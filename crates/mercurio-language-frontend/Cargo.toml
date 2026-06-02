@@ -1,0 +1,12 @@
+[package]
+name = "mercurio-language-frontend"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
+mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
+serde.workspace = true
+serde_json.workspace = true
+

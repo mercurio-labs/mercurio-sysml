@@ -1,0 +1,293 @@
+//! SysML language facade.
+//!
+//! This crate is the public SysML language implementation boundary: parsing,
+//! recovery/reporting, compilation to KIR, and the SysML baseline library.
+
+pub mod parser;
+
+pub use mercurio_kir::{KirDocument, KirError};
+pub use mercurio_language_contracts::ast::{ParsedModule, QualifiedName, SourceSpan, SysmlModule};
+pub use mercurio_language_contracts::diagnostics::Diagnostic;
+pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
+pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
+pub use mercurio_language_contracts::{SemanticConcept, SourceLanguage};
+pub use parser::{
+    SemanticCompileReport, SysmlError, compile_sysml_module, compile_sysml_module_with_context,
+    compile_sysml_module_with_context_report, compile_sysml_module_with_context_report_with_limit,
+    compile_sysml_module_with_resolver_context,
+    compile_sysml_module_with_resolver_context_report_with_limit, compile_sysml_text,
+    compile_sysml_text_with_context, compile_sysml_text_with_context_report,
+    default_sysml_delta_library_path, load_sysml_baseline, load_sysml_document,
+    load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
+};
+
+#[derive(Debug)]
+pub struct SysmlLanguageModule;
+
+pub fn parse(input: &str) -> Result<ParsedModule, Diagnostic> {
+    parse_sysml(input)
+}
+
+pub fn compile_text(
+    input: &str,
+    source_name: &str,
+    library_context: &KirDocument,
+) -> Result<KirDocument, Diagnostic> {
+    compile_sysml_text(input, source_name, library_context)
+}
+
+pub fn compile_text_with_context(
+    input: &str,
+    source_name: &str,
+    context_modules: &[ParsedModule],
+    library_context: &KirDocument,
+) -> Result<KirDocument, Diagnostic> {
+    compile_sysml_text_with_context(input, source_name, context_modules, library_context)
+}
+
+pub fn default_sysml_library_path() -> std::path::PathBuf {
+    default_sysml_delta_library_path()
+}
+
+pub fn legacy_monolithic_sysml_library_path() -> std::path::PathBuf {
+    parser::default_sysml_library_path()
+}
+
+impl LanguageService for SysmlLanguageModule {
+    fn language_id(&self) -> &str {
+        "sysml"
+    }
+
+    fn extensions(&self) -> &[&str] {
+        &["sysml"]
+    }
+
+    fn compile(
+        &self,
+        source: &str,
+        context: CompileContext<'_>,
+    ) -> mercurio_language_contracts::SemanticCompileReport<KirDocument> {
+        compile_sysml_text_with_context_report(
+            source,
+            context.source_name,
+            &[],
+            context.library_context,
+        )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use mercurio_language_contracts::LanguageRegistry;
+    use mercurio_language_contracts::ast::Declaration;
+    use std::path::Path;
+
+    #[test]
+    fn facade_parses_minimal_sysml() {
+        let module = parse("package Demo { part def Vehicle; }").unwrap();
+
+        assert!(module.package.is_some());
+    }
+
+    #[test]
+    fn facade_compiles_minimal_sysml() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            "package Demo { part def Vehicle; part vehicle : Vehicle; }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap();
+
+        assert!(document.elements.iter().any(|element| {
+            element.id == "part_definition.Demo.Vehicle"
+                || element.id == "definition.Demo.Vehicle"
+                || element.properties.get("declared_name")
+                    == Some(&serde_json::Value::String("Vehicle".to_string()))
+        }));
+    }
+
+    #[test]
+    fn language_service_compiles_registered_sysml() {
+        let mut registry = LanguageRegistry::new();
+        registry.register(SysmlLanguageModule);
+        let stdlib = load_sysml_baseline().unwrap();
+
+        let report = registry.compile_path(
+            Path::new("demo.sysml"),
+            "package Demo { part def Vehicle; }",
+            &stdlib,
+        );
+
+        assert_eq!(report.status, SemanticCompileStatus::Ok);
+        assert!(report.document.is_some());
+    }
+
+    #[test]
+    fn body_doc_is_owned_by_containing_part_definition() {
+        let source = "package Demo { part def A { doc /* doc from A */ } part def B; }";
+        let module = parse_sysml(source).unwrap();
+        let package = module.package.as_ref().unwrap();
+
+        let definition_docs = |name: &str| {
+            package
+                .members
+                .iter()
+                .find_map(|member| match member {
+                    Declaration::PartDefinition(definition) if definition.name == name => {
+                        Some(definition.docs.as_slice())
+                    }
+                    _ => None,
+                })
+                .unwrap()
+        };
+
+        assert_eq!(definition_docs("A"), ["doc from A"]);
+        assert!(definition_docs("B").is_empty());
+
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(source, "inline.sysml", &stdlib).unwrap();
+        let a = document
+            .elements
+            .iter()
+            .find(|element| element.id == "type.Demo.A")
+            .unwrap();
+        let b = document
+            .elements
+            .iter()
+            .find(|element| element.id == "type.Demo.B")
+            .unwrap();
+        let documentation = document
+            .elements
+            .iter()
+            .find(|element| element.kind == "KerML::Root::Documentation")
+            .unwrap();
+
+        assert!(!a.properties.contains_key("doc"));
+        assert!(!b.properties.contains_key("doc"));
+        assert!(!a.properties.contains_key("ownedElement"));
+        assert!(!a.properties.contains_key("documentation"));
+        assert_eq!(
+            documentation.properties["body"],
+            serde_json::json!("doc from A")
+        );
+        assert_eq!(
+            documentation.properties["owner"],
+            serde_json::json!("type.Demo.A")
+        );
+        assert!(!documentation.properties.contains_key("documentedElement"));
+        assert!(!documentation.properties.contains_key("annotatedElement"));
+    }
+
+    #[test]
+    fn comment_usage_trailing_doc_is_body() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            "package Demo { comment cmt /* Named Comment */ comment about C /* About Definition */ part def C { comment /* Inner Comment */ comment about cmt locale \"en_US\" /* About Named */ comment about Demo /* About Package */ } }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap();
+        let comment = document
+            .elements
+            .iter()
+            .find(|element| {
+                element.properties.get("metatype")
+                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    && element.properties.get("declared_name") == Some(&serde_json::json!("cmt"))
+            })
+            .unwrap();
+
+        assert_eq!(
+            comment.properties["body"],
+            serde_json::json!("Named Comment")
+        );
+
+        let inner_comment = document
+            .elements
+            .iter()
+            .find(|element| {
+                element.properties.get("metatype")
+                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    && element.properties.get("owner") == Some(&serde_json::json!("type.Demo.C"))
+            })
+            .unwrap();
+
+        assert_eq!(
+            inner_comment.properties["body"],
+            serde_json::json!("Inner Comment")
+        );
+
+        let about_comment = document
+            .elements
+            .iter()
+            .find(|element| {
+                element.properties.get("metatype")
+                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    && element.properties.get("body") == Some(&serde_json::json!("About Named"))
+            })
+            .unwrap();
+
+        assert_eq!(
+            about_comment.properties["annotatedElement"],
+            serde_json::json!(comment.id)
+        );
+        assert_eq!(
+            about_comment.properties["locale"],
+            serde_json::json!("en_US")
+        );
+
+        let definition = document
+            .elements
+            .iter()
+            .find(|element| element.id == "type.Demo.C")
+            .unwrap();
+        let about_definition = document
+            .elements
+            .iter()
+            .find(|element| {
+                element.properties.get("metatype")
+                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    && element.properties.get("body")
+                        == Some(&serde_json::json!("About Definition"))
+            })
+            .unwrap();
+        assert_eq!(
+            about_definition.properties["annotatedElement"],
+            serde_json::json!(definition.id)
+        );
+
+        let about_package = document
+            .elements
+            .iter()
+            .find(|element| {
+                element.properties.get("metatype")
+                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    && element.properties.get("body") == Some(&serde_json::json!("About Package"))
+            })
+            .unwrap();
+        assert_eq!(
+            about_package.properties["annotatedElement"],
+            serde_json::json!("pkg.Demo")
+        );
+    }
+
+    #[test]
+    fn baseline_is_kernel_plus_sysml_delta() {
+        let baseline = load_sysml_baseline().unwrap();
+
+        assert!(
+            baseline
+                .elements
+                .iter()
+                .any(|element| { element.id.contains("Kernel") || element.kind.contains("KerML") })
+        );
+        assert!(
+            baseline
+                .elements
+                .iter()
+                .any(|element| { element.id.contains("SysML") || element.kind.contains("SysML") })
+        );
+    }
+}

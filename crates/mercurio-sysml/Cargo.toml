@@ -1,0 +1,15 @@
+[package]
+name = "mercurio-sysml"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+mercurio-kerml = { path = "../mercurio-kerml" }
+mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
+mercurio-language-frontend = { path = "../mercurio-language-frontend" }
+mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
+
+[dev-dependencies]
+serde_json.workspace = true
+
