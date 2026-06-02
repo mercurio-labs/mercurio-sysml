@@ -137,6 +137,7 @@ impl LoweringRuleSeed {
 
     pub fn load_for_profile(profile_id: &str) -> Result<Option<&'static Self>, Diagnostic> {
         match profile_id {
+            "sysml-2.0-metamodel-0.57.0" => Self::load_sysml().map(Some),
             "sysml-2.0-pilot-0.57.0" => Self::load_sysml().map(Some),
             "kerml-bootstrap" => Ok(None),
             _ => Ok(None),
@@ -158,6 +159,6 @@ impl LoweringRuleSeed {
 
 fn load_sysml_lowering_rules_seed() -> &'static str {
     include_str!(
-        "../../../../resources/language-profiles/sysml-2.0-pilot-0.57.0/mappings/lowering_rules.seed.json"
+        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json"
     )
 }

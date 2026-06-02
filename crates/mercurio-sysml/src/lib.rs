@@ -4,6 +4,7 @@
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
 pub mod parser;
+pub mod metamodel;
 
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::ast::{ParsedModule, QualifiedName, SourceSpan, SysmlModule};
@@ -11,6 +12,11 @@ pub use mercurio_language_contracts::diagnostics::Diagnostic;
 pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
 pub use mercurio_language_contracts::{SemanticConcept, SourceLanguage};
+pub use metamodel::{
+    LEGACY_SYSML_2_0_PILOT_057_ID, LATEST_SYSML_METAMODEL_ID, SYSML_2_0_METAMODEL_057_ID,
+    SysmlEnvironment, SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource,
+    SysmlMetamodelStatus, available_metamodels, latest_metamodel, metamodel_resource,
+};
 pub use parser::{
     SemanticCompileReport, SysmlError, compile_sysml_module, compile_sysml_module_with_context,
     compile_sysml_module_with_context_report, compile_sysml_module_with_context_report_with_limit,
@@ -106,6 +112,37 @@ mod tests {
                 || element.properties.get("declared_name")
                     == Some(&serde_json::Value::String("Vehicle".to_string()))
         }));
+    }
+
+    #[test]
+    fn lists_latest_sysml_metamodel() {
+        let metamodels = available_metamodels().unwrap();
+
+        assert!(metamodels.iter().any(|metamodel| {
+            metamodel.id == SYSML_2_0_METAMODEL_057_ID
+                && metamodel.status == SysmlMetamodelStatus::Latest
+        }));
+        assert_eq!(latest_metamodel().unwrap().id, SYSML_2_0_METAMODEL_057_ID);
+    }
+
+    #[test]
+    fn resolves_legacy_pilot_id_to_metamodel() {
+        let metamodel = metamodel_resource(LEGACY_SYSML_2_0_PILOT_057_ID).unwrap();
+
+        assert_eq!(metamodel.info.id, SYSML_2_0_METAMODEL_057_ID);
+        assert!(metamodel.sysml_delta_path.ends_with("sysml-library.kir.json"));
+    }
+
+    #[test]
+    fn environment_compiles_with_latest_metamodel() {
+        let env = SysmlEnvironment::latest_metamodel().unwrap();
+
+        let document = env
+            .compile_text("package Demo { part def Vehicle; }", "inline.sysml")
+            .unwrap();
+
+        assert_eq!(env.metamodel().id, SYSML_2_0_METAMODEL_057_ID);
+        assert!(!document.elements.is_empty());
     }
 
     #[test]

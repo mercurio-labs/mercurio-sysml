@@ -9,7 +9,8 @@ mercurio-kerml = { path = "../mercurio-kerml" }
 mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
 mercurio-language-frontend = { path = "../mercurio-language-frontend" }
 mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
 
 [dev-dependencies]
-serde_json.workspace = true
 

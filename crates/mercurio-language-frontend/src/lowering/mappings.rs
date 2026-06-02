@@ -5,8 +5,8 @@ use mercurio_language_contracts::diagnostics::Diagnostic;
 
 pub use crate::lowering::emit::{
     DefaultSpecializationAnchorsSeed, EmissionRule, EmissionSpec, KirEmissionSeed, MappingBundle,
-    PilotConstructEntry, PilotConstructSeed, SemanticSpecializationDefaultsSeed, StdlibAliasSeed,
-    UsageSemanticSpecializationOverrideSeed,
+    MetamodelConstructEntry, MetamodelConstructSeed, PilotConstructEntry, PilotConstructSeed,
+    SemanticSpecializationDefaultsSeed, StdlibAliasSeed, UsageSemanticSpecializationOverrideSeed,
 };
 pub use crate::lowering::rules::{
     LoweringAstPattern, LoweringCollectRule, LoweringElaborationRule, LoweringEmitRule,
@@ -26,7 +26,7 @@ impl LanguageProfile {
     pub fn load(language: SourceLanguage) -> Result<Self, Diagnostic> {
         let id = match language {
             SourceLanguage::Kerml => "kerml-bootstrap".to_string(),
-            SourceLanguage::Sysml => "sysml-2.0-pilot-0.57.0".to_string(),
+            SourceLanguage::Sysml => "sysml-2.0-metamodel-0.57.0".to_string(),
         };
         let mappings = MappingBundle::load_for_language(language)?;
         let lowering_rules = LoweringRuleSeed::load_for_language(language)?;
@@ -40,7 +40,7 @@ impl LanguageProfile {
     }
 
     pub fn load_for_profile(id: impl Into<String>) -> Result<Self, Diagnostic> {
-        let id = id.into();
+        let id = canonical_profile_id(&id.into()).to_string();
         let mappings = MappingBundle::load_for_profile(&id)?;
         let lowering_rules = LoweringRuleSeed::load_for_profile(&id)?;
         validate_lowering_rules_against_mappings(lowering_rules, mappings)?;
@@ -50,6 +50,13 @@ impl LanguageProfile {
             mappings,
             lowering_rules,
         })
+    }
+}
+
+fn canonical_profile_id(id: &str) -> &str {
+    match id {
+        "sysml-2.0-pilot-0.57.0" => "sysml-2.0-metamodel-0.57.0",
+        other => other,
     }
 }
 
@@ -169,7 +176,7 @@ mod tests {
 
     #[test]
     fn sysml_profile_loads_declarative_lowering_rules() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let rules = profile.lowering_rules.expect("sysml lowering rules");
 
         assert_eq!(rules.schema_version, 1);
@@ -178,7 +185,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_expose_reviewed_package_lowering_rule() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let rule = profile
             .mappings
             .lowering_rule_for_construct("Package")
@@ -191,7 +198,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_expose_reviewed_import_lowering_rule() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let rule = profile
             .mappings
             .lowering_rule_for_construct("Import")
@@ -204,7 +211,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_expose_reviewed_definition_lowering_rule() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let rule = profile
             .mappings
             .lowering_rule_for_construct("PartDefinition")
@@ -217,7 +224,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_expose_reviewed_usage_lowering_rule() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let rule = profile
             .mappings
             .lowering_rule_for_construct("PartUsage")
@@ -233,7 +240,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_use_lowering_rules_for_generic_ast_keywords() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
 
         assert_eq!(
             profile.mappings.definition_construct_for("connection"),
@@ -247,7 +254,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_usage_family_semantic_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
 
         let package_action = profile
             .mappings
@@ -272,7 +279,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_usage_type_semantic_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let usage = test_usage("PartUsage", "Package");
 
         assert_eq!(
@@ -283,7 +290,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_usage_subset_semantic_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let mut usage = test_usage("PortUsage", "PortDefinition");
 
         assert_eq!(
@@ -300,7 +307,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_specialized_feature_subset_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let mut usage = test_usage("PartUsage", "Package");
         usage.specialized_features = vec!["feature.root.p".to_string()];
 
@@ -324,7 +331,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_usage_context_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let package_usage = test_usage("PartUsage", "Package");
         let nested_usage = test_usage("PartUsage", "PartDefinition");
         let connection_usage = test_usage("ConnectionUsage", "Package");
@@ -350,7 +357,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_usage_property_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let usage = test_usage("PartUsage", "ItemDefinition");
         let mut ref_usage = test_usage("PartUsage", "ItemDefinition");
         ref_usage.modifiers.push("ref".to_string());
@@ -368,7 +375,7 @@ mod tests {
 
     #[test]
     fn sysml_mappings_load_definition_context_defaults() {
-        let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0").unwrap();
+        let profile = LanguageProfile::load_for_profile("sysml-2.0-metamodel-0.57.0").unwrap();
         let enumeration = test_definition("EnumerationDefinition");
         let part = test_definition("PartDefinition");
 

@@ -29,7 +29,7 @@ use crate::lowering::semantic_properties::{
 };
 #[cfg(not(target_arch = "wasm32"))]
 #[derive(Debug, Clone, Deserialize)]
-pub struct PilotConstructSeed {
+pub struct MetamodelConstructSeed {
     #[serde(default)]
     pub keyword_registry: KeywordRegistrySeed,
     #[serde(default)]
@@ -40,14 +40,17 @@ pub struct PilotConstructSeed {
     pub usage_semantic_specialization_overrides: UsageSemanticSpecializationOverrideSeed,
     #[serde(default)]
     pub stdlib_aliases: StdlibAliasSeed,
-    pub constructs: Vec<PilotConstructEntry>,
+    pub constructs: Vec<MetamodelConstructEntry>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
-pub struct PilotConstructEntry {
+pub struct MetamodelConstructEntry {
     pub construct: String,
     pub metaclass: String,
 }
+
+pub type PilotConstructSeed = MetamodelConstructSeed;
+pub type PilotConstructEntry = MetamodelConstructEntry;
 
 #[derive(Debug, Clone, Default, Deserialize)]
 pub struct KeywordRegistrySeed {
@@ -154,8 +157,8 @@ impl MappingBundle {
         let construct_seed = match language {
             SourceLanguage::Kerml => kerml_construct_seed(),
             SourceLanguage::Sysml => {
-                let sysml_seed: PilotConstructSeed =
-                    serde_json::from_str(&load_pilot_constructs_seed()?).map_err(|err| {
+                let sysml_seed: MetamodelConstructSeed =
+                    serde_json::from_str(&load_metamodel_constructs_seed()?).map_err(|err| {
                         Diagnostic::new(format!("failed to parse mapping file: {err}"), None)
                     })?;
                 merge_construct_seeds(kerml_construct_seed(), sysml_seed)
@@ -942,29 +945,29 @@ fn merge_emission_seeds(mut base: KirEmissionSeed, overlay: KirEmissionSeed) -> 
     base
 }
 
-fn load_pilot_constructs_seed() -> Result<String, Diagnostic> {
+fn load_metamodel_constructs_seed() -> Result<String, Diagnostic> {
     Ok(include_str!(
-        "../../../../resources/language-profiles/sysml-2.0-pilot-0.57.0/mappings/pilot_constructs.seed.json"
+        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json"
     )
     .to_string())
 }
 
 fn load_kir_emission_seed() -> Result<String, Diagnostic> {
     Ok(include_str!(
-        "../../../../resources/language-profiles/sysml-2.0-pilot-0.57.0/mappings/kir_emission.seed.json"
+        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/kir_emission.seed.json"
     )
     .to_string())
 }
 
 fn load_lowering_rules_seed() -> &'static str {
     include_str!(
-        "../../../../resources/language-profiles/sysml-2.0-pilot-0.57.0/mappings/lowering_rules.seed.json"
+        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json"
     )
 }
 
 fn load_semantic_defaults_seed() -> &'static str {
     include_str!(
-        "../../../../resources/language-profiles/sysml-2.0-pilot-0.57.0/mappings/semantic_defaults.seed.json"
+        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/semantic_defaults.seed.json"
     )
 }
 

@@ -17,6 +17,10 @@ use mercurio_language_frontend::resolver::{
 };
 use mercurio_language_frontend::transpile::transpile_module;
 
+use crate::metamodel::{
+    LATEST_SYSML_METAMODEL_ID, load_baseline_for_metamodel, metamodel_resource,
+};
+
 #[cfg(not(target_arch = "wasm32"))]
 type CompileTimer = std::time::Instant;
 
@@ -89,7 +93,13 @@ pub fn default_sysml_delta_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    repo_path("resources/sysml/sysml-library.kir.json")
+    metamodel_resource(LATEST_SYSML_METAMODEL_ID)
+        .map(|metamodel| metamodel.sysml_delta_path)
+        .unwrap_or_else(|_| {
+            repo_path(
+                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+            )
+        })
 }
 
 pub fn default_sysml_library_path() -> PathBuf {
@@ -101,13 +111,24 @@ pub fn default_sysml_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    repo_path("resources/stdlib-sources/sysml-2.0-pilot-0.57.0/stdlib.full.kir.json")
+    metamodel_resource(LATEST_SYSML_METAMODEL_ID)
+        .map(|metamodel| metamodel.stdlib_path)
+        .unwrap_or_else(|_| {
+            repo_path(
+                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json",
+            )
+        })
 }
 
 pub fn load_sysml_baseline() -> Result<KirDocument, KirError> {
-    let kernel = mercurio_kerml::load_kernel_baseline()?;
-    let sysml_delta = KirDocument::from_path(&default_sysml_delta_library_path())?;
-    KirDocument::merge([kernel, sysml_delta])
+    match metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
+        Ok(metamodel) => load_baseline_for_metamodel(&metamodel),
+        Err(_) => {
+            let kernel = mercurio_kerml::load_kernel_baseline()?;
+            let sysml_delta = KirDocument::from_path(&default_sysml_delta_library_path())?;
+            KirDocument::merge([kernel, sysml_delta])
+        }
+    }
 }
 
 pub fn load_sysml_document_with_stdlib(
@@ -140,7 +161,7 @@ pub fn compile_sysml_module(
     stdlib: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
     let mapping_start = compile_timer_start();
-    let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0")?;
+    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)?;
     let mappings = profile.mappings;
     log_compile_timed_event(
         "sysml.compile.mapping_load",
@@ -268,7 +289,7 @@ pub fn compile_sysml_module_with_context_report_with_limit(
     stdlib: &KirDocument,
     max_attempts: usize,
 ) -> SemanticCompileReport {
-    let profile = match LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0") {
+    let profile = match LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID) {
         Ok(profile) => profile,
         Err(diagnostic) => {
             return SemanticCompileReport {
@@ -419,7 +440,7 @@ pub fn compile_sysml_module_with_context(
     stdlib: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
     let mapping_start = compile_timer_start();
-    let profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-0.57.0")?;
+    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)?;
     let mappings = profile.mappings;
     log_compile_timed_event(
         "sysml.compile.mapping_load",
@@ -3552,7 +3573,7 @@ fn callable_expr_name(expr: &Expr) -> Option<String> {
     }
 }
 
-fn repo_path(relative: &str) -> PathBuf {
+pub(crate) fn repo_path(relative: &str) -> PathBuf {
     repo_root().join(relative)
 }
 
@@ -3562,7 +3583,7 @@ fn repo_root() -> PathBuf {
     loop {
         if current.join("Cargo.toml").is_file()
             && current
-                .join("resources/sysml/sysml-library.kir.json")
+                .join("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json")
                 .is_file()
         {
             return current;
