@@ -4,7 +4,9 @@ use std::sync::Arc;
 use serde_json::Value;
 
 use mercurio_kir::KirDocument;
-use mercurio_language_contracts::ast::{Expr, LiteralExpr, QualifiedName, SourceSpan, SysmlModule};
+use mercurio_language_contracts::ast::{
+    Expr, LiteralExpr, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
+};
 use mercurio_language_contracts::diagnostics::Diagnostic;
 
 use crate::logging::{compile_timer_start, log_compile_timed_event};

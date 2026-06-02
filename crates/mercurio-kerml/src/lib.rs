@@ -15,10 +15,11 @@ pub use compiler::{
     load_kerml_document_with_stdlib, load_kernel_baseline,
 };
 pub use mercurio_kir::{KirDocument, KirError};
+pub use mercurio_language_contracts::SemanticConcept;
 pub use mercurio_language_contracts::ast::{ParsedModule, QualifiedName, SourceSpan};
 pub use mercurio_language_contracts::diagnostics::Diagnostic;
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
-pub use mercurio_language_contracts::{SemanticConcept, SourceLanguage};
+pub use mercurio_language_frontend::SourceLanguage;
 pub use parser::{parse, parse_kerml};
 
 impl LanguageService for KermlLanguageModule {
@@ -92,4 +93,3 @@ mod tests {
         assert!(report.document.is_some());
     }
 }
-

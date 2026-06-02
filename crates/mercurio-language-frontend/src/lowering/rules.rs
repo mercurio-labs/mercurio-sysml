@@ -10,8 +10,9 @@ use std::sync::OnceLock;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use mercurio_language_contracts::SourceLanguage;
 use mercurio_language_contracts::diagnostics::Diagnostic;
+
+use crate::SourceLanguage;
 
 pub const RUNTIME_ELABORATION_RULE_IDS: &[&str] = &[
     "comment-annotation-target",

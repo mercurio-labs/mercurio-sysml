@@ -3,17 +3,20 @@
 //! This crate is the public SysML language implementation boundary: parsing,
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
-pub mod parser;
 pub mod metamodel;
+pub mod parser;
 
 pub use mercurio_kir::{KirDocument, KirError};
-pub use mercurio_language_contracts::ast::{ParsedModule, QualifiedName, SourceSpan, SysmlModule};
+pub use mercurio_language_contracts::SemanticConcept;
+pub use mercurio_language_contracts::ast::{
+    ParsedModule, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
+};
 pub use mercurio_language_contracts::diagnostics::Diagnostic;
 pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
-pub use mercurio_language_contracts::{SemanticConcept, SourceLanguage};
+pub use mercurio_language_frontend::SourceLanguage;
 pub use metamodel::{
-    LEGACY_SYSML_2_0_PILOT_057_ID, LATEST_SYSML_METAMODEL_ID, SYSML_2_0_METAMODEL_057_ID,
+    LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID, SYSML_2_0_METAMODEL_057_ID,
     SysmlEnvironment, SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource,
     SysmlMetamodelStatus, available_metamodels, latest_metamodel, metamodel_resource,
 };
@@ -130,7 +133,11 @@ mod tests {
         let metamodel = metamodel_resource(LEGACY_SYSML_2_0_PILOT_057_ID).unwrap();
 
         assert_eq!(metamodel.info.id, SYSML_2_0_METAMODEL_057_ID);
-        assert!(metamodel.sysml_delta_path.ends_with("sysml-library.kir.json"));
+        assert!(
+            metamodel
+                .sysml_delta_path
+                .ends_with("sysml-library.kir.json")
+        );
     }
 
     #[test]

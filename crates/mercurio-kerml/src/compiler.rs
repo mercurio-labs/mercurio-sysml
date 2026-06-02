@@ -1,8 +1,9 @@
 use std::path::{Path, PathBuf};
 
 use mercurio_kir::{KirDocument, KirError};
+use mercurio_language_contracts::ast::ParsedModule as SysmlModule;
 use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_contracts::{SourceLanguage, ast::SysmlModule};
+use mercurio_language_frontend::SourceLanguage;
 use mercurio_language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
 use mercurio_language_frontend::resolver::{
     ResolverContext, resolve_kerml_module_with_context, resolve_kerml_module_with_resolver_context,

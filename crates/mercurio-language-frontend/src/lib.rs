@@ -2,6 +2,12 @@ pub mod lowering;
 pub mod resolver;
 pub mod transpile;
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+pub enum SourceLanguage {
+    Kerml,
+    Sysml,
+}
+
 mod logging {
     #[cfg(not(target_arch = "wasm32"))]
     pub type CompileTimer = std::time::Instant;

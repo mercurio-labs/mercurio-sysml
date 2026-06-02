@@ -144,7 +144,9 @@ impl Args {
     fn parse() -> Result<Self> {
         let mut inputs = vec![
             repo_path("resources/kernel/kerml-kernel.kir.json"),
-            repo_path("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json"),
+            repo_path(
+                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+            ),
         ];
         let mut inventory_out =
             repo_path("docs/development/generated/derived-feature-inventory.json");
@@ -932,7 +934,9 @@ mod tests {
         let mut features = Vec::new();
         for input in [
             repo_path("resources/kernel/kerml-kernel.kir.json"),
-            repo_path("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json"),
+            repo_path(
+                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+            ),
         ] {
             let document = KirDocument::from_path(&input).expect("default KIR input should load");
             for element in &document.elements {

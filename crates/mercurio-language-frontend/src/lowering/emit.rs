@@ -5,13 +5,13 @@ use serde::Deserialize;
 use serde_json::{Map, Value, json};
 
 use mercurio_kir::{KIR_SCHEMA_VERSION, KirDocument, KirElement};
-use mercurio_language_contracts::SourceLanguage;
 use mercurio_language_contracts::ast::{BinaryOp, SourceSpan, UnaryOp};
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::expression::{
     BinaryExpressionOp, ExpressionIr, ExpressionPathRoot, ExpressionPathSegment, UnaryExpressionOp,
 };
 
+use crate::SourceLanguage;
 use crate::lowering::elaborate::{
     ReferenceUsageSemantics, UsageFamilyDefaults, dedupe_refs, usage_all_type_refs,
 };
@@ -1275,8 +1275,7 @@ pub fn transpile_module_with_source(
         .into_iter()
         .collect(),
         elements,
-    }
-)
+    })
 }
 
 fn package_owner_id(usage: &ResolvedUsage, package_ids: &BTreeMap<String, String>) -> String {

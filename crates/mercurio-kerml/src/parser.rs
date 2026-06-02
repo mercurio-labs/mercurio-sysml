@@ -1,6 +1,6 @@
 use mercurio_language_contracts::ast::{
     AliasDecl, Declaration, GenericDefinitionDecl, GenericUsageDecl, ImportDecl, PackageDecl,
-    QualifiedName, SourceSpan, SysmlModule,
+    ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::lexer::{Token, TokenKind, lex};

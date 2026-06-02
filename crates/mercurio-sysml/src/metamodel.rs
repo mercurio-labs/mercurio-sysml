@@ -1,12 +1,12 @@
 use std::path::{Path, PathBuf};
 
-use mercurio_kir::{KirDocument, KirError};
 use mercurio_kerml::KermlLanguageModule;
+use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::{LanguageRegistry, SemanticCompileStatus};
 use serde::Deserialize;
 
-use crate::parser;
 use crate::SysmlLanguageModule;
+use crate::parser;
 
 pub const SYSML_2_0_METAMODEL_057_ID: &str = "sysml-2.0-metamodel-0.57.0";
 pub const LEGACY_SYSML_2_0_PILOT_057_ID: &str = "sysml-2.0-pilot-0.57.0";
@@ -136,19 +136,17 @@ impl SysmlEnvironment {
             .registry
             .compile_path(Path::new(source_name), source, &self.baseline);
         if report.status != SemanticCompileStatus::Ok {
-            let diagnostic = report
-                .diagnostics
-                .into_iter()
-                .next()
-                .unwrap_or_else(|| {
-                    mercurio_language_contracts::diagnostics::Diagnostic::new(
-                        "SysML compile failed without diagnostics",
-                        None,
-                    )
-                });
+            let diagnostic = report.diagnostics.into_iter().next().unwrap_or_else(|| {
+                mercurio_language_contracts::diagnostics::Diagnostic::new(
+                    "SysML compile failed without diagnostics",
+                    None,
+                )
+            });
             return Err(SysmlEnvironmentError::Diagnostic(diagnostic));
         }
-        Ok(report.document.expect("successful compile returns a document"))
+        Ok(report
+            .document
+            .expect("successful compile returns a document"))
     }
 }
 
@@ -166,7 +164,12 @@ pub fn latest_metamodel() -> Result<SysmlMetamodel, SysmlEnvironmentError> {
 
 pub fn metamodel_resource(id: &str) -> Result<SysmlMetamodelResource, SysmlEnvironmentError> {
     let descriptor = metamodel_descriptor()?;
-    if descriptor.id != id && !descriptor.legacy_ids.iter().any(|legacy_id| legacy_id == id) {
+    if descriptor.id != id
+        && !descriptor
+            .legacy_ids
+            .iter()
+            .any(|legacy_id| legacy_id == id)
+    {
         return Err(SysmlEnvironmentError::UnknownMetamodel(id.to_string()));
     }
 

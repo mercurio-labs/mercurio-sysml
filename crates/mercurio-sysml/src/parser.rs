@@ -4,8 +4,8 @@ use std::path::{Path, PathBuf};
 use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::ast::{
     AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    LiteralExpr, MultiplicityRange, PackageDecl, PartDefinitionDecl, PartUsageDecl, QualifiedName,
-    SourceSpan, SysmlModule, UnaryOp,
+    LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, PartDefinitionDecl,
+    PartUsageDecl, QualifiedName, SourceSpan, UnaryOp,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
@@ -114,9 +114,7 @@ pub fn default_sysml_library_path() -> PathBuf {
     metamodel_resource(LATEST_SYSML_METAMODEL_ID)
         .map(|metamodel| metamodel.stdlib_path)
         .unwrap_or_else(|_| {
-            repo_path(
-                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json",
-            )
+            repo_path("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json")
         })
 }
 
@@ -3583,7 +3581,9 @@ fn repo_root() -> PathBuf {
     loop {
         if current.join("Cargo.toml").is_file()
             && current
-                .join("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json")
+                .join(
+                    "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+                )
                 .is_file()
         {
             return current;

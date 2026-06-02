@@ -4,8 +4,8 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use mercurio_language_contracts::ast::{
     AliasDecl, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    MultiplicityRange, PackageDecl, PartDefinitionDecl, PartUsageDecl, QualifiedName, SourceSpan,
-    SysmlModule,
+    MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, PartDefinitionDecl, PartUsageDecl,
+    QualifiedName, SourceSpan,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 

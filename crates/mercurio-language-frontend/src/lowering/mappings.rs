@@ -1,8 +1,8 @@
 use std::collections::BTreeSet;
 
-use mercurio_language_contracts::SourceLanguage;
 use mercurio_language_contracts::diagnostics::Diagnostic;
 
+use crate::SourceLanguage;
 pub use crate::lowering::emit::{
     DefaultSpecializationAnchorsSeed, EmissionRule, EmissionSpec, KirEmissionSeed, MappingBundle,
     MetamodelConstructEntry, MetamodelConstructSeed, PilotConstructEntry, PilotConstructSeed,
