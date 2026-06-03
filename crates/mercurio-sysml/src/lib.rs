@@ -3,13 +3,35 @@
 //! This crate is the public SysML language implementation boundary: parsing,
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
+pub mod assessment;
 pub mod authoring;
+pub mod behavior;
+pub mod constraints;
 pub mod metamodel;
+pub mod mutation;
 pub mod parser;
 pub mod semantic_profile;
 pub mod session;
 
+pub use assessment::sysml_parsed_module_assessment_facts;
 pub use authoring::load_authoring_project_from_sysml;
+pub use behavior::{
+    CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
+    HybridSimulationStatus, HybridSimulationTraceEntry, SimulationError, SimulationSubject,
+    StateMachineExecutionReport, StateMachineExecutionStatus, StateMachineModel,
+    StateMachineScenario, StateMachineScenarioEvent, StateMachineTraceStep,
+    StateMachineValidationFinding, StateMachineValidationSeverity, StateNode,
+    StateTransitionTriggerKind, SysmlDynamicBehaviorCapability, TransitionNode,
+    project_state_machines, project_state_machines_from_graph, register_sysml_behavior_capability,
+    run_hybrid_simulation, run_hybrid_simulation_with_overlay,
+};
+pub use constraints::{
+    ConstraintDiagnosticDto, ConstraintError, ConstraintExplanationDto, ConstraintGraphEdgeDto,
+    ConstraintGraphRequestDto, ConstraintGraphViewDto, ConstraintRecordDto,
+    ConstraintSolveRequestDto, ConstraintSolveResultDto, ConstraintStatusDto,
+    ConstraintVariableDto, ConstraintVariableStatusDto, RequirementCheckDto, RequirementStatusDto,
+    execution_context_from_nested_values, render_constraint_graph, solve_constraints,
+};
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::SemanticConcept;
 pub use mercurio_language_contracts::ast::{
@@ -24,6 +46,12 @@ pub use metamodel::{
     SysmlEnvironment, SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource,
     SysmlMetamodelStatus, available_metamodels, latest_metamodel, metamodel_resource,
 };
+pub use mutation::{
+    SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,
+    enrich_sysml_semantic_reasoning_context_with_child_affordances,
+    sysml_mutation_feasibility_service, sysml_semantic_mutation_capability_context,
+    sysml_semantic_reasoning_context_from_authoring_project,
+};
 pub use parser::{
     SemanticCompileReport, SysmlError, compile_sysml_module, compile_sysml_module_with_context,
     compile_sysml_module_with_context_report, compile_sysml_module_with_context_report_with_limit,
@@ -34,13 +62,12 @@ pub use parser::{
     load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
 };
 pub use semantic_profile::{
-    SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_MUTATION_GUIDANCE,
-    SYSML_MUTATION_PROFILE_ID, SYSML_RELATIONSHIP_KINDS, SYSML_USAGE_KEYWORDS,
-    SysmlSemanticCapabilityOracle, normalize_definition_keyword, sysml_definition_kind,
-    sysml_is_container_kind, sysml_is_definition_keyword, sysml_is_satisfy_relationship,
-    sysml_is_usage_keyword, sysml_language_profile, sysml_relationship_usage_keyword,
-    sysml_semantic_mutation_capability_context, sysml_trace_relationship_uses_owner_source,
-    sysml_usage_kind,
+    SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_RELATIONSHIP_KINDS,
+    SYSML_USAGE_KEYWORDS, SysmlSemanticCapabilityOracle, normalize_definition_keyword,
+    sysml_definition_keyword_for_usage, sysml_definition_kind, sysml_is_container_kind,
+    sysml_is_definition_keyword, sysml_is_satisfy_relationship, sysml_is_usage_keyword,
+    sysml_language_profile, sysml_relationship_usage_keyword,
+    sysml_trace_relationship_uses_owner_source, sysml_usage_kind,
 };
 pub use session::{
     SYSML_PART_USAGE_KIND, SYSML_REQUIREMENT_USAGE_KIND, SYSML_SATISFY_KEYWORD,

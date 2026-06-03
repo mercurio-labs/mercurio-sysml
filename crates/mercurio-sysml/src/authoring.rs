@@ -1,6 +1,8 @@
 use std::collections::BTreeMap;
 
-use mercurio_core::{AuthoringError, AuthoringProject, KirDocument};
+use mercurio_core::{
+    AuthoringError, AuthoringProject, KirDocument, textual_model_authoring_render_profile,
+};
 
 use crate::{compile_sysml_text, default_sysml_library_path, parse_sysml};
 
@@ -14,8 +16,11 @@ pub fn load_authoring_project_from_sysml(
         original_texts.insert(path.clone(), source);
         modules.insert(path, module);
     }
-    AuthoringProject::from_parsed_modules(modules, original_texts)
-        .map(|project| project.with_source_compiler(compile_sysml_authoring_sources))
+    AuthoringProject::from_parsed_modules(modules, original_texts).map(|project| {
+        project
+            .with_render_profile(textual_model_authoring_render_profile())
+            .with_source_compiler(compile_sysml_authoring_sources)
+    })
 }
 
 fn compile_sysml_authoring_sources(

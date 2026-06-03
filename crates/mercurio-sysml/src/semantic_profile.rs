@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use mercurio_core::{
     AttributePolicyAnswer, CapabilityAnswer, SemanticCapabilityOracle, SemanticConcept,
-    SemanticMutationCapabilityContext, SourceLanguage, language::profile::LanguageProfile,
+    SourceLanguage, language::profile::LanguageProfile,
 };
 
 #[derive(Debug, Clone, Default)]
@@ -114,9 +114,16 @@ impl SemanticCapabilityOracle for SysmlSemanticCapabilityOracle {
     fn doc_id_attribute_aliases(&self) -> &'static [&'static str] {
         &["id", "requirement_id"]
     }
+
+    fn supporting_definition_keyword_for_usage(&self, usage_kind: &str) -> Option<String> {
+        sysml_definition_keyword_for_usage(usage_kind).map(ToString::to_string)
+    }
+
+    fn normalize_definition_keyword(&self, keyword: &str) -> String {
+        normalize_definition_keyword(keyword)
+    }
 }
 
-pub const SYSML_MUTATION_PROFILE_ID: &str = "model-v2-writable-mutation-v1";
 pub const SYSML_LANGUAGE_PROFILE_ID: &str = "sysml-v2";
 
 pub const SYSML_DEFINITION_KEYWORDS: &[&str] = &[
@@ -152,14 +159,6 @@ pub const SYSML_USAGE_KEYWORDS: &[&str] = &[
 ];
 
 pub const SYSML_RELATIONSHIP_KINDS: &[&str] = &["satisfy", "verify", "trace", "refine"];
-
-pub const SYSML_MUTATION_GUIDANCE: &[&str] = &[
-    "Use Model v2 textual concepts, not Model v1 block terminology.",
-    "Never use keyword `block`; use `part` for part definitions and part usages.",
-    "Requirement definitions should carry explicit `id` and `text` semantic attributes; use SetAttribute on existing requirement elements when those fields are missing.",
-    "Return semantic mutations, not source text edits.",
-    "Core feasibility remains authoritative for contextual legality.",
-];
 
 pub fn sysml_language_profile() -> LanguageProfile {
     LanguageProfile {
@@ -220,41 +219,6 @@ pub fn sysml_language_profile() -> LanguageProfile {
     }
 }
 
-pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilityContext {
-    SemanticMutationCapabilityContext {
-        metamodel_version: SYSML_MUTATION_PROFILE_ID.to_string(),
-        supported_operations: vec![
-            "AddPackage".to_string(),
-            "AddDefinition".to_string(),
-            "AddUsage".to_string(),
-            "AddRelationship".to_string(),
-            "AddMetadataAnnotation".to_string(),
-            "RenameDeclaration".to_string(),
-            "UpdateUsageType".to_string(),
-            "SetExpression".to_string(),
-            "UpdateSpecializations".to_string(),
-            "MoveDeclaration".to_string(),
-            "SetAttribute".to_string(),
-        ],
-        definition_keywords: SYSML_DEFINITION_KEYWORDS
-            .iter()
-            .map(ToString::to_string)
-            .collect(),
-        usage_keywords: SYSML_USAGE_KEYWORDS
-            .iter()
-            .map(ToString::to_string)
-            .collect(),
-        relationship_kinds: SYSML_RELATIONSHIP_KINDS
-            .iter()
-            .map(ToString::to_string)
-            .collect(),
-        guidance: SYSML_MUTATION_GUIDANCE
-            .iter()
-            .map(ToString::to_string)
-            .collect(),
-    }
-}
-
 pub fn sysml_trace_relationship_uses_owner_source(keyword: &str) -> bool {
     matches!(
         keyword.to_ascii_lowercase().as_str(),
@@ -271,6 +235,24 @@ pub fn sysml_is_satisfy_relationship(kind: &str) -> bool {
 
 pub fn sysml_relationship_usage_keyword(kind: &str) -> Option<&'static str> {
     sysml_is_satisfy_relationship(kind).then_some("satisfy")
+}
+
+pub fn sysml_definition_keyword_for_usage(keyword: &str) -> Option<&'static str> {
+    match keyword.trim().to_ascii_lowercase().as_str() {
+        "part" => Some("part"),
+        "attribute" => Some("attribute"),
+        "requirement" => Some("requirement"),
+        "item" => Some("item"),
+        "connection" => Some("connection"),
+        "port" => Some("port"),
+        "action" => Some("action"),
+        "constraint" => Some("constraint"),
+        "calc" => Some("calc"),
+        "state" => Some("state"),
+        "view" => Some("view"),
+        "verification" => Some("verification"),
+        _ => None,
+    }
 }
 
 pub fn sysml_definition_kind(keyword: &str) -> &'static str {
@@ -317,27 +299,6 @@ pub fn normalize_definition_keyword(keyword: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn sysml_capability_context_exposes_writable_model_v2_vocabulary() {
-        let context = sysml_semantic_mutation_capability_context();
-
-        assert_eq!(context.metamodel_version, "model-v2-writable-mutation-v1");
-        assert!(
-            context
-                .supported_operations
-                .contains(&"AddDefinition".to_string())
-        );
-        assert!(context.definition_keywords.contains(&"part".to_string()));
-        assert!(!context.definition_keywords.contains(&"block".to_string()));
-        assert!(context.relationship_kinds.contains(&"satisfy".to_string()));
-        assert!(
-            context
-                .guidance
-                .iter()
-                .any(|item| item.contains("Never use keyword `block`"))
-        );
-    }
 
     #[test]
     fn sysml_profile_owns_domain_semantic_anchors() {

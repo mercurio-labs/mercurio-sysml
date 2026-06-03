@@ -91,6 +91,10 @@ path = "src/bin/inspect_sysml_parse.rs"
 name = "parse_sysml_paths"
 path = "src/bin/parse_sysml_paths.rs"
 
+[[bin]]
+name = "capability_probe"
+path = "src/bin/capability_probe.rs"
+
 [dependencies]
 mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
 mercurio-kerml = { path = "../mercurio-kerml" }
