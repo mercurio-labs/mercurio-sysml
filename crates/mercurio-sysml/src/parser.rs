@@ -4,8 +4,8 @@ use std::path::{Path, PathBuf};
 use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::ast::{
     AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, PartDefinitionDecl,
-    PartUsageDecl, QualifiedName, SourceSpan, UnaryOp,
+    LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName,
+    SourceSpan, UnaryOp,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
@@ -648,7 +648,6 @@ fn prune_declaration_for_span(module: &mut SysmlModule, span: &SourceSpan) -> bo
         let pruned = prune_package_for_span(package, span);
         module.members = vec![Declaration::Package(package.clone())];
         module.imports = package.imports.clone();
-        module.definitions = package.definitions.clone();
         return pruned;
     }
 
@@ -658,14 +657,6 @@ fn prune_declaration_for_span(module: &mut SysmlModule, span: &SourceSpan) -> bo
         .iter()
         .filter_map(|declaration| match declaration {
             Declaration::Import(import) => Some(import.clone()),
-            _ => None,
-        })
-        .collect();
-    module.definitions = module
-        .members
-        .iter()
-        .filter_map(|declaration| match declaration {
-            Declaration::PartDefinition(definition) => Some(definition.clone()),
             _ => None,
         })
         .collect();
@@ -679,14 +670,6 @@ fn prune_package_for_span(package: &mut PackageDecl, span: &SourceSpan) -> bool 
         .iter()
         .filter_map(|declaration| match declaration {
             Declaration::Import(import) => Some(import.clone()),
-            _ => None,
-        })
-        .collect();
-    package.definitions = package
-        .members
-        .iter()
-        .filter_map(|declaration| match declaration {
-            Declaration::PartDefinition(definition) => Some(definition.clone()),
             _ => None,
         })
         .collect();
@@ -714,14 +697,9 @@ fn prune_declarations_for_span(declarations: &mut Vec<Declaration>, span: &Sourc
 fn prune_child_declaration_for_span(declaration: &mut Declaration, span: &SourceSpan) -> bool {
     match declaration {
         Declaration::Package(package) => prune_package_for_span(package, span),
-        Declaration::PartDefinition(definition) => {
-            prune_declarations_for_span(&mut definition.members, span)
-                || prune_part_usages_for_span(&mut definition.part_members, span)
-        }
         Declaration::GenericDefinition(definition) => {
             prune_declarations_for_span(&mut definition.members, span)
         }
-        Declaration::PartUsage(usage) => prune_declarations_for_span(&mut usage.body_members, span),
         Declaration::GenericUsage(usage) => {
             prune_declarations_for_span(&mut usage.body_members, span)
         }
@@ -729,30 +707,10 @@ fn prune_child_declaration_for_span(declaration: &mut Declaration, span: &Source
     }
 }
 
-fn prune_part_usages_for_span(usages: &mut Vec<PartUsageDecl>, span: &SourceSpan) -> bool {
-    for usage in usages.iter_mut() {
-        if prune_declarations_for_span(&mut usage.body_members, span) {
-            return true;
-        }
-    }
-
-    if let Some(index) = usages
-        .iter()
-        .position(|usage| span_contains(&usage.span, span))
-    {
-        usages.remove(index);
-        return true;
-    }
-
-    false
-}
-
 fn declaration_span(declaration: &Declaration) -> &SourceSpan {
     match declaration {
         Declaration::Package(declaration) => &declaration.span,
         Declaration::Import(declaration) => &declaration.span,
-        Declaration::PartDefinition(declaration) => &declaration.span,
-        Declaration::PartUsage(declaration) => &declaration.span,
         Declaration::GenericDefinition(declaration) => &declaration.span,
         Declaration::GenericUsage(declaration) => &declaration.span,
         Declaration::Alias(declaration) => &declaration.span,
@@ -1223,7 +1181,6 @@ impl Parser {
 
         let mut members = Vec::new();
         let mut imports = Vec::new();
-        let mut definitions = Vec::new();
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
             if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
@@ -1240,7 +1197,7 @@ impl Parser {
                 }
                 Err(diagnostic) => return Err(diagnostic),
             };
-            append_package_member(&mut members, &mut imports, &mut definitions, declaration);
+            append_package_member(&mut members, &mut imports, declaration);
             if matches!(self.peek_kind(), TokenKind::Eof) {
                 break;
             }
@@ -1251,7 +1208,7 @@ impl Parser {
             name,
             members,
             imports,
-            definitions,
+            definitions: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1485,45 +1442,28 @@ impl Parser {
         }
 
         let mut members = Vec::new();
-        let mut part_members = Vec::new();
         let end = match self.peek_kind() {
             TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`")?,
             TokenKind::LBrace => {
                 self.advance();
                 let block = self.parse_declaration_block_contents_after_open()?;
                 docs.extend(block.owner_docs);
-                for declaration in block.members {
-                    if let Declaration::PartUsage(part_usage) = &declaration {
-                        part_members.push(part_usage.clone());
-                    }
-                    members.push(declaration);
-                }
+                members.extend(block.members);
                 block.end
             }
             _ => return Err(self.error_here("expected `;` or `{` after part definition")),
         };
 
         let span = merge_span(&start.span, &end.span);
-        Ok(match keyword {
-            "part" => Declaration::PartDefinition(PartDefinitionDecl {
-                name,
-                specializes,
-                members,
-                part_members,
-                docs,
-                modifiers,
-                span,
-            }),
-            _ => Declaration::GenericDefinition(GenericDefinitionDecl {
-                keyword: keyword.to_string(),
-                name,
-                specializes,
-                members,
-                docs,
-                modifiers,
-                span,
-            }),
-        })
+        Ok(Declaration::GenericDefinition(GenericDefinitionDecl {
+            keyword: keyword.to_string(),
+            name,
+            specializes,
+            members,
+            docs,
+            modifiers,
+            span,
+        }))
     }
 
     fn parse_usage_after_keyword(
@@ -1876,43 +1816,26 @@ impl Parser {
                 }
             });
 
-        Ok(match effective_keyword.as_str() {
-            "part" => Declaration::PartUsage(PartUsageDecl {
-                name,
-                is_implicit_name,
-                ty: tail.ty,
-                multiplicity: tail.multiplicity,
-                expression: tail.expression.clone(),
-                additional_types: tail.additional_types,
-                specializes: tail.specializes,
-                subsets: tail.subsets,
-                redefines: tail.redefines,
-                body_members: tail.body_members,
-                docs,
-                modifiers,
-                span,
-            }),
-            _ => Declaration::GenericUsage(GenericUsageDecl {
-                keyword: effective_keyword,
-                name,
-                is_implicit_name,
-                ty: tail.ty,
-                reference_target,
-                allocation_source,
-                allocation_target,
-                metadata_properties: Default::default(),
-                multiplicity: tail.multiplicity,
-                expression: tail.expression,
-                additional_types: tail.additional_types,
-                specializes: tail.specializes,
-                subsets: tail.subsets,
-                redefines: tail.redefines,
-                body_members: tail.body_members,
-                docs,
-                modifiers,
-                span,
-            }),
-        })
+        Ok(Declaration::GenericUsage(GenericUsageDecl {
+            keyword: effective_keyword,
+            name,
+            is_implicit_name,
+            ty: tail.ty,
+            reference_target,
+            allocation_source,
+            allocation_target,
+            metadata_properties: Default::default(),
+            multiplicity: tail.multiplicity,
+            expression: tail.expression,
+            additional_types: tail.additional_types,
+            specializes: tail.specializes,
+            subsets: tail.subsets,
+            redefines: tail.redefines,
+            body_members: tail.body_members,
+            docs,
+            modifiers,
+            span,
+        }))
     }
 
     fn parse_comment_usage_after_keyword(
@@ -3426,7 +3349,6 @@ fn is_feature_keyword(value: &str) -> bool {
 fn append_module_member(module: &mut SysmlModule, declaration: Declaration) {
     match &declaration {
         Declaration::Import(import_decl) => module.imports.push(import_decl.clone()),
-        Declaration::PartDefinition(definition) => module.definitions.push(definition.clone()),
         _ => {}
     }
     module.members.push(declaration);
@@ -3527,12 +3449,10 @@ fn synthetic_reference_usage(
 fn append_package_member(
     members: &mut Vec<Declaration>,
     imports: &mut Vec<ImportDecl>,
-    definitions: &mut Vec<PartDefinitionDecl>,
     declaration: Declaration,
 ) {
     match &declaration {
         Declaration::Import(import_decl) => imports.push(import_decl.clone()),
-        Declaration::PartDefinition(definition) => definitions.push(definition.clone()),
         _ => {}
     }
     members.push(declaration);
@@ -3612,7 +3532,7 @@ mod tests {
         compile_sysml_module_with_context_report, compile_sysml_text_with_context_report,
         load_sysml_document, parse_sysml, parse_sysml_recovering,
     };
-    use crate::frontend::ast::{Declaration, Expr};
+    use crate::frontend::ast::{Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl};
     use crate::frontend::resolver::{resolve_module, resolve_module_with_context};
     use crate::frontend::transpile::{MappingBundle, transpile_module};
     use crate::ir::{KirDocument, load_model_stack};
@@ -3633,6 +3553,23 @@ mod tests {
         path
     }
 
+    fn definition_named<'a>(
+        declarations: &'a [Declaration],
+        name: &str,
+    ) -> Option<GenericDefinitionDecl> {
+        declarations.iter().find_map(|member| {
+            let definition = member.as_definition_like()?;
+            (definition.name == name).then_some(definition)
+        })
+    }
+
+    fn usage_named<'a>(declarations: &'a [Declaration], name: &str) -> Option<GenericUsageDecl> {
+        declarations.iter().find_map(|member| {
+            let usage = member.as_usage_like()?;
+            (usage.name == name).then_some(usage)
+        })
+    }
+
     #[test]
     fn parses_minimal_vehicle_model() {
         let module = parse_sysml(
@@ -3643,7 +3580,7 @@ mod tests {
         assert_eq!(module.definitions.len(), 0);
         let package = module.package.unwrap();
         assert_eq!(package.name.as_dot_string(), "Demo2");
-        assert_eq!(package.definitions.len(), 2);
+        assert_eq!(package.definition_like_declarations().len(), 2);
     }
 
     #[test]
@@ -3818,7 +3755,8 @@ mod tests {
         let package = module.package.unwrap();
         assert_eq!(package.name.as_dot_string(), "Package Example");
         assert_eq!(package.imports[0].path.as_colon_string(), "ScalarValues::*");
-        assert_eq!(package.definitions[0].name, "Automobile");
+        let definitions = package.definition_like_declarations();
+        assert_eq!(definitions[0].name, "Automobile");
     }
 
     #[test]
@@ -3827,7 +3765,7 @@ mod tests {
             parse_sysml("package Demo { part def Engine :> Vehicle { ref part driver: Person; } }")
                 .unwrap();
 
-        let definition = &module.package.unwrap().definitions[0];
+        let definition = &module.package.unwrap().definition_like_declarations()[0];
         assert_eq!(definition.specializes[0].as_colon_string(), "Vehicle");
         assert_eq!(definition.part_members[0].name, "driver");
         assert_eq!(
@@ -3989,11 +3927,12 @@ mod tests {
         .unwrap();
 
         let package = module.package.unwrap();
-        assert_eq!(package.definitions.len(), 2);
-        assert!(!package.definitions[0].members.is_empty());
+        let definitions = package.definition_like_declarations();
+        assert_eq!(definitions.len(), 2);
+        assert!(!definitions[0].members.is_empty());
         assert!(matches!(
-            &package.definitions[1].members[0],
-            Declaration::PartUsage(usage) if usage.name == "bigEng"
+            definitions[1].members[0].as_usage_like(),
+            Some(usage) if usage.name == "bigEng"
                 && usage.redefines.len() == 1
                 && usage.redefines[0].as_dot_string() == "eng"
         ));
@@ -4157,10 +4096,8 @@ mod tests {
         let wheel = package
             .members
             .iter()
-            .find_map(|member| match member {
-                Declaration::PartUsage(usage) if usage.name == "wheel" => Some(usage),
-                _ => None,
-            })
+            .find_map(|member| member.as_usage_like())
+            .filter(|usage| usage.name == "wheel")
             .unwrap();
         assert_eq!(wheel.name, "wheel");
     }
@@ -4176,10 +4113,8 @@ mod tests {
         let assembly = package
             .members
             .iter()
-            .find_map(|member| match member {
-                Declaration::PartUsage(usage) if usage.name == "assembly" => Some(usage),
-                _ => None,
-            })
+            .find_map(|member| member.as_usage_like())
+            .filter(|usage| usage.name == "assembly")
             .unwrap();
         let connection = assembly
             .body_members
@@ -4363,16 +4298,7 @@ mod tests {
             parse_sysml("package Demo { part def C { private in ref y: A, B; } }").unwrap();
 
         let package = module.package.unwrap();
-        let definition = package
-            .members
-            .iter()
-            .find_map(|member| match member {
-                Declaration::PartDefinition(definition) if definition.name == "C" => {
-                    Some(definition)
-                }
-                _ => None,
-            })
-            .unwrap();
+        let definition = definition_named(&package.members, "C").unwrap();
 
         assert!(matches!(
             &definition.members[0],
@@ -4395,10 +4321,8 @@ mod tests {
         let context = package
             .members
             .iter()
-            .find_map(|member| match member {
-                Declaration::PartUsage(usage) if usage.name == "satisfactionContext" => Some(usage),
-                _ => None,
-            })
+            .find_map(|member| member.as_usage_like())
+            .filter(|usage| usage.name == "satisfactionContext")
             .unwrap();
 
         assert!(matches!(
@@ -4420,16 +4344,7 @@ mod tests {
         .unwrap();
 
         let package = module.package.unwrap();
-        let definition = package
-            .members
-            .iter()
-            .find_map(|member| match member {
-                Declaration::PartDefinition(definition) if definition.name == "B" => {
-                    Some(definition)
-                }
-                _ => None,
-            })
-            .unwrap();
+        let definition = definition_named(&package.members, "B").unwrap();
         let action = definition
             .members
             .iter()
@@ -4892,7 +4807,7 @@ mod tests {
         .unwrap();
         let package = module.package.unwrap();
         let part = match &package.members[0] {
-            Declaration::PartUsage(usage) => usage,
+            Declaration::GenericUsage(usage) => usage,
             other => panic!("expected part usage, got {other:?}"),
         };
         let constraint = match &part.body_members[0] {
@@ -5344,15 +5259,7 @@ mod tests {
             .count();
         assert_eq!(package_comments, 3);
 
-        let definition = match package
-            .members
-            .iter()
-            .find(|member| matches!(member, Declaration::PartDefinition(definition) if definition.name == "C"))
-            .unwrap()
-        {
-            Declaration::PartDefinition(definition) => definition,
-            other => panic!("expected part definition, got {other:?}"),
-        };
+        let definition = definition_named(&package.members, "C").unwrap();
         let body_comments = definition
             .members
             .iter()
@@ -5372,13 +5279,11 @@ mod tests {
         let usage = package
             .members
             .iter()
-            .find_map(|member| match member {
-                Declaration::PartUsage(usage) if usage.name == "l" => Some(usage),
-                _ => None,
-            })
+            .find_map(|member| member.as_usage_like())
+            .filter(|usage| usage.name == "l")
             .unwrap();
         let nested = match &usage.body_members[0] {
-            Declaration::PartUsage(usage) => usage,
+            Declaration::GenericUsage(usage) => usage,
             other => panic!("expected nested part usage, got {other:?}"),
         };
         assert_eq!(nested.name, "component");
@@ -5736,10 +5641,8 @@ mod tests {
         let vehicle = package
             .members
             .iter()
-            .find_map(|member| match member {
-                Declaration::PartUsage(usage) if usage.name == "vehicle" => Some(usage),
-                _ => None,
-            })
+            .find_map(|member| member.as_usage_like())
+            .filter(|usage| usage.name == "vehicle")
             .unwrap();
         let total_mass = vehicle
             .body_members
@@ -6212,7 +6115,7 @@ mod tests {
                 .unwrap();
         let package = module.package.unwrap();
         let definition = match &package.members[0] {
-            Declaration::PartDefinition(definition) => definition,
+            Declaration::GenericDefinition(definition) => definition,
             other => panic!("expected part definition, got {other:?}"),
         };
         let usage = match &definition.members[0] {

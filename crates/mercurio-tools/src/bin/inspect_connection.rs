@@ -2,9 +2,10 @@ use std::path::PathBuf;
 
 use mercurio_core::frontend::ast::Declaration;
 use mercurio_core::frontend::lexer::lex;
-use mercurio_core::frontend::resolver::resolve_module;
-use mercurio_core::frontend::transpile::MappingBundle;
 use mercurio_core::ir::KirDocument;
+use mercurio_language_frontend::lowering::ir::ResolvedUsage;
+use mercurio_language_frontend::resolver::resolve_module;
+use mercurio_language_frontend::transpile::MappingBundle;
 use mercurio_sysml::parse_sysml;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -57,42 +58,33 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn dump_decl(decl: &Declaration, depth: usize) {
     let pad = "  ".repeat(depth);
+    if let Some(defn) = decl.as_definition_like() {
+        println!("{pad}{} def {}", defn.keyword, defn.name);
+        for member in &defn.members {
+            dump_decl(member, depth + 1);
+        }
+        return;
+    }
+    if let Some(usage) = decl.as_usage_like() {
+        println!(
+            "{pad}{} {} ref={:?}",
+            usage.keyword,
+            usage.name,
+            usage
+                .reference_target
+                .as_ref()
+                .map(|target| target.as_dot_string())
+        );
+        for member in &usage.body_members {
+            dump_decl(member, depth + 1);
+        }
+        return;
+    }
+
     match decl {
         Declaration::Package(pkg) => {
             println!("{pad}package {}", pkg.name.as_dot_string());
             for member in &pkg.members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::PartDefinition(defn) => {
-            println!("{pad}part def {}", defn.name);
-            for member in &defn.members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::PartUsage(usage) => {
-            println!("{pad}part {}", usage.name);
-            for member in &usage.body_members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::GenericDefinition(defn) => {
-            println!("{pad}{} def {}", defn.keyword, defn.name);
-            for member in &defn.members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::GenericUsage(usage) => {
-            println!(
-                "{pad}{} {} ref={:?}",
-                usage.keyword,
-                usage.name,
-                usage
-                    .reference_target
-                    .as_ref()
-                    .map(|target| target.as_dot_string())
-            );
-            for member in &usage.body_members {
                 dump_decl(member, depth + 1);
             }
         }
@@ -102,10 +94,11 @@ fn dump_decl(decl: &Declaration, depth: usize) {
         Declaration::Alias(alias) => {
             println!("{pad}alias {}", alias.name);
         }
+        _ => unreachable!("definition-like and usage-like declarations are handled above"),
     }
 }
 
-fn dump_usage(usage: &mercurio_core::frontend::resolver::ResolvedUsage, depth: usize) {
+fn dump_usage(usage: &ResolvedUsage, depth: usize) {
     let pad = "  ".repeat(depth);
     println!(
         "{pad}{} {} type={:?} ref={:?}",

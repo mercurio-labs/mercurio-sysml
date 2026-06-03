@@ -72,6 +72,8 @@ version = "0.1.0"
 dependencies = [
  "mercurio-kir",
  "mercurio-language-contracts",
+ "mercurio-model",
+ "mercurio-runtime",
  "serde",
  "serde_json",
  "zip",
@@ -115,9 +117,39 @@ dependencies = [
 ]
 
 [[package]]
+name = "mercurio-model"
+version = "0.1.0"
+dependencies = [
+ "mercurio-kir",
+ "mercurio-language-contracts",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "mercurio-requirements"
+version = "0.1.0"
+dependencies = [
+ "mercurio-foundation",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "mercurio-runtime"
+version = "0.1.0"
+dependencies = [
+ "mercurio-kir",
+ "mercurio-model",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "mercurio-sysml"
 version = "0.1.0"
 dependencies = [
+ "mercurio-foundation",
  "mercurio-kerml",
  "mercurio-kir",
  "mercurio-language-contracts",
@@ -132,6 +164,8 @@ version = "0.1.0"
 dependencies = [
  "mercurio-foundation",
  "mercurio-kerml",
+ "mercurio-language-frontend",
+ "mercurio-requirements",
  "mercurio-sysml",
  "mercurio-views",
  "serde",

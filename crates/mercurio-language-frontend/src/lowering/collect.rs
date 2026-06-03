@@ -4,8 +4,7 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use mercurio_language_contracts::ast::{
     AliasDecl, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, PartDefinitionDecl, PartUsageDecl,
-    QualifiedName, SourceSpan,
+    MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 
@@ -152,6 +151,45 @@ fn collect_declarations(
     mappings: &MappingBundle,
 ) -> Result<(), Diagnostic> {
     for declaration in declarations {
+        if let Some(definition) = declaration.as_definition_like() {
+            let qualified_segments =
+                qualify_segments(owner_package_segments, &[definition.name.clone()]);
+            definitions.push(collect_generic_definition(
+                &definition,
+                owner_package_segments,
+                mappings,
+            )?);
+            collect_nested_owned_definitions(
+                &definition.members,
+                &qualified_segments,
+                definitions,
+                mappings,
+            )?;
+            collect_nested_member_imports(
+                &definition.members,
+                &qualified_segments.join("."),
+                imports,
+            );
+            collect_nested_owned_packages(
+                &definition.members,
+                &qualified_segments,
+                packages,
+                imports,
+                definitions,
+                usages,
+                aliases,
+                mappings,
+            )?;
+            continue;
+        }
+        if let Some(usage) = declaration.as_usage_like() {
+            let owner = owner_package_qualified_name.unwrap_or("root");
+            usages.push(collect_generic_usage(&usage, owner, "Package", mappings)?);
+            let qualified_name = usage_qualified_name(owner, &usage.name);
+            collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
+            continue;
+        }
+
         match declaration {
             Declaration::Package(package) => collect_package(
                 package,
@@ -167,79 +205,8 @@ fn collect_declarations(
                 owner_package_qualified_name: owner_package_qualified_name.map(str::to_string),
                 decl: import_decl.clone(),
             }),
-            Declaration::PartDefinition(definition) => {
-                let qualified_segments =
-                    qualify_segments(owner_package_segments, &[definition.name.clone()]);
-                definitions.push(collect_part_definition(
-                    definition,
-                    owner_package_segments,
-                    mappings,
-                )?);
-                collect_nested_owned_definitions(
-                    &definition.members,
-                    &qualified_segments,
-                    definitions,
-                    mappings,
-                )?;
-                collect_nested_member_imports(
-                    &definition.members,
-                    &qualified_segments.join("."),
-                    imports,
-                );
-                collect_nested_owned_packages(
-                    &definition.members,
-                    &qualified_segments,
-                    packages,
-                    imports,
-                    definitions,
-                    usages,
-                    aliases,
-                    mappings,
-                )?;
-            }
-            Declaration::GenericDefinition(definition) => {
-                let qualified_segments =
-                    qualify_segments(owner_package_segments, &[definition.name.clone()]);
-                definitions.push(collect_generic_definition(
-                    definition,
-                    owner_package_segments,
-                    mappings,
-                )?);
-                collect_nested_owned_definitions(
-                    &definition.members,
-                    &qualified_segments,
-                    definitions,
-                    mappings,
-                )?;
-                collect_nested_member_imports(
-                    &definition.members,
-                    &qualified_segments.join("."),
-                    imports,
-                );
-                collect_nested_owned_packages(
-                    &definition.members,
-                    &qualified_segments,
-                    packages,
-                    imports,
-                    definitions,
-                    usages,
-                    aliases,
-                    mappings,
-                )?;
-            }
-            Declaration::PartUsage(usage) => {
-                let owner = owner_package_qualified_name.unwrap_or("root");
-                usages.push(collect_part_usage(usage, owner, "Package", mappings)?);
-                let qualified_name = usage_qualified_name(owner, &usage.name);
-                collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
-            }
-            Declaration::GenericUsage(usage) => {
-                let owner = owner_package_qualified_name.unwrap_or("root");
-                usages.push(collect_generic_usage(usage, owner, "Package", mappings)?);
-                let qualified_name = usage_qualified_name(owner, &usage.name);
-                collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
-            }
             Declaration::Alias(alias) => aliases.push(collect_alias(alias, owner_package_segments)),
+            _ => unreachable!("definition-like and usage-like declarations are handled above"),
         }
     }
 
@@ -282,35 +249,18 @@ fn collect_nested_owned_definitions(
     mappings: &MappingBundle,
 ) -> Result<(), Diagnostic> {
     for declaration in declarations {
-        match declaration {
-            Declaration::PartDefinition(definition) => {
-                definitions.push(collect_part_definition(
-                    definition,
-                    owner_package_segments,
-                    mappings,
-                )?);
-                collect_nested_owned_definitions(
-                    &definition.members,
-                    &qualify_segments(owner_package_segments, &[definition.name.clone()]),
-                    definitions,
-                    mappings,
-                )?;
-            }
-            Declaration::GenericDefinition(definition) => {
-                definitions.push(collect_generic_definition(
-                    definition,
-                    owner_package_segments,
-                    mappings,
-                )?);
-                collect_nested_owned_definitions(
-                    &definition.members,
-                    &qualify_segments(owner_package_segments, &[definition.name.clone()]),
-                    definitions,
-                    mappings,
-                )?;
-            }
-            Declaration::Package(_) => {}
-            _ => {}
+        if let Some(definition) = declaration.as_definition_like() {
+            definitions.push(collect_generic_definition(
+                &definition,
+                owner_package_segments,
+                mappings,
+            )?);
+            collect_nested_owned_definitions(
+                &definition.members,
+                &qualify_segments(owner_package_segments, &[definition.name.clone()]),
+                definitions,
+                mappings,
+            )?;
         }
     }
 
@@ -323,33 +273,29 @@ fn collect_nested_member_imports(
     imports: &mut Vec<CollectedImport>,
 ) {
     for declaration in declarations {
+        if let Some(usage) = declaration.as_usage_like() {
+            let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
+            collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
+            continue;
+        }
+        if let Some(definition) = declaration.as_definition_like() {
+            let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
+            collect_nested_member_imports(&definition.members, &qualified_name, imports);
+            continue;
+        }
+
         match declaration {
             Declaration::Import(import_decl) => imports.push(CollectedImport {
                 owner_package_qualified_name: Some(owner_qualified_name.to_string()),
                 decl: import_decl.clone(),
             }),
-            Declaration::PartUsage(usage) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
-                collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
-            }
-            Declaration::GenericUsage(usage) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
-                collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
-            }
-            Declaration::PartDefinition(definition) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
-                collect_nested_member_imports(&definition.members, &qualified_name, imports);
-            }
-            Declaration::GenericDefinition(definition) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
-                collect_nested_member_imports(&definition.members, &qualified_name, imports);
-            }
             Declaration::Package(package) => {
                 let qualified_name =
                     usage_qualified_name(owner_qualified_name, &package.name.as_dot_string());
                 collect_nested_member_imports(&package.members, &qualified_name, imports);
             }
             Declaration::Alias(_) => {}
+            _ => unreachable!("definition-like and usage-like declarations are handled above"),
         }
     }
 }
@@ -393,39 +339,6 @@ fn collect_package(
         aliases,
         mappings,
     )
-}
-
-fn collect_part_definition(
-    definition: &PartDefinitionDecl,
-    owner_package_segments: &[String],
-    mappings: &MappingBundle,
-) -> Result<CollectedDefinition, Diagnostic> {
-    let qualified_name = qualify_name(owner_package_segments, &definition.name);
-    let members = collect_usage_members(
-        &definition.members,
-        &qualified_name,
-        "PartDefinition",
-        mappings,
-    )?;
-    let specializes = definition_specializations_with_default(
-        "PartDefinition",
-        &definition.specializes,
-        mappings,
-    );
-
-    Ok(CollectedDefinition {
-        construct: "PartDefinition".to_string(),
-        qualified_name,
-        declared_name: definition.name.clone(),
-        is_abstract: definition
-            .modifiers
-            .iter()
-            .any(|modifier| modifier == "abstract"),
-        specializes,
-        members,
-        docs: definition.docs.clone(),
-        span: definition.span.clone(),
-    })
 }
 
 fn collect_generic_definition(
@@ -552,40 +465,6 @@ fn definition_specializations_with_default(
         });
     }
     specializations
-}
-
-fn collect_part_usage(
-    usage: &PartUsageDecl,
-    owner_qualified_name: &str,
-    owner_construct: &str,
-    mappings: &MappingBundle,
-) -> Result<CollectedUsage, Diagnostic> {
-    let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
-    let members =
-        collect_usage_members(&usage.body_members, &qualified_name, "PartUsage", mappings)?;
-    Ok(CollectedUsage {
-        construct: "PartUsage".to_string(),
-        owner_construct: owner_construct.to_string(),
-        owner_qualified_name: owner_qualified_name.to_string(),
-        qualified_name,
-        declared_name: usage.name.clone(),
-        is_implicit_name: usage.is_implicit_name,
-        ty: usage.ty.clone(),
-        additional_types: usage.additional_types.clone(),
-        reference_target: None,
-        allocation_source: None,
-        allocation_target: None,
-        metadata_properties: BTreeMap::new(),
-        multiplicity: usage.multiplicity.clone(),
-        expression: usage.expression.clone(),
-        specializes: usage.specializes.clone(),
-        subsets: usage.subsets.clone(),
-        redefines: usage.redefines.clone(),
-        members,
-        modifiers: usage.modifiers.clone(),
-        docs: usage.docs.clone(),
-        span: usage.span.clone(),
-    })
 }
 
 fn collect_generic_usage(
@@ -749,24 +628,13 @@ fn collect_usage_members(
 ) -> Result<Vec<CollectedUsage>, Diagnostic> {
     let mut usages = Vec::new();
     for member in declarations {
-        match member {
-            Declaration::PartUsage(usage) => {
-                usages.push(collect_part_usage(
-                    usage,
-                    qualified_name,
-                    construct,
-                    mappings,
-                )?);
-            }
-            Declaration::GenericUsage(usage) => {
-                usages.push(collect_generic_usage(
-                    usage,
-                    qualified_name,
-                    construct,
-                    mappings,
-                )?);
-            }
-            _ => {}
+        if let Some(usage) = member.as_usage_like() {
+            usages.push(collect_generic_usage(
+                &usage,
+                qualified_name,
+                construct,
+                mappings,
+            )?);
         }
     }
     Ok(usages)
@@ -869,6 +737,18 @@ fn collect_nested_aliases(
     aliases: &mut Vec<CollectedAlias>,
 ) {
     for declaration in declarations {
+        if let Some(definition) = declaration.as_definition_like() {
+            let qualified_name = qualify_name(owner_package_segments, &definition.name);
+            collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
+            continue;
+        }
+        if let Some(usage) = declaration.as_usage_like() {
+            let qualified_name =
+                usage_qualified_name(owner_qualified_name.unwrap_or("root"), &usage.name);
+            collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
+            continue;
+        }
+
         match declaration {
             Declaration::Package(package) => {
                 let package_segments =
@@ -881,25 +761,8 @@ fn collect_nested_aliases(
                     aliases,
                 );
             }
-            Declaration::PartDefinition(definition) => {
-                let qualified_name = qualify_name(owner_package_segments, &definition.name);
-                collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
-            }
-            Declaration::GenericDefinition(definition) => {
-                let qualified_name = qualify_name(owner_package_segments, &definition.name);
-                collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
-            }
-            Declaration::PartUsage(usage) => {
-                let qualified_name =
-                    usage_qualified_name(owner_qualified_name.unwrap_or("root"), &usage.name);
-                collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
-            }
-            Declaration::GenericUsage(usage) => {
-                let qualified_name =
-                    usage_qualified_name(owner_qualified_name.unwrap_or("root"), &usage.name);
-                collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
-            }
             Declaration::Import(_) | Declaration::Alias(_) => {}
+            _ => unreachable!("definition-like and usage-like declarations are handled above"),
         }
     }
 }
@@ -910,25 +773,20 @@ fn collect_nested_member_aliases(
     aliases: &mut Vec<CollectedAlias>,
 ) {
     for declaration in declarations {
+        if let Some(usage) = declaration.as_usage_like() {
+            let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
+            collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
+            continue;
+        }
+        if let Some(definition) = declaration.as_definition_like() {
+            let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
+            collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
+            continue;
+        }
+
         match declaration {
             Declaration::Alias(alias) => {
                 aliases.push(collect_alias_in_owner(alias, owner_qualified_name))
-            }
-            Declaration::PartUsage(usage) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
-                collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
-            }
-            Declaration::GenericUsage(usage) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
-                collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
-            }
-            Declaration::PartDefinition(definition) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
-                collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
-            }
-            Declaration::GenericDefinition(definition) => {
-                let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
-                collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
             }
             Declaration::Package(package) => {
                 let qualified_name =
@@ -936,6 +794,7 @@ fn collect_nested_member_aliases(
                 collect_nested_member_aliases(&package.members, &qualified_name, aliases);
             }
             Declaration::Import(_) => {}
+            _ => unreachable!("definition-like and usage-like declarations are handled above"),
         }
     }
 }

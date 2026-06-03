@@ -1,8 +1,9 @@
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use std::fs;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
-use mercurio_core::graph::{Element, GraphArtifact};
+use mercurio_core::graph::{Element, ElementProperties, GraphArtifact};
 use mercurio_core::{
     Edge, Graph, KirDocument, KirElement, MetamodelAttributeRegistry, default_stdlib_path,
 };
@@ -317,9 +318,15 @@ fn element(id: u32, element_id: &str, kind: &str, layer: u8) -> Element {
     Element {
         id,
         element_id: element_id.to_string(),
-        kind: kind.to_string(),
+        kind: Arc::from(kind),
         layer,
-        properties,
+        properties: ElementProperties::from_declared_arc_for_artifact(
+            element_id.to_string(),
+            properties
+                .into_iter()
+                .map(|(key, value)| (Arc::from(key), value))
+                .collect(),
+        ),
     }
 }
 
@@ -327,7 +334,7 @@ fn edge(source: u32, target: u32, relation: &str) -> Edge {
     Edge {
         source,
         target,
-        relation: relation.to_string(),
+        relation: Arc::from(relation),
     }
 }
 

@@ -18,6 +18,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn dump_decl(declaration: &Declaration, depth: usize) {
     let pad = "  ".repeat(depth);
+    if let Some(definition) = declaration.as_definition_like() {
+        println!("{pad}{} def {}", definition.keyword, definition.name);
+        for member in &definition.members {
+            dump_decl(member, depth + 1);
+        }
+        return;
+    }
+    if let Some(usage) = declaration.as_usage_like() {
+        println!(
+            "{pad}{} {}{}{}",
+            usage.keyword,
+            usage.name,
+            display_type(usage.ty.as_ref()),
+            display_usage_relations(&usage.specializes, &usage.subsets, &usage.redefines)
+        );
+        for member in &usage.body_members {
+            dump_decl(member, depth + 1);
+        }
+        return;
+    }
+
     match declaration {
         Declaration::Package(package) => {
             println!("{pad}package {}", package.name.as_dot_string());
@@ -28,41 +49,6 @@ fn dump_decl(declaration: &Declaration, depth: usize) {
         Declaration::Import(import) => {
             println!("{pad}import {}", display_name(&import.path));
         }
-        Declaration::PartDefinition(definition) => {
-            println!("{pad}part def {}", definition.name);
-            for member in &definition.members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::PartUsage(usage) => {
-            println!(
-                "{pad}part {}{}{}",
-                usage.name,
-                display_type(usage.ty.as_ref()),
-                display_usage_relations(&usage.specializes, &usage.subsets, &usage.redefines)
-            );
-            for member in &usage.body_members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::GenericDefinition(definition) => {
-            println!("{pad}{} def {}", definition.keyword, definition.name);
-            for member in &definition.members {
-                dump_decl(member, depth + 1);
-            }
-        }
-        Declaration::GenericUsage(usage) => {
-            println!(
-                "{pad}{} {}{}{}",
-                usage.keyword,
-                usage.name,
-                display_type(usage.ty.as_ref()),
-                display_usage_relations(&usage.specializes, &usage.subsets, &usage.redefines)
-            );
-            for member in &usage.body_members {
-                dump_decl(member, depth + 1);
-            }
-        }
         Declaration::Alias(alias) => {
             println!(
                 "{pad}alias {} for {}",
@@ -70,6 +56,7 @@ fn dump_decl(declaration: &Declaration, depth: usize) {
                 display_name(&alias.target)
             );
         }
+        _ => unreachable!("definition-like and usage-like declarations are handled above"),
     }
 }
 

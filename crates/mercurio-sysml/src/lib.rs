@@ -3,9 +3,13 @@
 //! This crate is the public SysML language implementation boundary: parsing,
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
+pub mod authoring;
 pub mod metamodel;
 pub mod parser;
+pub mod semantic_profile;
+pub mod session;
 
+pub use authoring::load_authoring_project_from_sysml;
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::SemanticConcept;
 pub use mercurio_language_contracts::ast::{
@@ -28,6 +32,19 @@ pub use parser::{
     compile_sysml_text_with_context, compile_sysml_text_with_context_report,
     default_sysml_delta_library_path, load_sysml_baseline, load_sysml_document,
     load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
+};
+pub use semantic_profile::{
+    SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_MUTATION_GUIDANCE,
+    SYSML_MUTATION_PROFILE_ID, SYSML_RELATIONSHIP_KINDS, SYSML_USAGE_KEYWORDS,
+    SysmlSemanticCapabilityOracle, normalize_definition_keyword, sysml_definition_kind,
+    sysml_is_container_kind, sysml_is_definition_keyword, sysml_is_satisfy_relationship,
+    sysml_is_usage_keyword, sysml_language_profile, sysml_relationship_usage_keyword,
+    sysml_semantic_mutation_capability_context, sysml_trace_relationship_uses_owner_source,
+    sysml_usage_kind,
+};
+pub use session::{
+    SYSML_PART_USAGE_KIND, SYSML_REQUIREMENT_USAGE_KIND, SYSML_SATISFY_KEYWORD,
+    SYSML_VERIFY_KEYWORD, SysmlModelForkExt,
 };
 
 #[derive(Debug)]
@@ -89,7 +106,6 @@ impl LanguageService for SysmlLanguageModule {
 mod tests {
     use super::*;
     use mercurio_language_contracts::LanguageRegistry;
-    use mercurio_language_contracts::ast::Declaration;
     use std::path::Path;
 
     #[test]
@@ -178,16 +194,14 @@ mod tests {
             package
                 .members
                 .iter()
-                .find_map(|member| match member {
-                    Declaration::PartDefinition(definition) if definition.name == name => {
-                        Some(definition.docs.as_slice())
-                    }
-                    _ => None,
+                .find_map(|member| {
+                    let definition = member.as_definition_like()?;
+                    (definition.name == name).then_some(definition.docs)
                 })
                 .unwrap()
         };
 
-        assert_eq!(definition_docs("A"), ["doc from A"]);
+        assert_eq!(definition_docs("A"), vec!["doc from A".to_string()]);
         assert!(definition_docs("B").is_empty());
 
         let stdlib = load_sysml_baseline().unwrap();

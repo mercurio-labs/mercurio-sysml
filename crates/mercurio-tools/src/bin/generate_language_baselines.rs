@@ -1,9 +1,7 @@
 use std::path::Path;
 
-use mercurio_core::{
-    KirDocument, default_kernel_library_path, default_sysml_delta_library_path,
-    default_sysml_library_path, repo_root,
-};
+use mercurio_core::{KirDocument, default_kernel_library_path, repo_root};
+use mercurio_sysml::{default_sysml_delta_library_path, default_sysml_library_path};
 use mercurio_tools::split_language_baselines;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

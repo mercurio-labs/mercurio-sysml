@@ -57,9 +57,6 @@ impl Parser {
                     module.members.push(Declaration::GenericUsage(usage));
                 }
                 Declaration::Alias(alias) => module.members.push(Declaration::Alias(alias)),
-                Declaration::PartDefinition(_) | Declaration::PartUsage(_) => {
-                    return Err(self.error_here("unexpected SysML-specific KerML declaration"));
-                }
             }
         }
 

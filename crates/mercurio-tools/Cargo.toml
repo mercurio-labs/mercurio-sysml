@@ -3,10 +3,15 @@ name = "mercurio-tools"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+autobins = false
+
+[features]
+legacy-pilot-tools = []
 
 [[bin]]
 name = "audit_pilot_corpus"
 path = "src/bin/audit_pilot_corpus.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "compare_kerml_examples"
@@ -19,10 +24,12 @@ path = "src/bin/compare_pilot_ast.rs"
 [[bin]]
 name = "compare_pilot_compile_errors"
 path = "src/bin/compare_pilot_compile_errors.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "compare_pilot_semantics"
 path = "src/bin/compare_pilot_semantics.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "check_repo_boundaries"
@@ -47,18 +54,22 @@ path = "src/bin/generate_sample_views.rs"
 [[bin]]
 name = "build_stdlib_release"
 path = "src/bin/build_stdlib_release.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "audit_language_profile"
 path = "src/bin/audit_language_profile.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "audit_lowering"
 path = "src/bin/audit_lowering.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "export_pilot_lowering_evidence"
 path = "src/bin/export_pilot_lowering_evidence.rs"
+required-features = ["legacy-pilot-tools"]
 
 [[bin]]
 name = "verify_core_contracts"
@@ -72,9 +83,19 @@ path = "src/bin/generate_language_baselines.rs"
 name = "derived_feature_burndown"
 path = "src/bin/derived_feature_burndown.rs"
 
+[[bin]]
+name = "inspect_sysml_parse"
+path = "src/bin/inspect_sysml_parse.rs"
+
+[[bin]]
+name = "parse_sysml_paths"
+path = "src/bin/parse_sysml_paths.rs"
+
 [dependencies]
 mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
 mercurio-kerml = { path = "../mercurio-kerml" }
+mercurio-language-frontend = { path = "../mercurio-language-frontend" }
+mercurio-requirements = { path = "../mercurio-requirements" }
 mercurio-sysml = { path = "../mercurio-sysml" }
 mercurio-views = { path = "../../../mercurio-adapter/crates/mercurio-views" }
 serde = { workspace = true, features = ["derive"] }

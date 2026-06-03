@@ -3,13 +3,13 @@ use std::collections::BTreeMap;
 use mercurio_core::{
     CURRENT_DEFAULT_PROFILE_ID, CommitMode, CommitStrategy, CoreMutationFeasibilityService,
     ElementRef, Graph, KirDocument, KirElement, LocalPackageRepository, ModelWorkspace,
-    MutationContext, MutationFeasibilityService, MutationProposal, SemanticConcept,
-    SemanticMutation, SessionError, WorkspaceSnapshot, default_language_profile,
-    default_metamodel_registry, default_stdlib_path, diff_kir_documents, elements_with_metadata,
-    generate_python_wrappers, load_authoring_project_from_sysml, load_language_profile,
-    requirement_traces, workspace_revision_for_kir_document,
+    MutationContext, MutationFeasibilityService, MutationProposal, SemanticMutation, SessionError,
+    WorkspaceSnapshot, default_language_profile, default_metamodel_registry, default_stdlib_path,
+    diff_kir_documents, elements_with_metadata, generate_python_wrappers, load_language_profile,
+    workspace_revision_for_kir_document,
 };
-use mercurio_sysml::compile_sysml_text;
+use mercurio_requirements::requirement_traces;
+use mercurio_sysml::{SysmlModelForkExt, compile_sysml_text, load_authoring_project_from_sysml};
 
 fn main() {
     if let Err(error) = run() {
@@ -41,10 +41,8 @@ fn run() -> Result<(), Box<dyn std::error::Error>> {
     let graph = Graph::from_document(stdlib.clone())?;
     let registry = default_metamodel_registry()?;
     check(
-        registry
-            .canonical_kind(SemanticConcept::RequirementUsage)
-            .is_some(),
-        "requirement usage concept is registered".to_string(),
+        registry.semantic_anchor("requirement_usage").is_none(),
+        "core registry does not own requirement usage concept".to_string(),
     )?;
     check(
         graph.edge_count() > 10_000,
@@ -217,7 +215,7 @@ fn verify_session_fork_contract() -> Result<(), Box<dyn std::error::Error>> {
     let mut fork = first_session.fork("verify generated requirements");
     let package = fork.package("GeneratedRequirements", None)?;
     for index in 0..128 {
-        fork.requirement(
+        fork.sysml_requirement(
             &package,
             format!("Req{index:05}"),
             format!("Generated requirement {index:05}"),
