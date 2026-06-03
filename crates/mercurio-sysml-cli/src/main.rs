@@ -11,7 +11,7 @@ use mercurio_core::plugin_registry as registry;
 use mercurio_core::{
     KirDocument, KparPackageBuild, KparPackageSource, LanguageRegistry, LibraryProviderConfig,
     LocalPackageManifest, LocalPackageRepository, LocalPackageSource, QueryEngine, QueryResultSet,
-    Runtime, default_stdlib_path, parse_query, write_kpar_package,
+    Runtime, default_stdlib_path, package_bytes_digest, parse_query, write_kpar_package,
 };
 use mercurio_kerml::{KermlLanguageModule, parse_kerml};
 use mercurio_sysml::{SysmlLanguageModule, SysmlModule, load_sysml_baseline, parse_sysml};
@@ -2969,29 +2969,7 @@ fn safe_package_path_segment(value: &str) -> String {
 }
 
 fn stable_file_digest(bytes: &[u8]) -> String {
-    format_stable_digest([("file".as_bytes(), bytes)])
-}
-
-fn format_stable_digest<'a, I>(chunks: I) -> String
-where
-    I: IntoIterator<Item = (&'a [u8], &'a [u8])>,
-{
-    const FNV_OFFSET: u64 = 0xcbf29ce484222325;
-    const FNV_PRIME: u64 = 0x100000001b3;
-
-    let mut hash = FNV_OFFSET;
-    for (label, bytes) in chunks {
-        for byte in label
-            .iter()
-            .chain(&(bytes.len() as u64).to_le_bytes())
-            .chain(bytes)
-        {
-            hash ^= u64::from(*byte);
-            hash = hash.wrapping_mul(FNV_PRIME);
-        }
-    }
-
-    format!("fnv1a64:{hash:016x}")
+    package_bytes_digest(bytes)
 }
 
 fn collect_package_manifest_rows(
