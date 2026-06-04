@@ -1,8 +1,9 @@
 use std::collections::BTreeMap;
 
 use mercurio_core::{
-    AttributePolicyAnswer, CapabilityAnswer, SemanticCapabilityOracle, SemanticConcept,
-    SourceLanguage, language::profile::LanguageProfile,
+    AttributePolicyAnswer, CapabilityAnswer, SemanticCapabilityOracle, SemanticCapabilityProfile,
+    SemanticConcept, SourceLanguage, TableSemanticCapabilityOracle,
+    language::profile::LanguageProfile,
 };
 
 #[derive(Debug, Clone, Default)]
@@ -10,43 +11,19 @@ pub struct SysmlSemanticCapabilityOracle;
 
 impl SemanticCapabilityOracle for SysmlSemanticCapabilityOracle {
     fn can_contain(&self, container_kind: &str, child_kind: &str) -> CapabilityAnswer {
-        if container_kind.is_empty() || child_kind.is_empty() {
-            CapabilityAnswer::Unknown("missing kind information".to_string())
-        } else if !sysml_is_container_kind(container_kind) {
-            CapabilityAnswer::Denied(format!(
-                "`{container_kind}` cannot own `{child_kind}` declarations"
-            ))
-        } else if sysml_is_definition_keyword(child_kind)
-            || sysml_is_usage_keyword(child_kind)
-            || child_kind == "package"
-        {
-            CapabilityAnswer::Allowed
-        } else {
-            CapabilityAnswer::Unknown(format!("unknown child kind `{child_kind}`"))
-        }
+        sysml_table_oracle().can_contain(container_kind, child_kind)
     }
 
     fn can_specialize(&self, source_kind: &str, target_kind: &str) -> CapabilityAnswer {
-        if source_kind.is_empty() || target_kind.is_empty() {
-            CapabilityAnswer::Unknown("missing kind information".to_string())
-        } else {
-            CapabilityAnswer::Allowed
-        }
+        sysml_table_oracle().can_specialize(source_kind, target_kind)
     }
 
     fn can_type_usage(&self, usage_kind: &str, definition_kind: &str) -> CapabilityAnswer {
-        if usage_kind.is_empty() || definition_kind.is_empty() {
-            CapabilityAnswer::Unknown("missing kind information".to_string())
-        } else if !sysml_is_usage_keyword(usage_kind) {
-            CapabilityAnswer::Denied(format!("`{usage_kind}` is not a usage kind"))
-        } else if !definition_kind.to_ascii_lowercase().contains("def") {
-            CapabilityAnswer::Denied(format!("`{definition_kind}` is not a definition-like type"))
-        } else if usage_kind == "part" && !definition_kind.to_ascii_lowercase().contains("part") {
-            CapabilityAnswer::Denied(format!(
-                "part usages should be typed by part definitions, got `{definition_kind}`"
-            ))
-        } else {
-            CapabilityAnswer::Allowed
+        match sysml_table_oracle().can_type_usage(usage_kind, definition_kind) {
+            CapabilityAnswer::Denied(_) if usage_kind == "part" => CapabilityAnswer::Denied(
+                format!("part usages should be typed by part definitions, got `{definition_kind}`"),
+            ),
+            answer => answer,
         }
     }
 
@@ -56,59 +33,27 @@ impl SemanticCapabilityOracle for SysmlSemanticCapabilityOracle {
         source_kind: &str,
         target_kind: &str,
     ) -> CapabilityAnswer {
-        let relation = relationship_kind.to_ascii_lowercase();
-        if !sysml_is_container_kind(source_kind) {
-            return CapabilityAnswer::Denied(format!(
-                "relationship source `{source_kind}` is not element-like"
-            ));
+        match sysml_table_oracle().can_relate(relationship_kind, source_kind, target_kind) {
+            CapabilityAnswer::Denied(_) if relationship_kind.eq_ignore_ascii_case("satisfy") => {
+                CapabilityAnswer::Denied(
+                    "satisfy relationships must target a requirement-like element".to_string(),
+                )
+            }
+            CapabilityAnswer::Denied(_) if relationship_kind.eq_ignore_ascii_case("verify") => {
+                CapabilityAnswer::Denied(
+                    "verify relationships must target a requirement-like element".to_string(),
+                )
+            }
+            answer => answer,
         }
-        let target = target_kind.to_ascii_lowercase();
-        if relation.contains("satisfy") && !target.contains("requirement") {
-            return CapabilityAnswer::Denied(
-                "satisfy relationships must target a requirement-like element".to_string(),
-            );
-        }
-        if relation.contains("verify") && !target.contains("requirement") {
-            return CapabilityAnswer::Denied(
-                "verify relationships must target a requirement-like element".to_string(),
-            );
-        }
-        if !(relation.contains("satisfy") || relation.contains("verify")) {
-            return CapabilityAnswer::Unknown(format!(
-                "relationship kind `{relationship_kind}` is not yet governed"
-            ));
-        }
-        CapabilityAnswer::Allowed
     }
 
     fn attribute_policy(&self, kind: &str, attribute: &str) -> AttributePolicyAnswer {
-        let attribute = attribute.to_ascii_lowercase();
-        let writable = matches!(
-            attribute.as_str(),
-            "declared_name"
-                | "specializes"
-                | "type"
-                | "is_abstract"
-                | "is_end"
-                | "direction"
-                | "target"
-                | "imports"
-                | "expression"
-                | "doc"
-                | "text"
-                | "id"
-                | "requirement_id"
-        );
-        AttributePolicyAnswer {
-            writable,
-            reason: (!writable).then(|| {
-                format!("attribute `{attribute}` is not writable on `{kind}` by this service")
-            }),
-        }
+        sysml_table_oracle().attribute_policy(kind, attribute)
     }
 
     fn relationship_uses_owner_as_source(&self, relationship_kind: &str) -> bool {
-        sysml_trace_relationship_uses_owner_source(relationship_kind)
+        sysml_table_oracle().relationship_uses_owner_as_source(relationship_kind)
     }
 
     fn doc_id_attribute_aliases(&self) -> &'static [&'static str] {
@@ -116,11 +61,11 @@ impl SemanticCapabilityOracle for SysmlSemanticCapabilityOracle {
     }
 
     fn supporting_definition_keyword_for_usage(&self, usage_kind: &str) -> Option<String> {
-        sysml_definition_keyword_for_usage(usage_kind).map(ToString::to_string)
+        sysml_table_oracle().supporting_definition_keyword_for_usage(usage_kind)
     }
 
     fn normalize_definition_keyword(&self, keyword: &str) -> String {
-        normalize_definition_keyword(keyword)
+        sysml_table_oracle().normalize_definition_keyword(keyword)
     }
 }
 
@@ -159,6 +104,129 @@ pub const SYSML_USAGE_KEYWORDS: &[&str] = &[
 ];
 
 pub const SYSML_RELATIONSHIP_KINDS: &[&str] = &["satisfy", "verify", "trace", "refine"];
+
+pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
+    let mut profile = SemanticCapabilityProfile::default()
+        .relationship_uses_owner_as_source("satisfy")
+        .relationship_uses_owner_as_source("verify")
+        .relationship_uses_owner_as_source("refine")
+        .definition_keyword_alias("part def", "part")
+        .definition_keyword_alias("requirement def", "requirement")
+        .definition_keyword_alias("attribute def", "attribute")
+        .definition_keyword_alias("action def", "action")
+        .definition_keyword_alias("constraint def", "constraint")
+        .definition_keyword_alias("verification def", "verification");
+    profile.doc_id_attribute_aliases = vec!["id", "requirement_id"];
+
+    for usage in SYSML_USAGE_KEYWORDS {
+        if let Some(definition) = sysml_definition_keyword_for_usage(usage) {
+            profile = profile
+                .allow_usage_typing(usage, &format!("{definition} def"))
+                .supporting_definition_keyword(usage, definition);
+        }
+    }
+
+    for container in ["package"]
+        .into_iter()
+        .chain(SYSML_DEFINITION_KEYWORDS.iter().map(|kind| *kind))
+        .chain(SYSML_DEFINITION_KEYWORDS.iter().map(|kind| match *kind {
+            "part" => "part def",
+            "attribute" => "attribute def",
+            "requirement" => "requirement def",
+            "item" => "item def",
+            "connection" => "connection def",
+            "port" => "port def",
+            "action" => "action def",
+            "constraint" => "constraint def",
+            "calc" => "calc def",
+            "state" => "state def",
+            "view" => "view def",
+            "verification" => "verification def",
+            other => other,
+        }))
+    {
+        for child in SYSML_DEFINITION_KEYWORDS
+            .iter()
+            .chain(SYSML_USAGE_KEYWORDS.iter())
+            .copied()
+            .chain(["package"])
+        {
+            profile = profile.allow_containment(container, child);
+        }
+        for child in SYSML_DEFINITION_KEYWORDS {
+            profile = profile.allow_containment(container, &format!("{child} def"));
+        }
+    }
+
+    for kind in SYSML_DEFINITION_KEYWORDS
+        .iter()
+        .chain(SYSML_USAGE_KEYWORDS.iter())
+        .copied()
+    {
+        profile = profile
+            .allow_specialization(kind, kind)
+            .allow_specialization(kind, &format!("{kind} def"));
+    }
+
+    for source in SYSML_DEFINITION_KEYWORDS
+        .iter()
+        .chain(SYSML_USAGE_KEYWORDS.iter())
+        .copied()
+        .chain(SYSML_DEFINITION_KEYWORDS.iter().map(|kind| match *kind {
+            "part" => "part def",
+            "attribute" => "attribute def",
+            "requirement" => "requirement def",
+            "item" => "item def",
+            "connection" => "connection def",
+            "port" => "port def",
+            "action" => "action def",
+            "constraint" => "constraint def",
+            "calc" => "calc def",
+            "state" => "state def",
+            "view" => "view def",
+            "verification" => "verification def",
+            other => other,
+        }))
+    {
+        profile = profile
+            .allow_relationship("trace", source, "*")
+            .allow_relationship("refine", source, "*")
+            .allow_relationship("satisfy", source, "requirement")
+            .allow_relationship("satisfy", source, "requirement def")
+            .allow_relationship("verify", source, "requirement")
+            .allow_relationship("verify", source, "requirement def");
+    }
+
+    for attribute in [
+        "declared_name",
+        "specializes",
+        "type",
+        "is_abstract",
+        "is_end",
+        "direction",
+        "target",
+        "imports",
+        "expression",
+        "doc",
+        "text",
+        "id",
+        "requirement_id",
+    ] {
+        profile = profile.attribute_policy(
+            "*",
+            attribute,
+            AttributePolicyAnswer {
+                writable: true,
+                reason: None,
+            },
+        );
+    }
+    profile
+}
+
+fn sysml_table_oracle() -> TableSemanticCapabilityOracle {
+    TableSemanticCapabilityOracle::new(sysml_semantic_capability_profile())
+}
 
 pub fn sysml_language_profile() -> LanguageProfile {
     LanguageProfile {

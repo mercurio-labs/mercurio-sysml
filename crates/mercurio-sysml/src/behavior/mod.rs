@@ -260,6 +260,22 @@ impl StateMachineModel {
             }
         }
 
+        let reachable = self.reachable_state_ids();
+        if !reachable.is_empty() {
+            for state in self
+                .states
+                .iter()
+                .filter(|state| !reachable.contains(&state.id))
+            {
+                findings.push(self.state_finding(
+                    state,
+                    "unreachable_state",
+                    StateMachineValidationSeverity::Warning,
+                    "State is not reachable from any initial state through projected transitions.",
+                ));
+            }
+        }
+
         findings
     }
 
@@ -850,6 +866,35 @@ mod tests {
             report.steps[0].transition_id.as_deref(),
             Some("transition.Server.stop")
         );
+    }
+
+    #[test]
+    fn validates_unreachable_state() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                state("state.Controller.Off", "Controller", true, false),
+                state("state.Controller.On", "Controller", false, false),
+                state("state.Controller.Fault", "Controller", false, false),
+                transition(
+                    "transition.Controller.start",
+                    "Controller",
+                    "state.Controller.Off",
+                    "state.Controller.On",
+                    "start",
+                ),
+            ],
+        })
+        .unwrap();
+
+        let machines = project_state_machines(&runtime);
+        let findings = machines[0].validate_structure();
+
+        assert!(findings.iter().any(|finding| {
+            finding.code == "unreachable_state"
+                && finding.severity == StateMachineValidationSeverity::Warning
+                && finding.state_id.as_deref() == Some("state.Controller.Fault")
+        }));
     }
 
     fn state(id: &str, owner: &str, initial: bool, final_state: bool) -> KirElement {

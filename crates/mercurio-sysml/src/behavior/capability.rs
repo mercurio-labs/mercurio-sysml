@@ -1,8 +1,8 @@
 use std::collections::BTreeMap;
 
 use crate::behavior::{
-    StateMachineExecutionStatus, StateMachineScenario, StateMachineScenarioEvent,
-    StateMachineValidationSeverity, project_state_machines_from_graph,
+    StateMachineExecutionStatus, StateMachineModel, StateMachineScenario,
+    StateMachineScenarioEvent, StateMachineValidationSeverity, project_state_machines_from_graph,
 };
 use mercurio_core::{
     CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind, CapabilityMaturity,
@@ -244,6 +244,15 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
             ],
             limitations: Vec::new(),
         };
+        let mut insights = vec![insight];
+        insights.extend(unreachable_state_insights(
+            &request.run_id,
+            workspace,
+            machine,
+            &execution,
+            &evidence_id,
+        ));
+
         let payload = json!({
             "machine": machine,
             "scenario": scenario,
@@ -263,7 +272,7 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
             capability_id: request.capability_id,
             status,
             target: request.target,
-            insights: vec![insight],
+            insights,
             artifacts: vec![artifact],
             evidence: EvidenceGraph {
                 nodes: vec![EvidenceNode {
@@ -349,6 +358,52 @@ fn parameter_usize(request: &CapabilityRunRequest, key: &str, default: usize) ->
         .and_then(Value::as_u64)
         .map(|value| value as usize)
         .unwrap_or(default)
+}
+
+fn unreachable_state_insights(
+    run_id: &str,
+    workspace: &SemanticWorkspaceSnapshot,
+    machine: &StateMachineModel,
+    execution: &crate::behavior::StateMachineExecutionReport,
+    evidence_id: &str,
+) -> Vec<mercurio_core::SemanticInsight> {
+    execution
+        .diagnostics
+        .iter()
+        .filter(|finding| finding.code == "unreachable_state")
+        .filter_map(|finding| {
+            let state_id = finding.state_id.as_ref()?;
+            Some(mercurio_core::SemanticInsight {
+                id: format!("insight.{run_id}.behavior.reachability.{state_id}"),
+                kind: InsightKind::ReachabilityFinding,
+                subject: workspace.element_ref(state_id),
+                claim: format!(
+                    "SysML state `{state_id}` is unreachable in state machine `{}`.",
+                    machine.id
+                ),
+                polarity: InsightPolarity::Weakens,
+                severity: InsightSeverity::Warning,
+                confidence: InsightConfidence::High,
+                scope: InsightScope::Element {
+                    element_id: state_id.clone(),
+                },
+                evidence_ids: vec![evidence_id.to_string()],
+                source_spans: workspace.source_spans(state_id),
+                metrics: BTreeMap::from([
+                    ("state_count".to_string(), Value::from(machine.states.len())),
+                    (
+                        "reachable_state_count".to_string(),
+                        Value::from(machine.reachable_state_ids().len()),
+                    ),
+                ]),
+                assumptions: vec![
+                    "reachability is computed from projected initial states and transitions"
+                        .to_string(),
+                ],
+                limitations: Vec::new(),
+            })
+        })
+        .collect()
 }
 
 fn value_digest(value: &Value) -> String {
@@ -461,5 +516,95 @@ mod tests {
                 .iter()
                 .any(|insight| insight.kind == InsightKind::BehaviorObserved)
         );
+    }
+
+    #[test]
+    fn behavior_capability_reports_unreachable_states() {
+        let workspace = SemanticWorkspaceSnapshot::from_document_with_profile(
+            KirDocument {
+                metadata: BTreeMap::new(),
+                elements: vec![
+                    KirElement {
+                        id: "state.Controller.Off".to_string(),
+                        kind: "SysML::Behavior::StateUsage".to_string(),
+                        layer: 2,
+                        properties: BTreeMap::from([
+                            (
+                                "owning_type".to_string(),
+                                Value::String("Controller".to_string()),
+                            ),
+                            ("is_initial".to_string(), Value::Bool(true)),
+                        ]),
+                    },
+                    KirElement {
+                        id: "state.Controller.On".to_string(),
+                        kind: "SysML::Behavior::StateUsage".to_string(),
+                        layer: 2,
+                        properties: BTreeMap::from([(
+                            "owning_type".to_string(),
+                            Value::String("Controller".to_string()),
+                        )]),
+                    },
+                    KirElement {
+                        id: "state.Controller.Fault".to_string(),
+                        kind: "SysML::Behavior::StateUsage".to_string(),
+                        layer: 2,
+                        properties: BTreeMap::from([(
+                            "owning_type".to_string(),
+                            Value::String("Controller".to_string()),
+                        )]),
+                    },
+                    KirElement {
+                        id: "transition.Controller.start".to_string(),
+                        kind: "SysML::Behavior::TransitionUsage".to_string(),
+                        layer: 2,
+                        properties: BTreeMap::from([
+                            (
+                                "owning_type".to_string(),
+                                Value::String("Controller".to_string()),
+                            ),
+                            (
+                                "source".to_string(),
+                                Value::String("state.Controller.Off".to_string()),
+                            ),
+                            (
+                                "target".to_string(),
+                                Value::String("state.Controller.On".to_string()),
+                            ),
+                            ("trigger".to_string(), Value::String("start".to_string())),
+                        ]),
+                    },
+                ],
+            },
+            Some("sysml".to_string()),
+        )
+        .unwrap();
+        let capability = SysmlDynamicBehaviorCapability;
+
+        let report = capability
+            .run(
+                &workspace,
+                CapabilityRunRequest {
+                    run_id: "run.behavior".to_string(),
+                    capability_id: "sysml.behavior.dynamic".to_string(),
+                    target: CapabilityTarget::Workspace,
+                    parameters: BTreeMap::new(),
+                    input_artifacts: Vec::new(),
+                },
+            )
+            .unwrap();
+
+        assert_eq!(report.status, CapabilityRunStatus::Passed);
+        assert!(report.diagnostics.iter().any(|diagnostic| {
+            diagnostic.code == "state_machine.unreachable_state"
+                && diagnostic
+                    .element
+                    .as_ref()
+                    .is_some_and(|element| element.element_id == "state.Controller.Fault")
+        }));
+        assert!(report.insights.iter().any(|insight| {
+            insight.kind == InsightKind::ReachabilityFinding
+                && insight.subject.element_id == "state.Controller.Fault"
+        }));
     }
 }

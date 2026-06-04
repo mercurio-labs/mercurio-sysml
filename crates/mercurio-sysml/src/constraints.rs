@@ -2,10 +2,18 @@ use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::fmt;
 
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
+use serde_json::{Value, json};
 
 use mercurio_core::graph::{Element, Graph};
-use mercurio_core::{ExecutionContext, ExpressionIr};
+use mercurio_core::{
+    AnalysisScope, CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind,
+    CapabilityMaturity, CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry,
+    CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget,
+    EvidenceGraph, EvidenceNode, EvidenceNodeKind, ExecutionContext, ExpressionIr,
+    InsightConfidence, InsightKind, InsightPolarity, InsightScope, InsightSeverity,
+    SemanticArtifact, SemanticCapability, SemanticDiagnostic, SemanticDiagnosticSeverity,
+    SemanticInsight, SemanticWorkspaceSnapshot, stable_digest,
+};
 
 const EPSILON: f64 = 1.0e-9;
 
@@ -48,6 +56,15 @@ pub struct ConstraintSolveResultDto {
     pub requirements: Vec<RequirementCheckDto>,
     pub diagnostics: Vec<ConstraintDiagnosticDto>,
     pub explanations: Vec<ConstraintExplanationDto>,
+}
+
+#[derive(Debug, Clone, Default)]
+pub struct SysmlConstraintAnalysisCapability;
+
+pub fn register_sysml_constraint_analysis_capability(
+    registry: &mut CapabilityRegistry,
+) -> Result<(), CapabilityError> {
+    registry.register(SysmlConstraintAnalysisCapability)
 }
 
 #[derive(Debug, Clone, Serialize, PartialEq)]
@@ -335,6 +352,212 @@ pub fn render_constraint_graph(
     })
 }
 
+impl SemanticCapability for SysmlConstraintAnalysisCapability {
+    fn descriptor(&self) -> CapabilityDescriptor {
+        CapabilityDescriptor {
+            id: "sysml.constraint.analysis".to_string(),
+            name: "SysML Constraint Analysis".to_string(),
+            kind: CapabilityKind::ConstraintAnalysis,
+            profile_id: Some("sysml".to_string()),
+            target_kinds: vec![
+                "SysML::Constraints::ConstraintUsage".to_string(),
+                "ConstraintUsage".to_string(),
+                "RequirementUsage".to_string(),
+            ],
+            relationship_kinds: Vec::new(),
+            input_artifact_kinds: Vec::new(),
+            produced_insight_kinds: vec![
+                InsightKind::ConstraintViolation,
+                InsightKind::SatisfiedConstraint,
+                InsightKind::UnknownVariable,
+                InsightKind::FeasibilityIssue,
+            ],
+            produced_artifact_kinds: vec!["constraint_analysis_summary".to_string()],
+            deterministic: true,
+            cost_class: CapabilityCostClass::Cheap,
+            maturity: CapabilityMaturity::Prototype,
+        }
+    }
+
+    fn readiness(
+        &self,
+        workspace: &SemanticWorkspaceSnapshot,
+        target: &CapabilityTarget,
+    ) -> CapabilityReadinessReport {
+        let analysis_scope = AnalysisScope::AuthoredModel;
+        let sources = scoped_constraint_sources(&workspace.graph, analysis_scope);
+        if sources.is_empty() {
+            return constraint_readiness(
+                target.clone(),
+                CapabilityReadinessStatus::NotApplicable,
+                "workspace has no constraint sources in authored model scope",
+            );
+        }
+        if let CapabilityTarget::Element { element_id } = target
+            && !sources.iter().any(|source| source.id == *element_id)
+        {
+            return constraint_readiness(
+                target.clone(),
+                CapabilityReadinessStatus::Blocked,
+                format!("target `{element_id}` is not a constraint source in authored model scope"),
+            );
+        }
+        constraint_readiness(
+            target.clone(),
+            CapabilityReadinessStatus::Ready,
+            "SysML constraint sources are available for lightweight analysis",
+        )
+    }
+
+    fn run(
+        &self,
+        workspace: &SemanticWorkspaceSnapshot,
+        request: CapabilityRunRequest,
+    ) -> Result<CapabilityRunReport, CapabilityError> {
+        let analysis_scope = parameter_analysis_scope_or(&request, AnalysisScope::AuthoredModel);
+        let mut sources = scoped_constraint_sources(&workspace.graph, analysis_scope);
+        if let CapabilityTarget::Element { element_id } = &request.target {
+            sources.retain(|source| source.id == *element_id);
+            if sources.is_empty() {
+                return Err(CapabilityError::InvalidRequest(format!(
+                    "target `{element_id}` is not a constraint source in analysis scope `{}`",
+                    analysis_scope.as_str()
+                )));
+            }
+        }
+        sources.sort_by(|left, right| left.id.cmp(&right.id));
+
+        if sources.is_empty() {
+            return Ok(CapabilityRunReport {
+                run_id: request.run_id,
+                capability_id: request.capability_id,
+                status: CapabilityRunStatus::NotApplicable,
+                target: request.target,
+                insights: Vec::new(),
+                artifacts: Vec::new(),
+                evidence: EvidenceGraph::default(),
+                diagnostics: Vec::new(),
+                limitations: vec![format!(
+                    "workspace has no constraint sources in analysis scope `{}`",
+                    analysis_scope.as_str()
+                )],
+            });
+        }
+
+        let parsed = parse_sources(&sources);
+        let mut state = initial_state(&ExecutionContext::default(), &parsed);
+        for _ in 0..(parsed.len().saturating_mul(8).max(1)) {
+            let mut changed = false;
+            for parsed_source in &parsed {
+                if parsed_source.source.kind != ConstraintSourceKind::Equation {
+                    continue;
+                }
+                if let Some(expr) = &parsed_source.expr
+                    && evaluate_equation(&parsed_source.source, expr, &mut state)
+                {
+                    changed = true;
+                }
+            }
+            if !changed {
+                break;
+            }
+        }
+        for parsed_source in &parsed {
+            match (&parsed_source.source.kind, &parsed_source.expr) {
+                (ConstraintSourceKind::Equation, Some(expr)) => {
+                    finalize_equation(&parsed_source.source, expr, &mut state)
+                }
+                (ConstraintSourceKind::Requirement, Some(expr)) => {
+                    finalize_requirement(&parsed_source.source, expr, &mut state)
+                }
+                (ConstraintSourceKind::Equation, None) => {
+                    finalize_unsupported_equation(parsed_source, &mut state)
+                }
+                (ConstraintSourceKind::Requirement, None) => {
+                    finalize_unsupported_requirement(parsed_source, &mut state)
+                }
+            }
+        }
+
+        let result = result_from_state(state);
+        let diagnostics = result
+            .diagnostics
+            .iter()
+            .map(|diagnostic| SemanticDiagnostic {
+                code: diagnostic.kind.clone(),
+                severity: if diagnostic.kind.contains("violation") {
+                    SemanticDiagnosticSeverity::Error
+                } else {
+                    SemanticDiagnosticSeverity::Warning
+                },
+                message: diagnostic.message.clone(),
+                element: Some(workspace.element_ref(&diagnostic.element_id)),
+                source_spans: workspace.source_spans(&diagnostic.element_id),
+            })
+            .collect::<Vec<_>>();
+        let evidence_nodes = sources
+            .iter()
+            .map(|source| EvidenceNode {
+                id: format!("evidence.{}.constraint.{}", request.run_id, source.id),
+                kind: EvidenceNodeKind::KirElement,
+                label: format!("Constraint source {}", source.id),
+                element_refs: vec![workspace.element_ref(&source.id)],
+                source_spans: workspace.source_spans(&source.id),
+                properties: BTreeMap::from([
+                    (
+                        "expression".to_string(),
+                        Value::String(source.expression.clone()),
+                    ),
+                    (
+                        "analysisScope".to_string(),
+                        Value::String(analysis_scope.as_str().to_string()),
+                    ),
+                ]),
+            })
+            .collect::<Vec<_>>();
+        let insights = constraint_analysis_insights(workspace, &request.run_id, &result);
+        let payload = json!({
+            "schema": "mercurio.capability.sysml_constraint_analysis.v1",
+            "analysisScope": analysis_scope.as_str(),
+            "constraintCount": result.constraints.len(),
+            "requirementCheckCount": result.requirements.len(),
+            "variableCount": result.variables.len(),
+            "diagnosticCount": result.diagnostics.len(),
+            "result": result,
+        });
+        let artifact = SemanticArtifact {
+            id: format!("artifact.{}.constraints", request.run_id),
+            kind: "constraint_analysis_summary".to_string(),
+            schema: "mercurio.capability.sysml_constraint_analysis.v1".to_string(),
+            digest: value_digest(&payload),
+            element_refs: sources
+                .iter()
+                .map(|source| workspace.element_ref(&source.id))
+                .collect(),
+            payload,
+        };
+        let status = constraint_capability_status(&artifact.payload);
+
+        Ok(CapabilityRunReport {
+            run_id: request.run_id,
+            capability_id: request.capability_id,
+            status,
+            target: request.target,
+            insights,
+            artifacts: vec![artifact],
+            evidence: EvidenceGraph {
+                nodes: evidence_nodes,
+                edges: Vec::new(),
+            },
+            diagnostics,
+            limitations: vec![
+                "MVP constraint analysis supports numeric equations and comparisons only"
+                    .to_string(),
+            ],
+        })
+    }
+}
+
 pub fn execution_context_from_nested_values(
     values: &BTreeMap<String, BTreeMap<String, Value>>,
 ) -> ExecutionContext {
@@ -347,6 +570,203 @@ pub fn execution_context_from_nested_values(
         }
     }
     context
+}
+
+fn constraint_readiness(
+    target: CapabilityTarget,
+    status: CapabilityReadinessStatus,
+    message: impl Into<String>,
+) -> CapabilityReadinessReport {
+    CapabilityReadinessReport {
+        capability_id: "sysml.constraint.analysis".to_string(),
+        target,
+        status,
+        message: message.into(),
+        required_inputs: Vec::new(),
+        limitations: Vec::new(),
+    }
+}
+
+fn scoped_constraint_sources(
+    graph: &Graph,
+    analysis_scope: AnalysisScope,
+) -> Vec<ConstraintSource> {
+    graph
+        .elements()
+        .iter()
+        .filter(|element| element_matches_analysis_scope(element, analysis_scope))
+        .filter_map(source_from_element)
+        .collect()
+}
+
+fn parameter_string(request: &CapabilityRunRequest, key: &str) -> Option<String> {
+    request
+        .parameters
+        .get(key)
+        .and_then(Value::as_str)
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(ToOwned::to_owned)
+}
+
+fn parameter_analysis_scope_or(
+    request: &CapabilityRunRequest,
+    default: AnalysisScope,
+) -> AnalysisScope {
+    parameter_string(request, "analysis_scope")
+        .or_else(|| parameter_string(request, "analysisScope"))
+        .and_then(|value| analysis_scope_from_str(&value))
+        .unwrap_or(default)
+}
+
+fn analysis_scope_from_str(value: &str) -> Option<AnalysisScope> {
+    match value.trim().to_ascii_lowercase().as_str() {
+        "authored_model" | "authored" | "model" | "user_model" => {
+            Some(AnalysisScope::AuthoredModel)
+        }
+        "stdlib" | "library" | "libraries" | "standard_library" => Some(AnalysisScope::Stdlib),
+        "metamodel" | "meta_model" => Some(AnalysisScope::Metamodel),
+        "all" | "workspace" => Some(AnalysisScope::All),
+        _ => None,
+    }
+}
+
+fn element_matches_analysis_scope(element: &Element, analysis_scope: AnalysisScope) -> bool {
+    match analysis_scope {
+        AnalysisScope::AuthoredModel => is_authored_model_element(element),
+        AnalysisScope::Stdlib => is_stdlib_element(element),
+        AnalysisScope::Metamodel => is_metamodel_element(element),
+        AnalysisScope::All => true,
+    }
+}
+
+fn is_authored_model_element(element: &Element) -> bool {
+    if element
+        .properties
+        .get("is_library_element")
+        .or_else(|| element.properties.get("isLibraryElement"))
+        .and_then(Value::as_bool)
+        .unwrap_or(false)
+    {
+        return false;
+    }
+    string_property(
+        element,
+        &[
+            "pilot_library_group",
+            "library_group",
+            "metamodel_layer",
+            "metamodel_language",
+        ],
+    )
+    .is_none()
+}
+
+fn is_metamodel_element(element: &Element) -> bool {
+    string_property(element, &["metamodel_layer", "metamodel_language"]).is_some()
+        || matches!(element.kind.as_ref(), "Metaclass" | "MetamodelFeature")
+        || element.element_id.starts_with("KerML::Root::")
+}
+
+fn is_stdlib_element(element: &Element) -> bool {
+    !is_authored_model_element(element) && !is_metamodel_element(element)
+}
+
+fn constraint_analysis_insights(
+    workspace: &SemanticWorkspaceSnapshot,
+    run_id: &str,
+    result: &ConstraintSolveResultDto,
+) -> Vec<SemanticInsight> {
+    let mut insights = result
+        .diagnostics
+        .iter()
+        .enumerate()
+        .map(|(index, diagnostic)| {
+            let kind = if diagnostic.kind.contains("violation") {
+                InsightKind::ConstraintViolation
+            } else if diagnostic.kind.contains("blocked") {
+                InsightKind::UnknownVariable
+            } else {
+                InsightKind::FeasibilityIssue
+            };
+            let severity = if diagnostic.kind.contains("violation") {
+                InsightSeverity::Error
+            } else {
+                InsightSeverity::Warning
+            };
+            SemanticInsight {
+                id: format!("insight.{run_id}.constraint.{}", index + 1),
+                kind,
+                subject: workspace.element_ref(&diagnostic.element_id),
+                claim: diagnostic.message.clone(),
+                polarity: InsightPolarity::Weakens,
+                severity,
+                confidence: InsightConfidence::High,
+                scope: InsightScope::Workspace,
+                evidence_ids: vec![format!(
+                    "evidence.{run_id}.constraint.{}",
+                    diagnostic.element_id
+                )],
+                source_spans: workspace.source_spans(&diagnostic.element_id),
+                metrics: BTreeMap::from([(
+                    "variable_count".to_string(),
+                    Value::from(diagnostic.variables.len()),
+                )]),
+                assumptions: Vec::new(),
+                limitations: Vec::new(),
+            }
+        })
+        .collect::<Vec<_>>();
+    if insights.is_empty() {
+        for constraint in &result.constraints {
+            if constraint.status == ConstraintStatusDto::Satisfied
+                || constraint.status == ConstraintStatusDto::Solved
+            {
+                insights.push(SemanticInsight {
+                    id: format!("insight.{run_id}.constraint.satisfied.{}", constraint.id),
+                    kind: InsightKind::SatisfiedConstraint,
+                    subject: workspace.element_ref(&constraint.id),
+                    claim: format!("constraint `{}` is {:?}", constraint.id, constraint.status),
+                    polarity: InsightPolarity::Supports,
+                    severity: InsightSeverity::Info,
+                    confidence: InsightConfidence::High,
+                    scope: InsightScope::Workspace,
+                    evidence_ids: vec![format!("evidence.{run_id}.constraint.{}", constraint.id)],
+                    source_spans: workspace.source_spans(&constraint.id),
+                    metrics: BTreeMap::new(),
+                    assumptions: Vec::new(),
+                    limitations: Vec::new(),
+                });
+            }
+        }
+    }
+    insights
+}
+
+fn constraint_capability_status(payload: &Value) -> CapabilityRunStatus {
+    let diagnostics = payload
+        .get("result")
+        .and_then(|result| result.get("diagnostics"))
+        .and_then(Value::as_array)
+        .cloned()
+        .unwrap_or_default();
+    if diagnostics.iter().any(|diagnostic| {
+        diagnostic
+            .get("kind")
+            .and_then(Value::as_str)
+            .is_some_and(|kind| kind.contains("violation"))
+    }) {
+        CapabilityRunStatus::Failed
+    } else if !diagnostics.is_empty() {
+        CapabilityRunStatus::Partial
+    } else {
+        CapabilityRunStatus::Passed
+    }
+}
+
+fn value_digest(value: &Value) -> String {
+    let bytes = serde_json::to_vec(value).unwrap_or_default();
+    stable_digest([("semantic-artifact".as_bytes(), bytes.as_slice())])
 }
 
 fn constraint_sources(graph: &Graph) -> Vec<ConstraintSource> {
@@ -1341,6 +1761,105 @@ mod tests {
             view.diagnostics
                 .iter()
                 .any(|diagnostic| diagnostic.kind == "constraint.unsupported")
+        );
+    }
+
+    #[test]
+    fn constraint_capability_reports_unknown_variables() {
+        let workspace = SemanticWorkspaceSnapshot::from_graph_with_profile(
+            test_graph(),
+            Some("sysml".to_string()),
+        )
+        .unwrap();
+        let capability = SysmlConstraintAnalysisCapability;
+
+        let report = capability
+            .run(
+                &workspace,
+                CapabilityRunRequest {
+                    run_id: "run.constraints".to_string(),
+                    capability_id: "sysml.constraint.analysis".to_string(),
+                    target: CapabilityTarget::Workspace,
+                    parameters: BTreeMap::new(),
+                    input_artifacts: Vec::new(),
+                },
+            )
+            .unwrap();
+
+        assert_eq!(report.status, CapabilityRunStatus::Partial);
+        assert_eq!(
+            report.artifacts[0].payload["analysisScope"],
+            "authored_model"
+        );
+        assert!(report.insights.iter().any(|insight| {
+            insight.kind == InsightKind::UnknownVariable
+                && insight.subject.element_id == "constraint.totalMass"
+        }));
+        assert!(report.diagnostics.iter().any(|diagnostic| {
+            diagnostic.code == "constraint.blocked"
+                && diagnostic.message.contains("unresolved variables")
+        }));
+    }
+
+    #[test]
+    fn constraint_capability_scope_filters_library_constraints() {
+        let graph = Graph::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                KirElement {
+                    id: "constraint.authored".into(),
+                    kind: "model.ConstraintUsage".into(),
+                    layer: 2,
+                    properties: BTreeMap::from([(
+                        "equation".into(),
+                        Value::String("a == b".into()),
+                    )]),
+                },
+                KirElement {
+                    id: "constraint.library".into(),
+                    kind: "model.ConstraintUsage".into(),
+                    layer: 1,
+                    properties: BTreeMap::from([
+                        ("equation".into(), Value::String("libA == libB".into())),
+                        ("is_library_element".into(), Value::Bool(true)),
+                        (
+                            "pilot_library_group".into(),
+                            Value::String("Kernel Libraries".into()),
+                        ),
+                    ]),
+                },
+            ],
+        })
+        .unwrap();
+        let workspace =
+            SemanticWorkspaceSnapshot::from_graph_with_profile(graph, Some("sysml".to_string()))
+                .unwrap();
+        let capability = SysmlConstraintAnalysisCapability;
+
+        let report = capability
+            .run(
+                &workspace,
+                CapabilityRunRequest {
+                    run_id: "run.constraints.stdlib".to_string(),
+                    capability_id: "sysml.constraint.analysis".to_string(),
+                    target: CapabilityTarget::Workspace,
+                    parameters: BTreeMap::from([(
+                        "analysis_scope".to_string(),
+                        Value::String("stdlib".to_string()),
+                    )]),
+                    input_artifacts: Vec::new(),
+                },
+            )
+            .unwrap();
+
+        assert_eq!(report.artifacts[0].payload["analysisScope"], "stdlib");
+        assert_eq!(
+            report.artifacts[0].payload["constraintCount"],
+            Value::from(1)
+        );
+        assert_eq!(
+            report.artifacts[0].payload["result"]["constraints"][0]["id"],
+            "constraint.library"
         );
     }
 

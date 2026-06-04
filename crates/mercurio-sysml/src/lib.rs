@@ -30,7 +30,8 @@ pub use constraints::{
     ConstraintGraphRequestDto, ConstraintGraphViewDto, ConstraintRecordDto,
     ConstraintSolveRequestDto, ConstraintSolveResultDto, ConstraintStatusDto,
     ConstraintVariableDto, ConstraintVariableStatusDto, RequirementCheckDto, RequirementStatusDto,
-    execution_context_from_nested_values, render_constraint_graph, solve_constraints,
+    SysmlConstraintAnalysisCapability, execution_context_from_nested_values,
+    register_sysml_constraint_analysis_capability, render_constraint_graph, solve_constraints,
 };
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::SemanticConcept;

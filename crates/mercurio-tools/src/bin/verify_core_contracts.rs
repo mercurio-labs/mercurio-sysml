@@ -167,7 +167,7 @@ package Demo {
             .changed_attributes
             .iter()
             .any(|change| {
-                change.element == ElementRef::new("Demo.safeStart")
+                change.element.element_id == "requirement.Demo.safeStart"
                     && change.attribute == "metadata"
             }),
         "metadata mutation reports semantic diff".to_string(),
