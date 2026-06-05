@@ -82,6 +82,10 @@ fn resolve_usage_property_default_value(
             modifier_value(&usage.modifiers, "trigger").map(str::to_string),
         ),
         (
+            "$modifier_value_source_is_initial",
+            modifier_value(&usage.modifiers, "source_is_initial").map(str::to_string),
+        ),
+        (
             "$sibling_state_id_transition_target",
             modifier_value(&usage.modifiers, "transition_target")
                 .and_then(|target| sibling_state_id(&usage.owner_qualified_name, target)),

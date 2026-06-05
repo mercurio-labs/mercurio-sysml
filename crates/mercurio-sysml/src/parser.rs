@@ -1865,7 +1865,10 @@ impl Parser {
             return Ok(false);
         }
 
-        self.advance();
+        let source_marker = self.expect_identifier("expected transition source marker")?;
+        if source_marker == "first" {
+            modifiers.push("source_is_initial=true".to_string());
+        }
         let source = self.parse_qualified_name()?;
         modifiers.push(format!("transition_source={}", source.as_dot_string()));
 

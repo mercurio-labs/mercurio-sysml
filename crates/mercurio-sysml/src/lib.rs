@@ -222,6 +222,11 @@ mod tests {
                 && transition.trigger.as_deref() == Some("start")
                 && transition.trigger_kind == StateTransitionTriggerKind::Event
         }));
+        assert!(
+            lifecycle.states.iter().any(|state| {
+                state.id == "state.Demo.Printer.lifecycle.idle" && state.is_initial
+            })
+        );
     }
 
     #[test]

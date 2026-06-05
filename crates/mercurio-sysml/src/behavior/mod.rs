@@ -523,8 +523,7 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
     let initial_state_ids = graph
         .elements()
         .iter()
-        .filter(|element| is_initial_transition_marker(element))
-        .filter_map(|element| string_property_any(element, &["target", "target_state", "to"]))
+        .filter_map(initial_state_id_from_marker)
         .collect::<BTreeSet<_>>();
 
     for element in graph.elements() {
@@ -675,6 +674,18 @@ fn is_initial_transition_marker(element: &Element) -> bool {
             .is_some_and(|value| value.eq_ignore_ascii_case("completion"))
         && string_property_any(element, &["source", "source_state", "from"]).is_none()
         && string_property_any(element, &["target", "target_state", "to"]).is_some()
+}
+
+fn initial_state_id_from_marker(element: &Element) -> Option<String> {
+    if string_property_any(element, &["source_is_initial", "sourceIsInitial"])
+        .is_some_and(|value| value.eq_ignore_ascii_case("true"))
+    {
+        return string_property_any(element, &["source", "source_state", "from"]);
+    }
+    if is_initial_transition_marker(element) {
+        return string_property_any(element, &["target", "target_state", "to"]);
+    }
+    None
 }
 
 fn owner_id(element: &Element) -> Option<String> {
