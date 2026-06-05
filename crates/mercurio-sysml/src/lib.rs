@@ -16,16 +16,17 @@ pub mod session;
 pub use assessment::sysml_parsed_module_assessment_facts;
 pub use authoring::load_authoring_project_from_sysml;
 pub use behavior::{
-    ConcurrentSimulationScenario, ConcurrentSubjectScenario, CriticalSimulationEvent,
-    HybridSimulationReport, HybridSimulationScenario, HybridSimulationStatus,
-    HybridSimulationTraceEntry, SimulationError, SimulationSubject, SimulationTrace,
-    StateMachineExecutionReport, StateMachineExecutionStatus, StateMachineModel,
+    AnalysisCaseInfo, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
+    CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
+    HybridSimulationStatus, HybridSimulationTraceEntry, SimulationError, SimulationSubject,
+    SimulationTrace, StateMachineExecutionReport, StateMachineExecutionStatus, StateMachineModel,
     StateMachineScenario, StateMachineScenarioEvent, StateMachineTraceStep,
     StateMachineValidationFinding, StateMachineValidationSeverity, StateNode,
     StateTransitionTriggerKind, SysmlDynamicBehaviorCapability, TraceChannel, TraceChannelSource,
-    TraceEntry, TraceEvent, TransitionNode, project_state_machines,
-    project_state_machines_from_graph, register_sysml_behavior_capability,
+    TraceEntry, TraceEvent, TransitionNode, list_analysis_cases, project_state_machines,
+    project_state_machines_from_graph, register_sysml_behavior_capability, run_analysis_case,
     run_concurrent_simulation, run_hybrid_simulation, run_hybrid_simulation_with_overlay,
+    scenario_from_analysis_case,
 };
 pub use constraints::{
     ConstraintDiagnosticDto, ConstraintError, ConstraintExplanationDto, ConstraintGraphEdgeDto,
@@ -135,6 +136,7 @@ impl LanguageService for SysmlLanguageModule {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use mercurio_core::Runtime;
     use mercurio_language_contracts::LanguageRegistry;
     use std::path::Path;
 
@@ -160,6 +162,65 @@ mod tests {
                 || element.id == "definition.Demo.Vehicle"
                 || element.properties.get("declared_name")
                     == Some(&serde_json::Value::String("Vehicle".to_string()))
+        }));
+    }
+
+    #[test]
+    fn individual_part_compiles_to_individual_usage() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            "package Demo { part def Printer; individual part printer : Printer; }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap();
+
+        let printer = document
+            .elements
+            .iter()
+            .find(|element| element.id == "individual.Demo.printer")
+            .unwrap();
+
+        assert_eq!(
+            printer.properties["metatype"],
+            serde_json::json!("SysML::IndividualUsage")
+        );
+        assert_eq!(
+            printer.properties["type"],
+            serde_json::json!("type.Demo.Printer")
+        );
+    }
+
+    #[test]
+    fn explicit_transition_usage_projects_state_machine_transition() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            "package Demo {
+                part def Printer {
+                    state lifecycle {
+                        state idle;
+                        state homing;
+                        transition idle_go first idle accept start then homing;
+                    }
+                }
+            }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap();
+
+        let runtime = Runtime::from_document(document).unwrap();
+        let machines = project_state_machines(&runtime);
+        let lifecycle = machines
+            .iter()
+            .find(|machine| machine.label == "lifecycle")
+            .unwrap();
+
+        assert!(lifecycle.transitions.iter().any(|transition| {
+            transition.source == "state.Demo.Printer.lifecycle.idle"
+                && transition.target == "state.Demo.Printer.lifecycle.homing"
+                && transition.trigger.as_deref() == Some("start")
+                && transition.trigger_kind == StateTransitionTriggerKind::Event
         }));
     }
 

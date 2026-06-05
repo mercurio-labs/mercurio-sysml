@@ -8,6 +8,7 @@ use crate::behavior::{
     StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
     project_state_machines,
 };
+use mercurio_core::graph::Element;
 use mercurio_core::ir::{KirDocument, KirElement};
 use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
 
@@ -62,6 +63,13 @@ pub struct ConcurrentSubjectScenario {
     /// External events to inject into this subject's machine, in order.
     #[serde(default)]
     pub events: Vec<StateMachineScenarioEvent>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct AnalysisCaseInfo {
+    pub id: String,
+    pub label: String,
+    pub subject_count: usize,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -280,6 +288,7 @@ mod tuple_value_map {
 
 #[derive(Debug)]
 pub enum SimulationError {
+    MissingAnalysisCase(String),
     MissingSubject(String),
     MissingStateMachine(String),
     MissingInitialState(String),
@@ -292,6 +301,7 @@ pub enum SimulationError {
 impl fmt::Display for SimulationError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
+            Self::MissingAnalysisCase(id) => write!(f, "missing analysis case: {id}"),
             Self::MissingSubject(id) => write!(f, "missing simulation subject: {id}"),
             Self::MissingStateMachine(id) => write!(f, "missing state machine: {id}"),
             Self::MissingInitialState(id) => write!(f, "missing initial state: {id}"),
@@ -326,6 +336,121 @@ pub fn run_hybrid_simulation_with_overlay(
     let composition = compose_simulation_overlay(base, overlay)?;
     let runtime = Runtime::from_document(composition.document)?;
     run_hybrid_simulation(&runtime, composition.scenario)
+}
+
+pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|element| is_project_analysis_case(element))
+        .map(|element| {
+            let subject_count = element
+                .properties
+                .get("subjects")
+                .and_then(Value::as_array)
+                .map(Vec::len)
+                .unwrap_or_else(|| {
+                    runtime
+                        .graph()
+                        .elements()
+                        .iter()
+                        .filter(|candidate| {
+                            string_property_any_element(candidate, &["owner", "owning_type"])
+                                .as_deref()
+                                == Some(element.element_id.as_str())
+                                && candidate.element_id.starts_with("subject.")
+                        })
+                        .count()
+                });
+            AnalysisCaseInfo {
+                id: element.element_id.clone(),
+                label: element_label_element(element),
+                subject_count,
+            }
+        })
+        .collect()
+}
+
+pub fn scenario_from_analysis_case(
+    runtime: &Runtime,
+    analysis_case_id: &str,
+) -> Result<ConcurrentSimulationScenario, SimulationError> {
+    let analysis_case = runtime
+        .graph()
+        .elements()
+        .iter()
+        .find(|element| {
+            is_project_analysis_case(element)
+                && (element.element_id == analysis_case_id
+                    || element_label_element(element) == analysis_case_id)
+        })
+        .ok_or_else(|| SimulationError::MissingAnalysisCase(analysis_case_id.to_string()))?;
+
+    let subjects = analysis_case
+        .properties
+        .get("subjects")
+        .and_then(Value::as_array)
+        .ok_or_else(|| {
+            SimulationError::InvalidOverlay(format!(
+                "{} must define `subjects` for analysis-case simulation",
+                analysis_case.element_id
+            ))
+        })?
+        .iter()
+        .enumerate()
+        .map(|(index, value)| subject_scenario_from_analysis_value(value, index))
+        .collect::<Result<Vec<_>, _>>()?;
+
+    if subjects.is_empty() {
+        return Err(SimulationError::InvalidOverlay(format!(
+            "{} must define at least one analysis subject",
+            analysis_case.element_id
+        )));
+    }
+
+    let initial_values = analysis_case
+        .properties
+        .get("initial_values")
+        .or_else(|| analysis_case.properties.get("initialValues"))
+        .and_then(Value::as_object)
+        .map(|values| {
+            values
+                .iter()
+                .filter_map(|(key, value)| {
+                    let (subject, feature) = key.split_once('|')?;
+                    Some(((subject.to_string(), feature.to_string()), value.clone()))
+                })
+                .collect::<BTreeMap<_, _>>()
+        })
+        .unwrap_or_default();
+
+    Ok(ConcurrentSimulationScenario {
+        id: analysis_case.element_id.clone(),
+        subjects,
+        max_steps: analysis_case
+            .properties
+            .get("max_steps")
+            .or_else(|| analysis_case.properties.get("maxSteps"))
+            .and_then(Value::as_u64)
+            .map(|value| value as usize)
+            .unwrap_or(300),
+        step_duration_s: analysis_case
+            .properties
+            .get("step_duration_s")
+            .or_else(|| analysis_case.properties.get("stepDurationS"))
+            .and_then(Value::as_f64)
+            .unwrap_or_else(default_step_duration),
+        initial_values,
+    })
+}
+
+pub fn run_analysis_case(
+    runtime: &Runtime,
+    analysis_case_id: &str,
+) -> Result<SimulationTrace, SimulationError> {
+    let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
+    run_concurrent_simulation(runtime, scenario)
 }
 
 pub fn compose_simulation_overlay(
@@ -505,6 +630,115 @@ fn transition_effect_overlay_value(effect: &KirElement) -> Result<Value, Simulat
 
 fn belongs_to_scenario(element: &KirElement, scenario_id: &str) -> bool {
     string_property(element, "scenario").is_none_or(|scenario| scenario == scenario_id)
+}
+
+fn subject_scenario_from_analysis_value(
+    value: &Value,
+    index: usize,
+) -> Result<ConcurrentSubjectScenario, SimulationError> {
+    let object = value.as_object().ok_or_else(|| {
+        SimulationError::InvalidOverlay(format!(
+            "analysis case subject at index {index} must be an object"
+        ))
+    })?;
+    let subject_id = object
+        .get("subject_id")
+        .or_else(|| object.get("subjectId"))
+        .or_else(|| object.get("subject"))
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            SimulationError::InvalidOverlay(format!(
+                "analysis case subject at index {index} must define `subject`"
+            ))
+        })?
+        .to_string();
+    let machine_id = object
+        .get("machine_id")
+        .or_else(|| object.get("machineId"))
+        .or_else(|| object.get("machine"))
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            SimulationError::InvalidOverlay(format!(
+                "analysis case subject `{subject_id}` must define `machine`"
+            ))
+        })?
+        .to_string();
+    let initial_state_id = object
+        .get("initial_state_id")
+        .or_else(|| object.get("initialStateId"))
+        .or_else(|| object.get("initial_state"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned);
+    let events = object
+        .get("events")
+        .and_then(Value::as_array)
+        .map(|events| {
+            events
+                .iter()
+                .enumerate()
+                .map(|(event_index, event)| {
+                    let event_object = event.as_object().ok_or_else(|| {
+                        SimulationError::InvalidOverlay(format!(
+                            "analysis case event {event_index} for `{subject_id}` must be an object"
+                        ))
+                    })?;
+                    let trigger = event_object
+                        .get("trigger")
+                        .and_then(Value::as_str)
+                        .ok_or_else(|| {
+                            SimulationError::InvalidOverlay(format!(
+                                "analysis case event {event_index} for `{subject_id}` must define `trigger`"
+                            ))
+                        })?
+                        .to_string();
+                    let id = event_object
+                        .get("id")
+                        .and_then(Value::as_str)
+                        .map(ToOwned::to_owned)
+                        .unwrap_or_else(|| format!("{subject_id}.event.{event_index}"));
+                    Ok(StateMachineScenarioEvent { id, trigger })
+                })
+                .collect::<Result<Vec<_>, SimulationError>>()
+        })
+        .transpose()?
+        .unwrap_or_default();
+
+    Ok(ConcurrentSubjectScenario {
+        subject_id,
+        machine_id,
+        initial_state_id,
+        events,
+    })
+}
+
+fn is_project_analysis_case(element: &Element) -> bool {
+    element.kind.contains("AnalysisCaseDefinition")
+        && element.element_id != "AnalysisCases::AnalysisCase"
+        && !element.element_id.starts_with("SysML::")
+        && !string_property_any_element(element, &["source_file", "sourceFile"])
+            .is_some_and(|source| source.starts_with("Systems Library/"))
+}
+
+fn element_label_element(element: &Element) -> String {
+    element
+        .properties
+        .get("declared_name")
+        .or_else(|| element.properties.get("name"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned)
+        .unwrap_or_else(|| element.element_id.clone())
+}
+
+fn string_property_any_element(element: &Element, keys: &[&str]) -> Option<String> {
+    keys.iter().find_map(|key| {
+        element
+            .properties
+            .get(*key)
+            .and_then(Value::as_str)
+            .map(str::trim)
+            .filter(|value| !value.is_empty())
+            .map(ToOwned::to_owned)
+    })
 }
 
 fn required_string_property(
@@ -2312,6 +2546,86 @@ mod tests {
                 .states
                 .get("individual.b")
                 .is_some_and(|states| states == &vec!["state.B.two".to_string()])
+        }));
+    }
+
+    #[test]
+    fn analysis_case_extracts_and_runs_concurrent_scenario() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Printer", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.printer",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("printer")),
+                        ("type", json!("type.Printer")),
+                    ],
+                ),
+                state_element("state.Printer.idle", "PrinterLifecycle", true),
+                state_element("state.Printer.printing", "PrinterLifecycle", false),
+                transition_element(
+                    "transition.Printer.start",
+                    "PrinterLifecycle",
+                    "state.Printer.idle",
+                    "state.Printer.printing",
+                    "start",
+                    "event",
+                    [],
+                ),
+                element(
+                    "analysis.PrintSequence",
+                    "SysML::Systems::AnalysisCaseDefinition",
+                    [
+                        ("declared_name", json!("PrintSequence")),
+                        ("max_steps", json!(8)),
+                        ("step_duration_s", json!(1.0)),
+                        (
+                            "subjects",
+                            json!([
+                                {
+                                    "subject": "individual.printer",
+                                    "machine": "PrinterLifecycle",
+                                    "events": [
+                                        { "id": "event.start", "trigger": "start" }
+                                    ]
+                                }
+                            ]),
+                        ),
+                        (
+                            "initial_values",
+                            json!({ "individual.printer|bed_temperature": 22.0 }),
+                        ),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let cases = list_analysis_cases(&runtime);
+        assert_eq!(cases.len(), 1);
+        assert_eq!(cases[0].label, "PrintSequence");
+        assert_eq!(cases[0].subject_count, 1);
+
+        let scenario = scenario_from_analysis_case(&runtime, "analysis.PrintSequence").unwrap();
+        assert_eq!(scenario.id, "analysis.PrintSequence");
+        assert_eq!(scenario.subjects[0].subject_id, "individual.printer");
+        assert_eq!(scenario.subjects[0].events[0].trigger, "start");
+        assert_eq!(
+            scenario.initial_values.get(&(
+                "individual.printer".to_string(),
+                "bed_temperature".to_string()
+            )),
+            Some(&json!(22.0))
+        );
+
+        let trace = run_analysis_case(&runtime, "analysis.PrintSequence").unwrap();
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.printer")
+                .is_some_and(|states| states == &vec!["state.Printer.printing".to_string()])
         }));
     }
 

@@ -1766,8 +1766,26 @@ impl Parser {
             self.expect_identifier_named("send", "expected `send` after action name")?;
             effective_keyword = "send".to_string();
         }
+        let parsed_transition_shorthand = if keyword == "transition" && explicit_name.is_some() {
+            self.parse_transition_usage_shorthand(&mut modifiers)?
+        } else {
+            false
+        };
         let is_implicit_name = explicit_name.is_none() || force_implicit_name;
         let mut tail = if keyword == "connect" {
+            UsageTail {
+                ty: None,
+                multiplicity: None,
+                expression: None,
+                additional_types: Vec::new(),
+                specializes: Vec::new(),
+                subsets: Vec::new(),
+                redefines: Vec::new(),
+                body_members: Vec::new(),
+                owner_docs: Vec::new(),
+                had_body: false,
+            }
+        } else if parsed_transition_shorthand {
             UsageTail {
                 ty: None,
                 multiplicity: None,
@@ -1836,6 +1854,45 @@ impl Parser {
             modifiers,
             span,
         }))
+    }
+
+    fn parse_transition_usage_shorthand(
+        &mut self,
+        modifiers: &mut Vec<String>,
+    ) -> Result<bool, Diagnostic> {
+        if !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then")
+        {
+            return Ok(false);
+        }
+
+        self.advance();
+        let source = self.parse_qualified_name()?;
+        modifiers.push(format!("transition_source={}", source.as_dot_string()));
+
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "accept") {
+            self.expect_identifier_named("accept", "expected `accept` in transition usage")?;
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "after" || value == "when" || value == "at")
+            {
+                let trigger_kind = self.expect_identifier("expected transition trigger kind")?;
+                modifiers.push(format!("trigger_kind={trigger_kind}"));
+                let trigger = self.collect_behavior_text_until_then_or_end();
+                if !trigger.is_empty() {
+                    modifiers.push(format!("trigger={trigger}"));
+                }
+            } else if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+                let trigger = self.parse_qualified_name()?;
+                modifiers.push(format!("trigger={}", trigger.as_dot_string()));
+                modifiers.push("trigger_kind=event".to_string());
+            }
+        }
+
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
+            self.expect_identifier_named("then", "expected `then` before transition target")?;
+            let target = self.parse_qualified_name()?;
+            modifiers.push(format!("transition_target={}", target.as_dot_string()));
+        }
+
+        Ok(true)
     }
 
     fn parse_comment_usage_after_keyword(

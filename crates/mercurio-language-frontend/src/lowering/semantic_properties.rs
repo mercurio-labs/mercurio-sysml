@@ -86,6 +86,11 @@ fn resolve_usage_property_default_value(
             modifier_value(&usage.modifiers, "transition_target")
                 .and_then(|target| sibling_state_id(&usage.owner_qualified_name, target)),
         ),
+        (
+            "$sibling_state_id_transition_source",
+            modifier_value(&usage.modifiers, "transition_source")
+                .and_then(|source| sibling_state_id(&usage.owner_qualified_name, source)),
+        ),
     ] {
         if !resolved.contains(placeholder) {
             continue;

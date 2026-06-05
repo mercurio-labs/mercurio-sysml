@@ -178,6 +178,16 @@
         }
       }
     ],
+    "TransitionUsage": [
+      {
+        "property_values": {
+          "source": "$sibling_state_id_transition_source",
+          "target": "$sibling_state_id_transition_target",
+          "trigger": "$modifier_value_trigger",
+          "trigger_kind": "$modifier_value_trigger_kind"
+        }
+      }
+    ],
     "VerifyUsage": [
       {
         "kir_kind": "SysML::Requirements::VerifyRequirementUsage",

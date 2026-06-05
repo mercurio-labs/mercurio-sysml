@@ -5,11 +5,12 @@ pub mod simulation;
 
 pub use capability::{SysmlDynamicBehaviorCapability, register_sysml_behavior_capability};
 pub use simulation::{
-    ConcurrentSimulationScenario, ConcurrentSubjectScenario, CriticalSimulationEvent,
-    HybridSimulationReport, HybridSimulationScenario, HybridSimulationStatus,
-    HybridSimulationTraceEntry, SimulationError, SimulationSubject, SimulationTrace, TraceChannel,
-    TraceChannelSource, TraceEntry, TraceEvent, run_concurrent_simulation, run_hybrid_simulation,
-    run_hybrid_simulation_with_overlay,
+    AnalysisCaseInfo, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
+    CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
+    HybridSimulationStatus, HybridSimulationTraceEntry, SimulationError, SimulationSubject,
+    SimulationTrace, TraceChannel, TraceChannelSource, TraceEntry, TraceEvent, list_analysis_cases,
+    run_analysis_case, run_concurrent_simulation, run_hybrid_simulation,
+    run_hybrid_simulation_with_overlay, scenario_from_analysis_case,
 };
 
 use serde::{Deserialize, Serialize};

@@ -473,7 +473,15 @@ fn collect_generic_usage(
     owner_construct: &str,
     mappings: &MappingBundle,
 ) -> Result<CollectedUsage, Diagnostic> {
-    let construct = mappings.usage_construct_for(&usage.keyword);
+    let mut construct = mappings.usage_construct_for(&usage.keyword);
+    if construct == "PartUsage"
+        && usage
+            .modifiers
+            .iter()
+            .any(|modifier| modifier == "individual")
+    {
+        construct = "IndividualUsage".to_string();
+    }
     let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
     let plan = collect_generic_usage_plan(
         mappings.lowering_rule_for_construct(&construct),
@@ -571,6 +579,9 @@ fn collect_generic_usage_plan(
                 plan.reference_target = usage.reference_target.clone();
             }
             ("body", "$ast.expression") => {
+                plan.expression = usage.expression.clone();
+            }
+            ("expression", "$ast.expression") => {
                 plan.expression = usage.expression.clone();
             }
             ("docs", "$ast.docs") => {
