@@ -731,10 +731,24 @@ fn native_analysis_subjects(
                 subject_id: subject.element_id.clone(),
                 machine_id: machine.id.clone(),
                 initial_state_id: None,
-                events: Vec::new(),
+                events: default_native_subject_events(machine),
             })
         })
         .collect()
+}
+
+fn default_native_subject_events(machine: &StateMachineModel) -> Vec<StateMachineScenarioEvent> {
+    if machine.transitions.iter().any(|transition| {
+        transition.trigger_kind == StateTransitionTriggerKind::Event
+            && transition.trigger.as_deref() == Some("start")
+    }) {
+        vec![StateMachineScenarioEvent {
+            id: format!("{}.event.start", machine.id),
+            trigger: "start".to_string(),
+        }]
+    } else {
+        Vec::new()
+    }
 }
 
 fn native_analysis_subject_elements<'a>(
@@ -2814,6 +2828,8 @@ mod tests {
                 .machine_id
                 .ends_with(".Printer.lifecycle")
         );
+        assert_eq!(scenario.subjects[0].events.len(), 1);
+        assert_eq!(scenario.subjects[0].events[0].trigger, "start");
         assert_eq!(
             scenario.initial_values.get(&(
                 scenario.subjects[0].subject_id.clone(),
@@ -2823,8 +2839,17 @@ mod tests {
         );
 
         let trace = run_concurrent_simulation(&runtime, scenario).unwrap();
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .values()
+                .any(|states| states.iter().any(|state| state.ends_with(".Printing")))
+        }));
         assert!(
-            trace.timeline[0]
+            trace
+                .timeline
+                .first()
+                .unwrap()
                 .states
                 .values()
                 .any(|states| states.iter().any(|state| state.ends_with(".Idle")))
