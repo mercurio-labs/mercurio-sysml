@@ -1,14 +1,22 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 use crate::behavior::{
-    StateMachineModel, StateMachineScenarioEvent, TransitionNode, project_state_machines,
+    StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
+    project_state_machines,
 };
 use mercurio_core::ir::{KirDocument, KirElement};
 use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
+
+const RATE_SAMPLE_INTERVAL_S: f64 = 1.0;
+const CHANGE_LOOP_LIMIT: usize = 20;
+
+fn default_step_duration() -> f64 {
+    1.0
+}
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SimulationSubject {
@@ -16,7 +24,7 @@ pub struct SimulationSubject {
     pub type_id: Option<String>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HybridSimulationScenario {
     pub id: String,
     pub subject: SimulationSubject,
@@ -25,9 +33,38 @@ pub struct HybridSimulationScenario {
     pub events: Vec<StateMachineScenarioEvent>,
     pub max_steps: usize,
     pub values: BTreeMap<(String, String), Value>,
+    #[serde(default = "default_step_duration")]
+    pub step_duration_s: f64,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+/// A scenario that runs multiple subjects simultaneously on a shared time axis.
+/// All subjects share a single `ExecutionContext`; cross-part guards work
+/// because the shared value map contains every `(subject_id, feature)` pair.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ConcurrentSimulationScenario {
+    pub id: String,
+    pub subjects: Vec<ConcurrentSubjectScenario>,
+    pub max_steps: usize,
+    #[serde(default = "default_step_duration")]
+    pub step_duration_s: f64,
+    /// Initial attribute values for ALL subjects.
+    /// Keys are `(subject_id, feature_name)` tuples.
+    #[serde(with = "tuple_value_map")]
+    pub initial_values: BTreeMap<(String, String), Value>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ConcurrentSubjectScenario {
+    pub subject_id: String,
+    pub machine_id: String,
+    #[serde(default)]
+    pub initial_state_id: Option<String>,
+    /// External events to inject into this subject's machine, in order.
+    #[serde(default)]
+    pub events: Vec<StateMachineScenarioEvent>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HybridSimulationReport {
     pub scenario_id: String,
     pub subject_id: String,
@@ -37,6 +74,119 @@ pub struct HybridSimulationReport {
     pub values: BTreeMap<(String, String), Value>,
     pub critical_events: Vec<CriticalSimulationEvent>,
     pub trace: Vec<HybridSimulationTraceEntry>,
+    /// Features whose values were driven by Rate effects during simulation.
+    /// Used by `to_trace` to assign the correct `TraceChannelSource`.
+    #[serde(default)]
+    pub rate_channels: BTreeSet<(String, String)>,
+}
+
+impl HybridSimulationReport {
+    /// Convert to the unified SimulationTrace format.
+    pub fn to_trace(&self) -> SimulationTrace {
+        let mut channel_ids: BTreeSet<(String, String)> = BTreeSet::new();
+        for entry in &self.trace {
+            for key in entry.values.keys() {
+                channel_ids.insert(key.clone());
+            }
+        }
+
+        let channels = channel_ids
+            .into_iter()
+            .map(|(subject, feature)| {
+                let source = if self
+                    .rate_channels
+                    .contains(&(subject.clone(), feature.clone()))
+                {
+                    TraceChannelSource::RateEffect
+                } else {
+                    TraceChannelSource::AssignEffect
+                };
+                TraceChannel {
+                    id: format!("{subject}.{feature}"),
+                    unit: None,
+                    source,
+                }
+            })
+            .collect();
+
+        let timeline = self
+            .trace
+            .iter()
+            .map(|entry| {
+                let mut states = BTreeMap::new();
+                states.insert(self.subject_id.clone(), entry.after.clone());
+
+                let events = entry
+                    .transition_id
+                    .iter()
+                    .map(|tid| TraceEvent {
+                        kind: "transition".to_string(),
+                        transition_id: Some(tid.clone()),
+                        trigger: entry.trigger.clone(),
+                    })
+                    .collect();
+
+                TraceEntry {
+                    t: entry.t,
+                    states,
+                    values: entry.values.clone(),
+                    events,
+                }
+            })
+            .collect();
+
+        SimulationTrace {
+            scenario_id: self.scenario_id.clone(),
+            subject_id: self.subject_id.clone(),
+            channels,
+            timeline,
+            status: self.status,
+        }
+    }
+}
+
+/// Unified simulation output. Every channel value is known at every
+/// point in simulation time. Consumed by the visualisation binding engine.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SimulationTrace {
+    pub scenario_id: String,
+    pub subject_id: String,
+    pub channels: Vec<TraceChannel>,
+    pub timeline: Vec<TraceEntry>,
+    pub status: HybridSimulationStatus,
+}
+
+/// Describes one observable channel in the trace.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TraceChannel {
+    pub id: String,
+    pub unit: Option<String>,
+    pub source: TraceChannelSource,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum TraceChannelSource {
+    StateMachine,
+    RateEffect,
+    AssignEffect,
+}
+
+/// One moment in simulation time capturing all state and attribute values.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TraceEntry {
+    pub t: f64,
+    pub states: BTreeMap<String, Vec<String>>,
+    #[serde(with = "tuple_value_map")]
+    pub values: BTreeMap<(String, String), Value>,
+    pub events: Vec<TraceEvent>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct TraceEvent {
+    pub kind: String,
+    pub transition_id: Option<String>,
+    pub trigger: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -55,16 +205,77 @@ pub struct CriticalSimulationEvent {
     pub detail: BTreeMap<String, Value>,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct HybridSimulationTraceEntry {
     pub step: usize,
+    #[serde(default)]
+    pub t: f64,
     pub event_id: Option<String>,
     pub trigger: Option<String>,
     pub transition_id: Option<String>,
     pub before: Vec<String>,
     pub after: Vec<String>,
+    #[serde(default, with = "tuple_value_map")]
+    pub values: BTreeMap<(String, String), Value>,
     pub critical_events: Vec<CriticalSimulationEvent>,
     pub explanation: String,
+}
+
+mod tuple_value_map {
+    use std::collections::BTreeMap;
+    use std::fmt;
+
+    use serde::de::{self, Visitor};
+    use serde::ser::SerializeMap;
+    use serde::{Deserializer, Serializer};
+    use serde_json::Value;
+
+    pub fn serialize<S>(
+        values: &BTreeMap<(String, String), Value>,
+        serializer: S,
+    ) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let mut map = serializer.serialize_map(Some(values.len()))?;
+        for ((subject, feature), value) in values {
+            map.serialize_entry(&format!("{subject}|{feature}"), value)?;
+        }
+        map.end()
+    }
+
+    pub fn deserialize<'de, D>(
+        deserializer: D,
+    ) -> Result<BTreeMap<(String, String), Value>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        struct TupleValueMapVisitor;
+
+        impl<'de> Visitor<'de> for TupleValueMapVisitor {
+            type Value = BTreeMap<(String, String), Value>;
+
+            fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+                formatter.write_str("a map keyed by `subject|feature`")
+            }
+
+            fn visit_map<A>(self, mut access: A) -> Result<Self::Value, A::Error>
+            where
+                A: de::MapAccess<'de>,
+            {
+                let mut values = BTreeMap::new();
+                while let Some((key, value)) = access.next_entry::<String, Value>()? {
+                    let (subject, feature) = key.split_once('|').ok_or_else(|| {
+                        de::Error::custom(format!("value key `{key}` must contain `|`"))
+                    })?;
+                    values.insert((subject.to_string(), feature.to_string()), value);
+                }
+                Ok(values)
+            }
+        }
+
+        deserializer.deserialize_map(TupleValueMapVisitor)
+    }
 }
 
 #[derive(Debug)]
@@ -206,6 +417,7 @@ fn scenario_from_overlay(
         events: events.into_iter().map(|(_, event)| event).collect(),
         max_steps,
         values,
+        step_duration_s: default_step_duration(),
     })
 }
 
@@ -276,6 +488,14 @@ fn transition_effect_overlay_value(effect: &KirElement) -> Result<Value, Simulat
             "event": required_string_property(effect, "event")?,
             "source": effect.id,
         })),
+        "rate" => Ok(serde_json::json!({
+            "kind": "rate",
+            "feature": required_string_property(effect, "feature")?,
+            "rate_per_second": effect.properties.get("rate_per_second").and_then(Value::as_f64).ok_or_else(|| {
+                SimulationError::InvalidOverlay(format!("{} must define numeric `rate_per_second`", effect.id))
+            })?,
+            "unit": effect.properties.get("unit").and_then(Value::as_str),
+        })),
         other => Err(SimulationError::InvalidOverlay(format!(
             "{} has unsupported effect_kind `{other}`",
             effect.id
@@ -333,6 +553,9 @@ pub fn run_hybrid_simulation(
     let mut values = scenario.values.clone();
     let mut critical_events = Vec::new();
     let mut trace = Vec::new();
+    let mut t = 0.0;
+    let mut step = 0usize;
+    let mut rate_channels: BTreeSet<(String, String)> = BTreeSet::new();
 
     critical_events.push(critical_event(
         0,
@@ -344,13 +567,33 @@ pub fn run_hybrid_simulation(
     let mut active = initial_configuration(machine, scenario.initial_state_id.as_deref())
         .ok_or_else(|| SimulationError::MissingInitialState(machine.id.clone()))?;
 
-    for (index, event) in scenario
-        .events
-        .iter()
-        .take(scenario.max_steps.max(1))
-        .enumerate()
-    {
-        let step = index + 1;
+    let max_steps = scenario.max_steps.max(1);
+    let mut event_index = 0usize;
+    while step < max_steps {
+        if event_index >= scenario.events.len() {
+            if !fire_after_transitions(
+                runtime,
+                machine,
+                &scenario.subject.id,
+                &mut active,
+                &mut values,
+                &mut context,
+                &mut critical_events,
+                &mut trace,
+                &mut t,
+                &mut step,
+                scenario.step_duration_s,
+                max_steps,
+                &mut rate_channels,
+            )? {
+                break;
+            }
+            continue;
+        }
+
+        let event = &scenario.events[event_index];
+        event_index += 1;
+        step += 1;
         let before = active.clone();
         let mut step_critical = vec![critical_event(
             step,
@@ -378,6 +621,8 @@ pub fn run_hybrid_simulation(
                 transition_id: None,
                 before: before.clone(),
                 after: before,
+                t,
+                values: values.clone(),
                 critical_events: step_critical.clone(),
                 explanation: format!("No enabled transition matched trigger `{}`.", event.trigger),
             };
@@ -391,46 +636,28 @@ pub fn run_hybrid_simulation(
                 values,
                 critical_events,
                 trace,
+                rate_channels,
             ));
         };
 
-        if let Some(guard_feature) = guard_feature_id(runtime, transition) {
-            let result = runtime.evaluate(&guard_feature, &scenario.subject.id, &context)?;
-            step_critical.push(critical_event(
-                step,
-                "guard.evaluated",
-                &scenario.subject.id,
-                [
-                    ("feature", Value::String(guard_feature)),
-                    ("result", result.value),
-                ],
-            ));
-        }
-
-        for effect in transition_effects(runtime, transition) {
-            match effect {
-                TransitionEffect::Assign { feature, value } => {
-                    values.insert(
-                        (scenario.subject.id.clone(), feature.clone()),
-                        value.clone(),
-                    );
-                    context.values.insert(
-                        (scenario.subject.id.clone(), feature.clone()),
-                        value.clone(),
-                    );
-                    context.version += 1;
-                    step_critical.push(critical_event(
-                        step,
-                        "effect.assigned",
-                        &scenario.subject.id,
-                        [("feature", Value::String(feature)), ("value", value)],
-                    ));
-                }
-                TransitionEffect::Log { kind, detail } => {
-                    step_critical.push(critical_event(step, &kind, &scenario.subject.id, detail));
-                }
-            }
-        }
+        t += scenario.step_duration_s;
+        append_guard_evaluation(
+            runtime,
+            transition,
+            &scenario.subject.id,
+            &context,
+            step,
+            &mut step_critical,
+        )?;
+        apply_transition_effects(
+            runtime,
+            transition,
+            &scenario.subject.id,
+            step,
+            &mut values,
+            &mut context,
+            &mut step_critical,
+        );
 
         active = initial_configuration(machine, Some(&transition.target))
             .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
@@ -448,6 +675,8 @@ pub fn run_hybrid_simulation(
             transition_id: Some(transition.id.clone()),
             before,
             after: active.clone(),
+            t,
+            values: values.clone(),
             critical_events: step_critical.clone(),
             explanation: format!(
                 "Transition `{}` fired for subject `{}`.",
@@ -456,6 +685,21 @@ pub fn run_hybrid_simulation(
         };
         critical_events.append(&mut step_critical);
         trace.push(entry);
+
+        fire_change_transitions(
+            runtime,
+            machine,
+            &scenario.subject.id,
+            &mut active,
+            &mut values,
+            &mut context,
+            &mut critical_events,
+            &mut trace,
+            t,
+            step,
+        )?;
+        // After transitions only fire once all queued events are consumed;
+        // they are driven in the events-exhausted branch at the top of the loop.
     }
 
     Ok(report(
@@ -466,7 +710,851 @@ pub fn run_hybrid_simulation(
         values,
         critical_events,
         trace,
+        rate_channels,
     ))
+}
+
+struct SubjectRunState<'m> {
+    subject_id: String,
+    machine: &'m StateMachineModel,
+    active: Vec<String>,
+    event_index: usize,
+    events: Vec<StateMachineScenarioEvent>,
+}
+
+fn make_concurrent_entry(
+    t: f64,
+    subjects: &[SubjectRunState<'_>],
+    values: &BTreeMap<(String, String), Value>,
+    fired_events: Vec<TraceEvent>,
+) -> TraceEntry {
+    let states = subjects
+        .iter()
+        .map(|subject| (subject.subject_id.clone(), subject.active.clone()))
+        .collect();
+    TraceEntry {
+        t,
+        states,
+        values: values.clone(),
+        events: fired_events,
+    }
+}
+
+fn apply_concurrent_rate_samples(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    subject_id: &str,
+    subjects: &[SubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    timeline: &mut Vec<TraceEntry>,
+    t_enter: f64,
+    duration: f64,
+    rate_channels: &mut BTreeSet<(String, String)>,
+) {
+    let rates = transition_effects(runtime, transition)
+        .into_iter()
+        .filter_map(|effect| match effect {
+            TransitionEffect::Rate {
+                feature,
+                rate_per_second,
+                unit: _,
+            } => Some((feature, rate_per_second)),
+            _ => None,
+        })
+        .collect::<Vec<_>>();
+    if rates.is_empty() {
+        return;
+    }
+
+    for (feature, _) in &rates {
+        rate_channels.insert((subject_id.to_string(), feature.clone()));
+    }
+
+    let initial_values = rates
+        .iter()
+        .map(|(feature, _)| {
+            let key = (subject_id.to_string(), feature.clone());
+            let initial = values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
+            (feature.clone(), initial)
+        })
+        .collect::<BTreeMap<_, _>>();
+
+    let mut offset = RATE_SAMPLE_INTERVAL_S;
+    while offset < duration {
+        for (feature, rate) in &rates {
+            let initial = initial_values.get(feature).copied().unwrap_or(0.0);
+            let value = initial + rate * offset;
+            let key = (subject_id.to_string(), feature.clone());
+            values.insert(key.clone(), Value::from(value));
+            context.values.insert(key, Value::from(value));
+        }
+        context.version += 1;
+        timeline.push(make_concurrent_entry(
+            t_enter + offset,
+            subjects,
+            values,
+            vec![TraceEvent {
+                kind: "rate_sample".to_string(),
+                transition_id: None,
+                trigger: Some("rate_sample".to_string()),
+            }],
+        ));
+        offset += RATE_SAMPLE_INTERVAL_S;
+    }
+
+    for (feature, rate) in &rates {
+        let initial = initial_values.get(feature).copied().unwrap_or(0.0);
+        let value = initial + rate * duration;
+        let key = (subject_id.to_string(), feature.clone());
+        values.insert(key.clone(), Value::from(value));
+        context.values.insert(key, Value::from(value));
+    }
+    context.version += 1;
+}
+
+pub fn run_concurrent_simulation(
+    runtime: &Runtime,
+    scenario: ConcurrentSimulationScenario,
+) -> Result<SimulationTrace, SimulationError> {
+    let all_machines = project_state_machines(runtime);
+    let mut subjects = Vec::<SubjectRunState<'_>>::new();
+    for subject in &scenario.subjects {
+        if runtime
+            .graph()
+            .element_by_element_id(&subject.subject_id)
+            .is_none()
+        {
+            return Err(SimulationError::MissingSubject(subject.subject_id.clone()));
+        }
+        let machine = all_machines
+            .iter()
+            .find(|machine| machine.id == subject.machine_id || machine.label == subject.machine_id)
+            .ok_or_else(|| SimulationError::MissingStateMachine(subject.machine_id.clone()))?;
+        let active = initial_configuration(machine, subject.initial_state_id.as_deref())
+            .ok_or_else(|| SimulationError::MissingInitialState(subject.machine_id.clone()))?;
+        subjects.push(SubjectRunState {
+            subject_id: subject.subject_id.clone(),
+            machine,
+            active,
+            event_index: 0,
+            events: subject.events.clone(),
+        });
+    }
+
+    let mut values = scenario.initial_values.clone();
+    let mut context = ExecutionContext {
+        values: values
+            .iter()
+            .map(|(key, value)| (key.clone(), value.clone()))
+            .collect(),
+        version: 1,
+    };
+    let mut t = 0.0f64;
+    let mut step = 0usize;
+    let mut rate_channels = BTreeSet::<(String, String)>::new();
+    let mut timeline = vec![make_concurrent_entry(t, &subjects, &values, Vec::new())];
+    let max_steps = scenario.max_steps.max(1);
+
+    while step < max_steps {
+        let mut fired_this_round = false;
+        let mut round_events = Vec::<TraceEvent>::new();
+
+        for subject in subjects.iter_mut() {
+            if step >= max_steps || subject.event_index >= subject.events.len() {
+                continue;
+            }
+
+            let event = subject.events[subject.event_index].clone();
+            let transition = select_transition(
+                runtime,
+                subject.machine,
+                &subject.subject_id,
+                &subject.active,
+                &event.trigger,
+                &context,
+            )?
+            .cloned();
+
+            subject.event_index += 1;
+            let Some(transition) = transition else {
+                continue;
+            };
+
+            t += scenario.step_duration_s;
+            step += 1;
+            let mut step_critical = Vec::new();
+            append_guard_evaluation(
+                runtime,
+                &transition,
+                &subject.subject_id,
+                &context,
+                step,
+                &mut step_critical,
+            )?;
+            apply_transition_effects(
+                runtime,
+                &transition,
+                &subject.subject_id,
+                step,
+                &mut values,
+                &mut context,
+                &mut step_critical,
+            );
+            subject.active = initial_configuration(subject.machine, Some(&transition.target))
+                .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
+            round_events.push(TraceEvent {
+                kind: "transition".to_string(),
+                transition_id: Some(transition.id),
+                trigger: Some(event.trigger),
+            });
+            fired_this_round = true;
+        }
+
+        for idx in 0..subjects.len() {
+            if step >= max_steps {
+                break;
+            }
+
+            let transition = {
+                let subject = &subjects[idx];
+                subject
+                    .active
+                    .iter()
+                    .rev()
+                    .flat_map(|state_id| {
+                        subject
+                            .machine
+                            .transitions
+                            .iter()
+                            .filter(move |transition| {
+                                transition.source == *state_id
+                                    && transition.trigger_kind == StateTransitionTriggerKind::After
+                            })
+                    })
+                    .next()
+                    .cloned()
+            };
+            let Some(transition) = transition else {
+                continue;
+            };
+            let Some(duration) = transition
+                .trigger
+                .as_deref()
+                .and_then(|trigger| trigger.parse::<f64>().ok())
+                .filter(|duration| duration.is_finite() && *duration >= 0.0)
+            else {
+                continue;
+            };
+            let remaining = max_steps.saturating_sub(step);
+            if duration > scenario.step_duration_s * remaining as f64 {
+                continue;
+            }
+
+            step += 1;
+            let t_enter = t;
+            let subject_id = subjects[idx].subject_id.clone();
+            apply_concurrent_rate_samples(
+                runtime,
+                &transition,
+                &subject_id,
+                &subjects,
+                &mut values,
+                &mut context,
+                &mut timeline,
+                t_enter,
+                duration,
+                &mut rate_channels,
+            );
+            t = t_enter + duration;
+
+            let mut step_critical = Vec::new();
+            apply_transition_effects(
+                runtime,
+                &transition,
+                &subject_id,
+                step,
+                &mut values,
+                &mut context,
+                &mut step_critical,
+            );
+            let target = transition.target.clone();
+            subjects[idx].active = initial_configuration(subjects[idx].machine, Some(&target))
+                .ok_or_else(|| SimulationError::MissingInitialState(target))?;
+            round_events.push(TraceEvent {
+                kind: "transition".to_string(),
+                transition_id: Some(transition.id.clone()),
+                trigger: Some(format!("after:{duration}")),
+            });
+            fired_this_round = true;
+
+            for _ in 0..CHANGE_LOOP_LIMIT {
+                let mut change_fired = false;
+                let subject_ids = subjects
+                    .iter()
+                    .map(|subject| subject.subject_id.clone())
+                    .collect::<Vec<_>>();
+                for subject in subjects.iter_mut() {
+                    let transition = select_concurrent_change_transition(
+                        runtime,
+                        subject.machine,
+                        &subject.subject_id,
+                        &subject.active,
+                        &subject_ids,
+                        &context,
+                    )?
+                    .cloned();
+                    let Some(transition) = transition else {
+                        continue;
+                    };
+                    let mut change_critical = Vec::new();
+                    apply_transition_effects(
+                        runtime,
+                        &transition,
+                        &subject.subject_id,
+                        step,
+                        &mut values,
+                        &mut context,
+                        &mut change_critical,
+                    );
+                    subject.active =
+                        initial_configuration(subject.machine, Some(&transition.target))
+                            .ok_or_else(|| {
+                                SimulationError::MissingInitialState(transition.target.clone())
+                            })?;
+                    round_events.push(TraceEvent {
+                        kind: "transition".to_string(),
+                        transition_id: Some(transition.id.clone()),
+                        trigger: Some(format!(
+                            "change:{}",
+                            transition.trigger.as_deref().unwrap_or("")
+                        )),
+                    });
+                    change_fired = true;
+                }
+                if !change_fired {
+                    break;
+                }
+            }
+        }
+
+        for _ in 0..CHANGE_LOOP_LIMIT {
+            let mut change_fired = false;
+            let subject_ids = subjects
+                .iter()
+                .map(|subject| subject.subject_id.clone())
+                .collect::<Vec<_>>();
+            for subject in subjects.iter_mut() {
+                let transition = select_concurrent_change_transition(
+                    runtime,
+                    subject.machine,
+                    &subject.subject_id,
+                    &subject.active,
+                    &subject_ids,
+                    &context,
+                )?
+                .cloned();
+                let Some(transition) = transition else {
+                    continue;
+                };
+                let mut step_critical = Vec::new();
+                apply_transition_effects(
+                    runtime,
+                    &transition,
+                    &subject.subject_id,
+                    step,
+                    &mut values,
+                    &mut context,
+                    &mut step_critical,
+                );
+                subject.active = initial_configuration(subject.machine, Some(&transition.target))
+                    .ok_or_else(|| {
+                    SimulationError::MissingInitialState(transition.target.clone())
+                })?;
+                round_events.push(TraceEvent {
+                    kind: "transition".to_string(),
+                    transition_id: Some(transition.id.clone()),
+                    trigger: Some(format!(
+                        "change:{}",
+                        transition.trigger.as_deref().unwrap_or("")
+                    )),
+                });
+                change_fired = true;
+                fired_this_round = true;
+            }
+            if !change_fired {
+                break;
+            }
+        }
+
+        if fired_this_round {
+            timeline.push(make_concurrent_entry(t, &subjects, &values, round_events));
+        } else {
+            break;
+        }
+    }
+
+    let primary_subject_id = scenario
+        .subjects
+        .first()
+        .map(|subject| subject.subject_id.clone())
+        .unwrap_or_default();
+    let mut channel_ids = BTreeSet::<(String, String)>::new();
+    for entry in &timeline {
+        channel_ids.extend(entry.values.keys().cloned());
+    }
+    let channels = channel_ids
+        .into_iter()
+        .map(|(subject, feature)| {
+            let source = if rate_channels.contains(&(subject.clone(), feature.clone())) {
+                TraceChannelSource::RateEffect
+            } else {
+                TraceChannelSource::AssignEffect
+            };
+            TraceChannel {
+                id: format!("{subject}.{feature}"),
+                unit: None,
+                source,
+            }
+        })
+        .collect();
+
+    Ok(SimulationTrace {
+        scenario_id: scenario.id,
+        subject_id: primary_subject_id,
+        channels,
+        timeline,
+        status: HybridSimulationStatus::Completed,
+    })
+}
+
+fn fire_after_transitions(
+    runtime: &Runtime,
+    machine: &StateMachineModel,
+    subject_id: &str,
+    active: &mut Vec<String>,
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    critical_events: &mut Vec<CriticalSimulationEvent>,
+    trace: &mut Vec<HybridSimulationTraceEntry>,
+    t: &mut f64,
+    step: &mut usize,
+    step_duration_s: f64,
+    max_steps: usize,
+    rate_channels: &mut BTreeSet<(String, String)>,
+) -> Result<bool, SimulationError> {
+    let mut fired_any = false;
+    while *step < max_steps {
+        let after_transitions = active
+            .iter()
+            .rev()
+            .flat_map(|state_id| {
+                machine.transitions.iter().filter(move |transition| {
+                    transition.source == *state_id
+                        && transition.trigger_kind == StateTransitionTriggerKind::After
+                })
+            })
+            .collect::<Vec<_>>();
+        let [transition] = after_transitions.as_slice() else {
+            return Ok(fired_any);
+        };
+        let Some(duration) = transition
+            .trigger
+            .as_deref()
+            .and_then(|trigger| trigger.parse::<f64>().ok())
+            .filter(|duration| duration.is_finite() && *duration >= 0.0)
+        else {
+            return Ok(fired_any);
+        };
+        let remaining_steps = max_steps.saturating_sub(*step);
+        if duration > step_duration_s * remaining_steps as f64 {
+            return Ok(fired_any);
+        }
+
+        *step += 1;
+        let before = active.clone();
+        let t_enter = *t;
+        apply_rate_samples(
+            runtime,
+            transition,
+            subject_id,
+            &before,
+            values,
+            context,
+            trace,
+            t_enter,
+            duration,
+            *step,
+            rate_channels,
+        );
+        *t = t_enter + duration;
+
+        let mut step_critical = Vec::new();
+        append_guard_evaluation(
+            runtime,
+            transition,
+            subject_id,
+            context,
+            *step,
+            &mut step_critical,
+        )?;
+        apply_transition_effects(
+            runtime,
+            transition,
+            subject_id,
+            *step,
+            values,
+            context,
+            &mut step_critical,
+        );
+        *active = initial_configuration(machine, Some(&transition.target))
+            .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
+        step_critical.push(critical_event(
+            *step,
+            "state.entered",
+            subject_id,
+            [("state", Value::String(transition.target.clone()))],
+        ));
+
+        let trigger = format!("after:{duration}");
+        trace.push(HybridSimulationTraceEntry {
+            step: *step,
+            t: *t,
+            event_id: None,
+            trigger: Some(trigger),
+            transition_id: Some(transition.id.clone()),
+            before,
+            after: active.clone(),
+            values: values.clone(),
+            critical_events: step_critical.clone(),
+            explanation: format!(
+                "After transition `{}` fired after {duration}s.",
+                transition.id
+            ),
+        });
+        critical_events.append(&mut step_critical);
+        fired_any = true;
+
+        fire_change_transitions(
+            runtime,
+            machine,
+            subject_id,
+            active,
+            values,
+            context,
+            critical_events,
+            trace,
+            *t,
+            *step,
+        )?;
+    }
+    Ok(fired_any)
+}
+
+fn apply_rate_samples(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    subject_id: &str,
+    active: &[String],
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    trace: &mut Vec<HybridSimulationTraceEntry>,
+    t_enter: f64,
+    duration: f64,
+    step: usize,
+    rate_channels: &mut BTreeSet<(String, String)>,
+) {
+    let rates = transition_effects(runtime, transition)
+        .into_iter()
+        .filter_map(|effect| match effect {
+            TransitionEffect::Rate {
+                feature,
+                rate_per_second,
+                unit: _,
+            } => Some((feature, rate_per_second)),
+            _ => None,
+        })
+        .collect::<Vec<_>>();
+    if rates.is_empty() {
+        return;
+    }
+
+    // Record every rate-driven (subject, feature) pair for channel source tracking.
+    for (feature, _) in &rates {
+        rate_channels.insert((subject_id.to_string(), feature.clone()));
+    }
+
+    let initial_values = rates
+        .iter()
+        .map(|(feature, _)| {
+            let key = (subject_id.to_string(), feature.clone());
+            let initial = values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
+            (feature.clone(), initial)
+        })
+        .collect::<BTreeMap<_, _>>();
+
+    let mut sample_offset = RATE_SAMPLE_INTERVAL_S;
+    while sample_offset < duration {
+        let mut explanations = Vec::new();
+        for (feature, rate_per_second) in &rates {
+            let initial = initial_values.get(feature).copied().unwrap_or(0.0);
+            let value = initial + rate_per_second * sample_offset;
+            let key = (subject_id.to_string(), feature.clone());
+            values.insert(key.clone(), Value::from(value));
+            context.values.insert(key, Value::from(value));
+            explanations.push(format!("{feature} = {value}"));
+        }
+        context.version += 1;
+        trace.push(HybridSimulationTraceEntry {
+            step,
+            t: t_enter + sample_offset,
+            event_id: None,
+            trigger: Some("rate_sample".to_string()),
+            transition_id: None,
+            before: active.to_vec(),
+            after: active.to_vec(),
+            values: values.clone(),
+            critical_events: Vec::new(),
+            explanation: format!("rate sample: {}", explanations.join(", ")),
+        });
+        sample_offset += RATE_SAMPLE_INTERVAL_S;
+    }
+
+    for (feature, rate_per_second) in &rates {
+        let initial = initial_values.get(feature).copied().unwrap_or(0.0);
+        let value = initial + rate_per_second * duration;
+        let key = (subject_id.to_string(), feature.clone());
+        values.insert(key.clone(), Value::from(value));
+        context.values.insert(key, Value::from(value));
+    }
+    context.version += 1;
+}
+
+fn fire_change_transitions(
+    runtime: &Runtime,
+    machine: &StateMachineModel,
+    subject_id: &str,
+    active: &mut Vec<String>,
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    critical_events: &mut Vec<CriticalSimulationEvent>,
+    trace: &mut Vec<HybridSimulationTraceEntry>,
+    t: f64,
+    step: usize,
+) -> Result<(), SimulationError> {
+    for _ in 0..CHANGE_LOOP_LIMIT {
+        let Some(transition) =
+            select_change_transition(runtime, machine, subject_id, active, context)?
+        else {
+            return Ok(());
+        };
+        let before = active.clone();
+        let mut step_critical = Vec::new();
+        append_guard_evaluation(
+            runtime,
+            transition,
+            subject_id,
+            context,
+            step,
+            &mut step_critical,
+        )?;
+        apply_transition_effects(
+            runtime,
+            transition,
+            subject_id,
+            step,
+            values,
+            context,
+            &mut step_critical,
+        );
+        *active = initial_configuration(machine, Some(&transition.target))
+            .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
+        step_critical.push(critical_event(
+            step,
+            "state.entered",
+            subject_id,
+            [("state", Value::String(transition.target.clone()))],
+        ));
+        trace.push(HybridSimulationTraceEntry {
+            step,
+            t,
+            event_id: None,
+            trigger: transition
+                .trigger
+                .as_ref()
+                .map(|trigger| format!("change:{trigger}")),
+            transition_id: Some(transition.id.clone()),
+            before,
+            after: active.clone(),
+            values: values.clone(),
+            critical_events: step_critical.clone(),
+            explanation: format!("Change transition `{}` fired.", transition.id),
+        });
+        critical_events.append(&mut step_critical);
+    }
+
+    let event = critical_event(
+        step,
+        "change.loop.detected",
+        subject_id,
+        [("limit", Value::from(CHANGE_LOOP_LIMIT))],
+    );
+    trace.push(HybridSimulationTraceEntry {
+        step,
+        t,
+        event_id: None,
+        trigger: Some("change.loop.detected".to_string()),
+        transition_id: None,
+        before: active.clone(),
+        after: active.clone(),
+        values: values.clone(),
+        critical_events: vec![event.clone()],
+        explanation: "Change transition recursion limit exceeded.".to_string(),
+    });
+    critical_events.push(event);
+    Ok(())
+}
+
+fn select_change_transition<'a>(
+    runtime: &Runtime,
+    machine: &'a StateMachineModel,
+    subject_id: &str,
+    active_configuration: &[String],
+    context: &ExecutionContext,
+) -> Result<Option<&'a TransitionNode>, SimulationError> {
+    let mut candidates = active_configuration
+        .iter()
+        .rev()
+        .flat_map(|state_id| {
+            machine.transitions.iter().filter(move |transition| {
+                transition.source == *state_id
+                    && transition.trigger_kind == StateTransitionTriggerKind::Change
+            })
+        })
+        .collect::<Vec<_>>();
+    candidates.sort_by(|left, right| left.id.cmp(&right.id));
+
+    for transition in candidates {
+        let Some(guard_feature) = guard_feature_id(runtime, transition) else {
+            // No guard — Change transition fires immediately (vacuously true),
+            // matching the semantics of `select_transition` for Event triggers.
+            return Ok(Some(transition));
+        };
+        let result = runtime.evaluate(&guard_feature, subject_id, context)?;
+        if result.value.as_bool().unwrap_or(false) {
+            return Ok(Some(transition));
+        }
+    }
+    Ok(None)
+}
+
+fn select_concurrent_change_transition<'a>(
+    runtime: &Runtime,
+    machine: &'a StateMachineModel,
+    subject_id: &str,
+    active_configuration: &[String],
+    subject_ids: &[String],
+    context: &ExecutionContext,
+) -> Result<Option<&'a TransitionNode>, SimulationError> {
+    let mut candidates = active_configuration
+        .iter()
+        .rev()
+        .flat_map(|state_id| {
+            machine.transitions.iter().filter(move |transition| {
+                transition.source == *state_id
+                    && transition.trigger_kind == StateTransitionTriggerKind::Change
+            })
+        })
+        .collect::<Vec<_>>();
+    candidates.sort_by(|left, right| left.id.cmp(&right.id));
+
+    for transition in candidates {
+        let Some(guard_feature) = guard_feature_id(runtime, transition) else {
+            return Ok(Some(transition));
+        };
+
+        let mut evaluation_subjects = vec![subject_id.to_string()];
+        for candidate_subject_id in subject_ids {
+            if candidate_subject_id != subject_id {
+                evaluation_subjects.push(candidate_subject_id.clone());
+            }
+        }
+
+        let mut last_error = None;
+        let mut evaluated = false;
+        for evaluation_subject_id in evaluation_subjects {
+            match runtime.evaluate(&guard_feature, &evaluation_subject_id, context) {
+                Ok(result) => {
+                    evaluated = true;
+                    if result.value.as_bool().unwrap_or(false) {
+                        return Ok(Some(transition));
+                    }
+                }
+                Err(err) => {
+                    last_error = Some(err);
+                }
+            }
+        }
+        if !evaluated && let Some(err) = last_error {
+            return Err(SimulationError::Runtime(err));
+        }
+    }
+    Ok(None)
+}
+
+fn append_guard_evaluation(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    subject_id: &str,
+    context: &ExecutionContext,
+    step: usize,
+    step_critical: &mut Vec<CriticalSimulationEvent>,
+) -> Result<(), SimulationError> {
+    if let Some(guard_feature) = guard_feature_id(runtime, transition) {
+        let result = runtime.evaluate(&guard_feature, subject_id, context)?;
+        step_critical.push(critical_event(
+            step,
+            "guard.evaluated",
+            subject_id,
+            [
+                ("feature", Value::String(guard_feature)),
+                ("result", result.value),
+            ],
+        ));
+    }
+    Ok(())
+}
+
+fn apply_transition_effects(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    subject_id: &str,
+    step: usize,
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    step_critical: &mut Vec<CriticalSimulationEvent>,
+) {
+    for effect in transition_effects(runtime, transition) {
+        match effect {
+            TransitionEffect::Assign { feature, value } => {
+                values.insert((subject_id.to_string(), feature.clone()), value.clone());
+                context
+                    .values
+                    .insert((subject_id.to_string(), feature.clone()), value.clone());
+                context.version += 1;
+                step_critical.push(critical_event(
+                    step,
+                    "effect.assigned",
+                    subject_id,
+                    [("feature", Value::String(feature)), ("value", value)],
+                ));
+            }
+            TransitionEffect::Rate { .. } => {}
+            TransitionEffect::Log { kind, detail } => {
+                step_critical.push(critical_event(step, &kind, subject_id, detail));
+            }
+        }
+    }
 }
 
 fn report(
@@ -477,6 +1565,7 @@ fn report(
     values: BTreeMap<(String, String), Value>,
     critical_events: Vec<CriticalSimulationEvent>,
     trace: Vec<HybridSimulationTraceEntry>,
+    rate_channels: BTreeSet<(String, String)>,
 ) -> HybridSimulationReport {
     HybridSimulationReport {
         scenario_id: scenario.id,
@@ -487,6 +1576,7 @@ fn report(
         values,
         critical_events,
         trace,
+        rate_channels,
     }
 }
 
@@ -570,11 +1660,16 @@ fn critical_event<const N: usize>(
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq)]
 enum TransitionEffect {
     Assign {
         feature: String,
         value: Value,
+    },
+    Rate {
+        feature: String,
+        rate_per_second: f64,
+        unit: Option<String>,
     },
     Log {
         kind: String,
@@ -589,6 +1684,14 @@ impl TransitionEffect {
             "assign" => Some(Self::Assign {
                 feature: object.get("feature")?.as_str()?.to_string(),
                 value: object.get("value")?.clone(),
+            }),
+            "rate" => Some(Self::Rate {
+                feature: object.get("feature")?.as_str()?.to_string(),
+                rate_per_second: object.get("rate_per_second")?.as_f64()?,
+                unit: object
+                    .get("unit")
+                    .and_then(Value::as_str)
+                    .map(str::to_string),
             }),
             "log" => Some(Self::Log {
                 kind: object.get("event")?.as_str()?.to_string(),
@@ -758,6 +1861,7 @@ mod tests {
                         json!(false),
                     ),
                 ]),
+                step_duration_s: default_step_duration(),
             },
         )
         .unwrap();
@@ -842,6 +1946,547 @@ mod tests {
                 "state.entered",
             ]
         );
+    }
+
+    #[test]
+    fn trace_entries_carry_timestamps() {
+        let runtime = Runtime::from_document(simple_machine([
+            transition_element(
+                "transition.test.go",
+                "TestMachine",
+                "state.test.A",
+                "state.test.B",
+                "go",
+                "event",
+                [],
+            ),
+            transition_element(
+                "transition.test.next",
+                "TestMachine",
+                "state.test.B",
+                "state.test.C",
+                "next",
+                "event",
+                [],
+            ),
+        ]))
+        .unwrap();
+
+        let report = run_hybrid_simulation(
+            &runtime,
+            scenario(
+                vec![
+                    StateMachineScenarioEvent {
+                        id: "event.go".to_string(),
+                        trigger: "go".to_string(),
+                    },
+                    StateMachineScenarioEvent {
+                        id: "event.next".to_string(),
+                        trigger: "next".to_string(),
+                    },
+                ],
+                BTreeMap::new(),
+                2.0,
+                8,
+            ),
+        )
+        .unwrap();
+
+        assert_eq!(report.trace[0].t, 2.0);
+        assert_eq!(report.trace[1].t, 4.0);
+    }
+
+    #[test]
+    fn trace_entries_carry_value_snapshots() {
+        let runtime = Runtime::from_document(simple_machine([
+            transition_element(
+                "transition.test.observe",
+                "TestMachine",
+                "state.test.A",
+                "state.test.B",
+                "observe",
+                "event",
+                [],
+            ),
+            transition_element(
+                "transition.test.heat",
+                "TestMachine",
+                "state.test.B",
+                "state.test.C",
+                "heat",
+                "event",
+                [(
+                    "effects",
+                    json!([{ "kind": "assign", "feature": "temperature", "value": 50.0 }]),
+                )],
+            ),
+        ]))
+        .unwrap();
+
+        let key = ("individual.test".to_string(), "temperature".to_string());
+        let report = run_hybrid_simulation(
+            &runtime,
+            scenario(
+                vec![
+                    StateMachineScenarioEvent {
+                        id: "event.observe".to_string(),
+                        trigger: "observe".to_string(),
+                    },
+                    StateMachineScenarioEvent {
+                        id: "event.heat".to_string(),
+                        trigger: "heat".to_string(),
+                    },
+                ],
+                BTreeMap::from([(key.clone(), json!(22.0))]),
+                1.0,
+                8,
+            ),
+        )
+        .unwrap();
+
+        assert_eq!(report.trace[0].values.get(&key), Some(&json!(22.0)));
+        assert_eq!(report.trace[1].values.get(&key), Some(&json!(50.0)));
+    }
+
+    #[test]
+    fn after_trigger_fires_without_event() {
+        let runtime = Runtime::from_document(simple_machine([transition_element(
+            "transition.test.after",
+            "TestMachine",
+            "state.test.A",
+            "state.test.B",
+            "3.0",
+            "after",
+            [],
+        )]))
+        .unwrap();
+
+        let report =
+            run_hybrid_simulation(&runtime, scenario(Vec::new(), BTreeMap::new(), 1.0, 10))
+                .unwrap();
+
+        let entry = report
+            .trace
+            .iter()
+            .find(|entry| entry.after == vec!["state.test.B"])
+            .unwrap();
+        assert!(entry.t >= 3.0);
+        assert_eq!(entry.event_id, None);
+    }
+
+    #[test]
+    fn rate_effect_generates_intermediate_samples() {
+        let runtime = Runtime::from_document(simple_machine([
+            transition_element(
+                "transition.test.after",
+                "TestMachine",
+                "state.test.A",
+                "state.test.B",
+                "5.0",
+                "after",
+                [(
+                    "effects",
+                    json!([{ "kind": "rate", "feature": "temperature", "rate_per_second": 2.0, "unit": "C" }]),
+                )],
+            ),
+        ]))
+        .unwrap();
+
+        let key = ("individual.test".to_string(), "temperature".to_string());
+        let report = run_hybrid_simulation(
+            &runtime,
+            scenario(
+                Vec::new(),
+                BTreeMap::from([(key.clone(), json!(20.0))]),
+                1.0,
+                10,
+            ),
+        )
+        .unwrap();
+
+        for expected_t in [1.0, 2.0, 3.0, 4.0] {
+            assert!(report.trace.iter().any(|entry| entry.t == expected_t));
+        }
+        let sample = report.trace.iter().find(|entry| entry.t == 3.0).unwrap();
+        assert_eq!(sample.values.get(&key), Some(&json!(26.0)));
+        let final_entry = report
+            .trace
+            .iter()
+            .find(|entry| entry.transition_id.as_deref() == Some("transition.test.after"))
+            .unwrap();
+        assert_eq!(final_entry.t, 5.0);
+        assert_eq!(final_entry.values.get(&key), Some(&json!(30.0)));
+    }
+
+    #[test]
+    fn change_trigger_fires_when_guard_is_true() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Test", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.test",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("test")), ("type", json!("type.Test"))],
+                ),
+                element(
+                    "feature.Test.hotEnough",
+                    "Model::CalculationUsage",
+                    [
+                        ("declared_name", json!("hotEnough")),
+                        ("owner", json!("type.Test")),
+                        ("expression_ir", greater_equal_path("temperature", 28.0)),
+                    ],
+                ),
+                state_element("state.test.A", "TestMachine", true),
+                state_element("state.test.B", "TestMachine", false),
+                state_element("state.test.C", "TestMachine", false),
+                transition_element(
+                    "transition.test.after",
+                    "TestMachine",
+                    "state.test.A",
+                    "state.test.B",
+                    "5.0",
+                    "after",
+                    [(
+                        "effects",
+                        json!([{ "kind": "rate", "feature": "temperature", "rate_per_second": 2.0 }]),
+                    )],
+                ),
+                transition_element(
+                    "transition.test.change",
+                    "TestMachine",
+                    "state.test.B",
+                    "state.test.C",
+                    "temperature >= 28.0",
+                    "change",
+                    [("guard_feature", json!("feature.Test.hotEnough"))],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let report = run_hybrid_simulation(
+            &runtime,
+            scenario(
+                Vec::new(),
+                BTreeMap::from([(
+                    ("individual.test".to_string(), "temperature".to_string()),
+                    json!(20.0),
+                )]),
+                1.0,
+                10,
+            ),
+        )
+        .unwrap();
+
+        assert!(
+            report
+                .trace
+                .iter()
+                .any(|entry| entry.after == vec!["state.test.C"])
+        );
+    }
+
+    #[test]
+    fn to_trace_produces_unified_trace() {
+        let runtime = Runtime::from_document(simple_machine([transition_element(
+            "transition.test.assign",
+            "TestMachine",
+            "state.test.A",
+            "state.test.B",
+            "assign",
+            "event",
+            [(
+                "effects",
+                json!([{ "kind": "assign", "feature": "temperature", "value": 25.0 }]),
+            )],
+        )]))
+        .unwrap();
+
+        let report = run_hybrid_simulation(
+            &runtime,
+            scenario(
+                vec![StateMachineScenarioEvent {
+                    id: "event.assign".to_string(),
+                    trigger: "assign".to_string(),
+                }],
+                BTreeMap::from([(
+                    ("individual.test".to_string(), "temperature".to_string()),
+                    json!(20.0),
+                )]),
+                1.0,
+                8,
+            ),
+        )
+        .unwrap();
+        let trace = report.to_trace();
+
+        assert_eq!(trace.timeline.len(), report.trace.len());
+        assert_eq!(trace.timeline[0].t, report.trace[0].t);
+        assert!(!trace.channels.is_empty());
+    }
+
+    #[test]
+    fn concurrent_simulation_fires_transitions_on_multiple_subjects() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.A", "Model::Systems::PartDefinition", []),
+                element("type.B", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.a",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("a")), ("type", json!("type.A"))],
+                ),
+                element(
+                    "individual.b",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("b")), ("type", json!("type.B"))],
+                ),
+                state_element("state.A.one", "MachineA", true),
+                state_element("state.A.two", "MachineA", false),
+                state_element("state.B.one", "MachineB", true),
+                state_element("state.B.two", "MachineB", false),
+                transition_element(
+                    "transition.A.go",
+                    "MachineA",
+                    "state.A.one",
+                    "state.A.two",
+                    "go",
+                    "event",
+                    [],
+                ),
+                transition_element(
+                    "transition.B.run",
+                    "MachineB",
+                    "state.B.one",
+                    "state.B.two",
+                    "run",
+                    "event",
+                    [],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.concurrent".to_string(),
+                subjects: vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.a".to_string(),
+                        machine_id: "MachineA".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.go".to_string(),
+                            trigger: "go".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.b".to_string(),
+                        machine_id: "MachineB".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.run".to_string(),
+                            trigger: "run".to_string(),
+                        }],
+                    },
+                ],
+                max_steps: 8,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.a")
+                .is_some_and(|states| states == &vec!["state.A.two".to_string()])
+        }));
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.b")
+                .is_some_and(|states| states == &vec!["state.B.two".to_string()])
+        }));
+    }
+
+    #[test]
+    fn concurrent_simulation_cross_part_change_guard_fires() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Printer", "Model::Systems::PartDefinition", []),
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.printer",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("printer")),
+                        ("type", json!("type.Printer")),
+                        ("bed", json!("individual.bed")),
+                    ],
+                ),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "feature.Bed.bedReady",
+                    "Model::CalculationUsage",
+                    [
+                        ("declared_name", json!("bedReady")),
+                        ("owner", json!("type.Bed")),
+                        ("expression_ir", greater_equal_path("bed_ready", 1.0)),
+                    ],
+                ),
+                state_element("state.Printer.Waiting", "PrinterMachine", true),
+                state_element("state.Printer.Printing", "PrinterMachine", false),
+                state_element("state.Bed.Cold", "BedMachine", true),
+                state_element("state.Bed.Hot", "BedMachine", false),
+                transition_element(
+                    "transition.Printer.print",
+                    "PrinterMachine",
+                    "state.Printer.Waiting",
+                    "state.Printer.Printing",
+                    "bed_ready >= 1.0",
+                    "change",
+                    [("guard_feature", json!("feature.Bed.bedReady"))],
+                ),
+                transition_element(
+                    "transition.Bed.after",
+                    "BedMachine",
+                    "state.Bed.Cold",
+                    "state.Bed.Hot",
+                    "3.0",
+                    "after",
+                    [(
+                        "effects",
+                        json!([{ "kind": "rate", "feature": "bed_ready", "rate_per_second": 0.5 }]),
+                    )],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.cross_part".to_string(),
+                subjects: vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.printer".to_string(),
+                        machine_id: "PrinterMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.bed".to_string(),
+                        machine_id: "BedMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                ],
+                max_steps: 20,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::from([(
+                    ("individual.bed".to_string(), "bed_ready".to_string()),
+                    json!(0.0),
+                )]),
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.printer")
+                .is_some_and(|states| states == &vec!["state.Printer.Printing".to_string()])
+        }));
+    }
+
+    #[test]
+    fn concurrent_trace_states_map_contains_all_subjects() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.A", "Model::Systems::PartDefinition", []),
+                element("type.B", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.a",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("a")), ("type", json!("type.A"))],
+                ),
+                element(
+                    "individual.b",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("b")), ("type", json!("type.B"))],
+                ),
+                state_element("state.A.one", "MachineA", true),
+                state_element("state.A.two", "MachineA", false),
+                state_element("state.B.one", "MachineB", true),
+                state_element("state.B.two", "MachineB", false),
+                transition_element(
+                    "transition.A.go",
+                    "MachineA",
+                    "state.A.one",
+                    "state.A.two",
+                    "go",
+                    "event",
+                    [],
+                ),
+                transition_element(
+                    "transition.B.run",
+                    "MachineB",
+                    "state.B.one",
+                    "state.B.two",
+                    "run",
+                    "event",
+                    [],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.concurrent.states".to_string(),
+                subjects: vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.a".to_string(),
+                        machine_id: "MachineA".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.go".to_string(),
+                            trigger: "go".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.b".to_string(),
+                        machine_id: "MachineB".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.run".to_string(),
+                            trigger: "run".to_string(),
+                        }],
+                    },
+                ],
+                max_steps: 8,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().all(|entry| {
+            entry.states.contains_key("individual.a") && entry.states.contains_key("individual.b")
+        }));
     }
 
     fn run_model_simulation_harness() -> ModelSimulationHarness {
@@ -1072,6 +2717,90 @@ package Demo {
         }
     }
 
+    fn scenario(
+        events: Vec<StateMachineScenarioEvent>,
+        values: BTreeMap<(String, String), Value>,
+        step_duration_s: f64,
+        max_steps: usize,
+    ) -> HybridSimulationScenario {
+        HybridSimulationScenario {
+            id: "scenario.test".to_string(),
+            subject: SimulationSubject {
+                id: "individual.test".to_string(),
+                type_id: Some("type.Test".to_string()),
+            },
+            machine_id: "TestMachine".to_string(),
+            initial_state_id: None,
+            events,
+            max_steps,
+            values,
+            step_duration_s,
+        }
+    }
+
+    fn simple_machine<const N: usize>(transitions: [KirElement; N]) -> KirDocument {
+        let mut elements = vec![
+            element("type.Test", "Model::Systems::PartDefinition", []),
+            element(
+                "individual.test",
+                "Model::IndividualUsage",
+                [
+                    ("declared_name", json!("test")),
+                    ("type", json!("type.Test")),
+                ],
+            ),
+            state_element("state.test.A", "TestMachine", true),
+            state_element("state.test.B", "TestMachine", false),
+            state_element("state.test.C", "TestMachine", false),
+        ];
+        elements.extend(transitions);
+        KirDocument {
+            metadata: BTreeMap::new(),
+            elements,
+        }
+    }
+
+    fn state_element(id: &str, owner: &str, initial: bool) -> KirElement {
+        element(
+            id,
+            "StateUsage",
+            [
+                ("declared_name", json!(id)),
+                ("owning_type", json!(owner)),
+                ("is_initial", json!(initial)),
+            ],
+        )
+    }
+
+    fn transition_element<const N: usize>(
+        id: &str,
+        owner: &str,
+        source: &str,
+        target: &str,
+        trigger: &str,
+        trigger_kind: &str,
+        extra_properties: [(&str, Value); N],
+    ) -> KirElement {
+        let mut properties = BTreeMap::from([
+            ("owning_type".to_string(), json!(owner)),
+            ("source".to_string(), json!(source)),
+            ("target".to_string(), json!(target)),
+            ("trigger".to_string(), json!(trigger)),
+            ("trigger_kind".to_string(), json!(trigger_kind)),
+        ]);
+        properties.extend(
+            extra_properties
+                .into_iter()
+                .map(|(key, value)| (key.to_string(), value)),
+        );
+        KirElement {
+            id: id.to_string(),
+            kind: "TransitionUsage".to_string(),
+            layer: 0,
+            properties,
+        }
+    }
+
     fn element<const N: usize>(id: &str, kind: &str, properties: [(&str, Value); N]) -> KirElement {
         KirElement {
             id: id.to_string(),
@@ -1103,13 +2832,18 @@ package Demo {
     }
 
     fn greater_equal_path(feature: &str, threshold: f64) -> Value {
+        greater_equal_path_segments([feature], threshold)
+    }
+
+    fn greater_equal_path_segments<const N: usize>(segments: [&str; N], threshold: f64) -> Value {
+        let segments = segments.to_vec();
         json!({
             "kind": "binary",
             "op": "greater_equal",
             "left": {
                 "kind": "path",
                 "root": "self",
-                "segments": [feature]
+                "segments": segments
             },
             "right": {
                 "kind": "literal",

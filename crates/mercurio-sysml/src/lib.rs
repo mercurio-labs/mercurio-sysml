@@ -16,14 +16,16 @@ pub mod session;
 pub use assessment::sysml_parsed_module_assessment_facts;
 pub use authoring::load_authoring_project_from_sysml;
 pub use behavior::{
-    CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
-    HybridSimulationStatus, HybridSimulationTraceEntry, SimulationError, SimulationSubject,
+    ConcurrentSimulationScenario, ConcurrentSubjectScenario, CriticalSimulationEvent,
+    HybridSimulationReport, HybridSimulationScenario, HybridSimulationStatus,
+    HybridSimulationTraceEntry, SimulationError, SimulationSubject, SimulationTrace,
     StateMachineExecutionReport, StateMachineExecutionStatus, StateMachineModel,
     StateMachineScenario, StateMachineScenarioEvent, StateMachineTraceStep,
     StateMachineValidationFinding, StateMachineValidationSeverity, StateNode,
-    StateTransitionTriggerKind, SysmlDynamicBehaviorCapability, TransitionNode,
-    project_state_machines, project_state_machines_from_graph, register_sysml_behavior_capability,
-    run_hybrid_simulation, run_hybrid_simulation_with_overlay,
+    StateTransitionTriggerKind, SysmlDynamicBehaviorCapability, TraceChannel, TraceChannelSource,
+    TraceEntry, TraceEvent, TransitionNode, project_state_machines,
+    project_state_machines_from_graph, register_sysml_behavior_capability,
+    run_concurrent_simulation, run_hybrid_simulation, run_hybrid_simulation_with_overlay,
 };
 pub use constraints::{
     ConstraintDiagnosticDto, ConstraintError, ConstraintExplanationDto, ConstraintGraphEdgeDto,

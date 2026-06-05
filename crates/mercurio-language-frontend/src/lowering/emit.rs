@@ -27,7 +27,6 @@ use crate::lowering::semantic_defaults::{
 use crate::lowering::semantic_properties::{
     apply_usage_property_defaults, usage_property_default_applies,
 };
-#[cfg(not(target_arch = "wasm32"))]
 #[derive(Debug, Clone, Deserialize)]
 pub struct MetamodelConstructSeed {
     #[serde(default)]
