@@ -7,6 +7,7 @@ pub use capability::{SysmlDynamicBehaviorCapability, register_sysml_behavior_cap
 pub use simulation::{
     CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
     HybridSimulationStatus, HybridSimulationTraceEntry, SimulationError, SimulationSubject,
+    SimulationTrace, TraceChannel, TraceChannelSource, TraceEntry, TraceEvent,
     run_hybrid_simulation, run_hybrid_simulation_with_overlay,
 };
 
