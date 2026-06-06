@@ -398,21 +398,24 @@ pub fn scenario_from_analysis_case(
         )));
     }
 
-    let mut initial_values = analysis_case
-        .properties
-        .get("initial_values")
-        .or_else(|| analysis_case.properties.get("initialValues"))
-        .and_then(Value::as_object)
-        .map(|values| {
-            values
-                .iter()
-                .filter_map(|(key, value)| {
-                    let (subject, feature) = key.split_once('|')?;
-                    Some(((subject.to_string(), feature.to_string()), value.clone()))
-                })
-                .collect::<BTreeMap<_, _>>()
-        })
-        .unwrap_or_default();
+    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects);
+    initial_values.extend(
+        analysis_case
+            .properties
+            .get("initial_values")
+            .or_else(|| analysis_case.properties.get("initialValues"))
+            .and_then(Value::as_object)
+            .map(|values| {
+                values
+                    .iter()
+                    .filter_map(|(key, value)| {
+                        let (subject, feature) = key.split_once('|')?;
+                        Some(((subject.to_string(), feature.to_string()), value.clone()))
+                    })
+                    .collect::<BTreeMap<_, _>>()
+            })
+            .unwrap_or_default(),
+    );
     initial_values.extend(native_analysis_initial_values(
         runtime,
         analysis_case,
@@ -798,6 +801,50 @@ fn native_analysis_initial_values(
     }
 
     Ok(values)
+}
+
+fn native_analysis_attribute_defaults(
+    runtime: &Runtime,
+    subjects: &[ConcurrentSubjectScenario],
+) -> BTreeMap<(String, String), Value> {
+    let mut values = BTreeMap::new();
+    for subject in subjects {
+        let Some(subject_element) = runtime.graph().element_by_element_id(&subject.subject_id)
+        else {
+            continue;
+        };
+        let Some(subject_type) =
+            string_property_any_element(subject_element, &["type", "definition"])
+        else {
+            continue;
+        };
+
+        for attribute in runtime.graph().elements().iter().filter(|candidate| {
+            is_attribute_element(candidate)
+                && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                    == Some(subject_type.as_str())
+        }) {
+            let Some(feature) = string_property_any_element(attribute, &["declared_name", "name"])
+            else {
+                continue;
+            };
+            let Some(value) = attribute_default_value(attribute) else {
+                continue;
+            };
+            values.insert((subject.subject_id.clone(), feature), value);
+        }
+    }
+    values
+}
+
+fn is_attribute_element(element: &Element) -> bool {
+    element.kind.contains("AttributeUsage")
+}
+
+fn attribute_default_value(attribute: &Element) -> Option<Value> {
+    let expression = attribute.properties.get("expression_ir")?;
+    let object = expression.as_object()?;
+    (object.get("kind")?.as_str()? == "literal").then(|| object.get("value").cloned())?
 }
 
 fn initial_value_from_assume_expression(
@@ -2060,13 +2107,7 @@ fn select_change_transition<'a>(
     candidates.sort_by(|left, right| left.id.cmp(&right.id));
 
     for transition in candidates {
-        let Some(guard_feature) = guard_feature_id(runtime, transition) else {
-            // No guard — Change transition fires immediately (vacuously true),
-            // matching the semantics of `select_transition` for Event triggers.
-            return Ok(Some(transition));
-        };
-        let result = runtime.evaluate(&guard_feature, subject_id, context)?;
-        if result.value.as_bool().unwrap_or(false) {
+        if transition_guard_satisfied(runtime, transition, subject_id, context)? {
             return Ok(Some(transition));
         }
     }
@@ -2094,10 +2135,6 @@ fn select_concurrent_change_transition<'a>(
     candidates.sort_by(|left, right| left.id.cmp(&right.id));
 
     for transition in candidates {
-        let Some(guard_feature) = guard_feature_id(runtime, transition) else {
-            return Ok(Some(transition));
-        };
-
         let mut evaluation_subjects = vec![subject_id.to_string()];
         for candidate_subject_id in subject_ids {
             if candidate_subject_id != subject_id {
@@ -2108,10 +2145,10 @@ fn select_concurrent_change_transition<'a>(
         let mut last_error = None;
         let mut evaluated = false;
         for evaluation_subject_id in evaluation_subjects {
-            match runtime.evaluate(&guard_feature, &evaluation_subject_id, context) {
-                Ok(result) => {
+            match transition_guard_satisfied(runtime, transition, &evaluation_subject_id, context) {
+                Ok(satisfied) => {
                     evaluated = true;
-                    if result.value.as_bool().unwrap_or(false) {
+                    if satisfied {
                         return Ok(Some(transition));
                     }
                 }
@@ -2121,10 +2158,65 @@ fn select_concurrent_change_transition<'a>(
             }
         }
         if !evaluated && let Some(err) = last_error {
-            return Err(SimulationError::Runtime(err));
+            return Err(err);
         }
     }
     Ok(None)
+}
+
+fn transition_guard_satisfied(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    subject_id: &str,
+    context: &ExecutionContext,
+) -> Result<bool, SimulationError> {
+    if let Some(guard_feature) = guard_feature_id(runtime, transition) {
+        let result = runtime.evaluate(&guard_feature, subject_id, context)?;
+        return Ok(result.value.as_bool().unwrap_or(false));
+    }
+
+    if transition.trigger_kind == StateTransitionTriggerKind::Change
+        && let Some(trigger) = transition.trigger.as_deref()
+    {
+        return Ok(evaluate_textual_change_guard(trigger, subject_id, context).unwrap_or(false));
+    }
+
+    Ok(true)
+}
+
+fn evaluate_textual_change_guard(
+    trigger: &str,
+    subject_id: &str,
+    context: &ExecutionContext,
+) -> Option<bool> {
+    let parts = trigger.split_whitespace().collect::<Vec<_>>();
+    let [left, op, right] = parts.as_slice() else {
+        return None;
+    };
+    let left = textual_guard_operand_value(left, subject_id, context)?;
+    let right = textual_guard_operand_value(right, subject_id, context)?;
+    Some(match *op {
+        "==" | "=" => left == right,
+        "!=" => left != right,
+        "<" => left < right,
+        "<=" => left <= right,
+        ">" => left > right,
+        ">=" => left >= right,
+        _ => return None,
+    })
+}
+
+fn textual_guard_operand_value(
+    operand: &str,
+    subject_id: &str,
+    context: &ExecutionContext,
+) -> Option<f64> {
+    operand.parse::<f64>().ok().or_else(|| {
+        context
+            .values
+            .get(&(subject_id.to_string(), operand.to_string()))
+            .and_then(Value::as_f64)
+    })
 }
 
 fn append_guard_evaluation(
@@ -2225,9 +2317,18 @@ fn initial_configuration(
         .states
         .iter()
         .find(|state| state.parent_state_id.is_none())?;
-    let child_initial = machine.states.iter().find(|state| {
-        state.parent_state_id.as_deref() == Some(root.id.as_str()) && state.is_initial
-    })?;
+    let child_initial = machine
+        .states
+        .iter()
+        .find(|state| {
+            state.parent_state_id.as_deref() == Some(root.id.as_str()) && state.is_initial
+        })
+        .or_else(|| {
+            machine
+                .states
+                .iter()
+                .find(|state| state.parent_state_id.as_deref() == Some(root.id.as_str()))
+        })?;
     Some(vec![root.id.clone(), child_initial.id.clone()])
 }
 
@@ -3042,6 +3143,8 @@ mod tests {
 
                 part def Printer {
                     attribute bed_temperature : Real = 22.0;
+                    attribute targetTemp : Real = 110.0;
+                    attribute heatRate : Real = 2.3;
 
                     state lifecycle {
                         state Idle;
@@ -3086,6 +3189,20 @@ mod tests {
                 "bed_temperature".to_string()
             )),
             Some(&json!(22.0))
+        );
+        assert_eq!(
+            scenario.initial_values.get(&(
+                scenario.subjects[0].subject_id.clone(),
+                "targetTemp".to_string()
+            )),
+            Some(&json!(110.0))
+        );
+        assert_eq!(
+            scenario.initial_values.get(&(
+                scenario.subjects[0].subject_id.clone(),
+                "heatRate".to_string()
+            )),
+            Some(&json!(2.3))
         );
 
         let trace = run_concurrent_simulation(&runtime, scenario).unwrap();
@@ -3213,15 +3330,6 @@ mod tests {
                     [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
                 ),
                 element(
-                    "feature.Bed.ready",
-                    "Model::CalculationUsage",
-                    [
-                        ("declared_name", json!("ready")),
-                        ("owner", json!("type.Bed")),
-                        ("expression_ir", greater_equal_path("temperature", 110.0)),
-                    ],
-                ),
-                element(
                     "state.Bed.Heating",
                     "StateUsage",
                     [
@@ -3248,9 +3356,9 @@ mod tests {
                     "BedMachine",
                     "state.Bed.Heating",
                     "state.Bed.Ready",
-                    "temperature >= 110.0",
+                    "temperature >= targetTemp",
                     "change",
-                    [("guard_feature", json!("feature.Bed.ready"))],
+                    [],
                 ),
             ],
         })
@@ -3276,6 +3384,10 @@ mod tests {
                     (
                         ("individual.bed".to_string(), "heatRate".to_string()),
                         json!(2.3),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "targetTemp".to_string()),
+                        json!(110.0),
                     ),
                 ]),
             },

@@ -36,6 +36,8 @@ pub struct StateNode {
     pub is_initial: bool,
     pub is_final: bool,
     pub do_behavior: Option<Value>,
+    #[serde(skip)]
+    pub source_order: Option<(u64, u64)>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -543,6 +545,7 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
                     || string_property_any(element, &["purpose", "state_kind", "kind_role"])
                         .is_some_and(|value| value.eq_ignore_ascii_case("final")),
                 do_behavior: element.properties.get("do_behavior").cloned(),
+                source_order: source_order(element),
             });
             continue;
         }
@@ -606,7 +609,7 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
         .into_iter()
         .map(|owner| {
             let mut states = states_by_owner.remove(&owner).unwrap_or_default();
-            states.sort_by(|left, right| left.id.cmp(&right.id));
+            apply_default_initial_state(&mut states);
             let mut transitions = transitions_by_owner.remove(&owner).unwrap_or_default();
             transitions.sort_by(|left, right| left.id.cmp(&right.id));
             StateMachineModel {
@@ -621,6 +624,58 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
             }
         })
         .collect()
+}
+
+fn apply_default_initial_state(states: &mut [StateNode]) {
+    if states.iter().any(|state| state.is_initial) {
+        return;
+    }
+
+    let root_id = states
+        .iter()
+        .find(|state| state.parent_state_id.is_none())
+        .map(|state| state.id.clone());
+    let default_index = root_id
+        .as_deref()
+        .and_then(|root_id| {
+            states
+                .iter()
+                .enumerate()
+                .filter(|(_, state)| state.parent_state_id.as_deref() == Some(root_id))
+                .min_by_key(|(_, state)| state.source_order.unwrap_or((u64::MAX, u64::MAX)))
+                .map(|(index, _)| index)
+        })
+        .or_else(|| {
+            states
+                .iter()
+                .enumerate()
+                .filter(|(_, state)| state.parent_state_id.is_none())
+                .min_by_key(|(_, state)| state.source_order.unwrap_or((u64::MAX, u64::MAX)))
+                .map(|(index, _)| index)
+        });
+
+    if let Some(index) = default_index {
+        states[index].is_initial = true;
+    }
+}
+
+fn source_order(element: &Element) -> Option<(u64, u64)> {
+    element
+        .properties
+        .get("start_line")
+        .and_then(Value::as_u64)
+        .zip(element.properties.get("start_col").and_then(Value::as_u64))
+        .or_else(|| {
+            let source_span = element
+                .properties
+                .get("metadata")?
+                .get("source_span")?
+                .as_object()?;
+            source_span
+                .get("start_line")
+                .and_then(Value::as_u64)
+                .zip(source_span.get("start_col").and_then(Value::as_u64))
+        })
 }
 
 fn state_machine_owner_for_state(

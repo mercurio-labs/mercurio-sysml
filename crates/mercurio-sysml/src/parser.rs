@@ -1871,10 +1871,7 @@ impl Parser {
             return Ok(false);
         }
 
-        let source_marker = self.expect_identifier("expected transition source marker")?;
-        if source_marker == "first" {
-            modifiers.push("source_is_initial=true".to_string());
-        }
+        let _source_marker = self.expect_identifier("expected transition source marker")?;
         let source = self.parse_qualified_name()?;
         modifiers.push(format!("transition_source={}", source.as_dot_string()));
 
@@ -3378,6 +3375,12 @@ fn token_text(kind: &TokenKind) -> String {
         TokenKind::Specializes => ":>".to_string(),
         TokenKind::Redefines => ":>>".to_string(),
         TokenKind::Equals => "=".to_string(),
+        TokenKind::DoubleEquals => "==".to_string(),
+        TokenKind::BangEquals => "!=".to_string(),
+        TokenKind::LAngle => "<".to_string(),
+        TokenKind::RAngle => ">".to_string(),
+        TokenKind::LessEqual => "<=".to_string(),
+        TokenKind::GreaterEqual => ">=".to_string(),
         TokenKind::Star => "*".to_string(),
         TokenKind::DoubleStar => "**".to_string(),
         _ => String::new(),
