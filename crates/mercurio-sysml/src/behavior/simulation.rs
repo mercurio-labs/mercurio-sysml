@@ -14,6 +14,7 @@ use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
 
 const RATE_SAMPLE_INTERVAL_S: f64 = 1.0;
 const CHANGE_LOOP_LIMIT: usize = 20;
+const CROSSING_TOLERANCE_S: f64 = 0.01;
 
 fn default_step_duration() -> f64 {
     1.0
@@ -1097,6 +1098,20 @@ struct SubjectRunState<'m> {
     events: Vec<StateMachineScenarioEvent>,
 }
 
+#[derive(Debug, Clone, PartialEq)]
+struct ActiveStateRate {
+    subject_id: String,
+    feature: String,
+    rate_per_second: f64,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+struct ChangeCrossing {
+    subject_index: usize,
+    offset: f64,
+    transition: TransitionNode,
+}
+
 fn make_concurrent_entry(
     t: f64,
     subjects: &[SubjectRunState<'_>],
@@ -1186,6 +1201,177 @@ fn apply_concurrent_rate_samples(
         context.values.insert(key, Value::from(value));
     }
     context.version += 1;
+}
+
+fn active_state_rates(
+    subjects: &[SubjectRunState<'_>],
+    values: &BTreeMap<(String, String), Value>,
+) -> Vec<ActiveStateRate> {
+    let mut rates = Vec::new();
+    for subject in subjects {
+        for state_id in &subject.active {
+            let Some(state) = subject
+                .machine
+                .states
+                .iter()
+                .find(|state| state.id == *state_id)
+            else {
+                continue;
+            };
+            rates.extend(state_do_rates(state, &subject.subject_id, values));
+        }
+    }
+    rates
+}
+
+fn state_do_rates(
+    state: &crate::behavior::StateNode,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Vec<ActiveStateRate> {
+    let Some(object) = state.do_behavior.as_ref().and_then(Value::as_object) else {
+        return Vec::new();
+    };
+    if object.get("kind").and_then(Value::as_str) != Some("rate_integration") {
+        return Vec::new();
+    }
+
+    object
+        .get("rates")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(|rate| {
+            let rate = rate.as_object()?;
+            let feature = rate.get("feature")?.as_str()?.to_string();
+            let rate_per_second = if let Some(rate_per_second) =
+                rate.get("rate_per_second").and_then(Value::as_f64)
+            {
+                rate_per_second
+            } else {
+                let rate_feature = rate.get("rate_feature")?.as_str()?;
+                values
+                    .get(&(subject_id.to_string(), rate_feature.to_string()))
+                    .and_then(Value::as_f64)?
+            };
+            Some(ActiveStateRate {
+                subject_id: subject_id.to_string(),
+                feature,
+                rate_per_second,
+            })
+        })
+        .collect()
+}
+
+fn integrate_active_state_behaviors(
+    rates: &[ActiveStateRate],
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    duration: f64,
+    rate_channels: &mut BTreeSet<(String, String)>,
+) {
+    for rate in rates {
+        rate_channels.insert((rate.subject_id.clone(), rate.feature.clone()));
+    }
+    let base_values = values.clone();
+    apply_rates_at_offset(rates, &base_values, values, context, duration);
+}
+
+fn context_with_rates_at_offset(
+    context: &ExecutionContext,
+    values: &BTreeMap<(String, String), Value>,
+    rates: &[ActiveStateRate],
+    offset: f64,
+) -> ExecutionContext {
+    let mut scratch = context.clone();
+    for rate in rates {
+        let key = (rate.subject_id.clone(), rate.feature.clone());
+        let initial = values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
+        scratch
+            .values
+            .insert(key, Value::from(initial + rate.rate_per_second * offset));
+    }
+    scratch.version += 1;
+    scratch
+}
+
+fn apply_rates_at_offset(
+    rates: &[ActiveStateRate],
+    base_values: &BTreeMap<(String, String), Value>,
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    offset: f64,
+) {
+    for rate in rates {
+        let key = (rate.subject_id.clone(), rate.feature.clone());
+        let initial = base_values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
+        let value = Value::from(initial + rate.rate_per_second * offset);
+        values.insert(key.clone(), value.clone());
+        context.values.insert(key, value);
+    }
+    context.version += 1;
+}
+
+fn earliest_change_crossing(
+    runtime: &Runtime,
+    subjects: &[SubjectRunState<'_>],
+    subject_ids: &[String],
+    context: &ExecutionContext,
+    values: &BTreeMap<(String, String), Value>,
+    rates: &[ActiveStateRate],
+    duration: f64,
+) -> Result<Option<ChangeCrossing>, SimulationError> {
+    let mut earliest: Option<ChangeCrossing> = None;
+    for (idx, subject) in subjects.iter().enumerate() {
+        let end_context = context_with_rates_at_offset(context, values, rates, duration);
+        let Some(end_transition) = select_concurrent_change_transition(
+            runtime,
+            subject.machine,
+            &subject.subject_id,
+            &subject.active,
+            subject_ids,
+            &end_context,
+        )?
+        .cloned() else {
+            continue;
+        };
+
+        let mut low = 0.0;
+        let mut high = duration;
+        let mut transition = end_transition;
+        while high - low > CROSSING_TOLERANCE_S {
+            let mid = (low + high) / 2.0;
+            let mid_context = context_with_rates_at_offset(context, values, rates, mid);
+            if let Some(mid_transition) = select_concurrent_change_transition(
+                runtime,
+                subject.machine,
+                &subject.subject_id,
+                &subject.active,
+                subject_ids,
+                &mid_context,
+            )?
+            .cloned()
+            {
+                high = mid;
+                transition = mid_transition;
+            } else {
+                low = mid;
+            }
+        }
+
+        let crossing = ChangeCrossing {
+            subject_index: idx,
+            offset: high,
+            transition,
+        };
+        if earliest
+            .as_ref()
+            .is_none_or(|current| crossing.offset < current.offset)
+        {
+            earliest = Some(crossing);
+        }
+    }
+    Ok(earliest)
 }
 
 pub fn run_concurrent_simulation(
@@ -1459,6 +1645,70 @@ pub fn run_concurrent_simulation(
             }
             if !change_fired {
                 break;
+            }
+        }
+
+        if !fired_this_round && step < max_steps {
+            let rates = active_state_rates(&subjects, &values);
+            if !rates.is_empty() {
+                let subject_ids = subjects
+                    .iter()
+                    .map(|subject| subject.subject_id.clone())
+                    .collect::<Vec<_>>();
+                let crossing = earliest_change_crossing(
+                    runtime,
+                    &subjects,
+                    &subject_ids,
+                    &context,
+                    &values,
+                    &rates,
+                    scenario.step_duration_s,
+                )?;
+                let duration = crossing
+                    .as_ref()
+                    .map(|crossing| crossing.offset)
+                    .unwrap_or(scenario.step_duration_s);
+
+                integrate_active_state_behaviors(
+                    &rates,
+                    &mut values,
+                    &mut context,
+                    duration,
+                    &mut rate_channels,
+                );
+                t += duration;
+                step += 1;
+                fired_this_round = true;
+
+                if let Some(crossing) = crossing {
+                    let subject_id = subjects[crossing.subject_index].subject_id.clone();
+                    let transition = crossing.transition;
+                    let mut step_critical = Vec::new();
+                    apply_transition_effects(
+                        runtime,
+                        &transition,
+                        &subject_id,
+                        step,
+                        &mut values,
+                        &mut context,
+                        &mut step_critical,
+                    );
+                    subjects[crossing.subject_index].active = initial_configuration(
+                        subjects[crossing.subject_index].machine,
+                        Some(&transition.target),
+                    )
+                    .ok_or_else(|| {
+                        SimulationError::MissingInitialState(transition.target.clone())
+                    })?;
+                    round_events.push(TraceEvent {
+                        kind: "transition".to_string(),
+                        transition_id: Some(transition.id.clone()),
+                        trigger: Some(format!(
+                            "change:{}",
+                            transition.trigger.as_deref().unwrap_or("")
+                        )),
+                    });
+                }
             }
         }
 
@@ -2949,6 +3199,109 @@ mod tests {
                 .get("individual.printer")
                 .is_some_and(|states| states == &vec!["state.Printer.Printing".to_string()])
         }));
+    }
+
+    #[test]
+    fn state_do_behavior_drives_rate_integration_to_guard_crossing() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "feature.Bed.ready",
+                    "Model::CalculationUsage",
+                    [
+                        ("declared_name", json!("ready")),
+                        ("owner", json!("type.Bed")),
+                        ("expression_ir", greater_equal_path("temperature", 110.0)),
+                    ],
+                ),
+                element(
+                    "state.Bed.Heating",
+                    "StateUsage",
+                    [
+                        ("declared_name", json!("Heating")),
+                        ("owning_type", json!("BedMachine")),
+                        ("is_initial", json!(true)),
+                        (
+                            "do_behavior",
+                            json!({
+                                "kind": "rate_integration",
+                                "rates": [
+                                    {
+                                        "feature": "temperature",
+                                        "rate_feature": "heatRate"
+                                    }
+                                ]
+                            }),
+                        ),
+                    ],
+                ),
+                state_element("state.Bed.Ready", "BedMachine", false),
+                transition_element(
+                    "transition.Bed.ready",
+                    "BedMachine",
+                    "state.Bed.Heating",
+                    "state.Bed.Ready",
+                    "temperature >= 110.0",
+                    "change",
+                    [("guard_feature", json!("feature.Bed.ready"))],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.state_do_rate".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.bed".to_string(),
+                    machine_id: "BedMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 100,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::from([
+                    (
+                        ("individual.bed".to_string(), "temperature".to_string()),
+                        json!(22.0),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "heatRate".to_string()),
+                        json!(2.3),
+                    ),
+                ]),
+            },
+        )
+        .unwrap();
+
+        let ready_entry = trace
+            .timeline
+            .iter()
+            .find(|entry| {
+                entry
+                    .states
+                    .get("individual.bed")
+                    .is_some_and(|states| states == &vec!["state.Bed.Ready".to_string()])
+            })
+            .unwrap();
+        let expected = (110.0 - 22.0) / 2.3;
+        assert!((ready_entry.t - expected).abs() <= 0.1);
+        assert!(trace.timeline.len() > 30);
+        assert!(
+            ready_entry
+                .values
+                .get(&("individual.bed".to_string(), "temperature".to_string()))
+                .and_then(Value::as_f64)
+                .is_some_and(|temperature| temperature >= 110.0)
+        );
     }
 
     #[test]

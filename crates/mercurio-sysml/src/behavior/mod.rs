@@ -35,6 +35,7 @@ pub struct StateNode {
     pub parent_state_id: Option<String>,
     pub is_initial: bool,
     pub is_final: bool,
+    pub do_behavior: Option<Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -541,6 +542,7 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
                 is_final: bool_property(element, &["is_final", "final"])
                     || string_property_any(element, &["purpose", "state_kind", "kind_role"])
                         .is_some_and(|value| value.eq_ignore_ascii_case("final")),
+                do_behavior: element.properties.get("do_behavior").cloned(),
             });
             continue;
         }
