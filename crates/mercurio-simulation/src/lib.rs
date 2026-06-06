@@ -7,6 +7,9 @@ use serde_json::Value;
 use mercurio_core::graph::Element;
 use mercurio_core::ir::{KirDocument, KirElement};
 use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
+use mercurio_language_contracts::expression::{
+    ExpressionEvaluationContext, ExpressionEvaluationError, ExpressionIr, ExpressionPathSegment,
+};
 use mercurio_sysml::{
     StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
     project_state_machines,
@@ -1149,7 +1152,14 @@ struct SubjectRunState<'m> {
 struct ActiveStateRate {
     subject_id: String,
     feature: String,
-    rate_per_second: f64,
+    source: ActiveStateRateSource,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+enum ActiveStateRateSource {
+    Constant(f64),
+    Feature(String),
+    Expression(Value),
 }
 
 #[derive(Debug, Clone, PartialEq)]
@@ -1252,7 +1262,7 @@ fn apply_concurrent_rate_samples(
 
 fn active_state_rates(
     subjects: &[SubjectRunState<'_>],
-    values: &BTreeMap<(String, String), Value>,
+    _values: &BTreeMap<(String, String), Value>,
 ) -> Vec<ActiveStateRate> {
     let mut rates = Vec::new();
     for subject in subjects {
@@ -1265,17 +1275,13 @@ fn active_state_rates(
             else {
                 continue;
             };
-            rates.extend(state_do_rates(state, &subject.subject_id, values));
+            rates.extend(state_do_rates(state, &subject.subject_id));
         }
     }
     rates
 }
 
-fn state_do_rates(
-    state: &mercurio_sysml::StateNode,
-    subject_id: &str,
-    values: &BTreeMap<(String, String), Value>,
-) -> Vec<ActiveStateRate> {
+fn state_do_rates(state: &mercurio_sysml::StateNode, subject_id: &str) -> Vec<ActiveStateRate> {
     let Some(object) = state.do_behavior.as_ref().and_then(Value::as_object) else {
         return Vec::new();
     };
@@ -1291,20 +1297,21 @@ fn state_do_rates(
         .filter_map(|rate| {
             let rate = rate.as_object()?;
             let feature = rate.get("feature")?.as_str()?.to_string();
-            let rate_per_second = if let Some(rate_per_second) =
+            let source = if let Some(rate_per_second) =
                 rate.get("rate_per_second").and_then(Value::as_f64)
             {
-                rate_per_second
+                ActiveStateRateSource::Constant(rate_per_second)
+            } else if let Some(rate_feature) = rate.get("rate_feature").and_then(Value::as_str) {
+                ActiveStateRateSource::Feature(rate_feature.to_string())
+            } else if let Some(rate_expr) = rate.get("rate_expr") {
+                ActiveStateRateSource::Expression(rate_expr.clone())
             } else {
-                let rate_feature = rate.get("rate_feature")?.as_str()?;
-                values
-                    .get(&(subject_id.to_string(), rate_feature.to_string()))
-                    .and_then(Value::as_f64)?
+                return None;
             };
             Some(ActiveStateRate {
                 subject_id: subject_id.to_string(),
                 feature,
-                rate_per_second,
+                source,
             })
         })
         .collect()
@@ -1331,12 +1338,8 @@ fn context_with_rates_at_offset(
     offset: f64,
 ) -> ExecutionContext {
     let mut scratch = context.clone();
-    for rate in rates {
-        let key = (rate.subject_id.clone(), rate.feature.clone());
-        let initial = values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
-        scratch
-            .values
-            .insert(key, Value::from(initial + rate.rate_per_second * offset));
+    for (key, value) in integrated_rate_values_at_offset(rates, values, offset) {
+        scratch.values.insert(key, Value::from(value));
     }
     scratch.version += 1;
     scratch
@@ -1349,14 +1352,131 @@ fn apply_rates_at_offset(
     context: &mut ExecutionContext,
     offset: f64,
 ) {
-    for rate in rates {
-        let key = (rate.subject_id.clone(), rate.feature.clone());
-        let initial = base_values.get(&key).and_then(Value::as_f64).unwrap_or(0.0);
-        let value = Value::from(initial + rate.rate_per_second * offset);
+    for (key, integrated) in integrated_rate_values_at_offset(rates, base_values, offset) {
+        let value = Value::from(integrated);
         values.insert(key.clone(), value.clone());
         context.values.insert(key, value);
     }
     context.version += 1;
+}
+
+fn integrated_rate_values_at_offset(
+    rates: &[ActiveStateRate],
+    base_values: &BTreeMap<(String, String), Value>,
+    offset: f64,
+) -> BTreeMap<(String, String), f64> {
+    let mut result = BTreeMap::new();
+    if offset <= 0.0 {
+        for rate in rates {
+            let key = (rate.subject_id.clone(), rate.feature.clone());
+            result.insert(
+                key.clone(),
+                base_values.get(&key).and_then(Value::as_f64).unwrap_or(0.0),
+            );
+        }
+        return result;
+    }
+
+    let base_numbers = rates
+        .iter()
+        .map(|rate| {
+            let key = (rate.subject_id.clone(), rate.feature.clone());
+            base_values.get(&key).and_then(Value::as_f64).unwrap_or(0.0)
+        })
+        .collect::<Vec<_>>();
+    let k1 = rate_derivatives(rates, base_values);
+    let k2_values = stage_values(base_values, rates, &base_numbers, &k1, offset * 0.5);
+    let k2 = rate_derivatives(rates, &k2_values);
+    let k3_values = stage_values(base_values, rates, &base_numbers, &k2, offset * 0.5);
+    let k3 = rate_derivatives(rates, &k3_values);
+    let k4_values = stage_values(base_values, rates, &base_numbers, &k3, offset);
+    let k4 = rate_derivatives(rates, &k4_values);
+
+    for (index, rate) in rates.iter().enumerate() {
+        let integrated = base_numbers[index]
+            + offset * (k1[index] + 2.0 * k2[index] + 2.0 * k3[index] + k4[index]) / 6.0;
+        result.insert((rate.subject_id.clone(), rate.feature.clone()), integrated);
+    }
+    result
+}
+
+fn stage_values(
+    base_values: &BTreeMap<(String, String), Value>,
+    rates: &[ActiveStateRate],
+    base_numbers: &[f64],
+    derivatives: &[f64],
+    offset: f64,
+) -> BTreeMap<(String, String), Value> {
+    let mut values = base_values.clone();
+    for (index, rate) in rates.iter().enumerate() {
+        values.insert(
+            (rate.subject_id.clone(), rate.feature.clone()),
+            Value::from(base_numbers[index] + derivatives[index] * offset),
+        );
+    }
+    values
+}
+
+fn rate_derivatives(
+    rates: &[ActiveStateRate],
+    values: &BTreeMap<(String, String), Value>,
+) -> Vec<f64> {
+    rates
+        .iter()
+        .map(|rate| rate_value(rate, values).unwrap_or(0.0))
+        .collect()
+}
+
+fn rate_value(rate: &ActiveStateRate, values: &BTreeMap<(String, String), Value>) -> Option<f64> {
+    match &rate.source {
+        ActiveStateRateSource::Constant(value) => Some(*value),
+        ActiveStateRateSource::Feature(feature) => values
+            .get(&(rate.subject_id.clone(), feature.clone()))
+            .and_then(Value::as_f64),
+        ActiveStateRateSource::Expression(expression) => {
+            evaluate_rate_expression(expression, &rate.subject_id, values)
+        }
+    }
+}
+
+fn evaluate_rate_expression(
+    expression: &Value,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<f64> {
+    let expression = ExpressionIr::from_value(expression).ok()?;
+    let mut context = RateExpressionContext { subject_id, values };
+    expression.evaluate(&mut context).ok()?.as_f64()
+}
+
+struct RateExpressionContext<'a> {
+    subject_id: &'a str,
+    values: &'a BTreeMap<(String, String), Value>,
+}
+
+impl ExpressionEvaluationContext for RateExpressionContext<'_> {
+    fn owner_id(&self) -> &str {
+        self.subject_id
+    }
+
+    fn resolve_path(
+        &mut self,
+        segments: &[ExpressionPathSegment],
+    ) -> Result<Vec<Value>, ExpressionEvaluationError> {
+        let feature = segments
+            .iter()
+            .map(ExpressionPathSegment::name)
+            .collect::<Vec<_>>()
+            .join(".");
+        self.values
+            .get(&(self.subject_id.to_string(), feature.clone()))
+            .cloned()
+            .map(|value| vec![value])
+            .ok_or(ExpressionEvaluationError::NonNumericValue {
+                owner: self.subject_id.to_string(),
+                feature,
+            })
+    }
 }
 
 fn earliest_change_crossing(
@@ -3413,6 +3533,99 @@ mod tests {
                 .get(&("individual.bed".to_string(), "temperature".to_string()))
                 .and_then(Value::as_f64)
                 .is_some_and(|temperature| temperature >= 110.0)
+        );
+    }
+
+    #[test]
+    fn state_do_rate_expression_integrates_newton_cooling_with_rk4() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "state.Bed.Cooling",
+                    "StateUsage",
+                    [
+                        ("declared_name", json!("Cooling")),
+                        ("owning_type", json!("BedMachine")),
+                        ("is_initial", json!(true)),
+                        (
+                            "do_behavior",
+                            json!({
+                                "kind": "rate_integration",
+                                "rates": [
+                                    {
+                                        "feature": "temperature",
+                                        "rate_expr": {
+                                            "kind": "binary",
+                                            "op": "multiply",
+                                            "left": { "kind": "literal", "value": -0.05 },
+                                            "right": {
+                                                "kind": "binary",
+                                                "op": "subtract",
+                                                "left": {
+                                                    "kind": "path",
+                                                    "segments": ["temperature"]
+                                                },
+                                                "right": {
+                                                    "kind": "path",
+                                                    "segments": ["ambient"]
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }),
+                        ),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.newton_cooling".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.bed".to_string(),
+                    machine_id: "BedMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 60,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::from([
+                    (
+                        ("individual.bed".to_string(), "temperature".to_string()),
+                        json!(110.0),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "ambient".to_string()),
+                        json!(22.0),
+                    ),
+                ]),
+            },
+        )
+        .unwrap();
+
+        let final_temperature = trace
+            .timeline
+            .last()
+            .unwrap()
+            .values
+            .get(&("individual.bed".to_string(), "temperature".to_string()))
+            .and_then(Value::as_f64)
+            .unwrap();
+        let expected = 22.0 + (110.0 - 22.0) * f64::exp(-0.05 * 60.0);
+        assert!(
+            (final_temperature - expected).abs() < 1.0,
+            "final_temperature={final_temperature}, expected={expected}"
         );
     }
 

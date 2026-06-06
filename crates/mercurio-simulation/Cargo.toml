@@ -7,6 +7,7 @@ license.workspace = true
 [dependencies]
 mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
 mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
+mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
 mercurio-sysml = { path = "../mercurio-sysml" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
