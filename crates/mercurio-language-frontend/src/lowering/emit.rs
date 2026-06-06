@@ -1806,6 +1806,11 @@ fn transpile_usage(
             Value::String(multiplicity.upper.clone()),
         );
     }
+    if let Some(do_behavior) = state_do_behavior(usage) {
+        element
+            .properties
+            .insert("do_behavior".to_string(), do_behavior);
+    }
     if let Some(reference_semantics) = &reference_semantics {
         set_property_refs(
             &mut element.properties,
@@ -1835,6 +1840,123 @@ fn transpile_usage(
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
     Ok(element)
+}
+
+fn state_do_behavior(usage: &ResolvedUsage) -> Option<Value> {
+    if usage.construct != "StateUsage" {
+        return None;
+    }
+
+    let rates = usage
+        .members
+        .iter()
+        .filter(|member| {
+            member.construct == "ActionUsage"
+                && member.modifiers.iter().any(|modifier| modifier == "do")
+        })
+        .flat_map(do_action_expressions)
+        .filter_map(rate_integration_from_assertion)
+        .collect::<Vec<_>>();
+
+    (!rates.is_empty()).then(|| {
+        json!({
+            "kind": "rate_integration",
+            "rates": rates
+        })
+    })
+}
+
+fn do_action_expressions(action: &ResolvedUsage) -> Vec<&ResolvedExpr> {
+    let mut expressions = Vec::new();
+    collect_usage_expressions(action, &mut expressions);
+    expressions
+}
+
+fn collect_usage_expressions<'a>(
+    usage: &'a ResolvedUsage,
+    expressions: &mut Vec<&'a ResolvedExpr>,
+) {
+    if let Some(expression) = &usage.expression {
+        expressions.push(expression);
+    }
+    for member in &usage.members {
+        collect_usage_expressions(member, expressions);
+    }
+}
+
+fn rate_integration_from_assertion(expression: &ResolvedExpr) -> Option<Value> {
+    let ResolvedExpr::Binary { left, op, right } = expression else {
+        return None;
+    };
+    if *op != BinaryOp::Equal {
+        return None;
+    }
+    let feature = simple_feature_name(left)?;
+    let (base, delta) = match right.as_ref() {
+        ResolvedExpr::Binary {
+            left,
+            op: BinaryOp::Add,
+            right,
+        } => (left.as_ref(), right.as_ref()),
+        _ => return None,
+    };
+    if simple_feature_name(base)? != feature {
+        return None;
+    }
+
+    let rate = rate_term_from_duration_product(delta)?;
+    Some(match rate {
+        RateTerm::Feature(rate_feature) => {
+            json!({ "feature": feature, "rate_feature": rate_feature })
+        }
+        RateTerm::Constant(rate_per_second) => {
+            json!({ "feature": feature, "rate_per_second": rate_per_second })
+        }
+    })
+}
+
+#[derive(Debug, Clone, PartialEq)]
+enum RateTerm {
+    Feature(String),
+    Constant(f64),
+}
+
+fn rate_term_from_duration_product(expression: &ResolvedExpr) -> Option<RateTerm> {
+    let ResolvedExpr::Binary {
+        left,
+        op: BinaryOp::Multiply,
+        right,
+    } = expression
+    else {
+        return None;
+    };
+
+    if simple_feature_name(left.as_ref()).as_deref() == Some("duration") {
+        rate_term(right.as_ref())
+    } else if simple_feature_name(right.as_ref()).as_deref() == Some("duration") {
+        rate_term(left.as_ref())
+    } else {
+        None
+    }
+}
+
+fn rate_term(expression: &ResolvedExpr) -> Option<RateTerm> {
+    if let Some(feature) = simple_feature_name(expression) {
+        return Some(RateTerm::Feature(feature));
+    }
+    match expression {
+        ResolvedExpr::Literal(Value::Number(number)) => number.as_f64().map(RateTerm::Constant),
+        _ => None,
+    }
+}
+
+fn simple_feature_name(expression: &ResolvedExpr) -> Option<String> {
+    match expression {
+        ResolvedExpr::FeaturePath { segments } if segments.len() == 1 => {
+            Some(segments[0].name.clone())
+        }
+        _ => None,
+    }
 }
 
 fn build_element(
@@ -2958,6 +3080,31 @@ mod lowering_golden_tests {
         }
     }
 
+    fn rate_assertion_expr(feature: &str, rate_feature: &str) -> ResolvedExpr {
+        ResolvedExpr::Binary {
+            left: Box::new(feature_expr(feature)),
+            op: BinaryOp::Equal,
+            right: Box::new(ResolvedExpr::Binary {
+                left: Box::new(feature_expr(feature)),
+                op: BinaryOp::Add,
+                right: Box::new(ResolvedExpr::Binary {
+                    left: Box::new(feature_expr(rate_feature)),
+                    op: BinaryOp::Multiply,
+                    right: Box::new(feature_expr("duration")),
+                }),
+            }),
+        }
+    }
+
+    fn feature_expr(name: &str) -> ResolvedExpr {
+        ResolvedExpr::FeaturePath {
+            segments: vec![ResolvedPathSegment {
+                name: name.to_string(),
+                feature_id: format!("feature.root.{name}"),
+            }],
+        }
+    }
+
     #[test]
     fn package_lowering_trace_is_stable() {
         let mappings = MappingBundle::load().unwrap();
@@ -3238,6 +3385,48 @@ mod lowering_golden_tests {
         assert_eq!(child.properties["parent_state"], "state.root.parent");
         assert_eq!(succession.properties["target"], "state.root.next");
         assert_eq!(succession.properties["trigger_kind"], "completion");
+    }
+
+    #[test]
+    fn state_do_action_rate_assertion_emits_do_behavior() {
+        let mappings = MappingBundle::load().unwrap();
+        let mut assertion = reference_usage("thermalEquation");
+        assertion.construct = "AssertUsage".to_string();
+        assertion.qualified_name = "root.Heating.integrate.thermalEquation".to_string();
+        assertion.expression = Some(rate_assertion_expr("temperature", "heatRate"));
+
+        let mut action = reference_usage("integrate");
+        action.construct = "ActionUsage".to_string();
+        action.owner_construct = "StateUsage".to_string();
+        action.owner_qualified_name = "root.Heating".to_string();
+        action.qualified_name = "root.Heating.integrate".to_string();
+        action.modifiers = vec!["do".to_string()];
+        action.members = vec![assertion];
+
+        let mut state = reference_usage("Heating");
+        state.construct = "StateUsage".to_string();
+        state.qualified_name = "root.Heating".to_string();
+        state.members = vec![action];
+
+        let module = ResolvedModule {
+            packages: Vec::new(),
+            imports: Vec::new(),
+            definitions: Vec::new(),
+            usages: vec![state],
+        };
+
+        let document = transpile_module(&module, "golden.sysml", mappings).unwrap();
+        let state = element(&document, "state.root.Heating");
+
+        assert_eq!(
+            state.properties["do_behavior"],
+            json!({
+                "kind": "rate_integration",
+                "rates": [
+                    { "feature": "temperature", "rate_feature": "heatRate" }
+                ]
+            })
+        );
     }
 
     #[test]

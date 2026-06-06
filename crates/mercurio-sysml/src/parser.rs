@@ -1798,6 +1798,12 @@ impl Parser {
                 owner_docs: Vec::new(),
                 had_body: false,
             }
+        } else if is_constraint_expression_usage(&effective_keyword, &modifiers) {
+            if let Some(tail) = self.try_parse_constraint_expression_tail()? {
+                tail
+            } else {
+                self.parse_usage_tail(&[])?
+            }
         } else {
             self.parse_usage_tail(if matches!(keyword, "connection" | "interface") {
                 &["connect"]
@@ -2286,6 +2292,49 @@ impl Parser {
 
     fn parse_expression(&mut self) -> Result<Expr, Diagnostic> {
         self.parse_or_expression()
+    }
+
+    fn try_parse_constraint_expression_tail(&mut self) -> Result<Option<UsageTail>, Diagnostic> {
+        if !matches!(self.peek_kind(), TokenKind::LBrace) {
+            return Ok(None);
+        }
+
+        let checkpoint = self.index;
+        self.expect(
+            TokenKind::LBrace,
+            "expected `{` before constraint expression",
+        )?;
+        let expression = match self.parse_expression() {
+            Ok(expression) => expression,
+            Err(_) => {
+                self.index = checkpoint;
+                return Ok(None);
+            }
+        };
+        if matches!(self.peek_kind(), TokenKind::Semicolon) {
+            self.advance();
+        }
+        if !matches!(self.peek_kind(), TokenKind::RBrace) {
+            self.index = checkpoint;
+            return Ok(None);
+        }
+        self.expect(
+            TokenKind::RBrace,
+            "expected `}` after constraint expression",
+        )?;
+
+        Ok(Some(UsageTail {
+            ty: None,
+            multiplicity: None,
+            expression: Some(expression),
+            additional_types: Vec::new(),
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            body_members: Vec::new(),
+            owner_docs: Vec::new(),
+            had_body: true,
+        }))
     }
 
     fn parse_or_expression(&mut self) -> Result<Expr, Diagnostic> {
@@ -3358,6 +3407,11 @@ fn is_declaration_modifier(value: &str) -> bool {
             | "variant"
             | "constant"
     )
+}
+
+fn is_constraint_expression_usage(keyword: &str, modifiers: &[String]) -> bool {
+    matches!(keyword, "assert" | "assume" | "require" | "constraint")
+        && modifiers.iter().any(|modifier| modifier == "constraint")
 }
 
 fn is_feature_keyword(value: &str) -> bool {

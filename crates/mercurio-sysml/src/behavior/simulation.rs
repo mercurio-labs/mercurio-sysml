@@ -3305,6 +3305,51 @@ mod tests {
     }
 
     #[test]
+    fn textual_state_do_action_lowers_to_rate_integration_behavior() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            r#"
+            package Demo {
+                import ScalarValues::*;
+
+                part def Bed {
+                    attribute temperature : Real;
+                    attribute heatRate : Real;
+
+                    state lifecycle {
+                        state Heating {
+                            do action integrate {
+                                assert constraint {
+                                    temperature == temperature + heatRate * duration;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            "#,
+            "state-do-rate.sysml",
+            &stdlib,
+        )
+        .unwrap();
+
+        let heating = document
+            .elements
+            .iter()
+            .find(|element| element.id.ends_with(".Bed.lifecycle.Heating"))
+            .expect("Heating state");
+        assert_eq!(
+            heating.properties.get("do_behavior"),
+            Some(&json!({
+                "kind": "rate_integration",
+                "rates": [
+                    { "feature": "temperature", "rate_feature": "heatRate" }
+                ]
+            }))
+        );
+    }
+
+    #[test]
     fn concurrent_trace_states_map_contains_all_subjects() {
         let runtime = Runtime::from_document(KirDocument {
             metadata: BTreeMap::new(),
