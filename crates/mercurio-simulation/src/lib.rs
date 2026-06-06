@@ -4,13 +4,13 @@ use std::fmt;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use crate::behavior::{
-    StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
-    project_state_machines,
-};
 use mercurio_core::graph::Element;
 use mercurio_core::ir::{KirDocument, KirElement};
 use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
+use mercurio_sysml::{
+    StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
+    project_state_machines,
+};
 
 const RATE_SAMPLE_INTERVAL_S: f64 = 1.0;
 const CHANGE_LOOP_LIMIT: usize = 20;
@@ -1272,7 +1272,7 @@ fn active_state_rates(
 }
 
 fn state_do_rates(
-    state: &crate::behavior::StateNode,
+    state: &mercurio_sysml::StateNode,
     subject_id: &str,
     values: &BTreeMap<(String, String), Value>,
 ) -> Vec<ActiveStateRate> {
@@ -2451,9 +2451,9 @@ mod tests {
 
     use serde_json::{Value, json};
 
-    use crate::{compile_sysml_text, load_sysml_baseline};
     use mercurio_core::runtime::Runtime;
     use mercurio_core::{KirDocument, KirElement};
+    use mercurio_sysml::{compile_sysml_text, load_sysml_baseline};
 
     use super::*;
 

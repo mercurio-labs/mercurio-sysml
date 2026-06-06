@@ -852,6 +852,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "mercurio-simulation"
+version = "0.1.0"
+dependencies = [
+ "mercurio-foundation",
+ "mercurio-kir",
+ "mercurio-sysml",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "mercurio-sysml"
 version = "0.1.0"
 dependencies = [
