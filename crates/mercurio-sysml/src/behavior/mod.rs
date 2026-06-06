@@ -47,6 +47,7 @@ pub struct TransitionNode {
 #[serde(rename_all = "snake_case")]
 pub enum StateTransitionTriggerKind {
     Event,
+    Signal,
     Time,
     After,
     Change,
@@ -801,6 +802,7 @@ fn transition_trigger_kind(element: &Element) -> StateTransitionTriggerKind {
         .as_deref()
     {
         Some("event") => StateTransitionTriggerKind::Event,
+        Some("signal") => StateTransitionTriggerKind::Signal,
         Some("time") | Some("at") => StateTransitionTriggerKind::Time,
         Some("after") | Some("duration") => StateTransitionTriggerKind::After,
         Some("change") | Some("when") => StateTransitionTriggerKind::Change,

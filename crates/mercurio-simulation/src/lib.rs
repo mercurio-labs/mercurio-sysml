@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use std::fmt;
 
 use serde::{Deserialize, Serialize};
@@ -1148,6 +1148,13 @@ struct SubjectRunState<'m> {
     events: Vec<StateMachineScenarioEvent>,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct PendingSignal {
+    source_subject_id: String,
+    signal_type: String,
+    target: Option<String>,
+}
+
 #[derive(Debug, Clone, PartialEq)]
 struct ActiveStateRate {
     subject_id: String,
@@ -1581,12 +1588,26 @@ pub fn run_concurrent_simulation(
     let mut t = 0.0f64;
     let mut step = 0usize;
     let mut rate_channels = BTreeSet::<(String, String)>::new();
+    let mut pending_signals = VecDeque::<PendingSignal>::new();
     let mut timeline = vec![make_concurrent_entry(t, &subjects, &values, Vec::new())];
     let max_steps = scenario.max_steps.max(1);
 
     while step < max_steps {
         let mut fired_this_round = false;
         let mut round_events = Vec::<TraceEvent>::new();
+
+        if deliver_pending_signals(
+            runtime,
+            &mut subjects,
+            &mut values,
+            &mut context,
+            &mut pending_signals,
+            &mut step,
+            max_steps,
+            &mut round_events,
+        )? {
+            fired_this_round = true;
+        }
 
         for subject in subjects.iter_mut() {
             if step >= max_steps || subject.event_index >= subject.events.len() {
@@ -1628,6 +1649,12 @@ pub fn run_concurrent_simulation(
                 &mut values,
                 &mut context,
                 &mut step_critical,
+            );
+            enqueue_transition_signals(
+                runtime,
+                &transition,
+                &subject.subject_id,
+                &mut pending_signals,
             );
             subject.active = initial_configuration(subject.machine, Some(&transition.target))
                 .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
@@ -1706,6 +1733,7 @@ pub fn run_concurrent_simulation(
                 &mut context,
                 &mut step_critical,
             );
+            enqueue_transition_signals(runtime, &transition, &subject_id, &mut pending_signals);
             let target = transition.target.clone();
             subjects[idx].active = initial_configuration(subjects[idx].machine, Some(&target))
                 .ok_or_else(|| SimulationError::MissingInitialState(target))?;
@@ -1744,6 +1772,12 @@ pub fn run_concurrent_simulation(
                         &mut values,
                         &mut context,
                         &mut change_critical,
+                    );
+                    enqueue_transition_signals(
+                        runtime,
+                        &transition,
+                        &subject.subject_id,
+                        &mut pending_signals,
                     );
                     subject.active =
                         initial_configuration(subject.machine, Some(&transition.target))
@@ -1794,6 +1828,12 @@ pub fn run_concurrent_simulation(
                     &mut values,
                     &mut context,
                     &mut step_critical,
+                );
+                enqueue_transition_signals(
+                    runtime,
+                    &transition,
+                    &subject.subject_id,
+                    &mut pending_signals,
                 );
                 subject.active = initial_configuration(subject.machine, Some(&transition.target))
                     .ok_or_else(|| {
@@ -1859,6 +1899,12 @@ pub fn run_concurrent_simulation(
                         &mut values,
                         &mut context,
                         &mut step_critical,
+                    );
+                    enqueue_transition_signals(
+                        runtime,
+                        &transition,
+                        &subject_id,
+                        &mut pending_signals,
                     );
                     subjects[crossing.subject_index].active = initial_configuration(
                         subjects[crossing.subject_index].machine,
@@ -2387,6 +2433,7 @@ fn apply_transition_effects(
                 ));
             }
             TransitionEffect::Rate { .. } => {}
+            TransitionEffect::SendSignal { .. } => {}
             TransitionEffect::Log { kind, detail } => {
                 step_critical.push(critical_event(step, &kind, subject_id, detail));
             }
@@ -2462,7 +2509,12 @@ fn select_transition<'a>(
 ) -> Result<Option<&'a TransitionNode>, SimulationError> {
     for state_id in active_configuration.iter().rev() {
         for transition in machine.transitions.iter().filter(|transition| {
-            transition.source == *state_id && transition.trigger.as_deref() == Some(trigger)
+            transition.source == *state_id
+                && matches!(
+                    transition.trigger_kind,
+                    StateTransitionTriggerKind::Event | StateTransitionTriggerKind::Unknown
+                )
+                && transition.trigger.as_deref() == Some(trigger)
         }) {
             let Some(guard_feature) = guard_feature_id(runtime, transition) else {
                 return Ok(Some(transition));
@@ -2474,6 +2526,139 @@ fn select_transition<'a>(
         }
     }
     Ok(None)
+}
+
+fn select_signal_transition<'a>(
+    runtime: &Runtime,
+    machine: &'a StateMachineModel,
+    subject_id: &str,
+    active_configuration: &[String],
+    signal_type: &str,
+    context: &ExecutionContext,
+) -> Result<Option<&'a TransitionNode>, SimulationError> {
+    for state_id in active_configuration.iter().rev() {
+        for transition in machine.transitions.iter().filter(|transition| {
+            transition.source == *state_id
+                && transition.trigger_kind == StateTransitionTriggerKind::Signal
+                && transition.trigger.as_deref() == Some(signal_type)
+        }) {
+            let Some(guard_feature) = guard_feature_id(runtime, transition) else {
+                return Ok(Some(transition));
+            };
+            let result = runtime.evaluate(&guard_feature, subject_id, context)?;
+            if result.value.as_bool().unwrap_or(false) {
+                return Ok(Some(transition));
+            }
+        }
+    }
+    Ok(None)
+}
+
+fn enqueue_transition_signals(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+    source_subject_id: &str,
+    pending_signals: &mut VecDeque<PendingSignal>,
+) {
+    for effect in transition_effects(runtime, transition) {
+        if let TransitionEffect::SendSignal {
+            signal_type,
+            target,
+        } = effect
+        {
+            pending_signals.push_back(PendingSignal {
+                source_subject_id: source_subject_id.to_string(),
+                signal_type,
+                target,
+            });
+        }
+    }
+}
+
+fn signal_targets_subject(signal: &PendingSignal, subject_id: &str) -> bool {
+    match signal.target.as_deref() {
+        Some(target) => target == subject_id,
+        None => true,
+    }
+}
+
+fn deliver_pending_signals(
+    runtime: &Runtime,
+    subjects: &mut [SubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    context: &mut ExecutionContext,
+    pending_signals: &mut VecDeque<PendingSignal>,
+    step: &mut usize,
+    max_steps: usize,
+    round_events: &mut Vec<TraceEvent>,
+) -> Result<bool, SimulationError> {
+    let mut fired_any = false;
+    let signal_count = pending_signals.len();
+    for _ in 0..signal_count {
+        if *step >= max_steps {
+            break;
+        }
+        let Some(signal) = pending_signals.pop_front() else {
+            break;
+        };
+
+        let mut consumed = false;
+        for subject in subjects.iter_mut() {
+            if *step >= max_steps || !signal_targets_subject(&signal, &subject.subject_id) {
+                continue;
+            }
+
+            let transition = select_signal_transition(
+                runtime,
+                subject.machine,
+                &subject.subject_id,
+                &subject.active,
+                &signal.signal_type,
+                context,
+            )?
+            .cloned();
+            let Some(transition) = transition else {
+                continue;
+            };
+
+            *step += 1;
+            let mut step_critical = Vec::new();
+            append_guard_evaluation(
+                runtime,
+                &transition,
+                &subject.subject_id,
+                context,
+                *step,
+                &mut step_critical,
+            )?;
+            apply_transition_effects(
+                runtime,
+                &transition,
+                &subject.subject_id,
+                *step,
+                values,
+                context,
+                &mut step_critical,
+            );
+            enqueue_transition_signals(runtime, &transition, &subject.subject_id, pending_signals);
+            subject.active = initial_configuration(subject.machine, Some(&transition.target))
+                .ok_or_else(|| SimulationError::MissingInitialState(transition.target.clone()))?;
+            round_events.push(TraceEvent {
+                kind: "transition".to_string(),
+                transition_id: Some(transition.id.clone()),
+                trigger: Some(format!(
+                    "signal:{}:{}",
+                    signal.source_subject_id, signal.signal_type
+                )),
+            });
+            fired_any = true;
+            consumed = true;
+        }
+        if !consumed {
+            pending_signals.push_back(signal);
+        }
+    }
+    Ok(fired_any)
 }
 
 fn guard_feature_id(runtime: &Runtime, transition: &TransitionNode) -> Option<String> {
@@ -2528,6 +2713,10 @@ enum TransitionEffect {
         rate_per_second: f64,
         unit: Option<String>,
     },
+    SendSignal {
+        signal_type: String,
+        target: Option<String>,
+    },
     Log {
         kind: String,
         detail: [(&'static str, Value); 1],
@@ -2550,6 +2739,11 @@ impl TransitionEffect {
                     .and_then(Value::as_str)
                     .map(str::to_string),
             }),
+            "send_signal" => Some(Self::SendSignal {
+                signal_type: string_property_any_value(object, &["signal_type", "signal", "type"])?,
+                target: string_property_any_value(object, &["target", "target_subject"])
+                    .filter(|target| target != "*"),
+            }),
             "log" => Some(Self::Log {
                 kind: object.get("event")?.as_str()?.to_string(),
                 detail: [(
@@ -2563,6 +2757,15 @@ impl TransitionEffect {
             _ => None,
         }
     }
+}
+
+fn string_property_any_value(
+    object: &serde_json::Map<String, Value>,
+    keys: &[&str],
+) -> Option<String> {
+    keys.iter()
+        .find_map(|key| object.get(*key).and_then(Value::as_str))
+        .map(str::to_string)
 }
 
 #[cfg(test)]
@@ -3627,6 +3830,288 @@ mod tests {
             (final_temperature - expected).abs() < 1.0,
             "final_temperature={final_temperature}, expected={expected}"
         );
+    }
+
+    #[test]
+    fn concurrent_signal_effect_routes_to_accepting_subject() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element("type.Printer", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "individual.printer",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("printer")),
+                        ("type", json!("type.Printer")),
+                    ],
+                ),
+                state_element("state.Bed.Heating", "BedMachine", true),
+                state_element("state.Bed.Ready", "BedMachine", false),
+                state_element("state.Printer.Heating", "PrinterMachine", true),
+                state_element("state.Printer.Printing", "PrinterMachine", false),
+                transition_element(
+                    "transition.Bed.ready",
+                    "BedMachine",
+                    "state.Bed.Heating",
+                    "state.Bed.Ready",
+                    "finish",
+                    "event",
+                    [(
+                        "effects",
+                        json!([
+                            {
+                                "kind": "send_signal",
+                                "signal_type": "BedReady",
+                                "target": "individual.printer"
+                            }
+                        ]),
+                    )],
+                ),
+                transition_element(
+                    "transition.Printer.print",
+                    "PrinterMachine",
+                    "state.Printer.Heating",
+                    "state.Printer.Printing",
+                    "BedReady",
+                    "signal",
+                    [],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.signal".to_string(),
+                subjects: vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.bed".to_string(),
+                        machine_id: "BedMachine".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.finish".to_string(),
+                            trigger: "finish".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.printer".to_string(),
+                        machine_id: "PrinterMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                ],
+                max_steps: 8,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.printer")
+                .is_some_and(|states| states == &vec!["state.Printer.Printing".to_string()])
+        }));
+        assert!(trace.timeline.iter().any(|entry| {
+            entry.events.iter().any(|event| {
+                event.transition_id.as_deref() == Some("transition.Printer.print")
+                    && event.trigger.as_deref() == Some("signal:individual.bed:BedReady")
+            })
+        }));
+    }
+
+    #[test]
+    fn concurrent_signals_can_join_regardless_of_arrival_order() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element("type.Hotend", "Model::Systems::PartDefinition", []),
+                element("type.Printer", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "individual.hotend",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("hotend")),
+                        ("type", json!("type.Hotend")),
+                    ],
+                ),
+                element(
+                    "individual.printer",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("printer")),
+                        ("type", json!("type.Printer")),
+                    ],
+                ),
+                state_element("state.Bed.Heating", "BedMachine", true),
+                state_element("state.Bed.Ready", "BedMachine", false),
+                state_element("state.Hotend.Heating", "HotendMachine", true),
+                state_element("state.Hotend.Ready", "HotendMachine", false),
+                state_element("state.Printer.Heating", "PrinterMachine", true),
+                state_element("state.Printer.BedOnly", "PrinterMachine", false),
+                state_element("state.Printer.HotendOnly", "PrinterMachine", false),
+                state_element("state.Printer.Printing", "PrinterMachine", false),
+                transition_element(
+                    "transition.Bed.ready",
+                    "BedMachine",
+                    "state.Bed.Heating",
+                    "state.Bed.Ready",
+                    "finish_bed",
+                    "event",
+                    [(
+                        "effects",
+                        json!([{ "kind": "send_signal", "signal_type": "BedReady" }]),
+                    )],
+                ),
+                transition_element(
+                    "transition.Hotend.ready",
+                    "HotendMachine",
+                    "state.Hotend.Heating",
+                    "state.Hotend.Ready",
+                    "finish_hotend",
+                    "event",
+                    [(
+                        "effects",
+                        json!([{ "kind": "send_signal", "signal_type": "HotendReady" }]),
+                    )],
+                ),
+                transition_element(
+                    "transition.Printer.bed_first",
+                    "PrinterMachine",
+                    "state.Printer.Heating",
+                    "state.Printer.BedOnly",
+                    "BedReady",
+                    "signal",
+                    [],
+                ),
+                transition_element(
+                    "transition.Printer.hotend_first",
+                    "PrinterMachine",
+                    "state.Printer.Heating",
+                    "state.Printer.HotendOnly",
+                    "HotendReady",
+                    "signal",
+                    [],
+                ),
+                transition_element(
+                    "transition.Printer.bed_then_hotend",
+                    "PrinterMachine",
+                    "state.Printer.BedOnly",
+                    "state.Printer.Printing",
+                    "HotendReady",
+                    "signal",
+                    [],
+                ),
+                transition_element(
+                    "transition.Printer.hotend_then_bed",
+                    "PrinterMachine",
+                    "state.Printer.HotendOnly",
+                    "state.Printer.Printing",
+                    "BedReady",
+                    "signal",
+                    [],
+                ),
+            ],
+        })
+        .unwrap();
+
+        for (id, subjects) in [
+            (
+                "bed_first",
+                vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.bed".to_string(),
+                        machine_id: "BedMachine".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.finish_bed".to_string(),
+                            trigger: "finish_bed".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.hotend".to_string(),
+                        machine_id: "HotendMachine".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.finish_hotend".to_string(),
+                            trigger: "finish_hotend".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.printer".to_string(),
+                        machine_id: "PrinterMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                ],
+            ),
+            (
+                "hotend_first",
+                vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.hotend".to_string(),
+                        machine_id: "HotendMachine".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.finish_hotend".to_string(),
+                            trigger: "finish_hotend".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.bed".to_string(),
+                        machine_id: "BedMachine".to_string(),
+                        initial_state_id: None,
+                        events: vec![StateMachineScenarioEvent {
+                            id: "event.finish_bed".to_string(),
+                            trigger: "finish_bed".to_string(),
+                        }],
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "individual.printer".to_string(),
+                        machine_id: "PrinterMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                ],
+            ),
+        ] {
+            let trace = run_concurrent_simulation(
+                &runtime,
+                ConcurrentSimulationScenario {
+                    id: format!("scenario.signal_join.{id}"),
+                    subjects,
+                    max_steps: 12,
+                    step_duration_s: 1.0,
+                    initial_values: BTreeMap::new(),
+                },
+            )
+            .unwrap();
+
+            assert!(
+                trace.timeline.iter().any(|entry| {
+                    entry
+                        .states
+                        .get("individual.printer")
+                        .is_some_and(|states| states == &vec!["state.Printer.Printing".to_string()])
+                }),
+                "{id} did not reach Printing"
+            );
+        }
     }
 
     #[test]
