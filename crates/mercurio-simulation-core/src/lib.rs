@@ -519,12 +519,17 @@ pub fn run_concurrent_simulation_model(
         .first()
         .map(|subject| subject.subject_id.clone())
         .unwrap_or_default();
+    let rate_integrated_channels = rate_integrated_channels(&subjects);
     let channels = values
         .keys()
         .map(|(subject, feature)| TraceChannel {
             id: format!("{subject}.{feature}"),
             unit: None,
-            source: TraceChannelSource::AssignEffect,
+            source: if rate_integrated_channels.contains(&(subject.clone(), feature.clone())) {
+                TraceChannelSource::RateEffect
+            } else {
+                TraceChannelSource::AssignEffect
+            },
         })
         .collect();
     Ok(SimulationTrace {
@@ -553,6 +558,21 @@ fn make_core_entry(
         values: values.clone(),
         events,
     }
+}
+
+fn rate_integrated_channels(subjects: &[CoreSubjectRunState<'_>]) -> BTreeSet<(String, String)> {
+    let mut channels = BTreeSet::new();
+    for subject in subjects {
+        for state in &subject.machine.states {
+            let Some(StateDoBehavior::RateIntegration { rates }) = &state.do_behavior else {
+                continue;
+            };
+            for rate in rates {
+                channels.insert((subject.subject_id.clone(), rate.feature.clone()));
+            }
+        }
+    }
+    channels
 }
 
 fn fire_immediate_transitions(
@@ -1008,7 +1028,42 @@ fn integrate_active_rates_once(
     duration: f64,
 ) -> Result<(), CoreSimulationError> {
     let snapshot = values.clone();
-    let mut updates = BTreeMap::<(String, String), f64>::new();
+    let active_rates = active_rates(subjects);
+    if active_rates.is_empty() {
+        return Ok(());
+    }
+
+    let k1 = evaluate_rate_vector(&active_rates, &snapshot, &BTreeMap::new())?;
+    let half_dt = duration / 2.0;
+    let k2 = evaluate_rate_vector(&active_rates, &snapshot, &scaled_increments(&k1, half_dt))?;
+    let k3 = evaluate_rate_vector(&active_rates, &snapshot, &scaled_increments(&k2, half_dt))?;
+    let k4 = evaluate_rate_vector(&active_rates, &snapshot, &scaled_increments(&k3, duration))?;
+
+    for active_rate in active_rates {
+        let current = snapshot
+            .get(&active_rate.key)
+            .and_then(Value::as_f64)
+            .unwrap_or_default();
+        let delta = duration
+            * (k1.get(&active_rate.key).copied().unwrap_or_default()
+                + 2.0 * k2.get(&active_rate.key).copied().unwrap_or_default()
+                + 2.0 * k3.get(&active_rate.key).copied().unwrap_or_default()
+                + k4.get(&active_rate.key).copied().unwrap_or_default())
+            / 6.0;
+        values.insert(active_rate.key, Value::from(current + delta));
+    }
+    Ok(())
+}
+
+#[derive(Debug, Clone)]
+struct ActiveRate<'a> {
+    key: (String, String),
+    subject_id: String,
+    source: &'a SimulationRateSource,
+}
+
+fn active_rates<'model>(subjects: &[CoreSubjectRunState<'model>]) -> Vec<ActiveRate<'model>> {
+    let mut active = Vec::new();
     for subject in subjects {
         for state_id in &subject.active {
             let Some(state) = subject
@@ -1023,22 +1078,53 @@ fn integrate_active_rates_once(
                 continue;
             };
             for rate in rates {
-                let current = snapshot
-                    .get(&(subject.subject_id.clone(), rate.feature.clone()))
-                    .and_then(Value::as_f64)
-                    .unwrap_or_default();
-                let rate_value = rate_value(&rate.source, &subject.subject_id, &snapshot)?;
-                updates.insert(
-                    (subject.subject_id.clone(), rate.feature.clone()),
-                    current + rate_value * duration,
-                );
+                active.push(ActiveRate {
+                    key: (subject.subject_id.clone(), rate.feature.clone()),
+                    subject_id: subject.subject_id.clone(),
+                    source: &rate.source,
+                });
             }
         }
     }
-    for (key, value) in updates {
-        values.insert(key, Value::from(value));
+    active
+}
+
+fn evaluate_rate_vector(
+    active_rates: &[ActiveRate<'_>],
+    base_values: &BTreeMap<(String, String), Value>,
+    increments: &BTreeMap<(String, String), f64>,
+) -> Result<BTreeMap<(String, String), f64>, CoreSimulationError> {
+    let values = values_with_increments(base_values, increments);
+    let mut vector = BTreeMap::new();
+    for active_rate in active_rates {
+        vector.insert(
+            active_rate.key.clone(),
+            rate_value(active_rate.source, &active_rate.subject_id, &values)?,
+        );
     }
-    Ok(())
+    Ok(vector)
+}
+
+fn scaled_increments(
+    vector: &BTreeMap<(String, String), f64>,
+    duration: f64,
+) -> BTreeMap<(String, String), f64> {
+    vector
+        .iter()
+        .map(|(key, value)| (key.clone(), value * duration))
+        .collect()
+}
+
+fn values_with_increments(
+    values: &BTreeMap<(String, String), Value>,
+    increments: &BTreeMap<(String, String), f64>,
+) -> BTreeMap<(String, String), Value> {
+    let mut adjusted = values.clone();
+    for (key, increment) in increments {
+        let current = values.get(key).and_then(Value::as_f64).unwrap_or_default();
+        adjusted.insert(key.clone(), Value::from(current + increment));
+    }
+    adjusted
 }
 
 fn next_change_crossing_duration(
@@ -2282,6 +2368,126 @@ mod tests {
                 .values
                 .get(&("bed".to_string(), "temperature".to_string())),
             Some(&Value::from(23.0))
+        );
+    }
+
+    #[test]
+    fn core_runner_tags_rate_integrated_channels() {
+        let heating = SimulationState {
+            do_behavior: Some(StateDoBehavior::RateIntegration {
+                rates: vec![SimulationRate {
+                    feature: "temperature".to_string(),
+                    source: SimulationRateSource::Constant(2.0),
+                }],
+            }),
+            ..state("heating", true)
+        };
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![heating],
+                transitions: Vec::new(),
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "bed".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 1,
+                step_duration_s: 1.0,
+                clock_config: None,
+                initial_values: BTreeMap::from([(
+                    ("bed".to_string(), "temperature".to_string()),
+                    Value::from(22.0),
+                )]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig::default(),
+        )
+        .unwrap();
+
+        assert!(trace.channels.iter().any(|channel| {
+            channel.id == "bed.temperature" && channel.source == TraceChannelSource::RateEffect
+        }));
+    }
+
+    #[test]
+    fn expression_rates_use_rk4_for_stiff_single_step_decay() {
+        let decaying = SimulationState {
+            do_behavior: Some(StateDoBehavior::RateIntegration {
+                rates: vec![SimulationRate {
+                    feature: "x".to_string(),
+                    source: SimulationRateSource::ExpressionIr(serde_json::json!({
+                        "kind": "binary",
+                        "op": "multiply",
+                        "left": { "kind": "literal", "value": -1.0 },
+                        "right": { "kind": "path", "segments": ["x"] }
+                    })),
+                }],
+            }),
+            ..state("decaying", true)
+        };
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![decaying],
+                transitions: Vec::new(),
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "subject".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 1,
+                step_duration_s: 1.0,
+                clock_config: None,
+                initial_values: BTreeMap::from([(
+                    ("subject".to_string(), "x".to_string()),
+                    Value::from(1.0),
+                )]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig {
+                max_time_s: 1.0,
+                fixed_step_s: 1.0,
+                sample_interval_s: 1.0,
+                change_loop_limit: 20,
+            },
+        )
+        .unwrap();
+
+        let final_x = trace
+            .timeline
+            .last()
+            .unwrap()
+            .values
+            .get(&("subject".to_string(), "x".to_string()))
+            .and_then(Value::as_f64)
+            .unwrap();
+        let expected = f64::exp(-1.0);
+        assert!(
+            (final_x - expected).abs() < 0.01,
+            "final_x={final_x}, expected={expected}"
         );
     }
 
