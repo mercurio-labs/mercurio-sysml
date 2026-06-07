@@ -60,6 +60,8 @@ fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
         parent_state_id: state.parent_state_id.clone(),
         is_initial: state.is_initial,
         is_final: state.is_final,
+        is_orthogonal: state.is_orthogonal,
+        is_history: state.is_history,
         entry_behavior: state
             .entry_behavior
             .as_ref()

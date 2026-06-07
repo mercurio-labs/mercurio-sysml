@@ -26,6 +26,8 @@ pub struct StateNode {
     pub parent_state_id: Option<String>,
     pub is_initial: bool,
     pub is_final: bool,
+    pub is_orthogonal: bool,
+    pub is_history: bool,
     pub entry_behavior: Option<Value>,
     pub exit_behavior: Option<Value>,
     pub do_behavior: Option<Value>,
@@ -231,7 +233,7 @@ impl StateMachineModel {
                     "Compound state has child states but no initial child state.",
                 ));
             }
-            if initial_children.len() > 1 {
+            if initial_children.len() > 1 && !parent.is_orthogonal {
                 findings.push(self.state_finding(
                     parent,
                     "compound_state_multiple_initial_children",
@@ -538,6 +540,12 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
                 is_final: bool_property(element, &["is_final", "final"])
                     || string_property_any(element, &["purpose", "state_kind", "kind_role"])
                         .is_some_and(|value| value.eq_ignore_ascii_case("final")),
+                is_orthogonal: bool_property(element, &["is_orthogonal", "orthogonal"])
+                    || string_property_any(element, &["state_kind", "kind_role"])
+                        .is_some_and(|value| value.eq_ignore_ascii_case("orthogonal")),
+                is_history: bool_property(element, &["is_history", "history"])
+                    || string_property_any(element, &["purpose", "state_kind", "kind_role"])
+                        .is_some_and(|value| value.eq_ignore_ascii_case("history")),
                 entry_behavior: element.properties.get("entry_behavior").cloned(),
                 exit_behavior: element.properties.get("exit_behavior").cloned(),
                 do_behavior: element.properties.get("do_behavior").cloned(),

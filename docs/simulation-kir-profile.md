@@ -15,6 +15,8 @@ Canonical state:
   "parent_state_id": null,
   "is_initial": false,
   "is_final": false,
+  "is_orthogonal": false,
+  "is_history": false,
   "entry_behavior": { "actions": [] },
   "exit_behavior": { "actions": [] },
   "do_behavior": {
@@ -28,6 +30,10 @@ Canonical state:
 State IDs are stable executable identities. Nested states reference another
 state in the same machine through `parent_state_id`. A machine must have one
 unambiguous top-level initial state.
+
+Orthogonal states set `is_orthogonal: true`; entering one enters all initial
+children. History pseudo-states set `is_history: true` and must be nested under
+the composite state whose shallow history they restore.
 
 ## Transition Nodes
 
@@ -47,6 +53,10 @@ Canonical transition:
 `source` and `target` must reference states in the same machine. More than one
 transition from the same source with the same trigger kind/value is rejected as
 ambiguous until explicit priority semantics are added.
+
+When a transition targets a history pseudo-state, the engine resolves the target
+to the last direct child exited from the history state's parent composite. If no
+history exists, the parent composite's default child is used.
 
 ## Trigger Representation
 

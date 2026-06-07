@@ -247,6 +247,8 @@ pub struct SimulationState {
     pub parent_state_id: Option<String>,
     pub is_initial: bool,
     pub is_final: bool,
+    pub is_orthogonal: bool,
+    pub is_history: bool,
     pub entry_behavior: Option<SimulationActionSequence>,
     pub exit_behavior: Option<SimulationActionSequence>,
     pub do_behavior: Option<StateDoBehavior>,
@@ -436,6 +438,24 @@ fn validate_machine(
                 "State parent must reference another state in the same machine.",
                 Some(&machine.id),
                 Some(&state.id),
+            ));
+        }
+    }
+
+    for parent in &machine.states {
+        let initial_child_count = machine
+            .states
+            .iter()
+            .filter(|state| {
+                state.parent_state_id.as_deref() == Some(parent.id.as_str()) && state.is_initial
+            })
+            .count();
+        if initial_child_count > 1 && !parent.is_orthogonal {
+            findings.push(finding(
+                "state.multiple_initial_children",
+                "Compound state has multiple initial children but is not marked orthogonal.",
+                Some(&machine.id),
+                Some(&parent.id),
             ));
         }
     }
@@ -630,6 +650,8 @@ mod tests {
             parent_state_id: None,
             is_initial: initial,
             is_final: false,
+            is_orthogonal: false,
+            is_history: false,
             entry_behavior: None,
             exit_behavior: None,
             do_behavior: None,
