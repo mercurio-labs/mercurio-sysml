@@ -6,11 +6,12 @@ use serde_json::Value;
 use mercurio_core::runtime::Runtime;
 use mercurio_simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
-    LogEffect, SignalEffect, SimulationActionSequence, SimulationClockConfig,
-    SimulationDerivedFeatureRule, SimulationEffect, SimulationEvent, SimulationGuard,
-    SimulationModel, SimulationObjective, SimulationRate, SimulationRateSource,
-    SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
-    SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
+    LogEffect, SignalEffect, SimulationActionNode, SimulationActionSequence, SimulationBindingRule,
+    SimulationClockConfig, SimulationDerivedFeatureRule, SimulationEffect, SimulationEvent,
+    SimulationFeatureRef, SimulationGuard, SimulationModel, SimulationObjective, SimulationRate,
+    SimulationRateSource, SimulationRequirement, SimulationState, SimulationStateMachine,
+    SimulationTransition, SimulationTrigger, SimulationTriggerKind, StateDoBehavior,
+    validate_simulation_model,
 };
 use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
@@ -197,6 +198,7 @@ pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationM
             .map(normalize_state_machine)
             .collect::<Vec<_>>(),
         derived_rules: Vec::new(),
+        binding_rules: Vec::new(),
     }
 }
 
@@ -211,6 +213,7 @@ pub fn normalize_state_machines_from_runtime(
             .map(|machine| normalize_state_machine_from_runtime(runtime, machine))
             .collect::<Vec<_>>(),
         derived_rules: simulation_derived_rules(runtime),
+        binding_rules: simulation_binding_rules(runtime),
     }
 }
 
@@ -258,13 +261,19 @@ fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRu
         })
         .filter_map(|element| {
             let expression = element.properties.get("expression_ir")?.clone();
-            let feature = element
-                .properties
-                .get("target_feature")
-                .or_else(|| element.properties.get("targetFeature"))
-                .or_else(|| element.properties.get("feature"))
-                .and_then(Value::as_str)
-                .map(ToOwned::to_owned)
+            let target = feature_ref_property_any(element, &["target", "result"]);
+            let feature = target
+                .as_ref()
+                .map(|target| target.feature.clone())
+                .or_else(|| {
+                    element
+                        .properties
+                        .get("target_feature")
+                        .or_else(|| element.properties.get("targetFeature"))
+                        .or_else(|| element.properties.get("feature"))
+                        .and_then(Value::as_str)
+                        .map(ToOwned::to_owned)
+                })
                 .or_else(|| {
                     element
                         .properties
@@ -272,13 +281,15 @@ fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRu
                         .and_then(Value::as_str)
                         .map(ToOwned::to_owned)
                 })?;
-            let subject_id = element
-                .properties
-                .get("subject")
-                .or_else(|| element.properties.get("subject_id"))
-                .or_else(|| element.properties.get("subjectId"))
-                .and_then(Value::as_str)
-                .map(ToOwned::to_owned);
+            let subject_id = target.and_then(|target| target.subject_id).or_else(|| {
+                element
+                    .properties
+                    .get("subject")
+                    .or_else(|| element.properties.get("subject_id"))
+                    .or_else(|| element.properties.get("subjectId"))
+                    .and_then(Value::as_str)
+                    .map(ToOwned::to_owned)
+            });
             Some(SimulationDerivedFeatureRule {
                 id: element.element_id.clone(),
                 label: element_label_element(element),
@@ -288,6 +299,80 @@ fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRu
             })
         })
         .collect()
+}
+
+fn simulation_binding_rules(runtime: &Runtime) -> Vec<SimulationBindingRule> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|element| {
+            element.kind.contains("BindingConnector")
+                || element.kind.contains("BindingUsage")
+                || element
+                    .properties
+                    .get("kind")
+                    .and_then(Value::as_str)
+                    .is_some_and(|kind| kind == "binding" || kind == "binding_connector")
+        })
+        .filter_map(|element| {
+            let left = feature_ref_property_any(element, &["left", "source", "from"])?;
+            let right = feature_ref_property_any(element, &["right", "target", "to"])?;
+            Some(SimulationBindingRule {
+                id: element.element_id.clone(),
+                label: element_label_element(element),
+                left,
+                right,
+            })
+        })
+        .collect()
+}
+
+fn feature_ref_property_any(element: &Element, keys: &[&str]) -> Option<SimulationFeatureRef> {
+    keys.iter()
+        .find_map(|key| element.properties.get(*key))
+        .and_then(feature_ref_from_value)
+}
+
+fn feature_ref_from_value(value: &Value) -> Option<SimulationFeatureRef> {
+    if let Some(path) = value.as_str() {
+        return feature_ref_from_path(path);
+    }
+    let object = value.as_object()?;
+    let subject_id = object
+        .get("subject")
+        .or_else(|| object.get("subject_id"))
+        .or_else(|| object.get("subjectId"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned);
+    let feature = object
+        .get("feature")
+        .or_else(|| object.get("feature_id"))
+        .or_else(|| object.get("featureId"))
+        .or_else(|| object.get("path"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned)?;
+    Some(SimulationFeatureRef {
+        subject_id,
+        feature,
+    })
+}
+
+fn feature_ref_from_path(path: &str) -> Option<SimulationFeatureRef> {
+    let trimmed = path.trim();
+    if trimmed.is_empty() {
+        return None;
+    }
+    let Some((subject, feature)) = trimmed.split_once('.') else {
+        return Some(SimulationFeatureRef {
+            subject_id: None,
+            feature: trimmed.to_string(),
+        });
+    };
+    Some(SimulationFeatureRef {
+        subject_id: Some(subject.to_string()),
+        feature: feature.to_string(),
+    })
 }
 
 fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
@@ -410,7 +495,57 @@ fn normalize_action_sequence(value: &Value) -> Option<SimulationActionSequence> 
         .and_then(Value::as_array)
         .into_iter()
         .flatten()
-        .filter_map(normalize_effect)
+        .filter_map(normalize_action_node)
+        .collect::<Vec<_>>();
+    Some(SimulationActionSequence { actions })
+}
+
+fn normalize_action_node(value: &Value) -> Option<SimulationActionNode> {
+    let object = value.as_object()?;
+    match object.get("kind").and_then(Value::as_str)? {
+        "decision" => {
+            let guard = object
+                .get("guard")
+                .cloned()
+                .map(SimulationGuard::ExpressionIr)
+                .or_else(|| {
+                    object
+                        .get("guard_feature")
+                        .and_then(Value::as_str)
+                        .map(|feature| SimulationGuard::RuntimeFeature(feature.to_string()))
+                })?;
+            let then_branch = normalize_action_branch(
+                object
+                    .get("then_branch")
+                    .or_else(|| object.get("then"))
+                    .or_else(|| object.get("thenBranch"))?,
+            )?;
+            let else_branch = object
+                .get("else_branch")
+                .or_else(|| object.get("else"))
+                .or_else(|| object.get("elseBranch"))
+                .and_then(normalize_action_branch);
+            Some(SimulationActionNode::Decision {
+                guard,
+                then_branch,
+                else_branch,
+            })
+        }
+        _ => normalize_effect(value).map(SimulationActionNode::Effect),
+    }
+}
+
+fn normalize_action_branch(value: &Value) -> Option<SimulationActionSequence> {
+    if value
+        .as_object()
+        .is_some_and(|object| object.contains_key("actions"))
+    {
+        return normalize_action_sequence(value);
+    }
+    let actions = value
+        .as_array()?
+        .iter()
+        .filter_map(normalize_action_node)
         .collect::<Vec<_>>();
     Some(SimulationActionSequence { actions })
 }
