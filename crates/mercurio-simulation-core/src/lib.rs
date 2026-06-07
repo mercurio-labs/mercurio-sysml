@@ -83,7 +83,7 @@ pub struct SimulationTrace {
     pub subject_id: String,
     pub channels: Vec<TraceChannel>,
     pub timeline: Vec<TraceEntry>,
-    pub status: HybridSimulationStatus,
+    pub status: SimulationStatus,
     #[serde(default)]
     pub requirements: Vec<SimulationRequirement>,
     #[serde(default)]
@@ -123,7 +123,7 @@ pub struct TraceEvent {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
-pub enum HybridSimulationStatus {
+pub enum SimulationStatus {
     Completed,
     Blocked,
     Failed,
@@ -514,7 +514,7 @@ pub fn run_concurrent_simulation_model(
         subject_id: primary_subject_id,
         channels,
         timeline,
-        status: HybridSimulationStatus::Completed,
+        status: SimulationStatus::Completed,
         requirements: scenario.requirements,
         objectives: scenario.objectives,
     })
