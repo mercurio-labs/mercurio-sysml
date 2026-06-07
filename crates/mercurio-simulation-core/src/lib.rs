@@ -117,6 +117,10 @@ pub struct SimulationTrace {
     pub channels: Vec<TraceChannel>,
     pub timeline: Vec<TraceEntry>,
     pub status: HybridSimulationStatus,
+    #[serde(default)]
+    pub requirements: Vec<SimulationRequirement>,
+    #[serde(default)]
+    pub objectives: Vec<SimulationObjective>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -242,6 +246,8 @@ impl HybridSimulationReport {
             channels,
             timeline,
             status: self.status,
+            requirements: Vec::new(),
+            objectives: Vec::new(),
         }
     }
 }
@@ -632,6 +638,8 @@ pub fn run_concurrent_simulation_model(
         channels,
         timeline,
         status: HybridSimulationStatus::Completed,
+        requirements: scenario.requirements,
+        objectives: scenario.objectives,
     })
 }
 

@@ -185,14 +185,10 @@ fn transition_effect_overlay_value(effect: &KirElement) -> Result<Value, Simulat
             "event": required_string_property(effect, "event")?,
             "source": effect.id,
         })),
-        "rate" => Ok(serde_json::json!({
-            "kind": "rate",
-            "feature": required_string_property(effect, "feature")?,
-            "rate_per_second": effect.properties.get("rate_per_second").and_then(Value::as_f64).ok_or_else(|| {
-                SimulationError::InvalidOverlay(format!("{} must define numeric `rate_per_second`", effect.id))
-            })?,
-            "unit": effect.properties.get("unit").and_then(Value::as_str),
-        })),
+        "rate" => Err(SimulationError::InvalidOverlay(format!(
+            "{} uses legacy transition rate effects; move rates to state `do_behavior`",
+            effect.id
+        ))),
         other => Err(SimulationError::InvalidOverlay(format!(
             "{} has unsupported effect_kind `{other}`",
             effect.id
