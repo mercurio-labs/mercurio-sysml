@@ -10,284 +10,25 @@ use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
 use mercurio_language_contracts::expression::{
     ExpressionEvaluationContext, ExpressionEvaluationError, ExpressionIr, ExpressionPathSegment,
 };
+pub use mercurio_simulation_core::{
+    AnalysisCaseInfo, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
+    CriticalSimulationEvent, HybridSimulationReport, HybridSimulationScenario,
+    HybridSimulationStatus, HybridSimulationTraceEntry, SimulationClockConfig, SimulationEvent,
+    SimulationModel, SimulationSubject, SimulationTrace, TraceChannel, TraceChannelSource,
+    TraceEntry, TraceEvent,
+};
 use mercurio_sysml::{
-    StateMachineModel, StateMachineScenarioEvent, StateTransitionTriggerKind, TransitionNode,
-    project_state_machines,
+    StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
 };
 
 const RATE_SAMPLE_INTERVAL_S: f64 = 1.0;
 const CHANGE_LOOP_LIMIT: usize = 20;
 const CROSSING_TOLERANCE_S: f64 = 0.01;
 
+pub type StateMachineScenarioEvent = SimulationEvent;
+
 fn default_step_duration() -> f64 {
     1.0
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct SimulationSubject {
-    pub id: String,
-    pub type_id: Option<String>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationScenario {
-    pub id: String,
-    pub subject: SimulationSubject,
-    pub machine_id: String,
-    pub initial_state_id: Option<String>,
-    pub events: Vec<StateMachineScenarioEvent>,
-    pub max_steps: usize,
-    pub values: BTreeMap<(String, String), Value>,
-    #[serde(default = "default_step_duration")]
-    pub step_duration_s: f64,
-}
-
-/// A scenario that runs multiple subjects simultaneously on a shared time axis.
-/// All subjects share a single `ExecutionContext`; cross-part guards work
-/// because the shared value map contains every `(subject_id, feature)` pair.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ConcurrentSimulationScenario {
-    pub id: String,
-    pub subjects: Vec<ConcurrentSubjectScenario>,
-    pub max_steps: usize,
-    #[serde(default = "default_step_duration")]
-    pub step_duration_s: f64,
-    /// Initial attribute values for ALL subjects.
-    /// Keys are `(subject_id, feature_name)` tuples.
-    #[serde(with = "tuple_value_map")]
-    pub initial_values: BTreeMap<(String, String), Value>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ConcurrentSubjectScenario {
-    pub subject_id: String,
-    pub machine_id: String,
-    #[serde(default)]
-    pub initial_state_id: Option<String>,
-    /// External events to inject into this subject's machine, in order.
-    #[serde(default)]
-    pub events: Vec<StateMachineScenarioEvent>,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct AnalysisCaseInfo {
-    pub id: String,
-    pub label: String,
-    pub subject_count: usize,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationReport {
-    pub scenario_id: String,
-    pub subject_id: String,
-    pub machine_id: String,
-    pub status: HybridSimulationStatus,
-    pub active_configuration: Vec<String>,
-    pub values: BTreeMap<(String, String), Value>,
-    pub critical_events: Vec<CriticalSimulationEvent>,
-    pub trace: Vec<HybridSimulationTraceEntry>,
-    /// Features whose values were driven by Rate effects during simulation.
-    /// Used by `to_trace` to assign the correct `TraceChannelSource`.
-    #[serde(default)]
-    pub rate_channels: BTreeSet<(String, String)>,
-}
-
-impl HybridSimulationReport {
-    /// Convert to the unified SimulationTrace format.
-    pub fn to_trace(&self) -> SimulationTrace {
-        let mut channel_ids: BTreeSet<(String, String)> = BTreeSet::new();
-        for entry in &self.trace {
-            for key in entry.values.keys() {
-                channel_ids.insert(key.clone());
-            }
-        }
-
-        let channels = channel_ids
-            .into_iter()
-            .map(|(subject, feature)| {
-                let source = if self
-                    .rate_channels
-                    .contains(&(subject.clone(), feature.clone()))
-                {
-                    TraceChannelSource::RateEffect
-                } else {
-                    TraceChannelSource::AssignEffect
-                };
-                TraceChannel {
-                    id: format!("{subject}.{feature}"),
-                    unit: None,
-                    source,
-                }
-            })
-            .collect();
-
-        let timeline = self
-            .trace
-            .iter()
-            .map(|entry| {
-                let mut states = BTreeMap::new();
-                states.insert(self.subject_id.clone(), entry.after.clone());
-
-                let events = entry
-                    .transition_id
-                    .iter()
-                    .map(|tid| TraceEvent {
-                        kind: "transition".to_string(),
-                        transition_id: Some(tid.clone()),
-                        trigger: entry.trigger.clone(),
-                    })
-                    .collect();
-
-                TraceEntry {
-                    t: entry.t,
-                    states,
-                    values: entry.values.clone(),
-                    events,
-                }
-            })
-            .collect();
-
-        SimulationTrace {
-            scenario_id: self.scenario_id.clone(),
-            subject_id: self.subject_id.clone(),
-            channels,
-            timeline,
-            status: self.status,
-        }
-    }
-}
-
-/// Unified simulation output. Every channel value is known at every
-/// point in simulation time. Consumed by the visualisation binding engine.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct SimulationTrace {
-    pub scenario_id: String,
-    pub subject_id: String,
-    pub channels: Vec<TraceChannel>,
-    pub timeline: Vec<TraceEntry>,
-    pub status: HybridSimulationStatus,
-}
-
-/// Describes one observable channel in the trace.
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct TraceChannel {
-    pub id: String,
-    pub unit: Option<String>,
-    pub source: TraceChannelSource,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum TraceChannelSource {
-    StateMachine,
-    RateEffect,
-    AssignEffect,
-}
-
-/// One moment in simulation time capturing all state and attribute values.
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct TraceEntry {
-    pub t: f64,
-    pub states: BTreeMap<String, Vec<String>>,
-    #[serde(with = "tuple_value_map")]
-    pub values: BTreeMap<(String, String), Value>,
-    pub events: Vec<TraceEvent>,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct TraceEvent {
-    pub kind: String,
-    pub transition_id: Option<String>,
-    pub trigger: Option<String>,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub enum HybridSimulationStatus {
-    Completed,
-    Blocked,
-    Failed,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct CriticalSimulationEvent {
-    pub step: usize,
-    pub kind: String,
-    pub subject_id: String,
-    pub detail: BTreeMap<String, Value>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationTraceEntry {
-    pub step: usize,
-    #[serde(default)]
-    pub t: f64,
-    pub event_id: Option<String>,
-    pub trigger: Option<String>,
-    pub transition_id: Option<String>,
-    pub before: Vec<String>,
-    pub after: Vec<String>,
-    #[serde(default, with = "tuple_value_map")]
-    pub values: BTreeMap<(String, String), Value>,
-    pub critical_events: Vec<CriticalSimulationEvent>,
-    pub explanation: String,
-}
-
-mod tuple_value_map {
-    use std::collections::BTreeMap;
-    use std::fmt;
-
-    use serde::de::{self, Visitor};
-    use serde::ser::SerializeMap;
-    use serde::{Deserializer, Serializer};
-    use serde_json::Value;
-
-    pub fn serialize<S>(
-        values: &BTreeMap<(String, String), Value>,
-        serializer: S,
-    ) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let mut map = serializer.serialize_map(Some(values.len()))?;
-        for ((subject, feature), value) in values {
-            map.serialize_entry(&format!("{subject}|{feature}"), value)?;
-        }
-        map.end()
-    }
-
-    pub fn deserialize<'de, D>(
-        deserializer: D,
-    ) -> Result<BTreeMap<(String, String), Value>, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        struct TupleValueMapVisitor;
-
-        impl<'de> Visitor<'de> for TupleValueMapVisitor {
-            type Value = BTreeMap<(String, String), Value>;
-
-            fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-                formatter.write_str("a map keyed by `subject|feature`")
-            }
-
-            fn visit_map<A>(self, mut access: A) -> Result<Self::Value, A::Error>
-            where
-                A: de::MapAccess<'de>,
-            {
-                let mut values = BTreeMap::new();
-                while let Some((key, value)) = access.next_entry::<String, Value>()? {
-                    let (subject, feature) = key.split_once('|').ok_or_else(|| {
-                        de::Error::custom(format!("value key `{key}` must contain `|`"))
-                    })?;
-                    values.insert((subject.to_string(), feature.to_string()), value);
-                }
-                Ok(values)
-            }
-        }
-
-        deserializer.deserialize_map(TupleValueMapVisitor)
-    }
 }
 
 #[derive(Debug)]
@@ -299,6 +40,7 @@ pub enum SimulationError {
     MissingOverlayScenario,
     MissingOverlayTarget(String),
     InvalidOverlay(String),
+    InvalidProfile(String),
     Runtime(RuntimeError),
 }
 
@@ -314,6 +56,7 @@ impl fmt::Display for SimulationError {
                 write!(f, "simulation overlay target not found: {id}")
             }
             Self::InvalidOverlay(message) => write!(f, "invalid simulation overlay: {message}"),
+            Self::InvalidProfile(message) => write!(f, "invalid simulation profile: {message}"),
             Self::Runtime(err) => write!(f, "{err}"),
         }
     }
@@ -325,6 +68,19 @@ impl From<RuntimeError> for SimulationError {
     fn from(value: RuntimeError) -> Self {
         Self::Runtime(value)
     }
+}
+
+pub fn canonical_simulation_model(runtime: &Runtime) -> Result<SimulationModel, SimulationError> {
+    mercurio_sysml_simulation::simulation_model_from_runtime(runtime).map_err(|error| {
+        SimulationError::InvalidProfile(match error {
+            mercurio_sysml_simulation::SysmlSimulationAdapterError::InvalidProfile(error) => error
+                .findings
+                .into_iter()
+                .map(|finding| format!("{}: {}", finding.code, finding.message))
+                .collect::<Vec<_>>()
+                .join("; "),
+        })
+    })
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -2469,7 +2225,7 @@ fn initial_configuration(
     initial_state_id: Option<&str>,
 ) -> Option<Vec<String>> {
     if let Some(state_id) = initial_state_id {
-        return Some(vec![state_id.to_string()]);
+        return enter_state_configuration(machine, state_id);
     }
 
     if let Some(top_level_initial) = machine
@@ -2477,26 +2233,59 @@ fn initial_configuration(
         .iter()
         .find(|state| state.parent_state_id.is_none() && state.is_initial)
     {
-        return Some(vec![top_level_initial.id.clone()]);
+        return enter_state_configuration(machine, &top_level_initial.id);
     }
 
-    let root = machine
+    let root_id = machine
         .states
         .iter()
-        .find(|state| state.parent_state_id.is_none())?;
-    let child_initial = machine
+        .find(|state| state.parent_state_id.is_none())?
+        .id
+        .clone();
+    enter_state_configuration(machine, &root_id)
+}
+
+fn enter_state_configuration(machine: &StateMachineModel, state_id: &str) -> Option<Vec<String>> {
+    let mut configuration = ancestor_path(machine, state_id)?;
+    let mut current = state_id.to_string();
+    loop {
+        let Some(child) = default_child_state(machine, &current) else {
+            return Some(configuration);
+        };
+        configuration.push(child.id.clone());
+        current = child.id.clone();
+    }
+}
+
+fn ancestor_path(machine: &StateMachineModel, state_id: &str) -> Option<Vec<String>> {
+    let mut path = Vec::new();
+    let mut cursor = machine.states.iter().find(|state| state.id == state_id)?;
+    loop {
+        path.push(cursor.id.clone());
+        let Some(parent_id) = &cursor.parent_state_id else {
+            path.reverse();
+            return Some(path);
+        };
+        cursor = machine.states.iter().find(|state| state.id == *parent_id)?;
+    }
+}
+
+fn default_child_state<'a>(
+    machine: &'a StateMachineModel,
+    parent_id: &str,
+) -> Option<&'a mercurio_sysml::StateNode> {
+    machine
         .states
         .iter()
-        .find(|state| {
-            state.parent_state_id.as_deref() == Some(root.id.as_str()) && state.is_initial
-        })
+        .filter(|state| state.parent_state_id.as_deref() == Some(parent_id))
+        .find(|state| state.is_initial)
         .or_else(|| {
             machine
                 .states
                 .iter()
-                .find(|state| state.parent_state_id.as_deref() == Some(root.id.as_str()))
-        })?;
-    Some(vec![root.id.clone(), child_initial.id.clone()])
+                .filter(|state| state.parent_state_id.as_deref() == Some(parent_id))
+                .min_by_key(|state| state.source_order.unwrap_or((u64::MAX, u64::MAX)))
+        })
 }
 
 fn select_transition<'a>(
@@ -4115,6 +3904,145 @@ mod tests {
     }
 
     #[test]
+    fn initial_configuration_enters_deep_initial_nested_state() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Controller", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.controller",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("controller")),
+                        ("type", json!("type.Controller")),
+                    ],
+                ),
+                state_element("state.Controller.Active", "ControllerMachine", true),
+                nested_state_element(
+                    "state.Controller.Active.Starting",
+                    "ControllerMachine",
+                    "state.Controller.Active",
+                    true,
+                ),
+                nested_state_element(
+                    "state.Controller.Active.Starting.Homing",
+                    "ControllerMachine",
+                    "state.Controller.Active.Starting",
+                    true,
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.hsm.initial".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.controller".to_string(),
+                    machine_id: "ControllerMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 4,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+        )
+        .unwrap();
+
+        assert_eq!(
+            trace
+                .timeline
+                .first()
+                .unwrap()
+                .states
+                .get("individual.controller")
+                .unwrap(),
+            &vec![
+                "state.Controller.Active".to_string(),
+                "state.Controller.Active.Starting".to_string(),
+                "state.Controller.Active.Starting.Homing".to_string(),
+            ]
+        );
+    }
+
+    #[test]
+    fn transition_targeting_composite_state_enters_default_descendant() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Controller", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.controller",
+                    "Model::IndividualUsage",
+                    [
+                        ("declared_name", json!("controller")),
+                        ("type", json!("type.Controller")),
+                    ],
+                ),
+                state_element("state.Controller.Off", "ControllerMachine", true),
+                state_element("state.Controller.Active", "ControllerMachine", false),
+                nested_state_element(
+                    "state.Controller.Active.Starting",
+                    "ControllerMachine",
+                    "state.Controller.Active",
+                    true,
+                ),
+                nested_state_element(
+                    "state.Controller.Active.Running",
+                    "ControllerMachine",
+                    "state.Controller.Active",
+                    false,
+                ),
+                transition_element(
+                    "transition.Controller.start",
+                    "ControllerMachine",
+                    "state.Controller.Off",
+                    "state.Controller.Active",
+                    "start",
+                    "event",
+                    [],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.hsm.composite_target".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.controller".to_string(),
+                    machine_id: "ControllerMachine".to_string(),
+                    initial_state_id: None,
+                    events: vec![StateMachineScenarioEvent {
+                        id: "event.start".to_string(),
+                        trigger: "start".to_string(),
+                    }],
+                }],
+                max_steps: 4,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("individual.controller")
+                .is_some_and(|states| {
+                    states
+                        == &vec![
+                            "state.Controller.Active".to_string(),
+                            "state.Controller.Active.Starting".to_string(),
+                        ]
+                })
+        }));
+    }
+
+    #[test]
     fn textual_state_do_action_lowers_to_rate_integration_behavior() {
         let stdlib = load_sysml_baseline().unwrap();
         let document = compile_sysml_text(
@@ -4516,6 +4444,19 @@ package Demo {
             [
                 ("declared_name", json!(id)),
                 ("owning_type", json!(owner)),
+                ("is_initial", json!(initial)),
+            ],
+        )
+    }
+
+    fn nested_state_element(id: &str, owner: &str, parent: &str, initial: bool) -> KirElement {
+        element(
+            id,
+            "StateUsage",
+            [
+                ("declared_name", json!(id)),
+                ("owning_type", json!(owner)),
+                ("parent_state", json!(parent)),
                 ("is_initial", json!(initial)),
             ],
         )

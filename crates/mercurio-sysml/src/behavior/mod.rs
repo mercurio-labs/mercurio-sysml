@@ -26,6 +26,8 @@ pub struct StateNode {
     pub parent_state_id: Option<String>,
     pub is_initial: bool,
     pub is_final: bool,
+    pub entry_behavior: Option<Value>,
+    pub exit_behavior: Option<Value>,
     pub do_behavior: Option<Value>,
     #[serde(skip)]
     pub source_order: Option<(u64, u64)>,
@@ -536,6 +538,8 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
                 is_final: bool_property(element, &["is_final", "final"])
                     || string_property_any(element, &["purpose", "state_kind", "kind_role"])
                         .is_some_and(|value| value.eq_ignore_ascii_case("final")),
+                entry_behavior: element.properties.get("entry_behavior").cloned(),
+                exit_behavior: element.properties.get("exit_behavior").cloned(),
                 do_behavior: element.properties.get("do_behavior").cloned(),
                 source_order: source_order(element),
             });

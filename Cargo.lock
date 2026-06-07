@@ -858,7 +858,17 @@ dependencies = [
  "mercurio-foundation",
  "mercurio-kir",
  "mercurio-language-contracts",
+ "mercurio-simulation-core",
  "mercurio-sysml",
+ "mercurio-sysml-simulation",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "mercurio-simulation-core"
+version = "0.1.0"
+dependencies = [
  "serde",
  "serde_json",
 ]
@@ -889,6 +899,17 @@ dependencies = [
  "serde",
  "serde_json",
  "zip",
+]
+
+[[package]]
+name = "mercurio-sysml-simulation"
+version = "0.1.0"
+dependencies = [
+ "mercurio-foundation",
+ "mercurio-simulation-core",
+ "mercurio-sysml",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
