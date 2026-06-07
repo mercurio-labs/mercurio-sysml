@@ -1,8 +1,12 @@
+use std::collections::BTreeMap;
+
+use mercurio_core::graph::Element;
 use serde_json::Value;
 
 use mercurio_core::runtime::Runtime;
 use mercurio_simulation_core::{
-    AssignEffect, LogEffect, SignalEffect, SimulationActionSequence, SimulationEffect,
+    AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
+    LogEffect, SignalEffect, SimulationActionSequence, SimulationEffect, SimulationEvent,
     SimulationGuard, SimulationModel, SimulationRate, SimulationRateSource, SimulationState,
     SimulationStateMachine, SimulationTransition, SimulationTrigger, SimulationTriggerKind,
     StateDoBehavior, validate_simulation_model,
@@ -14,6 +18,9 @@ use mercurio_sysml::{
 #[derive(Debug)]
 pub enum SysmlSimulationAdapterError {
     InvalidProfile(mercurio_simulation_core::SimulationProfileError),
+    MissingAnalysisCase(String),
+    MissingStateMachine(String),
+    InvalidAnalysisCase(String),
 }
 
 impl From<mercurio_simulation_core::SimulationProfileError> for SysmlSimulationAdapterError {
@@ -28,6 +35,111 @@ pub fn simulation_model_from_runtime(
     let model = normalize_state_machines(project_state_machines(runtime));
     validate_simulation_model(&model)?;
     Ok(model)
+}
+
+pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|element| is_project_analysis_case(element))
+        .map(|element| {
+            let subject_count = element
+                .properties
+                .get("subjects")
+                .and_then(Value::as_array)
+                .map(Vec::len)
+                .unwrap_or_else(|| native_analysis_subject_elements(runtime, element).len());
+            AnalysisCaseInfo {
+                id: element.element_id.clone(),
+                label: element_label_element(element),
+                subject_count,
+            }
+        })
+        .collect()
+}
+
+pub fn scenario_from_analysis_case(
+    runtime: &Runtime,
+    analysis_case_id: &str,
+) -> Result<ConcurrentSimulationScenario, SysmlSimulationAdapterError> {
+    let analysis_case = runtime
+        .graph()
+        .elements()
+        .iter()
+        .find(|element| {
+            is_project_analysis_case(element)
+                && (element.element_id == analysis_case_id
+                    || element_label_element(element) == analysis_case_id)
+        })
+        .ok_or_else(|| {
+            SysmlSimulationAdapterError::MissingAnalysisCase(analysis_case_id.to_string())
+        })?;
+
+    let subjects = analysis_case
+        .properties
+        .get("subjects")
+        .and_then(Value::as_array)
+        .map(|subjects| {
+            subjects
+                .iter()
+                .enumerate()
+                .map(|(index, value)| subject_scenario_from_analysis_value(value, index))
+                .collect::<Result<Vec<_>, _>>()
+        })
+        .transpose()?
+        .map(Ok)
+        .unwrap_or_else(|| native_analysis_subjects(runtime, analysis_case))?;
+
+    if subjects.is_empty() {
+        return Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "{} must define at least one analysis subject",
+            analysis_case.element_id
+        )));
+    }
+
+    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects);
+    initial_values.extend(
+        analysis_case
+            .properties
+            .get("initial_values")
+            .or_else(|| analysis_case.properties.get("initialValues"))
+            .and_then(Value::as_object)
+            .map(|values| {
+                values
+                    .iter()
+                    .filter_map(|(key, value)| {
+                        let (subject, feature) = key.split_once('|')?;
+                        Some(((subject.to_string(), feature.to_string()), value.clone()))
+                    })
+                    .collect::<BTreeMap<_, _>>()
+            })
+            .unwrap_or_default(),
+    );
+    initial_values.extend(native_analysis_initial_values(
+        runtime,
+        analysis_case,
+        &subjects,
+    )?);
+
+    Ok(ConcurrentSimulationScenario {
+        id: analysis_case.element_id.clone(),
+        subjects,
+        max_steps: analysis_case
+            .properties
+            .get("max_steps")
+            .or_else(|| analysis_case.properties.get("maxSteps"))
+            .and_then(Value::as_u64)
+            .map(|value| value as usize)
+            .unwrap_or(300),
+        step_duration_s: analysis_case
+            .properties
+            .get("step_duration_s")
+            .or_else(|| analysis_case.properties.get("stepDurationS"))
+            .and_then(Value::as_f64)
+            .unwrap_or(1.0),
+        initial_values,
+    })
 }
 
 pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationModel {
@@ -179,6 +291,305 @@ fn string_property_any(object: &serde_json::Map<String, Value>, keys: &[&str]) -
         .map(str::to_string)
 }
 
+fn subject_scenario_from_analysis_value(
+    value: &Value,
+    index: usize,
+) -> Result<ConcurrentSubjectScenario, SysmlSimulationAdapterError> {
+    let object = value.as_object().ok_or_else(|| {
+        SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "analysis case subject at index {index} must be an object"
+        ))
+    })?;
+    let subject_id = object
+        .get("subject_id")
+        .or_else(|| object.get("subjectId"))
+        .or_else(|| object.get("subject"))
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                "analysis case subject at index {index} must define `subject`"
+            ))
+        })?
+        .to_string();
+    let machine_id = object
+        .get("machine_id")
+        .or_else(|| object.get("machineId"))
+        .or_else(|| object.get("machine"))
+        .and_then(Value::as_str)
+        .ok_or_else(|| {
+            SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                "analysis case subject `{subject_id}` must define `machine`"
+            ))
+        })?
+        .to_string();
+    let initial_state_id = object
+        .get("initial_state_id")
+        .or_else(|| object.get("initialStateId"))
+        .or_else(|| object.get("initial_state"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned);
+    let events = object
+        .get("events")
+        .and_then(Value::as_array)
+        .map(|events| {
+            events
+                .iter()
+                .enumerate()
+                .map(|(event_index, event)| {
+                    let event_object = event.as_object().ok_or_else(|| {
+                        SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                            "analysis case event {event_index} for `{subject_id}` must be an object"
+                        ))
+                    })?;
+                    let trigger = event_object
+                        .get("trigger")
+                        .and_then(Value::as_str)
+                        .ok_or_else(|| {
+                            SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                                "analysis case event {event_index} for `{subject_id}` must define `trigger`"
+                            ))
+                        })?
+                        .to_string();
+                    let id = event_object
+                        .get("id")
+                        .and_then(Value::as_str)
+                        .map(ToOwned::to_owned)
+                        .unwrap_or_else(|| format!("{subject_id}.event.{event_index}"));
+                    Ok(SimulationEvent { id, trigger })
+                })
+                .collect::<Result<Vec<_>, SysmlSimulationAdapterError>>()
+        })
+        .transpose()?
+        .unwrap_or_default();
+
+    Ok(ConcurrentSubjectScenario {
+        subject_id,
+        machine_id,
+        initial_state_id,
+        events,
+    })
+}
+
+fn native_analysis_subjects(
+    runtime: &Runtime,
+    analysis_case: &Element,
+) -> Result<Vec<ConcurrentSubjectScenario>, SysmlSimulationAdapterError> {
+    let machines = project_state_machines(runtime);
+    native_analysis_subject_elements(runtime, analysis_case)
+        .into_iter()
+        .map(|subject| {
+            let subject_type = string_property_any_element(subject, &["type", "definition"])
+                .ok_or_else(|| {
+                    SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                        "{} must define `type` to infer a state machine",
+                        subject.element_id
+                    ))
+                })?;
+            let machine = machines
+                .iter()
+                .find(|machine| {
+                    machine.states.iter().any(|state| {
+                        state.parent_state_id.is_none() && state.owner_id == subject_type
+                    })
+                })
+                .ok_or_else(|| {
+                    SysmlSimulationAdapterError::MissingStateMachine(subject_type.clone())
+                })?;
+            Ok(ConcurrentSubjectScenario {
+                subject_id: subject.element_id.clone(),
+                machine_id: machine.id.clone(),
+                initial_state_id: None,
+                events: default_native_subject_events(machine),
+            })
+        })
+        .collect()
+}
+
+fn default_native_subject_events(machine: &StateMachineModel) -> Vec<SimulationEvent> {
+    if machine.transitions.iter().any(|transition| {
+        transition.trigger_kind == StateTransitionTriggerKind::Event
+            && transition.trigger.as_deref() == Some("start")
+    }) {
+        vec![SimulationEvent {
+            id: format!("{}.event.start", machine.id),
+            trigger: "start".to_string(),
+        }]
+    } else {
+        Vec::new()
+    }
+}
+
+fn native_analysis_subject_elements<'a>(
+    runtime: &'a Runtime,
+    analysis_case: &Element,
+) -> Vec<&'a Element> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|candidate| {
+            candidate.element_id.starts_with("subject.")
+                && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                    == Some(analysis_case.element_id.as_str())
+        })
+        .collect()
+}
+
+fn native_analysis_initial_values(
+    runtime: &Runtime,
+    analysis_case: &Element,
+    subjects: &[ConcurrentSubjectScenario],
+) -> Result<BTreeMap<(String, String), Value>, SysmlSimulationAdapterError> {
+    let subject_aliases = native_analysis_subject_elements(runtime, analysis_case)
+        .into_iter()
+        .map(|subject| (element_label_element(subject), subject.element_id.clone()))
+        .collect::<BTreeMap<_, _>>();
+    let default_subject = (subjects.len() == 1).then(|| subjects[0].subject_id.clone());
+    let mut values = BTreeMap::new();
+
+    for assume in runtime.graph().elements().iter().filter(|candidate| {
+        candidate.element_id.starts_with("assume.")
+            && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                == Some(analysis_case.element_id.as_str())
+    }) {
+        let Some(expression) = assume.properties.get("expression_ir") else {
+            continue;
+        };
+        if let Some(((subject, feature), value)) = initial_value_from_assume_expression(
+            expression,
+            &subject_aliases,
+            default_subject.as_deref(),
+        ) {
+            values.insert((subject, feature), value);
+        }
+    }
+
+    Ok(values)
+}
+
+fn native_analysis_attribute_defaults(
+    runtime: &Runtime,
+    subjects: &[ConcurrentSubjectScenario],
+) -> BTreeMap<(String, String), Value> {
+    let mut values = BTreeMap::new();
+    for subject in subjects {
+        let Some(subject_element) = runtime.graph().element_by_element_id(&subject.subject_id)
+        else {
+            continue;
+        };
+        let Some(subject_type) =
+            string_property_any_element(subject_element, &["type", "definition"])
+        else {
+            continue;
+        };
+
+        for attribute in runtime.graph().elements().iter().filter(|candidate| {
+            candidate.kind.contains("AttributeUsage")
+                && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                    == Some(subject_type.as_str())
+        }) {
+            let Some(feature) = string_property_any_element(attribute, &["declared_name", "name"])
+            else {
+                continue;
+            };
+            let Some(value) = attribute_default_value(attribute) else {
+                continue;
+            };
+            values.insert((subject.subject_id.clone(), feature), value);
+        }
+    }
+    values
+}
+
+fn attribute_default_value(attribute: &Element) -> Option<Value> {
+    let expression = attribute.properties.get("expression_ir")?;
+    let object = expression.as_object()?;
+    (object.get("kind")?.as_str()? == "literal").then(|| object.get("value").cloned())?
+}
+
+fn initial_value_from_assume_expression(
+    expression: &Value,
+    subject_aliases: &BTreeMap<String, String>,
+    default_subject: Option<&str>,
+) -> Option<((String, String), Value)> {
+    let object = expression.as_object()?;
+    if object.get("kind")?.as_str()? != "binary" || object.get("op")?.as_str()? != "equal" {
+        return None;
+    }
+    let left = object.get("left")?;
+    let right = object.get("right")?;
+    path_literal_initial_value(left, right, subject_aliases, default_subject)
+        .or_else(|| path_literal_initial_value(right, left, subject_aliases, default_subject))
+}
+
+fn path_literal_initial_value(
+    path: &Value,
+    literal: &Value,
+    subject_aliases: &BTreeMap<String, String>,
+    default_subject: Option<&str>,
+) -> Option<((String, String), Value)> {
+    if path.get("kind")?.as_str()? != "path" || literal.get("kind")?.as_str()? != "literal" {
+        return None;
+    }
+    let names = path
+        .get("segments")?
+        .as_array()?
+        .iter()
+        .filter_map(expression_path_segment_name)
+        .collect::<Vec<_>>();
+    let value = literal.get("value")?.clone();
+    match names.as_slice() {
+        [subject_name, feature @ ..] if !feature.is_empty() => {
+            let subject = subject_aliases.get(subject_name)?.clone();
+            Some(((subject, feature.join(".")), value))
+        }
+        [feature] => {
+            let subject = default_subject?.to_string();
+            Some(((subject, feature.clone()), value))
+        }
+        _ => None,
+    }
+}
+
+fn expression_path_segment_name(segment: &Value) -> Option<String> {
+    segment.as_str().map(ToOwned::to_owned).or_else(|| {
+        segment
+            .get("name")
+            .and_then(Value::as_str)
+            .map(ToOwned::to_owned)
+    })
+}
+
+fn is_project_analysis_case(element: &Element) -> bool {
+    element.kind.contains("AnalysisCaseDefinition")
+        && element.element_id != "AnalysisCases::AnalysisCase"
+        && !element.element_id.starts_with("SysML::")
+        && !string_property_any_element(element, &["source_file", "sourceFile"])
+            .is_some_and(|source| source.starts_with("Systems Library/"))
+}
+
+fn element_label_element(element: &Element) -> String {
+    element
+        .properties
+        .get("declared_name")
+        .or_else(|| element.properties.get("name"))
+        .and_then(Value::as_str)
+        .map(ToOwned::to_owned)
+        .unwrap_or_else(|| element.element_id.clone())
+}
+
+fn string_property_any_element(element: &Element, keys: &[&str]) -> Option<String> {
+    keys.iter().find_map(|key| {
+        element
+            .properties
+            .get(*key)
+            .and_then(Value::as_str)
+            .map(str::trim)
+            .filter(|value| !value.is_empty())
+            .map(ToOwned::to_owned)
+    })
+}
+
 #[cfg(test)]
 mod tests {
     use std::collections::BTreeMap;
@@ -254,6 +665,113 @@ mod tests {
                 );
             }
         }
+    }
+
+    #[test]
+    fn extracts_native_analysis_case_scenario() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element(
+                    "analysis.PrintSequence",
+                    "AnalysisCaseDefinition",
+                    [("declared_name", json!("PrintSequence"))],
+                ),
+                element(
+                    "subject.PrintSequence.printer",
+                    "SubjectUsage",
+                    [
+                        ("owner", json!("analysis.PrintSequence")),
+                        ("declared_name", json!("printer")),
+                        ("type", json!("VoronPrinter")),
+                    ],
+                ),
+                element(
+                    "attribute.VoronPrinter.bed_temperature",
+                    "AttributeUsage",
+                    [
+                        ("owner", json!("VoronPrinter")),
+                        ("declared_name", json!("bed_temperature")),
+                        (
+                            "expression_ir",
+                            json!({
+                                "kind": "literal",
+                                "value": 22
+                            }),
+                        ),
+                    ],
+                ),
+                element(
+                    "assume.PrintSequence.bed_temperature",
+                    "AssumeUsage",
+                    [
+                        ("owner", json!("analysis.PrintSequence")),
+                        (
+                            "expression_ir",
+                            json!({
+                                "kind": "binary",
+                                "op": "equal",
+                                "left": {
+                                    "kind": "path",
+                                    "segments": ["printer", "bed_temperature"]
+                                },
+                                "right": {
+                                    "kind": "literal",
+                                    "value": 30
+                                }
+                            }),
+                        ),
+                    ],
+                ),
+                element(
+                    "state.VoronPrinter.idle",
+                    "StateUsage",
+                    [
+                        ("owning_type", json!("VoronPrinter")),
+                        ("is_initial", json!(true)),
+                    ],
+                ),
+                element(
+                    "state.VoronPrinter.homing",
+                    "StateUsage",
+                    [("owning_type", json!("VoronPrinter"))],
+                ),
+                element(
+                    "transition.VoronPrinter.start",
+                    "TransitionUsage",
+                    [
+                        ("owning_type", json!("VoronPrinter")),
+                        ("source", json!("state.VoronPrinter.idle")),
+                        ("target", json!("state.VoronPrinter.homing")),
+                        ("trigger", json!("start")),
+                        ("trigger_kind", json!("event")),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let cases = list_analysis_cases(&runtime);
+        assert_eq!(cases.len(), 1);
+        assert_eq!(cases[0].label, "PrintSequence");
+        assert_eq!(cases[0].subject_count, 1);
+
+        let scenario = scenario_from_analysis_case(&runtime, "PrintSequence").unwrap();
+        assert_eq!(scenario.id, "analysis.PrintSequence");
+        assert_eq!(scenario.subjects.len(), 1);
+        assert_eq!(
+            scenario.subjects[0].subject_id,
+            "subject.PrintSequence.printer"
+        );
+        assert_eq!(scenario.subjects[0].machine_id, "VoronPrinter");
+        assert_eq!(scenario.subjects[0].events[0].trigger, "start");
+        assert_eq!(
+            scenario.initial_values.get(&(
+                "subject.PrintSequence.printer".to_string(),
+                "bed_temperature".to_string()
+            )),
+            Some(&json!(30))
+        );
     }
 
     fn element<const N: usize>(id: &str, kind: &str, properties: [(&str, Value); N]) -> KirElement {
