@@ -6,10 +6,11 @@ use serde_json::Value;
 use mercurio_core::runtime::Runtime;
 use mercurio_simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
-    LogEffect, SignalEffect, SimulationActionSequence, SimulationEffect, SimulationEvent,
-    SimulationGuard, SimulationModel, SimulationObjective, SimulationRate, SimulationRateSource,
-    SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
-    SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
+    LogEffect, SignalEffect, SimulationActionSequence, SimulationClockConfig, SimulationEffect,
+    SimulationEvent, SimulationGuard, SimulationModel, SimulationObjective, SimulationRate,
+    SimulationRateSource, SimulationRequirement, SimulationState, SimulationStateMachine,
+    SimulationTransition, SimulationTrigger, SimulationTriggerKind, StateDoBehavior,
+    validate_simulation_model,
 };
 use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
@@ -124,27 +125,68 @@ pub fn scenario_from_analysis_case(
     apply_analysis_script_events(runtime, analysis_case, &mut subjects)?;
     let requirements = native_analysis_requirements(runtime, analysis_case);
     let objectives = native_analysis_objectives(runtime, analysis_case, &subjects);
+    let max_steps = analysis_case
+        .properties
+        .get("max_steps")
+        .or_else(|| analysis_case.properties.get("maxSteps"))
+        .and_then(Value::as_u64)
+        .map(|value| value as usize)
+        .unwrap_or(300);
+    let step_duration_s = analysis_case
+        .properties
+        .get("step_duration_s")
+        .or_else(|| analysis_case.properties.get("stepDurationS"))
+        .and_then(Value::as_f64)
+        .unwrap_or(1.0);
 
     Ok(ConcurrentSimulationScenario {
         id: analysis_case.element_id.clone(),
         subjects,
-        max_steps: analysis_case
-            .properties
-            .get("max_steps")
-            .or_else(|| analysis_case.properties.get("maxSteps"))
-            .and_then(Value::as_u64)
-            .map(|value| value as usize)
-            .unwrap_or(300),
-        step_duration_s: analysis_case
-            .properties
-            .get("step_duration_s")
-            .or_else(|| analysis_case.properties.get("stepDurationS"))
-            .and_then(Value::as_f64)
-            .unwrap_or(1.0),
+        max_steps,
+        step_duration_s,
+        clock_config: Some(analysis_clock_config(
+            analysis_case,
+            max_steps,
+            step_duration_s,
+        )),
         initial_values,
         requirements,
         objectives,
     })
+}
+
+fn analysis_clock_config(
+    analysis_case: &Element,
+    max_steps: usize,
+    step_duration_s: f64,
+) -> SimulationClockConfig {
+    SimulationClockConfig {
+        max_time_s: analysis_case
+            .properties
+            .get("max_time_s")
+            .or_else(|| analysis_case.properties.get("maxTimeS"))
+            .and_then(Value::as_f64)
+            .unwrap_or(max_steps.max(1) as f64 * step_duration_s.max(0.0)),
+        fixed_step_s: analysis_case
+            .properties
+            .get("fixed_step_s")
+            .or_else(|| analysis_case.properties.get("fixedStepS"))
+            .and_then(Value::as_f64)
+            .unwrap_or(step_duration_s),
+        sample_interval_s: analysis_case
+            .properties
+            .get("sample_interval_s")
+            .or_else(|| analysis_case.properties.get("sampleIntervalS"))
+            .and_then(Value::as_f64)
+            .unwrap_or(step_duration_s),
+        change_loop_limit: analysis_case
+            .properties
+            .get("change_loop_limit")
+            .or_else(|| analysis_case.properties.get("changeLoopLimit"))
+            .and_then(Value::as_u64)
+            .map(|value| value as usize)
+            .unwrap_or(20),
+    }
 }
 
 pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationModel {

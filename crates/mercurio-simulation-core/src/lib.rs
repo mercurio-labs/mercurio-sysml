@@ -30,6 +30,8 @@ pub struct ConcurrentSimulationScenario {
     pub max_steps: usize,
     #[serde(default = "default_step_duration")]
     pub step_duration_s: f64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub clock_config: Option<SimulationClockConfig>,
     #[serde(with = "tuple_value_map")]
     pub initial_values: BTreeMap<(String, String), Value>,
     #[serde(default)]
@@ -117,8 +119,12 @@ pub struct TraceEntry {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct TraceEvent {
     pub kind: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub subject_id: Option<String>,
     pub transition_id: Option<String>,
     pub trigger: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reason: Option<String>,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -345,6 +351,7 @@ pub fn run_concurrent_simulation_model(
     let mut elapsed = BTreeMap::<(String, String), f64>::new();
     let mut t = 0.0;
     let mut step = 0usize;
+    let mut status = SimulationStatus::Completed;
     for subject in &subjects {
         for state_id in &subject.active {
             elapsed.insert((subject.subject_id.clone(), state_id.clone()), 0.0);
@@ -393,6 +400,15 @@ pub fn run_concurrent_simulation_model(
                 &values,
             )
             .cloned() else {
+                events.push(TraceEvent {
+                    kind: "event.dropped".to_string(),
+                    subject_id: Some(subject.subject_id.clone()),
+                    transition_id: None,
+                    trigger: Some(event.trigger),
+                    reason: Some("no enabled transition matched event trigger".to_string()),
+                });
+                status = SimulationStatus::Blocked;
+                fired = true;
                 continue;
             };
             step += 1;
@@ -416,8 +432,10 @@ pub fn run_concurrent_simulation_model(
             )?;
             events.push(TraceEvent {
                 kind: "transition".to_string(),
+                subject_id: Some(subject.subject_id.clone()),
                 transition_id: Some(transition.id),
                 trigger: Some(event.trigger),
+                reason: None,
             });
             fired = true;
         }
@@ -514,7 +532,7 @@ pub fn run_concurrent_simulation_model(
         subject_id: primary_subject_id,
         channels,
         timeline,
-        status: SimulationStatus::Completed,
+        status,
         requirements: scenario.requirements,
         objectives: scenario.objectives,
     })
@@ -561,7 +579,7 @@ fn fire_immediate_transitions(
     )? {
         fired = true;
     }
-    for _ in 0..change_loop_limit {
+    for iteration in 0..change_loop_limit {
         let mut loop_fired = false;
         for subject in subjects.iter_mut() {
             if *step >= max_steps {
@@ -597,6 +615,7 @@ fn fire_immediate_transitions(
             )?;
             events.push(TraceEvent {
                 kind: "transition".to_string(),
+                subject_id: Some(subject.subject_id.clone()),
                 transition_id: Some(transition.id.clone()),
                 trigger: Some(match transition.trigger.kind {
                     SimulationTriggerKind::Completion => "completion".to_string(),
@@ -608,9 +627,32 @@ fn fire_immediate_transitions(
                     }
                     _ => transition.trigger.value.clone().unwrap_or_default(),
                 }),
+                reason: None,
             });
             loop_fired = true;
             fired = true;
+        }
+        let limit_reached_with_pending_transition = loop_fired
+            && iteration + 1 == change_loop_limit
+            && subjects.iter().any(|subject| {
+                select_completion_or_change_transition(
+                    subject.machine,
+                    &subject.active,
+                    &subject.subject_id,
+                    values,
+                )
+                .is_some()
+            });
+        if limit_reached_with_pending_transition {
+            events.push(TraceEvent {
+                kind: "change.loop.limit".to_string(),
+                subject_id: None,
+                transition_id: None,
+                trigger: None,
+                reason: Some(format!(
+                    "change transition loop reached configured limit {change_loop_limit}"
+                )),
+            });
         }
         if !loop_fired {
             break;
@@ -675,11 +717,13 @@ fn deliver_pending_signals(
             )?;
             events.push(TraceEvent {
                 kind: "transition".to_string(),
+                subject_id: Some(subject.subject_id.clone()),
                 transition_id: Some(transition.id.clone()),
                 trigger: Some(format!(
                     "signal:{}:{}",
                     signal.source_subject_id, signal.signal_type
                 )),
+                reason: None,
             });
             consumed = true;
             fired = true;
@@ -903,6 +947,7 @@ fn fire_after_transitions(
         )?;
         events.push(TraceEvent {
             kind: "transition".to_string(),
+            subject_id: Some(subject.subject_id.clone()),
             transition_id: Some(transition.id.clone()),
             trigger: Some(format!(
                 "{}:{}",
@@ -912,6 +957,7 @@ fn fire_after_transitions(
                 },
                 transition.trigger.value.as_deref().unwrap_or_default()
             )),
+            reason: None,
         });
         fired = true;
     }
@@ -1795,12 +1841,10 @@ fn default_step_duration() -> f64 {
 
 pub mod tuple_value_map {
     use std::collections::BTreeMap;
-    use std::fmt;
 
-    use serde::de::{self, Visitor};
-    use serde::ser::SerializeMap;
-    use serde::{Deserializer, Serializer};
-    use serde_json::Value;
+    use serde::ser::SerializeSeq;
+    use serde::{Deserialize, Deserializer, Serializer};
+    use serde_json::{Value, json};
 
     pub fn serialize<S>(
         values: &BTreeMap<(String, String), Value>,
@@ -1809,11 +1853,15 @@ pub mod tuple_value_map {
     where
         S: Serializer,
     {
-        let mut map = serializer.serialize_map(Some(values.len()))?;
+        let mut sequence = serializer.serialize_seq(Some(values.len()))?;
         for ((subject, feature), value) in values {
-            map.serialize_entry(&format!("{subject}|{feature}"), value)?;
+            sequence.serialize_element(&json!({
+                "subject": subject,
+                "feature": feature,
+                "value": value,
+            }))?;
         }
-        map.end()
+        sequence.end()
     }
 
     pub fn deserialize<'de, D>(
@@ -1822,33 +1870,49 @@ pub mod tuple_value_map {
     where
         D: Deserializer<'de>,
     {
-        struct TupleMapVisitor;
-
-        impl<'de> Visitor<'de> for TupleMapVisitor {
-            type Value = BTreeMap<(String, String), Value>;
-
-            fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-                formatter.write_str("a map keyed by `subject|feature`")
+        let value = Value::deserialize(deserializer)?;
+        let mut values = BTreeMap::new();
+        match value {
+            Value::Array(entries) => {
+                for entry in entries {
+                    let object = entry.as_object().ok_or_else(|| {
+                        serde::de::Error::custom("tuple value entry must be an object")
+                    })?;
+                    let subject =
+                        object
+                            .get("subject")
+                            .and_then(Value::as_str)
+                            .ok_or_else(|| {
+                                serde::de::Error::custom("tuple value entry missing `subject`")
+                            })?;
+                    let feature =
+                        object
+                            .get("feature")
+                            .and_then(Value::as_str)
+                            .ok_or_else(|| {
+                                serde::de::Error::custom("tuple value entry missing `feature`")
+                            })?;
+                    let entry_value = object.get("value").cloned().unwrap_or(Value::Null);
+                    values.insert((subject.to_string(), feature.to_string()), entry_value);
+                }
             }
-
-            fn visit_map<A>(self, mut access: A) -> Result<Self::Value, A::Error>
-            where
-                A: de::MapAccess<'de>,
-            {
-                let mut values = BTreeMap::new();
-                while let Some((key, value)) = access.next_entry::<String, Value>()? {
+            Value::Object(entries) => {
+                for (key, entry_value) in entries {
                     let Some((subject, feature)) = key.split_once('|') else {
-                        return Err(de::Error::custom(format!(
+                        return Err(serde::de::Error::custom(format!(
                             "invalid tuple key `{key}`, expected `subject|feature`"
                         )));
                     };
-                    values.insert((subject.to_string(), feature.to_string()), value);
+                    values.insert((subject.to_string(), feature.to_string()), entry_value);
                 }
-                Ok(values)
+            }
+            _ => {
+                return Err(serde::de::Error::custom(
+                    "tuple value map must be an array of entries or a legacy map",
+                ));
             }
         }
-
-        deserializer.deserialize_map(TupleMapVisitor)
+        Ok(values)
     }
 }
 
@@ -1925,6 +1989,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -2005,6 +2070,7 @@ mod tests {
                 ],
                 max_steps: 6,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -2072,6 +2138,7 @@ mod tests {
                 }],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -2136,6 +2203,7 @@ mod tests {
                 }],
                 max_steps: 100,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::from([
                     (
                         ("bed".to_string(), "temperature".to_string()),
@@ -2168,6 +2236,324 @@ mod tests {
             })
             .unwrap();
         assert!((ready.t - ((110.0 - 22.0) / 2.3)).abs() <= 0.1);
+    }
+
+    #[test]
+    fn trace_values_serialize_as_typed_entries_and_read_legacy_maps() {
+        let entry = TraceEntry {
+            t: 0.0,
+            states: BTreeMap::new(),
+            values: BTreeMap::from([(
+                ("bed".to_string(), "temperature".to_string()),
+                Value::from(22.0),
+            )]),
+            events: Vec::new(),
+        };
+
+        let encoded = serde_json::to_value(&entry).unwrap();
+        let values = encoded.get("values").and_then(Value::as_array).unwrap();
+        assert_eq!(
+            values[0].get("subject").and_then(Value::as_str),
+            Some("bed")
+        );
+        assert_eq!(
+            values[0].get("feature").and_then(Value::as_str),
+            Some("temperature")
+        );
+        assert_eq!(values[0].get("value").and_then(Value::as_f64), Some(22.0));
+
+        let decoded: TraceEntry = serde_json::from_value(encoded).unwrap();
+        assert_eq!(
+            decoded
+                .values
+                .get(&("bed".to_string(), "temperature".to_string())),
+            Some(&Value::from(22.0))
+        );
+
+        let legacy: TraceEntry = serde_json::from_value(serde_json::json!({
+            "t": 0.0,
+            "states": {},
+            "values": { "bed|temperature": 23.0 },
+            "events": []
+        }))
+        .unwrap();
+        assert_eq!(
+            legacy
+                .values
+                .get(&("bed".to_string(), "temperature".to_string())),
+            Some(&Value::from(23.0))
+        );
+    }
+
+    #[test]
+    fn core_runner_marks_unmatched_events_as_blocked_diagnostics() {
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![state("idle", true), state("done", false)],
+                transitions: vec![transition("idle.done", "idle", "done", "go")],
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "subject".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: vec![SimulationEvent {
+                        id: "event.stop".to_string(),
+                        trigger: "stop".to_string(),
+                    }],
+                }],
+                max_steps: 4,
+                step_duration_s: 1.0,
+                clock_config: None,
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig::default(),
+        )
+        .unwrap();
+
+        assert_eq!(trace.status, SimulationStatus::Blocked);
+        assert!(trace.timeline.iter().any(|entry| {
+            entry.events.iter().any(|event| {
+                event.kind == "event.dropped"
+                    && event.subject_id.as_deref() == Some("subject")
+                    && event.trigger.as_deref() == Some("stop")
+                    && event.reason.as_deref()
+                        == Some("no enabled transition matched event trigger")
+            })
+        }));
+    }
+
+    #[test]
+    fn core_runner_honors_explicit_clock_max_time() {
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![state("waiting", true), state("done", false)],
+                transitions: vec![SimulationTransition {
+                    id: "waiting.done".to_string(),
+                    source: "waiting".to_string(),
+                    target: "done".to_string(),
+                    trigger: SimulationTrigger {
+                        kind: SimulationTriggerKind::After,
+                        value: Some("10s".to_string()),
+                    },
+                    guard: None,
+                    effects: Vec::new(),
+                }],
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "subject".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 100,
+                step_duration_s: 1.0,
+                clock_config: Some(SimulationClockConfig {
+                    max_time_s: 2.0,
+                    fixed_step_s: 1.0,
+                    sample_interval_s: 1.0,
+                    change_loop_limit: 20,
+                }),
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig {
+                max_time_s: 2.0,
+                fixed_step_s: 1.0,
+                sample_interval_s: 1.0,
+                change_loop_limit: 20,
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.last().is_some_and(|entry| entry.t <= 2.0));
+        assert!(!trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("subject")
+                .is_some_and(|states| states == &vec!["done".to_string()])
+        }));
+    }
+
+    #[test]
+    fn core_runner_reports_change_loop_limit_when_immediate_transition_remains() {
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![state("a", true), state("b", false)],
+                transitions: vec![
+                    SimulationTransition {
+                        id: "a.b".to_string(),
+                        source: "a".to_string(),
+                        target: "b".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::Completion,
+                            value: None,
+                        },
+                        guard: None,
+                        effects: Vec::new(),
+                    },
+                    SimulationTransition {
+                        id: "b.a".to_string(),
+                        source: "b".to_string(),
+                        target: "a".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::Completion,
+                            value: None,
+                        },
+                        guard: None,
+                        effects: Vec::new(),
+                    },
+                ],
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "subject".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 10,
+                step_duration_s: 1.0,
+                clock_config: None,
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig {
+                max_time_s: 10.0,
+                fixed_step_s: 1.0,
+                sample_interval_s: 1.0,
+                change_loop_limit: 1,
+            },
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry.events.iter().any(|event| {
+                event.kind == "change.loop.limit"
+                    && event
+                        .reason
+                        .as_deref()
+                        .is_some_and(|reason| reason.contains("configured limit 1"))
+            })
+        }));
+    }
+
+    #[test]
+    fn core_runner_delivers_completion_emitted_signals_without_scripted_events() {
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![
+                SimulationStateMachine {
+                    id: "BedMachine".to_string(),
+                    label: "BedMachine".to_string(),
+                    states: vec![state("bed.heating", true), state("bed.ready", false)],
+                    transitions: vec![SimulationTransition {
+                        id: "bed.ready".to_string(),
+                        source: "bed.heating".to_string(),
+                        target: "bed.ready".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::Completion,
+                            value: None,
+                        },
+                        guard: None,
+                        effects: vec![SimulationEffect::EmitSignal(SignalEffect {
+                            signal_type: "BedReady".to_string(),
+                            target: Some("printer".to_string()),
+                        })],
+                    }],
+                },
+                SimulationStateMachine {
+                    id: "PrinterMachine".to_string(),
+                    label: "PrinterMachine".to_string(),
+                    states: vec![
+                        state("printer.heating", true),
+                        state("printer.printing", false),
+                    ],
+                    transitions: vec![SimulationTransition {
+                        id: "printer.print".to_string(),
+                        source: "printer.heating".to_string(),
+                        target: "printer.printing".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::Signal,
+                            value: Some("BedReady".to_string()),
+                        },
+                        guard: None,
+                        effects: Vec::new(),
+                    }],
+                },
+            ],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![
+                    ConcurrentSubjectScenario {
+                        subject_id: "bed".to_string(),
+                        machine_id: "BedMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                    ConcurrentSubjectScenario {
+                        subject_id: "printer".to_string(),
+                        machine_id: "PrinterMachine".to_string(),
+                        initial_state_id: None,
+                        events: Vec::new(),
+                    },
+                ],
+                max_steps: 6,
+                step_duration_s: 1.0,
+                clock_config: None,
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+            SimulationClockConfig::default(),
+        )
+        .unwrap();
+
+        assert!(trace.timeline.iter().any(|entry| {
+            entry
+                .states
+                .get("printer")
+                .is_some_and(|states| states == &vec!["printer.printing".to_string()])
+        }));
+        assert!(trace.timeline.iter().any(|entry| {
+            entry.events.iter().any(|event| {
+                event.subject_id.as_deref() == Some("printer")
+                    && event.trigger.as_deref() == Some("signal:bed:BedReady")
+            })
+        }));
     }
 
     fn state(id: &str, initial: bool) -> SimulationState {

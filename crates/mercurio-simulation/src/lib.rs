@@ -119,17 +119,17 @@ fn run_canonical_core(
                 .to_string(),
         ));
     }
-    run_concurrent_simulation_model(
-        &model,
-        scenario.clone(),
-        SimulationClockConfig {
+    let clock_config = scenario
+        .clock_config
+        .clone()
+        .unwrap_or_else(|| SimulationClockConfig {
             max_time_s: scenario.max_steps.max(1) as f64 * scenario.step_duration_s.max(0.0),
             fixed_step_s: scenario.step_duration_s,
             sample_interval_s: scenario.step_duration_s,
             change_loop_limit: CHANGE_LOOP_LIMIT,
-        },
-    )
-    .map_err(|error| SimulationError::InvalidProfile(error.to_string()))
+        });
+    run_concurrent_simulation_model(&model, scenario.clone(), clock_config)
+        .map_err(|error| SimulationError::InvalidProfile(error.to_string()))
 }
 
 fn runtime_has_legacy_rate_transition_effects(
@@ -268,6 +268,7 @@ mod tests {
                 ],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -555,6 +556,7 @@ mod tests {
                 ],
                 max_steps: 20,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::from([(
                     ("individual.bed".to_string(), "bed_ready".to_string()),
                     json!(0.0),
@@ -608,6 +610,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -680,6 +683,7 @@ mod tests {
                 }],
                 max_steps: 100,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::from([
                     (
                         ("individual.bed".to_string(), "temperature".to_string()),
@@ -786,6 +790,7 @@ mod tests {
                 }],
                 max_steps: 60,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::from([
                     (
                         ("individual.bed".to_string(), "temperature".to_string()),
@@ -895,6 +900,7 @@ mod tests {
                 ],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1084,6 +1090,7 @@ mod tests {
                     subjects,
                     max_steps: 12,
                     step_duration_s: 1.0,
+                    clock_config: None,
                     initial_values: BTreeMap::new(),
                     requirements: Vec::new(),
                     objectives: Vec::new(),
@@ -1146,6 +1153,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1225,6 +1233,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1343,6 +1352,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1463,6 +1473,7 @@ mod tests {
                 ],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1530,6 +1541,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1619,6 +1631,7 @@ mod tests {
                 }],
                 max_steps: 4,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1745,6 +1758,7 @@ mod tests {
                 }],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
@@ -1878,6 +1892,7 @@ mod tests {
                 ],
                 max_steps: 8,
                 step_duration_s: 1.0,
+                clock_config: None,
                 initial_values: BTreeMap::new(),
                 requirements: Vec::new(),
                 objectives: Vec::new(),
