@@ -23,25 +23,6 @@ impl Default for SimulationClockConfig {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct SimulationSubject {
-    pub id: String,
-    pub type_id: Option<String>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationScenario {
-    pub id: String,
-    pub subject: SimulationSubject,
-    pub machine_id: String,
-    pub initial_state_id: Option<String>,
-    pub events: Vec<SimulationEvent>,
-    pub max_steps: usize,
-    pub values: BTreeMap<(String, String), Value>,
-    #[serde(default = "default_step_duration")]
-    pub step_duration_s: f64,
-}
-
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ConcurrentSimulationScenario {
     pub id: String,
@@ -97,20 +78,6 @@ pub struct AnalysisCaseInfo {
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationReport {
-    pub scenario_id: String,
-    pub subject_id: String,
-    pub machine_id: String,
-    pub status: HybridSimulationStatus,
-    pub active_configuration: Vec<String>,
-    pub values: BTreeMap<(String, String), Value>,
-    pub critical_events: Vec<CriticalSimulationEvent>,
-    pub trace: Vec<HybridSimulationTraceEntry>,
-    #[serde(default)]
-    pub rate_channels: BTreeSet<(String, String)>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct SimulationTrace {
     pub scenario_id: String,
     pub subject_id: String,
@@ -160,96 +127,6 @@ pub enum HybridSimulationStatus {
     Completed,
     Blocked,
     Failed,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
-pub struct CriticalSimulationEvent {
-    pub step: usize,
-    pub kind: String,
-    pub subject_id: String,
-    pub detail: BTreeMap<String, Value>,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct HybridSimulationTraceEntry {
-    pub step: usize,
-    #[serde(default)]
-    pub t: f64,
-    pub event_id: Option<String>,
-    pub trigger: Option<String>,
-    pub transition_id: Option<String>,
-    pub before: Vec<String>,
-    pub after: Vec<String>,
-    #[serde(default, with = "tuple_value_map")]
-    pub values: BTreeMap<(String, String), Value>,
-    pub critical_events: Vec<CriticalSimulationEvent>,
-    pub explanation: String,
-}
-
-impl HybridSimulationReport {
-    pub fn to_trace(&self) -> SimulationTrace {
-        let mut channel_ids: BTreeSet<(String, String)> = BTreeSet::new();
-        for entry in &self.trace {
-            for key in entry.values.keys() {
-                channel_ids.insert(key.clone());
-            }
-        }
-
-        let channels = channel_ids
-            .into_iter()
-            .map(|(subject, feature)| {
-                let source = if self
-                    .rate_channels
-                    .contains(&(subject.clone(), feature.clone()))
-                {
-                    TraceChannelSource::RateEffect
-                } else {
-                    TraceChannelSource::AssignEffect
-                };
-                TraceChannel {
-                    id: format!("{subject}.{feature}"),
-                    unit: None,
-                    source,
-                }
-            })
-            .collect();
-
-        let timeline = self
-            .trace
-            .iter()
-            .map(|entry| {
-                let mut states = BTreeMap::new();
-                states.insert(self.subject_id.clone(), entry.after.clone());
-
-                let events = entry
-                    .transition_id
-                    .iter()
-                    .map(|tid| TraceEvent {
-                        kind: "transition".to_string(),
-                        transition_id: Some(tid.clone()),
-                        trigger: entry.trigger.clone(),
-                    })
-                    .collect();
-
-                TraceEntry {
-                    t: entry.t,
-                    states,
-                    values: entry.values.clone(),
-                    events,
-                }
-            })
-            .collect();
-
-        SimulationTrace {
-            scenario_id: self.scenario_id.clone(),
-            subject_id: self.subject_id.clone(),
-            channels,
-            timeline,
-            status: self.status,
-            requirements: Vec::new(),
-            objectives: Vec::new(),
-        }
-    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
