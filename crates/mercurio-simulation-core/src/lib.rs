@@ -366,6 +366,7 @@ pub enum CoreSimulationError {
     MissingStateMachine(String),
     MissingSubject(String),
     MissingInitialState(String),
+    InvalidExpression(String),
 }
 
 impl fmt::Display for CoreSimulationError {
@@ -375,6 +376,9 @@ impl fmt::Display for CoreSimulationError {
             Self::MissingStateMachine(id) => write!(f, "missing state machine: {id}"),
             Self::MissingSubject(id) => write!(f, "missing simulation subject: {id}"),
             Self::MissingInitialState(id) => write!(f, "missing initial state: {id}"),
+            Self::InvalidExpression(message) => {
+                write!(f, "invalid simulation expression: {message}")
+            }
         }
     }
 }
@@ -435,10 +439,12 @@ pub fn run_concurrent_simulation_model(
     let mut values = scenario.initial_values.clone();
     let mut pending_signals = VecDeque::<CorePendingSignal>::new();
     let mut history = BTreeMap::<(String, String), String>::new();
+    let mut elapsed = BTreeMap::<(String, String), f64>::new();
     let mut t = 0.0;
     let mut step = 0usize;
     for subject in &subjects {
         for state_id in &subject.active {
+            elapsed.insert((subject.subject_id.clone(), state_id.clone()), 0.0);
             apply_state_behavior(
                 subject.machine,
                 state_id,
@@ -455,13 +461,15 @@ pub fn run_concurrent_simulation_model(
         let mut fired = false;
         let mut events = Vec::<TraceEvent>::new();
 
-        if deliver_pending_signals(
+        if fire_immediate_transitions(
             &mut subjects,
             &mut values,
             &mut pending_signals,
             &mut history,
+            &mut elapsed,
             &mut step,
             max_steps,
+            clock.change_loop_limit,
             &mut events,
         )? {
             fired = true;
@@ -478,12 +486,13 @@ pub fn run_concurrent_simulation_model(
                 &subject.active,
                 SimulationTriggerKind::Event,
                 &event.trigger,
+                &subject.subject_id,
+                &values,
             )
             .cloned() else {
                 continue;
             };
             step += 1;
-            t += clock.fixed_step_s.max(0.0);
             let before = subject.active.clone();
             apply_effects(
                 &transition.effects,
@@ -500,6 +509,7 @@ pub fn run_concurrent_simulation_model(
                 &mut values,
                 &mut pending_signals,
                 &mut history,
+                &mut elapsed,
             )?;
             events.push(TraceEvent {
                 kind: "transition".to_string(),
@@ -507,6 +517,73 @@ pub fn run_concurrent_simulation_model(
                 trigger: Some(event.trigger),
             });
             fired = true;
+        }
+
+        if fire_immediate_transitions(
+            &mut subjects,
+            &mut values,
+            &mut pending_signals,
+            &mut history,
+            &mut elapsed,
+            &mut step,
+            max_steps,
+            clock.change_loop_limit,
+            &mut events,
+        )? {
+            fired = true;
+        }
+
+        if !fired && step < max_steps {
+            let next_after = next_after_duration(&subjects, &elapsed, &values);
+            let next_change = next_change_crossing_duration(&subjects, &values)?;
+            let fixed_step = clock.fixed_step_s.max(0.0);
+            let mut duration = [Some(fixed_step), next_after, next_change]
+                .into_iter()
+                .flatten()
+                .filter(|duration| duration.is_finite() && *duration >= 0.0)
+                .min_by(|left, right| left.total_cmp(right))
+                .unwrap_or(fixed_step);
+            if fixed_step > 0.0 {
+                duration = duration.min(fixed_step);
+            }
+            if duration <= 0.0 {
+                duration = fixed_step;
+            }
+            if duration > 0.0 && t + duration <= clock.max_time_s {
+                integrate_active_state_behaviors(
+                    &subjects,
+                    &mut values,
+                    &mut elapsed,
+                    duration,
+                    clock.sample_interval_s,
+                    &mut timeline,
+                    t,
+                )?;
+                t += duration;
+                step += 1;
+                fired = true;
+                fire_after_transitions(
+                    &mut subjects,
+                    &mut values,
+                    &mut pending_signals,
+                    &mut history,
+                    &mut elapsed,
+                    &mut step,
+                    max_steps,
+                    &mut events,
+                )?;
+                fire_immediate_transitions(
+                    &mut subjects,
+                    &mut values,
+                    &mut pending_signals,
+                    &mut history,
+                    &mut elapsed,
+                    &mut step,
+                    max_steps,
+                    clock.change_loop_limit,
+                    &mut events,
+                )?;
+            }
         }
 
         if fired {
@@ -555,11 +632,94 @@ fn make_core_entry(
     }
 }
 
+fn fire_immediate_transitions(
+    subjects: &mut [CoreSubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    pending_signals: &mut VecDeque<CorePendingSignal>,
+    history: &mut BTreeMap<(String, String), String>,
+    elapsed: &mut BTreeMap<(String, String), f64>,
+    step: &mut usize,
+    max_steps: usize,
+    change_loop_limit: usize,
+    events: &mut Vec<TraceEvent>,
+) -> Result<bool, CoreSimulationError> {
+    let mut fired = false;
+    if deliver_pending_signals(
+        subjects,
+        values,
+        pending_signals,
+        history,
+        elapsed,
+        step,
+        max_steps,
+        events,
+    )? {
+        fired = true;
+    }
+    for _ in 0..change_loop_limit {
+        let mut loop_fired = false;
+        for subject in subjects.iter_mut() {
+            if *step >= max_steps {
+                break;
+            }
+            let Some(transition) = select_completion_or_change_transition(
+                subject.machine,
+                &subject.active,
+                &subject.subject_id,
+                values,
+            )
+            .cloned() else {
+                continue;
+            };
+            *step += 1;
+            let before = subject.active.clone();
+            apply_effects(
+                &transition.effects,
+                &subject.subject_id,
+                values,
+                pending_signals,
+            );
+            subject.active = apply_state_change(
+                subject.machine,
+                &subject.subject_id,
+                &before,
+                &transition.source,
+                &transition.target,
+                values,
+                pending_signals,
+                history,
+                elapsed,
+            )?;
+            events.push(TraceEvent {
+                kind: "transition".to_string(),
+                transition_id: Some(transition.id.clone()),
+                trigger: Some(match transition.trigger.kind {
+                    SimulationTriggerKind::Completion => "completion".to_string(),
+                    SimulationTriggerKind::Change => {
+                        format!(
+                            "change:{}",
+                            transition.trigger.value.as_deref().unwrap_or("")
+                        )
+                    }
+                    _ => transition.trigger.value.clone().unwrap_or_default(),
+                }),
+            });
+            loop_fired = true;
+            fired = true;
+        }
+        if !loop_fired {
+            break;
+        }
+    }
+    Ok(fired)
+}
+
 fn deliver_pending_signals(
     subjects: &mut [CoreSubjectRunState<'_>],
     values: &mut BTreeMap<(String, String), Value>,
     pending_signals: &mut VecDeque<CorePendingSignal>,
     history: &mut BTreeMap<(String, String), String>,
+    elapsed: &mut BTreeMap<(String, String), f64>,
     step: &mut usize,
     max_steps: usize,
     events: &mut Vec<TraceEvent>,
@@ -583,6 +743,8 @@ fn deliver_pending_signals(
                 &subject.active,
                 SimulationTriggerKind::Signal,
                 &signal.signal_type,
+                &subject.subject_id,
+                values,
             )
             .cloned() else {
                 continue;
@@ -604,6 +766,7 @@ fn deliver_pending_signals(
                 values,
                 pending_signals,
                 history,
+                elapsed,
             )?;
             events.push(TraceEvent {
                 kind: "transition".to_string(),
@@ -635,13 +798,36 @@ fn select_transition<'a>(
     active: &[String],
     kind: SimulationTriggerKind,
     trigger: &str,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
 ) -> Option<&'a SimulationTransition> {
     active.iter().rev().find_map(|state_id| {
         machine.transitions.iter().find(|transition| {
             transition.source == *state_id
                 && transition.trigger.kind == kind
                 && transition.trigger.value.as_deref() == Some(trigger)
-                && transition.guard.is_none()
+                && guard_allows(&transition.guard, subject_id, values)
+        })
+    })
+}
+
+fn select_completion_or_change_transition<'a>(
+    machine: &'a SimulationStateMachine,
+    active: &[String],
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<&'a SimulationTransition> {
+    active.iter().rev().find_map(|state_id| {
+        machine.transitions.iter().find(|transition| {
+            transition.source == *state_id
+                && matches!(
+                    transition.trigger.kind,
+                    SimulationTriggerKind::Completion | SimulationTriggerKind::Change
+                )
+                && guard_allows(&transition.guard, subject_id, values)
+                && transition.trigger.value.as_deref().is_none_or(|value| {
+                    value.is_empty() || bool_expression_string(value, subject_id, values)
+                })
         })
     })
 }
@@ -655,6 +841,7 @@ fn apply_state_change(
     values: &mut BTreeMap<(String, String), Value>,
     pending_signals: &mut VecDeque<CorePendingSignal>,
     history: &mut BTreeMap<(String, String), String>,
+    elapsed: &mut BTreeMap<(String, String), f64>,
 ) -> Result<Vec<String>, CoreSimulationError> {
     let resolved_target = resolve_history_target(machine, subject_id, target_state_id, history)
         .unwrap_or_else(|| target_state_id.to_string());
@@ -699,9 +886,602 @@ fn apply_state_change(
         record_shallow_history(machine, subject_id, state_id, history);
     }
     for state_id in &entry_states {
+        elapsed.insert((subject_id.to_string(), state_id.clone()), 0.0);
         apply_state_behavior(machine, state_id, subject_id, values, pending_signals);
     }
     Ok(after)
+}
+
+fn next_after_duration(
+    subjects: &[CoreSubjectRunState<'_>],
+    elapsed: &BTreeMap<(String, String), f64>,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<f64> {
+    subjects
+        .iter()
+        .flat_map(|subject| {
+            subject.active.iter().rev().flat_map(move |state_id| {
+                subject
+                    .machine
+                    .transitions
+                    .iter()
+                    .filter_map(move |transition| {
+                        if transition.source != *state_id
+                            || !matches!(
+                                transition.trigger.kind,
+                                SimulationTriggerKind::After | SimulationTriggerKind::Time
+                            )
+                            || !guard_allows(&transition.guard, &subject.subject_id, values)
+                        {
+                            return None;
+                        }
+                        let duration = parse_duration_s(transition.trigger.value.as_deref()?)?;
+                        let active_for = elapsed
+                            .get(&(subject.subject_id.clone(), state_id.clone()))
+                            .copied()
+                            .unwrap_or_default();
+                        Some((duration - active_for).max(0.0))
+                    })
+            })
+        })
+        .min_by(|left, right| left.total_cmp(right))
+}
+
+fn fire_after_transitions(
+    subjects: &mut [CoreSubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    pending_signals: &mut VecDeque<CorePendingSignal>,
+    history: &mut BTreeMap<(String, String), String>,
+    elapsed: &mut BTreeMap<(String, String), f64>,
+    step: &mut usize,
+    max_steps: usize,
+    events: &mut Vec<TraceEvent>,
+) -> Result<bool, CoreSimulationError> {
+    let mut fired = false;
+    for subject in subjects.iter_mut() {
+        if *step >= max_steps {
+            break;
+        }
+        let Some(transition) = subject
+            .active
+            .iter()
+            .rev()
+            .find_map(|state_id| {
+                subject.machine.transitions.iter().find(|transition| {
+                    if transition.source != *state_id
+                        || !matches!(
+                            transition.trigger.kind,
+                            SimulationTriggerKind::After | SimulationTriggerKind::Time
+                        )
+                        || !guard_allows(&transition.guard, &subject.subject_id, values)
+                    {
+                        return false;
+                    }
+                    let Some(duration) = transition
+                        .trigger
+                        .value
+                        .as_deref()
+                        .and_then(parse_duration_s)
+                    else {
+                        return false;
+                    };
+                    elapsed
+                        .get(&(subject.subject_id.clone(), state_id.clone()))
+                        .copied()
+                        .unwrap_or_default()
+                        + f64::EPSILON
+                        >= duration
+                })
+            })
+            .cloned()
+        else {
+            continue;
+        };
+        *step += 1;
+        let before = subject.active.clone();
+        apply_effects(
+            &transition.effects,
+            &subject.subject_id,
+            values,
+            pending_signals,
+        );
+        subject.active = apply_state_change(
+            subject.machine,
+            &subject.subject_id,
+            &before,
+            &transition.source,
+            &transition.target,
+            values,
+            pending_signals,
+            history,
+            elapsed,
+        )?;
+        events.push(TraceEvent {
+            kind: "transition".to_string(),
+            transition_id: Some(transition.id.clone()),
+            trigger: Some(format!(
+                "{}:{}",
+                match transition.trigger.kind {
+                    SimulationTriggerKind::Time => "time",
+                    _ => "after",
+                },
+                transition.trigger.value.as_deref().unwrap_or_default()
+            )),
+        });
+        fired = true;
+    }
+    Ok(fired)
+}
+
+fn integrate_active_state_behaviors(
+    subjects: &[CoreSubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    elapsed: &mut BTreeMap<(String, String), f64>,
+    duration: f64,
+    sample_interval_s: f64,
+    timeline: &mut Vec<TraceEntry>,
+    start_t: f64,
+) -> Result<(), CoreSimulationError> {
+    if duration <= 0.0 {
+        return Ok(());
+    }
+    let sample_interval = sample_interval_s.max(0.0);
+    let mut remaining = duration;
+    let mut cursor_t = start_t;
+    while remaining > f64::EPSILON {
+        let dt = if sample_interval > 0.0 {
+            remaining.min(sample_interval)
+        } else {
+            remaining
+        };
+        integrate_active_rates_once(subjects, values, dt)?;
+        for subject in subjects {
+            for state_id in &subject.active {
+                *elapsed
+                    .entry((subject.subject_id.clone(), state_id.clone()))
+                    .or_default() += dt;
+            }
+        }
+        cursor_t += dt;
+        remaining -= dt;
+        if sample_interval > 0.0 && remaining > f64::EPSILON {
+            timeline.push(make_core_entry(cursor_t, subjects, values, Vec::new()));
+        }
+    }
+    Ok(())
+}
+
+fn integrate_active_rates_once(
+    subjects: &[CoreSubjectRunState<'_>],
+    values: &mut BTreeMap<(String, String), Value>,
+    duration: f64,
+) -> Result<(), CoreSimulationError> {
+    let snapshot = values.clone();
+    let mut updates = BTreeMap::<(String, String), f64>::new();
+    for subject in subjects {
+        for state_id in &subject.active {
+            let Some(state) = subject
+                .machine
+                .states
+                .iter()
+                .find(|state| state.id == *state_id)
+            else {
+                continue;
+            };
+            let Some(StateDoBehavior::RateIntegration { rates }) = &state.do_behavior else {
+                continue;
+            };
+            for rate in rates {
+                let current = snapshot
+                    .get(&(subject.subject_id.clone(), rate.feature.clone()))
+                    .and_then(Value::as_f64)
+                    .unwrap_or_default();
+                let rate_value = rate_value(&rate.source, &subject.subject_id, &snapshot)?;
+                updates.insert(
+                    (subject.subject_id.clone(), rate.feature.clone()),
+                    current + rate_value * duration,
+                );
+            }
+        }
+    }
+    for (key, value) in updates {
+        values.insert(key, Value::from(value));
+    }
+    Ok(())
+}
+
+fn next_change_crossing_duration(
+    subjects: &[CoreSubjectRunState<'_>],
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<Option<f64>, CoreSimulationError> {
+    let mut earliest: Option<f64> = None;
+    for subject in subjects {
+        for state_id in subject.active.iter().rev() {
+            for transition in subject.machine.transitions.iter().filter(|transition| {
+                transition.source == *state_id
+                    && transition.trigger.kind == SimulationTriggerKind::Change
+            }) {
+                let expression = transition
+                    .trigger
+                    .value
+                    .as_deref()
+                    .or_else(|| match &transition.guard {
+                        Some(SimulationGuard::RuntimeFeature(feature)) => Some(feature.as_str()),
+                        _ => None,
+                    });
+                let Some(expression) = expression else {
+                    continue;
+                };
+                let Some((feature, op, threshold)) =
+                    comparison_against_threshold(expression, &subject.subject_id, values)
+                else {
+                    continue;
+                };
+                let Some(current) = resolve_feature_path(&feature, &subject.subject_id, values)
+                    .and_then(|value| value.as_f64())
+                else {
+                    continue;
+                };
+                if compare_numbers(current, threshold, op) {
+                    earliest = Some(0.0);
+                    continue;
+                }
+                let Some(rate) = active_rate_for_feature(subject, state_id, &feature, values)?
+                else {
+                    continue;
+                };
+                if rate.abs() <= f64::EPSILON {
+                    continue;
+                }
+                let duration = (threshold - current) / rate;
+                if duration.is_finite()
+                    && duration >= 0.0
+                    && compare_numbers(current + rate * duration, threshold, op)
+                {
+                    earliest = Some(
+                        earliest
+                            .map(|current| current.min(duration))
+                            .unwrap_or(duration),
+                    );
+                }
+            }
+        }
+    }
+    Ok(earliest)
+}
+
+fn active_rate_for_feature(
+    subject: &CoreSubjectRunState<'_>,
+    state_id: &str,
+    feature: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<Option<f64>, CoreSimulationError> {
+    let Some(state) = subject
+        .machine
+        .states
+        .iter()
+        .find(|state| state.id == state_id)
+    else {
+        return Ok(None);
+    };
+    let Some(StateDoBehavior::RateIntegration { rates }) = &state.do_behavior else {
+        return Ok(None);
+    };
+    rates
+        .iter()
+        .find(|rate| rate.feature == feature)
+        .map(|rate| rate_value(&rate.source, &subject.subject_id, values))
+        .transpose()
+}
+
+fn comparison_against_threshold(
+    expression: &str,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<(String, &'static str, f64)> {
+    for op in [">=", "<=", "==", "!=", ">", "<"] {
+        if let Some((left, right)) = expression.trim().split_once(op) {
+            let left = left.trim();
+            let right = right.trim();
+            if let Some(threshold) = numeric_operand(right, subject_id, values)
+                && resolve_feature_path(left, subject_id, values).is_some()
+            {
+                return Some((left.to_string(), op, threshold));
+            }
+            if let Some(threshold) = numeric_operand(left, subject_id, values)
+                && resolve_feature_path(right, subject_id, values).is_some()
+            {
+                let reversed = match op {
+                    ">=" => "<=",
+                    "<=" => ">=",
+                    ">" => "<",
+                    "<" => ">",
+                    other => other,
+                };
+                return Some((right.to_string(), reversed, threshold));
+            }
+        }
+    }
+    None
+}
+
+fn compare_numbers(left: f64, right: f64, op: &str) -> bool {
+    match op {
+        ">=" => left >= right,
+        "<=" => left <= right,
+        "==" => (left - right).abs() <= f64::EPSILON,
+        "!=" => (left - right).abs() > f64::EPSILON,
+        ">" => left > right,
+        "<" => left < right,
+        _ => false,
+    }
+}
+
+fn rate_value(
+    source: &SimulationRateSource,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<f64, CoreSimulationError> {
+    match source {
+        SimulationRateSource::Constant(value) => Ok(*value),
+        SimulationRateSource::Feature(feature) => Ok(values
+            .get(&(subject_id.to_string(), feature.clone()))
+            .and_then(Value::as_f64)
+            .unwrap_or_default()),
+        SimulationRateSource::ExpressionIr(expression) => {
+            eval_number(expression, subject_id, values)
+        }
+    }
+}
+
+fn guard_allows(
+    guard: &Option<SimulationGuard>,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> bool {
+    match guard {
+        None => true,
+        Some(SimulationGuard::RuntimeFeature(feature)) => values
+            .get(&(subject_id.to_string(), feature.clone()))
+            .and_then(Value::as_bool)
+            .unwrap_or(false),
+        Some(SimulationGuard::ExpressionIr(expression)) => {
+            eval_bool(expression, subject_id, values).unwrap_or(false)
+        }
+    }
+}
+
+fn eval_bool(
+    expression: &Value,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<bool, CoreSimulationError> {
+    match eval_value(expression, subject_id, values)? {
+        Value::Bool(value) => Ok(value),
+        Value::Number(value) => Ok(value.as_f64().unwrap_or_default() != 0.0),
+        Value::String(value) => Ok(bool_expression_string(&value, subject_id, values)),
+        other => Err(CoreSimulationError::InvalidExpression(format!(
+            "expected boolean, found {other}"
+        ))),
+    }
+}
+
+fn eval_number(
+    expression: &Value,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<f64, CoreSimulationError> {
+    eval_value(expression, subject_id, values)?
+        .as_f64()
+        .ok_or_else(|| CoreSimulationError::InvalidExpression("expected number".to_string()))
+}
+
+fn eval_value(
+    expression: &Value,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<Value, CoreSimulationError> {
+    let Some(object) = expression.as_object() else {
+        return Ok(expression.clone());
+    };
+    match object.get("kind").and_then(Value::as_str) {
+        Some("literal") => Ok(object.get("value").cloned().unwrap_or(Value::Null)),
+        Some("path") => {
+            let feature = expression_path(expression).ok_or_else(|| {
+                CoreSimulationError::InvalidExpression(
+                    "path expression has no segments".to_string(),
+                )
+            })?;
+            Ok(resolve_feature_path(&feature, subject_id, values).unwrap_or(Value::Null))
+        }
+        Some("unary") => {
+            let op = object.get("op").and_then(Value::as_str).unwrap_or_default();
+            let operand = object
+                .get("operand")
+                .or_else(|| object.get("expr"))
+                .ok_or_else(|| {
+                    CoreSimulationError::InvalidExpression(
+                        "unary expression has no operand".to_string(),
+                    )
+                })?;
+            match op {
+                "not" | "!" => Ok(Value::Bool(!eval_bool(operand, subject_id, values)?)),
+                "-" => Ok(Value::from(-eval_number(operand, subject_id, values)?)),
+                _ => Err(CoreSimulationError::InvalidExpression(format!(
+                    "unsupported unary operator `{op}`"
+                ))),
+            }
+        }
+        Some("binary") => {
+            let op = object.get("op").and_then(Value::as_str).unwrap_or_default();
+            let left = object.get("left").ok_or_else(|| {
+                CoreSimulationError::InvalidExpression(
+                    "binary expression has no left operand".to_string(),
+                )
+            })?;
+            let right = object.get("right").ok_or_else(|| {
+                CoreSimulationError::InvalidExpression(
+                    "binary expression has no right operand".to_string(),
+                )
+            })?;
+            eval_binary(op, left, right, subject_id, values)
+        }
+        Some(other) => Err(CoreSimulationError::InvalidExpression(format!(
+            "unsupported expression kind `{other}`"
+        ))),
+        None => Ok(expression.clone()),
+    }
+}
+
+fn eval_binary(
+    op: &str,
+    left: &Value,
+    right: &Value,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Result<Value, CoreSimulationError> {
+    match op {
+        "and" | "&&" => Ok(Value::Bool(
+            eval_bool(left, subject_id, values)? && eval_bool(right, subject_id, values)?,
+        )),
+        "or" | "||" => Ok(Value::Bool(
+            eval_bool(left, subject_id, values)? || eval_bool(right, subject_id, values)?,
+        )),
+        "equal" | "==" => Ok(Value::Bool(
+            eval_value(left, subject_id, values)? == eval_value(right, subject_id, values)?,
+        )),
+        "not_equal" | "!=" => Ok(Value::Bool(
+            eval_value(left, subject_id, values)? != eval_value(right, subject_id, values)?,
+        )),
+        "greater" | ">" => Ok(Value::Bool(
+            eval_number(left, subject_id, values)? > eval_number(right, subject_id, values)?,
+        )),
+        "greater_equal" | ">=" => Ok(Value::Bool(
+            eval_number(left, subject_id, values)? >= eval_number(right, subject_id, values)?,
+        )),
+        "less" | "<" => Ok(Value::Bool(
+            eval_number(left, subject_id, values)? < eval_number(right, subject_id, values)?,
+        )),
+        "less_equal" | "<=" => Ok(Value::Bool(
+            eval_number(left, subject_id, values)? <= eval_number(right, subject_id, values)?,
+        )),
+        "add" | "plus" | "+" => Ok(Value::from(
+            eval_number(left, subject_id, values)? + eval_number(right, subject_id, values)?,
+        )),
+        "sub" | "subtract" | "minus" | "-" => Ok(Value::from(
+            eval_number(left, subject_id, values)? - eval_number(right, subject_id, values)?,
+        )),
+        "mul" | "multiply" | "*" => Ok(Value::from(
+            eval_number(left, subject_id, values)? * eval_number(right, subject_id, values)?,
+        )),
+        "div" | "divide" | "/" => Ok(Value::from(
+            eval_number(left, subject_id, values)? / eval_number(right, subject_id, values)?,
+        )),
+        _ => Err(CoreSimulationError::InvalidExpression(format!(
+            "unsupported binary operator `{op}`"
+        ))),
+    }
+}
+
+fn expression_path(expression: &Value) -> Option<String> {
+    expression
+        .get("segments")?
+        .as_array()?
+        .iter()
+        .filter_map(|segment| {
+            segment.as_str().map(ToOwned::to_owned).or_else(|| {
+                segment
+                    .get("name")
+                    .and_then(Value::as_str)
+                    .map(ToOwned::to_owned)
+            })
+        })
+        .collect::<Vec<_>>()
+        .join(".")
+        .into()
+}
+
+fn resolve_feature_path(
+    path: &str,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<Value> {
+    if let Some((subject, feature)) = path.split_once('.') {
+        values
+            .get(&(subject.to_string(), feature.to_string()))
+            .cloned()
+            .or_else(|| {
+                values
+                    .get(&(subject_id.to_string(), path.to_string()))
+                    .cloned()
+            })
+    } else {
+        values
+            .get(&(subject_id.to_string(), path.to_string()))
+            .cloned()
+    }
+}
+
+fn bool_expression_string(
+    expression: &str,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> bool {
+    let trimmed = expression.trim();
+    if trimmed.eq_ignore_ascii_case("true") {
+        return true;
+    }
+    if trimmed.eq_ignore_ascii_case("false") {
+        return false;
+    }
+    for op in [">=", "<=", "==", "!=", ">", "<"] {
+        if let Some((left, right)) = trimmed.split_once(op) {
+            let left = numeric_operand(left.trim(), subject_id, values);
+            let right = numeric_operand(right.trim(), subject_id, values);
+            if let (Some(left), Some(right)) = (left, right) {
+                return match op {
+                    ">=" => left >= right,
+                    "<=" => left <= right,
+                    "==" => (left - right).abs() <= f64::EPSILON,
+                    "!=" => (left - right).abs() > f64::EPSILON,
+                    ">" => left > right,
+                    "<" => left < right,
+                    _ => false,
+                };
+            }
+        }
+    }
+    values
+        .get(&(subject_id.to_string(), trimmed.to_string()))
+        .and_then(Value::as_bool)
+        .unwrap_or(false)
+}
+
+fn numeric_operand(
+    operand: &str,
+    subject_id: &str,
+    values: &BTreeMap<(String, String), Value>,
+) -> Option<f64> {
+    operand.parse::<f64>().ok().or_else(|| {
+        resolve_feature_path(operand, subject_id, values).and_then(|value| value.as_f64())
+    })
+}
+
+fn parse_duration_s(value: &str) -> Option<f64> {
+    let trimmed = value.trim();
+    let numeric = trimmed
+        .strip_suffix("ms")
+        .and_then(|value| value.trim().parse::<f64>().ok().map(|value| value / 1000.0))
+        .or_else(|| {
+            trimmed
+                .strip_suffix('s')
+                .and_then(|value| value.trim().parse::<f64>().ok())
+        })
+        .or_else(|| trimmed.parse::<f64>().ok())?;
+    numeric
+        .is_finite()
+        .then_some(numeric)
+        .filter(|value| *value >= 0.0)
 }
 
 fn apply_state_behavior(
@@ -1318,6 +2098,151 @@ mod tests {
                 .get("printer")
                 .is_some_and(|states| states == &vec!["printer.printing".to_string()])
         }));
+    }
+
+    #[test]
+    fn core_runner_executes_completion_and_after_transitions() {
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![
+                    state("idle", true),
+                    state("armed", false),
+                    state("done", false),
+                ],
+                transitions: vec![
+                    SimulationTransition {
+                        id: "idle.armed".to_string(),
+                        source: "idle".to_string(),
+                        target: "armed".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::Completion,
+                            value: None,
+                        },
+                        guard: None,
+                        effects: Vec::new(),
+                    },
+                    SimulationTransition {
+                        id: "armed.done".to_string(),
+                        source: "armed".to_string(),
+                        target: "done".to_string(),
+                        trigger: SimulationTrigger {
+                            kind: SimulationTriggerKind::After,
+                            value: Some("2s".to_string()),
+                        },
+                        guard: None,
+                        effects: Vec::new(),
+                    },
+                ],
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "subject".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 8,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+            },
+            SimulationClockConfig::default(),
+        )
+        .unwrap();
+
+        let done = trace
+            .timeline
+            .iter()
+            .find(|entry| {
+                entry
+                    .states
+                    .get("subject")
+                    .is_some_and(|states| states == &vec!["done".to_string()])
+            })
+            .unwrap();
+        assert_eq!(done.t, 2.0);
+    }
+
+    #[test]
+    fn core_runner_integrates_state_rate_to_change_guard_crossing() {
+        let heating = SimulationState {
+            do_behavior: Some(StateDoBehavior::RateIntegration {
+                rates: vec![SimulationRate {
+                    feature: "temperature".to_string(),
+                    source: SimulationRateSource::Feature("heatRate".to_string()),
+                }],
+            }),
+            ..state("heating", true)
+        };
+        let model = SimulationModel {
+            id: "demo".to_string(),
+            machines: vec![SimulationStateMachine {
+                id: "Machine".to_string(),
+                label: "Machine".to_string(),
+                states: vec![heating, state("ready", false)],
+                transitions: vec![SimulationTransition {
+                    id: "heating.ready".to_string(),
+                    source: "heating".to_string(),
+                    target: "ready".to_string(),
+                    trigger: SimulationTrigger {
+                        kind: SimulationTriggerKind::Change,
+                        value: Some("temperature >= target".to_string()),
+                    },
+                    guard: None,
+                    effects: Vec::new(),
+                }],
+            }],
+        };
+
+        let trace = run_concurrent_simulation_model(
+            &model,
+            ConcurrentSimulationScenario {
+                id: "scenario".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "bed".to_string(),
+                    machine_id: "Machine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 100,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::from([
+                    (
+                        ("bed".to_string(), "temperature".to_string()),
+                        Value::from(22.0),
+                    ),
+                    (
+                        ("bed".to_string(), "heatRate".to_string()),
+                        Value::from(2.3),
+                    ),
+                    (
+                        ("bed".to_string(), "target".to_string()),
+                        Value::from(110.0),
+                    ),
+                ]),
+            },
+            SimulationClockConfig::default(),
+        )
+        .unwrap();
+
+        let ready = trace
+            .timeline
+            .iter()
+            .find(|entry| {
+                entry
+                    .states
+                    .get("bed")
+                    .is_some_and(|states| states == &vec!["ready".to_string()])
+            })
+            .unwrap();
+        assert!((ready.t - ((110.0 - 22.0) / 2.3)).abs() <= 0.1);
     }
 
     fn state(id: &str, initial: bool) -> SimulationState {

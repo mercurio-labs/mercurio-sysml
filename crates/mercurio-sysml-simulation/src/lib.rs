@@ -32,7 +32,7 @@ impl From<mercurio_simulation_core::SimulationProfileError> for SysmlSimulationA
 pub fn simulation_model_from_runtime(
     runtime: &Runtime,
 ) -> Result<SimulationModel, SysmlSimulationAdapterError> {
-    let model = normalize_state_machines(project_state_machines(runtime));
+    let model = normalize_state_machines_from_runtime(runtime, project_state_machines(runtime));
     validate_simulation_model(&model)?;
     Ok(model)
 }
@@ -76,7 +76,7 @@ pub fn scenario_from_analysis_case(
             SysmlSimulationAdapterError::MissingAnalysisCase(analysis_case_id.to_string())
         })?;
 
-    let subjects = analysis_case
+    let mut subjects = analysis_case
         .properties
         .get("subjects")
         .and_then(Value::as_array)
@@ -121,6 +121,7 @@ pub fn scenario_from_analysis_case(
         analysis_case,
         &subjects,
     )?);
+    apply_analysis_script_events(runtime, analysis_case, &mut subjects)?;
 
     Ok(ConcurrentSimulationScenario {
         id: analysis_case.element_id.clone(),
@@ -152,6 +153,19 @@ pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationM
     }
 }
 
+pub fn normalize_state_machines_from_runtime(
+    runtime: &Runtime,
+    machines: Vec<StateMachineModel>,
+) -> SimulationModel {
+    SimulationModel {
+        id: "sysml.projected".to_string(),
+        machines: machines
+            .iter()
+            .map(|machine| normalize_state_machine_from_runtime(runtime, machine))
+            .collect::<Vec<_>>(),
+    }
+}
+
 fn normalize_state_machine(machine: &StateMachineModel) -> SimulationStateMachine {
     SimulationStateMachine {
         id: machine.id.clone(),
@@ -161,6 +175,22 @@ fn normalize_state_machine(machine: &StateMachineModel) -> SimulationStateMachin
             .transitions
             .iter()
             .map(normalize_transition)
+            .collect(),
+    }
+}
+
+fn normalize_state_machine_from_runtime(
+    runtime: &Runtime,
+    machine: &StateMachineModel,
+) -> SimulationStateMachine {
+    SimulationStateMachine {
+        id: machine.id.clone(),
+        label: machine.label.clone(),
+        states: machine.states.iter().map(normalize_state).collect(),
+        transitions: machine
+            .transitions
+            .iter()
+            .map(|transition| normalize_transition_from_runtime(runtime, transition))
             .collect(),
     }
 }
@@ -187,6 +217,43 @@ fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
 }
 
 fn normalize_transition(transition: &TransitionNode) -> SimulationTransition {
+    normalize_transition_with_effects(transition, Vec::new())
+}
+
+fn normalize_transition_from_runtime(
+    runtime: &Runtime,
+    transition: &TransitionNode,
+) -> SimulationTransition {
+    let effects = runtime
+        .graph()
+        .element_by_element_id(&transition.id)
+        .and_then(|element| element.properties.get("effects"))
+        .and_then(Value::as_array)
+        .map(|effects| {
+            effects
+                .iter()
+                .filter_map(normalize_effect)
+                .collect::<Vec<_>>()
+        })
+        .unwrap_or_else(|| {
+            transition
+                .effect
+                .as_ref()
+                .map(|effect| {
+                    vec![SimulationEffect::Log(LogEffect {
+                        kind: "transition.effect".to_string(),
+                        source: Some(effect.clone()),
+                    })]
+                })
+                .unwrap_or_default()
+        });
+    normalize_transition_with_effects(transition, effects)
+}
+
+fn normalize_transition_with_effects(
+    transition: &TransitionNode,
+    effects: Vec<SimulationEffect>,
+) -> SimulationTransition {
     SimulationTransition {
         id: transition.id.clone(),
         source: transition.source.clone(),
@@ -196,16 +263,7 @@ fn normalize_transition(transition: &TransitionNode) -> SimulationTransition {
             value: transition.trigger.clone(),
         },
         guard: transition.guard.clone().map(SimulationGuard::ExpressionIr),
-        effects: transition
-            .effect
-            .as_ref()
-            .map(|effect| {
-                vec![SimulationEffect::Log(LogEffect {
-                    kind: "transition.effect".to_string(),
-                    source: Some(effect.clone()),
-                })]
-            })
-            .unwrap_or_default(),
+        effects,
     }
 }
 
@@ -501,6 +559,77 @@ fn native_analysis_attribute_defaults(
     values
 }
 
+fn apply_analysis_script_events(
+    runtime: &Runtime,
+    analysis_case: &Element,
+    subjects: &mut [ConcurrentSubjectScenario],
+) -> Result<(), SysmlSimulationAdapterError> {
+    let Some(script_events) = analysis_script_events(analysis_case) else {
+        return Ok(());
+    };
+    let mut aliases = subjects
+        .iter()
+        .map(|subject| (subject.subject_id.clone(), subject.subject_id.clone()))
+        .collect::<BTreeMap<_, _>>();
+    for subject in native_analysis_subject_elements(runtime, analysis_case) {
+        aliases.insert(element_label_element(subject), subject.element_id.clone());
+        aliases.insert(subject.element_id.clone(), subject.element_id.clone());
+    }
+    for subject in subjects.iter_mut() {
+        subject.events.clear();
+    }
+    for (index, event) in script_events.iter().enumerate() {
+        let object = event.as_object().ok_or_else(|| {
+            SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                "SimulationScript event {index} must be an object"
+            ))
+        })?;
+        let trigger =
+            string_property_any(object, &["trigger", "event", "signal"]).ok_or_else(|| {
+                SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                    "SimulationScript event {index} must define `trigger`"
+                ))
+            })?;
+        let subject_ref = string_property_any(object, &["subject", "target", "subject_id"]);
+        let subject_id = subject_ref
+            .as_ref()
+            .and_then(|subject| aliases.get(subject))
+            .cloned()
+            .or_else(|| (subjects.len() == 1).then(|| subjects[0].subject_id.clone()))
+            .ok_or_else(|| {
+                SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                    "SimulationScript event {index} must resolve a subject"
+                ))
+            })?;
+        let subject = subjects
+            .iter_mut()
+            .find(|subject| subject.subject_id == subject_id)
+            .ok_or_else(|| SysmlSimulationAdapterError::InvalidAnalysisCase(subject_id.clone()))?;
+        let id = string_property_any(object, &["id", "name"])
+            .unwrap_or_else(|| format!("{}.script.{index}", subject.subject_id));
+        subject.events.push(SimulationEvent { id, trigger });
+    }
+    Ok(())
+}
+
+fn analysis_script_events(analysis_case: &Element) -> Option<&Vec<Value>> {
+    analysis_case
+        .properties
+        .get("simulation_script")
+        .or_else(|| analysis_case.properties.get("simulationScript"))
+        .or_else(|| analysis_case.properties.get("events"))
+        .and_then(Value::as_array)
+        .or_else(|| {
+            analysis_case
+                .properties
+                .get("metadata")?
+                .get("SimulationScript")?
+                .get("properties")?
+                .get("events")?
+                .as_array()
+        })
+}
+
 fn attribute_default_value(attribute: &Element) -> Option<Value> {
     let expression = attribute.properties.get("expression_ir")?;
     let object = expression.as_object()?;
@@ -675,7 +804,19 @@ mod tests {
                 element(
                     "analysis.PrintSequence",
                     "AnalysisCaseDefinition",
-                    [("declared_name", json!("PrintSequence"))],
+                    [
+                        ("declared_name", json!("PrintSequence")),
+                        (
+                            "simulation_script",
+                            json!([
+                                {
+                                    "id": "script.start",
+                                    "subject": "printer",
+                                    "trigger": "start"
+                                }
+                            ]),
+                        ),
+                    ],
                 ),
                 element(
                     "subject.PrintSequence.printer",
@@ -764,6 +905,7 @@ mod tests {
             "subject.PrintSequence.printer"
         );
         assert_eq!(scenario.subjects[0].machine_id, "VoronPrinter");
+        assert_eq!(scenario.subjects[0].events[0].id, "script.start");
         assert_eq!(scenario.subjects[0].events[0].trigger, "start");
         assert_eq!(
             scenario.initial_values.get(&(

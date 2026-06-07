@@ -1445,7 +1445,7 @@ fn try_run_canonical_core(
     let Ok(model) = canonical_simulation_model(runtime) else {
         return Ok(None);
     };
-    if runtime_has_legacy_transition_effects(runtime, &model, scenario)
+    if runtime_has_legacy_rate_transition_effects(runtime, &model, scenario)
         || !core_runner_can_handle(&model, scenario)
     {
         return Ok(None);
@@ -1464,7 +1464,7 @@ fn try_run_canonical_core(
     .map_err(|error| SimulationError::InvalidProfile(error.to_string()))
 }
 
-fn runtime_has_legacy_transition_effects(
+fn runtime_has_legacy_rate_transition_effects(
     runtime: &Runtime,
     model: &SimulationModel,
     scenario: &ConcurrentSimulationScenario,
@@ -1480,7 +1480,15 @@ fn runtime_has_legacy_transition_effects(
                         .graph()
                         .element_by_element_id(&transition.id)
                         .and_then(|element| element.properties.get("effects"))
-                        .is_some()
+                        .and_then(Value::as_array)
+                        .is_some_and(|effects| {
+                            effects.iter().any(|effect| {
+                                effect
+                                    .get("kind")
+                                    .and_then(Value::as_str)
+                                    .is_some_and(|kind| kind == "rate")
+                            })
+                        })
                 })
             })
     })
@@ -1490,45 +1498,22 @@ fn core_runner_can_handle(
     model: &SimulationModel,
     scenario: &ConcurrentSimulationScenario,
 ) -> bool {
-    if scenario_uses_legacy_transition_effects(model, scenario) {
-        return false;
-    }
     scenario.subjects.iter().all(|subject| {
         model
             .machines
             .iter()
             .find(|machine| machine.id == subject.machine_id || machine.label == subject.machine_id)
             .is_some_and(|machine| {
-                machine
-                    .states
-                    .iter()
-                    .all(|state| state.do_behavior.is_none())
-                    && machine.transitions.iter().all(|transition| {
-                        transition.guard.is_none()
-                            && matches!(
-                                transition.trigger.kind,
-                                SimulationTriggerKind::Event | SimulationTriggerKind::Signal
-                            )
-                    })
-            })
-    })
-}
-
-fn scenario_uses_legacy_transition_effects(
-    model: &SimulationModel,
-    scenario: &ConcurrentSimulationScenario,
-) -> bool {
-    scenario.subjects.iter().any(|subject| {
-        model
-            .machines
-            .iter()
-            .find(|machine| machine.id == subject.machine_id || machine.label == subject.machine_id)
-            .is_some_and(|machine| {
-                machine.transitions.iter().any(|transition| {
-                    !transition.effects.is_empty()
-                        || transition.effects.iter().any(|effect| {
-                            matches!(effect, mercurio_simulation_core::SimulationEffect::Log(_))
-                        })
+                machine.transitions.iter().all(|transition| {
+                    matches!(
+                        transition.trigger.kind,
+                        SimulationTriggerKind::Event
+                            | SimulationTriggerKind::Signal
+                            | SimulationTriggerKind::Time
+                            | SimulationTriggerKind::After
+                            | SimulationTriggerKind::Change
+                            | SimulationTriggerKind::Completion
+                    )
                 })
             })
     })
