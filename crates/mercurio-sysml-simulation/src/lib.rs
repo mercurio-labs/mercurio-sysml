@@ -6,11 +6,11 @@ use serde_json::Value;
 use mercurio_core::runtime::Runtime;
 use mercurio_simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
-    LogEffect, SignalEffect, SimulationActionSequence, SimulationClockConfig, SimulationEffect,
-    SimulationEvent, SimulationGuard, SimulationModel, SimulationObjective, SimulationRate,
-    SimulationRateSource, SimulationRequirement, SimulationState, SimulationStateMachine,
-    SimulationTransition, SimulationTrigger, SimulationTriggerKind, StateDoBehavior,
-    validate_simulation_model,
+    LogEffect, SignalEffect, SimulationActionSequence, SimulationClockConfig,
+    SimulationDerivedFeatureRule, SimulationEffect, SimulationEvent, SimulationGuard,
+    SimulationModel, SimulationObjective, SimulationRate, SimulationRateSource,
+    SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
+    SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
 };
 use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
@@ -196,6 +196,7 @@ pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationM
             .iter()
             .map(normalize_state_machine)
             .collect::<Vec<_>>(),
+        derived_rules: Vec::new(),
     }
 }
 
@@ -209,6 +210,7 @@ pub fn normalize_state_machines_from_runtime(
             .iter()
             .map(|machine| normalize_state_machine_from_runtime(runtime, machine))
             .collect::<Vec<_>>(),
+        derived_rules: simulation_derived_rules(runtime),
     }
 }
 
@@ -239,6 +241,53 @@ fn normalize_state_machine_from_runtime(
             .map(|transition| normalize_transition_from_runtime(runtime, transition))
             .collect(),
     }
+}
+
+fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRule> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|element| {
+            element.kind.contains("CalculationUsage")
+                || element
+                    .properties
+                    .get("kind")
+                    .and_then(Value::as_str)
+                    .is_some_and(|kind| kind == "derived_feature")
+        })
+        .filter_map(|element| {
+            let expression = element.properties.get("expression_ir")?.clone();
+            let feature = element
+                .properties
+                .get("target_feature")
+                .or_else(|| element.properties.get("targetFeature"))
+                .or_else(|| element.properties.get("feature"))
+                .and_then(Value::as_str)
+                .map(ToOwned::to_owned)
+                .or_else(|| {
+                    element
+                        .properties
+                        .get("declared_name")
+                        .and_then(Value::as_str)
+                        .map(ToOwned::to_owned)
+                })?;
+            let subject_id = element
+                .properties
+                .get("subject")
+                .or_else(|| element.properties.get("subject_id"))
+                .or_else(|| element.properties.get("subjectId"))
+                .and_then(Value::as_str)
+                .map(ToOwned::to_owned);
+            Some(SimulationDerivedFeatureRule {
+                id: element.element_id.clone(),
+                label: element_label_element(element),
+                subject_id,
+                feature,
+                expression,
+            })
+        })
+        .collect()
 }
 
 fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
