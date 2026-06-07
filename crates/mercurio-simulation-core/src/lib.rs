@@ -1426,20 +1426,19 @@ fn resolve_feature_path(
     subject_id: &str,
     values: &BTreeMap<(String, String), Value>,
 ) -> Option<Value> {
-    if let Some((subject, feature)) = path.split_once('.') {
-        values
-            .get(&(subject.to_string(), feature.to_string()))
-            .cloned()
-            .or_else(|| {
-                values
-                    .get(&(subject_id.to_string(), path.to_string()))
-                    .cloned()
-            })
-    } else {
-        values
-            .get(&(subject_id.to_string(), path.to_string()))
-            .cloned()
+    if let Some(value) = values.get(&(subject_id.to_string(), path.to_string())) {
+        return Some(value.clone());
     }
+    values
+        .iter()
+        .filter_map(|((candidate_subject, candidate_feature), value)| {
+            let prefix = format!("{candidate_subject}.");
+            path.strip_prefix(&prefix)
+                .filter(|feature| *feature == candidate_feature)
+                .map(|_| (candidate_subject.len(), value.clone()))
+        })
+        .max_by_key(|(subject_len, _)| *subject_len)
+        .map(|(_, value)| value)
 }
 
 fn bool_expression_string(
@@ -1570,7 +1569,15 @@ fn initial_configuration(
     let root = machine
         .states
         .iter()
-        .find(|state| state.parent_state_id.is_none() && state.is_initial)?;
+        .find(|state| state.parent_state_id.is_none() && state.is_initial)
+        .or_else(|| {
+            let mut roots = machine
+                .states
+                .iter()
+                .filter(|state| state.parent_state_id.is_none());
+            let root = roots.next()?;
+            roots.next().is_none().then_some(root)
+        })?;
     enter_state_configuration(machine, &root.id)
 }
 
@@ -1762,15 +1769,20 @@ fn validate_machine(
         ));
     }
 
+    let top_level_count = machine
+        .states
+        .iter()
+        .filter(|state| state.parent_state_id.is_none())
+        .count();
     let top_initial_count = machine
         .states
         .iter()
         .filter(|state| state.parent_state_id.is_none() && state.is_initial)
         .count();
-    if top_initial_count == 0 && !machine.states.is_empty() {
+    if top_initial_count == 0 && top_level_count > 1 {
         findings.push(finding(
             "machine.no_initial_state",
-            "State machine must have a top-level initial state.",
+            "State machine with multiple top-level states must have a top-level initial state.",
             Some(&machine.id),
             None,
         ));

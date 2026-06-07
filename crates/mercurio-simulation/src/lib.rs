@@ -1,10 +1,8 @@
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use std::fmt;
 
-use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use mercurio_core::ir::{KirDocument, KirElement};
 use mercurio_core::runtime::{ExecutionContext, Runtime, RuntimeError};
 use mercurio_language_contracts::expression::{
     ExpressionEvaluationContext, ExpressionEvaluationError, ExpressionIr, ExpressionPathSegment,
@@ -20,12 +18,20 @@ use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
 };
 
+mod legacy_overlay;
+
+pub use legacy_overlay::{
+    SimulationOverlayComposition, compose_simulation_overlay, run_hybrid_simulation_with_overlay,
+};
+
 const RATE_SAMPLE_INTERVAL_S: f64 = 1.0;
 const CHANGE_LOOP_LIMIT: usize = 20;
+#[allow(dead_code)]
 const CROSSING_TOLERANCE_S: f64 = 0.01;
 
 pub type StateMachineScenarioEvent = SimulationEvent;
 
+#[cfg(test)]
 fn default_step_duration() -> f64 {
     1.0
 }
@@ -99,21 +105,6 @@ fn map_adapter_error(
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct SimulationOverlayComposition {
-    pub document: KirDocument,
-    pub scenario: HybridSimulationScenario,
-}
-
-pub fn run_hybrid_simulation_with_overlay(
-    base: KirDocument,
-    overlay: KirDocument,
-) -> Result<HybridSimulationReport, SimulationError> {
-    let composition = compose_simulation_overlay(base, overlay)?;
-    let runtime = Runtime::from_document(composition.document)?;
-    run_hybrid_simulation(&runtime, composition.scenario)
-}
-
 pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
     mercurio_sysml_simulation::list_analysis_cases(runtime)
 }
@@ -132,202 +123,6 @@ pub fn run_analysis_case(
 ) -> Result<SimulationTrace, SimulationError> {
     let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
     run_concurrent_simulation(runtime, scenario)
-}
-
-pub fn compose_simulation_overlay(
-    mut base: KirDocument,
-    overlay: KirDocument,
-) -> Result<SimulationOverlayComposition, SimulationError> {
-    let scenario = scenario_from_overlay(&overlay)?;
-    apply_overlay_patches(&mut base, &overlay)?;
-    base.elements.extend(overlay.elements);
-    Ok(SimulationOverlayComposition {
-        document: base,
-        scenario,
-    })
-}
-
-fn scenario_from_overlay(
-    overlay: &KirDocument,
-) -> Result<HybridSimulationScenario, SimulationError> {
-    let scenario_element = overlay
-        .elements
-        .iter()
-        .find(|element| element.kind == "Mercurio::Simulation::Scenario")
-        .ok_or(SimulationError::MissingOverlayScenario)?;
-    let scenario_id = scenario_element.id.clone();
-    let subject_id = required_string_property(scenario_element, "subject")?;
-    let type_id = string_property(scenario_element, "subject_type");
-    let machine_id = string_property(scenario_element, "machine")
-        .or_else(|| string_property(scenario_element, "target"))
-        .ok_or_else(|| {
-            SimulationError::InvalidOverlay(format!(
-                "{} must define `machine` or `target`",
-                scenario_element.id
-            ))
-        })?;
-    let initial_state_id = string_property(scenario_element, "initial_state");
-    let max_steps = scenario_element
-        .properties
-        .get("max_steps")
-        .and_then(Value::as_u64)
-        .map(|value| value as usize)
-        .unwrap_or(64);
-
-    let mut events = overlay
-        .elements
-        .iter()
-        .filter(|element| element.kind == "Mercurio::Simulation::InputEvent")
-        .filter(|element| belongs_to_scenario(element, &scenario_id))
-        .map(|element| {
-            let order = element
-                .properties
-                .get("order")
-                .and_then(Value::as_u64)
-                .unwrap_or(u64::MAX);
-            let trigger = required_string_property(element, "trigger")?;
-            Ok((
-                order,
-                StateMachineScenarioEvent {
-                    id: element.id.clone(),
-                    trigger,
-                },
-            ))
-        })
-        .collect::<Result<Vec<_>, SimulationError>>()?;
-    events.sort_by_key(|(order, _)| *order);
-
-    let values = overlay
-        .elements
-        .iter()
-        .filter(|element| element.kind == "Mercurio::Simulation::InitialValue")
-        .filter(|element| belongs_to_scenario(element, &scenario_id))
-        .map(|element| {
-            let owner = string_property(element, "owner").unwrap_or_else(|| subject_id.clone());
-            let feature = required_string_property(element, "feature")?;
-            let value = element.properties.get("value").cloned().ok_or_else(|| {
-                SimulationError::InvalidOverlay(format!("{} must define `value`", element.id))
-            })?;
-            Ok(((owner, feature), value))
-        })
-        .collect::<Result<BTreeMap<_, _>, SimulationError>>()?;
-
-    Ok(HybridSimulationScenario {
-        id: scenario_id,
-        subject: SimulationSubject {
-            id: subject_id,
-            type_id,
-        },
-        machine_id,
-        initial_state_id,
-        events: events.into_iter().map(|(_, event)| event).collect(),
-        max_steps,
-        values,
-        step_duration_s: default_step_duration(),
-    })
-}
-
-fn apply_overlay_patches(
-    base: &mut KirDocument,
-    overlay: &KirDocument,
-) -> Result<(), SimulationError> {
-    for patch in overlay
-        .elements
-        .iter()
-        .filter(|element| element.kind == "Mercurio::Simulation::TemporarySemanticPatch")
-    {
-        let target = required_string_property(patch, "target")?;
-        let element = base
-            .elements
-            .iter_mut()
-            .find(|element| element.id == target)
-            .ok_or_else(|| SimulationError::MissingOverlayTarget(target.clone()))?;
-        if let Some(guard_feature) = patch.properties.get("guard_feature").cloned() {
-            element
-                .properties
-                .insert("guard_feature".to_string(), guard_feature);
-        }
-        if let Some(effects) = patch.properties.get("effects").cloned() {
-            element.properties.insert("effects".to_string(), effects);
-        }
-    }
-
-    for effect in overlay
-        .elements
-        .iter()
-        .filter(|element| element.kind == "Mercurio::Simulation::TransitionEffect")
-    {
-        let transition_id = required_string_property(effect, "transition")?;
-        let transition = base
-            .elements
-            .iter_mut()
-            .find(|element| element.id == transition_id)
-            .ok_or_else(|| SimulationError::MissingOverlayTarget(transition_id.clone()))?;
-        let effect_value = transition_effect_overlay_value(effect)?;
-        let effects = transition
-            .properties
-            .entry("effects".to_string())
-            .or_insert_with(|| Value::Array(Vec::new()));
-        let Some(effects) = effects.as_array_mut() else {
-            return Err(SimulationError::InvalidOverlay(format!(
-                "{} has non-array `effects`",
-                transition.id
-            )));
-        };
-        effects.push(effect_value);
-    }
-
-    Ok(())
-}
-
-fn transition_effect_overlay_value(effect: &KirElement) -> Result<Value, SimulationError> {
-    match required_string_property(effect, "effect_kind")?.as_str() {
-        "assign" => Ok(serde_json::json!({
-            "kind": "assign",
-            "feature": required_string_property(effect, "feature")?,
-            "value": effect.properties.get("value").cloned().ok_or_else(|| {
-                SimulationError::InvalidOverlay(format!("{} must define `value`", effect.id))
-            })?,
-        })),
-        "log" => Ok(serde_json::json!({
-            "kind": "log",
-            "event": required_string_property(effect, "event")?,
-            "source": effect.id,
-        })),
-        "rate" => Ok(serde_json::json!({
-            "kind": "rate",
-            "feature": required_string_property(effect, "feature")?,
-            "rate_per_second": effect.properties.get("rate_per_second").and_then(Value::as_f64).ok_or_else(|| {
-                SimulationError::InvalidOverlay(format!("{} must define numeric `rate_per_second`", effect.id))
-            })?,
-            "unit": effect.properties.get("unit").and_then(Value::as_str),
-        })),
-        other => Err(SimulationError::InvalidOverlay(format!(
-            "{} has unsupported effect_kind `{other}`",
-            effect.id
-        ))),
-    }
-}
-
-fn belongs_to_scenario(element: &KirElement, scenario_id: &str) -> bool {
-    string_property(element, "scenario").is_none_or(|scenario| scenario == scenario_id)
-}
-
-fn required_string_property(
-    element: &KirElement,
-    property: &str,
-) -> Result<String, SimulationError> {
-    string_property(element, property).ok_or_else(|| {
-        SimulationError::InvalidOverlay(format!("{} must define `{property}`", element.id))
-    })
-}
-
-fn string_property(element: &KirElement, property: &str) -> Option<String> {
-    element
-        .properties
-        .get(property)
-        .and_then(Value::as_str)
-        .map(ToOwned::to_owned)
 }
 
 pub fn run_hybrid_simulation(
@@ -541,6 +336,7 @@ pub fn run_hybrid_simulation(
     ))
 }
 
+#[allow(dead_code)]
 struct SubjectRunState<'m> {
     subject_id: String,
     machine: &'m StateMachineModel,
@@ -556,6 +352,7 @@ struct PendingSignal {
     target: Option<String>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq)]
 struct ActiveStateRate {
     subject_id: String,
@@ -563,6 +360,7 @@ struct ActiveStateRate {
     source: ActiveStateRateSource,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq)]
 enum ActiveStateRateSource {
     Constant(f64),
@@ -570,6 +368,7 @@ enum ActiveStateRateSource {
     Expression(Value),
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, PartialEq)]
 struct ChangeCrossing {
     subject_index: usize,
@@ -577,6 +376,7 @@ struct ChangeCrossing {
     transition: TransitionNode,
 }
 
+#[allow(dead_code)]
 fn make_concurrent_entry(
     t: f64,
     subjects: &[SubjectRunState<'_>],
@@ -595,6 +395,7 @@ fn make_concurrent_entry(
     }
 }
 
+#[allow(dead_code)]
 fn apply_concurrent_rate_samples(
     runtime: &Runtime,
     transition: &TransitionNode,
@@ -668,6 +469,7 @@ fn apply_concurrent_rate_samples(
     context.version += 1;
 }
 
+#[allow(dead_code)]
 fn active_state_rates(
     subjects: &[SubjectRunState<'_>],
     _values: &BTreeMap<(String, String), Value>,
@@ -689,6 +491,7 @@ fn active_state_rates(
     rates
 }
 
+#[allow(dead_code)]
 fn state_do_rates(state: &mercurio_sysml::StateNode, subject_id: &str) -> Vec<ActiveStateRate> {
     let Some(object) = state.do_behavior.as_ref().and_then(Value::as_object) else {
         return Vec::new();
@@ -725,6 +528,7 @@ fn state_do_rates(state: &mercurio_sysml::StateNode, subject_id: &str) -> Vec<Ac
         .collect()
 }
 
+#[allow(dead_code)]
 fn integrate_active_state_behaviors(
     rates: &[ActiveStateRate],
     values: &mut BTreeMap<(String, String), Value>,
@@ -739,6 +543,7 @@ fn integrate_active_state_behaviors(
     apply_rates_at_offset(rates, &base_values, values, context, duration);
 }
 
+#[allow(dead_code)]
 fn context_with_rates_at_offset(
     context: &ExecutionContext,
     values: &BTreeMap<(String, String), Value>,
@@ -753,6 +558,7 @@ fn context_with_rates_at_offset(
     scratch
 }
 
+#[allow(dead_code)]
 fn apply_rates_at_offset(
     rates: &[ActiveStateRate],
     base_values: &BTreeMap<(String, String), Value>,
@@ -768,6 +574,7 @@ fn apply_rates_at_offset(
     context.version += 1;
 }
 
+#[allow(dead_code)]
 fn integrated_rate_values_at_offset(
     rates: &[ActiveStateRate],
     base_values: &BTreeMap<(String, String), Value>,
@@ -808,6 +615,7 @@ fn integrated_rate_values_at_offset(
     result
 }
 
+#[allow(dead_code)]
 fn stage_values(
     base_values: &BTreeMap<(String, String), Value>,
     rates: &[ActiveStateRate],
@@ -825,6 +633,7 @@ fn stage_values(
     values
 }
 
+#[allow(dead_code)]
 fn rate_derivatives(
     rates: &[ActiveStateRate],
     values: &BTreeMap<(String, String), Value>,
@@ -835,6 +644,7 @@ fn rate_derivatives(
         .collect()
 }
 
+#[allow(dead_code)]
 fn rate_value(rate: &ActiveStateRate, values: &BTreeMap<(String, String), Value>) -> Option<f64> {
     match &rate.source {
         ActiveStateRateSource::Constant(value) => Some(*value),
@@ -847,6 +657,7 @@ fn rate_value(rate: &ActiveStateRate, values: &BTreeMap<(String, String), Value>
     }
 }
 
+#[allow(dead_code)]
 fn evaluate_rate_expression(
     expression: &Value,
     subject_id: &str,
@@ -857,6 +668,7 @@ fn evaluate_rate_expression(
     expression.evaluate(&mut context).ok()?.as_f64()
 }
 
+#[allow(dead_code)]
 struct RateExpressionContext<'a> {
     subject_id: &'a str,
     values: &'a BTreeMap<(String, String), Value>,
@@ -887,6 +699,7 @@ impl ExpressionEvaluationContext for RateExpressionContext<'_> {
     }
 }
 
+#[allow(dead_code)]
 fn earliest_change_crossing(
     runtime: &Runtime,
     subjects: &[SubjectRunState<'_>],
@@ -953,502 +766,23 @@ pub fn run_concurrent_simulation(
     runtime: &Runtime,
     scenario: ConcurrentSimulationScenario,
 ) -> Result<SimulationTrace, SimulationError> {
-    if let Some(trace) = try_run_canonical_core(runtime, &scenario)? {
-        return Ok(trace);
-    }
-
-    let all_machines = project_state_machines(runtime);
-    let mut subjects = Vec::<SubjectRunState<'_>>::new();
-    for subject in &scenario.subjects {
-        if runtime
-            .graph()
-            .element_by_element_id(&subject.subject_id)
-            .is_none()
-        {
-            return Err(SimulationError::MissingSubject(subject.subject_id.clone()));
-        }
-        let machine = all_machines
-            .iter()
-            .find(|machine| machine.id == subject.machine_id || machine.label == subject.machine_id)
-            .ok_or_else(|| SimulationError::MissingStateMachine(subject.machine_id.clone()))?;
-        let active = initial_configuration(machine, subject.initial_state_id.as_deref())
-            .ok_or_else(|| SimulationError::MissingInitialState(subject.machine_id.clone()))?;
-        subjects.push(SubjectRunState {
-            subject_id: subject.subject_id.clone(),
-            machine,
-            active,
-            event_index: 0,
-            events: subject.events.clone(),
-        });
-    }
-
-    let mut values = scenario.initial_values.clone();
-    let mut context = ExecutionContext {
-        values: values
-            .iter()
-            .map(|(key, value)| (key.clone(), value.clone()))
-            .collect(),
-        version: 1,
-    };
-    let mut t = 0.0f64;
-    let mut step = 0usize;
-    let mut rate_channels = BTreeSet::<(String, String)>::new();
-    let mut pending_signals = VecDeque::<PendingSignal>::new();
-    let mut history = BTreeMap::<(String, String), String>::new();
-    let mut initial_critical = Vec::new();
-    for subject in &subjects {
-        for state_id in &subject.active {
-            apply_state_behavior(
-                subject.machine,
-                state_id,
-                StateBehaviorKind::Entry,
-                &subject.subject_id,
-                0,
-                &mut values,
-                &mut context,
-                &mut initial_critical,
-                Some(&mut pending_signals),
-            );
-        }
-    }
-    let mut timeline = vec![make_concurrent_entry(t, &subjects, &values, Vec::new())];
-    let max_steps = scenario.max_steps.max(1);
-
-    while step < max_steps {
-        let mut fired_this_round = false;
-        let mut round_events = Vec::<TraceEvent>::new();
-
-        if deliver_pending_signals(
-            runtime,
-            &mut subjects,
-            &mut values,
-            &mut context,
-            &mut pending_signals,
-            &mut history,
-            &mut step,
-            max_steps,
-            &mut round_events,
-        )? {
-            fired_this_round = true;
-        }
-
-        for subject in subjects.iter_mut() {
-            if step >= max_steps || subject.event_index >= subject.events.len() {
-                continue;
-            }
-
-            let event = subject.events[subject.event_index].clone();
-            let transition = select_transition(
-                runtime,
-                subject.machine,
-                &subject.subject_id,
-                &subject.active,
-                &event.trigger,
-                &context,
-            )?
-            .cloned();
-
-            subject.event_index += 1;
-            let Some(transition) = transition else {
-                continue;
-            };
-
-            t += scenario.step_duration_s;
-            step += 1;
-            let mut step_critical = Vec::new();
-            append_guard_evaluation(
-                runtime,
-                &transition,
-                &subject.subject_id,
-                &context,
-                step,
-                &mut step_critical,
-            )?;
-            apply_transition_effects(
-                runtime,
-                &transition,
-                &subject.subject_id,
-                step,
-                &mut values,
-                &mut context,
-                &mut step_critical,
-            );
-            enqueue_transition_signals(
-                runtime,
-                &transition,
-                &subject.subject_id,
-                &mut pending_signals,
-            );
-            let before = subject.active.clone();
-            subject.active = apply_transition_state_change(
-                subject.machine,
-                &subject.subject_id,
-                &before,
-                &transition.source,
-                &transition.target,
-                step,
-                &mut values,
-                &mut context,
-                &mut step_critical,
-                Some(&mut pending_signals),
-                Some(&mut history),
-            )?;
-            round_events.push(TraceEvent {
-                kind: "transition".to_string(),
-                transition_id: Some(transition.id),
-                trigger: Some(event.trigger),
-            });
-            fired_this_round = true;
-        }
-
-        for idx in 0..subjects.len() {
-            if step >= max_steps {
-                break;
-            }
-
-            let transition = {
-                let subject = &subjects[idx];
-                subject
-                    .active
-                    .iter()
-                    .rev()
-                    .flat_map(|state_id| {
-                        subject
-                            .machine
-                            .transitions
-                            .iter()
-                            .filter(move |transition| {
-                                transition.source == *state_id
-                                    && transition.trigger_kind == StateTransitionTriggerKind::After
-                            })
-                    })
-                    .next()
-                    .cloned()
-            };
-            let Some(transition) = transition else {
-                continue;
-            };
-            let Some(duration) = transition
-                .trigger
-                .as_deref()
-                .and_then(|trigger| trigger.parse::<f64>().ok())
-                .filter(|duration| duration.is_finite() && *duration >= 0.0)
-            else {
-                continue;
-            };
-            let remaining = max_steps.saturating_sub(step);
-            if duration > scenario.step_duration_s * remaining as f64 {
-                continue;
-            }
-
-            step += 1;
-            let t_enter = t;
-            let subject_id = subjects[idx].subject_id.clone();
-            apply_concurrent_rate_samples(
-                runtime,
-                &transition,
-                &subject_id,
-                &subjects,
-                &mut values,
-                &mut context,
-                &mut timeline,
-                t_enter,
-                duration,
-                &mut rate_channels,
-            );
-            t = t_enter + duration;
-
-            let mut step_critical = Vec::new();
-            apply_transition_effects(
-                runtime,
-                &transition,
-                &subject_id,
-                step,
-                &mut values,
-                &mut context,
-                &mut step_critical,
-            );
-            enqueue_transition_signals(runtime, &transition, &subject_id, &mut pending_signals);
-            let before = subjects[idx].active.clone();
-            subjects[idx].active = apply_transition_state_change(
-                subjects[idx].machine,
-                &subject_id,
-                &before,
-                &transition.source,
-                &transition.target,
-                step,
-                &mut values,
-                &mut context,
-                &mut step_critical,
-                Some(&mut pending_signals),
-                Some(&mut history),
-            )?;
-            round_events.push(TraceEvent {
-                kind: "transition".to_string(),
-                transition_id: Some(transition.id.clone()),
-                trigger: Some(format!("after:{duration}")),
-            });
-            fired_this_round = true;
-
-            for _ in 0..CHANGE_LOOP_LIMIT {
-                let mut change_fired = false;
-                let subject_ids = subjects
-                    .iter()
-                    .map(|subject| subject.subject_id.clone())
-                    .collect::<Vec<_>>();
-                for subject in subjects.iter_mut() {
-                    let transition = select_concurrent_change_transition(
-                        runtime,
-                        subject.machine,
-                        &subject.subject_id,
-                        &subject.active,
-                        &subject_ids,
-                        &context,
-                    )?
-                    .cloned();
-                    let Some(transition) = transition else {
-                        continue;
-                    };
-                    let mut change_critical = Vec::new();
-                    apply_transition_effects(
-                        runtime,
-                        &transition,
-                        &subject.subject_id,
-                        step,
-                        &mut values,
-                        &mut context,
-                        &mut change_critical,
-                    );
-                    enqueue_transition_signals(
-                        runtime,
-                        &transition,
-                        &subject.subject_id,
-                        &mut pending_signals,
-                    );
-                    let before = subject.active.clone();
-                    subject.active = apply_transition_state_change(
-                        subject.machine,
-                        &subject.subject_id,
-                        &before,
-                        &transition.source,
-                        &transition.target,
-                        step,
-                        &mut values,
-                        &mut context,
-                        &mut change_critical,
-                        Some(&mut pending_signals),
-                        Some(&mut history),
-                    )?;
-                    round_events.push(TraceEvent {
-                        kind: "transition".to_string(),
-                        transition_id: Some(transition.id.clone()),
-                        trigger: Some(format!(
-                            "change:{}",
-                            transition.trigger.as_deref().unwrap_or("")
-                        )),
-                    });
-                    change_fired = true;
-                }
-                if !change_fired {
-                    break;
-                }
-            }
-        }
-
-        for _ in 0..CHANGE_LOOP_LIMIT {
-            let mut change_fired = false;
-            let subject_ids = subjects
-                .iter()
-                .map(|subject| subject.subject_id.clone())
-                .collect::<Vec<_>>();
-            for subject in subjects.iter_mut() {
-                let transition = select_concurrent_change_transition(
-                    runtime,
-                    subject.machine,
-                    &subject.subject_id,
-                    &subject.active,
-                    &subject_ids,
-                    &context,
-                )?
-                .cloned();
-                let Some(transition) = transition else {
-                    continue;
-                };
-                let mut step_critical = Vec::new();
-                apply_transition_effects(
-                    runtime,
-                    &transition,
-                    &subject.subject_id,
-                    step,
-                    &mut values,
-                    &mut context,
-                    &mut step_critical,
-                );
-                enqueue_transition_signals(
-                    runtime,
-                    &transition,
-                    &subject.subject_id,
-                    &mut pending_signals,
-                );
-                let before = subject.active.clone();
-                subject.active = apply_transition_state_change(
-                    subject.machine,
-                    &subject.subject_id,
-                    &before,
-                    &transition.source,
-                    &transition.target,
-                    step,
-                    &mut values,
-                    &mut context,
-                    &mut step_critical,
-                    Some(&mut pending_signals),
-                    Some(&mut history),
-                )?;
-                round_events.push(TraceEvent {
-                    kind: "transition".to_string(),
-                    transition_id: Some(transition.id.clone()),
-                    trigger: Some(format!(
-                        "change:{}",
-                        transition.trigger.as_deref().unwrap_or("")
-                    )),
-                });
-                change_fired = true;
-                fired_this_round = true;
-            }
-            if !change_fired {
-                break;
-            }
-        }
-
-        if !fired_this_round && step < max_steps {
-            let rates = active_state_rates(&subjects, &values);
-            if !rates.is_empty() {
-                let subject_ids = subjects
-                    .iter()
-                    .map(|subject| subject.subject_id.clone())
-                    .collect::<Vec<_>>();
-                let crossing = earliest_change_crossing(
-                    runtime,
-                    &subjects,
-                    &subject_ids,
-                    &context,
-                    &values,
-                    &rates,
-                    scenario.step_duration_s,
-                )?;
-                let duration = crossing
-                    .as_ref()
-                    .map(|crossing| crossing.offset)
-                    .unwrap_or(scenario.step_duration_s);
-
-                integrate_active_state_behaviors(
-                    &rates,
-                    &mut values,
-                    &mut context,
-                    duration,
-                    &mut rate_channels,
-                );
-                t += duration;
-                step += 1;
-                fired_this_round = true;
-
-                if let Some(crossing) = crossing {
-                    let subject_id = subjects[crossing.subject_index].subject_id.clone();
-                    let transition = crossing.transition;
-                    let mut step_critical = Vec::new();
-                    apply_transition_effects(
-                        runtime,
-                        &transition,
-                        &subject_id,
-                        step,
-                        &mut values,
-                        &mut context,
-                        &mut step_critical,
-                    );
-                    enqueue_transition_signals(
-                        runtime,
-                        &transition,
-                        &subject_id,
-                        &mut pending_signals,
-                    );
-                    let before = subjects[crossing.subject_index].active.clone();
-                    subjects[crossing.subject_index].active = apply_transition_state_change(
-                        subjects[crossing.subject_index].machine,
-                        &subject_id,
-                        &before,
-                        &transition.source,
-                        &transition.target,
-                        step,
-                        &mut values,
-                        &mut context,
-                        &mut step_critical,
-                        Some(&mut pending_signals),
-                        Some(&mut history),
-                    )?;
-                    round_events.push(TraceEvent {
-                        kind: "transition".to_string(),
-                        transition_id: Some(transition.id.clone()),
-                        trigger: Some(format!(
-                            "change:{}",
-                            transition.trigger.as_deref().unwrap_or("")
-                        )),
-                    });
-                }
-            }
-        }
-
-        if fired_this_round {
-            timeline.push(make_concurrent_entry(t, &subjects, &values, round_events));
-        } else {
-            break;
-        }
-    }
-
-    let primary_subject_id = scenario
-        .subjects
-        .first()
-        .map(|subject| subject.subject_id.clone())
-        .unwrap_or_default();
-    let mut channel_ids = BTreeSet::<(String, String)>::new();
-    for entry in &timeline {
-        channel_ids.extend(entry.values.keys().cloned());
-    }
-    let channels = channel_ids
-        .into_iter()
-        .map(|(subject, feature)| {
-            let source = if rate_channels.contains(&(subject.clone(), feature.clone())) {
-                TraceChannelSource::RateEffect
-            } else {
-                TraceChannelSource::AssignEffect
-            };
-            TraceChannel {
-                id: format!("{subject}.{feature}"),
-                unit: None,
-                source,
-            }
-        })
-        .collect();
-
-    Ok(SimulationTrace {
-        scenario_id: scenario.id,
-        subject_id: primary_subject_id,
-        channels,
-        timeline,
-        status: HybridSimulationStatus::Completed,
-    })
+    run_canonical_core(runtime, &scenario)
 }
-
-fn try_run_canonical_core(
+fn run_canonical_core(
     runtime: &Runtime,
     scenario: &ConcurrentSimulationScenario,
-) -> Result<Option<SimulationTrace>, SimulationError> {
-    let Ok(model) = canonical_simulation_model(runtime) else {
-        return Ok(None);
-    };
-    if runtime_has_legacy_rate_transition_effects(runtime, &model, scenario)
-        || !core_runner_can_handle(&model, scenario)
-    {
-        return Ok(None);
+) -> Result<SimulationTrace, SimulationError> {
+    let model = canonical_simulation_model(runtime)?;
+    if runtime_has_legacy_rate_transition_effects(runtime, &model, scenario) {
+        return Err(SimulationError::InvalidProfile(
+            "legacy transition `rate` effects are no longer supported by concurrent simulation; move rates to state `do_behavior`".to_string(),
+        ));
+    }
+    if !core_runner_can_handle(&model, scenario) {
+        return Err(SimulationError::InvalidProfile(
+            "scenario contains simulation profile features unsupported by the canonical core runner"
+                .to_string(),
+        ));
     }
     run_concurrent_simulation_model(
         &model,
@@ -1460,7 +794,6 @@ fn try_run_canonical_core(
             change_loop_limit: CHANGE_LOOP_LIMIT,
         },
     )
-    .map(Some)
     .map_err(|error| SimulationError::InvalidProfile(error.to_string()))
 }
 
@@ -1846,6 +1179,7 @@ fn select_change_transition<'a>(
     Ok(None)
 }
 
+#[allow(dead_code)]
 fn select_concurrent_change_transition<'a>(
     runtime: &Runtime,
     machine: &'a StateMachineModel,
@@ -2406,6 +1740,7 @@ fn select_transition<'a>(
     Ok(None)
 }
 
+#[allow(dead_code)]
 fn select_signal_transition<'a>(
     runtime: &Runtime,
     machine: &'a StateMachineModel,
@@ -2432,6 +1767,7 @@ fn select_signal_transition<'a>(
     Ok(None)
 }
 
+#[allow(dead_code)]
 fn enqueue_transition_signals(
     runtime: &Runtime,
     transition: &TransitionNode,
@@ -2453,6 +1789,7 @@ fn enqueue_transition_signals(
     }
 }
 
+#[allow(dead_code)]
 fn signal_targets_subject(signal: &PendingSignal, subject_id: &str) -> bool {
     match signal.target.as_deref() {
         Some(target) => target == subject_id,
@@ -2460,6 +1797,7 @@ fn signal_targets_subject(signal: &PendingSignal, subject_id: &str) -> bool {
     }
 }
 
+#[allow(dead_code)]
 fn deliver_pending_signals(
     runtime: &Runtime,
     subjects: &mut [SubjectRunState<'_>],
@@ -3472,13 +2810,33 @@ mod tests {
                 state_element("state.Printer.Waiting", "PrinterMachine", true),
                 state_element("state.Printer.Printing", "PrinterMachine", false),
                 state_element("state.Bed.Cold", "BedMachine", true),
-                state_element("state.Bed.Hot", "BedMachine", false),
+                element(
+                    "state.Bed.Hot",
+                    "StateUsage",
+                    [
+                        ("declared_name", json!("Hot")),
+                        ("owning_type", json!("BedMachine")),
+                        ("is_initial", json!(false)),
+                        (
+                            "do_behavior",
+                            json!({
+                                "kind": "rate_integration",
+                                "rates": [
+                                    {
+                                        "feature": "bed_ready",
+                                        "rate_per_second": 0.5
+                                    }
+                                ]
+                            }),
+                        ),
+                    ],
+                ),
                 transition_element(
                     "transition.Printer.print",
                     "PrinterMachine",
                     "state.Printer.Waiting",
                     "state.Printer.Printing",
-                    "bed_ready >= 1.0",
+                    "individual.bed.bed_ready >= 1.0",
                     "change",
                     [("guard_feature", json!("feature.Bed.bedReady"))],
                 ),
@@ -3489,10 +2847,7 @@ mod tests {
                     "state.Bed.Hot",
                     "3.0",
                     "after",
-                    [(
-                        "effects",
-                        json!([{ "kind": "rate", "feature": "bed_ready", "rate_per_second": 0.5 }]),
-                    )],
+                    [],
                 ),
             ],
         })
@@ -3534,6 +2889,55 @@ mod tests {
                 .get("individual.printer")
                 .is_some_and(|states| states == &vec!["state.Printer.Printing".to_string()])
         }));
+    }
+
+    #[test]
+    fn concurrent_simulation_rejects_legacy_transition_rate_effects() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                state_element("state.Bed.Cold", "BedMachine", true),
+                state_element("state.Bed.Hot", "BedMachine", false),
+                transition_element(
+                    "transition.Bed.after",
+                    "BedMachine",
+                    "state.Bed.Cold",
+                    "state.Bed.Hot",
+                    "3.0",
+                    "after",
+                    [(
+                        "effects",
+                        json!([{ "kind": "rate", "feature": "bed_ready", "rate_per_second": 0.5 }]),
+                    )],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let error = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.legacy_rate".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.bed".to_string(),
+                    machine_id: "BedMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 4,
+                step_duration_s: 1.0,
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+        )
+        .unwrap_err();
+
+        assert!(matches!(
+            error,
+            SimulationError::InvalidProfile(message)
+                if message.contains("legacy transition `rate` effects")
+        ));
     }
 
     #[test]
