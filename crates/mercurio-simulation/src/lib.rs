@@ -3249,6 +3249,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -3520,6 +3522,8 @@ mod tests {
                     ("individual.bed".to_string(), "bed_ready".to_string()),
                     json!(0.0),
                 )]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -3604,6 +3608,8 @@ mod tests {
                         json!(110.0),
                     ),
                 ]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -3704,6 +3710,8 @@ mod tests {
                         json!(22.0),
                     ),
                 ]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -3802,6 +3810,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -3989,6 +3999,8 @@ mod tests {
                     max_steps: 12,
                     step_duration_s: 1.0,
                     initial_values: BTreeMap::new(),
+                    requirements: Vec::new(),
+                    objectives: Vec::new(),
                 },
             )
             .unwrap();
@@ -4049,6 +4061,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4126,6 +4140,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4242,6 +4258,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4360,6 +4378,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4425,6 +4445,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4512,6 +4534,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4636,6 +4660,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();
@@ -4767,6 +4793,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
         )
         .unwrap();

@@ -51,6 +51,10 @@ pub struct ConcurrentSimulationScenario {
     pub step_duration_s: f64,
     #[serde(with = "tuple_value_map")]
     pub initial_values: BTreeMap<(String, String), Value>,
+    #[serde(default)]
+    pub requirements: Vec<SimulationRequirement>,
+    #[serde(default)]
+    pub objectives: Vec<SimulationObjective>,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -67,6 +71,22 @@ pub struct ConcurrentSubjectScenario {
 pub struct SimulationEvent {
     pub id: String,
     pub trigger: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SimulationRequirement {
+    pub id: String,
+    pub label: String,
+    pub expression: Option<Value>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SimulationObjective {
+    pub id: String,
+    pub label: String,
+    pub subject: Option<String>,
+    pub feature: Option<String>,
+    pub expression: Option<Value>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -2009,6 +2029,8 @@ mod tests {
                 max_steps: 4,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
             SimulationClockConfig::default(),
         )
@@ -2087,6 +2109,8 @@ mod tests {
                 max_steps: 6,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
             SimulationClockConfig::default(),
         )
@@ -2152,6 +2176,8 @@ mod tests {
                 max_steps: 8,
                 step_duration_s: 1.0,
                 initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
             SimulationClockConfig::default(),
         )
@@ -2227,6 +2253,8 @@ mod tests {
                         Value::from(110.0),
                     ),
                 ]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
             },
             SimulationClockConfig::default(),
         )

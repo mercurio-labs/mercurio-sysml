@@ -7,9 +7,9 @@ use mercurio_core::runtime::Runtime;
 use mercurio_simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
     LogEffect, SignalEffect, SimulationActionSequence, SimulationEffect, SimulationEvent,
-    SimulationGuard, SimulationModel, SimulationRate, SimulationRateSource, SimulationState,
-    SimulationStateMachine, SimulationTransition, SimulationTrigger, SimulationTriggerKind,
-    StateDoBehavior, validate_simulation_model,
+    SimulationGuard, SimulationModel, SimulationObjective, SimulationRate, SimulationRateSource,
+    SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
+    SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
 };
 use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
@@ -122,6 +122,8 @@ pub fn scenario_from_analysis_case(
         &subjects,
     )?);
     apply_analysis_script_events(runtime, analysis_case, &mut subjects)?;
+    let requirements = native_analysis_requirements(runtime, analysis_case);
+    let objectives = native_analysis_objectives(runtime, analysis_case, &subjects);
 
     Ok(ConcurrentSimulationScenario {
         id: analysis_case.element_id.clone(),
@@ -140,6 +142,8 @@ pub fn scenario_from_analysis_case(
             .and_then(Value::as_f64)
             .unwrap_or(1.0),
         initial_values,
+        requirements,
+        objectives,
     })
 }
 
@@ -630,6 +634,124 @@ fn analysis_script_events(analysis_case: &Element) -> Option<&Vec<Value>> {
         })
 }
 
+fn native_analysis_requirements(
+    runtime: &Runtime,
+    analysis_case: &Element,
+) -> Vec<SimulationRequirement> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|candidate| {
+            is_analysis_requirement(candidate)
+                && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                    == Some(analysis_case.element_id.as_str())
+        })
+        .map(|requirement| SimulationRequirement {
+            id: requirement.element_id.clone(),
+            label: element_label_element(requirement),
+            expression: requirement.properties.get("expression_ir").cloned(),
+        })
+        .collect()
+}
+
+fn native_analysis_objectives(
+    runtime: &Runtime,
+    analysis_case: &Element,
+    subjects: &[ConcurrentSubjectScenario],
+) -> Vec<SimulationObjective> {
+    let subject_aliases = native_analysis_subject_elements(runtime, analysis_case)
+        .into_iter()
+        .flat_map(|subject| {
+            [
+                (element_label_element(subject), subject.element_id.clone()),
+                (subject.element_id.clone(), subject.element_id.clone()),
+            ]
+        })
+        .collect::<BTreeMap<_, _>>();
+    let default_subject = (subjects.len() == 1).then(|| subjects[0].subject_id.clone());
+
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|candidate| {
+            is_analysis_objective(candidate)
+                && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                    == Some(analysis_case.element_id.as_str())
+        })
+        .map(|objective| {
+            let expression = objective
+                .properties
+                .get("expression_ir")
+                .or_else(|| objective.properties.get("subject"))
+                .cloned();
+            let (subject, feature) = expression
+                .as_ref()
+                .and_then(|expression| {
+                    objective_subject_feature(
+                        expression,
+                        &subject_aliases,
+                        default_subject.as_deref(),
+                    )
+                })
+                .unwrap_or((None, None));
+            SimulationObjective {
+                id: objective.element_id.clone(),
+                label: element_label_element(objective),
+                subject,
+                feature,
+                expression,
+            }
+        })
+        .collect()
+}
+
+fn objective_subject_feature(
+    expression: &Value,
+    subject_aliases: &BTreeMap<String, String>,
+    default_subject: Option<&str>,
+) -> Option<(Option<String>, Option<String>)> {
+    let path = if expression.get("kind").and_then(Value::as_str) == Some("path") {
+        expression
+    } else if expression
+        .get("kind")
+        .and_then(Value::as_str)
+        .is_some_and(|kind| kind == "literal")
+    {
+        return None;
+    } else {
+        expression.get("subject").unwrap_or(expression)
+    };
+    let names = path
+        .get("segments")?
+        .as_array()?
+        .iter()
+        .filter_map(expression_path_segment_name)
+        .collect::<Vec<_>>();
+    match names.as_slice() {
+        [subject_name, feature @ ..] if !feature.is_empty() => Some((
+            subject_aliases.get(subject_name).cloned(),
+            Some(feature.join(".")),
+        )),
+        [feature] => Some((
+            default_subject.map(ToOwned::to_owned),
+            Some(feature.clone()),
+        )),
+        _ => None,
+    }
+}
+
+fn is_analysis_requirement(element: &Element) -> bool {
+    element.kind.contains("RequireUsage")
+        || element.kind.contains("RequirementUsage")
+        || element.element_id.starts_with("require.")
+}
+
+fn is_analysis_objective(element: &Element) -> bool {
+    element.kind.contains("ObjectiveUsage") || element.element_id.starts_with("objective.")
+}
+
 fn attribute_default_value(attribute: &Element) -> Option<Value> {
     let expression = attribute.properties.get("expression_ir")?;
     let object = expression.as_object()?;
@@ -865,6 +987,44 @@ mod tests {
                     ],
                 ),
                 element(
+                    "require.PrintSequence.printing",
+                    "RequireUsage",
+                    [
+                        ("owner", json!("analysis.PrintSequence")),
+                        ("declared_name", json!("PrinterEventuallyPrinting")),
+                        (
+                            "expression_ir",
+                            json!({
+                                "kind": "binary",
+                                "op": "equal",
+                                "left": {
+                                    "kind": "path",
+                                    "segments": ["printer", "state"]
+                                },
+                                "right": {
+                                    "kind": "literal",
+                                    "value": "Printing"
+                                }
+                            }),
+                        ),
+                    ],
+                ),
+                element(
+                    "objective.PrintSequence.thermalProfile",
+                    "ObjectiveUsage",
+                    [
+                        ("owner", json!("analysis.PrintSequence")),
+                        ("declared_name", json!("thermalProfile")),
+                        (
+                            "expression_ir",
+                            json!({
+                                "kind": "path",
+                                "segments": ["printer", "bed_temperature"]
+                            }),
+                        ),
+                    ],
+                ),
+                element(
                     "state.VoronPrinter.idle",
                     "StateUsage",
                     [
@@ -913,6 +1073,19 @@ mod tests {
                 "bed_temperature".to_string()
             )),
             Some(&json!(30))
+        );
+        assert_eq!(scenario.requirements.len(), 1);
+        assert_eq!(scenario.requirements[0].label, "PrinterEventuallyPrinting");
+        assert!(scenario.requirements[0].expression.is_some());
+        assert_eq!(scenario.objectives.len(), 1);
+        assert_eq!(scenario.objectives[0].label, "thermalProfile");
+        assert_eq!(
+            scenario.objectives[0].subject.as_deref(),
+            Some("subject.PrintSequence.printer")
+        );
+        assert_eq!(
+            scenario.objectives[0].feature.as_deref(),
+            Some("bed_temperature")
         );
     }
 
