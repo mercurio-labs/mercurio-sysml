@@ -4,7 +4,7 @@ use mercurio_core::{
     AuthoringError, AuthoringProject, KirDocument, textual_model_authoring_render_profile,
 };
 
-use crate::{compile_sysml_text, default_sysml_library_path, parse_sysml};
+use crate::{compile_sysml_text, load_sysml_baseline, parse_sysml};
 
 pub fn load_authoring_project_from_sysml(
     files: BTreeMap<String, String>,
@@ -26,8 +26,7 @@ pub fn load_authoring_project_from_sysml(
 fn compile_sysml_authoring_sources(
     files: &BTreeMap<String, String>,
 ) -> Result<KirDocument, AuthoringError> {
-    let stdlib =
-        KirDocument::from_path(&default_sysml_library_path()).map_err(AuthoringError::Kir)?;
+    let stdlib = load_sysml_baseline().map_err(AuthoringError::Kir)?;
     let mut documents = Vec::new();
     for (path, source) in files {
         documents.push(compile_sysml_text(source, path, &stdlib).map_err(AuthoringError::Parse)?);
@@ -79,5 +78,17 @@ mod tests {
             })
             .unwrap();
         project.write_back_mutation(&definition).unwrap();
+    }
+
+    #[test]
+    fn compiles_authoring_project_with_package_imported_scalar_type() {
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "decision.sysml".to_string(),
+            "package Demo { import ScalarValues::*; part def Thing { attribute score : Real = 1.0; } }"
+                .to_string(),
+        )]))
+        .unwrap();
+
+        project.compile_kir_document().unwrap();
     }
 }
