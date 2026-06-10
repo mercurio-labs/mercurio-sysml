@@ -1444,17 +1444,3 @@ fn git_dirty(repo: &Path) -> Option<bool> {
     }
     Some(!output.stdout.is_empty())
 }
-
-#[allow(dead_code)]
-fn relative_to_repo(path: &Path) -> String {
-    path.canonicalize()
-        .ok()
-        .and_then(|absolute| {
-            repo_root()
-                .canonicalize()
-                .ok()
-                .and_then(|root| absolute.strip_prefix(root).ok().map(Path::to_path_buf))
-        })
-        .map(|path| path_to_slash_path(&path))
-        .unwrap_or_else(|| path_to_slash_path(path))
-}

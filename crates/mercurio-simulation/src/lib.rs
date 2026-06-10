@@ -11,8 +11,6 @@ pub use mercurio_simulation_core::{
 };
 
 const CHANGE_LOOP_LIMIT: usize = 20;
-#[allow(dead_code)]
-const CROSSING_TOLERANCE_S: f64 = 0.01;
 
 pub type StateMachineScenarioEvent = SimulationEvent;
 
