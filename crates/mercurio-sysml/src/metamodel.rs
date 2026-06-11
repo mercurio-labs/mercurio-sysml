@@ -3,7 +3,7 @@ use std::path::{Path, PathBuf};
 use mercurio_kerml::KermlLanguageModule;
 use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::{LanguageRegistry, SemanticCompileStatus};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use crate::SysmlLanguageModule;
 use crate::parser;
@@ -12,14 +12,15 @@ pub const SYSML_2_0_METAMODEL_057_ID: &str = "sysml-2.0-metamodel-0.57.0";
 pub const LEGACY_SYSML_2_0_PILOT_057_ID: &str = "sysml-2.0-pilot-0.57.0";
 pub const LATEST_SYSML_METAMODEL_ID: &str = SYSML_2_0_METAMODEL_057_ID;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
 pub enum SysmlMetamodelStatus {
     Latest,
     Supported,
     Deprecated,
 }
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct SysmlMetamodel {
     pub id: String,
     pub display_name: String,
@@ -151,7 +152,9 @@ impl SysmlEnvironment {
 }
 
 pub fn available_metamodels() -> Result<Vec<SysmlMetamodel>, SysmlEnvironmentError> {
-    Ok(vec![metamodel_descriptor()?])
+    serde_json::from_str(crate::embedded_resources::METAMODEL_REGISTRY).map_err(|err| {
+        SysmlEnvironmentError::Json(format!("failed to parse SysML metamodel registry: {err}"))
+    })
 }
 
 pub fn latest_metamodel() -> Result<SysmlMetamodel, SysmlEnvironmentError> {
@@ -163,7 +166,7 @@ pub fn latest_metamodel() -> Result<SysmlMetamodel, SysmlEnvironmentError> {
 }
 
 pub fn metamodel_resource(id: &str) -> Result<SysmlMetamodelResource, SysmlEnvironmentError> {
-    let descriptor = metamodel_descriptor()?;
+    let descriptor = metamodel_descriptor(id)?;
     if descriptor.id != id
         && !descriptor
             .legacy_ids
@@ -194,43 +197,33 @@ pub fn load_baseline_for_metamodel(
     KirDocument::merge([kernel, sysml_delta])
 }
 
+#[cfg(feature = "embed-stdlib")]
+pub(crate) fn embedded_bytes_for_metamodel(id: &str) -> Option<(&'static [u8], &'static [u8])> {
+    match id {
+        SYSML_2_0_METAMODEL_057_ID | LEGACY_SYSML_2_0_PILOT_057_ID => Some((
+            crate::embedded_resources::EMBEDDED_KERNEL,
+            crate::embedded_resources::EMBEDDED_SYSML_LIBRARY,
+        )),
+        _ => None,
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct RawMetamodelDescriptor {
-    id: String,
-    display_name: String,
-    sysml_version: String,
-    kerml_version: String,
-    metamodel_version: String,
-    status: String,
     profile_path: String,
     mappings_path: String,
     stdlib_path: String,
     sysml_delta_path: String,
     provenance_path: String,
-    #[serde(default)]
-    legacy_ids: Vec<String>,
 }
 
-fn metamodel_descriptor() -> Result<SysmlMetamodel, SysmlEnvironmentError> {
-    let raw = metamodel_descriptor_raw()?;
-    Ok(SysmlMetamodel {
-        id: raw.id,
-        display_name: raw.display_name,
-        sysml_version: raw.sysml_version,
-        kerml_version: raw.kerml_version,
-        metamodel_version: raw.metamodel_version,
-        status: match raw.status.as_str() {
-            "latest" => SysmlMetamodelStatus::Latest,
-            "supported" => SysmlMetamodelStatus::Supported,
-            "deprecated" => SysmlMetamodelStatus::Deprecated,
-            other => {
-                return Err(SysmlEnvironmentError::Json(format!(
-                    "unknown SysML metamodel status `{other}`"
-                )));
-            }
-        },
-        legacy_ids: raw.legacy_ids,
-    })
+fn metamodel_descriptor(id: &str) -> Result<SysmlMetamodel, SysmlEnvironmentError> {
+    available_metamodels()?
+        .into_iter()
+        .find(|metamodel| {
+            metamodel.id == id || metamodel.legacy_ids.iter().any(|legacy_id| legacy_id == id)
+        })
+        .ok_or_else(|| SysmlEnvironmentError::UnknownMetamodel(id.to_string()))
 }
 
 fn metamodel_descriptor_raw() -> Result<RawMetamodelDescriptor, SysmlEnvironmentError> {

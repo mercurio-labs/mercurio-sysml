@@ -119,14 +119,35 @@ pub fn default_sysml_library_path() -> PathBuf {
 }
 
 pub fn load_sysml_baseline() -> Result<KirDocument, KirError> {
-    match metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
-        Ok(metamodel) => load_baseline_for_metamodel(&metamodel),
-        Err(_) => {
-            let kernel = mercurio_kerml::load_kernel_baseline()?;
-            let sysml_delta = KirDocument::from_path(&default_sysml_delta_library_path())?;
-            KirDocument::merge([kernel, sysml_delta])
+    if let Ok(path) = std::env::var("MERCURIO_STDLIB_PATH") {
+        return KirDocument::from_path(Path::new(&path));
+    }
+
+    if let Ok(metamodel) = metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
+        if metamodel.sysml_delta_path.exists() {
+            return load_baseline_for_metamodel(&metamodel);
         }
     }
+
+    #[cfg(feature = "embed-stdlib")]
+    {
+        let (kernel_bytes, sysml_bytes) =
+            crate::metamodel::embedded_bytes_for_metamodel(LATEST_SYSML_METAMODEL_ID)
+                .ok_or_else(|| KirError::Model("embedded SysML stdlib not found".to_string()))?;
+        let kernel = KirDocument::from_str(std::str::from_utf8(kernel_bytes).map_err(|_| {
+            KirError::Model("embedded kernel stdlib bytes are not valid UTF-8".to_string())
+        })?)?;
+        let sysml_delta =
+            KirDocument::from_str(std::str::from_utf8(sysml_bytes).map_err(|_| {
+                KirError::Model("embedded SysML stdlib bytes are not valid UTF-8".to_string())
+            })?)?;
+        return KirDocument::merge([kernel, sysml_delta]);
+    }
+
+    #[allow(unreachable_code)]
+    Err(KirError::Model(
+        "SysML stdlib not found; set MERCURIO_STDLIB_PATH or build with embed-stdlib".to_string(),
+    ))
 }
 
 pub fn load_sysml_document_with_stdlib(

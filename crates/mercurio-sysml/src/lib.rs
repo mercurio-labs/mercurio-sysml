@@ -6,7 +6,9 @@
 pub mod assessment;
 pub mod authoring;
 pub mod behavior;
+pub mod builder;
 pub mod constraints;
+mod embedded_resources;
 pub mod metamodel;
 pub mod mutation;
 pub mod parser;
@@ -21,6 +23,12 @@ pub use behavior::{
     StateMachineValidationFinding, StateMachineValidationSeverity, StateNode,
     StateTransitionTriggerKind, SysmlDynamicBehaviorCapability, TransitionNode,
     project_state_machines, project_state_machines_from_graph, register_sysml_behavior_capability,
+};
+pub use builder::{
+    ActionDefinition, AttributeDefinition, AttributeUsage, BuilderError, ConnectionDefinition,
+    ConnectionUsage, InterfaceDefinition, IntoDeclaration, IntoRef, ItemDefinition, ItemUsage,
+    ModelBuilder, PartDefinition, PartUsage, PortDefinition, PortUsage, RequirementDefinition,
+    StateDefinition, StateUsage, StdlibRef,
 };
 pub use constraints::{
     ConstraintDiagnosticDto, ConstraintError, ConstraintExplanationDto, ConstraintGraphEdgeDto,

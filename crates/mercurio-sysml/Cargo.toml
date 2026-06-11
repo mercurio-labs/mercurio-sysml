@@ -4,6 +4,9 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 
+[features]
+embed-stdlib = []
+
 [dependencies]
 mercurio-kerml = { path = "../mercurio-kerml" }
 mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
@@ -13,5 +16,9 @@ mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/merc
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 
-[dev-dependencies]
+[build-dependencies]
+mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+serde = { workspace = true, features = ["derive"] }
+serde_json.workspace = true
 
+[dev-dependencies]
