@@ -62,6 +62,8 @@ impl Args {
 #[derive(Debug, Deserialize)]
 struct BoundaryManifest {
     allowed_core_crates: BTreeSet<String>,
+    #[serde(default)]
+    allowed_support_crates: BTreeSet<String>,
     known_migration_crates: BTreeSet<String>,
     #[serde(default)]
     forbidden_dependencies: BTreeMap<String, BTreeSet<String>>,
@@ -88,6 +90,7 @@ struct ReasoningAiBoundary {
 #[derive(Debug)]
 struct BoundaryReport {
     allowed_core_crates: Vec<String>,
+    allowed_support_crates: Vec<String>,
     known_migration_crates: Vec<String>,
     unexpected_crates: Vec<String>,
     forbidden_dirs_present: Vec<String>,
@@ -102,6 +105,7 @@ impl BoundaryReport {
         let crates = discover_child_dirs(&repo_path("crates"))?;
         let root_dirs = discover_child_dirs(&repo_path("."))?;
         let mut allowed_core_crates = Vec::new();
+        let mut allowed_support_crates = Vec::new();
         let mut known_migration_crates = Vec::new();
         let mut unexpected_crates = Vec::new();
         let mut forbidden_dirs_present = Vec::new();
@@ -119,6 +123,9 @@ impl BoundaryReport {
         for crate_name in &crates {
             match classify_crate(manifest, crate_name) {
                 CrateClassification::AllowedCore => allowed_core_crates.push(crate_name.clone()),
+                CrateClassification::AllowedSupport => {
+                    allowed_support_crates.push(crate_name.clone())
+                }
                 CrateClassification::KnownMigration => {
                     known_migration_crates.push(crate_name.clone())
                 }
@@ -162,25 +169,45 @@ impl BoundaryReport {
 
         if let Some(boundary) = &manifest.reasoning_ai_boundary {
             let root = repo_path(".").join(&boundary.workspace_root);
-            for crate_name in &boundary.deterministic_crates {
-                let manifest_path = root.join("crates").join(crate_name).join("Cargo.toml");
-                let dependencies = crate_dependencies_from_manifest(&manifest_path)?;
-                let message = format!(
-                    "crate `{crate_name}` is independent from `{}`",
-                    boundary.ai_crate
-                );
-                if dependencies.contains(&boundary.ai_crate) {
-                    let error = reasoning_ai_dependency_violation(crate_name, &boundary.ai_crate);
-                    errors.push(error.clone());
-                    reasoning_ai_boundary.push(error);
+            if root.is_dir() {
+                for crate_name in &boundary.deterministic_crates {
+                    let manifest_path = root.join("crates").join(crate_name).join("Cargo.toml");
+                    let dependencies = crate_dependencies_from_manifest(&manifest_path)?;
+                    let message = format!(
+                        "crate `{crate_name}` is independent from `{}`",
+                        boundary.ai_crate
+                    );
+                    if dependencies.contains(&boundary.ai_crate) {
+                        let error =
+                            reasoning_ai_dependency_violation(crate_name, &boundary.ai_crate);
+                        errors.push(error.clone());
+                        reasoning_ai_boundary.push(error);
+                    } else {
+                        reasoning_ai_boundary.push(message);
+                    }
+                }
+            } else {
+                reasoning_ai_boundary.push(format!(
+                    "skipped reasoning/AI boundary; workspace root `{}` is not present",
+                    root.display()
+                ));
+                if manifest.known_migration_crates.contains(&boundary.ai_crate) {
+                    reasoning_ai_boundary.push(format!(
+                        "crate `{}` is tracked as a migration crate",
+                        boundary.ai_crate
+                    ));
                 } else {
-                    reasoning_ai_boundary.push(message);
+                    reasoning_ai_boundary.push(format!(
+                        "crate `{}` is external to this checkout",
+                        boundary.ai_crate
+                    ));
                 }
             }
         }
 
         Ok(Self {
             allowed_core_crates,
+            allowed_support_crates,
             known_migration_crates,
             unexpected_crates,
             forbidden_dirs_present,
@@ -195,6 +222,7 @@ impl BoundaryReport {
 #[derive(Debug, PartialEq, Eq)]
 enum CrateClassification {
     AllowedCore,
+    AllowedSupport,
     KnownMigration,
     Unclassified(String),
 }
@@ -208,6 +236,8 @@ struct DependencyViolation {
 fn classify_crate(manifest: &BoundaryManifest, crate_name: &str) -> CrateClassification {
     if manifest.allowed_core_crates.contains(crate_name) {
         CrateClassification::AllowedCore
+    } else if manifest.allowed_support_crates.contains(crate_name) {
+        CrateClassification::AllowedSupport
     } else if manifest.known_migration_crates.contains(crate_name) {
         CrateClassification::KnownMigration
     } else {
@@ -304,6 +334,10 @@ fn print_report(report: &BoundaryReport) {
         join_or_dash(&report.allowed_core_crates)
     );
     println!(
+        "  allowed support crates: {}",
+        join_or_dash(&report.allowed_support_crates)
+    );
+    println!(
         "  known migration crates: {}",
         join_or_dash(&report.known_migration_crates)
     );
@@ -388,6 +422,7 @@ default = []
     fn unclassified_crate_is_reported() {
         let manifest = BoundaryManifest {
             allowed_core_crates: ["mercurio-foundation".to_string()].into_iter().collect(),
+            allowed_support_crates: BTreeSet::new(),
             known_migration_crates: BTreeSet::new(),
             forbidden_dependencies: BTreeMap::new(),
             temporary_dependency_exceptions: BTreeMap::new(),
