@@ -17,9 +17,7 @@ use mercurio_language_frontend::resolver::{
 };
 use mercurio_language_frontend::transpile::transpile_module;
 
-use crate::metamodel::{
-    LATEST_SYSML_METAMODEL_ID, load_baseline_for_metamodel, metamodel_resource,
-};
+use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, metamodel_resource};
 
 #[cfg(not(target_arch = "wasm32"))]
 type CompileTimer = std::time::Instant;
@@ -118,36 +116,133 @@ pub fn default_sysml_library_path() -> PathBuf {
         })
 }
 
-pub fn load_sysml_baseline() -> Result<KirDocument, KirError> {
-    if let Ok(path) = std::env::var("MERCURIO_STDLIB_PATH") {
-        return KirDocument::from_path(Path::new(&path));
-    }
+/// A resolved stdlib source.
+///
+/// Obtained from `MERCURIO_STDLIB_LOCATOR`, the legacy `MERCURIO_STDLIB_PATH`, or
+/// auto-detection.  Use `as_uri()` to get a stable string identity for logging
+/// or cache keys.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum StdlibLocator {
+    /// `embedded:sysml-stdlib/{metamodel_id}` — KIR bytes compiled into this binary.
+    Embedded { metamodel_id: String },
+    /// `file:{path}` (or a bare path from the legacy `MERCURIO_STDLIB_PATH` env var).
+    File { path: PathBuf },
+    /// `kpar:{name}:{version}` — delegates to the foundation package system.
+    Kpar { locator: String },
+}
 
-    if let Ok(metamodel) = metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
-        if metamodel.sysml_delta_path.exists() {
-            return load_baseline_for_metamodel(&metamodel);
+impl StdlibLocator {
+    pub fn parse(s: &str) -> Self {
+        if let Some(rest) = s.strip_prefix("embedded:") {
+            let metamodel_id = rest
+                .strip_prefix("sysml-stdlib/")
+                .unwrap_or(LATEST_SYSML_METAMODEL_ID)
+                .to_string();
+            return Self::Embedded { metamodel_id };
+        }
+        if let Some(path) = s.strip_prefix("file:") {
+            return Self::File {
+                path: PathBuf::from(path),
+            };
+        }
+        if s.starts_with("kpar:") {
+            return Self::Kpar {
+                locator: s.to_string(),
+            };
+        }
+        // Bare path — accept legacy MERCURIO_STDLIB_PATH values unchanged.
+        Self::File {
+            path: PathBuf::from(s),
         }
     }
 
-    #[cfg(feature = "embed-stdlib")]
-    {
-        let (kernel_bytes, sysml_bytes) =
-            crate::metamodel::embedded_bytes_for_metamodel(LATEST_SYSML_METAMODEL_ID)
-                .ok_or_else(|| KirError::Model("embedded SysML stdlib not found".to_string()))?;
-        let kernel = KirDocument::from_str(std::str::from_utf8(kernel_bytes).map_err(|_| {
-            KirError::Model("embedded kernel stdlib bytes are not valid UTF-8".to_string())
-        })?)?;
-        let sysml_delta =
-            KirDocument::from_str(std::str::from_utf8(sysml_bytes).map_err(|_| {
-                KirError::Model("embedded SysML stdlib bytes are not valid UTF-8".to_string())
-            })?)?;
-        return KirDocument::merge([kernel, sysml_delta]);
+    /// Read `MERCURIO_STDLIB_LOCATOR` (preferred) or the legacy `MERCURIO_STDLIB_PATH`.
+    pub fn from_env() -> Option<Self> {
+        if let Ok(raw) = std::env::var("MERCURIO_STDLIB_LOCATOR") {
+            return Some(Self::parse(&raw));
+        }
+        if let Ok(path) = std::env::var("MERCURIO_STDLIB_PATH") {
+            return Some(Self::File {
+                path: PathBuf::from(path),
+            });
+        }
+        None
     }
 
-    #[allow(unreachable_code)]
-    Err(KirError::Model(
-        "SysML stdlib not found; set MERCURIO_STDLIB_PATH or build with embed-stdlib".to_string(),
-    ))
+    pub fn as_uri(&self) -> String {
+        match self {
+            Self::Embedded { metamodel_id } => {
+                format!("embedded:sysml-stdlib/{metamodel_id}")
+            }
+            Self::File { path } => format!("file:{}", path.display()),
+            Self::Kpar { locator } => locator.clone(),
+        }
+    }
+}
+
+/// Auto-detect the appropriate stdlib locator when no env override is set.
+pub fn resolve_default_stdlib_locator() -> StdlibLocator {
+    if let Ok(metamodel) = metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
+        if metamodel.sysml_delta_path.exists() {
+            return StdlibLocator::Kpar {
+                locator: "kpar:org.omg/model-stdlib:2.0.0".to_string(),
+            };
+        }
+    }
+    StdlibLocator::Embedded {
+        metamodel_id: LATEST_SYSML_METAMODEL_ID.to_string(),
+    }
+}
+
+pub fn load_sysml_baseline() -> Result<KirDocument, KirError> {
+    let locator = StdlibLocator::from_env().unwrap_or_else(resolve_default_stdlib_locator);
+    load_sysml_baseline_from_locator(&locator)
+}
+
+pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDocument, KirError> {
+    match locator {
+        StdlibLocator::File { path } => KirDocument::from_path(path),
+
+        StdlibLocator::Kpar { locator: loc } => {
+            mercurio_core::BaselineLibraryConfig {
+                id: "stdlib".to_string(),
+                provider: mercurio_core::LibraryProviderConfig::KparLocator {
+                    locator: loc.clone(),
+                },
+            }
+            .resolve()
+            .map(|a| a.document)
+        }
+
+        StdlibLocator::Embedded { metamodel_id } => {
+            #[cfg(feature = "embed-stdlib")]
+            {
+                let (kernel_bytes, sysml_bytes) =
+                    crate::metamodel::embedded_bytes_for_metamodel(metamodel_id).ok_or_else(
+                        || {
+                            KirError::Model(format!(
+                                "no embedded stdlib for metamodel '{metamodel_id}'"
+                            ))
+                        },
+                    )?;
+                let kernel =
+                    KirDocument::from_str(std::str::from_utf8(kernel_bytes).map_err(|_| {
+                        KirError::Model("embedded kernel stdlib is not valid UTF-8".to_string())
+                    })?)?;
+                let sysml_delta =
+                    KirDocument::from_str(std::str::from_utf8(sysml_bytes).map_err(|_| {
+                        KirError::Model(
+                            "embedded sysml-library stdlib is not valid UTF-8".to_string(),
+                        )
+                    })?)?;
+                return KirDocument::merge([kernel, sysml_delta]);
+            }
+            #[allow(unreachable_code)]
+            Err(KirError::Model(format!(
+                "embedded stdlib requested for '{metamodel_id}' but binary was not built with the embed-stdlib feature"
+            )))
+        }
+    }
 }
 
 pub fn load_sysml_document_with_stdlib(

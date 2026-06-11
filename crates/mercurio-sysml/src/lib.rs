@@ -59,13 +59,15 @@ pub use mutation::{
     sysml_semantic_reasoning_context_from_authoring_project,
 };
 pub use parser::{
-    SemanticCompileReport, SysmlError, compile_sysml_module, compile_sysml_module_with_context,
-    compile_sysml_module_with_context_report, compile_sysml_module_with_context_report_with_limit,
+    SemanticCompileReport, StdlibLocator, SysmlError, compile_sysml_module,
+    compile_sysml_module_with_context, compile_sysml_module_with_context_report,
+    compile_sysml_module_with_context_report_with_limit,
     compile_sysml_module_with_resolver_context,
     compile_sysml_module_with_resolver_context_report_with_limit, compile_sysml_text,
     compile_sysml_text_with_context, compile_sysml_text_with_context_report,
-    default_sysml_delta_library_path, load_sysml_baseline, load_sysml_document,
-    load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
+    default_sysml_delta_library_path, load_sysml_baseline, load_sysml_baseline_from_locator,
+    load_sysml_document, load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
+    resolve_default_stdlib_locator,
 };
 pub use semantic_profile::{
     SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_RELATIONSHIP_KINDS,
