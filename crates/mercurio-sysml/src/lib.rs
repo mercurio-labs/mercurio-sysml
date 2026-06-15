@@ -48,9 +48,11 @@ pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatu
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
 pub use mercurio_language_frontend::SourceLanguage;
 pub use metamodel::{
-    LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID, SYSML_2_0_METAMODEL_057_ID,
-    SysmlEnvironment, SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource,
-    SysmlMetamodelStatus, available_metamodels, latest_metamodel, metamodel_resource,
+    LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID, ReleaseBundleConformance,
+    ReleaseBundleDescriptor, ReleaseBundleMappings, ReleaseBundleProfile, ReleaseBundlePython,
+    ReleaseBundleResource, ReleaseBundleStdlib, SYSML_2_0_METAMODEL_057_ID, SysmlEnvironment,
+    SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource, SysmlMetamodelStatus,
+    available_metamodels, latest_metamodel, metamodel_resource, release_bundle,
 };
 pub use mutation::{
     SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,
@@ -257,8 +259,53 @@ mod tests {
     }
 
     #[test]
+    fn release_bundle_resolves_latest_and_aliases() {
+        let latest = release_bundle("latest").unwrap();
+        let by_selector = release_bundle("0.57.0").unwrap();
+        let by_alias = release_bundle("pilot-0.57.0").unwrap();
+        let by_legacy = release_bundle(LEGACY_SYSML_2_0_PILOT_057_ID).unwrap();
+
+        assert_eq!(latest.profile_id, SYSML_2_0_METAMODEL_057_ID);
+        assert_eq!(by_selector.profile_id, latest.profile_id);
+        assert_eq!(by_alias.profile_id, latest.profile_id);
+        assert_eq!(by_legacy.profile_id, latest.profile_id);
+        assert!(latest.stdlib_path.ends_with("stdlib.full.kir.json"));
+        assert!(latest.rulepack_path.ends_with("stdlib.rulepack.json"));
+        assert!(
+            latest
+                .lowering_rules_path
+                .ends_with("lowering_rules.seed.json")
+        );
+        assert!(
+            latest
+                .semantic_defaults_path
+                .ends_with("semantic_defaults.seed.json")
+        );
+    }
+
+    #[test]
+    fn stdlib_locator_resolves_release_selector() {
+        let locator = StdlibLocator::for_release("0.57.0").unwrap();
+
+        assert!(matches!(locator, StdlibLocator::File { .. }));
+        assert!(locator.as_uri().contains("stdlib.full.kir.json"));
+    }
+
+    #[test]
     fn environment_compiles_with_latest_metamodel() {
         let env = SysmlEnvironment::latest_metamodel().unwrap();
+
+        let document = env
+            .compile_text("package Demo { part def Vehicle; }", "inline.sysml")
+            .unwrap();
+
+        assert_eq!(env.metamodel().id, SYSML_2_0_METAMODEL_057_ID);
+        assert!(!document.elements.is_empty());
+    }
+
+    #[test]
+    fn environment_compiles_with_release_selector() {
+        let env = SysmlEnvironment::for_release("0.57.0").unwrap();
 
         let document = env
             .compile_text("package Demo { part def Vehicle; }", "inline.sysml")

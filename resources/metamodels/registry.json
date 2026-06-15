@@ -1,11 +1,39 @@
 [
   {
     "id": "sysml-2.0-metamodel-0.57.0",
+    "selector": "0.57.0",
     "display_name": "SysML v2 (0.57.0)",
     "sysml_version": "2.0",
     "kerml_version": "1.0",
     "metamodel_version": "0.57.0",
     "status": "latest",
-    "legacy_ids": ["sysml-2.0-pilot-0.57.0"]
+    "legacy_ids": ["sysml-2.0-pilot-0.57.0"],
+    "aliases": [
+      "pilot-0.57.0",
+      "sysml-2.0-pilot-0.57.0"
+    ],
+    "bundle": {
+      "profile": {
+        "path": "profile.json"
+      },
+      "stdlib": {
+        "locator": "file:stdlib/stdlib.full.kir.json",
+        "rulepack": "stdlib/stdlib.rulepack.json"
+      },
+      "mappings": {
+        "path": "mappings",
+        "metamodel_constructs": "mappings/metamodel_constructs.seed.json",
+        "kir_emission": "mappings/kir_emission.seed.json",
+        "lowering_rules": "mappings/lowering_rules.seed.json",
+        "semantic_defaults": "mappings/semantic_defaults.seed.json"
+      },
+      "conformance": {
+        "accepted_differences": "conformance/accepted_differences.json",
+        "trace": "conformance/conformance-trace.json"
+      },
+      "python": {
+        "wrapper_module": "mercurio_sysml_2_0"
+      }
+    }
   }
 ]

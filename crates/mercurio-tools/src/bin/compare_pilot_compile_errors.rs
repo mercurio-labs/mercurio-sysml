@@ -5,10 +5,9 @@ use std::process::Command;
 use std::time::Instant;
 
 use mercurio_core::frontend::diagnostics::Diagnostic;
-use mercurio_core::source_set::{
-    SourceCompileContext, SourceDocument, compile_source_document_with_context,
-};
-use mercurio_core::{KirDocument, default_stdlib_path, repo_path};
+use mercurio_core::source_set::{SourceDocument, compile_source_document_with_registry};
+use mercurio_core::{KirDocument, LanguageRegistry, default_stdlib_path};
+use mercurio_sysml::SysmlLanguageModule;
 use mercurio_tools::default_pilot_root;
 use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
@@ -174,9 +173,9 @@ struct PilotCorpusSeed {
 
 impl PilotCorpusSeed {
     fn load() -> Result<Self, Box<dyn std::error::Error>> {
-        Ok(serde_json::from_str(&std::fs::read_to_string(repo_path(
-            "crates/mercurio-tools/corpus/pilot_corpus.seed.json",
-        ))?)?)
+        Ok(serde_json::from_str(&std::fs::read_to_string(
+            tool_repo_path("crates/mercurio-tools/corpus/pilot_corpus.seed.json"),
+        )?)?)
     }
 
     fn support_paths_for(&self, relative_path: &str) -> &[String] {
@@ -292,9 +291,9 @@ impl PilotRunner {
     fn new(pilot_root: &Path) -> Result<Self, Box<dyn std::error::Error>> {
         let pilot_root = pilot_root.canonicalize()?;
         let interactive_jar = find_interactive_jar(&pilot_root)?;
-        let classes_dir = repo_path("target/pilot-exporter-classes");
-        let java_source = repo_path(
-            "../mercurio-sysml/tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotModelExporter.java",
+        let classes_dir = tool_repo_path("target/pilot-exporter-classes");
+        let java_source = tool_repo_path(
+            "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotModelExporter.java",
         );
         compile_java_exporter(
             &interactive_jar,
@@ -538,7 +537,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut relative_path = None;
     let mut corpus_name = None;
     let mut paths_file = None;
-    let mut output_path = repo_path("target/pilot_compile_error_compare.json");
+    let mut output_path = tool_repo_path("target/pilot_compile_error_compare.json");
     let args = env::args().skip(1).collect::<Vec<_>>();
     let mut index = 0;
 
@@ -675,29 +674,12 @@ fn build_mercurio_case(
     });
 
     let context_start = Instant::now();
-    let compile_context =
-        match SourceCompileContext::from_source_documents(&source_documents, &augmented) {
-            Ok(context) => {
-                phases.push(PhaseTiming {
-                    name: "build_resolver_context".to_string(),
-                    duration_ms: elapsed_ms(context_start),
-                });
-                context
-            }
-            Err(diagnostic) => {
-                phases.push(PhaseTiming {
-                    name: "build_resolver_context".to_string(),
-                    duration_ms: elapsed_ms(context_start),
-                });
-                return Ok(error_result(
-                    "resolve_context",
-                    None,
-                    diagnostic_to_normalized("resolve_context", None, &diagnostic),
-                    start,
-                    phases,
-                ));
-            }
-        };
+    let mut registry = LanguageRegistry::new();
+    registry.register(SysmlLanguageModule);
+    phases.push(PhaseTiming {
+        name: "build_language_registry".to_string(),
+        duration_ms: elapsed_ms(context_start),
+    });
 
     let target_document = source_documents
         .iter()
@@ -706,7 +688,7 @@ fn build_mercurio_case(
 
     let compile_start = Instant::now();
     if let Err(diagnostic) =
-        compile_source_document_with_context(target_document, &compile_context, &augmented)
+        compile_source_document_with_registry(target_document, &augmented, &registry)
     {
         phases.push(PhaseTiming {
             name: "compile_target_with_source_set".to_string(),
@@ -718,7 +700,7 @@ fn build_mercurio_case(
             diagnostic_to_normalized(
                 "resolve_transpile",
                 Some(&target_document.path),
-                &diagnostic,
+                &Diagnostic::new(diagnostic.to_string(), None),
             ),
             start,
             phases,
@@ -929,7 +911,7 @@ fn run_java_diagnostics_exporter(
     relative_path: &str,
     support_paths: &[String],
 ) -> Result<PathBuf, Box<dyn std::error::Error>> {
-    let export_path = repo_path(&format!(
+    let export_path = tool_repo_path(&format!(
         "target/pilot_compile_diagnostics.{}.json",
         relative_path_slug(relative_path)
     ));
@@ -961,7 +943,7 @@ fn run_java_diagnostics_exporter(
     input_paths.push(pilot_runner.pilot_root.join(relative_path));
 
     let status = if cfg!(windows) {
-        let script_path = repo_path("target/run_pilot_compile_diagnostics.ps1");
+        let script_path = tool_repo_path("target/run_pilot_compile_diagnostics.ps1");
         let mut script = format!(
             "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotModelExporter --diagnostics '{}' '{}'",
             classpath.replace('\'', "''"),
@@ -1031,10 +1013,10 @@ fn export_diagnostics_path_group_from_pilot(
     relative_paths: &[String],
     corpus_seed: &PilotCorpusSeed,
 ) -> Result<BTreeMap<String, PilotDiagnosticRunDocument>, Box<dyn std::error::Error>> {
-    let export_path = repo_path(&format!(
+    let export_path = tool_repo_path(&format!(
         "target/pilot_compile_diagnostics.batch.{group_slug}.json"
     ));
-    let spec_path = repo_path(&format!(
+    let spec_path = tool_repo_path(&format!(
         "target/pilot_compile_diagnostics.batch.{group_slug}.spec.json"
     ));
 
@@ -1157,7 +1139,7 @@ fn run_java_diagnostics_exporter_batch(
     );
 
     let status = if cfg!(windows) {
-        let script_path = repo_path("target/run_pilot_compile_diagnostics_batch.ps1");
+        let script_path = tool_repo_path("target/run_pilot_compile_diagnostics_batch.ps1");
         let script = format!(
             "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotModelExporter --diagnostics-batch '{}' '{}' '{}'\n",
             classpath.replace('\'', "''"),
@@ -1261,6 +1243,14 @@ fn absolute_path(path: &Path) -> Result<PathBuf, Box<dyn std::error::Error>> {
         return Ok(path.to_path_buf());
     }
     Ok(env::current_dir()?.join(path))
+}
+
+fn tool_repo_path(relative: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("mercurio-tools lives under crates")
+        .join(relative)
 }
 
 fn java_path_string(path: &Path) -> String {

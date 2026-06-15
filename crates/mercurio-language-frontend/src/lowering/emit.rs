@@ -148,8 +148,14 @@ impl MappingBundle {
         }
     }
 
-    pub fn load_for_profile(_profile_id: &str) -> Result<&'static Self, Diagnostic> {
-        Self::load_for_language(SourceLanguage::Sysml)
+    pub fn load_for_profile(profile_id: &str) -> Result<&'static Self, Diagnostic> {
+        match canonical_sysml_profile_id(profile_id) {
+            Some(_) => Self::load_for_language(SourceLanguage::Sysml),
+            None => Err(Diagnostic::new(
+                format!("no mapping bundle registered for profile `{profile_id}`"),
+                None,
+            )),
+        }
     }
 
     fn load_uncached_for_language(language: SourceLanguage) -> Result<Self, Diagnostic> {
@@ -949,6 +955,15 @@ fn load_metamodel_constructs_seed() -> Result<String, Diagnostic> {
         "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json"
     )
     .to_string())
+}
+
+fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
+    match profile_id {
+        "sysml-2.0-metamodel-0.57.0" | "sysml-2.0-pilot-0.57.0" | "pilot-0.57.0" | "0.57.0" => {
+            Some("sysml-2.0-metamodel-0.57.0")
+        }
+        _ => None,
+    }
 }
 
 fn load_kir_emission_seed() -> Result<String, Diagnostic> {
