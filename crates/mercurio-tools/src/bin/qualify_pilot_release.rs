@@ -13,6 +13,7 @@ const DEFAULT_RELEASE: &str = "2026-01";
 const DEFAULT_PROFILE_ID: &str = "sysml-2.0-metamodel-0.57.0";
 const DEFAULT_SPEC_VERSION: &str = "2.0.0";
 const DEFAULT_CORPUS: &str = "all";
+const DEFAULT_WRAPPER_MODULE: &str = "mercurio_sysml_2_0";
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse()?;
@@ -88,6 +89,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     args.profile_id.clone(),
                     "--source-id".to_string(),
                     args.release.clone(),
+                    "--wrapper-module".to_string(),
+                    args.wrapper_module.clone(),
                     "--audit-profile".to_string(),
                 ],
             },
@@ -95,6 +98,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             None,
         )?);
     }
+
+    stages.push(python_wrappers_stage(
+        &args.out.join("stdlib/python"),
+        &args.wrapper_module,
+        &args.profile_id,
+        args.skip_stdlib_build,
+    )?);
 
     let syntax_report = args.out.join("reports/syntax-parity.json");
     stages.push(run_stage(
@@ -219,6 +229,7 @@ struct Args {
     profile_id: String,
     spec_version: String,
     corpus: String,
+    wrapper_module: String,
     skip_stdlib_build: bool,
 }
 
@@ -231,6 +242,7 @@ impl Args {
             profile_id: DEFAULT_PROFILE_ID.to_string(),
             spec_version: DEFAULT_SPEC_VERSION.to_string(),
             corpus: DEFAULT_CORPUS.to_string(),
+            wrapper_module: DEFAULT_WRAPPER_MODULE.to_string(),
             skip_stdlib_build: false,
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
@@ -243,6 +255,7 @@ impl Args {
                 "--profile-id" => args.profile_id = next_string(&raw, &mut index)?,
                 "--spec-version" => args.spec_version = next_string(&raw, &mut index)?,
                 "--corpus" => args.corpus = next_string(&raw, &mut index)?,
+                "--wrapper-module" => args.wrapper_module = next_string(&raw, &mut index)?,
                 "--skip-stdlib-build" => args.skip_stdlib_build = true,
                 "--help" | "-h" => {
                     print_usage();
@@ -425,6 +438,130 @@ fn pilot_java_artifacts_stage(pilot_root: &Path) -> Result<StageTrace, Box<dyn s
     })
 }
 
+fn python_wrappers_stage(
+    python_root: &Path,
+    wrapper_module: &str,
+    expected_profile_id: &str,
+    skipped_stdlib_build: bool,
+) -> Result<StageTrace, Box<dyn std::error::Error>> {
+    let started = Instant::now();
+    let module_root = python_root.join(wrapper_module);
+    if !module_root.exists() {
+        return Ok(StageTrace {
+            name: "python_wrappers".to_string(),
+            description: "verify generated Python stdlib wrapper package",
+            status: if skipped_stdlib_build {
+                "skipped".to_string()
+            } else {
+                "failed".to_string()
+            },
+            duration_ms: started.elapsed().as_millis(),
+            command: Vec::new(),
+            exit_code: None,
+            report: None,
+            error: Some(format!(
+                "missing generated Python wrapper module at {}",
+                module_root.display()
+            )),
+        });
+    }
+
+    let required = [
+        "__init__.py",
+        "base.py",
+        "concepts.py",
+        "generation_info.py",
+        "metamodel.py",
+        "py.typed",
+        "stdlib/__init__.py",
+        "stdlib/isq.py",
+        "stdlib/si.py",
+    ];
+    let mut errors = Vec::new();
+    for relative in required {
+        if !module_root.join(relative).exists() {
+            errors.push(format!("missing {wrapper_module}/{relative}"));
+        }
+    }
+
+    let generation_info = module_root.join("generation_info.py");
+    if generation_info.exists() {
+        let content = std::fs::read_to_string(&generation_info)?;
+        if !content.contains(&format!("PROFILE_ID = {expected_profile_id:?}")) {
+            errors.push(format!(
+                "generation_info.py does not declare PROFILE_ID = {expected_profile_id:?}"
+            ));
+        }
+    }
+
+    let files = collect_files(python_root)?;
+    let py_files = files
+        .iter()
+        .filter(|path| path.extension().is_some_and(|extension| extension == "py"))
+        .cloned()
+        .collect::<Vec<_>>();
+    let mut py_compile_exit_code = None;
+    let mut command = Vec::new();
+    if !py_files.is_empty() {
+        let python = std::env::var("PYTHON").unwrap_or_else(|_| "python".to_string());
+        let mut spec_args = vec!["-m".to_string(), "py_compile".to_string()];
+        spec_args.extend(py_files.iter().map(|path| path.display().to_string()));
+        command = std::iter::once(python.clone())
+            .chain(spec_args.clone())
+            .collect();
+        match Command::new(&python).args(&spec_args).output() {
+            Ok(output) => {
+                py_compile_exit_code = output.status.code();
+                if !output.status.success() {
+                    errors.push(format!(
+                        "python py_compile failed: {}",
+                        String::from_utf8_lossy(&output.stderr).trim()
+                    ));
+                }
+            }
+            Err(err) => {
+                errors.push(format!("failed to launch Python for py_compile: {err}"));
+            }
+        }
+    }
+
+    let tree_sha256 = digest_paths(python_root, &files)?;
+    let report = ReportTrace {
+        path: python_root.display().to_string(),
+        sha256: tree_sha256,
+        metrics: json!({
+            "module": wrapper_module,
+            "file_count": files.len(),
+            "python_file_count": py_files.len(),
+            "metamodel_class_count": count_metamodel_classes(&module_root.join("metamodel.py"))?,
+            "stdlib_catalog_entries": {
+                "isq": count_catalog_entries(&module_root.join("stdlib/isq.py"))?,
+                "si": count_catalog_entries(&module_root.join("stdlib/si.py"))?
+            },
+            "py_compile_exit_code": py_compile_exit_code
+        }),
+    };
+
+    Ok(StageTrace {
+        name: "python_wrappers".to_string(),
+        description: "verify generated Python stdlib wrapper package",
+        status: if errors.is_empty() {
+            "passed".to_string()
+        } else {
+            "failed".to_string()
+        },
+        duration_ms: started.elapsed().as_millis(),
+        command,
+        exit_code: py_compile_exit_code,
+        report: Some(report),
+        error: if errors.is_empty() {
+            None
+        } else {
+            Some(errors.join("; "))
+        },
+    })
+}
+
 fn skipped_stage(name: &str, description: &'static str, reason: &str) -> StageTrace {
     StageTrace {
         name: name.to_string(),
@@ -436,6 +573,58 @@ fn skipped_stage(name: &str, description: &'static str, reason: &str) -> StageTr
         report: None,
         error: Some(reason.to_string()),
     }
+}
+
+fn collect_files(root: &Path) -> Result<Vec<PathBuf>, Box<dyn std::error::Error>> {
+    let mut stack = vec![root.to_path_buf()];
+    let mut files = Vec::new();
+    while let Some(path) = stack.pop() {
+        if path.is_dir() {
+            for entry in std::fs::read_dir(&path)? {
+                stack.push(entry?.path());
+            }
+        } else if path.is_file() {
+            files.push(path);
+        }
+    }
+    files.sort();
+    Ok(files)
+}
+
+fn digest_paths(root: &Path, paths: &[PathBuf]) -> Result<String, Box<dyn std::error::Error>> {
+    let mut material = String::new();
+    for path in paths {
+        let relative = path
+            .strip_prefix(root)
+            .unwrap_or(path)
+            .to_string_lossy()
+            .replace('\\', "/");
+        material.push_str(&relative);
+        material.push('\0');
+        material.push_str(&sha256_file(path)?);
+        material.push('\n');
+    }
+    Ok(sha256_hex(material.as_bytes()))
+}
+
+fn count_metamodel_classes(path: &Path) -> Result<usize, Box<dyn std::error::Error>> {
+    if !path.exists() {
+        return Ok(0);
+    }
+    Ok(std::fs::read_to_string(path)?
+        .lines()
+        .filter(|line| line.starts_with("class ") && line.contains("(ElementView):"))
+        .count())
+}
+
+fn count_catalog_entries(path: &Path) -> Result<usize, Box<dyn std::error::Error>> {
+    if !path.exists() {
+        return Ok(0);
+    }
+    Ok(std::fs::read_to_string(path)?
+        .lines()
+        .filter(|line| line.starts_with("    ") && line.contains("StdlibRef("))
+        .count())
 }
 
 fn fingerprint_repo(path: &Path) -> Result<RepoFingerprint, Box<dyn std::error::Error>> {
@@ -525,6 +714,6 @@ fn next_path(args: &[String], index: &mut usize) -> Result<PathBuf, Box<dyn std:
 
 fn print_usage() {
     println!(
-        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--skip-stdlib-build]"
+        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build]"
     );
 }
