@@ -2960,7 +2960,8 @@ fn disambiguate_duplicate_source_position_usage_ids(elements: &mut [KirElement])
             || element.id.starts_with("assume.")
             || element.id.starts_with("require.")
             || element.id.starts_with("reference.")
-            || element.id.starts_with("transition.");
+            || element.id.starts_with("transition.")
+            || (element.id.starts_with("feature.") && element.id.ends_with(".annotatedElement"));
         if !disambiguate_by_source_position {
             continue;
         }
