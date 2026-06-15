@@ -183,9 +183,9 @@ impl StdlibLocator {
 /// Auto-detect the appropriate stdlib locator when no env override is set.
 pub fn resolve_default_stdlib_locator() -> StdlibLocator {
     if let Ok(metamodel) = metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
-        if metamodel.sysml_delta_path.exists() {
-            return StdlibLocator::Kpar {
-                locator: "kpar:org.omg/model-stdlib:2.0.0".to_string(),
+        if metamodel.stdlib_path.exists() {
+            return StdlibLocator::File {
+                path: metamodel.stdlib_path,
             };
         }
     }

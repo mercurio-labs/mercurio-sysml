@@ -2114,7 +2114,7 @@
       },
       "elaborate": [],
       "emit": {
-        "id_template": "metadata.{owner_path}.{declared_name}",
+        "id_template": "metadata.{owner_path}.{declared_name}.{start_line}_{start_col}",
         "properties": {
           "declared_name": "$declared_name",
           "owner": "$owner_id",

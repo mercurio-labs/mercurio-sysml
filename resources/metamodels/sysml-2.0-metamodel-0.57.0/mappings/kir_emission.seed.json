@@ -935,7 +935,7 @@
     },
     "SysML::MetadataUsage": {
       "kir_kind": "KerML::Core::Feature",
-      "id_template": "metadata.{owner_path}.{declared_name}",
+      "id_template": "metadata.{owner_path}.{declared_name}.{start_line}_{start_col}",
       "emit": {
         "properties": {
           "owner": "{owner_id}",
