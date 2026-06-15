@@ -24,6 +24,8 @@ pub enum SysmlMetamodelStatus {
 pub struct SysmlMetamodel {
     pub id: String,
     #[serde(default)]
+    pub release: Option<String>,
+    #[serde(default)]
     pub selector: Option<String>,
     pub display_name: String,
     pub sysml_version: String,
@@ -125,6 +127,7 @@ pub struct ReleaseBundlePython {
 
 #[derive(Debug, Clone)]
 pub struct ReleaseBundleResource {
+    pub release: Option<String>,
     pub selector: String,
     pub profile_id: String,
     pub status: SysmlMetamodelStatus,
@@ -336,6 +339,17 @@ pub fn release_bundle(selector: &str) -> Result<ReleaseBundleResource, SysmlEnvi
     release_bundle_from_descriptor(&descriptor, &raw)
 }
 
+pub fn available_release_bundles() -> Result<Vec<ReleaseBundleResource>, SysmlEnvironmentError> {
+    available_metamodels()?
+        .into_iter()
+        .filter(|descriptor| descriptor.bundle.is_some())
+        .map(|descriptor| {
+            let raw = metamodel_descriptor_raw(&descriptor.id)?;
+            release_bundle_from_descriptor(&descriptor, &raw)
+        })
+        .collect()
+}
+
 pub fn load_baseline_for_metamodel(
     metamodel: &SysmlMetamodelResource,
 ) -> Result<KirDocument, KirError> {
@@ -393,6 +407,7 @@ fn release_bundle_descriptor(selector: &str) -> Result<SysmlMetamodel, SysmlEnvi
 
 fn descriptor_matches_selector(metamodel: &SysmlMetamodel, selector: &str) -> bool {
     metamodel.id == selector
+        || metamodel.release.as_deref() == Some(selector)
         || metamodel.selector.as_deref() == Some(selector)
         || metamodel
             .legacy_ids
@@ -412,6 +427,7 @@ fn release_bundle_from_descriptor(
         None => root.join(&bundle.stdlib.locator),
     };
     Ok(ReleaseBundleResource {
+        release: descriptor.release.clone(),
         selector: descriptor
             .selector
             .clone()

@@ -52,7 +52,8 @@ pub use metamodel::{
     ReleaseBundleDescriptor, ReleaseBundleMappings, ReleaseBundleProfile, ReleaseBundlePython,
     ReleaseBundleResource, ReleaseBundleStdlib, SYSML_2_0_METAMODEL_057_ID, SysmlEnvironment,
     SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource, SysmlMetamodelStatus,
-    available_metamodels, latest_metamodel, metamodel_resource, release_bundle,
+    available_metamodels, available_release_bundles, latest_metamodel, metamodel_resource,
+    release_bundle,
 };
 pub use mutation::{
     SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,
@@ -262,11 +263,14 @@ mod tests {
     fn release_bundle_resolves_latest_and_aliases() {
         let latest = release_bundle("latest").unwrap();
         let by_selector = release_bundle("0.57.0").unwrap();
+        let by_release = release_bundle("2026-01").unwrap();
         let by_alias = release_bundle("pilot-0.57.0").unwrap();
         let by_legacy = release_bundle(LEGACY_SYSML_2_0_PILOT_057_ID).unwrap();
 
         assert_eq!(latest.profile_id, SYSML_2_0_METAMODEL_057_ID);
+        assert_eq!(latest.release.as_deref(), Some("2026-01"));
         assert_eq!(by_selector.profile_id, latest.profile_id);
+        assert_eq!(by_release.profile_id, latest.profile_id);
         assert_eq!(by_alias.profile_id, latest.profile_id);
         assert_eq!(by_legacy.profile_id, latest.profile_id);
         assert!(latest.stdlib_path.ends_with("stdlib.full.kir.json"));
@@ -284,8 +288,18 @@ mod tests {
     }
 
     #[test]
+    fn available_release_bundles_expose_user_facing_release_names() {
+        let bundles = available_release_bundles().unwrap();
+
+        assert!(bundles.iter().any(|bundle| {
+            bundle.release.as_deref() == Some("2026-01")
+                && bundle.profile_id == SYSML_2_0_METAMODEL_057_ID
+        }));
+    }
+
+    #[test]
     fn stdlib_locator_resolves_release_selector() {
-        let locator = StdlibLocator::for_release("0.57.0").unwrap();
+        let locator = StdlibLocator::for_release("2026-01").unwrap();
 
         assert!(matches!(locator, StdlibLocator::File { .. }));
         assert!(locator.as_uri().contains("stdlib.full.kir.json"));
@@ -305,7 +319,7 @@ mod tests {
 
     #[test]
     fn environment_compiles_with_release_selector() {
-        let env = SysmlEnvironment::for_release("0.57.0").unwrap();
+        let env = SysmlEnvironment::for_release("2026-01").unwrap();
 
         let document = env
             .compile_text("package Demo { part def Vehicle; }", "inline.sysml")
