@@ -3,6 +3,7 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::time::Instant;
 
+use mercurio_core::{KirDocument, LanguageProfile, generate_python_wrappers};
 use mercurio_tools::{default_pilot_root, sha256_file, sha256_hex};
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
@@ -124,6 +125,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     stages.push(python_wrappers_stage(
         &args.out.join("stdlib/python"),
+        &args
+            .out
+            .join("candidate/resources/metamodels")
+            .join(&args.profile_id),
         &args.wrapper_module,
         &args.profile_id,
         args.skip_stdlib_build,
@@ -1679,6 +1684,7 @@ fn promote_registry_entry(
 
 fn python_wrappers_stage(
     python_root: &Path,
+    candidate_profile_root: &Path,
     wrapper_module: &str,
     expected_profile_id: &str,
     skipped_stdlib_build: bool,
@@ -1686,23 +1692,24 @@ fn python_wrappers_stage(
     let started = Instant::now();
     let module_root = python_root.join(wrapper_module);
     if !module_root.exists() {
-        return Ok(StageTrace {
-            name: "python_wrappers".to_string(),
-            description: "verify generated Python stdlib wrapper package",
-            status: if skipped_stdlib_build {
-                "skipped".to_string()
-            } else {
-                "failed".to_string()
-            },
-            duration_ms: started.elapsed().as_millis(),
-            command: Vec::new(),
-            exit_code: None,
-            report: None,
-            error: Some(format!(
-                "missing generated Python wrapper module at {}",
-                module_root.display()
-            )),
-        });
+        if skipped_stdlib_build {
+            generate_trace_python_wrappers(python_root, candidate_profile_root, wrapper_module)?;
+        }
+        if !module_root.exists() {
+            return Ok(StageTrace {
+                name: "python_wrappers".to_string(),
+                description: "verify generated Python stdlib wrapper package",
+                status: "failed".to_string(),
+                duration_ms: started.elapsed().as_millis(),
+                command: Vec::new(),
+                exit_code: None,
+                report: None,
+                error: Some(format!(
+                    "missing generated Python wrapper module at {}",
+                    module_root.display()
+                )),
+            });
+        }
     }
 
     let required = [
@@ -1799,6 +1806,24 @@ fn python_wrappers_stage(
             Some(errors.join("; "))
         },
     })
+}
+
+fn generate_trace_python_wrappers(
+    python_root: &Path,
+    candidate_profile_root: &Path,
+    wrapper_module: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let profile = LanguageProfile::from_path(&candidate_profile_root.join("profile.json"))?;
+    let stdlib = KirDocument::from_path(
+        &candidate_profile_root
+            .join("stdlib")
+            .join("stdlib.full.kir.json"),
+    )?;
+    let generated = generate_python_wrappers(&stdlib, &profile, wrapper_module);
+    for (relative, content) in generated.files {
+        write_text(&python_root.join(path_from_slashes(&relative)), &content)?;
+    }
+    Ok(())
 }
 
 fn skipped_stage(name: &str, description: &'static str, reason: &str) -> StageTrace {
@@ -1996,6 +2021,10 @@ fn write_text(path: &Path, value: &str) -> Result<(), Box<dyn std::error::Error>
     Ok(())
 }
 
+fn path_from_slashes(value: &str) -> PathBuf {
+    value.split('/').collect()
+}
+
 fn render_conformance_trace_markdown(trace: &ConformanceTrace) -> String {
     let mut output = String::new();
     output.push_str("# Pilot Conformance Trace\n\n");
@@ -2114,7 +2143,9 @@ fn render_source_metrics_markdown(source: &SourceMetricSummary) -> String {
                 "| `{}` | `{}` | `{}` | `{}` | `{}` |\n",
                 escape_markdown_table_cell(name),
                 escape_markdown_table_cell(repo.branch.as_deref().unwrap_or("")),
-                repo.dirty.map(|dirty| dirty.to_string()).unwrap_or_default(),
+                repo.dirty
+                    .map(|dirty| dirty.to_string())
+                    .unwrap_or_default(),
                 escape_markdown_table_cell(repo.commit.as_deref().unwrap_or("")),
                 escape_markdown_table_cell(repo.tracked_tree_sha256.as_deref().unwrap_or(""))
             ));
@@ -2319,6 +2350,80 @@ mod tests {
             default_profile_id_for_release("2026-04"),
             "sysml-2.0-pilot-2026-04"
         );
+    }
+
+    #[test]
+    fn python_wrappers_stage_generates_trace_wrappers_when_stdlib_build_is_skipped() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-python-wrapper-stage-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let candidate = root.join("candidate");
+        let python_root = root.join("stdlib/python");
+        let profile_id = "sysml-2.0-pilot-2099-01";
+        std::fs::create_dir_all(candidate.join("stdlib")).unwrap();
+        write_json(
+            &candidate.join("profile.json"),
+            &json!({
+                "id": profile_id,
+                "language": "sysml",
+                "language_version": "2.0",
+                "metamodel_version": "2099-01",
+                "stdlib_version": "2099-01",
+                "stdlib_path": "stdlib/stdlib.full.kir.json",
+                "kir_schema_version": "0.2"
+            }),
+        )
+        .unwrap();
+        write_json(
+            &candidate.join("stdlib/stdlib.full.kir.json"),
+            &json!({
+                "metadata": {
+                    "kir_schema_version": "0.2"
+                },
+                "elements": [
+                    {
+                        "id": "SI::metre",
+                        "kind": "AttributeUsage",
+                        "layer": 1,
+                        "properties": {}
+                    }
+                ]
+            }),
+        )
+        .unwrap();
+
+        let stage = python_wrappers_stage(
+            &python_root,
+            &candidate,
+            "mercurio_sysml_test",
+            profile_id,
+            true,
+        )
+        .unwrap();
+
+        assert_eq!(stage.status, "passed");
+        assert!(
+            python_root
+                .join("mercurio_sysml_test/generation_info.py")
+                .is_file()
+        );
+        assert!(
+            python_root
+                .join("mercurio_sysml_test/stdlib/si.py")
+                .is_file()
+        );
+        assert_eq!(
+            stage
+                .report
+                .as_ref()
+                .and_then(|report| report.metrics.get("module"))
+                .and_then(Value::as_str),
+            Some("mercurio_sysml_test")
+        );
+
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
