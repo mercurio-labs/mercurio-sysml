@@ -1,0 +1,463 @@
+{
+  "schema": "dev.mercurio.pilot-release-conformance-trace.v1",
+  "generated_at_utc": "2026-06-16T19:23:05.2693421Z",
+  "release": "2026-04",
+  "spec_version": "2.0.0",
+  "profile_id": "sysml-2.0-pilot-2026-04",
+  "corpus": "small",
+  "source_lock": "locks/source.lock.json",
+  "overall_status": "passed",
+  "qualification_metrics": {
+    "source": {
+      "mercurio_commit": "5ae5cd5b7b04b26b0fce12a879d3f1c44f5a0dc0",
+      "mercurio_branch": "feature/promote-pilot-2026-04-resources",
+      "mercurio_dirty": true,
+      "mercurio_tracked_file_count": 108,
+      "mercurio_tracked_tree_sha256": "ae6cf0d8b495971baa8fde0790238dacea525e1953acd81a3199854d966e72c5",
+      "pilot_commit": "241934dab96f2f07ddbfd7b351449cb975148064",
+      "pilot_branch": "master",
+      "pilot_dirty": false,
+      "pilot_tracked_file_count": 4599,
+      "pilot_tracked_tree_sha256": "69462b8d341eb1193e89529f466ee236636f99a19ed2ac8a335193e37b9c98e8",
+      "workspace_repositories": {
+        "mercurio-ai": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-ai",
+          "commit": "78540fbef25685373091dc236394aa9af392e126",
+          "branch": "main",
+          "dirty": false,
+          "tracked_file_count": 22,
+          "tracked_tree_sha256": "4a00dbb9774b7a10fbd99c3cfa2b126705213a894c178ff0ca41e034067936b0"
+        },
+        "mercurio-examples": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-examples",
+          "commit": "a2c832033fce724e7bc54f76a865dbffc8fc0eba",
+          "branch": "main",
+          "dirty": true,
+          "tracked_file_count": 62,
+          "tracked_tree_sha256": "5480cf0b01a50811786c4ab4e4c155bfae60c505525c7b54aadd8a65eaeeddd7"
+        },
+        "mercurio-foundation": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-foundation",
+          "commit": "73c8e2198c53e8aa4ab32306d81f149850e8cf53",
+          "branch": "main",
+          "dirty": false,
+          "tracked_file_count": 109,
+          "tracked_tree_sha256": "5eff1ff678530329c77f37688164dff117b41adda38798af5138de43e0687dec"
+        },
+        "mercurio-host-adapters": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-host-adapters",
+          "commit": "1eb5d78be82669f38a7d69d745af4b0f9b1e53c0",
+          "branch": "main",
+          "dirty": true,
+          "tracked_file_count": 56,
+          "tracked_tree_sha256": "f24b6c30fa62c0b80c6821b8b4644e6645c0f3030b0a370f1caf8c1a713556cd"
+        },
+        "mercurio-plugins": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-plugins",
+          "commit": "be9076df297624705759775ea0d00bc9cc5045c7",
+          "branch": "main",
+          "dirty": false,
+          "tracked_file_count": 30,
+          "tracked_tree_sha256": "e5adfbe054dff3964c2b8f9e1b96fa6a4d8c244c32cb7a4b7be088a848d3393b"
+        },
+        "mercurio-product": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-product",
+          "commit": "dac9b932f6cac0067eee3ab77eafb60dded1a67d",
+          "branch": "feature/lab-studio-redesign",
+          "dirty": true,
+          "tracked_file_count": 391,
+          "tracked_tree_sha256": "4d34438863bd512c4a6e1d541b5265f0fa5196f7474b8f7a9651653e03dd9600"
+        },
+        "mercurio-sysml": {
+          "root": "C:\\dev\\git\\mercurio\\mercurio-sysml",
+          "commit": "5ae5cd5b7b04b26b0fce12a879d3f1c44f5a0dc0",
+          "branch": "feature/promote-pilot-2026-04-resources",
+          "dirty": true,
+          "tracked_file_count": 108,
+          "tracked_tree_sha256": "ae6cf0d8b495971baa8fde0790238dacea525e1953acd81a3199854d966e72c5"
+        }
+      },
+      "source_archive_sha256": null,
+      "asset_tree_sha256": null
+    },
+    "stages": {
+      "candidate_promotion": {
+        "status": "passed",
+        "duration_ms": 2192,
+        "report_sha256": "cf0358fe989bd8979477bfd5769c5b5ae5d5bc0d5dea9a8900d1f66006477487",
+        "has_error": false
+      },
+      "candidate_staging": {
+        "status": "passed",
+        "duration_ms": 2938,
+        "report_sha256": "79d5b0112b9eea77661c675ed5be3eaa15c8bb917abac519126752353ad0d698",
+        "has_error": false
+      },
+      "compile_diagnostics_parity": {
+        "status": "passed",
+        "duration_ms": 6312,
+        "exit_code": 0,
+        "report_sha256": "04fa315793452dc87809ee957898ab7049d682b9cceb483da3cd72513829b32c",
+        "has_error": false
+      },
+      "pilot_java_artifacts": {
+        "status": "passed",
+        "duration_ms": 4638,
+        "report_sha256": "df471dfe14a88079597caee939878a9d978970b76d465594612a209ef1818348",
+        "has_error": false
+      },
+      "python_wrappers": {
+        "status": "passed",
+        "duration_ms": 883,
+        "exit_code": 0,
+        "report_sha256": "009037911852cf9ad9bd7c2fad6ba78f44c99771b3983fe737b7f4a472375bef",
+        "has_error": false
+      },
+      "semantic_parity": {
+        "status": "passed",
+        "duration_ms": 297456,
+        "exit_code": 0,
+        "report_sha256": "5f2450a6a57a33088472003ff09a41deecf14925ad9943206a48791ad538b281",
+        "has_error": false
+      },
+      "syntax_parity": {
+        "status": "passed",
+        "duration_ms": 47714,
+        "exit_code": 0,
+        "report_sha256": "e24cb129ddae16ac1c5e8972944c97e89b6b506ddfbe389f2324978191e207a4",
+        "has_error": false
+      }
+    },
+    "candidate": {
+      "candidate_root": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\candidate/resources/metamodels\\sysml-2.0-pilot-2026-04",
+      "file_count": 17,
+      "tree_sha256": "d2796e83ba34e5bf47b2fcb99605e2adaeac78694a26ce4a3946d89093280c68"
+    },
+    "stdlib": null,
+    "python": {
+      "file_count": 9,
+      "metamodel_class_count": 13,
+      "module": "mercurio_sysml_2_0",
+      "py_compile_exit_code": 0,
+      "python_file_count": 8,
+      "stdlib_catalog_entries": {
+        "isq": 0,
+        "si": 0
+      }
+    },
+    "syntax_parity": {
+      "accepted_difference_gate": {
+        "accepted": [],
+        "accepted_differences": 0,
+        "total_differences": 0,
+        "unaccepted": [],
+        "unaccepted_differences": 0
+      },
+      "aggregate": {
+        "exact_match_cases": 5,
+        "failed_cases": 0,
+        "total_mismatches": 0,
+        "total_pilot_only": 0,
+        "total_rust_only": 0
+      },
+      "case_count": 5
+    },
+    "semantic_parity": {
+      "accepted_difference_gate": {
+        "accepted": [],
+        "accepted_differences": 0,
+        "total_differences": 0,
+        "unaccepted": [],
+        "unaccepted_differences": 0
+      },
+      "aggregate": {
+        "compare": {
+          "avg_ms": 2,
+          "max_ms": 10,
+          "median_ms": 2,
+          "min_ms": 0,
+          "total_ms": 14
+        },
+        "exact_match_cases": 5,
+        "failed_cases": 0,
+        "mercurio": {
+          "avg_ms": 2813,
+          "max_ms": 3117,
+          "median_ms": 2908,
+          "min_ms": 2372,
+          "total_ms": 14067
+        },
+        "pilot": {
+          "avg_ms": 5987,
+          "max_ms": 7948,
+          "median_ms": 6318,
+          "min_ms": 4303,
+          "total_ms": 29936
+        },
+        "total_mercurio_only": 0,
+        "total_mismatches": 0,
+        "total_pilot_only": 0
+      },
+      "case_count": 5
+    },
+    "compile_diagnostics_parity": {
+      "accepted_difference_gate": {
+        "accepted": [],
+        "accepted_differences": 0,
+        "total_differences": 0,
+        "unaccepted": [],
+        "unaccepted_differences": 0
+      },
+      "aggregate": {
+        "both_fail_cases": 0,
+        "both_pass_cases": 5,
+        "failed_cases": 0,
+        "pilot_only_fail_cases": 0,
+        "primary_problem_match_cases": 0,
+        "rust_only_fail_cases": 0,
+        "status_match_cases": 5
+      },
+      "case_count": 5
+    }
+  },
+  "stages": [
+    {
+      "name": "candidate_staging",
+      "description": "stage release candidate resources without promoting them",
+      "status": "passed",
+      "duration_ms": 2938,
+      "command": [],
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/candidate-staging.json",
+        "sha256": "79d5b0112b9eea77661c675ed5be3eaa15c8bb917abac519126752353ad0d698",
+        "metrics": {
+          "candidate_root": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\candidate/resources/metamodels\\sysml-2.0-pilot-2026-04",
+          "file_count": 17,
+          "tree_sha256": "d2796e83ba34e5bf47b2fcb99605e2adaeac78694a26ce4a3946d89093280c68"
+        }
+      }
+    },
+    {
+      "name": "pilot_java_artifacts",
+      "description": "verify the Pilot checkout has built Java artifacts required for parity export",
+      "status": "passed",
+      "duration_ms": 4638,
+      "command": [],
+      "report": {
+        "path": "../external\\SysML-v2-Pilot-Implementation\\org.omg.sysml.interactive/target\\org.omg.sysml.interactive-0.57.0-SNAPSHOT-all.jar",
+        "sha256": "df471dfe14a88079597caee939878a9d978970b76d465594612a209ef1818348",
+        "metrics": {
+          "artifact": "org.omg.sysml.interactive-*-all.jar"
+        }
+      }
+    },
+    {
+      "name": "python_wrappers",
+      "description": "verify generated Python stdlib wrapper package",
+      "status": "passed",
+      "duration_ms": 883,
+      "command": [
+        "python",
+        "-m",
+        "py_compile",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\__init__.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\base.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\concepts.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\generation_info.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\metamodel.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\stdlib\\__init__.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\stdlib\\isq.py",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python\\mercurio_sysml_2_0\\stdlib\\si.py"
+      ],
+      "exit_code": 0,
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\stdlib/python",
+        "sha256": "009037911852cf9ad9bd7c2fad6ba78f44c99771b3983fe737b7f4a472375bef",
+        "metrics": {
+          "file_count": 9,
+          "metamodel_class_count": 13,
+          "module": "mercurio_sysml_2_0",
+          "py_compile_exit_code": 0,
+          "python_file_count": 8,
+          "stdlib_catalog_entries": {
+            "isq": 0,
+            "si": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "syntax_parity",
+      "description": "compare Mercurio parser syntax snapshots against the Java Pilot parser",
+      "status": "passed",
+      "duration_ms": 47714,
+      "command": [
+        "C:\\Users\\MarkPetrotta\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+        "run",
+        "-p",
+        "mercurio-tools",
+        "--bin",
+        "compare_pilot_ast",
+        "--",
+        "--pilot-root",
+        "../external\\SysML-v2-Pilot-Implementation",
+        "--corpus",
+        "small",
+        "--out",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/syntax-parity.json"
+      ],
+      "exit_code": 0,
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/syntax-parity.json",
+        "sha256": "e24cb129ddae16ac1c5e8972944c97e89b6b506ddfbe389f2324978191e207a4",
+        "metrics": {
+          "accepted_difference_gate": {
+            "accepted": [],
+            "accepted_differences": 0,
+            "total_differences": 0,
+            "unaccepted": [],
+            "unaccepted_differences": 0
+          },
+          "aggregate": {
+            "exact_match_cases": 5,
+            "failed_cases": 0,
+            "total_mismatches": 0,
+            "total_pilot_only": 0,
+            "total_rust_only": 0
+          },
+          "case_count": 5
+        }
+      }
+    },
+    {
+      "name": "semantic_parity",
+      "description": "compare Mercurio semantic snapshots against the Java Pilot compiler export",
+      "status": "passed",
+      "duration_ms": 297456,
+      "command": [
+        "C:\\Users\\MarkPetrotta\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+        "run",
+        "-p",
+        "mercurio-tools",
+        "--features",
+        "legacy-pilot-tools",
+        "--bin",
+        "compare_pilot_semantics",
+        "--",
+        "--pilot-root",
+        "../external\\SysML-v2-Pilot-Implementation",
+        "--corpus",
+        "small",
+        "--out",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/semantic-parity.json"
+      ],
+      "exit_code": 0,
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/semantic-parity.json",
+        "sha256": "5f2450a6a57a33088472003ff09a41deecf14925ad9943206a48791ad538b281",
+        "metrics": {
+          "accepted_difference_gate": {
+            "accepted": [],
+            "accepted_differences": 0,
+            "total_differences": 0,
+            "unaccepted": [],
+            "unaccepted_differences": 0
+          },
+          "aggregate": {
+            "compare": {
+              "avg_ms": 2,
+              "max_ms": 10,
+              "median_ms": 2,
+              "min_ms": 0,
+              "total_ms": 14
+            },
+            "exact_match_cases": 5,
+            "failed_cases": 0,
+            "mercurio": {
+              "avg_ms": 2813,
+              "max_ms": 3117,
+              "median_ms": 2908,
+              "min_ms": 2372,
+              "total_ms": 14067
+            },
+            "pilot": {
+              "avg_ms": 5987,
+              "max_ms": 7948,
+              "median_ms": 6318,
+              "min_ms": 4303,
+              "total_ms": 29936
+            },
+            "total_mercurio_only": 0,
+            "total_mismatches": 0,
+            "total_pilot_only": 0
+          },
+          "case_count": 5
+        }
+      }
+    },
+    {
+      "name": "compile_diagnostics_parity",
+      "description": "compare Mercurio and Java Pilot compile diagnostics",
+      "status": "passed",
+      "duration_ms": 6312,
+      "command": [
+        "C:\\Users\\MarkPetrotta\\.rustup\\toolchains\\stable-x86_64-pc-windows-msvc\\bin\\cargo.exe",
+        "run",
+        "-p",
+        "mercurio-tools",
+        "--features",
+        "legacy-pilot-tools",
+        "--bin",
+        "compare_pilot_compile_errors",
+        "--",
+        "--pilot-root",
+        "../external\\SysML-v2-Pilot-Implementation",
+        "--corpus",
+        "small",
+        "--out",
+        "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/compile-errors-parity.json"
+      ],
+      "exit_code": 0,
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/compile-errors-parity.json",
+        "sha256": "04fa315793452dc87809ee957898ab7049d682b9cceb483da3cd72513829b32c",
+        "metrics": {
+          "accepted_difference_gate": {
+            "accepted": [],
+            "accepted_differences": 0,
+            "total_differences": 0,
+            "unaccepted": [],
+            "unaccepted_differences": 0
+          },
+          "aggregate": {
+            "both_fail_cases": 0,
+            "both_pass_cases": 5,
+            "failed_cases": 0,
+            "pilot_only_fail_cases": 0,
+            "primary_problem_match_cases": 0,
+            "rust_only_fail_cases": 0,
+            "status_match_cases": 5
+          },
+          "case_count": 5
+        }
+      }
+    },
+    {
+      "name": "candidate_promotion",
+      "description": "promote staged release candidate resources into the repository",
+      "status": "passed",
+      "duration_ms": 2192,
+      "command": [],
+      "report": {
+        "path": "C:\\dev\\git\\mercurio\\target\\pilot-release-2026-04-promote-small\\reports/candidate-promotion.json",
+        "sha256": "cf0358fe989bd8979477bfd5769c5b5ae5d5bc0d5dea9a8900d1f66006477487",
+        "metrics": {
+          "file_count": 17,
+          "marked_latest": false,
+          "promoted_root": "C:\\dev\\git\\mercurio\\mercurio-sysml\\resources/metamodels\\sysml-2.0-pilot-2026-04",
+          "registry": "C:\\dev\\git\\mercurio\\mercurio-sysml\\resources/metamodels\\registry.json"
+        }
+      }
+    }
+  ]
+}
