@@ -262,15 +262,18 @@ mod tests {
     #[test]
     fn release_bundle_resolves_latest_and_aliases() {
         let latest = release_bundle("latest").unwrap();
-        let by_selector = release_bundle("0.57.0").unwrap();
-        let by_release = release_bundle("2026-01").unwrap();
+        let by_selector = release_bundle("2026-01").unwrap();
+        let by_version_alias = release_bundle("0.57.0").unwrap();
         let by_alias = release_bundle("pilot-0.57.0").unwrap();
         let by_legacy = release_bundle(LEGACY_SYSML_2_0_PILOT_057_ID).unwrap();
 
         assert_eq!(latest.profile_id, SYSML_2_0_METAMODEL_057_ID);
         assert_eq!(latest.release.as_deref(), Some("2026-01"));
+        assert_eq!(latest.selector, "2026-01");
+        assert_eq!(latest.pilot_release_tag.as_deref(), Some("2026-01"));
+        assert_eq!(latest.pilot_implementation_version.as_deref(), Some("0.57.0"));
         assert_eq!(by_selector.profile_id, latest.profile_id);
-        assert_eq!(by_release.profile_id, latest.profile_id);
+        assert_eq!(by_version_alias.profile_id, latest.profile_id);
         assert_eq!(by_alias.profile_id, latest.profile_id);
         assert_eq!(by_legacy.profile_id, latest.profile_id);
         assert!(latest.stdlib_path.ends_with("stdlib.full.kir.json"));
@@ -293,7 +296,9 @@ mod tests {
 
         assert!(bundles.iter().any(|bundle| {
             bundle.release.as_deref() == Some("2026-01")
+                && bundle.selector == "2026-01"
                 && bundle.profile_id == SYSML_2_0_METAMODEL_057_ID
+                && bundle.aliases.iter().any(|alias| alias == "0.57.0")
         }));
     }
 
