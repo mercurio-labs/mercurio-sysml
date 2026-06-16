@@ -183,6 +183,7 @@
       "id_template": "type.{qualified_name}.~{declared_name}",
       "emit": {
         "properties": {
+          "declared_name": "{declared_name}",
           "name": "{name}",
           "owner": "{owner_id}",
           "is_abstract": "{is_abstract}",

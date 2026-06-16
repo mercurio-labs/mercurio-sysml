@@ -919,6 +919,7 @@
       "emit": {
         "id_template": "type.{qualified_name}.~{declared_name}",
         "properties": {
+          "declared_name": "$declared_name",
           "is_abstract": "$is_abstract",
           "metatype": "$metatype_ref",
           "name": "$name",
