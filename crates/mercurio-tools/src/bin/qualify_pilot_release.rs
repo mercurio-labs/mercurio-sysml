@@ -31,6 +31,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         corpus: args.corpus.clone(),
         mercurio: fingerprint_repo(&mercurio_root)?,
         pilot: fingerprint_repo(&args.pilot_root)?,
+        inputs: SourceInputs {
+            source_archive: args
+                .source_archive
+                .as_deref()
+                .map(fingerprint_file)
+                .transpose()?,
+            asset_dir: args
+                .asset_dir
+                .as_deref()
+                .map(fingerprint_tree)
+                .transpose()?,
+        },
     };
     write_json(&args.out.join("locks/source.lock.json"), &source_lock)?;
 
@@ -105,6 +117,25 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         &args.profile_id,
         args.skip_stdlib_build,
     )?);
+
+    if args.skip_parity {
+        stages.push(skipped_stage(
+            "syntax_parity",
+            "compare Mercurio parser syntax snapshots against the Java Pilot parser",
+            "parity stages skipped by --skip-parity",
+        ));
+        stages.push(skipped_stage(
+            "semantic_parity",
+            "compare Mercurio semantic snapshots against the Java Pilot compiler export",
+            "parity stages skipped by --skip-parity",
+        ));
+        stages.push(skipped_stage(
+            "compile_diagnostics_parity",
+            "compare Mercurio and Java Pilot compile diagnostics",
+            "parity stages skipped by --skip-parity",
+        ));
+        return write_trace_and_exit(args, stages);
+    }
 
     let syntax_report = args.out.join("reports/syntax-parity.json");
     stages.push(run_stage(
@@ -254,7 +285,10 @@ struct Args {
     spec_version: String,
     corpus: String,
     wrapper_module: String,
+    source_archive: Option<PathBuf>,
+    asset_dir: Option<PathBuf>,
     skip_stdlib_build: bool,
+    skip_parity: bool,
 }
 
 impl Args {
@@ -267,7 +301,10 @@ impl Args {
             spec_version: DEFAULT_SPEC_VERSION.to_string(),
             corpus: DEFAULT_CORPUS.to_string(),
             wrapper_module: DEFAULT_WRAPPER_MODULE.to_string(),
+            source_archive: None,
+            asset_dir: None,
             skip_stdlib_build: false,
+            skip_parity: false,
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
@@ -280,7 +317,10 @@ impl Args {
                 "--spec-version" => args.spec_version = next_string(&raw, &mut index)?,
                 "--corpus" => args.corpus = next_string(&raw, &mut index)?,
                 "--wrapper-module" => args.wrapper_module = next_string(&raw, &mut index)?,
+                "--source-archive" => args.source_archive = Some(next_path(&raw, &mut index)?),
+                "--asset-dir" => args.asset_dir = Some(next_path(&raw, &mut index)?),
                 "--skip-stdlib-build" => args.skip_stdlib_build = true,
+                "--skip-parity" => args.skip_parity = true,
                 "--help" | "-h" => {
                     print_usage();
                     std::process::exit(0);
@@ -303,6 +343,15 @@ struct SourceLock {
     corpus: String,
     mercurio: RepoFingerprint,
     pilot: RepoFingerprint,
+    inputs: SourceInputs,
+}
+
+#[derive(Serialize)]
+struct SourceInputs {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    source_archive: Option<PathFingerprint>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    asset_dir: Option<TreeFingerprint>,
 }
 
 #[derive(Serialize)]
@@ -319,6 +368,21 @@ struct RepoFingerprint {
 #[derive(Serialize)]
 struct FileFingerprint {
     sha256: String,
+}
+
+#[derive(Serialize)]
+struct PathFingerprint {
+    path: String,
+    sha256: String,
+    byte_len: u64,
+}
+
+#[derive(Serialize)]
+struct TreeFingerprint {
+    root: String,
+    file_count: usize,
+    tree_sha256: String,
+    files: BTreeMap<String, FileFingerprint>,
 }
 
 #[derive(Serialize)]
@@ -695,6 +759,46 @@ fn count_catalog_entries(path: &Path) -> Result<usize, Box<dyn std::error::Error
         .count())
 }
 
+fn fingerprint_file(path: &Path) -> Result<PathFingerprint, Box<dyn std::error::Error>> {
+    let metadata = std::fs::metadata(path)?;
+    if !metadata.is_file() {
+        return Err(format!("source archive is not a file: {}", path.display()).into());
+    }
+    Ok(PathFingerprint {
+        path: path.display().to_string(),
+        sha256: sha256_file(path)?,
+        byte_len: metadata.len(),
+    })
+}
+
+fn fingerprint_tree(root: &Path) -> Result<TreeFingerprint, Box<dyn std::error::Error>> {
+    if !root.is_dir() {
+        return Err(format!("asset dir is not a directory: {}", root.display()).into());
+    }
+    let paths = collect_files(root)?;
+    let mut files = BTreeMap::new();
+    for path in &paths {
+        let relative = path
+            .strip_prefix(root)
+            .unwrap_or(path)
+            .to_string_lossy()
+            .replace('\\', "/");
+        files.insert(
+            relative,
+            FileFingerprint {
+                sha256: sha256_file(path)?,
+            },
+        );
+    }
+    let tree_sha256 = digest_paths(root, &paths)?;
+    Ok(TreeFingerprint {
+        root: root.display().to_string(),
+        file_count: files.len(),
+        tree_sha256,
+        files,
+    })
+}
+
 fn fingerprint_repo(path: &Path) -> Result<RepoFingerprint, Box<dyn std::error::Error>> {
     let tracked = git_stdout(path, &["ls-files"])?;
     let mut files = BTreeMap::new();
@@ -858,7 +962,7 @@ fn next_path(args: &[String], index: &mut usize) -> Result<PathBuf, Box<dyn std:
 
 fn print_usage() {
     println!(
-        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build]"
+        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--source-archive PATH] [--asset-dir PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build] [--skip-parity]"
     );
 }
 
@@ -932,5 +1036,31 @@ mod tests {
         assert!(qualification_markdown.contains("# Pilot Release Qualification"));
         assert!(qualification_markdown.contains("- Passed: 1"));
         assert!(qualification_markdown.contains("- Skipped: 1"));
+    }
+
+    #[test]
+    fn fingerprints_source_archive_and_asset_tree() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-qualification-fingerprint-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        std::fs::create_dir_all(root.join("assets/nested")).unwrap();
+        let archive = root.join("release.zip");
+        std::fs::write(&archive, b"archive").unwrap();
+        std::fs::write(root.join("assets/profile.json"), b"profile").unwrap();
+        std::fs::write(root.join("assets/nested/stdlib.kpar"), b"stdlib").unwrap();
+
+        let archive_fingerprint = fingerprint_file(&archive).unwrap();
+        assert_eq!(archive_fingerprint.byte_len, 7);
+        assert!(!archive_fingerprint.sha256.is_empty());
+
+        let tree = fingerprint_tree(&root.join("assets")).unwrap();
+        assert_eq!(tree.file_count, 2);
+        assert!(tree.files.contains_key("profile.json"));
+        assert!(tree.files.contains_key("nested/stdlib.kpar"));
+        assert!(!tree.tree_sha256.is_empty());
+
+        std::fs::remove_dir_all(root).unwrap();
     }
 }
