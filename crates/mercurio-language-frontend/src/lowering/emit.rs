@@ -2228,6 +2228,14 @@ fn enrich_usage_semantics(
             .insert("is_variable".to_string(), Value::Bool(defaults.is_variable));
     }
     apply_usage_property_defaults(element, usage, owner_id, mappings);
+    if usage.has_explicit_type {
+        if let Some(type_ref) = &usage.type_ref {
+            prepend_unique_property_ref(&mut element.properties, "definition", type_ref);
+        }
+        for type_ref in &usage.additional_type_refs {
+            prepend_unique_property_ref(&mut element.properties, "definition", type_ref);
+        }
+    }
     if !element.properties.contains_key("definition")
         && let Some(type_ref) = element.properties.get("type").cloned()
     {
@@ -2320,6 +2328,29 @@ pub(crate) fn append_unique_property_ref(
         }
         Some(Value::Null) | None => Value::String(value.to_string()),
         Some(other) => Value::Array(vec![other.clone(), Value::String(value.to_string())]),
+    };
+
+    properties.insert(key.to_string(), updated);
+}
+
+fn prepend_unique_property_ref(properties: &mut BTreeMap<String, Value>, key: &str, value: &str) {
+    let updated = match properties.get(key) {
+        Some(Value::String(existing)) if existing == value => return,
+        Some(Value::String(existing)) => Value::Array(vec![
+            Value::String(value.to_string()),
+            Value::String(existing.clone()),
+        ]),
+        Some(Value::Array(values)) => {
+            if values.iter().any(|item| item.as_str() == Some(value)) {
+                return;
+            }
+            let mut next = Vec::with_capacity(values.len() + 1);
+            next.push(Value::String(value.to_string()));
+            next.extend(values.clone());
+            Value::Array(next)
+        }
+        Some(Value::Null) | None => Value::String(value.to_string()),
+        Some(other) => Value::Array(vec![Value::String(value.to_string()), other.clone()]),
     };
 
     properties.insert(key.to_string(), updated);
@@ -3304,6 +3335,50 @@ mod lowering_golden_tests {
 
         assert_eq!(usage.properties["type"], "Parts::Part");
         assert_eq!(usage.properties["definition"], "Parts::Part");
+    }
+
+    #[test]
+    fn explicit_part_usage_definition_preserves_family_default() {
+        let mappings = MappingBundle::load().unwrap();
+        let module = ResolvedModule {
+            packages: Vec::new(),
+            imports: Vec::new(),
+            definitions: Vec::new(),
+            usages: vec![ResolvedUsage {
+                construct: "PartUsage".to_string(),
+                owner_construct: "ItemDefinition".to_string(),
+                owner_qualified_name: "ItemTest.B".to_string(),
+                qualified_name: "ItemTest.B.a".to_string(),
+                declared_name: "a".to_string(),
+                is_implicit_name: false,
+                has_explicit_type: true,
+                type_ref: Some("type.ItemTest.A".to_string()),
+                additional_type_refs: Vec::new(),
+                reference_target: None,
+                allocation_source: None,
+                allocation_target: None,
+                metadata_properties: BTreeMap::new(),
+                multiplicity: None,
+                expression: None,
+                is_derived: false,
+                specializes: Vec::new(),
+                specialized_features: Vec::new(),
+                subsetted_features: Vec::new(),
+                redefined_features: Vec::new(),
+                members: Vec::new(),
+                modifiers: Vec::new(),
+                docs: Vec::new(),
+                span: span(11),
+            }],
+        };
+
+        let document = transpile_module(&module, "golden.sysml", mappings).unwrap();
+        let usage = element(&document, "feature.ItemTest.B.a");
+
+        assert_eq!(
+            usage.properties["definition"],
+            json!(["type.ItemTest.A", "Parts::Part"])
+        );
     }
 
     #[test]
