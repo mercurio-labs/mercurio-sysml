@@ -47,11 +47,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let locked_export_path = release_root.join("raw/pilot-stdlib-export.json");
     copy_if_different(&raw_export_path, &locked_export_path)?;
 
-    let profile_source = tool_repo_path(&format!(
-        "resources/metamodels/{}/profile.json",
+    let profile_resource_root = profile_resource_root(&args.profile_id);
+    let profile_source = profile_resource_root.join("profile.json");
+    let mut profile = mercurio_core::LanguageProfile::from_path(&profile_source)?;
+    profile.id = args.profile_id.clone();
+    profile.stdlib_path = format!(
+        "resources/metamodels/{}/stdlib/stdlib.full.kir.json",
         args.profile_id
-    ));
-    let profile = mercurio_core::LanguageProfile::from_path(&profile_source)?;
+    );
     let mut kir = normalize_pilot_export(export.clone())?;
     kir.metadata = build_kir_metadata(&args, &source_id, &export_digest, &export_sha256, &export);
     attach_stdlib_derived_feature_manifest(
@@ -126,20 +129,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let sysml_delta_kpar_digest = digest_file(&sysml_delta_kpar_path)?;
 
     let profile_mapping_sources = [
-        tool_repo_path(&format!(
-            "resources/metamodels/{}/mappings/metamodel_constructs.seed.json",
-            args.profile_id
-        )),
-        tool_repo_path(&format!(
-            "resources/metamodels/{}/mappings/kir_emission.seed.json",
-            args.profile_id
-        )),
+        profile_resource_root
+            .join("mappings")
+            .join("metamodel_constructs.seed.json"),
+        profile_resource_root
+            .join("mappings")
+            .join("kir_emission.seed.json"),
     ];
     let profile_target = release_root
         .join("profiles")
         .join(&args.profile_id)
         .join("profile.json");
-    copy_if_different(&profile_source, &profile_target)?;
+    write_json(&profile_target, &profile)?;
     let profile_mapping_targets = profile_mapping_sources
         .iter()
         .map(|source| {
@@ -641,7 +642,7 @@ fn audit_profile_inputs(
     profile: &mercurio_core::LanguageProfile,
     kir: &mercurio_core::KirDocument,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let profile_dir = tool_repo_path(&format!("resources/metamodels/{}", args.profile_id));
+    let profile_dir = profile_resource_root(&args.profile_id);
     let constructs_path = profile_dir
         .join("mappings")
         .join("metamodel_constructs.seed.json");
@@ -1295,6 +1296,15 @@ fn safe_path_segment(value: &str) -> String {
         segment = segment.replace("--", "-");
     }
     segment.trim_matches('-').to_string()
+}
+
+fn profile_resource_root(profile_id: &str) -> PathBuf {
+    let requested = tool_repo_path(&format!("resources/metamodels/{profile_id}"));
+    if requested.is_dir() {
+        requested
+    } else {
+        tool_repo_path(&format!("resources/metamodels/{DEFAULT_PROFILE_ID}"))
+    }
 }
 
 fn path_from_slashes(value: &str) -> PathBuf {

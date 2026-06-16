@@ -325,12 +325,16 @@ impl Args {
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
+        let mut profile_id_explicit = false;
         while index < raw.len() {
             match raw[index].as_str() {
                 "--release" => args.release = next_string(&raw, &mut index)?,
                 "--pilot-root" => args.pilot_root = next_path(&raw, &mut index)?,
                 "--out" => args.out = next_path(&raw, &mut index)?,
-                "--profile-id" => args.profile_id = next_string(&raw, &mut index)?,
+                "--profile-id" => {
+                    args.profile_id = next_string(&raw, &mut index)?;
+                    profile_id_explicit = true;
+                }
                 "--spec-version" => args.spec_version = next_string(&raw, &mut index)?,
                 "--corpus" => args.corpus = next_string(&raw, &mut index)?,
                 "--wrapper-module" => args.wrapper_module = next_string(&raw, &mut index)?,
@@ -347,6 +351,9 @@ impl Args {
                 unknown => return Err(format!("unknown argument: {unknown}").into()),
             }
             index += 1;
+        }
+        if !profile_id_explicit {
+            args.profile_id = default_profile_id_for_release(&args.release);
         }
         if args.mark_latest && !args.promote_candidate {
             return Err("--mark-latest requires --promote-candidate".into());
@@ -1014,9 +1021,17 @@ fn pilot_java_artifacts_stage(pilot_root: &Path) -> Result<StageTrace, Box<dyn s
 
 fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error::Error>> {
     let started = Instant::now();
-    let source_root = sysml_workspace_root()
+    let requested_source_root = sysml_workspace_root()
         .join("resources/metamodels")
         .join(&args.profile_id);
+    let template_root = sysml_workspace_root()
+        .join("resources/metamodels")
+        .join(DEFAULT_PROFILE_ID);
+    let source_root = if requested_source_root.is_dir() {
+        requested_source_root.as_path()
+    } else {
+        template_root.as_path()
+    };
     let candidate_root = args
         .out
         .join("candidate/resources/metamodels")
@@ -1030,7 +1045,7 @@ fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error:
             source_root.display()
         ));
     } else {
-        copy_required_file(&source_root, &candidate_root, "profile.json", &mut errors);
+        copy_candidate_profile(source_root, &candidate_root, args, &mut errors);
         copy_optional_file(&source_root, &candidate_root, "metamodel.json", &mut errors);
         copy_optional_file(
             &source_root,
@@ -1171,6 +1186,7 @@ fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error:
     })
 }
 
+#[cfg(test)]
 fn copy_required_file(
     source_root: &Path,
     dest_root: &Path,
@@ -1184,6 +1200,42 @@ fn copy_required_file(
         return;
     }
     if let Err(err) = copy_file(&source, &dest) {
+        errors.push(format!(
+            "failed to copy {} to {}: {err}",
+            source.display(),
+            dest.display()
+        ));
+    }
+}
+
+fn copy_candidate_profile(
+    source_root: &Path,
+    dest_root: &Path,
+    args: &Args,
+    errors: &mut Vec<String>,
+) {
+    let source = source_root.join("profile.json");
+    let dest = dest_root.join("profile.json");
+    if !source.is_file() {
+        errors.push(format!("missing required file {}", source.display()));
+        return;
+    }
+    let result = (|| -> Result<(), Box<dyn std::error::Error>> {
+        let mut profile: Value = serde_json::from_str(&std::fs::read_to_string(&source)?)?;
+        if let Some(object) = profile.as_object_mut() {
+            object.insert("id".to_string(), Value::String(args.profile_id.clone()));
+            object.insert(
+                "stdlib_path".to_string(),
+                Value::String(format!(
+                    "resources/metamodels/{}/stdlib/stdlib.full.kir.json",
+                    args.profile_id
+                )),
+            );
+        }
+        write_json(&dest, &profile)?;
+        Ok(())
+    })();
+    if let Err(err) = result {
         errors.push(format!(
             "failed to copy {} to {}: {err}",
             source.display(),
@@ -1935,6 +1987,14 @@ fn print_usage() {
     );
 }
 
+fn default_profile_id_for_release(release: &str) -> String {
+    if release == DEFAULT_RELEASE {
+        DEFAULT_PROFILE_ID.to_string()
+    } else {
+        format!("sysml-2.0-pilot-{release}")
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -2066,6 +2126,58 @@ mod tests {
     }
 
     #[test]
+    fn default_profile_id_uses_release_selector_for_new_releases() {
+        assert_eq!(
+            default_profile_id_for_release("2026-01"),
+            "sysml-2.0-metamodel-0.57.0"
+        );
+        assert_eq!(
+            default_profile_id_for_release("2026-04"),
+            "sysml-2.0-pilot-2026-04"
+        );
+    }
+
+    #[test]
+    fn candidate_profile_rewrites_profile_id_and_stdlib_path() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-profile-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let source = root.join("source");
+        let candidate = root.join("candidate");
+        std::fs::create_dir_all(&source).unwrap();
+        std::fs::write(
+            source.join("profile.json"),
+            serde_json::to_vec(&json!({
+                "id": "sysml-2.0-metamodel-0.57.0",
+                "stdlib_path": "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json"
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        let args = test_args("2026-04", "sysml-2.0-pilot-2026-04");
+        let mut errors = Vec::new();
+
+        copy_candidate_profile(&source, &candidate, &args, &mut errors);
+
+        assert!(errors.is_empty(), "{errors:?}");
+        let profile: Value =
+            serde_json::from_str(&std::fs::read_to_string(candidate.join("profile.json")).unwrap())
+                .unwrap();
+        assert_eq!(
+            profile.get("id").and_then(Value::as_str),
+            Some("sysml-2.0-pilot-2026-04")
+        );
+        assert_eq!(
+            profile.get("stdlib_path").and_then(Value::as_str),
+            Some("resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.full.kir.json")
+        );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn parity_differences_extract_compile_status_mismatch() {
         let report = json!({
             "cases": [
@@ -2158,6 +2270,24 @@ mod tests {
                     files: BTreeMap::new(),
                 }),
             },
+        }
+    }
+
+    fn test_args(release: &str, profile_id: &str) -> Args {
+        Args {
+            release: release.to_string(),
+            pilot_root: PathBuf::new(),
+            out: PathBuf::new(),
+            profile_id: profile_id.to_string(),
+            spec_version: DEFAULT_SPEC_VERSION.to_string(),
+            corpus: DEFAULT_CORPUS.to_string(),
+            wrapper_module: DEFAULT_WRAPPER_MODULE.to_string(),
+            source_archive: None,
+            asset_dir: None,
+            skip_stdlib_build: false,
+            skip_parity: false,
+            promote_candidate: false,
+            mark_latest: false,
         }
     }
 
