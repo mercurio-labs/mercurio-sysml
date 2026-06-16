@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
+use std::sync::{Arc, Mutex, OnceLock};
 
 use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::ast::{
@@ -210,8 +211,38 @@ pub fn resolve_default_stdlib_locator() -> StdlibLocator {
 }
 
 pub fn load_sysml_baseline() -> Result<KirDocument, KirError> {
+    shared_sysml_baseline().map(|document| document.as_ref().clone())
+}
+
+pub fn shared_sysml_baseline() -> Result<Arc<KirDocument>, KirError> {
     let locator = StdlibLocator::from_env().unwrap_or_else(resolve_default_stdlib_locator);
-    load_sysml_baseline_from_locator(&locator)
+    shared_sysml_baseline_from_locator(&locator)
+}
+
+pub fn shared_sysml_baseline_from_locator(
+    locator: &StdlibLocator,
+) -> Result<Arc<KirDocument>, KirError> {
+    static CACHE: OnceLock<Mutex<BTreeMap<String, Arc<KirDocument>>>> = OnceLock::new();
+
+    let key = locator.as_uri();
+    let cache = CACHE.get_or_init(|| Mutex::new(BTreeMap::new()));
+    if let Some(document) = cache
+        .lock()
+        .map_err(|_| KirError::Model("SysML stdlib cache mutex is poisoned".to_string()))?
+        .get(&key)
+        .cloned()
+    {
+        return Ok(document);
+    }
+
+    let document = Arc::new(load_sysml_baseline_from_locator(locator)?);
+    let mut entries = cache
+        .lock()
+        .map_err(|_| KirError::Model("SysML stdlib cache mutex is poisoned".to_string()))?;
+    Ok(entries
+        .entry(key)
+        .or_insert_with(|| Arc::clone(&document))
+        .clone())
 }
 
 pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDocument, KirError> {

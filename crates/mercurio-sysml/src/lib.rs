@@ -70,7 +70,7 @@ pub use parser::{
     compile_sysml_text_with_context, compile_sysml_text_with_context_report,
     default_sysml_delta_library_path, load_sysml_baseline, load_sysml_baseline_from_locator,
     load_sysml_document, load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
-    resolve_default_stdlib_locator,
+    resolve_default_stdlib_locator, shared_sysml_baseline, shared_sysml_baseline_from_locator,
 };
 pub use semantic_profile::{
     SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_RELATIONSHIP_KINDS,
@@ -271,7 +271,10 @@ mod tests {
         assert_eq!(latest.release.as_deref(), Some("2026-01"));
         assert_eq!(latest.selector, "2026-01");
         assert_eq!(latest.pilot_release_tag.as_deref(), Some("2026-01"));
-        assert_eq!(latest.pilot_implementation_version.as_deref(), Some("0.57.0"));
+        assert_eq!(
+            latest.pilot_implementation_version.as_deref(),
+            Some("0.57.0")
+        );
         assert_eq!(by_selector.profile_id, latest.profile_id);
         assert_eq!(by_version_alias.profile_id, latest.profile_id);
         assert_eq!(by_alias.profile_id, latest.profile_id);
@@ -513,5 +516,13 @@ mod tests {
                 .iter()
                 .any(|element| { element.id.contains("SysML") || element.kind.contains("SysML") })
         );
+    }
+
+    #[test]
+    fn shared_baseline_reuses_cached_document() {
+        let first = shared_sysml_baseline().unwrap();
+        let second = shared_sysml_baseline().unwrap();
+
+        assert!(std::sync::Arc::ptr_eq(&first, &second));
     }
 }
