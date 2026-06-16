@@ -74,7 +74,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "compare Mercurio and Java Pilot compile diagnostics",
             "Pilot interactive JAR was not found",
         ));
-        return write_trace_and_exit(args, stages);
+        return write_trace_and_exit(args, source_lock, stages);
     }
 
     if !args.skip_stdlib_build {
@@ -135,7 +135,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "compare Mercurio and Java Pilot compile diagnostics",
             "parity stages skipped by --skip-parity",
         ));
-        return write_trace_and_exit(args, stages);
+        return write_trace_and_exit(args, source_lock, stages);
     }
 
     let syntax_report = args.out.join("reports/syntax-parity.json");
@@ -217,16 +217,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Some(&compile_report),
     )?);
 
-    write_trace_and_exit(args, stages)
+    write_trace_and_exit(args, source_lock, stages)
 }
 
 fn write_trace_and_exit(
     args: Args,
+    source_lock: SourceLock,
     mut stages: Vec<StageTrace>,
 ) -> Result<(), Box<dyn std::error::Error>> {
     append_promotion_stage(&args, &mut stages)?;
     let generated_at_utc = now_utc_rfc3339()?;
     let stage_summary = StageSummary::from_stages(&stages);
+    let qualification_metrics = QualificationMetrics::from_source_and_stages(&source_lock, &stages);
+    let overall_status = overall_status(&stages);
     let trace = ConformanceTrace {
         schema: "dev.mercurio.pilot-release-conformance-trace.v1",
         generated_at_utc: generated_at_utc.clone(),
@@ -235,11 +238,8 @@ fn write_trace_and_exit(
         profile_id: args.profile_id.clone(),
         corpus: args.corpus.clone(),
         source_lock: "locks/source.lock.json".to_string(),
-        overall_status: if stages.iter().all(|stage| stage.status == "passed") {
-            "passed".to_string()
-        } else {
-            "failed".to_string()
-        },
+        overall_status,
+        qualification_metrics: qualification_metrics.clone(),
         stages,
     };
     write_json(&args.out.join("reports/conformance-trace.json"), &trace)?;
@@ -259,6 +259,7 @@ fn write_trace_and_exit(
         source_lock: trace.source_lock.clone(),
         conformance_trace: "reports/conformance-trace.json".to_string(),
         stage_summary,
+        qualification_metrics,
     };
     write_json(&args.out.join("reports/qualification.json"), &qualification)?;
     write_text(
@@ -406,6 +407,7 @@ struct ConformanceTrace {
     corpus: String,
     source_lock: String,
     overall_status: String,
+    qualification_metrics: QualificationMetrics,
     stages: Vec<StageTrace>,
 }
 
@@ -421,6 +423,7 @@ struct QualificationReport {
     source_lock: String,
     conformance_trace: String,
     stage_summary: StageSummary,
+    qualification_metrics: QualificationMetrics,
 }
 
 #[derive(Serialize)]
@@ -451,6 +454,127 @@ impl StageSummary {
             total_duration_ms: stages.iter().map(|stage| stage.duration_ms).sum(),
         }
     }
+}
+
+#[derive(Clone, Serialize)]
+struct QualificationMetrics {
+    source: SourceMetricSummary,
+    stages: BTreeMap<String, StageMetricSummary>,
+    candidate: Option<Value>,
+    stdlib: Option<Value>,
+    python: Option<Value>,
+    syntax_parity: Option<Value>,
+    semantic_parity: Option<Value>,
+    compile_diagnostics_parity: Option<Value>,
+}
+
+impl QualificationMetrics {
+    fn from_source_and_stages(source_lock: &SourceLock, stages: &[StageTrace]) -> Self {
+        let mut stage_metrics = BTreeMap::new();
+        let mut candidate = None;
+        let mut stdlib = None;
+        let mut python = None;
+        let mut syntax_parity = None;
+        let mut semantic_parity = None;
+        let mut compile_diagnostics_parity = None;
+
+        for stage in stages {
+            let report_metrics = stage.report.as_ref().map(|report| report.metrics.clone());
+            stage_metrics.insert(
+                stage.name.clone(),
+                StageMetricSummary {
+                    status: stage.status.clone(),
+                    duration_ms: stage.duration_ms,
+                    exit_code: stage.exit_code,
+                    report_sha256: stage.report.as_ref().map(|report| report.sha256.clone()),
+                    has_error: stage.status == "failed" && stage.error.is_some(),
+                },
+            );
+
+            match stage.name.as_str() {
+                "candidate_staging" => candidate = report_metrics,
+                "stdlib_build" => stdlib = report_metrics,
+                "python_wrappers" => python = report_metrics,
+                "syntax_parity" => syntax_parity = report_metrics,
+                "semantic_parity" => semantic_parity = report_metrics,
+                "compile_diagnostics_parity" => compile_diagnostics_parity = report_metrics,
+                _ => {}
+            }
+        }
+
+        Self {
+            source: SourceMetricSummary::from_source_lock(source_lock),
+            stages: stage_metrics,
+            candidate,
+            stdlib,
+            python,
+            syntax_parity,
+            semantic_parity,
+            compile_diagnostics_parity,
+        }
+    }
+}
+
+fn overall_status(stages: &[StageTrace]) -> String {
+    if stages.iter().any(|stage| stage.status == "failed") {
+        "failed".to_string()
+    } else {
+        "passed".to_string()
+    }
+}
+
+#[derive(Clone, Serialize)]
+struct SourceMetricSummary {
+    mercurio_commit: Option<String>,
+    mercurio_branch: Option<String>,
+    mercurio_dirty: Option<bool>,
+    mercurio_tracked_file_count: usize,
+    mercurio_tracked_tree_sha256: Option<String>,
+    pilot_commit: Option<String>,
+    pilot_branch: Option<String>,
+    pilot_dirty: Option<bool>,
+    pilot_tracked_file_count: usize,
+    pilot_tracked_tree_sha256: Option<String>,
+    source_archive_sha256: Option<String>,
+    asset_tree_sha256: Option<String>,
+}
+
+impl SourceMetricSummary {
+    fn from_source_lock(source_lock: &SourceLock) -> Self {
+        Self {
+            mercurio_commit: source_lock.mercurio.commit.clone(),
+            mercurio_branch: source_lock.mercurio.branch.clone(),
+            mercurio_dirty: source_lock.mercurio.dirty,
+            mercurio_tracked_file_count: source_lock.mercurio.tracked_file_count,
+            mercurio_tracked_tree_sha256: source_lock.mercurio.tracked_tree_sha256.clone(),
+            pilot_commit: source_lock.pilot.commit.clone(),
+            pilot_branch: source_lock.pilot.branch.clone(),
+            pilot_dirty: source_lock.pilot.dirty,
+            pilot_tracked_file_count: source_lock.pilot.tracked_file_count,
+            pilot_tracked_tree_sha256: source_lock.pilot.tracked_tree_sha256.clone(),
+            source_archive_sha256: source_lock
+                .inputs
+                .source_archive
+                .as_ref()
+                .map(|fingerprint| fingerprint.sha256.clone()),
+            asset_tree_sha256: source_lock
+                .inputs
+                .asset_dir
+                .as_ref()
+                .map(|fingerprint| fingerprint.tree_sha256.clone()),
+        }
+    }
+}
+
+#[derive(Clone, Serialize)]
+struct StageMetricSummary {
+    status: String,
+    duration_ms: u128,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    exit_code: Option<i32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    report_sha256: Option<String>,
+    has_error: bool,
 }
 
 #[derive(Serialize)]
@@ -1354,6 +1478,11 @@ fn render_conformance_trace_markdown(trace: &ConformanceTrace) -> String {
     output.push_str(&format!("- Profile: `{}`\n", trace.profile_id));
     output.push_str(&format!("- Corpus: `{}`\n", trace.corpus));
     output.push_str(&format!("- Source lock: `{}`\n\n", trace.source_lock));
+    output.push_str("## Source Fingerprints\n\n");
+    output.push_str(&render_source_metrics_markdown(
+        &trace.qualification_metrics.source,
+    ));
+    output.push('\n');
     output.push_str("| Stage | Status | Duration ms | Report | Metrics |\n");
     output.push_str("|---|---:|---:|---|---|\n");
     for stage in &trace.stages {
@@ -1402,6 +1531,59 @@ fn render_qualification_markdown(report: &QualificationReport) -> String {
         "- Total duration ms: {}\n",
         report.stage_summary.total_duration_ms
     ));
+    output.push_str("\n## Source Fingerprints\n\n");
+    output.push_str(&render_source_metrics_markdown(
+        &report.qualification_metrics.source,
+    ));
+    output
+}
+
+fn render_source_metrics_markdown(source: &SourceMetricSummary) -> String {
+    let mut output = String::new();
+    output.push_str(&format!(
+        "- Mercurio commit: `{}`\n",
+        source.mercurio_commit.as_deref().unwrap_or("")
+    ));
+    output.push_str(&format!(
+        "- Mercurio branch: `{}`\n",
+        source.mercurio_branch.as_deref().unwrap_or("")
+    ));
+    output.push_str(&format!(
+        "- Mercurio dirty: `{}`\n",
+        source
+            .mercurio_dirty
+            .map(|dirty| dirty.to_string())
+            .unwrap_or_default()
+    ));
+    output.push_str(&format!(
+        "- Mercurio tracked tree SHA256: `{}`\n",
+        source.mercurio_tracked_tree_sha256.as_deref().unwrap_or("")
+    ));
+    output.push_str(&format!(
+        "- Pilot commit: `{}`\n",
+        source.pilot_commit.as_deref().unwrap_or("")
+    ));
+    output.push_str(&format!(
+        "- Pilot branch: `{}`\n",
+        source.pilot_branch.as_deref().unwrap_or("")
+    ));
+    output.push_str(&format!(
+        "- Pilot dirty: `{}`\n",
+        source
+            .pilot_dirty
+            .map(|dirty| dirty.to_string())
+            .unwrap_or_default()
+    ));
+    output.push_str(&format!(
+        "- Pilot tracked tree SHA256: `{}`\n",
+        source.pilot_tracked_tree_sha256.as_deref().unwrap_or("")
+    ));
+    if let Some(sha256) = &source.source_archive_sha256 {
+        output.push_str(&format!("- Source archive SHA256: `{sha256}`\n"));
+    }
+    if let Some(sha256) = &source.asset_tree_sha256 {
+        output.push_str(&format!("- Asset tree SHA256: `{sha256}`\n"));
+    }
     output
 }
 
@@ -1483,6 +1665,7 @@ mod tests {
         assert_eq!(summary.failed, 0);
         assert_eq!(summary.skipped, 1);
         assert_eq!(summary.total_duration_ms, 12);
+        let metrics = QualificationMetrics::from_source_and_stages(&test_source_lock(), &stages);
 
         let trace = ConformanceTrace {
             schema: "dev.mercurio.pilot-release-conformance-trace.v1",
@@ -1493,12 +1676,14 @@ mod tests {
             corpus: "small".to_string(),
             source_lock: "locks/source.lock.json".to_string(),
             overall_status: "failed".to_string(),
+            qualification_metrics: metrics.clone(),
             stages,
         };
         let trace_markdown = render_conformance_trace_markdown(&trace);
         assert!(trace_markdown.contains("# Pilot Conformance Trace"));
         assert!(trace_markdown.contains("`pilot_java_artifacts`"));
         assert!(trace_markdown.contains("pilot.jar"));
+        assert!(trace_markdown.contains("Mercurio tracked tree SHA256"));
 
         let report = QualificationReport {
             schema: "dev.mercurio.pilot-release-qualification.v1",
@@ -1511,6 +1696,7 @@ mod tests {
             source_lock: trace.source_lock.clone(),
             conformance_trace: "reports/conformance-trace.json".to_string(),
             stage_summary: summary,
+            qualification_metrics: metrics,
         };
         let qualification_markdown = render_qualification_markdown(&report);
         assert!(qualification_markdown.contains("# Pilot Release Qualification"));
@@ -1542,6 +1728,76 @@ mod tests {
         assert!(!tree.tree_sha256.is_empty());
 
         std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn skipped_stages_do_not_fail_overall_status() {
+        let stages = vec![
+            StageTrace {
+                name: "candidate_staging".to_string(),
+                description: "stage candidate",
+                status: "passed".to_string(),
+                duration_ms: 1,
+                command: Vec::new(),
+                exit_code: None,
+                report: None,
+                error: None,
+            },
+            StageTrace {
+                name: "syntax_parity".to_string(),
+                description: "compare syntax",
+                status: "skipped".to_string(),
+                duration_ms: 0,
+                command: Vec::new(),
+                exit_code: None,
+                report: None,
+                error: Some("not requested".to_string()),
+            },
+        ];
+
+        assert_eq!(overall_status(&stages), "passed");
+    }
+
+    fn test_source_lock() -> SourceLock {
+        SourceLock {
+            schema: "dev.mercurio.pilot-release-source-lock.v1",
+            generated_at_utc: "2026-06-16T00:00:00Z".to_string(),
+            release: "2026-01".to_string(),
+            spec_version: "2.0.0".to_string(),
+            profile_id: "sysml-2.0-metamodel-0.57.0".to_string(),
+            corpus: "small".to_string(),
+            mercurio: RepoFingerprint {
+                root: "mercurio".to_string(),
+                commit: Some("mercurio-commit".to_string()),
+                branch: Some("main".to_string()),
+                dirty: Some(false),
+                tracked_file_count: 2,
+                tracked_tree_sha256: Some("mercurio-tree".to_string()),
+                tracked_files: BTreeMap::new(),
+            },
+            pilot: RepoFingerprint {
+                root: "pilot".to_string(),
+                commit: Some("pilot-commit".to_string()),
+                branch: Some("master".to_string()),
+                dirty: Some(false),
+                tracked_file_count: 3,
+                tracked_tree_sha256: Some("pilot-tree".to_string()),
+                tracked_files: BTreeMap::new(),
+            },
+            inputs: SourceInputs {
+                source_archive: Some(PathFingerprint {
+                    path: "release.zip".to_string(),
+                    sha256: "archive-sha".to_string(),
+                    byte_len: 7,
+                }),
+                asset_dir: Some(TreeFingerprint {
+                    root: "assets".to_string(),
+                    file_count: 1,
+                    tree_sha256: "asset-tree".to_string(),
+                    files: BTreeMap::new(),
+                }),
+            },
+        }
     }
 
     #[test]
