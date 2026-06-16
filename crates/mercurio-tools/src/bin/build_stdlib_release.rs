@@ -4,13 +4,13 @@ use std::io::{Read, Seek, Write};
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-use mercurio_core::frontend::transpile::{KirEmissionSeed, PilotConstructSeed};
 use mercurio_core::{
     Graph, KirDocument, KparPackageBuild, MpackLanguageProfile, MpackLibrary, MpackManifest,
     MpackPythonPackage, MpackPythonWrapperBinding, MpackRequirements, MpackRulepack, RulePack,
-    generate_python_wrappers, load_language_profile, load_pilot_export, normalize_pilot_export,
-    repo_path, repo_root, validate_mpack_manifest, write_kpar_package,
+    generate_python_wrappers, load_pilot_export, normalize_pilot_export, repo_path, repo_root,
+    validate_mpack_manifest, write_kpar_package,
 };
+use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
 use mercurio_tools::{
     attach_stdlib_derived_feature_manifest, sha256_file, split_language_baselines,
 };
@@ -47,7 +47,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let locked_export_path = release_root.join("raw/pilot-stdlib-export.json");
     copy_if_different(&raw_export_path, &locked_export_path)?;
 
-    let profile = load_language_profile(&args.profile_id)?;
+    let profile_source = tool_repo_path(&format!(
+        "resources/metamodels/{}/profile.json",
+        args.profile_id
+    ));
+    let profile = mercurio_core::LanguageProfile::from_path(&profile_source)?;
     let mut kir = normalize_pilot_export(export.clone())?;
     kir.metadata = build_kir_metadata(&args, &source_id, &export_digest, &export_sha256, &export);
     attach_stdlib_derived_feature_manifest(
@@ -121,16 +125,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )?;
     let sysml_delta_kpar_digest = digest_file(&sysml_delta_kpar_path)?;
 
-    let profile_source = repo_path(&format!(
-        "resources/metamodels/{}/profile.json",
-        args.profile_id
-    ));
     let profile_mapping_sources = [
-        repo_path(&format!(
+        tool_repo_path(&format!(
             "resources/metamodels/{}/mappings/metamodel_constructs.seed.json",
             args.profile_id
         )),
-        repo_path(&format!(
+        tool_repo_path(&format!(
             "resources/metamodels/{}/mappings/kir_emission.seed.json",
             args.profile_id
         )),
@@ -615,7 +615,7 @@ fn prepare_raw_export(args: &Args) -> Result<PathBuf, Box<dyn std::error::Error>
         .pilot_root
         .as_deref()
         .ok_or("expected --from-export or --pilot-root")?;
-    let export_path = repo_path("target/stdlib-release/pilot-stdlib-export.json");
+    let export_path = tool_repo_path("target/stdlib-release/pilot-stdlib-export.json");
     export_from_pilot(pilot_root, &export_path)?;
     Ok(export_path)
 }
@@ -641,7 +641,7 @@ fn audit_profile_inputs(
     profile: &mercurio_core::LanguageProfile,
     kir: &mercurio_core::KirDocument,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let profile_dir = repo_path(&format!("resources/metamodels/{}", args.profile_id));
+    let profile_dir = tool_repo_path(&format!("resources/metamodels/{}", args.profile_id));
     let constructs_path = profile_dir
         .join("mappings")
         .join("metamodel_constructs.seed.json");
@@ -1094,7 +1094,7 @@ fn promote_release(
     mpack_path: &Path,
     release_lock_path: &Path,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let resource_root = repo_path(&format!("resources/metamodels/{}/stdlib", args.profile_id));
+    let resource_root = tool_repo_path(&format!("resources/metamodels/{}/stdlib", args.profile_id));
     copy_if_different(
         raw_export_path,
         &resource_root.join("pilot-stdlib-export.json"),
@@ -1102,11 +1102,13 @@ fn promote_release(
     copy_if_different(kir_path, &resource_root.join("stdlib.full.kir.json"))?;
     copy_if_different(
         kernel_kir_path,
-        &repo_path("resources/kernel/kerml-kernel.kir.json"),
+        &tool_repo_path("resources/kernel/kerml-kernel.kir.json"),
     )?;
     copy_if_different(
         sysml_delta_kir_path,
-        &repo_path("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json"),
+        &tool_repo_path(
+            "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+        ),
     )?;
     copy_if_different(rulepack_path, &resource_root.join("stdlib.rulepack.json"))?;
     copy_if_different(release_lock_path, &resource_root.join("release.lock.json"))?;
@@ -1317,9 +1319,9 @@ fn export_from_pilot(
     let pilot_root = pilot_root.canonicalize()?;
     let library_root = pilot_root.join("sysml.library");
     let interactive_jar = find_interactive_jar(&pilot_root)?;
-    let classes_dir = repo_path("target/pilot-exporter-classes");
-    let java_source = repo_path(
-        "../mercurio-sysml/tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStdlibExporter.java",
+    let classes_dir = tool_repo_path("target/pilot-exporter-classes");
+    let java_source = tool_repo_path(
+        "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStdlibExporter.java",
     );
 
     compile_java_exporter(&interactive_jar, &java_source, &classes_dir)?;
@@ -1392,30 +1394,71 @@ fn run_java_exporter(
     if let Some(parent) = export_path.parent() {
         std::fs::create_dir_all(parent)?;
     }
+    let classes_dir = absolute_path(classes_dir)?;
+    let interactive_jar = absolute_path(interactive_jar)?;
+    let library_root = absolute_path(library_root)?;
+    let export_path = absolute_path(export_path)?;
     let separator = if cfg!(windows) { ";" } else { ":" };
     let lib_dir = interactive_jar
         .parent()
         .unwrap_or_else(|| Path::new("."))
-        .join("lib");
+        .join("libs");
     let classpath = format!(
         "{}{}{}{}{}",
-        classes_dir.display(),
+        java_path_string(&classes_dir),
         separator,
-        interactive_jar.display(),
+        java_path_string(&interactive_jar),
         separator,
-        lib_dir.join("*").display()
+        java_path_string(&lib_dir.join("*"))
     );
-    let status = Command::new("java")
-        .arg("-cp")
-        .arg(classpath)
-        .arg("dev.mercurio.pilot.PilotStdlibExporter")
-        .arg(library_root)
-        .arg(export_path)
-        .status()?;
+    let status = if cfg!(windows) {
+        let script_path = tool_repo_path("target/run_pilot_stdlib_exporter.ps1");
+        if let Some(parent) = script_path.parent() {
+            std::fs::create_dir_all(parent)?;
+        }
+        let script = format!(
+            "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotStdlibExporter '{}' '{}'\n",
+            classpath.replace('\'', "''"),
+            java_path_string(&library_root).replace('\'', "''"),
+            java_path_string(&export_path).replace('\'', "''")
+        );
+        std::fs::write(&script_path, script)?;
+        Command::new("powershell")
+            .arg("-File")
+            .arg(script_path)
+            .status()?
+    } else {
+        Command::new("java")
+            .arg("-cp")
+            .arg(classpath)
+            .arg("dev.mercurio.pilot.PilotStdlibExporter")
+            .arg(library_root)
+            .arg(export_path)
+            .status()?
+    };
     if !status.success() {
         return Err("failed to run Java pilot exporter".into());
     }
     Ok(())
+}
+
+fn absolute_path(path: &Path) -> Result<PathBuf, Box<dyn std::error::Error>> {
+    if path.is_absolute() {
+        return Ok(path.to_path_buf());
+    }
+    Ok(std::env::current_dir()?.join(path))
+}
+
+fn tool_repo_path(relative: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("mercurio-tools lives under crates")
+        .join(relative)
+}
+
+fn java_path_string(path: &Path) -> String {
+    path.display().to_string().replace("\\\\?\\", "")
 }
 
 fn git_stdout<const N: usize>(repo: &Path, args: [&str; N]) -> Option<String> {

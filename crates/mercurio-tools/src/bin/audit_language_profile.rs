@@ -3,10 +3,10 @@ use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use mercurio_core::frontend::transpile::{KirEmissionSeed, PilotConstructSeed};
 use mercurio_core::ir::KirDocument;
 use mercurio_core::language::profile::{CURRENT_DEFAULT_PROFILE_ID, LanguageProfile};
 use mercurio_core::paths::repo_path;
+use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
