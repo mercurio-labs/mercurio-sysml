@@ -3473,17 +3473,6 @@ fn resolve_type_reference(
     local_aliases: &BTreeMap<String, QualifiedName>,
     import_aliases: &ImportAliases,
 ) -> Option<String> {
-    if let Some(unconjugated) = unconjugated_type_name(name) {
-        return resolve_type_reference(
-            &unconjugated,
-            stdlib_ids,
-            stdlib_aliases,
-            local_definitions,
-            local_aliases,
-            import_aliases,
-        );
-    }
-
     if name.segments.len() == 1 {
         let simple = &name.segments[0];
         if let Some(local) = local_definitions.get(simple) {
@@ -3505,7 +3494,18 @@ fn resolve_type_reference(
         if let Some(alias) = stdlib_aliases.get(simple) {
             return Some(alias.clone());
         }
-        return unique_suffix_match(simple, stdlib_ids);
+        return unique_suffix_match(simple, stdlib_ids).or_else(|| {
+            unconjugated_type_name(name).and_then(|unconjugated| {
+                resolve_type_reference(
+                    &unconjugated,
+                    stdlib_ids,
+                    stdlib_aliases,
+                    local_definitions,
+                    local_aliases,
+                    import_aliases,
+                )
+            })
+        });
     }
 
     if let Some(expanded) = expand_import_namespace_prefix(name, local_aliases, import_aliases) {
@@ -3554,6 +3554,18 @@ fn resolve_type_reference(
         local_definitions,
         local_aliases,
     )
+    .or_else(|| {
+        unconjugated_type_name(name).and_then(|unconjugated| {
+            resolve_type_reference(
+                &unconjugated,
+                stdlib_ids,
+                stdlib_aliases,
+                local_definitions,
+                local_aliases,
+                import_aliases,
+            )
+        })
+    })
 }
 
 fn resolve_type_reference_in_scope(
@@ -3565,18 +3577,6 @@ fn resolve_type_reference_in_scope(
     local_aliases: &BTreeMap<String, QualifiedName>,
     import_aliases: &ImportAliases,
 ) -> Option<String> {
-    if let Some(unconjugated) = unconjugated_type_name(name) {
-        return resolve_type_reference_in_scope(
-            &unconjugated,
-            owner_qualified_name,
-            stdlib_ids,
-            stdlib_aliases,
-            local_definitions,
-            local_aliases,
-            import_aliases,
-        );
-    }
-
     resolve_scoped_local_type_reference(name, owner_qualified_name, local_definitions)
         .or_else(|| resolve_scoped_import_value_alias(name, owner_qualified_name, import_aliases))
         .or_else(|| {
@@ -3588,6 +3588,19 @@ fn resolve_type_reference_in_scope(
                 local_aliases,
                 import_aliases,
             )
+        })
+        .or_else(|| {
+            unconjugated_type_name(name).and_then(|unconjugated| {
+                resolve_type_reference_in_scope(
+                    &unconjugated,
+                    owner_qualified_name,
+                    stdlib_ids,
+                    stdlib_aliases,
+                    local_definitions,
+                    local_aliases,
+                    import_aliases,
+                )
+            })
         })
 }
 
