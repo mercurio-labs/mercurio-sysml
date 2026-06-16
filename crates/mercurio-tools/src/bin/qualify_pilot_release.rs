@@ -222,8 +222,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 fn write_trace_and_exit(
     args: Args,
-    stages: Vec<StageTrace>,
+    mut stages: Vec<StageTrace>,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    append_promotion_stage(&args, &mut stages)?;
     let generated_at_utc = now_utc_rfc3339()?;
     let stage_summary = StageSummary::from_stages(&stages);
     let trace = ConformanceTrace {
@@ -290,6 +291,8 @@ struct Args {
     asset_dir: Option<PathBuf>,
     skip_stdlib_build: bool,
     skip_parity: bool,
+    promote_candidate: bool,
+    mark_latest: bool,
 }
 
 impl Args {
@@ -306,6 +309,8 @@ impl Args {
             asset_dir: None,
             skip_stdlib_build: false,
             skip_parity: false,
+            promote_candidate: false,
+            mark_latest: false,
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
@@ -322,6 +327,8 @@ impl Args {
                 "--asset-dir" => args.asset_dir = Some(next_path(&raw, &mut index)?),
                 "--skip-stdlib-build" => args.skip_stdlib_build = true,
                 "--skip-parity" => args.skip_parity = true,
+                "--promote-candidate" => args.promote_candidate = true,
+                "--mark-latest" => args.mark_latest = true,
                 "--help" | "-h" => {
                     print_usage();
                     std::process::exit(0);
@@ -329,6 +336,9 @@ impl Args {
                 unknown => return Err(format!("unknown argument: {unknown}").into()),
             }
             index += 1;
+        }
+        if args.mark_latest && !args.promote_candidate {
+            return Err("--mark-latest requires --promote-candidate".into());
         }
         Ok(args)
     }
@@ -821,6 +831,225 @@ fn copy_dir_recursive(source: &Path, dest: &Path) -> Result<(), Box<dyn std::err
     Ok(())
 }
 
+fn append_promotion_stage(
+    args: &Args,
+    stages: &mut Vec<StageTrace>,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if !args.promote_candidate {
+        return Ok(());
+    }
+
+    if !stages.iter().all(|stage| stage.status == "passed") {
+        stages.push(skipped_stage(
+            "candidate_promotion",
+            "promote staged release candidate resources into the repository",
+            "promotion skipped because qualification gates did not all pass",
+        ));
+        return Ok(());
+    }
+
+    stages.push(promote_candidate_stage(args)?);
+    Ok(())
+}
+
+fn promote_candidate_stage(args: &Args) -> Result<StageTrace, Box<dyn std::error::Error>> {
+    let started = Instant::now();
+    let candidate_resources_root = args.out.join("candidate/resources/metamodels");
+    let repo_metamodels_root = sysml_workspace_root().join("resources/metamodels");
+    let report_path = args.out.join("reports/candidate-promotion.json");
+    let result = promote_candidate_resources(
+        &candidate_resources_root,
+        &repo_metamodels_root,
+        &args.profile_id,
+        args.mark_latest,
+    );
+    let duration_ms = started.elapsed().as_millis();
+
+    match result {
+        Ok(report) => {
+            write_json(&report_path, &report)?;
+            Ok(StageTrace {
+                name: "candidate_promotion".to_string(),
+                description: "promote staged release candidate resources into the repository",
+                status: "passed".to_string(),
+                duration_ms,
+                command: Vec::new(),
+                exit_code: None,
+                report: Some(ReportTrace {
+                    path: report_path.display().to_string(),
+                    sha256: sha256_file(&report_path)?,
+                    metrics: json!({
+                        "promoted_root": report.promoted_root,
+                        "registry": report.registry,
+                        "marked_latest": report.marked_latest,
+                        "file_count": report.file_count,
+                    }),
+                }),
+                error: None,
+            })
+        }
+        Err(err) => Ok(StageTrace {
+            name: "candidate_promotion".to_string(),
+            description: "promote staged release candidate resources into the repository",
+            status: "failed".to_string(),
+            duration_ms,
+            command: Vec::new(),
+            exit_code: None,
+            report: None,
+            error: Some(err.to_string()),
+        }),
+    }
+}
+
+#[derive(Debug, Serialize)]
+struct CandidatePromotionReport {
+    schema: &'static str,
+    profile_id: String,
+    promoted_root: String,
+    registry: String,
+    marked_latest: bool,
+    file_count: usize,
+    tree_sha256: String,
+}
+
+fn promote_candidate_resources(
+    candidate_resources_root: &Path,
+    repo_metamodels_root: &Path,
+    profile_id: &str,
+    mark_latest: bool,
+) -> Result<CandidatePromotionReport, Box<dyn std::error::Error>> {
+    let candidate_profile_root = candidate_resources_root.join(profile_id);
+    if !candidate_profile_root.is_dir() {
+        return Err(format!(
+            "candidate profile root does not exist: {}",
+            candidate_profile_root.display()
+        )
+        .into());
+    }
+
+    let repo_profile_root = repo_metamodels_root.join(profile_id);
+    if repo_profile_root.exists() {
+        return Err(format!(
+            "refusing to overwrite existing promoted profile directory: {}",
+            repo_profile_root.display()
+        )
+        .into());
+    }
+
+    validate_registry_promotion(
+        &candidate_resources_root.join("registry.json"),
+        &repo_metamodels_root.join("registry.json"),
+        profile_id,
+    )?;
+    copy_dir_recursive(&candidate_profile_root, &repo_profile_root)?;
+    promote_registry_entry(
+        &candidate_resources_root.join("registry.json"),
+        &repo_metamodels_root.join("registry.json"),
+        profile_id,
+        mark_latest,
+    )?;
+
+    let files = collect_files(&repo_profile_root)?;
+    let tree_sha256 = digest_paths(&repo_profile_root, &files)?;
+    Ok(CandidatePromotionReport {
+        schema: "dev.mercurio.pilot-candidate-promotion.v1",
+        profile_id: profile_id.to_string(),
+        promoted_root: repo_profile_root.display().to_string(),
+        registry: repo_metamodels_root
+            .join("registry.json")
+            .display()
+            .to_string(),
+        marked_latest: mark_latest,
+        file_count: files.len(),
+        tree_sha256,
+    })
+}
+
+fn validate_registry_promotion(
+    candidate_registry_path: &Path,
+    repo_registry_path: &Path,
+    profile_id: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let candidate_registry: Value =
+        serde_json::from_str(&std::fs::read_to_string(candidate_registry_path)?)?;
+    let candidate_exists = candidate_registry.as_array().is_some_and(|entries| {
+        entries
+            .iter()
+            .any(|entry| entry.get("id").and_then(Value::as_str) == Some(profile_id))
+    });
+    if !candidate_exists {
+        return Err(format!("candidate registry does not contain `{profile_id}`").into());
+    }
+
+    if repo_registry_path.exists() {
+        let repo_registry: Value =
+            serde_json::from_str(&std::fs::read_to_string(repo_registry_path)?)?;
+        let entries = repo_registry
+            .as_array()
+            .ok_or("repo metamodel registry must be a JSON array")?;
+        if entries
+            .iter()
+            .any(|entry| entry.get("id").and_then(Value::as_str) == Some(profile_id))
+        {
+            return Err(format!("registry already contains `{profile_id}`").into());
+        }
+    }
+    Ok(())
+}
+
+fn promote_registry_entry(
+    candidate_registry_path: &Path,
+    repo_registry_path: &Path,
+    profile_id: &str,
+    mark_latest: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let candidate_registry: Value =
+        serde_json::from_str(&std::fs::read_to_string(candidate_registry_path)?)?;
+    let mut candidate_entry = candidate_registry
+        .as_array()
+        .and_then(|entries| {
+            entries
+                .iter()
+                .find(|entry| entry.get("id").and_then(Value::as_str) == Some(profile_id))
+        })
+        .cloned()
+        .ok_or_else(|| format!("candidate registry does not contain `{profile_id}`"))?;
+
+    if let Some(object) = candidate_entry.as_object_mut() {
+        object.insert(
+            "status".to_string(),
+            Value::String(if mark_latest { "latest" } else { "supported" }.to_string()),
+        );
+    }
+
+    let mut repo_registry: Value = if repo_registry_path.exists() {
+        serde_json::from_str(&std::fs::read_to_string(repo_registry_path)?)?
+    } else {
+        Value::Array(Vec::new())
+    };
+    let entries = repo_registry
+        .as_array_mut()
+        .ok_or("repo metamodel registry must be a JSON array")?;
+    if entries
+        .iter()
+        .any(|entry| entry.get("id").and_then(Value::as_str) == Some(profile_id))
+    {
+        return Err(format!("registry already contains `{profile_id}`").into());
+    }
+    if mark_latest {
+        for entry in entries.iter_mut() {
+            if entry.get("status").and_then(Value::as_str) == Some("latest")
+                && let Some(object) = entry.as_object_mut()
+            {
+                object.insert("status".to_string(), Value::String("supported".to_string()));
+            }
+        }
+    }
+    entries.push(candidate_entry);
+    write_json(repo_registry_path, &repo_registry)?;
+    Ok(())
+}
+
 fn python_wrappers_stage(
     python_root: &Path,
     wrapper_module: &str,
@@ -1213,7 +1442,7 @@ fn next_path(args: &[String], index: &mut usize) -> Result<PathBuf, Box<dyn std:
 
 fn print_usage() {
     println!(
-        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--source-archive PATH] [--asset-dir PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build] [--skip-parity]"
+        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--source-archive PATH] [--asset-dir PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build] [--skip-parity] [--promote-candidate] [--mark-latest]"
     );
 }
 
@@ -1347,6 +1576,110 @@ mod tests {
                 .is_file()
         );
         assert!(candidate.join("stdlib/stdlib.full.kir.json").is_file());
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn promotion_merges_registry_and_marks_latest_explicitly() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-promotion-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let candidate_resources = root.join("candidate/resources/metamodels");
+        let repo_resources = root.join("repo/resources/metamodels");
+        let profile_id = "sysml-2.0-metamodel-2026-04";
+        std::fs::create_dir_all(candidate_resources.join(profile_id)).unwrap();
+        std::fs::create_dir_all(&repo_resources).unwrap();
+        std::fs::write(
+            candidate_resources.join(profile_id).join("profile.json"),
+            b"{}",
+        )
+        .unwrap();
+        write_json(
+            &candidate_resources.join("registry.json"),
+            &json!([
+                {
+                    "id": profile_id,
+                    "release": "2026-04",
+                    "selector": "2026-04",
+                    "display_name": "SysML v2 (2026-04)",
+                    "sysml_version": "2.0",
+                    "kerml_version": "1.0",
+                    "metamodel_version": "2026-04",
+                    "status": "supported"
+                }
+            ]),
+        )
+        .unwrap();
+        write_json(
+            &repo_resources.join("registry.json"),
+            &json!([
+                {
+                    "id": "sysml-2.0-metamodel-0.57.0",
+                    "status": "latest"
+                }
+            ]),
+        )
+        .unwrap();
+
+        let report =
+            promote_candidate_resources(&candidate_resources, &repo_resources, profile_id, true)
+                .unwrap();
+        assert!(report.marked_latest);
+        assert!(
+            repo_resources
+                .join(profile_id)
+                .join("profile.json")
+                .is_file()
+        );
+
+        let registry: Value = serde_json::from_str(
+            &std::fs::read_to_string(repo_resources.join("registry.json")).unwrap(),
+        )
+        .unwrap();
+        let entries = registry.as_array().unwrap();
+        assert_eq!(
+            entries[0].get("status").and_then(Value::as_str),
+            Some("supported")
+        );
+        assert_eq!(
+            entries[1].get("status").and_then(Value::as_str),
+            Some("latest")
+        );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn promotion_refuses_existing_profile_directory() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-promotion-existing-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let candidate_resources = root.join("candidate/resources/metamodels");
+        let repo_resources = root.join("repo/resources/metamodels");
+        let profile_id = "sysml-2.0-metamodel-2026-04";
+        std::fs::create_dir_all(candidate_resources.join(profile_id)).unwrap();
+        std::fs::create_dir_all(repo_resources.join(profile_id)).unwrap();
+        std::fs::write(
+            candidate_resources.join(profile_id).join("profile.json"),
+            b"{}",
+        )
+        .unwrap();
+        write_json(
+            &candidate_resources.join("registry.json"),
+            &json!([{ "id": profile_id, "status": "supported" }]),
+        )
+        .unwrap();
+
+        let err =
+            promote_candidate_resources(&candidate_resources, &repo_resources, profile_id, false)
+                .unwrap_err()
+                .to_string();
+        assert!(err.contains("refusing to overwrite"));
 
         std::fs::remove_dir_all(root).unwrap();
     }
