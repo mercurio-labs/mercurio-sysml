@@ -192,13 +192,15 @@ fn write_trace_and_exit(
     args: Args,
     stages: Vec<StageTrace>,
 ) -> Result<(), Box<dyn std::error::Error>> {
+    let generated_at_utc = now_utc_rfc3339()?;
+    let stage_summary = StageSummary::from_stages(&stages);
     let trace = ConformanceTrace {
         schema: "dev.mercurio.pilot-release-conformance-trace.v1",
-        generated_at_utc: now_utc_rfc3339()?,
-        release: args.release,
-        spec_version: args.spec_version,
-        profile_id: args.profile_id,
-        corpus: args.corpus,
+        generated_at_utc: generated_at_utc.clone(),
+        release: args.release.clone(),
+        spec_version: args.spec_version.clone(),
+        profile_id: args.profile_id.clone(),
+        corpus: args.corpus.clone(),
         source_lock: "locks/source.lock.json".to_string(),
         overall_status: if stages.iter().all(|stage| stage.status == "passed") {
             "passed".to_string()
@@ -208,6 +210,28 @@ fn write_trace_and_exit(
         stages,
     };
     write_json(&args.out.join("reports/conformance-trace.json"), &trace)?;
+    write_text(
+        &args.out.join("reports/conformance-trace.md"),
+        &render_conformance_trace_markdown(&trace),
+    )?;
+
+    let qualification = QualificationReport {
+        schema: "dev.mercurio.pilot-release-qualification.v1",
+        generated_at_utc,
+        release: trace.release.clone(),
+        spec_version: trace.spec_version.clone(),
+        profile_id: trace.profile_id.clone(),
+        corpus: trace.corpus.clone(),
+        overall_status: trace.overall_status.clone(),
+        source_lock: trace.source_lock.clone(),
+        conformance_trace: "reports/conformance-trace.json".to_string(),
+        stage_summary,
+    };
+    write_json(&args.out.join("reports/qualification.json"), &qualification)?;
+    write_text(
+        &args.out.join("reports/qualification.md"),
+        &render_qualification_markdown(&qualification),
+    )?;
 
     println!("pilot release qualification");
     println!("  release: {}", trace.release);
@@ -308,6 +332,50 @@ struct ConformanceTrace {
     source_lock: String,
     overall_status: String,
     stages: Vec<StageTrace>,
+}
+
+#[derive(Serialize)]
+struct QualificationReport {
+    schema: &'static str,
+    generated_at_utc: String,
+    release: String,
+    spec_version: String,
+    profile_id: String,
+    corpus: String,
+    overall_status: String,
+    source_lock: String,
+    conformance_trace: String,
+    stage_summary: StageSummary,
+}
+
+#[derive(Serialize)]
+struct StageSummary {
+    passed: usize,
+    failed: usize,
+    skipped: usize,
+    total: usize,
+    total_duration_ms: u128,
+}
+
+impl StageSummary {
+    fn from_stages(stages: &[StageTrace]) -> Self {
+        Self {
+            passed: stages
+                .iter()
+                .filter(|stage| stage.status == "passed")
+                .count(),
+            failed: stages
+                .iter()
+                .filter(|stage| stage.status == "failed")
+                .count(),
+            skipped: stages
+                .iter()
+                .filter(|stage| stage.status == "skipped")
+                .count(),
+            total: stages.len(),
+            total_duration_ms: stages.iter().map(|stage| stage.duration_ms).sum(),
+        }
+    }
 }
 
 #[derive(Serialize)]
@@ -685,6 +753,82 @@ fn write_json(path: &Path, value: &impl Serialize) -> Result<(), Box<dyn std::er
     Ok(())
 }
 
+fn write_text(path: &Path, value: &str) -> Result<(), Box<dyn std::error::Error>> {
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+    std::fs::write(path, value)?;
+    Ok(())
+}
+
+fn render_conformance_trace_markdown(trace: &ConformanceTrace) -> String {
+    let mut output = String::new();
+    output.push_str("# Pilot Conformance Trace\n\n");
+    output.push_str(&format!("- Release: `{}`\n", trace.release));
+    output.push_str(&format!("- Status: `{}`\n", trace.overall_status));
+    output.push_str(&format!("- Generated: `{}`\n", trace.generated_at_utc));
+    output.push_str(&format!("- Profile: `{}`\n", trace.profile_id));
+    output.push_str(&format!("- Corpus: `{}`\n", trace.corpus));
+    output.push_str(&format!("- Source lock: `{}`\n\n", trace.source_lock));
+    output.push_str("| Stage | Status | Duration ms | Report | Metrics |\n");
+    output.push_str("|---|---:|---:|---|---|\n");
+    for stage in &trace.stages {
+        let report_path = stage
+            .report
+            .as_ref()
+            .map(|report| report.path.as_str())
+            .unwrap_or("");
+        let metrics = stage
+            .report
+            .as_ref()
+            .map(|report| compact_json(&report.metrics))
+            .unwrap_or_default();
+        output.push_str(&format!(
+            "| `{}` | `{}` | {} | `{}` | `{}` |\n",
+            stage.name,
+            stage.status,
+            stage.duration_ms,
+            escape_markdown_table_cell(report_path),
+            escape_markdown_table_cell(&metrics)
+        ));
+    }
+    output
+}
+
+fn render_qualification_markdown(report: &QualificationReport) -> String {
+    let mut output = String::new();
+    output.push_str("# Pilot Release Qualification\n\n");
+    output.push_str(&format!("- Release: `{}`\n", report.release));
+    output.push_str(&format!("- Status: `{}`\n", report.overall_status));
+    output.push_str(&format!("- Generated: `{}`\n", report.generated_at_utc));
+    output.push_str(&format!("- Spec version: `{}`\n", report.spec_version));
+    output.push_str(&format!("- Profile: `{}`\n", report.profile_id));
+    output.push_str(&format!("- Corpus: `{}`\n", report.corpus));
+    output.push_str(&format!("- Source lock: `{}`\n", report.source_lock));
+    output.push_str(&format!(
+        "- Conformance trace: `{}`\n\n",
+        report.conformance_trace
+    ));
+    output.push_str("## Stage Summary\n\n");
+    output.push_str(&format!("- Passed: {}\n", report.stage_summary.passed));
+    output.push_str(&format!("- Failed: {}\n", report.stage_summary.failed));
+    output.push_str(&format!("- Skipped: {}\n", report.stage_summary.skipped));
+    output.push_str(&format!("- Total: {}\n", report.stage_summary.total));
+    output.push_str(&format!(
+        "- Total duration ms: {}\n",
+        report.stage_summary.total_duration_ms
+    ));
+    output
+}
+
+fn compact_json(value: &Value) -> String {
+    serde_json::to_string(value).unwrap_or_else(|_| "null".to_string())
+}
+
+fn escape_markdown_table_cell(value: &str) -> String {
+    value.replace('|', "\\|").replace('\n', " ")
+}
+
 fn now_utc_rfc3339() -> Result<String, Box<dyn std::error::Error>> {
     Ok(OffsetDateTime::now_utc().format(&Rfc3339)?)
 }
@@ -716,4 +860,77 @@ fn print_usage() {
     println!(
         "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build]"
     );
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn qualification_reports_render_stage_summary_and_trace_markdown() {
+        let stages = vec![
+            StageTrace {
+                name: "pilot_java_artifacts".to_string(),
+                description: "verify jar",
+                status: "passed".to_string(),
+                duration_ms: 12,
+                command: Vec::new(),
+                exit_code: None,
+                report: Some(ReportTrace {
+                    path: "pilot.jar".to_string(),
+                    sha256: "abc".to_string(),
+                    metrics: json!({ "artifact": "jar" }),
+                }),
+                error: None,
+            },
+            StageTrace {
+                name: "syntax_parity".to_string(),
+                description: "compare syntax",
+                status: "skipped".to_string(),
+                duration_ms: 0,
+                command: Vec::new(),
+                exit_code: None,
+                report: None,
+                error: Some("not requested".to_string()),
+            },
+        ];
+        let summary = StageSummary::from_stages(&stages);
+        assert_eq!(summary.passed, 1);
+        assert_eq!(summary.failed, 0);
+        assert_eq!(summary.skipped, 1);
+        assert_eq!(summary.total_duration_ms, 12);
+
+        let trace = ConformanceTrace {
+            schema: "dev.mercurio.pilot-release-conformance-trace.v1",
+            generated_at_utc: "2026-06-16T00:00:00Z".to_string(),
+            release: "2026-01".to_string(),
+            spec_version: "2.0.0".to_string(),
+            profile_id: "sysml-2.0-metamodel-0.57.0".to_string(),
+            corpus: "small".to_string(),
+            source_lock: "locks/source.lock.json".to_string(),
+            overall_status: "failed".to_string(),
+            stages,
+        };
+        let trace_markdown = render_conformance_trace_markdown(&trace);
+        assert!(trace_markdown.contains("# Pilot Conformance Trace"));
+        assert!(trace_markdown.contains("`pilot_java_artifacts`"));
+        assert!(trace_markdown.contains("pilot.jar"));
+
+        let report = QualificationReport {
+            schema: "dev.mercurio.pilot-release-qualification.v1",
+            generated_at_utc: trace.generated_at_utc.clone(),
+            release: trace.release.clone(),
+            spec_version: trace.spec_version.clone(),
+            profile_id: trace.profile_id.clone(),
+            corpus: trace.corpus.clone(),
+            overall_status: trace.overall_status.clone(),
+            source_lock: trace.source_lock.clone(),
+            conformance_trace: "reports/conformance-trace.json".to_string(),
+            stage_summary: summary,
+        };
+        let qualification_markdown = render_qualification_markdown(&report);
+        assert!(qualification_markdown.contains("# Pilot Release Qualification"));
+        assert!(qualification_markdown.contains("- Passed: 1"));
+        assert!(qualification_markdown.contains("- Skipped: 1"));
+    }
 }
