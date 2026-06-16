@@ -4,7 +4,7 @@ use std::process::Command;
 use std::time::Instant;
 
 use mercurio_tools::{default_pilot_root, sha256_file, sha256_hex};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use time::OffsetDateTime;
 use time::format_description::well_known::Rfc3339;
@@ -48,6 +48,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut stages = Vec::new();
     stages.push(stage_candidate_bundle(&args)?);
+    let accepted_differences = AcceptedDifferences::load(
+        &args
+            .out
+            .join("candidate/resources/metamodels")
+            .join(&args.profile_id)
+            .join("conformance/accepted_differences.json"),
+    )?;
     let pilot_artifacts = pilot_java_artifacts_stage(&args.pilot_root)?;
     let pilot_artifacts_ready = pilot_artifacts.status == "passed";
     stages.push(pilot_artifacts);
@@ -139,7 +146,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let syntax_report = args.out.join("reports/syntax-parity.json");
-    stages.push(run_stage(
+    stages.push(run_parity_stage(
         "syntax_parity",
         "compare Mercurio parser syntax snapshots against the Java Pilot parser",
         CommandSpec {
@@ -160,11 +167,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ],
         },
         &mercurio_root,
-        Some(&syntax_report),
+        &syntax_report,
+        &accepted_differences,
     )?);
 
     let semantic_report = args.out.join("reports/semantic-parity.json");
-    stages.push(run_stage(
+    stages.push(run_parity_stage(
         "semantic_parity",
         "compare Mercurio semantic snapshots against the Java Pilot compiler export",
         CommandSpec {
@@ -187,11 +195,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ],
         },
         &mercurio_root,
-        Some(&semantic_report),
+        &semantic_report,
+        &accepted_differences,
     )?);
 
     let compile_report = args.out.join("reports/compile-errors-parity.json");
-    stages.push(run_stage(
+    stages.push(run_parity_stage(
         "compile_diagnostics_parity",
         "compare Mercurio and Java Pilot compile diagnostics",
         CommandSpec {
@@ -214,7 +223,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ],
         },
         &mercurio_root,
-        Some(&compile_report),
+        &compile_report,
+        &accepted_differences,
     )?);
 
     write_trace_and_exit(args, source_lock, stages)
@@ -651,6 +661,303 @@ fn run_stage(
             Some(stderr)
         },
     })
+}
+
+fn run_parity_stage(
+    name: &str,
+    description: &'static str,
+    spec: CommandSpec,
+    current_dir: &Path,
+    report_path: &Path,
+    accepted_differences: &AcceptedDifferences,
+) -> Result<StageTrace, Box<dyn std::error::Error>> {
+    let mut stage = run_stage(name, description, spec, current_dir, Some(report_path))?;
+    if stage.status != "passed" {
+        return Ok(stage);
+    }
+
+    let report_value: Value = serde_json::from_str(&std::fs::read_to_string(report_path)?)?;
+    let differences = parity_differences(name, &report_value);
+    let mut accepted = Vec::new();
+    let mut unaccepted = Vec::new();
+    for difference in differences {
+        if accepted_differences.matches(&difference) {
+            accepted.push(difference);
+        } else {
+            unaccepted.push(difference);
+        }
+    }
+
+    let gate_metrics = json!({
+        "total_differences": accepted.len() + unaccepted.len(),
+        "accepted_differences": accepted.len(),
+        "unaccepted_differences": unaccepted.len(),
+        "accepted": accepted,
+        "unaccepted": unaccepted,
+    });
+    if let Some(report) = &mut stage.report {
+        if let Some(object) = report.metrics.as_object_mut() {
+            object.insert("accepted_difference_gate".to_string(), gate_metrics.clone());
+        }
+    }
+    if gate_metrics
+        .get("unaccepted_differences")
+        .and_then(Value::as_u64)
+        .unwrap_or(0)
+        > 0
+    {
+        stage.status = "failed".to_string();
+        stage.error = Some(format!(
+            "{} unaccepted parity differences in `{name}`",
+            gate_metrics["unaccepted_differences"]
+        ));
+    }
+
+    Ok(stage)
+}
+
+#[derive(Debug, Clone, Serialize)]
+struct ParityDifference {
+    stage: String,
+    case: String,
+    kind: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    message: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    mercurio_status: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pilot_status: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    primary_problem: Option<String>,
+}
+
+#[derive(Debug, Deserialize)]
+struct AcceptedDifferences {
+    #[serde(default)]
+    differences: Vec<AcceptedDifference>,
+}
+
+impl AcceptedDifferences {
+    fn load(path: &Path) -> Result<Self, Box<dyn std::error::Error>> {
+        if !path.exists() {
+            return Ok(Self {
+                differences: Vec::new(),
+            });
+        }
+        Ok(serde_json::from_str(&std::fs::read_to_string(path)?)?)
+    }
+
+    fn matches(&self, difference: &ParityDifference) -> bool {
+        self.differences
+            .iter()
+            .any(|accepted| accepted.matches(difference))
+    }
+}
+
+#[derive(Debug, Deserialize)]
+struct AcceptedDifference {
+    #[serde(default)]
+    stage: Option<String>,
+    #[serde(default, rename = "case")]
+    case_path: Option<String>,
+    #[serde(default)]
+    kind: Option<String>,
+    #[serde(default)]
+    mercurio_status: Option<String>,
+    #[serde(default)]
+    pilot_status: Option<String>,
+    #[serde(default)]
+    primary_problem: Option<String>,
+    #[serde(default)]
+    message_contains: Option<String>,
+}
+
+impl AcceptedDifference {
+    fn matches(&self, difference: &ParityDifference) -> bool {
+        optional_eq(self.stage.as_deref(), &difference.stage)
+            && optional_eq(self.case_path.as_deref(), &difference.case)
+            && optional_eq(self.kind.as_deref(), &difference.kind)
+            && optional_eq_option(self.mercurio_status.as_deref(), &difference.mercurio_status)
+            && optional_eq_option(self.pilot_status.as_deref(), &difference.pilot_status)
+            && optional_eq_option(self.primary_problem.as_deref(), &difference.primary_problem)
+            && self.message_contains.as_ref().is_none_or(|needle| {
+                difference
+                    .message
+                    .as_ref()
+                    .is_some_and(|message| message.contains(needle))
+            })
+    }
+}
+
+fn optional_eq(expected: Option<&str>, actual: &str) -> bool {
+    expected.is_none_or(|expected| expected == actual)
+}
+
+fn optional_eq_option(expected: Option<&str>, actual: &Option<String>) -> bool {
+    expected.is_none_or(|expected| actual.as_deref() == Some(expected))
+}
+
+fn parity_differences(stage: &str, report: &Value) -> Vec<ParityDifference> {
+    let mut differences = Vec::new();
+    let Some(cases) = report.get("cases").and_then(Value::as_array) else {
+        return differences;
+    };
+
+    for case in cases {
+        let case_path = case
+            .get("relative_path")
+            .and_then(Value::as_str)
+            .unwrap_or("<unknown>")
+            .to_string();
+        match stage {
+            "syntax_parity" => append_syntax_differences(&mut differences, stage, &case_path, case),
+            "semantic_parity" => {
+                append_semantic_differences(&mut differences, stage, &case_path, case)
+            }
+            "compile_diagnostics_parity" => {
+                append_compile_differences(&mut differences, stage, &case_path, case)
+            }
+            _ => {}
+        }
+    }
+
+    differences
+}
+
+fn append_syntax_differences(
+    differences: &mut Vec<ParityDifference>,
+    stage: &str,
+    case_path: &str,
+    case: &Value,
+) {
+    if case.get("status").and_then(Value::as_str) == Some("error") {
+        differences.push(ParityDifference {
+            stage: stage.to_string(),
+            case: case_path.to_string(),
+            kind: "syntax_error".to_string(),
+            message: case
+                .get("error")
+                .and_then(Value::as_str)
+                .map(str::to_string),
+            mercurio_status: None,
+            pilot_status: None,
+            primary_problem: None,
+        });
+        return;
+    }
+    if case.get("exact").and_then(Value::as_bool) == Some(false) {
+        for (field, kind) in [
+            ("mismatches", "syntax_mismatch"),
+            ("rust_only", "syntax_rust_only"),
+            ("pilot_only", "syntax_pilot_only"),
+        ] {
+            let count = case.get(field).and_then(Value::as_u64).unwrap_or(0);
+            if count > 0 {
+                differences.push(ParityDifference {
+                    stage: stage.to_string(),
+                    case: case_path.to_string(),
+                    kind: kind.to_string(),
+                    message: Some(format!("{field}={count}")),
+                    mercurio_status: None,
+                    pilot_status: None,
+                    primary_problem: None,
+                });
+            }
+        }
+    }
+}
+
+fn append_semantic_differences(
+    differences: &mut Vec<ParityDifference>,
+    stage: &str,
+    case_path: &str,
+    case: &Value,
+) {
+    if case.get("status").and_then(Value::as_str) == Some("error") {
+        differences.push(ParityDifference {
+            stage: stage.to_string(),
+            case: case_path.to_string(),
+            kind: "semantic_error".to_string(),
+            message: case
+                .get("error")
+                .and_then(Value::as_str)
+                .map(str::to_string),
+            mercurio_status: Some("error".to_string()),
+            pilot_status: None,
+            primary_problem: None,
+        });
+        return;
+    }
+    if case.get("exact").and_then(Value::as_bool) == Some(false) {
+        for (field, kind) in [
+            ("mismatches", "semantic_mismatch"),
+            ("mercurio_only", "semantic_mercurio_only"),
+            ("pilot_only", "semantic_pilot_only"),
+        ] {
+            let count = case.get(field).and_then(Value::as_u64).unwrap_or(0);
+            if count > 0 {
+                differences.push(ParityDifference {
+                    stage: stage.to_string(),
+                    case: case_path.to_string(),
+                    kind: kind.to_string(),
+                    message: Some(format!("{field}={count}")),
+                    mercurio_status: None,
+                    pilot_status: None,
+                    primary_problem: None,
+                });
+            }
+        }
+    }
+}
+
+fn append_compile_differences(
+    differences: &mut Vec<ParityDifference>,
+    stage: &str,
+    case_path: &str,
+    case: &Value,
+) {
+    if case.get("status").and_then(Value::as_str) == Some("error") {
+        differences.push(ParityDifference {
+            stage: stage.to_string(),
+            case: case_path.to_string(),
+            kind: "compile_report_error".to_string(),
+            message: case
+                .get("error")
+                .and_then(Value::as_str)
+                .map(str::to_string),
+            mercurio_status: None,
+            pilot_status: None,
+            primary_problem: None,
+        });
+        return;
+    }
+
+    let comparison = case.get("comparison").unwrap_or(&Value::Null);
+    if comparison
+        .get("status_match")
+        .and_then(Value::as_bool)
+        .unwrap_or(true)
+    {
+        return;
+    }
+    differences.push(ParityDifference {
+        stage: stage.to_string(),
+        case: case_path.to_string(),
+        kind: "compile_status_mismatch".to_string(),
+        message: None,
+        mercurio_status: case
+            .get("mercurio_status")
+            .and_then(Value::as_str)
+            .map(str::to_string),
+        pilot_status: case
+            .get("pilot_status")
+            .and_then(Value::as_str)
+            .map(str::to_string),
+        primary_problem: comparison
+            .get("mercurio_primary_problem")
+            .and_then(Value::as_str)
+            .map(str::to_string),
+    });
 }
 
 fn pilot_java_artifacts_stage(pilot_root: &Path) -> Result<StageTrace, Box<dyn std::error::Error>> {
@@ -1756,6 +2063,60 @@ mod tests {
         ];
 
         assert_eq!(overall_status(&stages), "passed");
+    }
+
+    #[test]
+    fn parity_differences_extract_compile_status_mismatch() {
+        let report = json!({
+            "cases": [
+                {
+                    "relative_path": "model.sysml",
+                    "status": "ok",
+                    "comparison": {
+                        "status_match": false,
+                        "mercurio_primary_problem": "unresolved_reference"
+                    },
+                    "mercurio_status": "error",
+                    "pilot_status": "ok"
+                }
+            ]
+        });
+
+        let differences = parity_differences("compile_diagnostics_parity", &report);
+
+        assert_eq!(differences.len(), 1);
+        assert_eq!(differences[0].kind, "compile_status_mismatch");
+        assert_eq!(differences[0].case, "model.sysml");
+        assert_eq!(
+            differences[0].primary_problem.as_deref(),
+            Some("unresolved_reference")
+        );
+    }
+
+    #[test]
+    fn accepted_differences_match_specific_stage_case_and_problem() {
+        let accepted = AcceptedDifferences {
+            differences: vec![AcceptedDifference {
+                stage: Some("compile_diagnostics_parity".to_string()),
+                case_path: Some("model.sysml".to_string()),
+                kind: Some("compile_status_mismatch".to_string()),
+                mercurio_status: Some("error".to_string()),
+                pilot_status: Some("ok".to_string()),
+                primary_problem: Some("unresolved_reference".to_string()),
+                message_contains: None,
+            }],
+        };
+        let difference = ParityDifference {
+            stage: "compile_diagnostics_parity".to_string(),
+            case: "model.sysml".to_string(),
+            kind: "compile_status_mismatch".to_string(),
+            message: None,
+            mercurio_status: Some("error".to_string()),
+            pilot_status: Some("ok".to_string()),
+            primary_problem: Some("unresolved_reference".to_string()),
+        };
+
+        assert!(accepted.matches(&difference));
     }
 
     fn test_source_lock() -> SourceLock {
