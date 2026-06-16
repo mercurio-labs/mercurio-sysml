@@ -14,6 +14,7 @@ const DEFAULT_PROFILE_ID: &str = "sysml-2.0-metamodel-0.57.0";
 const DEFAULT_SPEC_VERSION: &str = "2.0.0";
 const DEFAULT_CORPUS: &str = "all";
 const DEFAULT_WRAPPER_MODULE: &str = "mercurio_sysml_2_0";
+const REQUIRED_STDLIB_ANCHORS: &[&str] = &["Items::Item", "Parts::Part"];
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse()?;
@@ -113,6 +114,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     args.wrapper_module.clone(),
                     "--audit-profile".to_string(),
                 ],
+                env: Vec::new(),
             },
             &mercurio_root,
             None,
@@ -145,6 +147,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return write_trace_and_exit(args, source_lock, stages);
     }
 
+    let candidate_stdlib_path = args
+        .out
+        .join("candidate/resources/metamodels")
+        .join(&args.profile_id)
+        .join("stdlib/stdlib.full.kir.json");
     let syntax_report = args.out.join("reports/syntax-parity.json");
     stages.push(run_parity_stage(
         "syntax_parity",
@@ -165,6 +172,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 "--out".to_string(),
                 syntax_report.display().to_string(),
             ],
+            env: parity_stdlib_env(&candidate_stdlib_path),
         },
         &mercurio_root,
         &syntax_report,
@@ -193,6 +201,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 "--out".to_string(),
                 semantic_report.display().to_string(),
             ],
+            env: parity_stdlib_env(&candidate_stdlib_path),
         },
         &mercurio_root,
         &semantic_report,
@@ -221,6 +230,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 "--out".to_string(),
                 compile_report.display().to_string(),
             ],
+            env: parity_stdlib_env(&candidate_stdlib_path),
         },
         &mercurio_root,
         &compile_report,
@@ -619,6 +629,7 @@ struct ReportTrace {
 struct CommandSpec {
     program: String,
     args: Vec<String>,
+    env: Vec<(String, String)>,
 }
 
 fn run_stage(
@@ -629,10 +640,12 @@ fn run_stage(
     report_path: Option<&Path>,
 ) -> Result<StageTrace, Box<dyn std::error::Error>> {
     let started = Instant::now();
-    let output = Command::new(&spec.program)
-        .args(&spec.args)
-        .current_dir(current_dir)
-        .output()?;
+    let mut command = Command::new(&spec.program);
+    command.args(&spec.args).current_dir(current_dir);
+    for (key, value) in &spec.env {
+        command.env(key, value);
+    }
+    let output = command.output()?;
     let duration_ms = started.elapsed().as_millis();
     let exit_code = output.status.code();
     let stderr = String::from_utf8_lossy(&output.stderr).trim().to_string();
@@ -668,6 +681,14 @@ fn run_stage(
             Some(stderr)
         },
     })
+}
+
+fn parity_stdlib_env(stdlib_path: &Path) -> Vec<(String, String)> {
+    let path = stdlib_path.display().to_string();
+    vec![
+        ("MERCURIO_STDLIB_PATH".to_string(), path.clone()),
+        ("MERCURIO_MODEL_LIBRARY_PATH".to_string(), path),
+    ]
 }
 
 fn run_parity_stage(
@@ -1046,7 +1067,7 @@ fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error:
         ));
     } else {
         copy_candidate_profile(source_root, &candidate_root, args, &mut errors);
-        copy_optional_file(&source_root, &candidate_root, "metamodel.json", &mut errors);
+        copy_candidate_metamodel(source_root, &candidate_root, args, &mut errors);
         copy_optional_file(
             &source_root,
             &candidate_root,
@@ -1057,12 +1078,9 @@ fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error:
 
         let generated_stdlib = args.out.join("stdlib");
         let bundled_stdlib = source_root.join("stdlib");
-        let stdlib_source = if generated_stdlib.join("stdlib.full.kir.json").exists() {
-            generated_stdlib
-        } else {
-            bundled_stdlib
-        };
+        let stdlib_source = select_candidate_stdlib_source(&generated_stdlib, &bundled_stdlib);
         copy_required_dir_from(&stdlib_source, &candidate_root.join("stdlib"), &mut errors);
+        validate_candidate_stdlib(&candidate_root.join("stdlib"), &mut errors);
     }
 
     let conformance_dir = candidate_root.join("conformance");
@@ -1242,6 +1260,101 @@ fn copy_candidate_profile(
             dest.display()
         ));
     }
+}
+
+fn copy_candidate_metamodel(
+    source_root: &Path,
+    dest_root: &Path,
+    args: &Args,
+    errors: &mut Vec<String>,
+) {
+    let source = source_root.join("metamodel.json");
+    if !source.exists() {
+        return;
+    }
+    let dest = dest_root.join("metamodel.json");
+    let result = (|| -> Result<(), Box<dyn std::error::Error>> {
+        let mut descriptor: Value = serde_json::from_str(&std::fs::read_to_string(&source)?)?;
+        if let Some(object) = descriptor.as_object_mut() {
+            object.insert("id".to_string(), Value::String(args.profile_id.clone()));
+            object.insert(
+                "display_name".to_string(),
+                Value::String(format!("SysML v2 ({})", args.release)),
+            );
+            object.insert(
+                "metamodel_version".to_string(),
+                Value::String(args.release.clone()),
+            );
+            object.insert("status".to_string(), Value::String("supported".to_string()));
+            object.insert("release".to_string(), Value::String(args.release.clone()));
+            object.insert("selector".to_string(), Value::String(args.release.clone()));
+            object.insert("legacy_ids".to_string(), Value::Array(Vec::new()));
+            object.insert(
+                "stdlib_path".to_string(),
+                Value::String("stdlib/stdlib.full.kir.json".to_string()),
+            );
+            object.insert(
+                "sysml_delta_path".to_string(),
+                Value::String("stdlib/sysml-library.kir.json".to_string()),
+            );
+        }
+        write_json(&dest, &descriptor)?;
+        Ok(())
+    })();
+    if let Err(err) = result {
+        errors.push(format!(
+            "failed to copy {} to {}: {err}",
+            source.display(),
+            dest.display()
+        ));
+    }
+}
+
+fn select_candidate_stdlib_source(generated_stdlib: &Path, bundled_stdlib: &Path) -> PathBuf {
+    if candidate_stdlib_has_required_anchors(generated_stdlib) {
+        generated_stdlib.to_path_buf()
+    } else {
+        bundled_stdlib.to_path_buf()
+    }
+}
+
+fn validate_candidate_stdlib(stdlib_root: &Path, errors: &mut Vec<String>) {
+    let stdlib_path = stdlib_root.join("stdlib.full.kir.json");
+    if !stdlib_path.is_file() {
+        errors.push(format!(
+            "candidate stdlib is missing {}",
+            stdlib_path.display()
+        ));
+        return;
+    }
+    if !candidate_stdlib_has_required_anchors(stdlib_root) {
+        errors.push(format!(
+            "candidate stdlib {} is missing required anchors: {}",
+            stdlib_path.display(),
+            REQUIRED_STDLIB_ANCHORS.join(", ")
+        ));
+    }
+}
+
+fn candidate_stdlib_has_required_anchors(stdlib_root: &Path) -> bool {
+    let stdlib_path = stdlib_root.join("stdlib.full.kir.json");
+    let Ok(raw) = std::fs::read_to_string(&stdlib_path) else {
+        return false;
+    };
+    let Ok(document) = serde_json::from_str::<Value>(&raw) else {
+        return false;
+    };
+    let Some(elements) = document.get("elements").and_then(Value::as_array) else {
+        return false;
+    };
+    REQUIRED_STDLIB_ANCHORS.iter().all(|required| {
+        elements.iter().any(|element| {
+            element
+                .get("id")
+                .and_then(Value::as_str)
+                .is_some_and(|id| id == *required)
+        })
+    })
 }
 
 fn copy_optional_file(
@@ -2173,6 +2286,104 @@ mod tests {
             profile.get("stdlib_path").and_then(Value::as_str),
             Some("resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.full.kir.json")
         );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn candidate_metamodel_rewrites_release_identity() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-metamodel-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let source = root.join("source");
+        let candidate = root.join("candidate");
+        std::fs::create_dir_all(&source).unwrap();
+        std::fs::write(
+            source.join("metamodel.json"),
+            serde_json::to_vec(&json!({
+                "id": "sysml-2.0-metamodel-0.57.0",
+                "display_name": "SysML 2.0 Metamodel 0.57.0",
+                "metamodel_version": "0.57.0",
+                "status": "latest",
+                "stdlib_path": "stdlib/stdlib.full.kir.json",
+                "sysml_delta_path": "stdlib/sysml-library.kir.json",
+                "legacy_ids": ["sysml-2.0-pilot-0.57.0"]
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+        let args = test_args("2026-04", "sysml-2.0-pilot-2026-04");
+        let mut errors = Vec::new();
+
+        copy_candidate_metamodel(&source, &candidate, &args, &mut errors);
+
+        assert!(errors.is_empty(), "{errors:?}");
+        let metamodel: Value = serde_json::from_str(
+            &std::fs::read_to_string(candidate.join("metamodel.json")).unwrap(),
+        )
+        .unwrap();
+        assert_eq!(
+            metamodel.get("id").and_then(Value::as_str),
+            Some("sysml-2.0-pilot-2026-04")
+        );
+        assert_eq!(
+            metamodel.get("metamodel_version").and_then(Value::as_str),
+            Some("2026-04")
+        );
+        assert_eq!(
+            metamodel.get("selector").and_then(Value::as_str),
+            Some("2026-04")
+        );
+        assert_eq!(
+            metamodel.get("status").and_then(Value::as_str),
+            Some("supported")
+        );
+        assert!(
+            metamodel
+                .get("legacy_ids")
+                .and_then(Value::as_array)
+                .is_some_and(Vec::is_empty)
+        );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn candidate_stdlib_falls_back_when_generated_full_kir_lacks_required_anchors() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-stdlib-select-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let generated = root.join("generated");
+        let bundled = root.join("bundled");
+        std::fs::create_dir_all(&generated).unwrap();
+        std::fs::create_dir_all(&bundled).unwrap();
+        std::fs::write(
+            generated.join("stdlib.full.kir.json"),
+            serde_json::to_vec(&json!({ "elements": [] })).unwrap(),
+        )
+        .unwrap();
+        std::fs::write(
+            bundled.join("stdlib.full.kir.json"),
+            serde_json::to_vec(&json!({
+                "elements": [
+                    { "id": "Items::Item" },
+                    { "id": "Parts::Part" }
+                ]
+            }))
+            .unwrap(),
+        )
+        .unwrap();
+
+        assert_eq!(
+            select_candidate_stdlib_source(&generated, &bundled),
+            bundled
+        );
+        assert!(candidate_stdlib_has_required_anchors(&bundled));
+        assert!(!candidate_stdlib_has_required_anchors(&generated));
 
         std::fs::remove_dir_all(root).unwrap();
     }
