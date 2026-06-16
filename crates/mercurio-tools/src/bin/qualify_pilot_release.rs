@@ -47,6 +47,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     write_json(&args.out.join("locks/source.lock.json"), &source_lock)?;
 
     let mut stages = Vec::new();
+    stages.push(stage_candidate_bundle(&args)?);
     let pilot_artifacts = pilot_java_artifacts_stage(&args.pilot_root)?;
     let pilot_artifacts_ready = pilot_artifacts.status == "passed";
     stages.push(pilot_artifacts);
@@ -570,6 +571,256 @@ fn pilot_java_artifacts_stage(pilot_root: &Path) -> Result<StageTrace, Box<dyn s
     })
 }
 
+fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error::Error>> {
+    let started = Instant::now();
+    let source_root = sysml_workspace_root()
+        .join("resources/metamodels")
+        .join(&args.profile_id);
+    let candidate_root = args
+        .out
+        .join("candidate/resources/metamodels")
+        .join(&args.profile_id);
+    let report_path = args.out.join("reports/candidate-staging.json");
+    let mut errors = Vec::new();
+
+    if !source_root.is_dir() {
+        errors.push(format!(
+            "source profile resources not found at {}",
+            source_root.display()
+        ));
+    } else {
+        copy_required_file(&source_root, &candidate_root, "profile.json", &mut errors);
+        copy_optional_file(&source_root, &candidate_root, "metamodel.json", &mut errors);
+        copy_optional_file(
+            &source_root,
+            &candidate_root,
+            "provenance.json",
+            &mut errors,
+        );
+        copy_required_dir(&source_root, &candidate_root, "mappings", &mut errors);
+
+        let generated_stdlib = args.out.join("stdlib");
+        let bundled_stdlib = source_root.join("stdlib");
+        let stdlib_source = if generated_stdlib.join("stdlib.full.kir.json").exists() {
+            generated_stdlib
+        } else {
+            bundled_stdlib
+        };
+        copy_required_dir_from(&stdlib_source, &candidate_root.join("stdlib"), &mut errors);
+    }
+
+    let conformance_dir = candidate_root.join("conformance");
+    if let Err(err) = std::fs::create_dir_all(&conformance_dir) {
+        errors.push(format!(
+            "failed to create conformance dir {}: {err}",
+            conformance_dir.display()
+        ));
+    } else {
+        write_json(
+            &conformance_dir.join("accepted_differences.json"),
+            &json!({
+                "schema": "dev.mercurio.pilot-accepted-differences.v1",
+                "release": args.release,
+                "differences": []
+            }),
+        )?;
+        write_json(
+            &conformance_dir.join("conformance-trace.json"),
+            &json!({
+                "schema": "dev.mercurio.pilot-release-conformance-trace-ref.v1",
+                "release": args.release,
+                "trace": "../../../../reports/conformance-trace.json"
+            }),
+        )?;
+    }
+
+    let registry_entry = json!({
+        "id": args.profile_id,
+        "release": args.release,
+        "selector": args.release,
+        "display_name": format!("SysML v2 ({})", args.release),
+        "sysml_version": args.spec_version,
+        "kerml_version": "1.0",
+        "metamodel_version": args.release,
+        "status": "supported",
+        "legacy_ids": [],
+        "aliases": [
+            args.release,
+            format!("pilot-{}", args.release)
+        ],
+        "bundle": {
+            "profile": { "path": "profile.json" },
+            "stdlib": {
+                "locator": "file:stdlib/stdlib.full.kir.json",
+                "rulepack": "stdlib/stdlib.rulepack.json"
+            },
+            "mappings": {
+                "path": "mappings",
+                "metamodel_constructs": "mappings/metamodel_constructs.seed.json",
+                "kir_emission": "mappings/kir_emission.seed.json",
+                "lowering_rules": "mappings/lowering_rules.seed.json",
+                "semantic_defaults": "mappings/semantic_defaults.seed.json"
+            },
+            "conformance": {
+                "accepted_differences": "conformance/accepted_differences.json",
+                "trace": "conformance/conformance-trace.json"
+            },
+            "python": {
+                "wrapper_module": args.wrapper_module
+            }
+        }
+    });
+    let registry = json!([registry_entry]);
+    let candidate_registry = args
+        .out
+        .join("candidate/resources/metamodels/registry.json");
+    write_json(&candidate_registry, &registry)?;
+
+    let candidate_files = if candidate_root.exists() {
+        collect_files(&candidate_root)?
+    } else {
+        Vec::new()
+    };
+    let candidate_tree_sha256 = if candidate_files.is_empty() {
+        None
+    } else {
+        Some(digest_paths(&candidate_root, &candidate_files)?)
+    };
+    write_json(
+        &report_path,
+        &json!({
+            "schema": "dev.mercurio.pilot-candidate-staging.v1",
+            "release": args.release,
+            "profile_id": args.profile_id,
+            "candidate_root": candidate_root.display().to_string(),
+            "registry": candidate_registry.display().to_string(),
+            "file_count": candidate_files.len(),
+            "tree_sha256": candidate_tree_sha256,
+            "errors": errors
+        }),
+    )?;
+
+    let report = Some(ReportTrace {
+        path: report_path.display().to_string(),
+        sha256: sha256_file(&report_path)?,
+        metrics: json!({
+            "candidate_root": candidate_root.display().to_string(),
+            "file_count": candidate_files.len(),
+            "tree_sha256": candidate_tree_sha256,
+        }),
+    });
+
+    Ok(StageTrace {
+        name: "candidate_staging".to_string(),
+        description: "stage release candidate resources without promoting them",
+        status: if errors.is_empty() {
+            "passed".to_string()
+        } else {
+            "failed".to_string()
+        },
+        duration_ms: started.elapsed().as_millis(),
+        command: Vec::new(),
+        exit_code: None,
+        report,
+        error: if errors.is_empty() {
+            None
+        } else {
+            Some(errors.join("; "))
+        },
+    })
+}
+
+fn copy_required_file(
+    source_root: &Path,
+    dest_root: &Path,
+    relative: &str,
+    errors: &mut Vec<String>,
+) {
+    let source = source_root.join(relative);
+    let dest = dest_root.join(relative);
+    if !source.is_file() {
+        errors.push(format!("missing required file {}", source.display()));
+        return;
+    }
+    if let Err(err) = copy_file(&source, &dest) {
+        errors.push(format!(
+            "failed to copy {} to {}: {err}",
+            source.display(),
+            dest.display()
+        ));
+    }
+}
+
+fn copy_optional_file(
+    source_root: &Path,
+    dest_root: &Path,
+    relative: &str,
+    errors: &mut Vec<String>,
+) {
+    let source = source_root.join(relative);
+    if !source.exists() {
+        return;
+    }
+    let dest = dest_root.join(relative);
+    if let Err(err) = copy_file(&source, &dest) {
+        errors.push(format!(
+            "failed to copy {} to {}: {err}",
+            source.display(),
+            dest.display()
+        ));
+    }
+}
+
+fn copy_required_dir(
+    source_root: &Path,
+    dest_root: &Path,
+    relative: &str,
+    errors: &mut Vec<String>,
+) {
+    copy_required_dir_from(
+        &source_root.join(relative),
+        &dest_root.join(relative),
+        errors,
+    );
+}
+
+fn copy_required_dir_from(source: &Path, dest: &Path, errors: &mut Vec<String>) {
+    if !source.is_dir() {
+        errors.push(format!("missing required directory {}", source.display()));
+        return;
+    }
+    if let Err(err) = copy_dir_recursive(source, dest) {
+        errors.push(format!(
+            "failed to copy directory {} to {}: {err}",
+            source.display(),
+            dest.display()
+        ));
+    }
+}
+
+fn copy_file(source: &Path, dest: &Path) -> Result<(), Box<dyn std::error::Error>> {
+    if let Some(parent) = dest.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+    std::fs::copy(source, dest)?;
+    Ok(())
+}
+
+fn copy_dir_recursive(source: &Path, dest: &Path) -> Result<(), Box<dyn std::error::Error>> {
+    std::fs::create_dir_all(dest)?;
+    for entry in std::fs::read_dir(source)? {
+        let entry = entry?;
+        let source_path = entry.path();
+        let dest_path = dest.join(entry.file_name());
+        if source_path.is_dir() {
+            copy_dir_recursive(&source_path, &dest_path)?;
+        } else if source_path.is_file() {
+            copy_file(&source_path, &dest_path)?;
+        }
+    }
+    Ok(())
+}
+
 fn python_wrappers_stage(
     python_root: &Path,
     wrapper_module: &str,
@@ -1060,6 +1311,42 @@ mod tests {
         assert!(tree.files.contains_key("profile.json"));
         assert!(tree.files.contains_key("nested/stdlib.kpar"));
         assert!(!tree.tree_sha256.is_empty());
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn copies_required_candidate_bundle_files() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-candidate-staging-test-{}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&root);
+        let source = root.join("source");
+        let candidate = root.join("candidate");
+        std::fs::create_dir_all(source.join("mappings")).unwrap();
+        std::fs::create_dir_all(source.join("stdlib")).unwrap();
+        std::fs::write(source.join("profile.json"), b"{}").unwrap();
+        std::fs::write(
+            source.join("mappings/metamodel_constructs.seed.json"),
+            b"{}",
+        )
+        .unwrap();
+        std::fs::write(source.join("stdlib/stdlib.full.kir.json"), b"{}").unwrap();
+
+        let mut errors = Vec::new();
+        copy_required_file(&source, &candidate, "profile.json", &mut errors);
+        copy_required_dir(&source, &candidate, "mappings", &mut errors);
+        copy_required_dir(&source, &candidate, "stdlib", &mut errors);
+
+        assert!(errors.is_empty(), "{errors:?}");
+        assert!(candidate.join("profile.json").is_file());
+        assert!(
+            candidate
+                .join("mappings/metamodel_constructs.seed.json")
+                .is_file()
+        );
+        assert!(candidate.join("stdlib/stdlib.full.kir.json").is_file());
 
         std::fs::remove_dir_all(root).unwrap();
     }
