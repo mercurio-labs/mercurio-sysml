@@ -32,6 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         corpus: args.corpus.clone(),
         mercurio: fingerprint_repo(&mercurio_root)?,
         pilot: fingerprint_repo(&args.pilot_root)?,
+        workspace_repositories: fingerprint_workspace_repositories(&mercurio_root)?,
         inputs: SourceInputs {
             source_archive: args
                 .source_archive
@@ -382,6 +383,7 @@ struct SourceLock {
     corpus: String,
     mercurio: RepoFingerprint,
     pilot: RepoFingerprint,
+    workspace_repositories: BTreeMap<String, RepoFingerprint>,
     inputs: SourceInputs,
 }
 
@@ -562,6 +564,7 @@ struct SourceMetricSummary {
     pilot_dirty: Option<bool>,
     pilot_tracked_file_count: usize,
     pilot_tracked_tree_sha256: Option<String>,
+    workspace_repositories: BTreeMap<String, RepoMetricSummary>,
     source_archive_sha256: Option<String>,
     asset_tree_sha256: Option<String>,
 }
@@ -579,6 +582,11 @@ impl SourceMetricSummary {
             pilot_dirty: source_lock.pilot.dirty,
             pilot_tracked_file_count: source_lock.pilot.tracked_file_count,
             pilot_tracked_tree_sha256: source_lock.pilot.tracked_tree_sha256.clone(),
+            workspace_repositories: source_lock
+                .workspace_repositories
+                .iter()
+                .map(|(name, fingerprint)| (name.clone(), RepoMetricSummary::from(fingerprint)))
+                .collect(),
             source_archive_sha256: source_lock
                 .inputs
                 .source_archive
@@ -589,6 +597,29 @@ impl SourceMetricSummary {
                 .asset_dir
                 .as_ref()
                 .map(|fingerprint| fingerprint.tree_sha256.clone()),
+        }
+    }
+}
+
+#[derive(Clone, Serialize)]
+struct RepoMetricSummary {
+    root: String,
+    commit: Option<String>,
+    branch: Option<String>,
+    dirty: Option<bool>,
+    tracked_file_count: usize,
+    tracked_tree_sha256: Option<String>,
+}
+
+impl From<&RepoFingerprint> for RepoMetricSummary {
+    fn from(value: &RepoFingerprint) -> Self {
+        Self {
+            root: value.root.clone(),
+            commit: value.commit.clone(),
+            branch: value.branch.clone(),
+            dirty: value.dirty,
+            tracked_file_count: value.tracked_file_count,
+            tracked_tree_sha256: value.tracked_tree_sha256.clone(),
         }
     }
 }
@@ -1905,6 +1936,30 @@ fn fingerprint_repo(path: &Path) -> Result<RepoFingerprint, Box<dyn std::error::
     })
 }
 
+fn fingerprint_workspace_repositories(
+    mercurio_root: &Path,
+) -> Result<BTreeMap<String, RepoFingerprint>, Box<dyn std::error::Error>> {
+    let workspace_root = mercurio_root
+        .parent()
+        .ok_or("mercurio workspace root has no parent")?;
+    let mut repositories = BTreeMap::new();
+    for name in [
+        "mercurio-foundation",
+        "mercurio-sysml",
+        "mercurio-host-adapters",
+        "mercurio-plugins",
+        "mercurio-ai",
+        "mercurio-product",
+        "mercurio-examples",
+    ] {
+        let root = workspace_root.join(name);
+        if root.join(".git").exists() {
+            repositories.insert(name.to_string(), fingerprint_repo(&root)?);
+        }
+    }
+    Ok(repositories)
+}
+
 fn git_stdout(path: &Path, args: &[&str]) -> Result<String, Box<dyn std::error::Error>> {
     let output = Command::new("git").args(args).current_dir(path).output()?;
     if !output.status.success() {
@@ -2050,6 +2105,22 @@ fn render_source_metrics_markdown(source: &SourceMetricSummary) -> String {
         "- Pilot tracked tree SHA256: `{}`\n",
         source.pilot_tracked_tree_sha256.as_deref().unwrap_or("")
     ));
+    if !source.workspace_repositories.is_empty() {
+        output.push_str("\n### Workspace Repositories\n\n");
+        output.push_str("| Repository | Branch | Dirty | Commit | Tree SHA256 |\n");
+        output.push_str("|---|---|---:|---|---|\n");
+        for (name, repo) in &source.workspace_repositories {
+            output.push_str(&format!(
+                "| `{}` | `{}` | `{}` | `{}` | `{}` |\n",
+                escape_markdown_table_cell(name),
+                escape_markdown_table_cell(repo.branch.as_deref().unwrap_or("")),
+                repo.dirty.map(|dirty| dirty.to_string()).unwrap_or_default(),
+                escape_markdown_table_cell(repo.commit.as_deref().unwrap_or("")),
+                escape_markdown_table_cell(repo.tracked_tree_sha256.as_deref().unwrap_or(""))
+            ));
+        }
+        output.push('\n');
+    }
     if let Some(sha256) = &source.source_archive_sha256 {
         output.push_str(&format!("- Source archive SHA256: `{sha256}`\n"));
     }
@@ -2468,6 +2539,18 @@ mod tests {
                 tracked_tree_sha256: Some("pilot-tree".to_string()),
                 tracked_files: BTreeMap::new(),
             },
+            workspace_repositories: BTreeMap::from([(
+                "mercurio-foundation".to_string(),
+                RepoFingerprint {
+                    root: "mercurio-foundation".to_string(),
+                    commit: Some("foundation-commit".to_string()),
+                    branch: Some("main".to_string()),
+                    dirty: Some(false),
+                    tracked_file_count: 4,
+                    tracked_tree_sha256: Some("foundation-tree".to_string()),
+                    tracked_files: BTreeMap::new(),
+                },
+            )]),
             inputs: SourceInputs {
                 source_archive: Some(PathFingerprint {
                     path: "release.zip".to_string(),
