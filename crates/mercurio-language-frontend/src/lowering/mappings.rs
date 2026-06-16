@@ -55,7 +55,12 @@ impl LanguageProfile {
 
 fn canonical_profile_id(id: &str) -> &str {
     match id {
-        "sysml-2.0-pilot-0.57.0" | "pilot-0.57.0" | "0.57.0" => "sysml-2.0-metamodel-0.57.0",
+        "sysml-2.0-pilot-0.57.0"
+        | "pilot-0.57.0"
+        | "0.57.0"
+        | "sysml-2.0-pilot-2026-04"
+        | "pilot-2026-04"
+        | "2026-04" => "sysml-2.0-metamodel-0.57.0",
         other => other,
     }
 }
@@ -388,6 +393,18 @@ mod tests {
         let profile = LanguageProfile::load(SourceLanguage::Kerml).unwrap();
 
         assert!(profile.lowering_rules.is_none());
+    }
+
+    #[test]
+    fn release_selector_profile_aliases_load_current_sysml_mappings() {
+        let by_profile = LanguageProfile::load_for_profile("sysml-2.0-pilot-2026-04").unwrap();
+        let by_selector = LanguageProfile::load_for_profile("2026-04").unwrap();
+        let by_alias = LanguageProfile::load_for_profile("pilot-2026-04").unwrap();
+
+        assert_eq!(by_profile.id, "sysml-2.0-metamodel-0.57.0");
+        assert_eq!(by_selector.id, by_profile.id);
+        assert_eq!(by_alias.id, by_profile.id);
+        assert!(by_profile.lowering_rules.is_some());
     }
 
     #[test]

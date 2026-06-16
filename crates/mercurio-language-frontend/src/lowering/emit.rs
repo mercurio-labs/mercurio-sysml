@@ -959,9 +959,13 @@ fn load_metamodel_constructs_seed() -> Result<String, Diagnostic> {
 
 fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
     match profile_id {
-        "sysml-2.0-metamodel-0.57.0" | "sysml-2.0-pilot-0.57.0" | "pilot-0.57.0" | "0.57.0" => {
-            Some("sysml-2.0-metamodel-0.57.0")
-        }
+        "sysml-2.0-metamodel-0.57.0"
+        | "sysml-2.0-pilot-0.57.0"
+        | "pilot-0.57.0"
+        | "0.57.0"
+        | "sysml-2.0-pilot-2026-04"
+        | "pilot-2026-04"
+        | "2026-04" => Some("sysml-2.0-metamodel-0.57.0"),
         _ => None,
     }
 }

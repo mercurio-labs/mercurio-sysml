@@ -273,6 +273,7 @@ fn write_trace_and_exit(
         &args.out.join("reports/conformance-trace.md"),
         &render_conformance_trace_markdown(&trace),
     )?;
+    write_promoted_conformance_trace(&args, &trace)?;
 
     let qualification = QualificationReport {
         schema: "dev.mercurio.pilot-release-qualification.v1",
@@ -1117,6 +1118,7 @@ fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error:
         let stdlib_source = select_candidate_stdlib_source(&generated_stdlib, &bundled_stdlib);
         copy_required_dir_from(&stdlib_source, &candidate_root.join("stdlib"), &mut errors);
         validate_candidate_stdlib(&candidate_root.join("stdlib"), &mut errors);
+        write_candidate_resource_provenance(&candidate_root, args, source_root, &stdlib_source)?;
     }
 
     let conformance_dir = candidate_root.join("conformance");
@@ -1370,6 +1372,86 @@ fn validate_candidate_stdlib(stdlib_root: &Path, errors: &mut Vec<String>) {
             REQUIRED_STDLIB_ANCHORS.join(", ")
         ));
     }
+}
+
+fn write_candidate_resource_provenance(
+    candidate_root: &Path,
+    args: &Args,
+    source_root: &Path,
+    stdlib_source: &Path,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let source_profile_id = source_root
+        .file_name()
+        .and_then(|value| value.to_str())
+        .unwrap_or(DEFAULT_PROFILE_ID);
+    let stdlib_files = collect_files(stdlib_source)?;
+    let stdlib_tree_sha256 = digest_paths(stdlib_source, &stdlib_files)?;
+    write_json(
+        &candidate_root.join("provenance.json"),
+        &json!({
+            "schema": "dev.mercurio.pilot-release-resource-provenance.v1",
+            "release": args.release,
+            "selector": args.release,
+            "profile_id": args.profile_id,
+            "spec_version": args.spec_version,
+            "source_profile_id": source_profile_id,
+            "source_profile_root": path_to_slash_path(source_root),
+            "stdlib_source_root": path_to_slash_path(stdlib_source),
+            "stdlib_source_file_count": stdlib_files.len(),
+            "stdlib_source_tree_sha256": stdlib_tree_sha256,
+            "stdlib_path": format!(
+                "resources/metamodels/{}/stdlib/stdlib.full.kir.json",
+                args.profile_id
+            ),
+            "wrapper_module": args.wrapper_module
+        }),
+    )?;
+    write_json(
+        &candidate_root.join("stdlib/source.lock.json"),
+        &json!({
+            "schema": "dev.mercurio.pilot-release-candidate-stdlib-source-lock.v1",
+            "release": args.release,
+            "profile_id": args.profile_id,
+            "source_profile_id": source_profile_id,
+            "source_root": path_to_slash_path(stdlib_source),
+            "file_count": stdlib_files.len(),
+            "tree_sha256": stdlib_tree_sha256
+        }),
+    )?;
+    write_json(
+        &candidate_root.join("stdlib/release.lock.json"),
+        &json!({
+            "schema": "dev.mercurio.pilot-release-candidate-stdlib-lock.v1",
+            "release": args.release,
+            "profile_id": args.profile_id,
+            "spec_version": args.spec_version,
+            "wrapper_module": args.wrapper_module,
+            "source_profile_id": source_profile_id,
+            "artifacts": {
+                "pilot_stdlib_export": fingerprint_optional_candidate_file(candidate_root, "stdlib/pilot-stdlib-export.json")?,
+                "stdlib_full_kir": fingerprint_optional_candidate_file(candidate_root, "stdlib/stdlib.full.kir.json")?,
+                "stdlib_delta_kir": fingerprint_optional_candidate_file(candidate_root, "stdlib/stdlib.kir.json")?,
+                "sysml_library_kir": fingerprint_optional_candidate_file(candidate_root, "stdlib/sysml-library.kir.json")?,
+                "rulepack": fingerprint_optional_candidate_file(candidate_root, "stdlib/stdlib.rulepack.json")?
+            }
+        }),
+    )?;
+    Ok(())
+}
+
+fn fingerprint_optional_candidate_file(
+    candidate_root: &Path,
+    relative: &str,
+) -> Result<Value, Box<dyn std::error::Error>> {
+    let path = candidate_root.join(path_from_slashes(relative));
+    if !path.exists() {
+        return Ok(Value::Null);
+    }
+    Ok(json!({
+        "path": relative,
+        "sha256": sha256_file(&path)?,
+        "byte_len": std::fs::metadata(&path)?.len()
+    }))
 }
 
 fn candidate_stdlib_has_required_anchors(stdlib_root: &Path) -> bool {
@@ -1679,6 +1761,31 @@ fn promote_registry_entry(
     }
     entries.push(candidate_entry);
     write_json(repo_registry_path, &repo_registry)?;
+    Ok(())
+}
+
+fn write_promoted_conformance_trace(
+    args: &Args,
+    trace: &ConformanceTrace,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if !args.promote_candidate
+        || !trace
+            .stages
+            .iter()
+            .any(|stage| stage.name == "candidate_promotion" && stage.status == "passed")
+    {
+        return Ok(());
+    }
+
+    let conformance_root = sysml_workspace_root()
+        .join("resources/metamodels")
+        .join(&args.profile_id)
+        .join("conformance");
+    write_json(&conformance_root.join("conformance-trace.json"), trace)?;
+    write_text(
+        &conformance_root.join("conformance-trace.md"),
+        &render_conformance_trace_markdown(trace),
+    )?;
     Ok(())
 }
 
@@ -2023,6 +2130,13 @@ fn write_text(path: &Path, value: &str) -> Result<(), Box<dyn std::error::Error>
 
 fn path_from_slashes(value: &str) -> PathBuf {
     value.split('/').collect()
+}
+
+fn path_to_slash_path(path: &Path) -> String {
+    path.components()
+        .map(|component| component.as_os_str().to_string_lossy())
+        .collect::<Vec<_>>()
+        .join("/")
 }
 
 fn render_conformance_trace_markdown(trace: &ConformanceTrace) -> String {

@@ -19,19 +19,16 @@ fn main() {
         "cargo:rerun-if-changed={}",
         resources.join("kernel").display()
     );
-    println!(
-        "cargo:rerun-if-changed={}",
-        resources
-            .join("metamodels/sysml-2.0-metamodel-0.57.0")
-            .display()
-    );
-
     let registry_text =
         fs::read_to_string(&registry_path).expect("failed to read SysML metamodel registry");
     let metamodels: Vec<RegistryEntry> =
         serde_json::from_str(&registry_text).expect("failed to parse SysML metamodel registry");
 
     for metamodel in metamodels {
+        println!(
+            "cargo:rerun-if-changed={}",
+            resources.join("metamodels").join(&metamodel.id).display()
+        );
         let document = load_baseline_for_build(&resources, &metamodel.id);
         let rust_source = generate_rust_stdlib_consts(&document, &metamodel.id);
         let out = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR"))

@@ -10,6 +10,7 @@ use crate::parser;
 
 pub const SYSML_2_0_METAMODEL_057_ID: &str = "sysml-2.0-metamodel-0.57.0";
 pub const LEGACY_SYSML_2_0_PILOT_057_ID: &str = "sysml-2.0-pilot-0.57.0";
+pub const SYSML_2_0_PILOT_2026_04_ID: &str = "sysml-2.0-pilot-2026-04";
 pub const LATEST_SYSML_METAMODEL_ID: &str = SYSML_2_0_METAMODEL_057_ID;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -305,12 +306,7 @@ pub fn latest_metamodel() -> Result<SysmlMetamodel, SysmlEnvironmentError> {
 
 pub fn metamodel_resource(id: &str) -> Result<SysmlMetamodelResource, SysmlEnvironmentError> {
     let descriptor = metamodel_descriptor(id)?;
-    if descriptor.id != id
-        && !descriptor
-            .legacy_ids
-            .iter()
-            .any(|legacy_id| legacy_id == id)
-    {
+    if !descriptor_matches_selector(&descriptor, id) {
         return Err(SysmlEnvironmentError::UnknownMetamodel(id.to_string()));
     }
 
@@ -491,6 +487,9 @@ fn metamodel_descriptor_raw(id: &str) -> Result<RawMetamodelDescriptor, SysmlEnv
         SYSML_2_0_METAMODEL_057_ID | LEGACY_SYSML_2_0_PILOT_057_ID => {
             include_str!("../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.json")
         }
+        SYSML_2_0_PILOT_2026_04_ID => {
+            include_str!("../../../resources/metamodels/sysml-2.0-pilot-2026-04/metamodel.json")
+        }
         _ => return Err(SysmlEnvironmentError::UnknownMetamodel(id.to_string())),
     };
     serde_json::from_str(raw).map_err(|err| {
@@ -528,4 +527,54 @@ fn default_lowering_rules_path() -> String {
 
 fn default_semantic_defaults_path() -> String {
     "mappings/semantic_defaults.seed.json".to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::StdlibLocator;
+
+    #[test]
+    fn release_selector_resolves_2026_04_bundle() {
+        let by_selector = release_bundle("2026-04").unwrap();
+        let by_alias = release_bundle("pilot-2026-04").unwrap();
+
+        assert_eq!(by_selector.profile_id, SYSML_2_0_PILOT_2026_04_ID);
+        assert_eq!(by_selector.selector, "2026-04");
+        assert_eq!(by_alias.profile_id, by_selector.profile_id);
+        assert!(
+            by_selector
+                .conformance_trace_path
+                .as_ref()
+                .is_some_and(|path| path.ends_with("conformance/conformance-trace.json"))
+        );
+    }
+
+    #[test]
+    fn metamodel_resource_accepts_2026_04_selector_and_aliases() {
+        let by_profile = metamodel_resource(SYSML_2_0_PILOT_2026_04_ID).unwrap();
+        let by_selector = metamodel_resource("2026-04").unwrap();
+        let by_alias = metamodel_resource("pilot-2026-04").unwrap();
+
+        assert_eq!(by_profile.info.id, SYSML_2_0_PILOT_2026_04_ID);
+        assert_eq!(by_selector.info.id, by_profile.info.id);
+        assert_eq!(by_alias.info.id, by_profile.info.id);
+        assert!(
+            by_profile
+                .sysml_delta_path
+                .ends_with("sysml-library.kir.json")
+        );
+    }
+
+    #[test]
+    fn stdlib_locator_resolves_2026_04_release_selector() {
+        let locator = StdlibLocator::for_release("2026-04").unwrap();
+
+        assert!(matches!(locator, StdlibLocator::File { .. }));
+        assert!(
+            locator
+                .as_uri()
+                .contains("resources/metamodels/sysml-2.0-pilot-2026-04")
+        );
+    }
 }
