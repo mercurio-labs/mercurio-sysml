@@ -6,7 +6,7 @@ use std::time::Instant;
 
 use mercurio_core::{
     SyntaxComparisonReport, SyntaxSnapshot, SyntaxSnapshotNode, SyntaxSourceSpan,
-    build_rust_syntax_snapshot, compare_syntax_snapshots, repo_path,
+    build_rust_syntax_snapshot, compare_syntax_snapshots,
 };
 use mercurio_sysml::parse_sysml;
 use mercurio_tools::default_pilot_root;
@@ -120,9 +120,9 @@ struct PilotCorpusSeed {
 
 impl PilotCorpusSeed {
     fn load() -> Result<Self, Box<dyn std::error::Error>> {
-        Ok(serde_json::from_str(&std::fs::read_to_string(repo_path(
-            "crates/mercurio-tools/corpus/pilot_corpus.seed.json",
-        ))?)?)
+        Ok(serde_json::from_str(&std::fs::read_to_string(
+            tool_repo_path("crates/mercurio-tools/corpus/pilot_corpus.seed.json"),
+        )?)?)
     }
 
     fn support_paths_for(&self, relative_path: &str) -> &[String] {
@@ -276,7 +276,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut pilot_root = default_pilot_root();
     let mut relative_path = None;
     let mut corpus_name = None;
-    let mut output_path = repo_path("target/pilot_ast_compare.json");
+    let mut output_path = tool_repo_path("target/pilot_ast_compare.json");
     let args = env::args().skip(1).collect::<Vec<_>>();
     let mut index = 0;
 
@@ -575,11 +575,11 @@ fn export_syntax_from_pilot(
     let pilot_root = pilot_root.canonicalize()?;
     let library_root = pilot_root.join("sysml.library");
     let interactive_jar = find_interactive_jar(&pilot_root)?;
-    let classes_dir = repo_path("target/pilot-exporter-classes");
-    let java_source = repo_path(
-        "../mercurio-sysml/tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotModelExporter.java",
+    let classes_dir = tool_repo_path("target/pilot-exporter-classes");
+    let java_source = tool_repo_path(
+        "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotModelExporter.java",
     );
-    let export_path = repo_path(&format!(
+    let export_path = tool_repo_path(&format!(
         "target/pilot_ast_export.{}.json",
         relative_path_slug(relative_path)
     ));
@@ -636,7 +636,7 @@ fn run_java_syntax_exporter(
     );
 
     let status = if cfg!(windows) {
-        let script_path = repo_path("target/run_pilot_ast_exporter.ps1");
+        let script_path = tool_repo_path("target/run_pilot_ast_exporter.ps1");
         let mut script = format!(
             "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotModelExporter --syntax '{}' '{}'",
             classpath.replace('\'', "''"),
@@ -748,6 +748,14 @@ fn absolute_path(path: &Path) -> Result<PathBuf, Box<dyn std::error::Error>> {
         return Ok(path.to_path_buf());
     }
     Ok(env::current_dir()?.join(path))
+}
+
+fn tool_repo_path(relative: &str) -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .and_then(Path::parent)
+        .expect("mercurio-tools lives under crates")
+        .join(relative)
 }
 
 fn java_path_string(path: &Path) -> String {

@@ -55,7 +55,7 @@ impl LanguageProfile {
 
 fn canonical_profile_id(id: &str) -> &str {
     match id {
-        "sysml-2.0-pilot-0.57.0" => "sysml-2.0-metamodel-0.57.0",
+        "sysml-2.0-pilot-0.57.0" | "pilot-0.57.0" | "0.57.0" => "sysml-2.0-metamodel-0.57.0",
         other => other,
     }
 }
@@ -388,6 +388,22 @@ mod tests {
         let profile = LanguageProfile::load(SourceLanguage::Kerml).unwrap();
 
         assert!(profile.lowering_rules.is_none());
+    }
+
+    #[test]
+    fn unknown_sysml_profile_does_not_fall_back_to_current_mappings() {
+        let err = match LanguageProfile::load_for_profile("sysml-2.0-pilot-2099-01") {
+            Ok(_) => panic!("unknown profile unexpectedly loaded current mappings"),
+            Err(err) => err,
+        };
+
+        assert!(
+            err.message
+                .contains("no mapping bundle registered for profile")
+                || err
+                    .message
+                    .contains("no lowering rule seed registered for profile")
+        );
     }
 
     fn test_usage(construct: &str, owner_construct: &str) -> ResolvedUsage {

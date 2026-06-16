@@ -17,7 +17,7 @@ use mercurio_language_frontend::resolver::{
 };
 use mercurio_language_frontend::transpile::transpile_module;
 
-use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, metamodel_resource};
+use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, release_bundle};
 
 #[cfg(not(target_arch = "wasm32"))]
 type CompileTimer = std::time::Instant;
@@ -91,8 +91,8 @@ pub fn default_sysml_delta_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    metamodel_resource(LATEST_SYSML_METAMODEL_ID)
-        .map(|metamodel| metamodel.sysml_delta_path)
+    release_bundle("latest")
+        .map(|bundle| bundle.root.join("stdlib").join("sysml-library.kir.json"))
         .unwrap_or_else(|_| {
             repo_path(
                 "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
@@ -109,8 +109,8 @@ pub fn default_sysml_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    metamodel_resource(LATEST_SYSML_METAMODEL_ID)
-        .map(|metamodel| metamodel.stdlib_path)
+    release_bundle("latest")
+        .map(|bundle| bundle.stdlib_path)
         .unwrap_or_else(|_| {
             repo_path("resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json")
         })
@@ -132,6 +132,20 @@ pub enum StdlibLocator {
 }
 
 impl StdlibLocator {
+    pub fn for_release(selector: &str) -> Result<Self, KirError> {
+        let bundle = release_bundle(selector).map_err(|err| {
+            KirError::Model(format!(
+                "failed to resolve SysML release `{selector}`: {err}"
+            ))
+        })?;
+        if bundle.stdlib_locator.starts_with("file:") {
+            return Ok(Self::File {
+                path: bundle.stdlib_path,
+            });
+        }
+        Ok(Self::parse(&bundle.stdlib_locator))
+    }
+
     pub fn parse(s: &str) -> Self {
         if let Some(rest) = s.strip_prefix("embedded:") {
             let metamodel_id = rest
@@ -182,12 +196,13 @@ impl StdlibLocator {
 
 /// Auto-detect the appropriate stdlib locator when no env override is set.
 pub fn resolve_default_stdlib_locator() -> StdlibLocator {
-    if let Ok(metamodel) = metamodel_resource(LATEST_SYSML_METAMODEL_ID) {
-        if metamodel.stdlib_path.exists() {
+    if let Ok(bundle) = release_bundle("latest") {
+        if bundle.stdlib_path.exists() {
             return StdlibLocator::File {
-                path: metamodel.stdlib_path,
+                path: bundle.stdlib_path,
             };
         }
+        return StdlibLocator::parse(&bundle.stdlib_locator);
     }
     StdlibLocator::Embedded {
         metamodel_id: LATEST_SYSML_METAMODEL_ID.to_string(),
@@ -203,28 +218,24 @@ pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDo
     match locator {
         StdlibLocator::File { path } => KirDocument::from_path(path),
 
-        StdlibLocator::Kpar { locator: loc } => {
-            mercurio_core::BaselineLibraryConfig {
-                id: "stdlib".to_string(),
-                provider: mercurio_core::LibraryProviderConfig::KparLocator {
-                    locator: loc.clone(),
-                },
-            }
-            .resolve()
-            .map(|a| a.document)
+        StdlibLocator::Kpar { locator: loc } => mercurio_core::BaselineLibraryConfig {
+            id: "stdlib".to_string(),
+            provider: mercurio_core::LibraryProviderConfig::KparLocator {
+                locator: loc.clone(),
+            },
         }
+        .resolve()
+        .map(|a| a.document),
 
         StdlibLocator::Embedded { metamodel_id } => {
             #[cfg(feature = "embed-stdlib")]
             {
-                let (kernel_bytes, sysml_bytes) =
-                    crate::metamodel::embedded_bytes_for_metamodel(metamodel_id).ok_or_else(
-                        || {
-                            KirError::Model(format!(
-                                "no embedded stdlib for metamodel '{metamodel_id}'"
-                            ))
-                        },
-                    )?;
+                let (kernel_bytes, sysml_bytes) = crate::metamodel::embedded_bytes_for_metamodel(
+                    metamodel_id,
+                )
+                .ok_or_else(|| {
+                    KirError::Model(format!("no embedded stdlib for metamodel '{metamodel_id}'"))
+                })?;
                 let kernel =
                     KirDocument::from_str(std::str::from_utf8(kernel_bytes).map_err(|_| {
                         KirError::Model("embedded kernel stdlib is not valid UTF-8".to_string())
