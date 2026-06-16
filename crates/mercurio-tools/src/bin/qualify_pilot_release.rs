@@ -495,6 +495,7 @@ impl StageSummary {
 struct QualificationMetrics {
     source: SourceMetricSummary,
     stages: BTreeMap<String, StageMetricSummary>,
+    standard_conformance: StandardConformanceMetrics,
     candidate: Option<Value>,
     stdlib: Option<Value>,
     python: Option<Value>,
@@ -540,12 +541,44 @@ impl QualificationMetrics {
         Self {
             source: SourceMetricSummary::from_source_lock(source_lock),
             stages: stage_metrics,
+            standard_conformance: StandardConformanceMetrics::from_stage_metrics(
+                &python,
+                &syntax_parity,
+                &semantic_parity,
+                &compile_diagnostics_parity,
+            ),
             candidate,
             stdlib,
             python,
             syntax_parity,
             semantic_parity,
             compile_diagnostics_parity,
+        }
+    }
+}
+
+#[derive(Clone, Serialize, Default)]
+struct StandardConformanceMetrics {
+    python_wrappers: Option<Value>,
+    syntax: Option<Value>,
+    semantic: Option<Value>,
+    compile_diagnostics: Option<Value>,
+}
+
+impl StandardConformanceMetrics {
+    fn from_stage_metrics(
+        python: &Option<Value>,
+        syntax: &Option<Value>,
+        semantic: &Option<Value>,
+        compile_diagnostics: &Option<Value>,
+    ) -> Self {
+        Self {
+            python_wrappers: python.as_ref().map(python_wrapper_conformance_summary),
+            syntax: syntax.as_ref().map(syntax_conformance_summary),
+            semantic: semantic.as_ref().map(semantic_conformance_summary),
+            compile_diagnostics: compile_diagnostics
+                .as_ref()
+                .map(compile_diagnostics_conformance_summary),
         }
     }
 }
@@ -2128,6 +2161,78 @@ fn write_text(path: &Path, value: &str) -> Result<(), Box<dyn std::error::Error>
     Ok(())
 }
 
+fn python_wrapper_conformance_summary(metrics: &Value) -> Value {
+    json!({
+        "module": value_at(metrics, &["module"]),
+        "file_count": value_at(metrics, &["file_count"]),
+        "python_file_count": value_at(metrics, &["python_file_count"]),
+        "metamodel_class_count": value_at(metrics, &["metamodel_class_count"]),
+        "py_compile_exit_code": value_at(metrics, &["py_compile_exit_code"]),
+        "stdlib_catalog_entries": value_at(metrics, &["stdlib_catalog_entries"]),
+    })
+}
+
+fn syntax_conformance_summary(metrics: &Value) -> Value {
+    json!({
+        "case_count": value_at(metrics, &["case_count"]),
+        "exact_match_cases": value_at(metrics, &["aggregate", "exact_match_cases"]),
+        "failed_cases": value_at(metrics, &["aggregate", "failed_cases"]),
+        "total_mismatches": value_at(metrics, &["aggregate", "total_mismatches"]),
+        "total_rust_only": value_at(metrics, &["aggregate", "total_rust_only"]),
+        "total_pilot_only": value_at(metrics, &["aggregate", "total_pilot_only"]),
+        "accepted_difference_gate": accepted_difference_gate_summary(metrics),
+    })
+}
+
+fn semantic_conformance_summary(metrics: &Value) -> Value {
+    json!({
+        "case_count": value_at(metrics, &["case_count"]),
+        "exact_match_cases": value_at(metrics, &["aggregate", "exact_match_cases"]),
+        "failed_cases": value_at(metrics, &["aggregate", "failed_cases"]),
+        "total_mismatches": value_at(metrics, &["aggregate", "total_mismatches"]),
+        "total_mercurio_only": value_at(metrics, &["aggregate", "total_mercurio_only"]),
+        "total_pilot_only": value_at(metrics, &["aggregate", "total_pilot_only"]),
+        "total_metatype_mismatches": value_at(metrics, &["aggregate", "total_metatype_mismatches"]),
+        "total_specialization_chain_mismatches": value_at(metrics, &["aggregate", "total_specialization_chain_mismatches"]),
+        "total_declared_attribute_mismatches": value_at(metrics, &["aggregate", "total_declared_attribute_mismatches"]),
+        "attribute_value_comparison": "declared_attributes.effective_value",
+        "accepted_difference_gate": accepted_difference_gate_summary(metrics),
+    })
+}
+
+fn compile_diagnostics_conformance_summary(metrics: &Value) -> Value {
+    json!({
+        "case_count": value_at(metrics, &["case_count"]),
+        "both_pass_cases": value_at(metrics, &["aggregate", "both_pass_cases"]),
+        "both_fail_cases": value_at(metrics, &["aggregate", "both_fail_cases"]),
+        "status_match_cases": value_at(metrics, &["aggregate", "status_match_cases"]),
+        "rust_only_fail_cases": value_at(metrics, &["aggregate", "rust_only_fail_cases"]),
+        "pilot_only_fail_cases": value_at(metrics, &["aggregate", "pilot_only_fail_cases"]),
+        "primary_problem_match_cases": value_at(metrics, &["aggregate", "primary_problem_match_cases"]),
+        "failed_cases": value_at(metrics, &["aggregate", "failed_cases"]),
+        "accepted_difference_gate": accepted_difference_gate_summary(metrics),
+    })
+}
+
+fn accepted_difference_gate_summary(metrics: &Value) -> Value {
+    json!({
+        "total_differences": value_at(metrics, &["accepted_difference_gate", "total_differences"]),
+        "accepted_differences": value_at(metrics, &["accepted_difference_gate", "accepted_differences"]),
+        "unaccepted_differences": value_at(metrics, &["accepted_difference_gate", "unaccepted_differences"]),
+    })
+}
+
+fn value_at(value: &Value, path: &[&str]) -> Value {
+    let mut current = value;
+    for segment in path {
+        let Some(next) = current.get(*segment) else {
+            return Value::Null;
+        };
+        current = next;
+    }
+    current.clone()
+}
+
 fn path_from_slashes(value: &str) -> PathBuf {
     value.split('/').collect()
 }
@@ -2153,6 +2258,12 @@ fn render_conformance_trace_markdown(trace: &ConformanceTrace) -> String {
         &trace.qualification_metrics.source,
     ));
     output.push('\n');
+    output.push_str("## Standard Conformance Metrics\n\n");
+    output.push_str(&render_standard_conformance_metrics_markdown(
+        &trace.qualification_metrics.standard_conformance,
+    ));
+    output.push('\n');
+    output.push_str("## Stage Reports\n\n");
     output.push_str("| Stage | Status | Duration ms | Report | Metrics |\n");
     output.push_str("|---|---:|---:|---|---|\n");
     for stage in &trace.stages {
@@ -2205,6 +2316,33 @@ fn render_qualification_markdown(report: &QualificationReport) -> String {
     output.push_str(&render_source_metrics_markdown(
         &report.qualification_metrics.source,
     ));
+    output.push_str("\n## Standard Conformance Metrics\n\n");
+    output.push_str(&render_standard_conformance_metrics_markdown(
+        &report.qualification_metrics.standard_conformance,
+    ));
+    output
+}
+
+fn render_standard_conformance_metrics_markdown(metrics: &StandardConformanceMetrics) -> String {
+    let rows = [
+        ("Python wrappers", metrics.python_wrappers.as_ref()),
+        ("Syntax parity", metrics.syntax.as_ref()),
+        ("Semantic parity", metrics.semantic.as_ref()),
+        ("Compile diagnostics", metrics.compile_diagnostics.as_ref()),
+    ];
+    let mut output = String::new();
+    output.push_str("| Area | Metrics |\n");
+    output.push_str("|---|---|\n");
+    for (area, value) in rows {
+        output.push_str(&format!(
+            "| {} | `{}` |\n",
+            area,
+            value
+                .map(compact_json)
+                .map(|text| escape_markdown_table_cell(&text))
+                .unwrap_or_else(|| "not reported".to_string())
+        ));
+    }
     output
 }
 
@@ -2355,12 +2493,43 @@ mod tests {
                 report: None,
                 error: Some("not requested".to_string()),
             },
+            StageTrace {
+                name: "semantic_parity".to_string(),
+                description: "compare semantics",
+                status: "passed".to_string(),
+                duration_ms: 34,
+                command: Vec::new(),
+                exit_code: Some(0),
+                report: Some(ReportTrace {
+                    path: "reports/semantic-parity.json".to_string(),
+                    sha256: "def".to_string(),
+                    metrics: json!({
+                        "case_count": 2,
+                        "aggregate": {
+                            "exact_match_cases": 1,
+                            "failed_cases": 0,
+                            "total_mismatches": 1,
+                            "total_mercurio_only": 0,
+                            "total_pilot_only": 0,
+                            "total_metatype_mismatches": 0,
+                            "total_specialization_chain_mismatches": 0,
+                            "total_declared_attribute_mismatches": 1
+                        },
+                        "accepted_difference_gate": {
+                            "total_differences": 0,
+                            "accepted_differences": 0,
+                            "unaccepted_differences": 0
+                        }
+                    }),
+                }),
+                error: None,
+            },
         ];
         let summary = StageSummary::from_stages(&stages);
-        assert_eq!(summary.passed, 1);
+        assert_eq!(summary.passed, 2);
         assert_eq!(summary.failed, 0);
         assert_eq!(summary.skipped, 1);
-        assert_eq!(summary.total_duration_ms, 12);
+        assert_eq!(summary.total_duration_ms, 46);
         let metrics = QualificationMetrics::from_source_and_stages(&test_source_lock(), &stages);
 
         let trace = ConformanceTrace {
@@ -2380,6 +2549,10 @@ mod tests {
         assert!(trace_markdown.contains("`pilot_java_artifacts`"));
         assert!(trace_markdown.contains("pilot.jar"));
         assert!(trace_markdown.contains("Mercurio tracked tree SHA256"));
+        assert!(trace_markdown.contains("## Standard Conformance Metrics"));
+        assert!(trace_markdown.contains("Semantic parity"));
+        assert!(trace_markdown.contains("total_declared_attribute_mismatches"));
+        assert!(trace_markdown.contains("declared_attributes.effective_value"));
 
         let report = QualificationReport {
             schema: "dev.mercurio.pilot-release-qualification.v1",
@@ -2396,8 +2569,9 @@ mod tests {
         };
         let qualification_markdown = render_qualification_markdown(&report);
         assert!(qualification_markdown.contains("# Pilot Release Qualification"));
-        assert!(qualification_markdown.contains("- Passed: 1"));
+        assert!(qualification_markdown.contains("- Passed: 2"));
         assert!(qualification_markdown.contains("- Skipped: 1"));
+        assert!(qualification_markdown.contains("## Standard Conformance Metrics"));
     }
 
     #[test]

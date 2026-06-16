@@ -7,7 +7,7 @@ use std::time::Instant;
 use mercurio_core::source_set::{SourceDocument, compile_source_document_with_registry};
 use mercurio_core::{
     Graph, KirDocument, LanguageRegistry, MetamodelAttributeRegistry, PilotExportDocument,
-    SemanticCompareOptions, SnapshotMode, build_semantic_snapshot,
+    SemanticCompareOptions, SemanticComparisonReport, SnapshotMode, build_semantic_snapshot,
     build_semantic_snapshot_with_registry, compare_snapshots_with_options, default_stdlib_path,
     load_pilot_export, normalize_pilot_export_for_compare,
 };
@@ -220,6 +220,9 @@ struct CorpusCaseSummary {
     mismatches: usize,
     mercurio_only: usize,
     pilot_only: usize,
+    metatype_mismatches: usize,
+    specialization_chain_mismatches: usize,
+    declared_attribute_mismatches: usize,
     mercurio_elements: Option<usize>,
     pilot_elements: Option<usize>,
     timings: Option<CompareTimings>,
@@ -232,9 +235,19 @@ struct CorpusAggregate {
     total_mismatches: usize,
     total_mercurio_only: usize,
     total_pilot_only: usize,
+    total_metatype_mismatches: usize,
+    total_specialization_chain_mismatches: usize,
+    total_declared_attribute_mismatches: usize,
     mercurio: AggregateTiming,
     pilot: AggregateTiming,
     compare: AggregateTiming,
+}
+
+#[derive(Debug, Clone, Copy, Default, Serialize)]
+struct SemanticMismatchBreakdown {
+    metatype_mismatches: usize,
+    specialization_chain_mismatches: usize,
+    declared_attribute_mismatches: usize,
 }
 
 #[derive(Debug, Serialize)]
@@ -777,6 +790,7 @@ fn build_compare_output(
 
 impl CorpusCaseSummary {
     fn from_compare_output(output: CompareOutput) -> Self {
+        let mismatch_breakdown = SemanticMismatchBreakdown::from_report(&output.report);
         Self {
             support_file_count: output.support_paths.len(),
             status: "ok".to_string(),
@@ -787,6 +801,9 @@ impl CorpusCaseSummary {
             mismatches: output.report.mismatches.len(),
             mercurio_only: output.report.mercurio_only.len(),
             pilot_only: output.report.pilot_only.len(),
+            metatype_mismatches: mismatch_breakdown.metatype_mismatches,
+            specialization_chain_mismatches: mismatch_breakdown.specialization_chain_mismatches,
+            declared_attribute_mismatches: mismatch_breakdown.declared_attribute_mismatches,
             mercurio_elements: Some(output.report.mercurio_count),
             pilot_elements: Some(output.report.pilot_count),
             relative_path: output.relative_path,
@@ -804,6 +821,9 @@ impl CorpusCaseSummary {
             mismatches: 0,
             mercurio_only: 0,
             pilot_only: 0,
+            metatype_mismatches: 0,
+            specialization_chain_mismatches: 0,
+            declared_attribute_mismatches: 0,
             mercurio_elements: None,
             pilot_elements: None,
             timings: None,
@@ -835,10 +855,37 @@ impl CorpusAggregate {
             total_mismatches: cases.iter().map(|case| case.mismatches).sum(),
             total_mercurio_only: cases.iter().map(|case| case.mercurio_only).sum(),
             total_pilot_only: cases.iter().map(|case| case.pilot_only).sum(),
+            total_metatype_mismatches: cases.iter().map(|case| case.metatype_mismatches).sum(),
+            total_specialization_chain_mismatches: cases
+                .iter()
+                .map(|case| case.specialization_chain_mismatches)
+                .sum(),
+            total_declared_attribute_mismatches: cases
+                .iter()
+                .map(|case| case.declared_attribute_mismatches)
+                .sum(),
             mercurio,
             pilot,
             compare,
         }
+    }
+}
+
+impl SemanticMismatchBreakdown {
+    fn from_report(report: &SemanticComparisonReport) -> Self {
+        let mut breakdown = Self::default();
+        for mismatch in &report.mismatches {
+            if mismatch.metatype.is_some() {
+                breakdown.metatype_mismatches += 1;
+            }
+            if mismatch.metatype_specialization_chain.is_some() {
+                breakdown.specialization_chain_mismatches += 1;
+            }
+            if mismatch.declared_attributes.is_some() {
+                breakdown.declared_attribute_mismatches += 1;
+            }
+        }
+        breakdown
     }
 }
 
