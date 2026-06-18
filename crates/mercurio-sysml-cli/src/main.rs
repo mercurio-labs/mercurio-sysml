@@ -980,11 +980,7 @@ fn run_package_build(command: PackageBuildCommand) -> Result<RunResult, CliError
     let package = KparPackageBuild {
         name: package_name,
         version: command.version.clone(),
-        sources: sources
-            .iter()
-            .filter(|source| source.path.ends_with(".model") || source.path.ends_with(".model/"))
-            .cloned()
-            .collect(),
+        sources: sources.clone(),
         precompiled_kir,
     };
     let output_path = command.out.clone().unwrap_or_else(|| {
@@ -4457,6 +4453,39 @@ mod tests {
                 .iter()
                 .any(|element| element.id == "type.Demo.Vehicle")
         );
+
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn package_build_preserves_sysml_source_entries() {
+        let root = temp_dir("mercurio-cli-package-sysml-source");
+        std::fs::create_dir_all(&root).unwrap();
+        let source_path = root.join("ai-profile.sysml");
+        let out_path = root.join("ai-profile.kpar");
+        std::fs::write(&source_path, "package AiProfile { part def Guidance; }").unwrap();
+
+        let build = run_args(&[
+            "package",
+            "build",
+            "--file",
+            source_path.to_str().unwrap(),
+            "--out",
+            out_path.to_str().unwrap(),
+            "--name",
+            "dev.mercurio/ai-profile",
+            "--version",
+            "1.0.0",
+            "--include-kir",
+            "--quiet",
+        ])
+        .unwrap();
+
+        assert_eq!(build.exit_code, 0);
+        let file = std::fs::File::open(&out_path).unwrap();
+        let mut archive = zip::ZipArchive::new(file).unwrap();
+        assert!(archive.by_name("ai-profile.sysml").is_ok());
+        assert!(archive.by_name("document.kir.json").is_ok());
 
         std::fs::remove_dir_all(root).unwrap();
     }

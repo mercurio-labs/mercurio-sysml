@@ -11,6 +11,7 @@ pub mod constraints;
 mod embedded_resources;
 pub mod metamodel;
 pub mod mutation;
+pub mod parse_session;
 pub mod parser;
 pub mod semantic_profile;
 pub mod session;
@@ -44,6 +45,9 @@ pub use mercurio_language_contracts::ast::{
     ParsedModule, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
 pub use mercurio_language_contracts::diagnostics::Diagnostic;
+pub use mercurio_language_contracts::editor::{
+    ParseSessionError, ParseSessionStatus, ParseSnapshot, TextEdit, TextRange,
+};
 pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
 pub use mercurio_language_frontend::SourceLanguage;
@@ -61,6 +65,7 @@ pub use mutation::{
     sysml_mutation_feasibility_service, sysml_semantic_mutation_capability_context,
     sysml_semantic_reasoning_context_from_authoring_project,
 };
+pub use parse_session::{SysmlParseSession, build_sysml_syntax_outline};
 pub use parser::{
     SemanticCompileReport, StdlibLocator, SysmlError, compile_sysml_module,
     compile_sysml_module_with_context, compile_sysml_module_with_context_report,
