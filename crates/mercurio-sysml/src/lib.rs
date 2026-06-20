@@ -3,6 +3,7 @@
 //! This crate is the public SysML language implementation boundary: parsing,
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
+pub mod abstract_syntax_json;
 pub mod assessment;
 pub mod authoring;
 pub mod behavior;
@@ -17,6 +18,12 @@ pub mod parser;
 pub mod semantic_profile;
 pub mod session;
 
+pub use abstract_syntax_json::{
+    SYSML_JSON_IMPORTER_VERSION, SysmlJsonImportDiagnostic, SysmlJsonImportError,
+    SysmlJsonImportOptions, SysmlJsonImportReport, SysmlJsonImportSeverity,
+    import_sysml_abstract_syntax_json, import_sysml_abstract_syntax_value,
+    import_sysml_api_elements,
+};
 pub use assessment::sysml_parsed_module_assessment_facts;
 pub use authoring::load_authoring_project_from_sysml;
 pub use behavior::{
