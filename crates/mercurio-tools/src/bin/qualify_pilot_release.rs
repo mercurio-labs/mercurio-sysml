@@ -2660,7 +2660,7 @@ mod tests {
                 "metamodel_version": "2099-01",
                 "stdlib_version": "2099-01",
                 "stdlib_path": "stdlib/stdlib.full.kir.json",
-                "kir_schema_version": "0.2"
+                "kir_schema_version": "0.4"
             }),
         )
         .unwrap();
@@ -2668,7 +2668,7 @@ mod tests {
             &candidate.join("stdlib/stdlib.full.kir.json"),
             &json!({
                 "metadata": {
-                    "kir_schema_version": "0.2"
+                    "kir_schema_version": "0.4"
                 },
                 "elements": [
                     {

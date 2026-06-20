@@ -3961,7 +3961,7 @@ mod tests {
                         ("declared_name".to_string(), serde_json::json!("leftEngine")),
                         (
                             "type".to_string(),
-                            serde_json::json!("type.EvalDemo.Engine"),
+                            serde_json::json!(["type.EvalDemo.Engine"]),
                         ),
                     ]
                     .into_iter()
@@ -3982,7 +3982,7 @@ mod tests {
                         ),
                         (
                             "type".to_string(),
-                            serde_json::json!("type.EvalDemo.Engine"),
+                            serde_json::json!(["type.EvalDemo.Engine"]),
                         ),
                     ]
                     .into_iter()
