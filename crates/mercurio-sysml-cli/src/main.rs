@@ -1,20 +1,27 @@
 use std::collections::{BTreeMap, HashMap};
 use std::fmt;
+use std::io::Read;
 use std::path::{Path, PathBuf};
+use std::sync::Arc;
 
 use clap::{Args, CommandFactory, Parser, Subcommand, ValueEnum};
 use clap_complete::{Shell, generate};
 use mercurio_core::frontend::SemanticCompileStatus;
 use mercurio_core::frontend::ast::Declaration;
 use mercurio_core::frontend::diagnostics::Diagnostic;
+use mercurio_core::graph::Graph;
 use mercurio_core::plugin_registry as registry;
 use mercurio_core::{
-    KirDocument, KparPackageBuild, KparPackageSource, LanguageRegistry, LibraryProviderConfig,
-    LocalPackageManifest, LocalPackageRepository, LocalPackageSource, QueryEngine, QueryResultSet,
-    Runtime, default_stdlib_path, package_bytes_digest, parse_query, write_kpar_package,
+    CapabilityRunReport, CapabilityRunStatus, DslAnalysisRunRequest, DslAnalysisRunSpec, DslEngine,
+    DslExecutionLimits, DslQueryRequest, DslQueryResult, DslSchema, KirDocument, KparPackageBuild,
+    KparPackageSource, LanguageRegistry, LibraryProviderConfig, LocalPackageManifest,
+    LocalPackageRepository, LocalPackageSource, Runtime, default_stdlib_path, package_bytes_digest,
+    write_kpar_package,
 };
 use mercurio_kerml::{KermlLanguageModule, parse_kerml};
-use mercurio_sysml::{SysmlLanguageModule, SysmlModule, load_sysml_baseline, parse_sysml};
+use mercurio_sysml::{
+    SysmlLanguageModule, SysmlModule, load_sysml_baseline, parse_sysml, sysml_dsl_extension,
+};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -31,7 +38,7 @@ enum Command {
     Parse(ParseCommand),
     Compile(CompileCommand),
     Evaluate(EvaluateCommand),
-    Query(QueryCommand),
+    Dsl(DslCommand),
     Lint(LintCommand),
     Package(PackageCommand),
     Plugin(PluginCommand),
@@ -110,23 +117,76 @@ struct EvaluateCommand {
 }
 
 #[derive(Debug, Args)]
-struct QueryCommand {
+struct DslCommand {
+    #[command(subcommand)]
+    command: DslSubcommand,
+}
+
+#[derive(Debug, Subcommand)]
+enum DslSubcommand {
+    Run(DslRunCommand),
+    Schema(DslSchemaCommand),
+    AnalysisRun(DslAnalysisRunCommand),
+}
+
+#[derive(Debug, Args)]
+struct DslRunCommand {
+    #[command(flatten)]
+    model: DslModelInput,
+    #[command(flatten)]
+    script: DslScriptInput,
+    #[arg(long)]
+    max_operations: Option<u64>,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Debug, Args)]
+struct DslSchemaCommand {
+    #[command(flatten)]
+    model: DslModelInput,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Debug, Args)]
+struct DslAnalysisRunCommand {
+    #[command(flatten)]
+    model: DslModelInput,
+    #[command(flatten)]
+    script: DslScriptInput,
+    #[arg(long, default_value = "dsl-analysis-run")]
+    run_id: String,
+    #[arg(long, default_value = "mercurio.dsl.analysis")]
+    capability_id: String,
+    #[arg(long)]
+    subject_element_id: Option<String>,
+    #[arg(long)]
+    max_operations: Option<u64>,
+    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+    format: OutputFormat,
+}
+
+#[derive(Debug, Clone, Args)]
+struct DslModelInput {
     #[command(flatten)]
     input: SingleInput,
     #[arg(long)]
     kir: Option<PathBuf>,
     #[arg(long)]
     kpar: Option<PathBuf>,
-    #[arg(long)]
-    query: Option<String>,
-    #[arg(long, value_name = "PATH")]
-    query_file: Option<PathBuf>,
     #[arg(long, value_enum)]
     language: Option<LanguageArg>,
-    #[arg(long, value_enum, default_value_t = OutputFormat::Text)]
-    format: OutputFormat,
     #[arg(long)]
     stdlib: Option<PathBuf>,
+}
+
+#[derive(Debug, Clone, Args)]
+struct DslScriptInput {
+    #[arg(long)]
+    script: Option<String>,
+    #[arg(long, value_name = "PATH")]
+    script_file: Option<PathBuf>,
 }
 
 #[derive(Debug, Args)]
@@ -566,7 +626,7 @@ fn run(cli: Cli) -> Result<RunResult, CliError> {
         Command::Parse(command) => run_parse(command),
         Command::Compile(command) => run_compile(command),
         Command::Evaluate(command) => run_evaluate(command),
-        Command::Query(command) => run_query(command),
+        Command::Dsl(command) => run_dsl(command),
         Command::Lint(command) => run_lint(command),
         Command::Package(command) => run_package(command),
         Command::Plugin(command) => run_plugin(command),
@@ -747,27 +807,101 @@ fn run_evaluate(command: EvaluateCommand) -> Result<RunResult, CliError> {
     })
 }
 
-fn run_query(command: QueryCommand) -> Result<RunResult, CliError> {
-    let model = read_query_model_input(&command)?;
-    let query_text = read_query_text(&command)?;
-    let query =
-        parse_query(&query_text).map_err(|err| CliError::usage(format!("invalid query: {err}")))?;
-    let result = QueryEngine::new(&model.document)
-        .execute(&query)
-        .map_err(|err| CliError::execution(format!("query failed: {err}")))?;
+fn run_dsl(command: DslCommand) -> Result<RunResult, CliError> {
+    match command.command {
+        DslSubcommand::Run(command) => run_dsl_run(command),
+        DslSubcommand::Schema(command) => run_dsl_schema(command),
+        DslSubcommand::AnalysisRun(command) => run_dsl_analysis_run(command),
+    }
+}
 
-    let response = QueryResponse {
+fn run_dsl_run(command: DslRunCommand) -> Result<RunResult, CliError> {
+    let model = read_dsl_model_input(&command.model)?;
+    let script_name = dsl_script_name(&command.script);
+    let script = read_dsl_script(&command.script)?;
+    let graph = dsl_graph_from_document(model.document)?;
+    let report = dsl_engine()
+        .execute_query(
+            graph,
+            DslQueryRequest {
+                script,
+                script_name,
+                limits: dsl_execution_limits(command.max_operations),
+            },
+        )
+        .map_err(|err| CliError::execution(format!("DSL query failed: {err}")))?;
+    let response = DslRunResponse {
         source: model.source,
+        script_name: report.script_name,
         project_descriptor: model.project_descriptor,
-        result,
+        result: report.result,
     };
     let stdout = match command.format {
-        OutputFormat::Text => format_query_text(&response),
+        OutputFormat::Text => format_dsl_run_text(&response),
         OutputFormat::Json => to_pretty_json(&response)?,
     };
 
     Ok(RunResult {
         exit_code: 0,
+        stdout,
+    })
+}
+
+fn run_dsl_schema(command: DslSchemaCommand) -> Result<RunResult, CliError> {
+    let model = read_dsl_model_input(&command.model)?;
+    let runtime = Runtime::from_document(model.document)
+        .map_err(|err| CliError::execution(format!("failed to build DSL runtime: {err}")))?;
+    let response = DslSchemaResponse {
+        source: model.source,
+        project_descriptor: model.project_descriptor,
+        schema: dsl_engine().schema_for(runtime.graph()),
+    };
+    let stdout = match command.format {
+        OutputFormat::Text => format_dsl_schema_text(&response),
+        OutputFormat::Json => to_pretty_json(&response)?,
+    };
+
+    Ok(RunResult {
+        exit_code: 0,
+        stdout,
+    })
+}
+
+fn run_dsl_analysis_run(command: DslAnalysisRunCommand) -> Result<RunResult, CliError> {
+    let model = read_dsl_model_input(&command.model)?;
+    let script_name = dsl_script_name(&command.script);
+    let script = read_dsl_script(&command.script)?;
+    let graph = dsl_graph_from_document(model.document)?;
+    let dsl_report = dsl_engine()
+        .execute_analysis_run(
+            graph,
+            DslAnalysisRunRequest {
+                spec: DslAnalysisRunSpec {
+                    run_id: command.run_id,
+                    capability_id: command.capability_id,
+                    script,
+                    subject_element_id: command.subject_element_id,
+                },
+                script_name,
+                limits: dsl_execution_limits(command.max_operations),
+            },
+        )
+        .map_err(|err| CliError::execution(format!("DSL analysis run failed: {err}")))?;
+    let report = dsl_report.report;
+    let failed = report.status != CapabilityRunStatus::Passed;
+    let response = DslAnalysisRunResponse {
+        source: model.source,
+        script_name: dsl_report.script_name,
+        project_descriptor: model.project_descriptor,
+        report,
+    };
+    let stdout = match command.format {
+        OutputFormat::Text => format_dsl_analysis_run_text(&response),
+        OutputFormat::Json => to_pretty_json(&response)?,
+    };
+
+    Ok(RunResult {
+        exit_code: if failed { 1 } else { 0 },
         stdout,
     })
 }
@@ -1566,17 +1700,17 @@ fn read_evaluate_input(command: &EvaluateCommand) -> Result<EvaluateInput, CliEr
     })
 }
 
-fn read_query_model_input(command: &QueryCommand) -> Result<QueryModelInput, CliError> {
-    let input_count = single_input_count(&command.input)
-        + usize::from(command.kir.is_some())
-        + usize::from(command.kpar.is_some());
+fn read_dsl_model_input(input: &DslModelInput) -> Result<QueryModelInput, CliError> {
+    let input_count = single_input_count(&input.input)
+        + usize::from(input.kir.is_some())
+        + usize::from(input.kpar.is_some());
     if input_count != 1 {
         return Err(CliError::usage(
             "provide exactly one of --file, --text, --url, --kir, or --kpar",
         ));
     }
 
-    if let Some(path) = &command.kir {
+    if let Some(path) = &input.kir {
         let document = KirDocument::from_path(path).map_err(|err| {
             CliError::execution(format!(
                 "failed to load KIR document {}: {err}",
@@ -1594,8 +1728,8 @@ fn read_query_model_input(command: &QueryCommand) -> Result<QueryModelInput, Cli
         });
     }
 
-    if let Some(path) = &command.kpar {
-        let library_context = load_library_context(command.stdlib.as_deref(), path.clone(), None)?;
+    if let Some(path) = &input.kpar {
+        let library_context = load_library_context(input.stdlib.as_deref(), path.clone(), None)?;
         let model = read_kpar_model_input(path, &library_context.document)?;
         return Ok(QueryModelInput {
             source: model.source,
@@ -1604,11 +1738,11 @@ fn read_query_model_input(command: &QueryCommand) -> Result<QueryModelInput, Cli
         });
     }
 
-    if let Some(url) = &command.input.url
+    if let Some(url) = &input.input.url
         && is_kpar_url(url)
     {
         let library_context = load_library_context(
-            command.stdlib.as_deref(),
+            input.stdlib.as_deref(),
             current_directory_context_path()?,
             None,
         )?;
@@ -1620,10 +1754,10 @@ fn read_query_model_input(command: &QueryCommand) -> Result<QueryModelInput, Cli
         });
     }
 
-    let source = read_single_input(&command.input, command.language)?;
+    let source = read_single_input(&input.input, input.language)?;
     let library_context = load_library_context(
-        command.stdlib.as_deref(),
-        single_input_context_path(&command.input)?,
+        input.stdlib.as_deref(),
+        single_input_context_path(&input.input)?,
         Some(source.language),
     )?;
     let response = compile_source(&source, &library_context.document);
@@ -1644,22 +1778,64 @@ fn read_query_model_input(command: &QueryCommand) -> Result<QueryModelInput, Cli
     })
 }
 
-fn read_query_text(command: &QueryCommand) -> Result<String, CliError> {
-    match (&command.query, &command.query_file) {
+fn read_dsl_script(input: &DslScriptInput) -> Result<String, CliError> {
+    match (&input.script, &input.script_file) {
         (Some(_), Some(_)) => Err(CliError::usage(
-            "provide exactly one of --query or --query-file",
+            "provide at most one of --script or --script-file",
         )),
-        (None, None) => Err(CliError::usage(
-            "provide exactly one of --query or --query-file",
-        )),
-        (Some(query), None) => Ok(query.clone()),
+        (Some(script), None) => Ok(script.clone()),
+        (None, Some(path)) if path == Path::new("-") => read_dsl_script_stdin(),
         (None, Some(path)) => std::fs::read_to_string(path).map_err(|err| {
             CliError::execution(format!(
-                "failed to read query file {}: {err}",
+                "failed to read DSL script file {}: {err}",
                 path.display()
             ))
         }),
+        (None, None) => read_dsl_script_stdin(),
     }
+}
+
+fn read_dsl_script_stdin() -> Result<String, CliError> {
+    let mut script = String::new();
+    std::io::stdin()
+        .read_to_string(&mut script)
+        .map_err(|err| {
+            CliError::execution(format!("failed to read DSL script from stdin: {err}"))
+        })?;
+    if script.trim().is_empty() {
+        return Err(CliError::usage(
+            "provide --script, --script-file, or a non-empty stdin script",
+        ));
+    }
+    Ok(script)
+}
+
+fn dsl_script_name(input: &DslScriptInput) -> Option<String> {
+    if input.script.is_some() {
+        return Some("<inline>".to_string());
+    }
+    match input.script_file.as_ref() {
+        Some(path) if path == Path::new("-") => Some("<stdin>".to_string()),
+        Some(path) => Some(path.display().to_string()),
+        None => Some("<stdin>".to_string()),
+    }
+}
+
+fn dsl_execution_limits(max_operations: Option<u64>) -> Option<DslExecutionLimits> {
+    max_operations.map(|max_operations| DslExecutionLimits {
+        max_operations,
+        ..DslExecutionLimits::default()
+    })
+}
+
+fn dsl_engine() -> DslEngine {
+    DslEngine::with_extensions(vec![sysml_dsl_extension()])
+}
+
+fn dsl_graph_from_document(document: KirDocument) -> Result<Arc<Graph>, CliError> {
+    let runtime = Runtime::from_document(document)
+        .map_err(|err| CliError::execution(format!("failed to build DSL runtime: {err}")))?;
+    Ok(Arc::new(runtime.graph().clone()))
 }
 
 fn read_package_sources(paths: &[PathBuf]) -> Result<Vec<KparPackageSource>, CliError> {
@@ -3163,10 +3339,28 @@ struct EvaluateResponse {
 }
 
 #[derive(Serialize)]
-struct QueryResponse {
+struct DslRunResponse {
+    source: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    script_name: Option<String>,
+    project_descriptor: ProjectDescriptorOutput,
+    result: DslQueryResult,
+}
+
+#[derive(Serialize)]
+struct DslSchemaResponse {
     source: String,
     project_descriptor: ProjectDescriptorOutput,
-    result: QueryResultSet,
+    schema: DslSchema,
+}
+
+#[derive(Serialize)]
+struct DslAnalysisRunResponse {
+    source: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    script_name: Option<String>,
+    project_descriptor: ProjectDescriptorOutput,
+    report: CapabilityRunReport,
 }
 
 fn format_parse_text(response: &ParseResponse) -> String {
@@ -3261,33 +3455,107 @@ fn format_evaluate_text(response: &EvaluateResponse, explain: bool) -> String {
     output
 }
 
-fn format_query_text(response: &QueryResponse) -> String {
+fn format_dsl_run_text(response: &DslRunResponse) -> String {
+    let mut output = String::new();
+    output.push_str(&format!("source: {}\n", response.source));
+    if let Some(script_name) = &response.script_name {
+        output.push_str(&format!("script: {script_name}\n"));
+    }
+    output.push_str(&format!(
+        "project_descriptor: {}\n",
+        response.project_descriptor.to_text()
+    ));
+    output.push_str(&format_dsl_result_table(&response.result));
+    output
+}
+
+fn format_dsl_schema_text(response: &DslSchemaResponse) -> String {
     let mut output = String::new();
     output.push_str(&format!("source: {}\n", response.source));
     output.push_str(&format!(
         "project_descriptor: {}\n",
         response.project_descriptor.to_text()
     ));
-    output.push_str(&format!("rows: {}\n", response.result.rows.len()));
+    output.push_str(&format!(
+        "element_kinds: {}\n",
+        response.schema.element_kinds.len()
+    ));
+    for kind in &response.schema.element_kinds {
+        output.push_str(&format!("kind: {kind}\n"));
+    }
+    output.push_str(&format!("fields: {}\n", response.schema.fields.len()));
+    for field in &response.schema.fields {
+        output.push_str(&format!("field: {}\t{}\n", field.name, field.kind));
+    }
+    output.push_str(&format!(
+        "stdlib_functions: {}\n",
+        response.schema.stdlib_functions.len()
+    ));
+    for function in &response.schema.stdlib_functions {
+        output.push_str(&format!("function: {function}\n"));
+    }
+    output
+}
 
-    if response.result.columns.is_empty() {
+fn format_dsl_analysis_run_text(response: &DslAnalysisRunResponse) -> String {
+    let mut output = String::new();
+    output.push_str(&format!("source: {}\n", response.source));
+    if let Some(script_name) = &response.script_name {
+        output.push_str(&format!("script: {script_name}\n"));
+    }
+    output.push_str(&format!(
+        "project_descriptor: {}\n",
+        response.project_descriptor.to_text()
+    ));
+    output.push_str(&format!("run_id: {}\n", response.report.run_id));
+    output.push_str(&format!(
+        "capability_id: {}\n",
+        response.report.capability_id
+    ));
+    output.push_str(&format!(
+        "status: {}\n",
+        format_capability_run_status(response.report.status)
+    ));
+    output.push_str(&format!("insights: {}\n", response.report.insights.len()));
+    output.push_str(&format!("artifacts: {}\n", response.report.artifacts.len()));
+    output.push_str(&format!(
+        "diagnostics: {}\n",
+        response.report.diagnostics.len()
+    ));
+    for diagnostic in &response.report.diagnostics {
+        output.push_str(&format!("diagnostic: {}\n", diagnostic.message));
+    }
+    output
+}
+
+fn format_dsl_result_table(result: &DslQueryResult) -> String {
+    let mut output = String::new();
+    output.push_str(&format!("rows: {}\n", result.rows.len()));
+
+    if result.columns.is_empty() {
         return output;
     }
 
-    output.push_str(&response.result.columns.join("\t"));
+    output.push_str(&result.columns.join("\t"));
     output.push('\n');
-    for row in &response.result.rows {
-        let values = response
-            .result
-            .columns
-            .iter()
-            .map(|column| format_query_cell(row.get(column).unwrap_or(&Value::Null)))
-            .collect::<Vec<_>>();
+    for row in &result.rows {
+        let values = row.iter().map(format_query_cell).collect::<Vec<_>>();
         output.push_str(&values.join("\t"));
         output.push('\n');
     }
 
     output
+}
+
+fn format_capability_run_status(status: CapabilityRunStatus) -> &'static str {
+    match status {
+        CapabilityRunStatus::Passed => "passed",
+        CapabilityRunStatus::Failed => "failed",
+        CapabilityRunStatus::Inconclusive => "inconclusive",
+        CapabilityRunStatus::Partial => "partial",
+        CapabilityRunStatus::NotApplicable => "not_applicable",
+        CapabilityRunStatus::Error => "error",
+    }
 }
 
 fn format_query_cell(value: &Value) -> String {
@@ -4634,13 +4902,16 @@ mod tests {
     }
 
     #[test]
-    fn query_text_filters_and_selects_elements() {
+    fn dsl_run_replaces_query_filters_and_selects_elements() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { part def Vehicle; attribute def Mass; }",
-            "--query",
-            r#"from elements where kind = "SysML::Systems::PartDefinition" select id, qualified_name"#,
+            "--script",
+            r#"model.elements()
+                .where_eq("kind", "SysML::Systems::PartDefinition")
+                .select(["id", "qualified_name"])"#,
         ])
         .unwrap();
 
@@ -4651,8 +4922,8 @@ mod tests {
     }
 
     #[test]
-    fn query_kpar_file_returns_json_rows() {
-        let root = temp_dir("mercurio-cli-query-kpar");
+    fn dsl_run_kpar_file_returns_json_rows_for_migrated_query() {
+        let root = temp_dir("mercurio-cli-dsl-kpar-query");
         std::fs::create_dir_all(&root).unwrap();
         let source_path = root.join("model.sysml");
         let out_path = root.join("model.kpar");
@@ -4669,11 +4940,14 @@ mod tests {
         .unwrap();
 
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--kpar",
             out_path.to_str().unwrap(),
-            "--query",
-            r#"from elements where qualified_name = "Demo.Vehicle" select id, kind"#,
+            "--script",
+            r#"model.elements()
+                .where_eq("qualified_name", "Demo.Vehicle")
+                .select(["id", "kind"])"#,
             "--format",
             "json",
         ])
@@ -4682,17 +4956,20 @@ mod tests {
         assert_eq!(result.exit_code, 0);
         let json: serde_json::Value = serde_json::from_str(&result.stdout).unwrap();
         assert_eq!(json["result"]["rows"].as_array().unwrap().len(), 1);
-        assert_eq!(json["result"]["rows"][0]["id"], "type.Demo.Vehicle");
+        assert_eq!(json["result"]["rows"][0][0], "type.Demo.Vehicle");
     }
 
     #[test]
-    fn query_match_binds_feature_relationships() {
+    fn dsl_run_replaces_query_match_feature_relationships() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { part def Vehicle { attribute mass = 42; } }",
-            "--query",
-            r#"match ?type kind "SysML::Systems::PartDefinition" match ?type features ?feature select ?type, ?feature"#,
+            "--script",
+            r#"model.elements()
+                .where_eq("kind", "SysML::Systems::PartDefinition")
+                .select_related("features", ["id"], ["id"])"#,
         ])
         .unwrap();
 
@@ -4703,13 +4980,16 @@ mod tests {
     }
 
     #[test]
-    fn query_filters_requirements_by_metatype_contains() {
+    fn dsl_run_replaces_query_metatype_contains_filter() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { requirement def VehicleNeed; requirement vehicleNeed : VehicleNeed; }",
-            "--query",
-            r#"from elements where metatype contains "Requirement" select id, qualified_name, metatype"#,
+            "--script",
+            r#"model.elements()
+                .where_contains("metatype", "Requirement")
+                .select(["id", "qualified_name", "metatype"])"#,
         ])
         .unwrap();
 
@@ -4720,13 +5000,16 @@ mod tests {
     }
 
     #[test]
-    fn query_match_selects_bound_element_fields() {
+    fn dsl_run_replaces_query_match_bound_element_fields() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { part def Vehicle { attribute mass = 42; } }",
-            "--query",
-            r#"match ?type kind "SysML::Systems::PartDefinition" match ?type features ?feature select ?type.qualified_name, ?feature.qualified_name"#,
+            "--script",
+            r#"model.elements()
+                .where_eq("kind", "SysML::Systems::PartDefinition")
+                .select_related("features", ["qualified_name"], ["qualified_name"])"#,
         ])
         .unwrap();
 
@@ -4737,13 +5020,18 @@ mod tests {
     }
 
     #[test]
-    fn query_supports_multiple_filters_not_equals_and_order_by() {
+    fn dsl_run_replaces_query_multiple_filters_and_order_by() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { requirement def VehicleNeed; requirement def SkipNeed; requirement vehicleNeed : VehicleNeed; }",
-            "--query",
-            r#"from elements where metatype contains "Requirement" where qualified_name != "Demo.SkipNeed" select id, qualified_name, metatype order by qualified_name desc"#,
+            "--script",
+            r#"model.elements()
+                .where_contains("metatype", "Requirement")
+                .where_ne("qualified_name", "Demo.SkipNeed")
+                .order_by_desc("qualified_name")
+                .select(["id", "qualified_name", "metatype"])"#,
         ])
         .unwrap();
 
@@ -4755,13 +5043,21 @@ mod tests {
     }
 
     #[test]
-    fn query_match_supports_where_filters() {
+    fn dsl_run_replaces_query_match_where_filters() {
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { part def Vehicle { attribute mass = 42; } }",
-            "--query",
-            r#"match ?type features ?feature where ?feature.metatype = "SysML::Systems::AttributeUsage" select ?type.qualified_name, ?feature.qualified_name"#,
+            "--script",
+            r#"model.elements()
+                .select_related_where_eq(
+                    "features",
+                    "metatype",
+                    "SysML::Systems::AttributeUsage",
+                    ["qualified_name"],
+                    ["qualified_name"]
+                )"#,
         ])
         .unwrap();
 
@@ -4772,28 +5068,186 @@ mod tests {
     }
 
     #[test]
-    fn query_file_reads_query_from_disk() {
-        let root = temp_dir("mercurio-cli-query-file");
+    fn dsl_run_script_file_replaces_query_file() {
+        let root = temp_dir("mercurio-cli-dsl-script-file");
         std::fs::create_dir_all(&root).unwrap();
-        let query_path = root.join("requirements.mq");
+        let script_path = root.join("requirements.mercurio-query.dsl");
         std::fs::write(
-            &query_path,
-            r#"from elements where metatype contains "Requirement" select id, qualified_name order by qualified_name"#,
+            &script_path,
+            r#"model.elements()
+                .where_contains("metatype", "Requirement")
+                .order_by("qualified_name")
+                .select(["id", "qualified_name"])"#,
         )
         .unwrap();
 
         let result = run_args(&[
-            "query",
+            "dsl",
+            "run",
             "--text",
             "package Demo { requirement def VehicleNeed; }",
-            "--query-file",
-            query_path.to_str().unwrap(),
+            "--script-file",
+            script_path.to_str().unwrap(),
         ])
         .unwrap();
 
         assert_eq!(result.exit_code, 0);
         assert!(result.stdout.contains("rows: 1"));
         assert!(result.stdout.contains("type.Demo.VehicleNeed"));
+    }
+
+    #[test]
+    fn dsl_run_text_filters_compiled_model() {
+        let result = run_args(&[
+            "dsl",
+            "run",
+            "--text",
+            "package Demo { part def Vehicle; attribute def Mass; }",
+            "--script",
+            r#"model.elements()
+                .where_eq("qualified_name", "Demo.Vehicle")
+                .select(["id", "qualified_name"])"#,
+        ])
+        .unwrap();
+
+        assert_eq!(result.exit_code, 0);
+        assert!(result.stdout.contains("rows: 1"));
+        assert!(result.stdout.contains("qualified_name"));
+        assert!(result.stdout.contains("Demo.Vehicle"));
+    }
+
+    #[test]
+    fn dsl_run_kir_file_returns_json_rows() {
+        let root = temp_dir("mercurio-cli-dsl-kir");
+        std::fs::create_dir_all(&root).unwrap();
+        let kir_path = root.join("model.kir.json");
+        let script_path = root.join("vehicle.mercurio-query.dsl");
+        let document = KirDocument {
+            metadata: Default::default(),
+            elements: vec![mercurio_core::KirElement {
+                id: "type.Demo.Vehicle".to_string(),
+                kind: "PartDefinition".to_string(),
+                layer: 2,
+                properties: BTreeMap::from([(
+                    "qualified_name".to_string(),
+                    serde_json::json!("Demo.Vehicle"),
+                )]),
+            }],
+        };
+        document.write_pretty_to_path(&kir_path).unwrap();
+        std::fs::write(
+            &script_path,
+            r#"model.elements().select(["qualified_name"])"#,
+        )
+        .unwrap();
+
+        let result = run_args(&[
+            "dsl",
+            "run",
+            "--kir",
+            kir_path.to_str().unwrap(),
+            "--script-file",
+            script_path.to_str().unwrap(),
+            "--format",
+            "json",
+        ])
+        .unwrap();
+
+        assert_eq!(result.exit_code, 0);
+        let json: serde_json::Value = serde_json::from_str(&result.stdout).unwrap();
+        assert_eq!(json["result"]["rows"].as_array().unwrap().len(), 1);
+        assert_eq!(json["result"]["rows"][0][0], "Demo.Vehicle");
+    }
+
+    #[test]
+    fn dsl_schema_reports_stdlib_functions() {
+        let result = run_args(&[
+            "dsl",
+            "schema",
+            "--text",
+            "package Demo { part def Vehicle; }",
+        ])
+        .unwrap();
+
+        assert_eq!(result.exit_code, 0);
+        assert!(result.stdout.contains("stdlib_functions:"));
+        assert!(result.stdout.contains("function: count_by_kind"));
+        assert!(
+            result
+                .stdout
+                .contains("function: ModelContext.requirements")
+        );
+    }
+
+    #[test]
+    fn dsl_run_uses_sysml_vocabulary_extension() {
+        let result = run_args(&[
+            "dsl",
+            "run",
+            "--text",
+            "package Demo { requirement def VehicleNeed; requirement vehicleNeed : VehicleNeed; }",
+            "--script",
+            r#"model.requirements().select(["id", "qualified_name"])"#,
+        ])
+        .unwrap();
+
+        assert_eq!(result.exit_code, 0);
+        assert!(result.stdout.contains("rows: 2"));
+        assert!(result.stdout.contains("type.Demo.VehicleNeed"));
+        assert!(result.stdout.contains("requirement.Demo.vehicleNeed"));
+    }
+
+    #[test]
+    fn dsl_run_honors_max_operations() {
+        let err = run_args(&[
+            "dsl",
+            "run",
+            "--text",
+            "package Demo { part def Vehicle; }",
+            "--script",
+            "let x = 0; while x < 1000 { x += 1; } x",
+            "--max-operations",
+            "10",
+        ])
+        .unwrap_err();
+
+        assert_eq!(err.code, 2);
+        assert!(err.message.contains("DSL query failed"));
+        assert!(err.message.contains("DSL_LIMIT_OPERATIONS"));
+        assert!(err.message.contains("<inline>"));
+    }
+
+    #[test]
+    fn dsl_analysis_run_uses_verdict_for_exit_status() {
+        let passed = run_args(&[
+            "dsl",
+            "analysis-run",
+            "--text",
+            "package Demo { part def Vehicle; }",
+            "--script",
+            r#"#{verdict: "pass"}"#,
+            "--run-id",
+            "ci.pass",
+        ])
+        .unwrap();
+
+        assert_eq!(passed.exit_code, 0);
+        assert!(passed.stdout.contains("status: passed"));
+
+        let failed = run_args(&[
+            "dsl",
+            "analysis-run",
+            "--text",
+            "package Demo { part def Vehicle; }",
+            "--script",
+            r#"#{verdict: "fail"}"#,
+            "--run-id",
+            "ci.fail",
+        ])
+        .unwrap();
+
+        assert_eq!(failed.exit_code, 1);
+        assert!(failed.stdout.contains("status: failed"));
     }
 
     #[test]

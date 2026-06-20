@@ -8,6 +8,7 @@ pub mod authoring;
 pub mod behavior;
 pub mod builder;
 pub mod constraints;
+pub mod dsl;
 mod embedded_resources;
 pub mod metamodel;
 pub mod mutation;
@@ -39,6 +40,7 @@ pub use constraints::{
     SysmlConstraintAnalysisCapability, execution_context_from_nested_values,
     register_sysml_constraint_analysis_capability, render_constraint_graph, solve_constraints,
 };
+pub use dsl::sysml_dsl_extension;
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::SemanticConcept;
 pub use mercurio_language_contracts::ast::{
