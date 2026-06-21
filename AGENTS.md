@@ -26,7 +26,7 @@ The simulation engine is the most active development area. Before modifying it r
 Key files:
 
 ```
-crates/mercurio-sysml/src/behavior/simulation.rs   — run_analysis_case(), run_concurrent_simulation(), SimulationTrace
+crates/mercurio-sysml/src/behavior/simulation.rs   — run_analysis_case() -> CapabilityRunReport, run_concurrent_simulation(), SimulationTrace artifact payloads
 crates/mercurio-sysml/src/behavior/capability.rs   — capability introspection
 crates/mercurio-sysml/src/compile.rs               — SysML text → KirDocument
 ```
@@ -50,6 +50,9 @@ crates/mercurio-sysml/src/compile.rs               — SysML text → KirDocumen
 ```rust
 use mercurio_sysml::{list_analysis_cases, run_analysis_case, SysmlEnvironment};
 // Runtime comes from mercurio-foundation: Runtime::from_graph(graph)
+// run_analysis_case(runtime, analysis_case_id, run_id) returns CapabilityRunReport.
+// SimulationTrace is the payload of the simulation_trace artifact, not the
+// public analysis-case return type.
 ```
 
 ---

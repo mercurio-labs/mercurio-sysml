@@ -1,8 +1,14 @@
+use std::collections::BTreeMap;
 use std::fmt;
 
 use serde_json::Value;
 
 use mercurio_core::runtime::{Runtime, RuntimeError};
+use mercurio_core::{
+    CapabilityRunReport, CapabilityRunStatus, CapabilityTarget, EvidenceEdge, EvidenceGraph,
+    EvidenceNode, EvidenceNodeKind, EvidenceRelation, SemanticArtifact, SemanticElementRef,
+    stable_digest,
+};
 pub use mercurio_simulation_core::{
     AnalysisCaseInfo, ConcurrentSimulationScenario, ConcurrentSubjectScenario, SimTraceChannel,
     SimTraceChannelSource, SimTraceEntry, SimTraceEvent, SimulationClockConfig, SimulationEvent,
@@ -11,6 +17,9 @@ pub use mercurio_simulation_core::{
 };
 
 const CHANGE_LOOP_LIMIT: usize = 20;
+pub const SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID: &str = "sysml.behavior.dynamic";
+pub const SIMULATION_TRACE_ARTIFACT_KIND: &str = "simulation_trace";
+pub const SIMULATION_TRACE_SCHEMA: &str = "mercurio.simulation.trace.v1";
 
 pub type StateMachineScenarioEvent = SimulationEvent;
 
@@ -22,6 +31,7 @@ pub enum SimulationError {
     MissingInitialState(String),
     InvalidProfile(String),
     Runtime(RuntimeError),
+    Serialization(serde_json::Error),
 }
 
 impl fmt::Display for SimulationError {
@@ -33,6 +43,7 @@ impl fmt::Display for SimulationError {
             Self::MissingInitialState(id) => write!(f, "missing initial state: {id}"),
             Self::InvalidProfile(message) => write!(f, "invalid simulation profile: {message}"),
             Self::Runtime(err) => write!(f, "{err}"),
+            Self::Serialization(err) => write!(f, "failed to serialize simulation trace: {err}"),
         }
     }
 }
@@ -42,6 +53,12 @@ impl std::error::Error for SimulationError {}
 impl From<RuntimeError> for SimulationError {
     fn from(value: RuntimeError) -> Self {
         Self::Runtime(value)
+    }
+}
+
+impl From<serde_json::Error> for SimulationError {
+    fn from(value: serde_json::Error) -> Self {
+        Self::Serialization(value)
     }
 }
 
@@ -90,9 +107,107 @@ pub fn scenario_from_analysis_case(
 pub fn run_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
-) -> Result<SimulationTrace, SimulationError> {
+    run_id: &str,
+) -> Result<CapabilityRunReport, SimulationError> {
     let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
-    run_concurrent_simulation(runtime, scenario)
+    let trace = run_concurrent_simulation(runtime, scenario)?;
+    simulation_trace_report(run_id, analysis_case_id, trace)
+}
+
+pub fn simulation_trace_report(
+    run_id: &str,
+    analysis_case_id: &str,
+    trace: SimulationTrace,
+) -> Result<CapabilityRunReport, SimulationError> {
+    let reported_analysis_case_id = if trace.scenario_id.is_empty() {
+        analysis_case_id
+    } else {
+        trace.scenario_id.as_str()
+    };
+    let payload = serde_json::to_value(&trace)?;
+    let payload_bytes = serde_json::to_vec(&payload)?;
+    let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
+    let analysis_case_ref = SemanticElementRef {
+        element_id: reported_analysis_case_id.to_string(),
+        qualified_name: None,
+        label: None,
+    };
+    let subject_ref = SemanticElementRef {
+        element_id: trace.subject_id.clone(),
+        qualified_name: None,
+        label: None,
+    };
+    let mut element_refs = vec![analysis_case_ref.clone()];
+    if !subject_ref.element_id.is_empty() && subject_ref.element_id != analysis_case_ref.element_id
+    {
+        element_refs.push(subject_ref);
+    }
+
+    let artifact_id = format!(
+        "artifact.{}.simulation_trace.{}",
+        sanitize_identifier(run_id),
+        sanitize_identifier(reported_analysis_case_id)
+    );
+    let evidence_id = format!(
+        "evidence.{}.simulation_analysis.{}",
+        sanitize_identifier(run_id),
+        sanitize_identifier(reported_analysis_case_id)
+    );
+    let artifact = SemanticArtifact {
+        id: artifact_id.clone(),
+        kind: SIMULATION_TRACE_ARTIFACT_KIND.to_string(),
+        schema: SIMULATION_TRACE_SCHEMA.to_string(),
+        digest,
+        element_refs: element_refs.clone(),
+        payload,
+    };
+
+    Ok(CapabilityRunReport {
+        run_id: run_id.to_string(),
+        capability_id: SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID.to_string(),
+        status: capability_status_from_simulation_status(trace.status),
+        target: CapabilityTarget::Element {
+            element_id: reported_analysis_case_id.to_string(),
+        },
+        insights: Vec::new(),
+        artifacts: vec![artifact],
+        evidence: EvidenceGraph {
+            nodes: vec![
+                EvidenceNode {
+                    id: evidence_id.clone(),
+                    kind: EvidenceNodeKind::AnalysisRun,
+                    label: format!("Simulation analysis case {reported_analysis_case_id}"),
+                    element_refs,
+                    source_spans: Vec::new(),
+                    properties: BTreeMap::from([
+                        (
+                            "analysis_case_id".to_string(),
+                            Value::String(reported_analysis_case_id.to_string()),
+                        ),
+                        (
+                            "scenario_id".to_string(),
+                            Value::String(trace.scenario_id.clone()),
+                        ),
+                    ]),
+                },
+                EvidenceNode {
+                    id: artifact_id.clone(),
+                    kind: EvidenceNodeKind::Artifact,
+                    label: "Simulation trace".to_string(),
+                    element_refs: Vec::new(),
+                    source_spans: Vec::new(),
+                    properties: BTreeMap::new(),
+                },
+            ],
+            edges: vec![EvidenceEdge {
+                source_id: artifact_id,
+                target_id: evidence_id,
+                relation: EvidenceRelation::ProducedBy,
+            }],
+        },
+        diagnostics: Vec::new(),
+        limitations: Vec::new(),
+    })
 }
 
 pub fn run_concurrent_simulation(
@@ -128,6 +243,31 @@ fn run_canonical_core(
         });
     run_concurrent_simulation_model(&model, scenario.clone(), clock_config)
         .map_err(|error| SimulationError::InvalidProfile(error.to_string()))
+}
+
+fn capability_status_from_simulation_status(status: SimulationStatus) -> CapabilityRunStatus {
+    match status {
+        SimulationStatus::Completed => CapabilityRunStatus::Passed,
+        SimulationStatus::Blocked => CapabilityRunStatus::Partial,
+        SimulationStatus::Failed => CapabilityRunStatus::Failed,
+    }
+}
+
+fn sanitize_identifier(value: &str) -> String {
+    let mut sanitized = value
+        .chars()
+        .map(|ch| {
+            if ch.is_ascii_alphanumeric() || ch == '.' || ch == '_' || ch == '-' {
+                ch
+            } else {
+                '_'
+            }
+        })
+        .collect::<String>();
+    if sanitized.is_empty() {
+        sanitized.push_str("unnamed");
+    }
+    sanitized
 }
 
 fn runtime_has_legacy_rate_transition_effects(
@@ -359,13 +499,24 @@ mod tests {
             Some(&json!(22.0))
         );
 
-        let trace = run_analysis_case(&runtime, "analysis.PrintSequence").unwrap();
+        let trace = run_concurrent_simulation(&runtime, scenario).unwrap();
         assert!(trace.timeline.iter().any(|entry| {
             entry
                 .states
                 .get("individual.printer")
                 .is_some_and(|states| states == &vec!["state.Printer.printing".to_string()])
         }));
+
+        let report = run_analysis_case(&runtime, "analysis.PrintSequence", "test.run").unwrap();
+        assert_eq!(report.capability_id, SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID);
+        assert_eq!(report.status, CapabilityRunStatus::Passed);
+        assert_eq!(report.artifacts.len(), 1);
+        assert_eq!(report.artifacts[0].kind, SIMULATION_TRACE_ARTIFACT_KIND);
+        assert_eq!(report.artifacts[0].schema, SIMULATION_TRACE_SCHEMA);
+        assert_eq!(
+            report.artifacts[0].payload["scenario_id"],
+            json!("analysis.PrintSequence")
+        );
     }
 
     #[test]
