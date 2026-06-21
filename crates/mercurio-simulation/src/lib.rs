@@ -131,11 +131,13 @@ pub fn simulation_trace_report(
         element_id: reported_analysis_case_id.to_string(),
         qualified_name: None,
         label: None,
+        semantic_anchor: None,
     };
     let subject_ref = SemanticElementRef {
         element_id: trace.subject_id.clone(),
         qualified_name: None,
         label: None,
+        semantic_anchor: None,
     };
     let mut element_refs = vec![analysis_case_ref.clone()];
     if !subject_ref.element_id.is_empty() && subject_ref.element_id != analysis_case_ref.element_id
