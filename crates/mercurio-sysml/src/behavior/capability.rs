@@ -427,7 +427,8 @@ mod tests {
                     layer: 2,
                     properties: BTreeMap::new(),
                 }],
-            },
+            }
+            .normalized_for_persistence(),
             Some("sysml".to_string()),
         )
         .unwrap();
@@ -486,7 +487,8 @@ mod tests {
                         ]),
                     },
                 ],
-            },
+            }
+            .normalized_for_persistence(),
             Some("sysml".to_string()),
         )
         .unwrap();
@@ -575,7 +577,8 @@ mod tests {
                         ]),
                     },
                 ],
-            },
+            }
+            .normalized_for_persistence(),
             Some("sysml".to_string()),
         )
         .unwrap();

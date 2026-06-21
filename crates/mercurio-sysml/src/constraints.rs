@@ -806,15 +806,21 @@ fn source_from_element(element: &Element) -> Option<ConstraintSource> {
 
     let expression_ir = element.properties.get("expression_ir")?;
     let target = variable_id_from_element(element);
-    let parsed_ir = ExpressionIr::from_value(expression_ir).ok();
-    let rhs = parsed_ir
-        .as_ref()
-        .map(ExpressionIr::render_constraint_expression)
-        .unwrap_or_else(|| expression_ir.to_string());
+    let parsed_ir = match ExpressionIr::from_value(expression_ir) {
+        Ok(expression_ir) => expression_ir,
+        Err(err) => {
+            return Some(ConstraintSource {
+                id: element.element_id.clone(),
+                label,
+                expression: format!("invalid expression_ir: {err}"),
+                kind: ConstraintSourceKind::Equation,
+                variables: vec![target],
+            });
+        }
+    };
+    let rhs = parsed_ir.render_constraint_expression();
     let mut variables = BTreeSet::from([target.clone()]);
-    if let Some(expression_ir) = &parsed_ir {
-        expression_ir.collect_path_variables(&mut variables);
-    }
+    parsed_ir.collect_path_variables(&mut variables);
     Some(ConstraintSource {
         id: element.element_id.clone(),
         label,
