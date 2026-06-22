@@ -91,7 +91,7 @@ fn load_workspace(
     model: Option<&PathBuf>,
 ) -> Result<SemanticWorkspaceSnapshot, Box<dyn std::error::Error>> {
     let model = model.ok_or("--model is required for readiness and run")?;
-    let document = KirDocument::from_path_lenient(model)?;
+    let document = KirDocument::from_path(model)?;
     Ok(SemanticWorkspaceSnapshot::from_document_with_profile(
         document,
         Some("sysml".to_string()),

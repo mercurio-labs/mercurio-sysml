@@ -110,17 +110,6 @@ pub fn requirement_traces(
             })
         })
         .collect::<Vec<_>>();
-    for element in &document.elements {
-        for (property, value) in &element.properties {
-            if is_requirement_trace_relation(property) && value_references(value, requirement_id) {
-                traces.push(RequirementTrace {
-                    relationship: property.clone(),
-                    source: element.id.clone(),
-                    target: requirement_id.to_string(),
-                });
-            }
-        }
-    }
     traces.sort_by(|left, right| {
         (&left.relationship, &left.source, &left.target).cmp(&(
             &right.relationship,
@@ -246,10 +235,11 @@ impl SemanticCapability for RequirementAnalysisCapability {
         let mut evidence = EvidenceGraph::default();
 
         for row in &rows {
-            let subject = requirement_element_ref(row);
+            let subject = workspace.element_ref(&row.id);
             if row.satisfied_by.is_empty() {
                 let evidence_id = format!("evidence.requirement.coverage_gap.{}", row.id);
                 evidence.nodes.push(requirement_evidence_node(
+                    workspace,
                     &evidence_id,
                     "Requirement has no satisfy trace",
                     row,
@@ -274,6 +264,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
             } else {
                 let evidence_id = format!("evidence.requirement.satisfied.{}", row.id);
                 evidence.nodes.push(requirement_evidence_node(
+                    workspace,
                     &evidence_id,
                     "Requirement has satisfy evidence",
                     row,
@@ -307,6 +298,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
             if row.verified_by.is_empty() {
                 let evidence_id = format!("evidence.requirement.verification_gap.{}", row.id);
                 evidence.nodes.push(requirement_evidence_node(
+                    workspace,
                     &evidence_id,
                     "Requirement has no verify trace",
                     row,
@@ -349,6 +341,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
                 element_id: "workspace".to_string(),
                 qualified_name: None,
                 label: Some("Requirement analysis scope".to_string()),
+                semantic_anchor: None,
             },
             claim: format!(
                 "Requirement scope has {satisfy_percent:.0}% satisfy coverage and {verify_percent:.0}% verify coverage."
@@ -400,7 +393,10 @@ impl SemanticCapability for RequirementAnalysisCapability {
             kind: "requirement_analysis_summary".to_string(),
             schema: "mercurio.capability.sysml_requirement_analysis.v1".to_string(),
             digest: artifact_digest(&payload),
-            element_refs: rows.iter().map(requirement_element_ref).collect(),
+            element_refs: rows
+                .iter()
+                .map(|row| workspace.element_ref(&row.id))
+                .collect(),
             payload,
         };
         let has_gaps = insights.iter().any(|insight| {
@@ -518,15 +514,8 @@ fn rows_for_target(
     }
 }
 
-fn requirement_element_ref(row: &RequirementTableRowDto) -> SemanticElementRef {
-    SemanticElementRef {
-        element_id: row.id.clone(),
-        qualified_name: None,
-        label: row.name.clone(),
-    }
-}
-
 fn requirement_evidence_node(
+    workspace: &SemanticWorkspaceSnapshot,
     id: &str,
     label: impl Into<String>,
     row: &RequirementTableRowDto,
@@ -535,7 +524,7 @@ fn requirement_evidence_node(
         id: id.to_string(),
         kind: EvidenceNodeKind::Fact,
         label: label.into(),
-        element_refs: vec![requirement_element_ref(row)],
+        element_refs: vec![workspace.element_ref(&row.id)],
         source_spans: source_spans(row),
         properties: BTreeMap::from([
             (
@@ -592,15 +581,6 @@ pub fn evaluate_semantic_goal(
 
 pub fn default_model_quality_profile() -> SemanticGoalProfile {
     mercurio_core::default_model_quality_profile()
-}
-
-fn value_references(value: &Value, target: &str) -> bool {
-    match value {
-        Value::String(value) => value == target,
-        Value::Array(items) => items.iter().any(|item| value_references(item, target)),
-        Value::Object(items) => items.values().any(|item| value_references(item, target)),
-        _ => false,
-    }
 }
 
 fn is_requirement_trace_relation(relation: &str) -> bool {
@@ -764,7 +744,8 @@ mod tests {
                     ),
                 ]),
             }],
-        };
+        }
+        .normalized_for_persistence();
         let workspace = SemanticWorkspaceSnapshot::from_document_with_profile(
             document,
             Some("sysml".to_string()),
@@ -798,6 +779,14 @@ mod tests {
                 .iter()
                 .any(|insight| insight.kind == InsightKind::TraceCompleteness)
         );
+        assert!(
+            report
+                .insights
+                .iter()
+                .find(|insight| insight.kind == InsightKind::CoverageGap)
+                .and_then(|insight| insight.subject.semantic_anchor.as_ref())
+                .is_some()
+        );
     }
 
     #[test]
@@ -821,7 +810,8 @@ mod tests {
                     )]),
                 },
             ],
-        };
+        }
+        .normalized_for_persistence();
         let workspace = SemanticWorkspaceSnapshot::from_document_with_profile(
             document,
             Some("sysml".to_string()),
@@ -848,5 +838,52 @@ mod tests {
                 .iter()
                 .any(|insight| insight.kind == InsightKind::SatisfactionEvidence)
         );
+    }
+
+    #[test]
+    fn requirement_traces_use_registered_graph_edges_only() {
+        let document = KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                KirElement {
+                    id: "req.safeStart".to_string(),
+                    kind: "SysML::Requirements::RequirementUsage".to_string(),
+                    layer: 2,
+                    properties: BTreeMap::new(),
+                },
+                KirElement {
+                    id: "part.controller".to_string(),
+                    kind: "SysML::Systems::PartUsage".to_string(),
+                    layer: 2,
+                    properties: BTreeMap::from([
+                        (
+                            "satisfy".to_string(),
+                            Value::Array(vec![Value::String("req.safeStart".to_string())]),
+                        ),
+                        (
+                            "x_note".to_string(),
+                            json!({"text": "req.safeStart is mentioned but not referenced"}),
+                        ),
+                    ]),
+                },
+                KirElement {
+                    id: "part.comment".to_string(),
+                    kind: "SysML::Systems::PartUsage".to_string(),
+                    layer: 2,
+                    properties: BTreeMap::from([(
+                        "x_note".to_string(),
+                        json!({"target": "req.safeStart"}),
+                    )]),
+                },
+            ],
+        }
+        .normalized_for_persistence();
+
+        let traces = requirement_traces(&document, "req.safeStart").unwrap();
+
+        assert_eq!(traces.len(), 1);
+        assert_eq!(traces[0].relationship, "satisfy");
+        assert_eq!(traces[0].source, "part.controller");
+        assert_eq!(traces[0].target, "req.safeStart");
     }
 }
