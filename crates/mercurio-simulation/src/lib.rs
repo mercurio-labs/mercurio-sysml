@@ -755,6 +755,7 @@ fn semantic_ref_from_analysis_ref(
         element_id: reference.element_id.clone(),
         qualified_name: None,
         label: reference.label.clone(),
+        semantic_anchor: None,
     }
 }
 
