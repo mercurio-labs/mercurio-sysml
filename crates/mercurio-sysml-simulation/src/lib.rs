@@ -8,10 +8,10 @@ use mercurio_simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
     LogEffect, SignalEffect, SimulationActionNode, SimulationActionSequence, SimulationBindingRule,
     SimulationClockConfig, SimulationDerivedFeatureRule, SimulationEffect, SimulationEvent,
-    SimulationFeatureRef, SimulationGuard, SimulationModel, SimulationObjective, SimulationRate,
-    SimulationRateSource, SimulationRequirement, SimulationState, SimulationStateMachine,
-    SimulationTransition, SimulationTrigger, SimulationTriggerKind, StateDoBehavior,
-    validate_simulation_model,
+    SimulationFeatureRef, SimulationGuard, SimulationLookupSample, SimulationLookupTable,
+    SimulationModel, SimulationObjective, SimulationRate, SimulationRateSource,
+    SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
+    SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
 };
 use mercurio_sysml::{
     StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
@@ -247,7 +247,7 @@ fn normalize_state_machine_from_runtime(
 }
 
 fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRule> {
-    runtime
+    let mut rules = runtime
         .graph()
         .elements()
         .iter()
@@ -298,7 +298,84 @@ fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRu
                 expression,
             })
         })
+        .collect::<Vec<_>>();
+    rules.extend(simulation_constraint_derived_rules(runtime));
+    rules
+}
+
+fn simulation_constraint_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRule> {
+    runtime
+        .graph()
+        .elements()
+        .iter()
+        .filter(|element| is_constraint_usage(element))
+        .filter_map(constraint_derived_rule)
         .collect()
+}
+
+fn constraint_derived_rule(element: &Element) -> Option<SimulationDerivedFeatureRule> {
+    let expression = element.properties.get("expression_ir")?;
+    let object = expression.as_object()?;
+    let op = object.get("op").and_then(Value::as_str)?;
+    if object.get("kind").and_then(Value::as_str) != Some("binary")
+        || !(op == "equal" || op == "==")
+    {
+        return None;
+    }
+    let left = object.get("left")?;
+    let right = object.get("right")?;
+    path_expression_feature_ref(left)
+        .map(|target| (target, right.clone()))
+        .or_else(|| path_expression_feature_ref(right).map(|target| (target, left.clone())))
+        .map(|(target, expression)| SimulationDerivedFeatureRule {
+            id: format!("{}.derived.{}", element.element_id, target.feature),
+            label: element_label_element(element),
+            subject_id: target.subject_id.or_else(|| {
+                element
+                    .properties
+                    .get("subject")
+                    .or_else(|| element.properties.get("subject_id"))
+                    .or_else(|| element.properties.get("subjectId"))
+                    .and_then(Value::as_str)
+                    .map(ToOwned::to_owned)
+            }),
+            feature: target.feature,
+            expression,
+        })
+}
+
+fn path_expression_feature_ref(expression: &Value) -> Option<SimulationFeatureRef> {
+    let object = expression.as_object()?;
+    if object.get("kind").and_then(Value::as_str)? != "path" {
+        return None;
+    }
+    let segments = object
+        .get("segments")?
+        .as_array()?
+        .iter()
+        .filter_map(expression_path_segment_name)
+        .collect::<Vec<_>>();
+    match segments.as_slice() {
+        [feature] => Some(SimulationFeatureRef {
+            subject_id: None,
+            feature: feature.clone(),
+        }),
+        [subject, feature @ ..] if !feature.is_empty() => Some(SimulationFeatureRef {
+            subject_id: Some(subject.clone()),
+            feature: feature.join("."),
+        }),
+        _ => None,
+    }
+}
+
+fn is_constraint_usage(element: &Element) -> bool {
+    element.kind.contains("ConstraintUsage")
+        || element.kind.contains("AssertConstraintUsage")
+        || element
+            .properties
+            .get("kind")
+            .and_then(Value::as_str)
+            .is_some_and(|kind| kind == "constraint" || kind == "constraint_usage")
 }
 
 fn simulation_binding_rules(runtime: &Runtime) -> Vec<SimulationBindingRule> {
@@ -462,16 +539,32 @@ fn normalize_trigger_kind(kind: &StateTransitionTriggerKind) -> SimulationTrigge
 
 fn normalize_do_behavior(value: &Value) -> Option<StateDoBehavior> {
     let object = value.as_object()?;
-    if object.get("kind").and_then(Value::as_str) != Some("rate_integration") {
-        return None;
+    match object.get("kind").and_then(Value::as_str)? {
+        "rate_integration" => {
+            let rates = object
+                .get("rates")
+                .and_then(Value::as_array)?
+                .iter()
+                .filter_map(normalize_rate)
+                .collect::<Vec<_>>();
+            Some(StateDoBehavior::RateIntegration { rates })
+        }
+        "lookup_table" | "lookup_tables" => {
+            let tables = object
+                .get("tables")
+                .or_else(|| object.get("lookup_tables"))
+                .and_then(Value::as_array)
+                .map(|items| {
+                    items
+                        .iter()
+                        .filter_map(normalize_lookup_table)
+                        .collect::<Vec<_>>()
+                })
+                .or_else(|| normalize_lookup_table(value).map(|table| vec![table]))?;
+            Some(StateDoBehavior::LookupTable { tables })
+        }
+        _ => None,
     }
-    let rates = object
-        .get("rates")
-        .and_then(Value::as_array)?
-        .iter()
-        .filter_map(normalize_rate)
-        .collect::<Vec<_>>();
-    Some(StateDoBehavior::RateIntegration { rates })
 }
 
 fn normalize_rate(value: &Value) -> Option<SimulationRate> {
@@ -486,6 +579,28 @@ fn normalize_rate(value: &Value) -> Option<SimulationRate> {
             SimulationRateSource::ExpressionIr(object.get("rate_expr")?.clone())
         };
     Some(SimulationRate { feature, source })
+}
+
+fn normalize_lookup_table(value: &Value) -> Option<SimulationLookupTable> {
+    let object = value.as_object()?;
+    let feature = object.get("feature")?.as_str()?.to_string();
+    let samples = object
+        .get("samples")
+        .and_then(Value::as_array)?
+        .iter()
+        .filter_map(normalize_lookup_sample)
+        .collect::<Vec<_>>();
+    if samples.is_empty() {
+        return None;
+    }
+    Some(SimulationLookupTable { feature, samples })
+}
+
+fn normalize_lookup_sample(value: &Value) -> Option<SimulationLookupSample> {
+    let object = value.as_object()?;
+    let t = object.get("t").or_else(|| object.get("time"))?.as_f64()?;
+    let value = object.get("value")?.as_f64()?;
+    Some(SimulationLookupSample { t, value })
 }
 
 fn normalize_action_sequence(value: &Value) -> Option<SimulationActionSequence> {
@@ -1141,6 +1256,7 @@ mod tests {
                     SimulationRateSource::Feature("heatRate".to_string())
                 );
             }
+            StateDoBehavior::LookupTable { .. } => panic!("expected rate integration"),
         }
     }
 

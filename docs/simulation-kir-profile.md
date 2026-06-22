@@ -20,9 +20,8 @@ Canonical state:
   "entry_behavior": { "actions": [] },
   "exit_behavior": { "actions": [] },
   "do_behavior": {
-    "rate_integration": {
-      "rates": []
-    }
+    "kind": "rate_integration",
+    "rates": []
   }
 }
 ```
@@ -103,6 +102,25 @@ Rates are state behavior, not transition effects:
     { "feature": "temperature", "rate_feature": "heatRate" },
     { "feature": "temperature", "rate_expr": { "kind": "binary" } },
     { "feature": "temperature", "rate_per_second": 2.3 }
+  ]
+}
+```
+
+Lookup-table curves are also state behavior. They are deterministic,
+piecewise-linear tables evaluated against elapsed time in the active state:
+
+```json
+{
+  "kind": "lookup_table",
+  "tables": [
+    {
+      "feature": "temperature",
+      "samples": [
+        { "time": 0.0, "value": 20.0 },
+        { "time": 5.0, "value": 60.0 },
+        { "time": 10.0, "value": 100.0 }
+      ]
+    }
   ]
 }
 ```

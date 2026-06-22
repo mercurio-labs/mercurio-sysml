@@ -4,6 +4,7 @@
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
 pub mod abstract_syntax_json;
+pub mod analysis;
 pub mod assessment;
 pub mod authoring;
 pub mod behavior;
@@ -23,6 +24,13 @@ pub use abstract_syntax_json::{
     SysmlJsonImportOptions, SysmlJsonImportReport, SysmlJsonImportSeverity,
     import_sysml_abstract_syntax_json, import_sysml_abstract_syntax_value,
     import_sysml_api_elements,
+};
+pub use analysis::{
+    AnalysisClockConfig, AnalysisDynamicBehaviorBinding, AnalysisDynamicBehaviorKind,
+    AnalysisExecutionContext, AnalysisExecutionPlan, AnalysisExecutionStep,
+    AnalysisExecutionStepKind, AnalysisExpectedArtifact, AnalysisReadinessDiagnostic,
+    AnalysisReadinessSeverity, AnalysisReadinessStatus, AnalysisSpec, AnalysisSpecError,
+    AnalysisTechnique, list_analysis_specs, project_analysis_spec,
 };
 pub use assessment::sysml_parsed_module_assessment_facts;
 pub use authoring::load_authoring_project_from_sysml;

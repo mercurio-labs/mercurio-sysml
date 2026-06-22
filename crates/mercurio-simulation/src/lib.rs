@@ -1,13 +1,15 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
 use serde_json::Value;
 
+use mercurio_core::graph::{Element, Graph};
 use mercurio_core::runtime::{Runtime, RuntimeError};
 use mercurio_core::{
-    CapabilityRunReport, CapabilityRunStatus, CapabilityTarget, EvidenceEdge, EvidenceGraph,
-    EvidenceNode, EvidenceNodeKind, EvidenceRelation, SemanticArtifact, SemanticElementRef,
-    stable_digest,
+    AnalysisScope, CapabilityError, CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus,
+    CapabilityTarget, EvidenceEdge, EvidenceGraph, EvidenceNode, EvidenceNodeKind,
+    EvidenceRelation, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    SemanticDiagnosticSeverity, SemanticElementRef, SemanticWorkspaceSnapshot, stable_digest,
 };
 pub use mercurio_simulation_core::{
     AnalysisCaseInfo, ConcurrentSimulationScenario, ConcurrentSubjectScenario, SimTraceChannel,
@@ -15,11 +17,24 @@ pub use mercurio_simulation_core::{
     SimulationModel, SimulationStatus, SimulationTrace, SimulationTriggerKind, TraceChannel,
     TraceChannelSource, TraceEntry, TraceEvent, run_concurrent_simulation_model,
 };
+pub use mercurio_sysml::{
+    AnalysisClockConfig, AnalysisDynamicBehaviorBinding, AnalysisDynamicBehaviorKind,
+    AnalysisExecutionContext, AnalysisExecutionPlan, AnalysisExecutionStep,
+    AnalysisExecutionStepKind, AnalysisExpectedArtifact, AnalysisReadinessDiagnostic,
+    AnalysisReadinessSeverity, AnalysisReadinessStatus, AnalysisSpec, AnalysisSpecError,
+    AnalysisTechnique, list_analysis_specs, project_analysis_spec,
+};
 
 const CHANGE_LOOP_LIMIT: usize = 20;
 pub const SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID: &str = "sysml.behavior.dynamic";
+pub const SYSML_ANALYSIS_CASE_CAPABILITY_ID: &str = "sysml.analysis.case";
+pub const SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_ID: &str = "sysml.constraint.analysis";
+pub const SYSML_ACTIVITY_EXECUTION_CAPABILITY_ID: &str = "sysml.activity.execution";
 pub const SIMULATION_TRACE_ARTIFACT_KIND: &str = "simulation_trace";
 pub const SIMULATION_TRACE_SCHEMA: &str = "mercurio.simulation.trace.v1";
+pub const ACTIVITY_EXECUTION_SUMMARY_ARTIFACT_KIND: &str = "activity_execution_summary";
+pub const ACTIVITY_EXECUTION_SUMMARY_SCHEMA: &str =
+    "mercurio.analysis.activity_execution_summary.v1";
 
 pub type StateMachineScenarioEvent = SimulationEvent;
 
@@ -32,6 +47,7 @@ pub enum SimulationError {
     InvalidProfile(String),
     Runtime(RuntimeError),
     Serialization(serde_json::Error),
+    Capability(CapabilityError),
 }
 
 impl fmt::Display for SimulationError {
@@ -44,6 +60,7 @@ impl fmt::Display for SimulationError {
             Self::InvalidProfile(message) => write!(f, "invalid simulation profile: {message}"),
             Self::Runtime(err) => write!(f, "{err}"),
             Self::Serialization(err) => write!(f, "failed to serialize simulation trace: {err}"),
+            Self::Capability(err) => write!(f, "{err}"),
         }
     }
 }
@@ -59,6 +76,12 @@ impl From<RuntimeError> for SimulationError {
 impl From<serde_json::Error> for SimulationError {
     fn from(value: serde_json::Error) -> Self {
         Self::Serialization(value)
+    }
+}
+
+impl From<CapabilityError> for SimulationError {
+    fn from(value: CapabilityError) -> Self {
+        Self::Capability(value)
     }
 }
 
@@ -109,9 +132,717 @@ pub fn run_analysis_case(
     analysis_case_id: &str,
     run_id: &str,
 ) -> Result<CapabilityRunReport, SimulationError> {
-    let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
-    let trace = run_concurrent_simulation(runtime, scenario)?;
-    simulation_trace_report(run_id, analysis_case_id, trace)
+    let spec = project_analysis_spec(runtime, analysis_case_id).map_err(map_analysis_spec_error)?;
+    let mut reports = Vec::new();
+
+    if has_executable_state_machine_binding(&spec) {
+        let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
+        let trace = run_concurrent_simulation(runtime, scenario)?;
+        reports.push(simulation_trace_report(run_id, analysis_case_id, trace)?);
+    }
+
+    if requires_constraint_analysis(&spec) {
+        reports.push(constraint_analysis_report(runtime, &spec, run_id)?);
+    }
+
+    if has_activity_binding(&spec) {
+        reports.push(activity_execution_report(runtime, &spec, run_id)?);
+    }
+
+    match reports.len() {
+        0 => Err(SimulationError::InvalidProfile(format!(
+            "analysis case `{analysis_case_id}` does not have an executable or reportable Phase 4 technique"
+        ))),
+        1 => Ok(reports.remove(0)),
+        _ => Ok(composite_analysis_report(run_id, &spec, reports)),
+    }
+}
+
+fn map_analysis_spec_error(error: AnalysisSpecError) -> SimulationError {
+    match error {
+        AnalysisSpecError::MissingAnalysisCase(id) => SimulationError::MissingAnalysisCase(id),
+    }
+}
+
+fn has_executable_state_machine_binding(spec: &AnalysisSpec) -> bool {
+    spec.dynamic_behavior_bindings
+        .iter()
+        .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::StateMachine)
+}
+
+fn has_activity_binding(spec: &AnalysisSpec) -> bool {
+    spec.dynamic_behavior_bindings
+        .iter()
+        .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity)
+}
+
+fn requires_constraint_analysis(spec: &AnalysisSpec) -> bool {
+    spec.techniques.iter().any(|technique| {
+        matches!(
+            technique,
+            AnalysisTechnique::Calculation
+                | AnalysisTechnique::ConstraintEvaluation
+                | AnalysisTechnique::Verification
+        )
+    })
+}
+
+fn constraint_analysis_report(
+    runtime: &Runtime,
+    spec: &AnalysisSpec,
+    run_id: &str,
+) -> Result<CapabilityRunReport, SimulationError> {
+    let workspace = SemanticWorkspaceSnapshot::from_graph_with_profile(
+        runtime.graph().clone(),
+        Some("sysml".to_string()),
+    )?;
+    let context_values = serde_json::to_value(&spec.execution_context.initial_values)?;
+    mercurio_sysml::SysmlConstraintAnalysisCapability
+        .run(
+            &workspace,
+            CapabilityRunRequest {
+                run_id: run_id.to_string(),
+                capability_id: SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_ID.to_string(),
+                target: CapabilityTarget::Scope {
+                    scope_id: spec.case_ref.element_id.clone(),
+                },
+                parameters: BTreeMap::from([
+                    (
+                        "analysis_scope".to_string(),
+                        Value::String(AnalysisScope::AuthoredModel.as_str().to_string()),
+                    ),
+                    (
+                        "analysis_case_id".to_string(),
+                        Value::String(spec.case_ref.element_id.clone()),
+                    ),
+                    ("context_values".to_string(), context_values),
+                ]),
+                input_artifacts: Vec::new(),
+            },
+        )
+        .map_err(Into::into)
+}
+
+fn activity_execution_report(
+    runtime: &Runtime,
+    spec: &AnalysisSpec,
+    run_id: &str,
+) -> Result<CapabilityRunReport, SimulationError> {
+    let activity_bindings = spec
+        .dynamic_behavior_bindings
+        .iter()
+        .filter(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity)
+        .collect::<Vec<_>>();
+    let execution_results = activity_bindings
+        .iter()
+        .map(|binding| execute_activity_binding(runtime.graph(), binding))
+        .collect::<Vec<_>>();
+    let status = aggregate_capability_status(execution_results.iter().map(|result| result.status));
+    let execution_state = activity_execution_state(status);
+    let payload_bindings = activity_bindings
+        .iter()
+        .zip(execution_results.iter())
+        .map(|(binding, result)| {
+            let mut payload = result.payload.clone();
+            if let Some(object) = payload.as_object_mut() {
+                object.insert(
+                    "subject".to_string(),
+                    analysis_ref_payload(&binding.subject),
+                );
+                object.insert(
+                    "behavior".to_string(),
+                    analysis_ref_payload(&binding.behavior),
+                );
+                object.insert("kind".to_string(), Value::String("activity".to_string()));
+            }
+            payload
+        })
+        .collect::<Vec<_>>();
+    let payload = serde_json::json!({
+        "schema": ACTIVITY_EXECUTION_SUMMARY_SCHEMA,
+        "analysisCase": analysis_ref_payload(&spec.case_ref),
+        "bindingCount": activity_bindings.len(),
+        "status": capability_run_status_label(status),
+        "executionState": execution_state,
+        "bindings": payload_bindings,
+    });
+    let payload_bytes = serde_json::to_vec(&payload)?;
+    let digest = stable_digest([(
+        "activity-execution-summary".as_bytes(),
+        payload_bytes.as_slice(),
+    )]);
+    let artifact_id = format!(
+        "artifact.{}.activity_execution.{}",
+        sanitize_identifier(run_id),
+        sanitize_identifier(&spec.case_ref.element_id)
+    );
+    let run_evidence_id = format!(
+        "evidence.{}.activity_execution.{}",
+        sanitize_identifier(run_id),
+        sanitize_identifier(&spec.case_ref.element_id)
+    );
+    let artifact = SemanticArtifact {
+        id: artifact_id.clone(),
+        kind: ACTIVITY_EXECUTION_SUMMARY_ARTIFACT_KIND.to_string(),
+        schema: ACTIVITY_EXECUTION_SUMMARY_SCHEMA.to_string(),
+        digest,
+        element_refs: activity_bindings
+            .iter()
+            .flat_map(|binding| {
+                [
+                    semantic_ref_from_analysis_ref(&binding.subject),
+                    semantic_ref_from_analysis_ref(&binding.behavior),
+                ]
+            })
+            .collect(),
+        payload,
+    };
+    let mut evidence_nodes = vec![
+        EvidenceNode {
+            id: run_evidence_id.clone(),
+            kind: EvidenceNodeKind::AnalysisRun,
+            label: format!(
+                "Activity execution analysis case {}",
+                spec.case_ref.element_id
+            ),
+            element_refs: vec![semantic_ref_from_analysis_ref(&spec.case_ref)],
+            source_spans: Vec::new(),
+            properties: BTreeMap::from([(
+                "analysis_case_id".to_string(),
+                Value::String(spec.case_ref.element_id.clone()),
+            )]),
+        },
+        EvidenceNode {
+            id: artifact_id.clone(),
+            kind: EvidenceNodeKind::Artifact,
+            label: "Activity execution summary".to_string(),
+            element_refs: Vec::new(),
+            source_spans: Vec::new(),
+            properties: BTreeMap::new(),
+        },
+    ];
+    evidence_nodes.extend(
+        activity_bindings
+            .iter()
+            .enumerate()
+            .map(|(index, binding)| EvidenceNode {
+                id: format!(
+                    "evidence.{}.activity_binding.{}",
+                    sanitize_identifier(run_id),
+                    index
+                ),
+                kind: EvidenceNodeKind::KirElement,
+                label: format!(
+                    "Activity binding {} -> {}",
+                    binding.subject.element_id, binding.behavior.element_id
+                ),
+                element_refs: vec![
+                    semantic_ref_from_analysis_ref(&binding.subject),
+                    semantic_ref_from_analysis_ref(&binding.behavior),
+                ],
+                source_spans: Vec::new(),
+                properties: BTreeMap::from([
+                    (
+                        "subject_id".to_string(),
+                        Value::String(binding.subject.element_id.clone()),
+                    ),
+                    (
+                        "behavior_id".to_string(),
+                        Value::String(binding.behavior.element_id.clone()),
+                    ),
+                ]),
+            }),
+    );
+    let diagnostics = execution_results
+        .iter()
+        .flat_map(|result| result.diagnostics.clone())
+        .collect::<Vec<_>>();
+    let limitations = dedup_strings(
+        execution_results
+            .iter()
+            .flat_map(|result| result.limitations.clone())
+            .chain([
+                "Phase 5 activity execution supports deterministic action/control-flow DAGs; object flow, decisions, guards, durations, and streaming tokens are not implemented yet"
+                    .to_string(),
+            ])
+            .collect(),
+    );
+
+    Ok(CapabilityRunReport {
+        run_id: run_id.to_string(),
+        capability_id: SYSML_ACTIVITY_EXECUTION_CAPABILITY_ID.to_string(),
+        status,
+        target: CapabilityTarget::Element {
+            element_id: spec.case_ref.element_id.clone(),
+        },
+        insights: Vec::new(),
+        artifacts: vec![artifact],
+        evidence: EvidenceGraph {
+            nodes: evidence_nodes,
+            edges: vec![EvidenceEdge {
+                source_id: artifact_id,
+                target_id: run_evidence_id,
+                relation: EvidenceRelation::ProducedBy,
+            }],
+        },
+        diagnostics,
+        limitations,
+    })
+}
+
+#[derive(Debug, Clone)]
+struct ActivityBindingExecution {
+    status: CapabilityRunStatus,
+    payload: Value,
+    diagnostics: Vec<SemanticDiagnostic>,
+    limitations: Vec<String>,
+}
+
+#[derive(Debug, Clone)]
+struct ActivityFlow {
+    id: String,
+    source: String,
+    target: String,
+}
+
+fn execute_activity_binding(
+    graph: &Graph,
+    binding: &AnalysisDynamicBehaviorBinding,
+) -> ActivityBindingExecution {
+    let behavior_id = binding.behavior.element_id.as_str();
+    let activity_nodes = activity_execution_nodes(graph, behavior_id);
+    if activity_nodes.is_empty() {
+        return ActivityBindingExecution {
+            status: CapabilityRunStatus::Partial,
+            payload: serde_json::json!({
+                "status": "partial",
+                "executionState": "no_executable_nodes",
+                "nodeCount": 0,
+                "edgeCount": 0,
+                "steps": [],
+                "blockedNodes": [],
+            }),
+            diagnostics: vec![activity_diagnostic(
+                "analysis.dynamic.activity_execution.no_nodes",
+                format!("activity `{behavior_id}` has no executable action or control nodes"),
+                binding,
+            )],
+            limitations: Vec::new(),
+        };
+    }
+
+    let node_ids = activity_nodes
+        .iter()
+        .map(|node| node.element_id.clone())
+        .collect::<BTreeSet<_>>();
+    let mut diagnostics = Vec::new();
+    let flows = activity_flows(graph, behavior_id, &node_ids, binding, &mut diagnostics);
+    let mut incoming = node_ids
+        .iter()
+        .map(|id| (id.clone(), BTreeSet::<String>::new()))
+        .collect::<BTreeMap<_, _>>();
+    let mut outgoing = node_ids
+        .iter()
+        .map(|id| (id.clone(), BTreeSet::<String>::new()))
+        .collect::<BTreeMap<_, _>>();
+    for flow in &flows {
+        if let Some(targets) = outgoing.get_mut(&flow.source) {
+            targets.insert(flow.target.clone());
+        }
+        if let Some(sources) = incoming.get_mut(&flow.target) {
+            sources.insert(flow.source.clone());
+        }
+    }
+
+    let node_by_id = activity_nodes
+        .iter()
+        .map(|node| (node.element_id.as_str(), *node))
+        .collect::<BTreeMap<_, _>>();
+    let mut completed = BTreeSet::<String>::new();
+    let mut steps = Vec::<Value>::new();
+    let mut step_index = 0usize;
+    while completed.len() < node_ids.len() {
+        let enabled = node_ids
+            .iter()
+            .filter(|node_id| !completed.contains(*node_id))
+            .filter(|node_id| {
+                incoming
+                    .get(*node_id)
+                    .is_none_or(|predecessors| predecessors.iter().all(|id| completed.contains(id)))
+            })
+            .cloned()
+            .collect::<Vec<_>>();
+
+        if enabled.is_empty() {
+            break;
+        }
+
+        let executed_nodes = enabled
+            .iter()
+            .filter_map(|node_id| node_by_id.get(node_id.as_str()).copied())
+            .map(activity_node_payload)
+            .collect::<Vec<_>>();
+        steps.push(serde_json::json!({
+            "index": step_index,
+            "nodes": executed_nodes,
+        }));
+        completed.extend(enabled);
+        step_index += 1;
+    }
+
+    let blocked_nodes = node_ids
+        .iter()
+        .filter(|node_id| !completed.contains(*node_id))
+        .filter_map(|node_id| node_by_id.get(node_id.as_str()).copied())
+        .map(activity_node_payload)
+        .collect::<Vec<_>>();
+    let status = if blocked_nodes.is_empty() && diagnostics.is_empty() {
+        CapabilityRunStatus::Passed
+    } else {
+        if !blocked_nodes.is_empty() {
+            diagnostics.push(activity_diagnostic(
+                "analysis.dynamic.activity_execution.blocked_graph",
+                format!(
+                    "activity `{behavior_id}` could not complete; remaining nodes may be cyclic or waiting on unsupported control semantics"
+                ),
+                binding,
+            ));
+        }
+        CapabilityRunStatus::Partial
+    };
+    let flow_payload = flows
+        .iter()
+        .map(|flow| {
+            serde_json::json!({
+                "id": flow.id.clone(),
+                "source": flow.source.clone(),
+                "target": flow.target.clone(),
+            })
+        })
+        .collect::<Vec<_>>();
+
+    ActivityBindingExecution {
+        status,
+        payload: serde_json::json!({
+            "status": capability_run_status_label(status),
+            "executionState": activity_execution_state(status),
+            "nodeCount": node_ids.len(),
+            "edgeCount": flows.len(),
+            "steps": steps,
+            "flows": flow_payload,
+            "blockedNodes": blocked_nodes,
+        }),
+        diagnostics,
+        limitations: Vec::new(),
+    }
+}
+
+fn activity_execution_nodes<'a>(graph: &'a Graph, behavior_id: &str) -> Vec<&'a Element> {
+    let mut nodes = graph
+        .elements()
+        .iter()
+        .filter(|element| {
+            is_activity_execution_node(element)
+                && activity_owner_id(element).as_deref() == Some(behavior_id)
+        })
+        .collect::<Vec<_>>();
+    nodes.sort_by(|left, right| left.element_id.cmp(&right.element_id));
+    if nodes.is_empty()
+        && let Some(element) = graph.element_by_element_id(behavior_id)
+        && is_activity_execution_node(element)
+    {
+        nodes.push(element);
+    }
+    nodes
+}
+
+fn activity_flows(
+    graph: &Graph,
+    behavior_id: &str,
+    node_ids: &BTreeSet<String>,
+    binding: &AnalysisDynamicBehaviorBinding,
+    diagnostics: &mut Vec<SemanticDiagnostic>,
+) -> Vec<ActivityFlow> {
+    let mut flows = Vec::new();
+    for element in graph.elements().iter().filter(|element| {
+        is_activity_flow_element(element)
+            && (activity_owner_id(element).as_deref() == Some(behavior_id)
+                || flow_touches_nodes(element, node_ids))
+    }) {
+        let Some(source) = string_property_any(element, &["source", "source_id", "sourceId"])
+        else {
+            continue;
+        };
+        let Some(target) = string_property_any(element, &["target", "target_id", "targetId"])
+        else {
+            continue;
+        };
+        let Some(source_id) = resolve_activity_reference(&source, node_ids) else {
+            diagnostics.push(activity_diagnostic(
+                "analysis.dynamic.activity_execution.unresolved_flow_source",
+                format!(
+                    "activity flow `{}` references unknown source `{source}`",
+                    element.element_id
+                ),
+                binding,
+            ));
+            continue;
+        };
+        let Some(target_id) = resolve_activity_reference(&target, node_ids) else {
+            diagnostics.push(activity_diagnostic(
+                "analysis.dynamic.activity_execution.unresolved_flow_target",
+                format!(
+                    "activity flow `{}` references unknown target `{target}`",
+                    element.element_id
+                ),
+                binding,
+            ));
+            continue;
+        };
+        flows.push(ActivityFlow {
+            id: element.element_id.clone(),
+            source: source_id,
+            target: target_id,
+        });
+    }
+    flows.sort_by(|left, right| left.id.cmp(&right.id));
+    flows
+}
+
+fn flow_touches_nodes(element: &Element, node_ids: &BTreeSet<String>) -> bool {
+    let Some(source) = string_property_any(element, &["source", "source_id", "sourceId"]) else {
+        return false;
+    };
+    let Some(target) = string_property_any(element, &["target", "target_id", "targetId"]) else {
+        return false;
+    };
+    resolve_activity_reference(&source, node_ids).is_some()
+        || resolve_activity_reference(&target, node_ids).is_some()
+}
+
+fn resolve_activity_reference(reference: &str, node_ids: &BTreeSet<String>) -> Option<String> {
+    if node_ids.contains(reference) {
+        return Some(reference.to_string());
+    }
+    let normalized = reference.replace("::", ".");
+    if node_ids.contains(&normalized) {
+        return Some(normalized);
+    }
+    let first_segment = normalized.split('.').next().unwrap_or(reference);
+    let last_segment = normalized.rsplit('.').next().unwrap_or(reference);
+    node_ids
+        .iter()
+        .find(|node_id| {
+            node_id.ends_with(&format!(".{reference}"))
+                || node_id.ends_with(&format!(".{normalized}"))
+                || node_id.ends_with(&format!(".{first_segment}"))
+                || node_id.ends_with(&format!(".{last_segment}"))
+        })
+        .cloned()
+}
+
+fn activity_node_payload(element: &Element) -> Value {
+    serde_json::json!({
+        "elementId": element.element_id.clone(),
+        "kind": element.kind.clone(),
+        "label": element_label(element),
+    })
+}
+
+fn is_activity_execution_node(element: &Element) -> bool {
+    let kind = canonical_kind(&element.kind);
+    (kind.contains("actionusage")
+        || kind.contains("actiondefinition")
+        || kind.contains("performactionusage")
+        || kind.contains("forknode")
+        || kind.contains("joinnode")
+        || kind.contains("decisionnode")
+        || kind.contains("mergenode"))
+        && !is_activity_flow_element(element)
+}
+
+fn is_activity_flow_element(element: &Element) -> bool {
+    let kind = canonical_kind(&element.kind);
+    kind.contains("succession") || (kind.contains("flow") && has_source_and_target(element))
+}
+
+fn has_source_and_target(element: &Element) -> bool {
+    string_property_any(element, &["source", "source_id", "sourceId"]).is_some()
+        && string_property_any(element, &["target", "target_id", "targetId"]).is_some()
+}
+
+fn activity_owner_id(element: &Element) -> Option<String> {
+    string_property_any(
+        element,
+        &[
+            "owner",
+            "owning_type",
+            "owning_definition",
+            "owning_namespace",
+            "owningNamespace",
+        ],
+    )
+}
+
+fn activity_diagnostic(
+    code: impl Into<String>,
+    message: impl Into<String>,
+    binding: &AnalysisDynamicBehaviorBinding,
+) -> SemanticDiagnostic {
+    SemanticDiagnostic {
+        code: code.into(),
+        severity: SemanticDiagnosticSeverity::Warning,
+        message: message.into(),
+        element: Some(semantic_ref_from_analysis_ref(&binding.behavior)),
+        source_spans: Vec::new(),
+    }
+}
+
+fn capability_run_status_label(status: CapabilityRunStatus) -> &'static str {
+    match status {
+        CapabilityRunStatus::Passed => "passed",
+        CapabilityRunStatus::Failed => "failed",
+        CapabilityRunStatus::Inconclusive => "inconclusive",
+        CapabilityRunStatus::Partial => "partial",
+        CapabilityRunStatus::NotApplicable => "not_applicable",
+        CapabilityRunStatus::Error => "error",
+    }
+}
+
+fn activity_execution_state(status: CapabilityRunStatus) -> &'static str {
+    match status {
+        CapabilityRunStatus::Passed => "completed",
+        CapabilityRunStatus::Partial => "partial",
+        CapabilityRunStatus::Failed | CapabilityRunStatus::Error => "failed",
+        CapabilityRunStatus::Inconclusive => "inconclusive",
+        CapabilityRunStatus::NotApplicable => "not_applicable",
+    }
+}
+
+fn string_property_any(element: &Element, keys: &[&str]) -> Option<String> {
+    keys.iter().find_map(|key| {
+        element
+            .properties
+            .get(*key)
+            .and_then(Value::as_str)
+            .map(str::trim)
+            .filter(|value| !value.is_empty())
+            .map(ToOwned::to_owned)
+    })
+}
+
+fn element_label(element: &Element) -> String {
+    string_property_any(element, &["declared_name", "name"])
+        .unwrap_or_else(|| element.element_id.clone())
+}
+
+fn canonical_kind(kind: &str) -> String {
+    kind.replace([':', '.', ' ', '_'], "").to_ascii_lowercase()
+}
+
+fn dedup_strings(values: Vec<String>) -> Vec<String> {
+    let mut seen = BTreeSet::new();
+    values
+        .into_iter()
+        .filter(|value| seen.insert(value.clone()))
+        .collect()
+}
+
+fn semantic_ref_from_analysis_ref(
+    reference: &mercurio_core::analysis::AnalysisElementRef,
+) -> SemanticElementRef {
+    SemanticElementRef {
+        element_id: reference.element_id.clone(),
+        qualified_name: None,
+        label: reference.label.clone(),
+    }
+}
+
+fn analysis_ref_payload(reference: &mercurio_core::analysis::AnalysisElementRef) -> Value {
+    serde_json::json!({
+        "elementId": reference.element_id.clone(),
+        "kind": reference.kind.clone(),
+        "label": reference.label.clone(),
+    })
+}
+
+fn composite_analysis_report(
+    run_id: &str,
+    spec: &AnalysisSpec,
+    reports: Vec<CapabilityRunReport>,
+) -> CapabilityRunReport {
+    let status = aggregate_capability_status(reports.iter().map(|report| report.status));
+    let mut insights = Vec::new();
+    let mut artifacts = Vec::new();
+    let mut evidence_nodes = Vec::new();
+    let mut evidence_edges = Vec::new();
+    let mut diagnostics = Vec::new();
+    let mut limitations = Vec::new();
+
+    for report in reports {
+        insights.extend(report.insights);
+        artifacts.extend(report.artifacts);
+        evidence_nodes.extend(report.evidence.nodes);
+        evidence_edges.extend(report.evidence.edges);
+        diagnostics.extend(report.diagnostics);
+        limitations.extend(report.limitations);
+    }
+
+    CapabilityRunReport {
+        run_id: run_id.to_string(),
+        capability_id: SYSML_ANALYSIS_CASE_CAPABILITY_ID.to_string(),
+        status,
+        target: CapabilityTarget::Element {
+            element_id: spec.case_ref.element_id.clone(),
+        },
+        insights,
+        artifacts,
+        evidence: EvidenceGraph {
+            nodes: evidence_nodes,
+            edges: evidence_edges,
+        },
+        diagnostics,
+        limitations,
+    }
+}
+
+fn aggregate_capability_status(
+    statuses: impl IntoIterator<Item = CapabilityRunStatus>,
+) -> CapabilityRunStatus {
+    let statuses = statuses.into_iter().collect::<Vec<_>>();
+    if statuses
+        .iter()
+        .any(|status| *status == CapabilityRunStatus::Error)
+    {
+        CapabilityRunStatus::Error
+    } else if statuses
+        .iter()
+        .any(|status| *status == CapabilityRunStatus::Failed)
+    {
+        CapabilityRunStatus::Failed
+    } else if statuses
+        .iter()
+        .any(|status| *status == CapabilityRunStatus::Partial)
+    {
+        CapabilityRunStatus::Partial
+    } else if statuses
+        .iter()
+        .any(|status| *status == CapabilityRunStatus::Inconclusive)
+    {
+        CapabilityRunStatus::Inconclusive
+    } else if statuses
+        .iter()
+        .all(|status| *status == CapabilityRunStatus::Passed)
+    {
+        CapabilityRunStatus::Passed
+    } else if statuses
+        .iter()
+        .any(|status| *status == CapabilityRunStatus::Passed)
+    {
+        CapabilityRunStatus::Partial
+    } else {
+        CapabilityRunStatus::NotApplicable
+    }
 }
 
 pub fn simulation_trace_report(
@@ -520,6 +1251,163 @@ mod tests {
     }
 
     #[test]
+    fn analysis_case_runs_constraint_summary_when_no_state_machine_is_bound() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element(
+                    "part.Vehicle",
+                    "PartUsage",
+                    [("declared_name", json!("vehicle"))],
+                ),
+                element(
+                    "constraint.totalMass",
+                    "ConstraintUsage",
+                    [("expression", json!("totalMass == dryMass + fuelMass"))],
+                ),
+                element(
+                    "req.maxMass",
+                    "RequirementUsage",
+                    [("expression", json!("totalMass <= maxMass"))],
+                ),
+                element(
+                    "analysis.MassCompliance",
+                    "SysML::Systems::AnalysisCaseDefinition",
+                    [
+                        ("declared_name", json!("MassCompliance")),
+                        ("subjects", json!([{ "subject": "part.Vehicle" }])),
+                        ("constraints", json!(["constraint.totalMass"])),
+                        ("requirements", json!(["req.maxMass"])),
+                        (
+                            "initial_values",
+                            json!({
+                                "scenario|dryMass": 90.0,
+                                "scenario|fuelMass": 30.0,
+                                "scenario|maxMass": 125.0
+                            }),
+                        ),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let report = run_analysis_case(&runtime, "analysis.MassCompliance", "test.mass").unwrap();
+
+        assert_eq!(
+            report.capability_id,
+            SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_ID
+        );
+        assert_eq!(report.status, CapabilityRunStatus::Passed);
+        assert_eq!(report.artifacts.len(), 1);
+        assert_eq!(report.artifacts[0].kind, "constraint_analysis_summary");
+        assert_eq!(
+            report.artifacts[0].payload["result"]["requirements"][0]["status"],
+            "satisfied"
+        );
+        assert_eq!(
+            report.artifacts[0].payload["result"]["variables"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|variable| variable["id"] == "totalMass")
+                .and_then(|variable| variable["value"].as_f64()),
+            Some(120.0)
+        );
+    }
+
+    #[test]
+    fn analysis_case_executes_sequential_activity_summary() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element(
+                    "type.Printer",
+                    "PartDefinition",
+                    [("declared_name", json!("Printer"))],
+                ),
+                element(
+                    "part.Printer",
+                    "PartUsage",
+                    [
+                        ("declared_name", json!("printer")),
+                        ("type", json!("type.Printer")),
+                    ],
+                ),
+                element(
+                    "action.Printer.warmup",
+                    "ActionUsage",
+                    [
+                        ("declared_name", json!("warmup")),
+                        ("owner", json!("type.Printer")),
+                    ],
+                ),
+                element(
+                    "action.Printer.warmup.home",
+                    "ActionUsage",
+                    [
+                        ("declared_name", json!("home")),
+                        ("owner", json!("action.Printer.warmup")),
+                    ],
+                ),
+                element(
+                    "action.Printer.warmup.heat",
+                    "ActionUsage",
+                    [
+                        ("declared_name", json!("heatBed")),
+                        ("owner", json!("action.Printer.warmup")),
+                    ],
+                ),
+                element(
+                    "flow.Printer.warmup.home_to_heat",
+                    "SuccessionUsage",
+                    [
+                        ("owner", json!("action.Printer.warmup")),
+                        ("source", json!("action.Printer.warmup.home")),
+                        ("target", json!("action.Printer.warmup.heat")),
+                    ],
+                ),
+                element(
+                    "analysis.Warmup",
+                    "SysML::Systems::AnalysisCaseDefinition",
+                    [
+                        ("declared_name", json!("Warmup")),
+                        ("subjects", json!([{ "subject": "part.Printer" }])),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let report = run_analysis_case(&runtime, "Warmup", "test.activity").unwrap();
+
+        assert_eq!(report.capability_id, SYSML_ACTIVITY_EXECUTION_CAPABILITY_ID);
+        assert_eq!(report.status, CapabilityRunStatus::Passed);
+        assert_eq!(report.artifacts.len(), 1);
+        assert_eq!(
+            report.artifacts[0].kind,
+            ACTIVITY_EXECUTION_SUMMARY_ARTIFACT_KIND
+        );
+        assert_eq!(
+            report.artifacts[0].payload["bindings"][0]["behavior"]["elementId"],
+            "action.Printer.warmup"
+        );
+        assert_eq!(
+            report.artifacts[0].payload["bindings"][0]["executionState"],
+            "completed"
+        );
+        assert_eq!(
+            report.artifacts[0].payload["bindings"][0]["steps"][0]["nodes"][0]["elementId"],
+            "action.Printer.warmup.home"
+        );
+        assert_eq!(
+            report.artifacts[0].payload["bindings"][0]["steps"][1]["nodes"][0]["elementId"],
+            "action.Printer.warmup.heat"
+        );
+        assert!(report.diagnostics.is_empty());
+    }
+
+    #[test]
     fn analysis_case_extracts_native_subjects_assumes_and_initial_state() {
         let stdlib = load_sysml_baseline().unwrap();
         let document = compile_sysml_text(
@@ -876,6 +1764,130 @@ mod tests {
     }
 
     #[test]
+    fn constraint_rule_derives_rate_used_by_state_do_behavior() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "state.Bed.Heating",
+                    "StateUsage",
+                    [
+                        ("declared_name", json!("Heating")),
+                        ("owning_type", json!("BedMachine")),
+                        ("is_initial", json!(true)),
+                        (
+                            "do_behavior",
+                            json!({
+                                "kind": "rate_integration",
+                                "rates": [
+                                    {
+                                        "feature": "temperature",
+                                        "rate_feature": "heatRate"
+                                    }
+                                ]
+                            }),
+                        ),
+                    ],
+                ),
+                element(
+                    "constraint.Bed.thermalLoad",
+                    "ConstraintUsage",
+                    [
+                        ("declared_name", json!("ThermalLoad")),
+                        (
+                            "expression_ir",
+                            json!({
+                                "kind": "binary",
+                                "op": "equal",
+                                "left": { "kind": "path", "segments": ["heatRate"] },
+                                "right": {
+                                    "kind": "binary",
+                                    "op": "divide",
+                                    "left": { "kind": "path", "segments": ["power"] },
+                                    "right": {
+                                        "kind": "binary",
+                                        "op": "multiply",
+                                        "left": { "kind": "path", "segments": ["mass"] },
+                                        "right": { "kind": "path", "segments": ["heatCap"] }
+                                    }
+                                }
+                            }),
+                        ),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.thermal_constraint".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.bed".to_string(),
+                    machine_id: "BedMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 2,
+                step_duration_s: 1.0,
+                clock_config: Some(SimulationClockConfig {
+                    max_time_s: 2.0,
+                    fixed_step_s: 1.0,
+                    sample_interval_s: 1.0,
+                    change_loop_limit: CHANGE_LOOP_LIMIT,
+                }),
+                initial_values: BTreeMap::from([
+                    (
+                        ("individual.bed".to_string(), "power".to_string()),
+                        json!(1000.0),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "mass".to_string()),
+                        json!(5.0),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "heatCap".to_string()),
+                        json!(500.0),
+                    ),
+                    (
+                        ("individual.bed".to_string(), "temperature".to_string()),
+                        json!(20.0),
+                    ),
+                ]),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+        )
+        .unwrap();
+
+        assert_eq!(
+            trace
+                .timeline
+                .first()
+                .unwrap()
+                .values
+                .get(&("individual.bed".to_string(), "heatRate".to_string())),
+            Some(&json!(0.4))
+        );
+        let final_temperature = trace
+            .timeline
+            .last()
+            .unwrap()
+            .values
+            .get(&("individual.bed".to_string(), "temperature".to_string()))
+            .and_then(Value::as_f64)
+            .unwrap();
+        assert!((final_temperature - 20.8).abs() <= 1e-9);
+    }
+
+    #[test]
     fn state_do_rate_expression_integrates_newton_cooling_with_rk4() {
         let runtime = Runtime::from_document(KirDocument {
             metadata: BTreeMap::new(),
@@ -969,6 +1981,105 @@ mod tests {
             (final_temperature - expected).abs() < 1.0,
             "final_temperature={final_temperature}, expected={expected}"
         );
+    }
+
+    #[test]
+    fn state_do_lookup_table_interpolates_continuous_value() {
+        let runtime = Runtime::from_document(KirDocument {
+            metadata: BTreeMap::new(),
+            elements: vec![
+                element("type.Bed", "Model::Systems::PartDefinition", []),
+                element(
+                    "individual.bed",
+                    "Model::IndividualUsage",
+                    [("declared_name", json!("bed")), ("type", json!("type.Bed"))],
+                ),
+                element(
+                    "state.Bed.Heating",
+                    "StateUsage",
+                    [
+                        ("declared_name", json!("Heating")),
+                        ("owning_type", json!("BedMachine")),
+                        ("is_initial", json!(true)),
+                        (
+                            "do_behavior",
+                            json!({
+                                "kind": "lookup_table",
+                                "tables": [
+                                    {
+                                        "feature": "temperature",
+                                        "samples": [
+                                            { "time": 0.0, "value": 20.0 },
+                                            { "time": 5.0, "value": 60.0 },
+                                            { "time": 10.0, "value": 100.0 }
+                                        ]
+                                    }
+                                ]
+                            }),
+                        ),
+                    ],
+                ),
+            ],
+        })
+        .unwrap();
+
+        let trace = run_concurrent_simulation(
+            &runtime,
+            ConcurrentSimulationScenario {
+                id: "scenario.lookup_curve".to_string(),
+                subjects: vec![ConcurrentSubjectScenario {
+                    subject_id: "individual.bed".to_string(),
+                    machine_id: "BedMachine".to_string(),
+                    initial_state_id: None,
+                    events: Vec::new(),
+                }],
+                max_steps: 2,
+                step_duration_s: 2.5,
+                clock_config: Some(SimulationClockConfig {
+                    max_time_s: 5.0,
+                    fixed_step_s: 2.5,
+                    sample_interval_s: 2.5,
+                    change_loop_limit: CHANGE_LOOP_LIMIT,
+                }),
+                initial_values: BTreeMap::new(),
+                requirements: Vec::new(),
+                objectives: Vec::new(),
+            },
+        )
+        .unwrap();
+
+        assert_eq!(
+            trace
+                .timeline
+                .first()
+                .unwrap()
+                .values
+                .get(&("individual.bed".to_string(), "temperature".to_string())),
+            Some(&json!(20.0))
+        );
+        let mid_temperature = trace
+            .timeline
+            .iter()
+            .find(|entry| (entry.t - 2.5).abs() <= f64::EPSILON)
+            .unwrap()
+            .values
+            .get(&("individual.bed".to_string(), "temperature".to_string()))
+            .and_then(Value::as_f64)
+            .unwrap();
+        assert!((mid_temperature - 40.0).abs() <= f64::EPSILON);
+        let final_temperature = trace
+            .timeline
+            .last()
+            .unwrap()
+            .values
+            .get(&("individual.bed".to_string(), "temperature".to_string()))
+            .and_then(Value::as_f64)
+            .unwrap();
+        assert!((final_temperature - 60.0).abs() <= f64::EPSILON);
+        assert!(trace.channels.iter().any(|channel| {
+            channel.id == "individual.bed.temperature"
+                && channel.source == SimTraceChannelSource::LookupTable
+        }));
     }
 
     #[test]
@@ -2112,7 +3223,11 @@ mod tests {
         KirElement {
             id: id.to_string(),
             kind: kind.to_string(),
-            layer: 0,
+            layer: if kind.contains("AnalysisCaseDefinition") {
+                2
+            } else {
+                0
+            },
             properties: properties
                 .into_iter()
                 .map(|(key, value)| (key.to_string(), value))

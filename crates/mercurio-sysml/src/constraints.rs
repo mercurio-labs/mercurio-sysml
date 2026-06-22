@@ -445,7 +445,9 @@ impl SemanticCapability for SysmlConstraintAnalysisCapability {
         }
 
         let parsed = parse_sources(&sources);
-        let mut state = initial_state(&ExecutionContext::default(), &parsed);
+        let context_values = parameter_context_values(&request);
+        let context = execution_context_from_nested_values(&context_values);
+        let mut state = initial_state(&context, &parsed);
         for _ in 0..(parsed.len().saturating_mul(8).max(1)) {
             let mut changed = false;
             for parsed_source in &parsed {
@@ -617,6 +619,19 @@ fn parameter_analysis_scope_or(
         .or_else(|| parameter_string(request, "analysisScope"))
         .and_then(|value| analysis_scope_from_str(&value))
         .unwrap_or(default)
+}
+
+fn parameter_context_values(
+    request: &CapabilityRunRequest,
+) -> BTreeMap<String, BTreeMap<String, Value>> {
+    request
+        .parameters
+        .get("context_values")
+        .or_else(|| request.parameters.get("contextValues"))
+        .and_then(|value| {
+            serde_json::from_value::<BTreeMap<String, BTreeMap<String, Value>>>(value.clone()).ok()
+        })
+        .unwrap_or_default()
 }
 
 fn analysis_scope_from_str(value: &str) -> Option<AnalysisScope> {
