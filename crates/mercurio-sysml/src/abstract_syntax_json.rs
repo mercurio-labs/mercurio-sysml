@@ -6,7 +6,7 @@ use std::fmt;
 
 use mercurio_kir::{
     KIR_SCHEMA_VERSION, KIR_SCHEMA_VERSION_METADATA_KEY, KirDocument, KirElement, KirError,
-    KirFieldRegistry, inferred_layer,
+    KirFieldKind, KirFieldRegistry, inferred_layer,
 };
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
@@ -246,6 +246,19 @@ fn import_element(
 
         let normalized = normalize_value(value.clone());
         if let Some(property_name) = kir_property_name(source_key, registry) {
+            if should_preserve_as_extension(&property_name, &normalized, registry) {
+                diagnostics.push(diagnostic(
+                    SysmlJsonImportSeverity::Warning,
+                    "sysml_json.property.structured_scalar",
+                    format!(
+                        "SysML JSON property `{source_key}` was preserved under `x_sysml_api` because KIR property `{property_name}` expects a scalar"
+                    ),
+                    Some(id.clone()),
+                    Some(path.to_string()),
+                ));
+                extension.insert(extension_key(source_key), normalized);
+                continue;
+            }
             if properties
                 .insert(property_name.clone(), normalized)
                 .is_some()
@@ -347,6 +360,17 @@ fn kir_property_name(source_key: &str, registry: &KirFieldRegistry) -> Option<St
 
     let snake = camel_to_snake(source_key);
     registry.field(&snake).map(|_| snake)
+}
+
+fn should_preserve_as_extension(
+    property_name: &str,
+    value: &Value,
+    registry: &KirFieldRegistry,
+) -> bool {
+    matches!(
+        registry.field(property_name).map(|spec| spec.kind),
+        Some(KirFieldKind::Scalar)
+    ) && (value.is_object() || value.is_array())
 }
 
 fn normalize_value(value: Value) -> Value {
@@ -642,6 +666,35 @@ mod tests {
         assert_eq!(
             report.metadata["x_sysml_json_document"]["name"],
             json!("Snapshot")
+        );
+    }
+
+    #[test]
+    fn preserves_structured_api_expression_as_extension() {
+        let report = import_sysml_api_elements(
+            vec![json!({
+                "@id": "expr.structured",
+                "@type": "AttributeUsage",
+                "declaredName": "limit",
+                "expression": {
+                    "@id": "expr.literal",
+                    "@type": "LiteralInteger",
+                    "value": 5
+                }
+            })],
+            SysmlJsonImportOptions::default(),
+        )
+        .unwrap();
+
+        let element = &report.document.elements[0];
+        assert!(element.properties.get("expression").is_none());
+        assert_eq!(
+            element.properties["x_sysml_api"]["expression"]["at_type"],
+            json!("LiteralInteger")
+        );
+        assert_eq!(
+            report.diagnostics[0].code,
+            "sysml_json.property.structured_scalar"
         );
     }
 

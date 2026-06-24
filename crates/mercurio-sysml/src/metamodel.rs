@@ -1,5 +1,6 @@
 use std::path::{Path, PathBuf};
 
+use mercurio_core::DatalogError;
 use mercurio_kerml::KermlLanguageModule;
 use mercurio_kir::{KirDocument, KirError};
 use mercurio_language_contracts::{LanguageRegistry, SemanticCompileStatus};
@@ -178,6 +179,7 @@ pub enum SysmlEnvironmentError {
     UnknownMetamodel(String),
     Json(String),
     Kir(KirError),
+    Datalog(DatalogError),
     Diagnostic(mercurio_language_contracts::diagnostics::Diagnostic),
 }
 
@@ -187,6 +189,7 @@ impl std::fmt::Display for SysmlEnvironmentError {
             Self::UnknownMetamodel(id) => write!(f, "unknown SysML metamodel `{id}`"),
             Self::Json(message) => write!(f, "{message}"),
             Self::Kir(err) => write!(f, "{err}"),
+            Self::Datalog(err) => write!(f, "{err}"),
             Self::Diagnostic(err) => write!(f, "{err}"),
         }
     }
@@ -197,6 +200,12 @@ impl std::error::Error for SysmlEnvironmentError {}
 impl From<KirError> for SysmlEnvironmentError {
     fn from(value: KirError) -> Self {
         Self::Kir(value)
+    }
+}
+
+impl From<DatalogError> for SysmlEnvironmentError {
+    fn from(value: DatalogError) -> Self {
+        Self::Datalog(value)
     }
 }
 

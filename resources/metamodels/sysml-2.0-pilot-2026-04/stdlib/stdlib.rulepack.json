@@ -1,9 +1,13 @@
 {
-  "id": "mercurio.metamodel.adapter",
+  "id": "sysml.semantic_legality",
   "version": "0.1.0",
   "metadata": {
-    "description": "Generated metamodel adapter facts for stable Mercurio predicates",
-    "elementCount": 17166
+    "description": "Generated SysML metamodel adapter facts and semantic legality diagnostics",
+    "elementCount": 17166,
+    "profileId": "sysml-2.0-pilot-2026-04",
+    "release": "2026-04",
+    "selector": "2026-04",
+    "stdlibPath": "stdlib/stdlib.full.kir.json"
   },
   "facts": [
     {
@@ -23,6 +27,1869 @@
       "predicate": "requirement_kind",
       "terms": [
         "RequirementUsage"
+      ]
+    },
+    {
+      "predicate": "sysml_deprecated_v1_keyword",
+      "terms": [
+        "block"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "action"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "attribute"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "calc"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "connection"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "constraint"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "item"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "part"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "port"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "ref"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "reference"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "satisfy"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "state"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "verify"
+      ]
+    },
+    {
+      "predicate": "sysml_non_requirement_relationship_target_kind",
+      "terms": [
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "action",
+        "action def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "attribute",
+        "attribute def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "calc",
+        "calc def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "connection",
+        "connection def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "constraint",
+        "constraint def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "item",
+        "item def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "part",
+        "part def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "port",
+        "port def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "state def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "requirement",
+        "requirement def",
+        "view def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "action def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "attribute def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "calc def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "connection def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "constraint def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "item def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "part def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "port def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "requirement def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "verification def"
+      ]
+    },
+    {
+      "predicate": "sysml_usage_typing_mismatch_kind",
+      "terms": [
+        "state",
+        "state def",
+        "view def"
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "id": "sysml.satisfy.target_requirement",
+      "severity": "error",
+      "message": "satisfy relationships must target requirement-like elements",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "TargetKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_relationship_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "satisfy"
+            },
+            {
+              "kind": "var",
+              "value": "SourceKind"
+            },
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_non_requirement_relationship_target_kind",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.verify.target_requirement",
+      "severity": "error",
+      "message": "verify relationships must target requirement-like elements",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "TargetKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_relationship_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "verify"
+            },
+            {
+              "kind": "var",
+              "value": "SourceKind"
+            },
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_non_requirement_relationship_target_kind",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.containment_container",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_containment_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            },
+            {
+              "kind": "var",
+              "value": "ChildKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.containment_child",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_containment_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "ContainerKind"
+            },
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.specialization_source",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_specialization_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            },
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.specialization_target",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_specialization_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "SourceKind"
+            },
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.usage_typing_usage",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.usage_typing_definition",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "UsageKind"
+            },
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.relationship_source",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_relationship_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "RelationshipKind"
+            },
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            },
+            {
+              "kind": "var",
+              "value": "TargetKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.relationship_target",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_relationship_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "RelationshipKind"
+            },
+            {
+              "kind": "var",
+              "value": "SourceKind"
+            },
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.deprecated.block.attribute_write",
+      "severity": "error",
+      "message": "SysML v2 does not use `block`; use `part` instead",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DeprecatedKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_attribute_write_request",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            },
+            {
+              "kind": "var",
+              "value": "Attribute"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_deprecated_v1_keyword",
+          "terms": [
+            {
+              "kind": "var",
+              "value": "DeprecatedKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.part.typing.part_definition",
+      "severity": "error",
+      "message": "part usages should be typed by part definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "part"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "part"
+            },
+            {
+              "kind": "const",
+              "value": "part def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.attribute.typing.attribute_definition",
+      "severity": "error",
+      "message": "attribute usages should be typed by attribute definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "attribute"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "attribute"
+            },
+            {
+              "kind": "const",
+              "value": "attribute def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.requirement.typing.requirement_definition",
+      "severity": "error",
+      "message": "requirement usages should be typed by requirement definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "requirement"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "requirement"
+            },
+            {
+              "kind": "const",
+              "value": "requirement def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.item.typing.item_definition",
+      "severity": "error",
+      "message": "item usages should be typed by item definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "item"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "item"
+            },
+            {
+              "kind": "const",
+              "value": "item def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.connection.typing.connection_definition",
+      "severity": "error",
+      "message": "connection usages should be typed by connection definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "connection"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "connection"
+            },
+            {
+              "kind": "const",
+              "value": "connection def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.port.typing.port_definition",
+      "severity": "error",
+      "message": "port usages should be typed by port definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "port"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "port"
+            },
+            {
+              "kind": "const",
+              "value": "port def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.action.typing.action_definition",
+      "severity": "error",
+      "message": "action usages should be typed by action definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "action"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "action"
+            },
+            {
+              "kind": "const",
+              "value": "action def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.constraint.typing.constraint_definition",
+      "severity": "error",
+      "message": "constraint usages should be typed by constraint definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "constraint"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "constraint"
+            },
+            {
+              "kind": "const",
+              "value": "constraint def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.calc.typing.calc_definition",
+      "severity": "error",
+      "message": "calc usages should be typed by calc definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "calc"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "calc"
+            },
+            {
+              "kind": "const",
+              "value": "calc def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sysml.state.typing.state_definition",
+      "severity": "error",
+      "message": "state usages should be typed by state definitions",
+      "subjects": [
+        {
+          "kind": "var",
+          "value": "DefinitionKind"
+        }
+      ],
+      "when": [
+        {
+          "predicate": "legality_usage_typing_request",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "state"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        },
+        {
+          "predicate": "sysml_usage_typing_mismatch_kind",
+          "terms": [
+            {
+              "kind": "const",
+              "value": "state"
+            },
+            {
+              "kind": "const",
+              "value": "state def"
+            },
+            {
+              "kind": "var",
+              "value": "DefinitionKind"
+            }
+          ]
+        }
       ]
     }
   ]

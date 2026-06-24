@@ -78,8 +78,13 @@ pub use metamodel::{
 };
 pub use mutation::{
     SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,
+    SysmlSemanticLegalityService, SysmlSemanticNextActionsService,
     enrich_sysml_semantic_reasoning_context_with_child_affordances,
-    sysml_mutation_feasibility_service, sysml_semantic_mutation_capability_context,
+    sysml_mutation_feasibility_service, sysml_semantic_legality_rulepack,
+    sysml_semantic_legality_rulepack_for_release, sysml_semantic_legality_rulepacks_for_release,
+    sysml_semantic_legality_service, sysml_semantic_legality_service_for_release,
+    sysml_semantic_mutation_capability_context, sysml_semantic_next_actions_service,
+    sysml_semantic_next_actions_service_for_release,
     sysml_semantic_reasoning_context_from_authoring_project,
 };
 pub use parse_session::{SysmlParseSession, build_sysml_syntax_outline};
