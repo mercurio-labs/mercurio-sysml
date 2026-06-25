@@ -5,6 +5,7 @@ use mercurio_core::{
     RuleDiagnosticSeverity, RulePack, SemanticLegalityService, SemanticMutationCapabilityContext,
     SemanticNextActionsService, SemanticReasoningContext, SemanticRelationshipTargetRuleContext,
     SemanticUsageTypingRuleContext, Term, WorkspaceRevision,
+    default_semantic_variant_capability_context,
     enrich_semantic_reasoning_context_with_next_action_affordances,
     semantic_reasoning_context_from_authoring_project_with_oracle,
 };
@@ -340,6 +341,7 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
             "MoveDeclaration".to_string(),
             "SetAttribute".to_string(),
         ],
+        variant_capabilities: default_semantic_variant_capability_context(),
         definition_keywords: SYSML_DEFINITION_KEYWORDS
             .iter()
             .map(ToString::to_string)
@@ -454,6 +456,12 @@ mod tests {
         assert!(context.relationship_target_rules.iter().any(|rule| {
             rule.relationship_kind == "satisfy" && rule.expected_target_kind == "requirement"
         }));
+        assert!(
+            context
+                .variant_capabilities
+                .supported_operations
+                .contains(&"CreateExplorationVariant".to_string())
+        );
         assert!(
             context
                 .guidance

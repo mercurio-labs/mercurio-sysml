@@ -264,6 +264,43 @@ mod tests {
     }
 
     #[test]
+    fn ai_style_transition_target_markers_compile_to_state_machine_transitions() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let document = compile_sysml_text(
+            "package Demo {
+                part def Printer {
+                    state lifecycle {
+                        state idle;
+                        state printing;
+                        transition start first idle to printing;
+                        transition stop from printing to idle;
+                        transition resume idle -> printing;
+                    }
+                }
+            }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap();
+
+        let runtime = Runtime::from_document(document).unwrap();
+        let machines = project_state_machines(&runtime);
+        let lifecycle = machines
+            .iter()
+            .find(|machine| machine.label == "lifecycle")
+            .unwrap();
+
+        assert!(lifecycle.transitions.iter().any(|transition| {
+            transition.source == "state.Demo.Printer.lifecycle.idle"
+                && transition.target == "state.Demo.Printer.lifecycle.printing"
+        }));
+        assert!(lifecycle.transitions.iter().any(|transition| {
+            transition.source == "state.Demo.Printer.lifecycle.printing"
+                && transition.target == "state.Demo.Printer.lifecycle.idle"
+        }));
+    }
+
+    #[test]
     fn lists_latest_sysml_metamodel() {
         let metamodels = available_metamodels().unwrap();
 

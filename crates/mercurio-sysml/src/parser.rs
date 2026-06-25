@@ -2024,12 +2024,16 @@ impl Parser {
         &mut self,
         modifiers: &mut Vec<String>,
     ) -> Result<bool, Diagnostic> {
-        if !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then")
+        if !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
+            && !matches!(self.peek_kind(), TokenKind::Identifier(_))
         {
             return Ok(false);
         }
 
-        let _source_marker = self.expect_identifier("expected transition source marker")?;
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
+        {
+            self.expect_identifier("expected transition source marker")?;
+        }
         let source = self.parse_qualified_name()?;
         modifiers.push(format!("transition_source={}", source.as_dot_string()));
 
@@ -2050,8 +2054,16 @@ impl Parser {
             }
         }
 
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
-            self.expect_identifier_named("then", "expected `then` before transition target")?;
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then" || value == "to")
+        {
+            self.expect_identifier("expected transition target marker")?;
+            let target = self.parse_qualified_name()?;
+            modifiers.push(format!("transition_target={}", target.as_dot_string()));
+        } else if matches!(self.peek_kind(), TokenKind::Minus)
+            && matches!(self.next_kind(), Some(TokenKind::RAngle))
+        {
+            self.advance();
+            self.advance();
             let target = self.parse_qualified_name()?;
             modifiers.push(format!("transition_target={}", target.as_dot_string()));
         }
