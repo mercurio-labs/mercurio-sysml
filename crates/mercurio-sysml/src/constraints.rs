@@ -11,8 +11,8 @@ use mercurio_core::{
     CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget,
     EvidenceGraph, EvidenceNode, EvidenceNodeKind, ExecutionContext, ExpressionIr,
     InsightConfidence, InsightKind, InsightPolarity, InsightScope, InsightSeverity,
-    SemanticArtifact, SemanticCapability, SemanticDiagnostic, SemanticDiagnosticSeverity,
-    SemanticInsight, SemanticWorkspaceSnapshot, stable_digest,
+    DiagnosticKind, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    SemanticDiagnosticSeverity, SemanticInsight, SemanticWorkspaceSnapshot, stable_digest,
 };
 
 const EPSILON: f64 = 1.0e-9;
@@ -485,16 +485,20 @@ impl SemanticCapability for SysmlConstraintAnalysisCapability {
         let diagnostics = result
             .diagnostics
             .iter()
-            .map(|diagnostic| SemanticDiagnostic {
-                code: diagnostic.kind.clone(),
-                severity: if diagnostic.kind.contains("violation") {
+            .map(|diagnostic| {
+                let severity = if diagnostic.kind.contains("violation") {
                     SemanticDiagnosticSeverity::Error
                 } else {
                     SemanticDiagnosticSeverity::Warning
-                },
-                message: diagnostic.message.clone(),
-                element: Some(workspace.element_ref(&diagnostic.element_id)),
-                source_spans: workspace.source_spans(&diagnostic.element_id),
+                };
+                SemanticDiagnostic::new(
+                    DiagnosticKind::Execution,
+                    severity,
+                    diagnostic.kind.clone(),
+                    diagnostic.message.clone(),
+                )
+                .with_subject(diagnostic.element_id.clone())
+                .with_source_spans(workspace.source_spans(&diagnostic.element_id))
             })
             .collect::<Vec<_>>();
         let evidence_nodes = sources

@@ -9,7 +9,7 @@ use mercurio_core::{
     CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry, CapabilityRunReport,
     CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget, EvidenceGraph, EvidenceNode,
     EvidenceNodeKind, InsightConfidence, InsightKind, InsightPolarity, InsightScope,
-    InsightSeverity, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    DiagnosticKind, InsightSeverity, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
     SemanticDiagnosticSeverity, SemanticWorkspaceSnapshot, stable_digest,
 };
 use serde_json::{Value, json};
@@ -154,24 +154,26 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
         let diagnostics = execution
             .diagnostics
             .iter()
-            .map(|finding| SemanticDiagnostic {
-                code: format!("state_machine.{}", finding.code),
-                severity: match finding.severity {
+            .map(|finding| {
+                let severity = match finding.severity {
                     StateMachineValidationSeverity::Warning => SemanticDiagnosticSeverity::Warning,
                     StateMachineValidationSeverity::Error => SemanticDiagnosticSeverity::Error,
-                },
-                message: finding.message.clone(),
-                element: finding
-                    .state_id
-                    .as_ref()
-                    .or(finding.transition_id.as_ref())
-                    .map(|element_id| workspace.element_ref(element_id)),
-                source_spans: finding
-                    .state_id
-                    .as_ref()
-                    .or(finding.transition_id.as_ref())
+                };
+                let element_id = finding.state_id.as_ref().or(finding.transition_id.as_ref());
+                let source_spans = element_id
                     .map(|element_id| workspace.source_spans(element_id))
-                    .unwrap_or_default(),
+                    .unwrap_or_default();
+                let mut diagnostic = SemanticDiagnostic::new(
+                    DiagnosticKind::Execution,
+                    severity,
+                    format!("state_machine.{}", finding.code),
+                    finding.message.clone(),
+                )
+                .with_source_spans(source_spans);
+                if let Some(element_id) = element_id {
+                    diagnostic = diagnostic.with_subject(element_id.clone());
+                }
+                diagnostic
             })
             .collect::<Vec<_>>();
         let subject = workspace.element_ref(&machine.id);
@@ -601,9 +603,9 @@ mod tests {
         assert!(report.diagnostics.iter().any(|diagnostic| {
             diagnostic.code == "state_machine.unreachable_state"
                 && diagnostic
-                    .element
-                    .as_ref()
-                    .is_some_and(|element| element.element_id == "state.Controller.Fault")
+                    .subjects
+                    .iter()
+                    .any(|subject| subject == "state.Controller.Fault")
         }));
         assert!(report.insights.iter().any(|insight| {
             insight.kind == InsightKind::ReachabilityFinding

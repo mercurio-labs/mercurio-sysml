@@ -8,7 +8,7 @@ use mercurio_core::runtime::{Runtime, RuntimeError};
 use mercurio_core::{
     AnalysisScope, CapabilityError, CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus,
     CapabilityTarget, EvidenceEdge, EvidenceGraph, EvidenceNode, EvidenceNodeKind,
-    EvidenceRelation, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    DiagnosticKind, EvidenceRelation, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
     SemanticDiagnosticSeverity, SemanticElementRef, SemanticWorkspaceSnapshot, stable_digest,
 };
 pub use mercurio_simulation_core::{
@@ -689,13 +689,13 @@ fn activity_diagnostic(
     message: impl Into<String>,
     binding: &AnalysisDynamicBehaviorBinding,
 ) -> SemanticDiagnostic {
-    SemanticDiagnostic {
-        code: code.into(),
-        severity: SemanticDiagnosticSeverity::Warning,
-        message: message.into(),
-        element: Some(semantic_ref_from_analysis_ref(&binding.behavior)),
-        source_spans: Vec::new(),
-    }
+    SemanticDiagnostic::new(
+        DiagnosticKind::Execution,
+        SemanticDiagnosticSeverity::Warning,
+        code,
+        message,
+    )
+    .with_subject(semantic_ref_from_analysis_ref(&binding.behavior).element_id)
 }
 
 fn capability_run_status_label(status: CapabilityRunStatus) -> &'static str {
