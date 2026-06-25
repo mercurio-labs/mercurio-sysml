@@ -1,4 +1,4 @@
-use std::collections::BTreeMap;
+﻿use std::collections::BTreeMap;
 
 use mercurio_core::{
     CURRENT_DEFAULT_PROFILE_ID, CommitMode, CommitStrategy, CoreMutationFeasibilityService,
@@ -124,7 +124,6 @@ package Demo {
     let context = MutationContext::from_project(project);
     let proposal = MutationProposal {
         intent: "tag requirement metadata".to_string(),
-        affected_elements: vec![ElementRef::new("Demo.safeStart")],
         operations: vec![SemanticMutation::AddMetadataAnnotation {
             element: ElementRef::new("Demo.safeStart"),
             metadata_type: "ReviewTag".to_string(),

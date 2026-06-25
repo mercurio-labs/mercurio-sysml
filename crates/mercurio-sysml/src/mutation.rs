@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, BTreeSet};
+﻿use std::collections::{BTreeMap, BTreeSet};
 
 use mercurio_core::{
     Atom, AuthoringProject, CoreMutationFeasibilityService, DiagnosticRule, ElementRef, Fact,
@@ -331,8 +331,7 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
             "AddUsage".to_string(),
             "AddRelationship".to_string(),
             "AddMetadataAnnotation".to_string(),
-            "RemoveDeclaration".to_string(),
-            "RemoveUsage".to_string(),
+            "Remove".to_string(),
             "RemoveRelationship".to_string(),
             "RenameDeclaration".to_string(),
             "UpdateUsageType".to_string(),
@@ -695,7 +694,6 @@ package HybridVehicle {
         let context = MutationContext::from_project(project);
         let proposal = MutationProposal {
             intent: "Add missing regenerative braking usage".to_string(),
-            affected_elements: vec![ElementRef::new("HybridVehicle.vehicle")],
             operations: vec![SemanticMutation::AddUsage {
                 container: ElementRef::new("HybridVehicle.vehicle"),
                 keyword: "part".to_string(),
@@ -736,7 +734,6 @@ package HybridVehicle {
         let context = MutationContext::from_project(project);
         let proposal = MutationProposal {
             intent: "Add vehicle definition with SysML surface spelling".to_string(),
-            affected_elements: Vec::new(),
             operations: vec![SemanticMutation::AddDefinition {
                 container: ElementRef::new("HybridVehicle"),
                 keyword: "part def".to_string(),
