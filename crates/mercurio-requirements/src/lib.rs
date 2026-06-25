@@ -337,12 +337,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
         insights.push(SemanticInsight {
             id: format!("insight.requirement.trace_completeness.{}", request.run_id),
             kind: InsightKind::TraceCompleteness,
-            subject: SemanticElementRef {
-                element_id: "workspace".to_string(),
-                qualified_name: None,
-                label: Some("Requirement analysis scope".to_string()),
-                semantic_anchor: None,
-            },
+            subject: SemanticElementRef::new("workspace").with_label("Requirement analysis scope"),
             claim: format!(
                 "Requirement scope has {satisfy_percent:.0}% satisfy coverage and {verify_percent:.0}% verify coverage."
             ),
