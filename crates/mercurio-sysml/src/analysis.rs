@@ -463,10 +463,10 @@ fn collect_dynamic_behavior_bindings(
                 .find(|machine| machine.id == machine_id || machine.label == machine_id)
                 .map(|machine| machine_behavior_ref(graph, machine))
                 .or_else(|| graph.element_by_element_id(&machine_id).map(element_ref))
-                .unwrap_or_else(|| AnalysisElementRef {
-                    element_id: machine_id.clone(),
-                    kind: "StateUsage".to_string(),
-                    label: Some(machine_id),
+                .unwrap_or_else(|| {
+                    AnalysisElementRef::new(machine_id.clone())
+                        .with_kind("StateUsage")
+                        .with_label(machine_id)
                 });
             bindings.push(AnalysisDynamicBehaviorBinding {
                 subject: subject.clone(),
@@ -569,11 +569,9 @@ fn machine_behavior_ref(
     if let Some(element) = graph.element_by_element_id(&machine.id) {
         return element_ref(element);
     }
-    AnalysisElementRef {
-        element_id: machine.id.clone(),
-        kind: "StateUsage".to_string(),
-        label: Some(machine.label.clone()),
-    }
+    AnalysisElementRef::new(machine.id.clone())
+        .with_kind("StateUsage")
+        .with_label(machine.label.clone())
 }
 
 fn behavior_owner_id(element: &Element) -> Option<String> {
@@ -1308,11 +1306,7 @@ where
 }
 
 fn element_ref(element: &Element) -> AnalysisElementRef {
-    AnalysisElementRef {
-        element_id: element.element_id.clone(),
-        kind: element.kind.to_string(),
-        label: element_label(element),
-    }
+    AnalysisElementRef::from_graph_element(element)
 }
 
 fn element_label(element: &Element) -> Option<String> {

@@ -751,15 +751,13 @@ fn dedup_strings(values: Vec<String>) -> Vec<String> {
 fn semantic_ref_from_analysis_ref(
     reference: &mercurio_core::analysis::AnalysisElementRef,
 ) -> SemanticElementRef {
-    SemanticElementRef::new(reference.element_id.clone())
-        .with_label_optional(reference.label.clone())
-        .with_kind(reference.kind.clone())
+    reference.clone()
 }
 
 fn analysis_ref_payload(reference: &mercurio_core::analysis::AnalysisElementRef) -> Value {
     serde_json::json!({
         "elementId": reference.element_id.clone(),
-        "kind": reference.kind.clone(),
+        "kind": reference.kind.clone().unwrap_or_else(|| "Element".to_string()),
         "label": reference.label.clone(),
     })
 }
