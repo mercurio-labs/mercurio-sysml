@@ -1,4 +1,4 @@
-﻿use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{BTreeMap, BTreeSet};
 
 use mercurio_core::{
     Atom, AuthoringProject, CoreMutationFeasibilityService, DiagnosticRule, ElementRef, Fact,
@@ -327,6 +327,7 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
         metamodel_version: SYSML_MUTATION_PROFILE_ID.to_string(),
         supported_operations: vec![
             "AddPackage".to_string(),
+            "AddElement".to_string(),
             "AddDefinition".to_string(),
             "AddUsage".to_string(),
             "AddRelationship".to_string(),
@@ -341,6 +342,7 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
             "SetAttribute".to_string(),
         ],
         variant_capabilities: default_semantic_variant_capability_context(),
+        element_kinds: sysml_semantic_element_kinds(),
         definition_keywords: SYSML_DEFINITION_KEYWORDS
             .iter()
             .map(ToString::to_string)
@@ -360,6 +362,54 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
             .map(ToString::to_string)
             .collect(),
     }
+}
+
+fn sysml_semantic_element_kinds() -> Vec<String> {
+    SYSML_DEFINITION_KEYWORDS
+        .iter()
+        .map(|keyword| sysml_semantic_definition_kind_name(keyword))
+        .chain(
+            SYSML_USAGE_KEYWORDS
+                .iter()
+                .map(|keyword| sysml_semantic_usage_kind_name(keyword)),
+        )
+        .collect()
+}
+
+fn sysml_semantic_definition_kind_name(keyword: &str) -> String {
+    match keyword {
+        "calc" => "CalculationDefinition".to_string(),
+        "verification" => "VerificationCaseDefinition".to_string(),
+        other => format!("{}Definition", pascal_case(other)),
+    }
+}
+
+fn sysml_semantic_usage_kind_name(keyword: &str) -> String {
+    match keyword {
+        "calc" => "CalculationUsage".to_string(),
+        "satisfy" => "SatisfyRequirementUsage".to_string(),
+        "verify" => "VerificationCaseUsage".to_string(),
+        "ref" | "reference" => "ReferenceUsage".to_string(),
+        other => format!("{}Usage", pascal_case(other)),
+    }
+}
+
+fn pascal_case(value: &str) -> String {
+    value
+        .split(|ch: char| !ch.is_ascii_alphanumeric())
+        .filter(|segment| !segment.is_empty())
+        .map(|segment| {
+            let mut chars = segment.chars();
+            match chars.next() {
+                Some(first) => format!(
+                    "{}{}",
+                    first.to_ascii_uppercase(),
+                    chars.as_str().to_ascii_lowercase()
+                ),
+                None => String::new(),
+            }
+        })
+        .collect()
 }
 
 fn sysml_usage_typing_rule_contexts() -> Vec<SemanticUsageTypingRuleContext> {
@@ -428,9 +478,9 @@ mod tests {
 
     use mercurio_core::{
         ElementRef, FeasibilityStatus, MutationContext, MutationFeasibilityService,
-        MutationProposal, SemanticLegalityDiagnosticSource, SemanticLegalityRequest,
-        SemanticLegalityStatus, SemanticMutation, SemanticNextActionOperation,
-        SemanticNextActionsRequest, WorkspaceRevision,
+        MutationProposal, SemanticElementKind, SemanticLegalityDiagnosticSource,
+        SemanticLegalityRequest, SemanticLegalityStatus, SemanticMutation,
+        SemanticNextActionOperation, SemanticNextActionsRequest, WorkspaceRevision,
     };
 
     use super::*;
@@ -447,6 +497,17 @@ mod tests {
                 .contains(&"AddDefinition".to_string())
         );
         assert!(context.definition_keywords.contains(&"part".to_string()));
+        assert!(
+            context
+                .supported_operations
+                .contains(&"AddElement".to_string())
+        );
+        assert!(context.element_kinds.contains(&"StateUsage".to_string()));
+        assert!(
+            context
+                .element_kinds
+                .contains(&"PartDefinition".to_string())
+        );
         assert!(!context.definition_keywords.contains(&"block".to_string()));
         assert!(context.relationship_kinds.contains(&"satisfy".to_string()));
         assert!(context.usage_typing_rules.iter().any(|rule| {
@@ -667,6 +728,11 @@ package HybridVehicle {
         enrich_sysml_semantic_reasoning_context_with_child_affordances(&mut context, 64);
 
         assert!(context.affordances.iter().any(|affordance| {
+            affordance.operation == "AddElement"
+                && affordance.child_kind == "PartDefinition"
+                && affordance.status == "Allowed"
+        }));
+        assert!(context.affordances.iter().any(|affordance| {
             affordance.operation == "AddDefinition"
                 && affordance.child_kind == "part"
                 && affordance.status == "Allowed"
@@ -715,8 +781,93 @@ package HybridVehicle {
         );
         assert!(matches!(
             &report.suggested_supporting_changes[0],
-            SemanticMutation::AddDefinition { keyword, name, .. }
-                if keyword == "part" && name == "RegenerativeBrakingSystem"
+            SemanticMutation::AddElement { kind, name, .. }
+                if kind.metaclass == "PartDefinition" && name == "RegenerativeBrakingSystem"
+        ));
+    }
+
+    #[test]
+    fn sysml_semantic_add_element_state_usage_renders_state_source() {
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "controller.sysml".to_string(),
+            r#"
+package Control {
+    state def Controller {
+        state operational;
+    }
+}
+"#
+            .to_string(),
+        )]))
+        .expect("project parses");
+        let context = MutationContext::from_project(project);
+        let proposal = MutationProposal {
+            intent: "Add nested state semantically".to_string(),
+            operations: vec![SemanticMutation::AddElement {
+                container: ElementRef::new("Control.Controller.operational"),
+                kind: SemanticElementKind::new("StateUsage"),
+                name: "armed".to_string(),
+                ty: None,
+                specializes: Vec::new(),
+                properties: BTreeMap::new(),
+            }],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+        let service = sysml_mutation_feasibility_service();
+        let report = service.check(&context, &proposal);
+
+        assert_eq!(report.status, FeasibilityStatus::Allowed, "{report:#?}");
+        let plan = report.normalized_plan.as_ref().unwrap();
+        assert!(matches!(
+            &plan.normalized_operations[0],
+            SemanticMutation::AddElement { kind, name, .. }
+                if kind.metaclass == "StateUsage" && name == "armed"
+        ));
+
+        let application = service.apply_checked_plan(&context, plan).unwrap();
+        let source = application.edited_files.get("controller.sysml").unwrap();
+        assert!(source.contains("state armed;"));
+        assert!(!source.contains("substate"));
+    }
+
+    #[test]
+    fn sysml_legacy_state_usage_normalizes_to_semantic_add_element() {
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "controller.sysml".to_string(),
+            r#"
+package Control {
+    state def Controller {
+        state operational;
+    }
+}
+"#
+            .to_string(),
+        )]))
+        .expect("project parses");
+        let context = MutationContext::from_project(project);
+        let proposal = MutationProposal {
+            intent: "Legacy state usage proposal".to_string(),
+            operations: vec![SemanticMutation::AddUsage {
+                container: ElementRef::new("Control.Controller.operational"),
+                keyword: "state".to_string(),
+                name: "armed".to_string(),
+                ty: None,
+                specializes: Vec::new(),
+            }],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+
+        let report = sysml_mutation_feasibility_service().check(&context, &proposal);
+
+        assert_eq!(report.status, FeasibilityStatus::Allowed, "{report:#?}");
+        assert!(matches!(
+            &report.normalized_plan.as_ref().unwrap().normalized_operations[0],
+            SemanticMutation::AddElement { kind, name, .. }
+                if kind.metaclass == "StateUsage" && name == "armed"
         ));
     }
 

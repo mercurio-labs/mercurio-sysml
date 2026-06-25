@@ -2,8 +2,8 @@ use std::collections::BTreeMap;
 
 use mercurio_core::{
     AttributePolicyAnswer, CapabilityAnswer, SemanticCapabilityOracle, SemanticCapabilityProfile,
-    SemanticConcept, SourceLanguage, TableSemanticCapabilityOracle,
-    language::profile::LanguageProfile,
+    SemanticConcept, SemanticElementAuthoring, SemanticElementForm, SourceLanguage,
+    TableSemanticCapabilityOracle, language::profile::LanguageProfile,
 };
 
 #[derive(Debug, Clone, Default)]
@@ -67,6 +67,18 @@ impl SemanticCapabilityOracle for SysmlSemanticCapabilityOracle {
     fn normalize_definition_keyword(&self, keyword: &str) -> String {
         sysml_table_oracle().normalize_definition_keyword(keyword)
     }
+
+    fn authoring_for_element_kind(&self, kind: &str) -> Option<SemanticElementAuthoring> {
+        sysml_table_oracle().authoring_for_element_kind(kind)
+    }
+
+    fn semantic_kind_for_definition_keyword(&self, keyword: &str) -> Option<String> {
+        sysml_table_oracle().semantic_kind_for_definition_keyword(keyword)
+    }
+
+    fn semantic_kind_for_usage_keyword(&self, keyword: &str) -> Option<String> {
+        sysml_table_oracle().semantic_kind_for_usage_keyword(keyword)
+    }
 }
 
 pub const SYSML_LANGUAGE_PROFILE_ID: &str = "sysml-v2";
@@ -118,6 +130,18 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
         .definition_keyword_alias("verification def", "verification");
     profile.doc_id_attribute_aliases = vec!["id", "requirement_id"];
 
+    for (keyword, kind) in sysml_definition_element_kinds() {
+        profile = profile
+            .element_kind_authoring(kind, SemanticElementForm::Definition, keyword)
+            .definition_keyword_element_kind(keyword, kind);
+    }
+
+    for (keyword, kind) in sysml_usage_element_kinds() {
+        profile = profile
+            .element_kind_authoring(kind, SemanticElementForm::Usage, keyword)
+            .usage_keyword_element_kind(keyword, kind);
+    }
+
     for usage in SYSML_USAGE_KEYWORDS {
         if let Some(definition) = sysml_definition_keyword_for_usage(usage) {
             profile = profile
@@ -125,6 +149,39 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
                 .supporting_definition_keyword(usage, definition);
         }
     }
+
+    for (usage_keyword, usage_kind) in sysml_usage_element_kinds() {
+        if let Some(definition_keyword) = sysml_definition_keyword_for_usage(usage_keyword) {
+            if let Some(definition_kind) = sysml_definition_element_kind(definition_keyword) {
+                profile = profile.allow_usage_typing(usage_kind, definition_kind);
+            }
+        }
+    }
+
+    let semantic_containers = std::iter::once("Package")
+        .chain(
+            sysml_definition_element_kinds()
+                .into_iter()
+                .map(|(_, kind)| kind),
+        )
+        .chain(
+            sysml_usage_element_kinds()
+                .into_iter()
+                .map(|(_, kind)| kind),
+        )
+        .collect::<Vec<_>>();
+    let semantic_children = std::iter::once("Package")
+        .chain(
+            sysml_definition_element_kinds()
+                .into_iter()
+                .map(|(_, kind)| kind),
+        )
+        .chain(
+            sysml_usage_element_kinds()
+                .into_iter()
+                .map(|(_, kind)| kind),
+        )
+        .collect::<Vec<_>>();
 
     for container in ["package"]
         .into_iter()
@@ -156,6 +213,15 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
         for child in SYSML_DEFINITION_KEYWORDS {
             profile = profile.allow_containment(container, &format!("{child} def"));
         }
+        for child in &semantic_children {
+            profile = profile.allow_containment(container, child);
+        }
+    }
+
+    for container in &semantic_containers {
+        for child in &semantic_children {
+            profile = profile.allow_containment(container, child);
+        }
     }
 
     for kind in SYSML_DEFINITION_KEYWORDS
@@ -166,6 +232,15 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
         profile = profile
             .allow_specialization(kind, kind)
             .allow_specialization(kind, &format!("{kind} def"));
+    }
+
+    for (_, kind) in sysml_definition_element_kinds()
+        .into_iter()
+        .chain(sysml_usage_element_kinds())
+    {
+        profile = profile
+            .allow_specialization(kind, kind)
+            .allow_specialization(kind, "*");
     }
 
     for source in SYSML_DEFINITION_KEYWORDS
@@ -197,6 +272,21 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
             .allow_relationship("verify", source, "requirement def");
     }
 
+    let semantic_sources = sysml_definition_element_kinds()
+        .into_iter()
+        .chain(sysml_usage_element_kinds())
+        .map(|(_, kind)| kind)
+        .collect::<Vec<_>>();
+    for source in semantic_sources {
+        profile = profile
+            .allow_relationship("trace", source, "*")
+            .allow_relationship("refine", source, "*")
+            .allow_relationship("satisfy", source, "RequirementUsage")
+            .allow_relationship("satisfy", source, "RequirementDefinition")
+            .allow_relationship("verify", source, "RequirementUsage")
+            .allow_relationship("verify", source, "RequirementDefinition");
+    }
+
     for attribute in [
         "declared_name",
         "specializes",
@@ -222,6 +312,48 @@ pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
         );
     }
     profile
+}
+
+fn sysml_definition_element_kinds() -> Vec<(&'static str, &'static str)> {
+    vec![
+        ("part", "PartDefinition"),
+        ("attribute", "AttributeDefinition"),
+        ("requirement", "RequirementDefinition"),
+        ("item", "ItemDefinition"),
+        ("connection", "ConnectionDefinition"),
+        ("port", "PortDefinition"),
+        ("action", "ActionDefinition"),
+        ("constraint", "ConstraintDefinition"),
+        ("calc", "CalculationDefinition"),
+        ("state", "StateDefinition"),
+        ("view", "ViewDefinition"),
+        ("verification", "VerificationCaseDefinition"),
+    ]
+}
+
+fn sysml_usage_element_kinds() -> Vec<(&'static str, &'static str)> {
+    vec![
+        ("part", "PartUsage"),
+        ("attribute", "AttributeUsage"),
+        ("requirement", "RequirementUsage"),
+        ("item", "ItemUsage"),
+        ("connection", "ConnectionUsage"),
+        ("port", "PortUsage"),
+        ("action", "ActionUsage"),
+        ("constraint", "ConstraintUsage"),
+        ("calc", "CalculationUsage"),
+        ("state", "StateUsage"),
+        ("satisfy", "SatisfyRequirementUsage"),
+        ("verify", "VerificationCaseUsage"),
+        ("ref", "ReferenceUsage"),
+        ("reference", "ReferenceUsage"),
+    ]
+}
+
+fn sysml_definition_element_kind(keyword: &str) -> Option<&'static str> {
+    sysml_definition_element_kinds()
+        .into_iter()
+        .find_map(|(candidate, kind)| (candidate == keyword).then_some(kind))
 }
 
 fn sysml_table_oracle() -> TableSemanticCapabilityOracle {

@@ -62,14 +62,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             },
         ),
         (
-            "state-machine-outline",
+            "state-machine",
             DiagramSpecDto {
                 version: 1,
-                kind: DiagramKindDto::Structure,
+                kind: DiagramKindDto::StateMachine,
                 title: "DriveMode State Machine Outline".to_string(),
-                description: Some("Temporary state-machine outline until a dedicated state_machine view kind exists.".to_string()),
+                description: Some("Sample state-machine diagram rendered from StateUsage and TransitionUsage elements.".to_string()),
                 root: Some("state.Vehicle.DriveMode".to_string()),
-                query: query(vec!["owner", "source", "target"], DiagramDirectionDto::Children, 2, false, true, 350, 900),
+                query: query(Vec::new(), DiagramDirectionDto::Children, 2, false, true, 350, 900),
                 layout: layout("LR"),
                 style: DiagramStyleOptionsDto::default(),
             },
