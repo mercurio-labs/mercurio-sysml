@@ -7,8 +7,8 @@ use mercurio_core::graph::{Element, Graph};
 use mercurio_core::runtime::{Runtime, RuntimeError};
 use mercurio_core::{
     AnalysisScope, CapabilityError, CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus,
-    CapabilityTarget, EvidenceEdge, EvidenceGraph, EvidenceNode, EvidenceNodeKind,
-    DiagnosticKind, EvidenceRelation, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    CapabilityTarget, DiagnosticKind, EvidenceEdge, EvidenceGraph, EvidenceNode, EvidenceNodeKind,
+    EvidenceRelation, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
     SemanticDiagnosticSeverity, SemanticElementRef, SemanticWorkspaceSnapshot, stable_digest,
 };
 pub use mercurio_simulation_core::{
@@ -751,12 +751,9 @@ fn dedup_strings(values: Vec<String>) -> Vec<String> {
 fn semantic_ref_from_analysis_ref(
     reference: &mercurio_core::analysis::AnalysisElementRef,
 ) -> SemanticElementRef {
-    SemanticElementRef {
-        element_id: reference.element_id.clone(),
-        qualified_name: None,
-        label: reference.label.clone(),
-        semantic_anchor: None,
-    }
+    SemanticElementRef::new(reference.element_id.clone())
+        .with_label_optional(reference.label.clone())
+        .with_kind(reference.kind.clone())
 }
 
 fn analysis_ref_payload(reference: &mercurio_core::analysis::AnalysisElementRef) -> Value {
@@ -859,18 +856,8 @@ pub fn simulation_trace_report(
     let payload = serde_json::to_value(&trace)?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
-    let analysis_case_ref = SemanticElementRef {
-        element_id: reported_analysis_case_id.to_string(),
-        qualified_name: None,
-        label: None,
-        semantic_anchor: None,
-    };
-    let subject_ref = SemanticElementRef {
-        element_id: trace.subject_id.clone(),
-        qualified_name: None,
-        label: None,
-        semantic_anchor: None,
-    };
+    let analysis_case_ref = SemanticElementRef::new(reported_analysis_case_id);
+    let subject_ref = SemanticElementRef::new(trace.subject_id.clone());
     let mut element_refs = vec![analysis_case_ref.clone()];
     if !subject_ref.element_id.is_empty() && subject_ref.element_id != analysis_case_ref.element_id
     {
