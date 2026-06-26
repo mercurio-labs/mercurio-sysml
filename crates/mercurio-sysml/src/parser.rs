@@ -197,16 +197,26 @@ impl StdlibLocator {
 
 /// Auto-detect the appropriate stdlib locator when no env override is set.
 pub fn resolve_default_stdlib_locator() -> StdlibLocator {
-    if let Ok(bundle) = release_bundle("latest") {
-        if bundle.stdlib_path.exists() {
-            return StdlibLocator::File {
-                path: bundle.stdlib_path,
-            };
-        }
-        return StdlibLocator::parse(&bundle.stdlib_locator);
+    #[cfg(feature = "embed-stdlib")]
+    {
+        return StdlibLocator::Embedded {
+            metamodel_id: LATEST_SYSML_METAMODEL_ID.to_string(),
+        };
     }
-    StdlibLocator::Embedded {
-        metamodel_id: LATEST_SYSML_METAMODEL_ID.to_string(),
+
+    #[cfg(not(feature = "embed-stdlib"))]
+    {
+        if let Ok(bundle) = release_bundle("latest") {
+            if bundle.stdlib_path.exists() {
+                return StdlibLocator::File {
+                    path: bundle.stdlib_path,
+                };
+            }
+            return StdlibLocator::parse(&bundle.stdlib_locator);
+        }
+        StdlibLocator::Embedded {
+            metamodel_id: LATEST_SYSML_METAMODEL_ID.to_string(),
+        }
     }
 }
 

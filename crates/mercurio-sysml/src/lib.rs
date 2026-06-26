@@ -377,6 +377,15 @@ mod tests {
         assert!(locator.as_uri().contains("stdlib.full.kir.json"));
     }
 
+    #[cfg(feature = "embed-stdlib")]
+    #[test]
+    fn embedded_build_defaults_to_embedded_stdlib() {
+        let locator = resolve_default_stdlib_locator();
+
+        assert!(matches!(locator, StdlibLocator::Embedded { .. }));
+        assert!(locator.as_uri().contains(SYSML_2_0_METAMODEL_057_ID));
+    }
+
     #[test]
     fn environment_compiles_with_latest_metamodel() {
         let env = SysmlEnvironment::latest_metamodel().unwrap();
