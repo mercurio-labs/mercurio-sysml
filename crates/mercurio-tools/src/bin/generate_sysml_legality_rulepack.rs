@@ -3,7 +3,10 @@ use std::env;
 use std::path::PathBuf;
 
 use mercurio_core::{Graph, KirDocument, RulePack};
-use mercurio_sysml::{available_release_bundles, release_bundle, sysml_semantic_legality_rulepack};
+use mercurio_sysml::{
+    available_release_bundles, release_bundle, sysml_metamodel_adapter_from_graph,
+    sysml_semantic_legality_rulepack,
+};
 use serde_json::{Value, json};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -16,7 +19,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     for bundle in bundles {
         let stdlib = KirDocument::from_path(&bundle.stdlib_path)?;
-        let adapter = RulePack::metamodel_adapter_from_graph(&Graph::from_document(stdlib)?);
+        let adapter = sysml_metamodel_adapter_from_graph(&Graph::from_document(stdlib)?);
         let element_count = adapter.metadata.get("elementCount").cloned();
         let mut metadata = BTreeMap::from([
             (

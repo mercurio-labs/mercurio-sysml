@@ -6,11 +6,12 @@ use std::process::Command;
 
 use mercurio_core::{
     Graph, KirDocument, KparPackageBuild, MpackLanguageProfile, MpackLibrary, MpackManifest,
-    MpackPythonPackage, MpackPythonWrapperBinding, MpackRequirements, MpackRulepack, RulePack,
+    MpackPythonPackage, MpackPythonWrapperBinding, MpackRequirements, MpackRulepack,
     generate_python_wrappers, load_pilot_export, normalize_pilot_export, repo_path, repo_root,
     validate_mpack_manifest, write_kpar_package,
 };
 use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
+use mercurio_sysml::sysml_metamodel_adapter_from_graph;
 use mercurio_tools::{
     attach_stdlib_derived_feature_manifest, sha256_file, split_language_baselines,
 };
@@ -87,7 +88,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .write_pretty_to_path(&sysml_delta_kir_path)?;
     let sysml_delta_kir_digest = digest_file(&sysml_delta_kir_path)?;
 
-    let rulepack = RulePack::metamodel_adapter_from_graph(&Graph::from_document(kir.clone())?);
+    let rulepack = sysml_metamodel_adapter_from_graph(&Graph::from_document(kir.clone())?);
     let rulepack_path = release_root.join("rules/stdlib.rulepack.json");
     rulepack.write_pretty_to_path(&rulepack_path)?;
     let rulepack_digest = digest_file(&rulepack_path)?;

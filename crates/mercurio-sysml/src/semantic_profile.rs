@@ -1,8 +1,10 @@
 use std::collections::BTreeMap;
+use std::collections::BTreeSet;
 
 use mercurio_core::{
-    AttributePolicyAnswer, CapabilityAnswer, SemanticCapabilityOracle, SemanticCapabilityProfile,
-    SemanticConcept, SemanticElementAuthoring, SemanticElementForm, SourceLanguage,
+    Atom, AttributePolicyAnswer, CORE_RULEPACK_VERSION, CapabilityAnswer, Concept, Fact, Graph,
+    KirFieldKind, LanguageId, Rule, RulePack, SemanticCapabilityOracle, SemanticCapabilityProfile,
+    SemanticElementAuthoring, SemanticElementForm, Term,
     TableSemanticCapabilityOracle, language::profile::LanguageProfile,
 };
 
@@ -116,6 +118,243 @@ pub const SYSML_USAGE_KEYWORDS: &[&str] = &[
 ];
 
 pub const SYSML_RELATIONSHIP_KINDS: &[&str] = &["satisfy", "verify", "trace", "refine"];
+
+pub fn sysml_field_specs() -> &'static [(&'static str, KirFieldKind)] {
+    &[
+        ("type_label", KirFieldKind::Scalar),
+        ("pilot_library_group", KirFieldKind::Scalar),
+        ("direction", KirFieldKind::Scalar),
+        ("multiplicity", KirFieldKind::Scalar),
+        ("multiplicity_lower", KirFieldKind::Scalar),
+        ("multiplicity_upper", KirFieldKind::Scalar),
+        ("declared_multiplicity", KirFieldKind::Scalar),
+        ("operator", KirFieldKind::Scalar),
+        ("operator_expression", KirFieldKind::Scalar),
+        ("trigger", KirFieldKind::Scalar),
+        ("trigger_kind", KirFieldKind::Scalar),
+        ("is_initial", KirFieldKind::Scalar),
+        ("source_is_initial", KirFieldKind::Scalar),
+        ("effect", KirFieldKind::Scalar),
+        ("text", KirFieldKind::Scalar),
+        ("requirement_id", KirFieldKind::Scalar),
+        ("body", KirFieldKind::Scalar),
+        ("locale", KirFieldKind::Scalar),
+        ("language", KirFieldKind::Scalar),
+        ("source_file", KirFieldKind::Scalar),
+        ("source_language", KirFieldKind::Scalar),
+        ("is_abstract", KirFieldKind::Scalar),
+        ("is_conjugated", KirFieldKind::Scalar),
+        ("is_derived", KirFieldKind::Scalar),
+        ("is_end", KirFieldKind::Scalar),
+        ("is_variable", KirFieldKind::Scalar),
+        ("is_readonly", KirFieldKind::Scalar),
+        ("is_ordered", KirFieldKind::Scalar),
+        ("is_unique", KirFieldKind::Scalar),
+        ("is_library_element", KirFieldKind::Scalar),
+        ("is_implied", KirFieldKind::Scalar),
+        ("definition", KirFieldKind::Reference),
+        ("metatype", KirFieldKind::Reference),
+        ("source_feature", KirFieldKind::Reference),
+        ("allocated", KirFieldKind::Reference),
+        ("allocated_to", KirFieldKind::Reference),
+        ("parent_state", KirFieldKind::Reference),
+        ("payload", KirFieldKind::Reference),
+        ("result", KirFieldKind::Reference),
+        ("original_definition", KirFieldKind::Reference),
+        ("conjugated", KirFieldKind::Reference),
+        ("opposite", KirFieldKind::Reference),
+        ("documentedElement", KirFieldKind::Reference),
+        ("annotatedElement", KirFieldKind::Reference),
+        ("target_ref", KirFieldKind::Reference),
+        ("documentation", KirFieldKind::ReferenceList),
+        ("feature_typings", KirFieldKind::ReferenceList),
+        ("subsets", KirFieldKind::ReferenceList),
+        ("subsetted_features", KirFieldKind::ReferenceList),
+        ("redefines", KirFieldKind::ReferenceList),
+        ("redefined_features", KirFieldKind::ReferenceList),
+        ("specialized_features", KirFieldKind::ReferenceList),
+        ("featuring_type", KirFieldKind::ReferenceList),
+        ("chaining_feature", KirFieldKind::ReferenceList),
+        ("imports", KirFieldKind::ReferenceList),
+        ("relationships", KirFieldKind::ReferenceList),
+        ("sources", KirFieldKind::ReferenceList),
+        ("targets", KirFieldKind::ReferenceList),
+        ("parts", KirFieldKind::ReferenceList),
+        ("items", KirFieldKind::ReferenceList),
+        ("owned_feature", KirFieldKind::ReferenceList),
+        ("verify", KirFieldKind::ReferenceList),
+        ("satisfy", KirFieldKind::ReferenceList),
+        ("related", KirFieldKind::ReferenceList),
+        ("parameters", KirFieldKind::ReferenceList),
+        ("arguments", KirFieldKind::ReferenceList),
+        ("successions", KirFieldKind::ReferenceList),
+        ("dependencies", KirFieldKind::ReferenceList),
+        ("do_behavior", KirFieldKind::Metadata),
+    ]
+}
+
+pub fn sysml_trace_rulepack() -> RulePack {
+    RulePack {
+        id: "sysml.trace".to_string(),
+        version: CORE_RULEPACK_VERSION.to_string(),
+        metadata: BTreeMap::from([(
+            "description".to_string(),
+            serde_json::Value::String("SysML requirement trace reasoning rules".to_string()),
+        )]),
+        facts: Vec::new(),
+        rules: vec![
+            rule(
+                "sysml.requirement.kind",
+                atom("requirement", [var("Element")]),
+                [
+                    atom("requirement_kind", [var("Kind")]),
+                    atom("kind", [var("Element"), var("Kind")]),
+                ],
+            ),
+            rule(
+                "sysml.requirement.specialization",
+                atom("requirement", [var("Element")]),
+                [
+                    atom("subtype", [var("Element"), var("Parent")]),
+                    atom("requirement", [var("Parent")]),
+                ],
+            ),
+            rule(
+                "sysml.satisfies.direct.satisfy",
+                atom("satisfies", [var("Source"), var("Requirement")]),
+                [atom(
+                    "edge",
+                    [var("Source"), constant("satisfy"), var("Requirement")],
+                )],
+            ),
+            rule(
+                "sysml.satisfies.direct.satisfies",
+                atom("satisfies", [var("Source"), var("Requirement")]),
+                [atom(
+                    "edge",
+                    [var("Source"), constant("satisfies"), var("Requirement")],
+                )],
+            ),
+            rule(
+                "sysml.satisfies.relationship",
+                atom("satisfies", [var("Source"), var("Requirement")]),
+                [
+                    atom("relationship_kind", [var("Rel"), constant("satisfy")]),
+                    atom("kind", [var("Relationship"), var("Rel")]),
+                    atom("edge", [var("Relationship"), constant("source"), var("Source")]),
+                    atom(
+                        "edge",
+                        [var("Relationship"), constant("target"), var("Requirement")],
+                    ),
+                ],
+            ),
+            rule(
+                "sysml.verifies.direct.verify",
+                atom("verifies", [var("Source"), var("Requirement")]),
+                [atom(
+                    "edge",
+                    [var("Source"), constant("verify"), var("Requirement")],
+                )],
+            ),
+            rule(
+                "sysml.verifies.direct.verifies",
+                atom("verifies", [var("Source"), var("Requirement")]),
+                [atom(
+                    "edge",
+                    [var("Source"), constant("verifies"), var("Requirement")],
+                )],
+            ),
+            rule(
+                "sysml.verifies.relationship",
+                atom("verifies", [var("Source"), var("Requirement")]),
+                [
+                    atom("relationship_kind", [var("Rel"), constant("verify")]),
+                    atom("kind", [var("Relationship"), var("Rel")]),
+                    atom("edge", [var("Relationship"), constant("source"), var("Source")]),
+                    atom(
+                        "edge",
+                        [var("Relationship"), constant("target"), var("Requirement")],
+                    ),
+                ],
+            ),
+        ],
+        diagnostics: Vec::new(),
+    }
+}
+
+pub fn sysml_metamodel_adapter_from_graph(graph: &Graph) -> RulePack {
+    let mut facts = BTreeSet::new();
+    for element in graph.elements() {
+        if sysml_is_requirement_kind(&element.kind) && sysml_trace_relationship_role(&element.kind).is_none() {
+            facts.insert(Fact::new("requirement_kind", [element.kind.to_string()]));
+        }
+        if let Some(role) = sysml_trace_relationship_role(&element.kind) {
+            facts.insert(Fact::new(
+                "relationship_kind",
+                [element.kind.to_string(), role.to_string()],
+            ));
+        }
+    }
+
+    RulePack {
+        id: "sysml.metamodel.adapter".to_string(),
+        version: CORE_RULEPACK_VERSION.to_string(),
+        metadata: BTreeMap::from([
+            (
+                "description".to_string(),
+                serde_json::Value::String(
+                    "Generated SysML metamodel adapter facts for stable Mercurio predicates"
+                        .to_string(),
+                ),
+            ),
+            (
+                "elementCount".to_string(),
+                serde_json::json!(graph.elements().len()),
+            ),
+        ]),
+        facts: facts.into_iter().collect(),
+        rules: Vec::new(),
+        diagnostics: Vec::new(),
+    }
+}
+
+pub fn sysml_is_requirement_kind(kind: &str) -> bool {
+    kind.contains("Requirement")
+}
+
+pub fn sysml_trace_relationship_role(kind: &str) -> Option<&'static str> {
+    let lower = kind.to_ascii_lowercase();
+    if lower.contains("satisfy") {
+        Some("satisfy")
+    } else if lower.contains("verify") {
+        Some("verify")
+    } else {
+        None
+    }
+}
+
+fn rule<const N: usize>(id: &str, head: Atom, body: [Atom; N]) -> Rule {
+    Rule {
+        id: id.to_string(),
+        head,
+        body: body.into_iter().collect(),
+    }
+}
+
+fn atom<const N: usize>(predicate: &str, terms: [Term; N]) -> Atom {
+    Atom {
+        predicate: predicate.to_string(),
+        terms: terms.into_iter().collect(),
+    }
+}
+
+fn var(name: &str) -> Term {
+    Term::Var(name.to_string())
+}
+
+fn constant(value: &str) -> Term {
+    Term::Const(value.to_string())
+}
 
 pub fn sysml_semantic_capability_profile() -> SemanticCapabilityProfile {
     let mut profile = SemanticCapabilityProfile::default()
@@ -363,7 +602,7 @@ fn sysml_table_oracle() -> TableSemanticCapabilityOracle {
 pub fn sysml_language_profile() -> LanguageProfile {
     LanguageProfile {
         id: SYSML_LANGUAGE_PROFILE_ID.to_string(),
-        language: SourceLanguage::Model,
+        language: LanguageId::from("model"),
         language_version: "2.0".to_string(),
         metamodel_version: "sysml-2.0".to_string(),
         stdlib_version: "sysml-2.0".to_string(),
@@ -371,10 +610,10 @@ pub fn sysml_language_profile() -> LanguageProfile {
         kir_schema_version: mercurio_core::ir::KIR_SCHEMA_VERSION.to_string(),
         canonical_kinds: BTreeMap::from([
             (
-                SemanticConcept::Package,
+                Concept::PACKAGE,
                 "KerML::Kernel::Package".to_string(),
             ),
-            (SemanticConcept::Type, "KerML::Kernel::Type".to_string()),
+            (Concept::TYPE, "KerML::Kernel::Type".to_string()),
         ]),
         semantic_anchors: BTreeMap::from([
             (
@@ -499,6 +738,8 @@ pub fn normalize_definition_keyword(keyword: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use mercurio_core::{Graph, KirDocument, KirElement, materialize_core_indexes};
+    use serde_json::json;
 
     #[test]
     fn sysml_profile_owns_domain_semantic_anchors() {
@@ -510,8 +751,63 @@ mod tests {
             "SysML::Requirements::RequirementUsage"
         );
         assert_eq!(
-            profile.canonical_kinds[&SemanticConcept::Package],
+            profile.canonical_kinds[&Concept::PACKAGE],
             "KerML::Kernel::Package"
+        );
+    }
+
+    #[test]
+    fn sysml_trace_rulepack_derives_requirement_indexes() {
+        let graph = Graph::from_document(KirDocument {
+            metadata: Default::default(),
+            elements: vec![
+                KirElement {
+                    id: "metafeature.SysML.Trace.verify".to_string(),
+                    kind: "MetamodelFeature".to_string(),
+                    layer: 1,
+                    properties: [
+                        (
+                            "kir_property".to_string(),
+                            json!("verify"),
+                        ),
+                        (
+                            "feature_kind".to_string(),
+                            json!("reference"),
+                        ),
+                    ]
+                    .into_iter()
+                    .collect(),
+                },
+                KirElement {
+                    id: "req.Braking".to_string(),
+                    kind: "SysML::Requirements::RequirementUsage".to_string(),
+                    layer: 2,
+                    properties: Default::default(),
+                },
+                KirElement {
+                    id: "case.BrakeTest".to_string(),
+                    kind: "SysML::Verification::VerificationCaseUsage".to_string(),
+                    layer: 2,
+                    properties: [("verify".to_string(), json!("req.Braking"))]
+                        .into_iter()
+                        .collect(),
+                },
+            ],
+        })
+        .unwrap();
+        let indexes = materialize_core_indexes(
+            &graph,
+            &[
+                sysml_trace_rulepack(),
+                sysml_metamodel_adapter_from_graph(&graph),
+            ],
+        )
+        .unwrap();
+
+        assert!(indexes.requirements.contains("req.Braking"));
+        assert_eq!(
+            indexes.verified_by["req.Braking"],
+            ["case.BrakeTest".to_string()].into_iter().collect()
         );
     }
 

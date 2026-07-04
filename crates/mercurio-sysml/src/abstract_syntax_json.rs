@@ -11,6 +11,8 @@ use mercurio_kir::{
 use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 
+use crate::sysml_field_specs;
+
 pub const SYSML_JSON_IMPORTER_VERSION: &str = concat!(
     "mercurio-sysml/",
     env!("CARGO_PKG_VERSION"),
@@ -154,7 +156,8 @@ fn import_elements(
     let mut diagnostics = Vec::new();
     let mut seen = BTreeSet::new();
     let mut imported = Vec::new();
-    let registry = KirFieldRegistry::standard();
+    let mut registry = KirFieldRegistry::structural();
+    registry.register_fields(sysml_field_specs().iter().copied());
 
     for (index, value) in elements.into_iter().enumerate() {
         let path = format!("elements[{index}]");

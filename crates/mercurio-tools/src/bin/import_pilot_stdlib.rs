@@ -7,6 +7,7 @@ use mercurio_core::{
     Graph, PilotExportDocument, RulePack, default_stdlib_path, load_pilot_export,
     normalize_pilot_export, repo_path, repo_root,
 };
+use mercurio_sysml::sysml_metamodel_adapter_from_graph;
 use mercurio_tools::sha256_file;
 use serde_json::{Value, json};
 use time::OffsetDateTime;
@@ -23,7 +24,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let export = load_pilot_export(&input_path)?;
     let mut kir = normalize_pilot_export(export.clone())?;
     kir.metadata = build_kir_metadata(&args, &input_path, &export)?;
-    let rulepack = RulePack::metamodel_adapter_from_graph(&Graph::from_document(kir.clone())?);
+    let rulepack = sysml_metamodel_adapter_from_graph(&Graph::from_document(kir.clone())?);
     kir.write_pretty_to_path(&args.output_path)?;
     write_rulepack(&rulepack, &args.rulepack_output_path)?;
 
