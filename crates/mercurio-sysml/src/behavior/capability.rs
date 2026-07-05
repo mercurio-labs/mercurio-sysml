@@ -7,9 +7,9 @@ use crate::behavior::{
 use mercurio_core::{
     CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind, CapabilityMaturity,
     CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry, CapabilityRunReport,
-    CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget, EvidenceGraph, EvidenceNode,
-    EvidenceNodeKind, InsightConfidence, InsightKind, InsightPolarity, InsightScope,
-    DiagnosticKind, InsightSeverity, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
+    CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget, DiagnosticKind, EvidenceGraph,
+    EvidenceNode, EvidenceNodeKind, InsightConfidence, InsightKind, InsightPolarity, InsightScope,
+    InsightSeverity, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
     SemanticDiagnosticSeverity, SemanticWorkspaceSnapshot, stable_digest,
 };
 use serde_json::{Value, json};

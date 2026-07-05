@@ -5,7 +5,7 @@ edition.workspace = true
 license.workspace = true
 
 [dependencies]
-mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
 mercurio-simulation-core = { path = "../../../mercurio-foundation/crates/mercurio-simulation-core" }
 mercurio-sysml = { path = "../mercurio-sysml" }
 serde = { workspace = true, features = ["derive"] }

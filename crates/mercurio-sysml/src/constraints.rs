@@ -9,10 +9,10 @@ use mercurio_core::{
     AnalysisScope, CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind,
     CapabilityMaturity, CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry,
     CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget,
-    EvidenceGraph, EvidenceNode, EvidenceNodeKind, ExecutionContext, ExpressionIr,
+    DiagnosticKind, EvidenceGraph, EvidenceNode, EvidenceNodeKind, ExecutionContext, ExpressionIr,
     InsightConfidence, InsightKind, InsightPolarity, InsightScope, InsightSeverity,
-    DiagnosticKind, SemanticArtifact, SemanticCapability, SemanticDiagnostic,
-    SemanticDiagnosticSeverity, SemanticInsight, SemanticWorkspaceSnapshot, stable_digest,
+    SemanticArtifact, SemanticCapability, SemanticDiagnostic, SemanticDiagnosticSeverity,
+    SemanticInsight, SemanticWorkspaceSnapshot, stable_digest,
 };
 
 const EPSILON: f64 = 1.0e-9;

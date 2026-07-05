@@ -4,8 +4,8 @@ use std::collections::BTreeSet;
 use mercurio_core::{
     Atom, AttributePolicyAnswer, CORE_RULEPACK_VERSION, CapabilityAnswer, Concept, Fact, Graph,
     KirFieldKind, LanguageId, Rule, RulePack, SemanticCapabilityOracle, SemanticCapabilityProfile,
-    SemanticElementAuthoring, SemanticElementForm, Term,
-    TableSemanticCapabilityOracle, language::profile::LanguageProfile,
+    SemanticElementAuthoring, SemanticElementForm, TableSemanticCapabilityOracle, Term,
+    language::profile::LanguageProfile,
 };
 
 #[derive(Debug, Clone, Default)]
@@ -241,7 +241,10 @@ pub fn sysml_trace_rulepack() -> RulePack {
                 [
                     atom("relationship_kind", [var("Rel"), constant("satisfy")]),
                     atom("kind", [var("Relationship"), var("Rel")]),
-                    atom("edge", [var("Relationship"), constant("source"), var("Source")]),
+                    atom(
+                        "edge",
+                        [var("Relationship"), constant("source"), var("Source")],
+                    ),
                     atom(
                         "edge",
                         [var("Relationship"), constant("target"), var("Requirement")],
@@ -270,7 +273,10 @@ pub fn sysml_trace_rulepack() -> RulePack {
                 [
                     atom("relationship_kind", [var("Rel"), constant("verify")]),
                     atom("kind", [var("Relationship"), var("Rel")]),
-                    atom("edge", [var("Relationship"), constant("source"), var("Source")]),
+                    atom(
+                        "edge",
+                        [var("Relationship"), constant("source"), var("Source")],
+                    ),
                     atom(
                         "edge",
                         [var("Relationship"), constant("target"), var("Requirement")],
@@ -285,7 +291,9 @@ pub fn sysml_trace_rulepack() -> RulePack {
 pub fn sysml_metamodel_adapter_from_graph(graph: &Graph) -> RulePack {
     let mut facts = BTreeSet::new();
     for element in graph.elements() {
-        if sysml_is_requirement_kind(&element.kind) && sysml_trace_relationship_role(&element.kind).is_none() {
+        if sysml_is_requirement_kind(&element.kind)
+            && sysml_trace_relationship_role(&element.kind).is_none()
+        {
             facts.insert(Fact::new("requirement_kind", [element.kind.to_string()]));
         }
         if let Some(role) = sysml_trace_relationship_role(&element.kind) {
@@ -609,10 +617,7 @@ pub fn sysml_language_profile() -> LanguageProfile {
         stdlib_path: "resources/sysml/sysml-library.kir.json".to_string(),
         kir_schema_version: mercurio_core::ir::KIR_SCHEMA_VERSION.to_string(),
         canonical_kinds: BTreeMap::from([
-            (
-                Concept::PACKAGE,
-                "KerML::Kernel::Package".to_string(),
-            ),
+            (Concept::PACKAGE, "KerML::Kernel::Package".to_string()),
             (Concept::TYPE, "KerML::Kernel::Type".to_string()),
         ]),
         semantic_anchors: BTreeMap::from([
@@ -766,14 +771,8 @@ mod tests {
                     kind: "MetamodelFeature".to_string(),
                     layer: 1,
                     properties: [
-                        (
-                            "kir_property".to_string(),
-                            json!("verify"),
-                        ),
-                        (
-                            "feature_kind".to_string(),
-                            json!("reference"),
-                        ),
+                        ("kir_property".to_string(), json!("verify")),
+                        ("feature_kind".to_string(), json!("reference")),
                     ]
                     .into_iter()
                     .collect(),

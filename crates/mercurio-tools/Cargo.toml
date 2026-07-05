@@ -52,6 +52,18 @@ name = "generate_sample_views"
 path = "src/bin/generate_sample_views.rs"
 
 [[bin]]
+name = "render_state_machine_view"
+path = "src/bin/render_state_machine_view.rs"
+
+[[bin]]
+name = "render_activity_view"
+path = "src/bin/render_activity_view.rs"
+
+[[bin]]
+name = "render_bdd_view"
+path = "src/bin/render_bdd_view.rs"
+
+[[bin]]
 name = "build_stdlib_release"
 path = "src/bin/build_stdlib_release.rs"
 required-features = ["legacy-pilot-tools"]
@@ -108,7 +120,7 @@ name = "capability_probe"
 path = "src/bin/capability_probe.rs"
 
 [dependencies]
-mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
 mercurio-kerml = { path = "../mercurio-kerml" }
 mercurio-language-frontend = { path = "../mercurio-language-frontend" }
 mercurio-requirements = { path = "../mercurio-requirements" }

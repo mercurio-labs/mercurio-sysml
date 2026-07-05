@@ -103,11 +103,11 @@ pub use semantic_profile::{
     SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_RELATIONSHIP_KINDS,
     SYSML_USAGE_KEYWORDS, SysmlSemanticCapabilityOracle, normalize_definition_keyword,
     sysml_definition_keyword_for_usage, sysml_definition_kind, sysml_field_specs,
-    sysml_is_container_kind, sysml_is_requirement_kind,
-    sysml_is_definition_keyword, sysml_is_satisfy_relationship, sysml_is_usage_keyword,
-    sysml_language_profile, sysml_metamodel_adapter_from_graph, sysml_relationship_usage_keyword,
-    sysml_trace_relationship_role, sysml_trace_relationship_uses_owner_source, sysml_trace_rulepack,
-    sysml_usage_kind,
+    sysml_is_container_kind, sysml_is_definition_keyword, sysml_is_requirement_kind,
+    sysml_is_satisfy_relationship, sysml_is_usage_keyword, sysml_language_profile,
+    sysml_metamodel_adapter_from_graph, sysml_relationship_usage_keyword,
+    sysml_trace_relationship_role, sysml_trace_relationship_uses_owner_source,
+    sysml_trace_rulepack, sysml_usage_kind,
 };
 pub use session::{
     SYSML_PART_USAGE_KIND, SYSML_REQUIREMENT_USAGE_KIND, SYSML_SATISFY_KEYWORD,

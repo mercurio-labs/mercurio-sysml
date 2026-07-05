@@ -9,7 +9,7 @@ embed-stdlib = []
 
 [dependencies]
 mercurio-kerml = { path = "../mercurio-kerml" }
-mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
 mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
 mercurio-language-frontend = { path = "../mercurio-language-frontend" }
 mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
@@ -17,7 +17,7 @@ serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 
 [build-dependencies]
-mercurio-core = { package = "mercurio-foundation", path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 

@@ -11,7 +11,7 @@ path = "src/main.rs"
 [dependencies]
 clap.workspace = true
 clap_complete.workspace = true
-mercurio-foundation = { path = "../../../mercurio-foundation/crates/mercurio-foundation" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
 mercurio-kerml = { path = "../mercurio-kerml" }
 mercurio-sysml = { path = "../mercurio-sysml", features = ["embed-stdlib"] }
 reqwest = { workspace = true, features = ["blocking"] }

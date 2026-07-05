@@ -42,7 +42,7 @@ fn load_baseline_for_build(resources: &Path, metamodel_id: &str) -> KirDocument 
         &resources.join("kernel/kerml-kernel.kir.json"),
         sysml_field_specs().iter().copied(),
     )
-        .expect("failed to load kernel KIR");
+    .expect("failed to load kernel KIR");
     let sysml = KirDocument::from_path_with_registered_fields(
         &resources
             .join("metamodels")
