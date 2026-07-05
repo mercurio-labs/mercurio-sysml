@@ -20,8 +20,10 @@ pub mod semantic_profile;
 pub mod session;
 
 pub use abstract_syntax_json::{
-    SYSML_JSON_IMPORTER_VERSION, SysmlJsonImportDiagnostic, SysmlJsonImportError,
-    SysmlJsonImportOptions, SysmlJsonImportReport, SysmlJsonImportSeverity,
+    SYSML_JSON_EXPORTER_VERSION, SYSML_JSON_IMPORTER_VERSION, SysmlJsonExportDiagnostic,
+    SysmlJsonExportError, SysmlJsonExportOptions, SysmlJsonExportReport, SysmlJsonExportSeverity,
+    SysmlJsonImportDiagnostic, SysmlJsonImportError, SysmlJsonImportOptions, SysmlJsonImportReport,
+    SysmlJsonImportSeverity, export_sysml_abstract_syntax_json, export_sysml_abstract_syntax_value,
     import_sysml_abstract_syntax_json, import_sysml_abstract_syntax_value,
     import_sysml_api_elements,
 };
