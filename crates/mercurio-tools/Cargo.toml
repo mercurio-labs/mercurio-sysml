@@ -22,6 +22,10 @@ name = "compare_pilot_ast"
 path = "src/bin/compare_pilot_ast.rs"
 
 [[bin]]
+name = "compare_sysml_json_interop"
+path = "src/bin/compare_sysml_json_interop.rs"
+
+[[bin]]
 name = "compare_pilot_compile_errors"
 path = "src/bin/compare_pilot_compile_errors.rs"
 required-features = ["legacy-pilot-tools"]
