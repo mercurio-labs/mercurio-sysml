@@ -204,6 +204,26 @@ mod tests {
     }
 
     #[test]
+    fn partial_compile_diagnostics_include_semantic_subjects() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let report = compile_sysml_text_with_context_report(
+            "package Demo { part def Good; part vehicle { part good: Good; part bad: Missing; } }",
+            "inline.sysml",
+            &[],
+            &stdlib,
+        );
+
+        assert_eq!(report.status, SemanticCompileStatus::Partial);
+        assert!(
+            report
+                .diagnostics
+                .iter()
+                .filter(|diagnostic| diagnostic.message.contains("unresolved type `Missing`"))
+                .any(|diagnostic| !diagnostic.subjects.is_empty())
+        );
+    }
+
+    #[test]
     fn individual_part_compiles_to_individual_usage() {
         let stdlib = load_sysml_baseline().unwrap();
         let document = compile_sysml_text(

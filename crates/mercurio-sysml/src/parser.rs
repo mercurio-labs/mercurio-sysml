@@ -17,6 +17,7 @@ use mercurio_language_frontend::resolver::{
     resolve_module_with_context, resolve_module_with_resolver_context,
 };
 use mercurio_language_frontend::transpile::transpile_module;
+use serde_json::Value;
 
 use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, release_bundle};
 
@@ -513,6 +514,7 @@ pub fn compile_sysml_module_with_resolver_context_report_with_limit(
             mappings,
         ) {
             Ok(document) => {
+                attach_diagnostic_subjects_from_document(&mut diagnostics, source_name, &document);
                 log_compile_timed_event(
                     "sysml.compile.partial_attempt",
                     attempt_start,
@@ -901,6 +903,101 @@ fn span_position_before_or_equal(
     right_col: usize,
 ) -> bool {
     left_line < right_line || (left_line == right_line && left_col <= right_col)
+}
+
+fn attach_diagnostic_subjects_from_document(
+    diagnostics: &mut [Diagnostic],
+    source_name: &str,
+    document: &KirDocument,
+) {
+    for diagnostic in diagnostics {
+        if !diagnostic.subjects.is_empty() {
+            continue;
+        }
+        let Some(span) = diagnostic.span.as_ref() else {
+            continue;
+        };
+        if let Some(subject) = closest_subject_for_span(document, source_name, span) {
+            diagnostic.subjects.push(subject);
+        }
+    }
+}
+
+fn closest_subject_for_span(
+    document: &KirDocument,
+    source_name: &str,
+    span: &SourceSpan,
+) -> Option<String> {
+    let candidates = document
+        .elements
+        .iter()
+        .filter(|element| element.layer == 2)
+        .filter_map(|element| {
+            let element_span = element_source_span(source_name, &element.properties)?;
+            Some((element_span, element.id.clone()))
+        })
+        .collect::<Vec<_>>();
+
+    candidates
+        .iter()
+        .filter(|(element_span, _)| span_contains(element_span, span))
+        .map(|(element_span, id)| (span_extent(element_span), id.clone()))
+        .min_by(|left, right| left.0.cmp(&right.0).then_with(|| left.1.cmp(&right.1)))
+        .or_else(|| {
+            candidates
+                .iter()
+                .filter(|(element_span, _)| {
+                    span_position_before_or_equal(
+                        element_span.start_line,
+                        element_span.start_col,
+                        span.start_line,
+                        span.start_col,
+                    )
+                })
+                .map(|(element_span, id)| (span_extent(element_span), id.clone()))
+                .max_by(|left, right| left.0.cmp(&right.0).then_with(|| left.1.cmp(&right.1)))
+        })
+        .map(|(_, id)| id)
+}
+
+fn element_source_span(
+    source_name: &str,
+    properties: &BTreeMap<String, Value>,
+) -> Option<SourceSpan> {
+    let metadata = properties.get("metadata").and_then(Value::as_object);
+    let source_file = metadata
+        .and_then(|metadata| metadata.get("source_file"))
+        .or_else(|| properties.get("source_file"))?
+        .as_str()?;
+    if !source_file_matches(source_file, source_name) {
+        return None;
+    }
+
+    let span = metadata
+        .and_then(|metadata| metadata.get("source_span"))
+        .or_else(|| properties.get("source_span"))?
+        .as_object()?;
+    Some(SourceSpan {
+        start_line: span.get("start_line")?.as_u64()? as usize,
+        start_col: span.get("start_col")?.as_u64()? as usize,
+        end_line: span.get("end_line")?.as_u64()? as usize,
+        end_col: span.get("end_col")?.as_u64()? as usize,
+    })
+}
+
+fn source_file_matches(source_file: &str, source_name: &str) -> bool {
+    let source_file = source_file.replace('\\', "/");
+    let source_name = source_name.replace('\\', "/");
+    source_file == source_name || source_file.ends_with(&format!("/{source_name}"))
+}
+
+fn span_extent(span: &SourceSpan) -> (usize, usize, usize, usize) {
+    (
+        span.end_line.saturating_sub(span.start_line),
+        span.end_col.saturating_sub(span.start_col),
+        span.end_line,
+        span.end_col,
+    )
 }
 
 pub fn parse_sysml(input: &str) -> Result<SysmlModule, Diagnostic> {
