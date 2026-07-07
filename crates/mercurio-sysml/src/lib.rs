@@ -218,6 +218,20 @@ mod tests {
     }
 
     #[test]
+    fn direct_compile_semantic_error_is_validation_kind() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let diagnostic = compile_sysml_text(
+            "package Demo { part vehicle: Missing; }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap_err();
+
+        assert_eq!(diagnostic.kind, DiagnosticKind::Validation);
+        assert!(diagnostic.message.contains("unresolved type `Missing`"));
+    }
+
+    #[test]
     fn partial_compile_diagnostics_include_semantic_subjects() {
         let stdlib = load_sysml_baseline().unwrap();
         let report = compile_sysml_text_with_context_report(

@@ -328,7 +328,8 @@ pub fn compile_sysml_module(
     stdlib: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
     let mapping_start = compile_timer_start();
-    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)?;
+    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)
+        .map_err(semantic_diagnostic)?;
     let mappings = profile.mappings;
     log_compile_timed_event(
         "sysml.compile.mapping_load",
@@ -338,8 +339,8 @@ pub fn compile_sysml_module(
     );
 
     let resolve_start = compile_timer_start();
-    let resolved = resolve_module(module, stdlib, mappings)?;
-    validate_metadata_usages(&resolved)?;
+    let resolved = resolve_module(module, stdlib, mappings).map_err(semantic_diagnostic)?;
+    validate_metadata_usages(&resolved).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.resolve",
         resolve_start,
@@ -348,7 +349,8 @@ pub fn compile_sysml_module(
     );
 
     let transpile_start = compile_timer_start();
-    let document = transpile_module(&resolved, source_name, mappings)?;
+    let document =
+        transpile_module(&resolved, source_name, mappings).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.transpile",
         transpile_start,
@@ -461,7 +463,7 @@ pub fn compile_sysml_module_with_context_report_with_limit(
         Err(diagnostic) => {
             return SemanticCompileReport {
                 status: SemanticCompileStatus::Failed,
-                diagnostics: vec![diagnostic],
+                diagnostics: vec![semantic_diagnostic(diagnostic)],
                 document: None,
             };
         }
@@ -566,7 +568,7 @@ pub fn compile_sysml_module_with_resolver_context_report_with_limit(
                 match ResolverContext::from_modules(&working_context_modules, stdlib, mappings) {
                     Ok(context) => owned_resolver_context = Some(context),
                     Err(diagnostic) => {
-                        diagnostics.push(diagnostic);
+                        diagnostics.push(semantic_diagnostic(diagnostic));
                         break;
                     }
                 }
@@ -575,7 +577,7 @@ pub fn compile_sysml_module_with_resolver_context_report_with_limit(
     }
 
     if max_attempts < MAX_PARTIAL_COMPILE_ATTEMPTS && diagnostics.len() >= max_attempts {
-        diagnostics.push(Diagnostic::new(
+        diagnostics.push(Diagnostic::semantic(
             format!(
                 "partial semantic recovery stopped after {max_attempts} attempts for a large source file"
             ),
@@ -609,7 +611,8 @@ pub fn compile_sysml_module_with_context(
     stdlib: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
     let mapping_start = compile_timer_start();
-    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)?;
+    let profile = LanguageProfile::load_for_profile(LATEST_SYSML_METAMODEL_ID)
+        .map_err(semantic_diagnostic)?;
     let mappings = profile.mappings;
     log_compile_timed_event(
         "sysml.compile.mapping_load",
@@ -619,8 +622,9 @@ pub fn compile_sysml_module_with_context(
     );
 
     let resolve_start = compile_timer_start();
-    let resolved = resolve_module_with_context(module, context_modules, stdlib, mappings)?;
-    validate_metadata_usages(&resolved)?;
+    let resolved = resolve_module_with_context(module, context_modules, stdlib, mappings)
+        .map_err(semantic_diagnostic)?;
+    validate_metadata_usages(&resolved).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.resolve",
         resolve_start,
@@ -633,7 +637,8 @@ pub fn compile_sysml_module_with_context(
     );
 
     let transpile_start = compile_timer_start();
-    let document = transpile_module(&resolved, source_name, mappings)?;
+    let document =
+        transpile_module(&resolved, source_name, mappings).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.transpile",
         transpile_start,
@@ -654,8 +659,9 @@ pub fn compile_sysml_module_with_resolver_context(
     mappings: &MappingBundle,
 ) -> Result<KirDocument, Diagnostic> {
     let resolve_start = compile_timer_start();
-    let resolved = resolve_module_with_resolver_context(module, resolver_context, mappings)?;
-    validate_metadata_usages(&resolved)?;
+    let resolved = resolve_module_with_resolver_context(module, resolver_context, mappings)
+        .map_err(semantic_diagnostic)?;
+    validate_metadata_usages(&resolved).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.resolve",
         resolve_start,
@@ -668,7 +674,8 @@ pub fn compile_sysml_module_with_resolver_context(
     );
 
     let transpile_start = compile_timer_start();
-    let document = transpile_module(&resolved, source_name, mappings)?;
+    let document =
+        transpile_module(&resolved, source_name, mappings).map_err(semantic_diagnostic)?;
     log_compile_timed_event(
         "sysml.compile.transpile",
         transpile_start,
@@ -737,6 +744,10 @@ fn validate_metadata_usages(resolved: &ResolvedModule) -> Result<(), Diagnostic>
     }
 
     Ok(())
+}
+
+fn semantic_diagnostic(diagnostic: Diagnostic) -> Diagnostic {
+    diagnostic.with_kind(DiagnosticKind::Validation)
 }
 
 fn all_resolved_usages(resolved: &ResolvedModule) -> Vec<&ResolvedUsage> {
