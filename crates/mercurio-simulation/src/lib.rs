@@ -30,6 +30,7 @@ pub const SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID: &str = "sysml.behavior.dynamic";
 pub const SYSML_ANALYSIS_CASE_CAPABILITY_ID: &str = "sysml.analysis.case";
 pub const SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_ID: &str = "sysml.constraint.analysis";
 pub const SYSML_ACTIVITY_EXECUTION_CAPABILITY_ID: &str = "sysml.activity.execution";
+pub const SYSML_SIMULATION_CAPABILITY_VERSION: &str = "0.1.0";
 pub const SIMULATION_TRACE_ARTIFACT_KIND: &str = "simulation_trace";
 pub const SIMULATION_TRACE_SCHEMA: &str = "mercurio.simulation.trace.v1";
 pub const ACTIVITY_EXECUTION_SUMMARY_ARTIFACT_KIND: &str = "activity_execution_summary";
@@ -371,6 +372,7 @@ fn activity_execution_report(
     Ok(CapabilityRunReport {
         run_id: run_id.to_string(),
         capability_id: SYSML_ACTIVITY_EXECUTION_CAPABILITY_ID.to_string(),
+        capability_version: Some(SYSML_SIMULATION_CAPABILITY_VERSION.to_string()),
         status,
         target: CapabilityTarget::Element {
             element_id: spec.case_ref.element_id.clone(),
@@ -787,6 +789,7 @@ fn composite_analysis_report(
     CapabilityRunReport {
         run_id: run_id.to_string(),
         capability_id: SYSML_ANALYSIS_CASE_CAPABILITY_ID.to_string(),
+        capability_version: Some(SYSML_SIMULATION_CAPABILITY_VERSION.to_string()),
         status,
         target: CapabilityTarget::Element {
             element_id: spec.case_ref.element_id.clone(),
@@ -884,6 +887,7 @@ pub fn simulation_trace_report(
     Ok(CapabilityRunReport {
         run_id: run_id.to_string(),
         capability_id: SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID.to_string(),
+        capability_version: Some(SYSML_SIMULATION_CAPABILITY_VERSION.to_string()),
         status: capability_status_from_simulation_status(trace.status),
         target: CapabilityTarget::Element {
             element_id: reported_analysis_case_id.to_string(),

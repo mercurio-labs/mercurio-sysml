@@ -17,6 +17,8 @@ use serde_json::{Value, json};
 #[derive(Debug, Clone, Default)]
 pub struct SysmlDynamicBehaviorCapability;
 
+pub const SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_VERSION: &str = "0.1.0";
+
 pub fn register_sysml_behavior_capability(
     registry: &mut CapabilityRegistry,
 ) -> Result<(), CapabilityError> {
@@ -115,6 +117,7 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
             return Ok(CapabilityRunReport {
                 run_id: request.run_id,
                 capability_id: request.capability_id,
+                capability_version: Some(SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_VERSION.to_string()),
                 status: CapabilityRunStatus::NotApplicable,
                 target: request.target,
                 insights: Vec::new(),
@@ -272,6 +275,7 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
         Ok(CapabilityRunReport {
             run_id: request.run_id.clone(),
             capability_id: request.capability_id,
+            capability_version: Some(SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_VERSION.to_string()),
             status,
             target: request.target,
             insights,
