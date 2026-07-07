@@ -175,6 +175,7 @@ impl LanguageService for SysmlLanguageModule {
 mod tests {
     use super::*;
     use mercurio_core::Runtime;
+    use mercurio_kir::DiagnosticKind;
     use mercurio_language_contracts::LanguageRegistry;
     use std::path::Path;
 
@@ -183,6 +184,19 @@ mod tests {
         let module = parse("package Demo { part def Vehicle; }").unwrap();
 
         assert!(module.package.is_some());
+    }
+
+    #[test]
+    fn recovering_parse_diagnostics_are_syntax_kind() {
+        let report = parse_sysml_recovering("package Demo { } }").unwrap();
+
+        assert!(!report.diagnostics.is_empty());
+        assert!(
+            report
+                .diagnostics
+                .iter()
+                .all(|diagnostic| diagnostic.kind == DiagnosticKind::Syntax)
+        );
     }
 
     #[test]
@@ -201,6 +215,41 @@ mod tests {
                 || element.properties.get("declared_name")
                     == Some(&serde_json::Value::String("Vehicle".to_string()))
         }));
+    }
+
+    #[test]
+    fn direct_compile_semantic_error_is_validation_kind() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let diagnostic = compile_sysml_text(
+            "package Demo { part vehicle: Missing; }",
+            "inline.sysml",
+            &stdlib,
+        )
+        .unwrap_err();
+
+        assert_eq!(diagnostic.kind, DiagnosticKind::Validation);
+        assert!(diagnostic.message.contains("unresolved type `Missing`"));
+    }
+
+    #[test]
+    fn partial_compile_diagnostics_include_semantic_subjects() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let report = compile_sysml_text_with_context_report(
+            "package Demo { part def Good; part vehicle { part good: Good; part bad: Missing; } }",
+            "inline.sysml",
+            &[],
+            &stdlib,
+        );
+
+        assert_eq!(report.status, SemanticCompileStatus::Partial);
+        assert!(
+            report
+                .diagnostics
+                .iter()
+                .filter(|diagnostic| diagnostic.message.contains("unresolved type `Missing`"))
+                .any(|diagnostic| diagnostic.kind == DiagnosticKind::Validation
+                    && !diagnostic.subjects.is_empty())
+        );
     }
 
     #[test]

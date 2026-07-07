@@ -16,6 +16,7 @@ use mercurio_core::{
 };
 
 const EPSILON: f64 = 1.0e-9;
+pub const SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_VERSION: &str = "0.1.0";
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct ConstraintGraphRequestDto {
@@ -431,6 +432,7 @@ impl SemanticCapability for SysmlConstraintAnalysisCapability {
             return Ok(CapabilityRunReport {
                 run_id: request.run_id,
                 capability_id: request.capability_id,
+                capability_version: Some(SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_VERSION.to_string()),
                 status: CapabilityRunStatus::NotApplicable,
                 target: request.target,
                 insights: Vec::new(),
@@ -547,6 +549,7 @@ impl SemanticCapability for SysmlConstraintAnalysisCapability {
         Ok(CapabilityRunReport {
             run_id: request.run_id,
             capability_id: request.capability_id,
+            capability_version: Some(SYSML_CONSTRAINT_ANALYSIS_CAPABILITY_VERSION.to_string()),
             status,
             target: request.target,
             insights,

@@ -1,6 +1,6 @@
 use std::path::{Path, PathBuf};
 
-use mercurio_kir::{KirDocument, KirError};
+use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
 use mercurio_language_contracts::ast::ParsedModule as SysmlModule;
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_frontend::SourceLanguage;
@@ -135,15 +135,17 @@ pub fn compile_kerml_module(
     source_name: &str,
     library_context: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
-    let profile = LanguageProfile::load(SourceLanguage::Kerml)?;
+    let profile = LanguageProfile::load(SourceLanguage::Kerml).map_err(semantic_diagnostic)?;
     let mappings = profile.mappings;
     let resolved = resolve_kerml_module_with_context(
         module,
         std::slice::from_ref(module),
         library_context,
         mappings,
-    )?;
+    )
+    .map_err(semantic_diagnostic)?;
     transpile_module_with_source(&resolved, source_name, "kerml", mappings)
+        .map_err(semantic_diagnostic)
 }
 
 pub fn compile_kerml_module_with_context(
@@ -152,11 +154,13 @@ pub fn compile_kerml_module_with_context(
     context_modules: &[SysmlModule],
     library_context: &KirDocument,
 ) -> Result<KirDocument, Diagnostic> {
-    let profile = LanguageProfile::load(SourceLanguage::Kerml)?;
+    let profile = LanguageProfile::load(SourceLanguage::Kerml).map_err(semantic_diagnostic)?;
     let mappings = profile.mappings;
     let resolved =
-        resolve_kerml_module_with_context(module, context_modules, library_context, mappings)?;
+        resolve_kerml_module_with_context(module, context_modules, library_context, mappings)
+            .map_err(semantic_diagnostic)?;
     transpile_module_with_source(&resolved, source_name, "kerml", mappings)
+        .map_err(semantic_diagnostic)
 }
 
 pub fn compile_kerml_module_with_resolver_context(
@@ -165,8 +169,10 @@ pub fn compile_kerml_module_with_resolver_context(
     resolver_context: &ResolverContext,
     mappings: &MappingBundle,
 ) -> Result<KirDocument, Diagnostic> {
-    let resolved = resolve_kerml_module_with_resolver_context(module, resolver_context, mappings)?;
+    let resolved = resolve_kerml_module_with_resolver_context(module, resolver_context, mappings)
+        .map_err(semantic_diagnostic)?;
     transpile_module_with_source(&resolved, source_name, "kerml", mappings)
+        .map_err(semantic_diagnostic)
 }
 
 pub fn compile_text(
@@ -188,6 +194,10 @@ pub fn compile_text_with_context(
 
 fn repo_path(relative: &str) -> PathBuf {
     repo_root().join(relative)
+}
+
+fn semantic_diagnostic(diagnostic: Diagnostic) -> Diagnostic {
+    diagnostic.with_kind(DiagnosticKind::Validation)
 }
 
 fn repo_root() -> PathBuf {
@@ -242,5 +252,17 @@ mod tests {
                 && element.properties.get("type")
                     == Some(&Value::String("type.Demo.Engine".to_string()))
         }));
+    }
+
+    #[test]
+    fn unresolved_kerml_import_is_validation_diagnostic() {
+        let diagnostic = compile_kerml_text_with_empty_context(
+            "package Demo { import Missing; classifier Vehicle; }",
+            "inline.kerml",
+        )
+        .unwrap_err();
+
+        assert_eq!(diagnostic.kind, DiagnosticKind::Validation);
+        assert!(diagnostic.message.contains("unresolved import `Missing`"));
     }
 }

@@ -20,6 +20,8 @@ pub use mercurio_core::{
 #[derive(Debug, Clone, Default)]
 pub struct RequirementAnalysisCapability;
 
+pub const REQUIREMENT_ANALYSIS_CAPABILITY_VERSION: &str = "0.1.0";
+
 pub fn register_requirement_analysis_capability(
     registry: &mut CapabilityRegistry,
 ) -> Result<(), CapabilityError> {
@@ -216,6 +218,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
             return Ok(CapabilityRunReport {
                 run_id: request.run_id,
                 capability_id: request.capability_id,
+                capability_version: Some(REQUIREMENT_ANALYSIS_CAPABILITY_VERSION.to_string()),
                 status: match readiness.status {
                     CapabilityReadinessStatus::NotApplicable => CapabilityRunStatus::NotApplicable,
                     _ => CapabilityRunStatus::Error,
@@ -404,6 +407,7 @@ impl SemanticCapability for RequirementAnalysisCapability {
         Ok(CapabilityRunReport {
             run_id: request.run_id,
             capability_id: request.capability_id,
+            capability_version: Some(REQUIREMENT_ANALYSIS_CAPABILITY_VERSION.to_string()),
             status: if has_gaps {
                 CapabilityRunStatus::Failed
             } else {
