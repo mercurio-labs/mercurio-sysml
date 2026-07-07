@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
-use mercurio_kir::{KirDocument, KirError};
+use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
 use mercurio_language_contracts::ast::{
     AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
     LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName,
@@ -539,6 +539,7 @@ pub fn compile_sysml_module_with_resolver_context_report_with_limit(
                 };
             }
             Err(diagnostic) => {
+                let diagnostic = diagnostic.with_kind(DiagnosticKind::Validation);
                 log_compile_timed_event(
                     "sysml.compile.partial_attempt",
                     attempt_start,

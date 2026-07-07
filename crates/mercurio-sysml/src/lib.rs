@@ -175,6 +175,7 @@ impl LanguageService for SysmlLanguageModule {
 mod tests {
     use super::*;
     use mercurio_core::Runtime;
+    use mercurio_kir::DiagnosticKind;
     use mercurio_language_contracts::LanguageRegistry;
     use std::path::Path;
 
@@ -183,6 +184,19 @@ mod tests {
         let module = parse("package Demo { part def Vehicle; }").unwrap();
 
         assert!(module.package.is_some());
+    }
+
+    #[test]
+    fn recovering_parse_diagnostics_are_syntax_kind() {
+        let report = parse_sysml_recovering("package Demo { } }").unwrap();
+
+        assert!(!report.diagnostics.is_empty());
+        assert!(
+            report
+                .diagnostics
+                .iter()
+                .all(|diagnostic| diagnostic.kind == DiagnosticKind::Syntax)
+        );
     }
 
     #[test]
@@ -219,7 +233,8 @@ mod tests {
                 .diagnostics
                 .iter()
                 .filter(|diagnostic| diagnostic.message.contains("unresolved type `Missing`"))
-                .any(|diagnostic| !diagnostic.subjects.is_empty())
+                .any(|diagnostic| diagnostic.kind == DiagnosticKind::Validation
+                    && !diagnostic.subjects.is_empty())
         );
     }
 
