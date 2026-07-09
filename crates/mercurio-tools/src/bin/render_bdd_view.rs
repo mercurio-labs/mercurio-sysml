@@ -50,6 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             show_attributes: false,
             show_edge_labels: true,
             group_by_layer: false,
+            show_affordances: false,
         },
     };
     let view_document = ViewDocumentDto::diagram(spec.clone());

@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "kir_schema_version": "0.4",
+    "parsed_from": "requirement-view-demo.sysml",
+    "source": "sysml"
+  },
+  "elements": [
+    {
+      "id": "pkg.VehicleRequirementExample",
+      "kind": "SysML::Package",
+      "properties": {
+        "declared_name": "VehicleRequirementExample",
+        "members": [
+          "type.VehicleRequirementExample.VehicleController",
+          "requirement.VehicleRequirementExample.safeStart",
+          "feature.VehicleRequirementExample.controller"
+        ],
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": null,
+            "ast_node": "PackageDecl",
+            "construct": "Package",
+            "elaboration_rules": [],
+            "metaclass": "SysML::Package"
+          },
+          "source_file": "requirement-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 1,
+            "end_line": 11,
+            "start_col": 1,
+            "start_line": 1
+          }
+        },
+        "metatype": "KerML::Kernel::Package",
+        "qualified_name": "VehicleRequirementExample"
+      }
+    },
+    {
+      "id": "type.VehicleRequirementExample.VehicleController",
+      "kind": "SysML::Systems::PartDefinition",
+      "properties": {
+        "declared_name": "VehicleController",
+        "is_abstract": false,
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "part",
+            "ast_node": "GenericDefinitionDecl",
+            "construct": "PartDefinition",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PartDefinition"
+          },
+          "source_file": "requirement-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 29,
+            "end_line": 2,
+            "start_col": 3,
+            "start_line": 2
+          }
+        },
+        "metatype": "SysML::Systems::PartDefinition",
+        "owner": "pkg.VehicleRequirementExample",
+        "qualified_name": "VehicleRequirementExample.VehicleController",
+        "specializes": [
+          "Parts::Part"
+        ]
+      }
+    },
+    {
+      "id": "requirement.VehicleRequirementExample.safeStart",
+      "kind": "KerML::Core::Feature",
+      "properties": {
+        "declared_name": "safeStart",
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "requirement",
+            "ast_node": "GenericUsageDecl",
+            "construct": "RequirementUsage",
+            "elaboration_rules": [],
+            "metaclass": "SysML::RequirementUsage"
+          },
+          "source_file": "requirement-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 6,
+            "end_line": 8,
+            "start_col": 3,
+            "start_line": 4
+          }
+        },
+        "metatype": "SysML::RequirementUsage",
+        "owner": "pkg.VehicleRequirementExample",
+        "qualified_name": "VehicleRequirementExample.safeStart"
+      }
+    },
+    {
+      "id": "feature.VehicleRequirementExample.controller",
+      "kind": "SysML::PartUsage",
+      "properties": {
+        "declared_name": "controller",
+        "definition": "type.VehicleRequirementExample.VehicleController",
+        "features": [
+          "satisfy.VehicleRequirementExample.controller.satisfy"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "members": [
+          "satisfy.VehicleRequirementExample.controller.satisfy"
+        ],
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "part",
+            "ast_node": "GenericUsageDecl",
+            "construct": "PartUsage",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PartUsage"
+          },
+          "source_file": "requirement-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 1,
+            "end_line": 10,
+            "start_col": 3,
+            "start_line": 8
+          }
+        },
+        "metatype": "SysML::Systems::PartUsage",
+        "owner": "pkg.VehicleRequirementExample",
+        "qualified_name": "VehicleRequirementExample.controller",
+        "specializes": [
+          "type.VehicleRequirementExample.VehicleController",
+          "Parts::parts"
+        ],
+        "subsetted_features": [
+          "Parts::parts"
+        ],
+        "type": [
+          "type.VehicleRequirementExample.VehicleController"
+        ]
+      }
+    },
+    {
+      "id": "satisfy.VehicleRequirementExample.controller.satisfy",
+      "kind": "SysML::Requirements::SatisfyRequirementUsage",
+      "properties": {
+        "declared_name": "satisfy",
+        "featuring_type": [
+          "feature.VehicleRequirementExample.controller"
+        ],
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "satisfy",
+            "ast_node": "GenericUsageDecl",
+            "construct": "SatisfyUsage",
+            "elaboration_rules": [
+              "satisfy-name-as-reference-target"
+            ],
+            "metaclass": "SysML::SatisfyUsage"
+          },
+          "source_file": "requirement-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 48,
+            "end_line": 9,
+            "start_col": 5,
+            "start_line": 9
+          }
+        },
+        "metatype": "SysML::SatisfyUsage",
+        "owner": "feature.VehicleRequirementExample.controller",
+        "owning_namespace": "feature.VehicleRequirementExample.controller",
+        "owning_type": "feature.VehicleRequirementExample.controller",
+        "source": "feature.VehicleRequirementExample.controller",
+        "target": "feature.VehicleRequirementExample.safeStart"
+      }
+    }
+  ]
+}

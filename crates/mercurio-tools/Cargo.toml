@@ -68,6 +68,14 @@ name = "render_bdd_view"
 path = "src/bin/render_bdd_view.rs"
 
 [[bin]]
+name = "render_ibd_view"
+path = "src/bin/render_ibd_view.rs"
+
+[[bin]]
+name = "render_requirement_view"
+path = "src/bin/render_requirement_view.rs"
+
+[[bin]]
 name = "build_stdlib_release"
 path = "src/bin/build_stdlib_release.rs"
 required-features = ["legacy-pilot-tools"]

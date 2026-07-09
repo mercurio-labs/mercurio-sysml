@@ -1,0 +1,411 @@
+{
+  "spec": {
+    "version": 1,
+    "kind": "internal_block",
+    "title": "IBD: VehicleInterfaceExample.Vehicle",
+    "description": "Compiled SysML internal block diagram rendered through the shared Mercurio view DTO path.",
+    "root": "type.VehicleInterfaceExample.Vehicle",
+    "query": {
+      "relations": [],
+      "direction": "children",
+      "depth": 4,
+      "include_libraries": false,
+      "include_user_model": true,
+      "max_nodes": 350,
+      "max_edges": 900
+    },
+    "layout": {
+      "engine": "dagre",
+      "direction": "LR"
+    },
+    "style": {
+      "show_attributes": false,
+      "show_edge_labels": true,
+      "group_by_layer": false
+    }
+  },
+  "symbols": [
+    {
+      "id": "symbol.feature_VehicleInterfaceExample_Vehicle_battery",
+      "element": "feature.VehicleInterfaceExample.Vehicle.battery",
+      "role": "part",
+      "properties": {
+        "shape": "part"
+      }
+    },
+    {
+      "id": "symbol.feature_VehicleInterfaceExample_Vehicle_controller",
+      "element": "feature.VehicleInterfaceExample.Vehicle.controller",
+      "role": "part",
+      "properties": {
+        "shape": "part"
+      }
+    },
+    {
+      "id": "symbol.feature_VehicleInterfaceExample_Vehicle_power",
+      "element": "feature.VehicleInterfaceExample.Vehicle.power",
+      "role": "port",
+      "properties": {
+        "shape": "port"
+      }
+    },
+    {
+      "id": "symbol.type_VehicleInterfaceExample_Vehicle",
+      "element": "type.VehicleInterfaceExample.Vehicle",
+      "role": "block",
+      "properties": {
+        "shape": "block"
+      }
+    },
+    {
+      "id": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_battery",
+      "element": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.battery",
+      "role": "edge",
+      "source": "symbol.type_VehicleInterfaceExample_Vehicle",
+      "target": "symbol.feature_VehicleInterfaceExample_Vehicle_battery",
+      "relation": "part",
+      "properties": {
+        "label_placement": "above",
+        "route": "orthogonal",
+        "source_decoration": "filled_diamond",
+        "target_decoration": "open_arrow"
+      }
+    },
+    {
+      "id": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_controller",
+      "element": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.controller",
+      "role": "edge",
+      "source": "symbol.type_VehicleInterfaceExample_Vehicle",
+      "target": "symbol.feature_VehicleInterfaceExample_Vehicle_controller",
+      "relation": "part",
+      "properties": {
+        "label_placement": "above",
+        "route": "orthogonal",
+        "source_decoration": "filled_diamond",
+        "target_decoration": "open_arrow"
+      }
+    },
+    {
+      "id": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_power",
+      "element": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.power",
+      "role": "edge",
+      "source": "symbol.type_VehicleInterfaceExample_Vehicle",
+      "target": "symbol.feature_VehicleInterfaceExample_Vehicle_power",
+      "relation": "part",
+      "properties": {
+        "label_placement": "above",
+        "route": "orthogonal",
+        "source_decoration": "filled_diamond",
+        "target_decoration": "open_arrow"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "feature.VehicleInterfaceExample.Vehicle.battery",
+      "symbol": "symbol.feature_VehicleInterfaceExample_Vehicle_battery",
+      "label": "battery",
+      "kind": "SysML::PartUsage",
+      "layer": 2,
+      "badges": [
+        "part"
+      ],
+      "attributes": [
+        {
+          "name": "isLibraryElement",
+          "type_label": "boolean"
+        },
+        {
+          "name": "name",
+          "type_label": "string"
+        },
+        {
+          "name": "owner",
+          "type_label": "string"
+        },
+        {
+          "name": "qualifiedName",
+          "type_label": "string"
+        }
+      ],
+      "properties": {
+        "declared_name": "battery",
+        "definition": "type.VehicleInterfaceExample.BatteryModule",
+        "featuring_type": "type.VehicleInterfaceExample.Vehicle",
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "part",
+            "ast_node": "GenericUsageDecl",
+            "construct": "PartUsage",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PartUsage"
+          },
+          "source_file": "ibd-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 33,
+            "end_line": 7,
+            "start_col": 5,
+            "start_line": 7
+          }
+        },
+        "metatype": "SysML::Systems::PartUsage",
+        "owner": "type.VehicleInterfaceExample.Vehicle",
+        "owning_definition": "type.VehicleInterfaceExample.Vehicle",
+        "owning_namespace": "type.VehicleInterfaceExample.Vehicle",
+        "owning_type": "type.VehicleInterfaceExample.Vehicle",
+        "specializes": [
+          "type.VehicleInterfaceExample.BatteryModule",
+          "Items::Item::subparts"
+        ],
+        "subsetted_features": [
+          "Items::Item::subparts"
+        ],
+        "type": "type.VehicleInterfaceExample.BatteryModule"
+      }
+    },
+    {
+      "id": "feature.VehicleInterfaceExample.Vehicle.controller",
+      "symbol": "symbol.feature_VehicleInterfaceExample_Vehicle_controller",
+      "label": "controller",
+      "kind": "SysML::PartUsage",
+      "layer": 2,
+      "badges": [
+        "part"
+      ],
+      "attributes": [
+        {
+          "name": "isLibraryElement",
+          "type_label": "boolean"
+        },
+        {
+          "name": "name",
+          "type_label": "string"
+        },
+        {
+          "name": "owner",
+          "type_label": "string"
+        },
+        {
+          "name": "qualifiedName",
+          "type_label": "string"
+        }
+      ],
+      "properties": {
+        "declared_name": "controller",
+        "definition": "type.VehicleInterfaceExample.DriveController",
+        "featuring_type": "type.VehicleInterfaceExample.Vehicle",
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "part",
+            "ast_node": "GenericUsageDecl",
+            "construct": "PartUsage",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PartUsage"
+          },
+          "source_file": "ibd-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 38,
+            "end_line": 8,
+            "start_col": 5,
+            "start_line": 8
+          }
+        },
+        "metatype": "SysML::Systems::PartUsage",
+        "owner": "type.VehicleInterfaceExample.Vehicle",
+        "owning_definition": "type.VehicleInterfaceExample.Vehicle",
+        "owning_namespace": "type.VehicleInterfaceExample.Vehicle",
+        "owning_type": "type.VehicleInterfaceExample.Vehicle",
+        "specializes": [
+          "type.VehicleInterfaceExample.DriveController",
+          "Items::Item::subparts"
+        ],
+        "subsetted_features": [
+          "Items::Item::subparts"
+        ],
+        "type": "type.VehicleInterfaceExample.DriveController"
+      }
+    },
+    {
+      "id": "feature.VehicleInterfaceExample.Vehicle.power",
+      "symbol": "symbol.feature_VehicleInterfaceExample_Vehicle_power",
+      "label": "power",
+      "kind": "SysML::PortUsage",
+      "layer": 2,
+      "badges": [
+        "port"
+      ],
+      "attributes": [
+        {
+          "name": "isLibraryElement",
+          "type_label": "boolean"
+        },
+        {
+          "name": "name",
+          "type_label": "string"
+        },
+        {
+          "name": "owner",
+          "type_label": "string"
+        },
+        {
+          "name": "qualifiedName",
+          "type_label": "string"
+        }
+      ],
+      "properties": {
+        "declared_name": "power",
+        "definition": "type.VehicleInterfaceExample.PowerPort",
+        "featuring_type": "type.VehicleInterfaceExample.Vehicle",
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "port",
+            "ast_node": "GenericUsageDecl",
+            "construct": "PortUsage",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PortUsage"
+          },
+          "source_file": "ibd-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 27,
+            "end_line": 9,
+            "start_col": 5,
+            "start_line": 9
+          }
+        },
+        "metatype": "SysML::Systems::PortUsage",
+        "owner": "type.VehicleInterfaceExample.Vehicle",
+        "owning_definition": "type.VehicleInterfaceExample.Vehicle",
+        "owning_namespace": "type.VehicleInterfaceExample.Vehicle",
+        "owning_type": "type.VehicleInterfaceExample.Vehicle",
+        "specializes": [
+          "type.VehicleInterfaceExample.PowerPort",
+          "Parts::Part::ownedPorts"
+        ],
+        "subsetted_features": [
+          "Parts::Part::ownedPorts"
+        ],
+        "type": "type.VehicleInterfaceExample.PowerPort"
+      }
+    },
+    {
+      "id": "type.VehicleInterfaceExample.Vehicle",
+      "symbol": "symbol.type_VehicleInterfaceExample_Vehicle",
+      "label": "Vehicle",
+      "kind": "SysML::Systems::PartDefinition",
+      "layer": 2,
+      "badges": [
+        "block"
+      ],
+      "attributes": [
+        {
+          "name": "isLibraryElement",
+          "type_label": "boolean"
+        },
+        {
+          "name": "name",
+          "type_label": "string"
+        },
+        {
+          "name": "ownedElement",
+          "type_label": "array"
+        },
+        {
+          "name": "owner",
+          "type_label": "string"
+        },
+        {
+          "name": "qualifiedName",
+          "type_label": "string"
+        }
+      ],
+      "properties": {
+        "declared_name": "Vehicle",
+        "features": [
+          "feature.VehicleInterfaceExample.Vehicle.battery",
+          "feature.VehicleInterfaceExample.Vehicle.controller",
+          "feature.VehicleInterfaceExample.Vehicle.power"
+        ],
+        "is_abstract": false,
+        "members": [
+          "feature.VehicleInterfaceExample.Vehicle.battery",
+          "feature.VehicleInterfaceExample.Vehicle.controller",
+          "feature.VehicleInterfaceExample.Vehicle.power"
+        ],
+        "metadata": {
+          "generated": false,
+          "lowering": {
+            "ast_keyword": "part",
+            "ast_node": "GenericDefinitionDecl",
+            "construct": "PartDefinition",
+            "elaboration_rules": [],
+            "metaclass": "SysML::PartDefinition"
+          },
+          "source_file": "ibd-view-demo.sysml",
+          "source_language": "sysml",
+          "source_span": {
+            "end_col": 3,
+            "end_line": 12,
+            "start_col": 3,
+            "start_line": 6
+          }
+        },
+        "metatype": "SysML::Systems::PartDefinition",
+        "owner": "pkg.VehicleInterfaceExample",
+        "specializes": [
+          "Parts::Part"
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.battery",
+      "symbol": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_battery",
+      "source": "type.VehicleInterfaceExample.Vehicle",
+      "target": "feature.VehicleInterfaceExample.Vehicle.battery",
+      "relation": "part",
+      "label": "part"
+    },
+    {
+      "id": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.controller",
+      "symbol": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_controller",
+      "source": "type.VehicleInterfaceExample.Vehicle",
+      "target": "feature.VehicleInterfaceExample.Vehicle.controller",
+      "relation": "part",
+      "label": "part"
+    },
+    {
+      "id": "part:type.VehicleInterfaceExample.Vehicle:feature.VehicleInterfaceExample.Vehicle.power",
+      "symbol": "symbol.edge.part.type_VehicleInterfaceExample_Vehicle.feature_VehicleInterfaceExample_Vehicle_power",
+      "source": "type.VehicleInterfaceExample.Vehicle",
+      "target": "feature.VehicleInterfaceExample.Vehicle.power",
+      "relation": "part",
+      "label": "part"
+    }
+  ],
+  "warnings": []
+}

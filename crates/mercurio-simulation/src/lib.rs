@@ -26,6 +26,9 @@ pub use mercurio_sysml::{
     AnalysisReadinessSeverity, AnalysisReadinessStatus, AnalysisSpec, AnalysisSpecError,
     AnalysisTechnique, list_analysis_specs, project_analysis_spec,
 };
+use mercurio_views::{
+    ViewEdgeMarkDto, ViewNodeMarkDto, ViewNodeValueDto, ViewOverlayDto, ViewOverlayFrameDto,
+};
 
 const CHANGE_LOOP_LIMIT: usize = 20;
 pub const SYSML_DYNAMIC_BEHAVIOR_CAPABILITY_ID: &str = "sysml.behavior.dynamic";
@@ -90,6 +93,86 @@ impl From<CapabilityError> for SimulationError {
 
 pub fn canonical_simulation_model(runtime: &Runtime) -> Result<SimulationModel, SimulationError> {
     adapter::simulation_model_from_runtime(runtime).map_err(map_adapter_error)
+}
+
+pub fn trace_to_view_overlay(trace: &SimulationTrace) -> ViewOverlayDto {
+    ViewOverlayDto {
+        version: 1,
+        frames: trace
+            .timeline
+            .iter()
+            .enumerate()
+            .map(|(index, entry)| trace_entry_to_overlay_frame(index, entry))
+            .collect(),
+    }
+}
+
+fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOverlayFrameDto {
+    let mut node_marks = Vec::new();
+    for (subject_id, states) in &entry.states {
+        for state_id in states {
+            let mut properties = serde_json::Map::new();
+            properties.insert("subject".to_string(), Value::String(subject_id.clone()));
+            node_marks.push(ViewNodeMarkDto {
+                element: state_id.clone(),
+                kind: "active_state".to_string(),
+                label: Some("active".to_string()),
+                properties,
+            });
+        }
+    }
+
+    let mut node_values = Vec::new();
+    for ((subject_id, feature_id), value) in &entry.values {
+        node_values.push(ViewNodeValueDto {
+            element: subject_id.clone(),
+            key: feature_id.clone(),
+            value: value.clone(),
+            label: Some(label_for_simulation_feature(feature_id)),
+            unit: None,
+        });
+    }
+
+    let mut edge_marks = Vec::new();
+    for event in &entry.events {
+        let Some(transition_id) = event.transition_id.as_ref() else {
+            continue;
+        };
+        let mut properties = serde_json::Map::new();
+        if let Some(subject_id) = event.subject_id.as_ref() {
+            properties.insert("subject".to_string(), Value::String(subject_id.clone()));
+        }
+        if let Some(trigger) = event.trigger.as_ref() {
+            properties.insert("trigger".to_string(), Value::String(trigger.clone()));
+        }
+        if let Some(reason) = event.reason.as_ref() {
+            properties.insert("reason".to_string(), Value::String(reason.clone()));
+        }
+        edge_marks.push(ViewEdgeMarkDto {
+            element: transition_id.clone(),
+            kind: "visited_transition".to_string(),
+            label: Some("visited".to_string()),
+            properties,
+        });
+    }
+
+    ViewOverlayFrameDto {
+        index,
+        time_s: Some(entry.t),
+        node_marks,
+        edge_marks,
+        node_values,
+        warnings: Vec::new(),
+    }
+}
+
+fn label_for_simulation_feature(feature_id: &str) -> String {
+    feature_id
+        .rsplit(['.', ':'])
+        .next()
+        .filter(|label| !label.is_empty())
+        .unwrap_or(feature_id)
+        .to_string()
 }
 
 fn map_adapter_error(error: adapter::SysmlSimulationAdapterError) -> SimulationError {
@@ -1058,6 +1141,62 @@ mod tests {
     use mercurio_sysml::{compile_sysml_text, load_sysml_baseline};
 
     use super::*;
+
+    #[test]
+    fn trace_to_view_overlay_projects_states_events_and_values() {
+        let trace = SimulationTrace {
+            scenario_id: "scenario.demo".to_string(),
+            subject_id: "part.controller".to_string(),
+            channels: Vec::new(),
+            timeline: vec![SimTraceEntry {
+                t: 2.0,
+                states: BTreeMap::from([(
+                    "part.controller".to_string(),
+                    vec!["state.Controller.Running".to_string()],
+                )]),
+                values: BTreeMap::from([(
+                    (
+                        "part.controller".to_string(),
+                        "feature.Controller.temperature".to_string(),
+                    ),
+                    json!(42),
+                )]),
+                events: vec![SimTraceEvent {
+                    kind: "transition".to_string(),
+                    subject_id: Some("part.controller".to_string()),
+                    transition_id: Some("transition.Controller.ready".to_string()),
+                    trigger: Some("ready".to_string()),
+                    reason: None,
+                }],
+            }],
+            status: SimulationStatus::Completed,
+            requirements: Vec::new(),
+            objectives: Vec::new(),
+        };
+
+        let overlay = trace_to_view_overlay(&trace);
+
+        assert_eq!(overlay.frames.len(), 1);
+        let frame = &overlay.frames[0];
+        assert_eq!(frame.index, 0);
+        assert_eq!(frame.time_s, Some(2.0));
+        assert!(frame.node_marks.iter().any(|mark| {
+            mark.element == "state.Controller.Running"
+                && mark.kind == "active_state"
+                && mark.label.as_deref() == Some("active")
+        }));
+        assert!(frame.edge_marks.iter().any(|mark| {
+            mark.element == "transition.Controller.ready"
+                && mark.kind == "visited_transition"
+                && mark.properties["trigger"] == json!("ready")
+        }));
+        assert!(frame.node_values.iter().any(|value| {
+            value.element == "part.controller"
+                && value.key == "feature.Controller.temperature"
+                && value.label.as_deref() == Some("temperature")
+                && value.value == json!(42)
+        }));
+    }
 
     #[test]
     fn concurrent_simulation_fires_transitions_on_multiple_subjects() {

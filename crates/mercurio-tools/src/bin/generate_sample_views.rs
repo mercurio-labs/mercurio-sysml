@@ -4,15 +4,13 @@ use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
 use mercurio_core::graph::{Element, ElementProperties, GraphArtifact};
-use mercurio_core::{
-    Edge, Graph, KirDocument, KirElement, MetamodelAttributeRegistry, default_stdlib_path,
-};
-use mercurio_sysml::compile_sysml_text;
+use mercurio_core::{Edge, Graph, KirDocument, KirElement, MetamodelAttributeRegistry};
+use mercurio_sysml::{compile_sysml_text, load_sysml_baseline};
 use mercurio_views::{
     DiagramDirectionDto, DiagramKindDto, DiagramLayoutOptionsDto, DiagramQueryOptionsDto,
     DiagramRenderRequestDto, DiagramSpecDto, DiagramStyleOptionsDto, DiagramSymbolDto,
-    DiagramViewDto, TableColumnSpecDto, TableKindDto, TableSpecDto, TableViewDto, ViewDocumentDto,
-    render_diagram, render_table, validate_view_document,
+    DiagramViewDto, TableColumnSpecDto, TableKindDto, TableScopeDto, TableSpecDto, TableViewDto,
+    ViewDocumentDto, render_diagram, render_table, validate_view_document,
 };
 use serde_json::json;
 
@@ -87,6 +85,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 style: DiagramStyleOptionsDto::default(),
             },
         ),
+        (
+            "internal-block",
+            DiagramSpecDto {
+                version: 1,
+                kind: DiagramKindDto::InternalBlock,
+                title: "Vehicle Internal Block".to_string(),
+                description: Some(
+                    "Sample internal block diagram with parts, ports, and a connection usage."
+                        .to_string(),
+                ),
+                root: Some("type.Vehicle.Car".to_string()),
+                query: query(Vec::new(), DiagramDirectionDto::Children, 2, false, true, 350, 900),
+                layout: layout("LR"),
+                style: DiagramStyleOptionsDto::default(),
+            },
+        ),
+        (
+            "requirement-diagram",
+            DiagramSpecDto {
+                version: 1,
+                kind: DiagramKindDto::Requirement,
+                title: "Vehicle Requirement Trace".to_string(),
+                description: Some(
+                    "Sample requirement diagram with a satisfy relationship from a vehicle part."
+                        .to_string(),
+                ),
+                root: Some("pkg.Vehicle".to_string()),
+                query: query(Vec::new(), DiagramDirectionDto::Children, 3, false, true, 350, 900),
+                layout: layout("LR"),
+                style: DiagramStyleOptionsDto::default(),
+            },
+        ),
     ];
 
     for (slug, spec) in views {
@@ -110,6 +140,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         description: Some("Requirements table rendered from KIR graph properties.".to_string()),
         root: Some("pkg.Vehicle".to_string()),
         target_type: None,
+        scope: TableScopeDto::ContainmentSubtree {
+            root: "pkg.Vehicle".to_string(),
+        },
+        row_type: None,
         query: query(
             vec!["owner"],
             DiagramDirectionDto::Children,
@@ -140,6 +174,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ),
             table_column("owner_name", "Model Owner", Some("owner.declared_name")),
         ],
+        show_affordances: false,
     };
     let requirements_table = render_table(&graph, &registry, requirements_table_spec.clone())?;
     write_table_spec(
@@ -258,6 +293,20 @@ fn sample_graph() -> Result<Graph, Box<dyn std::error::Error>> {
                 "SysML::Actions::ObjectNode",
                 2,
             ),
+            element(18, "feature.Vehicle.Car.controller", "SysML::PartUsage", 2),
+            element(19, "feature.Vehicle.Car.power", "SysML::PortUsage", 2),
+            element(
+                20,
+                "connection.Vehicle.Car.ControllerPower",
+                "SysML::ConnectionUsage",
+                2,
+            ),
+            element(
+                21,
+                "satisfy.Vehicle.Car.ControllerSafeStart",
+                "SysML::Requirements::SatisfyRequirementUsage",
+                2,
+            ),
         ],
         edges: vec![
             edge(2, 0, "specializes"),
@@ -289,6 +338,14 @@ fn sample_graph() -> Result<Graph, Box<dyn std::error::Error>> {
             edge(14, 17, "object_flow"),
             edge(17, 15, "object_flow"),
             edge(14, 15, "control_flow"),
+            edge(18, 2, "owner"),
+            edge(19, 2, "owner"),
+            edge(20, 2, "owner"),
+            edge(20, 18, "source"),
+            edge(20, 19, "target"),
+            edge(21, 1, "owner"),
+            edge(21, 18, "source"),
+            edge(21, 4, "target"),
         ],
     })?)
 }
@@ -314,6 +371,32 @@ fn element(id: u32, element_id: &str, kind: &str, layer: u8) -> Element {
                 }
             }),
         );
+    }
+    match element_id {
+        "feature.Vehicle.Car.controller" => {
+            properties.insert("type".to_string(), json!("type.Vehicle.Controller"));
+            properties.insert("owning_type".to_string(), json!("type.Vehicle.Car"));
+        }
+        "feature.Vehicle.Car.power" => {
+            properties.insert("type".to_string(), json!("type.Vehicle.PowerPort"));
+            properties.insert("owning_type".to_string(), json!("type.Vehicle.Car"));
+        }
+        "connection.Vehicle.Car.ControllerPower" => {
+            properties.insert(
+                "source".to_string(),
+                json!("feature.Vehicle.Car.controller"),
+            );
+            properties.insert("target".to_string(), json!("feature.Vehicle.Car.power"));
+        }
+        "satisfy.Vehicle.Car.ControllerSafeStart" => {
+            properties.insert(
+                "source".to_string(),
+                json!("feature.Vehicle.Car.controller"),
+            );
+            properties.insert("target".to_string(), json!("req.Vehicle.SafeStart"));
+            properties.insert("relationship_kind".to_string(), json!("satisfy"));
+        }
+        _ => {}
     }
     Element {
         id,
@@ -370,6 +453,7 @@ fn table_column(key: &str, label: &str, path: Option<&str>) -> TableColumnSpecDt
         key: key.to_string(),
         label: label.to_string(),
         path: path.map(str::to_string),
+        expression: None,
     }
 }
 
@@ -1113,7 +1197,7 @@ fn escape_xml(value: &str) -> String {
 }
 
 fn write_activity_swimlane_demo(output_dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
-    let stdlib = KirDocument::from_path(&default_stdlib_path())?;
+    let stdlib = load_sysml_baseline()?;
     let kir = compile_sysml_text(
         ACTIVITY_SWIMLANE_SYSML,
         "activity-swimlane-demo.sysml",

@@ -10,9 +10,9 @@ use mercurio_views::{
 };
 use serde_json::Value;
 
-const DEFAULT_STATE_MACHINE: &str = "VehicleControlExample.VehicleController.operatingMode";
-const DEFAULT_OUTPUT_DIR: &str = "artifacts/views/state-machine/latest";
-const SAMPLE_SOURCE_NAME: &str = "state-machine-view-demo.sysml";
+const DEFAULT_BLOCK: &str = "VehicleInterfaceExample.Vehicle";
+const DEFAULT_OUTPUT_DIR: &str = "artifacts/views/ibd/latest";
+const SAMPLE_SOURCE_NAME: &str = "ibd-view-demo.sysml";
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse()?;
@@ -20,16 +20,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let stdlib = load_sysml_baseline()?;
     let document = compile_sysml_text(SAMPLE_SYSML, SAMPLE_SOURCE_NAME, &stdlib)?;
-    let root_id = resolve_state_machine_root(&document, &args.state_machine)
+    let root_id = resolve_block_root(&document, &args.block)
         .map_err(|message| std::io::Error::new(std::io::ErrorKind::InvalidInput, message))?;
     let graph = Graph::from_document(document.clone())?;
     let registry = MetamodelAttributeRegistry::build(&graph);
     let spec = DiagramSpecDto {
         version: 1,
-        kind: DiagramKindDto::StateMachine,
-        title: format!("State Machine: {}", args.state_machine),
+        kind: DiagramKindDto::InternalBlock,
+        title: format!("IBD: {}", args.block),
         description: Some(
-            "Compiled SysML state machine rendered through the shared Mercurio view DTO path."
+            "Compiled SysML internal block diagram rendered through the shared Mercurio view DTO path."
                 .to_string(),
         ),
         root: Some(root_id.clone()),
@@ -58,57 +58,51 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let view = render_diagram(&graph, &registry, spec)?;
 
     fs::write(args.output_dir.join(SAMPLE_SOURCE_NAME), SAMPLE_SYSML)?;
-    document.write_pretty_to_path(&args.output_dir.join("state-machine.kir.json"))?;
+    document.write_pretty_to_path(&args.output_dir.join("ibd.kir.json"))?;
     fs::write(
-        args.output_dir.join("state-machine.view.json"),
+        args.output_dir.join("ibd.view.json"),
         format!("{}\n", serde_json::to_string_pretty(&view_document)?),
     )?;
     fs::write(
-        args.output_dir.join("state-machine.render.json"),
+        args.output_dir.join("ibd.render.json"),
         format!("{}\n", serde_json::to_string_pretty(&view)?),
     )?;
-    fs::write(
-        args.output_dir.join("state-machine.svg"),
-        render_diagram_svg(&view),
-    )?;
+    fs::write(args.output_dir.join("ibd.svg"), render_diagram_svg(&view))?;
 
     println!(
         "source: {}",
         args.output_dir.join(SAMPLE_SOURCE_NAME).display()
     );
     println!(
-        "state_machine: {} -> {}",
-        args.state_machine,
+        "ibd root: {} -> {}",
+        args.block,
         view.spec.root.as_deref().unwrap_or(&root_id)
     );
     println!("nodes: {}", view.nodes.len());
     println!("edges: {}", view.edges.len());
     println!("warnings: {}", view.warnings.len());
-    println!(
-        "svg: {}",
-        args.output_dir.join("state-machine.svg").display()
-    );
+    println!("svg: {}", args.output_dir.join("ibd.svg").display());
 
     Ok(())
 }
 
 struct Args {
-    state_machine: String,
+    block: String,
     output_dir: PathBuf,
     direction: String,
 }
 
 impl Args {
     fn parse() -> Result<Self, Box<dyn std::error::Error>> {
-        let mut state_machine = DEFAULT_STATE_MACHINE.to_string();
+        let mut block = DEFAULT_BLOCK.to_string();
         let mut output_dir = PathBuf::from(DEFAULT_OUTPUT_DIR);
         let mut direction = "LR".to_string();
         let mut args = std::env::args().skip(1);
 
         while let Some(arg) = args.next() {
             match arg.as_str() {
-                "--state-machine" | "--qualified-name" | "--root" => {
-                    state_machine = args.next().ok_or_else(|| {
+                "--ibd" | "--block" | "--qualified-name" | "--root" => {
+                    block = args.next().ok_or_else(|| {
                         std::io::Error::new(
                             std::io::ErrorKind::InvalidInput,
                             format!("missing value for {arg}"),
@@ -142,12 +136,12 @@ impl Args {
                 }
                 "--help" | "-h" => {
                     println!(
-                        "Usage: render_state_machine_view [--state-machine QUALIFIED_NAME] [--out DIR] [--direction LR|RL|TB|BT]"
+                        "Usage: render_ibd_view [--block QUALIFIED_NAME] [--out DIR] [--direction LR|RL|TB|BT]"
                     );
                     std::process::exit(0);
                 }
                 _ if !arg.starts_with('-') => {
-                    state_machine = arg;
+                    block = arg;
                 }
                 _ => {
                     return Err(std::io::Error::new(
@@ -160,33 +154,31 @@ impl Args {
         }
 
         Ok(Self {
-            state_machine,
+            block,
             output_dir,
             direction,
         })
     }
 }
 
-fn resolve_state_machine_root(document: &KirDocument, root: &str) -> Result<String, String> {
+fn resolve_block_root(document: &KirDocument, root: &str) -> Result<String, String> {
     let trimmed = root.trim();
     if trimmed.is_empty() {
-        return Err("state machine qualified name must not be empty".to_string());
+        return Err("IBD root qualified name must not be empty".to_string());
     }
 
     if let Some(element) = document
         .elements
         .iter()
-        .find(|element| element.id == trimmed && is_state_machine_element(element))
+        .find(|element| element.id == trimmed && is_block_root_element(element))
     {
-        return Ok(
-            resolve_state_definition_for_usage(document, element).unwrap_or(element.id.clone())
-        );
+        return Ok(element.id.clone());
     }
 
     let matches = document
         .elements
         .iter()
-        .filter(|element| is_state_machine_element(element))
+        .filter(|element| is_block_root_element(element))
         .filter(|element| {
             element_qualified_name(element).is_some_and(|qualified_name| {
                 qualified_name.eq_ignore_ascii_case(trimmed)
@@ -196,15 +188,13 @@ fn resolve_state_machine_root(document: &KirDocument, root: &str) -> Result<Stri
         .collect::<Vec<_>>();
 
     match matches.as_slice() {
-        [element] => {
-            Ok(resolve_state_definition_for_usage(document, element).unwrap_or(element.id.clone()))
-        }
+        [element] => Ok(element.id.clone()),
         [] => Err(format!(
-            "state machine `{trimmed}` was not found. Available state-machine roots: {}",
-            available_state_machine_roots(document).join(", ")
+            "IBD root `{trimmed}` was not found. Available IBD roots: {}",
+            available_block_roots(document).join(", ")
         )),
         _ => Err(format!(
-            "state machine `{trimmed}` is ambiguous. Matches: {}",
+            "IBD root `{trimmed}` is ambiguous. Matches: {}",
             matches
                 .iter()
                 .filter_map(|element| element_qualified_name(element))
@@ -214,54 +204,47 @@ fn resolve_state_machine_root(document: &KirDocument, root: &str) -> Result<Stri
     }
 }
 
-fn available_state_machine_roots(document: &KirDocument) -> Vec<String> {
+fn available_block_roots(document: &KirDocument) -> Vec<String> {
     let mut roots = document
         .elements
         .iter()
-        .filter(|element| is_state_machine_element(element))
-        .filter(|element| {
-            is_state_definition(element)
-                || document.elements.iter().any(|candidate| {
-                    is_state_usage(candidate)
-                        && string_property(candidate, "owner")
-                            .is_some_and(|owner| owner == element.id)
-                })
-        })
+        .filter(|element| is_block_root_element(element))
         .filter_map(element_qualified_name)
         .collect::<Vec<_>>();
     roots.sort();
     roots
 }
 
-fn is_state_machine_element(element: &KirElement) -> bool {
-    is_state_definition(element) || is_state_usage(element)
+fn is_block_root_element(element: &KirElement) -> bool {
+    semantic_text(element).contains("partdefinition")
+        || semantic_text(element).contains("partusage")
+        || semantic_text(element).contains("itemdefinition")
 }
 
-fn is_state_definition(element: &KirElement) -> bool {
-    string_property(element, "metatype")
-        .is_some_and(|metatype| metatype.contains("StateDefinition"))
-        || element.kind.contains("StateDefinition")
-}
-
-fn is_state_usage(element: &KirElement) -> bool {
-    string_property(element, "metatype").is_some_and(|metatype| metatype.contains("StateUsage"))
-        || element.id.starts_with("state.")
-}
-
-fn resolve_state_definition_for_usage(
-    document: &KirDocument,
-    element: &KirElement,
-) -> Option<String> {
-    if is_state_definition(element) {
-        return Some(element.id.clone());
+fn semantic_text(element: &KirElement) -> String {
+    let mut text = element.kind.to_ascii_lowercase();
+    for value in [
+        string_property(element, "metatype"),
+        element
+            .properties
+            .get("metadata")
+            .and_then(|metadata| metadata.get("lowering"))
+            .and_then(|lowering| lowering.get("construct"))
+            .and_then(Value::as_str),
+        element
+            .properties
+            .get("metadata")
+            .and_then(|metadata| metadata.get("lowering"))
+            .and_then(|lowering| lowering.get("metaclass"))
+            .and_then(Value::as_str),
+    ]
+    .into_iter()
+    .flatten()
+    {
+        text.push(' ');
+        text.push_str(&value.to_ascii_lowercase());
     }
-
-    let definition_id = string_property(element, "definition")?;
-    document
-        .elements
-        .iter()
-        .find(|candidate| candidate.id == definition_id && is_state_definition(candidate))
-        .map(|candidate| candidate.id.clone())
+    text
 }
 
 fn element_qualified_name(element: &KirElement) -> Option<String> {
@@ -298,26 +281,17 @@ fn format_view_validation_errors(
     )
 }
 
-const SAMPLE_SYSML: &str = r#"package VehicleControlExample {
-  state def OperatingMode {
-    state off;
-    state standby;
-    state active;
-    state faulted;
+const SAMPLE_SYSML: &str = r#"package VehicleInterfaceExample {
+  port def PowerPort;
+  part def BatteryModule;
+  part def DriveController;
 
-    transition power_on first off accept powerOn then standby;
-    transition enable_drive from standby accept enableDrive then active;
-    transition fault from active accept faultDetected then faulted;
-    transition reset from faulted accept reset then standby;
-    transition shutdown from standby accept shutdown then off;
-  }
+  part def Vehicle {
+    part battery : BatteryModule;
+    part controller : DriveController;
+    port power : PowerPort;
 
-  part def VehicleControlSystem {
-    part controller : VehicleController;
-  }
-
-  part def VehicleController {
-    state operatingMode : OperatingMode;
+    connect controller to power;
   }
 }
 "#;
