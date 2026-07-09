@@ -190,18 +190,6 @@ fn analysis_clock_config(
     }
 }
 
-pub fn normalize_state_machines(machines: Vec<StateMachineModel>) -> SimulationModel {
-    SimulationModel {
-        id: "sysml.projected".to_string(),
-        machines: machines
-            .iter()
-            .map(normalize_state_machine)
-            .collect::<Vec<_>>(),
-        derived_rules: Vec::new(),
-        binding_rules: Vec::new(),
-    }
-}
-
 pub fn normalize_state_machines_from_runtime(
     runtime: &Runtime,
     machines: Vec<StateMachineModel>,
@@ -214,19 +202,6 @@ pub fn normalize_state_machines_from_runtime(
             .collect::<Vec<_>>(),
         derived_rules: simulation_derived_rules(runtime),
         binding_rules: simulation_binding_rules(runtime),
-    }
-}
-
-fn normalize_state_machine(machine: &StateMachineModel) -> SimulationStateMachine {
-    SimulationStateMachine {
-        id: machine.id.clone(),
-        label: machine.label.clone(),
-        states: machine.states.iter().map(normalize_state).collect(),
-        transitions: machine
-            .transitions
-            .iter()
-            .map(normalize_transition)
-            .collect(),
     }
 }
 
@@ -471,10 +446,6 @@ fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
             .and_then(normalize_action_sequence),
         do_behavior: state.do_behavior.as_ref().and_then(normalize_do_behavior),
     }
-}
-
-fn normalize_transition(transition: &TransitionNode) -> SimulationTransition {
-    normalize_transition_with_effects(transition, Vec::new())
 }
 
 fn normalize_transition_from_runtime(

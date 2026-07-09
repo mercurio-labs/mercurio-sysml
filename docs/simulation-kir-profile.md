@@ -1,8 +1,8 @@
 # Simulation KIR Profile
 
 This profile defines the canonical executable model consumed by
-`mercurio-simulation-core`. SysML/KerML KIR is normalized by
-`mercurio-sysml-simulation` before execution.
+`mercurio-simulation-core`. SysML/KerML KIR is normalized by the
+`mercurio-simulation` adapter before execution.
 
 ## State Nodes
 
@@ -130,12 +130,12 @@ into state behavior or stay on the legacy overlay path.
 
 ## Analysis-Case Scenario Shape
 
-`AnalysisCaseDefinition` is SysML-specific and belongs in
-`mercurio-sysml-simulation`. Extraction produces a generic
+`AnalysisCaseDefinition` is SysML-specific and belongs in the
+`mercurio-simulation` adapter. Extraction produces a generic
 `ConcurrentSimulationScenario`:
 
 ```text
-sysml-simulation::scenario_from_analysis_case(...) -> SimulationScenario
+simulation::scenario_from_analysis_case(...) -> SimulationScenario
 simulation-core::run(...)
 ```
 
