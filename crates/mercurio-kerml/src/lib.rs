@@ -51,13 +51,6 @@ impl LanguageService for KermlLanguageModule {
     }
 }
 
-#[cfg(any())]
-pub use mercurio_core::language::kerml::parser::{
-    KermlError, compile_kerml_module, compile_kerml_module_with_context, compile_kerml_text,
-    compile_kerml_text_with_context, compile_kerml_text_with_empty_context, compile_text,
-    compile_text_with_context, load_kerml_document, load_kerml_document_with_stdlib,
-};
-
 #[cfg(test)]
 mod tests {
     use super::*;
