@@ -4,7 +4,7 @@ use mercurio_core::{
     AuthoringError, AuthoringProject, KirDocument, textual_model_authoring_render_profile,
 };
 
-use crate::{compile_sysml_text, parse_sysml, shared_sysml_baseline};
+use crate::{compile_sysml_text, parse_sysml, shared_sysml_baseline, sysml_field_specs};
 
 pub fn load_authoring_project_from_sysml(
     files: BTreeMap<String, String>,
@@ -31,7 +31,8 @@ fn compile_sysml_authoring_sources(
     for (path, source) in files {
         documents.push(compile_sysml_text(source, path, &stdlib).map_err(AuthoringError::Parse)?);
     }
-    KirDocument::merge(documents).map_err(AuthoringError::Kir)
+    KirDocument::merge_with_registered_fields(documents, sysml_field_specs().iter().copied())
+        .map_err(AuthoringError::Kir)
 }
 
 #[cfg(test)]

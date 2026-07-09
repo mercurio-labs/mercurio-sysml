@@ -359,8 +359,14 @@ pub fn load_baseline_for_metamodel(
     metamodel: &SysmlMetamodelResource,
 ) -> Result<KirDocument, KirError> {
     let kernel = mercurio_kerml::load_kernel_baseline()?;
-    let sysml_delta = KirDocument::from_path(&metamodel.sysml_delta_path)?;
-    KirDocument::merge([kernel, sysml_delta])
+    let sysml_delta = KirDocument::from_path_with_registered_fields(
+        &metamodel.sysml_delta_path,
+        crate::sysml_field_specs().iter().copied(),
+    )?;
+    KirDocument::merge_with_registered_fields(
+        [kernel, sysml_delta],
+        crate::sysml_field_specs().iter().copied(),
+    )
 }
 
 #[cfg(feature = "embed-stdlib")]

@@ -258,7 +258,10 @@ pub fn shared_sysml_baseline_from_locator(
 
 pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDocument, KirError> {
     match locator {
-        StdlibLocator::File { path } => KirDocument::from_path(path),
+        StdlibLocator::File { path } => KirDocument::from_path_with_registered_fields(
+            path,
+            crate::sysml_field_specs().iter().copied(),
+        ),
 
         StdlibLocator::Kpar { locator: loc } => mercurio_core::BaselineLibraryConfig {
             id: "stdlib".to_string(),
@@ -282,13 +285,18 @@ pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDo
                     KirDocument::from_str(std::str::from_utf8(kernel_bytes).map_err(|_| {
                         KirError::Model("embedded kernel stdlib is not valid UTF-8".to_string())
                     })?)?;
-                let sysml_delta =
-                    KirDocument::from_str(std::str::from_utf8(sysml_bytes).map_err(|_| {
+                let sysml_delta = KirDocument::from_str_with_registered_fields(
+                    std::str::from_utf8(sysml_bytes).map_err(|_| {
                         KirError::Model(
                             "embedded sysml-library stdlib is not valid UTF-8".to_string(),
                         )
-                    })?)?;
-                return KirDocument::merge([kernel, sysml_delta]);
+                    })?,
+                    crate::sysml_field_specs().iter().copied(),
+                )?;
+                return KirDocument::merge_with_registered_fields(
+                    [kernel, sysml_delta],
+                    crate::sysml_field_specs().iter().copied(),
+                );
             }
             #[allow(unreachable_code)]
             Err(KirError::Model(format!(

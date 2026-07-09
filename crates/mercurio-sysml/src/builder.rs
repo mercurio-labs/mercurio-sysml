@@ -7,7 +7,9 @@ use mercurio_core::{
 };
 use serde_json::json;
 
-use crate::{SysmlEnvironment, SysmlEnvironmentError, load_authoring_project_from_sysml};
+use crate::{
+    SysmlEnvironment, SysmlEnvironmentError, load_authoring_project_from_sysml, sysml_field_specs,
+};
 
 pub mod stdlib {
     include!(concat!(
@@ -117,7 +119,7 @@ impl ModelBuilder {
         for (path, source) in self.to_sysml() {
             documents.push(self.env.compile_text(&source, &path)?);
         }
-        KirDocument::merge(documents)
+        KirDocument::merge_with_registered_fields(documents, sysml_field_specs().iter().copied())
             .map_err(AuthoringError::from)
             .map_err(Into::into)
     }
