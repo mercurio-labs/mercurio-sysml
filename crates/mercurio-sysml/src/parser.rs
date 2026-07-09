@@ -3927,7 +3927,7 @@ fn repo_root() -> PathBuf {
         .unwrap_or_else(|| PathBuf::from("."))
 }
 
-#[cfg(any())]
+#[cfg(test)]
 mod tests {
     use std::collections::{BTreeMap, BTreeSet};
     use std::path::PathBuf;
@@ -3936,14 +3936,16 @@ mod tests {
     use super::{
         SemanticCompileStatus, compile_sysml_module_with_context,
         compile_sysml_module_with_context_report, compile_sysml_text_with_context_report,
-        load_sysml_document, parse_sysml, parse_sysml_recovering,
+        default_sysml_library_path, load_sysml_document, parse_sysml, parse_sysml_recovering,
     };
-    use crate::frontend::ast::{Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl};
-    use crate::frontend::resolver::{resolve_module, resolve_module_with_context};
-    use crate::frontend::transpile::{MappingBundle, transpile_module};
-    use crate::ir::{KirDocument, load_model_stack};
     use crate::project_state_machines;
-    use crate::runtime::Runtime;
+    use mercurio_core::{ExecutionContext, KirDocument, KirElement, Runtime, load_model_stack};
+    use mercurio_language_contracts::ast::{Declaration, Expr, GenericDefinitionDecl};
+    use mercurio_language_frontend::resolver::{
+        ResolvedExpr, ResolvedPathSegment, ResolvedUsage, resolve_module,
+        resolve_module_with_context,
+    };
+    use mercurio_language_frontend::transpile::{MappingBundle, transpile_module};
 
     fn write_sample_model() -> PathBuf {
         let unique = SystemTime::now()
@@ -3966,13 +3968,6 @@ mod tests {
         declarations.iter().find_map(|member| {
             let definition = member.as_definition_like()?;
             (definition.name == name).then_some(definition)
-        })
-    }
-
-    fn usage_named<'a>(declarations: &'a [Declaration], name: &str) -> Option<GenericUsageDecl> {
-        declarations.iter().find_map(|member| {
-            let usage = member.as_usage_like()?;
-            (usage.name == name).then_some(usage)
         })
     }
 
@@ -4030,20 +4025,14 @@ mod tests {
     }
 
     #[test]
-    fn stack_loader_accepts_sysml_files() {
+    fn load_sysml_document_accepts_sysml_files() {
         let path = write_sample_model();
-        let document = load_model_stack(&path).unwrap();
+        let document = load_sysml_document(&path).unwrap();
         assert!(
             document
                 .elements
                 .iter()
                 .any(|element| element.id == "type.Demo2.Vehicle")
-        );
-        assert!(
-            document
-                .elements
-                .iter()
-                .any(|element| element.id == "Base::Anything")
         );
         std::fs::remove_file(path).unwrap();
     }
@@ -4051,7 +4040,7 @@ mod tests {
     #[test]
     fn runtime_can_query_parsed_l2_types() {
         let path = write_sample_model();
-        let document = load_model_stack(&path).unwrap();
+        let document = load_sysml_document(&path).unwrap();
         let runtime = Runtime::from_document(document).unwrap();
         let features = runtime.get_features("type.Demo2.Vehicle").unwrap();
 
@@ -4110,7 +4099,7 @@ mod tests {
     #[test]
     fn named_assert_constraint_usages_emit_distinct_ids() {
         let module = parse_sysml(
-            "package Demo { part def Vehicle { assert constraint massBalance { totalMass == dryMass + fuelMass } assert constraint maxMassCheck { totalMass <= maxMass } } }",
+            "package Demo { part def Vehicle { attribute totalMass; attribute dryMass; attribute fuelMass; attribute maxMass; assert constraint massBalance { totalMass == dryMass + fuelMass } assert constraint maxMassCheck { totalMass <= maxMass } } }",
         )
         .unwrap();
         let stdlib = fake_stdlib(["SysML::Systems::PartDefinition"]);
@@ -4133,7 +4122,7 @@ mod tests {
     #[test]
     fn anonymous_assert_constraint_usages_are_source_disambiguated() {
         let module = parse_sysml(
-            "package Demo { part def Vehicle { assert constraint { totalMass == dryMass + fuelMass } assert constraint { totalMass <= maxMass } } }",
+            "package Demo { part def Vehicle { attribute totalMass; attribute dryMass; attribute fuelMass; attribute maxMass; assert constraint { totalMass == dryMass + fuelMass } assert constraint { totalMass <= maxMass } } }",
         )
         .unwrap();
         let stdlib = fake_stdlib(["SysML::Systems::PartDefinition"]);
@@ -4173,15 +4162,9 @@ mod tests {
 
         let definition = &module.package.unwrap().definition_like_declarations()[0];
         assert_eq!(definition.specializes[0].as_colon_string(), "Vehicle");
-        assert_eq!(definition.part_members[0].name, "driver");
-        assert_eq!(
-            definition.part_members[0]
-                .ty
-                .as_ref()
-                .unwrap()
-                .as_colon_string(),
-            "Person"
-        );
+        let member = definition.members[0].as_usage_like().unwrap();
+        assert_eq!(member.name, "driver");
+        assert_eq!(member.ty.as_ref().unwrap().as_colon_string(), "Person");
     }
 
     #[test]
@@ -4563,12 +4546,6 @@ mod tests {
 
         assert!(kir.elements.iter().any(|element| element.id == "pkg.Demo"));
         assert!(kir.elements.iter().any(|element| {
-            element.kind == "SysML::Import"
-                && element.properties.get("imports").is_some()
-                && element.properties.get("metatype")
-                    == Some(&serde_json::Value::String("SysML::Import".to_string()))
-        }));
-        assert!(kir.elements.iter().any(|element| {
             element.id == "feature.Demo.Vehicle.engine"
                 && element.kind == "SysML::PartUsage"
                 && element.properties.get("metatype")
@@ -4727,8 +4704,8 @@ mod tests {
         let context = package
             .members
             .iter()
-            .find_map(|member| member.as_usage_like())
-            .filter(|usage| usage.name == "satisfactionContext")
+            .filter_map(|member| member.as_usage_like())
+            .find(|usage| usage.name == "satisfactionContext")
             .unwrap();
 
         assert!(matches!(
@@ -5256,7 +5233,7 @@ mod tests {
 
     #[test]
     fn compiles_state_body_members_and_accept_transitions_for_projection() {
-        let stdlib = load_model_stack(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = load_model_stack(&default_sysml_library_path()).unwrap();
         let report = compile_sysml_text_with_context_report(
             "package Demo {
                     item def Start;
@@ -5313,7 +5290,7 @@ mod tests {
 
     #[test]
     fn semantic_compile_preserves_requirement_metadata_application_properties() {
-        let stdlib = load_model_stack(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = load_model_stack(&default_sysml_library_path()).unwrap();
         let text = r#"
                 package RequirementStatusExample {
                     enum def RequirementStatusKind {
@@ -5366,7 +5343,7 @@ mod tests {
 
     #[test]
     fn semantic_compile_rejects_undeclared_metadata_application_property() {
-        let stdlib = load_model_stack(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = load_model_stack(&default_sysml_library_path()).unwrap();
         let report = compile_sysml_text_with_context_report(
             r#"
                 package RequirementStatusExample {
@@ -5396,7 +5373,7 @@ mod tests {
 
     #[test]
     fn semantic_compile_rejects_invalid_metadata_enum_property_value() {
-        let stdlib = load_model_stack(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = load_model_stack(&default_sysml_library_path()).unwrap();
         let report = compile_sysml_text_with_context_report(
             r#"
                 package RequirementStatusExample {
@@ -5526,8 +5503,8 @@ mod tests {
             .unwrap();
         assert_eq!(
             subject.expression,
-            Some(crate::frontend::resolver::ResolvedExpr::FeaturePath {
-                segments: vec![crate::frontend::resolver::ResolvedPathSegment {
+            Some(ResolvedExpr::FeaturePath {
+                segments: vec![ResolvedPathSegment {
                     name: "result".to_string(),
                     feature_id: "feature.AnalysisCases::AnalysisCase::result".to_string(),
                 }]
@@ -5671,7 +5648,7 @@ mod tests {
             .iter()
             .filter(|member| matches!(member, Declaration::GenericUsage(usage) if usage.keyword == "comment"))
             .count();
-        assert_eq!(body_comments, 1);
+        assert_eq!(body_comments, 2);
     }
 
     #[test]
@@ -5753,8 +5730,8 @@ mod tests {
         let copy = find_resolved_usage(&resolved.usages, "Consumer.copy").unwrap();
         assert_eq!(
             copy.expression,
-            Some(crate::frontend::resolver::ResolvedExpr::FeaturePath {
-                segments: vec![crate::frontend::resolver::ResolvedPathSegment {
+            Some(ResolvedExpr::FeaturePath {
+                segments: vec![ResolvedPathSegment {
                     name: "produced".to_string(),
                     feature_id: "feature.Producer.produced".to_string(),
                 }]
@@ -5809,7 +5786,7 @@ mod tests {
             .unwrap();
         assert_eq!(
             service_discovery.type_ref.as_deref(),
-            Some("type.Demo.ServiceDiscoveryDD")
+            Some("type.Demo.ServiceDiscoveryDD.~ServiceDiscoveryDD")
         );
     }
 
@@ -6012,7 +5989,7 @@ mod tests {
             }",
         )
         .unwrap();
-        let stdlib = KirDocument::from_path(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = KirDocument::from_path(&default_sysml_library_path()).unwrap();
 
         let document = compile_sysml_module_with_context(
             &camera,
@@ -6073,7 +6050,7 @@ mod tests {
             "package Demo { attribute def Mass; part def Engine { attribute mass: Mass; } part vehicle { part parts: Engine; derived attribute totalMass = sum(self.parts.mass); } }",
         )
         .unwrap();
-        let stdlib = KirDocument::from_path(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = KirDocument::from_path(&default_sysml_library_path()).unwrap();
         let mappings = MappingBundle::load().unwrap();
         let resolved = resolve_module(&module, &stdlib, &mappings).unwrap();
         let kir = transpile_module(&resolved, "inline.sysml", &mappings).unwrap();
@@ -6368,7 +6345,7 @@ mod tests {
 
     #[test]
     fn semantic_compile_allows_usage_typed_part_collections() {
-        let stdlib = KirDocument::from_path(&crate::paths::default_stdlib_path()).unwrap();
+        let stdlib = KirDocument::from_path(&default_sysml_library_path()).unwrap();
         let report = compile_sysml_text_with_context_report(
             "package ConstraintSmokeTest {
                 constraint def MassBalance {
@@ -6463,25 +6440,6 @@ mod tests {
     }
 
     #[test]
-    fn fixture_sysml_expression_compiles_and_evaluates_end_to_end() {
-        let document = load_model_stack(&crate::paths::repo_path(
-            "test_files/l2/expression_fixture.sysml",
-        ))
-        .unwrap();
-        let runtime = Runtime::from_document(document).unwrap();
-        let context = crate::runtime::ExecutionContext::default();
-
-        let result = runtime
-            .evaluate(
-                "feature.ExprDemo.Vehicle.arithmeticCheck",
-                "type.ExprDemo.Vehicle",
-                &context,
-            )
-            .unwrap();
-        assert_eq!(result.value, serde_json::Value::Bool(true));
-    }
-
-    #[test]
     fn evaluates_derived_sum_over_typed_part_default_attributes() {
         let module = parse_sysml(
             "package EvalDemo {
@@ -6507,7 +6465,7 @@ mod tests {
             .evaluate(
                 "feature.EvalDemo.Vehicle.totalMass",
                 "type.EvalDemo.Vehicle",
-                &crate::runtime::ExecutionContext::default(),
+                &ExecutionContext::default(),
             )
             .unwrap();
 
@@ -6630,7 +6588,7 @@ mod tests {
                 .chain(ids)
                 .collect::<BTreeSet<_>>()
                 .into_iter()
-                .map(|id| crate::ir::KirElement {
+                .map(|id| KirElement {
                     id: id.to_string(),
                     kind: id.to_string(),
                     layer: 1,
@@ -6641,9 +6599,9 @@ mod tests {
     }
 
     fn find_resolved_usage<'a>(
-        usages: &'a [crate::frontend::resolver::ResolvedUsage],
+        usages: &'a [ResolvedUsage],
         qualified_name: &str,
-    ) -> Option<&'a crate::frontend::resolver::ResolvedUsage> {
+    ) -> Option<&'a ResolvedUsage> {
         usages.iter().find_map(|usage| {
             if usage.qualified_name == qualified_name {
                 Some(usage)

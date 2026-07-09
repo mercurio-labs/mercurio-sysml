@@ -3039,7 +3039,7 @@ fn disambiguate_duplicate_source_position_usage_ids(elements: &mut [KirElement])
     }
 }
 
-#[cfg(any())]
+#[cfg(test)]
 mod tests {
     use super::*;
 
