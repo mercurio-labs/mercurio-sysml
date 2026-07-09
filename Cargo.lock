@@ -989,7 +989,6 @@ dependencies = [
  "mercurio-language-contracts",
  "mercurio-simulation-core",
  "mercurio-sysml",
- "mercurio-sysml-simulation",
  "serde",
  "serde_json",
 ]
@@ -1028,17 +1027,6 @@ dependencies = [
  "serde",
  "serde_json",
  "zip",
-]
-
-[[package]]
-name = "mercurio-sysml-simulation"
-version = "0.1.0"
-dependencies = [
- "mercurio-core",
- "mercurio-simulation-core",
- "mercurio-sysml",
- "serde",
- "serde_json",
 ]
 
 [[package]]

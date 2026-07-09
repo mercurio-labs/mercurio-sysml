@@ -3,6 +3,8 @@ use std::fmt;
 
 use serde_json::Value;
 
+mod adapter;
+
 use mercurio_core::graph::{Element, Graph};
 use mercurio_core::runtime::{Runtime, RuntimeError};
 use mercurio_core::{
@@ -87,14 +89,12 @@ impl From<CapabilityError> for SimulationError {
 }
 
 pub fn canonical_simulation_model(runtime: &Runtime) -> Result<SimulationModel, SimulationError> {
-    mercurio_sysml_simulation::simulation_model_from_runtime(runtime).map_err(map_adapter_error)
+    adapter::simulation_model_from_runtime(runtime).map_err(map_adapter_error)
 }
 
-fn map_adapter_error(
-    error: mercurio_sysml_simulation::SysmlSimulationAdapterError,
-) -> SimulationError {
+fn map_adapter_error(error: adapter::SysmlSimulationAdapterError) -> SimulationError {
     match error {
-        mercurio_sysml_simulation::SysmlSimulationAdapterError::InvalidProfile(error) => {
+        adapter::SysmlSimulationAdapterError::InvalidProfile(error) => {
             SimulationError::InvalidProfile(
                 error
                     .findings
@@ -104,28 +104,27 @@ fn map_adapter_error(
                     .join("; "),
             )
         }
-        mercurio_sysml_simulation::SysmlSimulationAdapterError::MissingAnalysisCase(id) => {
+        adapter::SysmlSimulationAdapterError::MissingAnalysisCase(id) => {
             SimulationError::MissingAnalysisCase(id)
         }
-        mercurio_sysml_simulation::SysmlSimulationAdapterError::MissingStateMachine(id) => {
+        adapter::SysmlSimulationAdapterError::MissingStateMachine(id) => {
             SimulationError::MissingStateMachine(id)
         }
-        mercurio_sysml_simulation::SysmlSimulationAdapterError::InvalidAnalysisCase(message) => {
+        adapter::SysmlSimulationAdapterError::InvalidAnalysisCase(message) => {
             SimulationError::InvalidProfile(message)
         }
     }
 }
 
 pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
-    mercurio_sysml_simulation::list_analysis_cases(runtime)
+    adapter::list_analysis_cases(runtime)
 }
 
 pub fn scenario_from_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
 ) -> Result<ConcurrentSimulationScenario, SimulationError> {
-    mercurio_sysml_simulation::scenario_from_analysis_case(runtime, analysis_case_id)
-        .map_err(map_adapter_error)
+    adapter::scenario_from_analysis_case(runtime, analysis_case_id).map_err(map_adapter_error)
 }
 
 pub fn run_analysis_case(

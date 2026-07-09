@@ -11,8 +11,7 @@ KerML and SysML v2 language libraries. Owns the concrete language implementation
 | `mercurio-language-frontend` | Source text → parse tree → KIR pipeline entry point |
 | `mercurio-kerml` | KerML metamodel resources and semantic rules |
 | `mercurio-sysml` | SysML v2 compiler, semantic analysis, public simulation API |
-| `mercurio-sysml-simulation` | SysML simulation execution: state machines, concurrent engine |
-| `mercurio-simulation` | Shared simulation types and algorithms |
+| `mercurio-simulation` | SysML simulation adapter, shared simulation types, and concurrent engine |
 | `mercurio-requirements` | Requirements traceability and coverage analysis |
 | `mercurio-tools` | Maintainer tooling: boundary checker, metamodel validators |
 | `mercurio-sysml-cli` | CLI entry point |
