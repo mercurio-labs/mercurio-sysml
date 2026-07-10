@@ -2211,6 +2211,19 @@ fn enrich_usage_semantics(
 ) {
     if usage.is_implicit_name || mappings.reference_usage_has_synthetic_declared_name(usage) {
         element.properties.remove("declared_name");
+        // A redefining feature with no declared name still has an effective
+        // name inherited from the redefined feature (SysML v2). The pilot
+        // surfaces it as a derived `name`; without it the element has neither
+        // name nor declared name and cannot be identified. Emit the derived
+        // name only when the KIR carries no `name` already.
+        if !element.properties.contains_key("name")
+            && !usage.redefined_features.is_empty()
+            && let Some(name) = redefined_feature_effective_name(usage)
+        {
+            element
+                .properties
+                .insert("name".to_string(), Value::String(name));
+        }
     }
 
     if let Some(defaults) = mappings.usage_family_default(&usage.construct, &usage.owner_construct)
@@ -2282,6 +2295,19 @@ fn usage_display_name(usage: &ResolvedUsage, mappings: &MappingBundle) -> Option
     }
 
     (!usage.declared_name.is_empty()).then(|| usage.declared_name.clone())
+}
+
+// An unnamed redefining feature takes the redefined feature's name as its
+// effective name (SysML v2 redefinition semantics); the pilot derives the
+// same `name` while leaving the declared name unset.
+fn redefined_feature_effective_name(usage: &ResolvedUsage) -> Option<String> {
+    if !usage.declared_name.is_empty() {
+        return Some(usage.declared_name.clone());
+    }
+    usage
+        .redefined_features
+        .first()
+        .map(|value| display_name_for_ref(value))
 }
 
 pub(crate) fn modifier_value<'a>(modifiers: &'a [String], key: &str) -> Option<&'a str> {
