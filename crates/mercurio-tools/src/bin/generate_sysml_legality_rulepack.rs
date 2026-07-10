@@ -5,7 +5,7 @@ use std::path::PathBuf;
 use mercurio_core::{Graph, KirDocument, RulePack};
 use mercurio_sysml::{
     available_release_bundles, release_bundle, sysml_metamodel_adapter_from_graph,
-    sysml_semantic_legality_rulepack,
+    sysml_semantic_legality_base_rulepack,
 };
 use serde_json::{Value, json};
 
@@ -46,19 +46,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         if let Some(element_count) = element_count {
             metadata.insert("elementCount".to_string(), element_count);
         }
-        let rulepack = merge_rulepacks(adapter, sysml_semantic_legality_rulepack(), metadata);
+        let rulepack = merge_rulepacks(adapter, sysml_semantic_legality_base_rulepack(), metadata);
         let output_path = args
             .out
             .clone()
             .unwrap_or_else(|| bundle.rulepack_path.clone());
-        rulepack.write_pretty_to_path(&output_path)?;
-        println!(
-            "wrote {} for {} (facts: {}, diagnostics: {})",
-            output_path.display(),
-            bundle.profile_id,
-            rulepack.facts.len(),
-            rulepack.diagnostics.len()
-        );
+        if args.check {
+            let shipped = RulePack::from_path(&output_path)?;
+            if shipped != rulepack {
+                return Err(format!(
+                    "generated SysML legality rulepack for {} differs from {}",
+                    bundle.profile_id,
+                    output_path.display()
+                )
+                .into());
+            }
+            println!(
+                "checked {} for {} (facts: {}, diagnostics: {})",
+                output_path.display(),
+                bundle.profile_id,
+                rulepack.facts.len(),
+                rulepack.diagnostics.len()
+            );
+        } else {
+            rulepack.write_pretty_to_path(&output_path)?;
+            println!(
+                "wrote {} for {} (facts: {}, diagnostics: {})",
+                output_path.display(),
+                bundle.profile_id,
+                rulepack.facts.len(),
+                rulepack.diagnostics.len()
+            );
+        }
     }
 
     Ok(())
@@ -69,12 +88,14 @@ struct Args {
     selector: String,
     all: bool,
     out: Option<PathBuf>,
+    check: bool,
 }
 
 fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut selector = "latest".to_string();
     let mut all = false;
     let mut out = None;
+    let mut check = false;
     let args = env::args().skip(1).collect::<Vec<_>>();
     let mut index = 0;
 
@@ -96,6 +117,9 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                     args.get(index).ok_or("missing value for --out")?,
                 ));
             }
+            "--check" => {
+                check = true;
+            }
             "--help" | "-h" => {
                 print_usage();
                 std::process::exit(0);
@@ -109,12 +133,17 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
         return Err("--out can only be used when generating a single selector".into());
     }
 
-    Ok(Args { selector, all, out })
+    Ok(Args {
+        selector,
+        all,
+        out,
+        check,
+    })
 }
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin generate_sysml_legality_rulepack -- [--selector latest|2026-01|2026-04] [--all] [--out PATH]"
+        "Usage: cargo run -p mercurio-tools --bin generate_sysml_legality_rulepack -- [--selector latest|2026-01|2026-04] [--all] [--out PATH] [--check]"
     );
 }
 

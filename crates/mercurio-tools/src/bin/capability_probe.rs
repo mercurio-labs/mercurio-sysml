@@ -265,6 +265,7 @@ fn next_actions_request_from_options(
         element: options.get("element").cloned().map(ElementRef::new),
         element_kind,
         candidate_target_kinds: comma_list_option(options, "target-kinds"),
+        candidate_targets: Vec::new(),
         candidate_attributes: comma_list_option(options, "attributes"),
         facts: Vec::new(),
         max_actions,
