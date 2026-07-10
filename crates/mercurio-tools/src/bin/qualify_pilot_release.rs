@@ -47,6 +47,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .transpose()?,
         },
     };
+    if source_lock.pilot.dirty == Some(true) && !args.allow_dirty_pilot {
+        return Err(format!(
+            "Pilot checkout `{}` is dirty; pass --allow-dirty-pilot only for non-release/debug qualification",
+            args.pilot_root.display()
+        )
+        .into());
+    }
     write_json(&args.out.join("locks/source.lock.json"), &source_lock)?;
 
     let mut stages = Vec::new();
@@ -88,34 +95,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     if !args.skip_stdlib_build {
+        let mut stdlib_build_args = vec![
+            "run".to_string(),
+            "-p".to_string(),
+            "mercurio-tools".to_string(),
+            "--features".to_string(),
+            "legacy-pilot-tools".to_string(),
+            "--bin".to_string(),
+            "build_stdlib_release".to_string(),
+            "--".to_string(),
+            "--pilot-root".to_string(),
+            args.pilot_root.display().to_string(),
+            "--out".to_string(),
+            args.out.join("stdlib").display().to_string(),
+            "--spec-version".to_string(),
+            args.spec_version.clone(),
+            "--profile-id".to_string(),
+            args.profile_id.clone(),
+            "--source-id".to_string(),
+            args.release.clone(),
+            "--wrapper-module".to_string(),
+            args.wrapper_module.clone(),
+            "--audit-profile".to_string(),
+        ];
+        if args.allow_dirty_pilot {
+            stdlib_build_args.push("--allow-dirty".to_string());
+        }
         stages.push(run_stage(
             "stdlib_build",
             "build SysML stdlib release bundle from Pilot export",
             CommandSpec {
                 program: cargo_program(),
-                args: vec![
-                    "run".to_string(),
-                    "-p".to_string(),
-                    "mercurio-tools".to_string(),
-                    "--features".to_string(),
-                    "legacy-pilot-tools".to_string(),
-                    "--bin".to_string(),
-                    "build_stdlib_release".to_string(),
-                    "--".to_string(),
-                    "--pilot-root".to_string(),
-                    args.pilot_root.display().to_string(),
-                    "--out".to_string(),
-                    args.out.join("stdlib").display().to_string(),
-                    "--spec-version".to_string(),
-                    args.spec_version.clone(),
-                    "--profile-id".to_string(),
-                    args.profile_id.clone(),
-                    "--source-id".to_string(),
-                    args.release.clone(),
-                    "--wrapper-module".to_string(),
-                    args.wrapper_module.clone(),
-                    "--audit-profile".to_string(),
-                ],
+                args: stdlib_build_args,
                 env: Vec::new(),
             },
             &mercurio_root,
@@ -321,6 +332,7 @@ struct Args {
     skip_parity: bool,
     promote_candidate: bool,
     mark_latest: bool,
+    allow_dirty_pilot: bool,
 }
 
 impl Args {
@@ -339,6 +351,7 @@ impl Args {
             skip_parity: false,
             promote_candidate: false,
             mark_latest: false,
+            allow_dirty_pilot: false,
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
@@ -361,6 +374,7 @@ impl Args {
                 "--skip-parity" => args.skip_parity = true,
                 "--promote-candidate" => args.promote_candidate = true,
                 "--mark-latest" => args.mark_latest = true,
+                "--allow-dirty-pilot" | "--allow-dirty" => args.allow_dirty_pilot = true,
                 "--help" | "-h" => {
                     print_usage();
                     std::process::exit(0);
@@ -2195,6 +2209,11 @@ fn semantic_conformance_summary(metrics: &Value) -> Value {
         "total_metatype_mismatches": value_at(metrics, &["aggregate", "total_metatype_mismatches"]),
         "total_specialization_chain_mismatches": value_at(metrics, &["aggregate", "total_specialization_chain_mismatches"]),
         "total_declared_attribute_mismatches": value_at(metrics, &["aggregate", "total_declared_attribute_mismatches"]),
+        "compared_elements": value_at(metrics, &["aggregate", "compared_elements"]),
+        "total_elements": value_at(metrics, &["aggregate", "total_elements"]),
+        "excluded_elements": value_at(metrics, &["aggregate", "excluded_elements"]),
+        "compared_fraction": value_at(metrics, &["aggregate", "compared_fraction"]),
+        "match_key_disambiguations": value_at(metrics, &["aggregate", "match_key_disambiguations"]),
         "attribute_value_comparison": "declared_attributes.effective_value",
         "accepted_difference_gate": accepted_difference_gate_summary(metrics),
     })
@@ -2206,6 +2225,11 @@ fn compile_diagnostics_conformance_summary(metrics: &Value) -> Value {
         "both_pass_cases": value_at(metrics, &["aggregate", "both_pass_cases"]),
         "both_fail_cases": value_at(metrics, &["aggregate", "both_fail_cases"]),
         "status_match_cases": value_at(metrics, &["aggregate", "status_match_cases"]),
+        "parse_verdict_match_cases": value_at(metrics, &["aggregate", "parse_verdict_match_cases"]),
+        "diagnostic_set_match_cases": value_at(metrics, &["aggregate", "diagnostic_set_match_cases"]),
+        "diagnostic_matched_count": value_at(metrics, &["aggregate", "diagnostic_matched_count"]),
+        "diagnostic_mercurio_only_count": value_at(metrics, &["aggregate", "diagnostic_mercurio_only_count"]),
+        "diagnostic_pilot_only_count": value_at(metrics, &["aggregate", "diagnostic_pilot_only_count"]),
         "rust_only_fail_cases": value_at(metrics, &["aggregate", "rust_only_fail_cases"]),
         "pilot_only_fail_cases": value_at(metrics, &["aggregate", "pilot_only_fail_cases"]),
         "primary_problem_match_cases": value_at(metrics, &["aggregate", "primary_problem_match_cases"]),
@@ -2450,7 +2474,7 @@ fn next_path(args: &[String], index: &mut usize) -> Result<PathBuf, Box<dyn std:
 
 fn print_usage() {
     println!(
-        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--source-archive PATH] [--asset-dir PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build] [--skip-parity] [--promote-candidate] [--mark-latest]"
+        "Usage: qualify_pilot_release [--release 2026-01] [--pilot-root PATH] [--source-archive PATH] [--asset-dir PATH] [--out PATH] [--profile-id ID] [--spec-version VERSION] [--corpus NAME] [--wrapper-module MODULE] [--skip-stdlib-build] [--skip-parity] [--promote-candidate] [--mark-latest] [--allow-dirty-pilot]"
     );
 }
 
@@ -2975,6 +2999,7 @@ mod tests {
             skip_parity: false,
             promote_candidate: false,
             mark_latest: false,
+            allow_dirty_pilot: false,
         }
     }
 

@@ -1,0 +1,746 @@
+{
+  "schema": "dev.mercurio.field-specs.v1",
+  "source": {
+    "schema": "dev.mercurio.generated-source.v1",
+    "profile_id": "sysml-2.0-pilot-2026-04",
+    "source_files": [
+      {
+        "path": "resources/metamodels/sysml-2.0-pilot-2026-04/metamodel.extract.json",
+        "sha256": "659af8cc5441a2022c7441672419b4c28cbf12bf6becf6c9b982bf5f3ff7c28b"
+      },
+      {
+        "path": "resources/metamodels/sysml-2.0-pilot-2026-04/mappings/field_specs.overlay.json",
+        "sha256": "cd8658196b761ec1aab2cb0562339c90be6c2c30e38a9740e0d29bc99b83e946"
+      }
+    ],
+    "generator": {
+      "name": "generate_sysml_field_specs",
+      "version": "0.1.0"
+    },
+    "generated_at_utc": "2026-07-09T21:57:23.512529Z"
+  },
+  "fields": [
+    {
+      "field": "allocated",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR convenience edge for allocation relationships produced during lowering."
+      }
+    },
+    {
+      "field": "allocated_to",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR convenience edge for allocation relationships produced during lowering."
+      }
+    },
+    {
+      "field": "annotatedElement",
+      "kind": "Reference",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::AnnotatingElement::annotatedElement",
+          "KerML::Annotation::annotatedElement",
+          "SysML::AnnotatingElement::annotatedElement",
+          "SysML::Annotation::annotatedElement"
+        ],
+        "reason": "KIR stores a single annotated element reference where the Pilot metamodel has both annotation and annotating-element shapes."
+      }
+    },
+    {
+      "field": "arguments",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-alias",
+        "pilot_features": [
+          "KerML::InstantiationExpression::argument",
+          "SysML::InstantiationExpression::argument"
+        ],
+        "reason": "KIR plural alias for Pilot instantiation argument lists."
+      }
+    },
+    {
+      "field": "body",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Comment::body",
+          "KerML::TextualRepresentation::body",
+          "SysML::Comment::body",
+          "SysML::TextualRepresentation::body"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "chaining_feature",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Feature::chainingFeature",
+          "KerML::FeatureChaining::chainingFeature",
+          "SysML::Feature::chainingFeature",
+          "SysML::FeatureChaining::chainingFeature"
+        ],
+        "reason": "KIR keeps chaining features as a list across both base feature and feature-chaining relationship shapes."
+      }
+    },
+    {
+      "field": "conjugated",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR compatibility reference for conjugation handling in existing consumers."
+      }
+    },
+    {
+      "field": "declared_multiplicity",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR preserves the authored multiplicity text separately from Pilot derived multiplicity references."
+      }
+    },
+    {
+      "field": "definition",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "SysML::Usage::definition"
+        ],
+        "reason": "KIR accepts singleton and list definition references while the Pilot metamodel exposes a derived definition list."
+      }
+    },
+    {
+      "field": "dependencies",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR dependency relationship shortcut used by trace and graph consumers."
+      }
+    },
+    {
+      "field": "direction",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::direction",
+          "SysML::Feature::direction"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "do_behavior",
+      "kind": "Metadata",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio metadata payload for behavior implementation details; not a Pilot Ecore structural feature."
+      }
+    },
+    {
+      "field": "documentation",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::documentation",
+          "SysML::Element::documentation"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "documentedElement",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Documentation::documentedElement",
+          "SysML::Documentation::documentedElement"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "effect",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR textual effect summary derived during lowering for views and authoring."
+      }
+    },
+    {
+      "field": "feature_typings",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized list of typing relationships used by query and validation consumers."
+      }
+    },
+    {
+      "field": "featuring_type",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Feature::featuringType",
+          "KerML::TypeFeaturing::featuringType",
+          "SysML::Feature::featuringType",
+          "SysML::TypeFeaturing::featuringType"
+        ],
+        "reason": "KIR keeps featuring types as a list across both base feature and type-featuring relationship shapes."
+      }
+    },
+    {
+      "field": "imports",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized import relationship list used by package and namespace consumers."
+      }
+    },
+    {
+      "field": "is_abstract",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Type::isAbstract",
+          "SysML::Type::isAbstract"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_conjugated",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Type::isConjugated",
+          "SysML::Type::isConjugated"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_derived",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isDerived",
+          "SysML::Feature::isDerived"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_end",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isEnd",
+          "SysML::Feature::isEnd"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_implied",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Relationship::isImplied",
+          "SysML::Relationship::isImplied"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_initial",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureValue::isInitial",
+          "SysML::FeatureValue::isInitial"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_library_element",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::isLibraryElement",
+          "SysML::Element::isLibraryElement"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_ordered",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isOrdered",
+          "SysML::Feature::isOrdered"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_readonly",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR compatibility spelling retained for existing persisted documents and consumers."
+      }
+    },
+    {
+      "field": "is_unique",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isUnique",
+          "SysML::Feature::isUnique"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "is_variable",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isVariable",
+          "SysML::Feature::isVariable"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "items",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR domain convenience list for item-like usages used by views and queries."
+      }
+    },
+    {
+      "field": "language",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::TextualRepresentation::language",
+          "SysML::TextualRepresentation::language"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "locale",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Comment::locale",
+          "SysML::Comment::locale"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "metatype",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio classification reference used by lowering and inspection; not a direct Pilot Ecore feature."
+      }
+    },
+    {
+      "field": "multiplicity",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Type::multiplicity",
+          "SysML::Type::multiplicity"
+        ],
+        "reason": "KIR stores a textual scalar summary while the Pilot metamodel exposes multiplicity as a derived reference."
+      }
+    },
+    {
+      "field": "multiplicity_lower",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized scalar bound derived from parsed multiplicity syntax for query ergonomics."
+      }
+    },
+    {
+      "field": "multiplicity_upper",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized scalar bound derived from parsed multiplicity syntax for query ergonomics."
+      }
+    },
+    {
+      "field": "operator",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::OperatorExpression::operator",
+          "SysML::OperatorExpression::operator"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "operator_expression",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Parser/lowering convenience field for textual operator expressions; not a Pilot Ecore structural feature."
+      }
+    },
+    {
+      "field": "opposite",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR compatibility reference for opposite-end navigation in existing consumers."
+      }
+    },
+    {
+      "field": "original_definition",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio preservation field for transformed/generated elements."
+      }
+    },
+    {
+      "field": "owned_feature",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Type::ownedFeature",
+          "SysML::Type::ownedFeature"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "parameters",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-alias",
+        "pilot_features": [
+          "KerML::Behavior::parameter",
+          "KerML::Step::parameter",
+          "SysML::Behavior::parameter",
+          "SysML::Step::parameter"
+        ],
+        "reason": "KIR plural alias for Pilot parameter feature lists."
+      }
+    },
+    {
+      "field": "parent_state",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR state-machine convenience reference derived during lowering."
+      }
+    },
+    {
+      "field": "parts",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR domain convenience list for part-like usages used by views and queries."
+      }
+    },
+    {
+      "field": "payload",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR action/event convenience reference derived during lowering."
+      }
+    },
+    {
+      "field": "pilot_library_group",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio stdlib import grouping metadata used for bundle organization; not a Pilot Ecore structural feature."
+      }
+    },
+    {
+      "field": "redefined_features",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized relationship list for redefinition targets."
+      }
+    },
+    {
+      "field": "redefines",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized relationship list; Pilot redefine evidence appears in Ecore annotations and relationship classes."
+      }
+    },
+    {
+      "field": "related",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR generic relationship adjacency list used by graph consumers."
+      }
+    },
+    {
+      "field": "relationships",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR graph adjacency convenience list for relationship navigation."
+      }
+    },
+    {
+      "field": "requirement_id",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio document/requirement trace alias for user-facing requirement identifiers."
+      }
+    },
+    {
+      "field": "result",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Expression::result",
+          "KerML::Function::result",
+          "SysML::Expression::result",
+          "SysML::Function::result"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "satisfy",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR traceability shortcut edge for satisfaction relationships."
+      }
+    },
+    {
+      "field": "source_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Connector::sourceFeature",
+          "SysML::Connector::sourceFeature"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "source_file",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio source provenance field attached by parsers/importers."
+      }
+    },
+    {
+      "field": "source_is_initial",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR transition convenience flag derived from source state semantics."
+      }
+    },
+    {
+      "field": "source_language",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio source provenance field attached by parsers/importers."
+      }
+    },
+    {
+      "field": "sources",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-alias",
+        "pilot_features": [
+          "KerML::Relationship::source",
+          "SysML::Relationship::source"
+        ],
+        "reason": "KIR plural alias for Pilot relationship source references."
+      }
+    },
+    {
+      "field": "specialized_features",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized specialization target list used by semantic consumers."
+      }
+    },
+    {
+      "field": "subsets",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized relationship list; Pilot subset evidence appears in Ecore annotations and relationship classes."
+      }
+    },
+    {
+      "field": "subsetted_features",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized relationship list for subset targets."
+      }
+    },
+    {
+      "field": "successions",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR behavioral convenience list for succession relationships."
+      }
+    },
+    {
+      "field": "target_ref",
+      "kind": "Reference",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "Mercurio disambiguating alias used where `target` has relationship semantics."
+      }
+    },
+    {
+      "field": "targets",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-alias",
+        "pilot_features": [
+          "KerML::Relationship::target",
+          "SysML::Relationship::target"
+        ],
+        "reason": "KIR plural alias for Pilot relationship target references."
+      }
+    },
+    {
+      "field": "text",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::RequirementDefinition::text",
+          "SysML::RequirementUsage::text"
+        ],
+        "reason": "Directly derived from Pilot metamodel structural feature name and multiplicity."
+      }
+    },
+    {
+      "field": "trigger",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR transition trigger summary derived from syntax and lowering; not a direct Pilot Ecore feature."
+      }
+    },
+    {
+      "field": "trigger_kind",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR normalized trigger discriminator used by views and authoring; not a direct Pilot Ecore feature."
+      }
+    },
+    {
+      "field": "type_label",
+      "kind": "Scalar",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR display/classification label derived during lowering; not a Pilot Ecore structural feature."
+      }
+    },
+    {
+      "field": "verify",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "mercurio-extension",
+        "pilot_features": [],
+        "reason": "KIR traceability shortcut edge for verification relationships."
+      }
+    }
+  ]
+}

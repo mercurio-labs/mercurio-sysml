@@ -1,0 +1,385 @@
+{
+  "schema": "dev.mercurio.compare-tolerances-overlay.v1",
+  "source": {
+    "profileId": "sysml-2.0-pilot-2026-04",
+    "generatedFrom": [
+      "../metamodel.extract.json",
+      "../implicit_semantics.extract.json"
+    ],
+    "curatedAtUtc": "2026-07-09T00:00:00Z"
+  },
+  "includedAttributes": [
+    "declared_name",
+    "name",
+    "owner",
+    "type",
+    "definition",
+    "specializes",
+    "features",
+    "members",
+    "featuring_type",
+    "direction",
+    "subsets",
+    "redefines"
+  ],
+  "tolerances": [
+    {
+      "id": "compare.name.effective-direct",
+      "classification": "intentional-divergence",
+      "reason": "Pilot and Mercurio expose some name-like values as effective-only versus direct KIR properties.",
+      "scope": {},
+      "action": {
+        "kind": "promoteEffectiveToDirect",
+        "parameters": {
+          "attributes": ["declared_name", "name", "owner"]
+        }
+      }
+    },
+    {
+      "id": "compare.declared-name.from-name",
+      "classification": "intentional-divergence",
+      "reason": "The two engines may surface the same user-visible name under name or declared_name.",
+      "scope": {},
+      "action": {
+        "kind": "copyAttributeWhenMissing",
+        "parameters": {
+          "source": "name",
+          "target": "declared_name"
+        }
+      }
+    },
+    {
+      "id": "compare.reference.identity",
+      "classification": "pilot-quirk",
+      "reason": "Pilot can synthesize anonymous ReferenceUsage identity from generated feature IDs.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "ensureAttributesFromElementName",
+        "parameters": {
+          "attributes": ["declared_name", "name", "qualifiedName"],
+          "effectiveOnlyWhenGenerated": true
+        }
+      }
+    },
+    {
+      "id": "compare.reference.generated-name-optional",
+      "classification": "pilot-quirk",
+      "reason": "Pilot may omit generated ReferenceUsage names that are already recoverable from generated reference identity.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "removeAttributesIfGeneratedReferenceName",
+        "parameters": {
+          "attributes": ["declared_name", "name"]
+        }
+      }
+    },
+    {
+      "id": "compare.reference.source-output",
+      "classification": "pilot-quirk",
+      "reason": "Pilot encodes message source-output references through sourceOutput redefinition artifacts.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "setAttributesWhenAttributeContainsIdentifier",
+        "parameters": {
+          "source": "redefines",
+          "identifier": "sourceOutput",
+          "values": {
+            "owner": ["source"],
+            "featuring_type": ["?"],
+            "direction": "out"
+          }
+        }
+      }
+    },
+    {
+      "id": "compare.reference.target-input",
+      "classification": "pilot-quirk",
+      "reason": "Pilot encodes message target-input references through targetInput redefinition artifacts.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "setAttributesWhenAttributeContainsIdentifier",
+        "parameters": {
+          "source": "redefines",
+          "identifier": "targetInput",
+          "values": {
+            "owner": ["target"],
+            "featuring_type": ["?"]
+          }
+        }
+      }
+    },
+    {
+      "id": "compare.reference.accept-action-featuring-type",
+      "classification": "mercurio-gap",
+      "reason": "Mercurio currently erases some Pilot featuring-type references to wildcard placeholders.",
+      "trackingRef": "PX-5.5-mercurio-gap-featuring-type-wildcard",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "setAttributesWhenAttributeContainsIdentifier",
+        "parameters": {
+          "source": "featuring_type",
+          "identifier": "AcceptActionUsage",
+          "values": {
+            "featuring_type": ["?"]
+          }
+        }
+      }
+    },
+    {
+      "id": "compare.reference.drop-qualified-name",
+      "classification": "pilot-quirk",
+      "reason": "Pilot synthesized ReferenceUsage qualifiedName values are not stable semantic identity.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "removeAttribute",
+        "parameters": {
+          "attribute": "qualifiedName"
+        }
+      }
+    },
+    {
+      "id": "compare.reference.drop-documentation-owned-element",
+      "classification": "pilot-quirk",
+      "reason": "Pilot may include generated Documentation ownership under anonymous references.",
+      "scope": {
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "ownedElement",
+          "identifier": "Documentation"
+        }
+      }
+    },
+    {
+      "id": "compare.flow.generated-subactions-name",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated FlowUsage subactions names that are implicit structure.",
+      "scope": {
+        "metatype": "FlowUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "declared_name",
+          "identifier": "subactions"
+        }
+      }
+    },
+    {
+      "id": "compare.flow.generated-subactions-name-alias",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated FlowUsage subactions aliases that are implicit structure.",
+      "scope": {
+        "metatype": "FlowUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "name",
+          "identifier": "subactions"
+        }
+      }
+    },
+    {
+      "id": "compare.flow.drop-owned-element",
+      "classification": "pilot-quirk",
+      "reason": "FlowUsage ownedElement contains Pilot-generated flow endpoint artifacts covered by implicit semantics extraction.",
+      "scope": {
+        "metatype": "FlowUsage"
+      },
+      "action": {
+        "kind": "removeAttribute",
+        "parameters": {
+          "attribute": "ownedElement"
+        }
+      }
+    },
+    {
+      "id": "compare.succession-flow.generated-name",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated successionFlows names for implicit succession flow structure.",
+      "scope": {
+        "metatype": "SuccessionFlowUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "declared_name",
+          "identifier": "successionFlows"
+        }
+      }
+    },
+    {
+      "id": "compare.succession-flow.generated-name-alias",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated successionFlows aliases for implicit succession flow structure.",
+      "scope": {
+        "metatype": "SuccessionFlowUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "name",
+          "identifier": "successionFlows"
+        }
+      }
+    },
+    {
+      "id": "compare.accept-action.generated-name",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated acceptSubactions names for implicit accept action structure.",
+      "scope": {
+        "metatype": "AcceptActionUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "declared_name",
+          "identifier": "acceptSubactions"
+        }
+      }
+    },
+    {
+      "id": "compare.accept-action.generated-name-alias",
+      "classification": "pilot-quirk",
+      "reason": "Pilot exposes generated acceptSubactions aliases for implicit accept action structure.",
+      "scope": {
+        "metatype": "AcceptActionUsage"
+      },
+      "action": {
+        "kind": "removeAttributeIfEmptyOrIdentifier",
+        "parameters": {
+          "attribute": "name",
+          "identifier": "acceptSubactions"
+        }
+      }
+    },
+    {
+      "id": "compare.part-family.default-specializes",
+      "classification": "intentional-divergence",
+      "reason": "PartUsage may inherit the standard Parts family default specialization differently across engines.",
+      "scope": {
+        "metatype": "PartUsage"
+      },
+      "action": {
+        "kind": "stripIdentifierFromAttribute",
+        "parameters": {
+          "attribute": "specializes",
+          "identifier": "parts"
+        }
+      }
+    },
+    {
+      "id": "compare.part-family.default-subsets",
+      "classification": "intentional-divergence",
+      "reason": "PartUsage may inherit the standard Parts family default subsetting differently across engines.",
+      "scope": {
+        "metatype": "PartUsage"
+      },
+      "action": {
+        "kind": "stripIdentifierFromAttribute",
+        "parameters": {
+          "attribute": "subsets",
+          "identifier": "parts"
+        }
+      }
+    },
+    {
+      "id": "compare.optional.features-members",
+      "classification": "intentional-divergence",
+      "reason": "Features and members are aggregate relationship views and may be empty or duplicated by direct relationship attributes.",
+      "scope": {
+        "attribute": "features"
+      },
+      "action": {
+        "kind": "optionalWhenMissing",
+        "parameters": {
+          "mode": "secondaryPresentOrPrimaryNoValue"
+        }
+      }
+    },
+    {
+      "id": "compare.optional.members",
+      "classification": "intentional-divergence",
+      "reason": "Members are aggregate relationship views and may be empty or duplicated by direct relationship attributes.",
+      "scope": {
+        "attribute": "members"
+      },
+      "action": {
+        "kind": "optionalWhenMissing",
+        "parameters": {
+          "mode": "secondaryPresentOrPrimaryNoValue"
+        }
+      }
+    },
+    {
+      "id": "compare.optional.default-value",
+      "classification": "intentional-divergence",
+      "reason": "One engine may materialize a default false/empty value while the other omits it.",
+      "scope": {},
+      "action": {
+        "kind": "optionalWhenMissing",
+        "parameters": {
+          "mode": "primaryNoValueSecondaryDefault"
+        }
+      }
+    },
+    {
+      "id": "compare.optional.qualified-name-effective",
+      "classification": "pilot-quirk",
+      "reason": "Pilot synthesized qualifiedName values can be effective-only and absent on Mercurio nodes.",
+      "scope": {
+        "attribute": "qualifiedName"
+      },
+      "action": {
+        "kind": "optionalWhenMissing",
+        "parameters": {
+          "mode": "effectiveOnlyWithoutSecondary"
+        }
+      }
+    },
+    {
+      "id": "compare.optional.owner-namespace",
+      "classification": "intentional-divergence",
+      "reason": "Namespace owner defaults can be explicit in one engine and absent in the other.",
+      "scope": {
+        "attribute": "owner"
+      },
+      "action": {
+        "kind": "optionalWhenMissing",
+        "parameters": {
+          "mode": "namespaceOwnerGap"
+        }
+      }
+    },
+    {
+      "id": "compare.exclude.connection-end-reference",
+      "classification": "pilot-quirk",
+      "reason": "Pilot emits an anonymous same-line ReferenceUsage for typed connection ends already represented by the PartUsage end.",
+      "scope": {
+        "mode": "pilot",
+        "metatype": "ReferenceUsage"
+      },
+      "action": {
+        "kind": "excludeElement",
+        "parameters": {
+          "mode": "sameLineEndFeatureReference"
+        }
+      }
+    }
+  ]
+}

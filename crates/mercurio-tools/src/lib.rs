@@ -6,6 +6,7 @@ use mercurio_core::{
     DerivedFeatureManifest, DerivedFeatureRegistry, DerivedFeatureRule, DerivedFeatureSpec,
     KIR_SCHEMA_VERSION, KirDocument, KirElement, builtin_core_derived_feature_manifest,
 };
+use serde::Deserialize;
 use serde_json::{Value, json};
 
 pub const MERCURIO_WORKSPACE_ROOT_ENV: &str = "MERCURIO_WORKSPACE_ROOT";
@@ -14,9 +15,14 @@ pub const MERCURIO_EXAMPLES_ROOT_ENV: &str = "MERCURIO_EXAMPLES_ROOT";
 
 const PILOT_REPO_NAME: &str = "SysML-v2-Pilot-Implementation";
 const EXAMPLES_REPO_NAME: &str = "mercurio-examples";
+const PILOT_LOCK_PATH: &str = "resources/pilot.lock.json";
 
 pub fn default_pilot_root() -> PathBuf {
     if let Some(path) = env_path(MERCURIO_PILOT_ROOT_ENV) {
+        return path;
+    }
+
+    if let Some(path) = default_pilot_root_from_lock() {
         return path;
     }
 
@@ -34,6 +40,56 @@ pub fn default_pilot_root() -> PathBuf {
     } else {
         PathBuf::from("..").join(PILOT_REPO_NAME)
     }
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct PilotLock {
+    pub schema: String,
+    pub repository: String,
+    pub commit: String,
+    pub git_describe: Option<String>,
+    #[serde(default)]
+    pub source_roots: Vec<PilotLockSourceRoot>,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct PilotLockSourceRoot {
+    pub path: String,
+    pub note: Option<String>,
+}
+
+pub fn sysml_workspace_root() -> PathBuf {
+    let manifest_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    match manifest_dir.parent().and_then(Path::parent) {
+        Some(root) => root.to_path_buf(),
+        None => manifest_dir,
+    }
+}
+
+pub fn pilot_lock_path() -> PathBuf {
+    sysml_workspace_root().join(PILOT_LOCK_PATH)
+}
+
+pub fn load_pilot_lock() -> Result<PilotLock, Box<dyn std::error::Error>> {
+    let text = std::fs::read_to_string(pilot_lock_path())?;
+    Ok(serde_json::from_str(&text)?)
+}
+
+fn default_pilot_root_from_lock() -> Option<PathBuf> {
+    let lock = load_pilot_lock().ok()?;
+    let root = sysml_workspace_root();
+    for source_root in lock.source_roots {
+        let path = PathBuf::from(source_root.path);
+        let candidate = if path.is_absolute() {
+            path
+        } else {
+            root.join(path)
+        };
+        if candidate.exists() {
+            return Some(candidate);
+        }
+    }
+    None
 }
 
 pub fn default_kerml_examples_root(fallback_in_core: impl Into<PathBuf>) -> PathBuf {

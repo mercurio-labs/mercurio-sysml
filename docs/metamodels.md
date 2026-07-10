@@ -42,11 +42,22 @@ experiments that intentionally track the newest supported bundle.
 
 ## Adding A Version
 
-Adding a metamodel version should be a directory-level change:
+Adding a metamodel version should be one release-bump command plus review of
+the drift report:
+
+```powershell
+cargo run -p mercurio-tools --features legacy-pilot-tools --bin pilot_release_bump -- --profile-id <new-id> --corpus small --out target\pilot-release-bump-drift.json
+```
+
+Use the command in check mode to qualify checked-in generated artifacts, or pass
+`--write` while preparing a candidate bump from a clean Pilot checkout. The
+directory-level contract remains:
 
 - add a new `resources/metamodels/<id>/` directory,
 - include descriptor, profile, mappings, provenance, and generated KIR resources,
 - mark only one descriptor as `latest`,
 - preserve compatibility aliases only when the new bundle intentionally replaces
   an older identifier,
-- add tests that list, select, load, and compile with the new version.
+- add tests that list, select, load, and compile with the new version,
+- review the generated JSON/Markdown drift report for grammar, metamodel,
+  validator, implicit-semantics, stdlib, and conformance changes.

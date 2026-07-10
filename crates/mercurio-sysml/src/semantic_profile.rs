@@ -119,79 +119,7 @@ pub const SYSML_USAGE_KEYWORDS: &[&str] = &[
 
 pub const SYSML_RELATIONSHIP_KINDS: &[&str] = &["satisfy", "verify", "trace", "refine"];
 
-pub fn sysml_field_specs() -> &'static [(&'static str, KirFieldKind)] {
-    &[
-        ("type_label", KirFieldKind::Scalar),
-        ("pilot_library_group", KirFieldKind::Scalar),
-        ("direction", KirFieldKind::Scalar),
-        ("multiplicity", KirFieldKind::Scalar),
-        ("multiplicity_lower", KirFieldKind::Scalar),
-        ("multiplicity_upper", KirFieldKind::Scalar),
-        ("declared_multiplicity", KirFieldKind::Scalar),
-        ("operator", KirFieldKind::Scalar),
-        ("operator_expression", KirFieldKind::Scalar),
-        ("trigger", KirFieldKind::Scalar),
-        ("trigger_kind", KirFieldKind::Scalar),
-        ("is_initial", KirFieldKind::Scalar),
-        ("source_is_initial", KirFieldKind::Scalar),
-        ("effect", KirFieldKind::Scalar),
-        ("text", KirFieldKind::Scalar),
-        ("requirement_id", KirFieldKind::Scalar),
-        ("body", KirFieldKind::Scalar),
-        ("locale", KirFieldKind::Scalar),
-        ("language", KirFieldKind::Scalar),
-        ("source_file", KirFieldKind::Scalar),
-        ("source_language", KirFieldKind::Scalar),
-        ("is_abstract", KirFieldKind::Scalar),
-        ("is_conjugated", KirFieldKind::Scalar),
-        ("is_derived", KirFieldKind::Scalar),
-        ("is_end", KirFieldKind::Scalar),
-        ("is_variable", KirFieldKind::Scalar),
-        ("is_readonly", KirFieldKind::Scalar),
-        ("is_ordered", KirFieldKind::Scalar),
-        ("is_unique", KirFieldKind::Scalar),
-        ("is_library_element", KirFieldKind::Scalar),
-        ("is_implied", KirFieldKind::Scalar),
-        ("definition", KirFieldKind::Reference),
-        ("metatype", KirFieldKind::Reference),
-        ("source_feature", KirFieldKind::Reference),
-        ("allocated", KirFieldKind::Reference),
-        ("allocated_to", KirFieldKind::Reference),
-        ("parent_state", KirFieldKind::Reference),
-        ("payload", KirFieldKind::Reference),
-        ("result", KirFieldKind::Reference),
-        ("original_definition", KirFieldKind::Reference),
-        ("conjugated", KirFieldKind::Reference),
-        ("opposite", KirFieldKind::Reference),
-        ("documentedElement", KirFieldKind::Reference),
-        ("annotatedElement", KirFieldKind::Reference),
-        ("target_ref", KirFieldKind::Reference),
-        ("documentation", KirFieldKind::ReferenceList),
-        ("feature_typings", KirFieldKind::ReferenceList),
-        ("subsets", KirFieldKind::ReferenceList),
-        ("subsetted_features", KirFieldKind::ReferenceList),
-        ("redefines", KirFieldKind::ReferenceList),
-        ("redefined_features", KirFieldKind::ReferenceList),
-        ("specialized_features", KirFieldKind::ReferenceList),
-        ("featuring_type", KirFieldKind::ReferenceList),
-        ("chaining_feature", KirFieldKind::ReferenceList),
-        ("imports", KirFieldKind::ReferenceList),
-        ("relationships", KirFieldKind::ReferenceList),
-        ("sources", KirFieldKind::ReferenceList),
-        ("targets", KirFieldKind::ReferenceList),
-        ("parts", KirFieldKind::ReferenceList),
-        ("items", KirFieldKind::ReferenceList),
-        ("owned_feature", KirFieldKind::ReferenceList),
-        ("verify", KirFieldKind::ReferenceList),
-        ("satisfy", KirFieldKind::ReferenceList),
-        ("related", KirFieldKind::ReferenceList),
-        ("parameters", KirFieldKind::ReferenceList),
-        ("arguments", KirFieldKind::ReferenceList),
-        ("successions", KirFieldKind::ReferenceList),
-        ("dependencies", KirFieldKind::ReferenceList),
-        ("do_behavior", KirFieldKind::Metadata),
-    ]
-}
+include!(concat!(env!("OUT_DIR"), "/sysml_field_specs.rs"));
 
 pub fn sysml_trace_rulepack() -> RulePack {
     RulePack {
@@ -758,6 +686,38 @@ mod tests {
         assert_eq!(
             profile.canonical_kinds[&Concept::PACKAGE],
             "KerML::Kernel::Package"
+        );
+    }
+
+    #[test]
+    fn sysml_field_specs_are_generated_with_expected_shape() {
+        let fields = sysml_field_specs();
+
+        assert!(fields.len() >= 69);
+        assert!(
+            fields
+                .iter()
+                .any(|(field, kind)| *field == "type_label" && *kind == KirFieldKind::Scalar)
+        );
+        assert_eq!(
+            fields.iter().find(|(field, _)| *field == "definition"),
+            Some(&("definition", KirFieldKind::ReferenceList))
+        );
+        assert_eq!(
+            fields.iter().find(|(field, _)| *field == "body"),
+            Some(&("body", KirFieldKind::Scalar))
+        );
+        assert_eq!(
+            fields.iter().find(|(field, _)| *field == "direction"),
+            Some(&("direction", KirFieldKind::Scalar))
+        );
+        assert_eq!(
+            fields.iter().find(|(field, _)| *field == "owned_feature"),
+            Some(&("owned_feature", KirFieldKind::ReferenceList))
+        );
+        assert_eq!(
+            fields.iter().find(|(field, _)| *field == "do_behavior"),
+            Some(&("do_behavior", KirFieldKind::Metadata))
         );
     }
 
