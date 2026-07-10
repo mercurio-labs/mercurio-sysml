@@ -6165,7 +6165,10 @@ mod tests {
     }
 
     #[test]
-    fn initialized_attribute_usage_is_marked_derived_when_expression_is_present() {
+    fn initialized_attribute_usage_is_not_derived_without_derived_keyword() {
+        // A value binding (`= 42`) is a FeatureValue, not a derivation. Only the
+        // explicit `derived` keyword sets `isDerived` (SysML v2 / KerML). The
+        // pilot exports a bound but non-`derived` attribute as `isDerived=false`.
         let module = parse_sysml(
             "package Demo { attribute def Mass; part vehicle { attribute totalMass : Mass = 42; } }",
         )
@@ -6182,8 +6185,9 @@ mod tests {
             .unwrap();
         assert_eq!(
             total_mass.properties.get("is_derived"),
-            Some(&serde_json::Value::Bool(true))
+            Some(&serde_json::Value::Bool(false))
         );
+        // The bound value is still captured as an expression regardless.
         assert!(total_mass.properties.contains_key("expression_ir"));
     }
 

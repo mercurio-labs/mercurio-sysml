@@ -848,8 +848,11 @@ fn resolve_usage(
         metadata_properties: usage.metadata_properties,
         multiplicity: usage.multiplicity,
         expression,
-        is_derived: usage.modifiers.iter().any(|modifier| modifier == "derived")
-            || (usage.expression.is_some() && effective_redefines.is_empty()),
+        // `isDerived` is set only by the explicit `derived` modifier. A value
+        // binding (`= expr`) is a FeatureValue, not a derivation, so it must
+        // not imply `isDerived` (matches the pilot, which reports a bound but
+        // non-`derived` feature as `isDerived = false`).
+        is_derived: usage.modifiers.iter().any(|modifier| modifier == "derived"),
         specializes,
         specialized_features,
         subsetted_features,
