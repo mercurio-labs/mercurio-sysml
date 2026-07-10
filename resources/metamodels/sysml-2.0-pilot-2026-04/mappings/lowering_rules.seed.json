@@ -2346,6 +2346,43 @@
       }
     },
     {
+      "construct": "EventOccurrenceUsage",
+      "metaclass": "SysML::EventOccurrenceUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "event-occurrence"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "event-occurrence.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref",
+          "is_unique": "$is_unique",
+          "is_variable": "$is_variable"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "EventOccurrenceUsage"
+        ],
+        "ecore_class": "SysML::EventOccurrenceUsage",
+        "transform_observations": []
+      }
+    },
+    {
       "construct": "Package",
       "metaclass": "SysML::Package",
       "status": "reviewed",

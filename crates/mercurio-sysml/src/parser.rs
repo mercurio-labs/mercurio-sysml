@@ -1136,7 +1136,7 @@ impl Parser {
                 self.parse_composite_feature_declaration(
                     "event",
                     "occurrence",
-                    "occurrence",
+                    "event-occurrence",
                     docs,
                     modifiers,
                 )?
@@ -6485,7 +6485,7 @@ mod tests {
     }
 
     #[test]
-    fn parses_event_occurrence_as_occurrence_usage_with_declared_name() {
+    fn parses_event_occurrence_as_event_occurrence_usage_with_declared_name() {
         let module =
             parse_sysml("package Demo { part def Sequence { event occurrence publish; } }")
                 .unwrap();
@@ -6499,7 +6499,10 @@ mod tests {
             other => panic!("expected occurrence usage, got {other:?}"),
         };
 
-        assert_eq!(usage.keyword, "occurrence");
+        // `event occurrence` is a distinct construct from plain `occurrence`:
+        // it lowers to EventOccurrenceUsage (matching the pilot), keyed by the
+        // composite `event-occurrence` keyword.
+        assert_eq!(usage.keyword, "event-occurrence");
         assert_eq!(usage.name, "publish");
         assert!(!usage.is_implicit_name);
     }

@@ -20,14 +20,14 @@
       },
       {
         "path": "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/constructs.overlay.json",
-        "sha256": "7f7e91fc14c66d74a683403b2511297c42d97b6e0e6d8c69676250e8f720fc24"
+        "sha256": "79ab91f3a4e8b86c39603457ff9e7961b8eeb90acf050e7c03f86fef868b3901"
       }
     ],
     "extractor": {
       "name": "generate_pilot_constructs_seed",
       "version": "0.1.0"
     },
-    "generated_at_utc": "2026-07-10T21:32:32.315415Z"
+    "generated_at_utc": "2026-07-10T23:07:24.7737978Z"
   },
   "keyword_registry": {
     "source": {
@@ -90,6 +90,7 @@
       "dependency": "DependencyUsage",
       "end": "EndUsage",
       "enum": "EnumerationUsage",
+      "event-occurrence": "EventOccurrenceUsage",
       "exhibit": "ExhibitStateUsage",
       "failure": "FailureUsage",
       "feature": "FeatureUsage",
@@ -174,6 +175,7 @@
       "ConcernUsage": "SysML::Systems::ConcernUsage",
       "ConnectionUsage": "SysML::Systems::ConnectionUsage",
       "EnumerationUsage": "SysML::Systems::EnumerationUsage",
+      "EventOccurrenceUsage": "SysML::Systems::EventOccurrenceUsage",
       "ExhibitStateUsage": "SysML::Systems::ExhibitStateUsage",
       "FlowUsage": "SysML::Systems::FlowUsage",
       "FrameUsage": "SysML::Systems::ConcernUsage",
@@ -671,6 +673,13 @@
       "grammar_file": "SysML.xtext",
       "grammar_line": 847,
       "overlay_reason": "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+    },
+    {
+      "construct": "EventOccurrenceUsage",
+      "metaclass": "SysML::EventOccurrenceUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 867,
+      "overlay_reason": "`event occurrence` lowers to the distinct EventOccurrenceUsage metaclass the Pilot uses, vs plain `occurrence` -> OccurrenceUsage; metaclass and line are generated from grammar.extract.json."
     },
     {
       "construct": "RequirementUsage",

@@ -260,6 +260,11 @@
                                      "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
                                  },
                                  {
+                                     "construct":  "EventOccurrenceUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "`event occurrence` lowers to the distinct EventOccurrenceUsage metaclass the Pilot uses, vs plain `occurrence` -> OccurrenceUsage; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
                                      "construct":  "RequirementUsage",
                                      "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
                                      "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
@@ -695,6 +700,7 @@
                                             "dependency":  "DependencyUsage",
                                             "end":  "EndUsage",
                                             "enum":  "EnumerationUsage",
+                                            "event-occurrence":  "EventOccurrenceUsage",
                                             "exhibit":  "ExhibitStateUsage",
                                             "feature":  "FeatureUsage",
                                             "failure":  "FailureUsage",
@@ -781,6 +787,7 @@
                                                                                    "ConcernUsage":  "SysML::Systems::ConcernUsage",
                                                                                    "ConnectionUsage":  "SysML::Systems::ConnectionUsage",
                                                                                    "EnumerationUsage":  "SysML::Systems::EnumerationUsage",
+                                                                                   "EventOccurrenceUsage":  "SysML::Systems::EventOccurrenceUsage",
                                                                                    "ExhibitStateUsage":  "SysML::Systems::ExhibitStateUsage",
                                                                                    "FlowUsage":  "SysML::Systems::FlowUsage",
                                                                                    "FrameUsage":  "SysML::Systems::ConcernUsage",

@@ -1317,6 +1317,19 @@
           "redefined_features": "{redefined_feature_refs}"
         }
       }
+    },
+    "SysML::EventOccurrenceUsage": {
+      "kir_kind": "KerML::Core::Feature",
+      "id_template": "event-occurrence.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
     }
   }
 }
