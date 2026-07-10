@@ -1,8 +1,8 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
-use mercurio_core::frontend::lowering::pilot_evidence::PilotLoweringEvidence;
-use mercurio_core::frontend::lowering::rules::{
+use mercurio_language_frontend::lowering::pilot_evidence::PilotLoweringEvidence;
+use mercurio_language_frontend::lowering::rules::{
     LoweringAstPattern, LoweringCollectRule, LoweringEmitRule, LoweringPilotSources, LoweringRule,
     LoweringRuleSeed, has_runtime_collect_expression, has_runtime_elaboration_hook,
 };

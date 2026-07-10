@@ -11,6 +11,7 @@ SysML language service that turns source text into KIR for that substrate.
 
 - [Usage](usage.md): create a SysML environment, inspect metamodel versions, and compile source text.
 - [Metamodels](metamodels.md): layout and versioning contract for bundled metamodel resources.
+- [Pilot bootstrap](pilot-bootstrap.md): pinned Pilot checkout, JDK bootstrap, and dirty-checkout policy for extraction tools.
 - [Crates](crates.md): intent of each crate in this repository.
 - [Resources](resources.md): generated libraries, mappings, provenance, and release files.
 

@@ -6,12 +6,13 @@ use std::time::Instant;
 
 use mercurio_core::source_set::{SourceDocument, compile_source_document_with_registry};
 use mercurio_core::{
-    Graph, KirDocument, LanguageRegistry, MetamodelAttributeRegistry, PilotExportDocument,
-    SemanticCompareOptions, SemanticComparisonReport, SnapshotMode, build_semantic_snapshot,
-    build_semantic_snapshot_with_registry, compare_snapshots_with_options, default_stdlib_path,
+    Graph, KirDocument, KirElement, LanguageRegistry, MetamodelAttributeRegistry,
+    PilotExportDocument, SemanticCompareOptions, SemanticCompareProfile, SemanticComparisonReport,
+    SnapshotMode, build_semantic_snapshot_with_profile,
+    build_semantic_snapshot_with_registry_and_profile, compare_snapshots_with_profile,
     load_pilot_export, normalize_pilot_export_for_compare,
 };
-use mercurio_sysml::SysmlLanguageModule;
+use mercurio_sysml::{SysmlLanguageModule, load_sysml_baseline};
 use mercurio_tools::default_pilot_root;
 use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
@@ -20,6 +21,7 @@ use time::format_description::well_known::Rfc3339;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args()?;
     let corpus_seed = PilotCorpusSeed::load()?;
+    let compare_profile = load_compare_profile(&args.profile_id)?;
     match &args.relative_path {
         Some(relative_path) => {
             let output = run_compare_case(
@@ -27,6 +29,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 relative_path,
                 &corpus_seed,
                 args.compare_options,
+                &compare_profile,
             )?;
 
             if let Some(parent) = args.output_path.parent() {
@@ -44,6 +47,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             println!("  mismatches: {}", output.report.mismatches.len());
             println!("  mercurio only: {}", output.report.mercurio_only.len());
             println!("  pilot only: {}", output.report.pilot_only.len());
+            println!(
+                "  coverage: {}/{} compared ({:.3}), excluded={}, match-key disambiguations={}",
+                output.report.coverage.compared_elements,
+                output.report.coverage.total_elements,
+                output.report.coverage.compared_fraction,
+                output.report.coverage.excluded_elements,
+                output.report.coverage.match_key_disambiguations
+            );
+            println!(
+                "  merged duplicate KIR elements: {}",
+                output.mercurio_merge.duplicate_elements
+            );
             println!("  mercurio total ms: {}", output.timings.mercurio.total_ms);
             println!("  pilot total ms: {}", output.timings.pilot.total_ms);
             println!("  compare ms: {}", output.timings.compare_ms);
@@ -65,14 +80,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     &corpus_seed,
                     &pilot_cases,
                     args.compare_options,
+                    &compare_profile,
                 ) {
                     Ok(output) => {
                         println!(
-                            "timed {}: rust={}ms pilot={}ms mismatches={}",
+                            "timed {}: rust={}ms pilot={}ms mismatches={} duplicate_merges={}",
                             relative_path,
                             output.timings.mercurio.total_ms,
                             output.timings.pilot.total_ms,
-                            output.report.mismatches.len()
+                            output.report.mismatches.len(),
+                            output.mercurio_merge.duplicate_elements
                         );
                         cases.push(CorpusCaseSummary::from_compare_output(output));
                     }
@@ -96,6 +113,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 case_count: cases.len(),
                 shared_timings,
                 compare_options: args.compare_options,
+                compare_profile: compare_profile.clone(),
                 aggregate: CorpusAggregate::from_cases(&cases),
                 cases,
             };
@@ -122,6 +140,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 corpus_output.aggregate.total_mismatches
             );
             println!(
+                "  coverage: {}/{} compared ({:.3}), excluded={}, match-key disambiguations={}",
+                corpus_output.aggregate.compared_elements,
+                corpus_output.aggregate.total_elements,
+                corpus_output.aggregate.compared_fraction,
+                corpus_output.aggregate.excluded_elements,
+                corpus_output.aggregate.match_key_disambiguations
+            );
+            println!(
+                "  merged duplicate KIR elements: {}",
+                corpus_output.aggregate.merged_duplicate_elements
+            );
+            println!(
                 "  rust total ms: {} (avg {} median {})",
                 corpus_output.aggregate.mercurio.total_ms,
                 corpus_output.aggregate.mercurio.avg_ms,
@@ -145,6 +175,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 #[derive(Debug)]
 struct Args {
     pilot_root: PathBuf,
+    profile_id: String,
     relative_path: Option<String>,
     corpus_name: Option<String>,
     paths_file: Option<PathBuf>,
@@ -191,7 +222,9 @@ struct CompareOutput {
     support_paths: Vec<String>,
     pilot_export_path: String,
     compare_options: SemanticCompareOptions,
+    compare_profile: SemanticCompareProfile,
     timings: CompareTimings,
+    mercurio_merge: MergeStats,
     mercurio_snapshot: mercurio_core::SemanticSnapshot,
     pilot_snapshot: mercurio_core::SemanticSnapshot,
     report: mercurio_core::SemanticComparisonReport,
@@ -206,6 +239,7 @@ struct CorpusCompareOutput {
     #[serde(skip_serializing_if = "Option::is_none")]
     shared_timings: Option<CorpusSharedTimings>,
     compare_options: SemanticCompareOptions,
+    compare_profile: SemanticCompareProfile,
     aggregate: CorpusAggregate,
     cases: Vec<CorpusCaseSummary>,
 }
@@ -225,6 +259,12 @@ struct CorpusCaseSummary {
     declared_attribute_mismatches: usize,
     mercurio_elements: Option<usize>,
     pilot_elements: Option<usize>,
+    compared_elements: Option<usize>,
+    total_elements: Option<usize>,
+    excluded_elements: Option<usize>,
+    compared_fraction: Option<f64>,
+    match_key_disambiguations: Option<usize>,
+    merged_duplicate_elements: usize,
     timings: Option<CompareTimings>,
 }
 
@@ -238,9 +278,28 @@ struct CorpusAggregate {
     total_metatype_mismatches: usize,
     total_specialization_chain_mismatches: usize,
     total_declared_attribute_mismatches: usize,
+    compared_elements: usize,
+    total_elements: usize,
+    excluded_elements: usize,
+    compared_fraction: f64,
+    match_key_disambiguations: usize,
+    merged_duplicate_elements: usize,
     mercurio: AggregateTiming,
     pilot: AggregateTiming,
     compare: AggregateTiming,
+}
+
+#[derive(Debug, Clone, Copy, Default, Serialize)]
+struct MergeStats {
+    duplicate_elements: usize,
+    merged_array_values: usize,
+}
+
+impl MergeStats {
+    fn add(&mut self, other: Self) {
+        self.duplicate_elements += other.duplicate_elements;
+        self.merged_array_values += other.merged_array_values;
+    }
 }
 
 #[derive(Debug, Clone, Copy, Default, Serialize)]
@@ -289,6 +348,7 @@ struct MercurioCaseResult {
     support_paths: Vec<String>,
     metamodel_registry: MetamodelAttributeRegistry,
     snapshot: mercurio_core::SemanticSnapshot,
+    merge_stats: MergeStats,
     timings: EngineTimings,
 }
 
@@ -355,15 +415,10 @@ impl PilotCorpusSeed {
             .unwrap_or(&[])
     }
 
-    fn support_paths_for_case(&self, pilot_root: &Path, relative_path: &str) -> Vec<String> {
+    fn support_paths_for_case(&self, _pilot_root: &Path, relative_path: &str) -> Vec<String> {
         let mut support_paths = Vec::new();
         for path in self.support_paths_for(relative_path) {
             push_unique(&mut support_paths, path.clone());
-        }
-        for path in same_folder_sysml_paths(pilot_root, relative_path) {
-            if path != relative_path {
-                push_unique(&mut support_paths, path);
-            }
         }
         support_paths
     }
@@ -417,32 +472,6 @@ fn discover_all_pilot_examples(
     Ok(files)
 }
 
-fn same_folder_sysml_paths(pilot_root: &Path, relative_path: &str) -> Vec<String> {
-    let Some(parent) = Path::new(relative_path).parent() else {
-        return Vec::new();
-    };
-    let folder = pilot_root.join(parent);
-    let Ok(entries) = std::fs::read_dir(folder) else {
-        return Vec::new();
-    };
-
-    let mut paths = entries
-        .filter_map(Result::ok)
-        .map(|entry| entry.path())
-        .filter(|path| {
-            path.extension()
-                .is_some_and(|extension| extension == "sysml")
-        })
-        .filter_map(|path| {
-            path.strip_prefix(pilot_root)
-                .ok()
-                .map(|path| path.to_string_lossy().replace('\\', "/"))
-        })
-        .collect::<Vec<_>>();
-    paths.sort();
-    paths
-}
-
 fn push_unique(paths: &mut Vec<String>, path: String) {
     if !paths.contains(&path) {
         paths.push(path);
@@ -464,8 +493,92 @@ fn group_paths_by_folder(relative_paths: &[String]) -> BTreeMap<String, Vec<Stri
     groups
 }
 
+#[derive(Debug, Deserialize)]
+struct CompareToleranceOverlay {
+    #[serde(default)]
+    included_attributes: Vec<String>,
+    #[serde(default)]
+    tolerances: Vec<mercurio_core::SemanticCompareTolerance>,
+}
+
+#[derive(Debug, Deserialize)]
+struct MetamodelExtract {
+    #[serde(default)]
+    attributes: Vec<MetamodelExtractAttribute>,
+}
+
+#[derive(Debug, Deserialize)]
+struct MetamodelExtractAttribute {
+    name: String,
+    #[serde(default)]
+    derived: bool,
+}
+
+fn load_compare_profile(
+    profile_id: &str,
+) -> Result<SemanticCompareProfile, Box<dyn std::error::Error>> {
+    let profile_root = tool_repo_path(&format!("resources/metamodels/{profile_id}"));
+    let metamodel_path = profile_root.join("metamodel.extract.json");
+    let overlay_path = profile_root.join("mappings/compare_tolerances.overlay.json");
+    let metamodel: MetamodelExtract =
+        serde_json::from_str(&std::fs::read_to_string(&metamodel_path)?)?;
+    let overlay: CompareToleranceOverlay =
+        serde_json::from_str(&std::fs::read_to_string(&overlay_path)?)?;
+
+    for tolerance in &overlay.tolerances {
+        if tolerance.id.trim().is_empty()
+            || tolerance.classification.trim().is_empty()
+            || tolerance.reason.trim().is_empty()
+        {
+            return Err(format!(
+                "compare tolerance `{}` must provide id, classification, and reason",
+                tolerance.id
+            )
+            .into());
+        }
+        if tolerance.classification == "mercurio-gap" && tolerance.tracking_ref.is_none() {
+            return Err(format!(
+                "mercurio-gap tolerance `{}` must provide trackingRef",
+                tolerance.id
+            )
+            .into());
+        }
+    }
+
+    let mut included_attributes = overlay.included_attributes.into_iter().collect::<Vec<_>>();
+    for attribute in metamodel.attributes {
+        if !attribute.derived {
+            included_attributes.push(attribute.name.clone());
+            included_attributes.push(camel_to_snake(&attribute.name));
+        }
+    }
+    included_attributes.sort();
+    included_attributes.dedup();
+
+    Ok(SemanticCompareProfile {
+        included_attributes: included_attributes.into_iter().collect(),
+        tolerances: overlay.tolerances,
+    })
+}
+
+fn camel_to_snake(value: &str) -> String {
+    let mut output = String::new();
+    for (index, ch) in value.chars().enumerate() {
+        if ch.is_ascii_uppercase() {
+            if index > 0 {
+                output.push('_');
+            }
+            output.push(ch.to_ascii_lowercase());
+        } else {
+            output.push(ch);
+        }
+    }
+    output
+}
+
 fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut pilot_root = default_pilot_root();
+    let mut profile_id = "sysml-2.0-pilot-2026-04".to_string();
     let mut relative_path = None;
     let mut corpus_name = None;
     let mut paths_file = None;
@@ -480,6 +593,13 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                 index += 1;
                 pilot_root =
                     PathBuf::from(args.get(index).ok_or("missing value for --pilot-root")?);
+            }
+            "--profile-id" => {
+                index += 1;
+                profile_id = args
+                    .get(index)
+                    .ok_or("missing value for --profile-id")?
+                    .to_string();
             }
             "--relative-path" => {
                 index += 1;
@@ -531,6 +651,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
 
     Ok(Args {
         pilot_root,
+        profile_id,
         relative_path,
         corpus_name,
         paths_file,
@@ -541,7 +662,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin compare_pilot_semantics -- (--relative-path PATH | --corpus NAME|all | --paths-file PATH) [--pilot-root PATH] [--out PATH] [--include-derived-properties] [--all-attributes]"
+        "Usage: cargo run -p mercurio-tools --bin compare_pilot_semantics -- (--relative-path PATH | --corpus NAME|all | --paths-file PATH) [--pilot-root PATH] [--profile-id ID] [--out PATH] [--include-derived-properties] [--all-attributes]"
     );
 }
 
@@ -550,8 +671,9 @@ fn run_compare_case(
     relative_path: &str,
     corpus_seed: &PilotCorpusSeed,
     compare_options: SemanticCompareOptions,
+    compare_profile: &SemanticCompareProfile,
 ) -> Result<CompareOutput, Box<dyn std::error::Error>> {
-    let mercurio = build_mercurio_case(pilot_root, relative_path, corpus_seed)?;
+    let mercurio = build_mercurio_case(pilot_root, relative_path, corpus_seed, compare_profile)?;
     let support_paths = mercurio.support_paths.clone();
 
     let pilot_start = Instant::now();
@@ -564,11 +686,12 @@ fn run_compare_case(
     let pilot_load_ms = elapsed_ms(pilot_load_start);
 
     let pilot_snapshot_start = Instant::now();
-    let pilot_snapshot = build_semantic_snapshot_with_registry(
+    let pilot_snapshot = build_semantic_snapshot_with_registry_and_profile(
         normalize_pilot_export_for_compare(pilot_export)?,
         relative_path,
         SnapshotMode::Pilot,
         &mercurio.metamodel_registry,
+        compare_profile,
     )?;
     let pilot_snapshot_ms = elapsed_ms(pilot_snapshot_start);
     let pilot_total_ms = elapsed_ms(pilot_start);
@@ -599,6 +722,7 @@ fn run_compare_case(
         },
         "Rust timings currently include loading prebuilt stdlib KIR JSON plus L2 compile/snapshot. Pilot timings currently include Java exporter wall-clock time for loading source libraries plus L2 export/snapshot.".to_string(),
         compare_options,
+        compare_profile,
     )
 }
 
@@ -608,19 +732,21 @@ fn run_compare_case_from_batch(
     corpus_seed: &PilotCorpusSeed,
     pilot_cases: &BTreeMap<String, PilotBatchExportCase>,
     compare_options: SemanticCompareOptions,
+    compare_profile: &SemanticCompareProfile,
 ) -> Result<CompareOutput, Box<dyn std::error::Error>> {
-    let mercurio = build_mercurio_case(pilot_root, relative_path, corpus_seed)?;
+    let mercurio = build_mercurio_case(pilot_root, relative_path, corpus_seed, compare_profile)?;
     let support_paths = mercurio.support_paths.clone();
     let pilot_case = pilot_cases
         .get(relative_path)
         .ok_or_else(|| format!("pilot batch export missing case `{relative_path}`"))?;
 
     let pilot_snapshot_start = Instant::now();
-    let pilot_snapshot = build_semantic_snapshot_with_registry(
+    let pilot_snapshot = build_semantic_snapshot_with_registry_and_profile(
         normalize_pilot_export_for_compare(pilot_case.document.clone())?,
         relative_path,
         SnapshotMode::Pilot,
         &mercurio.metamodel_registry,
+        compare_profile,
     )?;
     let pilot_snapshot_ms = elapsed_ms(pilot_snapshot_start);
 
@@ -648,6 +774,7 @@ fn run_compare_case_from_batch(
         },
         "Rust timings currently include loading prebuilt stdlib KIR JSON plus L2 compile/snapshot. Pilot corpus timings exclude shared batch setup and JSON load; see shared_timings for those costs.".to_string(),
         compare_options,
+        compare_profile,
     )
 }
 
@@ -655,11 +782,12 @@ fn build_mercurio_case(
     pilot_root: &Path,
     relative_path: &str,
     corpus_seed: &PilotCorpusSeed,
+    compare_profile: &SemanticCompareProfile,
 ) -> Result<MercurioCaseResult, Box<dyn std::error::Error>> {
     let support_paths = corpus_seed.support_paths_for_case(pilot_root, relative_path);
     let mercurio_start = Instant::now();
     let load_stdlib_start = Instant::now();
-    let stdlib = KirDocument::from_path(&default_stdlib_path())?;
+    let stdlib = load_sysml_baseline()?;
     let load_stdlib_ms = elapsed_ms(load_stdlib_start);
 
     let read_parse_start = Instant::now();
@@ -691,21 +819,30 @@ fn build_mercurio_case(
             source_kir.push(document);
         }
     }
-    let source_document = KirDocument::merge(source_kir)?;
+    let (source_document, source_merge_stats) = merge_kir_documents_for_compare(source_kir)?;
     let compile_ms = elapsed_ms(compile_start);
 
-    let merged_document = KirDocument::merge([stdlib, source_document])?;
+    let (merged_document, stdlib_merge_stats) =
+        merge_kir_documents_for_compare([stdlib, source_document])?;
+    let mut merge_stats = source_merge_stats;
+    merge_stats.add(stdlib_merge_stats);
     let metamodel_registry =
         MetamodelAttributeRegistry::build(&Graph::from_document(merged_document.clone())?);
 
     let snapshot_start = Instant::now();
-    let snapshot = build_semantic_snapshot(merged_document, relative_path, SnapshotMode::Mercurio)?;
+    let snapshot = build_semantic_snapshot_with_profile(
+        merged_document,
+        relative_path,
+        SnapshotMode::Mercurio,
+        compare_profile,
+    )?;
     let snapshot_ms = elapsed_ms(snapshot_start);
 
     Ok(MercurioCaseResult {
         support_paths,
         metamodel_registry,
         snapshot,
+        merge_stats,
         timings: EngineTimings {
             total_ms: elapsed_ms(mercurio_start),
             phases: vec![
@@ -750,6 +887,140 @@ fn read_source_documents(
         .collect()
 }
 
+fn merge_kir_documents_for_compare(
+    documents: impl IntoIterator<Item = KirDocument>,
+) -> Result<(KirDocument, MergeStats), Box<dyn std::error::Error>> {
+    let mut elements = BTreeMap::new();
+    let mut order = Vec::new();
+    let mut stats = MergeStats::default();
+    let mut merged = KirDocument {
+        metadata: BTreeMap::new(),
+        elements: Vec::new(),
+    };
+    for document in documents {
+        for element in document.elements {
+            if let Some(existing) = elements.get_mut(&element.id) {
+                merge_duplicate_element_for_compare(existing, element, &mut stats)?;
+            } else {
+                order.push(element.id.clone());
+                elements.insert(element.id.clone(), element);
+            }
+        }
+    }
+    for id in order {
+        if let Some(element) = elements.remove(&id) {
+            merged.elements.push(element);
+        }
+    }
+    Ok((merged, stats))
+}
+
+fn merge_duplicate_element_for_compare(
+    existing: &mut KirElement,
+    duplicate: KirElement,
+    stats: &mut MergeStats,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if existing.kind != duplicate.kind {
+        return Err(format!(
+            "conflicting duplicate KIR element id `{}`: kind `{}` vs `{}`",
+            existing.id, existing.kind, duplicate.kind
+        )
+        .into());
+    }
+    if existing.layer != duplicate.layer {
+        return Err(format!(
+            "conflicting duplicate KIR element id `{}`: layer `{}` vs `{}`",
+            existing.id, existing.layer, duplicate.layer
+        )
+        .into());
+    }
+
+    for (property, duplicate_value) in duplicate.properties {
+        match existing.properties.get_mut(&property) {
+            Some(existing_value) => merge_duplicate_property_for_compare(
+                &existing.id,
+                &property,
+                existing_value,
+                duplicate_value,
+                stats,
+            )?,
+            None => {
+                existing.properties.insert(property, duplicate_value);
+            }
+        }
+    }
+
+    stats.duplicate_elements += 1;
+    Ok(())
+}
+
+fn merge_duplicate_property_for_compare(
+    element_id: &str,
+    property: &str,
+    existing: &mut serde_json::Value,
+    duplicate: serde_json::Value,
+    stats: &mut MergeStats,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if *existing == duplicate {
+        return Ok(());
+    }
+
+    if property == "metadata" {
+        return merge_duplicate_metadata_for_compare(existing, duplicate);
+    }
+
+    match (existing.as_array_mut(), duplicate) {
+        (Some(existing_items), serde_json::Value::Array(duplicate_items)) => {
+            for item in duplicate_items {
+                if !existing_items.contains(&item) {
+                    existing_items.push(item);
+                    stats.merged_array_values += 1;
+                }
+            }
+            Ok(())
+        }
+        (_, duplicate_value) => Err(format!(
+            "conflicting duplicate KIR element id `{element_id}` property `{property}`: `{}` vs `{}`",
+            existing, duplicate_value
+        )
+        .into()),
+    }
+}
+
+fn merge_duplicate_metadata_for_compare(
+    existing: &mut serde_json::Value,
+    duplicate: serde_json::Value,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let Some(existing_object) = existing.as_object_mut() else {
+        return Err("conflicting duplicate KIR metadata shape".into());
+    };
+    let serde_json::Value::Object(duplicate_object) = duplicate else {
+        return Err("conflicting duplicate KIR metadata shape".into());
+    };
+
+    let existing_source = serde_json::Value::Object(existing_object.clone());
+    let duplicate_source = serde_json::Value::Object(duplicate_object.clone());
+    let entry = existing_object
+        .entry("merged_duplicate_metadata".to_string())
+        .or_insert_with(|| serde_json::Value::Array(Vec::new()));
+    let Some(sources) = entry.as_array_mut() else {
+        return Err("conflicting duplicate KIR metadata provenance shape".into());
+    };
+    if !sources.contains(&existing_source) {
+        sources.push(existing_source);
+    }
+    if !sources.contains(&duplicate_source) {
+        sources.push(duplicate_source);
+    }
+
+    for (key, value) in duplicate_object {
+        if key != "merged_duplicate_metadata" {
+            existing_object.insert(key, value);
+        }
+    }
+    Ok(())
+}
+
 fn build_compare_output(
     pilot_root: &Path,
     relative_path: &str,
@@ -760,12 +1031,14 @@ fn build_compare_output(
     pilot_timings: EngineTimings,
     note: String,
     compare_options: SemanticCompareOptions,
+    compare_profile: &SemanticCompareProfile,
 ) -> Result<CompareOutput, Box<dyn std::error::Error>> {
     let compare_start = Instant::now();
-    let report = compare_snapshots_with_options(
+    let report = compare_snapshots_with_profile(
         mercurio.snapshot.clone(),
         pilot_snapshot.clone(),
         compare_options,
+        compare_profile,
     )?;
     let compare_ms = elapsed_ms(compare_start);
 
@@ -776,12 +1049,14 @@ fn build_compare_output(
         support_paths,
         pilot_export_path,
         compare_options,
+        compare_profile: compare_profile.clone(),
         timings: CompareTimings {
             note,
             mercurio: mercurio.timings,
             pilot: pilot_timings,
             compare_ms,
         },
+        mercurio_merge: mercurio.merge_stats,
         mercurio_snapshot: mercurio.snapshot,
         pilot_snapshot,
         report,
@@ -806,6 +1081,12 @@ impl CorpusCaseSummary {
             declared_attribute_mismatches: mismatch_breakdown.declared_attribute_mismatches,
             mercurio_elements: Some(output.report.mercurio_count),
             pilot_elements: Some(output.report.pilot_count),
+            compared_elements: Some(output.report.coverage.compared_elements),
+            total_elements: Some(output.report.coverage.total_elements),
+            excluded_elements: Some(output.report.coverage.excluded_elements),
+            compared_fraction: Some(output.report.coverage.compared_fraction),
+            match_key_disambiguations: Some(output.report.coverage.match_key_disambiguations),
+            merged_duplicate_elements: output.mercurio_merge.duplicate_elements,
             relative_path: output.relative_path,
             timings: Some(output.timings),
         }
@@ -826,6 +1107,12 @@ impl CorpusCaseSummary {
             declared_attribute_mismatches: 0,
             mercurio_elements: None,
             pilot_elements: None,
+            compared_elements: None,
+            total_elements: None,
+            excluded_elements: None,
+            compared_fraction: None,
+            match_key_disambiguations: None,
+            merged_duplicate_elements: 0,
             timings: None,
         }
     }
@@ -863,6 +1150,21 @@ impl CorpusAggregate {
             total_declared_attribute_mismatches: cases
                 .iter()
                 .map(|case| case.declared_attribute_mismatches)
+                .sum(),
+            compared_elements: cases.iter().filter_map(|case| case.compared_elements).sum(),
+            total_elements: cases.iter().filter_map(|case| case.total_elements).sum(),
+            excluded_elements: cases.iter().filter_map(|case| case.excluded_elements).sum(),
+            compared_fraction: aggregate_fraction(
+                cases.iter().filter_map(|case| case.compared_elements).sum(),
+                cases.iter().filter_map(|case| case.total_elements).sum(),
+            ),
+            match_key_disambiguations: cases
+                .iter()
+                .filter_map(|case| case.match_key_disambiguations)
+                .sum(),
+            merged_duplicate_elements: cases
+                .iter()
+                .map(|case| case.merged_duplicate_elements)
                 .sum(),
             mercurio,
             pilot,
@@ -914,6 +1216,14 @@ fn aggregate_timing(values: impl IntoIterator<Item = u64>) -> AggregateTiming {
         median_ms,
         min_ms,
         max_ms,
+    }
+}
+
+fn aggregate_fraction(numerator: usize, denominator: usize) -> f64 {
+    if denominator == 0 {
+        1.0
+    } else {
+        numerator as f64 / denominator as f64
     }
 }
 
@@ -1329,4 +1639,107 @@ fn now_utc_rfc3339() -> Result<String, Box<dyn std::error::Error>> {
 
 fn elapsed_ms(start: Instant) -> u64 {
     start.elapsed().as_millis().try_into().unwrap_or(u64::MAX)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    fn element(id: &str, kind: &str, properties: &[(&str, serde_json::Value)]) -> KirElement {
+        KirElement {
+            id: id.to_string(),
+            kind: kind.to_string(),
+            layer: 2,
+            properties: properties
+                .iter()
+                .map(|(name, value)| ((*name).to_string(), value.clone()))
+                .collect(),
+        }
+    }
+
+    fn document(elements: Vec<KirElement>) -> KirDocument {
+        KirDocument {
+            metadata: BTreeMap::new(),
+            elements,
+        }
+    }
+
+    #[test]
+    fn merge_for_compare_accepts_identical_duplicate_element_once() {
+        let duplicate = element("pkg.Demo", "Package", &[("name", json!("Demo"))]);
+
+        let (merged, stats) = merge_kir_documents_for_compare([
+            document(vec![duplicate.clone()]),
+            document(vec![duplicate]),
+        ])
+        .unwrap();
+
+        assert_eq!(merged.elements.len(), 1);
+        assert_eq!(stats.duplicate_elements, 1);
+        assert_eq!(stats.merged_array_values, 0);
+    }
+
+    #[test]
+    fn merge_for_compare_unions_array_properties_for_duplicate_element() {
+        let left = element(
+            "pkg.Demo",
+            "Package",
+            &[("owned_member", json!(["pkg.Demo.A"]))],
+        );
+        let right = element(
+            "pkg.Demo",
+            "Package",
+            &[("owned_member", json!(["pkg.Demo.A", "pkg.Demo.B"]))],
+        );
+
+        let (merged, stats) =
+            merge_kir_documents_for_compare([document(vec![left]), document(vec![right])]).unwrap();
+
+        assert_eq!(stats.duplicate_elements, 1);
+        assert_eq!(stats.merged_array_values, 1);
+        assert_eq!(
+            merged.elements[0].properties["owned_member"],
+            json!(["pkg.Demo.A", "pkg.Demo.B"])
+        );
+    }
+
+    #[test]
+    fn merge_for_compare_rejects_conflicting_duplicate_scalar_property() {
+        let left = element("pkg.Demo", "Package", &[("name", json!("Demo"))]);
+        let right = element("pkg.Demo", "Package", &[("name", json!("Other"))]);
+
+        let error = merge_kir_documents_for_compare([document(vec![left]), document(vec![right])])
+            .unwrap_err()
+            .to_string();
+
+        assert!(error.contains("conflicting duplicate KIR element id `pkg.Demo` property `name`"));
+    }
+
+    #[test]
+    fn merge_for_compare_accumulates_duplicate_metadata_provenance() {
+        let left = element(
+            "pkg.Demo",
+            "Package",
+            &[("metadata", json!({"source_file": "a.sysml"}))],
+        );
+        let right = element(
+            "pkg.Demo",
+            "Package",
+            &[("metadata", json!({"source_file": "b.sysml"}))],
+        );
+
+        let (merged, stats) =
+            merge_kir_documents_for_compare([document(vec![left]), document(vec![right])]).unwrap();
+
+        assert_eq!(stats.duplicate_elements, 1);
+        assert_eq!(
+            merged.elements[0].properties["metadata"]["source_file"],
+            json!("b.sysml")
+        );
+        assert_eq!(
+            merged.elements[0].properties["metadata"]["merged_duplicate_metadata"][0]["source_file"],
+            json!("a.sysml")
+        );
+    }
 }

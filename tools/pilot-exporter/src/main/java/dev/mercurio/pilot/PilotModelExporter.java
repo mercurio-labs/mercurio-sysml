@@ -72,6 +72,10 @@ public final class PilotModelExporter {
             exportBatch(args);
             return;
         }
+        if (args.length >= 1 && "--implicit-diff".equals(args[0])) {
+            exportImplicitDiffBatch(args);
+            return;
+        }
 
         if (args.length < 3) {
             System.err.println(
@@ -79,7 +83,8 @@ public final class PilotModelExporter {
                 + "   or: PilotModelExporter --syntax <library-root> <output-json> <model-file> [support-file ...]\n"
                 + "   or: PilotModelExporter --diagnostics <library-root> <output-json> <model-file> [support-file ...]\n"
                 + "   or: PilotModelExporter --diagnostics-batch <library-root> <spec-json> <output-json>\n"
-                + "   or: PilotModelExporter --batch-spec <library-root> <spec-json> <output-json>"
+                + "   or: PilotModelExporter --batch-spec <library-root> <spec-json> <output-json>\n"
+                + "   or: PilotModelExporter --implicit-diff <library-root> <spec-json> <output-json>"
             );
             System.exit(2);
         }
@@ -271,6 +276,95 @@ public final class PilotModelExporter {
         writeJson(outputPath, document);
     }
 
+    private static void exportImplicitDiffBatch(String[] args) throws Exception {
+        if (args.length != 4) {
+            System.err.println(
+                "Usage: PilotModelExporter --implicit-diff <library-root> <spec-json> <output-json>"
+            );
+            System.exit(2);
+        }
+
+        Path libraryRoot = Paths.get(args[1]).toAbsolutePath().normalize();
+        Path specPath = Paths.get(args[2]).toAbsolutePath().normalize();
+        Path outputPath = Paths.get(args[3]).toAbsolutePath().normalize();
+        BatchSpec spec = new Gson().fromJson(Files.readString(specPath, StandardCharsets.UTF_8), BatchSpec.class);
+        if (spec == null || spec.cases == null) {
+            throw new IllegalArgumentException("batch spec must contain cases");
+        }
+
+        System.setProperty("org.eclipse.emf.common.util.ReferenceClearingQueue", "false");
+
+        Instant setupStart = Instant.now();
+        SysMLInteractive interactive = SysMLInteractive.getInstance();
+        interactive.getLibraryIndexCache().setIndexDisabled(true);
+        interactive.setVerbose(false);
+
+        Instant loadLibraryStart = Instant.now();
+        interactive.loadLibrary(libraryRoot.toString());
+        long loadLibraryMs = elapsedMillis(loadLibraryStart, Instant.now());
+
+        Map<Path, Resource> resourcesByPath = new LinkedHashMap<>();
+        Instant loadInputsStart = Instant.now();
+        for (BatchSpecCase batchCase : spec.cases) {
+            for (String inputFile : batchCase.input_files) {
+                Path normalizedPath = Paths.get(inputFile).toAbsolutePath().normalize();
+                if (resourcesByPath.containsKey(normalizedPath)) {
+                    continue;
+                }
+                Resource resource = interactive.readResource(normalizedPath.toString());
+                interactive.addInputResource(resource);
+                resourcesByPath.put(normalizedPath, resource);
+            }
+        }
+        long loadInputsMs = elapsedMillis(loadInputsStart, Instant.now());
+
+        Instant explicitTransformStart = Instant.now();
+        ResourceSet resourceSet = interactive.getResourceSet();
+        resourceSet.getResources().forEach(resource -> EcoreUtil2.resolveLazyCrossReferences(resource, null));
+        interactive.resolveAllInputResources();
+        ElementUtil.transformAll(resourceSet, false);
+        resourceSet.getResources().forEach(resource -> EcoreUtil2.resolveLazyCrossReferences(resource, null));
+        long explicitTransformMs = elapsedMillis(explicitTransformStart, Instant.now());
+
+        Map<String, ExportDocument> explicitByCase = new LinkedHashMap<>();
+        for (BatchSpecCase batchCase : spec.cases) {
+            explicitByCase.put(batchCase.relative_path, exportDocumentForBatchCase(libraryRoot, resourcesByPath, resourceSet, batchCase));
+        }
+
+        Instant implicitTransformStart = Instant.now();
+        ElementUtil.transformAll(resourceSet, true);
+        resourceSet.getResources().forEach(resource -> EcoreUtil2.resolveLazyCrossReferences(resource, null));
+        long implicitTransformMs = elapsedMillis(implicitTransformStart, Instant.now());
+
+        List<ImplicitDiffCase> cases = new ArrayList<>();
+        for (BatchSpecCase batchCase : spec.cases) {
+            ExportDocument explicitDocument = explicitByCase.get(batchCase.relative_path);
+            ExportDocument implicitDocument = exportDocumentForBatchCase(libraryRoot, resourcesByPath, resourceSet, batchCase);
+            cases.add(diffImplicitCase(batchCase.relative_path, explicitDocument, implicitDocument));
+        }
+
+        ImplicitDiffMetadata metadata = new ImplicitDiffMetadata();
+        metadata.library_root = libraryRoot.toString();
+        metadata.exported_at_utc = Instant.now().toString();
+        metadata.pilot_version = pilotVersion();
+        metadata.case_count = cases.size();
+        metadata.unique_input_file_count = resourcesByPath.size();
+        metadata.setup_timings = new BatchSetupTimings(
+            elapsedMillis(setupStart, Instant.now()),
+            List.of(
+                new BatchPhaseTiming("load_library", loadLibraryMs),
+                new BatchPhaseTiming("load_unique_inputs", loadInputsMs),
+                new BatchPhaseTiming("resolve_and_transform_explicit", explicitTransformMs),
+                new BatchPhaseTiming("transform_implicit", implicitTransformMs)
+            )
+        );
+
+        ImplicitDiffDocument document = new ImplicitDiffDocument();
+        document.metadata = metadata;
+        document.cases = cases;
+        writeJson(outputPath, document);
+    }
+
     private static void exportBatch(String[] args) throws Exception {
         if (args.length != 4) {
             System.err.println(
@@ -367,6 +461,95 @@ public final class PilotModelExporter {
             JSON.toJson(document),
             StandardCharsets.UTF_8
         );
+    }
+
+    private static ExportDocument exportDocumentForBatchCase(
+        Path libraryRoot,
+        Map<Path, Resource> resourcesByPath,
+        ResourceSet resourceSet,
+        BatchSpecCase batchCase
+    ) {
+        List<Resource> inputResources = new ArrayList<>();
+        for (String inputFile : batchCase.input_files) {
+            Path normalizedPath = Paths.get(inputFile).toAbsolutePath().normalize();
+            Resource resource = resourcesByPath.get(normalizedPath);
+            if (resource == null) {
+                throw new IllegalStateException("missing loaded resource for " + normalizedPath);
+            }
+            inputResources.add(resource);
+        }
+        return exportDocument(libraryRoot, inputResources, resourceSet);
+    }
+
+    private static ImplicitDiffCase diffImplicitCase(
+        String relativePath,
+        ExportDocument explicitDocument,
+        ExportDocument implicitDocument
+    ) {
+        Map<String, String> explicitKinds = elementKinds(explicitDocument);
+        Map<String, String> implicitKinds = elementKinds(implicitDocument);
+        Map<String, String> implicitLibraryGroups = elementLibraryGroups(implicitDocument);
+        Set<String> explicitRelationships = relationshipKeys(explicitDocument.relationships);
+        List<ImpliedRelationship> addedRelationships = implicitDocument.relationships.stream()
+            .filter(relationship -> !explicitRelationships.contains(relationshipKey(relationship)))
+            .filter(relationship -> "Input Model".equals(implicitLibraryGroups.get(relationship.source)))
+            .map(relationship -> new ImpliedRelationship(
+                relationship.source,
+                relationship.relation,
+                relationship.target,
+                implicitKinds.get(relationship.source),
+                implicitKinds.get(relationship.target)
+            ))
+            .sorted(
+                Comparator.comparing((ImpliedRelationship relationship) -> relationship.source)
+                    .thenComparing(relationship -> relationship.relation)
+                    .thenComparing(relationship -> relationship.target)
+            )
+            .toList();
+
+        Set<String> explicitElements = explicitKinds.keySet();
+        List<ImpliedElement> addedElements = implicitDocument.elements.stream()
+            .filter(element -> !explicitElements.contains(element.qualified_name))
+            .filter(element -> "Input Model".equals(element.library_group))
+            .map(element -> new ImpliedElement(element.qualified_name, element.kind))
+            .sorted(Comparator.comparing(element -> element.qualified_name))
+            .toList();
+
+        return new ImplicitDiffCase(
+            relativePath,
+            explicitDocument.metadata.element_count,
+            explicitDocument.metadata.relationship_count,
+            implicitDocument.metadata.element_count,
+            implicitDocument.metadata.relationship_count,
+            addedElements,
+            addedRelationships
+        );
+    }
+
+    private static Map<String, String> elementKinds(ExportDocument document) {
+        Map<String, String> kinds = new LinkedHashMap<>();
+        for (ExportElement element : document.elements) {
+            kinds.put(element.qualified_name, element.kind);
+        }
+        return kinds;
+    }
+
+    private static Map<String, String> elementLibraryGroups(ExportDocument document) {
+        Map<String, String> groups = new LinkedHashMap<>();
+        for (ExportElement element : document.elements) {
+            groups.put(element.qualified_name, element.library_group);
+        }
+        return groups;
+    }
+
+    private static Set<String> relationshipKeys(List<ExportRelationship> relationships) {
+        return relationships.stream()
+            .map(PilotModelExporter::relationshipKey)
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    private static String relationshipKey(ExportRelationship relationship) {
+        return relationship.source + "\u001f" + relationship.relation + "\u001f" + relationship.target;
     }
 
     private static DiagnosticRunDocument collectDiagnostics(Path libraryRoot, List<Path> inputFiles) {
@@ -1505,6 +1688,80 @@ public final class PilotModelExporter {
             this.relative_path = relativePath;
             this.export_ms = exportMs;
             this.document = document;
+        }
+    }
+
+    private static final class ImplicitDiffDocument {
+        private ImplicitDiffMetadata metadata;
+        private List<ImplicitDiffCase> cases;
+    }
+
+    private static final class ImplicitDiffMetadata {
+        private String library_root;
+        private String exported_at_utc;
+        private String pilot_version;
+        private int case_count;
+        private int unique_input_file_count;
+        private BatchSetupTimings setup_timings;
+    }
+
+    private static final class ImplicitDiffCase {
+        private final String relative_path;
+        private final int explicit_element_count;
+        private final int explicit_relationship_count;
+        private final int implicit_element_count;
+        private final int implicit_relationship_count;
+        private final List<ImpliedElement> added_elements;
+        private final List<ImpliedRelationship> added_relationships;
+
+        private ImplicitDiffCase(
+            String relativePath,
+            int explicitElementCount,
+            int explicitRelationshipCount,
+            int implicitElementCount,
+            int implicitRelationshipCount,
+            List<ImpliedElement> addedElements,
+            List<ImpliedRelationship> addedRelationships
+        ) {
+            this.relative_path = relativePath;
+            this.explicit_element_count = explicitElementCount;
+            this.explicit_relationship_count = explicitRelationshipCount;
+            this.implicit_element_count = implicitElementCount;
+            this.implicit_relationship_count = implicitRelationshipCount;
+            this.added_elements = addedElements;
+            this.added_relationships = addedRelationships;
+        }
+    }
+
+    private static final class ImpliedElement {
+        private final String qualified_name;
+        private final String kind;
+
+        private ImpliedElement(String qualifiedName, String kind) {
+            this.qualified_name = qualifiedName;
+            this.kind = kind;
+        }
+    }
+
+    private static final class ImpliedRelationship {
+        private final String source;
+        private final String relation;
+        private final String target;
+        private final String source_kind;
+        private final String target_kind;
+
+        private ImpliedRelationship(
+            String source,
+            String relation,
+            String target,
+            String sourceKind,
+            String targetKind
+        ) {
+            this.source = source;
+            this.relation = relation;
+            this.target = target;
+            this.source_kind = sourceKind;
+            this.target_kind = targetKind;
         }
     }
 

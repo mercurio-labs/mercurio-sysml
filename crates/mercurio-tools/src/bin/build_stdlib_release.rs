@@ -13,7 +13,7 @@ use mercurio_core::{
 use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
 use mercurio_sysml::sysml_metamodel_adapter_from_graph;
 use mercurio_tools::{
-    attach_stdlib_derived_feature_manifest, sha256_file, split_language_baselines,
+    attach_stdlib_derived_feature_manifest, load_pilot_lock, sha256_file, split_language_baselines,
 };
 use serde::Serialize;
 use serde_json::{Value, json};
@@ -468,6 +468,7 @@ struct Args {
     check_reproducible: bool,
     audit_profile: bool,
     promote: bool,
+    allow_dirty: bool,
 }
 
 impl Args {
@@ -486,6 +487,7 @@ impl Args {
             check_reproducible: false,
             audit_profile: false,
             promote: false,
+            allow_dirty: false,
         };
         let raw = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
@@ -504,6 +506,7 @@ impl Args {
                 "--check-reproducible" => args.check_reproducible = true,
                 "--audit-profile" => args.audit_profile = true,
                 "--promote" => args.promote = true,
+                "--allow-dirty" => args.allow_dirty = true,
                 "--help" | "-h" => {
                     print_usage();
                     std::process::exit(0);
@@ -594,7 +597,7 @@ struct Artifact {
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin build_stdlib_release -- [--from-export PATH | --pilot-root PATH] [--out PATH] [--spec-version VERSION] [--profile-id ID] [--source-id ID] [--check-reproducible] [--audit-profile] [--promote]"
+        "Usage: cargo run -p mercurio-tools --bin build_stdlib_release -- [--from-export PATH | --pilot-root PATH] [--out PATH] [--spec-version VERSION] [--profile-id ID] [--source-id ID] [--check-reproducible] [--audit-profile] [--promote] [--allow-dirty]"
     );
 }
 
@@ -617,9 +620,42 @@ fn prepare_raw_export(args: &Args) -> Result<PathBuf, Box<dyn std::error::Error>
         .pilot_root
         .as_deref()
         .ok_or("expected --from-export or --pilot-root")?;
+    validate_pilot_checkout(pilot_root, args.allow_dirty)?;
     let export_path = tool_repo_path("target/stdlib-release/pilot-stdlib-export.json");
     export_from_pilot(pilot_root, &export_path)?;
     Ok(export_path)
+}
+
+fn validate_pilot_checkout(
+    pilot_root: &Path,
+    allow_dirty: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if let Ok(lock) = load_pilot_lock() {
+        let Some(actual_commit) = git_stdout(pilot_root, ["rev-parse", "HEAD"]) else {
+            return Err(format!(
+                "could not read Pilot git commit from {}",
+                pilot_root.display()
+            )
+            .into());
+        };
+        if actual_commit != lock.commit {
+            return Err(format!(
+                "Pilot checkout commit `{actual_commit}` does not match pinned commit `{}` from resources/pilot.lock.json",
+                lock.commit
+            )
+            .into());
+        }
+    }
+
+    if git_dirty(pilot_root) == Some(true) && !allow_dirty {
+        return Err(format!(
+            "Pilot checkout `{}` is dirty; pass --allow-dirty only for non-release/debug regeneration",
+            pilot_root.display()
+        )
+        .into());
+    }
+
+    Ok(())
 }
 
 fn create_release_dirs(root: &Path) -> Result<(), Box<dyn std::error::Error>> {

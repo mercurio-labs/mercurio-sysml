@@ -31,6 +31,11 @@ path = "src/bin/compare_pilot_compile_errors.rs"
 required-features = ["legacy-pilot-tools"]
 
 [[bin]]
+name = "pilot_conformance_harness"
+path = "src/bin/pilot_conformance_harness.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
 name = "compare_pilot_semantics"
 path = "src/bin/compare_pilot_semantics.rs"
 required-features = ["legacy-pilot-tools"]
@@ -93,6 +98,46 @@ required-features = ["legacy-pilot-tools"]
 [[bin]]
 name = "export_pilot_lowering_evidence"
 path = "src/bin/export_pilot_lowering_evidence.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "extract_pilot_grammar"
+path = "src/bin/extract_pilot_grammar.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "generate_pilot_constructs_seed"
+path = "src/bin/generate_pilot_constructs_seed.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "extract_pilot_metamodel"
+path = "src/bin/extract_pilot_metamodel.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "audit_metamodel_extract"
+path = "src/bin/audit_metamodel_extract.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "generate_sysml_field_specs"
+path = "src/bin/generate_sysml_field_specs.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "extract_pilot_validators"
+path = "src/bin/extract_pilot_validators.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "extract_pilot_implicit_semantics"
+path = "src/bin/extract_pilot_implicit_semantics.rs"
+required-features = ["legacy-pilot-tools"]
+
+[[bin]]
+name = "pilot_release_bump"
+path = "src/bin/pilot_release_bump.rs"
 required-features = ["legacy-pilot-tools"]
 
 [[bin]]

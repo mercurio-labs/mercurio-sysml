@@ -1,6 +1,40 @@
 {
   "source": {
+    "schema": "dev.mercurio.pilot-artifact-source.v1",
     "kind": "mercurio-kir-emission-seed",
+    "authorship": {
+      "mode": "hand-curated-mercurio-decision",
+      "note": "Emission rules are Mercurio KIR decisions, not direct Pilot facts; Pilot artifacts are cited as evidence."
+    },
+    "pilot": {
+      "repository": "SysML-v2-Pilot-Implementation",
+      "commit": "241934dab96f2f07ddbfd7b351449cb975148064",
+      "git_describe": "2026-04-29-g241934dab",
+      "dirty": true,
+      "dirty_waiver": "Existing bundle was stamped during PX-0 from the available dirty vendored checkout; future release regeneration is gated clean by default."
+    },
+    "source_files": [
+      {
+        "path": "org.omg.sysml/model/SysML.ecore",
+        "sha256": "aef59378d56b07301cef051c3cda1766d069b40bb57fe2d9926226dcffc7180d"
+      },
+      {
+        "path": "org.omg.sysml/model/kerml.ecore",
+        "sha256": "6d0a5d4d2079fb737c5290d7b42909b85c7a43e767b95a2ecffe82f3e05b4986"
+      },
+      {
+        "path": "org.omg.sysml/json-schema/SysML.json",
+        "sha256": "0b86f5f700afc75ef075f0c0c265c2196f28b6cb54419b1b53edf7dcd8c7f3d7"
+      },
+      {
+        "path": "org.omg.sysml/json-schema/KerML.json",
+        "sha256": "0ed82c255fffcc858b062e9f34de58f7888e03db610626e89e919e4e26e89f8c"
+      }
+    ],
+    "extractor": {
+      "name": "hand-curated",
+      "version": "pre-px-2"
+    },
     "note": "This file maps pilot metaclasses to canonical KIR emission rules for the first L2 parser subset."
   },
   "defaults": {

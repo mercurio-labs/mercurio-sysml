@@ -7,6 +7,7 @@ use mercurio_core::ir::KirDocument;
 use mercurio_core::language::profile::{CURRENT_DEFAULT_PROFILE_ID, LanguageProfile};
 use mercurio_core::paths::repo_path;
 use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
+use serde_json::Value;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -25,6 +26,12 @@ fn run() -> Result<()> {
         .join("mappings")
         .join("metamodel_constructs.seed.json");
     let emission_path = profile_dir.join("mappings").join("kir_emission.seed.json");
+    let lowering_path = profile_dir
+        .join("mappings")
+        .join("lowering_rules.seed.json");
+    let semantic_defaults_path = profile_dir
+        .join("mappings")
+        .join("semantic_defaults.seed.json");
 
     let profile = LanguageProfile::from_path(&profile_path)?;
     let constructs: PilotConstructSeed =
@@ -42,6 +49,10 @@ fn run() -> Result<()> {
     audit_constructs(&mut audit, &constructs, &emission);
     audit_emission(&mut audit, &constructs, &emission);
     audit_stdlib_references(&mut audit, &profile, &constructs, &stdlib_ids);
+    audit_mapping_source_block(&mut audit, &constructs_path, "metamodel constructs");
+    audit_mapping_source_block(&mut audit, &emission_path, "KIR emission");
+    audit_mapping_source_block(&mut audit, &lowering_path, "lowering rules");
+    audit_mapping_source_block(&mut audit, &semantic_defaults_path, "semantic defaults");
     if let Some(pilot_root) = &args.pilot_root {
         audit_pilot_grammar_alignment(&mut audit, &constructs, pilot_root);
     }
@@ -506,7 +517,7 @@ fn audit_pilot_grammar_alignment(
                 grammar_entries.extend(extract_xtext_returns(&text));
             }
             Err(err) => {
-                audit.warn(format!(
+                audit.error(format!(
                     "could not read Pilot grammar `{}`: {err}",
                     path.display()
                 ));
@@ -515,7 +526,7 @@ fn audit_pilot_grammar_alignment(
     }
 
     if grammar_entries.is_empty() {
-        audit.warn("Pilot grammar alignment skipped because no `returns` rules were found");
+        audit.error("Pilot grammar alignment failed because no `returns` rules were found");
         return;
     }
 
@@ -539,10 +550,105 @@ fn audit_pilot_grammar_alignment(
             grammar_entries.len()
         ));
     } else {
-        audit.warn(format!(
+        audit.error(format!(
             "Pilot grammar alignment drift: {missing_from_seed} grammar mapping(s) missing from seed, {missing_from_grammar} seed mapping(s) not found in grammar"
         ));
     }
+}
+
+fn audit_mapping_source_block(audit: &mut Audit, path: &Path, label: &str) {
+    let text = match fs::read_to_string(path) {
+        Ok(text) => text,
+        Err(err) => {
+            audit.error(format!(
+                "{label} mapping source block could not be read from {}: {err}",
+                path.display()
+            ));
+            return;
+        }
+    };
+    let value = match serde_json::from_str::<Value>(&text) {
+        Ok(value) => value,
+        Err(err) => {
+            audit.error(format!(
+                "{label} mapping source block could not be parsed from {}: {err}",
+                path.display()
+            ));
+            return;
+        }
+    };
+    let Some(source) = value.get("source").and_then(Value::as_object) else {
+        audit.error(format!(
+            "{label} mapping is missing a top-level `source` block"
+        ));
+        return;
+    };
+
+    if source
+        .get("schema")
+        .and_then(Value::as_str)
+        .filter(|schema| !schema.trim().is_empty())
+        .is_none()
+    {
+        audit.error(format!("{label} source block is missing `schema`"));
+    }
+    if source
+        .get("authorship")
+        .and_then(Value::as_object)
+        .and_then(|authorship| authorship.get("mode"))
+        .and_then(Value::as_str)
+        .filter(|mode| !mode.trim().is_empty())
+        .is_none()
+    {
+        audit.error(format!("{label} source block is missing `authorship.mode`"));
+    }
+    if source
+        .get("pilot")
+        .and_then(Value::as_object)
+        .and_then(|pilot| pilot.get("commit"))
+        .and_then(Value::as_str)
+        .filter(|commit| !commit.trim().is_empty())
+        .is_none()
+    {
+        audit.error(format!("{label} source block is missing `pilot.commit`"));
+    }
+    if source
+        .get("extractor")
+        .and_then(Value::as_object)
+        .and_then(|extractor| extractor.get("name"))
+        .and_then(Value::as_str)
+        .filter(|name| !name.trim().is_empty())
+        .is_none()
+    {
+        audit.error(format!("{label} source block is missing `extractor.name`"));
+    }
+    if !has_file_manifest(source.get("source_files"))
+        && !has_file_manifest(source.get("curated_files"))
+    {
+        audit.error(format!(
+            "{label} source block must list at least one `source_files` or `curated_files` entry with path and sha256"
+        ));
+    } else {
+        audit.ok(format!("{label} mapping declares provenance source block"));
+    }
+}
+
+fn has_file_manifest(value: Option<&Value>) -> bool {
+    let Some(files) = value.and_then(Value::as_array) else {
+        return false;
+    };
+    !files.is_empty()
+        && files.iter().all(|file| {
+            file.get("path")
+                .and_then(Value::as_str)
+                .filter(|path| !path.trim().is_empty())
+                .is_some()
+                && file
+                    .get("sha256")
+                    .and_then(Value::as_str)
+                    .filter(|sha| !sha.trim().is_empty())
+                    .is_some()
+        })
 }
 
 fn extract_xtext_returns(text: &str) -> BTreeSet<(String, String)> {

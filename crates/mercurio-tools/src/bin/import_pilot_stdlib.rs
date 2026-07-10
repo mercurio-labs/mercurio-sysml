@@ -8,7 +8,7 @@ use mercurio_core::{
     normalize_pilot_export, repo_path, repo_root,
 };
 use mercurio_sysml::sysml_metamodel_adapter_from_graph;
-use mercurio_tools::sha256_file;
+use mercurio_tools::{load_pilot_lock, sha256_file};
 use serde_json::{Value, json};
 use time::OffsetDateTime;
 use time::format_description::well_known::Rfc3339;
@@ -16,6 +16,7 @@ use time::format_description::well_known::Rfc3339;
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args()?;
     let input_path = if let Some(pilot_root) = args.pilot_root.as_deref() {
+        validate_pilot_checkout(pilot_root, args.allow_dirty)?;
         export_from_pilot(pilot_root, &args.input_path)?
     } else {
         args.input_path.clone()
@@ -42,6 +43,7 @@ struct Args {
     output_path: PathBuf,
     rulepack_output_path: PathBuf,
     pilot_root: Option<PathBuf>,
+    allow_dirty: bool,
 }
 
 fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
@@ -49,6 +51,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut output_path = default_stdlib_path();
     let mut rulepack_output_path = default_rulepack_path(&output_path);
     let mut pilot_root = None;
+    let mut allow_dirty = false;
     let args = env::args().skip(1).collect::<Vec<_>>();
     let mut index = 0;
 
@@ -75,6 +78,9 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                 let value = args.get(index).ok_or("missing value for --pilot-root")?;
                 pilot_root = Some(PathBuf::from(value));
             }
+            "--allow-dirty" => {
+                allow_dirty = true;
+            }
             "--help" | "-h" => {
                 print_usage();
                 std::process::exit(0);
@@ -99,12 +105,13 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
         output_path,
         rulepack_output_path,
         pilot_root,
+        allow_dirty,
     })
 }
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin import_pilot_stdlib -- [--pilot-root PATH] [--from-export PATH] [--out PATH] [--rulepack-out PATH]"
+        "Usage: cargo run -p mercurio-tools --bin import_pilot_stdlib -- [--pilot-root PATH] [--from-export PATH] [--out PATH] [--rulepack-out PATH] [--allow-dirty]"
     );
 }
 
@@ -254,6 +261,38 @@ fn git_dirty(repo: &Path) -> Option<bool> {
     }
 
     Some(!output.stdout.is_empty())
+}
+
+fn validate_pilot_checkout(
+    pilot_root: &Path,
+    allow_dirty: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    if let Ok(lock) = load_pilot_lock() {
+        let Some(actual_commit) = git_stdout(pilot_root, ["rev-parse", "HEAD"]) else {
+            return Err(format!(
+                "could not read Pilot git commit from {}",
+                pilot_root.display()
+            )
+            .into());
+        };
+        if actual_commit != lock.commit {
+            return Err(format!(
+                "Pilot checkout commit `{actual_commit}` does not match pinned commit `{}` from resources/pilot.lock.json",
+                lock.commit
+            )
+            .into());
+        }
+    }
+
+    if git_dirty(pilot_root) == Some(true) && !allow_dirty {
+        return Err(format!(
+            "Pilot checkout `{}` is dirty; pass --allow-dirty only for non-release/debug regeneration",
+            pilot_root.display()
+        )
+        .into());
+    }
+
+    Ok(())
 }
 
 fn kir_element_count(export: &PilotExportDocument) -> usize {

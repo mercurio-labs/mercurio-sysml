@@ -1,22 +1,24 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::env;
 use std::path::{Path, PathBuf};
 use std::process::Command;
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
+use mercurio_core::LanguageRegistry;
 use mercurio_core::frontend::diagnostics::Diagnostic;
 use mercurio_core::source_set::{SourceDocument, compile_source_document_with_registry};
-use mercurio_core::{KirDocument, LanguageRegistry, default_stdlib_path};
-use mercurio_sysml::SysmlLanguageModule;
+use mercurio_sysml::{SysmlLanguageModule, load_sysml_baseline};
 use mercurio_tools::default_pilot_root;
 use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
 use time::format_description::well_known::Rfc3339;
 
+const DEFAULT_JAVA_TIMEOUT_SECONDS: u64 = 300;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args()?;
     let corpus_seed = PilotCorpusSeed::load()?;
-    let pilot_runner = PilotRunner::new(&args.pilot_root)?;
+    let pilot_runner = PilotRunner::new(&args.pilot_root, args.java_timeout_seconds)?;
 
     match &args.relative_path {
         Some(relative_path) => {
@@ -130,6 +132,7 @@ struct Args {
     corpus_name: Option<String>,
     paths_file: Option<PathBuf>,
     output_path: PathBuf,
+    java_timeout_seconds: u64,
 }
 
 impl Args {
@@ -285,10 +288,14 @@ struct PilotRunner {
     library_root: PathBuf,
     interactive_jar: PathBuf,
     classes_dir: PathBuf,
+    java_timeout_seconds: u64,
 }
 
 impl PilotRunner {
-    fn new(pilot_root: &Path) -> Result<Self, Box<dyn std::error::Error>> {
+    fn new(
+        pilot_root: &Path,
+        java_timeout_seconds: u64,
+    ) -> Result<Self, Box<dyn std::error::Error>> {
         let pilot_root = pilot_root.canonicalize()?;
         let interactive_jar = find_interactive_jar(&pilot_root)?;
         let classes_dir = tool_repo_path("target/pilot-exporter-classes");
@@ -306,6 +313,7 @@ impl PilotRunner {
             pilot_root,
             interactive_jar,
             classes_dir,
+            java_timeout_seconds,
         })
     }
 }
@@ -348,14 +356,40 @@ struct NormalizedCompileDiagnostic {
 #[derive(Debug, Serialize)]
 struct CompileErrorComparison {
     status_match: bool,
+    parse_verdict_match: bool,
     both_pass: bool,
     both_fail: bool,
     failure_stage_match: bool,
     primary_problem_match: bool,
+    diagnostic_set_match: bool,
+    diagnostic_set: DiagnosticSetComparison,
     #[serde(skip_serializing_if = "Option::is_none")]
     mercurio_primary_problem: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pilot_primary_problem: Option<String>,
+}
+
+#[derive(Debug, Serialize)]
+struct DiagnosticSetComparison {
+    matched_count: usize,
+    mercurio_only_count: usize,
+    pilot_only_count: usize,
+    matched: Vec<DiagnosticSignature>,
+    mercurio_only: Vec<DiagnosticSignature>,
+    pilot_only: Vec<DiagnosticSignature>,
+}
+
+#[derive(Debug, Clone, Eq, PartialEq, Ord, PartialOrd, Serialize)]
+struct DiagnosticSignature {
+    stage: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    input_path: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    line: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    column: Option<u32>,
+    problem_kind: String,
+    message_key: String,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -396,9 +430,14 @@ struct CorpusCaseSummary {
 #[derive(Debug, Serialize)]
 struct CorpusAggregate {
     status_match_cases: usize,
+    parse_verdict_match_cases: usize,
     both_pass_cases: usize,
     both_fail_cases: usize,
     primary_problem_match_cases: usize,
+    diagnostic_set_match_cases: usize,
+    diagnostic_matched_count: usize,
+    diagnostic_mercurio_only_count: usize,
+    diagnostic_pilot_only_count: usize,
     rust_only_fail_cases: usize,
     pilot_only_fail_cases: usize,
     failed_cases: usize,
@@ -441,6 +480,14 @@ impl CorpusAggregate {
                 .iter()
                 .filter(|case| case.comparison.as_ref().is_some_and(|cmp| cmp.status_match))
                 .count(),
+            parse_verdict_match_cases: cases
+                .iter()
+                .filter(|case| {
+                    case.comparison
+                        .as_ref()
+                        .is_some_and(|cmp| cmp.parse_verdict_match)
+                })
+                .count(),
             both_pass_cases: cases
                 .iter()
                 .filter(|case| case.comparison.as_ref().is_some_and(|cmp| cmp.both_pass))
@@ -457,6 +504,29 @@ impl CorpusAggregate {
                         .is_some_and(|cmp| cmp.primary_problem_match)
                 })
                 .count(),
+            diagnostic_set_match_cases: cases
+                .iter()
+                .filter(|case| {
+                    case.comparison
+                        .as_ref()
+                        .is_some_and(|cmp| cmp.diagnostic_set_match)
+                })
+                .count(),
+            diagnostic_matched_count: cases
+                .iter()
+                .filter_map(|case| case.comparison.as_ref())
+                .map(|cmp| cmp.diagnostic_set.matched_count)
+                .sum(),
+            diagnostic_mercurio_only_count: cases
+                .iter()
+                .filter_map(|case| case.comparison.as_ref())
+                .map(|cmp| cmp.diagnostic_set.mercurio_only_count)
+                .sum(),
+            diagnostic_pilot_only_count: cases
+                .iter()
+                .filter_map(|case| case.comparison.as_ref())
+                .map(|cmp| cmp.diagnostic_set.pilot_only_count)
+                .sum(),
             rust_only_fail_cases: cases
                 .iter()
                 .filter(|case| {
@@ -538,6 +608,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut corpus_name = None;
     let mut paths_file = None;
     let mut output_path = tool_repo_path("target/pilot_compile_error_compare.json");
+    let mut java_timeout_seconds = DEFAULT_JAVA_TIMEOUT_SECONDS;
     let args = env::args().skip(1).collect::<Vec<_>>();
     let mut index = 0;
 
@@ -574,6 +645,13 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                 index += 1;
                 output_path = PathBuf::from(args.get(index).ok_or("missing value for --out")?);
             }
+            "--java-timeout-seconds" => {
+                index += 1;
+                java_timeout_seconds = args
+                    .get(index)
+                    .ok_or("missing value for --java-timeout-seconds")?
+                    .parse()?;
+            }
             "--help" | "-h" => {
                 print_usage();
                 std::process::exit(0);
@@ -596,12 +674,13 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
         corpus_name,
         paths_file,
         output_path,
+        java_timeout_seconds,
     })
 }
 
 fn print_usage() {
     println!(
-        "Usage: compare_pilot_compile_errors --pilot-root <pilot-root> (--relative-path <path> | --corpus <name|all> | --paths-file <path>) [--out <path>]"
+        "Usage: compare_pilot_compile_errors --pilot-root <pilot-root> (--relative-path <path> | --corpus <name|all> | --paths-file <path>) [--out <path>] [--java-timeout-seconds N]"
     );
 }
 
@@ -660,7 +739,7 @@ fn build_mercurio_case(
     let mut phases = Vec::new();
 
     let load_stdlib_start = Instant::now();
-    let augmented = KirDocument::from_path(&default_stdlib_path())?;
+    let augmented = load_sysml_baseline()?;
     phases.push(PhaseTiming {
         name: "load_stdlib_json".to_string(),
         duration_ms: elapsed_ms(load_stdlib_start),
@@ -824,15 +903,82 @@ fn compare_results(
     let primary_problem_match = mercurio_primary.map(|diag| diag.problem_kind.as_str())
         == pilot_primary.map(|diag| diag.problem_kind.as_str())
         && both_fail;
+    let diagnostic_set = compare_diagnostic_sets(&mercurio.diagnostics, &pilot.diagnostics);
+    let diagnostic_set_match =
+        diagnostic_set.mercurio_only_count == 0 && diagnostic_set.pilot_only_count == 0;
+    let status_match = mercurio.status == pilot.status;
 
     CompileErrorComparison {
-        status_match: mercurio.status == pilot.status,
+        status_match,
+        parse_verdict_match: status_match,
         both_pass,
         both_fail,
         failure_stage_match,
         primary_problem_match,
+        diagnostic_set_match,
+        diagnostic_set,
         mercurio_primary_problem: mercurio_primary.map(|diag| diag.problem_kind.clone()),
         pilot_primary_problem: pilot_primary.map(|diag| diag.problem_kind.clone()),
+    }
+}
+
+fn compare_diagnostic_sets(
+    mercurio: &[NormalizedCompileDiagnostic],
+    pilot: &[NormalizedCompileDiagnostic],
+) -> DiagnosticSetComparison {
+    let mut mercurio_counts = diagnostic_counts(mercurio);
+    let mut pilot_counts = diagnostic_counts(pilot);
+    let keys = mercurio_counts
+        .keys()
+        .chain(pilot_counts.keys())
+        .cloned()
+        .collect::<BTreeSet<_>>();
+    let mut matched = Vec::new();
+    let mut mercurio_only = Vec::new();
+    let mut pilot_only = Vec::new();
+
+    for key in keys {
+        let mercurio_count = mercurio_counts.remove(&key).unwrap_or(0);
+        let pilot_count = pilot_counts.remove(&key).unwrap_or(0);
+        for _ in 0..mercurio_count.min(pilot_count) {
+            matched.push(key.clone());
+        }
+        for _ in 0..mercurio_count.saturating_sub(pilot_count) {
+            mercurio_only.push(key.clone());
+        }
+        for _ in 0..pilot_count.saturating_sub(mercurio_count) {
+            pilot_only.push(key.clone());
+        }
+    }
+
+    DiagnosticSetComparison {
+        matched_count: matched.len(),
+        mercurio_only_count: mercurio_only.len(),
+        pilot_only_count: pilot_only.len(),
+        matched,
+        mercurio_only,
+        pilot_only,
+    }
+}
+
+fn diagnostic_counts(
+    diagnostics: &[NormalizedCompileDiagnostic],
+) -> BTreeMap<DiagnosticSignature, usize> {
+    let mut counts = BTreeMap::new();
+    for diagnostic in diagnostics {
+        *counts.entry(diagnostic_signature(diagnostic)).or_insert(0) += 1;
+    }
+    counts
+}
+
+fn diagnostic_signature(diagnostic: &NormalizedCompileDiagnostic) -> DiagnosticSignature {
+    DiagnosticSignature {
+        stage: diagnostic.stage.clone(),
+        input_path: diagnostic.input_path.clone(),
+        line: diagnostic.line,
+        column: diagnostic.column,
+        problem_kind: diagnostic.problem_kind.clone(),
+        message_key: normalize_message(&diagnostic.message),
     }
 }
 
@@ -942,40 +1088,22 @@ fn run_java_diagnostics_exporter(
         .collect::<Vec<_>>();
     input_paths.push(pilot_runner.pilot_root.join(relative_path));
 
-    let status = if cfg!(windows) {
-        let script_path = tool_repo_path("target/run_pilot_compile_diagnostics.ps1");
-        let mut script = format!(
-            "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotModelExporter --diagnostics '{}' '{}'",
-            classpath.replace('\'', "''"),
-            java_path_string(&pilot_runner.library_root).replace('\'', "''"),
-            java_path_string(&export_path).replace('\'', "''"),
-        );
-        for input_path in &input_paths {
-            script.push_str(&format!(
-                " '{}'",
-                java_path_string(input_path).replace('\'', "''")
-            ));
-        }
-        script.push('\n');
-        std::fs::write(&script_path, script)?;
-        Command::new("powershell")
-            .arg("-File")
-            .arg(script_path)
-            .status()?
-    } else {
-        let mut command = Command::new("java");
-        command
-            .arg("-cp")
-            .arg(classpath)
-            .arg("dev.mercurio.pilot.PilotModelExporter")
-            .arg("--diagnostics")
-            .arg(&pilot_runner.library_root)
-            .arg(&export_path);
-        for input_path in &input_paths {
-            command.arg(input_path);
-        }
-        command.status()?
-    };
+    let mut command = Command::new("java");
+    command
+        .arg("-cp")
+        .arg(classpath)
+        .arg("dev.mercurio.pilot.PilotModelExporter")
+        .arg("--diagnostics")
+        .arg(&pilot_runner.library_root)
+        .arg(&export_path);
+    for input_path in &input_paths {
+        command.arg(input_path);
+    }
+    let status = run_command_with_timeout(
+        command,
+        Duration::from_secs(pilot_runner.java_timeout_seconds),
+        "Java pilot diagnostics exporter",
+    )?;
 
     if !status.success() {
         return Err("failed to run Java pilot diagnostics exporter".into());
@@ -1138,31 +1266,20 @@ fn run_java_diagnostics_exporter_batch(
         java_path_string(&lib_dir.join("*"))
     );
 
-    let status = if cfg!(windows) {
-        let script_path = tool_repo_path("target/run_pilot_compile_diagnostics_batch.ps1");
-        let script = format!(
-            "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotModelExporter --diagnostics-batch '{}' '{}' '{}'\n",
-            classpath.replace('\'', "''"),
-            java_path_string(&pilot_runner.library_root).replace('\'', "''"),
-            java_path_string(&spec_path).replace('\'', "''"),
-            java_path_string(&export_path).replace('\'', "''"),
-        );
-        std::fs::write(&script_path, script)?;
-        Command::new("powershell")
-            .arg("-File")
-            .arg(script_path)
-            .status()?
-    } else {
-        Command::new("java")
-            .arg("-cp")
-            .arg(classpath)
-            .arg("dev.mercurio.pilot.PilotModelExporter")
-            .arg("--diagnostics-batch")
-            .arg(&pilot_runner.library_root)
-            .arg(&spec_path)
-            .arg(&export_path)
-            .status()?
-    };
+    let mut command = Command::new("java");
+    command
+        .arg("-cp")
+        .arg(classpath)
+        .arg("dev.mercurio.pilot.PilotModelExporter")
+        .arg("--diagnostics-batch")
+        .arg(&pilot_runner.library_root)
+        .arg(&spec_path)
+        .arg(&export_path);
+    let status = run_command_with_timeout(
+        command,
+        Duration::from_secs(pilot_runner.java_timeout_seconds),
+        "Java pilot diagnostics batch exporter",
+    )?;
 
     if !status.success() {
         return Err("failed to run Java pilot diagnostics batch exporter".into());
@@ -1238,6 +1355,27 @@ fn compile_java_exporter(
     Ok(())
 }
 
+fn run_command_with_timeout(
+    mut command: Command,
+    timeout: Duration,
+    label: &str,
+) -> Result<std::process::ExitStatus, Box<dyn std::error::Error>> {
+    let mut child = command.spawn()?;
+    let started = Instant::now();
+
+    loop {
+        if let Some(status) = child.try_wait()? {
+            return Ok(status);
+        }
+        if started.elapsed() >= timeout {
+            let _ = child.kill();
+            let _ = child.wait();
+            return Err(format!("{label} timed out after {} seconds", timeout.as_secs()).into());
+        }
+        std::thread::sleep(Duration::from_millis(100));
+    }
+}
+
 fn absolute_path(path: &Path) -> Result<PathBuf, Box<dyn std::error::Error>> {
     if path.is_absolute() {
         return Ok(path.to_path_buf());
@@ -1263,4 +1401,45 @@ fn now_utc_rfc3339() -> Result<String, Box<dyn std::error::Error>> {
 
 fn elapsed_ms(start: Instant) -> u64 {
     start.elapsed().as_millis().try_into().unwrap_or(u64::MAX)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{NormalizedCompileDiagnostic, compare_diagnostic_sets};
+
+    fn diagnostic(message: &str, line: u32) -> NormalizedCompileDiagnostic {
+        NormalizedCompileDiagnostic {
+            stage: "parse".to_string(),
+            input_path: Some("model.sysml".to_string()),
+            line: Some(line),
+            column: Some(1),
+            message: message.to_string(),
+            problem_kind: "parse_expected_token".to_string(),
+        }
+    }
+
+    #[test]
+    fn diagnostic_set_comparison_preserves_multiset_deltas() {
+        let mercurio = vec![
+            diagnostic("Expected `;`", 2),
+            diagnostic("Expected `;`", 2),
+            diagnostic("Expected `}`", 4),
+        ];
+        let pilot = vec![
+            diagnostic("expected `;`", 2),
+            diagnostic("Expected name", 9),
+        ];
+
+        let comparison = compare_diagnostic_sets(&mercurio, &pilot);
+
+        assert_eq!(comparison.matched_count, 1);
+        assert_eq!(comparison.mercurio_only_count, 2);
+        assert_eq!(comparison.pilot_only_count, 1);
+        assert_eq!(
+            comparison.mercurio_only[0].message_key,
+            "expected `;`".to_string()
+        );
+        assert_eq!(comparison.mercurio_only[1].line, Some(4));
+        assert_eq!(comparison.pilot_only[0].line, Some(9));
+    }
 }
