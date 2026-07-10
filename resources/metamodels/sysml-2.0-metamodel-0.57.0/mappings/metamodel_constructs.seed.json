@@ -16,18 +16,18 @@
     "source_files": [
       {
         "path": "resources/metamodels/sysml-2.0-metamodel-0.57.0/grammar.extract.json",
-        "sha256": "ff7cf7107c0a961b9fc85be0a317b556634569bbdb37b6ac09820c2300a958fb"
+        "sha256": "71404ebbbf689bb4e0b70fdb90a770473026fc3739048b697426dad6bb199512"
       },
       {
         "path": "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/constructs.overlay.json",
-        "sha256": "23fbbfaaaa93d41e477e635076bffa26bea8d059e5d954eb7b6654483f092abe"
+        "sha256": "deb98cb0acfa6cc089050c1d50364e0a03f55804eeaab7b42da834499240aa28"
       }
     ],
     "extractor": {
       "name": "generate_pilot_constructs_seed",
       "version": "0.1.0"
     },
-    "generated_at_utc": "2026-07-09T18:38:17.9092027Z"
+    "generated_at_utc": "2026-07-10T18:53:01.0246115Z"
   },
   "keyword_registry": {
     "source": {
@@ -175,12 +175,16 @@
       "ExhibitStateUsage": "SysML::Systems::ExhibitStateUsage",
       "FlowUsage": "SysML::Systems::FlowUsage",
       "ItemUsage": "SysML::Systems::ItemUsage",
+      "ObjectiveUsage": "SysML::Systems::RequirementUsage",
       "PartUsage": "SysML::Systems::PartUsage",
       "PerformActionUsage": "SysML::Systems::PerformActionUsage",
       "PortUsage": "SysML::Systems::PortUsage",
       "ReferenceUsage": "SysML::Systems::ReferenceUsage",
+      "ReturnUsage": "SysML::Systems::ReferenceUsage",
       "StateUsage": "SysML::Systems::StateUsage",
-      "SuccessionUsage": "SysML::Systems::SuccessionFlowUsage"
+      "SubjectUsage": "SysML::Systems::ReferenceUsage",
+      "SuccessionUsage": "SysML::Systems::SuccessionFlowUsage",
+      "VerifyUsage": "SysML::Systems::RequirementUsage"
     }
   },
   "semantic_specialization_defaults": {
