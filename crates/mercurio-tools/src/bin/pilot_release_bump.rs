@@ -56,6 +56,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ));
     stages.push(run_tool(
         &root,
+        "legality_rulepack",
+        "generate_sysml_legality_rulepack",
+        selector_check_args(&args.profile_id, !args.write),
+    ));
+    stages.push(run_tool(
+        &root,
         "validator_extract",
         "extract_pilot_validators",
         extraction_args(&args, true, !args.write),
@@ -273,6 +279,14 @@ fn extraction_args(args: &Args, pilot_root: bool, check: bool) -> Vec<String> {
 
 fn profile_check_args(profile_id: &str, check: bool) -> Vec<String> {
     let mut out = vec!["--profile-id".to_string(), profile_id.to_string()];
+    if check {
+        out.push("--check".to_string());
+    }
+    out
+}
+
+fn selector_check_args(selector: &str, check: bool) -> Vec<String> {
+    let mut out = vec!["--selector".to_string(), selector.to_string()];
     if check {
         out.push("--check".to_string());
     }

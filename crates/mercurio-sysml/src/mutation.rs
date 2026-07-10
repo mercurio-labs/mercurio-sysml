@@ -11,11 +11,17 @@ use mercurio_core::{
 };
 
 use crate::SysmlEnvironmentError;
+use crate::metamodel::{
+    LEGACY_SYSML_2_0_PILOT_057_ID, SYSML_2_0_METAMODEL_057_ID, SYSML_2_0_PILOT_2026_04_ID,
+};
 #[cfg(not(target_arch = "wasm32"))]
 use crate::release_bundle;
 use crate::semantic_profile::{
-    SYSML_DEFINITION_KEYWORDS, SYSML_RELATIONSHIP_KINDS, SYSML_USAGE_KEYWORDS,
-    SysmlSemanticCapabilityOracle, sysml_definition_keyword_for_usage,
+    SysmlSemanticCapabilityOracle, sysml_allowed_definition_keywords_for_usage,
+    sysml_definition_element_kinds, sysml_definition_keyword_for_usage, sysml_definition_keywords,
+    sysml_extension_relationship_keywords, sysml_grammar_containment_mismatches,
+    sysml_is_requirement_kind, sysml_relationship_keywords, sysml_usage_element_kinds,
+    sysml_usage_keywords,
 };
 
 pub const SYSML_MUTATION_PROFILE_ID: &str = "sysml-v2-writable-mutation-v1";
@@ -98,8 +104,7 @@ pub fn sysml_semantic_legality_rulepack_for_release(
 ) -> Result<RulePack, SysmlEnvironmentError> {
     #[cfg(target_arch = "wasm32")]
     {
-        let _ = selector;
-        Ok(sysml_semantic_legality_rulepack())
+        sysml_embedded_semantic_legality_rulepack_for_release(selector)
     }
 
     #[cfg(not(target_arch = "wasm32"))]
@@ -110,47 +115,67 @@ pub fn sysml_semantic_legality_rulepack_for_release(
 }
 
 pub fn sysml_semantic_legality_rulepack() -> RulePack {
+    sysml_embedded_semantic_legality_rulepack_for_release("latest")
+        .expect("embedded latest SysML legality rulepack parses")
+}
+
+pub fn sysml_semantic_legality_base_rulepack() -> RulePack {
     let mut facts = BTreeSet::new();
     facts.insert(Fact::new(
         "sysml_deprecated_v1_keyword",
         ["block".to_string()],
     ));
-    for kind in SYSML_USAGE_KEYWORDS
+    for (relationship, source) in sysml_extension_relationship_keywords() {
+        facts.insert(Fact::new(
+            "sysml_extension_relationship_kind",
+            [relationship.to_string(), source.to_string()],
+        ));
+    }
+    for (container, child) in sysml_grammar_containment_mismatches() {
+        facts.insert(Fact::new(
+            "sysml_grammar_containment_mismatch_kind",
+            [container.to_string(), child.to_string()],
+        ));
+    }
+    for (keyword, _) in sysml_usage_element_kinds()
         .iter()
         .copied()
-        .filter(|kind| *kind != "requirement")
+        .filter(|(_, kind)| !sysml_is_requirement_kind(kind))
     {
         facts.insert(Fact::new(
             "sysml_non_requirement_relationship_target_kind",
-            [kind.to_string()],
+            [keyword.to_string()],
         ));
     }
-    for kind in SYSML_DEFINITION_KEYWORDS
+    for (keyword, _) in sysml_definition_element_kinds()
         .iter()
         .copied()
-        .filter(|kind| *kind != "requirement")
+        .filter(|(_, kind)| !sysml_is_requirement_kind(kind))
     {
-        let definition_kind = format!("{kind} def");
+        let definition_kind = format!("{keyword} def");
         facts.insert(Fact::new(
             "sysml_non_requirement_relationship_target_kind",
             [definition_kind.clone()],
         ));
     }
-    for usage in SYSML_USAGE_KEYWORDS.iter().copied() {
+    for usage in sysml_usage_keywords().iter().copied() {
         let Some(expected_definition) = sysml_definition_keyword_for_usage(usage) else {
             continue;
         };
-        let expected_definition_kind = format!("{expected_definition} def");
-        for definition in SYSML_DEFINITION_KEYWORDS.iter().copied() {
+        let allowed_definition_kinds = sysml_allowed_definition_keywords_for_usage(usage)
+            .into_iter()
+            .map(|definition| format!("{definition} def"))
+            .collect::<BTreeSet<_>>();
+        for definition in sysml_definition_keywords().iter().copied() {
             let definition_kind = format!("{definition} def");
-            if definition_kind == expected_definition_kind {
+            if allowed_definition_kinds.contains(&definition_kind) {
                 continue;
             }
             facts.insert(Fact::new(
                 "sysml_usage_typing_mismatch_kind",
                 [
                     usage.to_string(),
-                    expected_definition_kind.clone(),
+                    format!("{expected_definition} def"),
                     definition_kind,
                 ],
             ));
@@ -176,6 +201,7 @@ pub fn sysml_semantic_legality_rulepack() -> RulePack {
                 Term::Var("DeprecatedKind".to_string()),
             ],
         ),
+        grammar_containment_warning_diagnostic(),
         deprecated_keyword_diagnostic(
             "sysml.deprecated.block.specialization_source",
             "legality_specialization_request",
@@ -235,7 +261,7 @@ pub fn sysml_semantic_legality_rulepack() -> RulePack {
             ],
         ),
     ];
-    diagnostics.extend(SYSML_USAGE_KEYWORDS.iter().copied().filter_map(|usage| {
+    diagnostics.extend(sysml_usage_keywords().iter().copied().filter_map(|usage| {
         sysml_definition_keyword_for_usage(usage)
             .map(|definition| usage_typing_diagnostic(usage, definition))
     }));
@@ -248,6 +274,30 @@ pub fn sysml_semantic_legality_rulepack() -> RulePack {
         rules: Vec::new(),
         diagnostics,
     }
+}
+
+fn sysml_embedded_semantic_legality_rulepack_for_release(
+    selector: &str,
+) -> Result<RulePack, SysmlEnvironmentError> {
+    let raw = match selector {
+        "latest"
+        | "2026-01"
+        | "0.57.0"
+        | "pilot-0.57.0"
+        | SYSML_2_0_METAMODEL_057_ID
+        | LEGACY_SYSML_2_0_PILOT_057_ID => {
+            crate::embedded_resources::SYSML_2_0_METAMODEL_057_RULEPACK
+        }
+        "2026-04" | "pilot-2026-04" | SYSML_2_0_PILOT_2026_04_ID => {
+            crate::embedded_resources::SYSML_2_0_PILOT_2026_04_RULEPACK
+        }
+        _ => {
+            return Err(SysmlEnvironmentError::UnknownMetamodel(
+                selector.to_string(),
+            ));
+        }
+    };
+    Ok(RulePack::from_str(raw)?)
 }
 
 fn deprecated_keyword_diagnostic(
@@ -291,6 +341,34 @@ fn relationship_target_diagnostic(kind: &str) -> DiagnosticRule {
             Atom {
                 predicate: "sysml_non_requirement_relationship_target_kind".to_string(),
                 terms: vec![Term::Var("TargetKind".to_string())],
+            },
+        ],
+    }
+}
+
+fn grammar_containment_warning_diagnostic() -> DiagnosticRule {
+    DiagnosticRule {
+        id: "sysml.grammar.containment.member_path".to_string(),
+        severity: RuleDiagnosticSeverity::Warning,
+        message: "containment pair is not present in the grammar-derived member paths".to_string(),
+        subjects: vec![
+            Term::Var("ContainerKind".to_string()),
+            Term::Var("ChildKind".to_string()),
+        ],
+        when: vec![
+            Atom {
+                predicate: "legality_containment_request".to_string(),
+                terms: vec![
+                    Term::Var("ContainerKind".to_string()),
+                    Term::Var("ChildKind".to_string()),
+                ],
+            },
+            Atom {
+                predicate: "sysml_grammar_containment_mismatch_kind".to_string(),
+                terms: vec![
+                    Term::Var("ContainerKind".to_string()),
+                    Term::Var("ChildKind".to_string()),
+                ],
             },
         ],
     }
@@ -343,15 +421,15 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
         ],
         variant_capabilities: default_semantic_variant_capability_context(),
         element_kinds: sysml_semantic_element_kinds(),
-        definition_keywords: SYSML_DEFINITION_KEYWORDS
+        definition_keywords: sysml_definition_keywords()
             .iter()
             .map(ToString::to_string)
             .collect(),
-        usage_keywords: SYSML_USAGE_KEYWORDS
+        usage_keywords: sysml_usage_keywords()
             .iter()
             .map(ToString::to_string)
             .collect(),
-        relationship_kinds: SYSML_RELATIONSHIP_KINDS
+        relationship_kinds: sysml_relationship_keywords()
             .iter()
             .map(ToString::to_string)
             .collect(),
@@ -365,55 +443,19 @@ pub fn sysml_semantic_mutation_capability_context() -> SemanticMutationCapabilit
 }
 
 fn sysml_semantic_element_kinds() -> Vec<String> {
-    SYSML_DEFINITION_KEYWORDS
+    sysml_definition_element_kinds()
         .iter()
-        .map(|keyword| sysml_semantic_definition_kind_name(keyword))
+        .map(|(_, kind)| kind.to_string())
         .chain(
-            SYSML_USAGE_KEYWORDS
+            sysml_usage_element_kinds()
                 .iter()
-                .map(|keyword| sysml_semantic_usage_kind_name(keyword)),
+                .map(|(_, kind)| kind.to_string()),
         )
         .collect()
 }
 
-fn sysml_semantic_definition_kind_name(keyword: &str) -> String {
-    match keyword {
-        "calc" => "CalculationDefinition".to_string(),
-        "verification" => "VerificationCaseDefinition".to_string(),
-        other => format!("{}Definition", pascal_case(other)),
-    }
-}
-
-fn sysml_semantic_usage_kind_name(keyword: &str) -> String {
-    match keyword {
-        "calc" => "CalculationUsage".to_string(),
-        "satisfy" => "SatisfyRequirementUsage".to_string(),
-        "verify" => "VerificationCaseUsage".to_string(),
-        "ref" | "reference" => "ReferenceUsage".to_string(),
-        other => format!("{}Usage", pascal_case(other)),
-    }
-}
-
-fn pascal_case(value: &str) -> String {
-    value
-        .split(|ch: char| !ch.is_ascii_alphanumeric())
-        .filter(|segment| !segment.is_empty())
-        .map(|segment| {
-            let mut chars = segment.chars();
-            match chars.next() {
-                Some(first) => format!(
-                    "{}{}",
-                    first.to_ascii_uppercase(),
-                    chars.as_str().to_ascii_lowercase()
-                ),
-                None => String::new(),
-            }
-        })
-        .collect()
-}
-
 fn sysml_usage_typing_rule_contexts() -> Vec<SemanticUsageTypingRuleContext> {
-    SYSML_USAGE_KEYWORDS
+    sysml_usage_keywords()
         .iter()
         .copied()
         .filter_map(|usage| {
@@ -474,17 +516,19 @@ pub fn enrich_sysml_semantic_reasoning_context_with_child_affordances(
 
 #[cfg(test)]
 mod tests {
-    use std::collections::BTreeMap;
+    use std::collections::{BTreeMap, BTreeSet};
 
     use mercurio_core::{
-        ElementRef, FeasibilityStatus, MutationContext, MutationFeasibilityService,
-        MutationProposal, SemanticElementKind, SemanticLegalityDiagnosticSource,
-        SemanticLegalityRequest, SemanticLegalityStatus, SemanticMutation,
-        SemanticNextActionOperation, SemanticNextActionsRequest, WorkspaceRevision,
+        ElementRef, FeasibilityStatus, Graph, KirDocument, MutationContext,
+        MutationFeasibilityService, MutationProposal, RulePack, SemanticElementKind,
+        SemanticLegalityDiagnosticSource, SemanticLegalityRequest, SemanticLegalityStatus,
+        SemanticMutation, SemanticNextActionOperation, SemanticNextActionsRequest,
+        WorkspaceRevision,
     };
+    use serde_json::{Value, json};
 
     use super::*;
-    use crate::load_authoring_project_from_sysml;
+    use crate::{available_release_bundles, load_authoring_project_from_sysml};
 
     #[test]
     fn sysml_capability_context_exposes_writable_sysml_v2_vocabulary() {
@@ -499,6 +543,12 @@ mod tests {
         assert!(context.definition_keywords.contains(&"part".to_string()));
         assert!(
             context
+                .definition_keywords
+                .contains(&"analysis".to_string())
+        );
+        assert!(context.definition_keywords.contains(&"enum".to_string()));
+        assert!(
+            context
                 .supported_operations
                 .contains(&"AddElement".to_string())
         );
@@ -510,6 +560,9 @@ mod tests {
         );
         assert!(!context.definition_keywords.contains(&"block".to_string()));
         assert!(context.relationship_kinds.contains(&"satisfy".to_string()));
+        assert!(context.relationship_kinds.contains(&"allocate".to_string()));
+        assert!(!context.relationship_kinds.contains(&"trace".to_string()));
+        assert!(!context.usage_keywords.contains(&"ref".to_string()));
         assert!(context.usage_typing_rules.iter().any(|rule| {
             rule.usage_keyword == "action" && rule.expected_definition_kind == "action def"
         }));
@@ -527,6 +580,45 @@ mod tests {
                 .guidance
                 .iter()
                 .any(|item| item.contains("Never use keyword `block`"))
+        );
+    }
+
+    #[test]
+    fn sysml_capability_context_matches_generated_keyword_registry() {
+        let context = sysml_semantic_mutation_capability_context();
+        let expected_definition_keywords = sysml_definition_keywords()
+            .iter()
+            .map(ToString::to_string)
+            .collect::<Vec<_>>();
+        let expected_usage_keywords = sysml_usage_keywords()
+            .iter()
+            .map(ToString::to_string)
+            .collect::<Vec<_>>();
+        let expected_relationship_keywords = sysml_relationship_keywords()
+            .iter()
+            .map(ToString::to_string)
+            .collect::<Vec<_>>();
+        let expected_element_kinds = sysml_definition_element_kinds()
+            .iter()
+            .chain(sysml_usage_element_kinds().iter())
+            .map(|(_, kind)| kind.to_string())
+            .collect::<Vec<_>>();
+
+        assert_eq!(
+            context.definition_keywords, expected_definition_keywords,
+            "mutation definitions must match the generated compiler registry"
+        );
+        assert_eq!(
+            context.usage_keywords, expected_usage_keywords,
+            "mutation usages must match the generated compiler registry"
+        );
+        assert_eq!(
+            context.relationship_kinds, expected_relationship_keywords,
+            "mutation relationships must be the generated relationship-family subset"
+        );
+        assert_eq!(
+            context.element_kinds, expected_element_kinds,
+            "mutation metaclasses must come from the generated registry"
         );
     }
 
@@ -568,6 +660,84 @@ mod tests {
                 .iter()
                 .any(|diagnostic| { diagnostic.id == "sysml.verify.target_requirement" })
         );
+        assert!(rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_non_requirement_relationship_target_kind"
+                && fact.terms == vec!["analysis def".to_string()]
+        }));
+        assert!(!rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_non_requirement_relationship_target_kind"
+                && fact.terms == vec!["concern".to_string()]
+        }));
+        assert!(!rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_non_requirement_relationship_target_kind"
+                && fact.terms == vec!["viewpoint def".to_string()]
+        }));
+        assert!(rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_usage_typing_mismatch_kind"
+                && fact.terms
+                    == vec![
+                        "analysis".to_string(),
+                        "analysis def".to_string(),
+                        "part def".to_string(),
+                    ]
+        }));
+        assert!(!rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_usage_typing_mismatch_kind"
+                && fact.terms
+                    == vec![
+                        "concern".to_string(),
+                        "concern def".to_string(),
+                        "requirement def".to_string(),
+                    ]
+        }));
+        assert!(rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_extension_relationship_kind"
+                && fact.terms == vec!["trace".to_string(), "mercurio-extension".to_string()]
+        }));
+        assert!(rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_grammar_containment_mismatch_kind"
+                && fact.terms == vec!["PartUsage".to_string(), "transition".to_string()]
+        }));
+        assert!(!rulepack.facts.iter().any(|fact| {
+            fact.predicate == "sysml_grammar_containment_mismatch_kind"
+                && fact.terms == vec!["StateUsage".to_string(), "transition".to_string()]
+        }));
+    }
+
+    #[test]
+    fn sysml_embedded_rulepack_matches_latest_bundle_rulepack() {
+        let embedded = sysml_semantic_legality_rulepack();
+        let bundled = sysml_semantic_legality_rulepack_for_release("latest")
+            .expect("latest SysML legality rulepack loads");
+
+        assert_eq!(
+            embedded, bundled,
+            "embedded wasm/default fallback must match the shipped latest rulepack"
+        );
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    #[test]
+    fn sysml_bundle_rulepacks_match_fresh_registry_generation() {
+        for bundle in available_release_bundles().expect("release bundles load") {
+            let stdlib = KirDocument::from_path(&bundle.stdlib_path).expect("release stdlib loads");
+            let adapter = crate::sysml_metamodel_adapter_from_graph(
+                &Graph::from_document(stdlib).expect("stdlib graph builds"),
+            );
+            let regenerated = merge_rulepacks_for_test(
+                adapter,
+                sysml_semantic_legality_base_rulepack(),
+                regenerated_rulepack_metadata_for_test(&bundle),
+            );
+            let shipped =
+                RulePack::from_path(&bundle.rulepack_path).expect("shipped rulepack loads");
+
+            assert_eq!(
+                regenerated, shipped,
+                "shipped rulepack for {} must match fresh registry generation",
+                bundle.profile_id
+            );
+        }
     }
 
     #[test]
@@ -610,6 +780,48 @@ mod tests {
     }
 
     #[test]
+    fn sysml_legality_allows_usage_typing_by_definition_ancestors() {
+        let report = sysml_semantic_legality_service().check(
+            SemanticLegalityRequest::usage_typing("concern", "requirement def"),
+        );
+
+        assert_eq!(
+            report.status,
+            SemanticLegalityStatus::Allowed,
+            "{report:#?}"
+        );
+        assert!(report.diagnostics.is_empty(), "{report:#?}");
+    }
+
+    #[test]
+    fn sysml_legality_warns_on_grammar_containment_mismatch() {
+        let report = sysml_semantic_legality_service().check(SemanticLegalityRequest::containment(
+            "PartUsage",
+            "transition",
+        ));
+
+        assert_eq!(
+            report.status,
+            SemanticLegalityStatus::AllowedWithWarnings,
+            "{report:#?}"
+        );
+        assert!(report.diagnostics.iter().any(|diagnostic| {
+            diagnostic.source == SemanticLegalityDiagnosticSource::Rulepack
+                && diagnostic.code == "sysml.grammar.containment.member_path"
+                && diagnostic.subjects == vec!["PartUsage".to_string(), "transition".to_string()]
+        }));
+
+        let allowed = sysml_semantic_legality_service().check(
+            SemanticLegalityRequest::containment("StateUsage", "transition"),
+        );
+        assert_eq!(
+            allowed.status,
+            SemanticLegalityStatus::Allowed,
+            "{allowed:#?}"
+        );
+    }
+
+    #[test]
     fn sysml_legality_rulepack_blocks_deprecated_block_keyword() {
         let report = sysml_semantic_legality_service()
             .check(SemanticLegalityRequest::containment("package", "block"));
@@ -643,6 +855,7 @@ mod tests {
             element: Some(ElementRef::new("HybridVehicle.vehicle")),
             element_kind: "part".to_string(),
             candidate_target_kinds: vec!["requirement".to_string(), "part".to_string()],
+            candidate_targets: Vec::new(),
             candidate_attributes: vec!["text".to_string()],
             facts: Vec::new(),
             max_actions: None,
@@ -653,6 +866,7 @@ mod tests {
                 == SemanticNextActionOperation::AddRelationship {
                     relationship_kind: "satisfy".to_string(),
                     target_kind: "requirement".to_string(),
+                    target: None,
                 }
                 && action.status == SemanticLegalityStatus::Allowed
         }));
@@ -661,12 +875,22 @@ mod tests {
                 == SemanticNextActionOperation::AddRelationship {
                     relationship_kind: "satisfy".to_string(),
                     target_kind: "part".to_string(),
+                    target: None,
                 }
                 && action.status == SemanticLegalityStatus::Blocked
                 && action.legality.diagnostics.iter().any(|diagnostic| {
                     diagnostic.source == SemanticLegalityDiagnosticSource::Rulepack
                         && diagnostic.code == "sysml.satisfy.target_requirement"
                 })
+        }));
+        assert!(report.actions.iter().any(|action| {
+            action.operation
+                == SemanticNextActionOperation::AddRelationship {
+                    relationship_kind: "allocate".to_string(),
+                    target_kind: "part".to_string(),
+                    target: None,
+                }
+                && action.status == SemanticLegalityStatus::Allowed
         }));
     }
 
@@ -725,7 +949,7 @@ package HybridVehicle {
             64,
         );
 
-        enrich_sysml_semantic_reasoning_context_with_child_affordances(&mut context, 64);
+        enrich_sysml_semantic_reasoning_context_with_child_affordances(&mut context, 256);
 
         assert!(context.affordances.iter().any(|affordance| {
             affordance.operation == "AddElement"
@@ -740,6 +964,36 @@ package HybridVehicle {
         assert!(context.affordances.iter().any(|affordance| {
             affordance.operation == "AddUsage"
                 && affordance.child_kind == "satisfy"
+                && affordance.status == "Allowed"
+        }));
+    }
+
+    #[test]
+    fn sysml_context_exposes_relationship_affordances_to_actual_requirements() {
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "vehicle.sysml".to_string(),
+            r#"
+package HybridVehicle {
+    part vehicle;
+    requirement def EfficiencyRequirement;
+    requirement efficiencyRequirement : EfficiencyRequirement;
+}
+"#
+            .to_string(),
+        )]))
+        .expect("project parses");
+        let mut context = sysml_semantic_reasoning_context_from_authoring_project(
+            &project,
+            WorkspaceRevision::unchecked(),
+            vec![ElementRef::new("HybridVehicle.vehicle")],
+            64,
+        );
+
+        enrich_sysml_semantic_reasoning_context_with_child_affordances(&mut context, 256);
+
+        assert!(context.affordances.iter().any(|affordance| {
+            affordance.operation == "AddRelationship"
+                && affordance.child_kind == "satisfy -> HybridVehicle.efficiencyRequirement"
                 && affordance.status == "Allowed"
         }));
     }
@@ -907,5 +1161,77 @@ package HybridVehicle {
 
         assert!(source.contains("part def Vehicle;"));
         assert!(!source.contains("part def def Vehicle;"));
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    fn regenerated_rulepack_metadata_for_test(
+        bundle: &crate::metamodel::ReleaseBundleResource,
+    ) -> BTreeMap<String, Value> {
+        let mut metadata = BTreeMap::from([
+            (
+                "description".to_string(),
+                Value::String(
+                    "Generated SysML metamodel adapter facts and semantic legality diagnostics"
+                        .to_string(),
+                ),
+            ),
+            (
+                "profileId".to_string(),
+                Value::String(bundle.profile_id.clone()),
+            ),
+            (
+                "selector".to_string(),
+                Value::String(bundle.selector.clone()),
+            ),
+            ("release".to_string(), json!(bundle.release)),
+            (
+                "stdlibPath".to_string(),
+                Value::String(relative_path_string_for_test(
+                    &bundle.root,
+                    &bundle.stdlib_path,
+                )),
+            ),
+        ]);
+        if let Some(element_count) = bundle_element_count_for_test(&bundle.stdlib_path) {
+            metadata.insert("elementCount".to_string(), element_count);
+        }
+        metadata
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    fn bundle_element_count_for_test(path: &std::path::Path) -> Option<Value> {
+        let stdlib = KirDocument::from_path(path).ok()?;
+        let adapter =
+            crate::sysml_metamodel_adapter_from_graph(&Graph::from_document(stdlib).ok()?);
+        adapter.metadata.get("elementCount").cloned()
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    fn merge_rulepacks_for_test(
+        adapter: RulePack,
+        legality: RulePack,
+        metadata: BTreeMap<String, Value>,
+    ) -> RulePack {
+        let mut facts = BTreeSet::new();
+        facts.extend(adapter.facts);
+        facts.extend(legality.facts);
+
+        let mut rules = adapter.rules;
+        rules.extend(legality.rules);
+
+        RulePack {
+            id: "sysml.semantic_legality".to_string(),
+            version: legality.version,
+            metadata,
+            facts: facts.into_iter().collect(),
+            rules,
+            diagnostics: legality.diagnostics,
+        }
+    }
+
+    #[cfg(not(target_arch = "wasm32"))]
+    fn relative_path_string_for_test(root: &std::path::Path, path: &std::path::Path) -> String {
+        let stable_path = path.strip_prefix(root).unwrap_or(path);
+        stable_path.to_string_lossy().replace('\\', "/")
     }
 }

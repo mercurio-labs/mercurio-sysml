@@ -82,11 +82,11 @@ pub use mutation::{
     SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,
     SysmlSemanticLegalityService, SysmlSemanticNextActionsService,
     enrich_sysml_semantic_reasoning_context_with_child_affordances,
-    sysml_mutation_feasibility_service, sysml_semantic_legality_rulepack,
-    sysml_semantic_legality_rulepack_for_release, sysml_semantic_legality_rulepacks_for_release,
-    sysml_semantic_legality_service, sysml_semantic_legality_service_for_release,
-    sysml_semantic_mutation_capability_context, sysml_semantic_next_actions_service,
-    sysml_semantic_next_actions_service_for_release,
+    sysml_mutation_feasibility_service, sysml_semantic_legality_base_rulepack,
+    sysml_semantic_legality_rulepack, sysml_semantic_legality_rulepack_for_release,
+    sysml_semantic_legality_rulepacks_for_release, sysml_semantic_legality_service,
+    sysml_semantic_legality_service_for_release, sysml_semantic_mutation_capability_context,
+    sysml_semantic_next_actions_service, sysml_semantic_next_actions_service_for_release,
     sysml_semantic_reasoning_context_from_authoring_project,
 };
 pub use parse_session::{SysmlParseSession, build_sysml_syntax_outline};
@@ -102,14 +102,15 @@ pub use parser::{
     resolve_default_stdlib_locator, shared_sysml_baseline, shared_sysml_baseline_from_locator,
 };
 pub use semantic_profile::{
-    SYSML_DEFINITION_KEYWORDS, SYSML_LANGUAGE_PROFILE_ID, SYSML_RELATIONSHIP_KINDS,
-    SYSML_USAGE_KEYWORDS, SysmlSemanticCapabilityOracle, normalize_definition_keyword,
-    sysml_definition_keyword_for_usage, sysml_definition_kind, sysml_field_specs,
+    SYSML_LANGUAGE_PROFILE_ID, SysmlSemanticCapabilityOracle, normalize_definition_keyword,
+    sysml_definition_element_kinds, sysml_definition_keyword_for_usage, sysml_definition_keywords,
+    sysml_definition_kind, sysml_extension_relationship_keywords, sysml_field_specs,
     sysml_is_container_kind, sysml_is_definition_keyword, sysml_is_requirement_kind,
     sysml_is_satisfy_relationship, sysml_is_usage_keyword, sysml_language_profile,
-    sysml_metamodel_adapter_from_graph, sysml_relationship_usage_keyword,
-    sysml_trace_relationship_role, sysml_trace_relationship_uses_owner_source,
-    sysml_trace_rulepack, sysml_usage_kind,
+    sysml_metamodel_adapter_from_graph, sysml_relationship_keywords,
+    sysml_relationship_usage_keyword, sysml_trace_relationship_role,
+    sysml_trace_relationship_uses_owner_source, sysml_trace_rulepack, sysml_usage_element_kinds,
+    sysml_usage_keywords, sysml_usage_kind,
 };
 pub use session::{
     SYSML_PART_USAGE_KIND, SYSML_REQUIREMENT_USAGE_KIND, SYSML_SATISFY_KEYWORD,
