@@ -2197,8 +2197,12 @@ impl Parser {
         ));
 
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "accept") {
-            self.expect_identifier_named("accept", "expected `accept` in transition usage")?;
+            let accept_token =
+                self.expect_identifier_named("accept", "expected `accept` in transition usage")?;
             has_trigger = true;
+            // The accepter AcceptActionUsage and its payload are anchored at the
+            // `accept` keyword (the trigger clause).
+            synthetic_body_members.push(transition_accepter_action(&accept_token.span));
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "after" || value == "when" || value == "at")
             {
                 let trigger_kind = self.expect_identifier("expected transition trigger kind")?;
@@ -3975,6 +3979,38 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        docs: Vec::new(),
+        modifiers: Vec::new(),
+        span: span.clone(),
+    })
+}
+
+// The pilot materializes a transition's `accept` trigger as an `accepter`
+// AcceptActionUsage owning a `payload` ReferenceUsage. The accepter carries no
+// source/target property, so it stays inert to `is_transition_element` (which
+// requires a `target`), and its keyword-prefixed element id ("accept.…") avoids
+// the "transition." prefix branch of the state-machine projection.
+fn transition_accepter_action(span: &SourceSpan) -> Declaration {
+    let payload = transition_member_reference("payload", span);
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "accept".to_string(),
+        name: "accepter".to_string(),
+        is_implicit_name: false,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: vec![QualifiedName {
+            segments: vec!["accepter".to_string()],
+            span: span.clone(),
+        }],
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: vec![payload],
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
