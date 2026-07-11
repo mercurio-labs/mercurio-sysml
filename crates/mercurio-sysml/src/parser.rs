@@ -1404,7 +1404,20 @@ impl Parser {
         modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.current().clone();
-        let name = self.expect_identifier("expected control-flow target")?;
+        // `first A then B` yields source=A, target=B; a bare `then B` yields
+        // target=B with an implicit source. The pilot models this as an
+        // anonymous SuccessionAsUsage owning source/target end references.
+        let first_operand = self.parse_qualified_name()?;
+        let has_first = modifiers.iter().any(|modifier| modifier == "first");
+        let (source, target) = if has_first
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then")
+        {
+            self.expect_identifier_named("then", "expected `then` after succession source")?;
+            let target = self.parse_qualified_name()?;
+            (Some(first_operand), Some(target))
+        } else {
+            (None, Some(first_operand))
+        };
 
         while !matches!(
             self.peek_kind(),
@@ -1420,10 +1433,19 @@ impl Parser {
         }
 
         let end = self.finish_usage("control-flow reference", body_closed)?;
+
+        let mut body_members = Vec::new();
+        if let Some(source) = source {
+            body_members.push(succession_end_reference("earlierOccurrence", source, &start.span));
+        }
+        if let Some(target) = target {
+            body_members.push(succession_end_reference("laterOccurrence", target, &start.span));
+        }
+
         Ok(Declaration::GenericUsage(GenericUsageDecl {
-            keyword: "succession".to_string(),
-            name,
-            is_implicit_name: false,
+            keyword: "succession-as".to_string(),
+            name: String::new(),
+            is_implicit_name: true,
             ty: None,
             reference_target: None,
             allocation_source: None,
@@ -1435,7 +1457,7 @@ impl Parser {
             specializes: Vec::new(),
             subsets: Vec::new(),
             redefines: Vec::new(),
-            body_members: Vec::new(),
+            body_members,
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -3856,6 +3878,40 @@ fn synthetic_reference_usage(
             .iter()
             .map(|modifier| (*modifier).to_string())
             .collect(),
+        span: span.clone(),
+    })
+}
+
+// A succession source/target end reference, mirroring the implicit end
+// references the pilot materializes under a SuccessionAsUsage: an `end`
+// reference named for the Succession feature it redefines
+// (`earlierOccurrence` / `laterOccurrence`) that also specializes the
+// referenced state.
+fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSpan) -> Declaration {
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "reference".to_string(),
+        name: feature.to_string(),
+        is_implicit_name: false,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: vec![
+            QualifiedName {
+                segments: vec![feature.to_string()],
+                span: span.clone(),
+            },
+            state,
+        ],
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: Vec::new(),
+        docs: Vec::new(),
+        modifiers: vec!["end".to_string()],
         span: span.clone(),
     })
 }

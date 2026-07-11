@@ -3325,6 +3325,41 @@
       }
     },
     {
+      "construct": "SuccessionAsUsage",
+      "metaclass": "SysML::SuccessionAsUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "succession-as"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "reference_target": "$ast.reference_target",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "succession-as.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref",
+          "is_unique": "$is_unique"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "SuccessionAsUsage"
+        ],
+        "ecore_class": "SysML::SuccessionAsUsage",
+        "transform_observations": []
+      }
+    },
+    {
       "construct": "TimesliceUsage",
       "metaclass": "SysML::TimesliceUsage",
       "status": "reviewed",

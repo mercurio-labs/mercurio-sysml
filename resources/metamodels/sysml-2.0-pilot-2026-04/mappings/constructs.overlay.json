@@ -497,6 +497,11 @@
                                     "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
                                 },
                                 {
+                                    "construct":  "SuccessionAsUsage",
+                                    "metaclass":  "SysML::SuccessionAsUsage",
+                                    "reason":  "A bare `first A then B` succession decomposes to the pilot's SuccessionAsUsage with source/target end references."
+                                },
+                                {
                                     "construct":  "FeatureDefinition",
                                     "metaclass":  "KerML::FeatureDefinition",
                                     "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
@@ -736,6 +741,7 @@
                                             "stakeholder":  "StakeholderUsage",
                                             "subject":  "SubjectUsage",
                                             "succession":  "SuccessionUsage",
+                                            "succession-as":  "SuccessionAsUsage",
                                             "timeslice":  "TimesliceUsage",
                                             "transition":  "TransitionUsage",
                                             "until":  "UntilUsage",
@@ -801,6 +807,7 @@
                                                                                    "StateUsage":  "SysML::Systems::StateUsage",
                                                                                    "SubjectUsage":  "SysML::Systems::ReferenceUsage",
                                                                                    "StakeholderUsage":  "SysML::Systems::PartUsage",
+                                                                                   "SuccessionAsUsage":  "SysML::Systems::SuccessionAsUsage",
                                                                                    "SuccessionUsage":  "SysML::Systems::SuccessionFlowUsage",
                                                                                    "VerifyUsage":  "SysML::Systems::RequirementUsage",
                                                                                    "ViewpointUsage":  "SysML::Systems::ViewpointUsage",
