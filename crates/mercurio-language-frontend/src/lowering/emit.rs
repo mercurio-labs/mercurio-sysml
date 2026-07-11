@@ -1870,7 +1870,9 @@ fn state_do_behavior(usage: &ResolvedUsage) -> Option<Value> {
         .members
         .iter()
         .filter(|member| {
-            member.construct == "ActionUsage"
+            // A `do action` lowers to PerformActionUsage; keep matching plain
+            // ActionUsage for robustness.
+            matches!(member.construct.as_str(), "ActionUsage" | "PerformActionUsage")
                 && member.modifiers.iter().any(|modifier| modifier == "do")
         })
         .flat_map(do_action_expressions)

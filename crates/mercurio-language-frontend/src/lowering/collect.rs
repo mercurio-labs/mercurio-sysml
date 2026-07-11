@@ -482,6 +482,16 @@ fn collect_generic_usage(
     {
         construct = "IndividualUsage".to_string();
     }
+    // A state entry/do/exit action (`do action X`) performs the named action;
+    // the pilot models it as PerformActionUsage, not a plain ActionUsage.
+    if construct == "ActionUsage"
+        && usage
+            .modifiers
+            .iter()
+            .any(|modifier| matches!(modifier.as_str(), "entry" | "do" | "exit"))
+    {
+        construct = "PerformActionUsage".to_string();
+    }
     let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
     let plan = collect_generic_usage_plan(
         mappings.lowering_rule_for_construct(&construct),
