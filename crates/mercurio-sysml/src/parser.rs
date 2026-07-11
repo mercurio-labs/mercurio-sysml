@@ -2186,10 +2186,19 @@ impl Parser {
         }
         let source = self.parse_qualified_name()?;
         modifiers.push(format!("transition_source={}", source.as_dot_string()));
+        let source_span = source.span.clone();
         let mut target_name: Option<QualifiedName> = None;
+        let mut has_trigger = false;
+
+        // The transition's source link feature is structural and unconditional.
+        synthetic_body_members.push(transition_member_reference(
+            "transitionLinkSource",
+            &source_span,
+        ));
 
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "accept") {
             self.expect_identifier_named("accept", "expected `accept` in transition usage")?;
+            has_trigger = true;
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "after" || value == "when" || value == "at")
             {
                 let trigger_kind = self.expect_identifier("expected transition trigger kind")?;
@@ -2203,6 +2212,12 @@ impl Parser {
                 modifiers.push(format!("trigger={}", trigger.as_dot_string()));
                 modifiers.push("trigger_kind=event".to_string());
             }
+        }
+
+        // The transition's payload feature is materialized only when it accepts
+        // a trigger signal; the pilot anchors it at the transition head.
+        if has_trigger {
+            synthetic_body_members.push(transition_member_reference("payload", &source_span));
         }
 
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then" || value == "to")
@@ -3936,6 +3951,36 @@ fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSp
 // source/target end references that specialize earlierOccurrence/laterOccurrence
 // and the referenced state. The pilot anchors all three at the `then` clause
 // (the target span), not the transition head.
+// The pilot also materializes a transition's structural link features as plain
+// member ReferenceUsages (transitionLinkSource, payload) owned by the
+// transition. They carry no behavioral semantics (default is_variable=true),
+// so they stay inert to the state-machine projection.
+fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration {
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "reference".to_string(),
+        name: feature.to_string(),
+        is_implicit_name: false,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: vec![QualifiedName {
+            segments: vec![feature.to_string()],
+            span: span.clone(),
+        }],
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: Vec::new(),
+        docs: Vec::new(),
+        modifiers: Vec::new(),
+        span: span.clone(),
+    })
+}
+
 fn transition_happens_before_succession(
     source: QualifiedName,
     target: QualifiedName,
