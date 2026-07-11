@@ -2074,7 +2074,7 @@ impl Parser {
             effective_keyword = "send".to_string();
         }
         let parsed_transition_shorthand = if keyword == "transition" && explicit_name.is_some() {
-            self.parse_transition_usage_shorthand(&mut modifiers)?
+            self.parse_transition_usage_shorthand(&mut modifiers, &mut synthetic_body_members)?
         } else {
             false
         };
@@ -2172,6 +2172,7 @@ impl Parser {
     fn parse_transition_usage_shorthand(
         &mut self,
         modifiers: &mut Vec<String>,
+        synthetic_body_members: &mut Vec<Declaration>,
     ) -> Result<bool, Diagnostic> {
         if !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
             && !matches!(self.peek_kind(), TokenKind::Identifier(_))
@@ -2185,6 +2186,7 @@ impl Parser {
         }
         let source = self.parse_qualified_name()?;
         modifiers.push(format!("transition_source={}", source.as_dot_string()));
+        let mut target_name: Option<QualifiedName> = None;
 
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "accept") {
             self.expect_identifier_named("accept", "expected `accept` in transition usage")?;
@@ -2208,6 +2210,7 @@ impl Parser {
             self.expect_identifier("expected transition target marker")?;
             let target = self.parse_qualified_name()?;
             modifiers.push(format!("transition_target={}", target.as_dot_string()));
+            target_name = Some(target);
         } else if matches!(self.peek_kind(), TokenKind::Minus)
             && matches!(self.next_kind(), Some(TokenKind::RAngle))
         {
@@ -2215,6 +2218,18 @@ impl Parser {
             self.advance();
             let target = self.parse_qualified_name()?;
             modifiers.push(format!("transition_target={}", target.as_dot_string()));
+            target_name = Some(target);
+        }
+
+        // The pilot materializes the implicit `then` succession of a transition
+        // as an anonymous SuccessionAsUsage owning source/target end references,
+        // anchored at the `then` clause. Only a transition with an explicit
+        // target expands.
+        if let Some(target) = target_name {
+            let anchor = target.span.clone();
+            synthetic_body_members.push(transition_happens_before_succession(
+                source, target, &anchor,
+            ));
         }
 
         Ok(true)
@@ -3912,6 +3927,42 @@ fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSp
         body_members: Vec::new(),
         docs: Vec::new(),
         modifiers: vec!["end".to_string()],
+        span: span.clone(),
+    })
+}
+
+// The pilot materializes a transition's implicit `then` succession exactly like
+// a bare `first A then B` succession: an anonymous SuccessionAsUsage owning
+// source/target end references that specialize earlierOccurrence/laterOccurrence
+// and the referenced state. The pilot anchors all three at the `then` clause
+// (the target span), not the transition head.
+fn transition_happens_before_succession(
+    source: QualifiedName,
+    target: QualifiedName,
+    span: &SourceSpan,
+) -> Declaration {
+    let body_members = vec![
+        succession_end_reference("earlierOccurrence", source, span),
+        succession_end_reference("laterOccurrence", target, span),
+    ];
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "succession-as".to_string(),
+        name: String::new(),
+        is_implicit_name: true,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: Vec::new(),
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members,
+        docs: Vec::new(),
+        modifiers: Vec::new(),
         span: span.clone(),
     })
 }
