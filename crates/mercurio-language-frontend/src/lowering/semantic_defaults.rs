@@ -72,6 +72,10 @@ pub struct UsageActionSeed {
     pub requires_metadata_properties: bool,
     #[serde(default)]
     pub requires_previous_state: bool,
+    #[serde(default)]
+    pub present_modifiers: Vec<String>,
+    #[serde(default)]
+    pub absent_modifiers: Vec<String>,
     pub target: Option<String>,
 }
 

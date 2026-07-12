@@ -240,6 +240,15 @@
         "requires_previous_state": true
       }
     ],
+    "TransitionUsage": [
+      {
+        "action": "source_from_previous_sibling_state",
+        "requires_previous_state": true,
+        "present_modifiers": [
+          "implicit_transition_source"
+        ]
+      }
+    ],
     "MetadataUsage": [
       {
         "action": "attach_metadata_application",
@@ -281,6 +290,12 @@
   },
   "usage_id_policies": {
     "EndUsage": {
+      "append_source_location_if_missing_start_col": true
+    },
+    "TransitionUsage": {
+      "append_source_location_if_missing_start_col": true
+    },
+    "AcceptActionUsage": {
       "append_source_location_if_missing_start_col": true
     }
   },

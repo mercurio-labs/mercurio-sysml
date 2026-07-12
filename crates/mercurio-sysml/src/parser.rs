@@ -1795,7 +1795,7 @@ impl Parser {
         let mut allocation_target = None;
         let mut explicit_reference_target = None;
 
-        let explicit_name = if keyword == "accept"
+        let mut explicit_name = if keyword == "accept"
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "at" || value == "when" || value == "after")
         {
             let trigger_kind = self.expect_identifier("expected accept trigger kind")?;
@@ -2078,6 +2078,24 @@ impl Parser {
         } else {
             false
         };
+        // Reroute the standalone `accept … then Y` shorthand. The pilot models it
+        // as an anonymous TransitionUsage whose source is the immediately
+        // preceding sibling state, owning an `accepter` AcceptActionUsage (which
+        // in turn owns the payload), not a bare AcceptActionUsage. Detect it by
+        // the `transition_target=` modifier the accept branches recorded, and
+        // mark it for previous-sibling-state source resolution during lowering.
+        if keyword == "accept"
+            && modifiers
+                .iter()
+                .any(|modifier| modifier.starts_with("transition_target="))
+        {
+            let accept_members = std::mem::take(&mut synthetic_body_members);
+            synthetic_body_members.push(accepter_action_with_members(accept_members, &start.span));
+            modifiers.push("implicit_transition_source".to_string());
+            effective_keyword = "transition".to_string();
+            explicit_name = None;
+            force_implicit_name = true;
+        }
         let is_implicit_name = explicit_name.is_none() || force_implicit_name;
         let mut tail = if keyword == "connect" {
             UsageTail {
@@ -3990,6 +4008,35 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
 // source/target property, so it stays inert to `is_transition_element` (which
 // requires a `target`), and its keyword-prefixed element id ("accept.…") avoids
 // the "transition." prefix branch of the state-machine projection.
+// Wrap the parsed accept members (payload/receiver references) in an `accepter`
+// AcceptActionUsage, used when rerouting a standalone `accept … then` shorthand
+// into a TransitionUsage.
+fn accepter_action_with_members(members: Vec<Declaration>, span: &SourceSpan) -> Declaration {
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "accept".to_string(),
+        name: "accepter".to_string(),
+        is_implicit_name: false,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: vec![QualifiedName {
+            segments: vec!["accepter".to_string()],
+            span: span.clone(),
+        }],
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: members,
+        docs: Vec::new(),
+        modifiers: Vec::new(),
+        span: span.clone(),
+    })
+}
+
 fn transition_accepter_action(span: &SourceSpan) -> Declaration {
     let payload = transition_member_reference("payload", span);
     Declaration::GenericUsage(GenericUsageDecl {
@@ -5399,6 +5446,9 @@ mod tests {
 
     #[test]
     fn parses_accept_payload_name_and_type() {
+        // A standalone `accept … then` shorthand is rerouted to an anonymous
+        // TransitionUsage (implicit source = preceding sibling state) owning an
+        // `accepter` AcceptActionUsage, which in turn owns the payload.
         let module =
             parse_sysml("package Demo { state s { accept rs:ResultGiveItems then Wait; } }")
                 .unwrap();
@@ -5407,19 +5457,31 @@ mod tests {
             Declaration::GenericUsage(usage) => usage,
             other => panic!("expected state usage, got {other:?}"),
         };
-        let accept = match &state.body_members[0] {
+        let transition = match &state.body_members[0] {
             Declaration::GenericUsage(usage) => usage,
-            other => panic!("expected accept usage, got {other:?}"),
+            other => panic!("expected transition usage, got {other:?}"),
         };
-        assert_eq!(accept.keyword, "accept");
+        assert_eq!(transition.keyword, "transition");
         assert!(
-            accept
+            transition
                 .modifiers
                 .iter()
                 .any(|modifier| modifier == "transition_target=Wait")
         );
+        assert!(
+            transition
+                .modifiers
+                .iter()
+                .any(|modifier| modifier == "implicit_transition_source")
+        );
+        let accepter = match &transition.body_members[0] {
+            Declaration::GenericUsage(usage) => usage,
+            other => panic!("expected accepter usage, got {other:?}"),
+        };
+        assert_eq!(accepter.keyword, "accept");
+        assert_eq!(accepter.name, "accepter");
         assert!(matches!(
-            &accept.body_members[0],
+            &accepter.body_members[0],
             Declaration::GenericUsage(payload)
                 if payload.name == "rs"
                     && payload.ty.as_ref().map(|ty| ty.as_dot_string()).as_deref()

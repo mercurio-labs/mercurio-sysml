@@ -7,6 +7,20 @@ use crate::lowering::ir::ResolvedUsage;
 use crate::lowering::semantic_defaults::UsageActionSeed;
 
 pub(crate) fn usage_action_applies(action: &UsageActionSeed, usage: &ResolvedUsage) -> bool {
+    if !action
+        .present_modifiers
+        .iter()
+        .all(|present| usage.modifiers.iter().any(|modifier| modifier == present))
+    {
+        return false;
+    }
+    if action
+        .absent_modifiers
+        .iter()
+        .any(|absent| usage.modifiers.iter().any(|modifier| modifier == absent))
+    {
+        return false;
+    }
     !action.requires_metadata_properties || !usage.metadata_properties.is_empty()
 }
 
