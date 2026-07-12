@@ -3226,6 +3226,44 @@ impl Parser {
             members.push(declaration);
         }
 
+        // The pilot anchors a standalone accept-transition's transitionLinkSource
+        // and payload link features at the preceding sibling state (the implicit
+        // transition source), not at the accept head. Inject them here, where the
+        // sibling order is known. The span persists across successive accepts that
+        // share one source state.
+        let mut previous_state_span: Option<SourceSpan> = None;
+        for member in &mut members {
+            let Declaration::GenericUsage(usage) = member else {
+                continue;
+            };
+            if usage.keyword == "state" {
+                // Anchor link features at the source state's declaration line.
+                // Only single-line `state x;` has an unambiguous anchor; the
+                // pilot's rule for a bodied `state x { … }` differs and is
+                // deferred, so skip those (leave their link refs pilot-only).
+                previous_state_span = (usage.span.start_line == usage.span.end_line)
+                    .then(|| usage.span.clone());
+            } else if usage.keyword == "transition"
+                && usage
+                    .modifiers
+                    .iter()
+                    .any(|modifier| modifier == "implicit_transition_source")
+                && let Some(state_span) = previous_state_span.take()
+            {
+                // Only the first accept-transition after a state anchors its link
+                // features at that state. The pilot chains successive transitions
+                // from the same source to different anchors; matching that is
+                // deferred, so leave the rest as pilot-only rather than mispair.
+                usage.body_members.push(transition_member_reference(
+                    "transitionLinkSource",
+                    &state_span,
+                ));
+                usage
+                    .body_members
+                    .push(transition_member_reference("payload", &state_span));
+            }
+        }
+
         let end = self.expect(TokenKind::RBrace, "expected `}` to close body")?;
         owner_docs.append(&mut self.pending_docs);
         Ok(DeclarationBlock {
