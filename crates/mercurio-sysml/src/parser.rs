@@ -1790,6 +1790,9 @@ impl Parser {
         let mut effective_keyword = keyword.to_string();
         let mut synthetic_body_members = Vec::new();
         let mut force_implicit_name = false;
+        // Span of the `then` target in a standalone accept shorthand, used to
+        // anchor the materialized succession at the `then` clause like the pilot.
+        let mut accept_target_span: Option<SourceSpan> = None;
         let mut leading_specialization = None;
         let mut allocation_source = None;
         let mut allocation_target = None;
@@ -1807,6 +1810,7 @@ impl Parser {
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept trigger")?;
                 let target = self.parse_qualified_name()?;
+                accept_target_span = Some(target.span.clone());
                 modifiers.push(format!("transition_target={}", target.as_dot_string()));
             }
             force_implicit_name = true;
@@ -1833,6 +1837,7 @@ impl Parser {
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept trigger")?;
                 let target = self.parse_qualified_name()?;
+                accept_target_span = Some(target.span.clone());
                 modifiers.push(format!("transition_target={}", target.as_dot_string()));
             }
             force_implicit_name = true;
@@ -1860,6 +1865,7 @@ impl Parser {
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept payload")?;
                 let target = self.parse_qualified_name()?;
+                accept_target_span = Some(target.span.clone());
                 modifiers.push(format!("transition_target={}", target.as_dot_string()));
             }
             force_implicit_name = true;
@@ -1889,6 +1895,7 @@ impl Parser {
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept payload")?;
                 let target = self.parse_qualified_name()?;
+                accept_target_span = Some(target.span.clone());
                 modifiers.push(format!("transition_target={}", target.as_dot_string()));
             }
             force_implicit_name = true;
@@ -2091,6 +2098,13 @@ impl Parser {
         {
             let accept_members = std::mem::take(&mut synthetic_body_members);
             synthetic_body_members.push(accepter_action_with_members(accept_members, &start.span));
+            // The happensBefore succession is anchored at the `then` clause and
+            // pairs cleanly. The transition's transitionLinkSource/payload link
+            // features are deferred: the pilot anchors them at the accept head
+            // with a span rule not yet replicated for the standalone shorthand.
+            if let Some(then_span) = &accept_target_span {
+                synthetic_body_members.push(standalone_happens_before_succession(then_span));
+            }
             modifiers.push("implicit_transition_source".to_string());
             effective_keyword = "transition".to_string();
             explicit_name = None;
@@ -4008,6 +4022,63 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
 // source/target property, so it stays inert to `is_transition_element` (which
 // requires a `target`), and its keyword-prefixed element id ("accept.…") avoids
 // the "transition." prefix branch of the state-machine projection.
+// The standalone `accept … then` shorthand materializes the same happensBefore
+// succession as the `transition` keyword form, but the source state is implicit
+// (resolved during lowering), so the end references specialize only the
+// Succession source/target features. Anchored at the `then` clause.
+fn standalone_happens_before_succession(span: &SourceSpan) -> Declaration {
+    let ends = vec![
+        standalone_succession_end("earlierOccurrence", span),
+        standalone_succession_end("laterOccurrence", span),
+    ];
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "succession-as".to_string(),
+        name: String::new(),
+        is_implicit_name: true,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: Vec::new(),
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: ends,
+        docs: Vec::new(),
+        modifiers: Vec::new(),
+        span: span.clone(),
+    })
+}
+
+fn standalone_succession_end(feature: &str, span: &SourceSpan) -> Declaration {
+    Declaration::GenericUsage(GenericUsageDecl {
+        keyword: "reference".to_string(),
+        name: feature.to_string(),
+        is_implicit_name: false,
+        ty: None,
+        reference_target: None,
+        allocation_source: None,
+        allocation_target: None,
+        metadata_properties: Default::default(),
+        multiplicity: None,
+        expression: None,
+        additional_types: Vec::new(),
+        specializes: vec![QualifiedName {
+            segments: vec![feature.to_string()],
+            span: span.clone(),
+        }],
+        subsets: Vec::new(),
+        redefines: Vec::new(),
+        body_members: Vec::new(),
+        docs: Vec::new(),
+        modifiers: vec!["end".to_string()],
+        span: span.clone(),
+    })
+}
+
 // Wrap the parsed accept members (payload/receiver references) in an `accepter`
 // AcceptActionUsage, used when rerouting a standalone `accept … then` shorthand
 // into a TransitionUsage.
