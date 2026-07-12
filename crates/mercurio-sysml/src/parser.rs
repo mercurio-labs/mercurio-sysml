@@ -1892,6 +1892,23 @@ impl Parser {
                     &start.span,
                 ));
             }
+            // A guarded/effectful accept transition: `accept Sig if <guard> do
+            // <effect> then Y`. Consume the guard and effect so the `then` target
+            // is reached and the shorthand can be rerouted to a TransitionUsage.
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+                self.expect_identifier_named("if", "expected `if` guard in accept transition")?;
+                let guard = self.collect_behavior_text_until_do_then_or_end();
+                if !guard.is_empty() {
+                    modifiers.push(format!("guard={guard}"));
+                }
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+                self.expect_identifier_named("do", "expected `do` effect in accept transition")?;
+                let effect = self.collect_behavior_text_until_then_or_end();
+                if !effect.is_empty() {
+                    modifiers.push(format!("effect={effect}"));
+                }
+            }
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept payload")?;
                 let target = self.parse_qualified_name()?;
@@ -2664,6 +2681,22 @@ impl Parser {
             TokenKind::Semicolon | TokenKind::RBrace | TokenKind::Eof
         ) {
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
+                break;
+            }
+            parts.push(token_text(self.peek_kind()));
+            self.advance();
+        }
+        parts.join(" ").trim().to_string()
+    }
+
+    fn collect_behavior_text_until_do_then_or_end(&mut self) -> String {
+        let mut parts = Vec::new();
+        while !matches!(
+            self.peek_kind(),
+            TokenKind::Semicolon | TokenKind::RBrace | TokenKind::Eof
+        ) {
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do" || value == "then")
+            {
                 break;
             }
             parts.push(token_text(self.peek_kind()));
