@@ -566,9 +566,16 @@ pub fn compile_sysml_module_with_resolver_context_report_with_limit(
                     diagnostics.push(diagnostic);
                     break;
                 };
+                let is_unresolved_type = diagnostic.message.starts_with("unresolved type `");
                 diagnostics.push(diagnostic);
 
-                if !prune_declaration_for_span(&mut working_module, &span) {
+                // Keep an element whose only problem is an unresolved type by
+                // stripping the type (the diagnostic above is retained), rather
+                // than dropping the whole declaration.
+                let recovered = (is_unresolved_type
+                    && strip_type_for_span(&mut working_module, &span))
+                    || prune_declaration_for_span(&mut working_module, &span);
+                if !recovered {
                     break;
                 }
                 let working_context_modules =
@@ -892,6 +899,50 @@ fn prune_child_declaration_for_span(declaration: &mut Declaration, span: &Source
         }
         Declaration::GenericUsage(usage) => {
             prune_declarations_for_span(&mut usage.body_members, span)
+        }
+        Declaration::Import(_) | Declaration::Alias(_) => false,
+    }
+}
+
+// Partial-recovery variant for `unresolved type` errors: rather than dropping
+// the whole declaration, strip the offending usage's declared type (set ty=None)
+// so the element still materializes (matching the pilot, which keeps elements
+// whose type is an unresolved cross-file import). The diagnostic is preserved by
+// the caller, so the unresolved type is still reported.
+fn strip_type_for_span(module: &mut SysmlModule, span: &SourceSpan) -> bool {
+    if let Some(package) = module.package.as_mut() {
+        let stripped = strip_type_in_declarations(&mut package.members, span);
+        module.members = vec![Declaration::Package(package.clone())];
+        return stripped;
+    }
+    strip_type_in_declarations(&mut module.members, span)
+}
+
+fn strip_type_in_declarations(declarations: &mut [Declaration], span: &SourceSpan) -> bool {
+    declarations
+        .iter_mut()
+        .any(|declaration| strip_type_in_declaration(declaration, span))
+}
+
+fn strip_type_in_declaration(declaration: &mut Declaration, span: &SourceSpan) -> bool {
+    match declaration {
+        Declaration::Package(package) => strip_type_in_declarations(&mut package.members, span),
+        Declaration::GenericDefinition(definition) => {
+            strip_type_in_declarations(&mut definition.members, span)
+        }
+        Declaration::GenericUsage(usage) => {
+            if strip_type_in_declarations(&mut usage.body_members, span) {
+                return true;
+            }
+            if usage
+                .ty
+                .as_ref()
+                .is_some_and(|ty| span_contains(&ty.span, span))
+            {
+                usage.ty = None;
+                return true;
+            }
+            false
         }
         Declaration::Import(_) | Declaration::Alias(_) => false,
     }
@@ -6635,7 +6686,7 @@ mod tests {
     }
 
     #[test]
-    fn partial_compile_skips_invalid_usage_and_preserves_valid_siblings() {
+    fn partial_compile_strips_unresolved_type_and_preserves_usage_and_siblings() {
         let module = parse_sysml(
             "package Demo { part def Good; part vehicle { part good: Good; part bad: Missing; } }",
         )
@@ -6663,8 +6714,12 @@ mod tests {
                 .iter()
                 .any(|element| element.id == "feature.Demo.vehicle.good")
         );
+        // The usage whose only problem is the unresolved type is preserved (the
+        // unresolved type is stripped, but a construct default type may remain),
+        // rather than dropped, matching the pilot's element set. The diagnostic
+        // above still reports the unresolved type.
         assert!(
-            !document
+            document
                 .elements
                 .iter()
                 .any(|element| element.id == "feature.Demo.vehicle.bad")
