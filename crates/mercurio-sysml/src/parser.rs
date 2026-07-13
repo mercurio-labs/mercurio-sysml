@@ -4252,6 +4252,17 @@ fn append_package_member(
 fn implicit_usage_keyword(modifiers: &[String]) -> &'static str {
     if modifiers
         .iter()
+        .any(|modifier| matches!(modifier.as_str(), "entry" | "exit"))
+    {
+        // A state `entry/exit <action>` shorthand performs the named action;
+        // it lowers to ActionUsage and then (collect.rs) PerformActionUsage,
+        // which the pilot materializes as a same-named element the comparator
+        // can pair. (`do <action>` is deferred: the pilot names it the generic
+        // `doAction`, needing a name/reference restructure that also has to keep
+        // the state do-behavior link intact.)
+        "action"
+    } else if modifiers
+        .iter()
         .any(|modifier| matches!(modifier.as_str(), "ref" | "in" | "out" | "inout"))
     {
         "reference"
