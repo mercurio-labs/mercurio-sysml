@@ -1,4 +1,5 @@
 use std::path::{Path, PathBuf};
+use std::sync::OnceLock;
 
 use mercurio_core::DatalogError;
 use mercurio_kerml::KermlLanguageModule;
@@ -13,6 +14,7 @@ pub const SYSML_2_0_METAMODEL_057_ID: &str = "sysml-2.0-metamodel-0.57.0";
 pub const LEGACY_SYSML_2_0_PILOT_057_ID: &str = "sysml-2.0-pilot-0.57.0";
 pub const SYSML_2_0_PILOT_2026_04_ID: &str = "sysml-2.0-pilot-2026-04";
 pub const LATEST_SYSML_METAMODEL_ID: &str = SYSML_2_0_METAMODEL_057_ID;
+pub const CANONICAL_SYSML_STDLIB_RELEASE: &str = "2026-04";
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
@@ -355,6 +357,42 @@ pub fn available_release_bundles() -> Result<Vec<ReleaseBundleResource>, SysmlEn
         .collect()
 }
 
+pub fn canonical_sysml_stdlib_address() -> &'static str {
+    static ADDRESS: OnceLock<String> = OnceLock::new();
+    ADDRESS
+        .get_or_init(|| {
+            release_bundle(CANONICAL_SYSML_STDLIB_RELEASE)
+                .map(|bundle| format!("file:{}", bundle.stdlib_path.display()))
+                .unwrap_or_else(|_| {
+                    "file:resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.full.kir.json"
+                        .to_string()
+                })
+        })
+        .as_str()
+}
+
+pub fn canonical_sysml_stdlib_version() -> &'static str {
+    CANONICAL_SYSML_STDLIB_RELEASE
+}
+
+pub fn canonical_sysml_stdlib_digest() -> Option<String> {
+    canonical_sysml_stdlib_runtime_source_bytes()
+        .as_deref()
+        .map(digest_bytes)
+}
+
+pub fn canonical_sysml_stdlib_runtime_source_bytes() -> Option<Vec<u8>> {
+    let bundle = release_bundle(CANONICAL_SYSML_STDLIB_RELEASE).ok()?;
+    let mut bytes = Vec::new();
+    bytes.extend_from_slice(b"mercurio.sysml.stdlib\n");
+    bytes.extend_from_slice(canonical_sysml_stdlib_address().as_bytes());
+    bytes.extend_from_slice(b"\n");
+    bytes.extend_from_slice(canonical_sysml_stdlib_version().as_bytes());
+    bytes.extend_from_slice(b"\n");
+    bytes.extend_from_slice(&std::fs::read(bundle.stdlib_path).ok()?);
+    Some(bytes)
+}
+
 pub fn load_baseline_for_metamodel(
     metamodel: &SysmlMetamodelResource,
 ) -> Result<KirDocument, KirError> {
@@ -544,6 +582,15 @@ fn default_semantic_defaults_path() -> String {
     "mappings/semantic_defaults.seed.json".to_string()
 }
 
+fn digest_bytes(bytes: &[u8]) -> String {
+    let mut hash = 0xcbf29ce484222325u64;
+    for byte in bytes {
+        hash ^= u64::from(*byte);
+        hash = hash.wrapping_mul(0x100000001b3);
+    }
+    format!("fnv1a64:{hash:016x}")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -591,5 +638,25 @@ mod tests {
                 .as_uri()
                 .contains("resources/metamodels/sysml-2.0-pilot-2026-04")
         );
+    }
+
+    #[test]
+    fn canonical_stdlib_identity_points_to_2026_04_bundle() {
+        assert_eq!(canonical_sysml_stdlib_version(), "2026-04");
+        assert!(canonical_sysml_stdlib_address().contains("sysml-2.0-pilot-2026-04"));
+        assert!(
+            canonical_sysml_stdlib_digest()
+                .as_deref()
+                .is_some_and(|digest| digest.starts_with("fnv1a64:"))
+        );
+        assert!(
+            canonical_sysml_stdlib_runtime_source_bytes().is_some_and(|bytes| bytes.len() > 1024)
+        );
+
+        let StdlibLocator::File { path } = StdlibLocator::parse(canonical_sysml_stdlib_address())
+        else {
+            panic!("canonical stdlib address should resolve to a file locator");
+        };
+        assert!(path.is_file());
     }
 }

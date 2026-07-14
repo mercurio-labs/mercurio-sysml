@@ -661,8 +661,7 @@ fn normalize_effect(value: &Value) -> Option<SimulationEffect> {
 
 fn string_property_any(object: &serde_json::Map<String, Value>, keys: &[&str]) -> Option<String> {
     keys.iter()
-        .find_map(|key| object.get(*key).and_then(Value::as_str))
-        .map(str::to_string)
+        .find_map(|key| object.get(*key).and_then(trimmed_string_value))
 }
 
 fn subject_scenario_from_analysis_value(
@@ -1142,15 +1141,25 @@ fn element_label_element(element: &Element) -> String {
 }
 
 fn string_property_any_element(element: &Element, keys: &[&str]) -> Option<String> {
-    keys.iter().find_map(|key| {
-        element
-            .properties
-            .get(*key)
-            .and_then(Value::as_str)
-            .map(str::trim)
-            .filter(|value| !value.is_empty())
-            .map(ToOwned::to_owned)
-    })
+    keys.iter()
+        .find_map(|key| element.properties.get(*key).and_then(trimmed_string_value))
+}
+
+fn trimmed_string_value(value: &Value) -> Option<String> {
+    match value {
+        Value::String(text) => non_empty_trimmed_string(text),
+        Value::Array(values) => values.iter().find_map(trimmed_string_value),
+        _ => None,
+    }
+}
+
+fn non_empty_trimmed_string(value: &str) -> Option<String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed.to_string())
+    }
 }
 
 #[cfg(test)]

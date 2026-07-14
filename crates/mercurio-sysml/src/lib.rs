@@ -71,12 +71,14 @@ pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatu
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
 pub use mercurio_language_frontend::SourceLanguage;
 pub use metamodel::{
-    LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID, ReleaseBundleConformance,
-    ReleaseBundleDescriptor, ReleaseBundleMappings, ReleaseBundleProfile, ReleaseBundlePython,
-    ReleaseBundleResource, ReleaseBundleStdlib, SYSML_2_0_METAMODEL_057_ID, SysmlEnvironment,
-    SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource, SysmlMetamodelStatus,
-    available_metamodels, available_release_bundles, latest_metamodel, metamodel_resource,
-    release_bundle,
+    CANONICAL_SYSML_STDLIB_RELEASE, LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID,
+    ReleaseBundleConformance, ReleaseBundleDescriptor, ReleaseBundleMappings, ReleaseBundleProfile,
+    ReleaseBundlePython, ReleaseBundleResource, ReleaseBundleStdlib, SYSML_2_0_METAMODEL_057_ID,
+    SysmlEnvironment, SysmlEnvironmentError, SysmlMetamodel, SysmlMetamodelResource,
+    SysmlMetamodelStatus, available_metamodels, available_release_bundles,
+    canonical_sysml_stdlib_address, canonical_sysml_stdlib_digest,
+    canonical_sysml_stdlib_runtime_source_bytes, canonical_sysml_stdlib_version, latest_metamodel,
+    metamodel_resource, release_bundle,
 };
 pub use mutation::{
     SYSML_MUTATION_GUIDANCE, SYSML_MUTATION_PROFILE_ID, SysmlMutationFeasibilityService,

@@ -1320,15 +1320,25 @@ fn element_label(element: &Element) -> Option<String> {
 }
 
 fn string_property_any(element: &Element, keys: &[&str]) -> Option<String> {
-    keys.iter().find_map(|key| {
-        element
-            .properties
-            .get(*key)
-            .and_then(Value::as_str)
-            .map(str::trim)
-            .filter(|value| !value.is_empty())
-            .map(ToOwned::to_owned)
-    })
+    keys.iter()
+        .find_map(|key| element.properties.get(*key).and_then(trimmed_string_value))
+}
+
+fn trimmed_string_value(value: &Value) -> Option<String> {
+    match value {
+        Value::String(text) => non_empty_trimmed_string(text),
+        Value::Array(values) => values.iter().find_map(trimmed_string_value),
+        _ => None,
+    }
+}
+
+fn non_empty_trimmed_string(value: &str) -> Option<String> {
+    let trimmed = value.trim();
+    if trimmed.is_empty() {
+        None
+    } else {
+        Some(trimmed.to_string())
+    }
 }
 
 fn has_text_property(element: &Element, keys: &[&str]) -> bool {
@@ -1512,11 +1522,21 @@ mod tests {
 
                 part def Printer {
                     attribute bed_temperature : Real = 22.0;
+                    attribute target_temperature : Real = 80.0;
+                    attribute heat_rate : Real = 10.0;
 
                     state lifecycle {
                         state Idle;
-                        state Printing;
+                        state Printing {
+                            do action integrate {
+                                assert constraint {
+                                    bed_temperature == bed_temperature + heat_rate * duration;
+                                }
+                            }
+                        }
+                        state Complete;
                         transition start first Idle accept start then Printing;
+                        transition complete first Printing accept when bed_temperature >= target_temperature then Complete;
                     }
                 }
 
@@ -1564,6 +1584,70 @@ mod tests {
             spec.execution_context.initial_values[&spec.subjects[0].element_id]["bed_temperature"],
             json!(22.0)
         );
+    }
+
+    #[test]
+    fn projects_2026_04_do_behavior_subject_binding() {
+        let locator = crate::StdlibLocator::for_release("2026-04").unwrap();
+        let stdlib = crate::load_sysml_baseline_from_locator(&locator).unwrap();
+        let document = compile_sysml_text(
+            r#"
+            package Demo {
+                import ScalarValues::*;
+
+                part def ThermalChamber {
+                    attribute temperature : Real = 20.0;
+                    attribute targetTemperature : Real = 80.0;
+                    attribute heatRate : Real = 10.0;
+
+                    state lifecycle {
+                        state Cold;
+                        state Heating {
+                            do action integrate {
+                                assert constraint {
+                                    temperature == temperature + heatRate * duration;
+                                }
+                            }
+                        }
+                        state Ready;
+
+                        transition cold_heating first Cold accept start then Heating;
+                        transition heating_ready first Heating accept when temperature >= targetTemperature then Ready;
+                    }
+                }
+
+                analysis def HeatProfile :> AnalysisCase {
+                    subject chamber : ThermalChamber;
+                    assume constraint = chamber.temperature == 20.0;
+
+                    objective chamberTemperature {
+                        subject = chamber.temperature;
+                    }
+                }
+            }
+            "#,
+            "do-behavior-analysis-2026-04.sysml",
+            &stdlib,
+        )
+        .unwrap();
+        let runtime = Runtime::from_document(document).unwrap();
+
+        let spec = project_analysis_spec(&runtime, "HeatProfile").unwrap();
+
+        assert_eq!(spec.readiness, AnalysisReadinessStatus::Ready);
+        assert_eq!(spec.dynamic_behavior_bindings.len(), 1);
+        assert!(
+            spec.techniques
+                .contains(&AnalysisTechnique::DynamicBehavior)
+        );
+        assert!(spec.expected_artifacts.iter().any(|artifact| {
+            artifact.kind == "simulation_trace" && artifact.schema == SIMULATION_TRACE_SCHEMA
+        }));
+
+        let graph_runtime = Runtime::from_graph(runtime.graph().clone()).unwrap();
+        let graph_spec = project_analysis_spec(&graph_runtime, "HeatProfile").unwrap();
+        assert_eq!(graph_spec.readiness, AnalysisReadinessStatus::Ready);
+        assert_eq!(graph_spec.dynamic_behavior_bindings.len(), 1);
     }
 
     #[test]
