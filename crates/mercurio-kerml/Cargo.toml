@@ -3,11 +3,15 @@ name = "mercurio-kerml"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description.workspace = true
+repository.workspace = true
+readme.workspace = true
+rust-version.workspace = true
 
 [dependencies]
-mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
-mercurio-language-frontend = { path = "../mercurio-language-frontend" }
-mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
+mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir", version = "0.1.0" }
+mercurio-language-frontend = { path = "../mercurio-language-frontend", version = "0.1.0" }
+mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts", version = "0.1.0" }
 
 [dev-dependencies]
 serde_json.workspace = true

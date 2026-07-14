@@ -1872,8 +1872,10 @@ fn state_do_behavior(usage: &ResolvedUsage) -> Option<Value> {
         .filter(|member| {
             // A `do action` lowers to PerformActionUsage; keep matching plain
             // ActionUsage for robustness.
-            matches!(member.construct.as_str(), "ActionUsage" | "PerformActionUsage")
-                && member.modifiers.iter().any(|modifier| modifier == "do")
+            matches!(
+                member.construct.as_str(),
+                "ActionUsage" | "PerformActionUsage"
+            ) && member.modifiers.iter().any(|modifier| modifier == "do")
         })
         .flat_map(do_action_expressions)
         .filter_map(rate_integration_from_assertion)
@@ -3578,7 +3580,7 @@ mod lowering_golden_tests {
         };
 
         let document = transpile_module(&module, "golden.sysml", mappings).unwrap();
-        let accept = element(&document, "accept.root.acceptA");
+        let accept = element(&document, "accept.root.acceptA.1_1");
         let allocation = element(&document, "allocation.root.allocA");
 
         assert_eq!(accept.properties["source"], "pkg.root");
@@ -3758,7 +3760,7 @@ mod lowering_golden_tests {
         };
 
         let document = transpile_module(&module, "golden.sysml", mappings).unwrap();
-        let accept = element(&document, "accept.root.act.acceptAfterReady");
+        let accept = element(&document, "accept.root.act.acceptAfterReady.1_1");
 
         assert_eq!(accept.properties["source"], "state.root.act.ready");
     }
