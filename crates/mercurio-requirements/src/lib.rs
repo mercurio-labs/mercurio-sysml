@@ -724,25 +724,43 @@ mod tests {
     use super::*;
     use mercurio_core::KirElement;
 
+    fn metamodel_field_spec(name: &str, feature_kind: &str) -> KirElement {
+        KirElement {
+            id: format!("metafeature.SysML.{name}"),
+            kind: "MetamodelFeature".to_string(),
+            layer: 1,
+            properties: BTreeMap::from([
+                ("kir_property".to_string(), Value::String(name.to_string())),
+                (
+                    "feature_kind".to_string(),
+                    Value::String(feature_kind.to_string()),
+                ),
+            ]),
+        }
+    }
+
     #[test]
     fn requirement_analysis_capability_reports_gaps_and_summary() {
         let document = KirDocument {
             metadata: BTreeMap::new(),
-            elements: vec![KirElement {
-                id: "req.safeStart".to_string(),
-                kind: "SysML::Requirements::RequirementUsage".to_string(),
-                layer: 2,
-                properties: BTreeMap::from([
-                    (
-                        "declared_name".to_string(),
-                        Value::String("Safe Start".to_string()),
-                    ),
-                    (
-                        "text".to_string(),
-                        Value::String("Vehicle shall start safely.".to_string()),
-                    ),
-                ]),
-            }],
+            elements: vec![
+                metamodel_field_spec("text", "attribute"),
+                KirElement {
+                    id: "req.safeStart".to_string(),
+                    kind: "SysML::Requirements::RequirementUsage".to_string(),
+                    layer: 2,
+                    properties: BTreeMap::from([
+                        (
+                            "declared_name".to_string(),
+                            Value::String("Safe Start".to_string()),
+                        ),
+                        (
+                            "text".to_string(),
+                            Value::String("Vehicle shall start safely.".to_string()),
+                        ),
+                    ]),
+                },
+            ],
         }
         .normalized_for_persistence();
         let workspace = SemanticWorkspaceSnapshot::from_document_with_profile(
@@ -793,6 +811,7 @@ mod tests {
         let document = KirDocument {
             metadata: BTreeMap::new(),
             elements: vec![
+                metamodel_field_spec("satisfy", "reference"),
                 KirElement {
                     id: "req.safeStart".to_string(),
                     kind: "SysML::Requirements::RequirementUsage".to_string(),
@@ -844,6 +863,7 @@ mod tests {
         let document = KirDocument {
             metadata: BTreeMap::new(),
             elements: vec![
+                metamodel_field_spec("satisfy", "reference"),
                 KirElement {
                     id: "req.safeStart".to_string(),
                     kind: "SysML::Requirements::RequirementUsage".to_string(),
