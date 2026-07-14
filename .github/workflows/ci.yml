@@ -35,14 +35,14 @@ jobs:
         env:
           RUSTDOCFLAGS: -D warnings
         run: cargo doc --workspace --no-deps --locked
-      - name: Assemble public crates.io packages
+      - name: Inspect public crates.io package contents
         working-directory: mercurio-sysml
         run: >-
           cargo package
+          --list
           -p mercurio-language-frontend
           -p mercurio-kerml
           -p mercurio-requirements
           -p mercurio-sysml
           -p mercurio-simulation
-          --no-verify
           --locked
