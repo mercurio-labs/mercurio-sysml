@@ -69,6 +69,9 @@ pub use mercurio_language_contracts::editor::{
 };
 pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
 pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
+use mercurio_language_contracts::workbench::{
+    LanguageAnalysis, SourceDocument, analysis_from_compile_report,
+};
 pub use mercurio_language_frontend::SourceLanguage;
 pub use metamodel::{
     CANONICAL_SYSML_STDLIB_RELEASE, LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID,
@@ -171,6 +174,53 @@ impl LanguageService for SysmlLanguageModule {
             &[],
             context.library_context,
         )
+    }
+
+    fn analyze_workspace(
+        &self,
+        documents: &[SourceDocument],
+        source_name: &str,
+        library_context: &KirDocument,
+    ) -> Option<LanguageAnalysis> {
+        let target = documents
+            .iter()
+            .find(|document| document.source_name == source_name)?;
+        let parsed = documents
+            .iter()
+            .filter_map(|document| {
+                parse_sysml_recovering(&document.text)
+                    .ok()
+                    .map(|report| (document, report.module))
+            })
+            .collect::<Vec<_>>();
+        let context_modules = parsed
+            .iter()
+            .map(|(_, module)| module.clone())
+            .collect::<Vec<_>>();
+        let mut resolution_context = library_context.clone();
+        for (document, module) in &parsed {
+            if let Ok(compiled) = compile_sysml_module_with_context(
+                module,
+                &document.source_name,
+                &context_modules,
+                library_context,
+            ) {
+                resolution_context.elements.extend(compiled.elements);
+            }
+        }
+        let report = compile_sysml_text_with_context_report(
+            &target.text,
+            &target.source_name,
+            &context_modules,
+            library_context,
+        );
+        Some(analysis_from_compile_report(
+            &target.text,
+            &target.source_name,
+            target.revision,
+            &resolution_context,
+            report,
+        ))
     }
 }
 
