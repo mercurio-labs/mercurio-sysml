@@ -3,21 +3,25 @@ name = "mercurio-sysml"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
+description.workspace = true
+repository.workspace = true
+readme.workspace = true
+rust-version.workspace = true
 
 [features]
 embed-stdlib = []
 
 [dependencies]
-mercurio-kerml = { path = "../mercurio-kerml" }
-mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
-mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir" }
-mercurio-language-frontend = { path = "../mercurio-language-frontend" }
-mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts" }
+mercurio-kerml = { path = "../mercurio-kerml", version = "0.1.0" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core", version = "0.1.0" }
+mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir", version = "0.1.0" }
+mercurio-language-frontend = { path = "../mercurio-language-frontend", version = "0.1.0" }
+mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts", version = "0.1.0" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 
 [build-dependencies]
-mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core" }
+mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core", version = "0.1.0" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 
