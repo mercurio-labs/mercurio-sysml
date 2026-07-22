@@ -1487,10 +1487,18 @@ impl Parser {
 
         let mut body_members = Vec::new();
         if let Some(source) = source {
-            body_members.push(succession_end_reference("earlierOccurrence", source, &start.span));
+            body_members.push(succession_end_reference(
+                "earlierOccurrence",
+                source,
+                &start.span,
+            ));
         }
         if let Some(target) = target {
-            body_members.push(succession_end_reference("laterOccurrence", target, &start.span));
+            body_members.push(succession_end_reference(
+                "laterOccurrence",
+                target,
+                &start.span,
+            ));
         }
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
@@ -3325,8 +3333,8 @@ impl Parser {
                 // Only single-line `state x;` has an unambiguous anchor; the
                 // pilot's rule for a bodied `state x { … }` differs and is
                 // deferred, so skip those (leave their link refs pilot-only).
-                previous_state_span = (usage.span.start_line == usage.span.end_line)
-                    .then(|| usage.span.clone());
+                previous_state_span =
+                    (usage.span.start_line == usage.span.end_line).then(|| usage.span.clone());
             } else if usage.keyword == "transition"
                 && usage
                     .modifiers
