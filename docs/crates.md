@@ -13,6 +13,13 @@ The public SysML facade. It owns:
 Use this crate when an application needs to accept SysML source text and produce
 foundation KIR.
 
+## `mercurio-sysml-resources`
+
+The versioned KerML kernel, SysML metamodel descriptors, lowering mappings,
+rulepacks, and standard-library KIR used by the language crates. It is published
+as an implementation dependency so downloaded crates remain self-contained.
+Applications should normally use these resources through `mercurio-sysml`.
+
 ## `mercurio-kerml`
 
 The kernel language facade used by the SysML baseline. It owns:

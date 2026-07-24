@@ -63,7 +63,13 @@ impl BaselineLibrary {
                 metadata: Default::default(),
                 elements: Vec::new(),
             }),
-            Self::Kernel => KirDocument::from_path(&default_kernel_library_path()),
+            Self::Kernel => {
+                if std::env::var_os("MERCURIO_KERNEL_LIBRARY_PATH").is_some() {
+                    KirDocument::from_path(&default_kernel_library_path())
+                } else {
+                    KirDocument::from_str(mercurio_sysml_resources::KERML_KERNEL)
+                }
+            }
             Self::Custom(document) => Ok(document.clone()),
         }
     }
@@ -77,7 +83,7 @@ pub fn default_kernel_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    repo_path("resources/kernel/kerml-kernel.kir.json")
+    mercurio_sysml_resources::resource_root().join("kernel/kerml-kernel.kir.json")
 }
 
 pub fn load_kernel_baseline() -> Result<KirDocument, KirError> {
@@ -192,36 +198,8 @@ pub fn compile_text_with_context(
     compile_kerml_text_with_context(input, source_name, context_modules, library_context)
 }
 
-fn repo_path(relative: &str) -> PathBuf {
-    repo_root().join(relative)
-}
-
 fn semantic_diagnostic(diagnostic: Diagnostic) -> Diagnostic {
     diagnostic.with_kind(DiagnosticKind::Validation)
-}
-
-fn repo_root() -> PathBuf {
-    let mut current = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
-
-    loop {
-        if current.join("Cargo.toml").is_file()
-            && current
-                .join("resources/kernel/kerml-kernel.kir.json")
-                .is_file()
-        {
-            return current;
-        }
-
-        if !current.pop() {
-            break;
-        }
-    }
-
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .and_then(Path::parent)
-        .map(Path::to_path_buf)
-        .unwrap_or_else(|| PathBuf::from("."))
 }
 
 #[cfg(test)]

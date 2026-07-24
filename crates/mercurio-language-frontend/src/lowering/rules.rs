@@ -161,9 +161,7 @@ impl LoweringRuleSeed {
 }
 
 fn load_sysml_lowering_rules_seed() -> &'static str {
-    include_str!(
-        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json"
-    )
+    mercurio_sysml_resources::SYSML_057_LOWERING_RULES
 }
 
 fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {

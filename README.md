@@ -4,6 +4,9 @@ KerML and SysML language libraries for Mercurio. These crates implement language
 
 This repository owns the concrete SysML-family language implementation: source parsing, semantic compilation, metamodel resources, bundled standard libraries, and maintainer tooling. Language-neutral model storage and runtime services live in `mercurio-foundation`.
 
+For Rust consumers, `mercurio-sysml` is the public entry point for this release
+unit. The supporting workspace crates are implementation packages.
+
 ## Quick Example
 
 ```rust
@@ -43,4 +46,9 @@ println!("latest: {}", latest.id);
 ```powershell
 cargo build
 ```
+
+## Release
+
+Mercurio SysML is released after its compatible Mercurio Foundation version is
+available on crates.io. See [Releasing Mercurio SysML](RELEASING.md).
 

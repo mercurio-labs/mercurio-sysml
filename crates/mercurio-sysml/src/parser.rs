@@ -1487,10 +1487,18 @@ impl Parser {
 
         let mut body_members = Vec::new();
         if let Some(source) = source {
-            body_members.push(succession_end_reference("earlierOccurrence", source, &start.span));
+            body_members.push(succession_end_reference(
+                "earlierOccurrence",
+                source,
+                &start.span,
+            ));
         }
         if let Some(target) = target {
-            body_members.push(succession_end_reference("laterOccurrence", target, &start.span));
+            body_members.push(succession_end_reference(
+                "laterOccurrence",
+                target,
+                &start.span,
+            ));
         }
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
@@ -3325,8 +3333,8 @@ impl Parser {
                 // Only single-line `state x;` has an unambiguous anchor; the
                 // pilot's rule for a bodied `state x { … }` differs and is
                 // deferred, so skip those (leave their link refs pilot-only).
-                previous_state_span = (usage.span.start_line == usage.span.end_line)
-                    .then(|| usage.span.clone());
+                previous_state_span =
+                    (usage.span.start_line == usage.span.end_line).then(|| usage.span.clone());
             } else if usage.keyword == "transition"
                 && usage
                     .modifiers
@@ -4345,7 +4353,14 @@ fn callable_expr_name(expr: &Expr) -> Option<String> {
 }
 
 pub(crate) fn repo_path(relative: &str) -> PathBuf {
-    repo_root().join(relative)
+    let candidate = repo_root().join(relative);
+    if candidate.exists() {
+        return candidate;
+    }
+    relative
+        .strip_prefix("resources/")
+        .map(|resource_relative| mercurio_sysml_resources::resource_root().join(resource_relative))
+        .unwrap_or(candidate)
 }
 
 fn repo_root() -> PathBuf {
@@ -4367,11 +4382,7 @@ fn repo_root() -> PathBuf {
         }
     }
 
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .and_then(Path::parent)
-        .map(Path::to_path_buf)
-        .unwrap_or_else(|| PathBuf::from("."))
+    mercurio_sysml_resources::resource_root()
 }
 
 #[cfg(test)]

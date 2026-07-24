@@ -1,0 +1,122 @@
+name: Crates release
+
+on:
+  push:
+    tags:
+      - "sysml-v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: crates-sysml-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+  FOUNDATION_REF: foundation-v0.85.0
+
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: mercurio-sysml
+      - uses: actions/checkout@v4
+        with:
+          repository: mercurio-labs/mercurio-foundation
+          ref: ${{ env.FOUNDATION_REF }}
+          path: mercurio-foundation
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Validate release identity
+        working-directory: mercurio-sysml
+        shell: bash
+        run: |
+          version="$(awk '/^\[workspace.package\]/{in_package=1; next} in_package && /^version = /{gsub(/"/, "", $3); print $3; exit}' Cargo.toml)"
+          test -n "${version}"
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            test "${GITHUB_REF_NAME}" = "sysml-v${version}"
+          fi
+      - name: Test workspace
+        working-directory: mercurio-sysml
+        run: cargo test --workspace --locked
+      - name: Check repository boundaries
+        working-directory: mercurio-sysml
+        run: cargo run -p mercurio-tools --bin check_repo_boundaries -- --manifest ../mercurio-foundation/repo-boundaries.json --strict
+      - name: Assemble crates.io packages
+        working-directory: mercurio-sysml
+        run: >-
+          cargo package
+          --workspace
+          --exclude mercurio-tools
+          --exclude mercurio-sysml-cli
+          --no-verify
+          --locked
+
+  publish:
+    if: github.ref_type == 'tag'
+    needs: qualify
+    runs-on: ubuntu-latest
+    environment: crates-io
+    env:
+      CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: mercurio-sysml
+      - uses: actions/checkout@v4
+        with:
+          repository: mercurio-labs/mercurio-foundation
+          ref: ${{ env.FOUNDATION_REF }}
+          path: mercurio-foundation
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Publish packages in dependency order
+        working-directory: mercurio-sysml
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(awk '/^\[workspace.package\]/{in_package=1; next} in_package && /^version = /{gsub(/"/, "", $3); print $3; exit}' Cargo.toml)"
+          packages=(
+            mercurio-sysml-resources
+            mercurio-language-frontend
+            mercurio-requirements
+            mercurio-kerml
+            mercurio-sysml
+            mercurio-simulation
+          )
+
+          published() {
+            curl --fail --silent --show-error \
+              --header "User-Agent: mercurio-sysml-release/${version}" \
+              "https://crates.io/api/v1/crates/$1" |
+              jq --exit-status --arg version "${version}" \
+                '.versions | any(.num == $version)' >/dev/null
+          }
+
+          publish_one() {
+            local package="$1"
+            if published "${package}"; then
+              echo "${package} ${version} is already published"
+              return
+            fi
+
+            for attempt in {1..12}; do
+              if cargo publish --locked --package "${package}"; then
+                return
+              fi
+              if published "${package}"; then
+                return
+              fi
+              if [[ "${attempt}" -eq 12 ]]; then
+                echo "failed to publish ${package} ${version}" >&2
+                return 1
+              fi
+              sleep 10
+            done
+          }
+
+          for package in "${packages[@]}"; do
+            publish_one "${package}"
+          done

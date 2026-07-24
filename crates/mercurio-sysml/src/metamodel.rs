@@ -382,23 +382,33 @@ pub fn canonical_sysml_stdlib_digest() -> Option<String> {
 }
 
 pub fn canonical_sysml_stdlib_runtime_source_bytes() -> Option<Vec<u8>> {
-    let bundle = release_bundle(CANONICAL_SYSML_STDLIB_RELEASE).ok()?;
     let mut bytes = Vec::new();
     bytes.extend_from_slice(b"mercurio.sysml.stdlib\n");
     bytes.extend_from_slice(canonical_sysml_stdlib_address().as_bytes());
     bytes.extend_from_slice(b"\n");
     bytes.extend_from_slice(canonical_sysml_stdlib_version().as_bytes());
     bytes.extend_from_slice(b"\n");
-    bytes.extend_from_slice(&std::fs::read(bundle.stdlib_path).ok()?);
+    bytes.extend_from_slice(mercurio_sysml_resources::full_stdlib(
+        SYSML_2_0_PILOT_2026_04_ID,
+    )?);
     Some(bytes)
 }
 
 pub fn load_baseline_for_metamodel(
     metamodel: &SysmlMetamodelResource,
 ) -> Result<KirDocument, KirError> {
-    let kernel = mercurio_kerml::load_kernel_baseline()?;
-    let sysml_delta = KirDocument::from_path_with_registered_fields(
-        &metamodel.sysml_delta_path,
+    let kernel = KirDocument::from_str(mercurio_sysml_resources::KERML_KERNEL)?;
+    let sysml_bytes =
+        mercurio_sysml_resources::sysml_library(&metamodel.info.id).ok_or_else(|| {
+            KirError::Model(format!(
+                "no bundled SysML library for metamodel '{}'",
+                metamodel.info.id
+            ))
+        })?;
+    let sysml_text = std::str::from_utf8(sysml_bytes)
+        .map_err(|_| KirError::Model("bundled SysML library is not valid UTF-8".to_string()))?;
+    let sysml_delta = KirDocument::from_str_with_registered_fields(
+        sysml_text,
         crate::sysml_field_specs().iter().copied(),
     )?;
     KirDocument::merge_with_registered_fields(
@@ -409,13 +419,14 @@ pub fn load_baseline_for_metamodel(
 
 #[cfg(feature = "embed-stdlib")]
 pub(crate) fn embedded_bytes_for_metamodel(id: &str) -> Option<(&'static [u8], &'static [u8])> {
-    match id {
-        SYSML_2_0_METAMODEL_057_ID | LEGACY_SYSML_2_0_PILOT_057_ID => Some((
-            crate::embedded_resources::EMBEDDED_KERNEL,
-            crate::embedded_resources::EMBEDDED_SYSML_LIBRARY,
-        )),
-        _ => None,
-    }
+    let canonical_id = match id {
+        LEGACY_SYSML_2_0_PILOT_057_ID => SYSML_2_0_METAMODEL_057_ID,
+        other => other,
+    };
+    Some((
+        crate::embedded_resources::EMBEDDED_KERNEL,
+        mercurio_sysml_resources::sysml_library(canonical_id)?,
+    ))
 }
 
 #[derive(Debug, Deserialize)]
@@ -536,15 +547,12 @@ impl ReleaseBundleDescriptorExt for Option<ReleaseBundleDescriptor> {
 }
 
 fn metamodel_descriptor_raw(id: &str) -> Result<RawMetamodelDescriptor, SysmlEnvironmentError> {
-    let raw = match id {
-        SYSML_2_0_METAMODEL_057_ID | LEGACY_SYSML_2_0_PILOT_057_ID => {
-            include_str!("../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.json")
-        }
-        SYSML_2_0_PILOT_2026_04_ID => {
-            include_str!("../../../resources/metamodels/sysml-2.0-pilot-2026-04/metamodel.json")
-        }
-        _ => return Err(SysmlEnvironmentError::UnknownMetamodel(id.to_string())),
+    let canonical_id = match id {
+        LEGACY_SYSML_2_0_PILOT_057_ID => SYSML_2_0_METAMODEL_057_ID,
+        other => other,
     };
+    let raw = mercurio_sysml_resources::metamodel_descriptor(canonical_id)
+        .ok_or_else(|| SysmlEnvironmentError::UnknownMetamodel(id.to_string()))?;
     serde_json::from_str(raw).map_err(|err| {
         SysmlEnvironmentError::Json(format!("failed to parse SysML metamodel descriptor: {err}"))
     })
