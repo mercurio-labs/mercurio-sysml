@@ -58,6 +58,8 @@ pub use constraints::{
     register_sysml_constraint_analysis_capability, render_constraint_graph, solve_constraints,
 };
 pub use dsl::sysml_dsl_extension;
+/// Language-neutral Mercurio APIs used by the SysML implementation.
+pub use mercurio_foundation as foundation;
 pub use mercurio_kir::{KirDocument, KirError};
 pub use mercurio_language_contracts::Concept;
 pub use mercurio_language_contracts::ast::{

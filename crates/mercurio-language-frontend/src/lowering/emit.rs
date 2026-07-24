@@ -951,10 +951,7 @@ fn merge_emission_seeds(mut base: KirEmissionSeed, overlay: KirEmissionSeed) -> 
 }
 
 fn load_metamodel_constructs_seed() -> Result<String, Diagnostic> {
-    Ok(include_str!(
-        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json"
-    )
-    .to_string())
+    Ok(mercurio_sysml_resources::SYSML_057_METAMODEL_CONSTRUCTS.to_string())
 }
 
 fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
@@ -971,22 +968,15 @@ fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
 }
 
 fn load_kir_emission_seed() -> Result<String, Diagnostic> {
-    Ok(include_str!(
-        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/kir_emission.seed.json"
-    )
-    .to_string())
+    Ok(mercurio_sysml_resources::SYSML_057_KIR_EMISSION.to_string())
 }
 
 fn load_lowering_rules_seed() -> &'static str {
-    include_str!(
-        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json"
-    )
+    mercurio_sysml_resources::SYSML_057_LOWERING_RULES
 }
 
 fn load_semantic_defaults_seed() -> &'static str {
-    include_str!(
-        "../../../../resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/semantic_defaults.seed.json"
-    )
+    mercurio_sysml_resources::SYSML_057_SEMANTIC_DEFAULTS
 }
 
 fn resolve_semantic_default_value(value: &str, usage: &ResolvedUsage) -> String {

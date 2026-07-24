@@ -4353,7 +4353,14 @@ fn callable_expr_name(expr: &Expr) -> Option<String> {
 }
 
 pub(crate) fn repo_path(relative: &str) -> PathBuf {
-    repo_root().join(relative)
+    let candidate = repo_root().join(relative);
+    if candidate.exists() {
+        return candidate;
+    }
+    relative
+        .strip_prefix("resources/")
+        .map(|resource_relative| mercurio_sysml_resources::resource_root().join(resource_relative))
+        .unwrap_or(candidate)
 }
 
 fn repo_root() -> PathBuf {
@@ -4375,11 +4382,7 @@ fn repo_root() -> PathBuf {
         }
     }
 
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .and_then(Path::parent)
-        .map(Path::to_path_buf)
-        .unwrap_or_else(|| PathBuf::from("."))
+    mercurio_sysml_resources::resource_root()
 }
 
 #[cfg(test)]

@@ -40,6 +40,7 @@ jobs:
         run: >-
           cargo package
           --list
+          -p mercurio-sysml-resources
           -p mercurio-language-frontend
           -p mercurio-kerml
           -p mercurio-requirements
