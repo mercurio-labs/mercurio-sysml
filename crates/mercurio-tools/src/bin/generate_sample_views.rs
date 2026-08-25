@@ -9,8 +9,8 @@ use mercurio_sysml::{compile_sysml_text, load_sysml_baseline};
 use mercurio_views::{
     DiagramDirectionDto, DiagramKindDto, DiagramLayoutOptionsDto, DiagramQueryOptionsDto,
     DiagramRenderRequestDto, DiagramSpecDto, DiagramStyleOptionsDto, DiagramSymbolDto,
-    DiagramViewDto, TableColumnSpecDto, TableKindDto, TableScopeDto, TableSpecDto, TableViewDto,
-    ViewDocumentDto, render_diagram, render_table, validate_view_document,
+    DiagramViewDto, MatrixPresetDto, TableColumnSpecDto, TableKindDto, TableScopeDto, TableSpecDto,
+    TableViewDto, ViewDocumentDto, render_diagram, render_table, validate_view_document,
 };
 use serde_json::json;
 
@@ -144,6 +144,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             root: "pkg.Vehicle".to_string(),
         },
         row_type: None,
+        column_scope: None,
+        column_type: None,
+        relations: Vec::new(),
+        matrix_preset: None,
         query: query(
             vec!["owner"],
             DiagramDirectionDto::Children,
@@ -192,6 +196,64 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         requirements_table.columns.len(),
         requirements_table.warnings.len()
     );
+
+    // DA-4: one relationship-matrix spec + render per preset.
+    let matrix_presets = [
+        (
+            "matrix-requirements-coverage",
+            MatrixPresetDto::RequirementsCoverage,
+            "Requirements Coverage Matrix",
+            "Requirement rows against satisfying and verifying elements.",
+        ),
+        (
+            "matrix-allocation",
+            MatrixPresetDto::Allocation,
+            "Allocation Matrix",
+            "Action and activity rows allocated onto part columns.",
+        ),
+        (
+            "matrix-dsm",
+            MatrixPresetDto::Dsm,
+            "Design Structure Matrix",
+            "Part-to-part connection, flow, and dependency structure.",
+        ),
+    ];
+    for (slug, preset, title, description) in matrix_presets {
+        let spec = TableSpecDto {
+            version: 1,
+            kind: TableKindDto::RelationshipMatrix,
+            title: title.to_string(),
+            description: Some(description.to_string()),
+            root: None,
+            target_type: None,
+            scope: TableScopeDto::WholeModel,
+            row_type: None,
+            column_scope: None,
+            column_type: None,
+            relations: Vec::new(),
+            matrix_preset: Some(preset),
+            query: query(
+                Vec::new(),
+                DiagramDirectionDto::Children,
+                3,
+                false,
+                true,
+                350,
+                900,
+            ),
+            columns: Vec::new(),
+            show_affordances: false,
+        };
+        let view = render_table(&graph, &registry, spec.clone())?;
+        write_table_spec(&output_dir, slug, &spec, &view)?;
+        println!(
+            "{slug}: rows={} columns={} warnings={}",
+            view.rows.len(),
+            view.columns.len(),
+            view.warnings.len()
+        );
+    }
+
     write_activity_swimlane_demo(&output_dir)?;
 
     Ok(())
@@ -307,6 +369,12 @@ fn sample_graph() -> Result<Graph, Box<dyn std::error::Error>> {
                 "SysML::Requirements::SatisfyRequirementUsage",
                 2,
             ),
+            element(
+                22,
+                "allocation.Vehicle.ProportionPowerToController",
+                "SysML::AllocationUsage",
+                2,
+            ),
         ],
         edges: vec![
             edge(2, 0, "specializes"),
@@ -346,6 +414,9 @@ fn sample_graph() -> Result<Graph, Box<dyn std::error::Error>> {
             edge(21, 1, "owner"),
             edge(21, 18, "source"),
             edge(21, 4, "target"),
+            edge(22, 1, "owner"),
+            edge(22, 14, "source"),
+            edge(22, 18, "target"),
         ],
     })?)
 }
@@ -395,6 +466,17 @@ fn element(id: u32, element_id: &str, kind: &str, layer: u8) -> Element {
             );
             properties.insert("target".to_string(), json!("req.Vehicle.SafeStart"));
             properties.insert("relationship_kind".to_string(), json!("satisfy"));
+        }
+        "allocation.Vehicle.ProportionPowerToController" => {
+            properties.insert(
+                "source".to_string(),
+                json!("action.Vehicle.ProvidePower.ProportionPower"),
+            );
+            properties.insert(
+                "target".to_string(),
+                json!("feature.Vehicle.Car.controller"),
+            );
+            properties.insert("relationship_kind".to_string(), json!("allocate"));
         }
         _ => {}
     }
