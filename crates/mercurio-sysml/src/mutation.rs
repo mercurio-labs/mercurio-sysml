@@ -519,11 +519,11 @@ mod tests {
     use std::collections::{BTreeMap, BTreeSet};
 
     use mercurio_core::{
-        ElementRef, FeasibilityStatus, Graph, KirDocument, MutationContext,
-        MutationFeasibilityService, MutationProposal, RulePack, SemanticElementKind,
-        SemanticLegalityDiagnosticSource, SemanticLegalityRequest, SemanticLegalityStatus,
-        SemanticMutation, SemanticNextActionOperation, SemanticNextActionsRequest,
-        WorkspaceRevision,
+        ElementRef, FeasibilityStatus, Graph, KirDocument, MutationApplicationResult,
+        MutationContext, MutationFeasibilityService, MutationProposal, RulePack,
+        SemanticElementKind, SemanticLegalityDiagnosticSource, SemanticLegalityRequest,
+        SemanticLegalityStatus, SemanticMutation, SemanticNextActionOperation,
+        SemanticNextActionsRequest, WorkspaceRevision, WriteBackMode,
     };
     use serde_json::{Value, json};
 
@@ -1161,6 +1161,218 @@ package HybridVehicle {
 
         assert!(source.contains("part def Vehicle;"));
         assert!(!source.contains("part def def Vehicle;"));
+    }
+
+    /// DA-1 round-trip fixture: commented, hand-formatted source. Every
+    /// fidelity test below asserts that an apply touches only the edited
+    /// declaration and that every comment survives.
+    const FIDELITY_FIXTURE: &str = "\
+// Vehicle systems model - hand-maintained fixture.
+// The odd formatting below is deliberate; write-back must not touch it.
+package  Vehicle {
+
+    /* Engine block: kept deliberately terse. */
+    part def Engine;
+
+    part def Chassis {
+        attribute mass;
+    }
+
+
+    // The flagship configuration.
+    part flagship : Chassis {
+        part engine : Engine;
+    }
+
+    requirement def MassLimit;
+
+    /* Verified by the mass rollup. */
+    requirement massLimit : MassLimit;
+
+    // Wheels arrive in rev B.
+    part def Wheel;
+}
+";
+
+    const FIDELITY_FIXTURE_COMMENTS: &[&str] = &[
+        "// Vehicle systems model - hand-maintained fixture.",
+        "// The odd formatting below is deliberate; write-back must not touch it.",
+        "/* Engine block: kept deliberately terse. */",
+        "// The flagship configuration.",
+        "/* Verified by the mass rollup. */",
+        "// Wheels arrive in rev B.",
+    ];
+
+    fn fidelity_context() -> MutationContext {
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "vehicle.sysml".to_string(),
+            FIDELITY_FIXTURE.to_string(),
+        )]))
+        .expect("fidelity fixture parses");
+        MutationContext::from_project(project)
+    }
+
+    fn apply_fidelity_operation(operation: SemanticMutation) -> MutationApplicationResult {
+        let context = fidelity_context();
+        let proposal = MutationProposal {
+            intent: "Fidelity fixture edit".to_string(),
+            operations: vec![operation],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+        let service = sysml_mutation_feasibility_service();
+        let report = service.check(&context, &proposal);
+        assert!(
+            matches!(
+                report.status,
+                FeasibilityStatus::Allowed | FeasibilityStatus::AllowedWithWarnings
+            ),
+            "{report:#?}"
+        );
+        service
+            .apply_checked_plan(&context, report.normalized_plan.as_ref().expect("plan"))
+            .expect("apply succeeds")
+    }
+
+    fn assert_fidelity_comments_survive(text: &str) {
+        for comment in FIDELITY_FIXTURE_COMMENTS {
+            assert!(
+                text.contains(comment),
+                "comment `{comment}` was lost:\n{text}"
+            );
+        }
+    }
+
+    /// Asserts everything before `start_marker` and from `end_marker` on is
+    /// byte-identical to the fixture, i.e. only the declaration between the
+    /// markers was rewritten.
+    fn assert_bytes_identical_outside_edit(text: &str, start_marker: &str, end_marker: &str) {
+        let prefix_end = FIDELITY_FIXTURE.find(start_marker).expect("start marker");
+        let prefix = &FIDELITY_FIXTURE[..prefix_end];
+        let suffix_start = FIDELITY_FIXTURE.find(end_marker).expect("end marker");
+        let suffix = &FIDELITY_FIXTURE[suffix_start..];
+        assert!(
+            text.starts_with(prefix),
+            "text before the edited declaration changed:\n{text}"
+        );
+        assert!(
+            text.ends_with(suffix),
+            "text after the edited declaration changed:\n{text}"
+        );
+    }
+
+    #[test]
+    fn sysml_add_usage_apply_patches_only_the_edited_declaration() {
+        let application = apply_fidelity_operation(SemanticMutation::AddUsage {
+            container: ElementRef::new("Vehicle.flagship"),
+            keyword: "part".to_string(),
+            name: "backupEngine".to_string(),
+            ty: Some(ElementRef::new("Vehicle.Engine")),
+            specializes: Vec::new(),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{application:#?}"
+        );
+        let text = application.edited_files.get("vehicle.sysml").expect("edit");
+        assert!(text.contains("backupEngine"));
+        assert_fidelity_comments_survive(text);
+        assert_bytes_identical_outside_edit(
+            text,
+            "    part flagship",
+            "    requirement def MassLimit;",
+        );
+    }
+
+    #[test]
+    fn sysml_set_attribute_apply_patches_only_the_edited_declaration() {
+        let application = apply_fidelity_operation(SemanticMutation::SetAttribute {
+            element: ElementRef::new("Vehicle.massLimit"),
+            attribute: "text".to_string(),
+            value: json!("Total vehicle mass stays within the limit."),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{application:#?}"
+        );
+        let text = application.edited_files.get("vehicle.sysml").expect("edit");
+        assert!(text.contains("Total vehicle mass stays within the limit."));
+        assert_fidelity_comments_survive(text);
+        assert_bytes_identical_outside_edit(
+            text,
+            "    requirement massLimit",
+            "    // Wheels arrive in rev B.",
+        );
+    }
+
+    #[test]
+    fn sysml_rename_apply_patches_only_the_edited_declaration() {
+        let application = apply_fidelity_operation(SemanticMutation::RenameDeclaration {
+            element: ElementRef::new("Vehicle.Wheel"),
+            new_name: "RoadWheel".to_string(),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{application:#?}"
+        );
+        let text = application.edited_files.get("vehicle.sysml").expect("edit");
+        assert!(text.contains("part def RoadWheel;"));
+        assert!(!text.contains("part def Wheel;"));
+        assert_fidelity_comments_survive(text);
+        assert_bytes_identical_outside_edit(text, "    part def Wheel;", "\n}\n");
+    }
+
+    #[test]
+    fn sysml_add_relationship_apply_patches_only_the_edited_declaration() {
+        let application = apply_fidelity_operation(SemanticMutation::AddRelationship {
+            kind: "satisfy".to_string(),
+            source: ElementRef::new("Vehicle.flagship"),
+            target: ElementRef::new("Vehicle.massLimit"),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{application:#?}"
+        );
+        let text = application.edited_files.get("vehicle.sysml").expect("edit");
+        assert!(text.contains("satisfy"));
+        assert_fidelity_comments_survive(text);
+        assert_bytes_identical_outside_edit(
+            text,
+            "    part flagship",
+            "    requirement def MassLimit;",
+        );
+    }
+
+    #[test]
+    fn sysml_add_package_into_new_file_falls_back_to_canonical_rewrite() {
+        let application = apply_fidelity_operation(SemanticMutation::AddPackage {
+            target_file: "extensions.sysml".to_string(),
+            name: "VehicleExtensions".to_string(),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::CanonicalRewrite),
+            "{application:#?}"
+        );
+        let text = application
+            .edited_files
+            .get("extensions.sysml")
+            .expect("new file");
+        assert!(text.contains("package VehicleExtensions"));
+        assert!(
+            !application.edited_files.contains_key("vehicle.sysml"),
+            "the fixture file must not be rewritten by an unrelated add"
+        );
     }
 
     #[cfg(not(target_arch = "wasm32"))]
