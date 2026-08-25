@@ -1181,6 +1181,7 @@ package  Vehicle {
 
     // The flagship configuration.
     part flagship : Chassis {
+        // Primary drive.
         part engine : Engine;
     }
 
@@ -1199,6 +1200,7 @@ package  Vehicle {
         "// The odd formatting below is deliberate; write-back must not touch it.",
         "/* Engine block: kept deliberately terse. */",
         "// The flagship configuration.",
+        "// Primary drive.",
         "/* Verified by the mass rollup. */",
         "// Wheels arrive in rev B.",
     ];
@@ -1213,10 +1215,14 @@ package  Vehicle {
     }
 
     fn apply_fidelity_operation(operation: SemanticMutation) -> MutationApplicationResult {
+        apply_fidelity_operations(vec![operation])
+    }
+
+    fn apply_fidelity_operations(operations: Vec<SemanticMutation>) -> MutationApplicationResult {
         let context = fidelity_context();
         let proposal = MutationProposal {
             intent: "Fidelity fixture edit".to_string(),
-            operations: vec![operation],
+            operations,
             evidence: Vec::new(),
             rationale: None,
             workspace_revision: context.workspace_revision.clone(),
@@ -1372,6 +1378,85 @@ package  Vehicle {
         assert!(
             !application.edited_files.contains_key("vehicle.sysml"),
             "the fixture file must not be rewritten by an unrelated add"
+        );
+    }
+
+    /// T6 keystone: a localized ReplaceNode re-renders the edited declaration
+    /// canonically *inside* its span — interior member comments only survive
+    /// because trivia is attached to the authoring model and re-rendered.
+    /// The declaration's own leading comment stays in the untouched prefix
+    /// and must not be duplicated by the splice.
+    #[test]
+    fn sysml_rename_of_container_keeps_interior_member_comments() {
+        let application = apply_fidelity_operation(SemanticMutation::RenameDeclaration {
+            element: ElementRef::new("Vehicle.flagship"),
+            new_name: "flagshipConfig".to_string(),
+        });
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{application:#?}"
+        );
+        let text = application.edited_files.get("vehicle.sysml").expect("edit");
+        // The edited declaration is re-rendered canonically inside its span
+        // (`name: Type`, canonical spacing).
+        assert!(text.contains("part flagshipConfig: Chassis"), "{text}");
+        assert_fidelity_comments_survive(text);
+        assert_eq!(
+            text.matches("// Primary drive.").count(),
+            1,
+            "the interior comment must survive the canonical re-render exactly once:\n{text}"
+        );
+        assert_eq!(
+            text.matches("// The flagship configuration.").count(),
+            1,
+            "the leading comment must not be duplicated by the splice:\n{text}"
+        );
+        assert_bytes_identical_outside_edit(
+            text,
+            "    part flagship",
+            "    requirement def MassLimit;",
+        );
+    }
+
+    /// T6 canonical-printer wiring: a plan that mixes a new-file AddPackage
+    /// (FullFile — never localizable) with an edit to the fixture file forces
+    /// the whole write-back onto the canonical path; every preserved comment
+    /// must survive the file-wide re-render.
+    #[test]
+    fn sysml_forced_canonical_apply_keeps_leading_comments_file_wide() {
+        let application = apply_fidelity_operations(vec![
+            SemanticMutation::AddPackage {
+                target_file: "extensions.sysml".to_string(),
+                name: "VehicleExtensions".to_string(),
+            },
+            SemanticMutation::AddUsage {
+                container: ElementRef::new("Vehicle.flagship"),
+                keyword: "part".to_string(),
+                name: "backupEngine".to_string(),
+                ty: Some(ElementRef::new("Vehicle.Engine")),
+                specializes: Vec::new(),
+            },
+        ]);
+
+        assert_eq!(
+            application.write_back_mode,
+            Some(WriteBackMode::CanonicalRewrite),
+            "{application:#?}"
+        );
+        let text = application
+            .edited_files
+            .get("vehicle.sysml")
+            .expect("fixture rewrite");
+        assert!(text.contains("backupEngine"));
+        assert_fidelity_comments_survive(text);
+        assert!(
+            application
+                .edited_files
+                .get("extensions.sysml")
+                .is_some_and(|new_file| new_file.contains("package VehicleExtensions")),
+            "{application:#?}"
         );
     }
 

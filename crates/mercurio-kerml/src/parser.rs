@@ -1,6 +1,6 @@
 use mercurio_language_contracts::ast::{
-    AliasDecl, Declaration, GenericDefinitionDecl, GenericUsageDecl, ImportDecl, PackageDecl,
-    ParsedModule as SysmlModule, QualifiedName, SourceSpan,
+    AliasDecl, CommentNote, Declaration, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
+    PackageDecl, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
@@ -18,6 +18,7 @@ struct Parser {
     tokens: Vec<Token>,
     index: usize,
     pending_docs: Vec<String>,
+    pending_comments: Vec<CommentNote>,
 }
 
 impl Parser {
@@ -26,6 +27,7 @@ impl Parser {
             tokens,
             index: 0,
             pending_docs: Vec::new(),
+            pending_comments: Vec::new(),
         }
     }
 
@@ -63,7 +65,34 @@ impl Parser {
         Ok(module)
     }
 
+    /// Parses one declaration, harvesting leading own-line comment trivia
+    /// from the declaration's first token, mirroring the SysML parser.
+    /// v1 scope: leading own-line comments only — trailing same-line and
+    /// dangling-before-`}` comments are dropped (documented follow-up).
     fn parse_declaration(&mut self) -> Result<Option<Declaration>, Diagnostic> {
+        self.collect_docs();
+        let comments = self.take_leading_comments();
+        let declaration = self.parse_declaration_inner()?;
+        Ok(declaration.map(|declaration| attach_leading_comments(declaration, comments)))
+    }
+
+    fn take_leading_comments(&mut self) -> Vec<CommentNote> {
+        let mut comments = std::mem::take(&mut self.pending_comments);
+        if let Some(token) = self.tokens.get_mut(self.index) {
+            comments.extend(
+                std::mem::take(&mut token.leading_trivia)
+                    .into_iter()
+                    .filter(|trivia| trivia.own_line)
+                    .map(|trivia| CommentNote {
+                        text: trivia.text,
+                        kind: trivia.kind,
+                    }),
+            );
+        }
+        comments
+    }
+
+    fn parse_declaration_inner(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         self.collect_docs();
         let docs = std::mem::take(&mut self.pending_docs);
         let metadata_prefixes = self.parse_metadata_prefixes();
@@ -133,6 +162,7 @@ impl Parser {
                 members: Vec::new(),
                 imports: Vec::new(),
                 definitions: Vec::new(),
+                comments: Vec::new(),
                 docs,
                 modifiers: Vec::new(),
                 span: merge_span(&start.span, &end.span),
@@ -158,6 +188,7 @@ impl Parser {
             members,
             imports,
             definitions: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
             span: merge_span(&start.span, &end.span),
@@ -174,6 +205,7 @@ impl Parser {
         };
         Ok(ImportDecl {
             path,
+            comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
             span: merge_span(&start.span, &end.span),
@@ -193,6 +225,7 @@ impl Parser {
         Ok(AliasDecl {
             name,
             target,
+            comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
             span: merge_span(&start.span, &end.span),
@@ -234,6 +267,7 @@ impl Parser {
             name,
             specializes,
             members,
+            comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
             span: merge_span(&start.span, &end.span),
@@ -274,6 +308,7 @@ impl Parser {
             name,
             specializes,
             members,
+            comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
             span: merge_span(&start.span, &end.span),
@@ -355,6 +390,7 @@ impl Parser {
             subsets: relations.subsets,
             redefines: relations.redefines,
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -449,6 +485,7 @@ impl Parser {
             subsets: relations.subsets,
             redefines: relations.redefines,
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -502,6 +539,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -860,6 +898,19 @@ impl Parser {
 
     fn collect_docs(&mut self) {
         while let TokenKind::Doc(text) = self.peek_kind().clone() {
+            // Comments preceding a `doc` line ride on the Doc token's trivia;
+            // queue them so they attach to the declaration the docs belong to.
+            if let Some(token) = self.tokens.get_mut(self.index) {
+                self.pending_comments.extend(
+                    std::mem::take(&mut token.leading_trivia)
+                        .into_iter()
+                        .filter(|trivia| trivia.own_line)
+                        .map(|trivia| CommentNote {
+                            text: trivia.text,
+                            kind: trivia.kind,
+                        }),
+                );
+            }
             self.pending_docs.push(text);
             self.advance();
         }
@@ -1046,6 +1097,26 @@ fn merge_span(left: &SourceSpan, right: &SourceSpan) -> SourceSpan {
         end_line: right.end_line,
         end_col: right.end_col,
     }
+}
+
+/// Attaches harvested leading comments to whichever declaration variant was
+/// parsed, preserving top-to-bottom order.
+fn attach_leading_comments(declaration: Declaration, comments: Vec<CommentNote>) -> Declaration {
+    if comments.is_empty() {
+        return declaration;
+    }
+    let mut declaration = declaration;
+    let slot = match &mut declaration {
+        Declaration::Package(package) => &mut package.comments,
+        Declaration::Import(import) => &mut import.comments,
+        Declaration::GenericDefinition(definition) => &mut definition.comments,
+        Declaration::GenericUsage(usage) => &mut usage.comments,
+        Declaration::Alias(alias) => &mut alias.comments,
+    };
+    let mut comments = comments;
+    comments.append(slot);
+    *slot = comments;
+    declaration
 }
 
 #[cfg(test)]

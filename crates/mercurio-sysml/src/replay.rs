@@ -504,6 +504,7 @@ impl GestureDeriver<'_> {
         let mut pruned = Package {
             name: package.name.clone(),
             members: Vec::new(),
+            comments: Vec::new(),
             docs: Vec::new(),
             modifiers: Vec::new(),
         };
@@ -684,6 +685,7 @@ impl GestureDeriver<'_> {
                         pruned.members.push(Declaration::Import(
                             mercurio_core::authoring::Import {
                                 path: import.path.clone(),
+                                comments: Vec::new(),
                                 docs: Vec::new(),
                                 modifiers: Vec::new(),
                             },
@@ -856,6 +858,7 @@ impl GestureDeriver<'_> {
             redefines: usage.redefines.clone(),
             members: Vec::new(),
             raw_body: usage.raw_body.clone(),
+            comments: Vec::new(),
             docs: Vec::new(),
             modifiers: usage.modifiers.clone(),
         };
@@ -1085,6 +1088,7 @@ impl GestureDeriver<'_> {
             specializes: parts.specializes,
             members,
             raw_body: definition.raw_body.clone(),
+            comments: Vec::new(),
             docs: parts.docs,
             modifiers: parts.modifiers,
         })

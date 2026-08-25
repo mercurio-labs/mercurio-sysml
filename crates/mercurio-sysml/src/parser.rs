@@ -4,9 +4,9 @@ use std::sync::{Arc, Mutex, OnceLock};
 
 use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
 use mercurio_language_contracts::ast::{
-    AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName,
-    SourceSpan, UnaryOp,
+    AliasDecl, BinaryOp, CommentNote, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl,
+    ImportDecl, LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule,
+    QualifiedName, SourceSpan, UnaryOp,
 };
 use mercurio_language_contracts::diagnostics::Diagnostic;
 use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
@@ -1087,6 +1087,7 @@ struct Parser {
     tokens: Vec<Token>,
     index: usize,
     pending_docs: Vec<String>,
+    pending_comments: Vec<CommentNote>,
     diagnostics: Vec<Diagnostic>,
     recover: bool,
 }
@@ -1097,6 +1098,7 @@ impl Parser {
             tokens,
             index: 0,
             pending_docs: Vec::new(),
+            pending_comments: Vec::new(),
             diagnostics: Vec::new(),
             recover,
         }
@@ -1134,7 +1136,40 @@ impl Parser {
         })
     }
 
+    /// Parses one declaration, harvesting the leading own-line `//` and
+    /// non-doc `/* */` comments collected as lexer trivia on the
+    /// declaration's first token (mirroring the `pending_docs` mechanism).
+    ///
+    /// v1 scope: only LEADING own-line comments are preserved. Trailing
+    /// same-line comments (`part x; // note`) and dangling comments before a
+    /// closing `}` are lexed as trivia of the *next* token (or of `}`/EOF)
+    /// and are dropped here — preserving them is a documented follow-up.
     fn parse_declaration(&mut self) -> Result<Option<Declaration>, Diagnostic> {
+        let comments = self.take_leading_comments();
+        let declaration = self.parse_declaration_inner()?;
+        Ok(declaration.map(|declaration| attach_leading_comments(declaration, comments)))
+    }
+
+    /// Drains the pending comment queue plus the own-line comment trivia
+    /// attached to the current token (the first token of the upcoming
+    /// declaration — a modifier, keyword, or name).
+    fn take_leading_comments(&mut self) -> Vec<CommentNote> {
+        let mut comments = std::mem::take(&mut self.pending_comments);
+        if let Some(token) = self.tokens.get_mut(self.index) {
+            comments.extend(
+                std::mem::take(&mut token.leading_trivia)
+                    .into_iter()
+                    .filter(|trivia| trivia.own_line)
+                    .map(|trivia| CommentNote {
+                        text: trivia.text,
+                        kind: trivia.kind,
+                    }),
+            );
+        }
+        comments
+    }
+
+    fn parse_declaration_inner(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         let docs = std::mem::take(&mut self.pending_docs);
         let modifiers = self.consume_declaration_modifiers();
         if let Some(keyword) = self.modifier_led_definition_keyword(&modifiers) {
@@ -1262,6 +1297,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1417,6 +1453,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start, &end.span),
@@ -1517,6 +1554,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1537,6 +1575,7 @@ impl Parser {
                 members: Vec::new(),
                 imports: Vec::new(),
                 definitions: Vec::new(),
+                comments: Vec::new(),
                 docs,
                 modifiers,
                 span: merge_span(&start.span, &end.span),
@@ -1575,6 +1614,7 @@ impl Parser {
             members,
             imports,
             definitions: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1600,6 +1640,7 @@ impl Parser {
 
         Ok(ImportDecl {
             path,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1645,6 +1686,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1826,6 +1868,7 @@ impl Parser {
             name,
             specializes,
             members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span,
@@ -2271,6 +2314,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span,
@@ -2393,6 +2437,7 @@ impl Parser {
                         target.segments.last().cloned().unwrap_or_default(),
                     ),
                     span: target.span.clone(),
+                    leading_trivia: Vec::new(),
                 };
                 about_target = Some(target);
             }
@@ -2457,6 +2502,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2524,6 +2570,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2558,6 +2605,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2584,6 +2632,7 @@ impl Parser {
         Ok(AliasDecl {
             name,
             target,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -3269,6 +3318,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs: Vec::new(),
             modifiers: vec!["end".to_string(), format!("end-{fallback_name}")],
             span,
@@ -3512,6 +3562,7 @@ impl Parser {
     fn recover_declaration(&mut self) {
         let start_index = self.index;
         self.pending_docs.clear();
+        self.pending_comments.clear();
         while !matches!(self.peek_kind(), TokenKind::Eof | TokenKind::RBrace) {
             match self.peek_kind() {
                 TokenKind::LBrace => {
@@ -3636,6 +3687,19 @@ impl Parser {
 
     fn collect_docs(&mut self) {
         while let TokenKind::Doc(text) = self.peek_kind().clone() {
+            // Comments preceding a `doc` line ride on the Doc token's trivia;
+            // queue them so they attach to the declaration the docs belong to.
+            if let Some(token) = self.tokens.get_mut(self.index) {
+                self.pending_comments.extend(
+                    std::mem::take(&mut token.leading_trivia)
+                        .into_iter()
+                        .filter(|trivia| trivia.own_line)
+                        .map(|trivia| CommentNote {
+                            text: trivia.text,
+                            kind: trivia.kind,
+                        }),
+                );
+            }
             self.pending_docs.push(text);
             self.advance();
         }
@@ -3847,6 +3911,27 @@ fn merge_span(start: &SourceSpan, end: &SourceSpan) -> SourceSpan {
         end_line: end.end_line,
         end_col: end.end_col,
     }
+}
+
+/// Attaches harvested leading comments to whichever declaration variant was
+/// parsed. Comments are prepended so queue order (comments before docs, top
+/// to bottom) is preserved.
+fn attach_leading_comments(declaration: Declaration, comments: Vec<CommentNote>) -> Declaration {
+    if comments.is_empty() {
+        return declaration;
+    }
+    let mut declaration = declaration;
+    let slot = match &mut declaration {
+        Declaration::Package(package) => &mut package.comments,
+        Declaration::Import(import) => &mut import.comments,
+        Declaration::GenericDefinition(definition) => &mut definition.comments,
+        Declaration::GenericUsage(usage) => &mut usage.comments,
+        Declaration::Alias(alias) => &mut alias.comments,
+    };
+    let mut comments = comments;
+    comments.append(slot);
+    *slot = comments;
+    declaration
 }
 
 fn expr_span(expr: &Expr) -> SourceSpan {
@@ -4071,6 +4156,7 @@ fn synthetic_reference_usage(
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: modifiers
             .iter()
@@ -4108,6 +4194,7 @@ fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSp
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: vec!["end".to_string()],
         span: span.clone(),
@@ -4143,6 +4230,7 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4179,6 +4267,7 @@ fn standalone_happens_before_succession(span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: ends,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4205,6 +4294,7 @@ fn standalone_succession_end(feature: &str, span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: vec!["end".to_string()],
         span: span.clone(),
@@ -4234,6 +4324,7 @@ fn accepter_action_with_members(members: Vec<Declaration>, span: &SourceSpan) ->
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: members,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4261,6 +4352,7 @@ fn transition_accepter_action(span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: vec![payload],
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4292,6 +4384,7 @@ fn transition_happens_before_succession(
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
