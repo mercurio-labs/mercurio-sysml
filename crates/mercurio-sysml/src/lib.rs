@@ -16,6 +16,7 @@ pub mod metamodel;
 pub mod mutation;
 pub mod parse_session;
 pub mod parser;
+pub mod replay;
 pub mod semantic_profile;
 pub mod session;
 
@@ -107,6 +108,13 @@ pub use parser::{
     default_sysml_delta_library_path, load_sysml_baseline, load_sysml_baseline_from_locator,
     load_sysml_document, load_sysml_document_with_stdlib, parse_sysml, parse_sysml_recovering,
     resolve_default_stdlib_locator, shared_sysml_baseline, shared_sysml_baseline_from_locator,
+};
+pub use replay::{
+    AUTHORING_PARITY_LEDGER_SCHEMA_VERSION, AppliedGesture, AuthoringParityOutcome,
+    BlockedConstruct, CoverageLedger, CoverageLedgerEntry, DerivedGestures,
+    GESTURE_SCRIPT_SCHEMA_VERSION, GestureExpectation, GestureScript, GestureStep, ReplayError,
+    ReplayReport, compile_replay_files, derive_gestures, replay_gesture_script,
+    run_authoring_parity,
 };
 pub use semantic_profile::{
     SYSML_LANGUAGE_PROFILE_ID, SysmlSemanticCapabilityOracle, normalize_definition_keyword,
