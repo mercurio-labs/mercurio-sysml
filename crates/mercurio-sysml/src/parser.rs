@@ -3278,7 +3278,9 @@ impl Parser {
     fn finish_usage(&mut self, label: &str, body_closed: bool) -> Result<Token, Diagnostic> {
         match self.peek_kind() {
             TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`"),
-            _ if body_closed => Ok(self.current().clone()),
+            // The body's `}` was already consumed; the usage ends there, not
+            // at the unconsumed lookahead token.
+            _ if body_closed => Ok(self.tokens[self.index.saturating_sub(1)].clone()),
             _ => Err(self.error_here(&format!("expected `;` or body terminator after {label}"))),
         }
     }
