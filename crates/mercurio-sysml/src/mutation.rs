@@ -1316,6 +1316,85 @@ package  Vehicle {
         );
     }
 
+    /// Two consecutive text edits on the same requirement must BOTH patch
+    /// localized. The first splice introduces the doc-before form (`doc /*
+    /// ... */` above the declaration keyword); on the fresh parse the
+    /// recorded span must cover those doc lines, because the canonical
+    /// printer re-renders them with the declaration — a keyword-anchored
+    /// splice would duplicate the doc and force a whole-file rewrite.
+    #[test]
+    fn sysml_set_attribute_text_twice_patches_localized_both_times() {
+        let first = apply_fidelity_operation(SemanticMutation::SetAttribute {
+            element: ElementRef::new("Vehicle.massLimit"),
+            attribute: "text".to_string(),
+            value: json!("Total vehicle mass stays within the limit."),
+        });
+        assert_eq!(
+            first.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{first:#?}"
+        );
+        let first_text = first
+            .edited_files
+            .get("vehicle.sysml")
+            .expect("first edit")
+            .clone();
+
+        // Fresh parse of the patched text, exactly as a live session reloads
+        // between applies.
+        let project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "vehicle.sysml".to_string(),
+            first_text.clone(),
+        )]))
+        .expect("patched fixture reparses");
+        let context = MutationContext::from_project(project);
+        let proposal = MutationProposal {
+            intent: "Second text edit".to_string(),
+            operations: vec![SemanticMutation::SetAttribute {
+                element: ElementRef::new("Vehicle.massLimit"),
+                attribute: "text".to_string(),
+                value: json!("Mass stays within the revised limit."),
+            }],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+        let service = sysml_mutation_feasibility_service();
+        let report = service.check(&context, &proposal);
+        assert!(
+            matches!(
+                report.status,
+                FeasibilityStatus::Allowed | FeasibilityStatus::AllowedWithWarnings
+            ),
+            "{report:#?}"
+        );
+        let second = service
+            .apply_checked_plan(&context, report.normalized_plan.as_ref().expect("plan"))
+            .expect("second apply succeeds");
+
+        assert_eq!(
+            second.write_back_mode,
+            Some(WriteBackMode::LocalizedPatch),
+            "{second:#?}"
+        );
+        let text = second.edited_files.get("vehicle.sysml").expect("edit");
+        assert_eq!(text.matches("doc /*").count(), 1, "{text}");
+        assert!(text.contains("Mass stays within the revised limit."), "{text}");
+        assert!(
+            !text.contains("Total vehicle mass stays within the limit."),
+            "the first doc must be replaced, not accumulated:\n{text}"
+        );
+        assert_fidelity_comments_survive(text);
+        // Everything outside the doc+declaration region is byte-identical to
+        // the first apply's output.
+        let prefix_end = first_text.find("doc /*").expect("doc marker");
+        let suffix_start = first_text
+            .find("    // Wheels arrive in rev B.")
+            .expect("suffix marker");
+        assert!(text.starts_with(&first_text[..prefix_end]), "{text}");
+        assert!(text.ends_with(&first_text[suffix_start..]), "{text}");
+    }
+
     #[test]
     fn sysml_rename_apply_patches_only_the_edited_declaration() {
         let application = apply_fidelity_operation(SemanticMutation::RenameDeclaration {

@@ -2453,6 +2453,14 @@ fn transpile_usage_tree(
             mappings,
         );
         elements.push(element);
+        append_documentation_elements(
+            elements,
+            &usage_id,
+            &usage.docs,
+            &usage.span,
+            source_file,
+            source_language,
+        );
         transpile_usage_tree(
             &usage.members,
             &usage_id,
