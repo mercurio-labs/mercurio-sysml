@@ -1,22 +1,23 @@
 # Releasing Mercurio SysML
 
-Mercurio SysML is one release unit with `mercurio-sysml` as its public
-crates.io entry point. `mercurio-sysml-resources`,
-`mercurio-language-frontend`, `mercurio-kerml`, `mercurio-requirements`, and
-`mercurio-simulation` are published implementation packages.
-`mercurio-tools` and `mercurio-sysml-cli` remain excluded from crates.io
-publication.
+Mercurio SysML is one release unit and one crates.io package:
+`mercurio-sysml`. The former implementation packages
+`mercurio-sysml-resources`, `mercurio-language-frontend`, `mercurio-kerml`,
+`mercurio-requirements`, and `mercurio-simulation` remain in the workspace
+only as non-publishable compatibility shims. Their implementations live in
+focused modules of `mercurio-sysml`. `mercurio-tools` and
+`mercurio-sysml-cli` are also non-publishable.
 
-All publishable SysML packages use the version in `[workspace.package]`.
-Internal and Foundation dependencies retain both a local `path` and a registry
-`version`.
+The public crate uses the version in `[workspace.package]`. Its Foundation
+dependency retains both a local `path` for paired development and a registry
+`version` for the packaged crate.
 
 ## Prerequisite
 
-Publish the required Mercurio Foundation release first and confirm that all of
-its packages are visible on crates.io. The `FOUNDATION_REF` in
-`.github/workflows/crates-release.yml` identifies the Foundation source release
-used to qualify the local path dependencies.
+Publish the matching `mercurio-foundation` release first and confirm that it
+is visible on crates.io. `FOUNDATION_REF` in
+`.github/workflows/crates-release.yml` identifies the Foundation source
+release used to qualify the local path dependency.
 
 ## Qualification
 
@@ -25,33 +26,25 @@ repository:
 
 ```powershell
 cargo test --workspace --locked
+$env:MERCURIO_REPO_ROOT = "..\mercurio-foundation"
 cargo run -p mercurio-tools --bin check_repo_boundaries -- --manifest ..\mercurio-foundation\repo-boundaries.json --strict
-cargo doc --workspace --no-deps --locked
-cargo package --workspace --exclude mercurio-tools --exclude mercurio-sysml-cli --no-verify --locked
+$env:RUSTDOCFLAGS = "-D warnings"
+cargo doc -p mercurio-sysml --all-features --no-deps --locked
+cargo package -p mercurio-sysml --locked
 ```
 
-## First Release
+The release workflow also extracts the generated `.crate` archive and runs the
+canonical crate's all-feature tests from that archive. This verifies that the
+published artifact contains its language modules and versioned resources and
+does not rely on sibling workspace packages.
 
-Before pushing the first tag:
+## Release
 
-1. Create a crates.io API token with permission to publish new crates.
-2. Add it to the `mercurio-sysml` GitHub repository as the
-   `CARGO_REGISTRY_TOKEN` Actions secret.
-3. Protect the optional `crates-io` GitHub environment if release approval is
-   desired.
-4. Merge the qualified release commit to `main`.
-5. Create and push `sysml-v<version>`, for example `sysml-v0.85.0`.
+Before pushing a tag:
 
-The workflow is resumable and waits for registry-index propagation between
-dependent packages. After the first release, configure crates.io Trusted
-Publishing and replace the long-lived token step with the crates.io OIDC
-action.
+1. Confirm `mercurio-foundation` at the matching version is published.
+2. Merge the qualified release commit to `main`.
+3. Create and push `sysml-v<version>`, for example `sysml-v0.86.0`.
 
-## Publish Order
-
-1. `mercurio-sysml-resources`
-2. `mercurio-language-frontend`
-3. `mercurio-requirements`
-4. `mercurio-kerml`
-5. `mercurio-sysml`
-6. `mercurio-simulation`
+The workflow publishes only `mercurio-sysml`. A manual dispatch can safely
+resume a release; it exits successfully when that version is already present.

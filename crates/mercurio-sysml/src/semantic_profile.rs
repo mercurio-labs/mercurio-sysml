@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 
-use mercurio_core::{
+use mercurio_foundation::{
     Atom, AttributePolicyAnswer, CORE_RULEPACK_VERSION, CapabilityAnswer, Concept, Fact, Graph,
     KirFieldKind, LanguageId, Rule, RulePack, SemanticCapabilityOracle, SemanticCapabilityProfile,
     SemanticElementAuthoring, SemanticElementForm, TableSemanticCapabilityOracle, Term,
@@ -574,7 +574,7 @@ pub fn sysml_language_profile() -> LanguageProfile {
         metamodel_version: "sysml-2.0".to_string(),
         stdlib_version: "sysml-2.0".to_string(),
         stdlib_path: "resources/sysml/sysml-library.kir.json".to_string(),
-        kir_schema_version: mercurio_core::ir::KIR_SCHEMA_VERSION.to_string(),
+        kir_schema_version: mercurio_foundation::ir::KIR_SCHEMA_VERSION.to_string(),
         canonical_kinds: BTreeMap::from([
             (Concept::PACKAGE, "KerML::Kernel::Package".to_string()),
             (Concept::TYPE, "KerML::Kernel::Type".to_string()),
@@ -726,7 +726,7 @@ pub fn normalize_definition_keyword(keyword: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_core::{Graph, KirDocument, KirElement, materialize_core_indexes};
+    use mercurio_foundation::{Graph, KirDocument, KirElement, materialize_core_indexes};
     use serde_json::json;
 
     #[test]

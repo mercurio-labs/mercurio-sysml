@@ -4,8 +4,8 @@ use std::fmt;
 use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 
-use mercurio_core::graph::{Element, Graph};
-use mercurio_core::{
+use mercurio_foundation::graph::{Element, Graph};
+use mercurio_foundation::{
     AnalysisScope, CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind,
     CapabilityMaturity, CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry,
     CapabilityRunReport, CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget,
@@ -1578,8 +1578,8 @@ mod tests {
     use serde_json::json;
 
     use super::*;
-    use mercurio_core::graph::Graph;
-    use mercurio_core::{KirDocument, KirElement};
+    use mercurio_foundation::graph::Graph;
+    use mercurio_foundation::{KirDocument, KirElement};
 
     #[test]
     fn propagates_simple_acausal_equation() {

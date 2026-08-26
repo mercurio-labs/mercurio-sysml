@@ -4,27 +4,29 @@ use std::sync::OnceLock;
 use serde::Deserialize;
 use serde_json::{Map, Value, json};
 
-use mercurio_kir::{KIR_SCHEMA_VERSION, KirDocument, KirElement};
-use mercurio_language_contracts::ast::{BinaryOp, SourceSpan, UnaryOp};
-use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_contracts::expression::{
+use mercurio_foundation::kir::{KIR_SCHEMA_VERSION, KirDocument, KirElement};
+use mercurio_foundation::language_contracts::ast::{BinaryOp, SourceSpan, UnaryOp};
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::expression::{
     BinaryExpressionOp, ExpressionIr, ExpressionPathRoot, ExpressionPathSegment, UnaryExpressionOp,
 };
 
 use crate::SourceLanguage;
-use crate::lowering::elaborate::{
+use crate::language_frontend::lowering::elaborate::{
     ReferenceUsageSemantics, UsageFamilyDefaults, dedupe_refs, usage_all_type_refs,
 };
-use crate::lowering::ir::{
+use crate::language_frontend::lowering::ir::{
     ResolvedDefinition, ResolvedExpr, ResolvedImport, ResolvedModule, ResolvedPackage,
     ResolvedPathSegment, ResolvedUsage,
 };
-use crate::lowering::rules::{LoweringRule, LoweringRuleSeed};
-use crate::lowering::semantic_actions::{apply_usage_actions, usage_action_applies};
-use crate::lowering::semantic_defaults::{
+use crate::language_frontend::lowering::rules::{LoweringRule, LoweringRuleSeed};
+use crate::language_frontend::lowering::semantic_actions::{
+    apply_usage_actions, usage_action_applies,
+};
+use crate::language_frontend::lowering::semantic_defaults::{
     ReferenceModifierSemanticsSeed, SemanticDefaultsSeed, UsageActionSeed, UsagePropertyDefaultSeed,
 };
-use crate::lowering::semantic_properties::{
+use crate::language_frontend::lowering::semantic_properties::{
     apply_usage_property_defaults, usage_property_default_applies,
 };
 #[derive(Debug, Clone, Deserialize)]
@@ -951,7 +953,7 @@ fn merge_emission_seeds(mut base: KirEmissionSeed, overlay: KirEmissionSeed) -> 
 }
 
 fn load_metamodel_constructs_seed() -> Result<String, Diagnostic> {
-    Ok(mercurio_sysml_resources::SYSML_057_METAMODEL_CONSTRUCTS.to_string())
+    Ok(crate::resources::SYSML_057_METAMODEL_CONSTRUCTS.to_string())
 }
 
 fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
@@ -968,15 +970,15 @@ fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {
 }
 
 fn load_kir_emission_seed() -> Result<String, Diagnostic> {
-    Ok(mercurio_sysml_resources::SYSML_057_KIR_EMISSION.to_string())
+    Ok(crate::resources::SYSML_057_KIR_EMISSION.to_string())
 }
 
 fn load_lowering_rules_seed() -> &'static str {
-    mercurio_sysml_resources::SYSML_057_LOWERING_RULES
+    crate::resources::SYSML_057_LOWERING_RULES
 }
 
 fn load_semantic_defaults_seed() -> &'static str {
-    mercurio_sysml_resources::SYSML_057_SEMANTIC_DEFAULTS
+    crate::resources::SYSML_057_SEMANTIC_DEFAULTS
 }
 
 fn resolve_semantic_default_value(value: &str, usage: &ResolvedUsage) -> String {

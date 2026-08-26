@@ -1,9 +1,9 @@
-use mercurio_language_contracts::ast::{
+use mercurio_foundation::language_contracts::ast::{
     AliasDecl, Declaration, GenericDefinitionDecl, GenericUsageDecl, ImportDecl, PackageDecl,
     ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
-use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::lexer::{Token, TokenKind, lex};
 
 pub fn parse_kerml(input: &str) -> Result<SysmlModule, Diagnostic> {
     let tokens = lex(input)?;

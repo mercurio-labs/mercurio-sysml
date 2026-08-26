@@ -2,7 +2,7 @@
 
 Mercurio SysML is the concrete language repository for SysML-family source text.
 It owns parsing, recovery, language-specific lowering, bundled metamodel
-resources, and tools that maintain those resources.
+resources, and tools that maintain those resources. `mercurio-sysml` is the only publishable package; focused modules preserve the former package boundaries.
 
 Foundation owns the language-neutral model substrate. This repository owns the
 SysML language service that turns source text into KIR for that substrate.

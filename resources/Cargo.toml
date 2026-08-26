@@ -3,10 +3,11 @@ name = "mercurio-sysml-resources"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Versioned KerML and SysML resource bundles used by Mercurio SysML."
+description = "Compatibility shim for mercurio-sysml::resources."
 repository.workspace = true
 readme.workspace = true
 rust-version.workspace = true
+publish = false
 
-[lib]
-path = "src/lib.rs"
+[dependencies]
+mercurio-sysml = { path = "../crates/mercurio-sysml", version = "0.86.0" }

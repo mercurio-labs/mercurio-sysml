@@ -2,10 +2,10 @@
 
 use std::collections::BTreeSet;
 
-use mercurio_language_contracts::ast::QualifiedName;
+use mercurio_foundation::language_contracts::ast::QualifiedName;
 
-use crate::lowering::emit::MappingBundle;
-use crate::lowering::ir::ResolvedUsage;
+use crate::language_frontend::lowering::emit::MappingBundle;
+use crate::language_frontend::lowering::ir::ResolvedUsage;
 
 #[derive(Debug, Clone, Default)]
 pub(crate) struct ReferenceUsageSemantics {
@@ -37,7 +37,7 @@ pub(crate) fn should_annotate_connection_end_direction(
 
 pub(crate) fn should_use_implicit_reference_redefinition_target(
     mappings: &MappingBundle,
-    usage: &crate::lowering::collect::CollectedUsage,
+    usage: &crate::language_frontend::lowering::collect::CollectedUsage,
 ) -> bool {
     has_elaboration_rule(mappings, &usage.construct, "implicit-ref-redefines-target")
         && usage.is_implicit_name
@@ -49,7 +49,7 @@ pub(crate) fn should_use_implicit_reference_redefinition_target(
 
 pub(crate) fn shorthand_reference_target(
     mappings: &MappingBundle,
-    usage: &crate::lowering::collect::CollectedUsage,
+    usage: &crate::language_frontend::lowering::collect::CollectedUsage,
 ) -> Option<QualifiedName> {
     let rule_id = match usage.construct.as_str() {
         "SatisfyUsage" => "satisfy-name-as-reference-target",
@@ -95,10 +95,10 @@ pub(crate) fn dedupe_refs(values: Vec<String>) -> Vec<String> {
 mod tests {
     use std::collections::BTreeMap;
 
-    use mercurio_language_contracts::ast::SourceSpan;
+    use mercurio_foundation::language_contracts::ast::SourceSpan;
 
     use super::*;
-    use crate::lowering::collect::CollectedUsage;
+    use crate::language_frontend::lowering::collect::CollectedUsage;
 
     fn span() -> SourceSpan {
         SourceSpan {

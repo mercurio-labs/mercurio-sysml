@@ -1,4 +1,4 @@
-use mercurio_core::DslExtensionSpec;
+use mercurio_foundation::DslExtensionSpec;
 
 pub fn sysml_dsl_extension() -> DslExtensionSpec {
     DslExtensionSpec::new("sysml")

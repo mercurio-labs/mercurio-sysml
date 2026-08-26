@@ -10,7 +10,7 @@ use std::sync::OnceLock;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
 use crate::SourceLanguage;
 
@@ -161,7 +161,7 @@ impl LoweringRuleSeed {
 }
 
 fn load_sysml_lowering_rules_seed() -> &'static str {
-    mercurio_sysml_resources::SYSML_057_LOWERING_RULES
+    crate::resources::SYSML_057_LOWERING_RULES
 }
 
 fn canonical_sysml_profile_id(profile_id: &str) -> Option<&'static str> {

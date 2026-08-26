@@ -2,21 +2,21 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
-use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
-use mercurio_language_contracts::ast::{
+use crate::language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
+use crate::language_frontend::resolver::{
+    ResolvedDefinition, ResolvedModule, ResolvedUsage, ResolverContext, resolve_module,
+    resolve_module_with_context, resolve_module_with_resolver_context,
+};
+use crate::language_frontend::transpile::transpile_module;
+use mercurio_foundation::kir::{DiagnosticKind, KirDocument, KirError};
+use mercurio_foundation::language_contracts::ast::{
     AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
     LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName,
     SourceSpan, UnaryOp,
 };
-use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
-pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
-use mercurio_language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
-use mercurio_language_frontend::resolver::{
-    ResolvedDefinition, ResolvedModule, ResolvedUsage, ResolverContext, resolve_module,
-    resolve_module_with_context, resolve_module_with_resolver_context,
-};
-use mercurio_language_frontend::transpile::transpile_module;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::lexer::{Token, TokenKind, lex};
+pub use mercurio_foundation::language_contracts::reports::{ParseReport, SemanticCompileStatus};
 use serde_json::Value;
 
 use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, release_bundle};
@@ -51,7 +51,7 @@ pub enum SysmlError {
 }
 
 pub type SemanticCompileReport =
-    mercurio_language_contracts::reports::SemanticCompileReport<KirDocument>;
+    mercurio_foundation::language_contracts::reports::SemanticCompileReport<KirDocument>;
 
 impl std::fmt::Display for SysmlError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -263,9 +263,9 @@ pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDo
             crate::sysml_field_specs().iter().copied(),
         ),
 
-        StdlibLocator::Kpar { locator: loc } => mercurio_core::BaselineLibraryConfig {
+        StdlibLocator::Kpar { locator: loc } => mercurio_foundation::BaselineLibraryConfig {
             id: "stdlib".to_string(),
-            provider: mercurio_core::LibraryProviderConfig::KparLocator {
+            provider: mercurio_foundation::LibraryProviderConfig::KparLocator {
                 locator: loc.clone(),
             },
         }
@@ -4359,7 +4359,7 @@ pub(crate) fn repo_path(relative: &str) -> PathBuf {
     }
     relative
         .strip_prefix("resources/")
-        .map(|resource_relative| mercurio_sysml_resources::resource_root().join(resource_relative))
+        .map(|resource_relative| crate::resources::resource_root().join(resource_relative))
         .unwrap_or(candidate)
 }
 
@@ -4382,7 +4382,7 @@ fn repo_root() -> PathBuf {
         }
     }
 
-    mercurio_sysml_resources::resource_root()
+    crate::resources::resource_root()
 }
 
 #[cfg(test)]
@@ -4396,14 +4396,16 @@ mod tests {
         compile_sysml_module_with_context_report, compile_sysml_text_with_context_report,
         default_sysml_library_path, load_sysml_document, parse_sysml, parse_sysml_recovering,
     };
-    use crate::project_state_machines;
-    use mercurio_core::{ExecutionContext, KirDocument, KirElement, Runtime, load_model_stack};
-    use mercurio_language_contracts::ast::{Declaration, Expr, GenericDefinitionDecl};
-    use mercurio_language_frontend::resolver::{
+    use crate::language_frontend::resolver::{
         ResolvedExpr, ResolvedPathSegment, ResolvedUsage, resolve_module,
         resolve_module_with_context,
     };
-    use mercurio_language_frontend::transpile::{MappingBundle, transpile_module};
+    use crate::language_frontend::transpile::{MappingBundle, transpile_module};
+    use crate::project_state_machines;
+    use mercurio_foundation::language_contracts::ast::{Declaration, Expr, GenericDefinitionDecl};
+    use mercurio_foundation::{
+        ExecutionContext, KirDocument, KirElement, Runtime, load_model_stack,
+    };
 
     fn write_sample_model() -> PathBuf {
         let unique = SystemTime::now()

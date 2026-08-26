@@ -1,10 +1,10 @@
 use serde_json::{Map, Value};
 
-use mercurio_kir::KirElement;
+use mercurio_foundation::kir::KirElement;
 
-use crate::lowering::emit::MappingBundle;
-use crate::lowering::ir::ResolvedUsage;
-use crate::lowering::semantic_defaults::UsageActionSeed;
+use crate::language_frontend::lowering::emit::MappingBundle;
+use crate::language_frontend::lowering::ir::ResolvedUsage;
+use crate::language_frontend::lowering::semantic_defaults::UsageActionSeed;
 
 pub(crate) fn usage_action_applies(action: &UsageActionSeed, usage: &ResolvedUsage) -> bool {
     if !action

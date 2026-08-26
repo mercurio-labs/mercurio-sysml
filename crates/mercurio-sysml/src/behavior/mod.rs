@@ -7,8 +7,8 @@ pub use capability::{SysmlDynamicBehaviorCapability, register_sysml_behavior_cap
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
-use mercurio_core::graph::{Element, Graph};
-use mercurio_core::runtime::Runtime;
+use mercurio_foundation::graph::{Element, Graph};
+use mercurio_foundation::runtime::Runtime;
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct StateMachineModel {
@@ -845,7 +845,7 @@ mod tests {
 
     use serde_json::Value;
 
-    use mercurio_core::{KirDocument, KirElement};
+    use mercurio_foundation::{KirDocument, KirElement};
 
     use super::*;
 

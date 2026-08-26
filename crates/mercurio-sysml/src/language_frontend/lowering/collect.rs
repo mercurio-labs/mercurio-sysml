@@ -2,16 +2,16 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 
-use mercurio_language_contracts::ast::{
+use mercurio_foundation::language_contracts::ast::{
     AliasDecl, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
     MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
-use crate::lowering::elaborate::should_annotate_connection_end_direction;
-use crate::lowering::emit::MappingBundle;
-use crate::lowering::ir::ResolvedPackage;
-use crate::lowering::rules::LoweringRule;
+use crate::language_frontend::lowering::elaborate::should_annotate_connection_end_direction;
+use crate::language_frontend::lowering::emit::MappingBundle;
+use crate::language_frontend::lowering::ir::ResolvedPackage;
+use crate::language_frontend::lowering::rules::LoweringRule;
 
 #[derive(Debug, Clone, Default)]
 pub(crate) struct CollectedModule {

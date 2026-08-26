@@ -21,7 +21,7 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  FOUNDATION_REF: foundation-v0.85.0
+  FOUNDATION_REF: foundation-v0.86.0
 
 jobs:
   qualify:
@@ -36,30 +36,45 @@ jobs:
           ref: ${{ env.FOUNDATION_REF }}
           path: mercurio-foundation
       - uses: dtolnay/rust-toolchain@stable
-      - name: Validate release identity
+      - name: Validate release identity and publishable package set
         working-directory: mercurio-sysml
         shell: bash
         run: |
+          set -euo pipefail
           version="$(awk '/^\[workspace.package\]/{in_package=1; next} in_package && /^version = /{gsub(/"/, "", $3); print $3; exit}' Cargo.toml)"
           test -n "${version}"
           if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
             test "${GITHUB_REF_NAME}" = "sysml-v${version}"
           fi
+          mapfile -t packages < <(
+            cargo metadata --no-deps --format-version 1 |
+              jq -r '.packages[] | select(.publish == null) | .name' |
+              sort
+          )
+          test "${#packages[@]}" -eq 1
+          test "${packages[0]}" = "mercurio-sysml"
       - name: Test workspace
         working-directory: mercurio-sysml
         run: cargo test --workspace --locked
       - name: Check repository boundaries
         working-directory: mercurio-sysml
+        env:
+          MERCURIO_REPO_ROOT: ../mercurio-foundation
         run: cargo run -p mercurio-tools --bin check_repo_boundaries -- --manifest ../mercurio-foundation/repo-boundaries.json --strict
-      - name: Assemble crates.io packages
+      - name: Assemble and verify the public crate
         working-directory: mercurio-sysml
-        run: >-
-          cargo package
-          --workspace
-          --exclude mercurio-tools
-          --exclude mercurio-sysml-cli
-          --no-verify
-          --locked
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(awk '/^\[workspace.package\]/{in_package=1; next} in_package && /^version = /{gsub(/"/, "", $3); print $3; exit}' Cargo.toml)"
+          cargo package -p mercurio-sysml --locked
+          rm -rf target/package/verify
+          mkdir -p target/package/verify
+          tar -xzf "target/package/mercurio-sysml-${version}.crate" -C target/package/verify
+          cargo test \
+            --manifest-path "target/package/verify/mercurio-sysml-${version}/Cargo.toml" \
+            --all-features \
+            --locked
 
   publish:
     if: github.ref_type == 'tag' || (github.event_name == 'workflow_dispatch' && inputs.publish)
@@ -78,52 +93,24 @@ jobs:
           ref: ${{ env.FOUNDATION_REF }}
           path: mercurio-foundation
       - uses: dtolnay/rust-toolchain@stable
-      - name: Publish packages in dependency order
+      - name: Publish mercurio-sysml
         working-directory: mercurio-sysml
         shell: bash
         run: |
           set -euo pipefail
           version="$(awk '/^\[workspace.package\]/{in_package=1; next} in_package && /^version = /{gsub(/"/, "", $3); print $3; exit}' Cargo.toml)"
-          packages=(
-            mercurio-sysml-resources
-            mercurio-language-frontend
-            mercurio-requirements
-            mercurio-kerml
-            mercurio-sysml
-            mercurio-simulation
-          )
 
           published() {
             curl --fail --silent --show-error \
               --header "User-Agent: mercurio-sysml-release/${version}" \
-              "https://crates.io/api/v1/crates/$1" |
+              "https://crates.io/api/v1/crates/mercurio-sysml" |
               jq --exit-status --arg version "${version}" \
                 '.versions | any(.num == $version)' >/dev/null
           }
 
-          publish_one() {
-            local package="$1"
-            if published "${package}"; then
-              echo "${package} ${version} is already published"
-              return
-            fi
+          if published; then
+            echo "mercurio-sysml ${version} is already published"
+            exit 0
+          fi
 
-            for attempt in {1..15}; do
-              if cargo publish --locked --package "${package}"; then
-                return
-              fi
-              if published "${package}"; then
-                return
-              fi
-              if [[ "${attempt}" -eq 15 ]]; then
-                echo "failed to publish ${package} ${version}" >&2
-                return 1
-              fi
-              echo "publish attempt ${attempt} failed; retrying ${package} in 60 seconds"
-              sleep 60
-            done
-          }
-
-          for package in "${packages[@]}"; do
-            publish_one "${package}"
-          done
+          cargo publish --locked --package mercurio-sysml
