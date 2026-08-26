@@ -1,9 +1,9 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
-use mercurio_core::analysis::{AnalysisCaseModel, AnalysisElementRef, AnalysisInventory};
-use mercurio_core::graph::{Element, Graph};
-use mercurio_core::runtime::Runtime;
+use mercurio_foundation::analysis::{AnalysisCaseModel, AnalysisElementRef, AnalysisInventory};
+use mercurio_foundation::graph::{Element, Graph};
+use mercurio_foundation::runtime::Runtime;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
@@ -1397,7 +1397,7 @@ fn canonical_kind(kind: &str) -> String {
 mod tests {
     use super::*;
     use crate::{compile_sysml_text, load_sysml_baseline};
-    use mercurio_core::{KirDocument, KirElement};
+    use mercurio_foundation::{KirDocument, KirElement};
     use serde_json::json;
 
     #[test]

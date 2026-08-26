@@ -4,7 +4,7 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
-use mercurio_kir::{
+use mercurio_foundation::kir::{
     KIR_SCHEMA_VERSION, KIR_SCHEMA_VERSION_METADATA_KEY, KirDocument, KirElement, KirError,
     KirFieldKind, KirFieldRegistry, inferred_layer,
 };

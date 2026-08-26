@@ -2,7 +2,9 @@ use std::collections::BTreeMap;
 
 use serde_json::Value;
 
-use mercurio_language_contracts::ast::{BinaryOp, MultiplicityRange, SourceSpan, UnaryOp};
+use mercurio_foundation::language_contracts::ast::{
+    BinaryOp, MultiplicityRange, SourceSpan, UnaryOp,
+};
 
 #[derive(Debug, Clone)]
 pub struct ResolvedModule {

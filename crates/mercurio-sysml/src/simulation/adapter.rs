@@ -1,10 +1,13 @@
 use std::collections::BTreeMap;
 
-use mercurio_core::graph::Element;
+use mercurio_foundation::graph::Element;
 use serde_json::Value;
 
-use mercurio_core::runtime::Runtime;
-use mercurio_simulation_core::{
+use crate::{
+    StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
+};
+use mercurio_foundation::runtime::Runtime;
+use mercurio_foundation::simulation_core::{
     AnalysisCaseInfo, AssignEffect, ConcurrentSimulationScenario, ConcurrentSubjectScenario,
     LogEffect, SignalEffect, SimulationActionNode, SimulationActionSequence, SimulationBindingRule,
     SimulationClockConfig, SimulationDerivedFeatureRule, SimulationEffect, SimulationEvent,
@@ -13,20 +16,19 @@ use mercurio_simulation_core::{
     SimulationRequirement, SimulationState, SimulationStateMachine, SimulationTransition,
     SimulationTrigger, SimulationTriggerKind, StateDoBehavior, validate_simulation_model,
 };
-use mercurio_sysml::{
-    StateMachineModel, StateTransitionTriggerKind, TransitionNode, project_state_machines,
-};
 
 #[derive(Debug)]
 pub enum SysmlSimulationAdapterError {
-    InvalidProfile(mercurio_simulation_core::SimulationProfileError),
+    InvalidProfile(mercurio_foundation::simulation_core::SimulationProfileError),
     MissingAnalysisCase(String),
     MissingStateMachine(String),
     InvalidAnalysisCase(String),
 }
 
-impl From<mercurio_simulation_core::SimulationProfileError> for SysmlSimulationAdapterError {
-    fn from(error: mercurio_simulation_core::SimulationProfileError) -> Self {
+impl From<mercurio_foundation::simulation_core::SimulationProfileError>
+    for SysmlSimulationAdapterError
+{
+    fn from(error: mercurio_foundation::simulation_core::SimulationProfileError) -> Self {
         Self::InvalidProfile(error)
     }
 }
@@ -427,7 +429,7 @@ fn feature_ref_from_path(path: &str) -> Option<SimulationFeatureRef> {
     })
 }
 
-fn normalize_state(state: &mercurio_sysml::StateNode) -> SimulationState {
+fn normalize_state(state: &crate::StateNode) -> SimulationState {
     SimulationState {
         id: state.id.clone(),
         label: state.label.clone(),
@@ -1168,9 +1170,9 @@ mod tests {
 
     use serde_json::json;
 
-    use mercurio_core::runtime::Runtime;
-    use mercurio_core::{KirDocument, KirElement};
-    use mercurio_simulation_core::{SimulationRateSource, StateDoBehavior};
+    use mercurio_foundation::runtime::Runtime;
+    use mercurio_foundation::simulation_core::{SimulationRateSource, StateDoBehavior};
+    use mercurio_foundation::{KirDocument, KirElement};
 
     use super::*;
 

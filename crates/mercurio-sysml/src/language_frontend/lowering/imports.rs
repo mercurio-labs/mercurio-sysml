@@ -2,16 +2,18 @@
 
 use std::collections::BTreeMap;
 
-use mercurio_language_contracts::ast::{QualifiedName, SourceSpan};
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::ast::{QualifiedName, SourceSpan};
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
-use crate::lowering::collect::{CollectedDefinition, CollectedUsage, ImportAliases};
-use crate::lowering::ir::{ResolvedImport, ResolvedPackage};
-use crate::lowering::names::{
+use crate::language_frontend::lowering::collect::{
+    CollectedDefinition, CollectedUsage, ImportAliases,
+};
+use crate::language_frontend::lowering::ir::{ResolvedImport, ResolvedPackage};
+use crate::language_frontend::lowering::names::{
     direct_child_name, dotted_name_to_qualified_name, import_namespace_prefix,
     qualified_names_match, resolve_local_namespace_dot,
 };
-use crate::lowering::policy::ResolvePolicy;
+use crate::language_frontend::lowering::policy::ResolvePolicy;
 pub(crate) fn build_import_alias_map(
     imports: &[ResolvedImport],
     packages: &[ResolvedPackage],

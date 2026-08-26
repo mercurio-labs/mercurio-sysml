@@ -517,7 +517,9 @@ struct MetamodelExtractAttribute {
 fn load_compare_profile(
     profile_id: &str,
 ) -> Result<SemanticCompareProfile, Box<dyn std::error::Error>> {
-    let profile_root = tool_repo_path(&format!("resources/metamodels/{profile_id}"));
+    let profile_root = tool_repo_path(&format!(
+        "crates/mercurio-sysml/resources/metamodels/{profile_id}"
+    ));
     let metamodel_path = profile_root.join("metamodel.extract.json");
     let overlay_path = profile_root.join("mappings/compare_tolerances.overlay.json");
     let metamodel: MetamodelExtract =

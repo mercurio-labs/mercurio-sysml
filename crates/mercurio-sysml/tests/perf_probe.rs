@@ -11,7 +11,7 @@
 use std::collections::BTreeMap;
 use std::time::Instant;
 
-use mercurio_core::{ElementRef, SemanticNextActionsRequest, WorkspaceRevision};
+use mercurio_foundation::{ElementRef, SemanticNextActionsRequest, WorkspaceRevision};
 use mercurio_sysml::{
     load_authoring_project_from_sysml, sysml_semantic_legality_service_for_release,
     sysml_semantic_next_actions_service_for_release,
@@ -112,7 +112,7 @@ fn probe_next_actions_latency() {
 
     for round in 0..3 {
         let t = Instant::now();
-        let report = legality.check(mercurio_core::SemanticLegalityRequest::relationship(
+        let report = legality.check(mercurio_foundation::SemanticLegalityRequest::relationship(
             "satisfy", "part", "part",
         ));
         println!(
@@ -150,7 +150,7 @@ fn probe_next_actions_latency() {
         .elements
         .iter()
         .filter(|element| element.element.qualified_name != "VehicleMassCompliance.Vehicle")
-        .map(|element| mercurio_core::SemanticNextActionTarget {
+        .map(|element| mercurio_foundation::SemanticNextActionTarget {
             element: ElementRef::new(element.element.qualified_name.clone()),
             kind: element
                 .attributes
@@ -170,7 +170,7 @@ fn probe_next_actions_latency() {
     let facts = context
         .facts
         .iter()
-        .map(|fact| mercurio_core::Fact {
+        .map(|fact| mercurio_foundation::Fact {
             predicate: fact.predicate.clone(),
             terms: fact.terms.clone(),
         })

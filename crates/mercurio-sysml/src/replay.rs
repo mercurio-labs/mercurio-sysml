@@ -18,7 +18,7 @@
 //!    `apply_checked_plan`, and merges `edited_files`.
 //! 3. [`run_authoring_parity`] compares the replayed compile against the
 //!    reference compile with the C1 equivalence oracle
-//!    (`mercurio_core::kir_canonical`).
+//!    (`mercurio_foundation::kir_canonical`).
 //!
 //! Blocked-construct exclusion is principled: the deriver produces, alongside
 //! the script, an *expressible reference* — the reference authoring tree with
@@ -61,12 +61,12 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
-use mercurio_core::authoring::{
+use mercurio_foundation::authoring::{
     AuthoringModule, AuthoringProject, Declaration, Definition, Package, QualifiedName, Usage,
     textual_model_authoring_render_profile,
 };
-use mercurio_core::kir_canonical::{KirEquivalenceReport, kir_equivalence_report};
-use mercurio_core::{
+use mercurio_foundation::kir_canonical::{KirEquivalenceReport, kir_equivalence_report};
+use mercurio_foundation::{
     ElementRef, FeasibilityStatus, MutationContext, MutationFeasibilityService, MutationProposal,
     SemanticExpression, SemanticLegalityStatus, SemanticMutation,
 };
@@ -683,7 +683,7 @@ impl GestureDeriver<'_> {
                 Declaration::Import(import) => {
                     if imports_expressible {
                         pruned.members.push(Declaration::Import(
-                            mercurio_core::authoring::Import {
+                            mercurio_foundation::authoring::Import {
                                 path: import.path.clone(),
                                 comments: Vec::new(),
                                 docs: Vec::new(),

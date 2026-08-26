@@ -30,21 +30,26 @@ jobs:
         run: cargo test --workspace --locked
       - name: Check repository boundaries
         working-directory: mercurio-sysml
+        env:
+          MERCURIO_REPO_ROOT: ../mercurio-foundation
         run: cargo run -p mercurio-tools --bin check_repo_boundaries -- --manifest ../mercurio-foundation/repo-boundaries.json --strict
       - name: Build rustdoc without warnings
         working-directory: mercurio-sysml
         env:
           RUSTDOCFLAGS: -D warnings
         run: cargo doc --workspace --no-deps --locked
+      - name: Assert the public package set
+        working-directory: mercurio-sysml
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t packages < <(
+            cargo metadata --no-deps --format-version 1 |
+              jq -r '.packages[] | select(.publish == null) | .name' |
+              sort
+          )
+          test "${#packages[@]}" -eq 1
+          test "${packages[0]}" = "mercurio-sysml"
       - name: Inspect public crates.io package contents
         working-directory: mercurio-sysml
-        run: >-
-          cargo package
-          --list
-          -p mercurio-sysml-resources
-          -p mercurio-language-frontend
-          -p mercurio-kerml
-          -p mercurio-requirements
-          -p mercurio-sysml
-          -p mercurio-simulation
-          --locked
+        run: cargo package --list -p mercurio-sysml --locked

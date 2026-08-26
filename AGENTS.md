@@ -4,17 +4,18 @@ KerML and SysML v2 language libraries. Owns the concrete language implementation
 
 ---
 
-## Crates
+## Crate and module architecture
 
-| Crate | Responsibility |
-|-------|---------------|
-| `mercurio-language-frontend` | Source text → parse tree → KIR pipeline entry point |
-| `mercurio-kerml` | KerML metamodel resources and semantic rules |
-| `mercurio-sysml` | SysML v2 compiler, semantic analysis, public simulation API |
-| `mercurio-simulation` | SysML simulation adapter, shared simulation types, and concurrent engine |
-| `mercurio-requirements` | Requirements traceability and coverage analysis |
-| `mercurio-tools` | Maintainer tooling: boundary checker, metamodel validators |
-| `mercurio-sysml-cli` | CLI entry point |
+| Package/module | Responsibility |
+|----------------|----------------|
+| `mercurio-sysml` | Only publishable package; SysML facade and all language modules |
+| `mercurio_sysml::language_frontend` | Source text → parse tree → KIR lowering pipeline |
+| `mercurio_sysml::kerml` | KerML parser, compiler, and baseline services |
+| `mercurio_sysml::requirements` | Requirements traceability and coverage analysis |
+| `mercurio_sysml::simulation` | SysML simulation adapter and concurrent engine |
+| `mercurio_sysml::resources` | Embedded metamodel, mapping, rulepack, and stdlib resources |
+| `mercurio-tools` | Non-publishable maintainer tooling |
+| `mercurio-sysml-cli` | Non-publishable CLI entry point |
 
 ---
 

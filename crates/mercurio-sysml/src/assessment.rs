@@ -1,5 +1,5 @@
-use mercurio_core::Fact;
-use mercurio_language_contracts::ast::{Declaration, GenericUsageDecl, ParsedModule};
+use mercurio_foundation::Fact;
+use mercurio_foundation::language_contracts::ast::{Declaration, GenericUsageDecl, ParsedModule};
 
 pub fn sysml_parsed_module_assessment_facts(module: &ParsedModule) -> Vec<Fact> {
     let mut facts = Vec::new();

@@ -1127,10 +1127,10 @@ fn pilot_java_artifacts_stage(pilot_root: &Path) -> Result<StageTrace, Box<dyn s
 fn stage_candidate_bundle(args: &Args) -> Result<StageTrace, Box<dyn std::error::Error>> {
     let started = Instant::now();
     let requested_source_root = sysml_workspace_root()
-        .join("resources/metamodels")
+        .join("crates/mercurio-sysml/resources/metamodels")
         .join(&args.profile_id);
     let template_root = sysml_workspace_root()
-        .join("resources/metamodels")
+        .join("crates/mercurio-sysml/resources/metamodels")
         .join(DEFAULT_PROFILE_ID);
     let source_root = if requested_source_root.is_dir() {
         requested_source_root.as_path()
@@ -1616,7 +1616,8 @@ fn append_promotion_stage(
 fn promote_candidate_stage(args: &Args) -> Result<StageTrace, Box<dyn std::error::Error>> {
     let started = Instant::now();
     let candidate_resources_root = args.out.join("candidate/resources/metamodels");
-    let repo_metamodels_root = sysml_workspace_root().join("resources/metamodels");
+    let repo_metamodels_root =
+        sysml_workspace_root().join("crates/mercurio-sysml/resources/metamodels");
     let report_path = args.out.join("reports/candidate-promotion.json");
     let result = promote_candidate_resources(
         &candidate_resources_root,
@@ -1825,7 +1826,7 @@ fn write_promoted_conformance_trace(
     }
 
     let conformance_root = sysml_workspace_root()
-        .join("resources/metamodels")
+        .join("crates/mercurio-sysml/resources/metamodels")
         .join(&args.profile_id)
         .join("conformance");
     write_json(&conformance_root.join("conformance-trace.json"), trace)?;

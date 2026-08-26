@@ -1,9 +1,13 @@
+#[allow(dead_code)]
+#[path = "src/resources.rs"]
+mod resources;
+
 use std::collections::BTreeMap;
 use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use mercurio_core::{KirDocument, KirFieldKind, generate_rust_stdlib_consts};
+use mercurio_foundation::{KirDocument, KirFieldKind, generate_rust_stdlib_consts};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
@@ -67,7 +71,7 @@ struct FieldSpecOverlayEntry {
 }
 
 fn main() {
-    let resources = mercurio_sysml_resources::resource_root();
+    let resources = resources::resource_root();
     let registry_path = resources.join("metamodels/registry.json");
     let out_dir = PathBuf::from(env::var("OUT_DIR").expect("OUT_DIR"));
     println!("cargo:rerun-if-changed={}", registry_path.display());
@@ -75,9 +79,8 @@ fn main() {
         "cargo:rerun-if-changed={}",
         resources.join("kernel").display()
     );
-    let metamodels: Vec<RegistryEntry> =
-        serde_json::from_str(mercurio_sysml_resources::METAMODEL_REGISTRY)
-            .expect("failed to parse SysML metamodel registry");
+    let metamodels: Vec<RegistryEntry> = serde_json::from_str(resources::METAMODEL_REGISTRY)
+        .expect("failed to parse SysML metamodel registry");
 
     let mut runtime_field_specs = None;
     let mut runtime_vocabulary = None;
@@ -213,13 +216,13 @@ fn load_baseline_for_build(
     field_specs: &[(String, KirFieldKind)],
 ) -> KirDocument {
     let kernel = KirDocument::from_str_with_registered_fields(
-        mercurio_sysml_resources::KERML_KERNEL,
+        resources::KERML_KERNEL,
         field_specs
             .iter()
             .map(|(name, kind)| (name.as_str(), *kind)),
     )
     .expect("failed to load kernel KIR");
-    let sysml_bytes = mercurio_sysml_resources::sysml_library(metamodel_id)
+    let sysml_bytes = resources::sysml_library(metamodel_id)
         .expect("registered metamodel must have a bundled SysML library");
     let sysml = KirDocument::from_str_with_registered_fields(
         std::str::from_utf8(sysml_bytes).expect("bundled SysML library must be UTF-8"),
@@ -236,7 +239,7 @@ fn load_generated_field_specs(resources: &Path, metamodel_id: &str) -> Vec<(Stri
         .join("metamodels")
         .join(metamodel_id)
         .join("mappings/field_specs.generated.json");
-    let text = mercurio_sysml_resources::field_specs_generated(metamodel_id).unwrap_or_else(|| {
+    let text = resources::field_specs_generated(metamodel_id).unwrap_or_else(|| {
         panic!(
             "missing generated SysML field specs `{}`",
             generated_path.display()
@@ -252,13 +255,12 @@ fn load_generated_field_specs(resources: &Path, metamodel_id: &str) -> Vec<(Stri
         .join("metamodels")
         .join(metamodel_id)
         .join("mappings/field_specs.overlay.json");
-    let overlay_text =
-        mercurio_sysml_resources::field_specs_overlay(metamodel_id).unwrap_or_else(|| {
-            panic!(
-                "missing SysML field spec overlay `{}`",
-                overlay_path.display()
-            )
-        });
+    let overlay_text = resources::field_specs_overlay(metamodel_id).unwrap_or_else(|| {
+        panic!(
+            "missing SysML field spec overlay `{}`",
+            overlay_path.display()
+        )
+    });
     let overlay: FieldSpecOverlay = serde_json::from_str(overlay_text).unwrap_or_else(|err| {
         panic!(
             "failed to parse SysML field spec overlay `{}`: {err}",
@@ -307,7 +309,7 @@ fn load_writable_vocabulary(resources: &Path, metamodel_id: &str) -> MetamodelCo
         .join("metamodels")
         .join(metamodel_id)
         .join("mappings/metamodel_constructs.seed.json");
-    let text = mercurio_sysml_resources::metamodel_constructs(metamodel_id).unwrap_or_else(|| {
+    let text = resources::metamodel_constructs(metamodel_id).unwrap_or_else(|| {
         panic!(
             "missing SysML metamodel construct seed `{}`",
             seed_path.display()
@@ -330,7 +332,7 @@ fn load_grammar_containment_mismatches(
         .join("metamodels")
         .join(metamodel_id)
         .join("grammar.extract.json");
-    let text = mercurio_sysml_resources::grammar_extract(metamodel_id)
+    let text = resources::grammar_extract(metamodel_id)
         .unwrap_or_else(|| panic!("missing SysML grammar extract `{}`", grammar_path.display()));
     let grammar: GrammarExtract = serde_json::from_str(text).unwrap_or_else(|err| {
         panic!(
@@ -429,7 +431,7 @@ fn load_metamodel_generalizations(
         .join("metamodels")
         .join(metamodel_id)
         .join("metamodel.extract.json");
-    let text = mercurio_sysml_resources::metamodel_extract(metamodel_id).unwrap_or_else(|| {
+    let text = resources::metamodel_extract(metamodel_id).unwrap_or_else(|| {
         panic!(
             "missing SysML metamodel extract `{}`",
             extract_path.display()

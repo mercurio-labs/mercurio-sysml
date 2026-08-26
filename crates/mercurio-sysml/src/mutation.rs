@@ -1,6 +1,6 @@
 use std::collections::{BTreeMap, BTreeSet};
 
-use mercurio_core::{
+use mercurio_foundation::{
     Atom, AuthoringProject, CoreMutationFeasibilityService, DiagnosticRule, ElementRef, Fact,
     RuleDiagnosticSeverity, RulePack, SemanticLegalityService, SemanticMutationCapabilityContext,
     SemanticNextActionsService, SemanticReasoningContext, SemanticRelationshipTargetRuleContext,
@@ -544,7 +544,7 @@ pub fn enrich_sysml_semantic_reasoning_context_with_child_affordances(
 mod tests {
     use std::collections::{BTreeMap, BTreeSet};
 
-    use mercurio_core::{
+    use mercurio_foundation::{
         ElementRef, FeasibilityStatus, Graph, KirDocument, MutationApplicationResult,
         MutationContext, MutationFeasibilityService, MutationProposal, RulePack,
         SemanticElementKind, SemanticLegalityDiagnosticSource, SemanticLegalityRequest,
@@ -1405,7 +1405,10 @@ package  Vehicle {
         );
         let text = second.edited_files.get("vehicle.sysml").expect("edit");
         assert_eq!(text.matches("doc /*").count(), 1, "{text}");
-        assert!(text.contains("Mass stays within the revised limit."), "{text}");
+        assert!(
+            text.contains("Mass stays within the revised limit."),
+            "{text}"
+        );
         assert!(
             !text.contains("Total vehicle mass stays within the limit."),
             "the first doc must be replaced, not accumulated:\n{text}"

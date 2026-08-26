@@ -2,14 +2,14 @@
 
 Mercurio extraction tools read the vendored SysML v2 Pilot Implementation
 checkout but never write source changes into it. The pinned Pilot commit is
-recorded in `resources/pilot.lock.json`; release extraction must use that clean
+recorded in `crates/mercurio-sysml/resources/pilot.lock.json`; release extraction must use that clean
 commit unless a task explicitly updates the lock and reviews the drift.
 
 ## Requirements
 
 - JDK 17 or newer on `PATH` for Java shim increments.
 - Maven wrapper from the Pilot checkout for rebuilding the interactive jar.
-- A clean Pilot checkout at the commit in `resources/pilot.lock.json`.
+- A clean Pilot checkout at the commit in `crates/mercurio-sysml/resources/pilot.lock.json`.
 
 ## Build the Pilot Interactive Jar
 

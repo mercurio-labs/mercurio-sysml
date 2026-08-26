@@ -2,10 +2,10 @@
 
 use std::collections::BTreeMap;
 
-use mercurio_language_contracts::ast::{QualifiedName, SourceSpan};
+use mercurio_foundation::language_contracts::ast::{QualifiedName, SourceSpan};
 
-use crate::lowering::collect::ImportAliases;
-use crate::lowering::ir::ResolvedPackage;
+use crate::language_frontend::lowering::collect::ImportAliases;
+use crate::language_frontend::lowering::ir::ResolvedPackage;
 pub(crate) fn qualified_names_match(left: &QualifiedName, right: &QualifiedName) -> bool {
     left.segments == right.segments
         || qualified_name_suffix_matches(&left.segments, &right.segments)

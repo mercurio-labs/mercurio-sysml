@@ -3,32 +3,34 @@ use std::sync::Arc;
 
 use serde_json::Value;
 
-use mercurio_kir::KirDocument;
-use mercurio_language_contracts::ast::{
+use mercurio_foundation::kir::KirDocument;
+use mercurio_foundation::language_contracts::ast::{
     Expr, LiteralExpr, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
-use crate::logging::{compile_timer_start, log_compile_timed_event};
-use crate::lowering::collect::{
+use crate::language_frontend::logging::{compile_timer_start, log_compile_timed_event};
+use crate::language_frontend::lowering::collect::{
     CollectedDefinition, CollectedImport, CollectedUsage, ImportAliases, collect_module,
     collect_modules,
 };
-use crate::lowering::elaborate::{
+use crate::language_frontend::lowering::elaborate::{
     shorthand_reference_target, should_use_implicit_reference_redefinition_target,
 };
-use crate::lowering::emit::MappingBundle;
-use crate::lowering::imports::build_import_alias_map;
-use crate::lowering::indexes::{
+use crate::language_frontend::lowering::emit::MappingBundle;
+use crate::language_frontend::lowering::imports::build_import_alias_map;
+use crate::language_frontend::lowering::indexes::{
     LibraryIndexes, build_local_alias_map, build_local_definition_map, build_local_feature_index,
     build_local_usage_map, cached_library_indexes,
 };
-pub use crate::lowering::ir::{
+pub use crate::language_frontend::lowering::ir::{
     ResolvedDefinition, ResolvedExpr, ResolvedImport, ResolvedModule, ResolvedPackage,
     ResolvedPathSegment, ResolvedUsage,
 };
-use crate::lowering::names::expand_import_namespace_prefix;
-use crate::lowering::policy::{KERML_RESOLVE_POLICY, ResolvePolicy, STRICT_RESOLVE_POLICY};
+use crate::language_frontend::lowering::names::expand_import_namespace_prefix;
+use crate::language_frontend::lowering::policy::{
+    KERML_RESOLVE_POLICY, ResolvePolicy, STRICT_RESOLVE_POLICY,
+};
 
 fn expression_span(expr: &Expr) -> SourceSpan {
     match expr {
@@ -3849,11 +3851,11 @@ fn unresolved_or_error(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_kir::KirElement;
-    use mercurio_language_contracts::ast::SourceSpan;
+    use mercurio_foundation::kir::KirElement;
+    use mercurio_foundation::language_contracts::ast::SourceSpan;
 
-    use crate::lowering::emit::MappingBundle;
-    use crate::lowering::indexes::build_stdlib_feature_index;
+    use crate::language_frontend::lowering::emit::MappingBundle;
+    use crate::language_frontend::lowering::indexes::build_stdlib_feature_index;
 
     #[test]
     fn expand_import_namespace_prefix_ignores_noop_expansion() {

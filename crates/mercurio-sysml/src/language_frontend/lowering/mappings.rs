@@ -1,14 +1,14 @@
 use std::collections::BTreeSet;
 
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
 use crate::SourceLanguage;
-pub use crate::lowering::emit::{
+pub use crate::language_frontend::lowering::emit::{
     DefaultSpecializationAnchorsSeed, EmissionRule, EmissionSpec, KirEmissionSeed, MappingBundle,
     MetamodelConstructEntry, MetamodelConstructSeed, PilotConstructEntry, PilotConstructSeed,
     SemanticSpecializationDefaultsSeed, StdlibAliasSeed, UsageSemanticSpecializationOverrideSeed,
 };
-pub use crate::lowering::rules::{
+pub use crate::language_frontend::lowering::rules::{
     LoweringAstPattern, LoweringCollectRule, LoweringElaborationRule, LoweringEmitRule,
     LoweringPilotSources, LoweringRule, LoweringRuleSeed, has_runtime_collect_expression,
     has_runtime_elaboration_hook,
@@ -177,7 +177,7 @@ fn collect_rule_expressions(rule: &LoweringRule) -> Vec<(&str, &str)> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::lowering::ir::{ResolvedDefinition, ResolvedUsage};
+    use crate::language_frontend::lowering::ir::{ResolvedDefinition, ResolvedUsage};
 
     #[test]
     fn sysml_profile_loads_declarative_lowering_rules() {
@@ -448,7 +448,7 @@ mod tests {
             members: Vec::new(),
             modifiers: Vec::new(),
             docs: Vec::new(),
-            span: mercurio_language_contracts::ast::SourceSpan {
+            span: mercurio_foundation::language_contracts::ast::SourceSpan {
                 start_line: 1,
                 start_col: 1,
                 end_line: 1,
@@ -466,7 +466,7 @@ mod tests {
             specializes: Vec::new(),
             members: Vec::new(),
             docs: Vec::new(),
-            span: mercurio_language_contracts::ast::SourceSpan {
+            span: mercurio_foundation::language_contracts::ast::SourceSpan {
                 start_line: 1,
                 start_col: 1,
                 end_line: 1,

@@ -8,7 +8,7 @@ Current bundle:
 
 - ID: `sysml-2.0-metamodel-0.57.0`
 - Status: `latest`
-- Descriptor: `resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.json`
+- Descriptor: `crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.json`
 
 ## Descriptor Contract
 
@@ -53,7 +53,7 @@ Use the command in check mode to qualify checked-in generated artifacts, or pass
 `--write` while preparing a candidate bump from a clean Pilot checkout. The
 directory-level contract remains:
 
-- add a new `resources/metamodels/<id>/` directory,
+- add a new `crates/mercurio-sysml/resources/metamodels/<id>/` directory,
 - include descriptor, profile, mappings, provenance, and generated KIR resources,
 - mark only one descriptor as `latest`,
 - preserve compatibility aliases only when the new bundle intentionally replaces

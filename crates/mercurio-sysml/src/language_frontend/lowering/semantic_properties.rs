@@ -1,12 +1,12 @@
 use serde_json::Value;
 
-use mercurio_kir::KirElement;
+use mercurio_foundation::kir::KirElement;
 
-use crate::lowering::emit::{
+use crate::language_frontend::lowering::emit::{
     MappingBundle, append_unique_property_ref, modifier_value, sibling_state_id,
 };
-use crate::lowering::ir::ResolvedUsage;
-use crate::lowering::semantic_defaults::UsagePropertyDefaultSeed;
+use crate::language_frontend::lowering::ir::ResolvedUsage;
+use crate::language_frontend::lowering::semantic_defaults::UsagePropertyDefaultSeed;
 
 pub(crate) fn apply_usage_property_defaults(
     element: &mut KirElement,

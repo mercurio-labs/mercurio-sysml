@@ -12,14 +12,20 @@ pub mod builder;
 pub mod constraints;
 pub mod dsl;
 mod embedded_resources;
+pub mod kerml;
+pub mod language_frontend;
 pub mod metamodel;
 pub mod mutation;
 pub mod parse_session;
 pub mod parser;
 pub mod replay;
+pub mod requirements;
+pub mod resources;
 pub mod semantic_profile;
 pub mod session;
+pub mod simulation;
 
+pub use crate::language_frontend::SourceLanguage;
 pub use abstract_syntax_json::{
     SYSML_JSON_EXPORTER_VERSION, SYSML_JSON_IMPORTER_VERSION, SysmlJsonExportDiagnostic,
     SysmlJsonExportError, SysmlJsonExportOptions, SysmlJsonExportReport, SysmlJsonExportSeverity,
@@ -61,21 +67,20 @@ pub use constraints::{
 pub use dsl::sysml_dsl_extension;
 /// Language-neutral Mercurio APIs used by the SysML implementation.
 pub use mercurio_foundation as foundation;
-pub use mercurio_kir::{KirDocument, KirError};
-pub use mercurio_language_contracts::Concept;
-pub use mercurio_language_contracts::ast::{
+pub use mercurio_foundation::kir::{KirDocument, KirError};
+pub use mercurio_foundation::language_contracts::Concept;
+pub use mercurio_foundation::language_contracts::ast::{
     ParsedModule, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
-pub use mercurio_language_contracts::diagnostics::Diagnostic;
-pub use mercurio_language_contracts::editor::{
+pub use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
+pub use mercurio_foundation::language_contracts::editor::{
     ParseSessionError, ParseSessionStatus, ParseSnapshot, TextEdit, TextRange,
 };
-pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
-pub use mercurio_language_contracts::service::{CompileContext, LanguageService};
-use mercurio_language_contracts::workbench::{
+pub use mercurio_foundation::language_contracts::reports::{ParseReport, SemanticCompileStatus};
+pub use mercurio_foundation::language_contracts::service::{CompileContext, LanguageService};
+use mercurio_foundation::language_contracts::workbench::{
     LanguageAnalysis, SourceDocument, analysis_from_compile_report,
 };
-pub use mercurio_language_frontend::SourceLanguage;
 pub use metamodel::{
     CANONICAL_SYSML_STDLIB_RELEASE, LATEST_SYSML_METAMODEL_ID, LEGACY_SYSML_2_0_PILOT_057_ID,
     ReleaseBundleConformance, ReleaseBundleDescriptor, ReleaseBundleMappings, ReleaseBundleProfile,
@@ -177,7 +182,7 @@ impl LanguageService for SysmlLanguageModule {
         &self,
         source: &str,
         context: CompileContext<'_>,
-    ) -> mercurio_language_contracts::SemanticCompileReport<KirDocument> {
+    ) -> mercurio_foundation::language_contracts::SemanticCompileReport<KirDocument> {
         compile_sysml_text_with_context_report(
             source,
             context.source_name,
@@ -237,9 +242,9 @@ impl LanguageService for SysmlLanguageModule {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_core::Runtime;
-    use mercurio_kir::DiagnosticKind;
-    use mercurio_language_contracts::LanguageRegistry;
+    use mercurio_foundation::Runtime;
+    use mercurio_foundation::kir::DiagnosticKind;
+    use mercurio_foundation::language_contracts::LanguageRegistry;
     use std::path::Path;
 
     #[test]

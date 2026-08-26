@@ -235,10 +235,8 @@ fn run_compare(
 
     let mut pruned_ledger_constructs: Vec<BlockedConstruct> = Vec::new();
     if let Some(ledger_path) = prune_ledger {
-        let project =
-            load_authoring_project_from_sysml(reference_files.clone()).map_err(|err| {
-                format!("{}: reference project: {err}", reference_dir.display())
-            })?;
+        let project = load_authoring_project_from_sysml(reference_files.clone())
+            .map_err(|err| format!("{}: reference project: {err}", reference_dir.display()))?;
         // The exact pruning the Tier-1 harness applies: derive_gestures
         // produces the expressible reference beside the blocked-construct
         // list (reused, not duplicated).
@@ -284,7 +282,9 @@ fn run_compare(
         // no-ops are expected).
         for element in &gap.elements {
             if !matched.contains(element) {
-                eprintln!("warning: gap prune element `{element}` matched nothing in the reference");
+                eprintln!(
+                    "warning: gap prune element `{element}` matched nothing in the reference"
+                );
             }
         }
         for facet in &gap.facets {
@@ -316,9 +316,7 @@ fn run_compare(
 
 /// All `.sysml` sources under a file-or-directory path, keyed by their
 /// root-relative label (the same discovery the replay corpus modes use).
-fn read_model_files(
-    root: &Path,
-) -> Result<BTreeMap<String, String>, Box<dyn std::error::Error>> {
+fn read_model_files(root: &Path) -> Result<BTreeMap<String, String>, Box<dyn std::error::Error>> {
     let models = discover_models(root)?;
     if models.is_empty() {
         return Err(format!("no .sysml models found under {}", root.display()).into());
@@ -439,9 +437,9 @@ impl GapPruner {
 
     fn prune_declaration(&mut self, member: &Declaration, owner: &str) -> Option<Declaration> {
         match member {
-            Declaration::Package(package) => self
-                .prune_package(package, owner)
-                .map(Declaration::Package),
+            Declaration::Package(package) => {
+                self.prune_package(package, owner).map(Declaration::Package)
+            }
             Declaration::Import(_) => Some(member.clone()),
             Declaration::Alias(alias) => {
                 if self.drop_element(&format!("{owner}.{}", alias.name)) {
@@ -617,10 +615,8 @@ fn parse_args(args: Vec<String>) -> Result<Args, Box<dyn std::error::Error>> {
                 corpus = Some(iter.next().ok_or("--corpus requires a tier name")?);
             }
             "--compare" => {
-                let reference =
-                    PathBuf::from(iter.next().ok_or("--compare requires two paths")?);
-                let candidate =
-                    PathBuf::from(iter.next().ok_or("--compare requires two paths")?);
+                let reference = PathBuf::from(iter.next().ok_or("--compare requires two paths")?);
+                let candidate = PathBuf::from(iter.next().ok_or("--compare requires two paths")?);
                 compare = Some((reference, candidate));
             }
             "--pilot-root" => {
@@ -658,8 +654,9 @@ fn parse_args(args: Vec<String>) -> Result<Args, Box<dyn std::error::Error>> {
     if bless && ledger.is_none() {
         return Err("--bless requires --ledger".into());
     }
-    let mode_count =
-        usize::from(model.is_some()) + usize::from(corpus.is_some()) + usize::from(compare.is_some());
+    let mode_count = usize::from(model.is_some())
+        + usize::from(corpus.is_some())
+        + usize::from(compare.is_some());
     if mode_count != 1 {
         return Err("exactly one of --model, --corpus, or --compare is required".into());
     }

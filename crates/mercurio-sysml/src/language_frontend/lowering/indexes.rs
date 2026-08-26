@@ -4,13 +4,15 @@ use std::collections::{BTreeMap, BTreeSet, hash_map::DefaultHasher};
 use std::hash::{Hash, Hasher};
 use std::sync::{Arc, Mutex, OnceLock};
 
-use mercurio_kir::KirDocument;
-use mercurio_language_contracts::ast::QualifiedName;
-use mercurio_language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::kir::KirDocument;
+use mercurio_foundation::language_contracts::ast::QualifiedName;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 use serde_json::Value;
 
-use crate::lowering::collect::{CollectedAlias, CollectedDefinition, CollectedUsage};
-use crate::lowering::emit::MappingBundle;
+use crate::language_frontend::lowering::collect::{
+    CollectedAlias, CollectedDefinition, CollectedUsage,
+};
+use crate::language_frontend::lowering::emit::MappingBundle;
 
 #[derive(Debug, Clone)]
 pub(crate) struct LibraryIndexes {

@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::path::Path;
 
-use mercurio_core::{
+use mercurio_foundation::{
     AttributeWritePolicy, AuthoringError, AuthoringProject, ContainerSelector, KirDocument,
     Mutation, QualifiedName, SemanticEdit,
 };

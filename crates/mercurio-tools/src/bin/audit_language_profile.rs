@@ -83,7 +83,7 @@ struct Args {
 impl Args {
     fn parse() -> Result<Self> {
         let mut profile_id = CURRENT_DEFAULT_PROFILE_ID.to_string();
-        let mut profile_root = repo_path("resources/metamodels");
+        let mut profile_root = repo_path("crates/mercurio-sysml/resources/metamodels");
         let mut stdlib_path = None;
         let mut pilot_root = None;
         let mut deny_warnings = false;

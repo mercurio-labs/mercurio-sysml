@@ -8,7 +8,7 @@
 //! connection with reference ends, a succession inside an action definition)
 //! because those are exactly the cases that fail without id canonicalization.
 
-use mercurio_core::kir_canonical::{
+use mercurio_foundation::kir_canonical::{
     kir_documents_equivalent, kir_equivalence_diff, kir_equivalence_report, semantic_diff_is_empty,
 };
 use mercurio_sysml::{
@@ -219,7 +219,9 @@ fn assert_position_ids_present(document: &KirDocument) {
             .rsplit('.')
             .next()
             .map(|segment| {
-                segment.bytes().all(|byte| byte.is_ascii_digit() || byte == b'_')
+                segment
+                    .bytes()
+                    .all(|byte| byte.is_ascii_digit() || byte == b'_')
                     && segment.bytes().any(|byte| byte.is_ascii_digit())
             })
             .unwrap_or(false)
@@ -287,7 +289,7 @@ fn raw_diff_is_position_sensitive_but_oracle_is_not() {
     let reference = compile(REFERENCE, "demo.sysml");
     let reordered = compile(REORDERED, "demo.sysml");
 
-    let raw = mercurio_core::diff_kir_documents(&reference, &reordered);
+    let raw = mercurio_foundation::diff_kir_documents(&reference, &reordered);
     assert!(
         !semantic_diff_is_empty(&raw),
         "expected the raw diff to be position-sensitive for this fixture"
@@ -310,7 +312,9 @@ fn renamed_part_is_reported() {
         .added_elements
         .iter()
         .chain(report.diff.removed_elements.iter())
-        .any(|element| element.element_id.contains("Car") || element.element_id.contains("Vehicle"))
+        .any(|element| {
+            element.element_id.contains("Car") || element.element_id.contains("Vehicle")
+        })
         || !report.diff.renamed_elements.is_empty();
     assert!(mentions_car, "diff should surface the rename: {report:?}");
 }
@@ -330,5 +334,8 @@ fn dropped_satisfy_is_reported() {
         .iter()
         .any(|element| element.element_id.starts_with("satisfy."))
         || !diff.removed_relationships.is_empty();
-    assert!(satisfy_removed, "diff should surface the dropped satisfy: {diff:?}");
+    assert!(
+        satisfy_removed,
+        "diff should surface the dropped satisfy: {diff:?}"
+    );
 }

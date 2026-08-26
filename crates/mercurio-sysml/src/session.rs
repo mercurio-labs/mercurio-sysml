@@ -1,6 +1,6 @@
 use std::collections::BTreeMap;
 
-use mercurio_core::{ForkElement, ForkElementSpec, ModelFork, SessionError};
+use mercurio_foundation::{ForkElement, ForkElementSpec, ModelFork, SessionError};
 use serde_json::Value;
 
 pub const SYSML_REQUIREMENT_USAGE_KIND: &str = "Model::RequirementUsage";
@@ -100,7 +100,7 @@ fn doc_metadata(text: String) -> Value {
 mod tests {
     use std::collections::BTreeMap;
 
-    use mercurio_core::{KirDocument, ModelWorkspace, WorkspaceSnapshot};
+    use mercurio_foundation::{KirDocument, ModelWorkspace, WorkspaceSnapshot};
 
     use super::*;
 

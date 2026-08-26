@@ -1,10 +1,10 @@
 use std::path::{Path, PathBuf};
 use std::sync::OnceLock;
 
-use mercurio_core::DatalogError;
-use mercurio_kerml::KermlLanguageModule;
-use mercurio_kir::{KirDocument, KirError};
-use mercurio_language_contracts::{LanguageRegistry, SemanticCompileStatus};
+use crate::kerml::KermlLanguageModule;
+use mercurio_foundation::DatalogError;
+use mercurio_foundation::kir::{KirDocument, KirError};
+use mercurio_foundation::language_contracts::{LanguageRegistry, SemanticCompileStatus};
 use serde::{Deserialize, Serialize};
 
 use crate::SysmlLanguageModule;
@@ -182,7 +182,7 @@ pub enum SysmlEnvironmentError {
     Json(String),
     Kir(KirError),
     Datalog(DatalogError),
-    Diagnostic(mercurio_language_contracts::diagnostics::Diagnostic),
+    Diagnostic(mercurio_foundation::language_contracts::diagnostics::Diagnostic),
 }
 
 impl std::fmt::Display for SysmlEnvironmentError {
@@ -211,8 +211,10 @@ impl From<DatalogError> for SysmlEnvironmentError {
     }
 }
 
-impl From<mercurio_language_contracts::diagnostics::Diagnostic> for SysmlEnvironmentError {
-    fn from(value: mercurio_language_contracts::diagnostics::Diagnostic) -> Self {
+impl From<mercurio_foundation::language_contracts::diagnostics::Diagnostic>
+    for SysmlEnvironmentError
+{
+    fn from(value: mercurio_foundation::language_contracts::diagnostics::Diagnostic) -> Self {
         Self::Diagnostic(value)
     }
 }
@@ -279,7 +281,7 @@ impl SysmlEnvironment {
             .compile_path(Path::new(source_name), source, &self.baseline);
         if report.status != SemanticCompileStatus::Ok {
             let diagnostic = report.diagnostics.into_iter().next().unwrap_or_else(|| {
-                mercurio_language_contracts::diagnostics::Diagnostic::new(
+                mercurio_foundation::language_contracts::diagnostics::Diagnostic::new(
                     "SysML compile failed without diagnostics",
                     None,
                 )
@@ -388,23 +390,20 @@ pub fn canonical_sysml_stdlib_runtime_source_bytes() -> Option<Vec<u8>> {
     bytes.extend_from_slice(b"\n");
     bytes.extend_from_slice(canonical_sysml_stdlib_version().as_bytes());
     bytes.extend_from_slice(b"\n");
-    bytes.extend_from_slice(mercurio_sysml_resources::full_stdlib(
-        SYSML_2_0_PILOT_2026_04_ID,
-    )?);
+    bytes.extend_from_slice(crate::resources::full_stdlib(SYSML_2_0_PILOT_2026_04_ID)?);
     Some(bytes)
 }
 
 pub fn load_baseline_for_metamodel(
     metamodel: &SysmlMetamodelResource,
 ) -> Result<KirDocument, KirError> {
-    let kernel = KirDocument::from_str(mercurio_sysml_resources::KERML_KERNEL)?;
-    let sysml_bytes =
-        mercurio_sysml_resources::sysml_library(&metamodel.info.id).ok_or_else(|| {
-            KirError::Model(format!(
-                "no bundled SysML library for metamodel '{}'",
-                metamodel.info.id
-            ))
-        })?;
+    let kernel = KirDocument::from_str(crate::resources::KERML_KERNEL)?;
+    let sysml_bytes = crate::resources::sysml_library(&metamodel.info.id).ok_or_else(|| {
+        KirError::Model(format!(
+            "no bundled SysML library for metamodel '{}'",
+            metamodel.info.id
+        ))
+    })?;
     let sysml_text = std::str::from_utf8(sysml_bytes)
         .map_err(|_| KirError::Model("bundled SysML library is not valid UTF-8".to_string()))?;
     let sysml_delta = KirDocument::from_str_with_registered_fields(
@@ -425,7 +424,7 @@ pub(crate) fn embedded_bytes_for_metamodel(id: &str) -> Option<(&'static [u8], &
     };
     Some((
         crate::embedded_resources::EMBEDDED_KERNEL,
-        mercurio_sysml_resources::sysml_library(canonical_id)?,
+        crate::resources::sysml_library(canonical_id)?,
     ))
 }
 
@@ -551,7 +550,7 @@ fn metamodel_descriptor_raw(id: &str) -> Result<RawMetamodelDescriptor, SysmlEnv
         LEGACY_SYSML_2_0_PILOT_057_ID => SYSML_2_0_METAMODEL_057_ID,
         other => other,
     };
-    let raw = mercurio_sysml_resources::metamodel_descriptor(canonical_id)
+    let raw = crate::resources::metamodel_descriptor(canonical_id)
         .ok_or_else(|| SysmlEnvironmentError::UnknownMetamodel(id.to_string()))?;
     serde_json::from_str(raw).map_err(|err| {
         SysmlEnvironmentError::Json(format!("failed to parse SysML metamodel descriptor: {err}"))

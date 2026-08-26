@@ -1,16 +1,16 @@
 use std::path::{Path, PathBuf};
 
-use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
-use mercurio_language_contracts::ast::ParsedModule as SysmlModule;
-use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_frontend::SourceLanguage;
-use mercurio_language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
-use mercurio_language_frontend::resolver::{
+use crate::language_frontend::SourceLanguage;
+use crate::language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
+use crate::language_frontend::resolver::{
     ResolverContext, resolve_kerml_module_with_context, resolve_kerml_module_with_resolver_context,
 };
-use mercurio_language_frontend::transpile::transpile_module_with_source;
+use crate::language_frontend::transpile::transpile_module_with_source;
+use mercurio_foundation::kir::{DiagnosticKind, KirDocument, KirError};
+use mercurio_foundation::language_contracts::ast::ParsedModule as SysmlModule;
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
 
-use crate::parser::parse_kerml;
+use crate::kerml::parser::parse_kerml;
 
 #[derive(Debug)]
 pub enum KermlError {
@@ -67,7 +67,7 @@ impl BaselineLibrary {
                 if std::env::var_os("MERCURIO_KERNEL_LIBRARY_PATH").is_some() {
                     KirDocument::from_path(&default_kernel_library_path())
                 } else {
-                    KirDocument::from_str(mercurio_sysml_resources::KERML_KERNEL)
+                    KirDocument::from_str(crate::resources::KERML_KERNEL)
                 }
             }
             Self::Custom(document) => Ok(document.clone()),
@@ -83,7 +83,7 @@ pub fn default_kernel_library_path() -> PathBuf {
         return PathBuf::from(path);
     }
 
-    mercurio_sysml_resources::resource_root().join("kernel/kerml-kernel.kir.json")
+    crate::resources::resource_root().join("kernel/kerml-kernel.kir.json")
 }
 
 pub fn load_kernel_baseline() -> Result<KirDocument, KirError> {
