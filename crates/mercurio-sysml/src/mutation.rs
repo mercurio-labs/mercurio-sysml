@@ -102,6 +102,32 @@ pub fn sysml_semantic_legality_rulepacks_for_release(
 pub fn sysml_semantic_legality_rulepack_for_release(
     selector: &str,
 ) -> Result<RulePack, SysmlEnvironmentError> {
+    // Release rulepacks are immutable per process run; cache the parsed pack
+    // per selector so per-request service construction stops re-reading and
+    // re-parsing the bundle JSON.
+    static CACHE: std::sync::OnceLock<std::sync::Mutex<BTreeMap<String, RulePack>>> =
+        std::sync::OnceLock::new();
+    let cache = CACHE.get_or_init(Default::default);
+    {
+        let cache = cache
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner);
+        if let Some(rulepack) = cache.get(selector) {
+            return Ok(rulepack.clone());
+        }
+    }
+
+    let rulepack = load_sysml_semantic_legality_rulepack_for_release(selector)?;
+    cache
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .insert(selector.to_string(), rulepack.clone());
+    Ok(rulepack)
+}
+
+fn load_sysml_semantic_legality_rulepack_for_release(
+    selector: &str,
+) -> Result<RulePack, SysmlEnvironmentError> {
     #[cfg(target_arch = "wasm32")]
     {
         sysml_embedded_semantic_legality_rulepack_for_release(selector)

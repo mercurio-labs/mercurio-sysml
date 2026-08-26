@@ -562,8 +562,20 @@ fn sysml_definition_element_kind(keyword: &str) -> Option<&'static str> {
         .find_map(|(candidate, kind)| (candidate == &keyword).then_some(*kind))
 }
 
-fn sysml_table_oracle() -> TableSemanticCapabilityOracle {
-    TableSemanticCapabilityOracle::new(sysml_semantic_capability_profile())
+/// The full SysML capability profile is expensive to assemble (combinatorial
+/// keyword/kind tables plus generalization-lattice walks), and every oracle
+/// query needs it — build it once per process instead of per call.
+fn sysml_table_oracle() -> &'static TableSemanticCapabilityOracle {
+    static ORACLE: std::sync::OnceLock<TableSemanticCapabilityOracle> = std::sync::OnceLock::new();
+    ORACLE.get_or_init(|| TableSemanticCapabilityOracle::new(sysml_semantic_capability_profile()))
+}
+
+/// Builds the process-wide cached SysML capability tables eagerly. Hosts that
+/// serve interactive requests (console API, desktop) call this at startup so
+/// the first legality or next-actions request does not pay the one-time
+/// profile construction cost (~1.5s on a debug build).
+pub fn warm_sysml_semantic_capability_cache() {
+    let _ = sysml_table_oracle();
 }
 
 pub fn sysml_language_profile() -> LanguageProfile {

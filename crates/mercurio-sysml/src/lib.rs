@@ -125,7 +125,7 @@ pub use semantic_profile::{
     sysml_metamodel_adapter_from_graph, sysml_relationship_keywords,
     sysml_relationship_usage_keyword, sysml_trace_relationship_role,
     sysml_trace_relationship_uses_owner_source, sysml_trace_rulepack, sysml_usage_element_kinds,
-    sysml_usage_keywords, sysml_usage_kind,
+    sysml_usage_keywords, sysml_usage_kind, warm_sysml_semantic_capability_cache,
 };
 pub use session::{
     SYSML_PART_USAGE_KIND, SYSML_REQUIREMENT_USAGE_KIND, SYSML_SATISFY_KEYWORD,
