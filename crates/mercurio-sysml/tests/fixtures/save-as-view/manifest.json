@@ -1,0 +1,112 @@
+{
+  "schema": "mercurio.save-as-view.fixtures.v1",
+  "source": {
+    "increment": "SV-0",
+    "plan": "docs/save-as-view-plan.md",
+    "authorship": {
+      "mode": "hand-curated-mercurio-decision",
+      "note": "These fixtures freeze the mercurio.view.v1 <-> SysML v2 view map recorded in the plan's field-by-field table. They are a CONTRACT, not generated output: any increment that changes the map must change a fixture in the same commit."
+    }
+  },
+  "tiers": {
+    "1": "Reifiable and interoperable. Standard scopes (expose + filter), the four standard renderings, viewpoints, composition. Direct lossless view-usage <-> mercurio.view.v1 map; renders in any conforming tool.",
+    "2": "Reifiable but tool-specific. Non-standard view kinds and semantic-but-non-standard render params, carried by user rendering defs subtyping GraphicalRendering/TabularRendering plus one documented Mercurio metadata profile. Travels and versions; only Mercurio renders faithfully.",
+    "3": "Not reified. SV-3 must return a typed NotReifiable naming the offending field rather than inventing an encoding."
+  },
+  "round_trip_rules": {
+    "tier1_tier2": "spec -> usage -> spec is the identity.",
+    "materialized": "A materialized save converts DiagramScopeDto::Traversal into ExplicitElements. That is a deliberate normalization, not a round-trip failure: assert materialize(spec) -> usage -> spec' == materialize(spec).",
+    "tier3": "Returns NotReifiable naming the offending field."
+  },
+  "fixtures": [
+    {
+      "id": "tree-diagram-subtree",
+      "tier": 1,
+      "sysml": "tier1/tree-diagram-subtree.sysml",
+      "spec": "tier1/tree-diagram-subtree.view.json",
+      "covers": ["DiagramSpecDto.root", "kind: package_tree", "render asTreeDiagram", "expose <root>::**", "doc -> description"],
+      "blocked_on": "SV-1"
+    },
+    {
+      "id": "interconnection-diagram",
+      "tier": 1,
+      "sysml": "tier1/interconnection-diagram.sysml",
+      "spec": "tier1/interconnection-diagram.view.json",
+      "covers": ["kind: internal_block", "render asInterconnectionDiagram"],
+      "blocked_on": "SV-1"
+    },
+    {
+      "id": "metadata-filtered-expose",
+      "tier": 1,
+      "sysml": "tier1/metadata-filtered-expose.sysml",
+      "spec": "tier1/metadata-filtered-expose.view.json",
+      "covers": ["expose ::**[@Meta]", "expose ::**[not (@Meta)]", "two view usages in one file"],
+      "blocked_on": "SV-2",
+      "note": "THE DISCRIMINATING CASE. Verified 2026-08-27: both views currently parse to an identical member list, so they cannot be told apart. SV-2 is not done until they diverge."
+    },
+    {
+      "id": "import-expose-parity",
+      "tier": 1,
+      "sysml": "tier1/import-expose-parity.sysml",
+      "spec": null,
+      "covers": ["import ::**[@Meta]", "expose ::**[@Meta]", "shared predicate gap"],
+      "blocked_on": "SV-1",
+      "note": "Characterisation only, no expected spec. Records that import preserves the wildcard and drops the predicate, while expose drops both. SV-1 should route expose through the existing import path; the dropped predicate is a standing correctness bug on the import side too."
+    },
+    {
+      "id": "explicit-exposes",
+      "tier": 1,
+      "sysml": "tier1/explicit-exposes.sysml",
+      "spec": "tier1/explicit-exposes.view.json",
+      "covers": ["one expose per element", "DiagramQueryOptionsDto.scope (new in SV-3)"],
+      "blocked_on": "SV-3",
+      "note": "DiagramSpecDto has no explicit-element scope today; only TableScopeDto does. Without the additive DiagramScopeDto field there is no field to read a materialized diagram view back into, and the round-trip criterion is unsatisfiable for the whole diagram family."
+    },
+    {
+      "id": "element-table-columns",
+      "tier": 1,
+      "sysml": "tier1/element-table-columns.sysml",
+      "spec": "tier1/element-table-columns.view.json",
+      "covers": ["render asElementTable", "columnView[n] -> TableColumnSpecDto", "TableScopeDto::ContainmentSubtree"],
+      "blocked_on": "SV-1",
+      "note": "Verified 2026-08-27: the rendering def and its nested columnView redefinitions already parse. This is the most interoperable row in the map."
+    },
+    {
+      "id": "view-def-metaclass-filter",
+      "tier": 1,
+      "sysml": "tier1/view-def-metaclass-filter.sysml",
+      "spec": "tier1/view-def-metaclass-filter.view.json",
+      "covers": ["view def as a root-free lens", "filter @<Metaclass> -> TableRowTypeDto", "view usage typed by a view def"],
+      "blocked_on": "SV-1",
+      "note": "Verified 2026-08-27: the view def parses but its `filter` member is dropped entirely, leaving an empty body. Boundary: filter maps to row_type ONLY for metaclass names; a user-definition row type with include_subtypes has no filter encoding and is tier 2."
+    },
+    {
+      "id": "mercurio-rendering-params",
+      "tier": 2,
+      "sysml": "tier2/mercurio-rendering-params.sysml",
+      "spec": "tier2/mercurio-rendering-params.view.json",
+      "covers": ["user rendering def :> GraphicalRendering", "Mercurio::ViewRenderParams", "query.relations", "query.depth", "layout.direction", "style.show_edge_labels"],
+      "blocked_on": "SV-4",
+      "note": "Pins the SHAPE the map depends on; SV-4 pins the names in the Mercurio library package."
+    },
+    {
+      "id": "relationship-matrix-subviews",
+      "tier": 2,
+      "sysml": "tier2/relationship-matrix-subviews.sysml",
+      "spec": "tier2/relationship-matrix-subviews.view.json",
+      "covers": ["subviews as matrix axes", "column_scope", "matrix_preset pinned not expanded"],
+      "blocked_on": "SV-4",
+      "note": "Verified 2026-08-27: the nested row/column view usages already parse. matrix_preset is pinned because preset axis filters are multi-kind predicates that a single-valued TableRowTypeDto cannot hold."
+    },
+    {
+      "id": "free-text-search",
+      "tier": 3,
+      "sysml": "tier3/free-text-search.sysml",
+      "spec": null,
+      "expect": "NotReifiable",
+      "covers": ["ModelViewSpecDto.query"],
+      "blocked_on": "SV-3",
+      "note": "A search is not a view. The expected outcome is a typed refusal naming the field."
+    }
+  ]
+}
