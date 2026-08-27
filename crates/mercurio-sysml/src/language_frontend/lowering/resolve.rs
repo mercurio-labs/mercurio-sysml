@@ -358,6 +358,8 @@ fn resolve_imports(
         resolved.push(ResolvedImport {
             owner_package_qualified_name: import.owner_package_qualified_name.clone(),
             target_id,
+            is_expose: import.decl.is_expose,
+            filter: import.decl.filter.clone(),
             imported_name: import
                 .decl
                 .path

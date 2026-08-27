@@ -371,6 +371,83 @@ package Complex {
     );
 }
 
+/// `expose` lowers to its own KIR kind, carrying the filter condition.
+///
+/// It must not share `SysML::Import`: a saved view's scope is an Expose, and
+/// the whole point of reifying views is that the distinction survives into the
+/// model. `MembershipExpose` and `NamespaceExpose` collapse onto the abstract
+/// `SysML::Expose` exactly as their Import twins collapse onto `SysML::Import`.
+#[test]
+fn sv1_expose_lowers_to_its_own_kir_kind_with_the_filter() {
+    const SOURCE: &str = r#"
+package Scoped {
+    metadata def Safety;
+    part vehicle { part brake { @Safety; } }
+    view v {
+        expose vehicle::**[@Safety];
+    }
+    public import vehicle::**;
+}
+"#;
+
+    let document = compile(SOURCE, "scoped.sysml");
+
+    let exposes: Vec<_> = document
+        .elements
+        .iter()
+        .filter(|element| element.kind == "SysML::Expose")
+        .collect();
+    assert_eq!(
+        exposes.len(),
+        1,
+        "expected exactly one Expose element; kinds were {:?}",
+        document
+            .elements
+            .iter()
+            .map(|element| element.kind.as_str())
+            .collect::<Vec<_>>()
+    );
+
+    assert_eq!(
+        exposes[0].properties.get("filter").and_then(|v| v.as_str()),
+        Some("@Safety"),
+        "the expose must carry its filter condition into KIR"
+    );
+
+    let imports = document
+        .elements
+        .iter()
+        .filter(|element| element.kind == "SysML::Import")
+        .count();
+    assert_eq!(imports, 1, "the plain import must still be an Import");
+}
+
+/// An unfiltered namespace query emits no `filter` property at all, rather than
+/// an empty string — `insert_rendered_property` drops nulls.
+#[test]
+fn sv1_unfiltered_expose_emits_no_filter_property() {
+    const SOURCE: &str = r#"
+package Plain {
+    part vehicle;
+    view v {
+        expose vehicle::**;
+    }
+}
+"#;
+
+    let document = compile(SOURCE, "plain.sysml");
+    let expose = document
+        .elements
+        .iter()
+        .find(|element| element.kind == "SysML::Expose")
+        .expect("an Expose element is emitted");
+    assert!(
+        !expose.properties.contains_key("filter"),
+        "an unfiltered expose must not carry a filter property; got {:?}",
+        expose.properties
+    );
+}
+
 // ------------------------------------------------------- targets (ignored)
 
 /// SV-2 exit criterion. Parse-level divergence (above) is necessary but not

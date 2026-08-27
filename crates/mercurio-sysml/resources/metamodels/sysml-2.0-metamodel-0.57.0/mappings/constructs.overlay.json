@@ -298,6 +298,26 @@
                                      "construct":  "RenderingUsage",
                                      "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
                                      "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ElementFilterMember",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "Expose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MembershipExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "NamespaceExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
                                  }
                              ],
     "explicit_constructs":  [

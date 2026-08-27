@@ -2,7 +2,7 @@
     "schema":  "dev.mercurio.pilot-constructs-overlay.v1",
     "source":  {
                    "schema":  "dev.mercurio.overlay-source.v1",
-                   "profile_id":  "sysml-2.0-pilot-2026-04",
+                   "profile_id":  "sysml-2.0-metamodel-0.57.0",
                    "authorship":  {
                                       "mode":  "hand-curated-overlay",
                                       "reason":  "PX-1 overlay separating Mercurio compiler subset, keyword choices, and non-grammar compatibility constructs from generated Pilot grammar facts."
@@ -298,6 +298,26 @@
                                      "construct":  "RenderingUsage",
                                      "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
                                      "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ElementFilterMember",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "Expose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MembershipExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "NamespaceExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
                                  }
                              ],
     "explicit_constructs":  [
@@ -805,8 +825,8 @@
                                                                                    "ReferenceUsage":  "SysML::Systems::ReferenceUsage",
                                                                                    "ReturnUsage":  "SysML::Systems::ReferenceUsage",
                                                                                    "StateUsage":  "SysML::Systems::StateUsage",
-                                                                                   "SubjectUsage":  "SysML::Systems::ReferenceUsage",
                                                                                    "StakeholderUsage":  "SysML::Systems::PartUsage",
+                                                                                   "SubjectUsage":  "SysML::Systems::ReferenceUsage",
                                                                                    "SuccessionAsUsage":  "SysML::Systems::SuccessionAsUsage",
                                                                                    "SuccessionUsage":  "SysML::Systems::SuccessionFlowUsage",
                                                                                    "VerifyUsage":  "SysML::Systems::RequirementUsage",

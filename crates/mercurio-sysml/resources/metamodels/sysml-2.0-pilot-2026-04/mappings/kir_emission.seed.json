@@ -72,6 +72,42 @@
         }
       }
     },
+    "SysML::Expose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::MembershipExpose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::NamespaceExpose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
     "SysML::MembershipImport": {
       "kir_kind": "SysML::Import",
       "id_template": "import.{owner_id}.{ordinal}",

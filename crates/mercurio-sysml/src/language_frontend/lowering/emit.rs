@@ -1422,14 +1422,18 @@ fn transpile_import(
     source_language: &str,
     mappings: &MappingBundle,
 ) -> Result<KirElement, Diagnostic> {
-    let metaclass = mappings.metaclass_for("Import")?;
+    // `expose` and `import` share this transpiler because they are
+    // parallel metamodel branches, but they must not share a KIR kind:
+    // a saved view's scope is an Expose, not an Import (save-as-view SV-1).
+    let construct = if import.is_expose { "Expose" } else { "Import" };
+    let metaclass = mappings.metaclass_for(construct)?;
     let emission = mappings.emission_for(metaclass)?;
-    let lowering_rule = mappings.lowering_rule_for_construct("Import");
+    let lowering_rule = mappings.lowering_rule_for_construct(construct);
     if let Some(rule) = lowering_rule {
         validate_rule_emission_compatibility(rule, metaclass, emission)?;
     }
     let metatype_ref = Value::String(metaclass.to_string());
-    let id_template = id_template_for_construct("Import", metaclass, emission, mappings)?;
+    let id_template = id_template_for_construct(construct, metaclass, emission, mappings)?;
     let id = render_string(
         id_template,
         &BTreeMap::from([
@@ -1445,6 +1449,16 @@ fn transpile_import(
             Value::Array(vec![Value::String(import.target_id.clone())]),
         ),
         ("ordinal".to_string(), json!(import.ordinal)),
+        (
+            // Null when absent; `insert_rendered_property` drops it, so an
+            // unfiltered query emits no `filter` property at all.
+            "filter".to_string(),
+            import
+                .filter
+                .clone()
+                .map(Value::String)
+                .unwrap_or(Value::Null),
+        ),
         ("metatype_ref".to_string(), metatype_ref),
     ]);
 
