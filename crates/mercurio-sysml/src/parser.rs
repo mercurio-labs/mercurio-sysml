@@ -2155,6 +2155,14 @@ impl Parser {
             self.expect_identifier_named("to", "expected `to` between allocation ends")?;
             allocation_target = Some(self.parse_qualified_name()?);
             Some(name)
+        } else if keyword == "transition" && self.starts_transition_source_clause() {
+            // The unnamed transition shorthand: `transition first S then T;`.
+            // `first`/`then`/`from` open the source clause, so they must not be
+            // swallowed as the declaration name — the shorthand parser consumes
+            // the marker itself, and a name captured here would be re-emitted by
+            // the canonical printer as a second marker
+            // (`transition first first S then T;`), corrupting the user's file.
+            None
         } else if matches!(
             self.peek_kind(),
             TokenKind::LBrace
@@ -2199,7 +2207,9 @@ impl Parser {
             self.expect_identifier_named("send", "expected `send` after action name")?;
             effective_keyword = "send".to_string();
         }
-        let parsed_transition_shorthand = if keyword == "transition" && explicit_name.is_some() {
+        let parsed_transition_shorthand = if keyword == "transition"
+            && (explicit_name.is_some() || self.starts_transition_source_clause())
+        {
             self.parse_transition_usage_shorthand(&mut modifiers, &mut synthetic_body_members)?
         } else {
             false
@@ -2321,19 +2331,24 @@ impl Parser {
         }))
     }
 
+    /// True when the next token opens a transition's source clause
+    /// (`first` / `then` / `from`) rather than naming the transition.
+    fn starts_transition_source_clause(&self) -> bool {
+        matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
+    }
+
     fn parse_transition_usage_shorthand(
         &mut self,
         modifiers: &mut Vec<String>,
         synthetic_body_members: &mut Vec<Declaration>,
     ) -> Result<bool, Diagnostic> {
-        if !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
+        if !self.starts_transition_source_clause()
             && !matches!(self.peek_kind(), TokenKind::Identifier(_))
         {
             return Ok(false);
         }
 
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first" || value == "then" || value == "from")
-        {
+        if self.starts_transition_source_clause() {
             self.expect_identifier("expected transition source marker")?;
         }
         let source = self.parse_qualified_name()?;
