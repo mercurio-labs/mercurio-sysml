@@ -1,32 +1,37 @@
-//! SV-0 — the Save-as-View mapping contract, as fixtures.
+//! Save-as-View — the mapping contract (SV-0) and the view constructs (SV-1).
 //!
 //! Plan: `docs/save-as-view-plan.md` (visualization-plan V-6, gate opened
-//! 2026-08-27). This increment adds **no behaviour**. It freezes the
-//! `mercurio.view.v1` <-> SysML v2 view map as a fixture corpus, and — more
-//! immediately useful — it *characterises what the compiler does today* with
-//! every construct that map depends on.
+//! 2026-08-27).
 //!
-//! The characterisation tests below PASS on today's compiler. They are not
-//! aspirational: each one pins a defect so that SV-1/SV-2 flipping it is a
-//! deliberate, reviewed change rather than an invisible one. When an increment
-//! fixes a construct, the corresponding `characterisation_*` test is expected
-//! to fail — update it, and un-ignore its `sv*_` counterpart, in the same
-//! commit.
+//! SV-0 froze the `mercurio.view.v1` <-> SysML v2 view map as a fixture corpus
+//! and characterised what the compiler did with every construct that map
+//! depends on. Those characterisation tests recorded four defects; SV-1 fixed
+//! all four, so each one is now an assertion of the corrected behaviour. The
+//! discipline holds going forward: when an increment changes a construct,
+//! update its test and un-ignore its `sv*_` counterpart in the same commit.
 //!
-//! Findings recorded here (all verified 2026-08-27, see the plan's evidence
-//! table):
+//! What SV-1 fixed, and why each mattered:
 //!
-//! - `expose X::**` is not merely unsupported; it **silently mis-parses** into
-//!   a usage declaration named after the first path segment. The recursive
-//!   wildcard vanishes with no diagnostic.
-//! - `import X::**` keeps the wildcard but **silently drops the `[@Meta]`
-//!   predicate**. That is a standing correctness bug independent of this plan:
-//!   the pilot's own `Filtering Example-2.sysml` resolves `vehicle::**[@Safety]`
-//!   as `vehicle::**`, i.e. every part rather than the safety-annotated ones.
-//! - A `view def`'s `filter` member is **dropped entirely**, leaving an empty
-//!   body.
-//! - Consequently the pilot's safety / non-safety view pair is **currently
-//!   indistinguishable**. Making those two diverge is SV-2's exit criterion.
+//! - `expose X::**` did not merely lack support — it **silently mis-parsed**
+//!   into a usage named after the first path segment, dropping the wildcard
+//!   with no diagnostic. Because localized writeback falls back to
+//!   `canonical_rewrite`, which re-renders declarations from the parsed AST,
+//!   that made writing `expose` before compiling it a file-corruption hazard.
+//!   It now parses as a namespace query, sharing the `import` path: the two are
+//!   parallel metamodel branches (`MembershipExpose`/`NamespaceExpose` beside
+//!   `MembershipImport`/`NamespaceImport`).
+//! - The `[@Meta]` predicate was dropped on **both** paths, mis-read as a
+//!   multiplicity range and discarded. On the import side that was a standing
+//!   correctness bug beyond this plan: the pilot's own
+//!   `40. Filtering/Filtering Example-2.sysml:28` writes
+//!   `public import vehicle::**[@Safety];`, which Mercurio resolved as
+//!   `vehicle::**` — every part, not just the safety-annotated ones.
+//! - A `view def`'s `filter` member was **dropped entirely**, leaving an empty
+//!   body: `block_starts_with_declaration` did not recognise `filter @X;` as a
+//!   declaration, so it was consumed as an opaque statement.
+//! - Consequently the pilot's safety / non-safety view pair was
+//!   indistinguishable. They now diverge at parse; SV-2 owns the remaining half
+//!   — that they resolve to disjoint *element sets*.
 
 use std::path::{Path, PathBuf};
 
@@ -69,7 +74,16 @@ fn walk(declaration: &Declaration, depth: usize, lines: &mut Vec<String>) {
             lines.push(format!("{pad}package {}", package.name.as_dot_string()));
         }
         Declaration::Import(import) => {
-            lines.push(format!("{pad}import {}", import.path.as_colon_string()));
+            let keyword = if import.is_expose { "expose" } else { "import" };
+            let filter = import
+                .filter
+                .as_ref()
+                .map(|condition| format!("[{condition}]"))
+                .unwrap_or_default();
+            lines.push(format!(
+                "{pad}{keyword} {}{filter}",
+                import.path.as_colon_string()
+            ));
         }
         Declaration::Alias(alias) => {
             lines.push(format!("{pad}alias {}", alias.name));
@@ -78,7 +92,13 @@ fn walk(declaration: &Declaration, depth: usize, lines: &mut Vec<String>) {
             if let Some(definition) = declaration.as_definition_like() {
                 lines.push(format!("{pad}{} def {}", definition.keyword, definition.name));
             } else if let Some(usage) = declaration.as_usage_like() {
-                lines.push(format!("{pad}{} {}", usage.keyword, usage.name));
+                // An element filter carries a predicate rather than a name.
+                match usage.metadata_properties.get("condition") {
+                    Some(condition) => {
+                        lines.push(format!("{pad}{} {condition}", usage.keyword))
+                    }
+                    None => lines.push(format!("{pad}{} {}", usage.keyword, usage.name)),
+                }
             }
         }
     }
@@ -220,96 +240,89 @@ package Fabricated {
     }
 }
 
-// ------------------------------------------------- characterisation (today)
+// -------------------------------------------------- SV-1(a): the constructs
 
-/// `expose <path>::**` mis-parses into a usage declaration named after the
-/// first path segment. The recursive wildcard is dropped with no diagnostic.
+/// `expose <path>::**` now parses as a namespace query and keeps its wildcard.
 ///
-/// This is the fact that makes SV-5 (writing a view out) hard-blocked on SV-1
-/// (compiling it): localized writeback falls back to `canonical_rewrite`, which
-/// re-renders declarations from the parsed AST — so writing `expose` before it
-/// parses would corrupt the file on the next unrelated mutation to it.
+/// Before SV-1 it mis-parsed into a usage declaration named after the first
+/// path segment, dropping the wildcard with no diagnostic. That silent
+/// mis-parse is what made writing `expose` before compiling it a
+/// file-corruption hazard, since localized writeback falls back to
+/// `canonical_rewrite`, which re-renders declarations from the parsed AST.
 #[test]
-fn characterisation_expose_drops_the_recursive_wildcard() {
+fn sv1_expose_parses_as_a_namespace_query() {
     let module = parse_fixture("tier1/tree-diagram-subtree.sysml");
     let lines = flat(&module);
 
     assert!(
-        lines.iter().any(|line| line == "expose vehicle"),
-        "expected today's mis-parse `expose vehicle`; got {lines:?}"
+        lines.iter().any(|line| line == "expose vehicle::**"),
+        "expose must parse as a namespace query carrying its wildcard; got {lines:?}"
     );
     assert!(
-        !lines.iter().any(|line| line.contains("::**")),
-        "the recursive wildcard is expected to be dropped today; got {lines:?}"
+        !lines.iter().any(|line| line == "expose vehicle"),
+        "the old wildcard-dropping mis-parse must not reappear; got {lines:?}"
     );
 }
 
-/// A `view def`'s `filter` member is dropped entirely, leaving an empty body.
+/// The filter predicate survives on BOTH namespace-query paths.
+///
+/// This half is a fix to shipped behaviour beyond the save-as-view plan: the
+/// pilot's own `40. Filtering/Filtering Example-2.sysml:28` writes
+/// `public import vehicle::**[@Safety];`, and before SV-1 Mercurio resolved
+/// that as `vehicle::**` — every part, not just the safety-annotated ones.
 #[test]
-fn characterisation_view_def_filter_member_is_dropped() {
-    let module = parse_fixture("tier1/view-def-metaclass-filter.sysml");
-
-    let view_def = find_definition(&module, "view", "Part Structure View")
-        .expect("the view def itself parses today");
-    assert!(
-        view_def.is_empty(),
-        "`filter @SysML::PartUsage;` is expected to be dropped today; got {view_def:?}"
-    );
-    assert!(
-        !flat(&module).iter().any(|line| line.starts_with("filter")),
-        "no filter declaration is expected to survive today"
-    );
-}
-
-/// `import` and `expose` fail *differently*, and that shapes SV-1: `expose`
-/// should route through the existing import path, which already carries the
-/// wildcard. The dropped predicate is a shared gap — and on the import side it
-/// is a standing correctness bug in shipped behaviour.
-#[test]
-fn characterisation_import_keeps_wildcard_but_drops_predicate() {
+fn sv1_import_and_expose_both_retain_the_filter_predicate() {
     let module = parse_fixture("tier1/import-expose-parity.sysml");
     let lines = flat(&module);
 
     assert!(
-        lines.iter().any(|line| line == "import vehicle::**"),
-        "import is expected to preserve the recursive wildcard; got {lines:?}"
+        lines
+            .iter()
+            .any(|line| line == "import vehicle::**[@Safety]"),
+        "import must retain its filter predicate; got {lines:?}"
     );
     assert!(
-        !lines.iter().any(|line| line.contains("@Safety")),
-        "the [@Safety] predicate is expected to be dropped on BOTH paths today; got {lines:?}"
+        lines
+            .iter()
+            .any(|line| line == "expose vehicle::**[@Safety]"),
+        "expose must retain its filter predicate; got {lines:?}"
     );
     assert!(
-        lines.iter().any(|line| line == "expose vehicle"),
-        "expose is expected to drop the wildcard entirely; got {lines:?}"
+        lines.iter().any(|line| line == "expose vehicle::**"),
+        "an unfiltered expose must stay unfiltered; got {lines:?}"
     );
 }
 
-/// The discriminating case, and SV-2's exit criterion in negative form. The
-/// pilot's safety / non-safety view pair currently parses to the identical
-/// member list, so nothing downstream can tell the two views apart.
+/// A `view def`'s `filter` member survives, and the interoperable
+/// `filter @<Metaclass>` form is captured structurally rather than as text —
+/// that is the shape `TableRowTypeDto` maps onto.
 #[test]
-fn characterisation_safety_and_non_safety_views_are_indistinguishable() {
-    let module = parse_fixture("tier1/metadata-filtered-expose.sysml");
+fn sv1_view_def_retains_its_filter_member() {
+    let module = parse_fixture("tier1/view-def-metaclass-filter.sysml");
 
-    let safety = find_usage_members(&module, "view", "safety features view")
-        .expect("the safety view parses");
-    let non_safety = find_usage_members(&module, "view", "non-safety features view")
-        .expect("the non-safety view parses");
-
+    let view_def = find_definition(&module, "view", "Part Structure View")
+        .expect("the view def parses");
     assert_eq!(
-        safety, non_safety,
-        "today these two views are indistinguishable after parsing; SV-2 is not \
-         done until this assertion fails"
+        view_def,
+        vec!["filter @SysML::PartUsage"],
+        "`filter @SysML::PartUsage;` must survive into the view def's body"
     );
-    assert_eq!(safety, vec!["expose vehicle", "render asTreeDiagram"]);
+
+    let filter = find_usage(&module, "filter").expect("the filter declaration is a usage");
+    assert_eq!(
+        filter
+            .reference_target
+            .as_ref()
+            .map(|name| name.as_colon_string()),
+        Some("SysML::PartUsage".to_string()),
+        "the metaclass predicate must be captured structurally, not only as text"
+    );
 }
 
-// ------------------------------------------------------- targets (ignored)
-
-/// SV-2 exit criterion. The inverse of the characterisation above.
+/// The discriminating case, now positive. The pilot's safety / non-safety view
+/// pair must be distinguishable — this is the parse-level half of it.
 #[test]
-#[ignore = "SV-2: expose resolution — un-ignore when `expose X::**[@Meta]` resolves"]
-fn sv2_safety_and_non_safety_views_must_diverge() {
+fn sv1_safety_and_non_safety_views_diverge_at_parse() {
     let module = parse_fixture("tier1/metadata-filtered-expose.sysml");
 
     let safety = find_usage_members(&module, "view", "safety features view")
@@ -320,33 +333,53 @@ fn sv2_safety_and_non_safety_views_must_diverge() {
     assert_ne!(
         safety, non_safety,
         "a view exposing [@Safety] and one exposing [not (@Safety)] must not \
-         resolve to the same exposed content"
+         parse identically"
+    );
+    assert_eq!(
+        safety,
+        vec!["expose vehicle::**[@Safety]", "render asTreeDiagram"]
+    );
+    assert_eq!(
+        non_safety,
+        vec!["expose vehicle::**[not (@Safety)]", "render asTreeDiagram"]
     );
 }
 
-/// SV-1 exit criterion for the wildcard half.
+/// Complex conditions survive verbatim, including the metadata-cast form the
+/// pilot uses. The parser's job is to stop losing the condition; evaluating it
+/// is SV-2's.
 #[test]
-#[ignore = "SV-1: compile the view metamodel — un-ignore when `expose` parses as a namespace query"]
-fn sv1_expose_preserves_the_recursive_wildcard() {
-    let module = parse_fixture("tier1/tree-diagram-subtree.sysml");
-    let lines = flat(&module);
+fn sv1_complex_filter_conditions_survive_verbatim() {
+    let module = parse_sysml(
+        r#"
+package Complex {
+    metadata def Safety { attribute isMandatory : ScalarValues::Boolean; }
+    part vehicle { part brake { @Safety { isMandatory = true; } } }
+    package Mandatory {
+        public import vehicle::**[@Safety and (as Safety).isMandatory];
+    }
+}
+"#,
+    )
+    .expect("complex filter conditions parse");
+
     assert!(
-        lines.iter().any(|line| line.contains("::**")),
-        "expose must carry the recursive wildcard; got {lines:?}"
+        flat(&module).iter().any(|line| line
+            == "import vehicle::**[@Safety and (as Safety).isMandatory]"),
+        "got {:?}",
+        flat(&module)
     );
 }
 
-/// SV-1 exit criterion for `filter`.
+// ------------------------------------------------------- targets (ignored)
+
+/// SV-2 exit criterion. Parse-level divergence (above) is necessary but not
+/// sufficient: the two views must resolve to disjoint *element sets*, which
+/// needs the `exposed_elements` resolver in `mercurio-views`.
 #[test]
-#[ignore = "SV-1: compile the view metamodel — un-ignore when `filter` is a body member"]
-fn sv1_view_def_retains_its_filter_member() {
-    let module = parse_fixture("tier1/view-def-metaclass-filter.sysml");
-    let view_def = find_definition(&module, "view", "Part Structure View")
-        .expect("the view def parses");
-    assert!(
-        !view_def.is_empty(),
-        "`filter @SysML::PartUsage;` must survive into the view def's body"
-    );
+#[ignore = "SV-2: expose resolution — un-ignore when exposed_elements() exists"]
+fn sv2_safety_and_non_safety_views_resolve_to_disjoint_sets() {
+    unimplemented!("SV-2: exposed_elements(graph, view_usage)");
 }
 
 /// SV-3 exit criterion. Every tier-1 and tier-2 fixture must round-trip
@@ -390,6 +423,32 @@ fn find_definition(module: &SysmlModule, keyword: &str, name: &str) -> Option<Ve
 /// Member outline of the first usage matching `keyword` and `name`.
 fn find_usage_members(module: &SysmlModule, keyword: &str, name: &str) -> Option<Vec<String>> {
     find(module, keyword, name, false)
+}
+
+/// The first usage declaration anywhere in the module with the given keyword.
+fn find_usage(
+    module: &SysmlModule,
+    keyword: &str,
+) -> Option<mercurio_foundation::language_contracts::ast::GenericUsageDecl> {
+    fn visit(
+        declaration: &Declaration,
+        keyword: &str,
+    ) -> Option<mercurio_foundation::language_contracts::ast::GenericUsageDecl> {
+        if let Some(usage) = declaration.as_usage_like()
+            && usage.keyword == keyword
+        {
+            return Some(usage);
+        }
+        declaration
+            .child_declarations()
+            .iter()
+            .find_map(|child| visit(child, keyword))
+    }
+
+    module
+        .members
+        .iter()
+        .find_map(|member| visit(member, keyword))
 }
 
 fn find(

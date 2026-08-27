@@ -205,6 +205,10 @@ impl Parser {
         };
         Ok(ImportDecl {
             path,
+            // KerML has `import` but no `expose`; `expose` is a SysML view
+            // construct (save-as-view SV-1).
+            is_expose: false,
+            filter: None,
             comments: Vec::new(),
             docs,
             modifiers: Vec::new(),
