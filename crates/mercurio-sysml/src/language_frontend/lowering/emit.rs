@@ -1170,10 +1170,22 @@ pub fn transpile_module_with_source(
     }
 
     for import in &module.imports {
+        // A namespace query is owned by whatever namespace declares it, which
+        // is not always a package: `view v { expose x::**; }` is owned by the
+        // view *usage*. Consulting only `package_ids` silently reparented every
+        // such query onto `pkg.root`, which made a view's exposes
+        // indistinguishable from the next view's — fatal for
+        // `exposed_elements`, which has to ask what *this* view exposes
+        // (save-as-view SV-2).
         let owner_id = import
-            .owner_package_qualified_name
+            .owner_qualified_name
             .as_ref()
-            .and_then(|qualified_name| package_ids.get(qualified_name))
+            .and_then(|qualified_name| {
+                package_ids
+                    .get(qualified_name)
+                    .or_else(|| definition_ids.get(qualified_name))
+                    .or_else(|| top_level_usage_ids.get(qualified_name))
+            })
             .cloned()
             .unwrap_or_else(|| "pkg.root".to_string());
         elements.push(transpile_import(

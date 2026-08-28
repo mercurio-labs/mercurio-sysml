@@ -35,7 +35,7 @@ pub(crate) fn build_import_alias_map(
             let namespace = import_namespace_prefix(&import.target_id);
             add_wildcard_import_aliases(
                 &namespace,
-                import.owner_package_qualified_name.as_deref().unwrap_or(""),
+                import.owner_qualified_name.as_deref().unwrap_or(""),
                 &root_package,
                 packages,
                 definitions,
@@ -63,7 +63,7 @@ pub(crate) fn build_import_alias_map(
             )?;
             bind_owner_qualified_value_aliases(
                 &mut aliases,
-                import.owner_package_qualified_name.as_deref().unwrap_or(""),
+                import.owner_qualified_name.as_deref().unwrap_or(""),
                 alias,
                 import.target_id.clone(),
                 &import.span,
