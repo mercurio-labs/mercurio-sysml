@@ -38,7 +38,9 @@ use std::path::{Path, PathBuf};
 use mercurio_foundation::language_contracts::ast::Declaration;
 use mercurio_foundation::model::{Graph, NodeId};
 use mercurio_foundation::views::{exposed_elements, resolve_exposed_elements};
-use mercurio_sysml::{KirDocument, SysmlModule, compile_sysml_text, load_sysml_baseline, parse_sysml};
+use mercurio_sysml::{
+    KirDocument, SysmlModule, compile_sysml_text, load_sysml_baseline, parse_sysml,
+};
 
 const FIXTURE_DIR: &str = "tests/fixtures/save-as-view";
 
@@ -92,13 +94,14 @@ fn walk(declaration: &Declaration, depth: usize, lines: &mut Vec<String>) {
         }
         _ => {
             if let Some(definition) = declaration.as_definition_like() {
-                lines.push(format!("{pad}{} def {}", definition.keyword, definition.name));
+                lines.push(format!(
+                    "{pad}{} def {}",
+                    definition.keyword, definition.name
+                ));
             } else if let Some(usage) = declaration.as_usage_like() {
                 // An element filter carries a predicate rather than a name.
                 match usage.metadata_properties.get("condition") {
-                    Some(condition) => {
-                        lines.push(format!("{pad}{} {condition}", usage.keyword))
-                    }
+                    Some(condition) => lines.push(format!("{pad}{} {condition}", usage.keyword)),
                     None => lines.push(format!("{pad}{} {}", usage.keyword, usage.name)),
                 }
             }
@@ -161,7 +164,10 @@ fn manifest_matches_the_corpus_on_disk() {
         );
 
         let tier = fixture["tier"].as_u64().expect("fixture declares a tier");
-        assert!((1..=3).contains(&tier), "fixture `{id}` has an unknown tier");
+        assert!(
+            (1..=3).contains(&tier),
+            "fixture `{id}` has an unknown tier"
+        );
 
         match fixture["spec"].as_str() {
             Some(spec) => assert!(
@@ -302,8 +308,8 @@ fn sv1_import_and_expose_both_retain_the_filter_predicate() {
 fn sv1_view_def_retains_its_filter_member() {
     let module = parse_fixture("tier1/view-def-metaclass-filter.sysml");
 
-    let view_def = find_definition(&module, "view", "Part Structure View")
-        .expect("the view def parses");
+    let view_def =
+        find_definition(&module, "view", "Part Structure View").expect("the view def parses");
     assert_eq!(
         view_def,
         vec!["filter @SysML::PartUsage"],
@@ -366,8 +372,9 @@ package Complex {
     .expect("complex filter conditions parse");
 
     assert!(
-        flat(&module).iter().any(|line| line
-            == "import vehicle::**[@Safety and (as Safety).isMandatory]"),
+        flat(&module)
+            .iter()
+            .any(|line| line == "import vehicle::**[@Safety and (as Safety).isMandatory]"),
         "got {:?}",
         flat(&module)
     );
@@ -553,8 +560,14 @@ fn sv2_safety_and_non_safety_views_resolve_to_disjoint_sets() {
     // `brake` carries @Safety; `radio` does not. Both views expose the same
     // `vehicle::**` scope, so only the predicate can tell them apart -- which
     // is the whole point of the increment.
-    assert_eq!(safety, vec!["feature.SafetyViews.vehicle.brake".to_string()]);
-    assert_eq!(non_safety, vec!["feature.SafetyViews.vehicle.radio".to_string()]);
+    assert_eq!(
+        safety,
+        vec!["feature.SafetyViews.vehicle.brake".to_string()]
+    );
+    assert_eq!(
+        non_safety,
+        vec!["feature.SafetyViews.vehicle.radio".to_string()]
+    );
     assert!(
         safety.iter().all(|id| !non_safety.contains(id)),
         "the two views must resolve to disjoint sets; got {safety:?} and {non_safety:?}"
@@ -616,18 +629,17 @@ package P {
 /// and each must be *correct* -- divergence alone would be satisfied by three
 /// different wrong answers.
 ///
-/// Two deviations from the file, both about **import visibility rather than
-/// views**, and neither touching what this test measures:
+/// One deviation from the file, about **import visibility rather than views**,
+/// and not touching what this test measures: the pilot splits the model across
+/// `AnnotationDefinitions`, `PartsTree`, `ViewDefinitions`, and `Views`
+/// packages joined by `public import`. A metadata definition is not visible
+/// across those package boundaries today, so everything is declared in one
+/// package here. That is a pre-existing name-resolution gap, unrelated to
+/// `expose`.
 ///
-/// - The pilot splits the model across `AnnotationDefinitions`, `PartsTree`,
-///   `ViewDefinitions`, and `Views` packages joined by `public import`. A
-///   metadata definition is not visible across those package boundaries today,
-///   so everything is declared in one package here.
-/// - The pilot writes `private import PartsTree::vehicle;`. A qualified path
-///   to a *usage* does not resolve -- see
-///   `sv2_a_qualified_path_to_a_usage_does_not_resolve`.
-///
-/// Both are pre-existing name-resolution gaps, unrelated to `expose`.
+/// The pilot's `private import PartsTree::vehicle;` was a second deviation
+/// through SV-2; it now compiles -- see
+/// `an_import_resolves_a_qualified_path_to_a_usage`.
 #[test]
 fn sv2_the_pilot_safety_and_security_views_diverge_correctly() {
     let document = compile(
@@ -808,12 +820,7 @@ fn find_usage(
         .find_map(|member| visit(member, keyword))
 }
 
-fn find(
-    module: &SysmlModule,
-    keyword: &str,
-    name: &str,
-    definition: bool,
-) -> Option<Vec<String>> {
+fn find(module: &SysmlModule, keyword: &str, name: &str, definition: bool) -> Option<Vec<String>> {
     fn visit(
         declaration: &Declaration,
         keyword: &str,
@@ -874,9 +881,13 @@ fn short_names(graph: &Graph, view: &str) -> Vec<String> {
     let mut names: Vec<String> = exposed(graph, view)
         .iter()
         .filter_map(|id| {
-            graph
-                .element_by_element_id(id)
-                .and_then(|element| element.properties.to_btree_map().get("declared_name").cloned())
+            graph.element_by_element_id(id).and_then(|element| {
+                element
+                    .properties
+                    .to_btree_map()
+                    .get("declared_name")
+                    .cloned()
+            })
         })
         .filter_map(|value| value.as_str().map(str::to_string))
         .collect();
@@ -884,21 +895,18 @@ fn short_names(graph: &Graph, view: &str) -> Vec<String> {
     names
 }
 
-/// A standing gap this increment did **not** close, recorded so it is not
-/// rediscovered: a qualified path naming a *usage* does not resolve in an
-/// `import`. Only definitions are bound at that point, so the pilot's own
-/// `private import PartsTree::vehicle;` fails to compile.
+/// A qualified path may name a **usage**, not just a definition:
+/// `import Tree::vehicle;` -- the shape the pilot itself writes as
+/// `private import PartsTree::vehicle;`. This failed to compile through SV-2,
+/// which recorded it as a standing gap; the import path now consults the
+/// module's usages after its definitions, and binds the usage's element id.
 ///
-/// `expose` no longer depends on this -- SV-2 made a non-wildcard expose scope
-/// fall through as verbatim text, exactly as a wildcard scope always has, and
-/// `exposed_elements` binds it against the graph. So this blocks `import`, not
-/// views. Closing it means teaching import resolution to render usage ids,
-/// which lives in the emission phase; that is its own increment.
+/// The assertion is on the emitted target rather than on compiling at all,
+/// because "it compiles" would also be satisfied by an import that resolved to
+/// the wrong element -- or to a plausible id naming nothing.
 #[test]
-#[ignore = "known gap: import cannot resolve a qualified path to a usage"]
-fn sv2_a_qualified_path_to_a_usage_does_not_resolve() {
-    let stdlib = load_sysml_baseline().expect("stdlib baseline loads");
-    let result = compile_sysml_text(
+fn an_import_resolves_a_qualified_path_to_a_usage() {
+    let document = compile(
         r#"
 package P {
     package Tree { part vehicle { part brake; } }
@@ -906,12 +914,104 @@ package P {
 }
 "#,
         "usage-import.sysml",
+    );
+
+    let vehicle = document
+        .elements
+        .iter()
+        .find(|element| {
+            element
+                .properties
+                .get("declared_name")
+                .and_then(|value| value.as_str())
+                == Some("vehicle")
+        })
+        .expect("the model declares a `vehicle` part");
+
+    let imports = document
+        .elements
+        .iter()
+        .filter(|element| element.kind == "SysML::Import")
+        .collect::<Vec<_>>();
+    assert_eq!(imports.len(), 1, "the source declares exactly one import");
+
+    let targets = imports[0]
+        .properties
+        .get("imports")
+        .and_then(|value| value.as_array())
+        .map(|values| {
+            values
+                .iter()
+                .filter_map(|value| value.as_str().map(str::to_string))
+                .collect::<Vec<_>>()
+        })
+        .unwrap_or_default();
+
+    assert_eq!(
+        targets,
+        vec![vehicle.id.clone()],
+        "the import must point at the `vehicle` element itself, not at an          unresolved path"
+    );
+}
+
+/// The same path, one segment shorter than the declaration is deep: a suffix
+/// match, the way definitions have always resolved.
+#[test]
+fn an_import_resolves_a_usage_by_unique_suffix() {
+    let document = compile(
+        r#"
+package P {
+    package Tree { part vehicle { part brake; } }
+    package Uses { private import vehicle::brake; }
+}
+"#,
+        "usage-import-suffix.sysml",
+    );
+
+    let brake = document
+        .elements
+        .iter()
+        .find(|element| {
+            element
+                .properties
+                .get("declared_name")
+                .and_then(|value| value.as_str())
+                == Some("brake")
+        })
+        .expect("the model declares a `brake` part");
+
+    let target = document
+        .elements
+        .iter()
+        .find(|element| element.kind == "SysML::Import")
+        .and_then(|element| element.properties.get("imports").cloned())
+        .and_then(|value| value.as_array().and_then(|values| values.first().cloned()))
+        .and_then(|value| value.as_str().map(str::to_string));
+
+    assert_eq!(target, Some(brake.id.clone()));
+}
+
+/// A path naming nothing is still a hard error. An import binds a name into a
+/// scope, so an unresolvable one is a defect the author must see -- widening
+/// resolution to usages must not turn that into a silent verbatim target.
+#[test]
+fn an_unresolvable_import_is_still_an_error() {
+    let stdlib = load_sysml_baseline().expect("stdlib baseline loads");
+    let result = compile_sysml_text(
+        r#"
+package P {
+    package Tree { part vehicle; }
+    package Uses { private import Tree::nosuchthing; }
+}
+"#,
+        "usage-import-missing.sysml",
         &stdlib,
     );
 
-    assert!(
-        result.is_ok(),
-        "un-ignore this when import resolves usage paths; got {:?}",
-        result.err().map(|error| error.message)
+    let message = result.err().map(|error| error.message);
+    assert_eq!(
+        message.as_deref(),
+        Some("unresolved import `Tree::nosuchthing`"),
+        "an import that names nothing must fail the compile"
     );
 }
