@@ -1,0 +1,33 @@
+{
+  "schema": "mercurio.view.v1",
+  "version": 1,
+  "kind": "diagram.internal_block",
+  "mode": "visualization",
+  "diagram": {
+    "version": 1,
+    "kind": "internal_block",
+    "title": "system internals",
+    "root": "InterconnectViews::System",
+    "query": {
+      "relations": [
+        "specializes"
+      ],
+      "direction": "children",
+      "depth": 3,
+      "include_libraries": true,
+      "include_user_model": true,
+      "max_nodes": 350,
+      "max_edges": 900
+    },
+    "layout": {
+      "engine": "dagre",
+      "direction": "LR"
+    },
+    "style": {
+      "show_attributes": true,
+      "show_edge_labels": true,
+      "group_by_layer": false,
+      "show_affordances": false
+    }
+  }
+}

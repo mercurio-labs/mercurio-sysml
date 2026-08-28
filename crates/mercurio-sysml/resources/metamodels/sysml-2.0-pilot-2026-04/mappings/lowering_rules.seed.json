@@ -1393,8 +1393,8 @@
       }
     },
     {
-      "construct": "FilterUsage",
-      "metaclass": "SysML::FilterUsage",
+      "construct": "ElementFilterMember",
+      "metaclass": "SysML::ElementFilterMembership",
       "status": "reviewed",
       "ast": {
         "node": "GenericUsageDecl",
@@ -1404,27 +1404,23 @@
         "element": "usage",
         "name": "$ast.name",
         "owner": "$scope.owner",
-        "fields": {
-          "members": "$ast.body_members[usage]",
-          "specializes": "$ast.specializes or semantic_default",
-          "type": "$ast.ty"
-        }
+        "fields": {}
       },
       "elaborate": [],
       "emit": {
-        "id_template": "filter.{owner_path}.{declared_name}",
+        "id_template": "filter.{owner_path}.{start_line}_{start_col}",
         "properties": {
-          "declared_name": "$declared_name",
-          "owner": "$owner_id",
-          "type": "$type_ref"
+          "owner": "$owner_id"
         }
       },
       "pilot_sources": {
         "grammar_rules": [
-          "FilterUsage"
+          "ElementFilterMember"
         ],
-        "ecore_class": "SysML::FilterUsage",
-        "transform_observations": []
+        "ecore_class": "SysML::ElementFilterMembership",
+        "transform_observations": [
+          "A filter member is a membership, not a usage: it has no name and no type, only a condition. It is collected through the usage path because that is the AST shape the parser produces (save-as-view SV-1/SV-2)."
+        ]
       }
     },
     {

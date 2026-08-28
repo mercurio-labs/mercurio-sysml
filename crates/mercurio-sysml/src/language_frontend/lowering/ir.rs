@@ -25,9 +25,17 @@ pub struct ResolvedPackage {
 
 #[derive(Debug, Clone)]
 pub struct ResolvedImport {
-    pub owner_package_qualified_name: Option<String>,
+    /// Qualified name of the owning namespace — a package, a definition, or a
+    /// *usage*. A `view v { expose x::**; }` records the view usage here, so
+    /// emission must not assume this names a package (save-as-view SV-2).
+    pub owner_qualified_name: Option<String>,
     pub target_id: String,
     pub imported_name: Option<String>,
+    /// `true` for `expose`, which lowers to `SysML::Expose` rather than
+    /// `SysML::Import` (save-as-view SV-1).
+    pub is_expose: bool,
+    /// Verbatim namespace-query filter condition, if any.
+    pub filter: Option<String>,
     pub docs: Vec<String>,
     pub span: SourceSpan,
     pub ordinal: usize,

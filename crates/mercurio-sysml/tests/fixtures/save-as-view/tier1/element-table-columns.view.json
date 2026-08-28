@@ -1,0 +1,37 @@
+{
+  "schema": "mercurio.view.v1",
+  "version": 1,
+  "kind": "table",
+  "mode": "visualization",
+  "table": {
+    "version": 1,
+    "kind": "elements",
+    "title": "component table",
+    "scope": {
+      "kind": "containment_subtree",
+      "root": "TableViews"
+    },
+    "columns": [
+      {
+        "key": "name",
+        "label": "name"
+      },
+      {
+        "key": "documentation",
+        "label": "documentation"
+      }
+    ],
+    "query": {
+      "relations": [
+        "specializes"
+      ],
+      "direction": "children",
+      "depth": 3,
+      "include_libraries": true,
+      "include_user_model": true,
+      "max_nodes": 350,
+      "max_edges": 900
+    },
+    "show_affordances": false
+  }
+}

@@ -238,6 +238,7 @@ fn resolve_module_with_policy_context(
         &context.library_indexes.aliases,
         &context.local_definitions,
         &local_aliases,
+        &context.local_usage_map,
     )?;
     log_compile_timed_event(
         "resolver.resolve_imports",
@@ -337,27 +338,52 @@ fn resolve_imports(
     stdlib_aliases: &BTreeMap<String, String>,
     local_definitions: &BTreeMap<String, String>,
     local_aliases: &BTreeMap<String, QualifiedName>,
+    local_usage_map: &BTreeMap<String, CollectedUsage>,
 ) -> Result<Vec<ResolvedImport>, Diagnostic> {
     let mut resolved = Vec::new();
 
     for import in imports {
-        let target_id = resolve_import_target(
+        let resolved_target = resolve_import_target(
             &import.decl.path,
             stdlib_ids,
             stdlib_aliases,
             local_definitions,
             local_aliases,
-        )
-        .ok_or_else(|| {
-            Diagnostic::new(
-                format!("unresolved import `{}`", import.decl.path.as_colon_string()),
-                Some(import.decl.span.clone()),
-            )
-        })?;
+            // Usages are offered to `import` only. SV-2 deliberately made a
+            // non-wildcard `expose` scope fall through as verbatim text, so
+            // `exposed_elements` binds it against the graph; binding it to an
+            // element id here would take that back.
+            (!import.decl.is_expose).then_some(local_usage_map),
+        );
+
+        // An `expose` scope is a *query*, not a name binding. It does not have
+        // to name one element at compile time: `vehicle::**` already falls
+        // through as verbatim text, because a wildcard cannot denote a single
+        // target, and `exposed_elements` resolves it against the graph.
+        //
+        // A non-wildcard scope is the same kind of thing, so it falls through
+        // the same way. Erroring instead made the pilot's own
+        // `view vehicleSafetyFeatureView { expose vehicle; }` fail to compile,
+        // since `vehicle` is a *usage* and only definitions are bound here.
+        //
+        // `import` keeps the hard error: an import really does bind a name into
+        // a scope, and an unresolvable one is a defect the author must see.
+        let target_id = match resolved_target {
+            Some(target_id) => target_id,
+            None if import.decl.is_expose => import.decl.path.as_colon_string(),
+            None => {
+                return Err(Diagnostic::new(
+                    format!("unresolved import `{}`", import.decl.path.as_colon_string()),
+                    Some(import.decl.span.clone()),
+                ));
+            }
+        };
 
         resolved.push(ResolvedImport {
-            owner_package_qualified_name: import.owner_package_qualified_name.clone(),
+            owner_qualified_name: import.owner_qualified_name.clone(),
             target_id,
+            is_expose: import.decl.is_expose,
+            filter: import.decl.filter.clone(),
             imported_name: import
                 .decl
                 .path
@@ -522,7 +548,9 @@ fn resolve_usage(
         .map(|name| {
             let reference_target_policy =
                 mappings.usage_reference_target_resolution_policy(&usage.construct);
-            if reference_target_policy == Some("annotation_target_then_type_then_reference") {
+            let resolved = if reference_target_policy
+                == Some("annotation_target_then_type_then_reference")
+            {
                 resolve_comment_annotation_target(&usage, name, local_definitions, local_usage_map)
                     .or_else(|| {
                         resolve_type_reference_in_scope(
@@ -589,15 +617,28 @@ fn resolve_usage(
                     local_feature_index,
                     local_usage_map,
                 )
-            }
-            .ok_or_else(|| {
-                Diagnostic::new(
+            };
+
+            match resolved {
+                Some(target) => Ok(Some(target)),
+                // A filter's `@Safety` is a metadata *predicate*, not a name
+                // binding: `exposed_elements` evaluates it against each
+                // element's own metadata features at render time, and a
+                // predicate that currently matches nothing is a legitimate
+                // filter, not an error. Requiring it to bind here made the
+                // pilot's own `view def SafetyFeatureView { filter @Safety; }`
+                // fail to compile unless the annotation happened to be applied
+                // somewhere the reference index could already see
+                // (save-as-view SV-2).
+                None if reference_target_policy == Some("metadata_predicate") => Ok(None),
+                None => Err(Diagnostic::new(
                     format!("unresolved reference target `{}`", name.as_colon_string()),
                     Some(name.span.clone()),
-                )
-            })
+                )),
+            }
         })
-        .transpose()?;
+        .transpose()?
+        .flatten();
     let allocation_source = usage
         .allocation_source
         .as_ref()
@@ -3448,6 +3489,7 @@ fn resolve_import_target(
     stdlib_aliases: &BTreeMap<String, String>,
     local_definitions: &BTreeMap<String, String>,
     local_aliases: &BTreeMap<String, QualifiedName>,
+    local_usages: Option<&BTreeMap<String, CollectedUsage>>,
 ) -> Option<String> {
     let as_colon = name.as_colon_string();
     if as_colon.contains('*') {
@@ -3461,6 +3503,11 @@ fn resolve_import_target(
         local_definitions,
         local_aliases,
     )
+    // A path may name a *usage* -- `import PartsTree::vehicle;` -- and only
+    // definitions are bound above. Usages are consulted before the stdlib
+    // last-segment fallback below, because a local declaration the path names
+    // in full beats a loose suffix match against a library id.
+    .or_else(|| local_usages.and_then(|usages| resolve_local_usage_reference(name, usages)))
     .or_else(|| {
         if name.segments.len() > 1 {
             unique_suffix_match(name.segments.last()?, stdlib_ids)
@@ -3468,6 +3515,28 @@ fn resolve_import_target(
             None
         }
     })
+}
+
+/// A qualified path against the usages declared in this module, exactly or by
+/// unique suffix -- `Tree::vehicle` names `P.Tree.vehicle` -- mirroring how
+/// [`unique_local_suffix_match`] treats definitions. A suffix matching more
+/// than one usage is ambiguous and resolves to nothing.
+fn resolve_local_usage_reference(
+    name: &QualifiedName,
+    local_usages: &BTreeMap<String, CollectedUsage>,
+) -> Option<String> {
+    let dotted = name.as_dot_string();
+    if let Some(usage) = local_usages.get(&dotted) {
+        return Some(collected_usage_element_id(usage));
+    }
+
+    let suffix = format!(".{dotted}");
+    let mut matches = local_usages
+        .iter()
+        .filter(|(qualified_name, _)| qualified_name.ends_with(&suffix))
+        .map(|(_, usage)| collected_usage_element_id(usage));
+    let first = matches.next()?;
+    matches.next().is_none().then_some(first)
 }
 
 fn resolve_type_reference(

@@ -24,7 +24,13 @@ pub(crate) struct CollectedModule {
 
 #[derive(Debug, Clone)]
 pub(crate) struct CollectedImport {
-    pub(crate) owner_package_qualified_name: Option<String>,
+    /// Qualified name of the owning namespace. **Not always a package**:
+    /// `collect_nested_member_imports` also walks usage and definition bodies,
+    /// so a `view v { expose x::**; }` records the *view usage* here. Emission
+    /// must therefore resolve this against usage and definition ids too, not
+    /// just package ids — assuming a package silently reparented every query
+    /// declared inside a view onto the document root (save-as-view SV-2).
+    pub(crate) owner_qualified_name: Option<String>,
     pub(crate) decl: ImportDecl,
 }
 
@@ -202,7 +208,7 @@ fn collect_declarations(
                 mappings,
             )?,
             Declaration::Import(import_decl) => imports.push(CollectedImport {
-                owner_package_qualified_name: owner_package_qualified_name.map(str::to_string),
+                owner_qualified_name: owner_package_qualified_name.map(str::to_string),
                 decl: import_decl.clone(),
             }),
             Declaration::Alias(alias) => aliases.push(collect_alias(alias, owner_package_segments)),
@@ -286,7 +292,7 @@ fn collect_nested_member_imports(
 
         match declaration {
             Declaration::Import(import_decl) => imports.push(CollectedImport {
-                owner_package_qualified_name: Some(owner_qualified_name.to_string()),
+                owner_qualified_name: Some(owner_qualified_name.to_string()),
                 decl: import_decl.clone(),
             }),
             Declaration::Package(package) => {

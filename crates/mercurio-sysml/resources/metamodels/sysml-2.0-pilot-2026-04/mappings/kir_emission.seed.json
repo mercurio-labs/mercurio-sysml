@@ -72,6 +72,42 @@
         }
       }
     },
+    "SysML::Expose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::MembershipExpose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::NamespaceExpose": {
+      "kir_kind": "SysML::Expose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
     "SysML::MembershipImport": {
       "kir_kind": "SysML::Import",
       "id_template": "import.{owner_id}.{ordinal}",
@@ -945,14 +981,13 @@
         }
       }
     },
-    "SysML::FilterUsage": {
-      "kir_kind": "KerML::Core::Feature",
-      "id_template": "filter.{owner_path}.{declared_name}",
+    "SysML::ElementFilterMembership": {
+      "kir_kind": "SysML::ElementFilterMembership",
+      "id_template": "filter.{owner_path}.{start_line}_{start_col}",
       "emit": {
         "properties": {
           "owner": "{owner_id}",
-          "type": "{type_ref}",
-          "declared_name": "{declared_name}"
+          "metatype": "{metatype_ref}"
         }
       }
     },
@@ -1251,7 +1286,7 @@
       }
     },
     "SysML::ViewUsage": {
-      "kir_kind": "KerML::Core::Feature",
+      "kir_kind": "SysML::ViewUsage",
       "id_template": "view.{owner_path}.{declared_name}",
       "emit": {
         "properties": {
@@ -1277,7 +1312,7 @@
       }
     },
     "SysML::ViewpointUsage": {
-      "kir_kind": "KerML::Core::Feature",
+      "kir_kind": "SysML::ViewpointUsage",
       "id_template": "viewpoint.{owner_path}.{declared_name}",
       "emit": {
         "properties": {
@@ -1290,7 +1325,7 @@
       }
     },
     "SysML::RenderingUsage": {
-      "kir_kind": "KerML::Core::Feature",
+      "kir_kind": "SysML::RenderingUsage",
       "id_template": "rendering.{owner_path}.{declared_name}",
       "emit": {
         "properties": {

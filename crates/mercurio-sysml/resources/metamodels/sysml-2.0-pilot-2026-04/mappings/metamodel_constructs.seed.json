@@ -20,14 +20,14 @@
       },
       {
         "path": "resources/metamodels/sysml-2.0-pilot-2026-04/mappings/constructs.overlay.json",
-        "sha256": "9d9c6740188e977de57213d9b8b00de5365641a8411d17f6c8c11c309446cd40"
+        "sha256": "01294e1894f0d1f84cbabac8a051c5834c30b37f1604f57545a974e532600b29"
       }
     ],
     "extractor": {
       "name": "generate_pilot_constructs_seed",
-      "version": "0.1.0"
+      "version": "0.86.0"
     },
-    "generated_at_utc": "2026-07-11T16:48:51.121044Z"
+    "generated_at_utc": "2026-08-27T14:24:12.7850053Z"
   },
   "keyword_registry": {
     "source": {
@@ -94,7 +94,7 @@
       "exhibit": "ExhibitStateUsage",
       "failure": "FailureUsage",
       "feature": "FeatureUsage",
-      "filter": "FilterUsage",
+      "filter": "ElementFilterMember",
       "flow": "FlowUsage",
       "focus": "FocusUsage",
       "for": "ForUsage",
@@ -747,6 +747,34 @@
       "overlay_reason": "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
     },
     {
+      "construct": "ElementFilterMember",
+      "metaclass": "SysML::ElementFilterMembership",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 229,
+      "overlay_reason": "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+    },
+    {
+      "construct": "Expose",
+      "metaclass": "SysML::Expose",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2374,
+      "overlay_reason": "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+    },
+    {
+      "construct": "MembershipExpose",
+      "metaclass": "SysML::MembershipExpose",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2379,
+      "overlay_reason": "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+    },
+    {
+      "construct": "NamespaceExpose",
+      "metaclass": "SysML::NamespaceExpose",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2383,
+      "overlay_reason": "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+    },
+    {
       "construct": "CommentDefinition",
       "metaclass": "SysML::CommentDefinition",
       "overlay_reason": "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
@@ -844,11 +872,6 @@
     {
       "construct": "IfUsage",
       "metaclass": "SysML::IfUsage",
-      "overlay_reason": "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
-    },
-    {
-      "construct": "FilterUsage",
-      "metaclass": "SysML::FilterUsage",
       "overlay_reason": "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
     },
     {

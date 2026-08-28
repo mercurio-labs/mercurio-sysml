@@ -1207,6 +1207,21 @@ impl Parser {
             TokenKind::Identifier(ref value) if value == "alias" => {
                 Declaration::Alias(self.parse_alias(docs, modifiers)?)
             }
+            // `expose` is import-shaped, not usage-shaped. Without this arm it
+            // falls through to generic usage parsing and mis-parses into a
+            // feature named after the first path segment, silently dropping the
+            // `::**` wildcard (save-as-view SV-1).
+            TokenKind::Identifier(ref value) if value == "expose" => {
+                Declaration::Import(self.parse_expose(docs, modifiers)?)
+            }
+            // `filter <condition>;` — an ElementFilterMembership on the owning
+            // view or package. Guarded against `filter def`, so a user type
+            // named `filter` still parses as a definition (save-as-view SV-1).
+            TokenKind::Identifier(ref value)
+                if value == "filter" && !matches!(self.next_kind(), Some(TokenKind::Def)) =>
+            {
+                self.parse_element_filter(docs, modifiers)?
+            }
             TokenKind::Identifier(ref value)
                 if value == "use"
                     && matches!(self.next_kind(), Some(TokenKind::Identifier(next)) if next == "case") =>
@@ -1588,6 +1603,16 @@ impl Parser {
         let mut imports = Vec::new();
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
+            // NOTE: unlike a definition or usage body (see
+            // `parse_declaration_block_contents_after_open`), a `doc` at
+            // package level still attaches to the declaration that follows it.
+            // Moving it to the package is what SysML v2 says -- `doc` is an
+            // owned Documentation of its namespace -- but Mercurio has a
+            // shipped convention in the other direction here: `set_documentation`
+            // replaces a prefix `doc` in place, and reversing the ownership makes
+            // it append a second one instead. Reconciling the two is an authoring
+            // decision, not a parser fix; raised as an open question by
+            // save-as-view V-6.3.
             if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
                 docs.append(&mut self.pending_docs);
             }
@@ -1630,21 +1655,181 @@ impl Parser {
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "all") {
             self.expect_identifier_named("all", "expected `all` after `import`")?;
         }
+        self.parse_namespace_query_tail(start, false, docs, modifiers, "import")
+    }
+
+    /// `expose <path>[<filter>];` — the view-scoped twin of `import`.
+    ///
+    /// `SysML::MembershipExpose`/`NamespaceExpose` are parallel to
+    /// `MembershipImport`/`NamespaceImport` in the metamodel and share the same
+    /// path syntax, so they share the parse path here (save-as-view SV-1).
+    fn parse_expose(
+        &mut self,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+    ) -> Result<ImportDecl, Diagnostic> {
+        let start = self.expect_identifier_named("expose", "expected `expose`")?;
+        self.parse_namespace_query_tail(start, true, docs, modifiers, "expose")
+    }
+
+    /// Shared tail of `import` and `expose`: a name path, an optional filter
+    /// condition, and a terminator.
+    fn parse_namespace_query_tail(
+        &mut self,
+        start: Token,
+        is_expose: bool,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+        keyword: &str,
+    ) -> Result<ImportDecl, Diagnostic> {
         let path = self.parse_import_path()?;
-        self.consume_suffix_adornments()?;
+        let filter = self.parse_namespace_query_filter()?;
         let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
             self.consume_opaque_block_with_open()?
         } else {
-            self.expect(TokenKind::Semicolon, "expected `;` after import")?
+            self.expect(
+                TokenKind::Semicolon,
+                &format!("expected `;` after {keyword}"),
+            )?
         };
 
         Ok(ImportDecl {
             path,
+            is_expose,
+            filter,
             comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
         })
+    }
+
+    /// `filter <condition>;` — an `SysML::ElementFilterMembership` on the
+    /// owning view definition or package.
+    ///
+    /// Like a namespace-query filter, the condition is held as raw text; SV-2
+    /// evaluates it. Before this, the whole declaration was dropped, leaving a
+    /// `view def`'s body empty with no diagnostic (save-as-view SV-1).
+    fn parse_element_filter(
+        &mut self,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+    ) -> Result<Declaration, Diagnostic> {
+        let start = self.expect_identifier_named("filter", "expected `filter`")?;
+
+        // The interoperable case is exactly `filter @<QualifiedName>` — a
+        // metaclass predicate, which is what maps onto TableRowTypeDto. Capture
+        // that shape structurally in `reference_target`; anything richer keeps
+        // its raw text and is resolved by SV-2.
+        let simple_reference = if matches!(self.peek_kind(), TokenKind::At)
+            && matches!(self.next_kind(), Some(TokenKind::Identifier(_)))
+        {
+            let checkpoint = self.index;
+            self.advance(); // `@`
+            let name = self.parse_qualified_name()?;
+            if matches!(self.peek_kind(), TokenKind::Semicolon) {
+                Some(name)
+            } else {
+                self.index = checkpoint;
+                None
+            }
+        } else {
+            None
+        };
+
+        let mut parts: Vec<String> = Vec::new();
+        if simple_reference.is_none() {
+            while !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::Eof) {
+                parts.push(filter_token_text(self.current().kind.clone()));
+                self.advance();
+            }
+        }
+        let end = self.expect(TokenKind::Semicolon, "expected `;` after filter condition")?;
+
+        let condition = match &simple_reference {
+            Some(name) => format!("@{}", name.as_colon_string()),
+            None => normalize_filter_condition(&parts.join(" ")),
+        };
+        if condition.is_empty() {
+            return Err(self.error_here("expected a condition after `filter`"));
+        }
+
+        // `condition` carries the verbatim predicate. It rides
+        // `metadata_properties` rather than `expression` because the AST's
+        // `Expr` cannot yet represent metadata-application (`@X`) or cast
+        // (`as X`) operators, and inventing a structured mis-representation
+        // would be worse than an honest text carrier. SV-2 promotes it.
+        let mut properties = BTreeMap::new();
+        properties.insert("condition".to_string(), condition);
+
+        Ok(Declaration::GenericUsage(GenericUsageDecl {
+            keyword: "filter".to_string(),
+            name: String::new(),
+            is_implicit_name: true,
+            ty: None,
+            reference_target: simple_reference,
+            allocation_source: None,
+            allocation_target: None,
+            metadata_properties: properties,
+            multiplicity: None,
+            expression: None,
+            additional_types: Vec::new(),
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            body_members: Vec::new(),
+            comments: Vec::new(),
+            docs,
+            modifiers,
+            span: merge_span(&start.span, &end.span),
+        }))
+    }
+
+    /// A bracketed filter condition on a namespace query, e.g. `[@Safety]` or
+    /// `[not (@Safety)]`.
+    ///
+    /// Captured as raw text. The parser's job here is to stop *losing* it —
+    /// before this, `consume_suffix_adornments` mis-read the brackets as a
+    /// multiplicity range and discarded the result, so `vehicle::**[@Safety]`
+    /// silently resolved as `vehicle::**`. Evaluating the condition against an
+    /// element's metadata features belongs to the resolver (save-as-view SV-2).
+    fn parse_namespace_query_filter(&mut self) -> Result<Option<String>, Diagnostic> {
+        let mut filter: Option<String> = None;
+        while matches!(self.peek_kind(), TokenKind::LBracket | TokenKind::LAngle) {
+            if matches!(self.peek_kind(), TokenKind::LAngle) {
+                self.consume_balanced(TokenKind::LAngle, TokenKind::RAngle)?;
+                continue;
+            }
+
+            self.expect(TokenKind::LBracket, "expected `[` before filter condition")?;
+            let mut parts: Vec<String> = Vec::new();
+            let mut depth = 0usize;
+            loop {
+                match self.peek_kind() {
+                    TokenKind::RBracket if depth == 0 => break,
+                    TokenKind::Eof => {
+                        return Err(self.error_here("expected `]` after filter condition"));
+                    }
+                    TokenKind::LBracket => depth += 1,
+                    TokenKind::RBracket => depth -= 1,
+                    _ => {}
+                }
+                parts.push(filter_token_text(self.current().kind.clone()));
+                self.advance();
+            }
+            self.expect(TokenKind::RBracket, "expected `]` after filter condition")?;
+
+            let condition = normalize_filter_condition(&parts.join(" "));
+            if !condition.is_empty() {
+                match &mut filter {
+                    // Successive conditions conjoin, matching the spec's
+                    // treatment of repeated filters on one namespace query.
+                    Some(existing) => *existing = format!("({existing}) and ({condition})"),
+                    None => filter = Some(condition),
+                }
+            }
+        }
+        Ok(filter)
     }
 
     fn parse_annotation_usage(
@@ -3348,11 +3533,12 @@ impl Parser {
 
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
-            if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
-                owner_docs.append(&mut self.pending_docs);
-            }
+            // A `doc` body member documents its **owner**, not whichever member
+            // happens to follow it. Treating it as a prefix annotation attached
+            // a package's documentation to its first part, and a view's to its
+            // first `expose` (save-as-view V-6.3).
+            owner_docs.append(&mut self.pending_docs);
             if !self.block_starts_with_declaration() {
-                owner_docs.append(&mut self.pending_docs);
                 self.consume_opaque_statement_in_block()?;
                 continue;
             }
@@ -3467,6 +3653,11 @@ impl Parser {
                 ) || matches!(next_kind, Some(TokenKind::LAngle) if is_feature_keyword(value))
                     || matches!(next_kind, Some(TokenKind::LBracket) if value == "connect" || value == "end")
                     || matches!(next_kind, Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) if value == "comment")
+                    // `filter @X;` and `expose @X;` lead with `@`, which is not
+                    // a usage-declaration shape — without this they are consumed
+                    // as opaque statements and silently vanish from the body
+                    // (save-as-view SV-1).
+                    || matches!(next_kind, Some(TokenKind::At) if value == "filter" || value == "expose")
             }
             _ => false,
         }
@@ -4103,6 +4294,77 @@ impl UsageTail {
             .cloned()
             .unwrap_or_else(|| keyword.to_string())
     }
+}
+
+/// Source text of one token inside a namespace-query filter condition.
+///
+/// Deliberately total over the operators a filter can contain (`@`, boolean
+/// operators, comparisons, parentheses, scope separators) rather than falling
+/// back to the empty string the way `multiplicity_token_text` does — silently
+/// dropping an operator would change the condition's meaning.
+fn filter_token_text(kind: TokenKind) -> String {
+    match kind {
+        TokenKind::Identifier(value) | TokenKind::Number(value) => value,
+        TokenKind::String(value) => format!("\"{value}\""),
+        TokenKind::Doc(value) | TokenKind::BlockDoc(value) => value,
+        TokenKind::At => "@".to_string(),
+        TokenKind::Hash => "#".to_string(),
+        TokenKind::Star => "*".to_string(),
+        TokenKind::DoubleStar => "**".to_string(),
+        TokenKind::LParen => "(".to_string(),
+        TokenKind::RParen => ")".to_string(),
+        TokenKind::LBracket => "[".to_string(),
+        TokenKind::RBracket => "]".to_string(),
+        TokenKind::LBrace => "{".to_string(),
+        TokenKind::RBrace => "}".to_string(),
+        TokenKind::LAngle => "<".to_string(),
+        TokenKind::RAngle => ">".to_string(),
+        TokenKind::ScopeSep => "::".to_string(),
+        TokenKind::Colon => ":".to_string(),
+        TokenKind::Dot => ".".to_string(),
+        TokenKind::Comma => ",".to_string(),
+        TokenKind::Semicolon => ";".to_string(),
+        TokenKind::Equals => "=".to_string(),
+        TokenKind::DoubleEquals => "==".to_string(),
+        TokenKind::BangEquals => "!=".to_string(),
+        TokenKind::LessEqual => "<=".to_string(),
+        TokenKind::GreaterEqual => ">=".to_string(),
+        TokenKind::Plus => "+".to_string(),
+        TokenKind::Minus => "-".to_string(),
+        TokenKind::Slash => "/".to_string(),
+        TokenKind::Bang => "!".to_string(),
+        TokenKind::Ampersand => "&".to_string(),
+        TokenKind::Pipe => "|".to_string(),
+        TokenKind::Caret => "^".to_string(),
+        TokenKind::Tilde => "~".to_string(),
+        TokenKind::Dollar => "$".to_string(),
+        TokenKind::Question => "?".to_string(),
+        TokenKind::Package => "package".to_string(),
+        TokenKind::Import => "import".to_string(),
+        TokenKind::Part => "part".to_string(),
+        TokenKind::Def => "def".to_string(),
+        TokenKind::Specializes => "specializes".to_string(),
+        TokenKind::Redefines => "redefines".to_string(),
+        TokenKind::Eof => String::new(),
+    }
+}
+
+/// Collapse the single-space token join back into conventional spacing.
+fn normalize_filter_condition(raw: &str) -> String {
+    let mut text = raw.trim().to_string();
+    for (from, to) in [
+        (" :: ", "::"),
+        (" . ", "."),
+        ("@ ", "@"),
+        ("( ", "("),
+        (" )", ")"),
+        ("[ ", "["),
+        (" ]", "]"),
+        (" ,", ","),
+    ] {
+        text = text.replace(from, to);
+    }
+    text
 }
 
 fn multiplicity_token_text(kind: &TokenKind) -> String {

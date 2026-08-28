@@ -1,0 +1,71 @@
+{
+  "note": "Two view usages in one file, listed in authored order. The expose predicate has no DiagramSpecDto field of its own; SV-3 carries it as a materialized scope (DiagramScopeDto::ExplicitElements). The two documents MUST differ -- that is the point of the fixture.",
+  "documents": [
+    {
+      "schema": "mercurio.view.v1",
+      "version": 1,
+      "kind": "diagram.package_tree",
+      "mode": "visualization",
+      "diagram": {
+        "version": 1,
+        "kind": "package_tree",
+        "title": "safety features view",
+        "root": "SafetyViews::vehicle",
+        "query": {
+          "relations": [
+            "specializes"
+          ],
+          "direction": "children",
+          "depth": 3,
+          "include_libraries": true,
+          "include_user_model": true,
+          "max_nodes": 350,
+          "max_edges": 900
+        },
+        "layout": {
+          "engine": "dagre",
+          "direction": "LR"
+        },
+        "style": {
+          "show_attributes": true,
+          "show_edge_labels": true,
+          "group_by_layer": false,
+          "show_affordances": false
+        }
+      }
+    },
+    {
+      "schema": "mercurio.view.v1",
+      "version": 1,
+      "kind": "diagram.package_tree",
+      "mode": "visualization",
+      "diagram": {
+        "version": 1,
+        "kind": "package_tree",
+        "title": "non-safety features view",
+        "root": "SafetyViews::vehicle",
+        "query": {
+          "relations": [
+            "specializes"
+          ],
+          "direction": "children",
+          "depth": 3,
+          "include_libraries": true,
+          "include_user_model": true,
+          "max_nodes": 350,
+          "max_edges": 900
+        },
+        "layout": {
+          "engine": "dagre",
+          "direction": "LR"
+        },
+        "style": {
+          "show_attributes": true,
+          "show_edge_labels": true,
+          "group_by_layer": false,
+          "show_affordances": false
+        }
+      }
+    }
+  ]
+}

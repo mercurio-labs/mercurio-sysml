@@ -74,6 +74,15 @@ fn resolve_usage_property_default_value(
             usage.metadata_properties.get("locale").cloned(),
         ),
         (
+            // The verbatim predicate of an `filter <condition>;` member. The
+            // parser parks it in `metadata_properties` because the AST's `Expr`
+            // cannot represent `@X` or `as X`; without this placeholder it
+            // reached KIR nowhere at all, so a view's own filter was invisible
+            // to `exposed_elements` (save-as-view SV-2).
+            "$metadata_condition",
+            usage.metadata_properties.get("condition").cloned(),
+        ),
+        (
             "$modifier_value_trigger_kind",
             modifier_value(&usage.modifiers, "trigger_kind").map(str::to_string),
         ),

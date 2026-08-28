@@ -1170,10 +1170,22 @@ pub fn transpile_module_with_source(
     }
 
     for import in &module.imports {
+        // A namespace query is owned by whatever namespace declares it, which
+        // is not always a package: `view v { expose x::**; }` is owned by the
+        // view *usage*. Consulting only `package_ids` silently reparented every
+        // such query onto `pkg.root`, which made a view's exposes
+        // indistinguishable from the next view's — fatal for
+        // `exposed_elements`, which has to ask what *this* view exposes
+        // (save-as-view SV-2).
         let owner_id = import
-            .owner_package_qualified_name
+            .owner_qualified_name
             .as_ref()
-            .and_then(|qualified_name| package_ids.get(qualified_name))
+            .and_then(|qualified_name| {
+                package_ids
+                    .get(qualified_name)
+                    .or_else(|| definition_ids.get(qualified_name))
+                    .or_else(|| top_level_usage_ids.get(qualified_name))
+            })
             .cloned()
             .unwrap_or_else(|| "pkg.root".to_string());
         elements.push(transpile_import(
@@ -1422,14 +1434,18 @@ fn transpile_import(
     source_language: &str,
     mappings: &MappingBundle,
 ) -> Result<KirElement, Diagnostic> {
-    let metaclass = mappings.metaclass_for("Import")?;
+    // `expose` and `import` share this transpiler because they are
+    // parallel metamodel branches, but they must not share a KIR kind:
+    // a saved view's scope is an Expose, not an Import (save-as-view SV-1).
+    let construct = if import.is_expose { "Expose" } else { "Import" };
+    let metaclass = mappings.metaclass_for(construct)?;
     let emission = mappings.emission_for(metaclass)?;
-    let lowering_rule = mappings.lowering_rule_for_construct("Import");
+    let lowering_rule = mappings.lowering_rule_for_construct(construct);
     if let Some(rule) = lowering_rule {
         validate_rule_emission_compatibility(rule, metaclass, emission)?;
     }
     let metatype_ref = Value::String(metaclass.to_string());
-    let id_template = id_template_for_construct("Import", metaclass, emission, mappings)?;
+    let id_template = id_template_for_construct(construct, metaclass, emission, mappings)?;
     let id = render_string(
         id_template,
         &BTreeMap::from([
@@ -1438,13 +1454,28 @@ fn transpile_import(
         ]),
     )?;
 
+    let target_ref = Value::Array(vec![Value::String(import.target_id.clone())]);
     let context = BTreeMap::from([
         ("owner_id".to_string(), Value::String(owner_id.to_string())),
-        (
-            "target_ref".to_string(),
-            Value::Array(vec![Value::String(import.target_id.clone())]),
-        ),
+        ("target_ref".to_string(), target_ref.clone()),
+        // The emission rule reads `{target_ref}`, but a lowering rule -- which
+        // takes precedence when one exists, and one does for `Import` -- reads
+        // `$imports`, the name of the property it fills. Binding only
+        // `target_ref` left every SysML import emitting an Import element with
+        // no target at all: `render_rule_value` found no `imports` key, and
+        // `insert_rendered_property` drops nulls silently.
+        ("imports".to_string(), target_ref),
         ("ordinal".to_string(), json!(import.ordinal)),
+        (
+            // Null when absent; `insert_rendered_property` drops it, so an
+            // unfiltered query emits no `filter` property at all.
+            "filter".to_string(),
+            import
+                .filter
+                .clone()
+                .map(Value::String)
+                .unwrap_or(Value::Null),
+        ),
         ("metatype_ref".to_string(), metatype_ref),
     ]);
 
