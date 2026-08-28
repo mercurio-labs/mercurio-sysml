@@ -238,6 +238,7 @@ fn resolve_module_with_policy_context(
         &context.library_indexes.aliases,
         &context.local_definitions,
         &local_aliases,
+        &context.local_usage_map,
     )?;
     log_compile_timed_event(
         "resolver.resolve_imports",
@@ -337,6 +338,7 @@ fn resolve_imports(
     stdlib_aliases: &BTreeMap<String, String>,
     local_definitions: &BTreeMap<String, String>,
     local_aliases: &BTreeMap<String, QualifiedName>,
+    local_usage_map: &BTreeMap<String, CollectedUsage>,
 ) -> Result<Vec<ResolvedImport>, Diagnostic> {
     let mut resolved = Vec::new();
 
@@ -347,6 +349,11 @@ fn resolve_imports(
             stdlib_aliases,
             local_definitions,
             local_aliases,
+            // Usages are offered to `import` only. SV-2 deliberately made a
+            // non-wildcard `expose` scope fall through as verbatim text, so
+            // `exposed_elements` binds it against the graph; binding it to an
+            // element id here would take that back.
+            (!import.decl.is_expose).then_some(local_usage_map),
         );
 
         // An `expose` scope is a *query*, not a name binding. It does not have
@@ -3482,6 +3489,7 @@ fn resolve_import_target(
     stdlib_aliases: &BTreeMap<String, String>,
     local_definitions: &BTreeMap<String, String>,
     local_aliases: &BTreeMap<String, QualifiedName>,
+    local_usages: Option<&BTreeMap<String, CollectedUsage>>,
 ) -> Option<String> {
     let as_colon = name.as_colon_string();
     if as_colon.contains('*') {
@@ -3495,6 +3503,11 @@ fn resolve_import_target(
         local_definitions,
         local_aliases,
     )
+    // A path may name a *usage* -- `import PartsTree::vehicle;` -- and only
+    // definitions are bound above. Usages are consulted before the stdlib
+    // last-segment fallback below, because a local declaration the path names
+    // in full beats a loose suffix match against a library id.
+    .or_else(|| local_usages.and_then(|usages| resolve_local_usage_reference(name, usages)))
     .or_else(|| {
         if name.segments.len() > 1 {
             unique_suffix_match(name.segments.last()?, stdlib_ids)
@@ -3502,6 +3515,28 @@ fn resolve_import_target(
             None
         }
     })
+}
+
+/// A qualified path against the usages declared in this module, exactly or by
+/// unique suffix -- `Tree::vehicle` names `P.Tree.vehicle` -- mirroring how
+/// [`unique_local_suffix_match`] treats definitions. A suffix matching more
+/// than one usage is ambiguous and resolves to nothing.
+fn resolve_local_usage_reference(
+    name: &QualifiedName,
+    local_usages: &BTreeMap<String, CollectedUsage>,
+) -> Option<String> {
+    let dotted = name.as_dot_string();
+    if let Some(usage) = local_usages.get(&dotted) {
+        return Some(collected_usage_element_id(usage));
+    }
+
+    let suffix = format!(".{dotted}");
+    let mut matches = local_usages
+        .iter()
+        .filter(|(qualified_name, _)| qualified_name.ends_with(&suffix))
+        .map(|(_, usage)| collected_usage_element_id(usage));
+    let first = matches.next()?;
+    matches.next().is_none().then_some(first)
 }
 
 fn resolve_type_reference(

@@ -1454,12 +1454,17 @@ fn transpile_import(
         ]),
     )?;
 
+    let target_ref = Value::Array(vec![Value::String(import.target_id.clone())]);
     let context = BTreeMap::from([
         ("owner_id".to_string(), Value::String(owner_id.to_string())),
-        (
-            "target_ref".to_string(),
-            Value::Array(vec![Value::String(import.target_id.clone())]),
-        ),
+        ("target_ref".to_string(), target_ref.clone()),
+        // The emission rule reads `{target_ref}`, but a lowering rule -- which
+        // takes precedence when one exists, and one does for `Import` -- reads
+        // `$imports`, the name of the property it fills. Binding only
+        // `target_ref` left every SysML import emitting an Import element with
+        // no target at all: `render_rule_value` found no `imports` key, and
+        // `insert_rendered_property` drops nulls silently.
+        ("imports".to_string(), target_ref),
         ("ordinal".to_string(), json!(import.ordinal)),
         (
             // Null when absent; `insert_rendered_property` drops it, so an
