@@ -36,6 +36,8 @@
 use std::path::{Path, PathBuf};
 
 use mercurio_foundation::language_contracts::ast::Declaration;
+use mercurio_foundation::model::{Graph, NodeId};
+use mercurio_foundation::views::{exposed_elements, resolve_exposed_elements};
 use mercurio_sysml::{KirDocument, SysmlModule, compile_sysml_text, load_sysml_baseline, parse_sysml};
 
 const FIXTURE_DIR: &str = "tests/fixtures/save-as-view";
@@ -450,13 +452,206 @@ package Plain {
 
 // ------------------------------------------------------- targets (ignored)
 
-/// SV-2 exit criterion. Parse-level divergence (above) is necessary but not
-/// sufficient: the two views must resolve to disjoint *element sets*, which
-/// needs the `exposed_elements` resolver in `mercurio-views`.
+/// SV-2 exit criterion. Parse-level divergence is necessary but not
+/// sufficient: the two views must resolve to disjoint *element sets*.
 #[test]
-#[ignore = "SV-2: expose resolution — un-ignore when exposed_elements() exists"]
 fn sv2_safety_and_non_safety_views_resolve_to_disjoint_sets() {
-    unimplemented!("SV-2: exposed_elements(graph, view_usage)");
+    let document = compile(
+        &read_fixture("tier1/metadata-filtered-expose.sysml"),
+        "metadata-filtered-expose.sysml",
+    );
+    let graph = Graph::from_document(document).expect("the fixture builds a graph");
+
+    let safety = exposed(&graph, "safety features view");
+    let non_safety = exposed(&graph, "non-safety features view");
+
+    // `brake` carries @Safety; `radio` does not. Both views expose the same
+    // `vehicle::**` scope, so only the predicate can tell them apart -- which
+    // is the whole point of the increment.
+    assert_eq!(safety, vec!["feature.SafetyViews.vehicle.brake".to_string()]);
+    assert_eq!(non_safety, vec!["feature.SafetyViews.vehicle.radio".to_string()]);
+    assert!(
+        safety.iter().all(|id| !non_safety.contains(id)),
+        "the two views must resolve to disjoint sets; got {safety:?} and {non_safety:?}"
+    );
+}
+
+/// The same revision must resolve to the same ordered answer every time --
+/// callers cache renders by artifact key, so a set that reorders would look
+/// like a model change.
+#[test]
+fn sv2_resolution_is_deterministic() {
+    let document = compile(
+        &read_fixture("tier1/tree-diagram-subtree.sysml"),
+        "tree-diagram-subtree.sysml",
+    );
+    let graph = Graph::from_document(document).expect("the fixture builds a graph");
+
+    let first = exposed(&graph, "vehicle structure view");
+    let second = exposed(&graph, "vehicle structure view");
+
+    assert_eq!(first, second);
+    assert_eq!(
+        first,
+        vec![
+            "feature.VehicleViews.vehicle.engine".to_string(),
+            "feature.VehicleViews.vehicle.wheel".to_string(),
+        ],
+        "`expose vehicle::**` is the subtree under vehicle, excluding vehicle itself"
+    );
+}
+
+/// A scope naming nothing must be reported, not silently dropped. A view with
+/// a typo should look broken rather than empty.
+#[test]
+fn sv2_an_unresolvable_scope_is_reported() {
+    let document = compile(
+        r#"
+package P {
+    part vehicle { part brake; }
+    view v { expose nosuchthing::**; }
+}
+"#,
+        "unresolvable.sysml",
+    );
+    let graph = Graph::from_document(document).expect("the source builds a graph");
+    let view = view_node(&graph, "v");
+
+    let resolution = resolve_exposed_elements(&graph, view);
+    assert!(resolution.elements.is_empty());
+    assert_eq!(resolution.unresolved, vec!["nosuchthing::**".to_string()]);
+}
+
+/// **The SV-2 exit criterion**, on the pilot's own discriminating case:
+/// `11-View and Viewpoint/11b-Safety and Security Feature Views.sysml`.
+///
+/// The corpus file is vendored under the outer repo's `external/`, which a
+/// crate test cannot reach, so its content is reproduced here. Before SV-2 the
+/// three views resolved to identical exposed content; they must now diverge,
+/// and each must be *correct* -- divergence alone would be satisfied by three
+/// different wrong answers.
+///
+/// Two deviations from the file, both about **import visibility rather than
+/// views**, and neither touching what this test measures:
+///
+/// - The pilot splits the model across `AnnotationDefinitions`, `PartsTree`,
+///   `ViewDefinitions`, and `Views` packages joined by `public import`. A
+///   metadata definition is not visible across those package boundaries today,
+///   so everything is declared in one package here.
+/// - The pilot writes `private import PartsTree::vehicle;`. A qualified path
+///   to a *usage* does not resolve -- see
+///   `sv2_a_qualified_path_to_a_usage_does_not_resolve`.
+///
+/// Both are pre-existing name-resolution gaps, unrelated to `expose`.
+#[test]
+fn sv2_the_pilot_safety_and_security_views_diverge_correctly() {
+    let document = compile(
+        r#"
+package SafetyAndSecurityFeatureViews {
+    metadata def Safety { attribute isMandatory : ScalarValues::Boolean; }
+    metadata def Security;
+
+    part vehicle {
+        part interior {
+            part alarm { @Security; }
+            part seatBelt { @Safety { isMandatory = true; } }
+            part frontSeat;
+            part driverAirBag { @Safety { isMandatory = false; } }
+        }
+        part bodyAssy {
+            part body;
+            part bumper { @Safety { isMandatory = true; } }
+            part keylessEntry { @Security; }
+        }
+        part wheelAssy {
+            part wheel;
+            part antilockBrakes { @Safety { isMandatory = false; } }
+        }
+    }
+
+    view def SafetyFeatureView { filter @Safety; }
+    view def SafetyOrSecurityFeatureView { filter @Safety | @Security; }
+
+    view vehicleSafetyFeatureView : SafetyFeatureView {
+        expose vehicle;
+    }
+
+    view vehicleSafetyOrSecurityFeatureView : SafetyOrSecurityFeatureView {
+        expose vehicle;
+    }
+
+    view vehicleMandatorySafetyFeatureViewStandalone {
+        expose vehicle::**[@Safety and (as Safety).isMandatory];
+    }
+}
+"#,
+        "11b-safety-and-security.sysml",
+    );
+    let graph = Graph::from_document(document).expect("the pilot source builds a graph");
+
+    let safety = short_names(&graph, "vehicleSafetyFeatureView");
+    let safety_or_security = short_names(&graph, "vehicleSafetyOrSecurityFeatureView");
+    let mandatory = short_names(&graph, "vehicleMandatorySafetyFeatureViewStandalone");
+
+    assert_eq!(
+        safety,
+        vec!["antilockBrakes", "bumper", "driverAirBag", "seatBelt"],
+        "`filter @Safety` selects exactly the @Safety-annotated parts"
+    );
+    assert_eq!(
+        safety_or_security,
+        vec![
+            "alarm",
+            "antilockBrakes",
+            "bumper",
+            "driverAirBag",
+            "keylessEntry",
+            "seatBelt"
+        ],
+        "`filter @Safety | @Security` adds the two @Security parts"
+    );
+    assert_eq!(
+        mandatory,
+        vec!["bumper", "seatBelt"],
+        "`@Safety and (as Safety).isMandatory` drops the two isMandatory=false parts"
+    );
+
+    // Divergence is the headline: before SV-2 all three were identical.
+    assert_ne!(safety, safety_or_security);
+    assert_ne!(safety, mandatory);
+    assert_ne!(safety_or_security, mandatory);
+}
+
+/// A view inherits the filters of the view it is typed by and of every view it
+/// specializes. This is what makes the pilot's 11b views diverge.
+#[test]
+fn sv2_filters_are_inherited_through_typing_and_specialization() {
+    let document = compile(
+        r#"
+package P {
+    metadata def Safety;
+    part vehicle {
+        part brake { @Safety; }
+        part radio;
+    }
+    view def SafetyView { filter @Safety; }
+    view scoped : SafetyView { expose vehicle::**; }
+    view narrowed :> scoped { expose vehicle::**; filter not (@Safety); }
+}
+"#,
+        "inheritance.sysml",
+    );
+    let graph = Graph::from_document(document).expect("the source builds a graph");
+
+    assert_eq!(
+        exposed(&graph, "scoped"),
+        vec!["feature.P.vehicle.brake".to_string()],
+        "`scoped` inherits `filter @Safety` from the definition it is typed by"
+    );
+    assert!(
+        exposed(&graph, "narrowed").is_empty(),
+        "`narrowed` inherits @Safety and adds not(@Safety), so nothing can satisfy both"
+    );
 }
 
 /// SV-3 exit criterion. Every tier-1 and tier-2 fixture must round-trip
@@ -568,4 +763,70 @@ fn find(
         .members
         .iter()
         .find_map(|member| visit(member, keyword, name, definition))
+}
+
+/// Node id of the view usage or definition with this declared name.
+fn view_node(graph: &Graph, declared_name: &str) -> NodeId {
+    graph
+        .elements()
+        .iter()
+        .find(|element| {
+            element.kind.contains("View")
+                && element.properties.to_btree_map().get("declared_name")
+                    == Some(&serde_json::Value::String(declared_name.to_string()))
+        })
+        .unwrap_or_else(|| panic!("no view named `{declared_name}`"))
+        .id
+}
+
+fn exposed(graph: &Graph, declared_name: &str) -> Vec<String> {
+    exposed_elements(graph, view_node(graph, declared_name))
+}
+
+/// Declared names of what a view exposes -- the readable projection for
+/// assertions, since element ids carry the whole containment path.
+fn short_names(graph: &Graph, view: &str) -> Vec<String> {
+    let mut names: Vec<String> = exposed(graph, view)
+        .iter()
+        .filter_map(|id| {
+            graph
+                .element_by_element_id(id)
+                .and_then(|element| element.properties.to_btree_map().get("declared_name").cloned())
+        })
+        .filter_map(|value| value.as_str().map(str::to_string))
+        .collect();
+    names.sort();
+    names
+}
+
+/// A standing gap this increment did **not** close, recorded so it is not
+/// rediscovered: a qualified path naming a *usage* does not resolve in an
+/// `import`. Only definitions are bound at that point, so the pilot's own
+/// `private import PartsTree::vehicle;` fails to compile.
+///
+/// `expose` no longer depends on this -- SV-2 made a non-wildcard expose scope
+/// fall through as verbatim text, exactly as a wildcard scope always has, and
+/// `exposed_elements` binds it against the graph. So this blocks `import`, not
+/// views. Closing it means teaching import resolution to render usage ids,
+/// which lives in the emission phase; that is its own increment.
+#[test]
+#[ignore = "known gap: import cannot resolve a qualified path to a usage"]
+fn sv2_a_qualified_path_to_a_usage_does_not_resolve() {
+    let stdlib = load_sysml_baseline().expect("stdlib baseline loads");
+    let result = compile_sysml_text(
+        r#"
+package P {
+    package Tree { part vehicle { part brake; } }
+    package Uses { private import Tree::vehicle; }
+}
+"#,
+        "usage-import.sysml",
+        &stdlib,
+    );
+
+    assert!(
+        result.is_ok(),
+        "un-ignore this when import resolves usage paths; got {:?}",
+        result.err().map(|error| error.message)
+    );
 }

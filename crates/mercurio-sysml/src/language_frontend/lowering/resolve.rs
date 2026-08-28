@@ -341,19 +341,36 @@ fn resolve_imports(
     let mut resolved = Vec::new();
 
     for import in imports {
-        let target_id = resolve_import_target(
+        let resolved_target = resolve_import_target(
             &import.decl.path,
             stdlib_ids,
             stdlib_aliases,
             local_definitions,
             local_aliases,
-        )
-        .ok_or_else(|| {
-            Diagnostic::new(
-                format!("unresolved import `{}`", import.decl.path.as_colon_string()),
-                Some(import.decl.span.clone()),
-            )
-        })?;
+        );
+
+        // An `expose` scope is a *query*, not a name binding. It does not have
+        // to name one element at compile time: `vehicle::**` already falls
+        // through as verbatim text, because a wildcard cannot denote a single
+        // target, and `exposed_elements` resolves it against the graph.
+        //
+        // A non-wildcard scope is the same kind of thing, so it falls through
+        // the same way. Erroring instead made the pilot's own
+        // `view vehicleSafetyFeatureView { expose vehicle; }` fail to compile,
+        // since `vehicle` is a *usage* and only definitions are bound here.
+        //
+        // `import` keeps the hard error: an import really does bind a name into
+        // a scope, and an unresolvable one is a defect the author must see.
+        let target_id = match resolved_target {
+            Some(target_id) => target_id,
+            None if import.decl.is_expose => import.decl.path.as_colon_string(),
+            None => {
+                return Err(Diagnostic::new(
+                    format!("unresolved import `{}`", import.decl.path.as_colon_string()),
+                    Some(import.decl.span.clone()),
+                ));
+            }
+        };
 
         resolved.push(ResolvedImport {
             owner_qualified_name: import.owner_qualified_name.clone(),
@@ -524,7 +541,9 @@ fn resolve_usage(
         .map(|name| {
             let reference_target_policy =
                 mappings.usage_reference_target_resolution_policy(&usage.construct);
-            if reference_target_policy == Some("annotation_target_then_type_then_reference") {
+            let resolved = if reference_target_policy
+                == Some("annotation_target_then_type_then_reference")
+            {
                 resolve_comment_annotation_target(&usage, name, local_definitions, local_usage_map)
                     .or_else(|| {
                         resolve_type_reference_in_scope(
@@ -591,15 +610,28 @@ fn resolve_usage(
                     local_feature_index,
                     local_usage_map,
                 )
-            }
-            .ok_or_else(|| {
-                Diagnostic::new(
+            };
+
+            match resolved {
+                Some(target) => Ok(Some(target)),
+                // A filter's `@Safety` is a metadata *predicate*, not a name
+                // binding: `exposed_elements` evaluates it against each
+                // element's own metadata features at render time, and a
+                // predicate that currently matches nothing is a legitimate
+                // filter, not an error. Requiring it to bind here made the
+                // pilot's own `view def SafetyFeatureView { filter @Safety; }`
+                // fail to compile unless the annotation happened to be applied
+                // somewhere the reference index could already see
+                // (save-as-view SV-2).
+                None if reference_target_policy == Some("metadata_predicate") => Ok(None),
+                None => Err(Diagnostic::new(
                     format!("unresolved reference target `{}`", name.as_colon_string()),
                     Some(name.span.clone()),
-                )
-            })
+                )),
+            }
         })
-        .transpose()?;
+        .transpose()?
+        .flatten();
     let allocation_source = usage
         .allocation_source
         .as_ref()
