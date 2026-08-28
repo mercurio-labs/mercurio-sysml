@@ -37,7 +37,10 @@ use std::path::{Path, PathBuf};
 
 use mercurio_foundation::language_contracts::ast::Declaration;
 use mercurio_foundation::model::{Graph, NodeId};
-use mercurio_foundation::views::{exposed_elements, resolve_exposed_elements};
+use mercurio_foundation::views::{
+    ModelViewKindDto, ModelViewSpecDto, ViewDocumentDto, ViewUsageDraft, exposed_elements,
+    resolve_exposed_elements, usage_from_view_spec, view_spec_from_usage,
+};
 use mercurio_sysml::{KirDocument, SysmlModule, compile_sysml_text, load_sysml_baseline, parse_sysml};
 
 const FIXTURE_DIR: &str = "tests/fixtures/save-as-view";
@@ -739,15 +742,90 @@ package P {
     );
 }
 
-/// SV-3 exit criterion. Every tier-1 and tier-2 fixture must round-trip
-/// through `view_spec_from_usage` / `usage_from_view_spec` under the rule its
-/// manifest entry declares; every tier-3 fixture must return `NotReifiable`.
-/// The mapper lives in `mercurio-views` (foundation), so this test grows a
-/// foundation dependency when SV-3 lands.
+/// V-6.3 exit criterion, first half: every fixture with a frozen spec must
+/// **read back** as exactly that spec. The `.view.json` files are the map's
+/// contract, so this is the assertion that the map is implemented as written
+/// rather than as convenient.
 #[test]
-#[ignore = "SV-3: the bidirectional map does not exist yet"]
-fn sv3_every_fixture_round_trips_under_its_declared_rule() {
-    unimplemented!("SV-3: view_spec_from_usage / usage_from_view_spec");
+fn sv3_every_fixture_reads_back_as_its_frozen_spec() {
+    for (fixture, view_name) in FIXTURES_WITH_SPECS {
+        let document = compile(&read_fixture(&format!("{fixture}.sysml")), fixture);
+        let graph = Graph::from_document(document).expect("the fixture builds a graph");
+        let actual = view_spec_from_usage(&graph, view_node(&graph, view_name))
+            .unwrap_or_else(|error| panic!("{fixture}: {error}"));
+
+        let expected: serde_json::Value =
+            serde_json::from_str(&read_fixture(&format!("{fixture}.view.json")))
+                .unwrap_or_else(|error| panic!("{fixture}.view.json parses: {error}"));
+        let expected = expected
+            .get("documents")
+            .and_then(|documents| {
+                documents
+                    .as_array()?
+                    .iter()
+                    .find(|document| document["diagram"]["title"] == *view_name)
+                    .cloned()
+            })
+            .unwrap_or(expected);
+
+        assert_eq!(
+            serde_json::to_value(&actual).expect("the spec serializes"),
+            expected,
+            "{fixture} -> {view_name} did not read back as its frozen spec"
+        );
+    }
+}
+
+/// V-6.3 exit criterion, second half: `spec -> usage -> spec` is the identity
+/// for tier 1. The draft is rendered to SysML, compiled for real, and read
+/// back, so this exercises the whole loop rather than a pair of pure functions
+/// agreeing with each other.
+#[test]
+fn sv3_every_tier1_spec_round_trips_through_real_sysml() {
+    for (fixture, view_name) in FIXTURES_WITH_SPECS {
+        let source = read_fixture(&format!("{fixture}.sysml"));
+        let document = compile(&source, fixture);
+        let graph = Graph::from_document(document).expect("the fixture builds a graph");
+        let original = view_spec_from_usage(&graph, view_node(&graph, view_name))
+            .unwrap_or_else(|error| panic!("{fixture}: {error}"));
+
+        let draft = usage_from_view_spec(&original)
+            .unwrap_or_else(|error| panic!("{fixture} drafts a usage: {error}"));
+
+        // Rebuild a whole source file around the drafted view: its exposes name
+        // qualified paths, so they need the elements they point at to exist.
+        let rebuilt = rebuild_source(&source, &draft);
+        let recompiled = compile(&rebuilt, &format!("{fixture}-roundtrip"));
+        let graph = Graph::from_document(recompiled).expect("the round-trip builds a graph");
+        let returned = view_spec_from_usage(&graph, view_node(&graph, view_name))
+            .unwrap_or_else(|error| panic!("{fixture} round-trip: {error}"));
+
+        assert_eq!(
+            returned, original,
+            "{fixture} -> {view_name} did not round-trip; rebuilt source was:\n{rebuilt}"
+        );
+    }
+}
+
+/// The tier-3 rule: refuse, and name the field. A free-text search has no
+/// scope, no notation, and no stable element set.
+#[test]
+fn sv3_a_tier3_view_is_refused_by_field_name() {
+    let spec = ViewDocumentDto::model(ModelViewSpecDto {
+        version: 1,
+        kind: ModelViewKindDto::Search,
+        title: "find brake".to_string(),
+        description: None,
+        root: None,
+        graph_scope: None,
+        query: Some("brake".to_string()),
+        expanded_parents: Vec::new(),
+        expanded_children: Vec::new(),
+        include_reference_edges: true,
+    });
+
+    let error = usage_from_view_spec(&spec).expect_err("a search is not a view");
+    assert_eq!(error.field, "model.query");
 }
 
 // ---------------------------------------------------------------- helpers
@@ -912,6 +990,88 @@ package P {
     assert!(
         result.is_ok(),
         "un-ignore this when import resolves usage paths; got {:?}",
+        result.err().map(|error| error.message)
+    );
+}
+
+/// Fixtures whose `.view.json` freezes an expected spec, paired with the view
+/// each one is about.
+///
+/// `element-table-columns` is absent on purpose: it does not compile yet --
+/// two `view :>> columnView[n]` redefinitions collide on the `ViewUsage` id
+/// template. See `sv3_the_columns_fixture_cannot_compile_yet`.
+const FIXTURES_WITH_SPECS: &[(&str, &str)] = &[
+    ("tier1/tree-diagram-subtree", "vehicle structure view"),
+    ("tier1/interconnection-diagram", "system internals"),
+    ("tier1/view-def-metaclass-filter", "vehicle parts"),
+    ("tier1/explicit-exposes", "curated pair"),
+    ("tier1/metadata-filtered-expose", "safety features view"),
+    ("tier1/metadata-filtered-expose", "non-safety features view"),
+];
+
+/// Replace the fixture's view declarations with the drafted one, keeping the
+/// model around them. A view's exposes are qualified paths into that model, so
+/// a draft cannot be compiled on its own.
+fn rebuild_source(original: &str, draft: &ViewUsageDraft) -> String {
+    let mut out = String::new();
+    let mut depth = 0usize;
+    let mut skipping = false;
+    let mut written = false;
+
+    for line in original.lines() {
+        let trimmed = line.trim_start();
+        if skipping {
+            depth += line.matches('{').count();
+            depth = depth.saturating_sub(line.matches('}').count());
+            if depth == 0 {
+                skipping = false;
+            }
+            continue;
+        }
+        if trimmed.starts_with("view ") && !trimmed.starts_with("view def") {
+            if !written {
+                for drafted in draft.to_sysml().lines() {
+                    out.push_str("    ");
+                    out.push_str(drafted);
+                    out.push('\n');
+                }
+                written = true;
+            }
+            depth = line.matches('{').count();
+            depth = depth.saturating_sub(line.matches('}').count());
+            skipping = depth > 0;
+            continue;
+        }
+        out.push_str(line);
+        out.push('\n');
+    }
+    out
+}
+
+/// The one fixture V-6.3 cannot satisfy, and exactly why.
+///
+/// `rendering asNameAndDoc :> asElementTable { view :>> columnView[1] { ... }
+/// view :>> columnView[2] { ... } }` is the most interoperable row in the whole
+/// map -- `asElementTable` models ordered `columnView[0..*]` natively. It fails
+/// to compile because the `SysML::ViewUsage` id template is
+/// `view.{owner_path}.{declared_name}` and both redefinitions carry the
+/// declared name `columnView`; the index is not part of the id.
+///
+/// Putting the span in the template would fix it and renumber every view
+/// element id, including ones V-6.2's tests assert. A redefinition-scoped
+/// disambiguator is the narrower fix. Un-ignore this once that is decided.
+#[test]
+#[ignore = "known gap: indexed columnView redefinitions collide on the ViewUsage id template"]
+fn sv3_the_columns_fixture_cannot_compile_yet() {
+    let stdlib = load_sysml_baseline().expect("stdlib baseline loads");
+    let result = compile_sysml_text(
+        &read_fixture("tier1/element-table-columns.sysml"),
+        "element-table-columns.sysml",
+        &stdlib,
+    );
+    assert!(
+        result.is_ok(),
+        "un-ignore when columnView redefinitions get distinct ids; got {:?}",
         result.err().map(|error| error.message)
     );
 }
