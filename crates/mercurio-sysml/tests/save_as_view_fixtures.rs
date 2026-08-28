@@ -806,7 +806,7 @@ fn sv3_every_tier1_spec_round_trips_through_real_sysml() {
 
         // Rebuild a whole source file around the drafted view: its exposes name
         // qualified paths, so they need the elements they point at to exist.
-        let rebuilt = rebuild_source(&source, &draft);
+        let rebuilt = rebuild_source(&source, view_name, &draft);
         let recompiled = compile(&rebuilt, &format!("{fixture}-roundtrip"));
         let graph = Graph::from_document(recompiled).expect("the round-trip builds a graph");
         let returned = view_spec_from_usage(&graph, view_node(&graph, view_name))
@@ -1096,12 +1096,9 @@ package P {
 
 /// Fixtures whose `.view.json` freezes an expected spec, paired with the view
 /// each one is about.
-///
-/// `element-table-columns` is absent on purpose: it does not compile yet --
-/// two `view :>> columnView[n]` redefinitions collide on the `ViewUsage` id
-/// template. See `sv3_the_columns_fixture_cannot_compile_yet`.
 const FIXTURES_WITH_SPECS: &[(&str, &str)] = &[
     ("tier1/tree-diagram-subtree", "vehicle structure view"),
+    ("tier1/element-table-columns", "component table"),
     ("tier1/interconnection-diagram", "system internals"),
     ("tier1/view-def-metaclass-filter", "vehicle parts"),
     ("tier1/explicit-exposes", "curated pair"),
@@ -1109,14 +1106,20 @@ const FIXTURES_WITH_SPECS: &[(&str, &str)] = &[
     ("tier1/metadata-filtered-expose", "non-safety features view"),
 ];
 
-/// Replace the fixture's view declarations with the drafted one, keeping the
-/// model around them. A view's exposes are qualified paths into that model, so
-/// a draft cannot be compiled on its own.
-fn rebuild_source(original: &str, draft: &ViewUsageDraft) -> String {
+/// Replace one named view declaration with the drafted one, keeping the model
+/// around it. A view's exposes are qualified paths into that model, so a draft
+/// cannot be compiled on its own.
+///
+/// Matched by name, not by the `view ` keyword: a `rendering` body also holds
+/// `view` members (its columns), and replacing those would rewrite the very
+/// structure the round-trip is checking.
+fn rebuild_source(original: &str, view_name: &str, draft: &ViewUsageDraft) -> String {
+    let bare = format!("view {view_name}");
+    let quoted = format!("view '{view_name}'");
+
     let mut out = String::new();
     let mut depth = 0usize;
     let mut skipping = false;
-    let mut written = false;
 
     for line in original.lines() {
         let trimmed = line.trim_start();
@@ -1128,14 +1131,11 @@ fn rebuild_source(original: &str, draft: &ViewUsageDraft) -> String {
             }
             continue;
         }
-        if trimmed.starts_with("view ") && !trimmed.starts_with("view def") {
-            if !written {
-                for drafted in draft.to_sysml().lines() {
-                    out.push_str("    ");
-                    out.push_str(drafted);
-                    out.push('\n');
-                }
-                written = true;
+        if trimmed.starts_with(&quoted) || trimmed.starts_with(&bare) {
+            for drafted in draft.to_sysml().lines() {
+                out.push_str("    ");
+                out.push_str(drafted);
+                out.push('\n');
             }
             depth = line.matches('{').count();
             depth = depth.saturating_sub(line.matches('}').count());
@@ -1148,30 +1148,39 @@ fn rebuild_source(original: &str, draft: &ViewUsageDraft) -> String {
     out
 }
 
-/// The one fixture V-6.3 cannot satisfy, and exactly why.
+/// Multiple table columns are **subsets** of `columnView`, not redefinitions of
+/// it, and the difference is why this fixture used to fail to compile.
 ///
-/// `rendering asNameAndDoc :> asElementTable { view :>> columnView[1] { ... }
-/// view :>> columnView[2] { ... } }` is the most interoperable row in the whole
-/// map -- `asElementTable` models ordered `columnView[0..*]` natively. It fails
-/// to compile because the `SysML::ViewUsage` id template is
-/// `view.{owner_path}.{declared_name}` and both redefinitions carry the
-/// declared name `columnView`; the index is not part of the id.
+/// `asElementTable` declares `view columnView[0..*] ordered`. `:>` adds
+/// instances to a many-valued feature; `:>>` replaces it. The pilot only ever
+/// writes one column -- `view :>> columnView[1]`, where `[1]` is the redefining
+/// feature's *multiplicity*, not an index (Views Example.sysml:16-20). This
+/// fixture originally wrote `[1]` and `[2]` as though `[n]` numbered the
+/// columns, which is two definitions of one feature; the duplicate-id error was
+/// the compiler being right, not an id-template defect.
 ///
-/// Putting the span in the template would fix it and renumber every view
-/// element id, including ones V-6.2's tests assert. A redefinition-scoped
-/// disambiguator is the narrower fix. Un-ignore this once that is decided.
+/// Both forms are asserted here so the distinction cannot quietly rot back.
 #[test]
-#[ignore = "known gap: indexed columnView redefinitions collide on the ViewUsage id template"]
-fn sv3_the_columns_fixture_cannot_compile_yet() {
+fn sv3_columns_are_subsets_of_column_view_not_redefinitions() {
     let stdlib = load_sysml_baseline().expect("stdlib baseline loads");
-    let result = compile_sysml_text(
-        &read_fixture("tier1/element-table-columns.sysml"),
-        "element-table-columns.sysml",
-        &stdlib,
+    let model = "package P {\n    private import Views::*;\n    part def Component;\n    part alpha : Component;\n";
+
+    let subsets = format!(
+        "{model}    rendering r :> asElementTable {{\n        view name :> columnView {{ render asTextualNotation; }}\n        view documentation :> columnView {{ render asTextualNotation; }}\n    }}\n    view t {{ expose P::**; render r; }}\n}}"
     );
     assert!(
-        result.is_ok(),
-        "un-ignore when columnView redefinitions get distinct ids; got {:?}",
-        result.err().map(|error| error.message)
+        compile_sysml_text(&subsets, "subsets.sysml", &stdlib).is_ok(),
+        "two columnView subsets must compile"
+    );
+
+    let redefinitions = format!(
+        "{model}    rendering r :> asElementTable {{\n        view :>> columnView[1] {{ render asTextualNotation; }}\n        view :>> columnView[2] {{ render asTextualNotation; }}\n    }}\n    view t {{ expose P::**; render r; }}\n}}"
+    );
+    let error = compile_sysml_text(&redefinitions, "redefinitions.sysml", &stdlib)
+        .expect_err("two redefinitions of one feature must not compile");
+    assert!(
+        error.message.contains("duplicate emitted KIR id"),
+        "the collision must be reported as what it is; got {}",
+        error.message
     );
 }

@@ -67,9 +67,9 @@
       "tier": 1,
       "sysml": "tier1/element-table-columns.sysml",
       "spec": "tier1/element-table-columns.view.json",
-      "covers": ["render asElementTable", "columnView[n] -> TableColumnSpecDto", "TableScopeDto::ContainmentSubtree"],
-      "blocked_on": "SV-1",
-      "note": "Verified 2026-08-27: the rendering def and its nested columnView redefinitions already parse. This is the most interoperable row in the map."
+      "covers": ["render <user rendering> :> asElementTable", "columnView subsets -> TableColumnSpecDto key/label", "TableScopeDto::ContainmentSubtree"],
+      "blocked_on": null,
+      "note": "Corrected 2026-08-28. This fixture originally wrote `view :>> columnView[1]` and `[2]` as if [n] indexed the columns. It does not: [n] is the multiplicity of the REDEFINING feature, and the pilot only ever writes one (Views Example.sysml:16-20). Two redefinitions of one feature collide, which is exactly what the compiler was reporting. Multiple columns are SUBSETS -- `view name :> columnView` -- because `:>` adds instances to a [0..*] feature while `:>>` replaces it. Column key/label (the column feature's declared name) is tier 1; TableColumnSpecDto.path is NOT -- the pilot column view carries only a `render`, so which attribute a column shows has no standard encoding and is tier 2 via the #Mercurio profile (V-6.4)."
     },
     {
       "id": "view-def-metaclass-filter",
