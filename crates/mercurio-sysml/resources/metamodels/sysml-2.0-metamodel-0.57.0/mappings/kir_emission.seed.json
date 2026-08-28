@@ -981,14 +981,13 @@
         }
       }
     },
-    "SysML::FilterUsage": {
-      "kir_kind": "KerML::Core::Feature",
-      "id_template": "filter.{owner_path}.{declared_name}",
+    "SysML::ElementFilterMembership": {
+      "kir_kind": "SysML::ElementFilterMembership",
+      "id_template": "filter.{owner_path}.{start_line}_{start_col}",
       "emit": {
         "properties": {
           "owner": "{owner_id}",
-          "type": "{type_ref}",
-          "declared_name": "{declared_name}"
+          "metatype": "{metatype_ref}"
         }
       }
     },
