@@ -450,6 +450,91 @@ package Plain {
     );
 }
 
+/// A `doc` member documents its **owner**, not whichever member happens to
+/// follow it. It was being treated as a prefix annotation, so the fixture's
+///
+/// ```text
+/// view 'vehicle structure view' {
+///     doc /* ... */
+///     expose vehicle::**;
+/// ```
+///
+/// attached the view's own documentation to its `expose` -- leaving V-6.3 with
+/// no `description` to map. Bare `/* ... */` comments are unaffected: those are
+/// trivia and never become Documentation elements.
+#[test]
+fn sv3_a_doc_member_documents_its_owner() {
+    let document = compile(
+        r#"
+package P {
+    part vehicle { part brake; }
+    view v {
+        doc /* What this view shows. */
+        expose vehicle::**;
+    }
+    part def A {
+        doc /* What A is. */
+        attribute q;
+    }
+}
+"#,
+        "doc-ownership.sysml",
+    );
+
+    let owner_of = |body: &str| -> Option<String> {
+        document
+            .elements
+            .iter()
+            .find(|element| {
+                element.kind.contains("Documentation")
+                    && element.properties.get("body").and_then(|v| v.as_str()) == Some(body)
+            })
+            .and_then(|element| {
+                element
+                    .properties
+                    .get("owner")
+                    .and_then(|v| v.as_str())
+                    .map(str::to_string)
+            })
+    };
+
+    assert_eq!(owner_of("What this view shows."), Some("view.P.v".to_string()));
+    assert_eq!(owner_of("What A is."), Some("type.P.A".to_string()));
+}
+
+/// The counterpart inconsistency this increment did **not** resolve, recorded
+/// so it is not mistaken for an oversight: at *package* level a prefix `doc`
+/// still documents the declaration that follows it.
+///
+/// SysML v2 says otherwise -- `doc` is an owned Documentation of its namespace
+/// -- but Mercurio has a shipped convention in the other direction here, and
+/// `set_documentation` depends on it: it replaces a prefix `doc` in place, and
+/// reversing the ownership makes it append a second one instead. That is an
+/// authoring-convention decision, not a parser fix.
+#[test]
+fn sv3_at_package_level_a_prefix_doc_still_annotates_the_next_declaration() {
+    let document = compile(
+        "package P {
+    doc /* About the part, by current convention. */
+    part v;
+}",
+        "package-doc.sysml",
+    );
+
+    let owner = document
+        .elements
+        .iter()
+        .find(|element| element.kind.contains("Documentation"))
+        .and_then(|element| element.properties.get("owner").and_then(|v| v.as_str()))
+        .map(str::to_string);
+
+    assert_eq!(
+        owner,
+        Some("feature.P.v".to_string()),
+        "change this deliberately, together with set_documentation, not by accident"
+    );
+}
+
 // ------------------------------------------------------- targets (ignored)
 
 /// SV-2 exit criterion. Parse-level divergence is necessary but not

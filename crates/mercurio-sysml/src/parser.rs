@@ -1603,6 +1603,16 @@ impl Parser {
         let mut imports = Vec::new();
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
+            // NOTE: unlike a definition or usage body (see
+            // `parse_declaration_block_contents_after_open`), a `doc` at
+            // package level still attaches to the declaration that follows it.
+            // Moving it to the package is what SysML v2 says -- `doc` is an
+            // owned Documentation of its namespace -- but Mercurio has a
+            // shipped convention in the other direction here: `set_documentation`
+            // replaces a prefix `doc` in place, and reversing the ownership makes
+            // it append a second one instead. Reconciling the two is an authoring
+            // decision, not a parser fix; raised as an open question by
+            // save-as-view V-6.3.
             if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
                 docs.append(&mut self.pending_docs);
             }
@@ -3523,11 +3533,12 @@ impl Parser {
 
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
-            if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
-                owner_docs.append(&mut self.pending_docs);
-            }
+            // A `doc` body member documents its **owner**, not whichever member
+            // happens to follow it. Treating it as a prefix annotation attached
+            // a package's documentation to its first part, and a view's to its
+            // first `expose` (save-as-view V-6.3).
+            owner_docs.append(&mut self.pending_docs);
             if !self.block_starts_with_declaration() {
-                owner_docs.append(&mut self.pending_docs);
                 self.consume_opaque_statement_in_block()?;
                 continue;
             }
