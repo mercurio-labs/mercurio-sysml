@@ -34,6 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ),
         root: Some(root_id.clone()),
         query: DiagramQueryOptionsDto {
+            scope: Default::default(),
             relations: Vec::new(),
             direction: DiagramDirectionDto::Children,
             depth: 4,
