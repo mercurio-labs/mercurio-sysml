@@ -431,6 +431,7 @@ fn query(
     max_edges: usize,
 ) -> DiagramQueryOptionsDto {
     DiagramQueryOptionsDto {
+        scope: Default::default(),
         relations: relations.into_iter().map(str::to_string).collect(),
         direction,
         depth,

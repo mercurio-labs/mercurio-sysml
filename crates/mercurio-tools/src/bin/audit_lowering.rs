@@ -725,16 +725,16 @@ struct Args {
 impl Args {
     fn parse() -> Result<Self, Box<dyn std::error::Error>> {
         let mut constructs = PathBuf::from(
-            "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json",
+            "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json",
         );
         let mut emission = PathBuf::from(
-            "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/kir_emission.seed.json",
+            "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/kir_emission.seed.json",
         );
         let mut rules = Some(PathBuf::from(
-            "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json",
+            "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json",
         ));
         let mut semantic_defaults = Some(PathBuf::from(
-            "resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/semantic_defaults.seed.json",
+            "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/semantic_defaults.seed.json",
         ));
         let mut verbose_rules = false;
         let mut write_rule_draft = None;

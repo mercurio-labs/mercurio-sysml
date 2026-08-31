@@ -15,7 +15,7 @@ pub const MERCURIO_EXAMPLES_ROOT_ENV: &str = "MERCURIO_EXAMPLES_ROOT";
 
 const PILOT_REPO_NAME: &str = "SysML-v2-Pilot-Implementation";
 const EXAMPLES_REPO_NAME: &str = "mercurio-examples";
-const PILOT_LOCK_PATH: &str = "resources/pilot.lock.json";
+const PILOT_LOCK_PATH: &str = "crates/mercurio-sysml/resources/pilot.lock.json";
 
 pub fn default_pilot_root() -> PathBuf {
     if let Some(path) = env_path(MERCURIO_PILOT_ROOT_ENV) {

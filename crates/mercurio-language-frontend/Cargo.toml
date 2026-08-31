@@ -3,14 +3,11 @@ name = "mercurio-language-frontend"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description.workspace = true
+description = "Compatibility shim for mercurio-sysml::language_frontend."
 repository.workspace = true
 readme.workspace = true
 rust-version.workspace = true
+publish = false
 
 [dependencies]
-mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir", version = "0.1.0" }
-mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts", version = "0.1.0" }
-serde.workspace = true
-serde_json.workspace = true
-
+mercurio-sysml = { path = "../mercurio-sysml", version = "0.86.0" }

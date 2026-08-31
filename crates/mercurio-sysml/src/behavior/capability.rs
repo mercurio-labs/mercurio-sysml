@@ -4,7 +4,7 @@ use crate::behavior::{
     StateMachineExecutionStatus, StateMachineModel, StateMachineScenario,
     StateMachineScenarioEvent, StateMachineValidationSeverity, project_state_machines_from_graph,
 };
-use mercurio_core::{
+use mercurio_foundation::{
     CapabilityCostClass, CapabilityDescriptor, CapabilityError, CapabilityKind, CapabilityMaturity,
     CapabilityReadinessReport, CapabilityReadinessStatus, CapabilityRegistry, CapabilityRunReport,
     CapabilityRunRequest, CapabilityRunStatus, CapabilityTarget, DiagnosticKind, EvidenceGraph,
@@ -211,7 +211,7 @@ impl SemanticCapability for SysmlDynamicBehaviorCapability {
             }
         };
         let scenario_id = scenario.id.clone();
-        let insight = mercurio_core::SemanticInsight {
+        let insight = mercurio_foundation::SemanticInsight {
             id: format!("insight.{}.behavior.{}", request.run_id, machine.id),
             kind: insight_kind,
             subject: subject.clone(),
@@ -372,14 +372,14 @@ fn unreachable_state_insights(
     machine: &StateMachineModel,
     execution: &crate::behavior::StateMachineExecutionReport,
     evidence_id: &str,
-) -> Vec<mercurio_core::SemanticInsight> {
+) -> Vec<mercurio_foundation::SemanticInsight> {
     execution
         .diagnostics
         .iter()
         .filter(|finding| finding.code == "unreachable_state")
         .filter_map(|finding| {
             let state_id = finding.state_id.as_ref()?;
-            Some(mercurio_core::SemanticInsight {
+            Some(mercurio_foundation::SemanticInsight {
                 id: format!("insight.{run_id}.behavior.reachability.{state_id}"),
                 kind: InsightKind::ReachabilityFinding,
                 subject: workspace.element_ref(state_id),
@@ -420,7 +420,7 @@ fn value_digest(value: &Value) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_core::{KirDocument, KirElement};
+    use mercurio_foundation::{KirDocument, KirElement};
 
     #[test]
     fn behavior_capability_reports_not_applicable_without_state_machines() {

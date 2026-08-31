@@ -7,22 +7,19 @@ description.workspace = true
 repository.workspace = true
 readme.workspace = true
 rust-version.workspace = true
+keywords = ["modeling", "sysml", "kerml", "simulation"]
+categories = ["parser-implementations", "development-tools"]
 
 [features]
+default = ["embed-stdlib"]
 embed-stdlib = []
 
 [dependencies]
-mercurio-kerml = { path = "../mercurio-kerml", version = "0.1.0" }
-mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core", version = "0.1.0" }
-mercurio-kir = { path = "../../../mercurio-foundation/crates/mercurio-kir", version = "0.1.0" }
-mercurio-language-frontend = { path = "../mercurio-language-frontend", version = "0.1.0" }
-mercurio-language-contracts = { path = "../../../mercurio-foundation/crates/mercurio-language-contracts", version = "0.1.0" }
+mercurio-foundation = { path = "../../../mercurio-foundation/crates/mercurio-foundation", version = "0.86.0" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
 
 [build-dependencies]
-mercurio-core = { path = "../../../mercurio-foundation/crates/mercurio-core", version = "0.1.0" }
+mercurio-foundation = { path = "../../../mercurio-foundation/crates/mercurio-foundation", version = "0.86.0" }
 serde = { workspace = true, features = ["derive"] }
 serde_json.workspace = true
-
-[dev-dependencies]

@@ -1,26 +1,25 @@
 # Resources
 
-Language resources live under `resources/`.
+Language resources are owned by the public crate under
+`crates/mercurio-sysml/resources/`. Keeping them inside that package makes the
+crates.io archive self-contained.
 
-## Kernel Baseline
+## Kernel baseline
 
-`resources/kernel/kerml-kernel.kir.json` is the prebuilt kernel baseline loaded
-by the kernel language crate and merged into SysML environments.
+`crates/mercurio-sysml/resources/kernel/kerml-kernel.kir.json` is the
+prebuilt kernel baseline loaded by the `kerml` module and merged into SysML
+environments.
 
-## Metamodel Bundles
+## Metamodel bundles
 
-`resources/metamodels/sysml-2.0-metamodel-0.57.0/` contains the current
-metamodel bundle:
+`crates/mercurio-sysml/resources/metamodels/` contains the versioned metamodel
+bundles. Each bundle carries its descriptor, language profile, provenance,
+lowering mappings, generated standard-library KIR, rulepack, and release locks.
 
-- `metamodel.json`: version descriptor consumed by `available_metamodels`.
-- `profile.json`: language profile metadata.
-- `provenance.json`: generation source and traceability metadata.
-- `mappings/`: seed files for lowering and semantic defaults.
-- `stdlib/`: generated standard library KIR, rulepack, release lock, and source
-  export files.
-
-## Generated Files
+## Generated files
 
 Generated resources are checked in so clients can create environments without
 running maintainer tooling. Regenerate them only when intentionally updating a
-metamodel bundle, standard library release, or mapping rule set.
+metamodel bundle, standard-library release, or mapping rule set. Maintainer
+tools continue to treat the canonical crate resource directory as the source of
+truth.

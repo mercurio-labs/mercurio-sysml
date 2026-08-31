@@ -1,0 +1,115 @@
+use serde_json::Value;
+
+use mercurio_foundation::kir::KirElement;
+
+use crate::language_frontend::lowering::emit::{
+    MappingBundle, append_unique_property_ref, modifier_value, sibling_state_id,
+};
+use crate::language_frontend::lowering::ir::ResolvedUsage;
+use crate::language_frontend::lowering::semantic_defaults::UsagePropertyDefaultSeed;
+
+pub(crate) fn apply_usage_property_defaults(
+    element: &mut KirElement,
+    usage: &ResolvedUsage,
+    owner_id: &str,
+    mappings: &MappingBundle,
+) {
+    for default in mappings.usage_property_defaults(usage) {
+        if let Some(kir_kind) = &default.kir_kind {
+            element.kind = kir_kind.clone();
+        }
+        for (property, refs) in &default.property_refs {
+            for value in refs {
+                append_unique_property_ref(&mut element.properties, property, value);
+            }
+        }
+        for (property, value) in &default.property_values {
+            if let Some(value) = resolve_usage_property_default_value(value, usage, owner_id) {
+                element
+                    .properties
+                    .insert(property.clone(), Value::String(value));
+            }
+        }
+    }
+}
+
+pub(crate) fn usage_property_default_applies(
+    default: &UsagePropertyDefaultSeed,
+    usage: &ResolvedUsage,
+) -> bool {
+    if let Some(owner_construct) = &default.owner_construct
+        && owner_construct != &usage.owner_construct
+    {
+        return false;
+    }
+    default
+        .present_modifiers
+        .iter()
+        .all(|present| usage.modifiers.iter().any(|modifier| modifier == present))
+        && default
+            .absent_modifiers
+            .iter()
+            .all(|absent| !usage.modifiers.iter().any(|modifier| modifier == absent))
+}
+
+fn resolve_usage_property_default_value(
+    value: &str,
+    usage: &ResolvedUsage,
+    owner_id: &str,
+) -> Option<String> {
+    let mut resolved = value.to_string();
+    for (placeholder, replacement) in [
+        ("$owner_id", Some(owner_id.to_string())),
+        ("$qualified_name", Some(usage.qualified_name.clone())),
+        ("$declared_name", Some(usage.declared_name.clone())),
+        ("$allocation_source", usage.allocation_source.clone()),
+        ("$allocation_target", usage.allocation_target.clone()),
+        ("$reference_target", usage.reference_target.clone()),
+        (
+            "$metadata_body",
+            usage.metadata_properties.get("body").cloned(),
+        ),
+        (
+            "$metadata_locale",
+            usage.metadata_properties.get("locale").cloned(),
+        ),
+        (
+            // The verbatim predicate of an `filter <condition>;` member. The
+            // parser parks it in `metadata_properties` because the AST's `Expr`
+            // cannot represent `@X` or `as X`; without this placeholder it
+            // reached KIR nowhere at all, so a view's own filter was invisible
+            // to `exposed_elements` (save-as-view SV-2).
+            "$metadata_condition",
+            usage.metadata_properties.get("condition").cloned(),
+        ),
+        (
+            "$modifier_value_trigger_kind",
+            modifier_value(&usage.modifiers, "trigger_kind").map(str::to_string),
+        ),
+        (
+            "$modifier_value_trigger",
+            modifier_value(&usage.modifiers, "trigger").map(str::to_string),
+        ),
+        (
+            "$modifier_value_source_is_initial",
+            modifier_value(&usage.modifiers, "source_is_initial").map(str::to_string),
+        ),
+        (
+            "$sibling_state_id_transition_target",
+            modifier_value(&usage.modifiers, "transition_target")
+                .and_then(|target| sibling_state_id(&usage.owner_qualified_name, target)),
+        ),
+        (
+            "$sibling_state_id_transition_source",
+            modifier_value(&usage.modifiers, "transition_source")
+                .and_then(|source| sibling_state_id(&usage.owner_qualified_name, source)),
+        ),
+    ] {
+        if !resolved.contains(placeholder) {
+            continue;
+        }
+        let replacement = replacement?;
+        resolved = resolved.replace(placeholder, &replacement);
+    }
+    Some(resolved)
+}

@@ -1,6 +1,6 @@
 use std::collections::BTreeMap;
 
-use mercurio_core::{
+use mercurio_foundation::{
     AuthoringError, AuthoringProject, KirDocument, textual_model_authoring_render_profile,
 };
 
@@ -38,7 +38,7 @@ fn compile_sysml_authoring_sources(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_core::{ContainerSelector, Mutation, QualifiedName};
+    use mercurio_foundation::{ContainerSelector, Mutation, QualifiedName};
 
     #[test]
     fn loads_sysml_authoring_project_from_source_files() {

@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 
-use mercurio_core::{
+use mercurio_foundation::{
     Atom, AttributePolicyAnswer, CORE_RULEPACK_VERSION, CapabilityAnswer, Concept, Fact, Graph,
     KirFieldKind, LanguageId, Rule, RulePack, SemanticCapabilityOracle, SemanticCapabilityProfile,
     SemanticElementAuthoring, SemanticElementForm, TableSemanticCapabilityOracle, Term,
@@ -562,8 +562,20 @@ fn sysml_definition_element_kind(keyword: &str) -> Option<&'static str> {
         .find_map(|(candidate, kind)| (candidate == &keyword).then_some(*kind))
 }
 
-fn sysml_table_oracle() -> TableSemanticCapabilityOracle {
-    TableSemanticCapabilityOracle::new(sysml_semantic_capability_profile())
+/// The full SysML capability profile is expensive to assemble (combinatorial
+/// keyword/kind tables plus generalization-lattice walks), and every oracle
+/// query needs it — build it once per process instead of per call.
+fn sysml_table_oracle() -> &'static TableSemanticCapabilityOracle {
+    static ORACLE: std::sync::OnceLock<TableSemanticCapabilityOracle> = std::sync::OnceLock::new();
+    ORACLE.get_or_init(|| TableSemanticCapabilityOracle::new(sysml_semantic_capability_profile()))
+}
+
+/// Builds the process-wide cached SysML capability tables eagerly. Hosts that
+/// serve interactive requests (console API, desktop) call this at startup so
+/// the first legality or next-actions request does not pay the one-time
+/// profile construction cost (~1.5s on a debug build).
+pub fn warm_sysml_semantic_capability_cache() {
+    let _ = sysml_table_oracle();
 }
 
 pub fn sysml_language_profile() -> LanguageProfile {
@@ -574,7 +586,7 @@ pub fn sysml_language_profile() -> LanguageProfile {
         metamodel_version: "sysml-2.0".to_string(),
         stdlib_version: "sysml-2.0".to_string(),
         stdlib_path: "resources/sysml/sysml-library.kir.json".to_string(),
-        kir_schema_version: mercurio_core::ir::KIR_SCHEMA_VERSION.to_string(),
+        kir_schema_version: mercurio_foundation::ir::KIR_SCHEMA_VERSION.to_string(),
         canonical_kinds: BTreeMap::from([
             (Concept::PACKAGE, "KerML::Kernel::Package".to_string()),
             (Concept::TYPE, "KerML::Kernel::Type".to_string()),
@@ -726,7 +738,7 @@ pub fn normalize_definition_keyword(keyword: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use mercurio_core::{Graph, KirDocument, KirElement, materialize_core_indexes};
+    use mercurio_foundation::{Graph, KirDocument, KirElement, materialize_core_indexes};
     use serde_json::json;
 
     #[test]

@@ -1,0 +1,39 @@
+{
+  "schema": "mercurio.view.v1",
+  "version": 1,
+  "kind": "diagram.package_tree",
+  "mode": "visualization",
+  "diagram": {
+    "version": 1,
+    "kind": "package_tree",
+    "title": "curated pair",
+    "query": {
+      "relations": [
+        "specializes"
+      ],
+      "direction": "children",
+      "depth": 3,
+      "include_libraries": true,
+      "include_user_model": true,
+      "max_nodes": 350,
+      "max_edges": 900,
+      "scope": {
+        "kind": "explicit_elements",
+        "elements": [
+          "CuratedViews::Alpha",
+          "CuratedViews::Gamma"
+        ]
+      }
+    },
+    "layout": {
+      "engine": "dagre",
+      "direction": "LR"
+    },
+    "style": {
+      "show_attributes": true,
+      "show_edge_labels": true,
+      "group_by_layer": false,
+      "show_affordances": false
+    }
+  }
+}

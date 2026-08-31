@@ -2,21 +2,21 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
 
-use mercurio_kir::{DiagnosticKind, KirDocument, KirError};
-use mercurio_language_contracts::ast::{
-    AliasDecl, BinaryOp, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName,
-    SourceSpan, UnaryOp,
-};
-use mercurio_language_contracts::diagnostics::Diagnostic;
-use mercurio_language_contracts::lexer::{Token, TokenKind, lex};
-pub use mercurio_language_contracts::reports::{ParseReport, SemanticCompileStatus};
-use mercurio_language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
-use mercurio_language_frontend::resolver::{
+use crate::language_frontend::lowering::mappings::{LanguageProfile, MappingBundle};
+use crate::language_frontend::resolver::{
     ResolvedDefinition, ResolvedModule, ResolvedUsage, ResolverContext, resolve_module,
     resolve_module_with_context, resolve_module_with_resolver_context,
 };
-use mercurio_language_frontend::transpile::transpile_module;
+use crate::language_frontend::transpile::transpile_module;
+use mercurio_foundation::kir::{DiagnosticKind, KirDocument, KirError};
+use mercurio_foundation::language_contracts::ast::{
+    AliasDecl, BinaryOp, CommentNote, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl,
+    ImportDecl, LiteralExpr, MultiplicityRange, PackageDecl, ParsedModule as SysmlModule,
+    QualifiedName, SourceSpan, UnaryOp,
+};
+use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
+use mercurio_foundation::language_contracts::lexer::{Token, TokenKind, lex};
+pub use mercurio_foundation::language_contracts::reports::{ParseReport, SemanticCompileStatus};
 use serde_json::Value;
 
 use crate::metamodel::{LATEST_SYSML_METAMODEL_ID, release_bundle};
@@ -51,7 +51,7 @@ pub enum SysmlError {
 }
 
 pub type SemanticCompileReport =
-    mercurio_language_contracts::reports::SemanticCompileReport<KirDocument>;
+    mercurio_foundation::language_contracts::reports::SemanticCompileReport<KirDocument>;
 
 impl std::fmt::Display for SysmlError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -263,9 +263,9 @@ pub fn load_sysml_baseline_from_locator(locator: &StdlibLocator) -> Result<KirDo
             crate::sysml_field_specs().iter().copied(),
         ),
 
-        StdlibLocator::Kpar { locator: loc } => mercurio_core::BaselineLibraryConfig {
+        StdlibLocator::Kpar { locator: loc } => mercurio_foundation::BaselineLibraryConfig {
             id: "stdlib".to_string(),
-            provider: mercurio_core::LibraryProviderConfig::KparLocator {
+            provider: mercurio_foundation::LibraryProviderConfig::KparLocator {
                 locator: loc.clone(),
             },
         }
@@ -1087,6 +1087,7 @@ struct Parser {
     tokens: Vec<Token>,
     index: usize,
     pending_docs: Vec<String>,
+    pending_comments: Vec<CommentNote>,
     diagnostics: Vec<Diagnostic>,
     recover: bool,
 }
@@ -1097,6 +1098,7 @@ impl Parser {
             tokens,
             index: 0,
             pending_docs: Vec::new(),
+            pending_comments: Vec::new(),
             diagnostics: Vec::new(),
             recover,
         }
@@ -1134,7 +1136,40 @@ impl Parser {
         })
     }
 
+    /// Parses one declaration, harvesting the leading own-line `//` and
+    /// non-doc `/* */` comments collected as lexer trivia on the
+    /// declaration's first token (mirroring the `pending_docs` mechanism).
+    ///
+    /// v1 scope: only LEADING own-line comments are preserved. Trailing
+    /// same-line comments (`part x; // note`) and dangling comments before a
+    /// closing `}` are lexed as trivia of the *next* token (or of `}`/EOF)
+    /// and are dropped here — preserving them is a documented follow-up.
     fn parse_declaration(&mut self) -> Result<Option<Declaration>, Diagnostic> {
+        let comments = self.take_leading_comments();
+        let declaration = self.parse_declaration_inner()?;
+        Ok(declaration.map(|declaration| attach_leading_comments(declaration, comments)))
+    }
+
+    /// Drains the pending comment queue plus the own-line comment trivia
+    /// attached to the current token (the first token of the upcoming
+    /// declaration — a modifier, keyword, or name).
+    fn take_leading_comments(&mut self) -> Vec<CommentNote> {
+        let mut comments = std::mem::take(&mut self.pending_comments);
+        if let Some(token) = self.tokens.get_mut(self.index) {
+            comments.extend(
+                std::mem::take(&mut token.leading_trivia)
+                    .into_iter()
+                    .filter(|trivia| trivia.own_line)
+                    .map(|trivia| CommentNote {
+                        text: trivia.text,
+                        kind: trivia.kind,
+                    }),
+            );
+        }
+        comments
+    }
+
+    fn parse_declaration_inner(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         let docs = std::mem::take(&mut self.pending_docs);
         let modifiers = self.consume_declaration_modifiers();
         if let Some(keyword) = self.modifier_led_definition_keyword(&modifiers) {
@@ -1171,6 +1206,21 @@ impl Parser {
             }
             TokenKind::Identifier(ref value) if value == "alias" => {
                 Declaration::Alias(self.parse_alias(docs, modifiers)?)
+            }
+            // `expose` is import-shaped, not usage-shaped. Without this arm it
+            // falls through to generic usage parsing and mis-parses into a
+            // feature named after the first path segment, silently dropping the
+            // `::**` wildcard (save-as-view SV-1).
+            TokenKind::Identifier(ref value) if value == "expose" => {
+                Declaration::Import(self.parse_expose(docs, modifiers)?)
+            }
+            // `filter <condition>;` — an ElementFilterMembership on the owning
+            // view or package. Guarded against `filter def`, so a user type
+            // named `filter` still parses as a definition (save-as-view SV-1).
+            TokenKind::Identifier(ref value)
+                if value == "filter" && !matches!(self.next_kind(), Some(TokenKind::Def)) =>
+            {
+                self.parse_element_filter(docs, modifiers)?
             }
             TokenKind::Identifier(ref value)
                 if value == "use"
@@ -1262,6 +1312,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1417,6 +1468,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start, &end.span),
@@ -1487,10 +1539,18 @@ impl Parser {
 
         let mut body_members = Vec::new();
         if let Some(source) = source {
-            body_members.push(succession_end_reference("earlierOccurrence", source, &start.span));
+            body_members.push(succession_end_reference(
+                "earlierOccurrence",
+                source,
+                &start.span,
+            ));
         }
         if let Some(target) = target {
-            body_members.push(succession_end_reference("laterOccurrence", target, &start.span));
+            body_members.push(succession_end_reference(
+                "laterOccurrence",
+                target,
+                &start.span,
+            ));
         }
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
@@ -1509,6 +1569,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1529,6 +1590,7 @@ impl Parser {
                 members: Vec::new(),
                 imports: Vec::new(),
                 definitions: Vec::new(),
+                comments: Vec::new(),
                 docs,
                 modifiers,
                 span: merge_span(&start.span, &end.span),
@@ -1541,6 +1603,16 @@ impl Parser {
         let mut imports = Vec::new();
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
+            // NOTE: unlike a definition or usage body (see
+            // `parse_declaration_block_contents_after_open`), a `doc` at
+            // package level still attaches to the declaration that follows it.
+            // Moving it to the package is what SysML v2 says -- `doc` is an
+            // owned Documentation of its namespace -- but Mercurio has a
+            // shipped convention in the other direction here: `set_documentation`
+            // replaces a prefix `doc` in place, and reversing the ownership makes
+            // it append a second one instead. Reconciling the two is an authoring
+            // decision, not a parser fix; raised as an open question by
+            // save-as-view V-6.3.
             if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
                 docs.append(&mut self.pending_docs);
             }
@@ -1567,6 +1639,7 @@ impl Parser {
             members,
             imports,
             definitions: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1582,20 +1655,181 @@ impl Parser {
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "all") {
             self.expect_identifier_named("all", "expected `all` after `import`")?;
         }
+        self.parse_namespace_query_tail(start, false, docs, modifiers, "import")
+    }
+
+    /// `expose <path>[<filter>];` — the view-scoped twin of `import`.
+    ///
+    /// `SysML::MembershipExpose`/`NamespaceExpose` are parallel to
+    /// `MembershipImport`/`NamespaceImport` in the metamodel and share the same
+    /// path syntax, so they share the parse path here (save-as-view SV-1).
+    fn parse_expose(
+        &mut self,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+    ) -> Result<ImportDecl, Diagnostic> {
+        let start = self.expect_identifier_named("expose", "expected `expose`")?;
+        self.parse_namespace_query_tail(start, true, docs, modifiers, "expose")
+    }
+
+    /// Shared tail of `import` and `expose`: a name path, an optional filter
+    /// condition, and a terminator.
+    fn parse_namespace_query_tail(
+        &mut self,
+        start: Token,
+        is_expose: bool,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+        keyword: &str,
+    ) -> Result<ImportDecl, Diagnostic> {
         let path = self.parse_import_path()?;
-        self.consume_suffix_adornments()?;
+        let filter = self.parse_namespace_query_filter()?;
         let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
             self.consume_opaque_block_with_open()?
         } else {
-            self.expect(TokenKind::Semicolon, "expected `;` after import")?
+            self.expect(
+                TokenKind::Semicolon,
+                &format!("expected `;` after {keyword}"),
+            )?
         };
 
         Ok(ImportDecl {
             path,
+            is_expose,
+            filter,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
         })
+    }
+
+    /// `filter <condition>;` — an `SysML::ElementFilterMembership` on the
+    /// owning view definition or package.
+    ///
+    /// Like a namespace-query filter, the condition is held as raw text; SV-2
+    /// evaluates it. Before this, the whole declaration was dropped, leaving a
+    /// `view def`'s body empty with no diagnostic (save-as-view SV-1).
+    fn parse_element_filter(
+        &mut self,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+    ) -> Result<Declaration, Diagnostic> {
+        let start = self.expect_identifier_named("filter", "expected `filter`")?;
+
+        // The interoperable case is exactly `filter @<QualifiedName>` — a
+        // metaclass predicate, which is what maps onto TableRowTypeDto. Capture
+        // that shape structurally in `reference_target`; anything richer keeps
+        // its raw text and is resolved by SV-2.
+        let simple_reference = if matches!(self.peek_kind(), TokenKind::At)
+            && matches!(self.next_kind(), Some(TokenKind::Identifier(_)))
+        {
+            let checkpoint = self.index;
+            self.advance(); // `@`
+            let name = self.parse_qualified_name()?;
+            if matches!(self.peek_kind(), TokenKind::Semicolon) {
+                Some(name)
+            } else {
+                self.index = checkpoint;
+                None
+            }
+        } else {
+            None
+        };
+
+        let mut parts: Vec<String> = Vec::new();
+        if simple_reference.is_none() {
+            while !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::Eof) {
+                parts.push(filter_token_text(self.current().kind.clone()));
+                self.advance();
+            }
+        }
+        let end = self.expect(TokenKind::Semicolon, "expected `;` after filter condition")?;
+
+        let condition = match &simple_reference {
+            Some(name) => format!("@{}", name.as_colon_string()),
+            None => normalize_filter_condition(&parts.join(" ")),
+        };
+        if condition.is_empty() {
+            return Err(self.error_here("expected a condition after `filter`"));
+        }
+
+        // `condition` carries the verbatim predicate. It rides
+        // `metadata_properties` rather than `expression` because the AST's
+        // `Expr` cannot yet represent metadata-application (`@X`) or cast
+        // (`as X`) operators, and inventing a structured mis-representation
+        // would be worse than an honest text carrier. SV-2 promotes it.
+        let mut properties = BTreeMap::new();
+        properties.insert("condition".to_string(), condition);
+
+        Ok(Declaration::GenericUsage(GenericUsageDecl {
+            keyword: "filter".to_string(),
+            name: String::new(),
+            is_implicit_name: true,
+            ty: None,
+            reference_target: simple_reference,
+            allocation_source: None,
+            allocation_target: None,
+            metadata_properties: properties,
+            multiplicity: None,
+            expression: None,
+            additional_types: Vec::new(),
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            body_members: Vec::new(),
+            comments: Vec::new(),
+            docs,
+            modifiers,
+            span: merge_span(&start.span, &end.span),
+        }))
+    }
+
+    /// A bracketed filter condition on a namespace query, e.g. `[@Safety]` or
+    /// `[not (@Safety)]`.
+    ///
+    /// Captured as raw text. The parser's job here is to stop *losing* it —
+    /// before this, `consume_suffix_adornments` mis-read the brackets as a
+    /// multiplicity range and discarded the result, so `vehicle::**[@Safety]`
+    /// silently resolved as `vehicle::**`. Evaluating the condition against an
+    /// element's metadata features belongs to the resolver (save-as-view SV-2).
+    fn parse_namespace_query_filter(&mut self) -> Result<Option<String>, Diagnostic> {
+        let mut filter: Option<String> = None;
+        while matches!(self.peek_kind(), TokenKind::LBracket | TokenKind::LAngle) {
+            if matches!(self.peek_kind(), TokenKind::LAngle) {
+                self.consume_balanced(TokenKind::LAngle, TokenKind::RAngle)?;
+                continue;
+            }
+
+            self.expect(TokenKind::LBracket, "expected `[` before filter condition")?;
+            let mut parts: Vec<String> = Vec::new();
+            let mut depth = 0usize;
+            loop {
+                match self.peek_kind() {
+                    TokenKind::RBracket if depth == 0 => break,
+                    TokenKind::Eof => {
+                        return Err(self.error_here("expected `]` after filter condition"));
+                    }
+                    TokenKind::LBracket => depth += 1,
+                    TokenKind::RBracket => depth -= 1,
+                    _ => {}
+                }
+                parts.push(filter_token_text(self.current().kind.clone()));
+                self.advance();
+            }
+            self.expect(TokenKind::RBracket, "expected `]` after filter condition")?;
+
+            let condition = normalize_filter_condition(&parts.join(" "));
+            if !condition.is_empty() {
+                match &mut filter {
+                    // Successive conditions conjoin, matching the spec's
+                    // treatment of repeated filters on one namespace query.
+                    Some(existing) => *existing = format!("({existing}) and ({condition})"),
+                    None => filter = Some(condition),
+                }
+            }
+        }
+        Ok(filter)
     }
 
     fn parse_annotation_usage(
@@ -1637,6 +1871,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -1818,6 +2053,7 @@ impl Parser {
             name,
             specializes,
             members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span,
@@ -2263,6 +2499,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span,
@@ -2385,6 +2622,7 @@ impl Parser {
                         target.segments.last().cloned().unwrap_or_default(),
                     ),
                     span: target.span.clone(),
+                    leading_trivia: Vec::new(),
                 };
                 about_target = Some(target);
             }
@@ -2449,6 +2687,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2516,6 +2755,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2550,6 +2790,7 @@ impl Parser {
             subsets: tail.subsets,
             redefines: tail.redefines,
             body_members: tail.body_members,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -2576,6 +2817,7 @@ impl Parser {
         Ok(AliasDecl {
             name,
             target,
+            comments: Vec::new(),
             docs,
             modifiers,
             span: merge_span(&start.span, &end.span),
@@ -3261,6 +3503,7 @@ impl Parser {
             subsets: Vec::new(),
             redefines: Vec::new(),
             body_members: Vec::new(),
+            comments: Vec::new(),
             docs: Vec::new(),
             modifiers: vec!["end".to_string(), format!("end-{fallback_name}")],
             span,
@@ -3270,7 +3513,9 @@ impl Parser {
     fn finish_usage(&mut self, label: &str, body_closed: bool) -> Result<Token, Diagnostic> {
         match self.peek_kind() {
             TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`"),
-            _ if body_closed => Ok(self.current().clone()),
+            // The body's `}` was already consumed; the usage ends there, not
+            // at the unconsumed lookahead token.
+            _ if body_closed => Ok(self.tokens[self.index.saturating_sub(1)].clone()),
             _ => Err(self.error_here(&format!("expected `;` or body terminator after {label}"))),
         }
     }
@@ -3288,11 +3533,12 @@ impl Parser {
 
         while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
             self.collect_docs();
-            if !self.pending_docs.is_empty() && self.next_declaration_is_comment_usage() {
-                owner_docs.append(&mut self.pending_docs);
-            }
+            // A `doc` body member documents its **owner**, not whichever member
+            // happens to follow it. Treating it as a prefix annotation attached
+            // a package's documentation to its first part, and a view's to its
+            // first `expose` (save-as-view V-6.3).
+            owner_docs.append(&mut self.pending_docs);
             if !self.block_starts_with_declaration() {
-                owner_docs.append(&mut self.pending_docs);
                 self.consume_opaque_statement_in_block()?;
                 continue;
             }
@@ -3325,8 +3571,8 @@ impl Parser {
                 // Only single-line `state x;` has an unambiguous anchor; the
                 // pilot's rule for a bodied `state x { … }` differs and is
                 // deferred, so skip those (leave their link refs pilot-only).
-                previous_state_span = (usage.span.start_line == usage.span.end_line)
-                    .then(|| usage.span.clone());
+                previous_state_span =
+                    (usage.span.start_line == usage.span.end_line).then(|| usage.span.clone());
             } else if usage.keyword == "transition"
                 && usage
                     .modifiers
@@ -3407,6 +3653,11 @@ impl Parser {
                 ) || matches!(next_kind, Some(TokenKind::LAngle) if is_feature_keyword(value))
                     || matches!(next_kind, Some(TokenKind::LBracket) if value == "connect" || value == "end")
                     || matches!(next_kind, Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) if value == "comment")
+                    // `filter @X;` and `expose @X;` lead with `@`, which is not
+                    // a usage-declaration shape — without this they are consumed
+                    // as opaque statements and silently vanish from the body
+                    // (save-as-view SV-1).
+                    || matches!(next_kind, Some(TokenKind::At) if value == "filter" || value == "expose")
             }
             _ => false,
         }
@@ -3502,6 +3753,7 @@ impl Parser {
     fn recover_declaration(&mut self) {
         let start_index = self.index;
         self.pending_docs.clear();
+        self.pending_comments.clear();
         while !matches!(self.peek_kind(), TokenKind::Eof | TokenKind::RBrace) {
             match self.peek_kind() {
                 TokenKind::LBrace => {
@@ -3626,6 +3878,19 @@ impl Parser {
 
     fn collect_docs(&mut self) {
         while let TokenKind::Doc(text) = self.peek_kind().clone() {
+            // Comments preceding a `doc` line ride on the Doc token's trivia;
+            // queue them so they attach to the declaration the docs belong to.
+            if let Some(token) = self.tokens.get_mut(self.index) {
+                self.pending_comments.extend(
+                    std::mem::take(&mut token.leading_trivia)
+                        .into_iter()
+                        .filter(|trivia| trivia.own_line)
+                        .map(|trivia| CommentNote {
+                            text: trivia.text,
+                            kind: trivia.kind,
+                        }),
+                );
+            }
             self.pending_docs.push(text);
             self.advance();
         }
@@ -3839,6 +4104,27 @@ fn merge_span(start: &SourceSpan, end: &SourceSpan) -> SourceSpan {
     }
 }
 
+/// Attaches harvested leading comments to whichever declaration variant was
+/// parsed. Comments are prepended so queue order (comments before docs, top
+/// to bottom) is preserved.
+fn attach_leading_comments(declaration: Declaration, comments: Vec<CommentNote>) -> Declaration {
+    if comments.is_empty() {
+        return declaration;
+    }
+    let mut declaration = declaration;
+    let slot = match &mut declaration {
+        Declaration::Package(package) => &mut package.comments,
+        Declaration::Import(import) => &mut import.comments,
+        Declaration::GenericDefinition(definition) => &mut definition.comments,
+        Declaration::GenericUsage(usage) => &mut usage.comments,
+        Declaration::Alias(alias) => &mut alias.comments,
+    };
+    let mut comments = comments;
+    comments.append(slot);
+    *slot = comments;
+    declaration
+}
+
 fn expr_span(expr: &Expr) -> SourceSpan {
     match expr {
         Expr::Literal(_) => SourceSpan {
@@ -4010,6 +4296,77 @@ impl UsageTail {
     }
 }
 
+/// Source text of one token inside a namespace-query filter condition.
+///
+/// Deliberately total over the operators a filter can contain (`@`, boolean
+/// operators, comparisons, parentheses, scope separators) rather than falling
+/// back to the empty string the way `multiplicity_token_text` does — silently
+/// dropping an operator would change the condition's meaning.
+fn filter_token_text(kind: TokenKind) -> String {
+    match kind {
+        TokenKind::Identifier(value) | TokenKind::Number(value) => value,
+        TokenKind::String(value) => format!("\"{value}\""),
+        TokenKind::Doc(value) | TokenKind::BlockDoc(value) => value,
+        TokenKind::At => "@".to_string(),
+        TokenKind::Hash => "#".to_string(),
+        TokenKind::Star => "*".to_string(),
+        TokenKind::DoubleStar => "**".to_string(),
+        TokenKind::LParen => "(".to_string(),
+        TokenKind::RParen => ")".to_string(),
+        TokenKind::LBracket => "[".to_string(),
+        TokenKind::RBracket => "]".to_string(),
+        TokenKind::LBrace => "{".to_string(),
+        TokenKind::RBrace => "}".to_string(),
+        TokenKind::LAngle => "<".to_string(),
+        TokenKind::RAngle => ">".to_string(),
+        TokenKind::ScopeSep => "::".to_string(),
+        TokenKind::Colon => ":".to_string(),
+        TokenKind::Dot => ".".to_string(),
+        TokenKind::Comma => ",".to_string(),
+        TokenKind::Semicolon => ";".to_string(),
+        TokenKind::Equals => "=".to_string(),
+        TokenKind::DoubleEquals => "==".to_string(),
+        TokenKind::BangEquals => "!=".to_string(),
+        TokenKind::LessEqual => "<=".to_string(),
+        TokenKind::GreaterEqual => ">=".to_string(),
+        TokenKind::Plus => "+".to_string(),
+        TokenKind::Minus => "-".to_string(),
+        TokenKind::Slash => "/".to_string(),
+        TokenKind::Bang => "!".to_string(),
+        TokenKind::Ampersand => "&".to_string(),
+        TokenKind::Pipe => "|".to_string(),
+        TokenKind::Caret => "^".to_string(),
+        TokenKind::Tilde => "~".to_string(),
+        TokenKind::Dollar => "$".to_string(),
+        TokenKind::Question => "?".to_string(),
+        TokenKind::Package => "package".to_string(),
+        TokenKind::Import => "import".to_string(),
+        TokenKind::Part => "part".to_string(),
+        TokenKind::Def => "def".to_string(),
+        TokenKind::Specializes => "specializes".to_string(),
+        TokenKind::Redefines => "redefines".to_string(),
+        TokenKind::Eof => String::new(),
+    }
+}
+
+/// Collapse the single-space token join back into conventional spacing.
+fn normalize_filter_condition(raw: &str) -> String {
+    let mut text = raw.trim().to_string();
+    for (from, to) in [
+        (" :: ", "::"),
+        (" . ", "."),
+        ("@ ", "@"),
+        ("( ", "("),
+        (" )", ")"),
+        ("[ ", "["),
+        (" ]", "]"),
+        (" ,", ","),
+    ] {
+        text = text.replace(from, to);
+    }
+    text
+}
+
 fn multiplicity_token_text(kind: &TokenKind) -> String {
     match kind {
         TokenKind::Number(value) | TokenKind::Identifier(value) | TokenKind::String(value) => {
@@ -4061,6 +4418,7 @@ fn synthetic_reference_usage(
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: modifiers
             .iter()
@@ -4098,6 +4456,7 @@ fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSp
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: vec!["end".to_string()],
         span: span.clone(),
@@ -4133,6 +4492,7 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4169,6 +4529,7 @@ fn standalone_happens_before_succession(span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: ends,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4195,6 +4556,7 @@ fn standalone_succession_end(feature: &str, span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: Vec::new(),
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: vec!["end".to_string()],
         span: span.clone(),
@@ -4224,6 +4586,7 @@ fn accepter_action_with_members(members: Vec<Declaration>, span: &SourceSpan) ->
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: members,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4251,6 +4614,7 @@ fn transition_accepter_action(span: &SourceSpan) -> Declaration {
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members: vec![payload],
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4282,6 +4646,7 @@ fn transition_happens_before_succession(
         subsets: Vec::new(),
         redefines: Vec::new(),
         body_members,
+        comments: Vec::new(),
         docs: Vec::new(),
         modifiers: Vec::new(),
         span: span.clone(),
@@ -4345,7 +4710,14 @@ fn callable_expr_name(expr: &Expr) -> Option<String> {
 }
 
 pub(crate) fn repo_path(relative: &str) -> PathBuf {
-    repo_root().join(relative)
+    let candidate = repo_root().join(relative);
+    if candidate.exists() {
+        return candidate;
+    }
+    relative
+        .strip_prefix("resources/")
+        .map(|resource_relative| crate::resources::resource_root().join(resource_relative))
+        .unwrap_or(candidate)
 }
 
 fn repo_root() -> PathBuf {
@@ -4367,11 +4739,7 @@ fn repo_root() -> PathBuf {
         }
     }
 
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .parent()
-        .and_then(Path::parent)
-        .map(Path::to_path_buf)
-        .unwrap_or_else(|| PathBuf::from("."))
+    crate::resources::resource_root()
 }
 
 #[cfg(test)]
@@ -4385,14 +4753,16 @@ mod tests {
         compile_sysml_module_with_context_report, compile_sysml_text_with_context_report,
         default_sysml_library_path, load_sysml_document, parse_sysml, parse_sysml_recovering,
     };
-    use crate::project_state_machines;
-    use mercurio_core::{ExecutionContext, KirDocument, KirElement, Runtime, load_model_stack};
-    use mercurio_language_contracts::ast::{Declaration, Expr, GenericDefinitionDecl};
-    use mercurio_language_frontend::resolver::{
+    use crate::language_frontend::resolver::{
         ResolvedExpr, ResolvedPathSegment, ResolvedUsage, resolve_module,
         resolve_module_with_context,
     };
-    use mercurio_language_frontend::transpile::{MappingBundle, transpile_module};
+    use crate::language_frontend::transpile::{MappingBundle, transpile_module};
+    use crate::project_state_machines;
+    use mercurio_foundation::language_contracts::ast::{Declaration, Expr, GenericDefinitionDecl};
+    use mercurio_foundation::{
+        ExecutionContext, KirDocument, KirElement, Runtime, load_model_stack,
+    };
 
     fn write_sample_model() -> PathBuf {
         let unique = SystemTime::now()

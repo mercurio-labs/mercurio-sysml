@@ -143,9 +143,9 @@ struct Args {
 impl Args {
     fn parse() -> Result<Self> {
         let mut inputs = vec![
-            repo_path("resources/kernel/kerml-kernel.kir.json"),
+            repo_path("crates/mercurio-sysml/resources/kernel/kerml-kernel.kir.json"),
             repo_path(
-                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+                "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
             ),
         ];
         let mut inventory_out =
@@ -933,9 +933,9 @@ mod tests {
     fn generated_candidate_manifest_validates_against_core_registry() {
         let mut features = Vec::new();
         for input in [
-            repo_path("resources/kernel/kerml-kernel.kir.json"),
+            repo_path("crates/mercurio-sysml/resources/kernel/kerml-kernel.kir.json"),
             repo_path(
-                "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+                "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
             ),
         ] {
             let document = KirDocument::from_path(&input).expect("default KIR input should load");

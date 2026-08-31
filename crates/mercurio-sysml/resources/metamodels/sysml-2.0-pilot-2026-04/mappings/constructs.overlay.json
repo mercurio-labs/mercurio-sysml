@@ -1,0 +1,975 @@
+﻿{
+    "schema":  "dev.mercurio.pilot-constructs-overlay.v1",
+    "source":  {
+                   "schema":  "dev.mercurio.overlay-source.v1",
+                   "profile_id":  "sysml-2.0-metamodel-0.57.0",
+                   "authorship":  {
+                                      "mode":  "hand-curated-overlay",
+                                      "reason":  "PX-1 overlay separating Mercurio compiler subset, keyword choices, and non-grammar compatibility constructs from generated Pilot grammar facts."
+                                  }
+               },
+    "construct_selections":  [
+                                 {
+                                     "construct":  "Package",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "LibraryPackage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "Import",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MembershipImport",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "NamespaceImport",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "Namespace",
+                                     "source_file":  "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ItemDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ItemUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AttributeDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AttributeUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "EnumerationDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "EnumerationUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "PartDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "PartUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "PortDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConjugatedPortDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "InterfaceDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ActionDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AllocationDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AnalysisCaseDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "CalculationDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConnectionDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConstraintDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MetadataDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "OccurrenceDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "RequirementDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "FlowDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "StateDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "UseCaseDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "VerificationCaseDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ViewDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ViewpointDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "PortUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ReferenceUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ActionUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "PerformActionUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "StateUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ExhibitStateUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "BindingConnectorAsUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AllocationUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "AnalysisCaseUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "CalculationUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "RenderingDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConcernDefinition",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConcernUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConnectionUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ConstraintUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "FlowUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MetadataUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "OccurrenceUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "EventOccurrenceUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "`event occurrence` lowers to the distinct EventOccurrenceUsage metaclass the Pilot uses, vs plain `occurrence` -> OccurrenceUsage; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "RequirementUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "TransitionUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "UseCaseUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ViewpointUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ViewUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "InterfaceUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "RenderingUsage",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset; metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "ElementFilterMember",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "Expose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "MembershipExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 },
+                                 {
+                                     "construct":  "NamespaceExpose",
+                                     "source_file":  "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+                                     "reason":  "Included in the current Mercurio compiler lowering subset (save-as-view SV-1): `expose` is the view-scoped twin of `import` and shares its namespace-query syntax; `filter` conditions scope a view definition. Metaclass and line are generated from grammar.extract.json."
+                                 }
+                             ],
+    "explicit_constructs":  [
+                                {
+                                    "construct":  "CommentDefinition",
+                                    "metaclass":  "SysML::CommentDefinition",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ScenarioDefinition",
+                                    "metaclass":  "SysML::ScenarioDefinition",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "IndividualDefinition",
+                                    "metaclass":  "SysML::IndividualDefinition",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "EndUsage",
+                                    "metaclass":  "SysML::EndUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "LoopUsage",
+                                    "metaclass":  "SysML::LoopUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SendUsage",
+                                    "metaclass":  "SysML::SendUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SituationUsage",
+                                    "metaclass":  "SysML::SituationUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SnapshotUsage",
+                                    "metaclass":  "SysML::SnapshotUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "UntilUsage",
+                                    "metaclass":  "SysML::UntilUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "AcceptActionUsage",
+                                    "metaclass":  "SysML::AcceptActionUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ActorUsage",
+                                    "metaclass":  "SysML::ActorUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "AssumeUsage",
+                                    "metaclass":  "SysML::AssumeUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "AllocateUsage",
+                                    "metaclass":  "SysML::AllocateUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "AssertUsage",
+                                    "metaclass":  "SysML::AssertUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "CauseUsage",
+                                    "metaclass":  "SysML::CauseUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "CommentUsage",
+                                    "metaclass":  "SysML::CommentUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "DependencyUsage",
+                                    "metaclass":  "SysML::DependencyUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "IndividualUsage",
+                                    "metaclass":  "SysML::IndividualUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FrameUsage",
+                                    "metaclass":  "SysML::FrameUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "IfUsage",
+                                    "metaclass":  "SysML::IfUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FailureUsage",
+                                    "metaclass":  "SysML::FailureUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FocusUsage",
+                                    "metaclass":  "SysML::FocusUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ForUsage",
+                                    "metaclass":  "SysML::ForUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "JoinUsage",
+                                    "metaclass":  "SysML::JoinUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "MergeUsage",
+                                    "metaclass":  "SysML::MergeUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "MessageUsage",
+                                    "metaclass":  "SysML::MessageUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ObjectiveUsage",
+                                    "metaclass":  "SysML::ObjectiveUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "RequireUsage",
+                                    "metaclass":  "SysML::RequireUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "RenderUsage",
+                                    "metaclass":  "SysML::RenderUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ReturnUsage",
+                                    "metaclass":  "SysML::ReturnUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SatisfyUsage",
+                                    "metaclass":  "SysML::SatisfyUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "StakeholderUsage",
+                                    "metaclass":  "SysML::StakeholderUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SubjectUsage",
+                                    "metaclass":  "SysML::SubjectUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "TimesliceUsage",
+                                    "metaclass":  "SysML::TimesliceUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "VerificationUsage",
+                                    "metaclass":  "SysML::VerificationUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "VerifyUsage",
+                                    "metaclass":  "SysML::VerifyUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "UseUsage",
+                                    "metaclass":  "SysML::UseUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SuccessionUsage",
+                                    "metaclass":  "SysML::SuccessionUsage",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SuccessionAsUsage",
+                                    "metaclass":  "SysML::SuccessionAsUsage",
+                                    "reason":  "A bare `first A then B` succession decomposes to the pilot's SuccessionAsUsage with source/target end references."
+                                },
+                                {
+                                    "construct":  "FeatureDefinition",
+                                    "metaclass":  "KerML::FeatureDefinition",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "Classifier",
+                                    "metaclass":  "KerML::Classifier",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FeatureUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "AgeUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ConnectorUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "DeclarationUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "DisjointUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ExprUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FeaturingUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "InvUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "InverseUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "LocaleUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "MetaclassUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "RedefinitionUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SpecializationUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "StepUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SubsetUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "TighteningTorqueUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "TypeUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "VarUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "VUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "YUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "BindingUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "ConjugationUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "FunctionDefinition",
+                                    "metaclass":  "KerML::Classifier",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "InvertingUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "LanguageUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SubclassifierUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                },
+                                {
+                                    "construct":  "SubtypeUsage",
+                                    "metaclass":  "KerML::Feature",
+                                    "reason":  "Mercurio compatibility construct or lowering-family alias not represented as a direct Pilot grammar return rule in grammar.extract.json."
+                                }
+                            ],
+    "keyword_registry":  {
+                             "reason":  "Curated compiler-facing keyword-to-construct choices, including aliases and generic lowering families; PX-1 keeps this as overlay while generated grammar keywords are available in grammar.extract.json.",
+                             "definitions":  {
+                                                 "action":  "ActionDefinition",
+                                                 "allocation":  "AllocationDefinition",
+                                                 "analysis":  "AnalysisCaseDefinition",
+                                                 "attribute":  "AttributeDefinition",
+                                                 "calc":  "CalculationDefinition",
+                                                 "class":  "Classifier",
+                                                 "classifier":  "Classifier",
+                                                 "assoc":  "Classifier",
+                                                 "behavior":  "Classifier",
+                                                 "comment":  "CommentDefinition",
+                                                 "concern":  "ConcernDefinition",
+                                                 "connection":  "ConnectionDefinition",
+                                                 "constraint":  "ConstraintDefinition",
+                                                 "enum":  "EnumerationDefinition",
+                                                 "feature":  "FeatureDefinition",
+                                                 "flow":  "FlowDefinition",
+                                                 "individual":  "IndividualDefinition",
+                                                 "interface":  "InterfaceDefinition",
+                                                 "item":  "ItemDefinition",
+                                                 "metadata":  "MetadataDefinition",
+                                                 "occurrence":  "OccurrenceDefinition",
+                                                 "part":  "PartDefinition",
+                                                 "port":  "PortDefinition",
+                                                 "requirement":  "RequirementDefinition",
+                                                 "rendering":  "RenderingDefinition",
+                                                 "scenario":  "ScenarioDefinition",
+                                                 "state":  "StateDefinition",
+                                                 "struct":  "Classifier",
+                                                 "datatype":  "Classifier",
+                                                 "metaclass":  "Classifier",
+                                                 "use-case":  "UseCaseDefinition",
+                                                 "verification":  "VerificationCaseDefinition",
+                                                 "view":  "ViewDefinition",
+                                                 "viewpoint":  "ViewpointDefinition"
+                                             },
+                             "usages":  {
+                                            "accept":  "AcceptActionUsage",
+                                            "action":  "ActionUsage",
+                                            "allocation":  "AllocationUsage",
+                                            "allocate":  "AllocateUsage",
+                                            "analysis":  "AnalysisCaseUsage",
+                                            "actor":  "ActorUsage",
+                                            "assume":  "AssumeUsage",
+                                            "assert":  "AssertUsage",
+                                            "attribute":  "AttributeUsage",
+                                            "bind":  "BindingConnectorAsUsage",
+                                            "calc":  "CalculationUsage",
+                                            "cause":  "CauseUsage",
+                                            "comment":  "CommentUsage",
+                                            "concern":  "ConcernUsage",
+                                            "connect":  "ConnectionUsage",
+                                            "constraint":  "ConstraintUsage",
+                                            "dependency":  "DependencyUsage",
+                                            "end":  "EndUsage",
+                                            "enum":  "EnumerationUsage",
+                                            "event-occurrence":  "EventOccurrenceUsage",
+                                            "exhibit":  "ExhibitStateUsage",
+                                            "feature":  "FeatureUsage",
+                                            "failure":  "FailureUsage",
+                                            "filter":  "ElementFilterMember",
+                                            "focus":  "FocusUsage",
+                                            "for":  "ForUsage",
+                                            "frame":  "FrameUsage",
+                                            "flow":  "FlowUsage",
+                                            "individual":  "IndividualUsage",
+                                            "if":  "IfUsage",
+                                            "interface":  "InterfaceUsage",
+                                            "item":  "ItemUsage",
+                                            "join":  "JoinUsage",
+                                            "loop":  "LoopUsage",
+                                            "merge":  "MergeUsage",
+                                            "message":  "MessageUsage",
+                                            "metadata":  "MetadataUsage",
+                                            "objective":  "ObjectiveUsage",
+                                            "occurrence":  "OccurrenceUsage",
+                                            "part":  "PartUsage",
+                                            "perform":  "PerformActionUsage",
+                                            "port":  "PortUsage",
+                                            "reference":  "ReferenceUsage",
+                                            "require":  "RequireUsage",
+                                            "requirement":  "RequirementUsage",
+                                            "render":  "RenderUsage",
+                                            "return":  "ReturnUsage",
+                                            "satisfy":  "SatisfyUsage",
+                                            "send":  "SendUsage",
+                                            "situation":  "SituationUsage",
+                                            "snapshot":  "SnapshotUsage",
+                                            "state":  "StateUsage",
+                                            "stakeholder":  "StakeholderUsage",
+                                            "subject":  "SubjectUsage",
+                                            "succession":  "SuccessionUsage",
+                                            "succession-as":  "SuccessionAsUsage",
+                                            "timeslice":  "TimesliceUsage",
+                                            "transition":  "TransitionUsage",
+                                            "until":  "UntilUsage",
+                                            "use-case":  "UseCaseUsage",
+                                            "use":  "UseUsage",
+                                            "verification":  "VerificationUsage",
+                                            "verify":  "VerifyUsage",
+                                            "view":  "ViewUsage",
+                                            "viewpoint":  "ViewpointUsage",
+                                            "rendering":  "RenderingUsage"
+                                        }
+                         },
+    "curated_sections":  {
+                             "reason":  "Non-grammar profile data retained as explicit Mercurio curation until later extraction increments re-back individual fact families.",
+                             "default_specialization_anchors":  {
+                                                                    "packages":  {
+                                                                                     "Package":  "KerML::Kernel::Package"
+                                                                                 },
+                                                                    "definitions":  {
+                                                                                        "ActionDefinition":  "SysML::Systems::ActionDefinition",
+                                                                                        "AllocationDefinition":  "SysML::Systems::AllocationDefinition",
+                                                                                        "AnalysisCaseDefinition":  "SysML::Systems::AnalysisCaseDefinition",
+                                                                                        "AttributeDefinition":  "SysML::Systems::AttributeDefinition",
+                                                                                        "CalculationDefinition":  "SysML::Systems::CalculationDefinition",
+                                                                                        "ConjugatedPortDefinition":  "SysML::Systems::ConjugatedPortDefinition",
+                                                                                        "ConcernDefinition":  "SysML::Systems::ConcernDefinition",
+                                                                                        "ConnectionDefinition":  "SysML::Systems::ConnectionDefinition",
+                                                                                        "ConstraintDefinition":  "SysML::Systems::ConstraintDefinition",
+                                                                                        "EnumerationDefinition":  "SysML::Systems::EnumerationDefinition",
+                                                                                        "FlowDefinition":  "SysML::Systems::FlowDefinition",
+                                                                                        "InterfaceDefinition":  "SysML::Systems::InterfaceDefinition",
+                                                                                        "ItemDefinition":  "SysML::Systems::ItemDefinition",
+                                                                                        "MetadataDefinition":  "SysML::Systems::MetadataDefinition",
+                                                                                        "PartDefinition":  "SysML::Systems::PartDefinition",
+                                                                                        "PortDefinition":  "SysML::Systems::PortDefinition",
+                                                                                        "RequirementDefinition":  "SysML::Systems::RequirementDefinition",
+                                                                                        "RenderingDefinition":  "SysML::Systems::RenderingDefinition",
+                                                                                        "StateDefinition":  "SysML::Systems::StateDefinition",
+                                                                                        "UseCaseDefinition":  "SysML::Systems::UseCaseDefinition",
+                                                                                        "VerificationCaseDefinition":  "SysML::Systems::VerificationCaseDefinition",
+                                                                                        "ViewDefinition":  "SysML::Systems::ViewDefinition",
+                                                                                        "ViewpointDefinition":  "SysML::Systems::ViewpointDefinition"
+                                                                                    },
+                                                                    "usages":  {
+                                                                                   "AcceptActionUsage":  "SysML::Systems::AcceptActionUsage",
+                                                                                   "ActionUsage":  "SysML::Systems::ActionUsage",
+                                                                                   "ActorUsage":  "SysML::Systems::PartUsage",
+                                                                                   "AttributeUsage":  "SysML::Systems::AttributeUsage",
+                                                                                   "ConcernUsage":  "SysML::Systems::ConcernUsage",
+                                                                                   "ConnectionUsage":  "SysML::Systems::ConnectionUsage",
+                                                                                   "EnumerationUsage":  "SysML::Systems::EnumerationUsage",
+                                                                                   "EventOccurrenceUsage":  "SysML::Systems::EventOccurrenceUsage",
+                                                                                   "ExhibitStateUsage":  "SysML::Systems::ExhibitStateUsage",
+                                                                                   "FlowUsage":  "SysML::Systems::FlowUsage",
+                                                                                   "FrameUsage":  "SysML::Systems::ConcernUsage",
+                                                                                   "ItemUsage":  "SysML::Systems::ItemUsage",
+                                                                                   "ObjectiveUsage":  "SysML::Systems::RequirementUsage",
+                                                                                   "PartUsage":  "SysML::Systems::PartUsage",
+                                                                                   "PerformActionUsage":  "SysML::Systems::PerformActionUsage",
+                                                                                   "PortUsage":  "SysML::Systems::PortUsage",
+                                                                                   "ReferenceUsage":  "SysML::Systems::ReferenceUsage",
+                                                                                   "ReturnUsage":  "SysML::Systems::ReferenceUsage",
+                                                                                   "StateUsage":  "SysML::Systems::StateUsage",
+                                                                                   "StakeholderUsage":  "SysML::Systems::PartUsage",
+                                                                                   "SubjectUsage":  "SysML::Systems::ReferenceUsage",
+                                                                                   "SuccessionAsUsage":  "SysML::Systems::SuccessionAsUsage",
+                                                                                   "SuccessionUsage":  "SysML::Systems::SuccessionFlowUsage",
+                                                                                   "VerifyUsage":  "SysML::Systems::RequirementUsage",
+                                                                                   "ViewpointUsage":  "SysML::Systems::ViewpointUsage",
+                                                                                   "AllocationUsage":  "SysML::Systems::AllocationUsage",
+                                                                                   "AnalysisCaseUsage":  "SysML::Systems::AnalysisCaseUsage",
+                                                                                   "BindingConnectorAsUsage":  "SysML::Systems::BindingConnectorAsUsage",
+                                                                                   "CalculationUsage":  "SysML::Systems::CalculationUsage",
+                                                                                   "ConstraintUsage":  "SysML::Systems::ConstraintUsage",
+                                                                                   "InterfaceUsage":  "SysML::Systems::InterfaceUsage",
+                                                                                   "MetadataUsage":  "SysML::Systems::MetadataUsage",
+                                                                                   "OccurrenceUsage":  "SysML::Systems::OccurrenceUsage",
+                                                                                   "RenderingUsage":  "SysML::Systems::RenderingUsage",
+                                                                                   "RequirementUsage":  "SysML::Systems::RequirementUsage",
+                                                                                   "TransitionUsage":  "SysML::Systems::TransitionUsage",
+                                                                                   "UseCaseUsage":  "SysML::Systems::UseCaseUsage",
+                                                                                   "ViewUsage":  "SysML::Systems::ViewUsage",
+                                                                                   "EndUsage":  "SysML::Systems::ReferenceUsage"
+                                                                               }
+                                                                },
+                             "semantic_specialization_defaults":  {
+                                                                      "definitions":  {
+                                                                                          "ActionDefinition":  [
+                                                                                                                   "Actions::Action"
+                                                                                                               ],
+                                                                                          "AnalysisCaseDefinition":  [
+                                                                                                                         "AnalysisCases::AnalysisCase"
+                                                                                                                     ],
+                                                                                          "AttributeDefinition":  [
+                                                                                                                      "Base::DataValue"
+                                                                                                                  ],
+                                                                                          "ConnectionDefinition":  [
+                                                                                                                       "Connections::BinaryConnection"
+                                                                                                                   ],
+                                                                                          "EnumerationDefinition":  [
+                                                                                                                        "Base::DataValue"
+                                                                                                                    ],
+                                                                                          "ItemDefinition":  [
+                                                                                                                 "Items::Item"
+                                                                                                             ],
+                                                                                          "PartDefinition":  [
+                                                                                                                 "Parts::Part"
+                                                                                                             ],
+                                                                                          "PortDefinition":  [
+                                                                                                                 "Ports::Port"
+                                                                                                             ]
+                                                                                      },
+                                                                      "usages":  {
+                                                                                     "AttributeUsage":  [
+                                                                                                            "Base::dataValues"
+                                                                                                        ],
+                                                                                     "EnumerationUsage":  [
+                                                                                                              "Base::dataValues"
+                                                                                                          ],
+                                                                                     "ItemUsage":  [
+                                                                                                       "Items::items"
+                                                                                                   ],
+                                                                                     "PartUsage":  [
+                                                                                                       "Items::Item::subparts"
+                                                                                                   ],
+                                                                                     "PortUsage":  [
+                                                                                                       "Parts::Part::ownedPorts"
+                                                                                                   ],
+                                                                                     "ReferenceUsage":  [
+                                                                                                            "Parts::parts"
+                                                                                                        ]
+                                                                                 }
+                                                                  },
+                             "usage_semantic_specialization_overrides":  {
+                                                                             "usages":  {
+                                                                                            "PartUsage":  {
+                                                                                                              "end-source":  [
+                                                                                                                                 "Parts::parts",
+                                                                                                                                 "Connections::BinaryConnection::source"
+                                                                                                                             ],
+                                                                                                              "end-target":  [
+                                                                                                                                 "Parts::parts",
+                                                                                                                                 "Connections::BinaryConnection::target"
+                                                                                                                             ],
+                                                                                                              "ref":  [
+                                                                                                                          "Parts::parts"
+                                                                                                                      ]
+                                                                                                          },
+                                                                                            "ReferenceUsage":  {
+                                                                                                                   "end-source":  [
+                                                                                                                                      "Connections::BinaryConnection::source"
+                                                                                                                                  ],
+                                                                                                                   "end-target":  [
+                                                                                                                                      "Connections::BinaryConnection::target"
+                                                                                                                                  ]
+                                                                                                               }
+                                                                                        }
+                                                                         },
+                             "stdlib_aliases":  {
+                                                    "ids":  {
+                                                                "ISQ::DurationValue":  "ISQBase::DurationValue",
+                                                                "ISQ::TimeValue":  "ISQBase::DurationValue",
+                                                                "ISQ::LengthValue":  "ISQBase::LengthValue",
+                                                                "length":  "ISQBase::length",
+                                                                "ISQ::length":  "ISQBase::length",
+                                                                "ISQ::distance":  "ISQSpaceTime::distance",
+                                                                "ISQ::speed":  "ISQSpaceTime::speed",
+                                                                "ISQ::acceleration":  "ISQSpaceTime::acceleration",
+                                                                "ISQ::angularMeasure":  "ISQSpaceTime::angularMeasure",
+                                                                "distance":  "ISQSpaceTime::distance",
+                                                                "speed":  "ISQSpaceTime::speed",
+                                                                "acceleration":  "ISQSpaceTime::acceleration",
+                                                                "angularMeasure":  "ISQSpaceTime::angularMeasure",
+                                                                "ISQ::volume":  "ISQSpaceTime::volume",
+                                                                "volume":  "ISQSpaceTime::volume",
+                                                                "ISQ::time":  "ISQBase::duration",
+                                                                "ISQ::duration":  "ISQBase::duration",
+                                                                "time":  "ISQBase::duration",
+                                                                "duration":  "ISQBase::duration",
+                                                                "ISQ::MassValue":  "ISQBase::MassValue",
+                                                                "mass":  "ISQBase::mass",
+                                                                "ISQ::mass":  "ISQBase::mass",
+                                                                "ISQ::PowerValue":  "ISQMechanics::PowerValue",
+                                                                "ISQ::TorqueValue":  "ISQMechanics::TorqueValue",
+                                                                "power":  "ISQMechanics::power",
+                                                                "force":  "ISQMechanics::force",
+                                                                "momentOfInertia":  "ISQMechanics::momentOfInertia",
+                                                                "torque":  "ISQMechanics::torque",
+                                                                "ISQ::power":  "ISQMechanics::power",
+                                                                "ISQ::force":  "ISQMechanics::force",
+                                                                "ISQ::momentOfInertia":  "ISQMechanics::momentOfInertia",
+                                                                "ISQ::torque":  "ISQMechanics::torque",
+                                                                "electricPotential":  "ISQElectromagnetism::electricPotential",
+                                                                "electricCurrent":  "ISQBase::electricCurrent",
+                                                                "resistance":  "ISQElectromagnetism::resistance",
+                                                                "inductance":  "ISQElectromagnetism::inductance",
+                                                                "electricCharge":  "ISQElectromagnetism::electricCharge",
+                                                                "ISQ::electricPotential":  "ISQElectromagnetism::electricPotential",
+                                                                "ISQ::electricCurrent":  "ISQBase::electricCurrent",
+                                                                "ISQ::resistance":  "ISQElectromagnetism::resistance",
+                                                                "ISQ::inductance":  "ISQElectromagnetism::inductance",
+                                                                "ISQ::electricCharge":  "ISQElectromagnetism::electricCharge",
+                                                                "ISQ::TemperatureValue":  "ISQBase::ThermodynamicTemperatureValue",
+                                                                "temperature":  "ISQBase::thermodynamicTemperature",
+                                                                "ISQ::temperature":  "ISQBase::thermodynamicTemperature",
+                                                                "TemperatureValue":  "ISQBase::ThermodynamicTemperatureValue",
+                                                                "ShapeItems::Box":  "ShapeItems::RectangularCuboid",
+                                                                "mi":  "USCustomaryUnits::mile",
+                                                                "isq::L":  "ISQBase::\u0027International System of Quantities\u0027::L",
+                                                                "TimeValue":  "ISQBase::DurationValue",
+                                                                "SysML::PartDefinition":  "SysML::Systems::PartDefinition",
+                                                                "SysML::PartUsage":  "SysML::Systems::PartUsage"
+                                                            }
+                                                }
+                         }
+}

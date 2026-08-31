@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 
-use mercurio_core::outline::{EditorOutlineNodeDto, build_editor_outline};
-use mercurio_language_contracts::{
+use mercurio_foundation::language_contracts::{
     Declaration, GenericDefinitionDecl, GenericUsageDecl, PackageDecl, ParseSessionError,
     ParseSessionStatus, ParseSnapshot, ParsedModule as SysmlModule, SourceSpan, TextEdit,
     TextRange,
 };
+use mercurio_foundation::outline::{EditorOutlineNodeDto, build_editor_outline};
 
 use crate::parse_sysml_recovering;
 

@@ -1,38 +1,31 @@
-# Crates
+# Crate and module architecture
 
-## `mercurio-sysml`
+## Public crate
 
-The public SysML facade. It owns:
+`mercurio-sysml` is the only publishable package in this workspace. It owns
+the complete KerML/SysML language implementation and exposes focused modules:
 
-- source parsing and recovering parse reports,
-- semantic compilation to KIR,
-- `SysmlLanguageModule` for registry-based hosts,
-- `SysmlEnvironment` for metamodel-aware clients,
-- metamodel discovery and resource resolution.
+- `language_frontend`: lowering, resolution, transpilation, and mapping support;
+- `kerml`: KerML parsing, compilation, baseline loading, and language service;
+- `requirements`: requirement traceability and analysis capabilities;
+- `simulation`: SysML simulation adapter and execution APIs;
+- `resources`: embedded versioned metamodel, mapping, rulepack, and standard-library data.
 
-Use this crate when an application needs to accept SysML source text and produce
-foundation KIR.
+The existing root facade remains the recommended entry point for common SysML
+parsing, compilation, authoring, analysis, and simulation workflows.
 
-## `mercurio-kerml`
+## Compatibility packages
 
-The kernel language facade used by the SysML baseline. It owns:
+The workspace retains `mercurio-language-frontend`, `mercurio-kerml`,
+`mercurio-requirements`, `mercurio-simulation`, and
+`mercurio-sysml-resources` as thin re-export shims. They preserve source-tree
+compatibility for internal consumers while those consumers migrate to
+`mercurio-sysml` modules. Every shim has `publish = false`; no
+implementation or resource data lives in those packages.
 
-- kernel parsing,
-- compilation to KIR,
-- baseline loading,
-- `KermlLanguageModule` registration.
+## Maintainer packages
 
-SysML environments register this module alongside `SysmlLanguageModule` because
-the SysML baseline is built on the kernel language model.
-
-## `mercurio-language-frontend`
-
-Shared frontend implementation used by the concrete language crates. It owns the
-language-specific lowering pipeline, resolver, emitter, formatting, and mapping
-support needed before KIR is handed to foundation services.
-
-## `mercurio-tools`
-
-Maintainer tooling for language resources. It owns audits, release generation,
-corpus comparisons, and resource import/export utilities. Applications should not
-depend on this crate for ordinary runtime behavior.
+`mercurio-tools` owns audits, release generation, corpus comparisons, and
+resource import/export utilities. `mercurio-sysml-cli` is the repository CLI.
+Both are non-publishable and may consume the compatibility shims during the
+migration.

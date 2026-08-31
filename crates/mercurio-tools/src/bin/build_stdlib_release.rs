@@ -1132,7 +1132,10 @@ fn promote_release(
     mpack_path: &Path,
     release_lock_path: &Path,
 ) -> Result<(), Box<dyn std::error::Error>> {
-    let resource_root = tool_repo_path(&format!("resources/metamodels/{}/stdlib", args.profile_id));
+    let resource_root = tool_repo_path(&format!(
+        "crates/mercurio-sysml/resources/metamodels/{}/stdlib",
+        args.profile_id
+    ));
     copy_if_different(
         raw_export_path,
         &resource_root.join("pilot-stdlib-export.json"),
@@ -1140,12 +1143,12 @@ fn promote_release(
     copy_if_different(kir_path, &resource_root.join("stdlib.full.kir.json"))?;
     copy_if_different(
         kernel_kir_path,
-        &tool_repo_path("resources/kernel/kerml-kernel.kir.json"),
+        &tool_repo_path("crates/mercurio-sysml/resources/kernel/kerml-kernel.kir.json"),
     )?;
     copy_if_different(
         sysml_delta_kir_path,
         &tool_repo_path(
-            "resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+            "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
         ),
     )?;
     copy_if_different(rulepack_path, &resource_root.join("stdlib.rulepack.json"))?;
@@ -1336,11 +1339,15 @@ fn safe_path_segment(value: &str) -> String {
 }
 
 fn profile_resource_root(profile_id: &str) -> PathBuf {
-    let requested = tool_repo_path(&format!("resources/metamodels/{profile_id}"));
+    let requested = tool_repo_path(&format!(
+        "crates/mercurio-sysml/resources/metamodels/{profile_id}"
+    ));
     if requested.is_dir() {
         requested
     } else {
-        tool_repo_path(&format!("resources/metamodels/{DEFAULT_PROFILE_ID}"))
+        tool_repo_path(&format!(
+            "crates/mercurio-sysml/resources/metamodels/{DEFAULT_PROFILE_ID}"
+        ))
     }
 }
 

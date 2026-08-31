@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "resources",
     "crates/mercurio-language-frontend",
     "crates/mercurio-kerml",
     "crates/mercurio-simulation",
@@ -11,7 +12,7 @@ members = [
 resolver = "2"
 
 [workspace.package]
-version = "0.1.0"
+version = "0.86.0"
 edition = "2024"
 license = "MIT"
 description = "KerML and SysML v2 language services, compiler, and simulation for Mercurio."

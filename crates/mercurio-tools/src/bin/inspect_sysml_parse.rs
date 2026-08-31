@@ -26,10 +26,17 @@ fn dump_decl(declaration: &Declaration, depth: usize) {
         return;
     }
     if let Some(usage) = declaration.as_usage_like() {
+        // An element filter carries its predicate rather than a name.
+        let condition = usage
+            .metadata_properties
+            .get("condition")
+            .map(|value| format!(" {value}"))
+            .unwrap_or_default();
         println!(
-            "{pad}{} {}{}{}",
+            "{pad}{} {}{}{}{}",
             usage.keyword,
             usage.name,
+            condition,
             display_type(usage.ty.as_ref()),
             display_usage_relations(&usage.specializes, &usage.subsets, &usage.redefines)
         );
@@ -47,7 +54,13 @@ fn dump_decl(declaration: &Declaration, depth: usize) {
             }
         }
         Declaration::Import(import) => {
-            println!("{pad}import {}", display_name(&import.path));
+            let keyword = if import.is_expose { "expose" } else { "import" };
+            let filter = import
+                .filter
+                .as_ref()
+                .map(|condition| format!("[{condition}]"))
+                .unwrap_or_default();
+            println!("{pad}{keyword} {}{filter}", display_name(&import.path));
         }
         Declaration::Alias(alias) => {
             println!(
