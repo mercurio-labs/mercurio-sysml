@@ -1,13 +1,17 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
-use mercurio_core::repo_path;
+use mercurio_tools::sysml_workspace_root;
 use serde::Deserialize;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse()?;
-    let manifest = BoundaryManifest::load(&args.manifest_path)?;
-    let report = BoundaryReport::build(&manifest)?;
+    let manifest_path = args.manifest_path.canonicalize()?;
+    let manifest = BoundaryManifest::load(&manifest_path)?;
+    let root = manifest_path
+        .parent()
+        .ok_or("boundary manifest has no parent directory")?;
+    let report = BoundaryReport::build(&manifest, root)?;
 
     print_report(&report);
 
@@ -30,7 +34,8 @@ struct Args {
 
 impl Args {
     fn parse() -> Result<Self, Box<dyn std::error::Error>> {
-        let mut manifest_path = repo_path("repo-boundaries.json");
+        let mut manifest_path =
+            sysml_workspace_root().join("../mercurio-foundation/repo-boundaries.json");
         let mut strict = false;
         let args = std::env::args().skip(1).collect::<Vec<_>>();
         let mut index = 0;
@@ -101,9 +106,9 @@ struct BoundaryReport {
 }
 
 impl BoundaryReport {
-    fn build(manifest: &BoundaryManifest) -> Result<Self, Box<dyn std::error::Error>> {
-        let crates = discover_child_dirs(&repo_path("crates"))?;
-        let root_dirs = discover_child_dirs(&repo_path("."))?;
+    fn build(manifest: &BoundaryManifest, root: &Path) -> Result<Self, Box<dyn std::error::Error>> {
+        let crates = discover_child_dirs(&root.join("crates"))?;
+        let root_dirs = discover_child_dirs(root)?;
         let mut allowed_core_crates = Vec::new();
         let mut allowed_support_crates = Vec::new();
         let mut known_migration_crates = Vec::new();
@@ -151,7 +156,7 @@ impl BoundaryReport {
         }
 
         for (crate_name, forbidden) in &manifest.forbidden_dependencies {
-            let dependencies = crate_dependencies(crate_name)?;
+            let dependencies = crate_dependencies(root, crate_name)?;
             for violation in forbidden_dependency_violations(
                 crate_name,
                 &dependencies,
@@ -168,7 +173,7 @@ impl BoundaryReport {
         }
 
         if let Some(boundary) = &manifest.reasoning_ai_boundary {
-            let root = repo_path(".").join(&boundary.workspace_root);
+            let root = root.join(&boundary.workspace_root);
             if root.is_dir() {
                 for crate_name in &boundary.deterministic_crates {
                     let manifest_path = root.join("crates").join(crate_name).join("Cargo.toml");
@@ -276,8 +281,11 @@ fn reasoning_ai_dependency_violation(crate_name: &str, ai_crate: &str) -> String
     format!("deterministic reasoning crate `{crate_name}` must not depend on `{ai_crate}`")
 }
 
-fn crate_dependencies(crate_name: &str) -> Result<BTreeSet<String>, Box<dyn std::error::Error>> {
-    let manifest_path = repo_path(&format!("crates/{crate_name}/Cargo.toml"));
+fn crate_dependencies(
+    root: &Path,
+    crate_name: &str,
+) -> Result<BTreeSet<String>, Box<dyn std::error::Error>> {
+    let manifest_path = root.join("crates").join(crate_name).join("Cargo.toml");
     crate_dependencies_from_manifest(&manifest_path)
 }
 
@@ -392,6 +400,44 @@ fn print_usage() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn checks_the_manifest_workspace_instead_of_the_packaged_resource_root() {
+        let root = std::env::temp_dir().join(format!(
+            "mercurio-boundary-root-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let crate_dir = root.join("crates/mercurio-runtime");
+        std::fs::create_dir_all(&crate_dir).unwrap();
+        std::fs::write(
+            crate_dir.join("Cargo.toml"),
+            "[dependencies]\nmercurio-ai = \"1\"\n",
+        )
+        .unwrap();
+        let manifest = BoundaryManifest {
+            allowed_core_crates: ["mercurio-runtime".to_string()].into_iter().collect(),
+            allowed_support_crates: BTreeSet::new(),
+            known_migration_crates: BTreeSet::new(),
+            forbidden_dependencies: BTreeMap::from([(
+                "mercurio-runtime".to_string(),
+                ["mercurio-ai".to_string()].into_iter().collect(),
+            )]),
+            temporary_dependency_exceptions: BTreeMap::new(),
+            reasoning_ai_boundary: None,
+            forbidden_root_dirs: BTreeSet::new(),
+        };
+        let report = BoundaryReport::build(&manifest, &root).unwrap();
+        std::fs::remove_dir_all(&root).unwrap();
+        assert_eq!(report.allowed_core_crates, ["mercurio-runtime"]);
+        assert_eq!(
+            report.errors,
+            ["crate `mercurio-runtime` must not depend on `mercurio-ai`"]
+        );
+    }
 
     #[test]
     fn cargo_dependency_parser_reads_declared_dependencies() {
