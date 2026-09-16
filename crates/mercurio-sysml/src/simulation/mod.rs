@@ -936,7 +936,12 @@ pub fn simulation_trace_report(
     } else {
         trace.scenario_id.as_str()
     };
-    let payload = serde_json::to_value(&trace)?;
+    let mut payload = serde_json::to_value(&trace)?;
+    payload["requirement_outcomes_schema"] =
+        Value::String("mercurio.simulation.requirement_outcomes.v1".into());
+    payload["requirement_outcomes"] = serde_json::to_value(
+        mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace),
+    )?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
     let analysis_case_ref = SemanticElementRef::new(reported_analysis_case_id);
@@ -3166,6 +3171,77 @@ mod tests {
         assert!(states.contains(&"state.Controller.Active".to_string()));
         assert!(states.contains(&"state.Controller.Active.B".to_string()));
         assert!(!states.contains(&"state.Controller.Active.A".to_string()));
+    }
+
+    #[test]
+    fn textual_thermal_deadline_verdicts() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {
+            let text = include_str!("thermal-deadline.sysml").replace(
+                "heatRate : Real = 10.0",
+                &format!("heatRate : Real = {rate}.0"),
+            );
+            let text = if expected == "unevaluated" {
+                text.replace(
+                    "chamber.temperature >= chamber.targetTemperature",
+                    "chamber.temperature + 0.0 >= chamber.targetTemperature",
+                )
+            } else {
+                text
+            };
+            let document = compile_sysml_text(&text, "thermal-deadline.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let case = list_analysis_cases(&runtime)
+                .into_iter()
+                .find(|c| c.label == "HeatProfile")
+                .unwrap();
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(
+                scenario.requirements.len(),
+                1,
+                "{:?}",
+                scenario.requirements
+            );
+            assert_eq!(
+                scenario.requirements[0].deadline_s,
+                Some(5.0),
+                "{:?}",
+                scenario.requirements
+            );
+            assert!(
+                scenario.requirements[0].expression.is_some(),
+                "{:?}",
+                scenario.requirements
+            );
+            let trace = run_concurrent_simulation(&runtime, scenario.clone()).unwrap();
+            let again = run_concurrent_simulation(&runtime, scenario).unwrap();
+            assert_eq!(trace, again);
+            let report = run_analysis_case(&runtime, &case.id, "deadline").unwrap();
+            let outcomes = &report.artifacts[0].payload["requirement_outcomes"];
+            assert_eq!(
+                outcomes[0]["status"], expected,
+                "{outcomes:#}; {:?}",
+                trace.requirements
+            );
+            let mut unsupported = trace.clone();
+            unsupported.requirements[0].expression =
+                Some(serde_json::json!({"kind":"call","name":"unknown"}));
+            assert_eq!(
+                mercurio_foundation::simulation_core::evaluate_deadline_requirements(&unsupported)
+                    [0]
+                .status,
+                "unevaluated"
+            );
+            let mut short = trace;
+            short.timeline.retain(|frame| frame.t < 4.0);
+            if expected != "unevaluated" {
+                assert_eq!(
+                    mercurio_foundation::simulation_core::evaluate_deadline_requirements(&short)[0]
+                        .reason_code,
+                    "deadline_not_observed"
+                );
+            }
+        }
     }
 
     #[test]

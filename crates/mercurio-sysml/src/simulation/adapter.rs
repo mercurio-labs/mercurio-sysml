@@ -960,12 +960,73 @@ fn native_analysis_requirements(
                 && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
                     == Some(analysis_case.element_id.as_str())
         })
-        .map(|requirement| SimulationRequirement {
-            id: requirement.element_id.clone(),
-            label: element_label_element(requirement),
-            expression: requirement.properties.get("expression_ir").cloned(),
+        .map(|requirement| {
+            let children: Vec<_> = runtime
+                .graph()
+                .elements()
+                .iter()
+                .filter(|candidate| {
+                    string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                        == Some(requirement.element_id.as_str())
+                })
+                .collect();
+            let deadline_s = children
+                .iter()
+                .find(|child| element_label_element(child) == "deadline")
+                .and_then(|child| attribute_default_value(child))
+                .and_then(|v| v.as_f64());
+            let constraints: Vec<_> = children
+                .iter()
+                .filter(|child| is_analysis_requirement(child))
+                .collect();
+            let mut expression = requirement
+                .properties
+                .get("expression_ir")
+                .cloned()
+                .or_else(|| {
+                    (constraints.len() == 1)
+                        .then(|| constraints[0].properties.get("expression_ir").cloned())
+                        .flatten()
+                });
+            if native_analysis_subject_elements(runtime, analysis_case).len() != 1 {
+                expression = None;
+            }
+            if let Some(expression) = &mut expression {
+                let aliases: BTreeMap<_, _> =
+                    native_analysis_subject_elements(runtime, analysis_case)
+                        .into_iter()
+                        .map(|subject| (element_label_element(subject), subject.element_id.clone()))
+                        .collect();
+                qualify_requirement_paths(expression, &aliases);
+            }
+            SimulationRequirement {
+                id: requirement.element_id.clone(),
+                label: element_label_element(requirement),
+                expression,
+                deadline_s,
+            }
         })
         .collect()
+}
+
+fn qualify_requirement_paths(expression: &mut Value, aliases: &BTreeMap<String, String>) {
+    if expression["kind"] == "path" {
+        if let Some(segments) = expression.get_mut("segments").and_then(Value::as_array_mut) {
+            if let Some(first) = segments.first_mut() {
+                if let Some(subject) =
+                    expression_path_segment_name(first).and_then(|name| aliases.get(&name))
+                {
+                    *first = Value::String(subject.clone());
+                }
+            }
+        }
+    } else if let Some(object) = expression.as_object_mut() {
+        for value in object.values_mut() {
+            if value.is_object() {
+                qualify_requirement_paths(value, aliases);
+            }
+        }
+    }
 }
 
 fn native_analysis_objectives(
@@ -1056,7 +1117,28 @@ fn objective_subject_feature(
 }
 
 fn is_analysis_requirement(element: &Element) -> bool {
-    element.kind.contains("RequireUsage")
+    if element.element_id.starts_with("objective.")
+        || element
+            .properties
+            .get("metadata")
+            .and_then(|m| m.get("lowering"))
+            .and_then(|l| l.get("construct"))
+            .and_then(Value::as_str)
+            == Some("ObjectiveUsage")
+    {
+        return false;
+    }
+    element
+        .properties
+        .get("metatype")
+        .and_then(Value::as_str)
+        .is_some_and(|kind| {
+            matches!(
+                kind.rsplit("::").next(),
+                Some("RequirementUsage" | "RequireUsage")
+            )
+        })
+        || element.kind.contains("RequireUsage")
         || element.kind.contains("RequirementUsage")
         || element.element_id.starts_with("require.")
 }
