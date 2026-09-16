@@ -1112,6 +1112,164 @@ package Control {
         assert!(!source.contains("substate"));
     }
 
+    /// Two-file workspace: `RoverParts` declares the definitions, `RoverSystem`
+    /// pulls them in with a wildcard import. Every accepted spelling of the
+    /// type reference must check `Allowed` and apply cleanly.
+    fn cross_file_import_project() -> AuthoringProject {
+        load_authoring_project_from_sysml(BTreeMap::from([
+            (
+                "parts.sysml".to_string(),
+                r#"
+package RoverParts {
+    part def Chassis;
+    part def WheelModule;
+}
+"#
+                .to_string(),
+            ),
+            (
+                "rover.sysml".to_string(),
+                r#"
+package RoverSystem {
+    import RoverParts::*;
+
+    part def Rover {
+        part chassis : Chassis;
+    }
+}
+"#
+                .to_string(),
+            ),
+        ]))
+        .unwrap()
+    }
+
+    #[test]
+    fn typed_add_usage_resolves_cross_file_wildcard_import() {
+        // Regression for the cross-file resolution bug: a typed AddUsage whose
+        // type lives in another file (reached through `import RoverParts::*;`)
+        // used to report Blocked with a bogus
+        // "unresolved type `Chassis`" ValidationFailure against an existing,
+        // valid line, or RequiresSupportingChanges suggesting a duplicate
+        // `Chassis` definition.
+        for ty in [
+            "Chassis",             // bare, in scope via the wildcard import
+            "RoverParts::Chassis", // SysML-native qualified form
+            "RoverParts.Chassis",  // dot-qualified form
+        ] {
+            let context = MutationContext::from_project(cross_file_import_project());
+            let service = sysml_mutation_feasibility_service();
+            let proposal = MutationProposal {
+                intent: "Add a cross-file typed part usage".to_string(),
+                operations: vec![SemanticMutation::AddUsage {
+                    container: ElementRef::new("RoverSystem.Rover"),
+                    keyword: "part".to_string(),
+                    name: "probeX".to_string(),
+                    ty: Some(ElementRef::new(ty)),
+                    specializes: Vec::new(),
+                }],
+                evidence: Vec::new(),
+                rationale: None,
+                workspace_revision: context.workspace_revision.clone(),
+            };
+
+            let report = service.check(&context, &proposal);
+            assert_eq!(
+                report.status,
+                FeasibilityStatus::Allowed,
+                "ty `{ty}` should resolve across files: {report:#?}"
+            );
+            assert!(
+                report.suggested_supporting_changes.is_empty(),
+                "ty `{ty}` must not suggest creating a duplicate definition: {report:#?}"
+            );
+
+            let application = service
+                .apply_checked_plan(&context, report.normalized_plan.as_ref().unwrap())
+                .unwrap();
+            let source = application.edited_files.get("rover.sysml").unwrap();
+            assert!(
+                source.contains("part probeX"),
+                "applied source should declare the new usage: {source}"
+            );
+            assert_eq!(
+                application.write_back_mode,
+                Some(WriteBackMode::LocalizedPatch),
+                "the edit must stay a localized patch: {source}"
+            );
+            // The reference is written back in the spelling the proposal used,
+            // which stays valid SysML in every accepted form.
+            assert!(source.contains("Chassis"), "{source}");
+            assert!(
+                source.contains("import RoverParts::*;"),
+                "the import must survive the write-back: {source}"
+            );
+        }
+    }
+
+    #[test]
+    fn typed_add_usage_resolves_same_package_definition() {
+        // The same-file/same-package case: `Rover` is declared next to the
+        // container, so a bare `Rover` must resolve rather than being treated
+        // as a missing definition.
+        let context = MutationContext::from_project(cross_file_import_project());
+        let service = sysml_mutation_feasibility_service();
+        let proposal = MutationProposal {
+            intent: "Add a same-package typed part usage".to_string(),
+            operations: vec![SemanticMutation::AddUsage {
+                container: ElementRef::new("RoverSystem.Rover"),
+                keyword: "part".to_string(),
+                name: "twin".to_string(),
+                ty: Some(ElementRef::new("Rover")),
+                specializes: Vec::new(),
+            }],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+
+        let report = service.check(&context, &proposal);
+        assert_eq!(report.status, FeasibilityStatus::Allowed, "{report:#?}");
+        assert!(
+            report.suggested_supporting_changes.is_empty(),
+            "an existing reachable definition must never be suggested for creation: {report:#?}"
+        );
+
+        let application = service
+            .apply_checked_plan(&context, report.normalized_plan.as_ref().unwrap())
+            .unwrap();
+        let source = application.edited_files.get("rover.sysml").unwrap();
+        assert!(source.contains("part twin"), "{source}");
+    }
+
+    #[test]
+    fn typed_add_usage_still_reports_a_genuinely_missing_type() {
+        // The resolver must stay honest: a type that really does not exist
+        // still asks for the supporting definition.
+        let context = MutationContext::from_project(cross_file_import_project());
+        let service = sysml_mutation_feasibility_service();
+        let proposal = MutationProposal {
+            intent: "Add a usage of an undeclared type".to_string(),
+            operations: vec![SemanticMutation::AddUsage {
+                container: ElementRef::new("RoverSystem.Rover"),
+                keyword: "part".to_string(),
+                name: "gizmo".to_string(),
+                ty: Some(ElementRef::new("NoSuchDefinition")),
+                specializes: Vec::new(),
+            }],
+            evidence: Vec::new(),
+            rationale: None,
+            workspace_revision: context.workspace_revision.clone(),
+        };
+
+        let report = service.check(&context, &proposal);
+        assert_eq!(
+            report.status,
+            FeasibilityStatus::RequiresSupportingChanges,
+            "{report:#?}"
+        );
+    }
+
     #[test]
     fn sysml_legacy_state_usage_normalizes_to_semantic_add_element() {
         let project = load_authoring_project_from_sysml(BTreeMap::from([(
