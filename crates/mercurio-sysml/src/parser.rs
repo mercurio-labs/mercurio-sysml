@@ -1315,7 +1315,7 @@ impl Parser {
             body_members: tail.body_members,
             comments: Vec::new(),
             docs,
-            modifiers,
+            modifiers: modifiers.into_iter().chain(tail.value_modifiers).collect(),
             span: merge_span(&start.span, &end.span),
         }))
     }
@@ -1471,7 +1471,7 @@ impl Parser {
             body_members: tail.body_members,
             comments: Vec::new(),
             docs,
-            modifiers,
+            modifiers: modifiers.into_iter().chain(tail.value_modifiers).collect(),
             span: merge_span(&start, &end.span),
         }))
     }
@@ -2437,6 +2437,7 @@ impl Parser {
         let is_implicit_name = explicit_name.is_none() || force_implicit_name;
         let mut tail = if keyword == "connect" {
             UsageTail {
+            value_modifiers: Vec::new(),
                 ty: None,
                 multiplicity: None,
                 expression: None,
@@ -2450,6 +2451,7 @@ impl Parser {
             }
         } else if parsed_transition_shorthand {
             UsageTail {
+            value_modifiers: Vec::new(),
                 ty: None,
                 multiplicity: None,
                 expression: None,
@@ -2521,7 +2523,7 @@ impl Parser {
             body_members: tail.body_members,
             comments: Vec::new(),
             docs,
-            modifiers,
+            modifiers: modifiers.into_iter().chain(tail.value_modifiers).collect(),
             span,
         }))
     }
@@ -2823,7 +2825,7 @@ impl Parser {
             body_members: tail.body_members,
             comments: Vec::new(),
             docs,
-            modifiers,
+            modifiers: modifiers.into_iter().chain(tail.value_modifiers).collect(),
             span: merge_span(&start.span, &end.span),
         }))
     }
@@ -2887,6 +2889,7 @@ impl Parser {
     }
 
     fn parse_usage_tail(&mut self, stop_keywords: &[&str]) -> Result<UsageTail, Diagnostic> {
+        let mut value_modifiers = Vec::new();
         let mut ty = None;
         let mut multiplicity = None;
         let mut expression = None;
@@ -2965,6 +2968,19 @@ impl Parser {
                         redefines.extend(refs);
                     }
                 }
+                TokenKind::Identifier(value) if value == "default" => {
+                    self.advance();
+                    if matches!(self.peek_kind(), TokenKind::Colon) || expression.is_some() {
+                        return Err(self.error_here("default binding requires `default = expression`; initializing defaults are not supported"));
+                    }
+                    value_modifiers.push("default".to_string());
+                    if !matches!(self.peek_kind(), TokenKind::Equals) {
+                        expression = Some(self.parse_expression()?);
+                        if !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::RBrace | TokenKind::LBrace | TokenKind::Eof) {
+                            return Err(self.error_here("unsupported trailing default expression syntax"));
+                        }
+                    }
+                }
                 TokenKind::Equals => {
                     self.advance();
                     expression = Some(self.parse_expression()?);
@@ -2990,6 +3006,7 @@ impl Parser {
         }
 
         Ok(UsageTail {
+            value_modifiers,
             ty,
             multiplicity,
             expression,
@@ -3135,6 +3152,7 @@ impl Parser {
             "expected `}` after constraint expression",
         )?;
         Ok(Some(UsageTail {
+            value_modifiers: Vec::new(),
             ty: None,
             multiplicity: None,
             expression,
@@ -4418,6 +4436,7 @@ fn append_module_member(module: &mut SysmlModule, declaration: Declaration) {
 }
 
 struct UsageTail {
+    value_modifiers: Vec<String>,
     ty: Option<QualifiedName>,
     multiplicity: Option<MultiplicityRange>,
     expression: Option<Expr>,

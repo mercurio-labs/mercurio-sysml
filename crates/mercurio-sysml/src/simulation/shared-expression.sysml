@@ -1,6 +1,20 @@
 package SimulationConstraintsChannels {
     import ScalarValues::*;
 
+    constraint def TargetReached {
+        in actual: Real;
+        in target: Real;
+        in ambient: Real default = 20.0;
+        in rise: Real default = target - ambient;
+        1 + 1 == 2 and
+        SequenceFunctions::size((1, null, (2, 3))) == 3 and
+        (1..3)#(2) == 2 and
+        (null ?? 1e0) == 1 and
+        (true or (1 / 0 > 0)) and
+        actual - ambient >= rise
+    }
+    constraint def InheritedTargetReached :> TargetReached;
+
     part def ThermalChamber {
         attribute temperature : Real = 20.0;
         attribute targetTemperature : Real = 80.0;
@@ -28,13 +42,9 @@ package SimulationConstraintsChannels {
 
         requirement targetByDeadline {
             attribute deadline : Real = 5.0;
-            require constraint {
-                1 + 1 == 2 and
-                SequenceFunctions::size((1, null, (2, 3))) == 3 and
-                (1..3)#(2) == 2 and
-                (null ?? 1e0) == 1 and
-                (true or (1 / 0 > 0)) and
-                chamber.temperature - 20.0 >= chamber.targetTemperature - 20.0;
+            require constraint reached: InheritedTargetReached {
+                :>> actual = chamber.temperature;
+                :>> target = chamber.targetTemperature;
             }
         }
 

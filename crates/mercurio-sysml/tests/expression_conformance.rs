@@ -323,3 +323,72 @@ fn typed_constraint_inherits_unchanged_predicate_through_a_chain() {
         } else { assert!(value.is_none(), "{name} must remain unevaluated"); }
     }
 }
+
+#[test]
+fn defaults_dependent_bindings_and_cycles_keep_their_semantics() {
+    let stdlib = load_sysml_baseline().unwrap();
+    let source = "package Audit { import ScalarValues::*;
+        constraint def C { in x: Real default = 3; in y: Real default = x + 2; y == x + 2 }
+        constraint defaults: C;
+        constraint overridden: C { :>> x = 7; }
+        constraint explicit: C { :>> x = 4; :>> y = x + 2; }
+        constraint wrong: C { :>> y = 0; }
+        constraint cycle: C { :>> x = y; :>> y = x; }
+        constraint def Fixed { in x: Real = 3; x > 1 }
+        constraint fixed: Fixed;
+        constraint illegalOverride: Fixed { :>> x = 0; }
+    }";
+    for rendered in [false, true] {
+        let source = if rendered {
+            let parsed = mercurio_sysml::parse_sysml(source).unwrap();
+            let project = mercurio_sysml::foundation::authoring::AuthoringProject::from_parsed_modules(
+                std::collections::BTreeMap::from([("defaults.sysml".into(), parsed)]),
+                std::collections::BTreeMap::new()).unwrap();
+            let text = project.render_new_file("defaults.sysml").unwrap();
+            assert!(text.contains("default ="), "{text}");
+            text
+        } else { source.to_string() };
+        let document = compile_sysml_text(&source, "defaults.sysml", &stdlib).unwrap();
+        for (name, expected) in [("defaults", Some(true)), ("overridden", Some(true)), ("explicit", Some(true)),
+            ("wrong", Some(false)), ("cycle", None), ("fixed", Some(true)), ("illegalOverride", None)] {
+            let usage = document.elements.iter().find(|e|
+                e.properties.get("declared_name").and_then(Value::as_str) == Some(name)).unwrap();
+            let ir = usage.properties.get("expression_ir");
+            if let Some(expected) = expected {
+                assert_eq!(ExpressionIr::from_value(ir.unwrap_or_else(|| panic!("{name}: {source}"))).unwrap().evaluate(&mut Bindings).unwrap(), json!(expected), "{name}");
+            } else { assert!(ir.is_none(), "{name}"); }
+        }
+    }
+}
+
+#[test]
+fn constraint_templates_cross_file_boundaries_and_keep_import_scope() {
+    let stdlib = load_sysml_baseline().unwrap();
+    let library = mercurio_sysml::parse_sysml("package Library { import ScalarValues::*;
+        constraint def C { in x: Real default = 3; in y: Real default = x + 2; y > x }
+        constraint def Derived :> C; }").unwrap();
+    let source = "package Audit { import Library::*; constraint result: Derived { :>> x = 8; } }";
+    let document = mercurio_sysml::compile_sysml_text_with_context(source, "client.sysml", &[library], &stdlib).unwrap();
+    let usage = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("result")).unwrap();
+    let ir = usage.properties.get("expression_ir").unwrap();
+    assert_eq!(ExpressionIr::from_value(ir).unwrap().evaluate(&mut Bindings).unwrap(), json!(true));
+    assert!(!ir.to_string().contains("feature.Library."));
+    assert!(!document.elements.iter().any(|e| e.id == "type.Library.C"), "context definitions must not be emitted into the client file");
+}
+
+#[test]
+fn initializing_defaults_are_not_misread_as_binding_defaults() {
+    let stdlib = load_sysml_baseline().unwrap();
+    assert!(compile_sysml_text("package Audit { attribute x default := 3; }", "defaults.sysml", &stdlib).is_err());
+}
+
+#[test]
+fn dependent_binding_expansion_has_a_finite_budget() {
+    let stdlib = load_sysml_baseline().unwrap();
+    let mut parameters = String::from("in x0: Real default 1;");
+    for i in 1..20 { parameters.push_str(&format!(" in x{i}: Real default = x{} + x{};", i - 1, i - 1)); }
+    let source = format!("package Audit {{ import ScalarValues::*; constraint def C {{ {parameters} x19 > 0 }} constraint result: C; }}");
+    let document = compile_sysml_text(&source, "budget.sysml", &stdlib).unwrap();
+    let usage = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("result")).unwrap();
+    assert!(!usage.properties.contains_key("expression_ir"));
+}

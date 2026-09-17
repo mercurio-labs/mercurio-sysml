@@ -3354,7 +3354,7 @@ mod tests {
             let source = include_str!("shared-expression.sysml")
                 .replace("heatRate : Real = 10.0", "heatRate : Real = 20.0")
                 .replace("part def ThermalChamber", "constraint def Reached { in actual: Real; in target: Real; actual - 20 >= target - 20 } constraint def DerivedReached :> Reached; part def ThermalChamber");
-            let start = source.find("            require constraint {").unwrap();
+            let start = source.find("            require constraint ").unwrap();
             let end = start + source[start..].find("            }").unwrap() + "            }".len();
             let mut source = source;
             source.replace_range(start..end, &format!("require constraint reached: {constraint_type} {{ {binding} }}"));

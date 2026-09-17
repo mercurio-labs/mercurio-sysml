@@ -8,9 +8,11 @@ use super::ir::{ResolvedDefinition, ResolvedExpr, ResolvedUsage};
 pub(super) fn bind_constraint_usages(
     definitions: &mut [ResolvedDefinition],
     usages: &mut [ResolvedUsage],
+    context_definitions: &[ResolvedDefinition],
 ) {
-    let templates: BTreeMap<_, _> = definitions
+    let templates: BTreeMap<_, _> = context_definitions
         .iter()
+        .chain(definitions.iter())
         .filter(|d| d.construct == "ConstraintDefinition")
         .map(|d| (format!("type.{}", d.qualified_name), d.clone()))
         .collect();
@@ -73,10 +75,9 @@ fn visit(usages: &mut [ResolvedUsage], templates: &BTreeMap<String, ResolvedDefi
         let Some(predicate) = &template.expression else {
             continue;
         };
-        if usage.members.len() != template.members.len() {
-            continue;
-        }
-        let mut bindings = BTreeMap::new();
+        let mut raw = BTreeMap::new();
+        let mut aliases = BTreeMap::new();
+        let mut consumed = BTreeSet::new();
         let mut supported = true;
         for formal in &template.members {
             let id = format!("feature.{}", formal.qualified_name);
@@ -85,38 +86,177 @@ fn visit(usages: &mut [ResolvedUsage], templates: &BTreeMap<String, ResolvedDefi
                 .iter()
                 .filter(|m| m.redefined_features.contains(&id))
                 .collect();
-            // Require one explicit value per formal. Default values, unbound
-            // parameters, and duplicate redefinitions need further elaboration.
-            let [actual] = actuals.as_slice() else {
-                supported = false;
-                break;
-            };
-            let Some(value) = &actual.expression else {
-                supported = false;
-                break;
-            };
-            if formal.expression.is_some()
-                || !formal.members.is_empty()
+            if !formal.members.is_empty()
                 || !matches!(
                     formal.construct.as_str(),
                     "ReferenceUsage" | "AttributeUsage"
                 )
-                || actual.redefined_features.len() != 1
-                || !actual.members.is_empty()
-                || actual.modifiers.iter().any(|m| m == "default")
-                || references_scope(value, &usage.qualified_name)
-                || references_scope(value, &template.qualified_name)
             {
                 supported = false;
                 break;
             }
-            bindings.insert(id, value.clone());
+            let value = match actuals.as_slice() {
+                [] => formal.expression.as_ref(),
+                [actual] if actual.redefined_features.len() == 1 && actual.members.is_empty() => {
+                    consumed.insert(&actual.qualified_name);
+                    aliases.insert(format!("feature.{}", actual.qualified_name), id.clone());
+                    if actual.expression.is_some()
+                        && formal.expression.is_some()
+                        && !formal.modifiers.iter().any(|m| m == "default")
+                    {
+                        supported = false;
+                        break;
+                    }
+                    actual.expression.as_ref().or(formal.expression.as_ref())
+                }
+                _ => {
+                    supported = false;
+                    break;
+                }
+            };
+            let Some(value) = value else {
+                supported = false;
+                break;
+            };
+            raw.insert(id, value.clone());
         }
-        if supported {
+        if !supported || consumed.len() != usage.members.len() {
+            continue;
+        }
+        let mut bindings = BTreeMap::new();
+        let mut budget = 10_000;
+        for (id, value) in &raw {
+            let mut visiting = BTreeSet::from([id.clone()]);
+            let Some(value) = expand_binding(
+                value,
+                &raw,
+                &aliases,
+                &mut visiting,
+                &mut budget,
+                &usage.qualified_name,
+                &template.qualified_name,
+            ) else {
+                supported = false;
+                break;
+            };
+            bindings.insert(id.clone(), value);
+        }
+        if supported && fits_expansion(predicate, &bindings, &mut budget) {
             usage.expression = substitute(predicate, &bindings)
                 .filter(|result| !references_scope(result, &template.qualified_name));
         }
     }
+}
+
+// Resolve dependencies by feature identity with finite work and cycle checks.
+fn expand_binding(
+    expr: &ResolvedExpr,
+    bindings: &BTreeMap<String, ResolvedExpr>,
+    aliases: &BTreeMap<String, String>,
+    visiting: &mut BTreeSet<String>,
+    budget: &mut usize,
+    usage_scope: &str,
+    template_scope: &str,
+) -> Option<ResolvedExpr> {
+    if *budget == 0 || visiting.len() > 128 {
+        return None;
+    }
+    *budget -= 1;
+    Some(match expr {
+        ResolvedExpr::SelfRef => return None,
+        ResolvedExpr::FeaturePath { segments } => {
+            let first = segments.first()?;
+            let key = aliases.get(&first.feature_id).unwrap_or(&first.feature_id);
+            if let Some(value) = bindings.get(key) {
+                if segments.len() != 1 || !visiting.insert(key.clone()) {
+                    return None;
+                }
+                let expanded = expand_binding(
+                    value,
+                    bindings,
+                    aliases,
+                    visiting,
+                    budget,
+                    usage_scope,
+                    template_scope,
+                )?;
+                visiting.remove(key);
+                expanded
+            } else {
+                if references_scope(expr, usage_scope) || references_scope(expr, template_scope) {
+                    return None;
+                }
+                expr.clone()
+            }
+        }
+        ResolvedExpr::Literal(_) => expr.clone(),
+        ResolvedExpr::Unary { op, expr } => ResolvedExpr::Unary {
+            op: op.clone(),
+            expr: Box::new(expand_binding(
+                expr,
+                bindings,
+                aliases,
+                visiting,
+                budget,
+                usage_scope,
+                template_scope,
+            )?),
+        },
+        ResolvedExpr::Binary { left, op, right } => ResolvedExpr::Binary {
+            op: op.clone(),
+            left: Box::new(expand_binding(
+                left,
+                bindings,
+                aliases,
+                visiting,
+                budget,
+                usage_scope,
+                template_scope,
+            )?),
+            right: Box::new(expand_binding(
+                right,
+                bindings,
+                aliases,
+                visiting,
+                budget,
+                usage_scope,
+                template_scope,
+            )?),
+        },
+        ResolvedExpr::Tuple { items } => ResolvedExpr::Tuple {
+            items: items
+                .iter()
+                .map(|e| {
+                    expand_binding(
+                        e,
+                        bindings,
+                        aliases,
+                        visiting,
+                        budget,
+                        usage_scope,
+                        template_scope,
+                    )
+                })
+                .collect::<Option<_>>()?,
+        },
+        ResolvedExpr::Call { function, args } => ResolvedExpr::Call {
+            function: function.clone(),
+            args: args
+                .iter()
+                .map(|e| {
+                    expand_binding(
+                        e,
+                        bindings,
+                        aliases,
+                        visiting,
+                        budget,
+                        usage_scope,
+                        template_scope,
+                    )
+                })
+                .collect::<Option<_>>()?,
+        },
+    })
 }
 
 fn references_scope(expr: &ResolvedExpr, scope: &str) -> bool {
@@ -132,6 +272,31 @@ fn references_scope(expr: &ResolvedExpr, scope: &str) -> bool {
         }
         ResolvedExpr::Call { args, .. } => args.iter().any(|e| references_scope(e, scope)),
         ResolvedExpr::Literal(_) => false,
+    }
+}
+
+fn fits_expansion(
+    expr: &ResolvedExpr,
+    bindings: &BTreeMap<String, ResolvedExpr>,
+    budget: &mut usize,
+) -> bool {
+    if *budget == 0 {
+        return false;
+    }
+    *budget -= 1;
+    match expr {
+        ResolvedExpr::FeaturePath { segments } => segments
+            .first()
+            .and_then(|s| bindings.get(&s.feature_id))
+            .map(|value| fits_expansion(value, &BTreeMap::new(), budget))
+            .unwrap_or(true),
+        ResolvedExpr::Unary { expr, .. } => fits_expansion(expr, bindings, budget),
+        ResolvedExpr::Binary { left, right, .. } => {
+            fits_expansion(left, bindings, budget) && fits_expansion(right, bindings, budget)
+        }
+        ResolvedExpr::Tuple { items } => items.iter().all(|e| fits_expansion(e, bindings, budget)),
+        ResolvedExpr::Call { args, .. } => args.iter().all(|e| fits_expansion(e, bindings, budget)),
+        _ => true,
     }
 }
 
