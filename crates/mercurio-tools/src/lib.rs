@@ -11,6 +11,7 @@ use serde_json::{Value, json};
 
 pub const MERCURIO_WORKSPACE_ROOT_ENV: &str = "MERCURIO_WORKSPACE_ROOT";
 pub const MERCURIO_PILOT_ROOT_ENV: &str = "MERCURIO_PILOT_ROOT";
+pub const MERCURIO_PILOT_LOCK_ENV: &str = "MERCURIO_PILOT_LOCK";
 pub const MERCURIO_EXAMPLES_ROOT_ENV: &str = "MERCURIO_EXAMPLES_ROOT";
 
 const PILOT_REPO_NAME: &str = "SysML-v2-Pilot-Implementation";
@@ -67,7 +68,7 @@ pub fn sysml_workspace_root() -> PathBuf {
 }
 
 pub fn pilot_lock_path() -> PathBuf {
-    sysml_workspace_root().join(PILOT_LOCK_PATH)
+    env_path(MERCURIO_PILOT_LOCK_ENV).unwrap_or_else(|| sysml_workspace_root().join(PILOT_LOCK_PATH))
 }
 
 pub fn load_pilot_lock() -> Result<PilotLock, Box<dyn std::error::Error>> {

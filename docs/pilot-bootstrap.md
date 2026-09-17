@@ -147,6 +147,11 @@ and caps example rows per case with
 
 ## Pilot Conformance Harness
 
+For complete release sample audits, use [release-audit.md](release-audit.md).
+The older harness below reads Pilot resource errors without full semantic
+validation and can accept partial native KIR. Its reported successes do not
+establish strict compilation or specification conformance.
+
 PX-5 compares Mercurio and the Pilot over the same source corpus using the
 Pilot diagnostics batch exporter:
 

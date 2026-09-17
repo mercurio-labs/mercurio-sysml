@@ -1,0 +1,667 @@
+{
+  "validators": {
+    "checks": {
+      "before_count": 111,
+      "after_count": 111,
+      "added": [],
+      "removed": [],
+      "changed": [
+        "KerMLValidator::checkRedefinition",
+        "SysMLValidator::checkAttributeDefinition",
+        "SysMLValidator::checkAttributeUsage",
+        "SysMLValidator::checkUsage"
+      ],
+      "changes": {
+        "KerMLValidator::checkRedefinition": {
+          "before": [
+            {
+              "id": "KerMLValidator::checkRedefinition",
+              "validator": "KerMLValidator",
+              "method": "checkRedefinition",
+              "parameter_type": "Redefinition",
+              "parameter_name": "redef",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateRedefinitionDirectionConformance",
+                "validateRedefinitionFeaturingTypes"
+              ],
+              "helper_calls": [],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_1",
+                  "message_constant": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_1",
+                  "message": "A package-level feature cannot be redefined",
+                  "issue_code_expr": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code_value": "validateRedefinitionFeaturingTypes"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_2",
+                  "message_constant": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_2",
+                  "message": "Featuring types of redefining feature and redefined feature cannot be the same",
+                  "issue_code_expr": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code_value": "validateRedefinitionFeaturingTypes"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_END_CONFORMANCE_MSG",
+                  "message_constant": "INVALID_REDEFINITION_END_CONFORMANCE_MSG",
+                  "message": "Redefining feature must be an end feature",
+                  "issue_code_expr": "INVALID_REDEFINITION_END_CONFORMANCE",
+                  "issue_code": "INVALID_REDEFINITION_END_CONFORMANCE",
+                  "issue_code_value": "validateRedefinitionEndConformance"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ],
+          "after": [
+            {
+              "id": "KerMLValidator::checkRedefinition",
+              "validator": "KerMLValidator",
+              "method": "checkRedefinition",
+              "parameter_type": "Redefinition",
+              "parameter_name": "redef",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateRedefinitionDirectionConformance",
+                "validateRedefinitionFeaturingTypes",
+                "validateRedefinitionEndConformance"
+              ],
+              "helper_calls": [],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_1",
+                  "message_constant": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_1",
+                  "message": "A package-level feature cannot be redefined",
+                  "issue_code_expr": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code_value": "validateRedefinitionFeaturingTypes"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_2",
+                  "message_constant": "INVALID_REDEFINITION_FEATURING_TYPES_MSG_2",
+                  "message": "Featuring types of redefining feature and redefined feature cannot be the same",
+                  "issue_code_expr": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code": "INVALID_REDEFINITION_FEATURING_TYPES",
+                  "issue_code_value": "validateRedefinitionFeaturingTypes"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REDEFINITION_END_CONFORMANCE_MSG",
+                  "message_constant": "INVALID_REDEFINITION_END_CONFORMANCE_MSG",
+                  "message": "Redefining feature must be an end feature",
+                  "issue_code_expr": "INVALID_REDEFINITION_END_CONFORMANCE",
+                  "issue_code": "INVALID_REDEFINITION_END_CONFORMANCE",
+                  "issue_code_value": "validateRedefinitionEndConformance"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ]
+        },
+        "SysMLValidator::checkAttributeDefinition": {
+          "before": [
+            {
+              "id": "SysMLValidator::checkAttributeDefinition",
+              "validator": "SysMLValidator",
+              "method": "checkAttributeDefinition",
+              "parameter_type": "AttributeDefinition",
+              "parameter_name": "defn",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [],
+              "helper_calls": [],
+              "diagnostics": [],
+              "classification": "bespoke",
+              "ledger_status": "pending"
+            }
+          ],
+          "after": [
+            {
+              "id": "SysMLValidator::checkAttributeDefinition",
+              "validator": "SysMLValidator",
+              "method": "checkAttributeDefinition",
+              "parameter_type": "AttributeDefinition",
+              "parameter_name": "defn",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "Check validateAttributeDefinitionFeatures"
+              ],
+              "helper_calls": [],
+              "diagnostics": [],
+              "classification": "bespoke",
+              "ledger_status": "pending"
+            }
+          ]
+        },
+        "SysMLValidator::checkAttributeUsage": {
+          "before": [
+            {
+              "id": "SysMLValidator::checkAttributeUsage",
+              "validator": "SysMLValidator",
+              "method": "checkAttributeUsage",
+              "parameter_type": "AttributeUsage",
+              "parameter_name": "usg",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateAttributeUsageIsReference"
+              ],
+              "helper_calls": [
+                "checkAllTypes"
+              ],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE_MSG",
+                  "message_constant": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE_MSG",
+                  "message": "An enumeration attribute cannot have more than one type.",
+                  "issue_code_expr": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE",
+                  "issue_code": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE",
+                  "issue_code_value": "validateAttributeUsageEnumerationType_"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REFERENCE_USAGE_IS_REFERENCE_MSG",
+                  "message_constant": "INVALID_REFERENCE_USAGE_IS_REFERENCE_MSG",
+                  "message": "An attribute usage must be referential.",
+                  "issue_code_expr": "INVALID_REFERENCE_USAGE_IS_REFERENCE",
+                  "issue_code": "INVALID_REFERENCE_USAGE_IS_REFERENCE",
+                  "issue_code_value": "validateReferenceUsageIsReference"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ],
+          "after": [
+            {
+              "id": "SysMLValidator::checkAttributeUsage",
+              "validator": "SysMLValidator",
+              "method": "checkAttributeUsage",
+              "parameter_type": "AttributeUsage",
+              "parameter_name": "usg",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateAttributeUsageIsReference",
+                "Check validateAttributeUsageFeatures"
+              ],
+              "helper_calls": [
+                "checkAllTypes"
+              ],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE_MSG",
+                  "message_constant": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE_MSG",
+                  "message": "An enumeration attribute cannot have more than one type.",
+                  "issue_code_expr": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE",
+                  "issue_code": "INVALID_ATTRIBUTE_USAGE_ENUMERATION_TYPE",
+                  "issue_code_value": "validateAttributeUsageEnumerationType_"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_REFERENCE_USAGE_IS_REFERENCE_MSG",
+                  "message_constant": "INVALID_REFERENCE_USAGE_IS_REFERENCE_MSG",
+                  "message": "An attribute usage must be referential.",
+                  "issue_code_expr": "INVALID_REFERENCE_USAGE_IS_REFERENCE",
+                  "issue_code": "INVALID_REFERENCE_USAGE_IS_REFERENCE",
+                  "issue_code_value": "validateReferenceUsageIsReference"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ]
+        },
+        "SysMLValidator::checkUsage": {
+          "before": [
+            {
+              "id": "SysMLValidator::checkUsage",
+              "validator": "SysMLValidator",
+              "method": "checkUsage",
+              "parameter_type": "Usage",
+              "parameter_name": "usage",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateUsageIsReferential",
+                "validateUsageVariationIsAbstract",
+                "validateUsageVariationOwnedFeatureMembership",
+                "validateUsageVariationSpecialization"
+              ],
+              "helper_calls": [
+                "checkAllTypes"
+              ],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_1",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_1",
+                  "message": "A directed usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_2",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_2",
+                  "message": "An end usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+                  "message": "A package-lebel usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_IS_ABSTRACT_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_IS_ABSTRACT_MSG",
+                  "message": "A variation must be abstract.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_IS_ABSTRACT",
+                  "issue_code": "INVALID_USAGE_VARIATION_IS_ABSTRACT",
+                  "issue_code_value": "validateUsageVariationIsAbstract"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_MEMBERSHIP_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_MEMBERSHIP_MSG",
+                  "message": "An owned usage of a variation must be a variant.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_MEMBERSHIP",
+                  "issue_code": "INVALID_USAGE_VARIATION_MEMBERSHIP",
+                  "issue_code_value": "validateUsageVariationMembership"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_SPECIALIZATION_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_SPECIALIZATION_MSG",
+                  "message": "A variation must not specialize another variation.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_SPECIALIZATION",
+                  "issue_code": "INVALID_USAGE_VARIATION_SPECIALIZATION",
+                  "issue_code_value": "validateUsageVariationSpecialization"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ],
+          "after": [
+            {
+              "id": "SysMLValidator::checkUsage",
+              "validator": "SysMLValidator",
+              "method": "checkUsage",
+              "parameter_type": "Usage",
+              "parameter_name": "usage",
+              "annotations": [
+                "@Check"
+              ],
+              "validation_comments": [
+                "validateUsageIsReferential",
+                "validateUsageVariationIsAbstract",
+                "validateUsageVariationOwnedFeatureMembership",
+                "validateUsageVariationSpecialization"
+              ],
+              "helper_calls": [
+                "checkAllTypes"
+              ],
+              "diagnostics": [
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_1",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_1",
+                  "message": "A directed usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_2",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_2",
+                  "message": "An end usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+                  "message_constant": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+                  "message": "A package-level usage must be referential.",
+                  "issue_code_expr": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code": "INVALID_USAGE_IS_REFERENTIAL",
+                  "issue_code_value": "validateUsageIsReferential"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_IS_ABSTRACT_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_IS_ABSTRACT_MSG",
+                  "message": "A variation must be abstract.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_IS_ABSTRACT",
+                  "issue_code": "INVALID_USAGE_VARIATION_IS_ABSTRACT",
+                  "issue_code_value": "validateUsageVariationIsAbstract"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_MEMBERSHIP_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_MEMBERSHIP_MSG",
+                  "message": "An owned usage of a variation must be a variant.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_MEMBERSHIP",
+                  "issue_code": "INVALID_USAGE_VARIATION_MEMBERSHIP",
+                  "issue_code_value": "validateUsageVariationMembership"
+                },
+                {
+                  "severity": "error",
+                  "message_expr": "INVALID_USAGE_VARIATION_SPECIALIZATION_MSG",
+                  "message_constant": "INVALID_USAGE_VARIATION_SPECIALIZATION_MSG",
+                  "message": "A variation must not specialize another variation.",
+                  "issue_code_expr": "INVALID_USAGE_VARIATION_SPECIALIZATION",
+                  "issue_code": "INVALID_USAGE_VARIATION_SPECIALIZATION",
+                  "issue_code_value": "validateUsageVariationSpecialization"
+                }
+              ],
+              "classification": "typing",
+              "ledger_status": "pending"
+            }
+          ]
+        }
+      }
+    },
+    "issue_constants": {
+      "before_count": 467,
+      "after_count": 467,
+      "added": [],
+      "removed": [],
+      "changed": [
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend::INVALID_USAGE_IS_REFERENTIAL_MSG_3"
+      ],
+      "changes": {
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend::INVALID_USAGE_IS_REFERENTIAL_MSG_3": {
+          "before": [
+            {
+              "name": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+              "value": "A package-lebel usage must be referential.",
+              "value_expression": "\"A package-lebel usage must be referential.\"",
+              "message_constant": true
+            }
+          ],
+          "after": [
+            {
+              "name": "INVALID_USAGE_IS_REFERENTIAL_MSG_3",
+              "value": "A package-level usage must be referential.",
+              "value_expression": "\"A package-level usage must be referential.\"",
+              "message_constant": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  "metamodel": {
+    "metaclasses": {
+      "before_count": 257,
+      "after_count": 257,
+      "added": [],
+      "removed": [],
+      "changed": [],
+      "changes": {}
+    },
+    "structural_features": {
+      "before_count": 620,
+      "after_count": 620,
+      "added": [],
+      "removed": [],
+      "changed": [],
+      "changes": {}
+    },
+    "generalizations": {
+      "before_count": 297,
+      "after_count": 297,
+      "added": [],
+      "removed": [],
+      "changed": [],
+      "changes": {}
+    }
+  },
+  "grammar": {
+    "constructs": {
+      "before_count": 611,
+      "after_count": 611,
+      "added": [],
+      "removed": [],
+      "changed": [],
+      "changes": {}
+    },
+    "rules": {
+      "before_count": 724,
+      "after_count": 724,
+      "added": [],
+      "removed": [],
+      "changed": [],
+      "changes": {}
+    },
+    "rule_call_graph": {
+      "before_count": 724,
+      "after_count": 724,
+      "added": [],
+      "removed": [],
+      "changed": [
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext::FeatureConjugation",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::AnnotatingMember",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::FramedConcernUsage",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::GuardedSuccessionMember",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::InterfaceUsageDeclaration",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::RequirementConstraintUsage",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::ViewRenderingUsage"
+      ],
+      "changes": {
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext::FeatureConjugation": {
+          "before": [
+            {
+              "rule": "FeatureConjugation",
+              "metaclass": "SysML::Conjugation",
+              "calls": [
+                "Feature",
+                "QualifiedName"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "FeatureConjugation",
+              "metaclass": "SysML::Conjugation",
+              "calls": [
+                "Feature",
+                "OwnedFeatureChain",
+                "QualifiedName"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::AnnotatingMember": {
+          "before": [
+            {
+              "rule": "AnnotatingMember",
+              "metaclass": "SysML::OwningMembership",
+              "calls": [
+                "AnnotatingElement"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "AnnotatingMember",
+              "metaclass": "SysML::OwningMembership",
+              "calls": [
+                "AnnotatingElement",
+                "MemberPrefix"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::FramedConcernUsage": {
+          "before": [
+            {
+              "rule": "FramedConcernUsage",
+              "metaclass": "SysML::ConcernUsage",
+              "calls": [
+                "CalculationBody",
+                "ConcernUsageKeyword",
+                "ConstraintUsageDeclaration",
+                "FeatureSpecialization",
+                "OwnedReferenceSubsetting",
+                "RequirementBody",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "FramedConcernUsage",
+              "metaclass": "SysML::ConcernUsage",
+              "calls": [
+                "ConcernUsageKeyword",
+                "ConstraintUsageDeclaration",
+                "FeatureSpecializationPart",
+                "OwnedReferenceSubsetting",
+                "RequirementBody",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::GuardedSuccessionMember": {
+          "before": [
+            {
+              "rule": "GuardedSuccessionMember",
+              "metaclass": "SysML::FeatureMembership",
+              "calls": [
+                "GuardedSuccession"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "GuardedSuccessionMember",
+              "metaclass": "SysML::FeatureMembership",
+              "calls": [
+                "GuardedSuccession",
+                "MemberPrefix"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::InterfaceUsageDeclaration": {
+          "before": [
+            {
+              "rule": "InterfaceUsageDeclaration",
+              "metaclass": "SysML::InterfaceUsage",
+              "calls": [
+                "ConnectorKeyword",
+                "InterfacePart",
+                "UsageDeclaration"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "InterfaceUsageDeclaration",
+              "metaclass": "SysML::InterfaceUsage",
+              "calls": [
+                "ConnectorKeyword",
+                "InterfacePart",
+                "UsageDeclaration",
+                "ValuePart"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::RequirementConstraintUsage": {
+          "before": [
+            {
+              "rule": "RequirementConstraintUsage",
+              "metaclass": "SysML::ConstraintUsage",
+              "calls": [
+                "CalculationBody",
+                "ConstraintUsageDeclaration",
+                "ConstraintUsageKeyword",
+                "FeatureSpecialization",
+                "OwnedReferenceSubsetting",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "RequirementConstraintUsage",
+              "metaclass": "SysML::ConstraintUsage",
+              "calls": [
+                "CalculationBody",
+                "ConstraintUsageDeclaration",
+                "ConstraintUsageKeyword",
+                "FeatureSpecializationPart",
+                "OwnedReferenceSubsetting",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ]
+        },
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext::ViewRenderingUsage": {
+          "before": [
+            {
+              "rule": "ViewRenderingUsage",
+              "metaclass": "SysML::RenderingUsage",
+              "calls": [
+                "FeatureSpecialization",
+                "OwnedReferenceSubsetting",
+                "Usage",
+                "UsageBody",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ],
+          "after": [
+            {
+              "rule": "ViewRenderingUsage",
+              "metaclass": "SysML::RenderingUsage",
+              "calls": [
+                "FeatureSpecializationPart",
+                "OwnedReferenceSubsetting",
+                "Usage",
+                "UsageBody",
+                "UsageExtensionKeyword"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

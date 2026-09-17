@@ -1,0 +1,3399 @@
+{
+  "generated_at": "2026-09-17T15:09:07.953393+00:00",
+  "release": {
+    "commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "tag": "2026-08"
+  },
+  "pilot": {
+    "commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "tag": "2026-08",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "jar_name": "jupyter-sysml-kernel-0.62.0-all.jar"
+  },
+  "mercurio": {
+    "sysml": {
+      "commit": "ced2caa463f460f9d1c0a0741fd9b992543a259e",
+      "status": "M crates/mercurio-tools/Cargo.toml\n M crates/mercurio-tools/corpus/pilot_corpus.seed.json\n M crates/mercurio-tools/src/lib.rs\n?? crates/mercurio-tools/src/bin/audit_release_compile.rs\n?? tools/__pycache__/\n?? tools/audit_release_samples.py\n?? tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotValidationAudit.java\n?? tools/test_audit_release_samples.py"
+    },
+    "foundation": {
+      "commit": "0539a9d3294110f752850840b1fcad9115d2bcff",
+      "status": ""
+    }
+  },
+  "scope": "all release samples",
+  "input_policy": "same-directory .sysml/.kerml files plus transitive corpus seed dependencies",
+  "samples": [
+    {
+      "path": "kerml/src/examples/Address Book Example/AddressBookModel.kerml",
+      "sha256": "30baae0ada289e144667adbe2f92409b21f3a3f4caf66329d9e829bd34f8226b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_N_ary.kerml",
+      "sha256": "6f41ca5c24c4cd774cf866fe3d107f8bed27e000919f872e1238b1e3dcc084d7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_OwnedEnds.kerml",
+      "sha256": "cf1b3415b75728c1ca1fa9de30516011ee59013dfb3bd91a946000d9ccd52c1e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_UnownedEnds.kerml",
+      "sha256": "47a86ed1692b4c9fc5a042cc8c0212eb854276525fc8845ec373d99b4bd33fb3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Behavior Examples/Camera.kerml",
+      "sha256": "b5e3d23f35f58099f8d855ba0812d6e300f1aa9626b3b476fc796637f88daa01",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Behavior Examples/TakePicture.kerml",
+      "sha256": "522901e1bbbf80e650c0015a943e953f5cc4f268e50f7c1c78fdd81565a03410",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Individuals Examples/JohnIndividualExample.kerml",
+      "sha256": "7f8b010fdbf8f9c69c2ad0f2398ebbf03b2363193b0262417cd99a535e5cae44",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-Atoms.kerml",
+      "sha256": "9d972fecbc110cc1af256955add63a3f7d9875c99b4201faaa5ab2e635efc544",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-ModelingInstances.kerml",
+      "sha256": "d7022eb67c25572bd93cb3074f40cc02fd490c12c52f04ac0c45585eb25c834d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-2-WithoutConnectors.kerml",
+      "sha256": "3a36d857d9b95ab2fcace2435a6831a42dfedc16754edd8d3254d5884f27b62a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-3-OneToOneConnectors.kerml",
+      "sha256": "9242be07645265e42f0a3d7aa14cffb1fee327c7d9c56003793e4554b3e53989",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-4-OneToUnrestrictedConnectors.kerml",
+      "sha256": "e5b8f343451101bbe425d9a9176556072275eb1198c660a86692ae4dea6623f1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-5-TimingForStructures.kerml",
+      "sha256": "9db4a32502dd287a03e0415818024d3ef9b626e60d36501d6878096496720ac2",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-6-Sequences.kerml",
+      "sha256": "9e7fa6be31003d5fa939270673e45be94c005e729ae08e4ba3b09fcf4472e197",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-7-DecisionsAndMerges.kerml",
+      "sha256": "e6c320b27fd51757a05b1d3fa84e26ef36b23527b53072b077259483626131d4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-8-ChangingFeatureValues.kerml",
+      "sha256": "80250dbcc2a53feb2dacda1c22aca6ae98c454b271df5cd64800a98c5226e05c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/MassRollup_1.kerml",
+      "sha256": "699c55b324e017fba453b689826ba9a4804adf3396fa24d70db90d7900eb9f14",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/MassRollup_2.kerml",
+      "sha256": "27b90bb2fa35b928746a3a3d21c05c642b7db42f23cb76475356aff7f5b3ee0d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_1.kerml",
+      "sha256": "97b8bf866720e4c52bd07d0d3878f166dbc10c09c9a7771c45b4d4518eb0f8e3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_2.kerml",
+      "sha256": "f52568111c169b597ab1ae17b9f36b2915371e04ed5cff0c1bcefa2df4feb13d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_3.kerml",
+      "sha256": "28d253d4b493f19a16ae37ca6f908d63a21ffd7aeb87c0cb186bc6e14d207c78",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Massed Thing Example/MassedThings.kerml",
+      "sha256": "927ee7c24dac9f80d5be0e711eb4e60a6e0198d77375d9d8ab90f3e1f4fac331",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Named Collection Members Example/VehicleTanks.kerml",
+      "sha256": "f808a8431e413ec308954512773ad53944b5876914da974e1d892e4dd85d7e68",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Packet Example/PacketUsage.kerml",
+      "sha256": "9e940d566017af873a6aacd4add472e9f39ffac5d32fa86c2ed9b6c1be55e355",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Packet Example/Packets.kerml",
+      "sha256": "eb786dc3b12e97b51c1c34a70bb0dba0a3e2e12b3de6e5171a01ba869481e267",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/ArgumentResolution.kerml",
+      "sha256": "ef41aea0c874d82dd385268eb17c632749ad5b941155cd7b2a5ce01fc6be35a2",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Associations.kerml",
+      "sha256": "7847ecc8040da796396255a14da86644ca5721833508928a7f87918d6dedfd49",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Behaviors.kerml",
+      "sha256": "12bb9172091ee9691d25175059329b9f44d2ae2572aa0e10ce95b377bb09c082",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Circular.kerml",
+      "sha256": "823e6b6b459cb841fa50da55b6505d8ffad2368cd3e9cb91425131e487b1762b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classes.kerml",
+      "sha256": "ffb8a13917841c9924cbb1a6105be515ac460a8df1b8bee92bd20454af4504f4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classifications.kerml",
+      "sha256": "f8d9b7bdcf766d6dcb9a960bc79d002e00df5bfb50579ea8c2c4ab94bca93fbd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+      "sha256": "a7880ec2c57a9102880e2f8099035f94094b578c623ca1533a3b31d7a42730f8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Comments.kerml",
+      "sha256": "b1b7d95f9558bfad81b63448a5197e90b6095abf35fc7797a27555f92e9fb30d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Conjugation.kerml",
+      "sha256": "692d4259e957d263495a2196721ef2b6feb1edf77d842ffabbaf6432efeb5e97",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Connectors.kerml",
+      "sha256": "368e6ee6200753e84659b229b6a0ff9a998260058c67d69eeef049731a18f84b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+      "sha256": "788df85bc513418ab4c57a47c039407a263a299b62ac8f4fe08be5d75307a346",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Expansion.kerml",
+      "sha256": "ad0b0c916c227753fa4473212c9ac884dbd941d882322331d70bf3b998d6106f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Expressions.kerml",
+      "sha256": "bde514f7236c6206848574ca416688c1ee34b6e12d2dc522db166b8977f8b041",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/FeatureChains.kerml",
+      "sha256": "c25e39f9287b0f48934106065144047ae8313ac1776680c4acc438ad202718ce",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/FeatureInheritance.kerml",
+      "sha256": "86b9e1e8ad5e8eacef5e5576d727c722d4414bbf38fe9181d215aff4a3ad1bbe",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Features.kerml",
+      "sha256": "45adcd57a019661daa1522e8a8bc3847f99870917ce1ca04054434bd6d1509c2",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Filtering.kerml",
+      "sha256": "9de3e9969a02419eee2db0f89985e86c7012f08314bba4f2db5335e7b40f131c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Imports.kerml",
+      "sha256": "fdcdc033ac07b4477d3aa00082f2bb77138bf40b533800cc68536c2f4174072e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Inheritance.kerml",
+      "sha256": "76c818ba239c56269f93565a697a4edc504c1f0e78415fb0f231bcad38b6233c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Inverses.kerml",
+      "sha256": "6ab43c8e7062cfa48a2f0f9ed54b73356098244874ac64c4c89d34f5e43101cd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/MetadataTest.kerml",
+      "sha256": "a9660b8ad6ea79534a98ece570244c49d5f961c2434bab88f48e32e6d2fa359b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Redefinition.kerml",
+      "sha256": "e5f74efd661737a4564f9badc715d402d155995dd23a233a26602a6ec86f290c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Scoping.kerml",
+      "sha256": "47a68673ab45a281aefd0a971abec79901c60ae5965ccc5180e753c52fae1015",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "sha256": "064456e4d6d453e04d828390ae8d886af4f36dc01eda0ed5b482f8a5be1cc1f9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Types.kerml",
+      "sha256": "842b5b8053eb80142e8e90e58d7cd5ac5df9dc1c3699ab7dff4e79f6c69198a7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/ExtendedOccurrences.kerml",
+      "sha256": "0ee38dc5959b592636fbdcfc7a14496526250bd3207f9ff43e068e721f05c283",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/Moments.kerml",
+      "sha256": "441f93819dfbd6dee83b84c672d392f80c4c8ede24c810351ad1d84e142df560",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingFeaturesEnhanced.kerml",
+      "sha256": "c9c6c36e45e016cbcd5d9340222ade1f7d786b5daa9da3cfe5348519d3e9aedb",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml",
+      "sha256": "3f0ce678857e3d68eff599bd241168367375d19e67eca41812100bb2c8584279",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/TimeVaryingCarDriver.kerml",
+      "sha256": "a9e6c695f19ccac37567cca350cd99ad180d4b3b4964137c4049e0d5187ff83a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/TimeVaryingFeatures.kerml",
+      "sha256": "8f91104b332d5d1baa4f02a574646d8792fe55c80685d292d5376120ea45dda4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Vehicle Example/VehicleDefinitions.kerml",
+      "sha256": "99abf64596a707b8f3bf893d81cdd23d3d9cd9a3ff14b3757951acae6a385e58",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "kerml/src/examples/Vehicle Example/VehicleUsages.kerml",
+      "sha256": "a056ba9ad060523c26eafa115dd3d72da16b105afa78d4670037587d908d0428",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/AnalysisAnnotation.sysml",
+      "sha256": "c487fb2da32061633a6372045e6f87baca2d8c00ca71538ccf5432b6c8d2ada5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Dynamics.sysml",
+      "sha256": "b51dbc2174549d65fcd750294923d1d21cf0afabfd2593a81ec02cd7f23f8478",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Turbojet Stage Analysis.sysml",
+      "sha256": "ace3ee32081a986e3f7a26548907454fc8dccb0383ea68bd33ac4a21270293af",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Vehicle Analysis Demo.sysml",
+      "sha256": "0d0e0997a60e73f0208d2c96b2fe7c933a7180c2a144439f3f53a775000a714c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFCoreLib.sysml",
+      "sha256": "08c81e862f96e1799a7e1ced4abc6171105c546de208d4fc309e1d8e1011e102",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFNorwayTopics.sysml",
+      "sha256": "a7b02539744dd06758b5bde8b0a3047749d61d69d4d1d102483907a7eadec30b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFProfileLib.sysml",
+      "sha256": "ad560b0ecbfe615c500d8884307e3676666ae3fe1fcc7bcb213d392b97519cd6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "sha256": "33ccdda01ec89aab46f02610e495924e3842b8745e44447b9f4b9997cc01ab9d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_N_ary.sysml",
+      "sha256": "84ca25cfe16c47ca74f4d2673b4e3cc4b6f8fbb80c668f03181d58f7b2b917c7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_OwnedEnds.sysml",
+      "sha256": "d72b7fb754e385d662b954992f80af72a86119b27908be6833cc1bc18fb57053",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_UnownedEnds.sysml",
+      "sha256": "da6a677c7bfc868174390e3a0213514b340580665d119dfbcd82dd17c66d8895",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Camera Example/Camera.sysml",
+      "sha256": "d2411282ad14538ac72da1c654b67edf7f080be44d6ecae452c1b28cf59c517e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Camera Example/PictureTaking.sysml",
+      "sha256": "2fc31c25a62bcaff412248aaeb72aef7d956da9b0e427da78c8a3c160fd78fe5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Cause and Effect Examples/CauseAndEffectExample.sysml",
+      "sha256": "e05305be2cc51024fb0af02b503f54e51ea5ba5ed3d54e5f4e2e0223aa9327f5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Cause and Effect Examples/MedicalDeviceFailure.sysml",
+      "sha256": "8c4f5060527c7d9436409932ec713e15165715b2c232cf299f38aea43ca91a74",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Comment Examples/Comments.sysml",
+      "sha256": "670d98ce74569b5c85a9a5abe6d8364cb2fafdd6ae06a4c8c28d17cc6642b623",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Flashlight Example/Flashlight Example.sysml",
+      "sha256": "fce0ac40ef48418c8390df9721c80be895b4412bf9ce534f0bb4cdfe9a3de98d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/CarWithEnvelopingShape.sysml",
+      "sha256": "6b5156d073d31d52b95748419c4b5836805ea6143ae33509f414bdfe2d937b3a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/CarWithShapeAndCSG.sysml",
+      "sha256": "586c991a892927221623ffca19274818709e3fafa5c9b5835d01c2036d74cbb9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/ExternalShapeRefExample.sysml",
+      "sha256": "57ab77382fed5e508a6a2f13aadb3ce714428826338fff78e3e3074053977c42",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/SimpleQuadcopter.sysml",
+      "sha256": "a2fc7c0391276586cf1fb666b484d8a5c6a196a7ef40d0f33b62a5d14d0b75c1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/VehicleGeometryAndCoordinateFrames.sysml",
+      "sha256": "ac8e2141c58cfb8061a819772df083f5c09c5e4931a5dec2e5d793747177bd11",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/AliasImport.sysml",
+      "sha256": "fd34df8407a75130e25f526b9cae74f9cf87531410ffcdc00d6d9986bc9d1d25",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/CircularImport.sysml",
+      "sha256": "3ed6813e219e43b737251c69aaa421d0e993219cbf35d3f78819de8b6eef70d4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/PrivateImportTest.sysml",
+      "sha256": "5111a800ab20f0018277bef5b4ed9d055327d03ac8afbdea2c2d3e5713113007",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/QualifiedNameImportTest.sysml",
+      "sha256": "2720d3539f24ebfc294bec9dad4c7537af099e46df8b02b31a197aca51d7a1ed",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Individuals Examples/AnalysisIndividualExample.sysml",
+      "sha256": "aacca8161258796ff20d7c9fdb5ea6eaf4cce4c61d34c05dbd3d33a2200da337",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Individuals Examples/JohnIndividualExample.sysml",
+      "sha256": "5bc1e6e861c86b39a7f9ef4e94f36f9cb526e3c62ba356e5224583cd00cb6269",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModel.sysml",
+      "sha256": "453c7016a1582ea3f987d1ddc8fe468958c27485b3bb503cf6c31cb625e70bfe",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModelOutside.sysml",
+      "sha256": "4417c2eddc29eaa1a7b481c529c4e62d06e47d709e5b4898242ce426bbaba1b9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-2.sysml",
+      "sha256": "60c04a056b5b4c7b17a209b96fe47742a2a0263017c572b4bca3f299dd102a1b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-3.sysml",
+      "sha256": "cedda5c4bc330b93c0faa3efbe3aa72510511b96219ebee96228c5f59027b364",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-2.sysml",
+      "sha256": "b7286648d86d97c3fb1971002b9f230ed5f343996989d67d0f3949f485b68054",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-3.sysml",
+      "sha256": "355ddc5571567fc8bcefba01e5ff43300bf8aeb4a204679f72729dc74fa5dd8d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/MassConstraintExample.sysml",
+      "sha256": "2398b661ba95006e06bb8fc0df83627aff688b05408897ea57177166f2d68348",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/MassRollup.sysml",
+      "sha256": "7dba8d7058221e7a801ea7f4b6d5149f312193f4a5f8fa8bcb39ca235c382a27",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/Vehicles.sysml",
+      "sha256": "99265bff25c1cc4bf9327f0292dd9045d48d6c9597e405775e8e238f00831c31",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/IssueMetadataExample.sysml",
+      "sha256": "1836ae34a7def93a8488a143939d5b6a568141d20b6cd34c40a8dc96f65e6a5e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RationaleMetadataExample.sysml",
+      "sha256": "48db19d9cf384cb77ff21413002578d696d9fc9cb31083afb2f15d58428e0db8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RequirementMetadataExample.sysml",
+      "sha256": "853c36e4126898560b2ad76eef6680fc6b09c1f0bff9b042eeedbae711d77fd9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RiskMetadataExample.sysml",
+      "sha256": "72180bdb6c2a1b5912b61956225a548137fbcf2f382f52788d6f3c3bb8e1e4c6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/VerificationMetadataExample.sysml",
+      "sha256": "bc32b51c43b578e99f0f139a2a51f5046e2e4c7a836f6653a266127d3c25d91c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Packet Example/PacketUsage.sysml",
+      "sha256": "7cecc1bd583948de9beb2cbc3f3cbe903355e6cedf729f9eb10ae72529aa9be3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Packet Example/Packets.sysml",
+      "sha256": "4e66a98b8ec7d49f486a0401e57ea1c0dd9472cf3a88df6cd9c6ed3345ad8194",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/HSUVRequirements.sysml",
+      "sha256": "7c6a48ed61406d93d659903b1cba9c1428fa4e4e1ba7da3ef6a079a1dfd4cbc5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/RequirementDerivationExample.sysml",
+      "sha256": "513112f826cfd5e36d728878d89bb42899e7c2f107b63493fe6119f35d6c45e1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/VehicleRequirementDerivation.sysml",
+      "sha256": "b6a9c0a62b739ae94af5131cbcb4c34fbc1b2deb1aefe96ec4ba589d913337dc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Room Model/RoomModel.sysml",
+      "sha256": "49ffc1ae51bfc3fe655e50c7113e6c881a2834c3fda4c935668c95e805a0da36",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ActionTest.sysml",
+      "sha256": "5d41213f104eae1c6180257d9e2969da37e42fb90365e984b73afdadebe69abd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AliasTest.sysml",
+      "sha256": "91ce2ab7419d3e860cd6bacfa597f361833b7f11cb0736790561e50e144195fe",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+      "sha256": "dadd0da31a3b5657fdfcd68ed767c541253dd457b7605f4f6484dbdc33e6eda7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+      "sha256": "bc9ec8a433e15d77f9f1843bee23760cb5bd9dee37ed50df6f272f9ae4b5afed",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+      "sha256": "d31136487043cba6362b47f4692eff4f1a33dc536f63fde633b10d52d204987d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+      "sha256": "38af0043838d799c5abdbcaadb1c21d4d666aeda3145516f1404fdc9ba3bf814",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/CommentTest.sysml",
+      "sha256": "56d5b21e061fca95508dfff29fc21d445eaf973420c2690faf507f4d3376b215",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+      "sha256": "91deacf8ad3dd3abff60a5c0ac665e46ad2331f48089c0d8b767bf6b88780267",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+      "sha256": "81dea0d21c6ea696da006f2cae5f4851d7ba66cad050aab81de428cd72ac5a64",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+      "sha256": "513d1bf9ae1a503bb8e7248242fdbafc819498a0af36163de49ef772760527c6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+      "sha256": "b77d91adcfd9c0e079177a4b48b0c4f86ae5c094c1187a7c9d1018b62961da1d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+      "sha256": "6ef6db215306f3819224a953d580248f9fc29ef9bfbe4bd935758cdb7f9f8ddc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+      "sha256": "b770da8931607bd2a7c0c631fd7f4e004efe3afa1beae7951e6ded5bb4a0c61f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+      "sha256": "1b3dc22874b5ee7ef8c4e354f16fe8d188f7936fec2f33d65da9bd4743b1b250",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+      "sha256": "eb75c999469b1a0793a19741dcbb7c42a8efa6999ea30f3c2ed37e96b33effe0",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+      "sha256": "ea0eae80b7b1dfd8f2c713b64ef3d3f68de42e1bdc54958394fa1d9463ee8ae3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ImportTest.sysml",
+      "sha256": "46dc93640f8c0ee70b8d27931b8276919fb541405df59950b8cbcf4759f7e0cc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+      "sha256": "0919b61e25d3d6d10901aa95f6b7cff5ffe19519dd911d924a080d2895a05b9c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+      "sha256": "47dc0961bea89af17f1329453f6d612732e3389e3a9fb42632abece6d1d6e7cb",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ItemTest.sysml",
+      "sha256": "70546c6377bd80e51901d16108149245d46110114e0cb837c86a17b17b180439",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+      "sha256": "56c6569da41422951e371106ce52f2186d63ebedd9a5bd958d6150edb1037d16",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+      "sha256": "44cf700ab9cee38a21000badd0d2d3517293f1067e386cbba8f4e5eb82b53109",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+      "sha256": "1ee2616adf7f32c5f3245e98252b6af8f58255ef81a62c7ab6c2348af57fdd04",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+      "sha256": "e9f7e8a9f5b486f1b2a03391d2d0b379ccbf7fe32ab4786b434d8e9966437c12",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/PartTest.sysml",
+      "sha256": "66ce667ad118527436537c952fb24fd5f9843005a30a8b07084974c6711da38e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+      "sha256": "8f05d2d8c8c3d1f9fa0e2886eec173b15859ff1a1992092e0dffb453a5cdff55",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+      "sha256": "082e3b068cab5aa63b4ba6e1ab4fd58dcadebc4fa327000a81cfe363dd8b2a72",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/StateTest.sysml",
+      "sha256": "e0b27b37b74049cd880150203de5c36e2b3b6eadb2d042965e96aa8dd7d8041a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+      "sha256": "6859079dc29b625b396679d76f491c942dbc480d3b2700b875cd35bde725fdc7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "sha256": "f50c3754f3747867c7590e730020ada778ed74d9827adca49b4f778e85b1cf83",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+      "sha256": "8cbd294cb83db2bea01cd45d1c6c3a541bcca63385bf88e2377605e7aa14a9ca",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+      "sha256": "9b2c769c791d4ad49bd7af537e653eb2d9125bc924e47081668c9c46cfaf6a07",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+      "sha256": "ef1456b8fad56830143f14238fcab639985438d8b87756dc2b1856c2ac522d0d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+      "sha256": "4f1a1ed7e0ca76b337bee1cb40931c1a76f2b3a82f52b11e7651ca7d697e8173",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ViewTest.sysml",
+      "sha256": "99127c86e2f233b2a1db04f07bf716218126eb040af05760b45c777946d1db69",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/State Space Representation Examples/CartSample.sysml",
+      "sha256": "7415482cf6722aed59f09faf9bdc316340feb248e221938ffe8fa15420c2dad0",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/State Space Representation Examples/EVSample.sysml",
+      "sha256": "0f58964c085745d4574bc838f803adc1021ab7f927272acda0e84c936bacfe60",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Timeslice and Snapshot Examples/TimeVaryingAttribute.sysml",
+      "sha256": "87e470af092b74866c998438d84de9bbf4d19896359ec8fa7627ccbfdcee716d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Variability Examples/VehicleVariabilityModel.sysml",
+      "sha256": "eab63b191294b1a052c2fa79c7854011485e8bd2ff7bfd8a78fed24a31afb1c1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/SysML v2 Spec Annex A SimpleVehicleModel.sysml",
+      "sha256": "5dbc1b39f25d1ecc1e389f7828ea62a6112a4d3f8f16c407d1ae54d74a819353",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleDefinitions.sysml",
+      "sha256": "6e6128a4dda956ba8eafda11f2d961fe77eb98ed3001d4befd609ab4559c67ba",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleIndividuals.sysml",
+      "sha256": "a03c302588967b6b2f6eadc2de85b6d56cac0254fae9f3e99c43633b1a964514",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleUsages.sysml",
+      "sha256": "093e8d9ed9f65035000fdec3e2927db5daed7f4f5f659f3fed65825dc72e5940",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package - Updated.sysml",
+      "sha256": "d103ec6fc1d4223e247abc4afac13626b00779ed548253a3155f1a99d752de94",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package.sysml",
+      "sha256": "3333ca0b933a6775943ac6aa926c258b48daaa2c76bb75bae13b9f804724bce7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition - Updated.sysml",
+      "sha256": "34b0b3483524121a413b2ddd8c4a798d46829c3e3e6d93531eefa0cb17b9fda7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition.sysml",
+      "sha256": "e0af0f339b0ebf487ea059993b77fa02e5963bcb504f9b16030f9ead88cb648b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/D.4.7.8 Dynamics/HSUVDynamics.sysml",
+      "sha256": "06bff3f92c2f5e2d09763e3240e084df00bb29ec917aae5fb92b8e52f39369f4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Comment Example.sysml",
+      "sha256": "554869762367e60eba3048cd3ffa713363ff67cc7cb287d723ae9c249f0c5169",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Documentation Example.sysml",
+      "sha256": "0797900ad98fd6d99c6b5bbc0d1d7d0046b04ffc74039ce91c46143412bc1ca6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Package Example.sysml",
+      "sha256": "192bc594b48bd65304ff1b357168da77672b8295c04b29b8a8e8206a163b1c63",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/02. Part Definitions/Part Definition Example.sysml",
+      "sha256": "2340cd33421a34ec41bdc0db4b26375fc673c181373112d1f658bc1011df64d9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/03. Generalization/Generalization Example.sysml",
+      "sha256": "8ff8fe67838af859af06b8d1e54f724dbe7d1ffde65ba1f88b5d73d0be10740d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/04. Subsetting/Subsetting Example.sysml",
+      "sha256": "3bc47e36ff49bef7900652f448400704651423335c66fe22b5e75cce3e192a0e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/05. Redefinition/Redefinition Example.sysml",
+      "sha256": "9dcc3eb04eddbb7a94900e0402283398ba449c278af61ad98a10a34bd7e4593a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-1.sysml",
+      "sha256": "059e3935ce1916811646901df80b492f18992198b88efbe4980c25d8c62ce84a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-2.sysml",
+      "sha256": "c69ddd3744e1e385259e59963642d9675f0d8bbec6a0c1a5722a5d4bbfd1e297",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/07. Parts/Parts Example-1.sysml",
+      "sha256": "309715afa83e60c5f282e34bd8b3dccf8a54d7a4a42649ea208773e2438a0b4c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/07. Parts/Parts Example-2.sysml",
+      "sha256": "f3cd762f65d6d51e970cac2fd597d0785949a3566066fe8b7d6c9679a9d8e491",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/08. Items/Items Example.sysml",
+      "sha256": "5eb1376cadf723de29fd97556d00faa11504b1adfaa4a622bd229eb815edf468",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/09. Connections/Connections Example.sysml",
+      "sha256": "82b5c7584e63320150b2f7ecf069d791e4957d530554fbd0b6a53343b23c3563",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/10. Ports/Port Conjugation Example.sysml",
+      "sha256": "4049898918adb451a3caf4f110abde37628085cbb668465d7a041fbfcfd7fa5c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/10. Ports/Port Example.sysml",
+      "sha256": "15a584ec873eb174f51d7131cbd70cc860c87b70cf60aa7561eae94d95d1658a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/11. Interfaces/Interface Decomposition Example.sysml",
+      "sha256": "b1f8356d72c60d634ea44c8eb97cd59e8417b569f6a82f3b2d5221e96dffc516",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/11. Interfaces/Interface Example.sysml",
+      "sha256": "024abc50f2d2047124d8bbf8b3716e4849e70b5574a8c445b0694f55fc467c40",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-1.sysml",
+      "sha256": "5800024a905fe0a3a63a107686d70da56c7f80857b439ce552941894497a05af",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-2.sysml",
+      "sha256": "b13bcb9b9f8a3fbfc914501bf9c6d98206e8d47237e77a6092d4536cac0e72c4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Definition Example.sysml",
+      "sha256": "4d4bab75cc419e98f5cb6bef459aa087918ae697cfacf2aba80b63737aed1fc4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Interface Example.sysml",
+      "sha256": "15ebaa4cc15137f4dfe4d2357d79365506661c1f890bb2708f3cea59c3237b0b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Usage Example.sysml",
+      "sha256": "f1504686992a53032689e6dc2f904eb6b5df646ff2ac5261dbea6326ca407962",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Definition Example.sysml",
+      "sha256": "3a17d11357e1a5c2afe6e5a223d84b6f2e25c3df72874e4bf9292080257c5372",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Shorthand Example.sysml",
+      "sha256": "30a9efd539b7bfb8e6c730cb26e7f52c5a8d029b168a149aaf8c11543e123fde",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Succession Example-1.sysml",
+      "sha256": "a7fbffa42b7eed8e00d8568f9b4dcc648ba7746a9b33e622890f670a0fd8cbf8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Succession Example-2.sysml",
+      "sha256": "1453e483c3eeafc7db9d51864641f59767996ebe7f0e6a6d6a586fefceb75cea",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/15. Actions/Action Decomposition.sysml",
+      "sha256": "b9623cc7d352968f1f3dfc294c44f4fb74eedc09587990616907c388ecf78115",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-1.sysml",
+      "sha256": "4d846fc50b1f5a9b055ca84d08d3068f30825c2ca17b4617b860c7af1af058b5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-2.sysml",
+      "sha256": "a95174bd4be13c296524d51e8ac5f1630dc1ad7e2fd88ad6a53a2c664b4e0273",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/17. Control/Camera.sysml",
+      "sha256": "fe465e835f878198cb7f4f0daa904413ef9c3b86c5dfd0f24fece98245de5c81",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/17. Control/Control Structures Example.sysml",
+      "sha256": "62f0cc0c4e17f3d4dbe5fca8f287fbfc2c883eabae89a6afd6881e162b195ade",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/17. Control/Decision Example.sysml",
+      "sha256": "89d68515fc57d7b4b5b1904ecc2f80af43590db8693da3bd5ed9b1b62743ec76",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/17. Control/Fork Join Example.sysml",
+      "sha256": "cc5c82ea5ed5b1d973bbb9c18708c9bf7dc4f2c44d03e578057fc8380811cd28",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/17. Control/Merge Example.sysml",
+      "sha256": "2c8e411106ac597164dcd04936abcf4b7bbb3ac0ef859b8a3f681fb2274fae85",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/18. Action Performance/Action Performance Example.sysml",
+      "sha256": "0dc8639fdd28ec972f85497961123920eb26b8631a55c40d98113453ab292687",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-1.sysml",
+      "sha256": "4a753b35e2ecfcbdd3726c9ebb4c17052bf643f572544bed2a706c0a769dd23f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-2.sysml",
+      "sha256": "454fd7804319cea7390c5e6e49a4f94419da1848bfe0b69012ba3c42a52cf969",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/20. Assignment Actions/Assignment Example.sysml",
+      "sha256": "b5f436a5e6cccfc5c69c2ac8d88e71effd9a98200c9f0773291c7eabb4267c1a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/21. Asynchronous Messaging/Messaging Example.sysml",
+      "sha256": "94ca0e4af1ac69fc51aa45b83393c4ab615cf19dfbc2a756f1652ed534b1aeac",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/21. Asynchronous Messaging/Messaging with Ports.sysml",
+      "sha256": "3f83c4189f746b9a57bbc1df1c0fa935e54d480fb9cb3517c043a760cfac29ce",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/22. Opaque Actions/Opaque Action Example.sysml",
+      "sha256": "34b9f4488a1416ac5cca5b12e93e5125846a41c228a9966902f18d8f496a7094",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/23. State Definitions/State Definition Example-1.sysml",
+      "sha256": "ee01967efdf155165c197d8032bb8ef68ce40ffa8281be6f8f53dd296309ba7f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/23. State Definitions/State Definition Example-2.sysml",
+      "sha256": "69c0fb7fdf18dd96dc520111657e4362b1c809b3021374972e81eb573773287e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/24. States/State Actions.sysml",
+      "sha256": "3bfefd2343ad5cda784a55aa876e52c32a52af5a7356087801910bfd7b48c6c3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/24. States/State Decomposition-1.sysml",
+      "sha256": "c1a4de673068f7860b3014c4eca64ec839c859e054e3e9dd053190e6adb74435",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/24. States/State Decomposition-2.sysml",
+      "sha256": "5182ad33a6dff4e44e5fda13c0c9fd518a60a78f76d5742d4f3b9af73e643007",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Change and Time Triggers.sysml",
+      "sha256": "595043503460fd09a0052c2f75d60a0067b81e243461bcbb91076f245e1aa57d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Local Clock Example.sysml",
+      "sha256": "c010674ec7a231f4e3a5f5e347bb39210decdb975f695d36334bdf9196166531",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Transition Actions.sysml",
+      "sha256": "5e695884b6a9703d40885aa47e692eeecefc7a4e35cb912f728c3c78cb10f03f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/26. State Exhibition/State Exhibition Example.sysml",
+      "sha256": "b1041c321dee03b551f75a0531b4cdf8d6626056b04ed1d2a0ea337c2cfd7534",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Event Occurrence Example.sysml",
+      "sha256": "3e3bad50fd49043a5a030ff6b4365a56e85f911aa6c2bb5ecd65c39e5b4f2cf7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Example-1.sysml",
+      "sha256": "8406d1e3968e6cc47c6e87134616fc4b9465f7dcf516828955ca350b7aed022d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Example-2.sysml",
+      "sha256": "1511ea366b29a3dc6dfcd3ef8679d712453c311f1b8535cb350d98ce7592ed3e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Realization-1.sysml",
+      "sha256": "8c38b0fff1b2bb0daa012fa6ab373b2eb062be506933d0ff41484016d916a29d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Realization-2.sysml",
+      "sha256": "219a0629eab348244518fa968b91602433bdb667bb3ecbd714c42942c03e6c00",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Message Payload Example.sysml",
+      "sha256": "7b0919f09ef638c134b99fec108afb986abc06f0f098e1aa076d8252d29b4697",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Time Slice and Snapshot Example.sysml",
+      "sha256": "01103847bb6aba185350c5111b0984ac30a40d2e76b22c08a7d5ea0afc5e6617",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Roles-1.sysml",
+      "sha256": "eddf8b381aaed8a1959416b7c73454085d48401cf22f8c634b8d42f75b81983c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Snapshots Example.sysml",
+      "sha256": "81dd5e6cf5a52cc31329b24b23c9febc085a7eb8a329970147e821c3575ed5a3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Time Slices.sysml",
+      "sha256": "6ea6b6fa9a457a8d85097ba3337febd6b8d9268e4442caca4f675ee4fabd97dc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 1.sysml",
+      "sha256": "6bcbda2ea6674257f6ab5b66668b6e02f48290eb6dfc065074370433b4293dbb",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 2.sysml",
+      "sha256": "7e40a50232b9f1c263f9da1d3e0d5a79a4c785dccb49d26abcb6c465ff0b730e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/MassRollup1.sysml",
+      "sha256": "fb10f788903d2583ef865e085f08209a941d261d2311784c730415e7e45fc64e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/MassRollup2.sysml",
+      "sha256": "8af5b03e4930331b7ef53108f06973167735327f52600c85236d82404c0f8c7f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Definitions.sysml",
+      "sha256": "c8c08362b9031d1ca737e8e8566dcd015c8d20d1fd1c50a021a3fec42824b605",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Usages-1.sysml",
+      "sha256": "08c4b8f2513875d408627118838cd4280c15fdaa03a86dc540d1ad217ec7533f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Usages-2.sysml",
+      "sha256": "7ccd8ee0ffc46c75145f796353410021c0f25e2656c0def29de2556f044c6a46",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Analytical Constraints.sysml",
+      "sha256": "fc811426811b46ad66646917e0976b16c7928ca282c936e353cd49077afa9fe7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraint Assertions-1.sysml",
+      "sha256": "6bdcf5d9a99e60fe17b1705aaaaaa0a06f8af3c6812fcd247a8fe2d61e34081c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraint Assertions-2.sysml",
+      "sha256": "9d6560d9ce5798dcf5b10a4672c0c6aa7403eb2b88657ca935563c6d1ee9ab12",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraints Example-1.sysml",
+      "sha256": "e0d7ffe5f39eb2b10695a423fadb09bd218f3f7904e7e58d54a9002d3ea2f8d3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraints Example-2.sysml",
+      "sha256": "2a1c607f7e23afefc17d0af1f3b17604454b7f63e78f51654c654d2a72b68ff1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Derivation Constraints.sysml",
+      "sha256": "8e70fc943eb8efe776639ffbf7187a6026ea0a4614c65ca5d6a289ddc3fffc14",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Time Constraints.sysml",
+      "sha256": "3b0eab37f4358624ddb4b013aa58e01a3bfbe7466887439a1ef7a8a9374a77af",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Definitions.sysml",
+      "sha256": "8e770e05a2307fb5deb1164533abec7f1659b2d750537c2784af169b89528d36",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Groups.sysml",
+      "sha256": "805a4df68510228f71b479706af54eca6fc8cf2a54788a885acd2238557b62cf",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Satisfaction.sysml",
+      "sha256": "8015e9947463bf4e6d4e638c0b7299ce27c7e9facf955b681c6735d9f1f908fe",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Usages.sysml",
+      "sha256": "da3e5c487abc484aa8a66cd266486db2ed25e571030900e9575a850bd6226bd7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Analysis Case Definition Example.sysml",
+      "sha256": "f511fcc2c1c2b6ae65989c49d415dcf20d87a6ef2eb9773d5932d6d6fb9eeb0c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Analysis Case Usage Example.sysml",
+      "sha256": "91e9aedc9f1a4c73710fd6f9aac4a04e67a1130ed21ea42e7cdf994500640189",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Trade Study Analysis Example.sysml",
+      "sha256": "a0192f0b535d6ad71458f4f955e69e514fad83aeaafee77375dbe7313547cff0",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/34. Verification/Verification Case Definition Example.sysml",
+      "sha256": "41d0fc0722ea3c2d137df465b9cd63f275f57decf3f702b1804a3f9e805db0f7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/34. Verification/Verification Case Usage Example.sysml",
+      "sha256": "c1775be385c07c9a1b3cb1734204308099b072bd2c6b61a2d0fc608324210c93",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/35. Use Cases/Use Case Definition Example.sysml",
+      "sha256": "5c842109c23d6ea04432b63c75aaa13b17fa9be220c78875f06e0f22eb6d944f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/35. Use Cases/Use Case Usage Example.sysml",
+      "sha256": "a3cbe81d5d72920e91501db8eed4e5a2ccaeee892c32fd4286f10fd85a116c9f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Configuration.sysml",
+      "sha256": "f62e0f7e9020ae2adc90dd0532f22e339752745eaa77b2093c68d826c92a8af3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Definitions.sysml",
+      "sha256": "12e3639fc807f65e708506916ddb5722ef9022dc211bf6a1a395408bbd9feb3a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Usages.sysml",
+      "sha256": "8ba2d6d5c18ad1d29e77e47b2e253344556a7f1d063e913fe1b61c301894ed5d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/37. Dependencies/Dependency Example.sysml",
+      "sha256": "9e0bc2a461abbb4eeaa09356725a3169361a7c3f7673b566d23d01e444ce6e04",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/38. Allocation/Allocation Definition Example.sysml",
+      "sha256": "922da707cd931fb6a9eebed2b1282413453798398f45c4be578b7389dcbdb817",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/38. Allocation/Allocation Usage Example.sysml",
+      "sha256": "8c982de250d0586620964a516796553ea284ebb4c593eb582aa8a2db6ae745e6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/39. Metadata/Metadata Example-1.sysml",
+      "sha256": "b7a12ab801723131f2f4ed4beb795b10e83375a1f0e878bc473970bf47a1d696",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/39. Metadata/Metadata Example-2.sysml",
+      "sha256": "bc2958a991dd80c87ce275a8cb8b51c61ebc6863b37a1d9dc197205103bc98e2",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/40. Filtering/Filtering Example-1.sysml",
+      "sha256": "4f48a0cc3b977f19166db84fc759f881925fe5b59ef621d5ca449961e7637014",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/40. Filtering/Filtering Example-2.sysml",
+      "sha256": "768bd0c1eb62eeb783c7505813b302f05798a2b288c4e04d373842aefa0508f1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/Model Library Example.sysml",
+      "sha256": "7367c07e4296c59c144caf96022206ab6051dc3bf2dcb615d4ffd72ad898e6f1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/Semantic Metadata Example.sysml",
+      "sha256": "3935dbb8ae609ea2f874649e8b859cbbc35e7b3dc66b6d56f987186543b38927",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/User Keyword Example.sysml",
+      "sha256": "60381524d6a3c9f4b4f8cd3dd40518d858f4c5b54177cd2a47347a3670d5e119",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/42. Views/Viewpoint Example.sysml",
+      "sha256": "97151c2f3028773567dcea070c070335109dc6cfb9607fa1acf02be56daa572d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/training/42. Views/Views Example.sysml",
+      "sha256": "a68e2eb8682f328e837b2acca53dea9386906d07a3815a2edfda363c1e481ad5",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1a-Parts Tree.sysml",
+      "sha256": "f5b98e87dbc2bbc292e8d590f3dc1b6c42165ab296af946180046f8144e38ca9",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1c-Parts Tree Redefinition.sysml",
+      "sha256": "dacc1426b79f1298ea6a3a6c222a9587001bfb54dcfc6edb7404a127c9c76160",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1d-Parts Tree with Reference.sysml",
+      "sha256": "88047a74736c9da3852bea6068be4057e3e62f0b4995184b3fb969b1c7c3e54f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/02-Parts Interconnection/2a-Parts Interconnection.sysml",
+      "sha256": "12c8dddeb3fd8d5b8990dd3476b23135fa22906ae9bebf5954a9ffda7a907fc3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/02-Parts Interconnection/2c-Parts Interconnection-Multiple Decompositions.sysml",
+      "sha256": "44473686d5ebe029647fa81df0296b4341a4240643ac8aab5fd1ff98b90649c8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-1.sysml",
+      "sha256": "7319d5532043e4f1f74c0a3af0a5c1c5993f23d322b9846539599ea36343bf64",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-2.sysml",
+      "sha256": "afc8d02554b71ec7300388291d6835f747363dc2e38ffeec6cd8253505b19760",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-3.sysml",
+      "sha256": "5643f1b07932eed2ec7e00c2598b181c11dc6ee1b311e559145eafd94af5a6a6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-1.sysml",
+      "sha256": "b8575dfefc11fec6af76d6755ad74247648426cd808ac7ec07cb1e1787349db4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-2.sysml",
+      "sha256": "414e37e6a7cb98979cc28e33ed4cb454fb101c8f02a55744310caca08434c565",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-3.sysml",
+      "sha256": "590047b792d3d11313ce3892ece837aaf036bce9f25d6481cc97741daaa930e4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "sha256": "43a7a7e9eaba1a114f540066d8cc6200c89a7867adef974dc38029a21a98b6e3",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3e-Function-based Behavior-item.sysml",
+      "sha256": "97fb9b9237f9b4bc5d5a45c68a181bd4b04fbfed7a9cadab3aecb800d1571b3a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/04-Functional Allocation/4a-Functional Allocation.sysml",
+      "sha256": "ce1a9539359b11326c2da2b3fa986059b757308706f90f79ff4e5d04029aff3d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1.sysml",
+      "sha256": "0f2931602406f4650a8b2e453c1aa2da99e4578bffffc744276299d1317470ea",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1a.sysml",
+      "sha256": "080e4ee5397acc2a228391f694c8089689fd97281187a5148ef8df838c493e8e",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-2.sysml",
+      "sha256": "3ed5dc03c658bd3cf57297313812497f63f23ebfbd38f0f759ffe2cbe24d9386",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/06-Individual and Snapshots/6-Individual and Snapshots.sysml",
+      "sha256": "24e5c20b52a2b64cb64b044b59cc4d8f603ff8867f60cdb73c8bf53c3d143ccd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7a-Variant Configuration - General Concept.sysml",
+      "sha256": "77323db9654a1bc3798539c36d0a9b6edc0be012a9e173b4e3bc36918c1c52dd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7a1-Variant Configuration - General Concept-a.sysml",
+      "sha256": "952808068944fddc6d86e99e988618593d458edff935270e66038a484dd1b265",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7b-Variant Configurations.sysml",
+      "sha256": "82ce23890fc507112d10fb66f3c10422ec2869812cbce83c832c1d577e3e09b2",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+      "sha256": "92ed10e8ebf60f1d1d0e63d271e1e3dcac45fdbda1b5eb7a71c8ff7998a7c2ec",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/09-Verification/9-Verification-simplified.sysml",
+      "sha256": "e58c9de3249e27aa1f8327184e19f71eb386a4a1671943ccaceee46ad50e367c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10a-Analysis.sysml",
+      "sha256": "adc307fbfacedfe211463d2a91ccccdae148a652a730f588eb54cbd79422063a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10b-Trade-off Among Alternative Configurations.sysml",
+      "sha256": "a0d1fd2076cc7d3577fe917d5c5b1c5c2c75d21144dee92efa8f5787fe0ec33d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10c-Fuel Economy Analysis.sysml",
+      "sha256": "3935b995f430411e3805413f815ed7dcd571ce7d8a9cfac619e4a21c4d1519e8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10d-Dynamics Analysis.sysml",
+      "sha256": "7f1086075977a901b5ba3f7d1f5b176772dd90492c871a89550fe2cf18420e66",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/11-View and Viewpoint/11a-View-Viewpoint.sysml",
+      "sha256": "b0ca9ddbc8e4ec8731eb8fe9aa01ee9e7d80c14269567d678ac121fcc18a2d4b",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/11-View and Viewpoint/11b-Safety and Security Feature Views.sysml",
+      "sha256": "9fd344c614d34133a758d60fdfc0789333bc6462efb248f4e02a149e6bdc8787",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12a-Dependency.sysml",
+      "sha256": "18115107485f37a0093d3ebe506beb57c5467edbfa8b93cf3625330c04e7480c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation-1.sysml",
+      "sha256": "82149b94a62645eeaf8a560f866085b216fff19043c3d45fb302272fa812a476",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation.sysml",
+      "sha256": "49bee01e14200a73054fcac30424903ad9f30c99c8d24fa5a9008f76da21030d",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13a-Model Containment.sysml",
+      "sha256": "28da26fd97295f96055b0d755ea56f988ab13fda828d1aefef1bf1217873eed4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-1.sysml",
+      "sha256": "f6f0bb32e5717686661983f0d0cabfbd1c12910449abb093557670792c74ae6a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-2.sysml",
+      "sha256": "35c9e367cb4a118dff42852bce810f3254eeafd179ab2dc8cd454ce83f42e1f7",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group.sysml",
+      "sha256": "934ac161f661855b7d0682d741535fb339c75ee85790215284b3fc41b59c4432",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14a-Language Extensions.sysml",
+      "sha256": "c3f7b8b4ff7a4f052c4db8ac9596349c82b1d2c7fe93e3cf9b11b53f715615fc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14b-Language Extensions.sysml",
+      "sha256": "6b032c9fb70dbcc91abd6bc94b9946cbb751adf252b7bd15b7419853e6091cb4",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14c-Language Extensions.sysml",
+      "sha256": "eb57a9b16fd93a2aba0d7e6736a567019845512f77b9f436136b105a7581a26a",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+      "sha256": "f8c0fe4ee016ae1e1d4f2f63b9c72116986be4e2d8010db0bd4fbb670f9d6a7f",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_02-Basic Value Properties.sysml",
+      "sha256": "f1c62232a789a354dbe08fe285ce4821e2d5af6534d7eb8e9511deac269d07c8",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_03-Value Expression.sysml",
+      "sha256": "36e1db0c7cb898a559b1bc42d1bbc1f30774bc1c8d04b13c999a00bb5764ebbc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_04-Logical Expressions.sysml",
+      "sha256": "8ad32fe7c8c05d36a2cfd2dccbbb206a6832c2e9f92c0163d9d7b2efadc99adb",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_05-Unification of Expression and Constraint Definition.sysml",
+      "sha256": "efb8b47edd29e75046d9f41cb0c40ab3a82544a5392d56c4afd78a76dc2ff123",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_06-System of Quantities.sysml",
+      "sha256": "86d44867604a5c8d3be0e5c2220f9adc72c329aa809d6651fdb5ee1d2b554aa1",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_07-System of Units and Scales.sysml",
+      "sha256": "cb464bc52ce6330ca17e82270d927840bf9990302101a361d78163cbbfe842af",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_08-Range Restriction.sysml",
+      "sha256": "2239e863f011055195507c9220bdb38988a7b935f9e30b0afde3d23136b525a0",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_10-Primitive Data Types.sysml",
+      "sha256": "5754c77b1c4b17f8698d4c1ef0ffe20707afd14120646359af00086c8ecb6db6",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_11-Variable Length Collection Types.sysml",
+      "sha256": "591ccf783a3e4b867526654dccbd3cd441e3d283b078d0696c2717f9245d00cd",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_12-Compound Value Type.sysml",
+      "sha256": "e2ee3da89e2971615f5bbf3aff1ed59fdac9c0b936e4bf75024d9a0b0af8d647",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_13-Discretely Sampled Function Value.sysml",
+      "sha256": "58104ffbfd5828b5af7ce3d86ca0430b01da820f88e4795cbc194c372db7a91c",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_19-Materials with Properties.sysml",
+      "sha256": "4086ac3330eddaa39c6c26eff6ee2421ea3191961842637f1a5330caa56c4d99",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_19a-Materials with Properties.sysml",
+      "sha256": "7dea228ba7560f3df3d3fa6e22128ef9f7ae192cae2dc3e75fd77d87c422a378",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/17-Sequence Modeling/17a-Sequence-Modeling.sysml",
+      "sha256": "54f0cd212db81ec35efdd96d2a66230f2352f0a894cb1afe3f11547249db88bc",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/17-Sequence Modeling/17b-Sequence-Modeling.sysml",
+      "sha256": "366e9d8288305130b3947dd6c8371490d2bcfb5bffcad0ff52451b27c2cce030",
+      "pilot_source_identical": true
+    },
+    {
+      "path": "sysml/src/validation/18-Use Case/18-Use Case.sysml",
+      "sha256": "c33d492499a4d49744369a6d7b1f524cba114a076e8fe8af3e9c58ca1e699819",
+      "pilot_source_identical": true
+    }
+  ],
+  "inputs": [
+    {
+      "path": "kerml/src/examples/Address Book Example/AddressBookModel.kerml",
+      "sha256": "30baae0ada289e144667adbe2f92409b21f3a3f4caf66329d9e829bd34f8226b"
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_N_ary.kerml",
+      "sha256": "6f41ca5c24c4cd774cf866fe3d107f8bed27e000919f872e1238b1e3dcc084d7"
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_OwnedEnds.kerml",
+      "sha256": "cf1b3415b75728c1ca1fa9de30516011ee59013dfb3bd91a946000d9ccd52c1e"
+    },
+    {
+      "path": "kerml/src/examples/Association Examples/ProductSelection_UnownedEnds.kerml",
+      "sha256": "47a86ed1692b4c9fc5a042cc8c0212eb854276525fc8845ec373d99b4bd33fb3"
+    },
+    {
+      "path": "kerml/src/examples/Behavior Examples/Camera.kerml",
+      "sha256": "b5e3d23f35f58099f8d855ba0812d6e300f1aa9626b3b476fc796637f88daa01"
+    },
+    {
+      "path": "kerml/src/examples/Behavior Examples/TakePicture.kerml",
+      "sha256": "522901e1bbbf80e650c0015a943e953f5cc4f268e50f7c1c78fdd81565a03410"
+    },
+    {
+      "path": "kerml/src/examples/Individuals Examples/JohnIndividualExample.kerml",
+      "sha256": "7f8b010fdbf8f9c69c2ad0f2398ebbf03b2363193b0262417cd99a535e5cae44"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-Atoms.kerml",
+      "sha256": "9d972fecbc110cc1af256955add63a3f7d9875c99b4201faaa5ab2e635efc544"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-ModelingInstances.kerml",
+      "sha256": "d7022eb67c25572bd93cb3074f40cc02fd490c12c52f04ac0c45585eb25c834d"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-2-WithoutConnectors.kerml",
+      "sha256": "3a36d857d9b95ab2fcace2435a6831a42dfedc16754edd8d3254d5884f27b62a"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-3-OneToOneConnectors.kerml",
+      "sha256": "9242be07645265e42f0a3d7aa14cffb1fee327c7d9c56003793e4554b3e53989"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-4-OneToUnrestrictedConnectors.kerml",
+      "sha256": "e5b8f343451101bbe425d9a9176556072275eb1198c660a86692ae4dea6623f1"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-5-TimingForStructures.kerml",
+      "sha256": "9db4a32502dd287a03e0415818024d3ef9b626e60d36501d6878096496720ac2"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-6-Sequences.kerml",
+      "sha256": "9e7fa6be31003d5fa939270673e45be94c005e729ae08e4ba3b09fcf4472e197"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-7-DecisionsAndMerges.kerml",
+      "sha256": "e6c320b27fd51757a05b1d3fa84e26ef36b23527b53072b077259483626131d4"
+    },
+    {
+      "path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-8-ChangingFeatureValues.kerml",
+      "sha256": "80250dbcc2a53feb2dacda1c22aca6ae98c454b271df5cd64800a98c5226e05c"
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/MassRollup_1.kerml",
+      "sha256": "699c55b324e017fba453b689826ba9a4804adf3396fa24d70db90d7900eb9f14"
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/MassRollup_2.kerml",
+      "sha256": "27b90bb2fa35b928746a3a3d21c05c642b7db42f23cb76475356aff7f5b3ee0d"
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_1.kerml",
+      "sha256": "97b8bf866720e4c52bd07d0d3878f166dbc10c09c9a7771c45b4d4518eb0f8e3"
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_2.kerml",
+      "sha256": "f52568111c169b597ab1ae17b9f36b2915371e04ed5cff0c1bcefa2df4feb13d"
+    },
+    {
+      "path": "kerml/src/examples/Mass Roll-up Example/Vehicles_3.kerml",
+      "sha256": "28d253d4b493f19a16ae37ca6f908d63a21ffd7aeb87c0cb186bc6e14d207c78"
+    },
+    {
+      "path": "kerml/src/examples/Massed Thing Example/MassedThings.kerml",
+      "sha256": "927ee7c24dac9f80d5be0e711eb4e60a6e0198d77375d9d8ab90f3e1f4fac331"
+    },
+    {
+      "path": "kerml/src/examples/Named Collection Members Example/VehicleTanks.kerml",
+      "sha256": "f808a8431e413ec308954512773ad53944b5876914da974e1d892e4dd85d7e68"
+    },
+    {
+      "path": "kerml/src/examples/Packet Example/Packets.kerml",
+      "sha256": "eb786dc3b12e97b51c1c34a70bb0dba0a3e2e12b3de6e5171a01ba869481e267"
+    },
+    {
+      "path": "kerml/src/examples/Packet Example/PacketUsage.kerml",
+      "sha256": "9e940d566017af873a6aacd4add472e9f39ffac5d32fa86c2ed9b6c1be55e355"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/ArgumentResolution.kerml",
+      "sha256": "ef41aea0c874d82dd385268eb17c632749ad5b941155cd7b2a5ce01fc6be35a2"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Associations.kerml",
+      "sha256": "7847ecc8040da796396255a14da86644ca5721833508928a7f87918d6dedfd49"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Behaviors.kerml",
+      "sha256": "12bb9172091ee9691d25175059329b9f44d2ae2572aa0e10ce95b377bb09c082"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Circular.kerml",
+      "sha256": "823e6b6b459cb841fa50da55b6505d8ffad2368cd3e9cb91425131e487b1762b"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classes.kerml",
+      "sha256": "ffb8a13917841c9924cbb1a6105be515ac460a8df1b8bee92bd20454af4504f4"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classifications.kerml",
+      "sha256": "f8d9b7bdcf766d6dcb9a960bc79d002e00df5bfb50579ea8c2c4ab94bca93fbd"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+      "sha256": "a7880ec2c57a9102880e2f8099035f94094b578c623ca1533a3b31d7a42730f8"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Comments.kerml",
+      "sha256": "b1b7d95f9558bfad81b63448a5197e90b6095abf35fc7797a27555f92e9fb30d"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Conjugation.kerml",
+      "sha256": "692d4259e957d263495a2196721ef2b6feb1edf77d842ffabbaf6432efeb5e97"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Connectors.kerml",
+      "sha256": "368e6ee6200753e84659b229b6a0ff9a998260058c67d69eeef049731a18f84b"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+      "sha256": "788df85bc513418ab4c57a47c039407a263a299b62ac8f4fe08be5d75307a346"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Expansion.kerml",
+      "sha256": "ad0b0c916c227753fa4473212c9ac884dbd941d882322331d70bf3b998d6106f"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Expressions.kerml",
+      "sha256": "bde514f7236c6206848574ca416688c1ee34b6e12d2dc522db166b8977f8b041"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/FeatureChains.kerml",
+      "sha256": "c25e39f9287b0f48934106065144047ae8313ac1776680c4acc438ad202718ce"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/FeatureInheritance.kerml",
+      "sha256": "86b9e1e8ad5e8eacef5e5576d727c722d4414bbf38fe9181d215aff4a3ad1bbe"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Features.kerml",
+      "sha256": "45adcd57a019661daa1522e8a8bc3847f99870917ce1ca04054434bd6d1509c2"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Filtering.kerml",
+      "sha256": "9de3e9969a02419eee2db0f89985e86c7012f08314bba4f2db5335e7b40f131c"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Imports.kerml",
+      "sha256": "fdcdc033ac07b4477d3aa00082f2bb77138bf40b533800cc68536c2f4174072e"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Inheritance.kerml",
+      "sha256": "76c818ba239c56269f93565a697a4edc504c1f0e78415fb0f231bcad38b6233c"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Inverses.kerml",
+      "sha256": "6ab43c8e7062cfa48a2f0f9ed54b73356098244874ac64c4c89d34f5e43101cd"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/MetadataTest.kerml",
+      "sha256": "a9660b8ad6ea79534a98ece570244c49d5f961c2434bab88f48e32e6d2fa359b"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Redefinition.kerml",
+      "sha256": "e5f74efd661737a4564f9badc715d402d155995dd23a233a26602a6ec86f290c"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Scoping.kerml",
+      "sha256": "47a68673ab45a281aefd0a971abec79901c60ae5965ccc5180e753c52fae1015"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "sha256": "064456e4d6d453e04d828390ae8d886af4f36dc01eda0ed5b482f8a5be1cc1f9"
+    },
+    {
+      "path": "kerml/src/examples/Simple Tests/Types.kerml",
+      "sha256": "842b5b8053eb80142e8e90e58d7cd5ac5df9dc1c3699ab7dff4e79f6c69198a7"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/ExtendedOccurrences.kerml",
+      "sha256": "0ee38dc5959b592636fbdcfc7a14496526250bd3207f9ff43e068e721f05c283"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/Moments.kerml",
+      "sha256": "441f93819dfbd6dee83b84c672d392f80c4c8ede24c810351ad1d84e142df560"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingFeaturesEnhanced.kerml",
+      "sha256": "c9c6c36e45e016cbcd5d9340222ade1f7d786b5daa9da3cfe5348519d3e9aedb"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml",
+      "sha256": "3f0ce678857e3d68eff599bd241168367375d19e67eca41812100bb2c8584279"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/TimeVaryingCarDriver.kerml",
+      "sha256": "a9e6c695f19ccac37567cca350cd99ad180d4b3b4964137c4049e0d5187ff83a"
+    },
+    {
+      "path": "kerml/src/examples/Variable Feature Examples/TimeVaryingFeatures.kerml",
+      "sha256": "8f91104b332d5d1baa4f02a574646d8792fe55c80685d292d5376120ea45dda4"
+    },
+    {
+      "path": "kerml/src/examples/Vehicle Example/VehicleDefinitions.kerml",
+      "sha256": "99abf64596a707b8f3bf893d81cdd23d3d9cd9a3ff14b3757951acae6a385e58"
+    },
+    {
+      "path": "kerml/src/examples/Vehicle Example/VehicleUsages.kerml",
+      "sha256": "a056ba9ad060523c26eafa115dd3d72da16b105afa78d4670037587d908d0428"
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/AnalysisAnnotation.sysml",
+      "sha256": "c487fb2da32061633a6372045e6f87baca2d8c00ca71538ccf5432b6c8d2ada5"
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Dynamics.sysml",
+      "sha256": "b51dbc2174549d65fcd750294923d1d21cf0afabfd2593a81ec02cd7f23f8478"
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Turbojet Stage Analysis.sysml",
+      "sha256": "ace3ee32081a986e3f7a26548907454fc8dccb0383ea68bd33ac4a21270293af"
+    },
+    {
+      "path": "sysml/src/examples/Analysis Examples/Vehicle Analysis Demo.sysml",
+      "sha256": "0d0e0997a60e73f0208d2c96b2fe7c933a7180c2a144439f3f53a775000a714c"
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFCoreLib.sysml",
+      "sha256": "08c81e862f96e1799a7e1ced4abc6171105c546de208d4fc309e1d8e1011e102"
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFNorwayTopics.sysml",
+      "sha256": "a7b02539744dd06758b5bde8b0a3047749d61d69d4d1d102483907a7eadec30b"
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFProfileLib.sysml",
+      "sha256": "ad560b0ecbfe615c500d8884307e3676666ae3fe1fcc7bcb213d392b97519cd6"
+    },
+    {
+      "path": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "sha256": "33ccdda01ec89aab46f02610e495924e3842b8745e44447b9f4b9997cc01ab9d"
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_N_ary.sysml",
+      "sha256": "84ca25cfe16c47ca74f4d2673b4e3cc4b6f8fbb80c668f03181d58f7b2b917c7"
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_OwnedEnds.sysml",
+      "sha256": "d72b7fb754e385d662b954992f80af72a86119b27908be6833cc1bc18fb57053"
+    },
+    {
+      "path": "sysml/src/examples/Association Examples/ProductSelection_UnownedEnds.sysml",
+      "sha256": "da6a677c7bfc868174390e3a0213514b340580665d119dfbcd82dd17c66d8895"
+    },
+    {
+      "path": "sysml/src/examples/Camera Example/Camera.sysml",
+      "sha256": "d2411282ad14538ac72da1c654b67edf7f080be44d6ecae452c1b28cf59c517e"
+    },
+    {
+      "path": "sysml/src/examples/Camera Example/PictureTaking.sysml",
+      "sha256": "2fc31c25a62bcaff412248aaeb72aef7d956da9b0e427da78c8a3c160fd78fe5"
+    },
+    {
+      "path": "sysml/src/examples/Cause and Effect Examples/CauseAndEffectExample.sysml",
+      "sha256": "e05305be2cc51024fb0af02b503f54e51ea5ba5ed3d54e5f4e2e0223aa9327f5"
+    },
+    {
+      "path": "sysml/src/examples/Cause and Effect Examples/MedicalDeviceFailure.sysml",
+      "sha256": "8c4f5060527c7d9436409932ec713e15165715b2c232cf299f38aea43ca91a74"
+    },
+    {
+      "path": "sysml/src/examples/Comment Examples/Comments.sysml",
+      "sha256": "670d98ce74569b5c85a9a5abe6d8364cb2fafdd6ae06a4c8c28d17cc6642b623"
+    },
+    {
+      "path": "sysml/src/examples/Flashlight Example/Flashlight Example.sysml",
+      "sha256": "fce0ac40ef48418c8390df9721c80be895b4412bf9ce534f0bb4cdfe9a3de98d"
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/CarWithEnvelopingShape.sysml",
+      "sha256": "6b5156d073d31d52b95748419c4b5836805ea6143ae33509f414bdfe2d937b3a"
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/CarWithShapeAndCSG.sysml",
+      "sha256": "586c991a892927221623ffca19274818709e3fafa5c9b5835d01c2036d74cbb9"
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/ExternalShapeRefExample.sysml",
+      "sha256": "57ab77382fed5e508a6a2f13aadb3ce714428826338fff78e3e3074053977c42"
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/SimpleQuadcopter.sysml",
+      "sha256": "a2fc7c0391276586cf1fb666b484d8a5c6a196a7ef40d0f33b62a5d14d0b75c1"
+    },
+    {
+      "path": "sysml/src/examples/Geometry Examples/VehicleGeometryAndCoordinateFrames.sysml",
+      "sha256": "ac8e2141c58cfb8061a819772df083f5c09c5e4931a5dec2e5d793747177bd11"
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/AliasImport.sysml",
+      "sha256": "fd34df8407a75130e25f526b9cae74f9cf87531410ffcdc00d6d9986bc9d1d25"
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/CircularImport.sysml",
+      "sha256": "3ed6813e219e43b737251c69aaa421d0e993219cbf35d3f78819de8b6eef70d4"
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/PrivateImportTest.sysml",
+      "sha256": "5111a800ab20f0018277bef5b4ed9d055327d03ac8afbdea2c2d3e5713113007"
+    },
+    {
+      "path": "sysml/src/examples/Import Tests/QualifiedNameImportTest.sysml",
+      "sha256": "2720d3539f24ebfc294bec9dad4c7537af099e46df8b02b31a197aca51d7a1ed"
+    },
+    {
+      "path": "sysml/src/examples/Individuals Examples/AnalysisIndividualExample.sysml",
+      "sha256": "aacca8161258796ff20d7c9fdb5ea6eaf4cce4c61d34c05dbd3d33a2200da337"
+    },
+    {
+      "path": "sysml/src/examples/Individuals Examples/JohnIndividualExample.sysml",
+      "sha256": "5bc1e6e861c86b39a7f9ef4e94f36f9cb526e3c62ba356e5224583cd00cb6269"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModel.sysml",
+      "sha256": "453c7016a1582ea3f987d1ddc8fe468958c27485b3bb503cf6c31cb625e70bfe"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModelOutside.sysml",
+      "sha256": "4417c2eddc29eaa1a7b481c529c4e62d06e47d709e5b4898242ce426bbaba1b9"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-2.sysml",
+      "sha256": "60c04a056b5b4c7b17a209b96fe47742a2a0263017c572b4bca3f299dd102a1b"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-3.sysml",
+      "sha256": "cedda5c4bc330b93c0faa3efbe3aa72510511b96219ebee96228c5f59027b364"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-2.sysml",
+      "sha256": "b7286648d86d97c3fb1971002b9f230ed5f343996989d67d0f3949f485b68054"
+    },
+    {
+      "path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-3.sysml",
+      "sha256": "355ddc5571567fc8bcefba01e5ff43300bf8aeb4a204679f72729dc74fa5dd8d"
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/MassConstraintExample.sysml",
+      "sha256": "2398b661ba95006e06bb8fc0df83627aff688b05408897ea57177166f2d68348"
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/MassRollup.sysml",
+      "sha256": "7dba8d7058221e7a801ea7f4b6d5149f312193f4a5f8fa8bcb39ca235c382a27"
+    },
+    {
+      "path": "sysml/src/examples/Mass Roll-up Example/Vehicles.sysml",
+      "sha256": "99265bff25c1cc4bf9327f0292dd9045d48d6c9597e405775e8e238f00831c31"
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/IssueMetadataExample.sysml",
+      "sha256": "1836ae34a7def93a8488a143939d5b6a568141d20b6cd34c40a8dc96f65e6a5e"
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RationaleMetadataExample.sysml",
+      "sha256": "48db19d9cf384cb77ff21413002578d696d9fc9cb31083afb2f15d58428e0db8"
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RequirementMetadataExample.sysml",
+      "sha256": "853c36e4126898560b2ad76eef6680fc6b09c1f0bff9b042eeedbae711d77fd9"
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/RiskMetadataExample.sysml",
+      "sha256": "72180bdb6c2a1b5912b61956225a548137fbcf2f382f52788d6f3c3bb8e1e4c6"
+    },
+    {
+      "path": "sysml/src/examples/Metadata Examples/VerificationMetadataExample.sysml",
+      "sha256": "bc32b51c43b578e99f0f139a2a51f5046e2e4c7a836f6653a266127d3c25d91c"
+    },
+    {
+      "path": "sysml/src/examples/Packet Example/Packets.sysml",
+      "sha256": "4e66a98b8ec7d49f486a0401e57ea1c0dd9472cf3a88df6cd9c6ed3345ad8194"
+    },
+    {
+      "path": "sysml/src/examples/Packet Example/PacketUsage.sysml",
+      "sha256": "7cecc1bd583948de9beb2cbc3f3cbe903355e6cedf729f9eb10ae72529aa9be3"
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/HSUVRequirements.sysml",
+      "sha256": "7c6a48ed61406d93d659903b1cba9c1428fa4e4e1ba7da3ef6a079a1dfd4cbc5"
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/RequirementDerivationExample.sysml",
+      "sha256": "513112f826cfd5e36d728878d89bb42899e7c2f107b63493fe6119f35d6c45e1"
+    },
+    {
+      "path": "sysml/src/examples/Requirements Examples/VehicleRequirementDerivation.sysml",
+      "sha256": "b6a9c0a62b739ae94af5131cbcb4c34fbc1b2deb1aefe96ec4ba589d913337dc"
+    },
+    {
+      "path": "sysml/src/examples/Room Model/RoomModel.sysml",
+      "sha256": "49ffc1ae51bfc3fe655e50c7113e6c881a2834c3fda4c935668c95e805a0da36"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ActionTest.sysml",
+      "sha256": "5d41213f104eae1c6180257d9e2969da37e42fb90365e984b73afdadebe69abd"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AliasTest.sysml",
+      "sha256": "91ce2ab7419d3e860cd6bacfa597f361833b7f11cb0736790561e50e144195fe"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+      "sha256": "dadd0da31a3b5657fdfcd68ed767c541253dd457b7605f4f6484dbdc33e6eda7"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+      "sha256": "bc9ec8a433e15d77f9f1843bee23760cb5bd9dee37ed50df6f272f9ae4b5afed"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+      "sha256": "d31136487043cba6362b47f4692eff4f1a33dc536f63fde633b10d52d204987d"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+      "sha256": "38af0043838d799c5abdbcaadb1c21d4d666aeda3145516f1404fdc9ba3bf814"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/CommentTest.sysml",
+      "sha256": "56d5b21e061fca95508dfff29fc21d445eaf973420c2690faf507f4d3376b215"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+      "sha256": "91deacf8ad3dd3abff60a5c0ac665e46ad2331f48089c0d8b767bf6b88780267"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+      "sha256": "81dea0d21c6ea696da006f2cae5f4851d7ba66cad050aab81de428cd72ac5a64"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+      "sha256": "513d1bf9ae1a503bb8e7248242fdbafc819498a0af36163de49ef772760527c6"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+      "sha256": "b77d91adcfd9c0e079177a4b48b0c4f86ae5c094c1187a7c9d1018b62961da1d"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+      "sha256": "6ef6db215306f3819224a953d580248f9fc29ef9bfbe4bd935758cdb7f9f8ddc"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+      "sha256": "b770da8931607bd2a7c0c631fd7f4e004efe3afa1beae7951e6ded5bb4a0c61f"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+      "sha256": "1b3dc22874b5ee7ef8c4e354f16fe8d188f7936fec2f33d65da9bd4743b1b250"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+      "sha256": "eb75c999469b1a0793a19741dcbb7c42a8efa6999ea30f3c2ed37e96b33effe0"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+      "sha256": "ea0eae80b7b1dfd8f2c713b64ef3d3f68de42e1bdc54958394fa1d9463ee8ae3"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ImportTest.sysml",
+      "sha256": "46dc93640f8c0ee70b8d27931b8276919fb541405df59950b8cbcf4759f7e0cc"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+      "sha256": "0919b61e25d3d6d10901aa95f6b7cff5ffe19519dd911d924a080d2895a05b9c"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+      "sha256": "47dc0961bea89af17f1329453f6d612732e3389e3a9fb42632abece6d1d6e7cb"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ItemTest.sysml",
+      "sha256": "70546c6377bd80e51901d16108149245d46110114e0cb837c86a17b17b180439"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+      "sha256": "56c6569da41422951e371106ce52f2186d63ebedd9a5bd958d6150edb1037d16"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+      "sha256": "44cf700ab9cee38a21000badd0d2d3517293f1067e386cbba8f4e5eb82b53109"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+      "sha256": "1ee2616adf7f32c5f3245e98252b6af8f58255ef81a62c7ab6c2348af57fdd04"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+      "sha256": "e9f7e8a9f5b486f1b2a03391d2d0b379ccbf7fe32ab4786b434d8e9966437c12"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/PartTest.sysml",
+      "sha256": "66ce667ad118527436537c952fb24fd5f9843005a30a8b07084974c6711da38e"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+      "sha256": "8f05d2d8c8c3d1f9fa0e2886eec173b15859ff1a1992092e0dffb453a5cdff55"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+      "sha256": "082e3b068cab5aa63b4ba6e1ab4fd58dcadebc4fa327000a81cfe363dd8b2a72"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/StateTest.sysml",
+      "sha256": "e0b27b37b74049cd880150203de5c36e2b3b6eadb2d042965e96aa8dd7d8041a"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+      "sha256": "6859079dc29b625b396679d76f491c942dbc480d3b2700b875cd35bde725fdc7"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "sha256": "f50c3754f3747867c7590e730020ada778ed74d9827adca49b4f778e85b1cf83"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+      "sha256": "8cbd294cb83db2bea01cd45d1c6c3a541bcca63385bf88e2377605e7aa14a9ca"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+      "sha256": "9b2c769c791d4ad49bd7af537e653eb2d9125bc924e47081668c9c46cfaf6a07"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+      "sha256": "ef1456b8fad56830143f14238fcab639985438d8b87756dc2b1856c2ac522d0d"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+      "sha256": "4f1a1ed7e0ca76b337bee1cb40931c1a76f2b3a82f52b11e7651ca7d697e8173"
+    },
+    {
+      "path": "sysml/src/examples/Simple Tests/ViewTest.sysml",
+      "sha256": "99127c86e2f233b2a1db04f07bf716218126eb040af05760b45c777946d1db69"
+    },
+    {
+      "path": "sysml/src/examples/State Space Representation Examples/CartSample.sysml",
+      "sha256": "7415482cf6722aed59f09faf9bdc316340feb248e221938ffe8fa15420c2dad0"
+    },
+    {
+      "path": "sysml/src/examples/State Space Representation Examples/EVSample.sysml",
+      "sha256": "0f58964c085745d4574bc838f803adc1021ab7f927272acda0e84c936bacfe60"
+    },
+    {
+      "path": "sysml/src/examples/Timeslice and Snapshot Examples/TimeVaryingAttribute.sysml",
+      "sha256": "87e470af092b74866c998438d84de9bbf4d19896359ec8fa7627ccbfdcee716d"
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package - Updated.sysml",
+      "sha256": "d103ec6fc1d4223e247abc4afac13626b00779ed548253a3155f1a99d752de94"
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package.sysml",
+      "sha256": "3333ca0b933a6775943ac6aa926c258b48daaa2c76bb75bae13b9f804724bce7"
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition - Updated.sysml",
+      "sha256": "34b0b3483524121a413b2ddd8c4a798d46829c3e3e6d93531eefa0cb17b9fda7"
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition.sysml",
+      "sha256": "e0af0f339b0ebf487ea059993b77fa02e5963bcb504f9b16030f9ead88cb648b"
+    },
+    {
+      "path": "sysml/src/examples/v1 Spec Examples/D.4.7.8 Dynamics/HSUVDynamics.sysml",
+      "sha256": "06bff3f92c2f5e2d09763e3240e084df00bb29ec917aae5fb92b8e52f39369f4"
+    },
+    {
+      "path": "sysml/src/examples/Variability Examples/VehicleVariabilityModel.sysml",
+      "sha256": "eab63b191294b1a052c2fa79c7854011485e8bd2ff7bfd8a78fed24a31afb1c1"
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/SysML v2 Spec Annex A SimpleVehicleModel.sysml",
+      "sha256": "5dbc1b39f25d1ecc1e389f7828ea62a6112a4d3f8f16c407d1ae54d74a819353"
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleDefinitions.sysml",
+      "sha256": "6e6128a4dda956ba8eafda11f2d961fe77eb98ed3001d4befd609ab4559c67ba"
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleIndividuals.sysml",
+      "sha256": "a03c302588967b6b2f6eadc2de85b6d56cac0254fae9f3e99c43633b1a964514"
+    },
+    {
+      "path": "sysml/src/examples/Vehicle Example/VehicleUsages.sysml",
+      "sha256": "093e8d9ed9f65035000fdec3e2927db5daed7f4f5f659f3fed65825dc72e5940"
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Comment Example.sysml",
+      "sha256": "554869762367e60eba3048cd3ffa713363ff67cc7cb287d723ae9c249f0c5169"
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Documentation Example.sysml",
+      "sha256": "0797900ad98fd6d99c6b5bbc0d1d7d0046b04ffc74039ce91c46143412bc1ca6"
+    },
+    {
+      "path": "sysml/src/training/01. Packages/Package Example.sysml",
+      "sha256": "192bc594b48bd65304ff1b357168da77672b8295c04b29b8a8e8206a163b1c63"
+    },
+    {
+      "path": "sysml/src/training/02. Part Definitions/Part Definition Example.sysml",
+      "sha256": "2340cd33421a34ec41bdc0db4b26375fc673c181373112d1f658bc1011df64d9"
+    },
+    {
+      "path": "sysml/src/training/03. Generalization/Generalization Example.sysml",
+      "sha256": "8ff8fe67838af859af06b8d1e54f724dbe7d1ffde65ba1f88b5d73d0be10740d"
+    },
+    {
+      "path": "sysml/src/training/04. Subsetting/Subsetting Example.sysml",
+      "sha256": "3bc47e36ff49bef7900652f448400704651423335c66fe22b5e75cce3e192a0e"
+    },
+    {
+      "path": "sysml/src/training/05. Redefinition/Redefinition Example.sysml",
+      "sha256": "9dcc3eb04eddbb7a94900e0402283398ba449c278af61ad98a10a34bd7e4593a"
+    },
+    {
+      "path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-1.sysml",
+      "sha256": "059e3935ce1916811646901df80b492f18992198b88efbe4980c25d8c62ce84a"
+    },
+    {
+      "path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-2.sysml",
+      "sha256": "c69ddd3744e1e385259e59963642d9675f0d8bbec6a0c1a5722a5d4bbfd1e297"
+    },
+    {
+      "path": "sysml/src/training/07. Parts/Parts Example-1.sysml",
+      "sha256": "309715afa83e60c5f282e34bd8b3dccf8a54d7a4a42649ea208773e2438a0b4c"
+    },
+    {
+      "path": "sysml/src/training/07. Parts/Parts Example-2.sysml",
+      "sha256": "f3cd762f65d6d51e970cac2fd597d0785949a3566066fe8b7d6c9679a9d8e491"
+    },
+    {
+      "path": "sysml/src/training/08. Items/Items Example.sysml",
+      "sha256": "5eb1376cadf723de29fd97556d00faa11504b1adfaa4a622bd229eb815edf468"
+    },
+    {
+      "path": "sysml/src/training/09. Connections/Connections Example.sysml",
+      "sha256": "82b5c7584e63320150b2f7ecf069d791e4957d530554fbd0b6a53343b23c3563"
+    },
+    {
+      "path": "sysml/src/training/10. Ports/Port Conjugation Example.sysml",
+      "sha256": "4049898918adb451a3caf4f110abde37628085cbb668465d7a041fbfcfd7fa5c"
+    },
+    {
+      "path": "sysml/src/training/10. Ports/Port Example.sysml",
+      "sha256": "15a584ec873eb174f51d7131cbd70cc860c87b70cf60aa7561eae94d95d1658a"
+    },
+    {
+      "path": "sysml/src/training/11. Interfaces/Interface Decomposition Example.sysml",
+      "sha256": "b1f8356d72c60d634ea44c8eb97cd59e8417b569f6a82f3b2d5221e96dffc516"
+    },
+    {
+      "path": "sysml/src/training/11. Interfaces/Interface Example.sysml",
+      "sha256": "024abc50f2d2047124d8bbf8b3716e4849e70b5574a8c445b0694f55fc467c40"
+    },
+    {
+      "path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-1.sysml",
+      "sha256": "5800024a905fe0a3a63a107686d70da56c7f80857b439ce552941894497a05af"
+    },
+    {
+      "path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-2.sysml",
+      "sha256": "b13bcb9b9f8a3fbfc914501bf9c6d98206e8d47237e77a6092d4536cac0e72c4"
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Definition Example.sysml",
+      "sha256": "4d4bab75cc419e98f5cb6bef459aa087918ae697cfacf2aba80b63737aed1fc4"
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Interface Example.sysml",
+      "sha256": "15ebaa4cc15137f4dfe4d2357d79365506661c1f890bb2708f3cea59c3237b0b"
+    },
+    {
+      "path": "sysml/src/training/13. Flows/Flow Usage Example.sysml",
+      "sha256": "f1504686992a53032689e6dc2f904eb6b5df646ff2ac5261dbea6326ca407962"
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Definition Example.sysml",
+      "sha256": "3a17d11357e1a5c2afe6e5a223d84b6f2e25c3df72874e4bf9292080257c5372"
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Shorthand Example.sysml",
+      "sha256": "30a9efd539b7bfb8e6c730cb26e7f52c5a8d029b168a149aaf8c11543e123fde"
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Succession Example-1.sysml",
+      "sha256": "a7fbffa42b7eed8e00d8568f9b4dcc648ba7746a9b33e622890f670a0fd8cbf8"
+    },
+    {
+      "path": "sysml/src/training/14. Action Definitions/Action Succession Example-2.sysml",
+      "sha256": "1453e483c3eeafc7db9d51864641f59767996ebe7f0e6a6d6a586fefceb75cea"
+    },
+    {
+      "path": "sysml/src/training/15. Actions/Action Decomposition.sysml",
+      "sha256": "b9623cc7d352968f1f3dfc294c44f4fb74eedc09587990616907c388ecf78115"
+    },
+    {
+      "path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-1.sysml",
+      "sha256": "4d846fc50b1f5a9b055ca84d08d3068f30825c2ca17b4617b860c7af1af058b5"
+    },
+    {
+      "path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-2.sysml",
+      "sha256": "a95174bd4be13c296524d51e8ac5f1630dc1ad7e2fd88ad6a53a2c664b4e0273"
+    },
+    {
+      "path": "sysml/src/training/17. Control/Camera.sysml",
+      "sha256": "fe465e835f878198cb7f4f0daa904413ef9c3b86c5dfd0f24fece98245de5c81"
+    },
+    {
+      "path": "sysml/src/training/17. Control/Control Structures Example.sysml",
+      "sha256": "62f0cc0c4e17f3d4dbe5fca8f287fbfc2c883eabae89a6afd6881e162b195ade"
+    },
+    {
+      "path": "sysml/src/training/17. Control/Decision Example.sysml",
+      "sha256": "89d68515fc57d7b4b5b1904ecc2f80af43590db8693da3bd5ed9b1b62743ec76"
+    },
+    {
+      "path": "sysml/src/training/17. Control/Fork Join Example.sysml",
+      "sha256": "cc5c82ea5ed5b1d973bbb9c18708c9bf7dc4f2c44d03e578057fc8380811cd28"
+    },
+    {
+      "path": "sysml/src/training/17. Control/Merge Example.sysml",
+      "sha256": "2c8e411106ac597164dcd04936abcf4b7bbb3ac0ef859b8a3f681fb2274fae85"
+    },
+    {
+      "path": "sysml/src/training/18. Action Performance/Action Performance Example.sysml",
+      "sha256": "0dc8639fdd28ec972f85497961123920eb26b8631a55c40d98113453ab292687"
+    },
+    {
+      "path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-1.sysml",
+      "sha256": "4a753b35e2ecfcbdd3726c9ebb4c17052bf643f572544bed2a706c0a769dd23f"
+    },
+    {
+      "path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-2.sysml",
+      "sha256": "454fd7804319cea7390c5e6e49a4f94419da1848bfe0b69012ba3c42a52cf969"
+    },
+    {
+      "path": "sysml/src/training/20. Assignment Actions/Assignment Example.sysml",
+      "sha256": "b5f436a5e6cccfc5c69c2ac8d88e71effd9a98200c9f0773291c7eabb4267c1a"
+    },
+    {
+      "path": "sysml/src/training/21. Asynchronous Messaging/Messaging Example.sysml",
+      "sha256": "94ca0e4af1ac69fc51aa45b83393c4ab615cf19dfbc2a756f1652ed534b1aeac"
+    },
+    {
+      "path": "sysml/src/training/21. Asynchronous Messaging/Messaging with Ports.sysml",
+      "sha256": "3f83c4189f746b9a57bbc1df1c0fa935e54d480fb9cb3517c043a760cfac29ce"
+    },
+    {
+      "path": "sysml/src/training/22. Opaque Actions/Opaque Action Example.sysml",
+      "sha256": "34b9f4488a1416ac5cca5b12e93e5125846a41c228a9966902f18d8f496a7094"
+    },
+    {
+      "path": "sysml/src/training/23. State Definitions/State Definition Example-1.sysml",
+      "sha256": "ee01967efdf155165c197d8032bb8ef68ce40ffa8281be6f8f53dd296309ba7f"
+    },
+    {
+      "path": "sysml/src/training/23. State Definitions/State Definition Example-2.sysml",
+      "sha256": "69c0fb7fdf18dd96dc520111657e4362b1c809b3021374972e81eb573773287e"
+    },
+    {
+      "path": "sysml/src/training/24. States/State Actions.sysml",
+      "sha256": "3bfefd2343ad5cda784a55aa876e52c32a52af5a7356087801910bfd7b48c6c3"
+    },
+    {
+      "path": "sysml/src/training/24. States/State Decomposition-1.sysml",
+      "sha256": "c1a4de673068f7860b3014c4eca64ec839c859e054e3e9dd053190e6adb74435"
+    },
+    {
+      "path": "sysml/src/training/24. States/State Decomposition-2.sysml",
+      "sha256": "5182ad33a6dff4e44e5fda13c0c9fd518a60a78f76d5742d4f3b9af73e643007"
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Change and Time Triggers.sysml",
+      "sha256": "595043503460fd09a0052c2f75d60a0067b81e243461bcbb91076f245e1aa57d"
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Local Clock Example.sysml",
+      "sha256": "c010674ec7a231f4e3a5f5e347bb39210decdb975f695d36334bdf9196166531"
+    },
+    {
+      "path": "sysml/src/training/25. Transitions/Transition Actions.sysml",
+      "sha256": "5e695884b6a9703d40885aa47e692eeecefc7a4e35cb912f728c3c78cb10f03f"
+    },
+    {
+      "path": "sysml/src/training/26. State Exhibition/State Exhibition Example.sysml",
+      "sha256": "b1041c321dee03b551f75a0531b4cdf8d6626056b04ed1d2a0ea337c2cfd7534"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Event Occurrence Example.sysml",
+      "sha256": "3e3bad50fd49043a5a030ff6b4365a56e85f911aa6c2bb5ecd65c39e5b4f2cf7"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Example-1.sysml",
+      "sha256": "8406d1e3968e6cc47c6e87134616fc4b9465f7dcf516828955ca350b7aed022d"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Example-2.sysml",
+      "sha256": "1511ea366b29a3dc6dfcd3ef8679d712453c311f1b8535cb350d98ce7592ed3e"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Realization-1.sysml",
+      "sha256": "8c38b0fff1b2bb0daa012fa6ab373b2eb062be506933d0ff41484016d916a29d"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Interaction Realization-2.sysml",
+      "sha256": "219a0629eab348244518fa968b91602433bdb667bb3ecbd714c42942c03e6c00"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Message Payload Example.sysml",
+      "sha256": "7b0919f09ef638c134b99fec108afb986abc06f0f098e1aa076d8252d29b4697"
+    },
+    {
+      "path": "sysml/src/training/27. Occurrences/Time Slice and Snapshot Example.sysml",
+      "sha256": "01103847bb6aba185350c5111b0984ac30a40d2e76b22c08a7d5ea0afc5e6617"
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Roles-1.sysml",
+      "sha256": "eddf8b381aaed8a1959416b7c73454085d48401cf22f8c634b8d42f75b81983c"
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Snapshots Example.sysml",
+      "sha256": "81dd5e6cf5a52cc31329b24b23c9febc085a7eb8a329970147e821c3575ed5a3"
+    },
+    {
+      "path": "sysml/src/training/28. Individuals/Individuals and Time Slices.sysml",
+      "sha256": "6ea6b6fa9a457a8d85097ba3337febd6b8d9268e4442caca4f675ee4fabd97dc"
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 1.sysml",
+      "sha256": "6bcbda2ea6674257f6ab5b66668b6e02f48290eb6dfc065074370433b4293dbb"
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 2.sysml",
+      "sha256": "7e40a50232b9f1c263f9da1d3e0d5a79a4c785dccb49d26abcb6c465ff0b730e"
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/MassRollup1.sysml",
+      "sha256": "fb10f788903d2583ef865e085f08209a941d261d2311784c730415e7e45fc64e"
+    },
+    {
+      "path": "sysml/src/training/29. Expressions/MassRollup2.sysml",
+      "sha256": "8af5b03e4930331b7ef53108f06973167735327f52600c85236d82404c0f8c7f"
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Definitions.sysml",
+      "sha256": "c8c08362b9031d1ca737e8e8566dcd015c8d20d1fd1c50a021a3fec42824b605"
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Usages-1.sysml",
+      "sha256": "08c4b8f2513875d408627118838cd4280c15fdaa03a86dc540d1ad217ec7533f"
+    },
+    {
+      "path": "sysml/src/training/30. Calculations/Calculation Usages-2.sysml",
+      "sha256": "7ccd8ee0ffc46c75145f796353410021c0f25e2656c0def29de2556f044c6a46"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Analytical Constraints.sysml",
+      "sha256": "fc811426811b46ad66646917e0976b16c7928ca282c936e353cd49077afa9fe7"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraint Assertions-1.sysml",
+      "sha256": "6bdcf5d9a99e60fe17b1705aaaaaa0a06f8af3c6812fcd247a8fe2d61e34081c"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraint Assertions-2.sysml",
+      "sha256": "9d6560d9ce5798dcf5b10a4672c0c6aa7403eb2b88657ca935563c6d1ee9ab12"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraints Example-1.sysml",
+      "sha256": "e0d7ffe5f39eb2b10695a423fadb09bd218f3f7904e7e58d54a9002d3ea2f8d3"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Constraints Example-2.sysml",
+      "sha256": "2a1c607f7e23afefc17d0af1f3b17604454b7f63e78f51654c654d2a72b68ff1"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Derivation Constraints.sysml",
+      "sha256": "8e70fc943eb8efe776639ffbf7187a6026ea0a4614c65ca5d6a289ddc3fffc14"
+    },
+    {
+      "path": "sysml/src/training/31. Constraints/Time Constraints.sysml",
+      "sha256": "3b0eab37f4358624ddb4b013aa58e01a3bfbe7466887439a1ef7a8a9374a77af"
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Definitions.sysml",
+      "sha256": "8e770e05a2307fb5deb1164533abec7f1659b2d750537c2784af169b89528d36"
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Groups.sysml",
+      "sha256": "805a4df68510228f71b479706af54eca6fc8cf2a54788a885acd2238557b62cf"
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Satisfaction.sysml",
+      "sha256": "8015e9947463bf4e6d4e638c0b7299ce27c7e9facf955b681c6735d9f1f908fe"
+    },
+    {
+      "path": "sysml/src/training/32. Requirements/Requirement Usages.sysml",
+      "sha256": "da3e5c487abc484aa8a66cd266486db2ed25e571030900e9575a850bd6226bd7"
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Analysis Case Definition Example.sysml",
+      "sha256": "f511fcc2c1c2b6ae65989c49d415dcf20d87a6ef2eb9773d5932d6d6fb9eeb0c"
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Analysis Case Usage Example.sysml",
+      "sha256": "91e9aedc9f1a4c73710fd6f9aac4a04e67a1130ed21ea42e7cdf994500640189"
+    },
+    {
+      "path": "sysml/src/training/33. Analysis/Trade Study Analysis Example.sysml",
+      "sha256": "a0192f0b535d6ad71458f4f955e69e514fad83aeaafee77375dbe7313547cff0"
+    },
+    {
+      "path": "sysml/src/training/34. Verification/Verification Case Definition Example.sysml",
+      "sha256": "41d0fc0722ea3c2d137df465b9cd63f275f57decf3f702b1804a3f9e805db0f7"
+    },
+    {
+      "path": "sysml/src/training/34. Verification/Verification Case Usage Example.sysml",
+      "sha256": "c1775be385c07c9a1b3cb1734204308099b072bd2c6b61a2d0fc608324210c93"
+    },
+    {
+      "path": "sysml/src/training/35. Use Cases/Use Case Definition Example.sysml",
+      "sha256": "5c842109c23d6ea04432b63c75aaa13b17fa9be220c78875f06e0f22eb6d944f"
+    },
+    {
+      "path": "sysml/src/training/35. Use Cases/Use Case Usage Example.sysml",
+      "sha256": "a3cbe81d5d72920e91501db8eed4e5a2ccaeee892c32fd4286f10fd85a116c9f"
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Configuration.sysml",
+      "sha256": "f62e0f7e9020ae2adc90dd0532f22e339752745eaa77b2093c68d826c92a8af3"
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Definitions.sysml",
+      "sha256": "12e3639fc807f65e708506916ddb5722ef9022dc211bf6a1a395408bbd9feb3a"
+    },
+    {
+      "path": "sysml/src/training/36. Variability/Variation Usages.sysml",
+      "sha256": "8ba2d6d5c18ad1d29e77e47b2e253344556a7f1d063e913fe1b61c301894ed5d"
+    },
+    {
+      "path": "sysml/src/training/37. Dependencies/Dependency Example.sysml",
+      "sha256": "9e0bc2a461abbb4eeaa09356725a3169361a7c3f7673b566d23d01e444ce6e04"
+    },
+    {
+      "path": "sysml/src/training/38. Allocation/Allocation Definition Example.sysml",
+      "sha256": "922da707cd931fb6a9eebed2b1282413453798398f45c4be578b7389dcbdb817"
+    },
+    {
+      "path": "sysml/src/training/38. Allocation/Allocation Usage Example.sysml",
+      "sha256": "8c982de250d0586620964a516796553ea284ebb4c593eb582aa8a2db6ae745e6"
+    },
+    {
+      "path": "sysml/src/training/39. Metadata/Metadata Example-1.sysml",
+      "sha256": "b7a12ab801723131f2f4ed4beb795b10e83375a1f0e878bc473970bf47a1d696"
+    },
+    {
+      "path": "sysml/src/training/39. Metadata/Metadata Example-2.sysml",
+      "sha256": "bc2958a991dd80c87ce275a8cb8b51c61ebc6863b37a1d9dc197205103bc98e2"
+    },
+    {
+      "path": "sysml/src/training/40. Filtering/Filtering Example-1.sysml",
+      "sha256": "4f48a0cc3b977f19166db84fc759f881925fe5b59ef621d5ca449961e7637014"
+    },
+    {
+      "path": "sysml/src/training/40. Filtering/Filtering Example-2.sysml",
+      "sha256": "768bd0c1eb62eeb783c7505813b302f05798a2b288c4e04d373842aefa0508f1"
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/Model Library Example.sysml",
+      "sha256": "7367c07e4296c59c144caf96022206ab6051dc3bf2dcb615d4ffd72ad898e6f1"
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/Semantic Metadata Example.sysml",
+      "sha256": "3935dbb8ae609ea2f874649e8b859cbbc35e7b3dc66b6d56f987186543b38927"
+    },
+    {
+      "path": "sysml/src/training/41. Language Extension/User Keyword Example.sysml",
+      "sha256": "60381524d6a3c9f4b4f8cd3dd40518d858f4c5b54177cd2a47347a3670d5e119"
+    },
+    {
+      "path": "sysml/src/training/42. Views/Viewpoint Example.sysml",
+      "sha256": "97151c2f3028773567dcea070c070335109dc6cfb9607fa1acf02be56daa572d"
+    },
+    {
+      "path": "sysml/src/training/42. Views/Views Example.sysml",
+      "sha256": "a68e2eb8682f328e837b2acca53dea9386906d07a3815a2edfda363c1e481ad5"
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1a-Parts Tree.sysml",
+      "sha256": "f5b98e87dbc2bbc292e8d590f3dc1b6c42165ab296af946180046f8144e38ca9"
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1c-Parts Tree Redefinition.sysml",
+      "sha256": "dacc1426b79f1298ea6a3a6c222a9587001bfb54dcfc6edb7404a127c9c76160"
+    },
+    {
+      "path": "sysml/src/validation/01-Parts Tree/1d-Parts Tree with Reference.sysml",
+      "sha256": "88047a74736c9da3852bea6068be4057e3e62f0b4995184b3fb969b1c7c3e54f"
+    },
+    {
+      "path": "sysml/src/validation/02-Parts Interconnection/2a-Parts Interconnection.sysml",
+      "sha256": "12c8dddeb3fd8d5b8990dd3476b23135fa22906ae9bebf5954a9ffda7a907fc3"
+    },
+    {
+      "path": "sysml/src/validation/02-Parts Interconnection/2c-Parts Interconnection-Multiple Decompositions.sysml",
+      "sha256": "44473686d5ebe029647fa81df0296b4341a4240643ac8aab5fd1ff98b90649c8"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-1.sysml",
+      "sha256": "7319d5532043e4f1f74c0a3af0a5c1c5993f23d322b9846539599ea36343bf64"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-2.sysml",
+      "sha256": "afc8d02554b71ec7300388291d6835f747363dc2e38ffeec6cd8253505b19760"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-3.sysml",
+      "sha256": "5643f1b07932eed2ec7e00c2598b181c11dc6ee1b311e559145eafd94af5a6a6"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-1.sysml",
+      "sha256": "b8575dfefc11fec6af76d6755ad74247648426cd808ac7ec07cb1e1787349db4"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-2.sysml",
+      "sha256": "414e37e6a7cb98979cc28e33ed4cb454fb101c8f02a55744310caca08434c565"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-3.sysml",
+      "sha256": "590047b792d3d11313ce3892ece837aaf036bce9f25d6481cc97741daaa930e4"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "sha256": "43a7a7e9eaba1a114f540066d8cc6200c89a7867adef974dc38029a21a98b6e3"
+    },
+    {
+      "path": "sysml/src/validation/03-Function-based Behavior/3e-Function-based Behavior-item.sysml",
+      "sha256": "97fb9b9237f9b4bc5d5a45c68a181bd4b04fbfed7a9cadab3aecb800d1571b3a"
+    },
+    {
+      "path": "sysml/src/validation/04-Functional Allocation/4a-Functional Allocation.sysml",
+      "sha256": "ce1a9539359b11326c2da2b3fa986059b757308706f90f79ff4e5d04029aff3d"
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1.sysml",
+      "sha256": "0f2931602406f4650a8b2e453c1aa2da99e4578bffffc744276299d1317470ea"
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1a.sysml",
+      "sha256": "080e4ee5397acc2a228391f694c8089689fd97281187a5148ef8df838c493e8e"
+    },
+    {
+      "path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-2.sysml",
+      "sha256": "3ed5dc03c658bd3cf57297313812497f63f23ebfbd38f0f759ffe2cbe24d9386"
+    },
+    {
+      "path": "sysml/src/validation/06-Individual and Snapshots/6-Individual and Snapshots.sysml",
+      "sha256": "24e5c20b52a2b64cb64b044b59cc4d8f603ff8867f60cdb73c8bf53c3d143ccd"
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7a-Variant Configuration - General Concept.sysml",
+      "sha256": "77323db9654a1bc3798539c36d0a9b6edc0be012a9e173b4e3bc36918c1c52dd"
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7a1-Variant Configuration - General Concept-a.sysml",
+      "sha256": "952808068944fddc6d86e99e988618593d458edff935270e66038a484dd1b265"
+    },
+    {
+      "path": "sysml/src/validation/07-Variant Configuration/7b-Variant Configurations.sysml",
+      "sha256": "82ce23890fc507112d10fb66f3c10422ec2869812cbce83c832c1d577e3e09b2"
+    },
+    {
+      "path": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+      "sha256": "92ed10e8ebf60f1d1d0e63d271e1e3dcac45fdbda1b5eb7a71c8ff7998a7c2ec"
+    },
+    {
+      "path": "sysml/src/validation/09-Verification/9-Verification-simplified.sysml",
+      "sha256": "e58c9de3249e27aa1f8327184e19f71eb386a4a1671943ccaceee46ad50e367c"
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10a-Analysis.sysml",
+      "sha256": "adc307fbfacedfe211463d2a91ccccdae148a652a730f588eb54cbd79422063a"
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10b-Trade-off Among Alternative Configurations.sysml",
+      "sha256": "a0d1fd2076cc7d3577fe917d5c5b1c5c2c75d21144dee92efa8f5787fe0ec33d"
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10c-Fuel Economy Analysis.sysml",
+      "sha256": "3935b995f430411e3805413f815ed7dcd571ce7d8a9cfac619e4a21c4d1519e8"
+    },
+    {
+      "path": "sysml/src/validation/10-Analysis and Trades/10d-Dynamics Analysis.sysml",
+      "sha256": "7f1086075977a901b5ba3f7d1f5b176772dd90492c871a89550fe2cf18420e66"
+    },
+    {
+      "path": "sysml/src/validation/11-View and Viewpoint/11a-View-Viewpoint.sysml",
+      "sha256": "b0ca9ddbc8e4ec8731eb8fe9aa01ee9e7d80c14269567d678ac121fcc18a2d4b"
+    },
+    {
+      "path": "sysml/src/validation/11-View and Viewpoint/11b-Safety and Security Feature Views.sysml",
+      "sha256": "9fd344c614d34133a758d60fdfc0789333bc6462efb248f4e02a149e6bdc8787"
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12a-Dependency.sysml",
+      "sha256": "18115107485f37a0093d3ebe506beb57c5467edbfa8b93cf3625330c04e7480c"
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation-1.sysml",
+      "sha256": "82149b94a62645eeaf8a560f866085b216fff19043c3d45fb302272fa812a476"
+    },
+    {
+      "path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation.sysml",
+      "sha256": "49bee01e14200a73054fcac30424903ad9f30c99c8d24fa5a9008f76da21030d"
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13a-Model Containment.sysml",
+      "sha256": "28da26fd97295f96055b0d755ea56f988ab13fda828d1aefef1bf1217873eed4"
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-1.sysml",
+      "sha256": "f6f0bb32e5717686661983f0d0cabfbd1c12910449abb093557670792c74ae6a"
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-2.sysml",
+      "sha256": "35c9e367cb4a118dff42852bce810f3254eeafd179ab2dc8cd454ce83f42e1f7"
+    },
+    {
+      "path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group.sysml",
+      "sha256": "934ac161f661855b7d0682d741535fb339c75ee85790215284b3fc41b59c4432"
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14a-Language Extensions.sysml",
+      "sha256": "c3f7b8b4ff7a4f052c4db8ac9596349c82b1d2c7fe93e3cf9b11b53f715615fc"
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14b-Language Extensions.sysml",
+      "sha256": "6b032c9fb70dbcc91abd6bc94b9946cbb751adf252b7bd15b7419853e6091cb4"
+    },
+    {
+      "path": "sysml/src/validation/14-Language Extensions/14c-Language Extensions.sysml",
+      "sha256": "eb57a9b16fd93a2aba0d7e6736a567019845512f77b9f436136b105a7581a26a"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+      "sha256": "f8c0fe4ee016ae1e1d4f2f63b9c72116986be4e2d8010db0bd4fbb670f9d6a7f"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_02-Basic Value Properties.sysml",
+      "sha256": "f1c62232a789a354dbe08fe285ce4821e2d5af6534d7eb8e9511deac269d07c8"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_03-Value Expression.sysml",
+      "sha256": "36e1db0c7cb898a559b1bc42d1bbc1f30774bc1c8d04b13c999a00bb5764ebbc"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_04-Logical Expressions.sysml",
+      "sha256": "8ad32fe7c8c05d36a2cfd2dccbbb206a6832c2e9f92c0163d9d7b2efadc99adb"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_05-Unification of Expression and Constraint Definition.sysml",
+      "sha256": "efb8b47edd29e75046d9f41cb0c40ab3a82544a5392d56c4afd78a76dc2ff123"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_06-System of Quantities.sysml",
+      "sha256": "86d44867604a5c8d3be0e5c2220f9adc72c329aa809d6651fdb5ee1d2b554aa1"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_07-System of Units and Scales.sysml",
+      "sha256": "cb464bc52ce6330ca17e82270d927840bf9990302101a361d78163cbbfe842af"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_08-Range Restriction.sysml",
+      "sha256": "2239e863f011055195507c9220bdb38988a7b935f9e30b0afde3d23136b525a0"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_10-Primitive Data Types.sysml",
+      "sha256": "5754c77b1c4b17f8698d4c1ef0ffe20707afd14120646359af00086c8ecb6db6"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_11-Variable Length Collection Types.sysml",
+      "sha256": "591ccf783a3e4b867526654dccbd3cd441e3d283b078d0696c2717f9245d00cd"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_12-Compound Value Type.sysml",
+      "sha256": "e2ee3da89e2971615f5bbf3aff1ed59fdac9c0b936e4bf75024d9a0b0af8d647"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_13-Discretely Sampled Function Value.sysml",
+      "sha256": "58104ffbfd5828b5af7ce3d86ca0430b01da820f88e4795cbc194c372db7a91c"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_19-Materials with Properties.sysml",
+      "sha256": "4086ac3330eddaa39c6c26eff6ee2421ea3191961842637f1a5330caa56c4d99"
+    },
+    {
+      "path": "sysml/src/validation/15-Properties-Values-Expressions/15_19a-Materials with Properties.sysml",
+      "sha256": "7dea228ba7560f3df3d3fa6e22128ef9f7ae192cae2dc3e75fd77d87c422a378"
+    },
+    {
+      "path": "sysml/src/validation/17-Sequence Modeling/17a-Sequence-Modeling.sysml",
+      "sha256": "54f0cd212db81ec35efdd96d2a66230f2352f0a894cb1afe3f11547249db88bc"
+    },
+    {
+      "path": "sysml/src/validation/17-Sequence Modeling/17b-Sequence-Modeling.sysml",
+      "sha256": "366e9d8288305130b3947dd6c8371490d2bcfb5bffcad0ff52451b27c2cce030"
+    },
+    {
+      "path": "sysml/src/validation/18-Use Case/18-Use Case.sysml",
+      "sha256": "c33d492499a4d49744369a6d7b1f524cba114a076e8fe8af3e9c58ca1e699819"
+    }
+  ],
+  "stdlib": [
+    {
+      "path": "sysml.library/Domain Libraries/Analysis/AnalysisTooling.sysml",
+      "sha256": "9c42e7b07c31d0c6f5add4da41e2c6b08fd7d07adeac79b69619c7887a8c0a60"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Analysis/SampledFunctions.sysml",
+      "sha256": "2fc1fb0e887754c598158fa137c02c5c565a9355318788150890433b659b6a23"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Analysis/StateSpaceRepresentation.sysml",
+      "sha256": "e216ad311376c97216703d5a99d6a2725e02ec66dad8c6c4e2374cf0b4e4d34a"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Analysis/TradeStudies.sysml",
+      "sha256": "92ef291e85a292cb4012c9630e3095c9c5d8a394501385e62e71b375b966236e"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Cause and Effect/CausationConnections.sysml",
+      "sha256": "ba6f0b12b0d74360e3cfb4db6dee719db01a676c109d30fae33e610da1c2d241"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Cause and Effect/CauseAndEffect.sysml",
+      "sha256": "e8dbd601bf6e5a0f4023561c8add8936e127430f34f38ae06d40f550599e6485"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Geometry/ShapeItems.sysml",
+      "sha256": "e7f713a959a56fbbb78455386623f1fe410fa67c1a253ca1487c1d0bb3135962"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Geometry/SpatialItems.sysml",
+      "sha256": "8f0a399026360f36b8b271392541dcc218227fbae90ba185a0d9462b6edeea15"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Metadata/ImageMetadata.sysml",
+      "sha256": "d0d39b4be26f697f6db3359eb7b3a5cd3eb133077a8698a610708a992a29afab"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Metadata/ModelingMetadata.sysml",
+      "sha256": "6214cf07d16a3405692f8414798930cd8869f183367d9c827eb5c70ab5af2397"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Metadata/ParametersOfInterestMetadata.sysml",
+      "sha256": "51474ef5606a9f2be33b860e85b4758008573591b6f3dba984fd40aa5a2ca694"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Metadata/RiskMetadata.sysml",
+      "sha256": "ee822eefcc56e16a775f7a941bcc068668fdb64fa829dfeb2438a0e91e11f6de"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQ.sysml",
+      "sha256": "7c67aa8b16201bea752d26943388304a5d8c97d101e14d4663150f6984dfd563"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQAcoustics.sysml",
+      "sha256": "a212e1b1e96cb7270912ec201d87c9c6c793132555c6ec3477ba34ed8c9df0cb"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQAtomicNuclear.sysml",
+      "sha256": "95976d154514bc66348fbdf5786fa209d57f6c6bb54d239dde8452abbb2ab24a"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQBase.sysml",
+      "sha256": "82f91f99155e1ee9fa23acb3e9cea4bec39d86138ad95b54a3a7ea9d7e692b89"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQCharacteristicNumbers.sysml",
+      "sha256": "75227197c3ada14f522cb80e9d98566d4d486b748734f0fd352cb5f3bf380475"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQChemistryMolecular.sysml",
+      "sha256": "2d00ef50cb9ef25fe7144d3a0bb82a72f3ca6bb61776192fd3b797cd3e49176a"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQCondensedMatter.sysml",
+      "sha256": "60188ea7c02f19cc2440a95d8eafea881e33d758a7225877be08e1ebeb6f6636"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQElectromagnetism.sysml",
+      "sha256": "d4f286af34060889109a8f59134f2d036a20d30dcfb9b3adc68228950550a504"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQInformation.sysml",
+      "sha256": "0cdbd940fe6b4879a1cd044b70e6a6dec5773690d4c2f4eb01887ebcc347fa77"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQLight.sysml",
+      "sha256": "8221b57a3b82a5ff28a481ae93a6fd9bd6de4ba1695cb27b0e554c5192ae87e3"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQMechanics.sysml",
+      "sha256": "507f9be9eb54353d5b9e487ee70fb28a9327cb2ed591a5ed04939dfe6ebdb964"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQSpaceTime.sysml",
+      "sha256": "934d6725ca490c078f042cc3ba8ef4c09da19a41f30da5b5d32da3f3909ba462"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/ISQThermodynamics.sysml",
+      "sha256": "ae0929b78c0b08f635e976ad52727ad8626f492970d47e7f7f5be54110524c92"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/MeasurementRefCalculations.sysml",
+      "sha256": "4eca94723410a11906abf2183db2bc82f849a63b8e6323b27beef363e42e298c"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/MeasurementReferences.sysml",
+      "sha256": "663d7b2e503fd7dcdd12d174b03a5eefd95735b71ac34d682f3b85e055f76517"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/Quantities.sysml",
+      "sha256": "d4ed609e120e50dcb93f67922624863d98581b5275f8032b8172202040055bb6"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/QuantityCalculations.sysml",
+      "sha256": "ef235e95327b476f45abb270b04fe37cdc51f6271683b8629c79019bae688d86"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/SI.sysml",
+      "sha256": "c6af4b72d6d098b7655f737ee162e7bae58089e8bcf7b9209e71041707c1e4e0"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/SIPrefixes.sysml",
+      "sha256": "90e604fcda40f8ec920114a457097cb2fed6d898d422c80277b4c8e9c3e70638"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/TensorCalculations.sysml",
+      "sha256": "0011fefd4cc62d3c1cb252a73a4a5b1a8024fb1bb2d69f626344690dc63d2923"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/Time.sysml",
+      "sha256": "3db3dde710d3298fbfa6c148972743c4a88e9371b4c1166a29e22a9600cd6fd5"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/USCustomaryUnits.sysml",
+      "sha256": "52a817f637ae237386b227d4c7a3a0401dbd494853719dbd210eb784fe68db70"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Quantities and Units/VectorCalculations.sysml",
+      "sha256": "61dab53484ca1141036be18bcbc07d3ecd2a5668cf80792da8cd38175da1315d"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Requirement Derivation/DerivationConnections.sysml",
+      "sha256": "f9f587423c1151f6ea89dae3e4a2e9b446906c5660bd8b3532952876fd9b9adc"
+    },
+    {
+      "path": "sysml.library/Domain Libraries/Requirement Derivation/RequirementDerivation.sysml",
+      "sha256": "ae3e65ca5c709869163cf17d04114ff7a6263c5b6f03d7ab05d62e0459d07f5d"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "sha256": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Data Type Library/VectorValues.kerml",
+      "sha256": "4d0d194f3437d15d10c978912ec7d2d3eadab926881ea61d2b724b8cdb7217d5"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+      "sha256": "728420cf580a119310f319b142e7d38932e556745a2508e6ce9453d243bc6a54"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/BooleanFunctions.kerml",
+      "sha256": "4da6ad54f1e36ecf22f538a4b5153cb2a9831870b190b291e73e4c7a21e7ac50"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "sha256": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/ComplexFunctions.kerml",
+      "sha256": "df0347537e6f711f3d60c1798335ef354afc420726bdc5919a80fafa348cc97a"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "sha256": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml",
+      "sha256": "8c219a2becac038dcbf101ddf64eee57b568dcd95b204be26c2ed3a83ec510af"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "sha256": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/NaturalFunctions.kerml",
+      "sha256": "9bf320732fbc48685a296771384489130353ac22c33bb68c54b238ce554fb8ee"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/NumericalFunctions.kerml",
+      "sha256": "702ab0f027b46621c31e316de0d0108538da4b87e959a41fad464ada153acf58"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml",
+      "sha256": "5a6a9e18199c6072252b99d82ad7b04657290475f1c2acee46a9b5ae0fec21d9"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/RationalFunctions.kerml",
+      "sha256": "e3ab60e171c271566878a27984391f57db1b9557cdf0dc9f0ec28d2ac4c0b3a4"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/RealFunctions.kerml",
+      "sha256": "ef861eb293190368dd4cae24f190e8803a3bb2ac01a31c6d95eda1b71ac0e2ec"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "sha256": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "sha256": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/StringFunctions.kerml",
+      "sha256": "c52d1f5450cec75267970d18f4206ba552db033432ceea6f8ecc4e6bac4ceb59"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/TrigFunctions.kerml",
+      "sha256": "614c0f168370a2efc292b40712401d57a186ef065ddebfbd63dab598701a580f"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Function Library/VectorFunctions.kerml",
+      "sha256": "dba38be553b153af66e1a008e08072f9f8aa76ee4695c7b4bc9586498dec1125"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "sha256": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml",
+      "sha256": "d7433722414a609f0ad2583b2f910e1c34a2bc1d7ac3abfe7ebbb7c239941f60"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml",
+      "sha256": "b6f9e5349c7c7f393591c0334c3bec86f1766b3e37209819179310c2f8fe1fb7"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "sha256": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "sha256": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "sha256": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Observation.kerml",
+      "sha256": "cbf87b0e9e358f0a1cf5ec99128a2abd5ccd59af67b696efc9581239e86a01a9"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "sha256": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "sha256": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/SpatialFrames.kerml",
+      "sha256": "1c7095c4845fa24bdb51c3affe617dc723e054aea2abebfafcba1a1687c49de3"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml",
+      "sha256": "47da8348d01c426c0839b679e87a35fb58d090a43c0faa4514542cc83e893e3a"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+      "sha256": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml",
+      "sha256": "407c222276f63b32fae108ac3c886671198894e6ff4c2beec6b6ce091fe910f9"
+    },
+    {
+      "path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Triggers.kerml",
+      "sha256": "7819af0ada0d753c2e3bbe395282f218e9829ca297012eb7aae5861db094631e"
+    },
+    {
+      "path": "sysml.library/Systems Library/Actions.sysml",
+      "sha256": "f80cc391abd8f5d8171d581788c8595cd44811779a47259fd5d24680e3fe300b"
+    },
+    {
+      "path": "sysml.library/Systems Library/Allocations.sysml",
+      "sha256": "77c881254d552847ee3ac5686ff84fa7baaa9e90541b59f2b3221cc1752be56f"
+    },
+    {
+      "path": "sysml.library/Systems Library/AnalysisCases.sysml",
+      "sha256": "839177ea10bf5eae65b8eac406c99ca54cea7404e075e77ae937b19d7c485da1"
+    },
+    {
+      "path": "sysml.library/Systems Library/Attributes.sysml",
+      "sha256": "eb853c5bc97965d726478e6de7e1323ea7c236b0ad69fb03fb43852b2f711bf1"
+    },
+    {
+      "path": "sysml.library/Systems Library/Calculations.sysml",
+      "sha256": "e35be6d273ea61ca86cd2e7d77b0e7a5d5f714d984e9a601ecfb1bfa6e225271"
+    },
+    {
+      "path": "sysml.library/Systems Library/Cases.sysml",
+      "sha256": "207bc825621bcef5c365a779e1e87c0cfe1bc49e44f6c0d7cc1ca2677503cf16"
+    },
+    {
+      "path": "sysml.library/Systems Library/Connections.sysml",
+      "sha256": "13c20eb2e2388646bb23ae8d204fb2dccfe9d1ef07ddb9ac6528fbe37200a701"
+    },
+    {
+      "path": "sysml.library/Systems Library/Constraints.sysml",
+      "sha256": "a8085cadbaa9bc4e4f1b2460c2facfbea8cb7ea3e0436e1ce9a6230daa16b757"
+    },
+    {
+      "path": "sysml.library/Systems Library/Flows.sysml",
+      "sha256": "89567552fea20e13b615ab7f3e76588bec9e9c7ffcfa94340eb74c742d36ebee"
+    },
+    {
+      "path": "sysml.library/Systems Library/Interfaces.sysml",
+      "sha256": "eac8920019f6fea45c39ab550ea2e7bcde0773a569db969ed178a284a9b62873"
+    },
+    {
+      "path": "sysml.library/Systems Library/Items.sysml",
+      "sha256": "508c789f9d8425176ce9f8c70cb7853d2848228920d17927aa4ab5e0088745e6"
+    },
+    {
+      "path": "sysml.library/Systems Library/Metadata.sysml",
+      "sha256": "2261103c64c193b2ee1495a7ce8f5cf4711027388b640011d0c380a77de9c916"
+    },
+    {
+      "path": "sysml.library/Systems Library/Parts.sysml",
+      "sha256": "127a820928b34628c5cdb34444debab9bc93a63284ba5e6dd6bb2c8707ea9b2c"
+    },
+    {
+      "path": "sysml.library/Systems Library/Ports.sysml",
+      "sha256": "a5d0e567124a734437648c986e71b6a892557711f5643c429d2c7cf4598805be"
+    },
+    {
+      "path": "sysml.library/Systems Library/Requirements.sysml",
+      "sha256": "e6b715b569bb99629990ad554c51e0094a1de6c6fa2439093ab9a830d635b10f"
+    },
+    {
+      "path": "sysml.library/Systems Library/StandardViewDefinitions.sysml",
+      "sha256": "2075fe906ddeefb5e8b38ee681acd3b6409a5ec2c1b04135a4a9d013c9d35ec8"
+    },
+    {
+      "path": "sysml.library/Systems Library/States.sysml",
+      "sha256": "10d503f4409549df91ec71dbcdc7633994d1275947b0d69f3c755c647dd84b82"
+    },
+    {
+      "path": "sysml.library/Systems Library/SysML.sysml",
+      "sha256": "9879496bc52b75fae6915d8ea4b1ef2e60b8f81e8df9b86e7b951c290ca36be6"
+    },
+    {
+      "path": "sysml.library/Systems Library/UseCases.sysml",
+      "sha256": "6dc9298dc491ef9b91214741c9977cd911b80e3bfc464b7ea2d3da96733b9f5f"
+    },
+    {
+      "path": "sysml.library/Systems Library/VerificationCases.sysml",
+      "sha256": "498e93de337a79b6aea4421866dbdc4898d8471bdadb2b0f92507d599b9db346"
+    },
+    {
+      "path": "sysml.library/Systems Library/Views.sysml",
+      "sha256": "068b8cbad08f21f194a462d6923a7705a84bbf3ad31727f7f032834530633539"
+    }
+  ],
+  "native_resources": [
+    {
+      "path": "crates/mercurio-sysml/resources/kernel/kerml-kernel.kir.json",
+      "sha256": "a182486cf42f0959044846fdf62c485b633855455c2bba58d8fc406fa193e6e8"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/registry.json",
+      "sha256": "d4846d09bb05d47bc0942e5c08dcd72f509ba9db79c184024d28cf8330247454"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/grammar.extract.json",
+      "sha256": "71404ebbbf689bb4e0b70fdb90a770473026fc3739048b697426dad6bb199512"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/implicit_semantics.extract.json",
+      "sha256": "ddfb9eb41d585ca960a5b44a046801e51ea47667cc47abb7186d8712fa8934bb"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/constructs.overlay.json",
+      "sha256": "9ad0a07f795c15f848c6a43509dad174a024e27758fba3767ba8446861d3d2bb"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/field_specs.generated.json",
+      "sha256": "4a7c800f1d67cd9d378fc77017268c5a2ace0f1287c30ae3cab9dbc69fdca561"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/field_specs.overlay.json",
+      "sha256": "a3c68b8b2441303f1d1e881539c41c07a2ca25dc9b5caa4bf7d17f7d4f4a1544"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/kir_emission.seed.json",
+      "sha256": "6975f519dfa1e8af4d5c00e55c5c1fccd8f1c060d6d560c142359e9252635624"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/lowering_rules.seed.json",
+      "sha256": "fa64a6367d32e3e53dc5634238083763e75b72d8a82219b93cd3b6e23345ebcb"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/metamodel_constructs.seed.json",
+      "sha256": "546a53a6f357d853c84918901e38b4413e3d9dbd74a95b47fba2b52c31a0a0de"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/mappings/semantic_defaults.seed.json",
+      "sha256": "063e34f970fede6a92771454373f5630ad2905f45b0507cd80232646a8e2c6f4"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.extract.json",
+      "sha256": "dbe3086bcff6d8dd7b7e0070f2df99631f2d95dff156b2dace6884096ed5eec2"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/metamodel.json",
+      "sha256": "e25c45eb6e4e76e6c6956c0b7aa51391e0ccb336a3fedcf7b730442b63ba99dd"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/profile.json",
+      "sha256": "138df7d2d7d1d45539271ea637833d17d905119c8a290225e1d8c875f7f655dd"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/provenance.json",
+      "sha256": "4e5cdbe9bf5499ab662661eba3b9ce381a1eb91f90373554a15bc0fdf8ea4e9d"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/pilot-stdlib-export.json",
+      "sha256": "f40a301d314b8c05d8eb5a53055ec18c2f2e144c27ff541458409f7563aa4395"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/release.lock.json",
+      "sha256": "7845c26aeffdac711d636ecd22f6c2b1b55ab4db9de243756c608a421b765e0e"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/source.lock.json",
+      "sha256": "2a6cbcc39e6bb91b9990504350d7695ee891a310d65443bb39cc2bb948b9a6e6"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.full.kir.json",
+      "sha256": "d9912795e421d069d24ff8734538fc1a3543df1c44a3d26b69bf1c9844c3e68c"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.kir.json",
+      "sha256": "313e6b34cabe03036dec1fa2c0b308e958771c1f0d3dc19e39487cd9727418bf"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/stdlib.rulepack.json",
+      "sha256": "61c635ffbd043952f93ad57119243d6d36b3858fddd21de0bf6c2dc209ae460a"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/stdlib/sysml-library.kir.json",
+      "sha256": "27b4e4ec99a7b4ce4824445ad868872c372c2babfd1ea5ae37da6cc94f5d1a9f"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-metamodel-0.57.0/validators.extract.json",
+      "sha256": "b07145b852eb2ae8cf6902992f440fb3f0f13e5cf988ca9af3978e57c81e817a"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/conformance/accepted_differences.json",
+      "sha256": "f2a952e32a1215719f7d9e53c5db2d79dbe5d6046dc0ddfefda23fe02975e70f"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/conformance/conformance-trace.json",
+      "sha256": "1651c861ea56b778a82b18e06a1cf1364342bcd0af1247f28178c69163185e26"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/grammar.extract.json",
+      "sha256": "17daa3b38e17c84e3bda60d83986cc82b6a9b1a15a8a430ae471246a4d78f1fd"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/implicit_semantics.extract.json",
+      "sha256": "3bda83bf23aab7292c08e2d08a3b3aad7189e2fa2103f82742cfdcf8b8abd5b3"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/compare_tolerances.overlay.json",
+      "sha256": "3684f8550f779bd9636dabff938d2c9ff357fc9c5c64d833a11e88f45396569f"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/constructs.overlay.json",
+      "sha256": "9ad0a07f795c15f848c6a43509dad174a024e27758fba3767ba8446861d3d2bb"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/field_specs.generated.json",
+      "sha256": "337bf30942758071c0a7cd9cd3bee537d91233811b9ee5df81995737b9c3a98a"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/field_specs.overlay.json",
+      "sha256": "a3c68b8b2441303f1d1e881539c41c07a2ca25dc9b5caa4bf7d17f7d4f4a1544"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/kir_emission.seed.json",
+      "sha256": "6975f519dfa1e8af4d5c00e55c5c1fccd8f1c060d6d560c142359e9252635624"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/lowering_rules.seed.json",
+      "sha256": "fa64a6367d32e3e53dc5634238083763e75b72d8a82219b93cd3b6e23345ebcb"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/metamodel_constructs.seed.json",
+      "sha256": "9ddebdb720662aadf1fab682458b378dbb538be0d0632b92274b808fe34e7c66"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/mappings/semantic_defaults.seed.json",
+      "sha256": "cbf178bae6cbe7949c2fe0ffc93d7d7cfe01272d9036c2aa34546d15803118f8"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/metamodel.extract.json",
+      "sha256": "e355da75a39af9e79bba7b5863093366cd2ce71cc7a32c8ed4054d552a8c81fa"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/metamodel.json",
+      "sha256": "ce819c8fab84ce1fd1b8e224789c9374c54f039942ce388e5cf895f9a33eddc7"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/profile.json",
+      "sha256": "de8be4fcb31d94fa0e404dfae1b1e83fd653bc97dfdcddba9158cf8564f3dee6"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/provenance.json",
+      "sha256": "bdcb89fbf043e7a8ed42b1dd493044b34b4fa6cf4562316a3758f94e1884fbf6"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/pilot-stdlib-export.json",
+      "sha256": "f40a301d314b8c05d8eb5a53055ec18c2f2e144c27ff541458409f7563aa4395"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/release.lock.json",
+      "sha256": "05a32c08d004c6a9179e1086895e846b921630b63cb0e2d39d145fd61ba7d1be"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/source.lock.json",
+      "sha256": "028ab4cdfc8b9f5150cc0cd35fefc6d5ad7b5402feaee47c187e270eda110aea"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.full.kir.json",
+      "sha256": "d9912795e421d069d24ff8734538fc1a3543df1c44a3d26b69bf1c9844c3e68c"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.kir.json",
+      "sha256": "313e6b34cabe03036dec1fa2c0b308e958771c1f0d3dc19e39487cd9727418bf"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/stdlib.rulepack.json",
+      "sha256": "3a3156ae5d1cc5ce65604e50a77a487990a120334e0ce8b94fc9501cdef4756e"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/stdlib/sysml-library.kir.json",
+      "sha256": "27b4e4ec99a7b4ce4824445ad868872c372c2babfd1ea5ae37da6cc94f5d1a9f"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-04/validators.extract.json",
+      "sha256": "d6acf8b87bddd7522a5fb25240b25fa670bf3214b0968e23925d8e2bd886cd27"
+    },
+    {
+      "path": "crates/mercurio-sysml/resources/pilot.lock.json",
+      "sha256": "40141268b887dbb9c50d7ea96ccd93b14a019a1eff0615260e73c5f1eff455d9"
+    }
+  ],
+  "audit_sources": {
+    "tools\\audit_release_samples.py": "b84ae50ea4a36a97ed47243ba7d397c77e52450ae8dc2d72721340e16061e7c6",
+    "crates\\mercurio-tools\\src\\bin\\audit_release_compile.rs": "e73aaf1b778cf0dd589480716e1b58ca854b89861e46a4353df4e505ed2d7e74",
+    "tools\\pilot-exporter\\src\\main\\java\\dev\\mercurio\\pilot\\PilotValidationAudit.java": "011db9ec6700225023bd62d781b6e4196b1089cc811392364ff9bc570a6a43ba",
+    "crates\\mercurio-tools\\corpus\\pilot_corpus.seed.json": "01af20bbfa1273fa2cfa6ee39d043606bf8e834868f9d31c9c919993eafcf18d"
+  },
+  "native_binary_sha256": "b364dc54855298e5de0d9f47f377a1ba7463b791e62a068cf9ccf5ccf632e96e",
+  "pilot_cache": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\release-audit-2026-08"
+}

@@ -14,6 +14,10 @@ autobins = false
 legacy-pilot-tools = []
 
 [[bin]]
+name = "audit_release_compile"
+path = "src/bin/audit_release_compile.rs"
+
+[[bin]]
 name = "audit_pilot_corpus"
 path = "src/bin/audit_pilot_corpus.rs"
 required-features = ["legacy-pilot-tools"]

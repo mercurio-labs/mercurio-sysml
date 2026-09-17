@@ -1,0 +1,137 @@
+[
+  {
+    "name": "valid",
+    "source": "package Audit { part def Vehicle; part vehicle: Vehicle; }\n",
+    "native": {
+      "diagnostics": [],
+      "elapsed_ms": 1337,
+      "element_count": 3,
+      "parse_ok": true,
+      "relative_path": "valid.sysml",
+      "status": "ok"
+    },
+    "pilot": {
+      "relative_path": "valid.sysml",
+      "parse_ok": true,
+      "status": "ok",
+      "diagnostics": [],
+      "elapsed_ms": 722
+    }
+  },
+  {
+    "name": "invalid-type",
+    "source": "package Audit { part def Vehicle; attribute invalid: Vehicle; }\n",
+    "native": {
+      "diagnostics": [],
+      "elapsed_ms": 1172,
+      "element_count": 3,
+      "parse_ok": true,
+      "relative_path": "invalid-type.sysml",
+      "status": "ok"
+    },
+    "pilot": {
+      "relative_path": "invalid-type.sysml",
+      "parse_ok": true,
+      "status": "error",
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "syntax": false,
+          "code": "validateAttributeUsageType_",
+          "message": "An attribute must be typed by attribute definitions.",
+          "line": 1,
+          "column": 35
+        }
+      ],
+      "elapsed_ms": 480
+    }
+  },
+  {
+    "name": "unresolved",
+    "source": "package Audit { part broken: Missing; }\n",
+    "native": {
+      "diagnostics": [
+        {
+          "kind": "validation",
+          "message": "unresolved type `Missing`",
+          "span": {
+            "end_col": 36,
+            "end_line": 1,
+            "start_col": 30,
+            "start_line": 1
+          }
+        }
+      ],
+      "elapsed_ms": 1996,
+      "input_path": "unresolved.sysml",
+      "parse_ok": true,
+      "relative_path": "unresolved.sysml",
+      "stage": "compile",
+      "status": "error"
+    },
+    "pilot": {
+      "relative_path": "unresolved.sysml",
+      "parse_ok": true,
+      "status": "error",
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "syntax": false,
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 1,
+          "column": 30
+        },
+        {
+          "severity": "ERROR",
+          "syntax": false,
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 1,
+          "column": 17
+        }
+      ],
+      "elapsed_ms": 432
+    }
+  },
+  {
+    "name": "syntax",
+    "source": "package Audit { part def\n",
+    "native": {
+      "diagnostics": [
+        {
+          "kind": "syntax",
+          "message": "expected part definition name",
+          "span": {
+            "end_col": 1,
+            "end_line": 2,
+            "start_col": 1,
+            "start_line": 2
+          }
+        }
+      ],
+      "elapsed_ms": 0,
+      "input_path": "syntax.sysml",
+      "parse_ok": false,
+      "relative_path": "syntax.sysml",
+      "stage": "parse",
+      "status": "error"
+    },
+    "pilot": {
+      "relative_path": "syntax.sysml",
+      "parse_ok": false,
+      "status": "error",
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "syntax": true,
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '<EOF>'",
+          "line": 1,
+          "column": 25
+        }
+      ],
+      "elapsed_ms": 549
+    }
+  }
+]
