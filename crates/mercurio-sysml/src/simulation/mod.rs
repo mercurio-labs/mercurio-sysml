@@ -960,6 +960,7 @@ pub fn simulation_trace_report(
     payload["requirement_outcomes"] = serde_json::to_value(
         mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace),
     )?;
+    payload["view_overlay"] = serde_json::to_value(trace_to_view_overlay(&trace))?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
     let analysis_case_ref = SemanticElementRef::new(reported_analysis_case_id);
@@ -1164,6 +1165,16 @@ mod tests {
     use mercurio_foundation::{KirDocument, KirElement};
 
     use super::*;
+
+    #[test]
+    fn recorded_playback_contract_matches_shared_fixture() {
+        let fixture: Value = serde_json::from_str(include_str!("playback-fixture.json")).unwrap();
+        let trace: SimulationTrace = serde_json::from_value(fixture["trace"].clone()).unwrap();
+        let overlay = trace_to_view_overlay(&trace);
+        assert_eq!(serde_json::to_value(&overlay).unwrap(), fixture["overlay"]);
+        let report = simulation_trace_report("fixture", "heat", trace).unwrap();
+        assert_eq!(report.artifacts[0].payload["view_overlay"], fixture["overlay"]);
+    }
 
     #[test]
     fn trace_to_view_overlay_projects_states_events_and_values() {
