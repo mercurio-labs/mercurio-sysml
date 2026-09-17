@@ -2958,6 +2958,11 @@ impl Parser {
                 TokenKind::Equals => {
                     self.advance();
                     expression = Some(self.parse_expression()?);
+                    if !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::RBrace | TokenKind::LBrace | TokenKind::Eof)
+                        && !matches!(self.peek_kind(), TokenKind::Identifier(value) if stop_keywords.contains(&value.as_str()))
+                    {
+                        return Err(self.error_here("unsupported trailing expression syntax"));
+                    }
                 }
                 TokenKind::LBrace => {
                     had_body = true;
@@ -3020,79 +3025,170 @@ impl Parser {
     }
 
     fn parse_expression(&mut self) -> Result<Expr, Diagnostic> {
-        self.parse_or_expression()
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+            let start = self.current().span.clone();
+            self.advance();
+            let condition = self.parse_coalescing_expression()?;
+            self.expect(TokenKind::Question, "expected `?` after conditional test")?;
+            let consequent = self.parse_expression()?;
+            self.expect_identifier_named("else", "expected `else` after conditional branch")?;
+            let alternative = self.parse_expression()?;
+            let span = merge_span(&start, &expr_span(&alternative));
+            return Ok(Expr::Call {
+                function: "if".to_string(),
+                args: vec![condition, consequent, alternative],
+                span,
+            });
+        }
+        self.parse_coalescing_expression()
+    }
+
+    fn parse_coalescing_expression(&mut self) -> Result<Expr, Diagnostic> {
+        let mut expr = self.parse_implies_expression()?;
+        while matches!(
+            (self.peek_kind(), self.next_kind()),
+            (TokenKind::Question, Some(TokenKind::Question))
+        ) {
+            self.advance();
+            self.advance();
+            let right = self.parse_implies_expression()?;
+            expr = binary_call("??", expr, right);
+        }
+        Ok(expr)
+    }
+
+    fn parse_implies_expression(&mut self) -> Result<Expr, Diagnostic> {
+        let mut expr = self.parse_or_expression()?;
+        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "implies") {
+            self.advance();
+            let right = self.parse_or_expression()?;
+            expr = binary_call("implies", expr, right);
+        }
+        Ok(expr)
     }
 
     fn try_parse_constraint_expression_tail(&mut self) -> Result<Option<UsageTail>, Diagnostic> {
         if !matches!(self.peek_kind(), TokenKind::LBrace) {
             return Ok(None);
         }
-
-        let checkpoint = self.index;
         self.expect(
             TokenKind::LBrace,
             "expected `{` before constraint expression",
         )?;
-        let expression = match self.parse_expression() {
-            Ok(expression) => expression,
-            Err(_) => {
-                self.index = checkpoint;
-                return Ok(None);
+        let mut body_members = Vec::new();
+        let mut owner_docs = Vec::new();
+        let mut expression = None;
+        while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+            self.collect_docs();
+            owner_docs.append(&mut self.pending_docs);
+            if matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                break;
             }
-        };
-        if matches!(self.peek_kind(), TokenKind::Semicolon) {
-            self.advance();
-        }
-        if !matches!(self.peek_kind(), TokenKind::RBrace) {
-            self.index = checkpoint;
-            return Ok(None);
+            // Declaration heads remain declarations. All remaining body text
+            // must be a complete predicate; an unsupported tail cannot vanish
+            // through the general block parser's opaque-statement fallback.
+            let declaration_head = matches!(
+                self.peek_kind(),
+                TokenKind::Package
+                    | TokenKind::Import
+                    | TokenKind::Part
+                    | TokenKind::At
+                    | TokenKind::Hash
+                    | TokenKind::Specializes
+                    | TokenKind::Redefines
+            ) || matches!(self.peek_kind(), TokenKind::Identifier(value)
+                    if is_feature_keyword(value) || is_declaration_modifier(value) || value == "rep")
+                || matches!(
+                    (self.peek_kind(), self.next_kind()),
+                    (
+                        TokenKind::Identifier(_),
+                        Some(TokenKind::Colon | TokenKind::Specializes | TokenKind::Redefines)
+                    )
+                );
+            if declaration_head {
+                let declaration = self
+                    .parse_declaration()?
+                    .ok_or_else(|| self.error_here("expected constraint body declaration"))?;
+                body_members.push(declaration);
+                continue;
+            }
+            expression = Some(self.parse_expression()?);
+            if matches!(self.peek_kind(), TokenKind::Semicolon) {
+                self.advance();
+            }
+            if !matches!(self.peek_kind(), TokenKind::RBrace) {
+                return Err(self.error_here("unsupported trailing constraint expression syntax"));
+            }
         }
         self.expect(
             TokenKind::RBrace,
             "expected `}` after constraint expression",
         )?;
-
         Ok(Some(UsageTail {
             ty: None,
             multiplicity: None,
-            expression: Some(expression),
+            expression,
             additional_types: Vec::new(),
             specializes: Vec::new(),
             subsets: Vec::new(),
             redefines: Vec::new(),
-            body_members: Vec::new(),
-            owner_docs: Vec::new(),
+            body_members,
+            owner_docs,
             had_body: true,
         }))
     }
 
     fn parse_or_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_and_expression()?;
-        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "or") {
-            self.expect_identifier_token("expected `or`")?;
-            let right = self.parse_and_expression()?;
+        let mut expr = self.parse_xor_expression()?;
+        while matches!(self.peek_kind(), TokenKind::Pipe)
+            || matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "or")
+        {
+            let eager = matches!(self.peek_kind(), TokenKind::Pipe);
+            self.advance();
+            let right = self.parse_xor_expression()?;
             let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op: BinaryOp::Or,
-                span,
-                right: Box::new(right),
+            expr = if eager {
+                binary_call("|", expr, right)
+            } else {
+                Expr::Binary {
+                    left: Box::new(expr),
+                    op: BinaryOp::Or,
+                    right: Box::new(right),
+                    span,
+                }
             };
+        }
+        Ok(expr)
+    }
+
+    fn parse_xor_expression(&mut self) -> Result<Expr, Diagnostic> {
+        let mut expr = self.parse_and_expression()?;
+        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "xor") {
+            self.advance();
+            let right = self.parse_and_expression()?;
+            expr = binary_call("xor", expr, right);
         }
         Ok(expr)
     }
 
     fn parse_and_expression(&mut self) -> Result<Expr, Diagnostic> {
         let mut expr = self.parse_equality_expression()?;
-        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "and") {
-            self.expect_identifier_token("expected `and`")?;
+        while matches!(self.peek_kind(), TokenKind::Ampersand)
+            || matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "and")
+        {
+            let eager = matches!(self.peek_kind(), TokenKind::Ampersand);
+            self.advance();
             let right = self.parse_equality_expression()?;
             let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op: BinaryOp::And,
-                span,
-                right: Box::new(right),
+            expr = if eager {
+                binary_call("&", expr, right)
+            } else {
+                Expr::Binary {
+                    left: Box::new(expr),
+                    op: BinaryOp::And,
+                    right: Box::new(right),
+                    span,
+                }
             };
         }
         Ok(expr)
@@ -3120,7 +3216,7 @@ impl Parser {
     }
 
     fn parse_comparison_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_additive_expression()?;
+        let mut expr = self.parse_range_expression()?;
         loop {
             let op = match self.peek_kind() {
                 TokenKind::LAngle => BinaryOp::Less,
@@ -3130,7 +3226,7 @@ impl Parser {
                 _ => break,
             };
             self.advance();
-            let right = self.parse_additive_expression()?;
+            let right = self.parse_range_expression()?;
             let span = merge_span(&expr_span(&expr), &expr_span(&right));
             expr = Expr::Binary {
                 left: Box::new(expr),
@@ -3140,6 +3236,21 @@ impl Parser {
             };
         }
         Ok(expr)
+    }
+
+    fn parse_range_expression(&mut self) -> Result<Expr, Diagnostic> {
+        let expr = self.parse_additive_expression()?;
+        if matches!(
+            (self.peek_kind(), self.next_kind()),
+            (TokenKind::Dot, Some(TokenKind::Dot))
+        ) {
+            self.advance();
+            self.advance();
+            let right = self.parse_additive_expression()?;
+            Ok(binary_call("..", expr, right))
+        } else {
+            Ok(expr)
+        }
     }
 
     fn parse_additive_expression(&mut self) -> Result<Expr, Diagnostic> {
@@ -3166,6 +3277,12 @@ impl Parser {
     fn parse_multiplicative_expression(&mut self) -> Result<Expr, Diagnostic> {
         let mut expr = self.parse_power_expression()?;
         loop {
+            if matches!(self.peek_kind(), TokenKind::Percent) {
+                self.advance();
+                let right = self.parse_power_expression()?;
+                expr = binary_call("%", expr, right);
+                continue;
+            }
             let op = match self.peek_kind() {
                 TokenKind::Star => BinaryOp::Multiply,
                 TokenKind::Slash => BinaryOp::Divide,
@@ -3204,6 +3321,17 @@ impl Parser {
 
     fn parse_unary_expression(&mut self) -> Result<Expr, Diagnostic> {
         match self.peek_kind().clone() {
+            TokenKind::Plus => {
+                let start = self.current().span.clone();
+                self.advance();
+                let expr = self.parse_unary_expression()?;
+                let span = merge_span(&start, &expr_span(&expr));
+                Ok(Expr::Call {
+                    function: "+".to_string(),
+                    args: vec![expr],
+                    span,
+                })
+            }
             TokenKind::Minus => {
                 let token = self.current().clone();
                 self.advance();
@@ -3246,15 +3374,13 @@ impl Parser {
 
         loop {
             match self.peek_kind() {
+                TokenKind::Dot if matches!(self.next_kind(), Some(TokenKind::Dot)) => break,
                 TokenKind::Dot => {
                     self.advance();
-                    if matches!(self.peek_kind(), TokenKind::Question) {
-                        self.advance();
-                        if matches!(self.peek_kind(), TokenKind::LBrace) {
-                            self.consume_opaque_block_with_open()?;
-                            continue;
-                        }
-                        return Err(self.error_here("expected `{` after filter operator"));
+                    if matches!(self.peek_kind(), TokenKind::Question | TokenKind::LBrace) {
+                        return Err(self.error_here(
+                            "selection and collection body expressions are not supported",
+                        ));
                     }
                     let segment = self.expect_identifier("expected identifier after `.`")?;
                     let segment_span = self.tokens[self.index - 1].span.clone();
@@ -3288,22 +3414,23 @@ impl Parser {
                         span: merge_span(&start_span, &end.span),
                     };
                 }
-                TokenKind::LBracket => {
-                    self.consume_balanced(TokenKind::LBracket, TokenKind::RBracket)?;
-                }
-                TokenKind::Identifier(value) if value == "as" => {
-                    self.expect_identifier_named("as", "expected `as` in cast expression")?;
-                    if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
-                        let ty = self.parse_qualified_name()?;
-                        let span = merge_span(&expr_span(&expr), &ty.span);
-                        expr = Expr::Call {
-                            function: format!("as {}", ty.as_dot_string()),
-                            args: vec![expr],
-                            span,
-                        };
-                    } else {
-                        return Err(self.error_here("expected type name after `as`"));
+                TokenKind::Hash => {
+                    self.advance();
+                    if !matches!(self.peek_kind(), TokenKind::LParen) {
+                        return Err(self.error_here("expected `(` after index operator `#`"));
                     }
+                    let index = self.parse_expression_primary()?;
+                    expr = binary_call("#", expr, index);
+                }
+                TokenKind::LBracket => {
+                    return Err(self.error_here("bracket expressions and unit conversion are not supported; indexing uses `#(...)`"));
+                }
+                TokenKind::Identifier(value)
+                    if matches!(value.as_str(), "as" | "hastype" | "istype" | "meta") =>
+                {
+                    return Err(
+                        self.error_here("classification and cast expressions are not supported")
+                    );
                 }
                 _ => break,
             }
@@ -3341,6 +3468,14 @@ impl Parser {
                     span: merge_span(&start.span, &end.span),
                 })
             }
+            TokenKind::Identifier(value) if value == "null" => {
+                let span = self.current().span.clone();
+                self.advance();
+                Ok(Expr::Tuple {
+                    items: Vec::new(),
+                    span,
+                })
+            }
             TokenKind::Identifier(value) if value == "self" => {
                 let token = self.expect_identifier_token("expected `self`")?;
                 Ok(Expr::SelfRef(token.span))
@@ -3356,7 +3491,7 @@ impl Parser {
             TokenKind::Number(value) => {
                 let token = self.current().clone();
                 self.advance();
-                if value.contains('.') {
+                if value.contains(['.', 'e', 'E']) {
                     Ok(Expr::Literal(LiteralExpr::Real(value)))
                 } else {
                     let value = value.parse::<i64>().map_err(|_| {
@@ -3408,8 +3543,7 @@ impl Parser {
         if matches!(self.peek_kind(), TokenKind::Identifier(_))
             && matches!(self.next_kind(), Some(TokenKind::Equals))
         {
-            self.expect_identifier_token("expected argument name")?;
-            self.expect(TokenKind::Equals, "expected `=` after argument name")?;
+            return Err(self.error_here("named argument binding is not supported"));
         }
         self.parse_expression()
     }
@@ -4174,38 +4308,17 @@ fn segment_text(kind: &TokenKind) -> String {
 }
 
 fn token_text(kind: &TokenKind) -> String {
-    match kind {
-        TokenKind::Identifier(value) => value.clone(),
-        TokenKind::String(value) => format!("\"{value}\""),
-        TokenKind::Number(value) => value.clone(),
-        TokenKind::Colon => ":".to_string(),
-        TokenKind::ScopeSep => "::".to_string(),
-        TokenKind::Dot => ".".to_string(),
-        TokenKind::Comma => ",".to_string(),
-        TokenKind::LParen => "(".to_string(),
-        TokenKind::RParen => ")".to_string(),
-        TokenKind::LBracket => "[".to_string(),
-        TokenKind::RBracket => "]".to_string(),
-        TokenKind::Specializes => ":>".to_string(),
-        TokenKind::Redefines => ":>>".to_string(),
-        TokenKind::Equals => "=".to_string(),
-        TokenKind::DoubleEquals => "==".to_string(),
-        TokenKind::BangEquals => "!=".to_string(),
-        TokenKind::LAngle => "<".to_string(),
-        TokenKind::RAngle => ">".to_string(),
-        TokenKind::LessEqual => "<=".to_string(),
-        TokenKind::GreaterEqual => ">=".to_string(),
-        TokenKind::Plus => "+".to_string(),
-        TokenKind::Minus => "-".to_string(),
-        TokenKind::Slash => "/".to_string(),
-        TokenKind::Bang => "!".to_string(),
-        TokenKind::Ampersand => "&".to_string(),
-        TokenKind::Pipe => "|".to_string(),
-        TokenKind::Caret => "^".to_string(),
-        TokenKind::Tilde => "~".to_string(),
-        TokenKind::Star => "*".to_string(),
-        TokenKind::DoubleStar => "**".to_string(),
-        _ => String::new(),
+    // Preserve every token when behavior clauses are reparsed as expressions.
+    // Dropping `#`, `?`, or a body token changes the engine's expression.
+    filter_token_text(kind.clone())
+}
+
+fn binary_call(function: &str, left: Expr, right: Expr) -> Expr {
+    let span = merge_span(&expr_span(&left), &expr_span(&right));
+    Expr::Call {
+        function: function.to_string(),
+        args: vec![left, right],
+        span,
     }
 }
 
@@ -4235,8 +4348,9 @@ fn is_declaration_modifier(value: &str) -> bool {
 }
 
 fn is_constraint_expression_usage(keyword: &str, modifiers: &[String]) -> bool {
-    matches!(keyword, "assert" | "assume" | "require" | "constraint")
-        && modifiers.iter().any(|modifier| modifier == "constraint")
+    keyword == "constraint"
+        || (matches!(keyword, "assert" | "assume" | "require")
+            && modifiers.iter().any(|modifier| modifier == "constraint"))
 }
 
 fn is_feature_keyword(value: &str) -> bool {
@@ -4361,6 +4475,7 @@ fn filter_token_text(kind: TokenKind) -> String {
         TokenKind::Plus => "+".to_string(),
         TokenKind::Minus => "-".to_string(),
         TokenKind::Slash => "/".to_string(),
+        TokenKind::Percent => "%".to_string(),
         TokenKind::Bang => "!".to_string(),
         TokenKind::Ampersand => "&".to_string(),
         TokenKind::Pipe => "|".to_string(),
@@ -5861,9 +5976,9 @@ mod tests {
     }
 
     #[test]
-    fn parses_anonymous_objective_and_opaque_constraint_blocks() {
+    fn parses_anonymous_objective_and_constraint_blocks() {
         let module = parse_sysml(
-            "package Demo { requirement def Need { subject vehicle; objective { doc /* hi */ } require constraint { vehicle.mass > 0[kg] } } }",
+            "package Demo { requirement def Need { subject vehicle; objective { doc /* hi */ } require constraint { vehicle.mass > 0 } } }",
         )
         .unwrap();
 
@@ -5936,23 +6051,13 @@ mod tests {
     }
 
     #[test]
-    fn parses_expression_unit_suffixes_and_cast_postfix() {
-        let module = parse_sysml(
-            "package Demo { attribute length = new Cuboid(4800 [mm], 1840 [mm]); attribute local = new Translation((3800, 825, 40)[datum]); attribute masses = (vehicles as VehiclePart).m; attribute named = F(q = 1, p = a); }",
-        )
-        .unwrap();
-        let package = module.package.unwrap();
-        assert_eq!(package.members.len(), 4);
-    }
-
-    #[test]
-    fn parses_expression_filter_postfix() {
-        let module = parse_sysml(
-            "package Demo { attribute total = mass + sum(subcomponents.totalMass.?{ in p :> ISQ::mass; p > minMass }); }",
-        )
-        .unwrap();
-        let package = module.package.unwrap();
-        assert_eq!(package.members.len(), 1);
+    fn rejects_unsupported_expression_postfix_without_discarding_semantics() {
+        for expression in [
+            "new Cuboid(4800 [mm], 1840 [mm])", "(vehicles as VehiclePart).m",
+            "F(q = 1, p = a)", "mass + sum(subcomponents.totalMass.?{ in p :> ISQ::mass; p > minMass })",
+        ] {
+            assert!(parse_sysml(&format!("package Demo {{ attribute result = {expression}; }}")).is_err(), "{expression}");
+        }
     }
 
     #[test]
@@ -6029,22 +6134,15 @@ mod tests {
     }
 
     #[test]
-    fn parses_constraint_body_with_opaque_if_else_expression() {
+    fn parses_conditional_constraint_and_rejects_unsupported_classification() {
         let module = parse_sysml(
-            "package Demo { part p { assert constraint { if flag? p istype A else p istype B } } }",
-        )
-        .unwrap();
+            "package Demo { part p { assert constraint { if flag ? 1 else 2 } } }",
+        ).unwrap();
         let package = module.package.unwrap();
-        let part = match &package.members[0] {
-            Declaration::GenericUsage(usage) => usage,
-            other => panic!("expected part usage, got {other:?}"),
-        };
-        let constraint = match &part.body_members[0] {
-            Declaration::GenericUsage(usage) => usage,
-            other => panic!("expected constraint usage, got {other:?}"),
-        };
-        assert_eq!(constraint.keyword, "assert");
-        assert!(constraint.body_members.is_empty());
+        let part = package.members[0].as_usage_like().unwrap();
+        let constraint = part.body_members[0].as_usage_like().unwrap();
+        assert!(matches!(constraint.expression, Some(Expr::Call { function, .. }) if function == "if"));
+        assert!(parse_sysml("package Demo { part p { assert constraint { if flag ? p istype A else p istype B } } }").is_err());
     }
 
     #[test]
@@ -6479,13 +6577,16 @@ mod tests {
     }
 
     #[test]
-    fn parses_opaque_constraint_expression_with_less_than() {
+    fn preserves_constraint_parameters_and_trailing_predicate() {
         let module = parse_sysml(
             "package Demo { constraint massLimitation { mass : MassValue; massLimit : MassValue; mass < massLimit } }",
         )
         .unwrap();
         let package = module.package.unwrap();
-        assert_eq!(package.members.len(), 1);
+        let constraint = package.members[0].as_usage_like().unwrap();
+        assert_eq!(constraint.body_members.len(), 2);
+        assert!(matches!(constraint.expression, Some(Expr::Binary { .. })));
+        assert!(parse_sysml("package Demo { constraint c { x : Real; x[1] > 0 } }").is_err());
     }
 
     #[test]
