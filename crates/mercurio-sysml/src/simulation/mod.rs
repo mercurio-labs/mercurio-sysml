@@ -3273,6 +3273,38 @@ mod tests {
     }
 
     #[test]
+    fn textual_done_endpoint_terminates_without_inventing_deadline_evidence() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, end_time, outcome) in [(10, 6.0, "violated"), (20, 3.0, "unevaluated")] {
+            let text = include_str!("thermal-deadline.sysml")
+                .replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"))
+                .replace("then Ready;", "then done;");
+            let document = compile_sysml_text(&text, "thermal-final.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            let done = runtime.graph().element_by_element_id("state.SimulationConstraintsChannels.ThermalChamber.lifecycle.done").expect("Shared graph must contain inherited done");
+            assert_eq!(done.properties["is_final"], true);
+            assert_eq!(done.properties["metadata"]["generated"], true);
+            let report = run_analysis_case(&runtime, &case.id, "final-state").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["termination"], "final_state", "{trace:#}");
+            let frames = trace["timeline"].as_array().unwrap();
+            assert_eq!(frames.last().unwrap()["t"], end_time);
+            assert_eq!(trace["requirement_outcomes"][0]["status"], outcome);
+            if outcome == "unevaluated" {
+                assert_eq!(trace["requirement_outcomes"][0]["reason_code"], "deadline_not_observed");
+            }
+            assert!(trace["view_overlay"]["frames"].as_array().unwrap().last().unwrap()["node_marks"].as_array().unwrap().iter().any(|mark|
+                mark["kind"] == "active_state" && mark["element"].as_str().is_some_and(|id| id.ends_with(".lifecycle.done"))));
+            // A locally declared ordinary state named done shadows the inherited endpoint.
+            let shadow = text.replace("state Ready;", "state done;");
+            let runtime = Runtime::from_document(compile_sysml_text(&shadow, "shadow.sysml", &stdlib).unwrap()).unwrap();
+            let report = run_analysis_case(&runtime, &case.id, "shadow").unwrap();
+            assert_eq!(report.artifacts[0].payload["termination"], "step_budget_exhausted");
+        }
+    }
+
+    #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {

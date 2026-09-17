@@ -1277,6 +1277,9 @@ pub fn transpile_module_with_source(
         disambiguate_duplicate_element_ids(&mut elements);
     }
     disambiguate_duplicate_source_position_usage_ids(&mut elements);
+    if source_language == "sysml" {
+        materialize_referenced_state_done(&mut elements);
+    }
     validate_unique_ids(&elements)?;
 
     Ok(KirDocument {
@@ -1298,6 +1301,36 @@ pub fn transpile_module_with_source(
         .collect(),
         elements,
     })
+}
+
+// States::StateAction provides an inherited done endpoint. Materialize a scoped
+// usage only for an explicit transition reference and preserve local shadowing.
+// This makes the endpoint available to every graph consumer, including views.
+fn materialize_referenced_state_done(elements: &mut Vec<KirElement>) {
+    let mut generated = BTreeMap::new();
+    for transition in elements.iter() {
+        let Some(target) = transition.properties.get("target").and_then(Value::as_str) else { continue; };
+        let Some(parent_id) = target.strip_suffix(".done") else { continue; };
+        if transition.properties.get("owner").and_then(Value::as_str) != Some(parent_id)
+            || !transition.properties.contains_key("source")
+            || elements.iter().any(|element| element.id == target) {
+            continue;
+        }
+        let Some(parent) = elements.iter().find(|element| element.id == parent_id
+            && element.properties.get("metatype").and_then(Value::as_str).is_some_and(|kind| kind.contains("StateUsage"))) else { continue; };
+        generated.entry(target.to_string()).or_insert_with(|| KirElement {
+            id: target.into(), kind: parent.kind.clone(), layer: parent.layer,
+            properties: BTreeMap::from([
+                ("owner".into(), json!(parent_id)),
+                ("parent_state".into(), json!(parent_id)),
+                ("declared_name".into(), json!("done")),
+                ("metatype".into(), json!("SysML::StateUsage")),
+                ("is_final".into(), json!(true)),
+                ("metadata".into(), json!({"generated":true,"semantic_origin":"States::StateAction::done","source_transition":transition.id})),
+            ]),
+        });
+    }
+    elements.extend(generated.into_values());
 }
 
 fn package_owner_id(usage: &ResolvedUsage, package_ids: &BTreeMap<String, String>) -> String {
