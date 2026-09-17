@@ -3507,6 +3507,32 @@ mod tests {
     }
 
     #[test]
+    fn final_mission_audit_rejects_metadata_and_preserves_requirement_uncertainty() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let profile = include_str!("../../resources/profiles/MercurioMissions.sysml");
+        let thermal = include_str!("thermal-deadline.sysml").replace("heatRate : Real = 10.0", "heatRate : Real = 20.0");
+        for fixture in [
+            format!("{}\n{}", profile.replace("Clock", "Clok"), thermal.replace("subject chamber : ThermalChamber;", "@Mercurio::Missions::Clok { maxTime = 6.0; fixedStep = 1.0; sampleInterval = 1.0; } subject chamber : ThermalChamber;")),
+            format!("{profile}\n{}", thermal.replace("state Cold;", "state Cold { @Mercurio::Missions::Clock { maxTime = 6.0; fixedStep = 1.0; sampleInterval = 1.0; } }")),
+        ] {
+            let runtime = Runtime::from_document(compile_sysml_text(&fixture, "audit-metadata.sysml", &stdlib).unwrap()).unwrap();
+            let error = scenario_from_analysis_case(&runtime, "HeatProfile").expect_err("invalid metadata accepted");
+            assert!(format!("{error:?}").contains("mission.metadata.invalid"));
+        }
+        for fixture in [
+            thermal.replace("requirement targetByDeadline {", "requirement targetByDeadline { requirement extra { require constraint { false; } }"),
+            thermal.replace("analysis def HeatProfile", "requirement def ExtraRule { require constraint { false; } } analysis def HeatProfile").replace("requirement targetByDeadline {", "requirement targetByDeadline : ExtraRule {"),
+        ] {
+            let document = compile_sysml_text(&fixture, "audit-requirement.sysml", &stdlib).unwrap();
+            for document in [document.clone(), mercurio_foundation::KirDocument::merge_with_registered_fields(vec![document], crate::sysml_field_specs().iter().copied()).unwrap()] {
+                let runtime = Runtime::from_document(document).unwrap();
+                let report = run_analysis_case(&runtime, "HeatProfile", "audit").unwrap();
+                assert_eq!(report.artifacts[0].payload["requirement_outcomes"][0]["status"], "unevaluated");
+            }
+        }
+    }
+
+    #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {

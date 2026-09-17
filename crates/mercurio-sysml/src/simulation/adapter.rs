@@ -1079,7 +1079,14 @@ pub(super) fn native_analysis_requirements(
                         .then(|| constraints[0].properties.get("expression_ir").cloned())
                         .flatten()
                 });
-            if native_analysis_subject_elements(runtime, analysis_case).len() != 1 {
+            // Custom requirement types can carry inherited obligations that this
+            // bounded evaluator does not expand. Never report the local body alone.
+            let custom_type = requirement.properties.get("type").is_some_and(|value| match value {
+                Value::String(reference) => reference.starts_with("type."),
+                Value::Array(references) => references.iter().any(|reference| reference.as_str().is_some_and(|reference| reference.starts_with("type."))),
+                _ => true,
+            });
+            if native_analysis_subject_elements(runtime, analysis_case).len() != 1 || custom_type {
                 expression = None;
             }
             if let Some(expression) = &mut expression {

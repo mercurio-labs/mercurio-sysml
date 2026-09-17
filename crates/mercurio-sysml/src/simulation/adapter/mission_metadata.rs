@@ -88,6 +88,23 @@ pub(in crate::simulation) fn apply(
     case: &Element,
     scenario: &mut ConcurrentSimulationScenario,
 ) -> Result<(), SysmlSimulationAdapterError> {
+    for element in runtime.graph().elements() {
+        let Some(metadata) = element.properties.get("metadata").and_then(Value::as_object) else { continue; };
+        for key in metadata.keys().filter(|key| key.starts_with("Mercurio::Missions::")) {
+            let name = key.trim_start_matches("Mercurio::Missions::");
+            let construct = metadata.get("lowering").and_then(|value| value.get("construct")).and_then(Value::as_str)
+                .unwrap_or_else(|| element.kind.rsplit("::").next().unwrap_or(&element.kind));
+            let allowed = match name {
+                "Clock" | "Termination" | "InitialStimulus" => is_project_analysis_case(element),
+                "TimedActivity" => construct == "ActionUsage",
+                "Duration" => construct == "ActionUsage" && string_property_any_element(element, &["owner", "owning_type"])
+                    .and_then(|owner| runtime.graph().element_by_element_id(&owner))
+                    .is_some_and(|owner| owner.properties.get("metadata").and_then(|value| value.get("Mercurio::Missions::TimedActivity")).is_some()),
+                _ => false,
+            };
+            if !allowed { return Err(invalid(format!("unknown or misplaced {key} on {}", element.element_id))); }
+        }
+    }
     if let Some(p) = properties(
         runtime,
         case,
