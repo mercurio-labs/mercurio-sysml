@@ -3320,6 +3320,29 @@ mod tests {
     }
 
     #[test]
+    fn shared_expression_textual_mission_parity() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, expected, witness) in [(10, "violated", None), (20, "satisfied", Some(3.0))] {
+            let text = include_str!("shared-expression.sysml")
+                .replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "shared-expression.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|case| case.label == "HeatProfile").unwrap();
+            let model = canonical_simulation_model(&runtime).unwrap();
+            assert!(model.machines.iter().flat_map(|machine| &machine.transitions).any(|transition|
+                transition.effects.iter().any(|effect| matches!(effect, mercurio_foundation::simulation_core::SimulationEffect::AssignExpression { .. }))));
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            let first = run_concurrent_simulation(&runtime, scenario.clone()).unwrap();
+            let second = run_concurrent_simulation(&runtime, scenario).unwrap();
+            assert_eq!(first, second);
+            let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(&first);
+            assert_eq!(outcomes[0].status, expected);
+            assert_eq!(outcomes[0].witness_time_s, witness);
+            let report = run_analysis_case(&runtime, &case.id, "shared-expression").unwrap();
+            assert_eq!(report.artifacts[0].payload["requirement_outcomes"][0]["status"], expected);
+        }
+    }
+
+    #[test]
     fn textual_absolute_time_is_independent_of_state_entry() {
         let stdlib = load_sysml_baseline().unwrap();
         let text = include_str!("thermal-deadline.sysml")
@@ -3382,7 +3405,7 @@ mod tests {
             ("maxSteps = 100", "maxSteps = 1.5", "invalid"),
             ("subject = \"chamber\"", "subject = \"missing\"", "invalid"),
             ("trigger = \"start\"", "trigger = \"unknown\"", "blocked"),
-            ("chamber.temperature >= chamber.targetTemperature", "chamber.temperature + 0.0 >= chamber.targetTemperature", "time_budget_exhausted"),
+            ("chamber.temperature >= chamber.targetTemperature", "chamber.temperature + 0.0 >= chamber.targetTemperature", "requirement_violated"),
         ] {
             let changed = text.replace(from, to);
             assert_ne!(changed, text);
@@ -3432,12 +3455,12 @@ mod tests {
     #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
-        for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {
+        for (rate, expected, arithmetic) in [(10, "violated", false), (20, "satisfied", false), (20, "satisfied", true)] {
             let text = include_str!("thermal-deadline.sysml").replace(
                 "heatRate : Real = 10.0",
                 &format!("heatRate : Real = {rate}.0"),
             );
-            let text = if expected == "unevaluated" {
+            let text = if arithmetic {
                 text.replace(
                     "chamber.temperature >= chamber.targetTemperature",
                     "chamber.temperature + 0.0 >= chamber.targetTemperature",

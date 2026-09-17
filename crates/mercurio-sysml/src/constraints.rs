@@ -1246,24 +1246,79 @@ fn graph_edges(
     edges
 }
 
-fn eval_number(expr: &Expr, values: &HashMap<String, f64>) -> Option<f64> {
-    match expr {
-        Expr::Number(value) => Some(*value),
-        Expr::Var(id) => values.get(id).copied(),
-        Expr::UnaryMinus(expr) => eval_number(expr, values).map(|value| -value),
+struct ConstraintExpressionContext<'a>(&'a HashMap<String, f64>);
+impl mercurio_foundation::ExpressionEvaluationContext for ConstraintExpressionContext<'_> {
+    fn owner_id(&self) -> &str {
+        "constraint"
+    }
+    fn resolve_path(
+        &mut self,
+        segments: &[mercurio_foundation::ExpressionPathSegment],
+    ) -> Result<Vec<Value>, mercurio_foundation::ExpressionEvaluationError> {
+        let path = segments
+            .iter()
+            .map(|segment| segment.name())
+            .collect::<Vec<_>>()
+            .join(".");
+        self.0
+            .get(&path)
+            .copied()
+            .map(|value| vec![json!(value)])
+            .ok_or(mercurio_foundation::ExpressionEvaluationError::MissingBinding(path))
+    }
+}
+
+fn numeric_expression_ir(expr: &Expr, values: &HashMap<String, f64>) -> Option<ExpressionIr> {
+    use mercurio_foundation::{
+        BinaryExpressionOp as Op, ExpressionPathRoot, ExpressionPathSegment, UnaryExpressionOp,
+    };
+    Some(match expr {
+        Expr::Number(value) => ExpressionIr::Literal {
+            value: json!(value),
+        },
+        Expr::Var(id) => ExpressionIr::Path {
+            root: ExpressionPathRoot::SelfRef,
+            segments: vec![ExpressionPathSegment::Name(id.clone())],
+        },
+        Expr::UnaryMinus(expr) => ExpressionIr::Unary {
+            op: UnaryExpressionOp::Negate,
+            expr: Box::new(numeric_expression_ir(expr, values)?),
+        },
         Expr::Binary { op, left, right } => {
-            let left = eval_number(left, values)?;
-            let right = eval_number(right, values)?;
-            match op {
-                BinaryOp::Add => Some(left + right),
-                BinaryOp::Sub => Some(left - right),
-                BinaryOp::Mul => Some(left * right),
-                BinaryOp::Div if !nearly_equal(right, 0.0) => Some(left / right),
-                BinaryOp::Div => None,
+            let left = numeric_expression_ir(left, values)?;
+            let right = numeric_expression_ir(right, values)?;
+            // Near-singular equations remain a solver policy, not expression division semantics.
+            if *op == BinaryOp::Div
+                && nearly_equal(
+                    right
+                        .evaluate(&mut ConstraintExpressionContext(values))
+                        .ok()?
+                        .as_f64()?,
+                    0.0,
+                )
+            {
+                return None;
+            }
+            ExpressionIr::Binary {
+                left: Box::new(left),
+                right: Box::new(right),
+                op: match op {
+                    BinaryOp::Add => Op::Add,
+                    BinaryOp::Sub => Op::Subtract,
+                    BinaryOp::Mul => Op::Multiply,
+                    BinaryOp::Div => Op::Divide,
+                },
             }
         }
-        Expr::Compare { .. } => None,
-    }
+        Expr::Compare { .. } => return None,
+    })
+}
+
+fn eval_number(expr: &Expr, values: &HashMap<String, f64>) -> Option<f64> {
+    numeric_expression_ir(expr, values)?
+        .evaluate(&mut ConstraintExpressionContext(values))
+        .ok()?
+        .as_f64()
 }
 
 fn solve_for(
@@ -1580,6 +1635,27 @@ mod tests {
     use super::*;
     use mercurio_foundation::graph::Graph;
     use mercurio_foundation::{KirDocument, KirElement};
+
+    #[test]
+    fn shared_expression_static_arithmetic_preserves_solver_policy() {
+        let values = HashMap::from([("x".into(), 8.0)]);
+        assert_eq!(
+            eval_number(&parse_expression("-(x - 2) / 3").unwrap(), &values),
+            Some(-2.0)
+        );
+        assert_eq!(
+            eval_number(&parse_expression("x / 0").unwrap(), &values),
+            None
+        );
+        assert_eq!(
+            eval_number(&parse_expression("x / 0.0000000001").unwrap(), &values),
+            None
+        );
+        assert_eq!(
+            eval_number(&parse_expression("missing - 2").unwrap(), &values),
+            None
+        );
+    }
 
     #[test]
     fn propagates_simple_acausal_equation() {

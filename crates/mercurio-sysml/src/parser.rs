@@ -1,3 +1,4 @@
+pub(crate) mod behavior_expression;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
@@ -2562,6 +2563,17 @@ impl Parser {
                 modifiers.push(format!("trigger={}", trigger.as_dot_string()));
                 modifiers.push("trigger_kind=event".to_string());
             }
+        }
+
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+            self.advance();
+            let guard = self.collect_behavior_text_until_do_then_or_end();
+            modifiers.push(format!("guard={guard}"));
+        }
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+            self.advance();
+            let effect = self.collect_behavior_text_until_then_or_end();
+            modifiers.push(format!("effect={effect}"));
         }
 
         // The transition's payload feature is materialized only when it accepts

@@ -1914,6 +1914,26 @@ fn transpile_usage(
         );
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
+    if usage.construct == "TransitionUsage" {
+        let modifier = |prefix: &str| usage.modifiers.iter().find_map(|value| value.strip_prefix(prefix));
+        let guard = modifier("guard=").or_else(|| {
+            (modifier("trigger_kind=") == Some("when"))
+                .then(|| modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))).flatten()
+        });
+        if let Some(guard) = guard {
+            let expression = crate::parser::behavior_expression::expression(guard)
+                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
+            element.properties.insert("expression_ir".into(), expression);
+        }
+        if let Some(effect) = modifier("effect=").filter(|effect| effect.trim_start().starts_with("assign ")) {
+            let (feature, expression) = crate::parser::behavior_expression::assignment(effect)
+                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
+            element.properties.insert("effects".into(), json!([{
+                "kind":"assign_expression", "feature":feature, "expression":expression,
+                "source":usage.qualified_name,
+            }]));
+        }
+    }
     Ok(element)
 }
 
@@ -1991,6 +2011,7 @@ fn rate_integration_from_assertion(expression: &ResolvedExpr) -> Option<Value> {
         RateTerm::Constant(rate_per_second) => {
             json!({ "feature": feature, "rate_per_second": rate_per_second })
         }
+        RateTerm::Expression(expression) => json!({"feature":feature,"rate_expr":expression}),
     })
 }
 
@@ -1998,6 +2019,7 @@ fn rate_integration_from_assertion(expression: &ResolvedExpr) -> Option<Value> {
 enum RateTerm {
     Feature(String),
     Constant(f64),
+    Expression(Value),
 }
 
 fn rate_term_from_duration_product(expression: &ResolvedExpr) -> Option<RateTerm> {
@@ -2025,7 +2047,7 @@ fn rate_term(expression: &ResolvedExpr) -> Option<RateTerm> {
     }
     match expression {
         ResolvedExpr::Literal(Value::Number(number)) => number.as_f64().map(RateTerm::Constant),
-        _ => None,
+        _ => render_expression_ir(expression).ok().map(RateTerm::Expression),
     }
 }
 

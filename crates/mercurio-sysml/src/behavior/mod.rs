@@ -573,7 +573,7 @@ pub fn project_state_machines_from_graph(graph: &Graph) -> Vec<StateMachineModel
                 target,
                 trigger: string_property_any(element, &["trigger", "event", "guard"]),
                 trigger_kind: transition_trigger_kind(element),
-                guard: element.properties.get("guard").cloned(),
+                guard: element.properties.get("expression_ir").or_else(|| element.properties.get("guard")).cloned(),
                 effect: string_property_any(element, &["effect", "effect_action"]),
             });
         }
