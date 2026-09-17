@@ -929,6 +929,9 @@ fn resolve_expression(
             let parsed = value.parse::<f64>().map_err(|_| {
                 Diagnostic::new("invalid real literal", Some(expression_span(expr)))
             })?;
+            if !parsed.is_finite() {
+                return Err(Diagnostic::new("non-finite real literal", Some(expression_span(expr))));
+            }
             Ok(ResolvedExpr::Literal(Value::from(parsed)))
         }
         Expr::Literal(LiteralExpr::Boolean(value)) => {
