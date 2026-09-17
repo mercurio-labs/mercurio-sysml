@@ -233,6 +233,7 @@ pub fn scenario_from_analysis_case(
 fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[ConcurrentSubjectScenario]) -> ViewOverlayDto {
     let machines = crate::project_state_machines(runtime);
     let mut bindings = BTreeMap::new();
+    let mut machine_bindings = BTreeMap::new();
     for subject in subjects {
         // A definition shared by multiple simulated instances cannot display one
         // instance's value without an explicit instance-aware view contract.
@@ -242,6 +243,7 @@ fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[Con
         let Some(machine) = machines.iter().find(|machine| machine.id == subject.machine_id) else { continue; };
         let roots = machine.states.iter().filter(|state| state.parent_state_id.is_none()).collect::<Vec<_>>();
         if roots.len() != 1 || runtime.graph().element_by_element_id(&roots[0].id).is_none() { continue; }
+        machine_bindings.insert(subject.subject_id.clone(), roots[0].id.clone());
         let mut attributes = BTreeMap::<String, Vec<&Element>>::new();
         for attribute in runtime.graph().elements().iter().filter(|candidate| {
             candidate.kind.contains("AttributeUsage") &&
@@ -257,8 +259,27 @@ fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[Con
             }
         }
     }
+    let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(trace);
     let mut overlay = trace_to_view_overlay(trace);
     for (frame, entry) in overlay.frames.iter_mut().zip(&trace.timeline) {
+        for outcome in outcomes.iter().filter(|outcome| outcome.status == "violated"
+            && outcome.deadline_s.is_some_and(|deadline| entry.t >= deadline)) {
+            let Some(machine) = machine_bindings.get(&trace.subject_id) else {
+                frame.warnings.push(format!("Requirement violation binding unavailable for {}: no unique authored subject and machine.", outcome.requirement_id));
+                continue;
+            };
+            frame.node_marks.push(ViewNodeMarkDto {
+                element: machine.clone(), kind: "violating".into(),
+                label: Some(format!("Requirement violated: {}", outcome.requirement_id)),
+                properties: serde_json::Map::from_iter([
+                    ("subject".into(), serde_json::json!(trace.subject_id)),
+                    ("requirement_id".into(), serde_json::json!(outcome.requirement_id)),
+                    ("deadline_s".into(), serde_json::json!(outcome.deadline_s)),
+                    ("reason_code".into(), serde_json::json!(outcome.reason_code)),
+                    ("evidence_strength".into(), serde_json::json!(outcome.evidence_strength)),
+                ]),
+            });
+        }
         frame.node_values.clear();
         for ((subject, feature), value) in &entry.values {
             let Some((target, attribute)) = bindings.get(&(subject.clone(), feature.clone())) else {
@@ -3458,10 +3479,20 @@ mod tests {
             assert!(temperature.element.ends_with(".ThermalChamber.lifecycle"));
             assert_eq!(temperature.value, json!(20.0));
             assert!(overlay.frames[0].warnings.is_empty());
+            for frame in &overlay.frames {
+                let violations = frame.node_marks.iter().filter(|mark| mark.kind == "violating").collect::<Vec<_>>();
+                assert_eq!(violations.len(), usize::from(expected == "violated" && frame.time_s.unwrap_or(0.0) >= 5.0));
+                for mark in violations {
+                    assert_eq!(mark.element, temperature.element);
+                    assert_eq!(mark.properties["requirement_id"], serde_json::json!(trace.requirements[0].id));
+                }
+            }
+
             let mut ambiguous = scenario_from_analysis_case(&runtime, &case.id).unwrap().subjects;
             ambiguous.push(ambiguous[0].clone());
             let ambiguous_overlay = bind_trace_values(&runtime, &trace, &ambiguous);
             assert!(ambiguous_overlay.frames[0].node_values.is_empty());
+            assert!(ambiguous_overlay.frames.iter().all(|frame| frame.node_marks.iter().all(|mark| mark.kind != "violating")));
             assert!(!ambiguous_overlay.frames[0].warnings.is_empty());
             let outcomes = &report.artifacts[0].payload["requirement_outcomes"];
             assert_eq!(
