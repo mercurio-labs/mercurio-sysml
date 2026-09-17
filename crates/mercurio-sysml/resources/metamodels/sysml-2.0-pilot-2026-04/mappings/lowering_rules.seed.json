@@ -253,6 +253,7 @@
         "id_template": "action.{owner_path}.{declared_name}",
         "properties": {
           "declared_name": "$declared_name",
+          "is_abstract": "$is_abstract",
           "owner": "$owner_id",
           "type": "$type_ref"
         }

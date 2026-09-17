@@ -4,8 +4,9 @@ Opt in with the authored Mercurio::Missions profile. This is a sequential execut
 subset, not the full M11 token engine and not a general SysML conformance claim.
 
 - Put `@Mercurio::Missions::TimedActivity { completionFeature = "completed"; }`
-  inside one inline activity (`action procedure`) on the analysis subject's part definition.
-- Declare a unique Boolean attribute `completed : Boolean = false` on that definition.
+  inside one concrete (non-abstract) inline activity (`action procedure`) on the analysis subject's part definition.
+- Declare a unique Boolean attribute `completed : Boolean = false` on that definition. Explicit completion-output multiplicity, including `[1]`, is
+  outside this scalar-only profile and is rejected.
 - Give each leaf action `@Mercurio::Missions::Duration { seconds = 5.0; }`.
   Durations must be positive finite literal seconds; expressions are rejected.
 - Connect all actions in one sequence with `first warmup then hold;` successions.

@@ -131,12 +131,13 @@ pub(super) fn run(
         .element_by_element_id(&binding.behavior.element_id)
         .ok_or_else(|| invalid("missing activity"))?;
     if construct(behavior) != "ActionUsage"
+        || behavior.properties.get("is_abstract") == Some(&Value::Bool(true))
         || references(behavior.properties.get("type"))
             .iter()
             .any(|t| *t != "Actions::Action")
     {
         return Err(invalid(
-            "activity must be an inline action usage without inherited behavior",
+            "activity must be a concrete inline action usage without inherited behavior",
         ));
     }
     let annotation = properties(runtime, behavior, "TimedActivity", &["completionFeature"])
@@ -160,6 +161,7 @@ pub(super) fn run(
         })
         .collect::<Vec<_>>();
     if attributes.len() != 1
+        || attributes[0].properties.contains_key("multiplicity")
         || !references(attributes[0].properties.get("type")).contains(&"ScalarValues::Boolean")
         || attributes[0]
             .properties
@@ -168,7 +170,7 @@ pub(super) fn run(
             != Some(&Value::Bool(false))
     {
         return Err(invalid(
-            "completionFeature must resolve uniquely to an authored Boolean attribute initialized to false",
+            "completionFeature must resolve uniquely to an authored scalar Boolean attribute initialized to false; explicit multiplicity is unsupported",
         ));
     }
     for element in [
@@ -535,6 +537,22 @@ mod tests {
             .remove(0)
             .payload;
         assert_eq!(payload, execute(SOURCE).unwrap());
+    }
+    #[test]
+    fn timed_sequence_rejects_abstract_activity_and_collection_output() {
+        for source in [
+            SOURCE.replace("action procedure {", "abstract action procedure {"),
+            SOURCE.replace("action warmup {", "abstract action warmup {"),
+            SOURCE.replace(
+                "attribute completed : Boolean = false;",
+                "attribute completed : Boolean[2] = false;",
+            ),
+        ] {
+            let error = execute(&source)
+                .err()
+                .unwrap_or_else(|| panic!("unsupported declaration executed: {source}"));
+            assert!(format!("{error:?}").contains("activity.timed.unsupported"));
+        }
     }
     #[test]
     fn timed_sequence_rejects_unsupported_graphs_and_durations() {
