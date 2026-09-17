@@ -96,15 +96,32 @@ pub fn canonical_simulation_model(runtime: &Runtime) -> Result<SimulationModel, 
 }
 
 pub fn trace_to_view_overlay(trace: &SimulationTrace) -> ViewOverlayDto {
-    ViewOverlayDto {
-        version: 1,
-        frames: trace
-            .timeline
-            .iter()
-            .enumerate()
-            .map(|(index, entry)| trace_entry_to_overlay_frame(index, entry))
-            .collect(),
+    let mut seen_nodes = BTreeMap::<(String, String), ViewNodeMarkDto>::new();
+    let mut seen_edges = BTreeMap::<(String, String), ViewEdgeMarkDto>::new();
+    let mut frames = Vec::new();
+    for (index, entry) in trace.timeline.iter().enumerate() {
+        let mut frame = trace_entry_to_overlay_frame(index, entry);
+        for mark in seen_nodes.values_mut() {
+            mark.kind = "visited_state".into();
+            mark.label = Some("visited".into());
+        }
+        for mark in seen_edges.values_mut() {
+            mark.kind = "visited_transition".into();
+            mark.label = Some("visited".into());
+        }
+        for mark in frame.node_marks.drain(..) {
+            let subject = mark.properties.get("subject").and_then(Value::as_str).unwrap_or("").to_string();
+            seen_nodes.insert((subject, mark.element.clone()), mark);
+        }
+        for mark in frame.edge_marks.drain(..) {
+            let subject = mark.properties.get("subject").and_then(Value::as_str).unwrap_or("").to_string();
+            seen_edges.insert((subject, mark.element.clone()), mark);
+        }
+        frame.node_marks = seen_nodes.values().cloned().collect();
+        frame.edge_marks = seen_edges.values().cloned().collect();
+        frames.push(frame);
     }
+    ViewOverlayDto { version: 1, frames }
 }
 
 fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOverlayFrameDto {
@@ -135,6 +152,7 @@ fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOver
 
     let mut edge_marks = Vec::new();
     for event in &entry.events {
+        if event.kind != "transition" { continue; }
         let Some(transition_id) = event.transition_id.as_ref() else {
             continue;
         };
@@ -150,8 +168,8 @@ fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOver
         }
         edge_marks.push(ViewEdgeMarkDto {
             element: transition_id.clone(),
-            kind: "visited_transition".to_string(),
-            label: Some("visited".to_string()),
+            kind: "active_transition".to_string(),
+            label: Some("active".to_string()),
             properties,
         });
     }
@@ -1180,6 +1198,16 @@ mod tests {
         };
 
         let overlay = trace_to_view_overlay(&trace);
+        let mut extended = trace.clone();
+        let mut next = extended.timeline[0].clone();
+        next.t = 3.0;
+        next.states.get_mut("part.controller").unwrap().clear();
+        next.events.clear();
+        extended.timeline.push(next);
+        let history = trace_to_view_overlay(&extended);
+        assert_eq!(history.frames[0], overlay.frames[0]);
+        assert!(history.frames[1].node_marks.iter().all(|mark| mark.kind == "visited_state"));
+        assert!(history.frames[1].edge_marks.iter().all(|mark| mark.kind == "visited_transition"));
 
         assert_eq!(overlay.frames.len(), 1);
         let frame = &overlay.frames[0];
@@ -1192,7 +1220,7 @@ mod tests {
         }));
         assert!(frame.edge_marks.iter().any(|mark| {
             mark.element == "transition.Controller.ready"
-                && mark.kind == "visited_transition"
+                && mark.kind == "active_transition"
                 && mark.properties["trigger"] == json!("ready")
         }));
         assert!(frame.node_values.iter().any(|value| {
