@@ -228,6 +228,54 @@ pub fn scenario_from_analysis_case(
     adapter::scenario_from_analysis_case(runtime, analysis_case_id).map_err(map_adapter_error)
 }
 
+/// Bind values using authored subject/type/attribute relationships. Display on the
+/// subject's single root machine node; key retains the exact source attribute ID.
+fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[ConcurrentSubjectScenario]) -> ViewOverlayDto {
+    let machines = crate::project_state_machines(runtime);
+    let mut bindings = BTreeMap::new();
+    for subject in subjects {
+        // A definition shared by multiple simulated instances cannot display one
+        // instance's value without an explicit instance-aware view contract.
+        if subjects.iter().filter(|s| s.machine_id == subject.machine_id).count() != 1 { continue; }
+        let Some(owner) = runtime.graph().element_by_element_id(&subject.subject_id)
+            .and_then(|element| string_property_any(element, &["type", "definition"])) else { continue; };
+        let Some(machine) = machines.iter().find(|machine| machine.id == subject.machine_id) else { continue; };
+        let roots = machine.states.iter().filter(|state| state.parent_state_id.is_none()).collect::<Vec<_>>();
+        if roots.len() != 1 || runtime.graph().element_by_element_id(&roots[0].id).is_none() { continue; }
+        let mut attributes = BTreeMap::<String, Vec<&Element>>::new();
+        for attribute in runtime.graph().elements().iter().filter(|candidate| {
+            candidate.kind.contains("AttributeUsage") &&
+            string_property_any(candidate, &["owner", "owning_type"]).as_deref() == Some(owner.as_str())
+        }) {
+            if let Some(name) = string_property_any(attribute, &["declared_name", "name"]) {
+                attributes.entry(name).or_default().push(attribute);
+            }
+        }
+        for (name, matches) in attributes {
+            if matches.len() == 1 {
+                bindings.insert((subject.subject_id.clone(), name), (roots[0].id.clone(), matches[0].element_id.clone()));
+            }
+        }
+    }
+    let mut overlay = trace_to_view_overlay(trace);
+    for (frame, entry) in overlay.frames.iter_mut().zip(&trace.timeline) {
+        frame.node_values.clear();
+        for ((subject, feature), value) in &entry.values {
+            let Some((target, attribute)) = bindings.get(&(subject.clone(), feature.clone())) else {
+                frame.warnings.push(format!("Value binding unavailable for {subject}.{feature}: no unique authored attribute and machine."));
+                continue;
+            };
+            let unit = trace.channels.iter().find(|channel| channel.id == format!("{subject}.{feature}"))
+                .and_then(|channel| channel.unit.clone());
+            frame.node_values.push(ViewNodeValueDto {
+                element: target.clone(), key: attribute.clone(), value: value.clone(),
+                label: Some(feature.clone()), unit,
+            });
+        }
+    }
+    overlay
+}
+
 pub fn run_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
@@ -238,8 +286,10 @@ pub fn run_analysis_case(
 
     if has_executable_state_machine_binding(&spec) {
         let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
+        let subjects = scenario.subjects.clone();
         let trace = run_concurrent_simulation(runtime, scenario)?;
-        reports.push(simulation_trace_report(run_id, analysis_case_id, trace)?);
+        let overlay = bind_trace_values(runtime, &trace, &subjects);
+        reports.push(simulation_trace_report_with_overlay(run_id, analysis_case_id, trace, Some(overlay))?);
     }
 
     if requires_constraint_analysis(&spec) {
@@ -949,6 +999,15 @@ pub fn simulation_trace_report(
     analysis_case_id: &str,
     trace: SimulationTrace,
 ) -> Result<CapabilityRunReport, SimulationError> {
+    simulation_trace_report_with_overlay(run_id, analysis_case_id, trace, None)
+}
+
+fn simulation_trace_report_with_overlay(
+    run_id: &str,
+    analysis_case_id: &str,
+    trace: SimulationTrace,
+    overlay: Option<ViewOverlayDto>,
+) -> Result<CapabilityRunReport, SimulationError> {
     let reported_analysis_case_id = if trace.scenario_id.is_empty() {
         analysis_case_id
     } else {
@@ -960,7 +1019,7 @@ pub fn simulation_trace_report(
     payload["requirement_outcomes"] = serde_json::to_value(
         mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace),
     )?;
-    payload["view_overlay"] = serde_json::to_value(trace_to_view_overlay(&trace))?;
+    payload["view_overlay"] = serde_json::to_value(overlay.unwrap_or_else(|| trace_to_view_overlay(&trace)))?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
     let analysis_case_ref = SemanticElementRef::new(reported_analysis_case_id);
@@ -3256,6 +3315,17 @@ mod tests {
             let again = run_concurrent_simulation(&runtime, scenario).unwrap();
             assert_eq!(trace, again);
             let report = run_analysis_case(&runtime, &case.id, "deadline").unwrap();
+            let overlay: ViewOverlayDto = serde_json::from_value(report.artifacts[0].payload["view_overlay"].clone()).unwrap();
+            let temperature = overlay.frames[0].node_values.iter().find(|value| value.label.as_deref() == Some("temperature")).unwrap();
+            assert!(runtime.graph().element_by_element_id(&temperature.key).is_some());
+            assert!(temperature.element.ends_with(".ThermalChamber.lifecycle"));
+            assert_eq!(temperature.value, json!(20.0));
+            assert!(overlay.frames[0].warnings.is_empty());
+            let mut ambiguous = scenario_from_analysis_case(&runtime, &case.id).unwrap().subjects;
+            ambiguous.push(ambiguous[0].clone());
+            let ambiguous_overlay = bind_trace_values(&runtime, &trace, &ambiguous);
+            assert!(ambiguous_overlay.frames[0].node_values.is_empty());
+            assert!(!ambiguous_overlay.frames[0].warnings.is_empty());
             let outcomes = &report.artifacts[0].payload["requirement_outcomes"];
             assert_eq!(
                 outcomes[0]["status"], expected,
