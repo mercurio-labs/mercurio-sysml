@@ -3452,6 +3452,24 @@ mod tests {
     }
 
     #[test]
+    fn textual_state_actions_cannot_silently_drop_unsupported_behavior() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let source = include_str!("thermal-deadline.sysml");
+        for text in [
+            source.replace("do action integrate", "entry action integrate"),
+            source.replace("do action integrate", "exit action integrate"),
+            source.replace("temperature == temperature + heatRate * duration;", "temperature == temperature * heatRate;"),
+            source.replace("temperature == temperature + heatRate * duration;", "temperature == temperature + heatRate * duration; temperature > 0;"),
+            source.replace("do action integrate {", "do action integrate { action nested;"),
+        ] {
+            let document = compile_sysml_text(&text, "unsupported-state-action.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let error = canonical_simulation_model(&runtime).expect_err("unsupported authored behavior must not be dropped");
+            assert!(format!("{error:?}").contains("simulation.behavior.unsupported"), "{error:?}");
+        }
+    }
+
+    #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {
