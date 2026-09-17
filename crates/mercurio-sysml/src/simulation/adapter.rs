@@ -1,3 +1,4 @@
+mod mission_metadata;
 use std::collections::BTreeMap;
 
 use mercurio_foundation::graph::Element;
@@ -142,7 +143,8 @@ pub fn scenario_from_analysis_case(
         .and_then(Value::as_f64)
         .unwrap_or(1.0);
 
-    Ok(ConcurrentSimulationScenario {
+    let mut scenario = ConcurrentSimulationScenario {
+        termination_policy: Default::default(),
         id: analysis_case.element_id.clone(),
         subjects,
         max_steps,
@@ -155,7 +157,9 @@ pub fn scenario_from_analysis_case(
         initial_values,
         requirements,
         objectives,
-    })
+    };
+    mission_metadata::apply(runtime, analysis_case, &mut scenario)?;
+    Ok(scenario)
 }
 
 fn analysis_clock_config(
@@ -490,7 +494,17 @@ fn normalize_transition_with_effects(
         target: transition.target.clone(),
         trigger: SimulationTrigger {
             kind: normalize_trigger_kind(&transition.trigger_kind),
-            value: transition.trigger.clone(),
+            value: transition.trigger.as_ref().map(|value| {
+                if matches!(transition.trigger_kind, StateTransitionTriggerKind::Time | StateTransitionTriggerKind::After) {
+                    // Convert the supported textual SysML unit literals at the language boundary.
+                    if let Some((number, unit)) = value.trim().strip_suffix(']').and_then(|v| v.rsplit_once('[')) {
+                        if matches!(unit.trim(), "s" | "ms") && number.trim().parse::<f64>().is_ok() {
+                            return format!("{}{}", number.trim(), unit.trim());
+                        }
+                    }
+                }
+                value.clone()
+            }),
         },
         guard: transition.guard.clone().map(SimulationGuard::ExpressionIr),
         effects,

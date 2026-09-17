@@ -60,6 +60,30 @@ mod tests {
     use mercurio_foundation::{ContainerSelector, Mutation, QualifiedName};
 
     #[test]
+    fn checked_metadata_edit_preserves_multiple_top_level_packages() {
+        let profile = include_str!("../resources/profiles/MercurioMissions.sysml");
+        let mission = include_str!("simulation/thermal-deadline.sysml");
+        let source = format!("{profile}\n{mission}");
+        let mut project = load_authoring_project_from_sysml(BTreeMap::from([("mission.sysml".into(), source.clone())])).unwrap();
+        let mutation = project.apply_mutation(Mutation::AddMetadataAnnotation {
+            element: QualifiedName(vec!["SimulationConstraintsChannels".into(), "HeatProfile".into()]),
+            metadata_type: "Mercurio::Missions::Termination".into(),
+            properties: BTreeMap::from([("onAnyViolated".into(), "true".into())]),
+        }).unwrap();
+        let edited = project.write_back_mutation(&mutation).unwrap();
+        assert!(edited.validation.ok, "{:?}", edited.validation);
+        let text = &edited.edited_files["mission.sysml"];
+        assert!(text.starts_with(profile), "Unrelated profile source was changed: {text}");
+        assert_eq!(text.matches("package SimulationConstraintsChannels").count(), 1);
+        assert!(text.contains("@Mercurio::Missions::Termination"));
+        let stdlib = crate::load_sysml_baseline().unwrap();
+        let runtime = mercurio_foundation::runtime::Runtime::from_document(crate::compile_sysml_text(text, "mission.sysml", &stdlib).unwrap()).unwrap();
+        let case = crate::simulation::list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+        let report = crate::simulation::run_analysis_case(&runtime, &case.id, "checked-metadata").unwrap();
+        assert_eq!(report.artifacts[0].payload["termination"], "requirement_violated");
+    }
+
+    #[test]
     fn loads_sysml_authoring_project_from_source_files() {
         let project = load_authoring_project_from_sysml(BTreeMap::from([(
             "demo.sysml".to_string(),

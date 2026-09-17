@@ -1014,11 +1014,20 @@ fn simulation_trace_report_with_overlay(
         trace.scenario_id.as_str()
     };
     let mut payload = serde_json::to_value(&trace)?;
+    payload["trace_schema"] = Value::String("mercurio.simulation.trace.v1".into());
     payload["requirement_outcomes_schema"] =
         Value::String("mercurio.simulation.requirement_outcomes.v1".into());
-    payload["requirement_outcomes"] = serde_json::to_value(
-        mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace),
-    )?;
+    let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace);
+    payload["requirement_outcomes"] = serde_json::to_value(&outcomes)?;
+    payload["mission_summary"] = serde_json::json!({
+        "schema_version": 1, "evidence_strength": "sampled_simulation",
+        "execution_status": trace.status, "termination": trace.termination,
+        "recorded_end_time_s": trace.timeline.last().map(|frame| frame.t),
+        "frame_count": trace.timeline.len(),
+        "requirements": {"satisfied": outcomes.iter().filter(|o| o.status == "satisfied").count(),
+            "violated": outcomes.iter().filter(|o| o.status == "violated").count(),
+            "unevaluated": outcomes.iter().filter(|o| o.status == "unevaluated").count()}
+    });
     payload["view_overlay"] = serde_json::to_value(overlay.unwrap_or_else(|| trace_to_view_overlay(&trace)))?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
@@ -1238,6 +1247,7 @@ mod tests {
     #[test]
     fn trace_to_view_overlay_projects_states_events_and_values() {
         let trace = SimulationTrace {
+            configuration: None,
             termination: None,
             scenario_id: "scenario.demo".to_string(),
             subject_id: "part.controller".to_string(),
@@ -1348,6 +1358,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.concurrent".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -1810,6 +1821,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.cross_part".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -1872,6 +1884,7 @@ mod tests {
         let error = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.legacy_rate".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -1945,6 +1958,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.state_do_rate".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2062,6 +2076,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.thermal_constraint".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2176,6 +2191,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.newton_cooling".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2260,6 +2276,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.lookup_curve".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2374,6 +2391,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.signal".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -2580,6 +2598,7 @@ mod tests {
             let trace = run_concurrent_simulation(
                 &runtime,
                 ConcurrentSimulationScenario {
+                    termination_policy: Default::default(),
                     id: format!("scenario.signal_join.{id}"),
                     subjects,
                     max_steps: 12,
@@ -2638,6 +2657,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.initial".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2715,6 +2735,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.composite_target".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2834,6 +2855,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.sibling".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2947,6 +2969,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.entry_signal".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -3026,6 +3049,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.orthogonal_initial".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3113,6 +3137,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.orthogonal_branch".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3226,6 +3251,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.history".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3270,6 +3296,84 @@ mod tests {
         assert!(states.contains(&"state.Controller.Active".to_string()));
         assert!(states.contains(&"state.Controller.Active.B".to_string()));
         assert!(!states.contains(&"state.Controller.Active.A".to_string()));
+    }
+
+    #[test]
+    fn textual_absolute_time_is_independent_of_state_entry() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let text = include_str!("thermal-deadline.sysml")
+            .replace("accept start then Heating", "accept after 2[s] then Heating")
+            .replace("accept when temperature >= targetTemperature then Ready", "accept at 3[s] then done");
+        let runtime = Runtime::from_document(compile_sysml_text(&text, "absolute-time.sysml", &stdlib).unwrap()).unwrap();
+        let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+        let report = run_analysis_case(&runtime, &case.id, "absolute-time").unwrap();
+        let trace = &report.artifacts[0].payload;
+        assert_eq!(trace["termination"], "final_state");
+        assert_eq!(trace["mission_summary"]["recorded_end_time_s"], 3.0);
+        assert_eq!(trace["mission_summary"]["requirements"]["unevaluated"], 1);
+        let milliseconds = text.replace("2[s]", "2000[ms]").replace("3[s]", "3000[ms]");
+        let runtime = Runtime::from_document(compile_sysml_text(&milliseconds, "absolute-ms.sysml", &stdlib).unwrap()).unwrap();
+        let report = run_analysis_case(&runtime, &case.id, "absolute-ms").unwrap();
+        assert_eq!(report.artifacts[0].payload["mission_summary"]["recorded_end_time_s"], 3.0);
+        for expression in ["3[min]", "targetTemperature", "-1[s]"] {
+            let unsupported = text.replace("3[s]", expression);
+            let runtime = Runtime::from_document(compile_sysml_text(&unsupported, "unsupported-time.sysml", &stdlib).unwrap()).unwrap();
+            let error = canonical_simulation_model(&runtime).unwrap_err();
+            assert!(format!("{error:?}").contains("transition.time_unsupported"), "{error:?}");
+        }
+
+    }
+
+    #[test]
+    fn typed_mission_metadata_controls_clock_stimulus_and_termination() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let metadata = r#"
+            @Mercurio::Missions::Clock { maxTime = 10.0; fixedStep = 0.5; sampleInterval = 0.5; maxSteps = 100; }
+            @Mercurio::Missions::InitialStimulus { subject = "chamber"; trigger = "start"; }
+            @Mercurio::Missions::Termination { onAllSatisfied = true; onAnyViolated = true; onBlocked = true; }
+        "#;
+        let profile = include_str!("../../resources/profiles/MercurioMissions.sysml");
+        let fixture = include_str!("thermal-deadline.sysml").replace("subject chamber : ThermalChamber;", &format!("{metadata} subject chamber : ThermalChamber;"));
+        for (rate, reason, outcome) in [(10, "requirement_violated", "violated"), (20, "requirements_satisfied", "satisfied")] {
+            let text = format!("{profile}\n{fixture}").replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "mission.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(scenario.clock_config.as_ref().unwrap().fixed_step_s, 0.5);
+            assert_eq!(scenario.max_steps, 100);
+            assert_eq!(scenario.subjects[0].events.len(), 1);
+            let report = run_analysis_case(&runtime, &case.id, "mission").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["termination"], reason, "{trace:#}");
+            assert_eq!(trace["trace_schema"], "mercurio.simulation.trace.v1");
+            assert_eq!(trace["configuration"]["clock"]["fixed_step_s"], 0.5);
+            assert_eq!(trace["configuration"]["termination_policy"]["on_any_violated"], true);
+            assert_eq!(trace["timeline"].as_array().unwrap().last().unwrap()["t"], 5.0);
+            assert_eq!(trace["requirement_outcomes"][0]["status"], outcome);
+            assert!(trace["timeline"].as_array().unwrap().iter().any(|f| f["t"] == 0.5));
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(run_concurrent_simulation(&runtime, scenario.clone()).unwrap(), run_concurrent_simulation(&runtime, scenario).unwrap());
+        }
+        let text = format!("{profile}\n{fixture}");
+        for (from, to, expected) in [
+            ("fixedStep = 0.5", "fixedStep = 0.0", "invalid"),
+            ("fixedStep = 0.5", "fixedStep = 0.25 + 0.25", "invalid"),
+            ("maxSteps = 100", "maxSteps = 1.5", "invalid"),
+            ("subject = \"chamber\"", "subject = \"missing\"", "invalid"),
+            ("trigger = \"start\"", "trigger = \"unknown\"", "blocked"),
+            ("chamber.temperature >= chamber.targetTemperature", "chamber.temperature + 0.0 >= chamber.targetTemperature", "time_budget_exhausted"),
+        ] {
+            let changed = text.replace(from, to);
+            assert_ne!(changed, text);
+            let runtime = Runtime::from_document(compile_sysml_text(&changed, "invalid-mission.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            if expected == "invalid" {
+                assert!(format!("{:?}", scenario_from_analysis_case(&runtime, &case.id).unwrap_err()).contains("mission.metadata.invalid"));
+            } else {
+                let report = run_analysis_case(&runtime, &case.id, "mission").unwrap();
+                assert_eq!(report.artifacts[0].payload["termination"], expected);
+            }
+        }
     }
 
     #[test]
@@ -3477,6 +3581,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.concurrent.states".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
