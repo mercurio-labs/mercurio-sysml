@@ -1,7 +1,7 @@
 mod mission_metadata;
 use std::collections::BTreeMap;
 
-use mercurio_foundation::graph::Element;
+use mercurio_foundation::graph::{Element, Graph};
 use serde_json::Value;
 
 use crate::{
@@ -43,8 +43,11 @@ pub fn simulation_model_from_runtime(
 }
 
 pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
-    runtime
-        .graph()
+    list_analysis_cases_from_graph(runtime.graph())
+}
+
+pub fn list_analysis_cases_from_graph(graph: &Graph) -> Vec<AnalysisCaseInfo> {
+    graph
         .elements()
         .iter()
         .filter(|element| is_project_analysis_case(element))
@@ -54,7 +57,7 @@ pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
                 .get("subjects")
                 .and_then(Value::as_array)
                 .map(Vec::len)
-                .unwrap_or_else(|| native_analysis_subject_elements(runtime, element).len());
+                .unwrap_or_else(|| analysis_subject_elements_from_graph(graph, element).len());
             AnalysisCaseInfo {
                 id: element.element_id.clone(),
                 label: element_label_element(element),
@@ -812,8 +815,14 @@ fn native_analysis_subject_elements<'a>(
     runtime: &'a Runtime,
     analysis_case: &Element,
 ) -> Vec<&'a Element> {
-    runtime
-        .graph()
+    analysis_subject_elements_from_graph(runtime.graph(), analysis_case)
+}
+
+fn analysis_subject_elements_from_graph<'a>(
+    graph: &'a Graph,
+    analysis_case: &Element,
+) -> Vec<&'a Element> {
+    graph
         .elements()
         .iter()
         .filter(|candidate| {

@@ -221,6 +221,11 @@ pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
     adapter::list_analysis_cases(runtime)
 }
 
+/// Enumerate authored analysis cases without materializing runtime-derived indexes.
+pub fn list_analysis_cases_from_graph(graph: &Graph) -> Vec<AnalysisCaseInfo> {
+    adapter::list_analysis_cases_from_graph(graph)
+}
+
 pub fn scenario_from_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
@@ -1480,6 +1485,10 @@ mod tests {
         .unwrap();
 
         let cases = list_analysis_cases(&runtime);
+        assert_eq!(
+            serde_json::to_value(&cases).unwrap(),
+            serde_json::to_value(super::list_analysis_cases_from_graph(runtime.graph())).unwrap(),
+        );
         assert_eq!(cases.len(), 1);
         assert_eq!(cases[0].label, "PrintSequence");
         assert_eq!(cases[0].subject_count, 1);
