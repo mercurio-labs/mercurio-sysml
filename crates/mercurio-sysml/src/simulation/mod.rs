@@ -244,7 +244,16 @@ fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[Con
         // instance's value without an explicit instance-aware view contract.
         if subjects.iter().filter(|s| s.machine_id == subject.machine_id).count() != 1 { continue; }
         let Some(owner) = runtime.graph().element_by_element_id(&subject.subject_id)
-            .and_then(|element| string_property_any(element, &["type", "definition"])) else { continue; };
+            // Registered KIR merges normalize reference fields to arrays. Bind only
+            // a single type; multiple types remain ambiguous.
+            .and_then(|element| ["type", "definition"].iter().find_map(|key| {
+                let value = element.properties.get(*key)?;
+                match value {
+                    Value::String(value) => Some(value.clone()),
+                    Value::Array(values) if values.len() == 1 => values[0].as_str().map(str::to_owned),
+                    _ => None,
+                }
+            })) else { continue; };
         let Some(machine) = machines.iter().find(|machine| machine.id == subject.machine_id) else { continue; };
         let roots = machine.states.iter().filter(|state| state.parent_state_id.is_none()).collect::<Vec<_>>();
         if roots.len() != 1 || runtime.graph().element_by_element_id(&roots[0].id).is_none() { continue; }
@@ -3455,6 +3464,10 @@ mod tests {
                 text
             };
             let document = compile_sysml_text(&text, "thermal-deadline.sysml", &stdlib).unwrap();
+            let merged = mercurio_foundation::KirDocument::merge_with_registered_fields(
+                vec![document.clone()], crate::sysml_field_specs().iter().copied(),
+            ).unwrap();
+            let merged_runtime = Runtime::from_document(merged).unwrap();
             let runtime = Runtime::from_document(document).unwrap();
             let case = list_analysis_cases(&runtime)
                 .into_iter()
@@ -3482,6 +3495,9 @@ mod tests {
             let again = run_concurrent_simulation(&runtime, scenario).unwrap();
             assert_eq!(trace, again);
             let report = run_analysis_case(&runtime, &case.id, "deadline").unwrap();
+            let merged_report = run_analysis_case(&merged_runtime, &case.id, "deadline").unwrap();
+            assert_eq!(report.artifacts[0].payload, merged_report.artifacts[0].payload,
+                "registered reference normalization must preserve the complete trace");
             let overlay: ViewOverlayDto = serde_json::from_value(report.artifacts[0].payload["view_overlay"].clone()).unwrap();
             let temperature = overlay.frames[0].node_values.iter().find(|value| value.label.as_deref() == Some("temperature")).unwrap();
             assert!(runtime.graph().element_by_element_id(&temperature.key).is_some());
