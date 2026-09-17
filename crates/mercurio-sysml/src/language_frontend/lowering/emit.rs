@@ -1277,6 +1277,9 @@ pub fn transpile_module_with_source(
         disambiguate_duplicate_element_ids(&mut elements);
     }
     disambiguate_duplicate_source_position_usage_ids(&mut elements);
+    if source_language == "sysml" {
+        materialize_referenced_state_done(&mut elements);
+    }
     validate_unique_ids(&elements)?;
 
     Ok(KirDocument {
@@ -1298,6 +1301,36 @@ pub fn transpile_module_with_source(
         .collect(),
         elements,
     })
+}
+
+// States::StateAction provides an inherited done endpoint. Materialize a scoped
+// usage only for an explicit transition reference and preserve local shadowing.
+// This makes the endpoint available to every graph consumer, including views.
+fn materialize_referenced_state_done(elements: &mut Vec<KirElement>) {
+    let mut generated = BTreeMap::new();
+    for transition in elements.iter() {
+        let Some(target) = transition.properties.get("target").and_then(Value::as_str) else { continue; };
+        let Some(parent_id) = target.strip_suffix(".done") else { continue; };
+        if transition.properties.get("owner").and_then(Value::as_str) != Some(parent_id)
+            || !transition.properties.contains_key("source")
+            || elements.iter().any(|element| element.id == target) {
+            continue;
+        }
+        let Some(parent) = elements.iter().find(|element| element.id == parent_id
+            && element.properties.get("metatype").and_then(Value::as_str).is_some_and(|kind| kind.contains("StateUsage"))) else { continue; };
+        generated.entry(target.to_string()).or_insert_with(|| KirElement {
+            id: target.into(), kind: parent.kind.clone(), layer: parent.layer,
+            properties: BTreeMap::from([
+                ("owner".into(), json!(parent_id)),
+                ("parent_state".into(), json!(parent_id)),
+                ("declared_name".into(), json!("done")),
+                ("metatype".into(), json!("SysML::StateUsage")),
+                ("is_final".into(), json!(true)),
+                ("metadata".into(), json!({"generated":true,"semantic_origin":"States::StateAction::done","source_transition":transition.id})),
+            ]),
+        });
+    }
+    elements.extend(generated.into_values());
 }
 
 fn package_owner_id(usage: &ResolvedUsage, package_ids: &BTreeMap<String, String>) -> String {
@@ -1881,6 +1914,26 @@ fn transpile_usage(
         );
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
+    if usage.construct == "TransitionUsage" {
+        let modifier = |prefix: &str| usage.modifiers.iter().find_map(|value| value.strip_prefix(prefix));
+        let guard = modifier("guard=").or_else(|| {
+            (modifier("trigger_kind=") == Some("when"))
+                .then(|| modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))).flatten()
+        });
+        if let Some(guard) = guard {
+            let expression = crate::parser::behavior_expression::expression(guard)
+                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
+            element.properties.insert("expression_ir".into(), expression);
+        }
+        if let Some(effect) = modifier("effect=").filter(|effect| effect.trim_start().starts_with("assign ")) {
+            let (feature, expression) = crate::parser::behavior_expression::assignment(effect)
+                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
+            element.properties.insert("effects".into(), json!([{
+                "kind":"assign_expression", "feature":feature, "expression":expression,
+                "source":usage.qualified_name,
+            }]));
+        }
+    }
     Ok(element)
 }
 
@@ -1958,6 +2011,7 @@ fn rate_integration_from_assertion(expression: &ResolvedExpr) -> Option<Value> {
         RateTerm::Constant(rate_per_second) => {
             json!({ "feature": feature, "rate_per_second": rate_per_second })
         }
+        RateTerm::Expression(expression) => json!({"feature":feature,"rate_expr":expression}),
     })
 }
 
@@ -1965,6 +2019,7 @@ fn rate_integration_from_assertion(expression: &ResolvedExpr) -> Option<Value> {
 enum RateTerm {
     Feature(String),
     Constant(f64),
+    Expression(Value),
 }
 
 fn rate_term_from_duration_product(expression: &ResolvedExpr) -> Option<RateTerm> {
@@ -1992,7 +2047,7 @@ fn rate_term(expression: &ResolvedExpr) -> Option<RateTerm> {
     }
     match expression {
         ResolvedExpr::Literal(Value::Number(number)) => number.as_f64().map(RateTerm::Constant),
-        _ => None,
+        _ => render_expression_ir(expression).ok().map(RateTerm::Expression),
     }
 }
 

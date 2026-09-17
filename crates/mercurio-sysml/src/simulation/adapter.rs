@@ -1,3 +1,4 @@
+mod mission_metadata;
 use std::collections::BTreeMap;
 
 use mercurio_foundation::graph::Element;
@@ -36,6 +37,37 @@ impl From<mercurio_foundation::simulation_core::SimulationProfileError>
 pub fn simulation_model_from_runtime(
     runtime: &Runtime,
 ) -> Result<SimulationModel, SysmlSimulationAdapterError> {
+    // Normalization must never silently drop an authored effect or action branch.
+    for element in runtime.graph().elements() {
+        for field in ["entry_behavior", "exit_behavior"] {
+            if let Some(value) = element.properties.get(field) {
+                validate_action_input(value).map_err(|message| {
+                    SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                        "{} {field}: {message}",
+                        element.element_id
+                    ))
+                })?;
+            }
+        }
+        if let Some(effects) = element.properties.get("effects") {
+            let effects = effects.as_array().ok_or_else(|| {
+                SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                    "{} effects must be an array",
+                    element.element_id
+                ))
+            })?;
+            for effect in effects {
+                if effect.get("kind").and_then(Value::as_str) != Some("rate")
+                    && normalize_effect(effect).is_none()
+                {
+                    return Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                        "{} unsupported or malformed effect: {effect}",
+                        element.element_id
+                    )));
+                }
+            }
+        }
+    }
     let model = normalize_state_machines_from_runtime(runtime, project_state_machines(runtime));
     validate_simulation_model(&model)?;
     Ok(model)
@@ -142,7 +174,8 @@ pub fn scenario_from_analysis_case(
         .and_then(Value::as_f64)
         .unwrap_or(1.0);
 
-    Ok(ConcurrentSimulationScenario {
+    let mut scenario = ConcurrentSimulationScenario {
+        termination_policy: Default::default(),
         id: analysis_case.element_id.clone(),
         subjects,
         max_steps,
@@ -155,7 +188,9 @@ pub fn scenario_from_analysis_case(
         initial_values,
         requirements,
         objectives,
-    })
+    };
+    mission_metadata::apply(runtime, analysis_case, &mut scenario)?;
+    Ok(scenario)
 }
 
 fn analysis_clock_config(
@@ -276,6 +311,58 @@ fn simulation_derived_rules(runtime: &Runtime) -> Vec<SimulationDerivedFeatureRu
             })
         })
         .collect::<Vec<_>>();
+    // A calculation owned by a type applies to its bound instances, not every
+    // concurrent subject. Resolve applicability before evaluating; never hide an
+    // expression failure to guess which subject was intended.
+    rules = rules
+        .into_iter()
+        .flat_map(|rule| {
+            if rule.subject_id.is_some() {
+                return vec![rule];
+            }
+            let owner = runtime
+                .graph()
+                .element_by_element_id(&rule.id)
+                .and_then(|element| {
+                    element
+                        .properties
+                        .get("owner")
+                        .or_else(|| element.properties.get("owning_type"))
+                })
+                .and_then(Value::as_str);
+            let Some(owner) = owner else {
+                return vec![rule];
+            };
+            let subjects = runtime
+                .graph()
+                .elements()
+                .iter()
+                .filter(|candidate| {
+                    ["type", "definition"].iter().any(|key| {
+                        candidate.properties.get(*key).is_some_and(|value| {
+                            value.as_str() == Some(owner)
+                                || value.as_array().is_some_and(|items| {
+                                    items.iter().any(|value| value.as_str() == Some(owner))
+                                })
+                        })
+                    })
+                })
+                .map(|candidate| candidate.element_id.clone())
+                .collect::<Vec<_>>();
+            if subjects.is_empty() {
+                return vec![rule];
+            }
+            subjects
+                .into_iter()
+                .map(|subject| {
+                    let mut bound = rule.clone();
+                    bound.id = format!("{}@{}", bound.id, subject);
+                    bound.subject_id = Some(subject);
+                    bound
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect();
     rules.extend(simulation_constraint_derived_rules(runtime));
     rules
 }
@@ -490,7 +577,25 @@ fn normalize_transition_with_effects(
         target: transition.target.clone(),
         trigger: SimulationTrigger {
             kind: normalize_trigger_kind(&transition.trigger_kind),
-            value: transition.trigger.clone(),
+            value: transition.trigger.as_ref().map(|value| {
+                if matches!(
+                    transition.trigger_kind,
+                    StateTransitionTriggerKind::Time | StateTransitionTriggerKind::After
+                ) {
+                    // Convert the supported textual SysML unit literals at the language boundary.
+                    if let Some((number, unit)) = value
+                        .trim()
+                        .strip_suffix(']')
+                        .and_then(|v| v.rsplit_once('['))
+                    {
+                        if matches!(unit.trim(), "s" | "ms") && number.trim().parse::<f64>().is_ok()
+                        {
+                            return format!("{}{}", number.trim(), unit.trim());
+                        }
+                    }
+                }
+                value.clone()
+            }),
         },
         guard: transition.guard.clone().map(SimulationGuard::ExpressionIr),
         effects,
@@ -588,6 +693,42 @@ fn normalize_action_sequence(value: &Value) -> Option<SimulationActionSequence> 
     Some(SimulationActionSequence { actions })
 }
 
+fn validate_action_input(value: &Value) -> Result<(), String> {
+    let actions = value
+        .get("actions")
+        .unwrap_or(value)
+        .as_array()
+        .ok_or_else(|| "action sequence must contain an actions array".to_string())?;
+    for action in actions {
+        if action.get("kind").and_then(Value::as_str) == Some("decision") {
+            if action.get("guard").is_none()
+                && action
+                    .get("guard_feature")
+                    .and_then(Value::as_str)
+                    .is_none()
+            {
+                return Err("decision has no guard".into());
+            }
+            let then_branch = action
+                .get("then_branch")
+                .or_else(|| action.get("then"))
+                .or_else(|| action.get("thenBranch"))
+                .ok_or_else(|| "decision has no then branch".to_string())?;
+            validate_action_input(then_branch)?;
+            if let Some(branch) = action
+                .get("else_branch")
+                .or_else(|| action.get("else"))
+                .or_else(|| action.get("elseBranch"))
+            {
+                validate_action_input(branch)?;
+            }
+        } else if normalize_effect(action).is_none() {
+            return Err(format!("unsupported or malformed action: {action}"));
+        }
+    }
+    Ok(())
+}
+
 fn normalize_action_node(value: &Value) -> Option<SimulationActionNode> {
     let object = value.as_object()?;
     match object.get("kind").and_then(Value::as_str)? {
@@ -641,6 +782,10 @@ fn normalize_action_branch(value: &Value) -> Option<SimulationActionSequence> {
 fn normalize_effect(value: &Value) -> Option<SimulationEffect> {
     let object = value.as_object()?;
     match object.get("kind").and_then(Value::as_str)? {
+        "assign_expression" => Some(SimulationEffect::AssignExpression {
+            feature: object.get("feature")?.as_str()?.to_string(),
+            expression: object.get("expression")?.clone(),
+        }),
         "assign" => Some(SimulationEffect::Assign(AssignEffect {
             feature: object.get("feature")?.as_str()?.to_string(),
             value: object.get("value")?.clone(),
@@ -960,12 +1105,77 @@ fn native_analysis_requirements(
                 && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
                     == Some(analysis_case.element_id.as_str())
         })
-        .map(|requirement| SimulationRequirement {
-            id: requirement.element_id.clone(),
-            label: element_label_element(requirement),
-            expression: requirement.properties.get("expression_ir").cloned(),
+        .map(|requirement| {
+            let children: Vec<_> = runtime
+                .graph()
+                .elements()
+                .iter()
+                .filter(|candidate| {
+                    string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
+                        == Some(requirement.element_id.as_str())
+                })
+                .collect();
+            let deadline_s = children
+                .iter()
+                .find(|child| element_label_element(child) == "deadline")
+                .and_then(|child| attribute_default_value(child))
+                .and_then(|v| v.as_f64());
+            let constraints: Vec<_> = children
+                .iter()
+                .filter(|child| is_analysis_requirement(child))
+                .collect();
+            let mut expression = requirement
+                .properties
+                .get("expression_ir")
+                .cloned()
+                .or_else(|| {
+                    (constraints.len() == 1)
+                        .then(|| constraints[0].properties.get("expression_ir").cloned())
+                        .flatten()
+                });
+            if native_analysis_subject_elements(runtime, analysis_case).len() != 1 {
+                expression = None;
+            }
+            if let Some(expression) = &mut expression {
+                let aliases: BTreeMap<_, _> =
+                    native_analysis_subject_elements(runtime, analysis_case)
+                        .into_iter()
+                        .map(|subject| (element_label_element(subject), subject.element_id.clone()))
+                        .collect();
+                qualify_requirement_paths(expression, &aliases);
+            }
+            SimulationRequirement {
+                id: requirement.element_id.clone(),
+                label: element_label_element(requirement),
+                expression,
+                deadline_s,
+            }
         })
         .collect()
+}
+
+fn qualify_requirement_paths(expression: &mut Value, aliases: &BTreeMap<String, String>) {
+    if expression["kind"] == "path" {
+        if let Some(segments) = expression.get_mut("segments").and_then(Value::as_array_mut) {
+            if let Some(first) = segments.first_mut() {
+                if let Some(subject) =
+                    expression_path_segment_name(first).and_then(|name| aliases.get(&name))
+                {
+                    *first = Value::String(subject.clone());
+                }
+            }
+        }
+    } else if let Some(object) = expression.as_object_mut() {
+        for value in object.values_mut() {
+            if let Some(items) = value.as_array_mut() {
+                for item in items {
+                    qualify_requirement_paths(item, aliases);
+                }
+            } else if value.is_object() {
+                qualify_requirement_paths(value, aliases);
+            }
+        }
+    }
 }
 
 fn native_analysis_objectives(
@@ -1056,7 +1266,28 @@ fn objective_subject_feature(
 }
 
 fn is_analysis_requirement(element: &Element) -> bool {
-    element.kind.contains("RequireUsage")
+    if element.element_id.starts_with("objective.")
+        || element
+            .properties
+            .get("metadata")
+            .and_then(|m| m.get("lowering"))
+            .and_then(|l| l.get("construct"))
+            .and_then(Value::as_str)
+            == Some("ObjectiveUsage")
+    {
+        return false;
+    }
+    element
+        .properties
+        .get("metatype")
+        .and_then(Value::as_str)
+        .is_some_and(|kind| {
+            matches!(
+                kind.rsplit("::").next(),
+                Some("RequirementUsage" | "RequireUsage")
+            )
+        })
+        || element.kind.contains("RequireUsage")
         || element.kind.contains("RequirementUsage")
         || element.element_id.starts_with("require.")
 }

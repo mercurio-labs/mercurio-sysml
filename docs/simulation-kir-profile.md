@@ -164,3 +164,52 @@ canonical transition ID and a trigger rendering.
 - transition source/target references outside the machine
 - missing trigger values for triggered transitions
 - ambiguous transitions from the same source for the same trigger kind/value
+
+## Shared expression evaluation
+
+The foundation `ExpressionIr` evaluator owns arithmetic, comparisons, Boolean
+operators, tuples, and the `count`, `sum`, `min`, `max`, and `avg` built-ins.
+Simulation guards, decisions, expression assignments, rates, derived values,
+and sampled deadline predicates use this evaluator through snapshot bindings.
+Runtime calculations use the same evaluator through runtime bindings; static
+constraint numeric evaluation delegates to it while retaining solver tolerances.
+
+Expressions are prepared and cached within each simulation run. Bindings are
+read at evaluation time, so sequential actions observe earlier assignments.
+Guards and predicates require a Boolean result. Missing bindings, invalid types,
+unknown operators/functions, division by zero, and non-finite results are errors;
+Boolean operands are evaluated eagerly. Dynamic execution propagates errors;
+requirement reporting records an unevaluated outcome with its existing reason
+code. Empty collections remain distinct from missing scalar bindings.
+
+Expression assignment is explicit, preserving existing literal JSON assignment:
+
+```json
+{
+  "kind": "assign_expression",
+  "feature": "temperature",
+  "expression": {
+    "kind": "binary", "op": "subtract",
+    "left": { "kind": "path", "segments": ["temperature"] },
+    "right": { "kind": "literal", "value": 2.0 }
+  }
+}
+```
+
+Textual transition guards and `do assign temperature := temperature - 2.0`
+are lowered by the SysML parser into this IR. Textual expression assignments
+currently target an initialized local feature (`self.temperature` is accepted).
+A missing target or failed RHS is rejected before writing that assignment;
+previous successful actions are not rolled back. Qualified RHS paths are supported.
+Typed transition guards are emitted in KIR's registered `expression_ir` field.
+Legacy single-comparison guard strings are translated into IR at the boundary.
+
+This is a shared evaluator for the supported subset, not complete SysML execution,
+unit algebra, arbitrary user functions, or temporal proof. Requirement evidence
+remains sampled; native, WASM, MCP, and playback UI consume the recorded engine
+verdict, witness, deadline, and termination evidence.
+
+WASM embeds the same default core rulepack that native loads from disk, enabling
+shared optimized index materialization for full-library simulation sessions.
+The full-library browser regression validates the same traces and requirement
+verdicts as native/MCP, with repeat runs on each host.

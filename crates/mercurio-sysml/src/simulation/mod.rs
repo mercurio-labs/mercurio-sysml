@@ -96,15 +96,32 @@ pub fn canonical_simulation_model(runtime: &Runtime) -> Result<SimulationModel, 
 }
 
 pub fn trace_to_view_overlay(trace: &SimulationTrace) -> ViewOverlayDto {
-    ViewOverlayDto {
-        version: 1,
-        frames: trace
-            .timeline
-            .iter()
-            .enumerate()
-            .map(|(index, entry)| trace_entry_to_overlay_frame(index, entry))
-            .collect(),
+    let mut seen_nodes = BTreeMap::<(String, String), ViewNodeMarkDto>::new();
+    let mut seen_edges = BTreeMap::<(String, String), ViewEdgeMarkDto>::new();
+    let mut frames = Vec::new();
+    for (index, entry) in trace.timeline.iter().enumerate() {
+        let mut frame = trace_entry_to_overlay_frame(index, entry);
+        for mark in seen_nodes.values_mut() {
+            mark.kind = "visited_state".into();
+            mark.label = Some("visited".into());
+        }
+        for mark in seen_edges.values_mut() {
+            mark.kind = "visited_transition".into();
+            mark.label = Some("visited".into());
+        }
+        for mark in frame.node_marks.drain(..) {
+            let subject = mark.properties.get("subject").and_then(Value::as_str).unwrap_or("").to_string();
+            seen_nodes.insert((subject, mark.element.clone()), mark);
+        }
+        for mark in frame.edge_marks.drain(..) {
+            let subject = mark.properties.get("subject").and_then(Value::as_str).unwrap_or("").to_string();
+            seen_edges.insert((subject, mark.element.clone()), mark);
+        }
+        frame.node_marks = seen_nodes.values().cloned().collect();
+        frame.edge_marks = seen_edges.values().cloned().collect();
+        frames.push(frame);
     }
+    ViewOverlayDto { version: 1, frames }
 }
 
 fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOverlayFrameDto {
@@ -135,6 +152,7 @@ fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOver
 
     let mut edge_marks = Vec::new();
     for event in &entry.events {
+        if event.kind != "transition" { continue; }
         let Some(transition_id) = event.transition_id.as_ref() else {
             continue;
         };
@@ -150,8 +168,8 @@ fn trace_entry_to_overlay_frame(index: usize, entry: &SimTraceEntry) -> ViewOver
         }
         edge_marks.push(ViewEdgeMarkDto {
             element: transition_id.clone(),
-            kind: "visited_transition".to_string(),
-            label: Some("visited".to_string()),
+            kind: "active_transition".to_string(),
+            label: Some("active".to_string()),
             properties,
         });
     }
@@ -210,6 +228,75 @@ pub fn scenario_from_analysis_case(
     adapter::scenario_from_analysis_case(runtime, analysis_case_id).map_err(map_adapter_error)
 }
 
+/// Bind values using authored subject/type/attribute relationships. Display on the
+/// subject's single root machine node; key retains the exact source attribute ID.
+fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[ConcurrentSubjectScenario]) -> ViewOverlayDto {
+    let machines = crate::project_state_machines(runtime);
+    let mut bindings = BTreeMap::new();
+    let mut machine_bindings = BTreeMap::new();
+    for subject in subjects {
+        // A definition shared by multiple simulated instances cannot display one
+        // instance's value without an explicit instance-aware view contract.
+        if subjects.iter().filter(|s| s.machine_id == subject.machine_id).count() != 1 { continue; }
+        let Some(owner) = runtime.graph().element_by_element_id(&subject.subject_id)
+            .and_then(|element| string_property_any(element, &["type", "definition"])) else { continue; };
+        let Some(machine) = machines.iter().find(|machine| machine.id == subject.machine_id) else { continue; };
+        let roots = machine.states.iter().filter(|state| state.parent_state_id.is_none()).collect::<Vec<_>>();
+        if roots.len() != 1 || runtime.graph().element_by_element_id(&roots[0].id).is_none() { continue; }
+        machine_bindings.insert(subject.subject_id.clone(), roots[0].id.clone());
+        let mut attributes = BTreeMap::<String, Vec<&Element>>::new();
+        for attribute in runtime.graph().elements().iter().filter(|candidate| {
+            candidate.kind.contains("AttributeUsage") &&
+            string_property_any(candidate, &["owner", "owning_type"]).as_deref() == Some(owner.as_str())
+        }) {
+            if let Some(name) = string_property_any(attribute, &["declared_name", "name"]) {
+                attributes.entry(name).or_default().push(attribute);
+            }
+        }
+        for (name, matches) in attributes {
+            if matches.len() == 1 {
+                bindings.insert((subject.subject_id.clone(), name), (roots[0].id.clone(), matches[0].element_id.clone()));
+            }
+        }
+    }
+    let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(trace);
+    let mut overlay = trace_to_view_overlay(trace);
+    for (frame, entry) in overlay.frames.iter_mut().zip(&trace.timeline) {
+        for outcome in outcomes.iter().filter(|outcome| outcome.status == "violated"
+            && outcome.deadline_s.is_some_and(|deadline| entry.t >= deadline)) {
+            let Some(machine) = machine_bindings.get(&trace.subject_id) else {
+                frame.warnings.push(format!("Requirement violation binding unavailable for {}: no unique authored subject and machine.", outcome.requirement_id));
+                continue;
+            };
+            frame.node_marks.push(ViewNodeMarkDto {
+                element: machine.clone(), kind: "violating".into(),
+                label: Some(format!("Requirement violated: {}", outcome.requirement_id)),
+                properties: serde_json::Map::from_iter([
+                    ("subject".into(), serde_json::json!(trace.subject_id)),
+                    ("requirement_id".into(), serde_json::json!(outcome.requirement_id)),
+                    ("deadline_s".into(), serde_json::json!(outcome.deadline_s)),
+                    ("reason_code".into(), serde_json::json!(outcome.reason_code)),
+                    ("evidence_strength".into(), serde_json::json!(outcome.evidence_strength)),
+                ]),
+            });
+        }
+        frame.node_values.clear();
+        for ((subject, feature), value) in &entry.values {
+            let Some((target, attribute)) = bindings.get(&(subject.clone(), feature.clone())) else {
+                frame.warnings.push(format!("Value binding unavailable for {subject}.{feature}: no unique authored attribute and machine."));
+                continue;
+            };
+            let unit = trace.channels.iter().find(|channel| channel.id == format!("{subject}.{feature}"))
+                .and_then(|channel| channel.unit.clone());
+            frame.node_values.push(ViewNodeValueDto {
+                element: target.clone(), key: attribute.clone(), value: value.clone(),
+                label: Some(feature.clone()), unit,
+            });
+        }
+    }
+    overlay
+}
+
 pub fn run_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
@@ -220,8 +307,10 @@ pub fn run_analysis_case(
 
     if has_executable_state_machine_binding(&spec) {
         let scenario = scenario_from_analysis_case(runtime, analysis_case_id)?;
+        let subjects = scenario.subjects.clone();
         let trace = run_concurrent_simulation(runtime, scenario)?;
-        reports.push(simulation_trace_report(run_id, analysis_case_id, trace)?);
+        let overlay = bind_trace_values(runtime, &trace, &subjects);
+        reports.push(simulation_trace_report_with_overlay(run_id, analysis_case_id, trace, Some(overlay))?);
     }
 
     if requires_constraint_analysis(&spec) {
@@ -931,12 +1020,36 @@ pub fn simulation_trace_report(
     analysis_case_id: &str,
     trace: SimulationTrace,
 ) -> Result<CapabilityRunReport, SimulationError> {
+    simulation_trace_report_with_overlay(run_id, analysis_case_id, trace, None)
+}
+
+fn simulation_trace_report_with_overlay(
+    run_id: &str,
+    analysis_case_id: &str,
+    trace: SimulationTrace,
+    overlay: Option<ViewOverlayDto>,
+) -> Result<CapabilityRunReport, SimulationError> {
     let reported_analysis_case_id = if trace.scenario_id.is_empty() {
         analysis_case_id
     } else {
         trace.scenario_id.as_str()
     };
-    let payload = serde_json::to_value(&trace)?;
+    let mut payload = serde_json::to_value(&trace)?;
+    payload["trace_schema"] = Value::String("mercurio.simulation.trace.v1".into());
+    payload["requirement_outcomes_schema"] =
+        Value::String("mercurio.simulation.requirement_outcomes.v1".into());
+    let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(&trace);
+    payload["requirement_outcomes"] = serde_json::to_value(&outcomes)?;
+    payload["mission_summary"] = serde_json::json!({
+        "schema_version": 1, "evidence_strength": "sampled_simulation",
+        "execution_status": trace.status, "termination": trace.termination,
+        "recorded_end_time_s": trace.timeline.last().map(|frame| frame.t),
+        "frame_count": trace.timeline.len(),
+        "requirements": {"satisfied": outcomes.iter().filter(|o| o.status == "satisfied").count(),
+            "violated": outcomes.iter().filter(|o| o.status == "violated").count(),
+            "unevaluated": outcomes.iter().filter(|o| o.status == "unevaluated").count()}
+    });
+    payload["view_overlay"] = serde_json::to_value(overlay.unwrap_or_else(|| trace_to_view_overlay(&trace)))?;
     let payload_bytes = serde_json::to_vec(&payload)?;
     let digest = stable_digest([("simulation-trace".as_bytes(), payload_bytes.as_slice())]);
     let analysis_case_ref = SemanticElementRef::new(reported_analysis_case_id);
@@ -1143,8 +1256,20 @@ mod tests {
     use super::*;
 
     #[test]
+    fn recorded_playback_contract_matches_shared_fixture() {
+        let fixture: Value = serde_json::from_str(include_str!("playback-fixture.json")).unwrap();
+        let trace: SimulationTrace = serde_json::from_value(fixture["trace"].clone()).unwrap();
+        let overlay = trace_to_view_overlay(&trace);
+        assert_eq!(serde_json::to_value(&overlay).unwrap(), fixture["overlay"]);
+        let report = simulation_trace_report("fixture", "heat", trace).unwrap();
+        assert_eq!(report.artifacts[0].payload["view_overlay"], fixture["overlay"]);
+    }
+
+    #[test]
     fn trace_to_view_overlay_projects_states_events_and_values() {
         let trace = SimulationTrace {
+            configuration: None,
+            termination: None,
             scenario_id: "scenario.demo".to_string(),
             subject_id: "part.controller".to_string(),
             channels: Vec::new(),
@@ -1175,6 +1300,16 @@ mod tests {
         };
 
         let overlay = trace_to_view_overlay(&trace);
+        let mut extended = trace.clone();
+        let mut next = extended.timeline[0].clone();
+        next.t = 3.0;
+        next.states.get_mut("part.controller").unwrap().clear();
+        next.events.clear();
+        extended.timeline.push(next);
+        let history = trace_to_view_overlay(&extended);
+        assert_eq!(history.frames[0], overlay.frames[0]);
+        assert!(history.frames[1].node_marks.iter().all(|mark| mark.kind == "visited_state"));
+        assert!(history.frames[1].edge_marks.iter().all(|mark| mark.kind == "visited_transition"));
 
         assert_eq!(overlay.frames.len(), 1);
         let frame = &overlay.frames[0];
@@ -1187,7 +1322,7 @@ mod tests {
         }));
         assert!(frame.edge_marks.iter().any(|mark| {
             mark.element == "transition.Controller.ready"
-                && mark.kind == "visited_transition"
+                && mark.kind == "active_transition"
                 && mark.properties["trigger"] == json!("ready")
         }));
         assert!(frame.node_values.iter().any(|value| {
@@ -1244,6 +1379,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.concurrent".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -1706,6 +1842,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.cross_part".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -1768,6 +1905,7 @@ mod tests {
         let error = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.legacy_rate".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -1841,6 +1979,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.state_do_rate".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -1958,6 +2097,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.thermal_constraint".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2072,6 +2212,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.newton_cooling".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2156,6 +2297,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.lookup_curve".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.bed".to_string(),
@@ -2270,6 +2412,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.signal".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -2476,6 +2619,7 @@ mod tests {
             let trace = run_concurrent_simulation(
                 &runtime,
                 ConcurrentSimulationScenario {
+                    termination_policy: Default::default(),
                     id: format!("scenario.signal_join.{id}"),
                     subjects,
                     max_steps: 12,
@@ -2534,6 +2678,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.initial".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2611,6 +2756,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.composite_target".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2730,6 +2876,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.sibling".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -2843,6 +2990,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.entry_signal".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {
@@ -2922,6 +3070,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.orthogonal_initial".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3009,6 +3158,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.orthogonal_branch".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3122,6 +3272,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.hsm.history".to_string(),
                 subjects: vec![ConcurrentSubjectScenario {
                     subject_id: "individual.controller".to_string(),
@@ -3166,6 +3317,231 @@ mod tests {
         assert!(states.contains(&"state.Controller.Active".to_string()));
         assert!(states.contains(&"state.Controller.Active.B".to_string()));
         assert!(!states.contains(&"state.Controller.Active.A".to_string()));
+    }
+
+    #[test]
+    fn shared_expression_textual_mission_parity() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, expected, witness) in [(10, "violated", None), (20, "satisfied", Some(3.0))] {
+            let text = include_str!("shared-expression.sysml")
+                .replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "shared-expression.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|case| case.label == "HeatProfile").unwrap();
+            let model = canonical_simulation_model(&runtime).unwrap();
+            assert!(model.machines.iter().flat_map(|machine| &machine.transitions).any(|transition|
+                transition.effects.iter().any(|effect| matches!(effect, mercurio_foundation::simulation_core::SimulationEffect::AssignExpression { .. }))));
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            let first = run_concurrent_simulation(&runtime, scenario.clone()).unwrap();
+            let second = run_concurrent_simulation(&runtime, scenario).unwrap();
+            assert_eq!(first, second);
+            let outcomes = mercurio_foundation::simulation_core::evaluate_deadline_requirements(&first);
+            assert_eq!(outcomes[0].status, expected);
+            assert_eq!(outcomes[0].witness_time_s, witness);
+            let report = run_analysis_case(&runtime, &case.id, "shared-expression").unwrap();
+            assert_eq!(report.artifacts[0].payload["requirement_outcomes"][0]["status"], expected);
+        }
+    }
+
+    #[test]
+    fn textual_absolute_time_is_independent_of_state_entry() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let text = include_str!("thermal-deadline.sysml")
+            .replace("accept start then Heating", "accept after 2[s] then Heating")
+            .replace("accept when temperature >= targetTemperature then Ready", "accept at 3[s] then done");
+        let runtime = Runtime::from_document(compile_sysml_text(&text, "absolute-time.sysml", &stdlib).unwrap()).unwrap();
+        let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+        let report = run_analysis_case(&runtime, &case.id, "absolute-time").unwrap();
+        let trace = &report.artifacts[0].payload;
+        assert_eq!(trace["termination"], "final_state");
+        assert_eq!(trace["mission_summary"]["recorded_end_time_s"], 3.0);
+        assert_eq!(trace["mission_summary"]["requirements"]["unevaluated"], 1);
+        let milliseconds = text.replace("2[s]", "2000[ms]").replace("3[s]", "3000[ms]");
+        let runtime = Runtime::from_document(compile_sysml_text(&milliseconds, "absolute-ms.sysml", &stdlib).unwrap()).unwrap();
+        let report = run_analysis_case(&runtime, &case.id, "absolute-ms").unwrap();
+        assert_eq!(report.artifacts[0].payload["mission_summary"]["recorded_end_time_s"], 3.0);
+        for expression in ["3[min]", "targetTemperature", "-1[s]"] {
+            let unsupported = text.replace("3[s]", expression);
+            let runtime = Runtime::from_document(compile_sysml_text(&unsupported, "unsupported-time.sysml", &stdlib).unwrap()).unwrap();
+            let error = canonical_simulation_model(&runtime).unwrap_err();
+            assert!(format!("{error:?}").contains("transition.time_unsupported"), "{error:?}");
+        }
+
+    }
+
+    #[test]
+    fn typed_mission_metadata_controls_clock_stimulus_and_termination() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let metadata = r#"
+            @Mercurio::Missions::Clock { maxTime = 10.0; fixedStep = 0.5; sampleInterval = 0.5; maxSteps = 100; }
+            @Mercurio::Missions::InitialStimulus { subject = "chamber"; trigger = "start"; }
+            @Mercurio::Missions::Termination { onAllSatisfied = true; onAnyViolated = true; onBlocked = true; }
+        "#;
+        let profile = include_str!("../../resources/profiles/MercurioMissions.sysml");
+        let fixture = include_str!("thermal-deadline.sysml").replace("subject chamber : ThermalChamber;", &format!("{metadata} subject chamber : ThermalChamber;"));
+        for (rate, reason, outcome) in [(10, "requirement_violated", "violated"), (20, "requirements_satisfied", "satisfied")] {
+            let text = format!("{profile}\n{fixture}").replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "mission.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(scenario.clock_config.as_ref().unwrap().fixed_step_s, 0.5);
+            assert_eq!(scenario.max_steps, 100);
+            assert_eq!(scenario.subjects[0].events.len(), 1);
+            let report = run_analysis_case(&runtime, &case.id, "mission").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["termination"], reason, "{trace:#}");
+            assert_eq!(trace["trace_schema"], "mercurio.simulation.trace.v1");
+            assert_eq!(trace["configuration"]["clock"]["fixed_step_s"], 0.5);
+            assert_eq!(trace["configuration"]["termination_policy"]["on_any_violated"], true);
+            assert_eq!(trace["timeline"].as_array().unwrap().last().unwrap()["t"], 5.0);
+            assert_eq!(trace["requirement_outcomes"][0]["status"], outcome);
+            assert!(trace["timeline"].as_array().unwrap().iter().any(|f| f["t"] == 0.5));
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(run_concurrent_simulation(&runtime, scenario.clone()).unwrap(), run_concurrent_simulation(&runtime, scenario).unwrap());
+        }
+        let text = format!("{profile}\n{fixture}");
+        for (from, to, expected) in [
+            ("fixedStep = 0.5", "fixedStep = 0.0", "invalid"),
+            ("fixedStep = 0.5", "fixedStep = 0.25 + 0.25", "invalid"),
+            ("maxSteps = 100", "maxSteps = 1.5", "invalid"),
+            ("subject = \"chamber\"", "subject = \"missing\"", "invalid"),
+            ("trigger = \"start\"", "trigger = \"unknown\"", "blocked"),
+            ("chamber.temperature >= chamber.targetTemperature", "chamber.temperature + 0.0 >= chamber.targetTemperature", "requirement_violated"),
+        ] {
+            let changed = text.replace(from, to);
+            assert_ne!(changed, text);
+            let runtime = Runtime::from_document(compile_sysml_text(&changed, "invalid-mission.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            if expected == "invalid" {
+                assert!(format!("{:?}", scenario_from_analysis_case(&runtime, &case.id).unwrap_err()).contains("mission.metadata.invalid"));
+            } else {
+                let report = run_analysis_case(&runtime, &case.id, "mission").unwrap();
+                assert_eq!(report.artifacts[0].payload["termination"], expected);
+            }
+        }
+    }
+
+    #[test]
+    fn textual_done_endpoint_terminates_without_inventing_deadline_evidence() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, end_time, outcome) in [(10, 6.0, "violated"), (20, 3.0, "unevaluated")] {
+            let text = include_str!("thermal-deadline.sysml")
+                .replace("heatRate : Real = 10.0", &format!("heatRate : Real = {rate}.0"))
+                .replace("then Ready;", "then done;");
+            let document = compile_sysml_text(&text, "thermal-final.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            let done = runtime.graph().element_by_element_id("state.SimulationConstraintsChannels.ThermalChamber.lifecycle.done").expect("Shared graph must contain inherited done");
+            assert_eq!(done.properties["is_final"], true);
+            assert_eq!(done.properties["metadata"]["generated"], true);
+            let report = run_analysis_case(&runtime, &case.id, "final-state").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["termination"], "final_state", "{trace:#}");
+            let frames = trace["timeline"].as_array().unwrap();
+            assert_eq!(frames.last().unwrap()["t"], end_time);
+            assert_eq!(trace["requirement_outcomes"][0]["status"], outcome);
+            if outcome == "unevaluated" {
+                assert_eq!(trace["requirement_outcomes"][0]["reason_code"], "deadline_not_observed");
+            }
+            assert!(trace["view_overlay"]["frames"].as_array().unwrap().last().unwrap()["node_marks"].as_array().unwrap().iter().any(|mark|
+                mark["kind"] == "active_state" && mark["element"].as_str().is_some_and(|id| id.ends_with(".lifecycle.done"))));
+            // A locally declared ordinary state named done shadows the inherited endpoint.
+            let shadow = text.replace("state Ready;", "state done;");
+            let runtime = Runtime::from_document(compile_sysml_text(&shadow, "shadow.sysml", &stdlib).unwrap()).unwrap();
+            let report = run_analysis_case(&runtime, &case.id, "shadow").unwrap();
+            assert_eq!(report.artifacts[0].payload["termination"], "step_budget_exhausted");
+        }
+    }
+
+    #[test]
+    fn textual_thermal_deadline_verdicts() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for (rate, expected, arithmetic) in [(10, "violated", false), (20, "satisfied", false), (20, "satisfied", true)] {
+            let text = include_str!("thermal-deadline.sysml").replace(
+                "heatRate : Real = 10.0",
+                &format!("heatRate : Real = {rate}.0"),
+            );
+            let text = if arithmetic {
+                text.replace(
+                    "chamber.temperature >= chamber.targetTemperature",
+                    "chamber.temperature + 0.0 >= chamber.targetTemperature",
+                )
+            } else {
+                text
+            };
+            let document = compile_sysml_text(&text, "thermal-deadline.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let case = list_analysis_cases(&runtime)
+                .into_iter()
+                .find(|c| c.label == "HeatProfile")
+                .unwrap();
+            let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+            assert_eq!(
+                scenario.requirements.len(),
+                1,
+                "{:?}",
+                scenario.requirements
+            );
+            assert_eq!(
+                scenario.requirements[0].deadline_s,
+                Some(5.0),
+                "{:?}",
+                scenario.requirements
+            );
+            assert!(
+                scenario.requirements[0].expression.is_some(),
+                "{:?}",
+                scenario.requirements
+            );
+            let trace = run_concurrent_simulation(&runtime, scenario.clone()).unwrap();
+            let again = run_concurrent_simulation(&runtime, scenario).unwrap();
+            assert_eq!(trace, again);
+            let report = run_analysis_case(&runtime, &case.id, "deadline").unwrap();
+            let overlay: ViewOverlayDto = serde_json::from_value(report.artifacts[0].payload["view_overlay"].clone()).unwrap();
+            let temperature = overlay.frames[0].node_values.iter().find(|value| value.label.as_deref() == Some("temperature")).unwrap();
+            assert!(runtime.graph().element_by_element_id(&temperature.key).is_some());
+            assert!(temperature.element.ends_with(".ThermalChamber.lifecycle"));
+            assert_eq!(temperature.value, json!(20.0));
+            assert!(overlay.frames[0].warnings.is_empty());
+            for frame in &overlay.frames {
+                let violations = frame.node_marks.iter().filter(|mark| mark.kind == "violating").collect::<Vec<_>>();
+                assert_eq!(violations.len(), usize::from(expected == "violated" && frame.time_s.unwrap_or(0.0) >= 5.0));
+                for mark in violations {
+                    assert_eq!(mark.element, temperature.element);
+                    assert_eq!(mark.properties["requirement_id"], serde_json::json!(trace.requirements[0].id));
+                }
+            }
+
+            let mut ambiguous = scenario_from_analysis_case(&runtime, &case.id).unwrap().subjects;
+            ambiguous.push(ambiguous[0].clone());
+            let ambiguous_overlay = bind_trace_values(&runtime, &trace, &ambiguous);
+            assert!(ambiguous_overlay.frames[0].node_values.is_empty());
+            assert!(ambiguous_overlay.frames.iter().all(|frame| frame.node_marks.iter().all(|mark| mark.kind != "violating")));
+            assert!(!ambiguous_overlay.frames[0].warnings.is_empty());
+            let outcomes = &report.artifacts[0].payload["requirement_outcomes"];
+            assert_eq!(
+                outcomes[0]["status"], expected,
+                "{outcomes:#}; {:?}",
+                trace.requirements
+            );
+            let mut unsupported = trace.clone();
+            unsupported.requirements[0].expression =
+                Some(serde_json::json!({"kind":"call","name":"unknown"}));
+            assert_eq!(
+                mercurio_foundation::simulation_core::evaluate_deadline_requirements(&unsupported)
+                    [0]
+                .status,
+                "unevaluated"
+            );
+            let mut short = trace;
+            short.timeline.retain(|frame| frame.t < 4.0);
+            if expected != "unevaluated" {
+                assert_eq!(
+                    mercurio_foundation::simulation_core::evaluate_deadline_requirements(&short)[0]
+                        .reason_code,
+                    "deadline_not_observed"
+                );
+            }
+        }
     }
 
     #[test]
@@ -3259,6 +3635,7 @@ mod tests {
         let trace = run_concurrent_simulation(
             &runtime,
             ConcurrentSimulationScenario {
+                termination_policy: Default::default(),
                 id: "scenario.concurrent.states".to_string(),
                 subjects: vec![
                     ConcurrentSubjectScenario {

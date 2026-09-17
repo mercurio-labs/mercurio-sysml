@@ -4,7 +4,9 @@ use mercurio_foundation::{
     AuthoringError, AuthoringProject, KirDocument, textual_model_authoring_render_profile,
 };
 
-use crate::{compile_sysml_text, parse_sysml, shared_sysml_baseline, sysml_field_specs};
+use crate::{
+    compile_sysml_text_with_context, parse_sysml, shared_sysml_baseline, sysml_field_specs,
+};
 
 pub fn load_authoring_project_from_sysml(
     files: BTreeMap<String, String>,
@@ -27,9 +29,26 @@ fn compile_sysml_authoring_sources(
     files: &BTreeMap<String, String>,
 ) -> Result<KirDocument, AuthoringError> {
     let stdlib = shared_sysml_baseline().map_err(AuthoringError::Kir)?;
+
+    // Every file must be compiled with the whole project in scope, exactly the
+    // way the workspace source compiler does it (see
+    // `SourceCompileContext::from_source_documents` in mercurio-console-api).
+    // Compiling each file in isolation makes a cross-file `import Other::*;`
+    // unresolvable, so a perfectly valid `part chassis : Chassis;` in one file
+    // fails to compile when `Chassis` is declared in another — which in turn
+    // made every semantic mutation over a multi-file workspace report a
+    // spurious `unresolved type` validation failure.
+    let mut context_modules = Vec::with_capacity(files.len());
+    for source in files.values() {
+        context_modules.push(parse_sysml(source).map_err(AuthoringError::Parse)?);
+    }
+
     let mut documents = Vec::new();
     for (path, source) in files {
-        documents.push(compile_sysml_text(source, path, &stdlib).map_err(AuthoringError::Parse)?);
+        documents.push(
+            compile_sysml_text_with_context(source, path, &context_modules, &stdlib)
+                .map_err(AuthoringError::Parse)?,
+        );
     }
     KirDocument::merge_with_registered_fields(documents, sysml_field_specs().iter().copied())
         .map_err(AuthoringError::Kir)
@@ -39,6 +58,30 @@ fn compile_sysml_authoring_sources(
 mod tests {
     use super::*;
     use mercurio_foundation::{ContainerSelector, Mutation, QualifiedName};
+
+    #[test]
+    fn checked_metadata_edit_preserves_multiple_top_level_packages() {
+        let profile = include_str!("../resources/profiles/MercurioMissions.sysml");
+        let mission = include_str!("simulation/thermal-deadline.sysml");
+        let source = format!("{profile}\n{mission}");
+        let mut project = load_authoring_project_from_sysml(BTreeMap::from([("mission.sysml".into(), source.clone())])).unwrap();
+        let mutation = project.apply_mutation(Mutation::AddMetadataAnnotation {
+            element: QualifiedName(vec!["SimulationConstraintsChannels".into(), "HeatProfile".into()]),
+            metadata_type: "Mercurio::Missions::Termination".into(),
+            properties: BTreeMap::from([("onAnyViolated".into(), "true".into())]),
+        }).unwrap();
+        let edited = project.write_back_mutation(&mutation).unwrap();
+        assert!(edited.validation.ok, "{:?}", edited.validation);
+        let text = &edited.edited_files["mission.sysml"];
+        assert!(text.starts_with(profile), "Unrelated profile source was changed: {text}");
+        assert_eq!(text.matches("package SimulationConstraintsChannels").count(), 1);
+        assert!(text.contains("@Mercurio::Missions::Termination"));
+        let stdlib = crate::load_sysml_baseline().unwrap();
+        let runtime = mercurio_foundation::runtime::Runtime::from_document(crate::compile_sysml_text(text, "mission.sysml", &stdlib).unwrap()).unwrap();
+        let case = crate::simulation::list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+        let report = crate::simulation::run_analysis_case(&runtime, &case.id, "checked-metadata").unwrap();
+        assert_eq!(report.artifacts[0].payload["termination"], "requirement_violated");
+    }
 
     #[test]
     fn loads_sysml_authoring_project_from_source_files() {
@@ -91,5 +134,36 @@ mod tests {
         .unwrap();
 
         project.compile_kir_document().unwrap();
+    }
+
+    #[test]
+    fn compiles_authoring_project_across_files_via_wildcard_import() {
+        // Regression: each file used to be compiled in isolation, so
+        // `import Parts::*;` in `system.sysml` could not see `Chassis`
+        // declared in `parts.sysml` and compilation failed with
+        // "unresolved type `Chassis`".
+        let project = load_authoring_project_from_sysml(BTreeMap::from([
+            (
+                "parts.sysml".to_string(),
+                "package Parts { part def Chassis; }".to_string(),
+            ),
+            (
+                "system.sysml".to_string(),
+                "package System { import Parts::*; part def Rover { part chassis : Chassis; } }"
+                    .to_string(),
+            ),
+        ]))
+        .unwrap();
+
+        let document = project
+            .compile_kir_document()
+            .expect("cross-file wildcard import must compile");
+        assert!(
+            document
+                .elements
+                .iter()
+                .any(|element| element.id.contains("Parts") && element.id.contains("Chassis")),
+            "compiled document should contain the cross-file definition"
+        );
     }
 }

@@ -1,0 +1,195 @@
+{
+  "trace": {
+    "subject_id": "chamber",
+    "scenario_id": "heat",
+    "channels": [],
+    "status": "completed",
+    "requirements": [],
+    "objectives": [],
+    "timeline": [
+      {
+        "t": 0,
+        "states": {
+          "chamber": [
+            "state.Model.Chamber.lifecycle",
+            "state.Model.Chamber.lifecycle.Cold"
+          ]
+        },
+        "values": [],
+        "events": []
+      },
+      {
+        "t": 0,
+        "states": {
+          "chamber": [
+            "state.Model.Chamber.lifecycle",
+            "state.Model.Chamber.lifecycle.Heating"
+          ],
+          "other": [
+            "state.Other.Cold"
+          ]
+        },
+        "values": [],
+        "events": [
+          {
+            "kind": "transition",
+            "subject_id": "chamber",
+            "transition_id": "transition.Model.Chamber.lifecycle.start.20_13",
+            "trigger": "start"
+          }
+        ]
+      },
+      {
+        "t": 3,
+        "states": {
+          "chamber": [
+            "state.Model.Chamber.lifecycle",
+            "state.Model.Chamber.lifecycle.Ready"
+          ]
+        },
+        "values": [],
+        "events": []
+      }
+    ]
+  },
+  "overlay": {
+    "version": 1,
+    "frames": [
+      {
+        "index": 0,
+        "time_s": 0.0,
+        "node_marks": [
+          {
+            "element": "state.Model.Chamber.lifecycle",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Cold",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          }
+        ],
+        "edge_marks": [],
+        "node_values": [],
+        "warnings": []
+      },
+      {
+        "index": 1,
+        "time_s": 0.0,
+        "node_marks": [
+          {
+            "element": "state.Model.Chamber.lifecycle",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Cold",
+            "kind": "visited_state",
+            "label": "visited",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Heating",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Other.Cold",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "other"
+            }
+          }
+        ],
+        "edge_marks": [
+          {
+            "element": "transition.Model.Chamber.lifecycle.start.20_13",
+            "kind": "active_transition",
+            "label": "active",
+            "properties": {
+              "subject": "chamber",
+              "trigger": "start"
+            }
+          }
+        ],
+        "node_values": [],
+        "warnings": []
+      },
+      {
+        "index": 2,
+        "time_s": 3.0,
+        "node_marks": [
+          {
+            "element": "state.Model.Chamber.lifecycle",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Cold",
+            "kind": "visited_state",
+            "label": "visited",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Heating",
+            "kind": "visited_state",
+            "label": "visited",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Model.Chamber.lifecycle.Ready",
+            "kind": "active_state",
+            "label": "active",
+            "properties": {
+              "subject": "chamber"
+            }
+          },
+          {
+            "element": "state.Other.Cold",
+            "kind": "visited_state",
+            "label": "visited",
+            "properties": {
+              "subject": "other"
+            }
+          }
+        ],
+        "edge_marks": [
+          {
+            "element": "transition.Model.Chamber.lifecycle.start.20_13",
+            "kind": "visited_transition",
+            "label": "visited",
+            "properties": {
+              "subject": "chamber",
+              "trigger": "start"
+            }
+          }
+        ],
+        "node_values": [],
+        "warnings": []
+      }
+    ]
+  }
+}

@@ -1,3 +1,4 @@
+pub(crate) mod behavior_expression;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
@@ -791,7 +792,7 @@ fn find_metadata_definition<'a>(
 ) -> Option<&'a ResolvedDefinition> {
     definitions.iter().copied().find(|definition| {
         definition.declared_name == usage.declared_name
-            || definition.qualified_name == usage.declared_name
+            || definition.qualified_name == usage.declared_name.replace("::", ".")
             || definition
                 .qualified_name
                 .rsplit('.')
@@ -1838,7 +1839,7 @@ impl Parser {
         modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.expect(TokenKind::At, "expected `@`")?;
-        let name = self.expect_identifier("expected annotation name")?;
+        let name = self.parse_qualified_name()?.as_colon_string();
         let reference_target = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "about")
         {
             self.expect_identifier_named("about", "expected `about` after annotation name")?;
@@ -1954,6 +1955,15 @@ impl Parser {
         }
 
         let value = parts.join("");
+        // Numeric metadata must retain its decimal/exponent spelling.
+        if value.parse::<f64>().is_ok() { return Ok(value); }
+        // Only shorten qualified identifier literals (e.g. Enum::member).
+        // Never turn an unsupported arithmetic expression into a valid number.
+        let identifier_path = value.split("::").flat_map(|part| part.split('.')).all(|part| {
+            part.chars().next().is_some_and(|c| c.is_alphabetic() || c == '_')
+                && part.chars().all(|c| c.is_alphanumeric() || c == '_')
+        });
+        if !identifier_path { return Ok(value); }
         Ok(value
             .rsplit([':', '.'])
             .find(|part| !part.is_empty())
@@ -2553,6 +2563,17 @@ impl Parser {
                 modifiers.push(format!("trigger={}", trigger.as_dot_string()));
                 modifiers.push("trigger_kind=event".to_string());
             }
+        }
+
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+            self.advance();
+            let guard = self.collect_behavior_text_until_do_then_or_end();
+            modifiers.push(format!("guard={guard}"));
+        }
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+            self.advance();
+            let effect = self.collect_behavior_text_until_then_or_end();
+            modifiers.push(format!("effect={effect}"));
         }
 
         // The transition's payload feature is materialized only when it accepts
@@ -4174,6 +4195,14 @@ fn token_text(kind: &TokenKind) -> String {
         TokenKind::RAngle => ">".to_string(),
         TokenKind::LessEqual => "<=".to_string(),
         TokenKind::GreaterEqual => ">=".to_string(),
+        TokenKind::Plus => "+".to_string(),
+        TokenKind::Minus => "-".to_string(),
+        TokenKind::Slash => "/".to_string(),
+        TokenKind::Bang => "!".to_string(),
+        TokenKind::Ampersand => "&".to_string(),
+        TokenKind::Pipe => "|".to_string(),
+        TokenKind::Caret => "^".to_string(),
+        TokenKind::Tilde => "~".to_string(),
         TokenKind::Star => "*".to_string(),
         TokenKind::DoubleStar => "**".to_string(),
         _ => String::new(),

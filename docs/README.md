@@ -15,6 +15,8 @@ SysML language service that turns source text into KIR for that substrate.
 - [Crates](crates.md): intent of each crate in this repository.
 - [Resources](resources.md): generated libraries, mappings, provenance, and release files.
 
+- [Mission profile](mission-profile.md): authored clock, initial stimulus, stopping policy and sampled evidence contract.
+
 ## Boundary
 
 Keep SysML-specific concepts here:
