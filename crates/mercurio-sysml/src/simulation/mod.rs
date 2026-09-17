@@ -3343,6 +3343,30 @@ mod tests {
     }
 
     #[test]
+    fn typed_constraint_requirements_use_shared_engine_verdicts() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for constraint_type in ["Reached", "DerivedReached"] {
+        for (binding, expected) in [
+            (":>> actual = chamber.temperature; :>> target = chamber.targetTemperature;", "satisfied"),
+            (":>> actual = chamber.temperature - 100; :>> target = chamber.targetTemperature;", "violated"),
+            (":>> actual = chamber.temperature;", "unevaluated"),
+        ] {
+            let source = include_str!("shared-expression.sysml")
+                .replace("heatRate : Real = 10.0", "heatRate : Real = 20.0")
+                .replace("part def ThermalChamber", "constraint def Reached { in actual: Real; in target: Real; actual - 20 >= target - 20 } constraint def DerivedReached :> Reached; part def ThermalChamber");
+            let start = source.find("            require constraint ").unwrap();
+            let end = start + source[start..].find("            }").unwrap() + "            }".len();
+            let mut source = source;
+            source.replace_range(start..end, &format!("require constraint reached: {constraint_type} {{ {binding} }}"));
+            let runtime = Runtime::from_document(compile_sysml_text(&source, "typed.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "HeatProfile").unwrap();
+            let report = run_analysis_case(&runtime, &case.id, "typed-expression").unwrap();
+            assert_eq!(report.artifacts[0].payload["requirement_outcomes"][0]["status"], expected, "{constraint_type}: {binding}");
+        }
+        }
+    }
+
+    #[test]
     fn textual_absolute_time_is_independent_of_state_entry() {
         let stdlib = load_sysml_baseline().unwrap();
         let text = include_str!("thermal-deadline.sysml")

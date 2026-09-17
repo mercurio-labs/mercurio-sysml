@@ -53,6 +53,7 @@ fn expression_span(expr: &Expr) -> SourceSpan {
 #[derive(Debug, Clone)]
 pub struct ResolverContext {
     module_count: usize,
+    modules: Vec<SysmlModule>,
     packages: Vec<ResolvedPackage>,
     definitions: Vec<CollectedDefinition>,
     local_definitions: BTreeMap<String, String>,
@@ -121,6 +122,7 @@ impl ResolverContext {
 
         Ok(Self {
             module_count: context_modules.len(),
+            modules: context_modules.to_vec(),
             packages,
             definitions,
             local_definitions,
@@ -203,6 +205,21 @@ fn resolve_module_with_policy(
 }
 
 fn resolve_module_with_policy_context(
+    module: &SysmlModule, context: &ResolverContext, mappings: &MappingBundle, policy: ResolvePolicy,
+) -> Result<ResolvedModule, Diagnostic> {
+    let mut resolved = resolve_module_without_binding(module, context, mappings, policy)?;
+    let mut external = Vec::new();
+    if context.definitions.iter().any(|d| d.construct == "ConstraintDefinition"
+        && !resolved.definitions.iter().any(|local| local.qualified_name == d.qualified_name)) {
+        for source in &context.modules {
+            external.extend(resolve_module_without_binding(source, context, mappings, policy)?.definitions);
+        }
+    }
+    super::constraint_binding::bind_constraint_usages(&mut resolved.definitions, &mut resolved.usages, &external);
+    Ok(resolved)
+}
+
+fn resolve_module_without_binding(
     module: &SysmlModule,
     context: &ResolverContext,
     mappings: &MappingBundle,
@@ -324,6 +341,7 @@ fn resolve_module_with_policy_context(
         format!("usages={}", resolved_usages.len()),
     );
 
+
     Ok(ResolvedModule {
         packages,
         imports: resolved_imports,
@@ -434,6 +452,40 @@ fn resolve_definition(
             )
         })
         .collect::<Result<Vec<_>, _>>()?;
+    // Reuse feature resolution in the definition's lexical scope. This context
+    // is not a synthesized model usage and is never emitted into KIR.
+    let expression = if let Some(expr) = &definition.expression {
+        let context = CollectedUsage {
+            construct: definition.construct.clone(),
+            owner_construct: definition.construct.clone(),
+            owner_qualified_name: definition.qualified_name.clone(),
+            qualified_name: definition.qualified_name.clone(),
+            declared_name: definition.declared_name.clone(),
+            is_implicit_name: false,
+            ty: None,
+            additional_types: Vec::new(),
+            reference_target: None,
+            allocation_source: None,
+            allocation_target: None,
+            metadata_properties: BTreeMap::new(),
+            multiplicity: None,
+            expression: None,
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            members: Vec::new(),
+            modifiers: Vec::new(),
+            docs: Vec::new(),
+            span: definition.span.clone(),
+        };
+        Some(resolve_expression(
+            &context, expr, stdlib_ids, stdlib_feature_index, stdlib_aliases,
+            local_definitions, local_aliases, import_aliases, definition_index,
+            local_feature_index, local_usage_map,
+        )?)
+    } else {
+        None
+    };
     let members = definition
         .members
         .into_iter()
@@ -456,6 +508,7 @@ fn resolve_definition(
         .collect::<Result<Vec<_>, _>>()?;
 
     Ok(ResolvedDefinition {
+        expression,
         construct: definition.construct,
         qualified_name: definition.qualified_name,
         declared_name: definition.declared_name,

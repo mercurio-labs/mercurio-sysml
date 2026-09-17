@@ -43,6 +43,7 @@ pub struct ResolvedImport {
 
 #[derive(Debug, Clone)]
 pub struct ResolvedDefinition {
+    pub expression: Option<ResolvedExpr>,
     pub construct: String,
     pub qualified_name: String,
     pub declared_name: String,
