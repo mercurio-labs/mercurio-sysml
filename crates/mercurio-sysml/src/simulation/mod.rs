@@ -4,6 +4,7 @@ use std::fmt;
 use serde_json::Value;
 
 mod adapter;
+mod timed_activity;
 
 pub use crate::{
     AnalysisClockConfig, AnalysisDynamicBehaviorBinding, AnalysisDynamicBehaviorKind,
@@ -317,6 +318,9 @@ pub fn run_analysis_case(
     run_id: &str,
 ) -> Result<CapabilityRunReport, SimulationError> {
     let spec = project_analysis_spec(runtime, analysis_case_id).map_err(map_analysis_spec_error)?;
+    if timed_activity::is_requested(runtime, &spec) {
+        return timed_activity::run(runtime, &spec, run_id);
+    }
     let mut reports = Vec::new();
 
     if has_executable_state_machine_binding(&spec) {

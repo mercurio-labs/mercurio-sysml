@@ -290,7 +290,7 @@ fn analysis_spec_from_case(
     }
 
     let readiness = readiness_status(&diagnostics);
-    let expected_artifacts = expected_artifacts(&techniques, &dynamic_behavior_bindings);
+    let expected_artifacts = expected_artifacts(runtime.graph(), &techniques, &dynamic_behavior_bindings);
     let mut spec = AnalysisSpec {
         case_ref: element_ref(analysis_case),
         model_revision: runtime.derived_feature_revision().to_string(),
@@ -931,6 +931,7 @@ fn is_trade_study(analysis_case: &Element) -> bool {
 }
 
 fn expected_artifacts(
+    graph: &Graph,
     techniques: &[AnalysisTechnique],
     dynamic_behavior_bindings: &[AnalysisDynamicBehaviorBinding],
 ) -> Vec<AnalysisExpectedArtifact> {
@@ -938,7 +939,7 @@ fn expected_artifacts(
     if techniques.contains(&AnalysisTechnique::DynamicBehavior) {
         if dynamic_behavior_bindings
             .iter()
-            .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::StateMachine)
+            .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::StateMachine || timed_activity_binding(graph, binding))
             || dynamic_behavior_bindings.is_empty()
         {
             artifacts.push(AnalysisExpectedArtifact {
@@ -948,7 +949,7 @@ fn expected_artifacts(
         }
         if dynamic_behavior_bindings
             .iter()
-            .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity)
+            .any(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity && !timed_activity_binding(graph, binding))
         {
             artifacts.push(AnalysisExpectedArtifact {
                 kind: "activity_execution_summary".to_string(),
@@ -1100,16 +1101,23 @@ fn readiness_diagnostics(
             Some(analysis_case.element_id.clone()),
         ));
     }
-    diagnostics.extend(activity_execution_diagnostics(dynamic_behavior_bindings));
+    diagnostics.extend(activity_execution_diagnostics(graph, dynamic_behavior_bindings));
     diagnostics
 }
 
+fn timed_activity_binding(graph: &Graph, binding: &AnalysisDynamicBehaviorBinding) -> bool {
+    binding.kind == AnalysisDynamicBehaviorKind::Activity && graph.element_by_element_id(&binding.behavior.element_id)
+        .and_then(|e| e.properties.get("metadata"))
+        .and_then(|m| m.get("Mercurio::Missions::TimedActivity")).is_some()
+}
+
 fn activity_execution_diagnostics(
+    graph: &Graph,
     dynamic_behavior_bindings: &[AnalysisDynamicBehaviorBinding],
 ) -> Vec<AnalysisReadinessDiagnostic> {
     dynamic_behavior_bindings
         .iter()
-        .filter(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity)
+        .filter(|binding| binding.kind == AnalysisDynamicBehaviorKind::Activity && !timed_activity_binding(graph, binding))
         .map(|binding| {
             readiness_warning(
                 "analysis.dynamic.activity_execution.pending",

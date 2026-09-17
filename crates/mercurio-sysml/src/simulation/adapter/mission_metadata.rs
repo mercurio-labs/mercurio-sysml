@@ -8,7 +8,7 @@ fn invalid(message: impl Into<String>) -> SysmlSimulationAdapterError {
     ))
 }
 
-fn properties<'a>(
+pub(in crate::simulation) fn properties<'a>(
     runtime: &Runtime,
     case: &'a Element,
     name: &str,
@@ -41,7 +41,7 @@ fn properties<'a>(
     Ok(Some(properties))
 }
 
-fn number(properties: &Map<String, Value>, key: &str) -> Result<f64, SysmlSimulationAdapterError> {
+pub(in crate::simulation) fn number(properties: &Map<String, Value>, key: &str) -> Result<f64, SysmlSimulationAdapterError> {
     let value = properties
         .get(key)
         .ok_or_else(|| invalid(format!("missing {key}")))?;
@@ -83,7 +83,7 @@ fn boolean(
     }
 }
 
-pub(super) fn apply(
+pub(in crate::simulation) fn apply(
     runtime: &Runtime,
     case: &Element,
     scenario: &mut ConcurrentSimulationScenario,

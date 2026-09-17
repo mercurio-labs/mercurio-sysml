@@ -1,4 +1,4 @@
-mod mission_metadata;
+pub(super) mod mission_metadata;
 use std::collections::BTreeMap;
 
 use mercurio_foundation::graph::{Element, Graph};
@@ -970,7 +970,7 @@ fn analysis_script_events(analysis_case: &Element) -> Option<&Vec<Value>> {
         })
 }
 
-fn native_analysis_requirements(
+pub(super) fn native_analysis_requirements(
     runtime: &Runtime,
     analysis_case: &Element,
 ) -> Vec<SimulationRequirement> {
