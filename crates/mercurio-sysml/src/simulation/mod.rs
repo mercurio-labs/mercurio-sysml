@@ -1238,6 +1238,7 @@ mod tests {
     #[test]
     fn trace_to_view_overlay_projects_states_events_and_values() {
         let trace = SimulationTrace {
+            termination: None,
             scenario_id: "scenario.demo".to_string(),
             subject_id: "part.controller".to_string(),
             channels: Vec::new(),
