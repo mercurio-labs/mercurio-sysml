@@ -3420,6 +3420,29 @@ mod tests {
     }
 
     #[test]
+    fn textual_cooldown_preserves_signed_defaults_and_rejects_unsupported_defaults() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let source = include_str!("instrument-cooldown.sysml");
+        for (rate, status, witness) in [("-1.0", "violated", serde_json::Value::Null), ("-3.0", "satisfied", json!(9.0))] {
+            let text = source.replace("finalCoolingRate : Real = -1.0", &format!("finalCoolingRate : Real = {rate}"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "cooldown.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
+            let report = run_analysis_case(&runtime, &case.id, "cooldown").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["requirement_outcomes"][0]["status"], status);
+            assert_eq!(trace["requirement_outcomes"][0]["witness_time_s"], witness);
+            let frame = trace["timeline"].as_array().unwrap().iter().find(|frame| frame["t"] == 4.0).unwrap();
+            assert!(frame["values"].as_array().unwrap().iter().any(|value| value["feature"] == "temperature" && value["value"] == 40.0), "{frame:#}");
+        }
+        let text = source.replace("finalCoolingRate : Real = -1.0", "finalCoolingRate : Real = 0.0 - 1.0");
+        let runtime = Runtime::from_document(compile_sysml_text(&text, "unsupported-default.sysml", &stdlib).unwrap()).unwrap();
+        let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
+        let error = run_analysis_case(&runtime, &case.id, "unsupported-default").unwrap_err().to_string();
+        assert!(error.contains("simulation.initial_value.unsupported"), "{error}");
+        assert!(error.contains("finalCoolingRate"), "{error}");
+    }
+
+    #[test]
     fn textual_done_endpoint_terminates_without_inventing_deadline_evidence() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, end_time, outcome) in [(10, 6.0, "violated"), (20, 3.0, "unevaluated")] {

@@ -171,7 +171,7 @@ pub fn scenario_from_analysis_case(
         )));
     }
 
-    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects);
+    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects)?;
     initial_values.extend(
         analysis_case
             .properties
@@ -936,7 +936,7 @@ fn native_analysis_initial_values(
 fn native_analysis_attribute_defaults(
     runtime: &Runtime,
     subjects: &[ConcurrentSubjectScenario],
-) -> BTreeMap<(String, String), Value> {
+) -> Result<BTreeMap<(String, String), Value>, SysmlSimulationAdapterError> {
     let mut values = BTreeMap::new();
     for subject in subjects {
         let Some(subject_element) = runtime.graph().element_by_element_id(&subject.subject_id)
@@ -959,12 +959,18 @@ fn native_analysis_attribute_defaults(
                 continue;
             };
             let Some(value) = attribute_default_value(attribute) else {
+                if attribute.properties.contains_key("expression_ir") {
+                    return Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                        "simulation.initial_value.unsupported: {} requires a literal or signed numeric literal default",
+                        attribute.element_id
+                    )));
+                }
                 continue;
             };
             values.insert((subject.subject_id.clone(), feature), value);
         }
     }
-    values
+    Ok(values)
 }
 
 fn apply_analysis_script_events(
@@ -1248,7 +1254,21 @@ fn is_analysis_objective(element: &Element) -> bool {
 fn attribute_default_value(attribute: &Element) -> Option<Value> {
     let expression = attribute.properties.get("expression_ir")?;
     let object = expression.as_object()?;
-    (object.get("kind")?.as_str()? == "literal").then(|| object.get("value").cloned())?
+    match object.get("kind")?.as_str()? {
+        "literal" => object.get("value").cloned(),
+        "unary" if object.get("op")?.as_str()? == "negate" => {
+            let operand = object.get("expr")?;
+            if operand.get("kind")?.as_str()? != "literal" {
+                return None;
+            }
+            let number = operand.get("value")?;
+            if let Some(integer) = number.as_i64() {
+                return integer.checked_neg().map(Value::from);
+            }
+            serde_json::Number::from_f64(-number.as_f64()?).map(Value::Number)
+        }
+        _ => None,
+    }
 }
 
 fn initial_value_from_assume_expression(
