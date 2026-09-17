@@ -37,9 +37,68 @@ impl From<mercurio_foundation::simulation_core::SimulationProfileError>
 pub fn simulation_model_from_runtime(
     runtime: &Runtime,
 ) -> Result<SimulationModel, SysmlSimulationAdapterError> {
-    let model = normalize_state_machines_from_runtime(runtime, project_state_machines(runtime));
+    let machines = project_state_machines(runtime);
+    validate_behavior_projection(runtime, &machines)?;
+    let model = normalize_state_machines_from_runtime(runtime, machines);
     validate_simulation_model(&model)?;
     Ok(model)
+}
+
+// Validate before lossy projection can turn unsupported behavior into a successful run.
+fn validate_behavior_projection(
+    runtime: &Runtime,
+    machines: &[StateMachineModel],
+) -> Result<(), SysmlSimulationAdapterError> {
+    let invalid = |id: &str, field: &str| {
+        SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "simulation.behavior.unsupported: {id} has malformed or unsupported {field}"
+        ))
+    };
+    for machine in machines {
+        for state in &machine.states {
+            for (name, value) in [
+                ("entry_behavior", &state.entry_behavior),
+                ("exit_behavior", &state.exit_behavior),
+            ] {
+                if value
+                    .as_ref()
+                    .is_some_and(|value| normalize_action_sequence(value).is_none())
+                {
+                    return Err(invalid(&state.id, name));
+                }
+            }
+            if state
+                .do_behavior
+                .as_ref()
+                .is_some_and(|value| normalize_do_behavior(value).is_none())
+            {
+                return Err(invalid(&state.id, "do_behavior"));
+            }
+        }
+        for transition in &machine.transitions {
+            if let Some(value) = runtime
+                .graph()
+                .element_by_element_id(&transition.id)
+                .and_then(|element| element.properties.get("effects"))
+            {
+                let effects = value
+                    .as_array()
+                    .ok_or_else(|| invalid(&transition.id, "effects"))?;
+                for effect in effects {
+                    if effect.get("kind").and_then(Value::as_str) == Some("rate") {
+                        return Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                            "simulation.behavior.unsupported: {}: legacy transition `rate` effects are unsupported; move rates to state `do_behavior`",
+                            transition.id
+                        )));
+                    }
+                    if normalize_effect(effect).is_none() {
+                        return Err(invalid(&transition.id, "effects"));
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
 }
 
 pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
@@ -535,22 +594,19 @@ fn normalize_do_behavior(value: &Value) -> Option<StateDoBehavior> {
                 .get("rates")
                 .and_then(Value::as_array)?
                 .iter()
-                .filter_map(normalize_rate)
-                .collect::<Vec<_>>();
+                .map(normalize_rate)
+                .collect::<Option<Vec<_>>>()?;
             Some(StateDoBehavior::RateIntegration { rates })
         }
         "lookup_table" | "lookup_tables" => {
-            let tables = object
-                .get("tables")
-                .or_else(|| object.get("lookup_tables"))
-                .and_then(Value::as_array)
-                .map(|items| {
-                    items
-                        .iter()
-                        .filter_map(normalize_lookup_table)
-                        .collect::<Vec<_>>()
-                })
-                .or_else(|| normalize_lookup_table(value).map(|table| vec![table]))?;
+            let tables = match object.get("tables").or_else(|| object.get("lookup_tables")) {
+                Some(items) => items
+                    .as_array()?
+                    .iter()
+                    .map(normalize_lookup_table)
+                    .collect::<Option<Vec<_>>>()?,
+                None => vec![normalize_lookup_table(value)?],
+            };
             Some(StateDoBehavior::LookupTable { tables })
         }
         _ => None,
@@ -578,8 +634,8 @@ fn normalize_lookup_table(value: &Value) -> Option<SimulationLookupTable> {
         .get("samples")
         .and_then(Value::as_array)?
         .iter()
-        .filter_map(normalize_lookup_sample)
-        .collect::<Vec<_>>();
+        .map(normalize_lookup_sample)
+        .collect::<Option<Vec<_>>>()?;
     if samples.is_empty() {
         return None;
     }
@@ -597,11 +653,10 @@ fn normalize_action_sequence(value: &Value) -> Option<SimulationActionSequence> 
     let object = value.as_object()?;
     let actions = object
         .get("actions")
-        .and_then(Value::as_array)
-        .into_iter()
-        .flatten()
-        .filter_map(normalize_action_node)
-        .collect::<Vec<_>>();
+        .and_then(Value::as_array)?
+        .iter()
+        .map(normalize_action_node)
+        .collect::<Option<Vec<_>>>()?;
     Some(SimulationActionSequence { actions })
 }
 
@@ -625,11 +680,14 @@ fn normalize_action_node(value: &Value) -> Option<SimulationActionNode> {
                     .or_else(|| object.get("then"))
                     .or_else(|| object.get("thenBranch"))?,
             )?;
-            let else_branch = object
+            let else_branch = match object
                 .get("else_branch")
                 .or_else(|| object.get("else"))
                 .or_else(|| object.get("elseBranch"))
-                .and_then(normalize_action_branch);
+            {
+                Some(branch) => Some(normalize_action_branch(branch)?),
+                None => None,
+            };
             Some(SimulationActionNode::Decision {
                 guard,
                 then_branch,
@@ -650,8 +708,8 @@ fn normalize_action_branch(value: &Value) -> Option<SimulationActionSequence> {
     let actions = value
         .as_array()?
         .iter()
-        .filter_map(normalize_action_node)
-        .collect::<Vec<_>>();
+        .map(normalize_action_node)
+        .collect::<Option<Vec<_>>>()?;
     Some(SimulationActionSequence { actions })
 }
 
@@ -1280,6 +1338,79 @@ mod tests {
     use mercurio_foundation::{KirDocument, KirElement};
 
     use super::*;
+
+    #[test]
+    fn rejects_behavior_entries_instead_of_silently_dropping_them() {
+        let valid = json!({"kind":"assign", "feature":"ready", "value":true});
+        let invalid = json!({"kind":"external_solver"});
+        for (property, value) in [
+            (
+                "entry_behavior",
+                json!({"actions":[valid.clone(), invalid.clone()]}),
+            ),
+            (
+                "exit_behavior",
+                json!({"actions":[{"kind":"decision", "guard":true, "then":[valid.clone()], "else":[invalid.clone()]}]}),
+            ),
+            ("entry_behavior", json!({"actions":"invalid"})),
+            (
+                "do_behavior",
+                json!({"kind":"rate_integration", "rates":[{"feature":"temperature", "rate_per_second":1}, {}]}),
+            ),
+            (
+                "do_behavior",
+                json!({"kind":"lookup_table", "feature":"temperature", "samples":[{"t":0,"value":20}, {"t":1}]}),
+            ),
+            ("do_behavior", invalid.clone()),
+        ] {
+            let runtime = Runtime::from_document(KirDocument {
+                metadata: BTreeMap::new(),
+                elements: vec![element(
+                    "state.Demo.On",
+                    "StateUsage",
+                    [
+                        ("owning_type", json!("DemoMachine")),
+                        ("is_initial", json!(true)),
+                        (property, value.clone()),
+                    ],
+                )],
+            })
+            .unwrap();
+            let error = simulation_model_from_runtime(&runtime)
+                .expect_err(&format!("silently accepted {property}: {value}"));
+            assert!(format!("{error:?}").contains("state.Demo.On"));
+        }
+        for value in [json!([valid, invalid]), json!({"kind":"assign"})] {
+            let runtime = Runtime::from_document(KirDocument {
+                metadata: BTreeMap::new(),
+                elements: vec![
+                    element(
+                        "state.Demo.On",
+                        "StateUsage",
+                        [
+                            ("owning_type", json!("DemoMachine")),
+                            ("is_initial", json!(true)),
+                        ],
+                    ),
+                    element(
+                        "transition.Demo.loop",
+                        "TransitionUsage",
+                        [
+                            ("owning_type", json!("DemoMachine")),
+                            ("source", json!("state.Demo.On")),
+                            ("target", json!("state.Demo.On")),
+                            ("trigger", json!("tick")),
+                            ("effects", value.clone()),
+                        ],
+                    ),
+                ],
+            })
+            .unwrap();
+            let error = simulation_model_from_runtime(&runtime)
+                .expect_err(&format!("silently accepted effects: {value}"));
+            assert!(format!("{error:?}").contains("transition.Demo.loop"));
+        }
+    }
 
     #[test]
     fn normalizes_projected_state_machine_to_simulation_model() {
