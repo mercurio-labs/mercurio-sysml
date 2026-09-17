@@ -1922,6 +1922,15 @@ fn transpile_usage(
         );
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
+    let unsupported_clauses = usage.modifiers.iter()
+        .filter(|modifier| modifier.starts_with("effect=") || modifier.starts_with("guard="))
+        .cloned().collect::<Vec<_>>();
+    if !unsupported_clauses.is_empty() {
+        let metadata = element.properties.entry("metadata".to_string()).or_insert_with(|| json!({}));
+        if let Some(metadata) = metadata.as_object_mut() {
+            metadata.insert("simulation".to_string(), json!({"unsupported_clauses": unsupported_clauses}));
+        }
+    }
     Ok(element)
 }
 

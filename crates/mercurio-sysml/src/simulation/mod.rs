@@ -3470,6 +3470,43 @@ mod tests {
     }
 
     #[test]
+    fn textual_transition_clauses_cannot_be_silently_dropped() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for clause in ["do reset", "if temperature > 100", "if temperature > 100 do reset"] {
+            let source = include_str!("thermal-deadline.sysml").replace(
+                "transition cold_heating first Cold accept start then Heating;",
+                &format!("accept start {clause} then Heating;"),
+            );
+            let document = compile_sysml_text(&source, "unsupported-effect.sysml", &stdlib).unwrap();
+            for document in [document.clone(), mercurio_foundation::KirDocument::merge_with_registered_fields(
+                vec![document], crate::sysml_field_specs().iter().copied(),
+            ).unwrap()] {
+                let runtime = Runtime::from_document(document).unwrap();
+                let error = canonical_simulation_model(&runtime).expect_err("authored transition clauses must not disappear");
+                assert!(format!("{error:?}").contains("simulation.behavior.unsupported"), "{error:?}");
+            }
+        }
+    }
+
+    #[test]
+    fn textual_analysis_assumptions_are_not_silently_dropped() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for assumption in [
+            "assume constraint = chamber.temperature > 100.0;",
+            "assume constraint = chamber.temperature == chamber.targetTemperature;",
+            "assume constraint empty;",
+            "assume constraint = chamber.temperature == 20.0; assume constraint = chamber.temperature == 99.0;",
+        ] {
+            let source = include_str!("thermal-deadline.sysml").replace(
+                "assume constraint = chamber.temperature == 20.0;", assumption,
+            );
+            let runtime = Runtime::from_document(compile_sysml_text(&source, "unsupported-assumption.sysml", &stdlib).unwrap()).unwrap();
+            let error = scenario_from_analysis_case(&runtime, "HeatProfile").expect_err("unsupported or conflicting assumption accepted");
+            assert!(format!("{error:?}").contains("analysis.assumption."), "{error:?}");
+        }
+    }
+
+    #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, expected) in [(10, "violated"), (20, "satisfied"), (20, "unevaluated")] {

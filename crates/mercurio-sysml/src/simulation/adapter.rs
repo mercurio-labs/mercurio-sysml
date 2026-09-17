@@ -76,6 +76,12 @@ fn validate_behavior_projection(
             }
         }
         for transition in &machine.transitions {
+            if runtime.graph().element_by_element_id(&transition.id)
+                .and_then(|element| element.properties.get("metadata"))
+                .and_then(|metadata| metadata.get("simulation"))
+                .and_then(|metadata| metadata.get("unsupported_clauses")).is_some() {
+                return Err(invalid(&transition.id, "authored transition guard/effect clauses"));
+            }
             if let Some(value) = runtime
                 .graph()
                 .element_by_element_id(&transition.id)
@@ -908,16 +914,20 @@ fn native_analysis_initial_values(
             && string_property_any_element(candidate, &["owner", "owning_type"]).as_deref()
                 == Some(analysis_case.element_id.as_str())
     }) {
-        let Some(expression) = assume.properties.get("expression_ir") else {
-            continue;
-        };
-        if let Some(((subject, feature), value)) = initial_value_from_assume_expression(
-            expression,
-            &subject_aliases,
-            default_subject.as_deref(),
-        ) {
-            values.insert((subject, feature), value);
+        let unsupported = || SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "analysis.assumption.unsupported: {} must be a subject-feature equality to a literal initial value", assume.element_id
+        ));
+        let expression = assume.properties.get("expression_ir").ok_or_else(unsupported)?;
+        let ((subject, feature), value) = initial_value_from_assume_expression(
+            expression, &subject_aliases, default_subject.as_deref(),
+        ).ok_or_else(unsupported)?;
+        let key = (subject, feature);
+        if values.get(&key).is_some_and(|previous| previous != &value) {
+            return Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                "analysis.assumption.conflict: {} contradicts another initial value for {}.{}", assume.element_id, key.0, key.1
+            )));
         }
+        values.insert(key, value);
     }
 
     Ok(values)
