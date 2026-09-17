@@ -271,7 +271,7 @@ fn resolve_module_with_policy_context(
     );
 
     let resolve_definition_start = compile_timer_start();
-    let resolved_definitions = definitions
+    let mut resolved_definitions = definitions
         .into_iter()
         .map(|definition| {
             resolve_definition(
@@ -298,7 +298,7 @@ fn resolve_module_with_policy_context(
     );
 
     let resolve_usage_start = compile_timer_start();
-    let resolved_usages = usages
+    let mut resolved_usages = usages
         .into_iter()
         .map(|usage| {
             resolve_usage(
@@ -323,6 +323,8 @@ fn resolve_module_with_policy_context(
         "ok",
         format!("usages={}", resolved_usages.len()),
     );
+
+    super::constraint_binding::bind_constraint_usages(&mut resolved_definitions, &mut resolved_usages);
 
     Ok(ResolvedModule {
         packages,
@@ -434,6 +436,40 @@ fn resolve_definition(
             )
         })
         .collect::<Result<Vec<_>, _>>()?;
+    // Reuse feature resolution in the definition's lexical scope. This context
+    // is not a synthesized model usage and is never emitted into KIR.
+    let expression = if let Some(expr) = &definition.expression {
+        let context = CollectedUsage {
+            construct: definition.construct.clone(),
+            owner_construct: definition.construct.clone(),
+            owner_qualified_name: definition.qualified_name.clone(),
+            qualified_name: definition.qualified_name.clone(),
+            declared_name: definition.declared_name.clone(),
+            is_implicit_name: false,
+            ty: None,
+            additional_types: Vec::new(),
+            reference_target: None,
+            allocation_source: None,
+            allocation_target: None,
+            metadata_properties: BTreeMap::new(),
+            multiplicity: None,
+            expression: None,
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            members: Vec::new(),
+            modifiers: Vec::new(),
+            docs: Vec::new(),
+            span: definition.span.clone(),
+        };
+        Some(resolve_expression(
+            &context, expr, stdlib_ids, stdlib_feature_index, stdlib_aliases,
+            local_definitions, local_aliases, import_aliases, definition_index,
+            local_feature_index, local_usage_map,
+        )?)
+    } else {
+        None
+    };
     let members = definition
         .members
         .into_iter()
@@ -456,6 +492,7 @@ fn resolve_definition(
         .collect::<Result<Vec<_>, _>>()?;
 
     Ok(ResolvedDefinition {
+        expression,
         construct: definition.construct,
         qualified_name: definition.qualified_name,
         declared_name: definition.declared_name,

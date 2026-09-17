@@ -36,6 +36,7 @@ pub(crate) struct CollectedImport {
 
 #[derive(Debug, Clone)]
 pub(crate) struct CollectedDefinition {
+    pub(crate) expression: Option<Expr>,
     pub(crate) construct: String,
     pub(crate) qualified_name: String,
     pub(crate) declared_name: String,
@@ -365,6 +366,7 @@ fn collect_generic_definition(
     annotate_connection_definition_members(&construct, &mut members, mappings);
 
     Ok(CollectedDefinition {
+        expression: definition.expression.clone(),
         construct,
         qualified_name,
         declared_name: plan.declared_name,

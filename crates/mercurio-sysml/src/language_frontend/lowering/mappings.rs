@@ -459,6 +459,7 @@ mod tests {
 
     fn test_definition(construct: &str) -> ResolvedDefinition {
         ResolvedDefinition {
+            expression: None,
             construct: construct.to_string(),
             qualified_name: "root.X".to_string(),
             declared_name: "X".to_string(),

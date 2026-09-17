@@ -267,6 +267,7 @@ impl Parser {
         };
 
         Ok(GenericDefinitionDecl {
+            expression: None,
             keyword,
             name,
             specializes,
@@ -308,6 +309,7 @@ impl Parser {
         };
 
         Ok(GenericDefinitionDecl {
+            expression: None,
             keyword: "feature".to_string(),
             name,
             specializes,

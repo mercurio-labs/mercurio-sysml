@@ -1125,6 +1125,18 @@ pub fn transpile_module_with_source(
             render_package_id(package, mappings).map(|id| (package.qualified_name.clone(), id))
         })
         .collect::<Result<BTreeMap<_, _>, _>>()?;
+    let mut definition_expression_ids = BTreeMap::new();
+    if module.definitions.iter().any(|definition| definition.expression.is_some()) {
+        for definition in &module.definitions {
+            if let Some(owner) = definition_ids.get(&definition.qualified_name) {
+                collect_expression_feature_ids(&definition.members, owner, mappings, &mut definition_expression_ids)?;
+            }
+        }
+        for usage in &module.usages {
+            let owner = package_owner_id(usage, &package_ids);
+            collect_expression_feature_ids(std::slice::from_ref(usage), &owner, mappings, &mut definition_expression_ids)?;
+        }
+    }
     let top_level_usage_ids = module
         .usages
         .iter()
@@ -1229,6 +1241,7 @@ pub fn transpile_module_with_source(
             &definition_id,
             &feature_ids,
             &member_ids,
+            &definition_expression_ids,
             source_file,
             source_language,
             mappings,
@@ -1523,11 +1536,48 @@ fn transpile_import(
     )
 }
 
+// Resolution uses source-qualified feature keys; emission may use metaclass-
+// specific IDs (notably ReferenceUsage parameters). Keep definition IR anchored
+// to those actual emitted elements, including inherited and nested features.
+fn collect_expression_feature_ids(
+    usages: &[ResolvedUsage], owner: &str, mappings: &MappingBundle,
+    output: &mut BTreeMap<String, String>,
+) -> Result<(), Diagnostic> {
+    for usage in usages {
+        let id = render_usage_id(usage, owner, mappings)?;
+        output.insert(format!("feature.{}", usage.qualified_name), id.clone());
+        collect_expression_feature_ids(&usage.members, &id, mappings, output)?;
+    }
+    Ok(())
+}
+
+fn remap_expression_feature_ids(ir: &mut ExpressionIr, ids: &BTreeMap<String, String>) {
+    match ir {
+        ExpressionIr::Path { segments, .. } => {
+            for segment in segments {
+                if let ExpressionPathSegment::Resolved { feature: Some(feature), .. } = segment {
+                    if let Some(emitted) = ids.get(feature) { *feature = emitted.clone(); }
+                }
+            }
+        }
+        ExpressionIr::Unary { expr, .. } => remap_expression_feature_ids(expr, ids),
+        ExpressionIr::Binary { left, right, .. } => {
+            remap_expression_feature_ids(left, ids);
+            remap_expression_feature_ids(right, ids);
+        }
+        ExpressionIr::Tuple { items } | ExpressionIr::Call { args: items, .. } => {
+            for item in items { remap_expression_feature_ids(item, ids); }
+        }
+        ExpressionIr::Literal { .. } | ExpressionIr::SelfRef => {}
+    }
+}
+
 fn transpile_definition(
     definition: &ResolvedDefinition,
     definition_id: &str,
     feature_ids: &[String],
     member_ids: &[String],
+    expression_ids: &BTreeMap<String, String>,
     source_file: &str,
     source_language: &str,
     mappings: &MappingBundle,
@@ -1581,7 +1631,7 @@ fn transpile_definition(
         ("metatype_ref".to_string(), metatype_ref),
     ]);
 
-    build_element(
+    let mut element = build_element(
         definition_id,
         &definition.span,
         source_file,
@@ -1589,7 +1639,14 @@ fn transpile_definition(
         emission,
         lowering_rule,
         context,
-    )
+    )?;
+    if let Some(expression) = &definition.expression {
+        let mut ir = build_expression_ir(expression)?;
+        remap_expression_feature_ids(&mut ir, expression_ids);
+        element.properties.insert("expression_ir".into(), ir.to_value()
+            .map_err(|error| Diagnostic::new(error.to_string(), Some(definition.span.clone())))?);
+    }
+    Ok(element)
 }
 
 fn transpile_conjugated_port_definition(
@@ -3305,6 +3362,7 @@ mod lowering_golden_tests {
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: vec![ResolvedDefinition {
+                expression: None,
                 construct: "ConnectionDefinition".to_string(),
                 qualified_name: "Link".to_string(),
                 declared_name: "Link".to_string(),

@@ -800,6 +800,11 @@ fn constraint_sources(graph: &Graph) -> Vec<ConstraintSource> {
 }
 
 fn source_from_element(element: &Element) -> Option<ConstraintSource> {
+    // A definition's predicate is a template with unbound parameters, not a
+    // model-wide equation. Usage instantiation/binding must select its context.
+    if element.kind.ends_with("ConstraintDefinition") {
+        return None;
+    }
     let label = element_label(element);
     if let Some(expression) =
         string_property(element, &["equation", "constraint", "check", "expression"])
@@ -1635,6 +1640,23 @@ mod tests {
     use super::*;
     use mercurio_foundation::graph::Graph;
     use mercurio_foundation::{KirDocument, KirElement};
+
+    #[test]
+    fn constraint_definition_predicates_are_not_global_equations() {
+        let stdlib = crate::load_sysml_baseline().unwrap();
+        let document = crate::compile_sysml_text(
+            "package Audit { import ScalarValues::*; constraint def C { in x: Real; x > 0 } attribute a: Real = 1.0; }",
+            "definition.sysml", &stdlib,
+        ).unwrap();
+        let definition = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("C")).unwrap();
+        assert!(definition.properties.contains_key("expression_ir"));
+        let definition_id = definition.id.clone();
+        let attribute_id = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("a")).unwrap().id.clone();
+        let graph = Graph::from_document(document).unwrap();
+        let sources = constraint_sources(&graph);
+        assert!(!sources.iter().any(|s| s.id == definition_id));
+        assert!(sources.iter().any(|s| s.id == attribute_id));
+    }
 
     #[test]
     fn shared_expression_static_arithmetic_preserves_solver_policy() {

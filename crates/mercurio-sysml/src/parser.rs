@@ -2045,8 +2045,17 @@ impl Parser {
         }
 
         let mut members = Vec::new();
+        let mut expression = None;
         let end = match self.peek_kind() {
             TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`")?,
+            TokenKind::LBrace if keyword == "constraint" => {
+                let tail = self.try_parse_constraint_expression_tail()?
+                    .ok_or_else(|| self.error_here("expected constraint definition body"))?;
+                expression = tail.expression;
+                docs.extend(tail.owner_docs);
+                members.extend(tail.body_members);
+                self.tokens[self.index - 1].clone()
+            }
             TokenKind::LBrace => {
                 self.advance();
                 let block = self.parse_declaration_block_contents_after_open()?;
@@ -2059,6 +2068,7 @@ impl Parser {
 
         let span = merge_span(&start.span, &end.span);
         Ok(Declaration::GenericDefinition(GenericDefinitionDecl {
+            expression,
             keyword: keyword.to_string(),
             name,
             specializes,

@@ -4,6 +4,7 @@
 //! KIR emission. The initial extraction keeps the existing resolver/transpiler
 //! behavior intact while giving the phases stable module boundaries.
 
+mod constraint_binding;
 pub mod collect;
 pub mod elaborate;
 pub mod emit;
