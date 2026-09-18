@@ -1186,7 +1186,7 @@ pub fn transpile_module_with_source(
         // is not always a package: `view v { expose x::**; }` is owned by the
         // view *usage*. Consulting only `package_ids` silently reparented every
         // such query onto `pkg.root`, which made a view's exposes
-        // indistinguishable from the next view's â€” fatal for
+        // indistinguishable from the next view's — fatal for
         // `exposed_elements`, which has to ask what *this* view exposes
         // (save-as-view SV-2).
         let owner_id = import

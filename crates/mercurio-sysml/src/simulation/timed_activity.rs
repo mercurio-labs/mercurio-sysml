@@ -320,7 +320,7 @@ pub(super) fn run(
             (subject.clone(), completion.to_owned()),
             Value::Bool(false),
         )]),
-        requirements: adapter::native_analysis_requirements(runtime, case),
+        requirements: adapter::native_analysis_requirements(runtime, case).map_err(map_adapter_error)?,
         objectives: vec![],
     };
     adapter::mission_metadata::apply(runtime, case, &mut scenario).map_err(map_adapter_error)?;
