@@ -14,6 +14,7 @@ pub mod dsl;
 mod embedded_resources;
 pub mod kerml;
 pub mod language_frontend;
+pub mod library_dependencies;
 pub mod metamodel;
 pub mod mutation;
 pub mod parse_session;

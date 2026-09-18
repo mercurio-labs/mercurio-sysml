@@ -30,6 +30,20 @@ fn compile_sysml_authoring_sources(
 ) -> Result<KirDocument, AuthoringError> {
     let stdlib = shared_sysml_baseline().map_err(AuthoringError::Kir)?;
 
+    compile_sysml_source_set(files, &stdlib)
+}
+
+/// Compile an explicit retained source set with the supplied library context.
+/// Uses the same whole-project resolution and merge rules as native authoring.
+pub fn compile_sysml_source_set(
+    files: &BTreeMap<String, String>,
+    stdlib: &KirDocument,
+) -> Result<KirDocument, AuthoringError> {
+    if files.is_empty() {
+        return Err(AuthoringError::Kir(
+            mercurio_foundation::KirError::Frontend("Source set is empty".into()),
+        ));
+    }
     // Every file must be compiled with the whole project in scope, exactly the
     // way the workspace source compiler does it (see
     // `SourceCompileContext::from_source_documents` in mercurio-console-api).
@@ -46,7 +60,7 @@ fn compile_sysml_authoring_sources(
     let mut documents = Vec::new();
     for (path, source) in files {
         documents.push(
-            compile_sysml_text_with_context(source, path, &context_modules, &stdlib)
+            compile_sysml_text_with_context(source, path, &context_modules, stdlib)
                 .map_err(AuthoringError::Parse)?,
         );
     }

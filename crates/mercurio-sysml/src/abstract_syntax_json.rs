@@ -12,6 +12,10 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value, json};
 
 use crate::sysml_field_specs;
+pub mod package_projection;
+pub mod package_identity;
+pub mod parts_preview;
+mod reference_closure;
 
 pub const SYSML_JSON_IMPORTER_VERSION: &str = concat!(
     "mercurio-sysml/",
@@ -21,7 +25,7 @@ pub const SYSML_JSON_IMPORTER_VERSION: &str = concat!(
 pub const SYSML_JSON_EXPORTER_VERSION: &str = concat!(
     "mercurio-sysml/",
     env!("CARGO_PKG_VERSION"),
-    "/sysml-json-export-v1"
+    "/sysml-json-export-v7"
 );
 
 fn default_include_mercurio_extensions() -> bool {
@@ -281,7 +285,52 @@ pub fn export_sysml_abstract_syntax_value(
         ));
     }
 
+    let mut origins = Value::Null;
+    if options.schema_profile.as_deref() == Some(package_projection::PROFILE) {
+        diagnostics.clear();
+        match package_projection::project(document) {
+            Ok((projected, map)) => {
+                elements = projected;
+                origins = map;
+            }
+            Err(message) => {
+                elements.clear();
+                diagnostics.push(export_diagnostic(
+                    SysmlJsonExportSeverity::Error,
+                    "sysml_json_export.package_profile",
+                    message,
+                    None,
+                    None,
+                ));
+            }
+        }
+    }
+    if options.schema_profile.as_deref() == Some(parts_preview::PROFILE) {
+        match parts_preview::project(document, &exchange_ids, &mut elements) {
+            Ok(map) => origins = map,
+            Err(message) => diagnostics.push(export_diagnostic(
+                SysmlJsonExportSeverity::Error,
+                "sysml_json_export.parts_preview",
+                message,
+                None,
+                None,
+            )),
+        }
+        diagnostics.push(export_diagnostic(
+            SysmlJsonExportSeverity::Warning,
+            "sysml_json_export.preview_only",
+            "Parts preview includes authored ownership and type relationships; inherited properties, source modifiers and standard-library exchange closure remain unqualified for publication",
+            None, None,
+        ));
+    }
     let mut metadata = BTreeMap::new();
+    metadata.insert(
+        "reference_closure".into(),
+        reference_closure::audit(&elements),
+    );
+    if !origins.is_null() {
+        metadata.insert("origins".to_string(), origins);
+    }
     metadata.insert(
         "source_format".to_string(),
         Value::String("sysml-abstract-syntax-json".to_string()),
@@ -322,6 +371,15 @@ pub fn export_sysml_abstract_syntax_value(
     })
 }
 
+/// Qualified internal metaclass names are not OMG REST discriminator values.
+fn metaclass_name(kind: &str) -> &str {
+    if kind.starts_with("SysML::") || kind.starts_with("KerML::") {
+        kind.rsplit("::").next().unwrap_or(kind)
+    } else {
+        kind
+    }
+}
+
 fn export_element(
     element: &KirElement,
     registry: &KirFieldRegistry,
@@ -337,7 +395,10 @@ fn export_element(
         .cloned()
         .unwrap_or_else(|| deterministic_exchange_uuid(&element.id));
     object.insert("@id".to_string(), Value::String(exchange_id));
-    object.insert("@type".to_string(), Value::String(element.kind.clone()));
+    object.insert(
+        "@type".to_string(),
+        Value::String(metaclass_name(&element.kind).to_string()),
+    );
 
     let mut extension_properties = Map::new();
     let mut extension_metadata = Map::new();
@@ -820,7 +881,10 @@ fn reference_object(
         ),
     );
     if let Some(kind) = kind {
-        object.insert("@type".to_string(), Value::String(kind.to_string()));
+        object.insert(
+            "@type".to_string(),
+            Value::String(metaclass_name(kind).to_string()),
+        );
     }
     Value::Object(object)
 }
