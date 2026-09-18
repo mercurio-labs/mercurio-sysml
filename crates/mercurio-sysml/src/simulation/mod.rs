@@ -4,6 +4,7 @@ use std::fmt;
 use serde_json::Value;
 
 mod adapter;
+mod timed_activity;
 
 pub use crate::{
     AnalysisClockConfig, AnalysisDynamicBehaviorBinding, AnalysisDynamicBehaviorKind,
@@ -221,6 +222,11 @@ pub fn list_analysis_cases(runtime: &Runtime) -> Vec<AnalysisCaseInfo> {
     adapter::list_analysis_cases(runtime)
 }
 
+/// Enumerate authored analysis cases without materializing runtime-derived indexes.
+pub fn list_analysis_cases_from_graph(graph: &Graph) -> Vec<AnalysisCaseInfo> {
+    adapter::list_analysis_cases_from_graph(graph)
+}
+
 pub fn scenario_from_analysis_case(
     runtime: &Runtime,
     analysis_case_id: &str,
@@ -239,7 +245,16 @@ fn bind_trace_values(runtime: &Runtime, trace: &SimulationTrace, subjects: &[Con
         // instance's value without an explicit instance-aware view contract.
         if subjects.iter().filter(|s| s.machine_id == subject.machine_id).count() != 1 { continue; }
         let Some(owner) = runtime.graph().element_by_element_id(&subject.subject_id)
-            .and_then(|element| string_property_any(element, &["type", "definition"])) else { continue; };
+            // Registered KIR merges normalize reference fields to arrays. Bind only
+            // a single type; multiple types remain ambiguous.
+            .and_then(|element| ["type", "definition"].iter().find_map(|key| {
+                let value = element.properties.get(*key)?;
+                match value {
+                    Value::String(value) => Some(value.clone()),
+                    Value::Array(values) if values.len() == 1 => values[0].as_str().map(str::to_owned),
+                    _ => None,
+                }
+            })) else { continue; };
         let Some(machine) = machines.iter().find(|machine| machine.id == subject.machine_id) else { continue; };
         let roots = machine.states.iter().filter(|state| state.parent_state_id.is_none()).collect::<Vec<_>>();
         if roots.len() != 1 || runtime.graph().element_by_element_id(&roots[0].id).is_none() { continue; }
@@ -303,6 +318,9 @@ pub fn run_analysis_case(
     run_id: &str,
 ) -> Result<CapabilityRunReport, SimulationError> {
     let spec = project_analysis_spec(runtime, analysis_case_id).map_err(map_analysis_spec_error)?;
+    if timed_activity::is_requested(runtime, &spec) {
+        return timed_activity::run(runtime, &spec, run_id);
+    }
     let mut reports = Vec::new();
 
     if has_executable_state_machine_binding(&spec) {
@@ -1480,6 +1498,10 @@ mod tests {
         .unwrap();
 
         let cases = list_analysis_cases(&runtime);
+        assert_eq!(
+            serde_json::to_value(&cases).unwrap(),
+            serde_json::to_value(super::list_analysis_cases_from_graph(runtime.graph())).unwrap(),
+        );
         assert_eq!(cases.len(), 1);
         assert_eq!(cases[0].label, "PrintSequence");
         assert_eq!(cases[0].subject_count, 1);
@@ -3445,6 +3467,29 @@ mod tests {
     }
 
     #[test]
+    fn textual_cooldown_preserves_signed_defaults_and_rejects_unsupported_defaults() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let source = include_str!("instrument-cooldown.sysml");
+        for (rate, status, witness) in [("-1.0", "violated", serde_json::Value::Null), ("-3.0", "satisfied", json!(9.0))] {
+            let text = source.replace("finalCoolingRate : Real = -1.0", &format!("finalCoolingRate : Real = {rate}"));
+            let runtime = Runtime::from_document(compile_sysml_text(&text, "cooldown.sysml", &stdlib).unwrap()).unwrap();
+            let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
+            let report = run_analysis_case(&runtime, &case.id, "cooldown").unwrap();
+            let trace = &report.artifacts[0].payload;
+            assert_eq!(trace["requirement_outcomes"][0]["status"], status);
+            assert_eq!(trace["requirement_outcomes"][0]["witness_time_s"], witness);
+            let frame = trace["timeline"].as_array().unwrap().iter().find(|frame| frame["t"] == 4.0).unwrap();
+            assert!(frame["values"].as_array().unwrap().iter().any(|value| value["feature"] == "temperature" && value["value"] == 40.0), "{frame:#}");
+        }
+        let text = source.replace("finalCoolingRate : Real = -1.0", "finalCoolingRate : Real = 0.0 - 1.0");
+        let runtime = Runtime::from_document(compile_sysml_text(&text, "unsupported-default.sysml", &stdlib).unwrap()).unwrap();
+        let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
+        let error = run_analysis_case(&runtime, &case.id, "unsupported-default").unwrap_err().to_string();
+        assert!(error.contains("simulation.initial_value.unsupported"), "{error}");
+        assert!(error.contains("finalCoolingRate"), "{error}");
+    }
+
+    #[test]
     fn textual_done_endpoint_terminates_without_inventing_deadline_evidence() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, end_time, outcome) in [(10, 6.0, "violated"), (20, 3.0, "unevaluated")] {
@@ -3477,6 +3522,87 @@ mod tests {
     }
 
     #[test]
+    fn textual_state_actions_cannot_silently_drop_unsupported_behavior() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let source = include_str!("thermal-deadline.sysml");
+        for text in [
+            source.replace("do action integrate", "entry action integrate"),
+            source.replace("do action integrate", "exit action integrate"),
+            source.replace("temperature == temperature + heatRate * duration;", "temperature == temperature * heatRate;"),
+            source.replace("temperature == temperature + heatRate * duration;", "temperature == temperature + heatRate * duration; temperature > 0;"),
+            source.replace("do action integrate {", "do action integrate { action nested;"),
+        ] {
+            let document = compile_sysml_text(&text, "unsupported-state-action.sysml", &stdlib).unwrap();
+            let runtime = Runtime::from_document(document).unwrap();
+            let error = canonical_simulation_model(&runtime).expect_err("unsupported authored behavior must not be dropped");
+            assert!(format!("{error:?}").contains("simulation.behavior.unsupported"), "{error:?}");
+        }
+    }
+
+    #[test]
+    fn textual_transition_clauses_cannot_be_silently_dropped() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for clause in ["do reset", "if temperature > 100", "if temperature > 100 do reset"] {
+            let source = include_str!("thermal-deadline.sysml").replace(
+                "transition cold_heating first Cold accept start then Heating;",
+                &format!("accept start {clause} then Heating;"),
+            );
+            let document = compile_sysml_text(&source, "unsupported-effect.sysml", &stdlib).unwrap();
+            for document in [document.clone(), mercurio_foundation::KirDocument::merge_with_registered_fields(
+                vec![document], crate::sysml_field_specs().iter().copied(),
+            ).unwrap()] {
+                let runtime = Runtime::from_document(document).unwrap();
+                let error = canonical_simulation_model(&runtime).expect_err("authored transition clauses must not disappear");
+                assert!(format!("{error:?}").contains("simulation.behavior.unsupported"), "{error:?}");
+            }
+        }
+    }
+
+    #[test]
+    fn textual_analysis_assumptions_are_not_silently_dropped() {
+        let stdlib = load_sysml_baseline().unwrap();
+        for assumption in [
+            "assume constraint = chamber.temperature > 100.0;",
+            "assume constraint = chamber.temperature == chamber.targetTemperature;",
+            "assume constraint empty;",
+            "assume constraint = chamber.temperature == 20.0; assume constraint = chamber.temperature == 99.0;",
+        ] {
+            let source = include_str!("thermal-deadline.sysml").replace(
+                "assume constraint = chamber.temperature == 20.0;", assumption,
+            );
+            let runtime = Runtime::from_document(compile_sysml_text(&source, "unsupported-assumption.sysml", &stdlib).unwrap()).unwrap();
+            let error = scenario_from_analysis_case(&runtime, "HeatProfile").expect_err("unsupported or conflicting assumption accepted");
+            assert!(format!("{error:?}").contains("analysis.assumption."), "{error:?}");
+        }
+    }
+
+    #[test]
+    fn final_mission_audit_rejects_metadata_and_preserves_requirement_uncertainty() {
+        let stdlib = load_sysml_baseline().unwrap();
+        let profile = include_str!("../../resources/profiles/MercurioMissions.sysml");
+        let thermal = include_str!("thermal-deadline.sysml").replace("heatRate : Real = 10.0", "heatRate : Real = 20.0");
+        for fixture in [
+            format!("{}\n{}", profile.replace("Clock", "Clok"), thermal.replace("subject chamber : ThermalChamber;", "@Mercurio::Missions::Clok { maxTime = 6.0; fixedStep = 1.0; sampleInterval = 1.0; } subject chamber : ThermalChamber;")),
+            format!("{profile}\n{}", thermal.replace("state Cold;", "state Cold { @Mercurio::Missions::Clock { maxTime = 6.0; fixedStep = 1.0; sampleInterval = 1.0; } }")),
+        ] {
+            let runtime = Runtime::from_document(compile_sysml_text(&fixture, "audit-metadata.sysml", &stdlib).unwrap()).unwrap();
+            let error = scenario_from_analysis_case(&runtime, "HeatProfile").expect_err("invalid metadata accepted");
+            assert!(format!("{error:?}").contains("mission.metadata.invalid"));
+        }
+        for fixture in [
+            thermal.replace("requirement targetByDeadline {", "requirement targetByDeadline { requirement extra { require constraint { false; } }"),
+            thermal.replace("analysis def HeatProfile", "requirement def ExtraRule { require constraint { false; } } analysis def HeatProfile").replace("requirement targetByDeadline {", "requirement targetByDeadline : ExtraRule {"),
+        ] {
+            let document = compile_sysml_text(&fixture, "audit-requirement.sysml", &stdlib).unwrap();
+            for document in [document.clone(), mercurio_foundation::KirDocument::merge_with_registered_fields(vec![document], crate::sysml_field_specs().iter().copied()).unwrap()] {
+                let runtime = Runtime::from_document(document).unwrap();
+                let report = run_analysis_case(&runtime, "HeatProfile", "audit").unwrap();
+                assert_eq!(report.artifacts[0].payload["requirement_outcomes"][0]["status"], "unevaluated");
+            }
+        }
+    }
+
+    #[test]
     fn textual_thermal_deadline_verdicts() {
         let stdlib = load_sysml_baseline().unwrap();
         for (rate, expected, arithmetic) in [(10, "violated", false), (20, "satisfied", false), (20, "satisfied", true)] {
@@ -3493,6 +3619,10 @@ mod tests {
                 text
             };
             let document = compile_sysml_text(&text, "thermal-deadline.sysml", &stdlib).unwrap();
+            let merged = mercurio_foundation::KirDocument::merge_with_registered_fields(
+                vec![document.clone()], crate::sysml_field_specs().iter().copied(),
+            ).unwrap();
+            let merged_runtime = Runtime::from_document(merged).unwrap();
             let runtime = Runtime::from_document(document).unwrap();
             let case = list_analysis_cases(&runtime)
                 .into_iter()
@@ -3520,6 +3650,9 @@ mod tests {
             let again = run_concurrent_simulation(&runtime, scenario).unwrap();
             assert_eq!(trace, again);
             let report = run_analysis_case(&runtime, &case.id, "deadline").unwrap();
+            let merged_report = run_analysis_case(&merged_runtime, &case.id, "deadline").unwrap();
+            assert_eq!(report.artifacts[0].payload, merged_report.artifacts[0].payload,
+                "registered reference normalization must preserve the complete trace");
             let overlay: ViewOverlayDto = serde_json::from_value(report.artifacts[0].payload["view_overlay"].clone()).unwrap();
             let temperature = overlay.frames[0].node_values.iter().find(|value| value.label.as_deref() == Some("temperature")).unwrap();
             assert!(runtime.graph().element_by_element_id(&temperature.key).is_some());

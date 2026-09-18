@@ -1186,7 +1186,7 @@ pub fn transpile_module_with_source(
         // is not always a package: `view v { expose x::**; }` is owned by the
         // view *usage*. Consulting only `package_ids` silently reparented every
         // such query onto `pkg.root`, which made a view's exposes
-        // indistinguishable from the next view's — fatal for
+        // indistinguishable from the next view's â€” fatal for
         // `exposed_elements`, which has to ask what *this* view exposes
         // (save-as-view SV-2).
         let owner_id = import
@@ -1969,6 +1969,14 @@ fn transpile_usage(
             Value::String(multiplicity.upper.clone()),
         );
     }
+    if usage.construct == "StateUsage" {
+        for phase in ["entry", "exit"] {
+            if usage.members.iter().any(|member| member.modifiers.iter().any(|modifier| modifier == phase)) {
+                // Retain unsupported authored behavior so execution can reject it.
+                element.properties.insert(format!("{phase}_behavior"), json!({"kind":"unsupported_state_action"}));
+            }
+        }
+    }
     if let Some(do_behavior) = state_do_behavior(usage) {
         element
             .properties
@@ -2008,6 +2016,15 @@ fn transpile_usage(
             "source":usage.qualified_name,
         }]));
     }
+    let unsupported_clauses = usage.modifiers.iter()
+        .filter(|modifier| modifier.starts_with("effect=") || modifier.starts_with("guard="))
+        .cloned().collect::<Vec<_>>();
+    if !unsupported_clauses.is_empty() {
+        let metadata = element.properties.entry("metadata".to_string()).or_insert_with(|| json!({}));
+        if let Some(metadata) = metadata.as_object_mut() {
+            metadata.insert("simulation".to_string(), json!({"unsupported_clauses": unsupported_clauses}));
+        }
+    }
     Ok(element)
 }
 
@@ -2016,27 +2033,31 @@ fn state_do_behavior(usage: &ResolvedUsage) -> Option<Value> {
         return None;
     }
 
-    let rates = usage
-        .members
-        .iter()
-        .filter(|member| {
-            // A `do action` lowers to PerformActionUsage; keep matching plain
-            // ActionUsage for robustness.
-            matches!(
-                member.construct.as_str(),
-                "ActionUsage" | "PerformActionUsage"
-            ) && member.modifiers.iter().any(|modifier| modifier == "do")
-        })
-        .flat_map(do_action_expressions)
-        .filter_map(rate_integration_from_assertion)
-        .collect::<Vec<_>>();
-
-    (!rates.is_empty()).then(|| {
-        json!({
-            "kind": "rate_integration",
-            "rates": rates
-        })
-    })
+    let actions = usage.members.iter().filter(|member| member.modifiers.iter().any(|modifier| modifier == "do")).collect::<Vec<_>>();
+    if actions.is_empty() {
+        return None;
+    }
+    let unsupported = || Some(json!({"kind":"unsupported_state_action"}));
+    let mut rates = Vec::new();
+    for action in actions {
+        if !matches!(action.construct.as_str(), "ActionUsage" | "PerformActionUsage")
+            || action.has_explicit_type || action.multiplicity.is_some()
+            || action.modifiers.iter().any(|modifier| modifier == "abstract")
+            || action.expression.is_some() || action.members.is_empty()
+            || action.members.iter().any(|member| member.construct != "AssertUsage") {
+            return unsupported();
+        }
+        for expression in do_action_expressions(action) {
+            let Some(rate) = rate_integration_from_assertion(expression) else {
+                return unsupported();
+            };
+            rates.push(rate);
+        }
+    }
+    if rates.is_empty() {
+        return unsupported();
+    }
+    Some(json!({"kind":"rate_integration", "rates":rates}))
 }
 
 fn do_action_expressions(action: &ResolvedUsage) -> Vec<&ResolvedExpr> {

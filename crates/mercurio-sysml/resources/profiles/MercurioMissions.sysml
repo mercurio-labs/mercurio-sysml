@@ -8,6 +8,12 @@ package Mercurio {
             attribute maxSteps : Integer;
             attribute changeLoopLimit : Integer;
         }
+        metadata def TimedActivity {
+            attribute completionFeature : String;
+        }
+        metadata def Duration {
+            attribute seconds : Real;
+        }
         metadata def InitialStimulus {
             attribute subject : String;
             attribute trigger : String;
