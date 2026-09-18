@@ -2048,7 +2048,7 @@ impl Parser {
         let mut expression = None;
         let end = match self.peek_kind() {
             TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`")?,
-            TokenKind::LBrace if keyword == "constraint" => {
+            TokenKind::LBrace if matches!(keyword, "constraint" | "calc") => {
                 let tail = self.try_parse_constraint_expression_tail()?
                     .ok_or_else(|| self.error_here("expected constraint definition body"))?;
                 expression = tail.expression;
@@ -4364,6 +4364,7 @@ fn is_declaration_modifier(value: &str) -> bool {
             | "ref"
             | "in"
             | "out"
+            | "return"
             | "first"
             | "derived"
             | "readonly"
@@ -4562,6 +4563,7 @@ fn normalize_multiplicity_raw(raw: &str) -> String {
 }
 
 fn multiplicity_bounds(raw: &str) -> (String, String) {
+    if raw == "*" { return ("0".to_string(), "*".to_string()); }
     if let Some((lower, upper)) = raw.split_once("..") {
         return (lower.to_string(), upper.to_string());
     }
@@ -4852,7 +4854,7 @@ fn implicit_usage_keyword(modifiers: &[String]) -> &'static str {
         "action"
     } else if modifiers
         .iter()
-        .any(|modifier| matches!(modifier.as_str(), "ref" | "in" | "out" | "inout"))
+        .any(|modifier| matches!(modifier.as_str(), "ref" | "in" | "out" | "inout" | "return"))
     {
         "reference"
     } else {

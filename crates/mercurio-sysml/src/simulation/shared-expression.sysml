@@ -1,6 +1,13 @@
 package SimulationConstraintsChannels {
     import ScalarValues::*;
 
+    calc def Difference {
+        in left: Real[1];
+        in right: Real[1] default = 0.0;
+        return result: Real[1];
+        left - right
+    }
+
     constraint def TargetReached {
         in actual: Real;
         in target: Real;
@@ -11,12 +18,12 @@ package SimulationConstraintsChannels {
         (1..3)#(2) == 2 and
         (null ?? 1e0) == 1 and
         (true or (1 / 0 > 0)) and
-        actual - ambient >= rise
+        Difference(actual, ambient) >= rise
     }
     constraint def InheritedTargetReached :> TargetReached;
 
     part def ThermalChamber {
-        attribute temperature : Real = 20.0;
+        attribute temperature : Real[1] = 20.0;
         attribute targetTemperature : Real = 80.0;
         attribute heatRate : Real = 10.0;
 
@@ -31,8 +38,8 @@ package SimulationConstraintsChannels {
             }
             state Ready;
 
-            transition cold_heating first Cold accept start do assign temperature := temperature - ((4503599627370496 * 2 + 1 - 4503599627370496 * 2) - 1) then Heating;
-            transition heating_ready first Heating accept when (false implies (1 / 0 > 0)) and temperature - 20.0 >= targetTemperature - 20.0 then Ready;
+            transition cold_heating first Cold accept start do assign temperature := Difference(temperature, ((4503599627370496 * 2 + 1 - 4503599627370496 * 2) - 1)) then Heating;
+            transition heating_ready first Heating accept when (false implies (1 / 0 > 0)) and Difference(temperature, 20.0) >= Difference(targetTemperature, 20.0) then Ready;
         }
     }
 

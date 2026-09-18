@@ -1,5 +1,6 @@
 use std::collections::BTreeMap;
 
+use mercurio_foundation::kir::ExpressionContract;
 use serde_json::Value;
 
 use mercurio_foundation::language_contracts::ast::{
@@ -56,6 +57,7 @@ pub struct ResolvedDefinition {
 
 #[derive(Debug, Clone)]
 pub struct ResolvedUsage {
+    pub assignment: Option<(String, ResolvedExpr)>,
     pub construct: String,
     pub owner_construct: String,
     pub owner_qualified_name: String,
@@ -84,6 +86,15 @@ pub struct ResolvedUsage {
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ResolvedExpr {
+    Checked {
+        expression: Box<ResolvedExpr>,
+        contract: ExpressionContract,
+    },
+    Invoke {
+        function: String,
+        bindings: Vec<ResolvedBinding>,
+        body: Box<ResolvedExpr>,
+    },
     Literal(Value),
     SelfRef,
     Tuple {
@@ -111,4 +122,11 @@ pub enum ResolvedExpr {
 pub struct ResolvedPathSegment {
     pub name: String,
     pub feature_id: String,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct ResolvedBinding {
+    pub feature: String,
+    pub lexical: bool,
+    pub expression: ResolvedExpr,
 }

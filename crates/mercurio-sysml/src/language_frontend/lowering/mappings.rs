@@ -425,6 +425,7 @@ mod tests {
 
     fn test_usage(construct: &str, owner_construct: &str) -> ResolvedUsage {
         ResolvedUsage {
+            assignment: None,
             construct: construct.to_string(),
             owner_construct: owner_construct.to_string(),
             owner_qualified_name: "root".to_string(),

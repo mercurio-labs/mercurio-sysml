@@ -1,22 +1,26 @@
 //! Lower the existing parser's expression AST for dynamic snapshot bindings.
 use super::*;
+#[cfg(test)]
 use mercurio_foundation::{
     BinaryExpressionOp as Op, ExpressionIr, ExpressionPathRoot, ExpressionPathSegment,
     UnaryExpressionOp,
 };
 
-pub(crate) fn expression(text: &str) -> Result<Value, Diagnostic> {
+pub(crate) fn expression_ast(text: &str) -> Result<Expr, Diagnostic> {
     let mut parser = Parser::new(lex(text)?, false);
     let ast = parser.parse_expression()?;
     if !matches!(parser.peek_kind(), TokenKind::Eof) {
         return Err(parser.error_here("unsupported trailing expression syntax"));
     }
-    lower(&ast)?
-        .to_value()
-        .map_err(|error| Diagnostic::new(error.to_string(), None))
+    Ok(ast)
 }
 
-pub(crate) fn assignment(text: &str) -> Result<(String, Value), Diagnostic> {
+#[cfg(test)]
+pub(crate) fn expression(text: &str) -> Result<Value, Diagnostic> {
+    lower(&expression_ast(text)?)?.to_value().map_err(|error| Diagnostic::new(error.to_string(), None))
+}
+
+pub(crate) fn assignment_ast(text: &str) -> Result<(String, Expr), Diagnostic> {
     let mut parser = Parser::new(lex(text)?, false);
     parser.expect_identifier_named("assign", "expected assignment effect")?;
     let target = parser.parse_qualified_name()?.as_dot_string();
@@ -33,14 +37,10 @@ pub(crate) fn assignment(text: &str) -> Result<(String, Value), Diagnostic> {
             None,
         ));
     }
-    Ok((
-        target.to_string(),
-        lower(&ast)?
-            .to_value()
-            .map_err(|error| Diagnostic::new(error.to_string(), None))?,
-    ))
+    Ok((target.to_string(), ast))
 }
 
+#[cfg(test)]
 fn lower(expr: &Expr) -> Result<ExpressionIr, Diagnostic> {
     Ok(match expr {
         Expr::Literal(value) => ExpressionIr::Literal {

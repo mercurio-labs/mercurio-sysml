@@ -2,6 +2,9 @@ mod mission_metadata;
 use std::collections::BTreeMap;
 
 use mercurio_foundation::graph::Element;
+use mercurio_foundation::kir::{
+    ExpressionEvaluationContext, ExpressionEvaluationError, ExpressionIr, ExpressionPathSegment,
+};
 use serde_json::Value;
 
 use crate::{
@@ -134,7 +137,7 @@ pub fn scenario_from_analysis_case(
         )));
     }
 
-    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects);
+    let mut initial_values = native_analysis_attribute_defaults(runtime, &subjects)?;
     initial_values.extend(
         analysis_case
             .properties
@@ -158,7 +161,7 @@ pub fn scenario_from_analysis_case(
         &subjects,
     )?);
     apply_analysis_script_events(runtime, analysis_case, &mut subjects)?;
-    let requirements = native_analysis_requirements(runtime, analysis_case);
+    let requirements = native_analysis_requirements(runtime, analysis_case)?;
     let objectives = native_analysis_objectives(runtime, analysis_case, &subjects);
     let max_steps = analysis_case
         .properties
@@ -379,7 +382,13 @@ fn simulation_constraint_derived_rules(runtime: &Runtime) -> Vec<SimulationDeriv
 
 fn constraint_derived_rule(element: &Element) -> Option<SimulationDerivedFeatureRule> {
     let expression = element.properties.get("expression_ir")?;
-    let object = expression.as_object()?;
+    // Inspect the equation beneath a result contract; keep the selected RHS
+    // expression intact so its own contracts still execute in the shared core.
+    let mut equation = expression;
+    while equation.get("kind").and_then(Value::as_str) == Some("checked") {
+        equation = equation.get("expression")?;
+    }
+    let object = equation.as_object()?;
     let op = object.get("op").and_then(Value::as_str)?;
     if object.get("kind").and_then(Value::as_str) != Some("binary")
         || !(op == "equal" || op == "==")
@@ -990,7 +999,7 @@ fn native_analysis_initial_values(
 fn native_analysis_attribute_defaults(
     runtime: &Runtime,
     subjects: &[ConcurrentSubjectScenario],
-) -> BTreeMap<(String, String), Value> {
+) -> Result<BTreeMap<(String, String), Value>, SysmlSimulationAdapterError> {
     let mut values = BTreeMap::new();
     for subject in subjects {
         let Some(subject_element) = runtime.graph().element_by_element_id(&subject.subject_id)
@@ -1012,13 +1021,13 @@ fn native_analysis_attribute_defaults(
             else {
                 continue;
             };
-            let Some(value) = attribute_default_value(attribute) else {
+            let Some(value) = attribute_default_value(attribute)? else {
                 continue;
             };
             values.insert((subject.subject_id.clone(), feature), value);
         }
     }
-    values
+    Ok(values)
 }
 
 fn apply_analysis_script_events(
@@ -1095,7 +1104,7 @@ fn analysis_script_events(analysis_case: &Element) -> Option<&Vec<Value>> {
 fn native_analysis_requirements(
     runtime: &Runtime,
     analysis_case: &Element,
-) -> Vec<SimulationRequirement> {
+) -> Result<Vec<SimulationRequirement>, SysmlSimulationAdapterError> {
     runtime
         .graph()
         .elements()
@@ -1118,8 +1127,20 @@ fn native_analysis_requirements(
             let deadline_s = children
                 .iter()
                 .find(|child| element_label_element(child) == "deadline")
-                .and_then(|child| attribute_default_value(child))
-                .and_then(|v| v.as_f64());
+                .map(|child| {
+                    let value = attribute_default_value(child)?.ok_or_else(|| {
+                        SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                            "{} deadline requires a constant expression",
+                            child.element_id
+                        ))
+                    })?;
+                    value.as_f64().filter(|value| value.is_finite() && *value >= 0.0)
+                        .ok_or_else(|| SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+                            "{} deadline must evaluate to one finite non-negative number",
+                            child.element_id
+                        )))
+                })
+                .transpose()?;
             let constraints: Vec<_> = children
                 .iter()
                 .filter(|child| is_analysis_requirement(child))
@@ -1144,12 +1165,12 @@ fn native_analysis_requirements(
                         .collect();
                 qualify_requirement_paths(expression, &aliases);
             }
-            SimulationRequirement {
+            Ok(SimulationRequirement {
                 id: requirement.element_id.clone(),
                 label: element_label_element(requirement),
                 expression,
                 deadline_s,
-            }
+            })
         })
         .collect()
 }
@@ -1296,10 +1317,67 @@ fn is_analysis_objective(element: &Element) -> bool {
     element.kind.contains("ObjectiveUsage") || element.element_id.starts_with("objective.")
 }
 
-fn attribute_default_value(attribute: &Element) -> Option<Value> {
-    let expression = attribute.properties.get("expression_ir")?;
-    let object = expression.as_object()?;
-    (object.get("kind")?.as_str()? == "literal").then(|| object.get("value").cloned())?
+/// Initial defaults may be evaluated only without model-instance bindings.
+/// Typed wrappers and closed invocation frames use the same core evaluator as
+/// simulation expressions. Dependent initializers remain outside this profile.
+fn attribute_default_value(
+    attribute: &Element,
+) -> Result<Option<Value>, SysmlSimulationAdapterError> {
+    let Some(value) = attribute.properties.get("expression_ir") else {
+        return Ok(None);
+    };
+    let expression = ExpressionIr::from_value(value).map_err(|error| {
+        SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "{} invalid initial expression: {error}", attribute.element_id
+        ))
+    })?;
+    if expression_contains_self(&expression) {
+        return Ok(None);
+    }
+    match expression.evaluate_result(&mut ConstantDefaultContext { attribute_id: &attribute.element_id }) {
+        Ok(result) => Ok(Some(result.into_legacy_value())),
+        Err(ExpressionEvaluationError::MissingBinding(_)) => Ok(None),
+        Err(error) => Err(SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
+            "{} initial expression: {error}", attribute.element_id
+        ))),
+    }
+}
+
+fn expression_contains_self(expression: &ExpressionIr) -> bool {
+    match expression {
+        ExpressionIr::SelfRef => true,
+        ExpressionIr::Literal { .. } | ExpressionIr::Path { .. } => false,
+        ExpressionIr::Tuple { items } => items.iter().any(expression_contains_self),
+        ExpressionIr::Unary { expr, .. } => expression_contains_self(expr),
+        ExpressionIr::Binary { left, right, .. } => {
+            expression_contains_self(left) || expression_contains_self(right)
+        }
+        ExpressionIr::Call { args, .. } => args.iter().any(expression_contains_self),
+        ExpressionIr::Checked { expression, .. } => expression_contains_self(expression),
+        ExpressionIr::Invoke { bindings, body, .. } => {
+            bindings.iter().any(|binding| expression_contains_self(&binding.expression))
+                || expression_contains_self(body)
+        }
+    }
+}
+
+struct ConstantDefaultContext<'a> {
+    attribute_id: &'a str,
+}
+
+impl ExpressionEvaluationContext for ConstantDefaultContext<'_> {
+    fn owner_id(&self) -> &str {
+        self.attribute_id
+    }
+
+    fn resolve_path(
+        &mut self,
+        segments: &[ExpressionPathSegment],
+    ) -> Result<Vec<Value>, ExpressionEvaluationError> {
+        Err(ExpressionEvaluationError::MissingBinding(
+            segments.iter().map(ExpressionPathSegment::name).collect::<Vec<_>>().join("."),
+        ))
+    }
 }
 
 fn initial_value_from_assume_expression(
@@ -1642,6 +1720,107 @@ mod tests {
             scenario.objectives[0].feature.as_deref(),
             Some("bed_temperature")
         );
+    }
+
+    fn typed_default(value_type: &str, expression: Value) -> Value {
+        json!({"kind":"checked", "contract": {
+            "value_type":value_type, "multiplicity":{"lower":1,"upper":1}
+        }, "expression":expression})
+    }
+
+    fn default_runtime(default: Value, deadline: Option<Value>) -> Runtime {
+        let mut elements = vec![
+            element("analysis.Defaults", "AnalysisCaseDefinition", [
+                ("declared_name", json!("Defaults")),
+                ("subjects", json!([{"subject_id":"subject.Defaults.device","machine":"Device"}])),
+            ]),
+            element("subject.Defaults.device", "SubjectUsage", [
+                ("owner", json!("analysis.Defaults")),
+                ("type", json!("Device")),
+            ]),
+            element("attribute.Device.temperature", "AttributeUsage", [
+                ("owner", json!("Device")),
+                ("declared_name", json!("temperature")),
+                ("expression_ir", default),
+            ]),
+        ];
+        if let Some(deadline) = deadline {
+            elements.push(element("require.Defaults.ready", "RequireUsage", [
+                ("owner", json!("analysis.Defaults")),
+                ("expression_ir", json!({"kind":"literal","value":true})),
+            ]));
+            elements.push(element("attribute.Defaults.deadline", "AttributeUsage", [
+                ("owner", json!("require.Defaults.ready")),
+                ("declared_name", json!("deadline")),
+                ("expression_ir", deadline),
+            ]));
+        }
+        Runtime::from_document(KirDocument {metadata:BTreeMap::new(), elements}).unwrap()
+    }
+
+    #[test]
+    fn typed_constant_and_closed_invocation_defaults_reach_scenario() {
+        let literal = json!({"kind":"literal","value":22});
+        let invoke = json!({"kind":"invoke", "function":"type.WarmUp", "bindings":[
+            {"feature":"feature.WarmUp.x", "expression":literal.clone()}
+        ], "body":{"kind":"path", "segments":[{"name":"x","feature":"feature.WarmUp.x"}]}});
+        for initializer in [literal, invoke] {
+            let runtime = default_runtime(typed_default("integer", initializer), Some(
+                typed_default("real", json!({"kind":"binary","op":"+",
+                    "left":{"kind":"literal","value":20},
+                    "right":{"kind":"literal","value":5}}))
+            ));
+            let scenario = scenario_from_analysis_case(&runtime, "Defaults").unwrap();
+            assert_eq!(scenario.initial_values.get(&("subject.Defaults.device".into(), "temperature".into())),
+                Some(&json!(22)));
+            assert_eq!(scenario.requirements[0].deadline_s, Some(25.0));
+        }
+    }
+
+    #[test]
+    fn dependent_initial_defaults_remain_excluded() {
+        for expression in [
+            json!({"kind":"path","segments":["ambient"]}),
+            json!({"kind":"self"}),
+        ] {
+            let runtime = default_runtime(typed_default("real", expression), None);
+            let scenario = scenario_from_analysis_case(&runtime, "Defaults").unwrap();
+            assert!(scenario.initial_values.is_empty());
+        }
+    }
+
+    #[test]
+    fn invalid_typed_defaults_and_deadlines_reject_scenario_construction() {
+        let invalid = typed_default("integer", json!({"kind":"literal","value":"hot"}));
+        let runtime = default_runtime(invalid, None);
+        let error = scenario_from_analysis_case(&runtime, "Defaults").unwrap_err();
+        assert!(format!("{error:?}").contains("attribute.Device.temperature"));
+        assert!(format!("{error:?}").contains("expected Integer"));
+        for deadline in [
+            typed_default("real", json!({"kind":"literal","value":"later"})),
+            typed_default("real", json!({"kind":"tuple","items":[]})),
+            json!({"kind":"path","segments":["duration"]}),
+            json!({"kind":"literal","value":-1}),
+        ] {
+            let runtime = default_runtime(json!({"kind":"literal","value":22}), Some(deadline));
+            let error = scenario_from_analysis_case(&runtime, "Defaults").unwrap_err();
+            assert!(format!("{error:?}").contains("attribute.Defaults.deadline"), "{error:?}");
+        }
+    }
+
+    #[test]
+    fn checked_equation_discovery_preserves_rhs_contracts() {
+        let rhs = typed_default("real", json!({"kind":"literal","value":7}));
+        let runtime = Runtime::from_document(KirDocument {
+            metadata:BTreeMap::new(),
+            elements:vec![element("constraint.equation", "ConstraintUsage", [
+                ("expression_ir", typed_default("boolean", json!({"kind":"binary","op":"equal",
+                    "left":{"kind":"path","segments":["temperature"]}, "right":rhs.clone()})))
+            ])],
+        }).unwrap();
+        let rule = constraint_derived_rule(runtime.graph().element_by_element_id("constraint.equation").unwrap()).unwrap();
+        assert_eq!(rule.feature, "temperature");
+        assert_eq!(rule.expression, rhs);
     }
 
     fn element<const N: usize>(id: &str, kind: &str, properties: [(&str, Value); N]) -> KirElement {

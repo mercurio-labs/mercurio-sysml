@@ -1126,7 +1126,7 @@ pub fn transpile_module_with_source(
         })
         .collect::<Result<BTreeMap<_, _>, _>>()?;
     let mut definition_expression_ids = BTreeMap::new();
-    if module.definitions.iter().any(|definition| definition.expression.is_some()) {
+    {
         for definition in &module.definitions {
             if let Some(owner) = definition_ids.get(&definition.qualified_name) {
                 collect_expression_feature_ids(&definition.members, owner, mappings, &mut definition_expression_ids)?;
@@ -1286,6 +1286,25 @@ pub fn transpile_module_with_source(
         )?;
     }
 
+    // All executable paths retain the same resolved feature identities.
+    for element in &mut elements {
+        if let Some(value) = element.properties.get_mut("expression_ir") {
+            let mut ir = ExpressionIr::from_value(value)
+                .map_err(|error| Diagnostic::new(error.to_string(), None))?;
+            remap_expression_feature_ids(&mut ir, &definition_expression_ids);
+            *value = ir.to_value().map_err(|error| Diagnostic::new(error.to_string(), None))?;
+        }
+        if let Some(effects) = element.properties.get_mut("effects").and_then(Value::as_array_mut) {
+            for effect in effects {
+                if let Some(value) = effect.get_mut("expression") {
+                    let mut ir = ExpressionIr::from_value(value)
+                        .map_err(|error| Diagnostic::new(error.to_string(), None))?;
+                    remap_expression_feature_ids(&mut ir, &definition_expression_ids);
+                    *value = ir.to_value().map_err(|error| Diagnostic::new(error.to_string(), None))?;
+                }
+            }
+        }
+    }
     if source_language == "kerml" {
         disambiguate_duplicate_element_ids(&mut elements);
     }
@@ -1559,6 +1578,14 @@ fn remap_expression_feature_ids(ir: &mut ExpressionIr, ids: &BTreeMap<String, St
                     if let Some(emitted) = ids.get(feature) { *feature = emitted.clone(); }
                 }
             }
+        }
+        ExpressionIr::Checked { expression, .. } => remap_expression_feature_ids(expression, ids),
+        ExpressionIr::Invoke { bindings, body, .. } => {
+            for binding in bindings {
+                if let Some(emitted) = ids.get(&binding.feature) { binding.feature = emitted.clone(); }
+                remap_expression_feature_ids(&mut binding.expression, ids);
+            }
+            remap_expression_feature_ids(body, ids);
         }
         ExpressionIr::Unary { expr, .. } => remap_expression_feature_ids(expr, ids),
         ExpressionIr::Binary { left, right, .. } => {
@@ -1919,9 +1946,13 @@ fn transpile_usage(
         context,
     )?;
     if let Some(expression) = &usage.expression {
+        let mut ir = build_expression_ir(expression)?;
+        if let Some(contract) = super::expression_contract::usage_expression_contract(usage)? {
+            ir = ExpressionIr::Checked { expression: Box::new(ir), contract };
+        }
         element.properties.insert(
             "expression_ir".to_string(),
-            render_expression_ir(expression)?,
+            ir.to_value().map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?,
         );
     }
     if let Some(multiplicity) = &usage.multiplicity {
@@ -1971,25 +2002,11 @@ fn transpile_usage(
         );
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
-    if usage.construct == "TransitionUsage" {
-        let modifier = |prefix: &str| usage.modifiers.iter().find_map(|value| value.strip_prefix(prefix));
-        let guard = modifier("guard=").or_else(|| {
-            (modifier("trigger_kind=") == Some("when"))
-                .then(|| modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))).flatten()
-        });
-        if let Some(guard) = guard {
-            let expression = crate::parser::behavior_expression::expression(guard)
-                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
-            element.properties.insert("expression_ir".into(), expression);
-        }
-        if let Some(effect) = modifier("effect=").filter(|effect| effect.trim_start().starts_with("assign ")) {
-            let (feature, expression) = crate::parser::behavior_expression::assignment(effect)
-                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
-            element.properties.insert("effects".into(), json!([{
-                "kind":"assign_expression", "feature":feature, "expression":expression,
-                "source":usage.qualified_name,
-            }]));
-        }
+    if let Some((feature, expression)) = &usage.assignment {
+        element.properties.insert("effects".into(), json!([{
+            "kind":"assign_expression", "feature":feature, "expression":render_expression_ir(expression)?,
+            "source":usage.qualified_name,
+        }]));
     }
     Ok(element)
 }
@@ -2968,6 +2985,19 @@ fn render_expression_ir(expr: &ResolvedExpr) -> Result<Value, Diagnostic> {
 
 fn build_expression_ir(expr: &ResolvedExpr) -> Result<ExpressionIr, Diagnostic> {
     match expr {
+        ResolvedExpr::Checked { expression, contract } => Ok(ExpressionIr::Checked {
+            expression: Box::new(build_expression_ir(expression)?),
+            contract: contract.clone(),
+        }),
+        ResolvedExpr::Invoke { function, bindings, body } => Ok(ExpressionIr::Invoke {
+            function: function.clone(),
+            bindings: bindings.iter().map(|binding| Ok(mercurio_foundation::kir::ExpressionBinding {
+                feature: binding.feature.clone(),
+                expression: build_expression_ir(&binding.expression)?,
+                lexical: binding.lexical,
+            })).collect::<Result<Vec<_>, Diagnostic>>()?,
+            body: Box::new(build_expression_ir(body)?),
+        }),
         ResolvedExpr::Literal(value) => Ok(ExpressionIr::Literal {
             value: value.clone(),
         }),
@@ -3292,6 +3322,7 @@ mod lowering_golden_tests {
             metadata_properties: BTreeMap::new(),
             multiplicity: None,
             expression: None,
+            assignment: None,
             is_derived: false,
             specializes: Vec::new(),
             specialized_features: Vec::new(),
@@ -3410,6 +3441,7 @@ mod lowering_golden_tests {
                 metadata_properties: BTreeMap::new(),
                 multiplicity: None,
                 expression: None,
+            assignment: None,
                 is_derived: false,
                 specializes: Vec::new(),
                 specialized_features: Vec::new(),
@@ -3496,6 +3528,7 @@ mod lowering_golden_tests {
                 metadata_properties: BTreeMap::new(),
                 multiplicity: None,
                 expression: None,
+            assignment: None,
                 is_derived: false,
                 specializes: Vec::new(),
                 specialized_features: Vec::new(),
@@ -3538,6 +3571,7 @@ mod lowering_golden_tests {
                 metadata_properties: BTreeMap::new(),
                 multiplicity: None,
                 expression: None,
+            assignment: None,
                 is_derived: false,
                 specializes: Vec::new(),
                 specialized_features: Vec::new(),
@@ -3578,6 +3612,7 @@ mod lowering_golden_tests {
             metadata_properties: BTreeMap::new(),
             multiplicity: None,
             expression: None,
+            assignment: None,
             is_derived: false,
             specializes: Vec::new(),
             specialized_features: Vec::new(),
@@ -3604,6 +3639,7 @@ mod lowering_golden_tests {
             metadata_properties: BTreeMap::new(),
             multiplicity: None,
             expression: None,
+            assignment: None,
             is_derived: false,
             specializes: Vec::new(),
             specialized_features: Vec::new(),
@@ -3630,6 +3666,7 @@ mod lowering_golden_tests {
             metadata_properties: BTreeMap::new(),
             multiplicity: None,
             expression: None,
+            assignment: None,
             is_derived: false,
             specializes: Vec::new(),
             specialized_features: Vec::new(),

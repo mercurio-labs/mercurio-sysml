@@ -46,7 +46,7 @@ fn scalar_sequence_profile_agrees_across_attribute_guard_and_assignment_producer
                 ),
             };
             let source = format!(
-                "package Audit {{ import ScalarValues::*; part def P {{ attribute x : Real = 8.0; attribute items : Real[0..*] = (1,2); {body} }} }}"
+                "package Audit {{ import ScalarValues::*; part def P {{ attribute x = 8.0; attribute items : Real[0..*] = (1,2); {body} }} }}"
             );
             let compiled = compile_sysml_text(&source, "conformance.sysml", &stdlib);
             let label = format!("{} / {producer}: {expression}", case["id"]);
@@ -89,7 +89,7 @@ fn scalar_sequence_profile_agrees_across_attribute_guard_and_assignment_producer
             let ir =
                 ExpressionIr::from_value(ir).unwrap_or_else(|error| panic!("{label}: {error}"));
             let evaluated = ir.evaluate(&mut Bindings);
-            if case["error"] == true {
+            if case["error"] == true || (producer == "guard" && !case["value"].is_boolean()) {
                 assert!(evaluated.is_err(), "expected diagnostic: {label}");
             } else {
                 let value = evaluated.unwrap_or_else(|error| panic!("{label}: {error}"));
@@ -277,10 +277,10 @@ fn typed_constraint_binding_preserves_expressions_and_rejects_incomplete_applica
         let usage = document.elements.iter().find(|e|
             e.properties.get("declared_name").and_then(Value::as_str) == Some(name)).unwrap();
         let value = usage.properties.get("expression_ir");
-        if name == "dynamic" || name == "inherited" {
+        if name == "dynamic" || name == "inherited" || name == "captured" {
             let ir = ExpressionIr::from_value(value.expect(name)).unwrap();
             assert_eq!(ir.evaluate(&mut Bindings).unwrap(), json!(true));
-            assert!(!value.unwrap().to_string().contains("feature.Audit.Range."));
+            assert_eq!(without_contract(value.unwrap())["kind"], "invoke");
         } else { assert!(value.is_none(), "{name} must remain unevaluated"); }
     }
 }
@@ -319,7 +319,7 @@ fn typed_constraint_inherits_unchanged_predicate_through_a_chain() {
         if let Some(expected) = expected {
             let ir = ExpressionIr::from_value(value.expect(name)).unwrap();
             assert_eq!(ir.evaluate(&mut Bindings).unwrap(), json!(expected), "{name}");
-            assert!(!value.unwrap().to_string().contains("feature.Audit.Positive.x"));
+            assert_eq!(without_contract(value.unwrap())["kind"], "invoke");
         } else { assert!(value.is_none(), "{name} must remain unevaluated"); }
     }
 }
@@ -372,7 +372,7 @@ fn constraint_templates_cross_file_boundaries_and_keep_import_scope() {
     let usage = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("result")).unwrap();
     let ir = usage.properties.get("expression_ir").unwrap();
     assert_eq!(ExpressionIr::from_value(ir).unwrap().evaluate(&mut Bindings).unwrap(), json!(true));
-    assert!(!ir.to_string().contains("feature.Library."));
+    assert_eq!(without_contract(ir)["kind"], "invoke");
     assert!(!document.elements.iter().any(|e| e.id == "type.Library.C"), "context definitions must not be emitted into the client file");
 }
 
@@ -383,12 +383,19 @@ fn initializing_defaults_are_not_misread_as_binding_defaults() {
 }
 
 #[test]
-fn dependent_binding_expansion_has_a_finite_budget() {
+fn dependent_bindings_evaluate_once_without_exponential_expansion() {
     let stdlib = load_sysml_baseline().unwrap();
     let mut parameters = String::from("in x0: Real default 1;");
     for i in 1..20 { parameters.push_str(&format!(" in x{i}: Real default = x{} + x{};", i - 1, i - 1)); }
     let source = format!("package Audit {{ import ScalarValues::*; constraint def C {{ {parameters} x19 > 0 }} constraint result: C; }}");
     let document = compile_sysml_text(&source, "budget.sysml", &stdlib).unwrap();
     let usage = document.elements.iter().find(|e| e.properties.get("declared_name").and_then(Value::as_str) == Some("result")).unwrap();
-    assert!(!usage.properties.contains_key("expression_ir"));
+    let value = usage.properties.get("expression_ir").expect("linear call-frame bindings");
+    assert!(value.to_string().len() < 30_000);
+    assert_eq!(ExpressionIr::from_value(value).unwrap().evaluate(&mut Bindings).unwrap(), json!(true));
+}
+
+fn without_contract(mut expression: &Value) -> &Value {
+    while expression["kind"] == "checked" { expression = &expression["expression"]; }
+    expression
 }

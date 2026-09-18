@@ -8,6 +8,7 @@ mod constraint_binding;
 pub mod collect;
 pub mod elaborate;
 pub mod emit;
+mod expression_contract;
 pub mod imports;
 pub mod indexes;
 pub mod ir;

@@ -209,13 +209,13 @@ fn resolve_module_with_policy_context(
 ) -> Result<ResolvedModule, Diagnostic> {
     let mut resolved = resolve_module_without_binding(module, context, mappings, policy)?;
     let mut external = Vec::new();
-    if context.definitions.iter().any(|d| d.construct == "ConstraintDefinition"
+    if context.definitions.iter().any(|d| matches!(d.construct.as_str(), "ConstraintDefinition" | "CalculationDefinition")
         && !resolved.definitions.iter().any(|local| local.qualified_name == d.qualified_name)) {
         for source in &context.modules {
             external.extend(resolve_module_without_binding(source, context, mappings, policy)?.definitions);
         }
     }
-    super::constraint_binding::bind_constraint_usages(&mut resolved.definitions, &mut resolved.usages, &external);
+    super::constraint_binding::bind_constraint_usages(&mut resolved.definitions, &mut resolved.usages, &external)?;
     Ok(resolved)
 }
 
@@ -543,9 +543,40 @@ fn resolve_usage(
     if effective_reference_target.is_none() {
         effective_reference_target = shorthand_reference_target(mappings, &usage);
     }
-    let expression = usage
-        .expression
-        .as_ref()
+    let modifier = |prefix: &str| usage.modifiers.iter().find_map(|value| value.strip_prefix(prefix));
+    let guard = if usage.construct == "TransitionUsage" {
+        modifier("guard=").or_else(|| (modifier("trigger_kind=") == Some("when"))
+            .then(|| modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))).flatten())
+            .map(crate::parser::behavior_expression::expression_ast).transpose()?
+    } else { None };
+    let assignment = if usage.construct == "TransitionUsage" {
+        modifier("effect=").filter(|text| text.trim_start().starts_with("assign "))
+            .map(crate::parser::behavior_expression::assignment_ast).transpose()?
+            .map(|(target, ast)| {
+                let mut expression = resolve_expression(&usage, &ast, stdlib_ids, stdlib_feature_index,
+                    stdlib_aliases, local_definitions, local_aliases, import_aliases, definition_index,
+                    local_feature_index, local_usage_map)?;
+                let name = QualifiedName { segments: vec![target.clone()], span: usage.span.clone() };
+                if let Some(target_usage) = resolve_feature_reference(&usage, &name, stdlib_ids,
+                    stdlib_feature_index, stdlib_aliases, local_definitions, local_aliases,
+                    import_aliases, definition_index, local_feature_index, local_usage_map)
+                    .and_then(|id| id.strip_prefix("feature.").and_then(|name| local_usage_map.get(name)))
+                    .filter(|target| matches!(target.construct.as_str(), "AttributeUsage" | "ReferenceUsage")) {
+                    // Resolve only the target's declaration contract, not its initializer.
+                    let mut target_usage = target_usage.clone();
+                    target_usage.expression = None;
+                    target_usage.members.clear();
+                    let resolved_target = resolve_usage(target_usage, stdlib_ids, stdlib_feature_index,
+                        stdlib_aliases, local_definitions, local_aliases, import_aliases, definition_index,
+                        local_feature_index, local_usage_map, mappings, policy)?;
+                    if let Some(contract) = super::expression_contract::usage_expression_contract(&resolved_target)? {
+                        expression = ResolvedExpr::Checked { expression: Box::new(expression), contract };
+                    }
+                }
+                Ok::<_, Diagnostic>((target, expression))
+            }).transpose()?
+    } else { None };
+    let expression = guard.as_ref().or(usage.expression.as_ref())
         .map(|expr| {
             resolve_expression(
                 &usage,
@@ -929,6 +960,7 @@ fn resolve_usage(
         .collect::<Result<Vec<_>, _>>()?;
 
     Ok(ResolvedUsage {
+        assignment,
         construct: usage.construct,
         owner_construct: usage.owner_construct,
         owner_qualified_name: usage.owner_qualified_name,
@@ -1088,7 +1120,13 @@ fn resolve_expression(
             )?),
         }),
         Expr::Call { function, args, .. } => Ok(ResolvedExpr::Call {
-            function: function.clone(),
+            function: resolve_type_reference_in_scope(
+                &QualifiedName { segments: function.replace("::", ".").split('.').map(str::to_string).collect(), span: expression_span(expr) },
+                &usage.owner_qualified_name, stdlib_ids, stdlib_aliases, local_definitions, local_aliases, import_aliases,
+            ).filter(|id| definition_index.values().any(|definition|
+                format!("type.{}", definition.qualified_name) == *id
+                    && matches!(definition.construct.as_str(), "CalculationDefinition" | "ConstraintDefinition")
+            )).unwrap_or_else(|| function.clone()),
             args: args
                 .iter()
                 .map(|arg| {
@@ -1149,6 +1187,24 @@ fn resolve_expression_name(
                 feature_id,
             }],
         });
+    }
+
+    // A function body resolves captures in its declaration's lexical scopes.
+    // Do not rely on global unique-name fallback: another caller may declare
+    // an unrelated feature with the same spelling.
+    if name.segments.len() == 1 {
+        let mut scope = usage.owner_qualified_name.as_str();
+        loop {
+            if let Some(feature_id) = local_feature_index.get(scope)
+                .and_then(|features| features.get(&name.segments[0])) {
+                return Ok(ResolvedExpr::FeaturePath { segments: vec![ResolvedPathSegment {
+                    name: name.segments[0].clone(),
+                    feature_id: feature_id_from_qualified_name(feature_id),
+                }] });
+            }
+            let Some((parent, _)) = scope.rsplit_once('.') else { break; };
+            scope = parent;
+        }
     }
 
     if let Some(feature_id) = resolve_qualified_reference(

@@ -802,7 +802,7 @@ fn constraint_sources(graph: &Graph) -> Vec<ConstraintSource> {
 fn source_from_element(element: &Element) -> Option<ConstraintSource> {
     // A definition's predicate is a template with unbound parameters, not a
     // model-wide equation. Usage instantiation/binding must select its context.
-    if element.kind.ends_with("ConstraintDefinition") {
+    if element.kind.ends_with("ConstraintDefinition") || element.kind.ends_with("CalculationDefinition") {
         return None;
     }
     let label = element_label(element);
