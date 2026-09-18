@@ -3537,7 +3537,14 @@ mod tests {
             source.replace("temperature == temperature + heatRate * duration;", "temperature == temperature + heatRate * duration; temperature > 0;"),
             source.replace("do action integrate {", "do action integrate { action nested;"),
         ] {
-            let document = compile_sysml_text(&text, "unsupported-state-action.sysml", &stdlib).unwrap();
+            let document = match compile_sysml_text(&text, "unsupported-state-action.sysml", &stdlib) {
+                Ok(document) => document,
+                Err(error) => {
+                    // The expression parser may reject the extra clause before projection.
+                    assert_eq!(error.message, "unsupported trailing constraint expression syntax");
+                    continue;
+                }
+            };
             let runtime = Runtime::from_document(document).unwrap();
             let error = canonical_simulation_model(&runtime).expect_err("unsupported authored behavior must not be dropped");
             assert!(format!("{error:?}").contains("simulation.behavior.unsupported"), "{error:?}");
