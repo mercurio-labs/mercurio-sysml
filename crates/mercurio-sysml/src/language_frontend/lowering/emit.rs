@@ -2017,7 +2017,7 @@ fn transpile_usage(
         }]));
     }
     let unsupported_clauses = usage.modifiers.iter()
-        .filter(|modifier| modifier.starts_with("effect=") || modifier.starts_with("guard="))
+        .filter(|modifier| (modifier.starts_with("effect=") && usage.assignment.is_none()) || modifier.starts_with("guard="))
         .cloned().collect::<Vec<_>>();
     if !unsupported_clauses.is_empty() {
         let metadata = element.properties.entry("metadata".to_string()).or_insert_with(|| json!({}));

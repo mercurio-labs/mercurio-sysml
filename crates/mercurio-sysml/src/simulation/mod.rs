@@ -3482,6 +3482,11 @@ mod tests {
             assert!(frame["values"].as_array().unwrap().iter().any(|value| value["feature"] == "temperature" && value["value"] == 40.0), "{frame:#}");
         }
         let text = source.replace("finalCoolingRate : Real = -1.0", "finalCoolingRate : Real = 0.0 - 1.0");
+        let runtime = Runtime::from_document(compile_sysml_text(&text, "closed-default.sysml", &stdlib).unwrap()).unwrap();
+        let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
+        let scenario = scenario_from_analysis_case(&runtime, &case.id).unwrap();
+        assert!(scenario.initial_values.iter().any(|((_, feature), value)| feature == "finalCoolingRate" && *value == json!(-1.0)));
+        let text = source.replace("finalCoolingRate : Real = -1.0", "finalCoolingRate : Real = 0.0 - slowThreshold");
         let runtime = Runtime::from_document(compile_sysml_text(&text, "unsupported-default.sysml", &stdlib).unwrap()).unwrap();
         let case = list_analysis_cases(&runtime).into_iter().find(|c| c.label == "CooldownProfile").unwrap();
         let error = run_analysis_case(&runtime, &case.id, "unsupported-default").unwrap_err().to_string();

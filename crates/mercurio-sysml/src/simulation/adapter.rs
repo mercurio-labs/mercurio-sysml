@@ -46,7 +46,7 @@ pub fn simulation_model_from_runtime(
             if let Some(value) = element.properties.get(field) {
                 validate_action_input(value).map_err(|message| {
                     SysmlSimulationAdapterError::InvalidAnalysisCase(format!(
-                        "{} {field}: {message}",
+                        "simulation.behavior.unsupported: {} {field}: {message}",
                         element.element_id
                     ))
                 })?;
@@ -1410,7 +1410,7 @@ fn is_analysis_objective(element: &Element) -> bool {
 /// Initial defaults may be evaluated only without model-instance bindings.
 /// Typed wrappers and closed invocation frames use the same core evaluator as
 /// simulation expressions. Dependent initializers remain outside this profile.
-fn attribute_default_value(
+pub(super) fn attribute_default_value(
     attribute: &Element,
 ) -> Result<Option<Value>, SysmlSimulationAdapterError> {
     let Some(value) = attribute.properties.get("expression_ir") else {
@@ -1947,8 +1947,8 @@ mod tests {
             json!({"kind":"self"}),
         ] {
             let runtime = default_runtime(typed_default("real", expression), None);
-            let scenario = scenario_from_analysis_case(&runtime, "Defaults").unwrap();
-            assert!(scenario.initial_values.is_empty());
+            let error = scenario_from_analysis_case(&runtime, "Defaults").unwrap_err();
+            assert!(format!("{error:?}").contains("simulation.initial_value.unsupported"));
         }
     }
 

@@ -163,11 +163,8 @@ pub(super) fn run(
     if attributes.len() != 1
         || attributes[0].properties.contains_key("multiplicity")
         || !references(attributes[0].properties.get("type")).contains(&"ScalarValues::Boolean")
-        || attributes[0]
-            .properties
-            .get("expression_ir")
-            .and_then(|e| e.get("value"))
-            != Some(&Value::Bool(false))
+        || adapter::attribute_default_value(attributes[0]).map_err(map_adapter_error)?
+            != Some(Value::Bool(false))
     {
         return Err(invalid(
             "completionFeature must resolve uniquely to an authored scalar Boolean attribute initialized to false; explicit multiplicity is unsupported",
