@@ -2566,7 +2566,7 @@ impl Parser {
             {
                 let trigger_kind = self.expect_identifier("expected transition trigger kind")?;
                 modifiers.push(format!("trigger_kind={trigger_kind}"));
-                let trigger = self.collect_behavior_text_until_then_or_end();
+                let trigger = self.collect_behavior_text_until_do_then_or_end();
                 if !trigger.is_empty() {
                     modifiers.push(format!("trigger={trigger}"));
                 }
