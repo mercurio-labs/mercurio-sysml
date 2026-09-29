@@ -4,7 +4,11 @@ use std::fmt;
 use serde_json::Value;
 
 mod adapter;
+#[cfg(test)]
+mod integrated_network_tests;
 mod timed_activity;
+pub mod constraint_network;
+pub mod session;
 
 pub use crate::{
     AnalysisClockConfig, AnalysisDynamicBehaviorBinding, AnalysisDynamicBehaviorKind,
@@ -1175,6 +1179,7 @@ fn run_canonical_core(
             max_time_s: scenario.max_steps.max(1) as f64 * scenario.step_duration_s.max(0.0),
             fixed_step_s: scenario.step_duration_s,
             sample_interval_s: scenario.step_duration_s,
+            adaptive: None,
             change_loop_limit: CHANGE_LOOP_LIMIT,
         });
     run_concurrent_simulation_model(&model, scenario.clone(), clock_config)
@@ -1292,6 +1297,8 @@ mod tests {
             subject_id: "part.controller".to_string(),
             channels: Vec::new(),
             timeline: vec![SimTraceEntry {
+                    integration: None,
+                    network_evaluations: Vec::new(),
                 t: 2.0,
                 states: BTreeMap::from([(
                     "part.controller".to_string(),
@@ -2133,6 +2140,7 @@ mod tests {
                     max_time_s: 2.0,
                     fixed_step_s: 1.0,
                     sample_interval_s: 1.0,
+                    adaptive: None,
                     change_loop_limit: CHANGE_LOOP_LIMIT,
                 }),
                 initial_values: BTreeMap::from([
@@ -2333,6 +2341,7 @@ mod tests {
                     max_time_s: 5.0,
                     fixed_step_s: 2.5,
                     sample_interval_s: 2.5,
+                    adaptive: None,
                     change_loop_limit: CHANGE_LOOP_LIMIT,
                 }),
                 initial_values: BTreeMap::new(),

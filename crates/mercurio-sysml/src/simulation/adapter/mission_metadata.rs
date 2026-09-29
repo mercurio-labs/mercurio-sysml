@@ -41,7 +41,10 @@ pub(in crate::simulation) fn properties<'a>(
     Ok(Some(properties))
 }
 
-pub(in crate::simulation) fn number(properties: &Map<String, Value>, key: &str) -> Result<f64, SysmlSimulationAdapterError> {
+pub(in crate::simulation) fn number(
+    properties: &Map<String, Value>,
+    key: &str,
+) -> Result<f64, SysmlSimulationAdapterError> {
     let value = properties
         .get(key)
         .ok_or_else(|| invalid(format!("missing {key}")))?;
@@ -89,20 +92,49 @@ pub(in crate::simulation) fn apply(
     scenario: &mut ConcurrentSimulationScenario,
 ) -> Result<(), SysmlSimulationAdapterError> {
     for element in runtime.graph().elements() {
-        let Some(metadata) = element.properties.get("metadata").and_then(Value::as_object) else { continue; };
-        for key in metadata.keys().filter(|key| key.starts_with("Mercurio::Missions::")) {
+        let Some(metadata) = element
+            .properties
+            .get("metadata")
+            .and_then(Value::as_object)
+        else {
+            continue;
+        };
+        for key in metadata
+            .keys()
+            .filter(|key| key.starts_with("Mercurio::Missions::"))
+        {
             let name = key.trim_start_matches("Mercurio::Missions::");
-            let construct = metadata.get("lowering").and_then(|value| value.get("construct")).and_then(Value::as_str)
+            let construct = metadata
+                .get("lowering")
+                .and_then(|value| value.get("construct"))
+                .and_then(Value::as_str)
                 .unwrap_or_else(|| element.kind.rsplit("::").next().unwrap_or(&element.kind));
             let allowed = match name {
                 "Clock" | "Termination" | "InitialStimulus" => is_project_analysis_case(element),
                 "TimedActivity" => construct == "ActionUsage",
-                "Duration" => construct == "ActionUsage" && string_property_any_element(element, &["owner", "owning_type"])
-                    .and_then(|owner| runtime.graph().element_by_element_id(&owner))
-                    .is_some_and(|owner| owner.properties.get("metadata").and_then(|value| value.get("Mercurio::Missions::TimedActivity")).is_some()),
+                "ConstraintNetwork" => construct == "PartDefinition",
+                "Duration" => {
+                    construct == "ActionUsage"
+                        && string_property_any_element(element, &["owner", "owning_type"])
+                            .and_then(|owner| runtime.graph().element_by_element_id(&owner))
+                            .is_some_and(|owner| {
+                                owner
+                                    .properties
+                                    .get("metadata")
+                                    .and_then(|value| {
+                                        value.get("Mercurio::Missions::TimedActivity")
+                                    })
+                                    .is_some()
+                            })
+                }
                 _ => false,
             };
-            if !allowed { return Err(invalid(format!("unknown or misplaced {key} on {}", element.element_id))); }
+            if !allowed {
+                return Err(invalid(format!(
+                    "unknown or misplaced {key} on {}",
+                    element.element_id
+                )));
+            }
         }
     }
     if let Some(p) = properties(
@@ -115,6 +147,12 @@ pub(in crate::simulation) fn apply(
             "sampleInterval",
             "maxSteps",
             "changeLoopLimit",
+            "adaptive",
+            "absoluteTolerance",
+            "relativeTolerance",
+            "minimumStep",
+            "eventTolerance",
+            "maxRefinements",
         ],
     )? {
         let max_time_s = number(p, "maxTime")?;
@@ -128,10 +166,36 @@ pub(in crate::simulation) fn apply(
         let change_loop_limit = positive_integer(p, "changeLoopLimit", 20)?;
         scenario.max_steps = positive_integer(p, "maxSteps", scenario.max_steps)?;
         scenario.step_duration_s = fixed_step_s;
+        let adaptive = if p.contains_key("adaptive") && boolean(p, "adaptive")? {
+            Some(
+                mercurio_foundation::simulation_core::AdaptiveIntegrationConfig {
+                    absolute_tolerance: number(p, "absoluteTolerance")?,
+                    relative_tolerance: number(p, "relativeTolerance")?,
+                    minimum_step_s: number(p, "minimumStep")?,
+                    event_tolerance_s: number(p, "eventTolerance")?,
+                    max_refinements: positive_integer(p, "maxRefinements", 32)?,
+                },
+            )
+        } else {
+            if [
+                "absoluteTolerance",
+                "relativeTolerance",
+                "minimumStep",
+                "eventTolerance",
+                "maxRefinements",
+            ]
+            .iter()
+            .any(|key| p.contains_key(*key))
+            {
+                return Err(invalid("adaptive tolerances require adaptive = true"));
+            }
+            None
+        };
         scenario.clock_config = Some(SimulationClockConfig {
             max_time_s,
             fixed_step_s,
             sample_interval_s,
+            adaptive,
             change_loop_limit,
         });
     }

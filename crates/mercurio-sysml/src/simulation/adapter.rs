@@ -73,7 +73,9 @@ pub fn simulation_model_from_runtime(
     }
     let machines = project_state_machines(runtime);
     validate_behavior_projection(runtime, &machines)?;
-    let model = normalize_state_machines_from_runtime(runtime, machines);
+    let mut model = normalize_state_machines_from_runtime(runtime, machines);
+    model.constraint_networks = super::constraint_network::simulation_networks(runtime)
+        .map_err(|error| SysmlSimulationAdapterError::InvalidAnalysisCase(format!("{error:?}")))?;
     validate_simulation_model(&model)?;
     Ok(model)
 }
@@ -288,6 +290,7 @@ fn analysis_clock_config(
             .or_else(|| analysis_case.properties.get("sampleIntervalS"))
             .and_then(Value::as_f64)
             .unwrap_or(step_duration_s),
+        adaptive: None,
         change_loop_limit: analysis_case
             .properties
             .get("change_loop_limit")
@@ -303,6 +306,7 @@ pub fn normalize_state_machines_from_runtime(
     machines: Vec<StateMachineModel>,
 ) -> SimulationModel {
     SimulationModel {
+        constraint_networks: Vec::new(),
         id: "sysml.projected".to_string(),
         machines: machines
             .iter()
@@ -444,6 +448,9 @@ fn simulation_constraint_derived_rules(runtime: &Runtime) -> Vec<SimulationDeriv
         .elements()
         .iter()
         .filter(|element| is_constraint_usage(element))
+        .filter(|element| !string_property_any_element(element, &["owner", "owning_type"])
+            .and_then(|id| runtime.graph().element_by_element_id(&id))
+            .is_some_and(|owner| owner.properties.get("metadata").and_then(|m| m.get("Mercurio::Missions::ConstraintNetwork")).is_some()))
         .filter_map(constraint_derived_rule)
         .collect()
 }
