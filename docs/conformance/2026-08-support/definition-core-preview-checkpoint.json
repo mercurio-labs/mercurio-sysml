@@ -2,6 +2,12 @@
   "accepted_preview_report": "definition-core-preview-acceptance.json",
   "accepted_preview_source_bytes_unchanged": true,
   "candidate_promoted": false,
+  "checkpoint_correction": "Inherited Git blobs were refreshed from the accepted working bytes; all source changes in the correction were proved CRLF/LF-only. No working source or acceptance input changed.",
+  "committed_preview_input_byte_audit": {
+    "exact_match": true,
+    "files": 270,
+    "line_endings_preserved": true
+  },
   "fresh_checkpoint_checks": [
     {
       "command": "cargo test -p mercurio-foundation --lib --locked",
