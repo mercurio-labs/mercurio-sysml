@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "bdcb0d7f202df6f8f96fcbbb2346f6debbf0bc65ec871f2dbb92b2b2da00b7cd",
+    "export_sha256": "0d7fafe25a0a87378206fe627e4fae090677583cce060e7d9c102e57b3513f02",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1805,
+      "relationship_count": 12803,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/crossing-metadata-prefix.kerml",
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/terminate-flow-declarations.sysml"
+      ],
+      "exported_at_utc": "2026-09-18T23:31:56.488934200Z"
+    },
+    "selected_elements": {
+      "DeclarationControls::Run::finish": "TerminateNode",
+      "DeclarationControls::Run::stop": "TerminateNode"
+    }
+  },
+  "usage_type_defaults": {
+    "TerminateNode": {
+      "type_ref": "Actions::TerminateAction"
+    }
+  }
+}

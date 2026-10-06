@@ -1,0 +1,44 @@
+{
+  "scope": "Definition-backed dispatch for the shared owning-type featuring producer. Supports both branches for 32 admitted classes; does not qualify every behavior of those classes.",
+  "imported": {
+    "bindings": 79,
+    "admitted": 32,
+    "excluded": 47,
+    "admission_dependencies": [
+      "FeatureAdapter#computeFeaturingType",
+      "FeatureImpl#isVariable",
+      "FeatureImpl#getOwningType"
+    ],
+    "excluded_dependency": "UsageImpl#isVariable calls the mayTimeVary semantic service; a stored is_variable value cannot stand in for that getter."
+  },
+  "generation": "Resolved runtime method identities generate owning_type_featuring_supported; unknown or changed identities are excluded. All declaring sources and the runtime are pinned and hashed. This is bounded dispatch generation, not translation of the entire method body.",
+  "native_consumer": "definition_materialize_owning_type_featuring uses generated admission and the shared handwritten owning-type/snapshot algorithm. Per-class algorithm patches are unnecessary.",
+  "verification": {
+    "independent_pilot_cases": 64,
+    "newly_admitted_classes": 31,
+    "negative_class_controls": 47,
+    "contexts": "Fixed and variable features in controlled canonical FeatureMembership/Type contexts. These are class-dispatch controls, not grammar coverage for every class.",
+    "tooling_tests": 40,
+    "both_exporters_reproduce": true,
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "cc437173fcde9622761c9507e64cd80ae4a7759071304c97e8416d405c84ee81",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "e21d1a55f38c65bbade8e3f9069a30799a53748c9cbab8bdd527a43908f5802e",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "5b52310442cf215fc29480180ea39a4226a772fd71b2021c8be476deabe01dee",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "56e2401917065a0d78e1cee99c73951969c9269a57d6782c059733ee7fdc74eb",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "a1b3b0ba4d1d718db05c6177216d7d153f0984ea584789313959cffb09504400"
+    },
+    "full_native_tests": 739,
+    "qualification": "definition-pipeline-qualification.json"
+  },
+  "normative_references": [
+    "normative-owning-type-featuring.json",
+    "normative-variable-featuring.json"
+  ],
+  "remaining": [
+    "Connect the 47 UsageImpl bindings to the existing may_time_vary provider with explicit errors for incomplete generalization",
+    "Complete expression/multiplicity/cross-feature implicit featuring contributions",
+    "Full featuringType projection and ordered transitive closure",
+    "Connector compatibility/context selection and full transformation",
+    "Release gates and full sample qualification"
+  ]
+}

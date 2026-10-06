@@ -1,0 +1,38 @@
+{
+  "schema": "dev.mercurio.featuring-query-evidence.v1",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/featuring-queries.extract.json",
+  "imported_sha256": "51c4b864d861a39cf6d3a6d8cc869781be2becc1be5b70c149d4e516644a3e65",
+  "independent_pilot_contexts": 10,
+  "source_pipeline_contexts": 1,
+  "native_consumers": [
+    "definition_featuring_types",
+    "definition_all_featuring_types",
+    "definition_document::reference_targets",
+    "definition_document::all_featuring_types"
+  ],
+  "implementation_boundary": "Resolved delegate identity selects handwritten Ecore-driven reads. Ordered owned TypeFeaturing targets, assessed fixed ordinary Feature implicit ownership and first-chain contributions are deduplicated by the imported uniqueness flag. The breadth-first closure substitutes FeatureValue owners and terminates repeated featuring nodes. Complete fixtures are explicitly marked; production does not synthesize completeness flags.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      188,
+      197
+    ],
+    "rule": "deriveFeatureFeaturingType",
+    "assessment": "Written rule reads typeFeaturing inverses, with ownedTypeFeaturing as a subset. Pinned Pilot delegate reads ownedTypeFeaturing plus implicit contributions and first chain. Native currently rejects an externally owned TypeFeaturing targeting the queried Feature; no full agreement or complete inverse support is claimed."
+  },
+  "remaining": [
+    "Externally owned TypeFeaturing inverse scope and ordering",
+    "Variable and specialized implicit featuring providers unless inputs are explicitly complete",
+    "Cyclic first-chain semantics (rejected rather than recursing indefinitely)",
+    "Connector context compatibility",
+    "Feature-reference binding, full expression transformation and release qualification"
+  ],
+  "qualification": {
+    "native_tests": 108,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-featuring-query-focused.log",
+    "test_log_sha256": "948cce5a047f8e314078d83b2e2b9311375c09420b9c05885706c45569393356",
+    "tooling_tests": 70,
+    "complete_samples_and_timing_qualified": false
+  }
+}

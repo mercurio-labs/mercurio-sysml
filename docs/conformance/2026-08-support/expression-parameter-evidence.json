@@ -1,0 +1,100 @@
+{
+  "schema": "dev.mercurio.expression-parameter-evidence.v1",
+  "scope": "Non-guard ExpressionAdapter positional parameter/result queries on supplied completed Function ancestry across 20 concrete bindings. Canonical native traversal is shared and handwritten; resolved dispatch admits only the ordinary delegation branch. Not a full expression lifecycle or valid callable-model proof.",
+  "pipeline": {
+    "pinned_artifact": "docs/conformance/2026-08-support/expression-parameter-pilot-controls.json",
+    "resolved_representation": "javac typed ExpressionAdapter#getGeneralTypes body and reflected parameter/collection/selector dispatch",
+    "generator": "tools/generate_expression_parameters.py",
+    "native_consumer": "definition_positional_parameters_query -> ordered general-type and parameter queries -> computed redefinitions, naming and partial physical-contribution checks",
+    "handwritten_dependencies": [
+      "canonical membership/guard projection",
+      "ordered general-type and parameter traversal",
+      "identity and ordered-chain duplicate suppression"
+    ],
+    "normative_review": "docs/conformance/2026-08-support/expression-parameter-normative-review.json"
+  },
+  "verification": {
+    "independent_controls": 960,
+    "native_comparison_contexts": 3840,
+    "native_bindings": 20,
+    "focused_native_tests_passed": 1,
+    "generator_control_tests_passed": 5,
+    "guard_rejections": 20,
+    "queries_preserve_graph": true,
+    "full_native_regression": "passes",
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json",
+      "sha256": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+      "status": "assessed",
+      "native_executable": {
+        "path": "target/release/audit_release_compile.exe",
+        "sha256": "3b2b9ad560826acfec9352920642d391f306154c04dadf16e7937bfeaa18534f"
+      },
+      "elapsed_seconds": 626.969,
+      "diagnostic_only": true,
+      "semantic_qualification": false,
+      "comparable_benchmark": false,
+      "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+      "exit_code": 1
+    },
+    "full_normative_qualification": false,
+    "native_definition_tests_passed": 379,
+    "candidate_pipeline_tests_passed": 8,
+    "tool_binary_tests_passed": 11,
+    "optimized_build": "passes",
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "strategy_tests_passed": 15,
+    "resource_assessment_current_code": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "Transition-guard library/general-type override",
+    "Constructor result ancestry and assignment-write effects",
+    "Full FeatureValue/owning/multiplicity/direction/end/metadata/conjugation lifecycle",
+    "Callable-model validity, full resource construction/publication and global dependency contracts"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "tools/run_expression_parameter_probe.py": "8838355e927d5720f0f7c50ca450ff0d471e9c792c92e49cba2b2c4ce35b16d7",
+    "tools/generate_expression_parameters.py": "b194cb4eb514cc49fbfabbf60486cab02e854b5c23a5d1e9861c9183733c1e7a",
+    "tools/test_expression_parameters.py": "26d339c7a4488d984fd2f88dcbc25d9df647baaa63cd74bf2192a5e810b82ce9",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotExpressionParameterProbe.java": "ed050fee804e6e200b6a58faf47d55ad705b36e4acdbd1523ed4eb6b8cf13056",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/expression_parameters_generated.rs": "d1f888158f036f5908b121e42d24f4eb56fb6cad0b90daad946026bc9df58cef",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "docs/conformance/2026-08-support/expression-parameter-pilot-controls.json": "61d68b993b6e2fba73c775a5ee0807c8da38af528f49f8e3765d4ebbbf4f1c07",
+    "docs/conformance/2026-08-support/expression-parameter-normative-review.json": "eaeee679ba07a9aa62d08bde03cdc1dcb2498faea7de8ed5fadf1892b1fbf273",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-focused.log": "f36d36354bd9d3c50630920de21ec9a63f7a010f3a0939bf753caa4ad30d20d0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-generator-tests.log": "c7d7876bc0a8e871f4c587e02fea5b3590ec3b72f1c614cc0389dbdc73eb727d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-export.log": "cbe76979aed5e9d139dbc86a45b2c8541b0c589d1b214c3c3e7838a76f5cde59",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-cache-check.log": "cbe76979aed5e9d139dbc86a45b2c8541b0c589d1b214c3c3e7838a76f5cde59",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-tool-tests.log": "8ed3780a07eeb88c453492fa5f9ae9cd7cee3965fb481ecc084e259932c8f20e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-release-build.log": "82ab2fed91592c2bc19891110089c022b3ef8f4b025ef72b5a2d6774ec9e722d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-plan-tests.log": "57e3633a015bb68a45ac6a84674d2dc714f18a36a030ad625acae23981d9cf4c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-certificate-tests.log": "92b428abc4f5b0215c9da03b13c66cd44343ec865e23ff099db7e40c09c19c0a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-strategy-tests.log": "a2849f8da316e47a1638418b96fb6a0cc31499d397ad11ce9c5b148b67f5f382",
+    "docs/conformance/2026-08-support/enum-trigger-states-expression-parameter-assessment.json": "29880e50c097d7a79cab7b907b189f4252a15e30ce3143ce69d322664d377ad1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-assessment.json": "d9278a9d974b5f5136ac9e862ad68a39b6710c1e305010ec1a2754b2116d65d6",
+    "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  }
+}

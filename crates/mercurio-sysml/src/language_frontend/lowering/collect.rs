@@ -36,10 +36,14 @@ pub(crate) struct CollectedImport {
 
 #[derive(Debug, Clone)]
 pub(crate) struct CollectedDefinition {
+    pub(crate) modifiers: Vec<String>,
     pub(crate) construct: String,
     pub(crate) qualified_name: String,
     pub(crate) declared_name: String,
     pub(crate) is_abstract: bool,
+    pub(crate) is_variation: bool,
+    pub(crate) is_public: bool,
+    pub(crate) implicit_specializations: Vec<String>,
     pub(crate) specializes: Vec<QualifiedName>,
     pub(crate) members: Vec<CollectedUsage>,
     pub(crate) docs: Vec<String>,
@@ -48,13 +52,17 @@ pub(crate) struct CollectedDefinition {
 
 #[derive(Debug, Clone)]
 pub(crate) struct CollectedUsage {
+    pub(crate) annotation_targets: Vec<QualifiedName>,
     pub(crate) construct: String,
     pub(crate) owner_construct: String,
     pub(crate) owner_qualified_name: String,
     pub(crate) qualified_name: String,
     pub(crate) declared_name: String,
     pub(crate) is_implicit_name: bool,
+    pub(crate) has_explicit_specialization: bool,
     pub(crate) ty: Option<QualifiedName>,
+    pub(crate) implicit_type: Option<String>,
+    pub(crate) implicit_subsets: Vec<String>,
     pub(crate) additional_types: Vec<QualifiedName>,
     pub(crate) reference_target: Option<QualifiedName>,
     pub(crate) allocation_source: Option<QualifiedName>,
@@ -73,6 +81,8 @@ pub(crate) struct CollectedUsage {
 
 #[derive(Debug, Clone)]
 pub(crate) struct CollectedAlias {
+    pub(crate) declaration: Option<AliasDecl>,
+    pub(crate) owner_qualified_name: String,
     pub(crate) qualified_name: String,
     pub(crate) declared_name: String,
     pub(crate) target: QualifiedName,
@@ -80,7 +90,15 @@ pub(crate) struct CollectedAlias {
 
 #[derive(Debug, Clone, Default)]
 pub(crate) struct ImportAliases {
+    /// Membership access metadata shared by scope consumers alongside import bindings.
+    /// Indexed once per resolver context; cloning bindings does not clone this table.
+    pub(crate) membership_visibility: std::sync::Arc<BTreeMap<String, String>>,
+    /// Source-derived visibility of directly owned library members.
+    pub(crate) library_membership_visibility: std::sync::Arc<BTreeMap<String, String>>,
+    pub(crate) library_namespace_scope: std::sync::Arc<super::indexes::LibraryNamespaceScope>,
     pub(crate) value_aliases: BTreeMap<String, String>,
+    /// Declaring scopes for compatibility short bindings; lookup must still be lexical.
+    pub(crate) value_alias_owners: BTreeMap<String, BTreeSet<String>>,
     pub(crate) namespace_aliases: BTreeMap<String, QualifiedName>,
     pub(crate) ambiguous_value_aliases: BTreeSet<String>,
     pub(crate) ambiguous_namespace_aliases: BTreeSet<String>,
@@ -116,6 +134,28 @@ pub(crate) fn collect_module(
         mappings,
     )?;
     collect_nested_aliases(&root_members, &[], None, &mut aliases);
+
+    // Relationship bodies are containment scopes, not namespaces. Their
+    // definitions still need the ordinary definition indexes and semantic passes.
+    // Keep usage roots in the relationship body; collect nested definitions here.
+    let mut visited_bodies = BTreeSet::new();
+    loop {
+        let bodies = aliases.iter().filter_map(|a| a.declaration.as_ref().map(|d|
+            (a.qualified_name.clone(), d.body_members.clone())))
+            .chain(imports.iter().map(|i| (import_body_scope(i), i.decl.body_members.clone())))
+            .filter(|(scope, _)| visited_bodies.insert(scope.clone()))
+            .collect::<Vec<_>>();
+        if bodies.is_empty() { break; }
+        for (scope, body) in bodies {
+            let segments = scope.split('.').map(str::to_string).collect::<Vec<_>>();
+            collect_nested_owned_definitions(&body, &segments, &mut definitions, mappings)?;
+            collect_nested_owned_packages(&body, &segments, &mut packages, &mut imports,
+                &mut definitions, &mut usages, &mut aliases, mappings)?;
+            collect_nested_member_imports(&body, &scope, &mut imports);
+            collect_nested_aliases(&body, &segments, Some(&scope), &mut aliases);
+        }
+    }
+
 
     Ok(CollectedModule {
         packages,
@@ -191,8 +231,28 @@ fn collect_declarations(
         if let Some(usage) = declaration.as_usage_like() {
             let owner = owner_package_qualified_name.unwrap_or("root");
             usages.push(collect_generic_usage(&usage, owner, "Package", mappings)?);
-            let qualified_name = usage_qualified_name(owner, &usage.name);
+            let qualified_name = anonymous_usage_qualified_name(owner, &usage);
             collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
+            let segments = qualified_name
+                .split('.')
+                .map(str::to_string)
+                .collect::<Vec<_>>();
+            collect_nested_owned_definitions(
+                &usage.body_members,
+                &segments,
+                definitions,
+                mappings,
+            )?;
+            collect_nested_owned_packages(
+                &usage.body_members,
+                &segments,
+                packages,
+                imports,
+                definitions,
+                usages,
+                aliases,
+                mappings,
+            )?;
             continue;
         }
 
@@ -242,6 +302,31 @@ fn collect_nested_owned_packages(
                 aliases,
                 mappings,
             )?;
+        } else if let Some(definition) = declaration.as_definition_like() {
+            let segments = qualify_segments(owner_package_segments, &[definition.name.clone()]);
+            collect_nested_owned_packages(
+                &definition.members,
+                &segments,
+                packages,
+                imports,
+                definitions,
+                usages,
+                aliases,
+                mappings,
+            )?;
+        } else if let Some(usage) = declaration.as_usage_like() {
+            let name = anonymous_usage_qualified_name(&owner_package_segments.join("."), &usage);
+            let segments = name.split('.').map(str::to_string).collect::<Vec<_>>();
+            collect_nested_owned_packages(
+                &usage.body_members,
+                &segments,
+                packages,
+                imports,
+                definitions,
+                usages,
+                aliases,
+                mappings,
+            )?;
         }
     }
 
@@ -267,6 +352,15 @@ fn collect_nested_owned_definitions(
                 definitions,
                 mappings,
             )?;
+        } else if let Some(usage) = declaration.as_usage_like() {
+            let name = anonymous_usage_qualified_name(&owner_package_segments.join("."), &usage);
+            let segments = name.split('.').map(str::to_string).collect::<Vec<_>>();
+            collect_nested_owned_definitions(
+                &usage.body_members,
+                &segments,
+                definitions,
+                mappings,
+            )?;
         }
     }
 
@@ -280,7 +374,7 @@ fn collect_nested_member_imports(
 ) {
     for declaration in declarations {
         if let Some(usage) = declaration.as_usage_like() {
-            let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
+            let qualified_name = anonymous_usage_qualified_name(owner_qualified_name, &usage);
             collect_nested_member_imports(&usage.body_members, &qualified_name, imports);
             continue;
         }
@@ -330,6 +424,7 @@ fn collect_package(
             .last()
             .cloned()
             .unwrap_or_else(|| qualified_name.clone()),
+        modifiers: package.modifiers.clone(),
         docs: package.docs.clone(),
         span: package.span.clone(),
     });
@@ -363,13 +458,33 @@ fn collect_generic_definition(
     )?;
     let mut members = plan.members;
     annotate_connection_definition_members(&construct, &mut members, mappings);
+    let end_count = members.iter().filter(|member| member.modifiers.iter().any(|m| m == "end" || m.starts_with("end-"))).count();
+    let connection_defaults = mappings.connection_definition_defaults(&construct, end_count)?;
+    // Derived library parents are not explicit source references. Resolve adds
+    // them after checking declared parents; partial-library services can still
+    // diagnose and recover individual source members without those libraries.
+    let specializes = if connection_defaults.is_some() && definition.specializes.is_empty() {
+        Vec::new()
+    } else { plan.specializes };
+    let implicit_specializations = connection_defaults
+        .unwrap_or_else(|| mappings.semantic_specializations_for_definition(&construct));
 
     Ok(CollectedDefinition {
-        construct,
+        modifiers: definition.modifiers.clone(),
+        implicit_specializations,
+        construct: construct.clone(),
         qualified_name,
         declared_name: plan.declared_name,
         is_abstract: plan.is_abstract,
-        specializes: plan.specializes,
+        // Pilot EnumerationDefinitionImpl initializes isVariation to true.
+        // This model default is handwritten; the generated validator only reads it.
+        is_variation: construct == "EnumerationDefinition"
+            || definition.modifiers.iter().any(|m| m == "variation"),
+        is_public: !definition
+            .modifiers
+            .iter()
+            .any(|m| matches!(m.as_str(), "private" | "protected")),
+        specializes,
         members,
         docs: plan.docs,
         span: definition.span.clone(),
@@ -396,7 +511,7 @@ fn collect_generic_definition_plan(
         is_abstract: definition
             .modifiers
             .iter()
-            .any(|modifier| modifier == "abstract"),
+            .any(|modifier| matches!(modifier.as_str(), "abstract" | "variation")),
         specializes: definition_specializations_with_default(
             construct,
             &definition.specializes,
@@ -416,7 +531,7 @@ fn collect_generic_definition_plan(
                 plan.is_abstract = definition
                     .modifiers
                     .iter()
-                    .any(|modifier| modifier == "abstract");
+                    .any(|modifier| matches!(modifier.as_str(), "abstract" | "variation"));
             }
             ("specializes", "$ast.specializes or semantic_default") => {
                 plan.specializes = definition_specializations_with_default(
@@ -479,18 +594,10 @@ fn collect_generic_usage(
     owner_construct: &str,
     mappings: &MappingBundle,
 ) -> Result<CollectedUsage, Diagnostic> {
-    let mut construct = mappings.usage_construct_for(&usage.keyword);
-    if construct == "PartUsage"
-        && usage
-            .modifiers
-            .iter()
-            .any(|modifier| modifier == "individual")
-    {
-        construct = "IndividualUsage".to_string();
-    }
+    let mut construct = mappings.usage_construct_in_context(&usage.keyword, owner_construct);
     // A state entry/do/exit action (`do action X`) performs the named action;
     // the pilot models it as PerformActionUsage, not a plain ActionUsage.
-    if construct == "ActionUsage"
+    if matches!(construct.as_str(), "ActionUsage" | "ReferenceUsage")
         && usage
             .modifiers
             .iter()
@@ -498,7 +605,7 @@ fn collect_generic_usage(
     {
         construct = "PerformActionUsage".to_string();
     }
-    let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
+    let qualified_name = anonymous_usage_qualified_name(owner_qualified_name, &usage);
     let plan = collect_generic_usage_plan(
         mappings.lowering_rule_for_construct(&construct),
         usage,
@@ -506,14 +613,40 @@ fn collect_generic_usage(
         &construct,
         mappings,
     )?;
+    let end_count = usage.body_members.iter().filter(|member| matches!(member,
+        Declaration::GenericUsage(end) if end.modifiers.iter().any(|m| m == "end" || m.starts_with("end-")))).count();
+    let implicit_type = mappings.usage_type_for_end_count(&construct, end_count)
+        .or_else(|| mappings.usage_family_default(&construct, owner_construct).map(|default| default.type_ref))
+        .or_else(|| mappings.constant_usage_type_default(&construct));
     Ok(CollectedUsage {
+        annotation_targets: plan.annotation_targets,
+        implicit_subsets: mappings.constant_usage_subset_defaults(&construct),
+        implicit_type,
         construct,
         owner_construct: owner_construct.to_string(),
         owner_qualified_name: owner_qualified_name.to_string(),
         qualified_name,
         declared_name: plan.declared_name,
         is_implicit_name: usage.is_implicit_name,
-        ty: plan.ty,
+        has_explicit_specialization: usage.ty.is_some()
+            || !usage.additional_types.is_empty()
+            || !usage.specializes.is_empty()
+            || !usage.subsets.is_empty()
+            || !usage.redefines.is_empty()
+            || usage.reference_target.is_some(),
+        ty: plan.ty.or_else(|| {
+            // Pilot derives a variant's type from its owning variation definition.
+            (usage.reference_target.is_none()
+                && usage.modifiers.iter().any(|m| m == "variant")
+                && owner_construct.ends_with("Definition"))
+            .then(|| QualifiedName {
+                segments: owner_qualified_name
+                    .split('.')
+                    .map(str::to_string)
+                    .collect(),
+                span: usage.span.clone(),
+            })
+        }),
         additional_types: usage.additional_types.clone(),
         reference_target: plan.reference_target,
         allocation_source: plan.allocation_source,
@@ -532,6 +665,7 @@ fn collect_generic_usage(
 }
 
 struct GenericUsageCollectPlan {
+    annotation_targets: Vec<QualifiedName>,
     declared_name: String,
     ty: Option<QualifiedName>,
     reference_target: Option<QualifiedName>,
@@ -554,6 +688,7 @@ fn generic_usage_plan_from_ast(
     mappings: &MappingBundle,
 ) -> Result<GenericUsageCollectPlan, Diagnostic> {
     Ok(GenericUsageCollectPlan {
+        annotation_targets: usage.annotation_targets.clone(),
         declared_name: usage.name.clone(),
         ty: usage.ty.clone(),
         reference_target: usage.reference_target.clone(),
@@ -622,7 +757,7 @@ fn collect_generic_usage_plan(
             }
             ("reference_target", "$ast.reference_target or $ast.name") => {
                 plan.reference_target = usage.reference_target.clone().or_else(|| {
-                    (!usage.name.is_empty()).then(|| QualifiedName {
+                    (!usage.name.is_empty() && usage.ty.is_none()).then(|| QualifiedName {
                         segments: vec![usage.name.clone()],
                         span: usage.span.clone(),
                     })
@@ -720,6 +855,29 @@ fn annotate_connection_definition_members(
     }
 }
 
+fn alias_scope_name(alias: &AliasDecl) -> String {
+    if !alias.name.is_empty() { alias.name.clone() }
+    else { format!("__alias_{}_{}", alias.span.start_line, alias.span.start_col) }
+}
+
+pub(crate) fn import_body_scope(import: &CollectedImport) -> String {
+    format!("{}.__import_{}_{}", import.owner_qualified_name.as_deref().unwrap_or("root"), import.decl.span.start_line, import.decl.span.start_col)
+}
+
+pub(crate) fn collect_relationship_body(
+    members: &[Declaration], scope: &str, construct: &str, mappings: &MappingBundle,
+) -> Result<Vec<CollectedUsage>, Diagnostic> {
+    members.iter().filter_map(|declaration| {
+        // Definitions and packages are collected into their ordinary module
+        // indexes above. Do not reinterpret them as usage-like annotations.
+        if declaration.as_definition_like().is_some() || matches!(declaration, Declaration::Package(_)) {
+            return None;
+        }
+        Some(declaration.as_usage_like().ok_or_else(|| Diagnostic::new("unsupported relationship body declaration", None))
+            .and_then(|usage| collect_generic_usage(&usage, scope, construct, mappings)))
+    }).collect()
+}
+
 fn collect_alias(alias: &AliasDecl, owner_package_segments: &[String]) -> CollectedAlias {
     let target = if alias.target.segments.len() == 1 && !owner_package_segments.is_empty() {
         QualifiedName {
@@ -730,7 +888,9 @@ fn collect_alias(alias: &AliasDecl, owner_package_segments: &[String]) -> Collec
         alias.target.clone()
     };
     CollectedAlias {
-        qualified_name: qualify_name(owner_package_segments, &alias.name),
+        declaration: Some(alias.clone()),
+        owner_qualified_name: if owner_package_segments.is_empty() { "root".into() } else { owner_package_segments.join(".") },
+        qualified_name: qualify_name(owner_package_segments, &alias_scope_name(alias)),
         declared_name: alias.name.clone(),
         target,
     }
@@ -751,9 +911,38 @@ fn collect_alias_in_owner(alias: &AliasDecl, owner_qualified_name: &str) -> Coll
         alias.target.clone()
     };
     CollectedAlias {
-        qualified_name: usage_qualified_name(owner_qualified_name, &alias.name),
+        declaration: Some(alias.clone()),
+        owner_qualified_name: owner_qualified_name.into(),
+        qualified_name: usage_qualified_name(owner_qualified_name, &alias_scope_name(alias)),
         declared_name: alias.name.clone(),
         target,
+    }
+}
+
+fn collect_definition_short_names(
+    definition: &GenericDefinitionDecl,
+    qualified_name: &str,
+    aliases: &mut Vec<CollectedAlias>,
+) {
+    for short_name in definition
+        .modifiers
+        .iter()
+        .filter_map(|m| m.strip_prefix("short_name="))
+    {
+        let owner = qualified_name
+            .rsplit_once('.')
+            .map(|(owner, _)| owner)
+            .unwrap_or("root");
+        aliases.push(CollectedAlias {
+            declaration: None,
+            owner_qualified_name: owner.into(),
+            qualified_name: usage_qualified_name(owner, short_name),
+            declared_name: short_name.to_string(),
+            target: QualifiedName {
+                segments: qualified_name.split('.').map(str::to_string).collect(),
+                span: definition.span.clone(),
+            },
+        });
     }
 }
 
@@ -766,12 +955,13 @@ fn collect_nested_aliases(
     for declaration in declarations {
         if let Some(definition) = declaration.as_definition_like() {
             let qualified_name = qualify_name(owner_package_segments, &definition.name);
+            collect_definition_short_names(&definition, &qualified_name, aliases);
             collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
             continue;
         }
         if let Some(usage) = declaration.as_usage_like() {
             let qualified_name =
-                usage_qualified_name(owner_qualified_name.unwrap_or("root"), &usage.name);
+                anonymous_usage_qualified_name(owner_qualified_name.unwrap_or("root"), &usage);
             collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
             continue;
         }
@@ -801,12 +991,13 @@ fn collect_nested_member_aliases(
 ) {
     for declaration in declarations {
         if let Some(usage) = declaration.as_usage_like() {
-            let qualified_name = usage_qualified_name(owner_qualified_name, &usage.name);
+            let qualified_name = anonymous_usage_qualified_name(owner_qualified_name, &usage);
             collect_nested_member_aliases(&usage.body_members, &qualified_name, aliases);
             continue;
         }
         if let Some(definition) = declaration.as_definition_like() {
             let qualified_name = usage_qualified_name(owner_qualified_name, &definition.name);
+            collect_definition_short_names(&definition, &qualified_name, aliases);
             collect_nested_member_aliases(&definition.members, &qualified_name, aliases);
             continue;
         }
@@ -847,4 +1038,15 @@ fn qualify_segments(
     let mut segments = owner_package_segments.to_vec();
     segments.extend(declared_segments.iter().cloned());
     segments
+}
+
+// Anonymous declarations may share a derived display name. Their namespace
+// identities must remain distinct before indexes and nested ownership are built.
+fn anonymous_usage_qualified_name(owner: &str, usage: &GenericUsageDecl) -> String {
+    let name = usage_qualified_name(owner, &usage.name);
+    if usage.is_implicit_name && usage.redefines.is_empty() {
+        format!("{name}.@{}_{}", usage.span.start_line, usage.span.start_col)
+    } else {
+        name
+    }
 }

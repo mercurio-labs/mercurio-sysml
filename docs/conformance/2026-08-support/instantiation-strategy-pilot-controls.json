@@ -1,0 +1,2110 @@
+{
+  "bindings": {
+    "CollectExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "ConstructorExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.FeatureAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::constructorEvaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.InstantiationExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "FeatureChainExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "IndexExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "InvocationExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.FeatureAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.InstantiationExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "OperatorExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "SelectExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    },
+    "TriggerInvocationExpression": {
+      "add_default_general_type": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "compute_implicit_general_types": "org.omg.sysml.adapter.TriggerInvocationExpressionAdapter#computeImplicitGeneralTypes",
+      "operation_uri": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/instantiatedType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "selected_delegate": "org.omg.sysml.delegate.invocation.TriggerInvocationExpression_instantiatedType_InvocationDelegate",
+      "setting_delegate": "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate"
+    }
+  },
+  "definitions": {
+    "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType/0": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.ExpressionAdapter#super",
+                      "type": "org.omg.sysml.adapter.StepAdapter"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#addDefaultGeneralType()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#addDefaultGeneralType()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite()",
+                      "type": "()boolean"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite()",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite()",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                          "type": "(java.lang.String)void"
+                        },
+                        {
+                          "children": [],
+                          "kind": "STRING_LITERAL",
+                          "type": "java.lang.String",
+                          "value": "ownedPerformance"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite()",
+                      "type": "()boolean"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite()",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite()",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                          "type": "(java.lang.String)void"
+                        },
+                        {
+                          "children": [],
+                          "kind": "STRING_LITERAL",
+                          "type": "java.lang.String",
+                          "value": "subperformance"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned()",
+                      "type": "()boolean"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned()",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned()",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                          "type": "(java.lang.String)void"
+                        },
+                        {
+                          "children": [],
+                          "kind": "STRING_LITERAL",
+                          "type": "java.lang.String",
+                          "value": "enclosedPerformance"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType(java.lang.String)",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.ExpressionAdapter#getDefaultSupertype/0": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype(java.lang.String)",
+                  "type": "(java.lang.String)java.lang.String"
+                },
+                {
+                  "children": [],
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "base"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype(java.lang.String)",
+              "type": "java.lang.String"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType/0": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.InvocationExpressionAdapter#super",
+                      "type": "org.omg.sysml.adapter.InstantiationExpressionAdapter"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.InvocationExpressionAdapter#getTarget()",
+                          "type": "()org.omg.sysml.lang.sysml.InvocationExpression"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.InvocationExpressionAdapter#getTarget()",
+                      "type": "org.omg.sysml.lang.sysml.InvocationExpression"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.InstantiationExpression#getInstantiatedType()",
+                  "type": "()org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.InstantiationExpression#getInstantiatedType()",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "addDefaultGeneralType()#instantiatedType",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "addDefaultGeneralType()#instantiatedType",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>",
+                      "value": null
+                    }
+                  ],
+                  "kind": "NOT_EQUAL_TO",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "addDefaultGeneralType()#instantiatedType",
+                              "type": "org.omg.sysml.lang.sysml.Type"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Feature",
+                              "type": "org.omg.sysml.lang.sysml.Feature"
+                            }
+                          ],
+                          "kind": "INSTANCE_OF",
+                          "type": "boolean"
+                        }
+                      ],
+                      "kind": "PARENTHESIZED",
+                      "type": "boolean"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addImplicitGeneralType(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)",
+                                  "type": "(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)void"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLPackage",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#eINSTANCE",
+                                          "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getSubsetting()",
+                                      "type": "()org.eclipse.emf.ecore.EClass"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getSubsetting()",
+                                  "type": "org.eclipse.emf.ecore.EClass"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "addDefaultGeneralType()#instantiatedType",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#addImplicitGeneralType(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)",
+                              "type": "void"
+                            }
+                          ],
+                          "kind": "EXPRESSION_STATEMENT"
+                        }
+                      ],
+                      "kind": "BLOCK"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addImplicitGeneralType(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)",
+                                  "type": "(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)void"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLPackage",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#eINSTANCE",
+                                          "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getFeatureTyping()",
+                                      "type": "()org.eclipse.emf.ecore.EClass"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getFeatureTyping()",
+                                  "type": "org.eclipse.emf.ecore.EClass"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "addDefaultGeneralType()#instantiatedType",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#addImplicitGeneralType(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)",
+                              "type": "void"
+                            }
+                          ],
+                          "kind": "EXPRESSION_STATEMENT"
+                        }
+                      ],
+                      "kind": "BLOCK"
+                    }
+                  ],
+                  "kind": "IF"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.TypeAdapter#forEachImplicitGeneralType/1": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "MODIFIERS"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                  "type": "org.eclipse.emf.ecore.EClass"
+                }
+              ],
+              "kind": "VARIABLE",
+              "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#eClass",
+              "type": "org.eclipse.emf.ecore.EClass"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getImplicitGeneralTypeKinds()",
+                  "type": "()java.util.Collection<org.eclipse.emf.ecore.EClass>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getImplicitGeneralTypeKinds()",
+              "type": "java.util.Collection<org.eclipse.emf.ecore.EClass>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        }
+                      ],
+                      "kind": "VARIABLE",
+                      "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#supertype",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                              "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.Map#get(java.lang.Object)",
+                          "type": "(java.lang.Object)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#eClass",
+                          "type": "org.eclipse.emf.ecore.EClass"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.Map#get(java.lang.Object)",
+                      "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#action",
+                                      "type": "java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.function.BiConsumer#accept(T,U)",
+                                  "type": "(org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type)void"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#eClass",
+                                  "type": "org.eclipse.emf.ecore.EClass"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "forEachImplicitGeneralType(java.util.function.BiConsumer<org.eclipse.emf.ecore.EClass,org.omg.sysml.lang.sysml.Type>)#supertype",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.function.BiConsumer#accept(T,U)",
+                              "type": "void"
+                            }
+                          ],
+                          "kind": "EXPRESSION_STATEMENT"
+                        }
+                      ],
+                      "kind": "BLOCK"
+                    }
+                  ],
+                  "kind": "ENHANCED_FOR_LOOP"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "ENHANCED_FOR_LOOP"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.TypeAdapter#getImplicitGeneralTypeKinds/0": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.List",
+                  "type": "java.util.List"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                  "type": "org.eclipse.emf.ecore.EClass"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.List",
+              "type": "java.util.List<org.eclipse.emf.ecore.EClass>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "java.util#java.util.ArrayList",
+                      "type": "java.util.ArrayList"
+                    }
+                  ],
+                  "kind": "PARAMETERIZED_TYPE",
+                  "symbol": "java.util#java.util.ArrayList",
+                  "type": "java.util.ArrayList<org.eclipse.emf.ecore.EClass>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                          "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                        }
+                      ],
+                      "kind": "MEMBER_SELECT",
+                      "symbol": "java.util.Map#keySet()",
+                      "type": "()java.util.Set<org.eclipse.emf.ecore.EClass>"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "java.util.Map#keySet()",
+                  "type": "java.util.Set<org.eclipse.emf.ecore.EClass>"
+                }
+              ],
+              "kind": "NEW_CLASS",
+              "symbol": "java.util.ArrayList#ArrayList(java.util.Collection<? extends E>)",
+              "type": "java.util.ArrayList<org.eclipse.emf.ecore.EClass>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "getImplicitGeneralTypeKinds()#keyList",
+          "type": "java.util.List<org.eclipse.emf.ecore.EClass>"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "java.util#java.util.Collections",
+                      "type": "java.util.Collections"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.Collections#<T>sort(java.util.List<T>,java.util.Comparator<? super T>)",
+                  "type": "(java.util.List<org.eclipse.emf.ecore.EClass>,java.util.Comparator<? super org.eclipse.emf.ecore.EClass>)void"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "getImplicitGeneralTypeKinds()#keyList",
+                  "type": "java.util.List<org.eclipse.emf.ecore.EClass>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util#java.util.Comparator",
+                          "type": "java.util.Comparator"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                          "type": "org.eclipse.emf.ecore.EClass"
+                        }
+                      ],
+                      "kind": "PARAMETERIZED_TYPE",
+                      "symbol": "java.util#java.util.Comparator",
+                      "type": "java.util.Comparator<org.eclipse.emf.ecore.EClass>"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "java.util#java.util.Comparator",
+                              "type": "java.util.Comparator"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                              "type": "org.eclipse.emf.ecore.EClass"
+                            }
+                          ],
+                          "kind": "PARAMETERIZED_TYPE",
+                          "symbol": "java.util#java.util.Comparator",
+                          "type": "java.util.Comparator<org.eclipse.emf.ecore.EClass>"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "MODIFIERS"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "java.lang.Object#Object()",
+                                          "type": "()void"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.lang.Object#Object()",
+                                      "type": "void"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            }
+                          ],
+                          "kind": "METHOD",
+                          "symbol": "<anonymous org.omg.sysml.adapter.TypeAdapter$1>#()",
+                          "type": "()void"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "java.lang#java.lang.Override",
+                                      "type": "java.lang.Override"
+                                    }
+                                  ],
+                                  "kind": "ANNOTATION",
+                                  "symbol": "java.lang#java.lang.Override",
+                                  "type": "java.lang.Override"
+                                }
+                              ],
+                              "kind": "MODIFIERS"
+                            },
+                            {
+                              "children": [],
+                              "kind": "PRIMITIVE_TYPE",
+                              "type": "int"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                                  "type": "org.eclipse.emf.ecore.EClass"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "compare(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)#c1",
+                              "type": "org.eclipse.emf.ecore.EClass"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.eclipse.emf.ecore#org.eclipse.emf.ecore.EClass",
+                                  "type": "org.eclipse.emf.ecore.EClass"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "compare(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)#c2",
+                              "type": "org.eclipse.emf.ecore.EClass"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "java.lang#java.lang.Integer",
+                                              "type": "java.lang.Integer"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.lang.Integer#compare(int,int)",
+                                          "type": "(int,int)int"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "compare(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)#c1",
+                                                  "type": "org.eclipse.emf.ecore.EClass"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.eclipse.emf.ecore.EClassifier#getClassifierID()",
+                                              "type": "()int"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "org.eclipse.emf.ecore.EClassifier#getClassifierID()",
+                                          "type": "int"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "compare(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)#c2",
+                                                  "type": "org.eclipse.emf.ecore.EClass"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.eclipse.emf.ecore.EClassifier#getClassifierID()",
+                                              "type": "()int"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "org.eclipse.emf.ecore.EClassifier#getClassifierID()",
+                                          "type": "int"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.lang.Integer#compare(int,int)",
+                                      "type": "int"
+                                    }
+                                  ],
+                                  "kind": "RETURN"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            }
+                          ],
+                          "kind": "METHOD",
+                          "symbol": "<anonymous org.omg.sysml.adapter.TypeAdapter$1>#compare(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)",
+                          "type": "(org.eclipse.emf.ecore.EClass,org.eclipse.emf.ecore.EClass)int"
+                        }
+                      ],
+                      "kind": "CLASS",
+                      "symbol": "getImplicitGeneralTypeKinds()#<anonymous org.omg.sysml.adapter.TypeAdapter$1>",
+                      "type": "<anonymous java.util.Comparator<org.eclipse.emf.ecore.EClass>>"
+                    }
+                  ],
+                  "kind": "NEW_CLASS",
+                  "symbol": "<anonymous org.omg.sysml.adapter.TypeAdapter$1>#()",
+                  "type": "<anonymous java.util.Comparator<org.eclipse.emf.ecore.EClass>>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.Collections#<T>sort(java.util.List<T>,java.util.Comparator<? super T>)",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "getImplicitGeneralTypeKinds()#keyList",
+              "type": "java.util.List<org.eclipse.emf.ecore.EClass>"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.delegate.invocation.InstantiationExpression_instantiatedType_InvocationDelegate#dynamicInvoke/2": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.InstantiationExpression",
+              "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.InstantiationExpression",
+                  "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#target",
+                  "type": "org.eclipse.emf.ecore.InternalEObject"
+                }
+              ],
+              "kind": "TYPE_CAST",
+              "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+          "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Element",
+              "type": "org.omg.sysml.lang.sysml.Element"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [],
+                                                                      "kind": "IDENTIFIER",
+                                                                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                                                                      "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "org.omg.sysml.lang.sysml.Namespace#getOwnedMembership()",
+                                                                  "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Membership>"
+                                                                }
+                                                              ],
+                                                              "kind": "METHOD_INVOCATION",
+                                                              "symbol": "org.omg.sysml.lang.sysml.Namespace#getOwnedMembership()",
+                                                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Membership>"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "java.util.Collection#stream()",
+                                                          "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Membership>"
+                                                        }
+                                                      ],
+                                                      "kind": "METHOD_INVOCATION",
+                                                      "symbol": "java.util.Collection#stream()",
+                                                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Membership>"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                                  "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Membership>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Membership>"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [],
+                                                          "kind": "MODIFIERS"
+                                                        },
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [
+                                                                        {
+                                                                          "children": [
+                                                                            {
+                                                                              "children": [],
+                                                                              "kind": "IDENTIFIER",
+                                                                              "symbol": "unnamed module#org",
+                                                                              "type": "org"
+                                                                            }
+                                                                          ],
+                                                                          "kind": "MEMBER_SELECT",
+                                                                          "symbol": "unnamed module#org.omg",
+                                                                          "type": "org.omg"
+                                                                        }
+                                                                      ],
+                                                                      "kind": "MEMBER_SELECT",
+                                                                      "symbol": "unnamed module#org.omg.sysml",
+                                                                      "type": "org.omg.sysml"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "unnamed module#org.omg.sysml.lang",
+                                                                  "type": "org.omg.sysml.lang"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                                              "type": "org.omg.sysml.lang.sysml"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Membership",
+                                                          "type": "org.omg.sysml.lang.sysml.Membership"
+                                                        }
+                                                      ],
+                                                      "kind": "VARIABLE",
+                                                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#m",
+                                                      "type": "org.omg.sysml.lang.sysml.Membership"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#m",
+                                                                  "type": "org.omg.sysml.lang.sysml.Membership"
+                                                                },
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.FeatureMembership",
+                                                                  "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                                                                }
+                                                              ],
+                                                              "kind": "INSTANCE_OF",
+                                                              "type": "boolean"
+                                                            }
+                                                          ],
+                                                          "kind": "PARENTHESIZED",
+                                                          "type": "boolean"
+                                                        }
+                                                      ],
+                                                      "kind": "LOGICAL_COMPLEMENT",
+                                                      "type": "boolean"
+                                                    }
+                                                  ],
+                                                  "kind": "LAMBDA_EXPRESSION",
+                                                  "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Membership>"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Membership>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                                          "type": "(java.util.function.Function<? super org.omg.sysml.lang.sysml.Membership,? extends org.omg.sysml.lang.sysml.Element>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Element>"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Membership",
+                                              "type": "org.omg.sysml.lang.sysml.Membership"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_REFERENCE",
+                                          "symbol": "org.omg.sysml.lang.sysml.Membership#getMemberElement()",
+                                          "type": "java.util.function.Function<org.omg.sysml.lang.sysml.Membership,org.omg.sysml.lang.sysml.Element>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Element>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                  "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Element>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Element>"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "java.util#java.util.Objects",
+                                      "type": "java.util.Objects"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_REFERENCE",
+                                  "symbol": "java.util.Objects#nonNull(java.lang.Object)",
+                                  "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Element>"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Element>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.stream.Stream#findFirst()",
+                          "type": "()java.util.Optional<org.omg.sysml.lang.sysml.Element>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.stream.Stream#findFirst()",
+                      "type": "java.util.Optional<org.omg.sysml.lang.sysml.Element>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.Optional#orElse(T)",
+                  "type": "(org.omg.sysml.lang.sysml.Element)org.omg.sysml.lang.sysml.Element"
+                },
+                {
+                  "children": [],
+                  "kind": "NULL_LITERAL",
+                  "type": "<nulltype>",
+                  "value": null
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.Optional#orElse(T)",
+              "type": "org.omg.sysml.lang.sysml.Element"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#member",
+          "type": "org.omg.sysml.lang.sysml.Element"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#member",
+                      "type": "org.omg.sysml.lang.sysml.Element"
+                    },
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    }
+                  ],
+                  "kind": "INSTANCE_OF",
+                  "type": "boolean"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#member",
+                  "type": "org.omg.sysml.lang.sysml.Element"
+                },
+                {
+                  "children": [],
+                  "kind": "NULL_LITERAL",
+                  "type": "<nulltype>",
+                  "value": null
+                }
+              ],
+              "kind": "CONDITIONAL_EXPRESSION",
+              "type": "java.lang.Object"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate#dynamicInvoke/2": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.OperatorExpression",
+              "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.OperatorExpression",
+                  "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#target",
+                  "type": "org.eclipse.emf.ecore.InternalEObject"
+                }
+              ],
+              "kind": "TYPE_CAST",
+              "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+          "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "java.lang#java.lang.String",
+              "type": "java.lang.String"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                      "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.OperatorExpression#getOperator()",
+                  "type": "()java.lang.String"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.OperatorExpression#getOperator()",
+              "type": "java.lang.String"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#operator",
+          "type": "java.lang.String"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#operator",
+                      "type": "java.lang.String"
+                    },
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>",
+                      "value": null
+                    }
+                  ],
+                  "kind": "EQUAL_TO",
+                  "type": "boolean"
+                },
+                {
+                  "children": [],
+                  "kind": "NULL_LITERAL",
+                  "type": "<nulltype>",
+                  "value": null
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Function",
+                      "type": "org.omg.sysml.lang.sysml.Function"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.util#org.omg.sysml.util.SysMLLibraryUtil",
+                              "type": "org.omg.sysml.util.SysMLLibraryUtil"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "org.omg.sysml.util.SysMLLibraryUtil#getLibraryType(org.omg.sysml.lang.sysml.Element,java.lang.String...)",
+                          "type": "(org.omg.sysml.lang.sysml.Element,java.lang.String[])org.omg.sysml.lang.sysml.Type"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                          "type": "org.omg.sysml.lang.sysml.OperatorExpression"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.util#org.omg.sysml.util.ExpressionUtil",
+                                  "type": "org.omg.sysml.util.ExpressionUtil"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "org.omg.sysml.util.ExpressionUtil#getOperatorQualifiedNames(java.lang.String)",
+                              "type": "(java.lang.String)java.lang.String[]"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#operator",
+                              "type": "java.lang.String"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.util.ExpressionUtil#getOperatorQualifiedNames(java.lang.String)",
+                          "type": "java.lang.String[]"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.util.SysMLLibraryUtil#getLibraryType(org.omg.sysml.lang.sysml.Element,java.lang.String...)",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    }
+                  ],
+                  "kind": "TYPE_CAST",
+                  "type": "org.omg.sysml.lang.sysml.Function"
+                }
+              ],
+              "kind": "CONDITIONAL_EXPRESSION",
+              "type": "java.lang.Object"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.delegate.invocation.TriggerInvocationExpression_instantiatedType_InvocationDelegate#dynamicInvoke/2": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TriggerInvocationExpression",
+              "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TriggerInvocationExpression",
+                  "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#target",
+                  "type": "org.eclipse.emf.ecore.InternalEObject"
+                }
+              ],
+              "kind": "TYPE_CAST",
+              "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+          "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TriggerKind",
+              "type": "org.omg.sysml.lang.sysml.TriggerKind"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                      "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.TriggerInvocationExpression#getKind()",
+                  "type": "()org.omg.sysml.lang.sysml.TriggerKind"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.TriggerInvocationExpression#getKind()",
+              "type": "org.omg.sysml.lang.sysml.TriggerKind"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#kind",
+          "type": "org.omg.sysml.lang.sysml.TriggerKind"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#kind",
+                      "type": "org.omg.sysml.lang.sysml.TriggerKind"
+                    },
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>",
+                      "value": null
+                    }
+                  ],
+                  "kind": "EQUAL_TO",
+                  "type": "boolean"
+                },
+                {
+                  "children": [],
+                  "kind": "NULL_LITERAL",
+                  "type": "<nulltype>",
+                  "value": null
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.util#org.omg.sysml.util.SysMLLibraryUtil",
+                          "type": "org.omg.sysml.util.SysMLLibraryUtil"
+                        }
+                      ],
+                      "kind": "MEMBER_SELECT",
+                      "symbol": "org.omg.sysml.util.SysMLLibraryUtil#getLibraryType(org.omg.sysml.lang.sysml.Element,java.lang.String...)",
+                      "type": "(org.omg.sysml.lang.sysml.Element,java.lang.String[])org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                      "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.util#org.omg.sysml.util.ImplicitGeneralizationMap",
+                              "type": "org.omg.sysml.util.ImplicitGeneralizationMap"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "org.omg.sysml.util.ImplicitGeneralizationMap#getDefaultSupertypeFor(java.lang.Class<?>,java.lang.String)",
+                          "type": "(java.lang.Class<?>,java.lang.String)java.lang.String"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#self",
+                                  "type": "org.omg.sysml.lang.sysml.TriggerInvocationExpression"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "java.lang.Object#getClass()",
+                              "type": "()java.lang.Class<?>"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "java.lang.Object#getClass()",
+                          "type": "java.lang.Class<capture#464 of ? extends org.omg.sysml.lang.sysml.TriggerInvocationExpression>"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "dynamicInvoke(org.eclipse.emf.ecore.InternalEObject,org.eclipse.emf.common.util.EList<?>)#kind",
+                                  "type": "org.omg.sysml.lang.sysml.TriggerKind"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "org.omg.sysml.lang.sysml.TriggerKind#toString()",
+                              "type": "()java.lang.String"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.lang.sysml.TriggerKind#toString()",
+                          "type": "java.lang.String"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.util.ImplicitGeneralizationMap#getDefaultSupertypeFor(java.lang.Class<?>,java.lang.String)",
+                      "type": "java.lang.String"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "org.omg.sysml.util.SysMLLibraryUtil#getLibraryType(org.omg.sysml.lang.sysml.Element,java.lang.String...)",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "CONDITIONAL_EXPRESSION",
+              "type": "java.lang.Object"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.delegate.setting.InstantiationExpression_instantiatedType_SettingDelegate#basicGet/1": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.InstantiationExpression",
+                              "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "basicGet(org.eclipse.emf.ecore.InternalEObject)#owner",
+                              "type": "org.eclipse.emf.ecore.InternalEObject"
+                            }
+                          ],
+                          "kind": "TYPE_CAST",
+                          "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+                        }
+                      ],
+                      "kind": "PARENTHESIZED",
+                      "type": "org.omg.sysml.lang.sysml.InstantiationExpression"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.InstantiationExpression#instantiatedType()",
+                  "type": "()org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.InstantiationExpression#instantiatedType()",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    }
+  },
+  "generalization_classifier_ids": {
+    "FeatureTyping": 64,
+    "Subsetting": 150
+  },
+  "membership_controls": [
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "ConstructorExpression",
+      "shape": "empty"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "empty_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "feature_membership_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "feature"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "ConstructorExpression",
+      "shape": "package_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "class_then_feature"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "feature_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "ConstructorExpression",
+      "shape": "owning_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "ConstructorExpression",
+      "shape": "empty_only"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "InvocationExpression",
+      "shape": "empty"
+    },
+    {
+      "generals": [
+        {
+          "kind": "FeatureTyping",
+          "target": "target0"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "empty_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "FeatureTyping",
+          "target": "target0"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "feature_membership_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "FeatureTyping",
+          "target": "target0"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "target0"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "feature"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "InvocationExpression",
+      "shape": "package_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "FeatureTyping",
+          "target": "target0"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "class_then_feature"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "target0"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "feature_then_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "FeatureTyping",
+          "target": "target0"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": "target0",
+      "kind": "InvocationExpression",
+      "shape": "owning_class"
+    },
+    {
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "instantiated_type": null,
+      "kind": "InvocationExpression",
+      "shape": "empty_only"
+    }
+  ],
+  "provenance": {
+    "PilotOperandProbe.java": "7bf24e4d6cbb9c0d7203aaea9315bcee4125b06341f4cfd7f5d926a1fef3525b",
+    "PilotResultConstructionExporter.java": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567",
+    "ast_helper_sha256": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "driver_sha256": "35ddb8fc3cfb8622228237578f6f5ea0aa82e52b292aa5570b40f0440a9d10e2",
+    "helper_sha256": "9cfc806e38d1d2925e81b5de019b7300150714cba65bfd4076332cb43f7fad0e",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ExpressionAdapter.java": "435d8f22006137d91f793d4a20be3c88e72a017db838bf1b1d7da654672d7141",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/InvocationExpressionAdapter.java": "a62a675127ea161fdf7dedc2f49cc0302e08095aca37e75d408ff4bc7e8b4c44",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/InstantiationExpression_instantiatedType_InvocationDelegate.java": "c3d73b5af746d8c60cbddbcefdc3fd242fad8f938068bafccdf2f8427616f52d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/OperatorExpression_instantiatedType_InvocationDelegate.java": "ee44813f817acce602a68d406d717326f8f923184ad2be8290abd5cd21a30860",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/TriggerInvocationExpression_instantiatedType_InvocationDelegate.java": "2fcf60c946c0aab8fccca4f582b60406a4883b0857f879e3372d4344814df392",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/InstantiationExpression_instantiatedType_SettingDelegate.java": "ae1d3ace49469a372b35c752cba9d48dc27c9af7fbe139112db3f76fb8099a79",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "reference_only_dependencies": [
+    {
+      "kind": "CollectExpression",
+      "required_dependency": "operator qualified-name conversion and global Function lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate"
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "required_dependency": "operator qualified-name conversion and global Function lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate"
+    },
+    {
+      "kind": "IndexExpression",
+      "required_dependency": "operator qualified-name conversion and global Function lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate"
+    },
+    {
+      "kind": "OperatorExpression",
+      "required_dependency": "operator qualified-name conversion and global Function lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate"
+    },
+    {
+      "kind": "SelectExpression",
+      "required_dependency": "operator qualified-name conversion and global Function lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate"
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "required_dependency": "TriggerKind role mapping and global Type lookup",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.TriggerInvocationExpression_instantiatedType_InvocationDelegate"
+    }
+  ],
+  "schema": "dev.mercurio.instantiation-strategy-controls.v1",
+  "scope": "Resolved concrete instantiation setting/operation dispatch, membership-order selection and bounded detached default contributions. Nonstandard operator/trigger delegates are explicit reference-only dependencies. Import is not native implementation or semantic qualification; real libraries, lifecycle and validation remain open."
+}

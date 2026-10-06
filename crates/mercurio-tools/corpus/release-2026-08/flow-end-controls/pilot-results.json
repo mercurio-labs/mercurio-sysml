@@ -1,0 +1,42 @@
+{
+  "engine_total_ms": 22969.4359,
+  "phases": {
+    "initialize_ms": 12265.9933,
+    "load_library_ms": 9347.2649,
+    "read_parse_inputs_ms": 70.4118,
+    "validate_targets_ms": 1182.0331
+  },
+  "cases": [
+    {
+      "relative_path": "abstract-zero.sysml",
+      "status": "ok",
+      "validation_ms": 811.0007,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "binary.sysml",
+      "status": "ok",
+      "validation_ms": 313.6685,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "three-ends.sysml",
+      "status": "error",
+      "validation_ms": 56.9267,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFlowDefinitionConnectionEnds",
+          "message": "A flow connection definition can have at most two ends.",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "input_files": [
+    "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\flow-end-controls\\binary.sysml",
+    "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\flow-end-controls\\three-ends.sysml",
+    "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\flow-end-controls\\abstract-zero.sysml"
+  ],
+  "library_index_mode": "published-default"
+}

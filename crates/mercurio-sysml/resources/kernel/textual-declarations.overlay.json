@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "source": {
+    "mode": "hand-curated-overlay",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "grammar": [
+      "KerML.xtext#TextualRepresentation",
+      "KerML.xtext#Invariant",
+      "KerML.xtext#ResultExpressionMember",
+      "SysML.xtext#TextualRepresentation"
+    ],
+    "metamodel": [
+      "kerml.ecore#TextualRepresentation.representedElement",
+      "kerml.ecore#ResultExpressionMembership"
+    ],
+    "body_normalization": "ElementUtil.processCommentBody",
+    "oracle_sha256": "3cc26747346af97348d88ff9c9ed869ec72c27bf857168e7c884136ae25221eb"
+  },
+  "invariant_type": "Performances::BooleanEvaluation",
+  "invariant_result": "Performances::BooleanEvaluation::result",
+  "positive_subset": "Performances::trueEvaluations",
+  "negative_subset": "Performances::falseEvaluations"
+}

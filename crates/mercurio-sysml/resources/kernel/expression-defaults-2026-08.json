@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "1a18dc674c9cac00b1368909ad553f8857e83f981e7b1e6f9fb92f97333a6ea5",
+    "export_sha256": "97fdb6d12700ee28148028e51eb9c9f8f99917e7412a49d18cfaee4e40250e11",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1958,
+      "relationship_count": 14321,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/kernel-connectors.kerml",
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/sysml-connectors.sysml"
+      ],
+      "exported_at_utc": "2026-09-18T21:41:26.496914900Z"
+    },
+    "include_subsets": true,
+    "selected_elements": {
+      "KernelConnectors::Scope::calculate": "Expression"
+    }
+  },
+  "usage_type_defaults": {
+    "Expression": {
+      "type_ref": "Performances::Evaluation"
+    }
+  },
+  "usage_subset_defaults": {
+    "Expression": {
+      "subsetted_feature_refs": [
+        "Performances::evaluations"
+      ]
+    }
+  }
+}

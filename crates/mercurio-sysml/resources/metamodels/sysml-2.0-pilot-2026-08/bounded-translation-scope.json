@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "scope_id": "bounded-xtend-one-type-v1",
+  "checks": [
+    "org.omg.kerml.xtext.validation.KerMLValidator#checkAnnotation",
+    "org.omg.kerml.xtext.validation.KerMLValidator#checkImport",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkReferenceUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationDefinition",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkAnalysisCaseUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkVerificationCaseUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkUseCaseUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkRenderingUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkViewpointUsage",
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkMetadataUsage"
+  ],
+  "helpers": [
+    "org.omg.sysml.xtext.validation.SysMLValidator#checkOneType"
+  ],
+  "native_services": [
+    {
+      "symbol": "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)",
+      "ownership": "handwritten-rust",
+      "contract": "Return effective type objects with stable identity; qualify native all_types independently."
+    },
+    {
+      "symbol": "java.lang.Class.isInstance(java.lang.Object)",
+      "ownership": "handwritten-rust",
+      "contract": "Test model metaclass inheritance; no Java reflection at runtime."
+    },
+    {
+      "symbol": "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+      "ownership": "handwritten-rust",
+      "contract": "Preserve validator invocation subject and structural-feature diagnostic location."
+    }
+  ],
+  "completion_gates": [
+    "All 11 selected checks generate Rust from resolved ASTs and are bound into native compilation.",
+    "checkOneType predicate is generated from its resolved helper body; no handwritten reconstruction.",
+    "Selected callers retain complete bodies and ordered diagnostics; no partial-method coverage.",
+    "Native type collection, metaclass and diagnostic bindings have independent focused controls.",
+    "Generated Rust agrees with actual Pilot for empty, single matching, single nonmatching and multiple-type cases.",
+    "Source mutation tests exercise helper and caller changes; unsupported constructs fail closed.",
+    "Remove superseded handwritten predicate evaluation for these seven callers.",
+    "Focused native tests pass with Java unavailable; reproducible generation checks pass."
+  ],
+  "excluded": [
+    "checkAllTypes and its callers",
+    "Guarded or multi-helper checkOneType callers",
+    "General Java/EMF execution, mutation, reflection or dynamic dispatch",
+    "Whole-language specification compliance and full-corpus benchmarking"
+  ],
+  "progress_policy": "Report implemented check count / 11 only as a validator-count metric; do not represent it as time or overall gate completion. Helpers and qualification gates are mandatory and reported separately."
+}

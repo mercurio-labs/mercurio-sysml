@@ -1,0 +1,290 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "export_sha256": "3cc26747346af97348d88ff9c9ed869ec72c27bf857168e7c884136ae25221eb",
+  "fixtures": {
+    "textual-invariants.kerml": "8d48d3fdc5fd6e5b4fc0a995039b9e07b7d84892ee5950183a4bc4cd260571f8",
+    "textual-missing-body.kerml": "148a0e5240ede3a336e044258d9205ed7f62910bd8baee8f2f6c29942c61540e",
+    "textual-missing-language.kerml": "b71c463b627ee0d1586a01cfbfd1847a3e108ff85cebdaa730fb1581590933d6",
+    "textual-representations.sysml": "df1015cce783165f6d3482afbb6380af0b5c6936458ebb8abf37736efbd09cc5",
+    "textual-unquoted-language.sysml": "5ec329dfa50a386c2477265aaffbf18a379a6f56031e70ae138ddd36abc140e8",
+    "invariant-invalid-result.kerml": "c7126248181ed58fb41fcfb708ab765afa1559eb6eea688a03514be4c164a355"
+  },
+  "cases": [
+    {
+      "relative_path": "textual-invariants.kerml",
+      "status": "ok",
+      "validation_ms": 411.1002,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "textual-representations.sysml",
+      "status": "ok",
+      "validation_ms": 89.3646,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "textual-missing-language.kerml",
+      "status": "error",
+      "validation_ms": 7.0078,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input '/* body */' expecting 'language'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "textual-missing-body.kerml",
+      "status": "error",
+      "validation_ms": 0.3924,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "textual-unquoted-language.sysml",
+      "status": "error",
+      "validation_ms": 2.0757,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input 'ocl' expecting RULE_STRING_VALUE",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* body */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invariant-invalid-result.kerml",
+      "status": "ok",
+      "validation_ms": 29.6981,
+      "diagnostics": [
+        {
+          "severity": "WARNING",
+          "code": "validateBindingConnectorTypeConformance",
+          "message": "Bound features should have conforming types",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "file": "textual-invariants.kerml",
+      "line": 10,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "body": "first line\nsecond line\n",
+        "language": "alf"
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 9,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "body": "preserve spaces  ",
+        "language": "plain"
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ]
+      }
+    },
+    {
+      "file": "textual-representations.sysml",
+      "line": 6,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "body": "preserve spaces  ",
+        "language": "plain"
+      },
+      "references": {
+        "owner": [
+          "TextualRepresentations::C"
+        ]
+      }
+    },
+    {
+      "file": "textual-representations.sysml",
+      "line": 7,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "body": "first line\nsecond line\n",
+        "language": "alf"
+      },
+      "references": {
+        "owner": [
+          "TextualRepresentations::C"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 6,
+      "kind": "Invariant",
+      "properties": {
+        "declared_name": "described",
+        "is_negated": false
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ],
+        "type": [
+          "Performances::BooleanEvaluation"
+        ],
+        "specializes": [
+          "Performances::trueEvaluations"
+        ],
+        "function": [
+          "Performances::BooleanEvaluation"
+        ],
+        "result": [
+          "Performances::BooleanEvaluation::result"
+        ],
+        "parameter": [
+          "Performances::BooleanEvaluation::result"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 7,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "declared_name": "inOCL",
+        "declared_short_name": "ocl",
+        "body": "self.x > 0.0 ",
+        "language": "ocl"
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C::described"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 5,
+      "kind": "Invariant",
+      "properties": {
+        "declared_name": "negative",
+        "is_negated": true
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ],
+        "type": [
+          "Performances::BooleanEvaluation"
+        ],
+        "specializes": [
+          "Performances::falseEvaluations"
+        ],
+        "function": [
+          "Performances::BooleanEvaluation"
+        ],
+        "result": [
+          "Performances::BooleanEvaluation::result"
+        ],
+        "parameter": [
+          "Performances::BooleanEvaluation::result"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 3,
+      "kind": "Invariant",
+      "properties": {
+        "declared_name": "plain",
+        "is_negated": false
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ],
+        "type": [
+          "Performances::BooleanEvaluation"
+        ],
+        "specializes": [
+          "Performances::trueEvaluations"
+        ],
+        "function": [
+          "Performances::BooleanEvaluation"
+        ],
+        "result": [
+          "Performances::BooleanEvaluation::result"
+        ],
+        "parameter": [
+          "Performances::BooleanEvaluation::result"
+        ]
+      }
+    },
+    {
+      "file": "textual-invariants.kerml",
+      "line": 4,
+      "kind": "Invariant",
+      "properties": {
+        "declared_name": "positive",
+        "is_negated": false
+      },
+      "references": {
+        "owner": [
+          "TextualInvariants::C"
+        ],
+        "type": [
+          "Performances::BooleanEvaluation"
+        ],
+        "specializes": [
+          "Performances::trueEvaluations"
+        ],
+        "function": [
+          "Performances::BooleanEvaluation"
+        ],
+        "result": [
+          "Performances::BooleanEvaluation::result"
+        ],
+        "parameter": [
+          "Performances::BooleanEvaluation::result"
+        ]
+      }
+    },
+    {
+      "file": "textual-representations.sysml",
+      "line": 4,
+      "kind": "TextualRepresentation",
+      "properties": {
+        "declared_name": "inOCL",
+        "declared_short_name": "ocl",
+        "body": "self.x > 0.0 ",
+        "language": "ocl"
+      },
+      "references": {
+        "owner": [
+          "TextualRepresentations::C::checked"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schema": "dev.mercurio.pilot-constructs-overlay.v1",
+  "source": {
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Select control actions for shared native lowering; construct metaclasses are generated from pinned Pilot grammar."
+    }
+  },
+  "construct_selections": [
+    {
+      "construct": "Step",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve typed KerML steps and their owned feature bodies."
+    },
+    {
+      "construct": "Association",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Behavior",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Class",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "DataType",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Function",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Interaction",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Metaclass",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Predicate",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Structure",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Expression",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve owned KerML expression bodies and their concrete expression metaclass."
+    },
+    {
+      "construct": "BooleanExpression",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve owned KerML expression bodies and their concrete expression metaclass."
+    },
+    {
+      "construct": "LibraryPackage",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve library package identity rather than emitting every namespace as Package."
+    },
+    {
+      "construct": "Type",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "AssociationStructure",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "Connector",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "BindingConnector",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "Succession",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "Subclassification",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "FeatureTyping",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Subsetting",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Redefinition",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Conjugation",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "FeatureInverting",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "TypeFeaturing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Dependency",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Disjoining",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve direct disjoining relationships and their pinned grammar endpoint assignments."
+    },
+    {
+      "construct": "Namespace",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve the concrete Namespace metaclass and its optional source identification."
+    },
+    {
+      "construct": "MultiplicitySubset",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve direct and owned-chain MultiplicitySubset targets and their Feature subsetting relation."
+    },
+    {
+      "construct": "MultiplicityRange",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve direct multiplicity ranges with ordered owned bound-expression members."
+    },
+    {
+      "construct": "Flow",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve Flow declarations, ordered FlowEnd graphs, `all` sufficiency, directly typed PayloadFeature graphs and literal ValuePart relationships; nonliteral values and other payload alternatives remain separate."
+    },
+    {
+      "construct": "SuccessionFlow",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve SuccessionFlow declarations, ordered FlowEnd graphs, `all` sufficiency, directly typed PayloadFeature graphs and literal ValuePart relationships; nonliteral values and other payload alternatives remain separate."
+    },
+    {
+      "construct": "TextualRepresentation",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve textual representation and invariant declaration identity and owned content."
+    },
+    {
+      "construct": "Invariant",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+      "reason": "Preserve textual representation and invariant declaration identity and owned content."
+    }
+  ],
+  "explicit_constructs": [],
+  "keyword_registry": {
+    "reason": "Parser token routing for control actions.",
+    "definitions": {
+      "class": "Class",
+      "struct": "Structure",
+      "behavior": "Behavior",
+      "datatype": "DataType",
+      "function": "Function",
+      "predicate": "Predicate",
+      "assoc": "Association",
+      "association": "Association",
+      "interaction": "Interaction",
+      "metaclass": "Metaclass",
+      "type": "Type",
+      "namespace": "Namespace",
+      "assoc-struct": "AssociationStructure"
+    },
+    "usages": {
+      "step": "Step",
+      "multiplicity": "MultiplicitySubset",
+      "multiplicity-range": "MultiplicityRange",
+      "kerml-flow": "Flow",
+      "kerml-succession-flow": "SuccessionFlow",
+      "expr": "Expression",
+      "bool": "BooleanExpression",
+      "connector": "Connector",
+      "binding": "BindingConnector",
+      "succession": "Succession",
+      "rep": "TextualRepresentation",
+      "inv": "Invariant"
+    }
+  },
+  "curated_sections": {
+    "reason": "No invented implicit semantics; defaults require separate oracle evidence.",
+    "default_specialization_anchors": {},
+    "semantic_specialization_defaults": {},
+    "usage_semantic_specialization_overrides": {},
+    "stdlib_aliases": {}
+  }
+}

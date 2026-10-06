@@ -1,0 +1,104 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "ce6732f2bfee9feaf421c8762bcce489db2a05d990fd102e3d312cc80a91d629",
+    "timings_sha256": "fed1fbcc552b08745fc28cd171ab40895c0790c981e7542c512ab5cb7d07c892",
+    "fixtures": {
+      "variable-class-positive.kerml": "19e553ad88d074f7e35dbc7318c336a6738ee5dd353e0b62ebba515464985524",
+      "variable-datatype-negative.kerml": "7678752c020b5465817dd99617a8d3887248940d2f97a794d1669831bc8ee5ac",
+      "constant-association-negative.kerml": "14b5ee2ae44f6201451550d9f476b825c84cbbf4a08cf86cfacbed59539686e3",
+      "constant-association-structure-positive.kerml": "835303ccabe09f71d18e1348891ce0aae0529055760ff2a4dd6af7ea80c5ac9c",
+      "variable-portion-negative.kerml": "acc4c737b915fb20f878c948b1d7d3617e94df9d7fe22f0bad9167d81a7fcab6",
+      "variable-package-negative.kerml": "d805505a4da254ddb56ce3e0955002720ee06a2cdd57b1a67798746e4bccf2dc"
+    },
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350"
+  },
+  "cases": [
+    {
+      "relative_path": "variable-class-positive.kerml",
+      "status": "ok",
+      "validation_ms": 280.5749,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "variable-datatype-negative.kerml",
+      "status": "error",
+      "validation_ms": 18.1139,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFeatureIsVariable",
+          "message": "Must be owned by an occurrence type",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "constant-association-negative.kerml",
+      "status": "error",
+      "validation_ms": 88.6913,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFeatureIsVariable",
+          "message": "Must be owned by an occurrence type",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "constant-association-structure-positive.kerml",
+      "status": "ok",
+      "validation_ms": 46.972,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "variable-portion-negative.kerml",
+      "status": "error",
+      "validation_ms": 29.0435,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFeaturePortionNotVariable",
+          "message": "A portion cannot be variable",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "variable-package-negative.kerml",
+      "status": "error",
+      "validation_ms": 3.8203,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFeatureIsVariable",
+          "message": "Must be owned by an occurrence type",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "positive_flags": [
+    {
+      "file": "constant-association-structure-positive.kerml",
+      "name": "left",
+      "kind": "Feature",
+      "flags": {
+        "is_variable": true,
+        "is_constant": true,
+        "is_portion": false
+      }
+    },
+    {
+      "file": "variable-class-positive.kerml",
+      "name": "changing",
+      "kind": "Feature",
+      "flags": {
+        "is_variable": true,
+        "is_constant": false,
+        "is_portion": false
+      }
+    }
+  ]
+}

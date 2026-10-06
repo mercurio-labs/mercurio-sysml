@@ -1,0 +1,85 @@
+{
+  "accepted_preview_report": "definition-core-preview-acceptance.json",
+  "accepted_preview_source_bytes_unchanged": true,
+  "candidate_promoted": false,
+  "fresh_checkpoint_checks": [
+    {
+      "command": "cargo test -p mercurio-foundation --lib --locked",
+      "exit_code": 0,
+      "passed_tests": 524
+    },
+    {
+      "command": "python -B -m unittest discover -s tools -p test_definition_core_preview.py",
+      "exit_code": 0,
+      "passed_tests": 16
+    },
+    {
+      "command": "cargo test -p mercurio-sysml --lib --release --locked --no-run",
+      "exit_code": 0,
+      "native_test_binary_sha256": "9694cbabdbea18dae5b5bca247b4f983ad79588da66841d7f2bdf9a3f30f1383"
+    },
+    {
+      "command": "cargo run -p mercurio-tools --bin check_repo_boundaries --release --locked -- --manifest ../mercurio-foundation/repo-boundaries.json --strict",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo check -p mercurio-sysml --lib --target wasm32-unknown-unknown --locked",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo check --workspace --locked",
+      "exit_code": 0,
+      "workspace": "mercurio-host-adapters"
+    },
+    {
+      "command": "python -B tools/restore_preview_recovery.py --verify-only",
+      "exit_code": 0,
+      "verified_files": 2653
+    },
+    {
+      "check": "recovery destination traversal controls",
+      "rejections": 5
+    }
+  ],
+  "full_release_qualified": false,
+  "matrix": {
+    "canonical_nodes": 1403,
+    "stored_reference_slots": 2595,
+    "supported_documents": 90,
+    "syntax_negatives": 8
+  },
+  "new_task": "01a1118a-2f91-7c00-8e2b-90c93b91831c",
+  "new_task_status": "waiting for Mercurio cleanup handoff and subsequent user instruction",
+  "preservation": {
+    "archived_witnesses": 93,
+    "candidate_promoted": false,
+    "full_release_criteria_preserved": true,
+    "retained_files": 3656
+  },
+  "preview_acceptance_items": {
+    "passed": 6,
+    "required": 6
+  },
+  "production_runtime_java": false,
+  "ready_for_develop_merge": false,
+  "recovery": {
+    "all_archived_file_hashes_verified": true,
+    "archives": 9,
+    "compressed_bytes": 60811236,
+    "files": 2653,
+    "manifest": "recovery/manifest.json",
+    "original_raw_files_retained_in_place": true,
+    "overwrite_changed_files": false,
+    "restore_command": "python -B tools/restore_preview_recovery.py",
+    "uncompressed_bytes": 2073969991,
+    "verify_command": "python -B tools/restore_preview_recovery.py --verify-only"
+  },
+  "remaining_integration_work": [
+    "Existing formatting check reports differences in 171 source files; original semantic source bytes are preserved at this checkpoint.",
+    "Existing source acceptance runner uses retained Windows executable witnesses and local archival inputs; clean-checkout platform-independent qualification remains integration work.",
+    "Current develop must be integrated and overlapping changes reviewed before a develop merge.",
+    "The complete release corpus, semantic family certificates and final paired timing remain deferred."
+  ],
+  "schema": "dev.mercurio.definition-core-preview-checkpoint.v1",
+  "scope": "Extraction-ready, definition-driven core preview; full 2026-08 qualification deferred"
+}

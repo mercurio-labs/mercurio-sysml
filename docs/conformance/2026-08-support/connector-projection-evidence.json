@@ -1,0 +1,42 @@
+{
+  "scope": "Connector derived related/source/target projections using complete effective ends. Explicit input completeness is fixture scaffolding, never synthesized by production.",
+  "normative": {
+    "file": "1-Kernel_Modeling_Language.pdf",
+    "pdf_page": 216,
+    "constraints": [
+      "deriveConnectorRelatedFeature",
+      "deriveConnectorSourceFeature",
+      "deriveConnectorTargetFeature"
+    ],
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+  },
+  "pilot_source_sha256": {
+    "util/ConnectorUtil.java": "0d3f93e57644e15f177d50f92506dab3dabc724cb8758fe4e5cf38062d7929fb",
+    "adapter/FeatureAdapter.java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+    "delegate/setting/Connector_sourceFeature_SettingDelegate.java": "9ae07c6978b58d1b3b02fb5c5aa2ff692a0f02c81247231779901b72da88b6ec",
+    "delegate/setting/Connector_targetFeature_SettingDelegate.java": "a7a00f02f0c614439f45864cd223d5a996d647fef85e0fac6a2c480938cb9d73",
+    "delegate/setting/Connector_relatedFeature_SettingDelegate.java": "279d2f9ebe2907b8c40485ddd08709c768bb23feb90b251fd5b008f6da032b62"
+  },
+  "native_source_sha256": "d07c6edd1f9dcf79e5cba4889327cc013018b95d37b75cff84be834b4551b7c4",
+  "observations_sha256": "012393102469db076910314c809508fc814fb7e87aeb7d585c74df1643527db4",
+  "verification": {
+    "complete_input_controls": 7,
+    "covers": [
+      "empty",
+      "binary distinct",
+      "same endpoints",
+      "succession",
+      "inherited ends",
+      "end with no reference",
+      "n-ary repeated target"
+    ],
+    "log": "definition-pipeline-evidence/connector-projection-tests.log",
+    "log_sha256": "8c5c2ff57738291247c3d2299350ed993995bb2603b9cc5bf04615e6a87f2d4a"
+  },
+  "remaining": [
+    "Ordinary connector generalization completeness",
+    "Implicit reference-subsetting providers",
+    "Connector context and transformation qualification"
+  ],
+  "matching_source_models_added": 0
+}

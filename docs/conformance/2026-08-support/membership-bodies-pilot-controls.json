@@ -1,0 +1,79 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-unresolved.kerml": "7b33c248398afea4a07c7b35bc182d96bc65f3466472758dd0538d18e94d2756",
+    "invalid-unresolved.sysml": "7b33c248398afea4a07c7b35bc182d96bc65f3466472758dd0538d18e94d2756",
+    "positive-alias.kerml": "f6bc91e368a4b4ab0881aad2f243cbfd027c5baa7721d5b8b1ebbc1bbd800ee4",
+    "positive-alias.sysml": "082dc6fe5205a727a978fa7976a5dc4dbbbd3bbaf92f0af40ecb32a7074d8726",
+    "positive-import.kerml": "3c9335f5809efff7a1b6519f7c72642f79aacc96c6d53168f707e77f46e3f4d1",
+    "positive-import.sysml": "1d6d4a994f3e8f521ef39feb6e0ee32bb8ffe95883470ed7e76314304280eef2",
+    "positive-nested.kerml": "a308daa07fce628261e1309d9f83edc39897acb583ead7fb51a64b58cc58b314",
+    "positive-nested.sysml": "f3e39238ce31decf84cb78cf912ecd00167be52ff6b0244533e5176c90f876b1"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-unresolved.kerml",
+      "status": "error",
+      "validation_ms": 140.3466,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-unresolved.sysml",
+      "status": "error",
+      "validation_ms": 70.9589,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-alias.kerml",
+      "status": "ok",
+      "validation_ms": 172.7172,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-alias.sysml",
+      "status": "ok",
+      "validation_ms": 286.0454,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-import.kerml",
+      "status": "ok",
+      "validation_ms": 198.8722,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-import.sysml",
+      "status": "ok",
+      "validation_ms": 306.947,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-nested.kerml",
+      "status": "ok",
+      "validation_ms": 272.5103,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-nested.sysml",
+      "status": "ok",
+      "validation_ms": 297.1212,
+      "diagnostics": []
+    }
+  ]
+}

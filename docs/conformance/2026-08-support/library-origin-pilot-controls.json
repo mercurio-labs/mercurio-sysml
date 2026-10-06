@@ -1,0 +1,238 @@
+{
+  "cases": [
+    {
+      "observations": [
+        {
+          "is_library_element": false,
+          "kind": "Package",
+          "library": null,
+          "name": "Outside",
+          "owning_relationship_library": null
+        },
+        {
+          "is_library_element": false,
+          "kind": "Package",
+          "library": null,
+          "name": "Nested",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": false,
+          "kind": "Feature",
+          "library": null,
+          "name": "f",
+          "owning_relationship_library": null
+        }
+      ],
+      "source": "package Outside { package Nested { feature f; } }"
+    },
+    {
+      "observations": [
+        {
+          "is_library_element": true,
+          "kind": "LibraryPackage",
+          "library": "Library",
+          "name": "Library",
+          "owning_relationship_library": null
+        },
+        {
+          "is_library_element": true,
+          "kind": "Package",
+          "library": "Library",
+          "name": "Nested",
+          "owning_relationship_library": "Library"
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": true,
+          "kind": "Feature",
+          "library": "Library",
+          "name": "f",
+          "owning_relationship_library": "Library"
+        },
+        {
+          "is_library_element": false,
+          "kind": "Package",
+          "library": null,
+          "name": "Outside",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": false,
+          "kind": "Feature",
+          "library": null,
+          "name": "g",
+          "owning_relationship_library": null
+        }
+      ],
+      "source": "library package Library { package Nested { feature f; } } package Outside { feature g; }"
+    },
+    {
+      "observations": [
+        {
+          "is_library_element": true,
+          "kind": "LibraryPackage",
+          "library": "Standard",
+          "name": "Standard",
+          "owning_relationship_library": null
+        },
+        {
+          "is_library_element": true,
+          "kind": "LibraryPackage",
+          "library": "Inner",
+          "name": "Inner",
+          "owning_relationship_library": "Standard"
+        },
+        {
+          "is_library_element": true,
+          "kind": "Package",
+          "library": "Inner",
+          "name": "Nested",
+          "owning_relationship_library": "Inner"
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": true,
+          "kind": "Feature",
+          "library": "Inner",
+          "name": "f",
+          "owning_relationship_library": "Inner"
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": true,
+          "kind": "Feature",
+          "library": "Standard",
+          "name": "g",
+          "owning_relationship_library": "Standard"
+        }
+      ],
+      "source": "standard library package Standard { library package Inner { package Nested { feature f; } } feature g; }"
+    },
+    {
+      "alias": {
+        "is_library_element": false,
+        "kind": "Membership",
+        "library": null,
+        "name": "borrowed",
+        "owning_relationship_library": null
+      },
+      "observations": [
+        {
+          "is_library_element": true,
+          "kind": "LibraryPackage",
+          "library": "Library",
+          "name": "Library",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": true,
+          "kind": "Feature",
+          "library": "Library",
+          "name": "original",
+          "owning_relationship_library": "Library"
+        },
+        {
+          "is_library_element": false,
+          "kind": "Package",
+          "library": null,
+          "name": "Outside",
+          "owning_relationship_library": null
+        }
+      ],
+      "source": "library package Library { feature original; } package Outside { alias borrowed for Library::original; }"
+    },
+    {
+      "observations": [
+        {
+          "is_library_element": false,
+          "kind": "Package",
+          "library": null,
+          "name": "Context",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": false,
+          "kind": "Classifier",
+          "library": null,
+          "name": "Original",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": false,
+          "kind": "Classifier",
+          "library": null,
+          "name": "Plain",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": "Original",
+          "is_conjugated": true,
+          "is_library_element": false,
+          "kind": "Classifier",
+          "library": null,
+          "name": "Conjugated",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": null,
+          "is_conjugated": false,
+          "is_library_element": false,
+          "kind": "Feature",
+          "library": null,
+          "name": "direct",
+          "owning_relationship_library": null
+        },
+        {
+          "conjugator_original": "direct",
+          "is_conjugated": true,
+          "is_library_element": false,
+          "kind": "Feature",
+          "library": null,
+          "name": "reverse",
+          "owning_relationship_library": null
+        }
+      ],
+      "source": "package Context { classifier Original; classifier Plain; classifier Conjugated conjugates Original; feature direct; feature reverse conjugates direct; }"
+    },
+    {
+      "is_library_element": true,
+      "library": "DetachedLibrary",
+      "shape": "relationship_fallback"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "5e60514dcc338ec7e3ea4be7a831620c39f836930ec79738ad77161bb659940d",
+    "helper_sha256": "3e3f4384ccfd93c3ed466bb59e43fab2406e24b7a7452a66b10b09a4b310acaf",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Element_libraryNamespace_InvocationDelegate.java": "18b2ff1bd36016fa55332c81608843e9b60bcaaa4a4196ac5c3b2252c20bfb3e",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/LibraryPackage_libraryNamespace_InvocationDelegate.java": "77dc5694d0c0b147136f163da501c9c07881cad8cd35a11cf12c8fb711bdfc48",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Relationship_libraryNamespace_InvocationDelegate.java": "24e82bd3fa84cc9915377bee776c9129ef9fd24895b268db101f807f78050b64",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Element_isLibraryElement_SettingDelegate.java": "1e7d66d4b4d9924d859a14d9b271ab9c6f566584ec5b40ddae7523791186f80f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_isConjugated_SettingDelegate.java": "2e50a2b8a248cdae3d3415682ef6aeed98671336d8cb471e39fd3988d5d31a19",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedConjugator_SettingDelegate.java": "5e79adeefc3ada74e09ca667f4593ada4a09b259da3e5ad0a87f5dd793285acd",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.library-origin-controls.v1",
+  "scope": "Five independently parsed source controls (22 named-element observations), including explicit classifier and Feature conjugation, one external-library alias and one detached relationship fallback. No supplied completion flags, complete transformation or model validation."
+}

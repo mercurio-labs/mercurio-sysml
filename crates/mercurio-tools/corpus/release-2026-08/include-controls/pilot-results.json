@@ -1,0 +1,106 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_java_sha256": "13edaa4678d7e7db49c144a5d49635e5379f357e467a63f2a585b654bcdbe643",
+  "helper_class_sha256": "aada2023a026f93a961cc71102f896c624189416142c8aca8d909ad3b70c7963",
+  "fixture_sha256": {
+    "default-valid.sysml": "cf92ee8f46000965c5dbaae20e1e361896a79cb1e924fdec34ad6323d4781579",
+    "reference-invalid.sysml": "abeb4a44c75e08fc97c0e99a2f716b82a068c5b5153003b247d71f3d184bd155",
+    "reference-valid.sysml": "5507fd4f885da158e7b4a0c7f42950d170da771459ec9de6ace94455629a952d",
+    "typed-valid.sysml": "4ef71915c26759ed11da127c336de75ad690fb0408eba7c9c29667dd8a09d446"
+  },
+  "cases": [
+    {
+      "relative_path": "typed-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "default-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "reference-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "reference-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateIncludeUseCaseUsageReference"
+    }
+  ],
+  "validation": "CheckMode.ALL; identical support sets; target last; namespaces distinct",
+  "results": [
+    {
+      "relative_path": "typed-valid.sysml",
+      "parse_ok": true,
+      "status": "ok",
+      "diagnostics": [],
+      "elapsed_ms": 545
+    },
+    {
+      "relative_path": "default-valid.sysml",
+      "parse_ok": true,
+      "status": "ok",
+      "diagnostics": [],
+      "elapsed_ms": 21
+    },
+    {
+      "relative_path": "reference-valid.sysml",
+      "parse_ok": true,
+      "status": "ok",
+      "diagnostics": [],
+      "elapsed_ms": 69
+    },
+    {
+      "relative_path": "reference-invalid.sysml",
+      "parse_ok": true,
+      "status": "error",
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "syntax": false,
+          "code": "validateIncludeUseCaseUsageReference",
+          "message": "Must reference a use case.",
+          "line": 1,
+          "column": 67
+        },
+        {
+          "severity": "ERROR",
+          "syntax": false,
+          "code": "validateUseCaseUsageType_",
+          "message": "A use case must be typed by one use case definition.",
+          "line": 1,
+          "column": 59
+        },
+        {
+          "severity": "WARNING",
+          "syntax": false,
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'self' from Part, UseCase",
+          "line": 1,
+          "column": 59
+        },
+        {
+          "severity": "WARNING",
+          "syntax": false,
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'done' from Part, UseCase",
+          "line": 1,
+          "column": 59
+        },
+        {
+          "severity": "WARNING",
+          "syntax": false,
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'start' from Part, UseCase",
+          "line": 1,
+          "column": 59
+        }
+      ],
+      "elapsed_ms": 123
+    }
+  ]
+}

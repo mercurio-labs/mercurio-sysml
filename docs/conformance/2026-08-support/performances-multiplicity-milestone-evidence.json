@@ -1,0 +1,58 @@
+{
+  "schema": "dev.mercurio.native-resource-milestone.v1",
+  "scope": "Frozen pre-membership-fix resource assessment. Diagnostic evidence only; neither semantic qualification nor comparable benchmark.",
+  "supervision": {
+    "schema": "dev.mercurio.native-assessment-supervision.v1",
+    "status": "completed",
+    "elapsed_seconds": 121.40600000001723,
+    "exit_code": 1,
+    "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+    "binary_sha256": "d69ac6152b54269eebc81604e3d95a6cb796bb28da6b8aa62112df85070c475a",
+    "source_sha256": "259327148ff856cc205d84cd329a36b4d334d4df41367ea3dc4f7da44a94fd26",
+    "wall_budget_seconds": 300,
+    "linking_budget_seconds": 180,
+    "semantic_qualification": "not_assessed"
+  },
+  "inputs": {
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-multiplicity-milestone-build.log": "99c0d5c8f46e7eaaf49ec14d8ca951b89a7cea782d6b4f99b4379dc78b3a707b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-multiplicity-milestone-supervision.json": "14cb631adecd483e335307052a22942d08d2f1ed3d0cbb4d77b920ddeeb8d909",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-multiplicity-milestone-results.jsonl": "d3dc0be2b4a6655e5353dbd20394974836b83a1ed98892136d5520859b63b5ac",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-multiplicity-milestone-trace.log": "2c6077fcd1ee6b14545bb00b46e3145c1ac6e0ab529dd94b10a01bf73526af20",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-multiplicity-milestone-analysis.json": "4c4e719edc9c8c561a5199b14f620c44fa2c896fe4706fd1b8a981d085466c1e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9"
+  },
+  "resource_files": 16,
+  "source_bytes": 121245,
+  "initial_elements": 12288,
+  "completed_reference_attempts": 191,
+  "inflight_frames": 0,
+  "outcome": {
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: ordinary Feature/Connector provider requires contribution assessment for SysML::OwningMembership under definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.15.owned_related_element.0.owned_relationship.18.owned_related_element.0 (owned: [\\\"SysML::Subsetting\\\"])\", kind: Syntax, span: None, subjects: [] }",
+    "input_files": [
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    ],
+    "relative_path": "Performances-explicit-import-source-set.kerml",
+    "resource_mode": "separate",
+    "semantic_qualification": "not_assessed",
+    "source_bytes": 121245,
+    "source_set_cache_hit": false,
+    "stage": "construction_or_linking",
+    "status": "blocked"
+  },
+  "interpretation": "The candidate terminates with a concrete standalone relationship membership contribution guard, without supervisor termination. Previous 55-second linking budget was increased to 180 seconds for diagnosis; timings do not establish a speedup. This binary predates the bounded membership/scoping correction below. No complete resource/model qualification; no result/default contribution stage reached."
+}

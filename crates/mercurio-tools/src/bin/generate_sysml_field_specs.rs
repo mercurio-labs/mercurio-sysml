@@ -310,8 +310,10 @@ fn expected_field_kind(field: &str, features: &[StructuralFeatureExtract]) -> Op
                 } else {
                     KirFieldKind::ReferenceList
                 }
-            } else {
+            } else if feature.upper_bound == 1 {
                 KirFieldKind::Scalar
+            } else {
+                KirFieldKind::ScalarList
             }
         })
         .collect::<Vec<_>>();
@@ -328,6 +330,7 @@ fn expected_field_kind(field: &str, features: &[StructuralFeatureExtract]) -> Op
 fn field_kind_name(kind: KirFieldKind) -> &'static str {
     match kind {
         KirFieldKind::Scalar => "Scalar",
+        KirFieldKind::ScalarList => "ScalarList",
         KirFieldKind::Reference => "Reference",
         KirFieldKind::ReferenceList => "ReferenceList",
         KirFieldKind::Expression => "Expression",

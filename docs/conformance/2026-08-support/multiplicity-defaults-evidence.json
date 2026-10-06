@@ -1,0 +1,131 @@
+{
+  "schema": "dev.mercurio.multiplicity-defaults-evidence.v1",
+  "scope": "Owner-sensitive default selection, canonical generalization inputs and physical default contributions for two Multiplicity bindings. Not full multiplicity transformation or validation.",
+  "inputs": {
+    "tools/generate_multiplicity_defaults.py": "ba4728c1f734dec3ed02aa48ca6d309a1303cc1de3df2cb811179d1e688e6039",
+    "tools/test_generate_multiplicity_defaults.py": "9b7617c857aa5cdcbbd76bb9f959af44576be3e3450733691a6f47644c6fbf10",
+    "tools/run_multiplicity_defaults_probe.py": "408ef1f207faf65b659c1e668baa368d1c0ce70eeeaa24294c55b3355434a46e",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotMultiplicityDefaultsProbe.java": "1286d106c2a6bb1210106169196d20f794c498f0f63c02aaff473bced6387460",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "259327148ff856cc205d84cd329a36b4d334d4df41367ea3dc4f7da44a94fd26",
+    "crates/mercurio-sysml/src/definition_document.rs": "6addb2713091d01b1df25a10c502693cbceea753d49d1103970121f80c24fd6a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/multiplicity_defaults_generated.rs": "fd3b7f41b4e980747dacc7977fc43eac3c00fd7f7e3bbef161c91cb51d685909",
+    "docs/conformance/2026-08-support/multiplicity-defaults-pilot-controls.json": "85bd80ef5e467a5cf6844bbdd74412fe31f5609d40895fbf03e7281eafad82b3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/multiplicity-defaults-native-tests.log": "265db45a9e617c691ea711e07eddd4866698df69f9c96b7a8ff795d2d8148983",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/multiplicity-defaults-focused-tests.log": "517eed77a0a0a7254014d197af25451065553207b667fa9e244b84603b1d212d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/multiplicity-defaults-audit-tests.log": "a2716511024af43ce639f87880287f071f0cdcafc4aff0575bb8b747f37062d6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/multiplicity-defaults-generator-tests.log": "351f929ed84aacafade91b6fd67dc7be9217ffaea2ca9d1c9d59bd385ba30fb6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/multiplicity-defaults-pilot-check.log": "76bb04d5083c16377c91bd666e67533aa89fde18cadaac63b3702f8a3fa2a526",
+    "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+  },
+  "imported": {
+    "resolved_typed_methods": [
+      "org.omg.sysml.adapter.MultiplicityAdapter#getDefaultSupertype",
+      "org.omg.sysml.adapter.MultiplicityAdapter#getRelevantFeatures"
+    ],
+    "bindings": {
+      "Multiplicity": {
+        "base": "Base::naturals",
+        "classifier": "Base::zeroOrOne",
+        "feature": "Base::exactlyOne"
+      },
+      "MultiplicityRange": {
+        "base": "Base::naturals",
+        "classifier": "Base::naturals",
+        "feature": "Base::naturals"
+      }
+    },
+    "provenance": {
+      "driver_sha256": "408ef1f207faf65b659c1e668baa368d1c0ce70eeeaa24294c55b3355434a46e",
+      "helper_sha256": "1286d106c2a6bb1210106169196d20f794c498f0f63c02aaff473bced6387460",
+      "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+      "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+      "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+      "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+      "source_sha256": {
+        "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/MultiplicityAdapter.java": "9287e87f4b6561f9f0c8a2c1dd38619e8695193a7f3fc8487834b52062eab875",
+        "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+      },
+      "tree_helper_sha256": "877477dd7712d40831fe5f1785f1be39200c3fd415d5f1a196a771f4fbaebe34"
+    },
+    "runtime_dispatch": "multiplicity_defaults_generated.rs; both owner tests and library names derive from resolved definitions"
+  },
+  "native_consumption": {
+    "algorithm": "Explicit handwritten Ecore canonical owner projection; generated Classifier-before-Feature branch ordering. Shared native namespace/library binding, Feature generalization and transactional contribution/replay services consume the selected name. Existing generated empty relevant-feature policy remains in effect.",
+    "consumers": [
+      "definition_multiplicity_default_name",
+      "definition_general_type_inputs_ready",
+      "definition_materialize_feature_defaults"
+    ],
+    "preserved_guards": [
+      "broken reciprocal ownership",
+      "duplicate identities",
+      "missing owner/library",
+      "metadata-derived bases",
+      "conjugation/crossing/chaining/valuation",
+      "unassessed partial contributions"
+    ],
+    "runtime_java": false
+  },
+  "verification": {
+    "pilot_selector_controls": 20,
+    "bindings": 2,
+    "native_tests": 232,
+    "new_native_tests": 3,
+    "generator_drift_tests": 4,
+    "audit_tool_tests": 11,
+    "cached_pilot_reproduces": true,
+    "actual_library_sources": [
+      {
+        "uri": "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e"
+      },
+      {
+        "uri": "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398"
+      }
+    ],
+    "actual_source_path": "Both resource orders: actual pinned Base+ScalarValues -> parse/construct/link reference bounds -> materialize three owned expression results -> physical MultiplicityRange default Subsetting to actual Base::naturals -> KIR persistence, reversed graph order and zero-insertion replay. No completion flags set.",
+    "selector_boundary": "Twenty factory selector observations match both bindings; actual full source/default replay control exercises MultiplicityRange. This is not complete behavioral qualification of either binding."
+  },
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "physical_pages": [
+      168,
+      169,
+      304
+    ],
+    "requirements": [
+      "checkMultiplicitySpecialization",
+      "checkMultiplicityTypeFeaturing"
+    ],
+    "assessment": "Default targets specialize actual Base::naturals; current native stage supplies generalization only. Featuring, cardinality evaluation and invariants remain required. Pilot owner-sensitive conveniences are implementation semantics, not a replacement for normative specialization. Existing disagreements elsewhere remain open."
+  },
+  "remaining_required": [
+    "Multiplicity featuring/type propagation and full transformation",
+    "Numeric bounds/evaluability/invariants",
+    "Actual Performances resource closure and inherited literal result qualification",
+    "Complete sample semantic comparison and comparable Pilot timing assessment"
+  ],
+  "qualification": {
+    "matching_whole_models": 155,
+    "ordinary_feature_bindings": [
+      50,
+      79
+    ],
+    "bounded_obligations": [
+      7,
+      9
+    ],
+    "families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "candidate": "unpromoted"
+  }
+}

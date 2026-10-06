@@ -1,0 +1,117 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-private-alias.sysml": "a5a561791cecd6f0b5aa283210b17b69c3ccb6373bdc994e01b7c10072572b0a",
+    "invalid-private-prefix.sysml": "c81341b8de8aaf55e56c756b1cdcaf9a1437ba9d1c8ecb83d25fb07a039cafee",
+    "invalid-private-type.sysml": "920f1d330be2225fc6a4cf27fe959e080e221d8001f16b1bab2ad9f7d2ba0855",
+    "invalid-protected-type.sysml": "bed3e99623e34a21564d7254be897a81a20c871b33838e3992be5924d850d24e",
+    "positive-lexical-private.sysml": "879ac1d98d2f02fbecb243d360eeba6df4c175365f071bf9fb645349647a67d2",
+    "positive-public-alias.sysml": "cdbda1771281a19af5c13463741489970cd77eb5bff36015633d32974d7d0de1",
+    "positive-public-prefix.sysml": "f8d5bd7af9091dfbac401d3720c354a487ce84834650af6a255213bce6f3b5c2",
+    "positive-public-type.sysml": "cebeddeb0d0b20493342c97818f9808cd6530f8a3563f7f221be049d6badd0be"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-private-alias.sysml",
+      "status": "error",
+      "validation_ms": 794.9738,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'P::Hidden'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-prefix.sysml",
+      "status": "error",
+      "validation_ms": 1005.676,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'P::Hidden::Visible'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-type.sysml",
+      "status": "error",
+      "validation_ms": 1070.5125,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'P::Hidden'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-protected-type.sysml",
+      "status": "error",
+      "validation_ms": 1039.7281,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'P::Hidden'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-lexical-private.sysml",
+      "status": "ok",
+      "validation_ms": 785.7564,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias.sysml",
+      "status": "ok",
+      "validation_ms": 673.4094,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-prefix.sysml",
+      "status": "ok",
+      "validation_ms": 1022.9202,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-type.sysml",
+      "status": "ok",
+      "validation_ms": 926.8399,
+      "diagnostics": []
+    }
+  ]
+}

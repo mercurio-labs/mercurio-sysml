@@ -1,0 +1,177 @@
+{
+  "schema": "dev.mercurio.producer-query-integration-evidence.v1",
+  "qualification_certificate": false,
+  "status": "shared_query_semantics_and_bounded_source_regression_verified_genuine_binding_lifecycle_incomplete",
+  "scope": {
+    "execution_revision": 8,
+    "bounded_literal_source_class_contexts": 12,
+    "shared_projection_class_view_contexts": 36,
+    "frozen_reference_contexts": 26,
+    "complete_genuine_contexts_verified": 0,
+    "complete_b1_obligations_closed": 0,
+    "complete_b1_obligations_required": 10,
+    "strict_families_qualified": 0,
+    "strict_families_required": 34,
+    "release_gates_qualified": 0,
+    "release_gates_required": 5
+  },
+  "implementation": {
+    "imported": "Pinned Ecore Feature/Type reference and delegate contracts, imported literal/default and resolved result/ordered-membership contributions, and upstream grammar-driven source construction. No additional sample-specific selectors or Pilot heuristics.",
+    "native_consumers": [
+      "definition_feature_types_in_view",
+      "definition_featuring_types_in_view",
+      "definition_specializes_depth_in_view",
+      "definition_explicit_specialization_proof_in_view",
+      "literal_value_binding shared input/contribution views",
+      "cold_literal_values observed producer planning",
+      "registered document literal scheduler"
+    ],
+    "handwritten": "One immutable canonical query/index carries recursive type, ancestry, featuring and binding-input reads. Each graph write or retry creates a fresh view. Original dispatch, ordered-set rules, normative disagreements, semantic dependencies and all admission guards remain. Stage tracing records exact field and receiver identities without OS clocks in the kernel.",
+    "runtime": "Native kernel; no runtime Java, OS I/O, threads or Cargo dependency changes.",
+    "unimplemented": "Read-before-write planning for the entire binding/end/library lifecycle remains open. The real library path has not completed a producer or Closed publication; validation, complete-context persistence and semantics remain unqualified."
+  },
+  "focused_controls": {
+    "new_native_tests": 2,
+    "shared_projection_class_view_contexts": 36,
+    "views": [
+      "original",
+      "reversed graph",
+      "SysML JSON persistence"
+    ],
+    "failures": [
+      "exact pending FeatureTyping.type survives repeated calls",
+      "invalid endpoint rejects",
+      "fresh view after field repair recomputes",
+      "duplicate identity rejects",
+      "scheduler unregistered/cyclic/wrong-type and late-failure boundaries preserve caller graph"
+    ],
+    "trace_controls": "Existing two-typing-field times five scheduler boundaries now verify exact dependency events, failed semantic stages, successful binding-lifecycle stages only when reached, and atomic external outcomes."
+  },
+  "verification": {
+    "native_definition_tests_passed": 408,
+    "native_definition_tests_failed": 0,
+    "other_tests_filtered": 665,
+    "total_tests_registered": 1073,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/producer-query-native-regression.log",
+      "sha256": "017a2a1f58058a3ed495767ed58baee1c815a1569e487283fe240261c9f74c79"
+    },
+    "native_run": "docs/conformance/2026-08-support/definition-pipeline-evidence/producer-query-native-regression-run.json",
+    "test_seconds": 416.94,
+    "process_seconds": 417.054,
+    "source_hashes_unchanged_during_run": true,
+    "audit_tool_tests_passed": 14,
+    "release_build_succeeded": true,
+    "focused_tool_checks_passed": 107,
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/producer-query-tool-checks.log",
+      "sha256": "a8a6127c1d4d99586c8994931295d0c373798073faec46237a4630c37fe7dea2"
+    },
+    "existing_bounded_obligations_revalidated": {
+      "closed": 11,
+      "required": 14,
+      "acceptance_changed": false
+    },
+    "full_crate_descriptor": "Historical definition-pipeline-qualification.json remains stale and unchanged. 665 other crate tests were not run."
+  },
+  "genuine_diagnostics": [
+    {
+      "run": "docs/conformance/2026-08-support/definition-pipeline-evidence/producer-query-genuine-preflight-run.json",
+      "run_sha256": "ca25955d288ec898dbc5c13caa93c0e103518f3838506fe3d8b71a43f5a88cf5",
+      "status": "incomplete_budget",
+      "seconds": 180.736,
+      "resources": 24,
+      "pinned_libraries": 22,
+      "original_sources": 2,
+      "inputs_unchanged": true,
+      "unique_requested_fields": 19,
+      "receiver_jobs_observed": 1,
+      "producer_attempts": 20,
+      "successful_producer_attempts": 0,
+      "successful_stage_attempts": {
+        "owner_featuring": 20,
+        "result_parameter": 18,
+        "receiver_types": 4,
+        "cold_inputs": 4,
+        "receiver_defaults": 4,
+        "receiver_featuring": 4,
+        "binding_inputs": 2,
+        "binding_chain": 2
+      },
+      "last_stage": "receiver_featuring",
+      "last_stage_phase": "LiteralStageFinished",
+      "last_stage_elapsed_ms": 179808,
+      "max_staged_elements": 15403,
+      "candidate_rows": 0,
+      "qualified_contexts": 0,
+      "meaning": "Counts are retry/staging attempts for the same first Integer receiver. They are not distinct verified source contexts or committed transformations. Required fields before resumed producer attempts are scheduled by the registered native dependency stack; no candidate publishes under the diagnostic budget."
+    },
+    {
+      "run": "docs/conformance/2026-08-support/definition-pipeline-evidence/producer-query-genuine-extended-run.json",
+      "run_sha256": "28ea2f378f2fb823611602ff0e1340603ae3c9733cc32717f8cfb23e9973b0fc",
+      "status": "incomplete_budget",
+      "seconds": 360.048,
+      "resources": 24,
+      "pinned_libraries": 22,
+      "original_sources": 2,
+      "inputs_unchanged": true,
+      "unique_requested_fields": 36,
+      "receiver_jobs_observed": 1,
+      "producer_attempts": 37,
+      "successful_producer_attempts": 0,
+      "successful_stage_attempts": {
+        "owner_featuring": 37,
+        "result_parameter": 35,
+        "receiver_types": 21,
+        "cold_inputs": 21,
+        "receiver_defaults": 21,
+        "receiver_featuring": 21,
+        "binding_inputs": 20,
+        "binding_chain": 20
+      },
+      "last_stage": "binding_lifecycle",
+      "last_stage_phase": "LiteralStageStarted",
+      "last_stage_elapsed_ms": 351976,
+      "max_staged_elements": 15403,
+      "candidate_rows": 0,
+      "qualified_contexts": 0,
+      "meaning": "Counts are retry/staging attempts for the same first Integer receiver. They are not distinct verified source contexts or committed transformations. Required fields before resumed producer attempts are scheduled by the registered native dependency stack; no candidate publishes under the diagnostic budget."
+    }
+  ],
+  "next_dependency": "Plan and resolve binding prototype/end/result/owner inputs before repeated physical receiver stages. Use observed exact fields in the frozen 22-library environment and shared read-only views; recheck after atomic writes. Then complete the actual library lifecycle, applicable validation and full frozen contexts. No guard relaxation or new broad run before that implementation batch.",
+  "timing": "417-second native regression and 180/360-second diagnostics are verification/diagnostic durations only. No full Pilot run, paired benchmark or speedup claim.",
+  "preserved_inputs": {
+    "docs\\conformance\\2026-08-support\\definition-pipeline-qualification.json": "721377e3f725ce8cacef288b569f8ad7cceb89c8d6fb98e849738de49e5451da",
+    "docs\\conformance\\2026-08-support\\value-service-reference-controls.json.gz": "ab8542d44e03a1d4010e7e87a395742fd0e0d1c84fd86de0813626d8bc0b27b8",
+    "docs\\conformance\\2026-08-support\\value-service-reference-manifest.json": "99e18d8d57786c559e73783502d46879a42fb56186ec8f4a54f9addefbf00839"
+  },
+  "current_consumer_sha256": {
+    "crates/mercurio-sysml/src/definition_document.rs": "e58bd287519b59e5fce9d068a7f3838a602a7b6098f040602f967d1195af19bb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "33c99dc189a7832ef3dbae0bbe0dc3c98cd8dde5e8a845de9388a76a5b340406",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "6d539b22792a13ac66f15d868ba7de3e5d62163ddae55a7059d5357ffcfe39c1",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_value_validation.rs": "1cd2c4c3b3b20c4bcd8f816c8b0a8a5d5354c8d5b1d43deea276ccc0aeaafb57",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/cold_literal_values.rs": "bb52d9a951cc56ef30c40c9e866aeaf85fce7c92e6c6eb3d4bb7f1058d5e0704",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "0d0e9073a1f47c26fce7fe74b6e01f7213ffa976366409c12f604c669cd6b466",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "c531af268c2efecbfebeaa70bad37b14eaa0498b146d6ef4f8d42073fb449bac",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "b5c063cf07b2dd554fd1a27afadf8bc12fade61aa669ada945b790ee839cdfe9",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "3a5545379e82f946d34d5a700a684963a0fb6305e755fb01afd18b62fa70dd91",
+    "tools/export_pilot_connector_defaults.py": "97dbd7e5320927fcd07679adbb569df7a485810a4283a492a86bec40ab741052",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotConnectorDefaultExporter.java": "6bca6016147da5fc7a10541b4d9f9f331698fb2b5009ace9f7c7442acd5550ef",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "5c629b7193c1d966d45456566da0d19ecda851b24ac915f4af6408f62f2e4e24",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "c98baac06d89b6e582ef6137b63f511afd94c1a9817f01e9a922c5e79843bb28",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_result_scope.rs": "cd0ce01f251241e26c4edb0677429d781e80fdeff17ab6fd79e25ea0be87337e",
+    "tools/prepare_native_reference_inputs.py": "b412fb9fe8c3f0849a554f89b0b0dfc093c258a0d7bb1b07c59394dcc20275d0",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a"
+  },
+  "evidence_sha256": {
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-focused-attempt-1-run.json": "8e25a3cf71c5eb7afd5980faf421a42174e44b9000ab7914552a028f70e8cf9b",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-focused-attempt-2-run.json": "00a554a86d0562757a0be9d2953f4989091e43653d4a97456c5e5697ed9b8314",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-focused-attempt-3-run.json": "6982cbe19c8447ad16b0829133466f8090adcffcb9c74b2beb866c034b84af12",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-focused-attempt-4-run.json": "43bf2885a3d1d44cf04efd3d74f380388c9ce913dab6b4136867ab9d574b7b49",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-native-regression-run.json": "4c281c197d18811e5b3095bf29b4c26188d3497befcaf6bfeea690789de88579",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-tools-run.json": "0c7b67415801006d89400df6f58dacad0fe508de1580b6a95ee777c3be7fd698",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\producer-query-tool-checks-run.json": "4bec294aa74e54d1422241f96aa4b93cb77cb3409333ec6b41a17229038e05fc"
+  }
+}

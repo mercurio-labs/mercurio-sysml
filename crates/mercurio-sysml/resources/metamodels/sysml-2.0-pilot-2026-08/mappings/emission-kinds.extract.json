@@ -1,0 +1,353 @@
+{
+  "source": {
+    "authorship": {
+      "mode": "generated",
+      "reason": "Keep inherited IDs and property templates, replacing erased kinds only for actual extracted Ecore metaclasses."
+    },
+    "metamodel_sha256": "76fd2db0933f329f9a1f8fc8fdc7693b3a5575b86463d64471db252f5027d84b",
+    "emission_sha256": "6975f519dfa1e8af4d5c00e55c5c1fccd8f1c060d6d560c142359e9252635624",
+    "extractor": "generate_release_emission_kinds.py"
+  },
+  "metaclasses": {
+    "SysML::MembershipExpose": {
+      "kir_kind": "SysML::MembershipExpose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::NamespaceExpose": {
+      "kir_kind": "SysML::NamespaceExpose",
+      "id_template": "expose.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "exposes": "{target_ref}",
+          "filter": "{filter}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::MembershipImport": {
+      "kir_kind": "SysML::MembershipImport",
+      "id_template": "import.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "imports": "{target_ref}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::NamespaceImport": {
+      "kir_kind": "SysML::NamespaceImport",
+      "id_template": "import.{owner_id}.{ordinal}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "imports": "{target_ref}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::LibraryPackage": {
+      "kir_kind": "SysML::LibraryPackage",
+      "id_template": "pkg.{qualified_name}",
+      "emit": {
+        "properties": {
+          "declared_name": "{declared_name}",
+          "name": "{name}",
+          "owner": "{owner_id}",
+          "members": "{member_ids}",
+          "metatype": "{metatype_ref}",
+          "is_library": "true"
+        }
+      }
+    },
+    "SysML::EnumerationDefinition": {
+      "kir_kind": "SysML::EnumerationDefinition",
+      "id_template": "type.{qualified_name}",
+      "emit": {
+        "properties": {
+          "declared_name": "{declared_name}",
+          "name": "{name}",
+          "owner": "{owner_id}",
+          "members": "{member_ids}",
+          "specializes": "{specializes_refs}",
+          "features": "{owned_feature_ids}",
+          "is_abstract": "{is_abstract}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::ActionUsage": {
+      "kir_kind": "SysML::ActionUsage",
+      "id_template": "action.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}"
+        }
+      }
+    },
+    "SysML::PerformActionUsage": {
+      "kir_kind": "SysML::PerformActionUsage",
+      "id_template": "perform.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::AcceptActionUsage": {
+      "kir_kind": "SysML::AcceptActionUsage",
+      "id_template": "accept.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}"
+        }
+      }
+    },
+    "SysML::BindingConnectorAsUsage": {
+      "kir_kind": "SysML::BindingConnectorAsUsage",
+      "id_template": "binding.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::AllocationUsage": {
+      "kir_kind": "SysML::AllocationUsage",
+      "id_template": "allocation.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::AnalysisCaseUsage": {
+      "kir_kind": "SysML::AnalysisCaseUsage",
+      "id_template": "analysis.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::CalculationUsage": {
+      "kir_kind": "SysML::CalculationUsage",
+      "id_template": "calculation.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::ConcernUsage": {
+      "kir_kind": "SysML::ConcernUsage",
+      "id_template": "concern.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::ConstraintUsage": {
+      "kir_kind": "SysML::ConstraintUsage",
+      "id_template": "constraint.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::FlowUsage": {
+      "kir_kind": "SysML::FlowUsage",
+      "id_template": "flow.{owner_path}.{declared_name}.{start_line}_{start_col}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}"
+        }
+      }
+    },
+    "SysML::MetadataUsage": {
+      "kir_kind": "SysML::MetadataUsage",
+      "id_template": "metadata.{owner_path}.{declared_name}.{start_line}_{start_col}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::OccurrenceUsage": {
+      "kir_kind": "SysML::OccurrenceUsage",
+      "id_template": "occurrence.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::RequirementUsage": {
+      "kir_kind": "SysML::RequirementUsage",
+      "id_template": "requirement.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::StateUsage": {
+      "kir_kind": "SysML::StateUsage",
+      "id_template": "state.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}"
+        }
+      }
+    },
+    "SysML::UseCaseUsage": {
+      "kir_kind": "SysML::UseCaseUsage",
+      "id_template": "use-case.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::TransitionUsage": {
+      "kir_kind": "SysML::TransitionUsage",
+      "id_template": "transition.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}"
+        }
+      }
+    },
+    "SysML::ExhibitStateUsage": {
+      "kir_kind": "SysML::ExhibitStateUsage",
+      "id_template": "exhibit.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}"
+        }
+      }
+    },
+    "SysML::InterfaceUsage": {
+      "kir_kind": "SysML::InterfaceUsage",
+      "id_template": "interface.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "KerML::Classifier": {
+      "kir_kind": "KerML::Classifier",
+      "id_template": "type.{qualified_name}",
+      "emit": {
+        "properties": {
+          "declared_name": "{declared_name}",
+          "name": "{name}",
+          "owner": "{owner_id}",
+          "is_abstract": "{is_abstract}",
+          "specializes": "{specializes_refs}",
+          "features": "{owned_feature_ids}",
+          "members": "{member_ids}",
+          "metatype": "{metatype_ref}"
+        }
+      }
+    },
+    "SysML::EventOccurrenceUsage": {
+      "kir_kind": "SysML::EventOccurrenceUsage",
+      "id_template": "event-occurrence.{owner_path}.{declared_name}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}",
+          "is_variable": "{is_variable}"
+        }
+      }
+    },
+    "SysML::SuccessionAsUsage": {
+      "kir_kind": "SysML::SuccessionAsUsage",
+      "id_template": "succession-as.{owner_path}.{declared_name}.{start_line}_{start_col}",
+      "emit": {
+        "properties": {
+          "owner": "{owner_id}",
+          "type": "{type_ref}",
+          "declared_name": "{declared_name}",
+          "is_unique": "{is_unique}"
+        }
+      }
+    }
+  }
+}

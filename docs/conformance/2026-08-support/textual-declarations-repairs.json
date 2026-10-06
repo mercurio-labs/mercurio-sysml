@@ -1,0 +1,73 @@
+{
+  "scope": "G03 original named targets and four representation bodies; no whole-corpus semantic claim",
+  "repairs": [
+    {
+      "source": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "anchor": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml:6:x_constraint",
+      "before_kind": "Feature",
+      "native_kind": "SysML::Invariant",
+      "pilot_kind": "Invariant",
+      "native_id": "feature.TextualRepresentation.C.x_constraint",
+      "pilot_id": "TextualRepresentation::C::x_constraint"
+    },
+    {
+      "source": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "anchor": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml:7:inOCL",
+      "before_kind": "Feature",
+      "native_kind": "SysML::TextualRepresentation",
+      "pilot_kind": "TextualRepresentation",
+      "native_id": "representation.TextualRepresentationTest.C.x_constraint.inOCL",
+      "pilot_id": "TextualRepresentationTest::C::x_constraint::inOCL"
+    }
+  ],
+  "representations": [
+    {
+      "source": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "line": 13,
+      "native_id": "representation.TextualRepresentation.setX.rep_13_6.13_6",
+      "pilot_id": "InputModel::kerml/src/examples/Simple Tests/TextualRepresentation.kerml::13::TextualRepresentation",
+      "fields": {
+        "language": "alf",
+        "body": "c.x = newX;\nWriteLine(\"Set new x\");\n"
+      },
+      "owner_matches": true
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "line": 7,
+      "native_id": "representation.TextualRepresentation.C.x_constraint.inOCL",
+      "pilot_id": "TextualRepresentation::C::x_constraint::inOCL",
+      "fields": {
+        "language": "ocl",
+        "body": "self.x > 0.0 "
+      },
+      "owner_matches": true
+    },
+    {
+      "source": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "line": 16,
+      "native_id": "representation.TextualRepresentationTest.setX.rep_16_6.16_6",
+      "pilot_id": "InputModel::sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml::16::TextualRepresentation",
+      "fields": {
+        "language": "alf",
+        "body": "c.x = newX;\nWriteLine(\"Set new x\");\n"
+      },
+      "owner_matches": true
+    },
+    {
+      "source": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "line": 7,
+      "native_id": "representation.TextualRepresentationTest.C.x_constraint.inOCL",
+      "pilot_id": "TextualRepresentationTest::C::x_constraint::inOCL",
+      "fields": {
+        "language": "ocl",
+        "body": "self.x > 0.0 "
+      },
+      "owner_matches": true
+    }
+  ],
+  "comparisons": {
+    "TextualRepresentation.json": "dfbe1db7790064092040c739e9303fdaf052d8b9ab5200d44ca77a9ad0bf4630",
+    "TextualRepresentationTest.json": "0fb3154419aaf7e7dbe9952fd2808ed524003daab4b53fbdc99e3dd86821facd"
+  }
+}

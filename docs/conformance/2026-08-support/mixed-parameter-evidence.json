@@ -1,0 +1,220 @@
+{
+  "schema": "dev.mercurio.mixed-parameter-evidence.v1",
+  "scope": "Owned/all parameter collection, result lookup and positional-redefinition query stages on supplied complete Type inputs. Full transformation and semantic validation remain unqualified.",
+  "inputs": {
+    "tools/run_mixed_parameter_probe.py": "3ed36dc67f3b15180de24332dcba30bf2a4dc6c49a550904d7ab244595807eb6",
+    "tools/generate_parameter_collections.py": "d1a403abb17a5c16afba44ad50abc06176656e22d3446d3a4ea95890509cf0f6",
+    "tools/test_parameter_collections.py": "98a0164d2db68dad7f676b681f63decd4a5b356eed09bcf8ede91487614f4f8f",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotMixedParameterProbe.java": "d14e923cbae2e3f5a89e745513caba1083a7b00df7f55b8c420d13ed3e26e4a2",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureRedefinitionExporter.java": "f1f08a4094205c493772900a0be8df3a94d9add28e40b827df68c8b4a4f9c115",
+    "docs/conformance/2026-08-support/mixed-parameter-pilot-controls.json": "735abedb2e178c6bb97ae7bb5c8e43aab7c4a65de8951909cb04bc2bc7ccb9ce",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/parameter_collections_generated.rs": "0dbbe45a2aa142a26d990bbbc9d66ab6beb84641ab254a2caff2f02b687a2bb2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported_representation": [
+    "Four complete resolved typed method trees: FeatureUtil.isParameter and TypeUtil.getOwnedParametersOf/getAllParametersOf/getOwnedResultParameterOf",
+    "Thirty runtime-resolved FeatureAdapter parameter strategy bindings; fixed 1164-case inventory",
+    "Canonical Ecore ancestry, ownership, specialization endpoint fields and direction enumeration; pinned effective-feature/owning-Type setting delegates"
+  ],
+  "native_consumers": [
+    "parameter_collections_generated::is_parameter",
+    "definition_parameter_collection",
+    "definition_relevant_parameters",
+    "definition_positional_parameters",
+    "generated_owned_result_parameter",
+    "definition_result_parameter"
+  ],
+  "generation_boundary": "Bounded generation extracts the resolved owning-Type predicate. Full typed method fingerprints guard the owned/all/result collection contracts. Java reflection is build-time only; native ordered graph traversal and recursion remain handwritten dependencies.",
+  "handwritten_dependencies": [
+    "Canonical Ecore ownership and inherited Type conformance",
+    "Effective-feature traversal, visibility, redefinition filtering and identity order",
+    "Direction validation and owned membership/result projection",
+    "General-Type resolution, recursive result lookup and positional candidate selection",
+    "Added-member admission, constructor/invocation strategies, pending/deferred and chaining/conjugation guards"
+  ],
+  "bindings": [
+    "AllocationUsage",
+    "AssertConstraintUsage",
+    "AttributeUsage",
+    "BindingConnector",
+    "BindingConnectorAsUsage",
+    "ConnectionUsage",
+    "Connector",
+    "ConstraintUsage",
+    "EnumerationUsage",
+    "EventOccurrenceUsage",
+    "Feature",
+    "Flow",
+    "FlowEnd",
+    "FlowUsage",
+    "InterfaceUsage",
+    "ItemUsage",
+    "MetadataFeature",
+    "MetadataUsage",
+    "Multiplicity",
+    "MultiplicityRange",
+    "OccurrenceUsage",
+    "PartUsage",
+    "PortUsage",
+    "Step",
+    "Succession",
+    "SuccessionAsUsage",
+    "SuccessionFlow",
+    "SuccessionFlowUsage",
+    "Usage",
+    "ViewUsage"
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-child-native-tests.log",
+      "sha256": "8b82edf9e7290264fa1efcb30935c6e87953d74d5decae20d46a86a06b0a693f",
+      "passed": 302
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-focused-tests.log",
+      "sha256": "bbc337f0ba78a0c9c71d0a2f4f57ba35f8dca4b7445705687cbc3d6c77ce7a1a",
+      "passed": 1
+    },
+    "source_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-source-tests.log",
+      "sha256": "c4a13deef07697c184ef9fe43d045c70eeb3629c0054ced3d9e9d868664b2f85",
+      "passed": 1
+    },
+    "generator_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-generator-tests.log",
+      "sha256": "15445d3521ecf6445ad5cfa1d10eabef2826cde7b87fdbdd82dc300381e87969",
+      "passed": 5
+    },
+    "oracle_reproduction": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-cache-check.log",
+      "sha256": "0ef82269e198f06802f337461c1c15d9bf24264e9ca672894a704ca7efcb27ea",
+      "status": "exact"
+    },
+    "pilot_stage_controls": 1164,
+    "native_matching_stage_controls": 1164,
+    "contexts": [
+      "Five owner categories x eight general categories x six shapes x nonresult/result positions (816 controls)",
+      "Twenty-nine additional bindings x Class general x direct/empty/inherited shapes x four positions (348 controls)",
+      "Owned/all collections, result lookup and ordered redefinitions in original/reversed storage and serialized reload without mutation",
+      "Parsed Function-specializes-Class source in both declaration orders, directed general Feature matching and persistence",
+      "Missing general/list, invalid direction, inheritance cycle, chaining endpoint and unsupported added-member states remain rejected"
+    ],
+    "fixture_boundary": "General Types are supplied complete query states; FeatureAdapter queries compute local redefinitions without promoting flags. Result membership is supplied only for Function/Expression-compatible owners. Same-category and mixed generalizations are query-stage controls; they are not semantically validated whole models.",
+    "initial_failure_resolution": [
+      "Incorrect reflection signature fixed: getRedefinedFeaturesWithComputed takes zero arguments.",
+      "Invalid Behavior result-membership fixture replaced with ordinary directed membership; no result-owner guard was relaxed."
+    ],
+    "certificate_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-certificate-tests.log",
+      "sha256": "aeabf9bea3c6d9cc4ae9bae1555d947ae3745014d76d74b8f8b42fe50620e0af",
+      "passed": 15
+    },
+    "plan_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-plan-tests.log",
+      "sha256": "bad628c169443d385ee5723c3315219f628030e3ca8bd737c1517a2f975d3e28",
+      "passed": 14
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_reference": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "path": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      194,
+      195,
+      291
+    ],
+    "constraints": [
+      "checkFeatureParameterRedefinition",
+      "checkFeatureResultRedefinition"
+    ]
+  },
+  "disagreements": [
+    {
+      "status": "open assessment",
+      "subject": "Positional parameter computation is broader than normative minimum requirements",
+      "description": "The written constraints require corresponding owned parameters for direct Behavior/Step general Types and results for Function/Expression general Types. Pilot additionally uses directed effective features for arbitrary general Types and recursively finds results across mixed Type ancestry. Its inherited/private/protected query behavior is preserved in this bounded stage. The specification does not itself require these extra mixed-category redefinitions; no normative whole-model qualification or claim of equivalence is inferred. Dedicated validation must assess resulting feature compatibility and lifecycle behavior."
+    }
+  ],
+  "remaining_required_behavior": [
+    "Full added-member transformation and validation across every binding",
+    "Conjugation/chaining and basic-feature lifecycle composition",
+    "Specialized constructor/invocation parameters, write-feature effects and pending scheduling",
+    "Actual Performances resource closure and expression result services",
+    "Resolve or explicitly qualify normative-versus-Pilot positional collection differences"
+  ],
+  "metrics": {
+    "verified_whole_models": 155,
+    "verified_whole_models_delta": 0,
+    "ordinary_feature_bindings": 50,
+    "ordinary_feature_denominator": 79,
+    "bounded_obligations_closed": 7,
+    "bounded_obligations_required": 9,
+    "families_closed": 0,
+    "families_required": 34,
+    "release_gates_closed": 0,
+    "release_gates_required": 5
+  },
+  "resource_assessment": {
+    "status": "timed_out",
+    "manifest": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+      "sha256": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9"
+    },
+    "native_binary": {
+      "path": "target/release/audit_release_compile.exe",
+      "sha256": "5e184c9363c589cab5e8496648dd3899ad28315276fee46f5ade4cfa71b07a62"
+    },
+    "build": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/mixed-parameter-release-build.log",
+      "sha256": "4f03ccece89fd97377030189c00bb3fc11ff81f7c6d03f7cbe65327f7deab02d"
+    },
+    "note": "The verified native process was stopped after the announced thirty-minute CPU budget in ConstructionAndLinking. No compiler result or linked model was produced. This does not prove the prior first blocker cleared in the actual resource environment.",
+    "supervision": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-mixed-parameter-timeout.json",
+      "sha256": "747b8eff4c307c6bfc09691dcbaffa751d5652e0b7b8e1849500336ea1d638e5"
+    },
+    "progress_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-mixed-parameter-native-progress.log",
+      "sha256": "5272b689452a22be83107165897971a78eec62e23ffee17e8d8734574567d046"
+    },
+    "parsed_resources": 16,
+    "cpu_seconds": 1837.46875,
+    "elapsed_seconds": 1845.4193922,
+    "cpu_budget_seconds": 1800,
+    "semantic_qualification": "not_assessed",
+    "first_semantic_blocker": null
+  }
+}

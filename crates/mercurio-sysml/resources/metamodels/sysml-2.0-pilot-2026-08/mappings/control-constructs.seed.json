@@ -1,0 +1,255 @@
+{
+  "source": {
+    "schema": "dev.mercurio.pilot-artifact-source.v1",
+    "kind": "generated-pilot-construct-seed",
+    "authorship": {
+      "mode": "generated-with-overlay",
+      "note": "Generated from grammar.extract.json and constructs.overlay.json; overlay carries Mercurio compiler subset and compatibility decisions."
+    },
+    "pilot": {
+      "commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "dirty": false,
+      "git_describe": "2026-08",
+      "repository": "SysML-v2-Pilot-Implementation"
+    },
+    "source_files": [
+      {
+        "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.extract.json",
+        "sha256": "24e66fffa007c3d34ea37ade3757832d2887ce4c29cd72fcc11a38d56be1a540"
+      },
+      {
+        "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/mappings/control-constructs.overlay.json",
+        "sha256": "d951b34329e51af0aeb3ca96da33889cd166a4c710c0196b264b1599e2c19203"
+      }
+    ],
+    "extractor": {
+      "name": "generate_pilot_constructs_seed",
+      "version": "0.86.0"
+    },
+    "generated_at_utc": "2026-09-19T00:22:00.4348891Z"
+  },
+  "keyword_registry": {
+    "source": {
+      "mode": "overlay",
+      "reason": "Parser token routing for control actions."
+    },
+    "definitions": {
+      "extended": "ExtendedDefinition",
+      "individual": "IndividualDefinition"
+    },
+    "usages": {
+      "assert": "AssertConstraintUsage",
+      "assign": "AssignmentNode",
+      "decide": "DecisionNode",
+      "extended": "ExtendedUsage",
+      "for": "ForLoopNode",
+      "fork": "ForkNode",
+      "if": "IfNode",
+      "individual": "IndividualUsage",
+      "join": "JoinNode",
+      "loop": "WhileLoopNode",
+      "merge": "MergeNode",
+      "message": "Message",
+      "payload": "PayloadFeature",
+      "send": "SendNode",
+      "terminate": "TerminateNode",
+      "verification": "VerificationCaseUsage",
+      "while": "WhileLoopNode"
+    }
+  },
+  "default_specialization_anchors": {},
+  "semantic_specialization_defaults": {},
+  "usage_semantic_specialization_overrides": {},
+  "stdlib_aliases": {},
+  "constructs": [
+    {
+      "construct": "ForkNode",
+      "metaclass": "SysML::ForkNode",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1682,
+      "overlay_reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "JoinNode",
+      "metaclass": "SysML::JoinNode",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1676,
+      "overlay_reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "MergeNode",
+      "metaclass": "SysML::MergeNode",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1664,
+      "overlay_reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "DecisionNode",
+      "metaclass": "SysML::DecisionNode",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1670,
+      "overlay_reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "TerminateNode",
+      "metaclass": "SysML::TerminateActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1641,
+      "overlay_reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "AssignmentNode",
+      "metaclass": "SysML::AssignmentActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1535,
+      "overlay_reason": "Preserve release action and message grammar metaclasses."
+    },
+    {
+      "construct": "Message",
+      "metaclass": "SysML::FlowUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1245,
+      "overlay_reason": "Preserve release action and message grammar metaclasses."
+    },
+    {
+      "construct": "IfNode",
+      "metaclass": "SysML::IfActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1596,
+      "overlay_reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "WhileLoopNode",
+      "metaclass": "SysML::WhileLoopActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1615,
+      "overlay_reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "ForLoopNode",
+      "metaclass": "SysML::ForLoopActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1624,
+      "overlay_reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "SendNode",
+      "metaclass": "SysML::SendActionUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1499,
+      "overlay_reason": "Preserve send action operands and transition effect membership."
+    },
+    {
+      "construct": "PayloadFeature",
+      "metaclass": "SysML::PayloadFeature",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1298,
+      "overlay_reason": "Preserve message and flow payload typing and declared names as PayloadFeature."
+    },
+    {
+      "construct": "AssertConstraintUsage",
+      "metaclass": "SysML::AssertConstraintUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2007,
+      "overlay_reason": "Use the grammar metaclass for assertion declarations, replacing the legacy non-metamodel AssertUsage name."
+    },
+    {
+      "construct": "IndividualDefinition",
+      "metaclass": "SysML::OccurrenceDefinition",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 816,
+      "overlay_reason": "Individual grammar rules return Occurrence metaclasses with isIndividual=true; Individual is not an Ecore metaclass."
+    },
+    {
+      "construct": "IndividualUsage",
+      "metaclass": "SysML::OccurrenceUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 849,
+      "overlay_reason": "Individual grammar rules return Occurrence metaclasses with isIndividual=true; Individual is not an Ecore metaclass."
+    },
+    {
+      "construct": "VerificationCaseUsage",
+      "metaclass": "SysML::VerificationCaseUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2258,
+      "overlay_reason": "Use the grammar-returned VerificationCaseUsage metaclass for validation and KIR."
+    },
+    {
+      "construct": "CommentUsage",
+      "metaclass": "SysML::Comment",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 84,
+      "overlay_reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "DependencyUsage",
+      "metaclass": "SysML::Dependency",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 53,
+      "overlay_reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "SatisfyUsage",
+      "metaclass": "SysML::SatisfyRequirementUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2117,
+      "overlay_reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "LibraryPackage",
+      "metaclass": "SysML::LibraryPackage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 186,
+      "overlay_reason": "Preserve library package identity rather than emitting every namespace as Package."
+    },
+    {
+      "construct": "IncludeUseCaseUsage",
+      "metaclass": "SysML::IncludeUseCaseUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2300,
+      "overlay_reason": "Retain inclusion identity and its reference subsetting."
+    },
+    {
+      "construct": "EndUsage",
+      "metaclass": "SysML::ReferenceUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 630,
+      "overlay_reason": "Untyped SysML end declarations are ReferenceUsage; preserve the legacy EndUsage collect contract without inventing an Ecore class."
+    },
+    {
+      "construct": "SuccessionFlowUsage",
+      "metaclass": "SysML::SuccessionFlowUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 1278,
+      "overlay_reason": "Preserve succession-flow identity and action reference compatibility."
+    },
+    {
+      "construct": "ExtendedDefinition",
+      "metaclass": "SysML::Definition",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 724,
+      "overlay_reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "ExtendedUsage",
+      "metaclass": "SysML::Usage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 728,
+      "overlay_reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "AssumeUsage",
+      "metaclass": "SysML::ConstraintUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2066,
+      "overlay_reason": "Retain the internal requirement-role alias and stable ID prefix while using the grammar-returned ConstraintUsage metaclass."
+    },
+    {
+      "construct": "RequireUsage",
+      "metaclass": "SysML::ConstraintUsage",
+      "grammar_file": "SysML.xtext",
+      "grammar_line": 2066,
+      "overlay_reason": "Retain the internal requirement-role alias and stable ID prefix while using the grammar-returned ConstraintUsage metaclass."
+    }
+  ]
+}

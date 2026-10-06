@@ -1,0 +1,105 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-explicit-private.kerml": "c3ed30ca90bd63231cec9e3594dde623d26392eb1f2941e4b1839e74465e61e1",
+    "invalid-explicit-protected.kerml": "85595cc47c2a43f1314b27443e4f316c85050639732154380e7195108f29adbd",
+    "invalid-qualified-private-import.kerml": "a6302098a59087653741a2071a8623db5ab20a18e9add4fbc49dbb7d6735c294",
+    "invalid-reexport-private.kerml": "7ceb4a2503554e426360ed241072815290b02f0063caf78bcb89192fefe93272",
+    "positive-import-all-private.kerml": "ddc739752a404d16e5c67b1c327ee90ebeb4187d2ccd0dc88fb17eb5aa2ea0fd",
+    "positive-public-alias-private.kerml": "f947a977012a7dc6059335172cb7053087ce6162ca46a070bf0529337d0e73e4",
+    "positive-qualified-public-import.kerml": "275f8ca1ade8dc3c1abf656e28012aeeb7049bbadf8b744d7e15c4d60943f415",
+    "positive-reexport-public.kerml": "d2f66ebaa7a428bc31072f5d12a8d5c0db5a7e3f32c136ab37f4e31a726c9531"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-explicit-private.kerml",
+      "status": "error",
+      "validation_ms": 586.0978,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Membership 'P::Hidden'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-explicit-protected.kerml",
+      "status": "error",
+      "validation_ms": 814.1669,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Membership 'P::Hidden'.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-private-import.kerml",
+      "status": "error",
+      "validation_ms": 642.7456,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Q::Visible'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-reexport-private.kerml",
+      "status": "error",
+      "validation_ms": 568.5095,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Visible'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-import-all-private.kerml",
+      "status": "ok",
+      "validation_ms": 670.6852,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias-private.kerml",
+      "status": "ok",
+      "validation_ms": 642.1947,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-qualified-public-import.kerml",
+      "status": "ok",
+      "validation_ms": 556.8278,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-reexport-public.kerml",
+      "status": "ok",
+      "validation_ms": 541.6574,
+      "diagnostics": []
+    }
+  ]
+}

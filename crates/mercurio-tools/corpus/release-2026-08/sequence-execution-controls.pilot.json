@@ -1,0 +1,264 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "fixture_sha256": "92a0de356bee5dbe85dbf03c4f3febb339396f7871c10e70d3fc52b0289998e1",
+  "runtime_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "e35de506200e33e83127f38bd300d4ea262f8fe35d948ab9d88bcea1599de790",
+  "class_sha256": "4accd6155dd20d4c10cd21dc02797106217c63f5cf32e798e51271cb632731c1",
+  "raw_sha256": "7be66e3ce65530d7a09fb5185eea51a4f39615ee59acc993d68b79e63ac16c39",
+  "observations": [
+    {
+      "id": "sequence_00",
+      "expression": "1..3",
+      "diagnostics": "CalculationUsage (e3c9e4d0-a146-4671-8c1f-21c27e490bc2)\n",
+      "values": [
+        1,
+        2,
+        3
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_01",
+      "expression": "3..1",
+      "diagnostics": "CalculationUsage (7ff06668-cd62-4a7d-9ba9-adb6ff0dd405)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_02",
+      "expression": "(1, (2, 3), null, 4)",
+      "diagnostics": "CalculationUsage (ed0959d8-8540-45ed-a3a0-1f5669ee2c03)\n",
+      "values": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_03",
+      "expression": "(null, 7)#(1)",
+      "diagnostics": "CalculationUsage (9d7930e5-04d0-440d-9443-eaa58c25d91c)\n",
+      "values": [
+        7
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_04",
+      "expression": "((1, 2), (3, 4))#(3)",
+      "diagnostics": "CalculationUsage (30a5e495-4aaf-422c-9a7c-bca7d253e18c)\n",
+      "values": [
+        3
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_05",
+      "expression": "(1..3)#(2)",
+      "diagnostics": "CalculationUsage (750d74c7-7ad8-44a8-8996-888fb1358d76)\n",
+      "values": [
+        2
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_06",
+      "expression": "7 % 3",
+      "diagnostics": "CalculationUsage (acdb5361-4a90-4460-8ae7-2a0f7750ab14)\n",
+      "values": [
+        1
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_07",
+      "expression": "-7 % 3",
+      "diagnostics": "CalculationUsage (e68cda8f-417e-4fb9-857b-caf25a6a8110)\n",
+      "values": [
+        -1
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_08",
+      "expression": "7 % -3",
+      "diagnostics": "CalculationUsage (c790dc2a-7574-45d0-b185-0a9037032426)\n",
+      "values": [
+        1
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_09",
+      "expression": "9007199254740993 + 1",
+      "diagnostics": "ERROR:For input string: \"9007199254740993\" (10.sysml line : 1 column : 8)\n",
+      "status": "error",
+      "error": "java.lang.IllegalArgumentException: Pilot rejected expression"
+    },
+    {
+      "id": "sequence_10",
+      "expression": "9007199254740993 > 9007199254740992",
+      "diagnostics": "ERROR:For input string: \"9007199254740993\" (11.sysml line : 1 column : 8)\nERROR:For input string: \"9007199254740992\" (11.sysml line : 1 column : 27)\n",
+      "status": "error",
+      "error": "java.lang.IllegalArgumentException: Pilot rejected expression"
+    },
+    {
+      "id": "sequence_11",
+      "expression": "1 == 1.0",
+      "diagnostics": "CalculationUsage (aa92e16d-8509-49bb-8c1f-9d7bcf612603)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_12",
+      "expression": "1 != 1.0",
+      "diagnostics": "CalculationUsage (2f6c9af3-3310-4c1e-97ae-5330098995b9)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_13",
+      "expression": "null == null",
+      "diagnostics": "CalculationUsage (918a0095-057c-45c6-bec7-c960236e4f8b)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_14",
+      "expression": "null != 1",
+      "diagnostics": "CalculationUsage (c3169a29-dd83-42da-a3de-59c0e305397a)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_15",
+      "expression": "\"a\" + \"b\"",
+      "diagnostics": "CalculationUsage (dd2817a6-d3f6-4170-942e-77941ad69e43)\n",
+      "values": [
+        "ab"
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_16",
+      "expression": "SequenceFunctions::size((1, (2, 3), null))",
+      "diagnostics": "CalculationUsage (59c0ed49-6953-48c1-aefd-d25110e6124c)\n",
+      "values": [
+        3
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_17",
+      "expression": "IntegerFunctions::sum((1, 2, 3))",
+      "diagnostics": "CalculationUsage (38640a9e-1932-4330-88ce-efcd133ebddb)\n",
+      "status": "error",
+      "error": "java.lang.IllegalArgumentException: Unevaluated result: Expression"
+    },
+    {
+      "id": "sequence_18",
+      "expression": "IntegerFunctions::min(4, 2)",
+      "diagnostics": "CalculationUsage (00680e12-0aba-4cdd-90dd-78c865b6260f)\n",
+      "status": "error",
+      "error": "java.lang.IllegalArgumentException: Unevaluated result: InvocationExpression"
+    },
+    {
+      "id": "sequence_19",
+      "expression": "IntegerFunctions::max(4, 2)",
+      "diagnostics": "CalculationUsage (85015ff7-8dee-4930-9c1d-0eb1236b8e1d)\n",
+      "status": "error",
+      "error": "java.lang.IllegalArgumentException: Unevaluated result: InvocationExpression"
+    },
+    {
+      "id": "sequence_20",
+      "expression": "if true ? (1, 2) else (3, 4)",
+      "diagnostics": "CalculationUsage (d428160a-670f-491a-94d7-61d1fbd13b1d)\n",
+      "values": [
+        1,
+        2
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_21",
+      "expression": "null ?? (1, 2)",
+      "diagnostics": "CalculationUsage (acec2ae4-cdbe-4b53-a38c-f38d2a156bf4)\n",
+      "values": [
+        1,
+        2
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_22",
+      "expression": "(1, 2)#(0)",
+      "diagnostics": "CalculationUsage (d57eb982-5b4a-4ef9-9911-0bfa71c42fdf)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_23",
+      "expression": "(1, 2)#(-1)",
+      "diagnostics": "CalculationUsage (6590545e-1f63-439a-88b2-783f12f6893a)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_24",
+      "expression": "false and (1 / 0 > 0)",
+      "diagnostics": "CalculationUsage (61508af9-e805-4800-b81c-91de0047b6dc)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "sequence_25",
+      "expression": "true or (1 / 0 > 0)",
+      "diagnostics": "CalculationUsage (ffa7eda5-344c-4708-ba43-c971a1d1ec99)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    }
+  ],
+  "known_divergences": {
+    "sequence_11": {
+      "native_values": [
+        true
+      ],
+      "reason": "Native numeric-value equality; Pilot EvaluationUtil.equal delegates to Java Object.equals and distinguishes Integer from Double."
+    },
+    "sequence_12": {
+      "native_values": [
+        false
+      ],
+      "reason": "Negation of the mixed numeric equality divergence."
+    }
+  },
+  "oracle_limitations": {
+    "rejected_integer_literals": [
+      "sequence_09",
+      "sequence_10"
+    ],
+    "unevaluated_library_functions": [
+      "sequence_17",
+      "sequence_18",
+      "sequence_19"
+    ]
+  },
+  "sources": {
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/EvaluationUtil.java": "3a3491324d88067b1123120ecdabd4b35c23710bbd34a33ec1496509b1313d98"
+  },
+  "status": "Bounded execution observations; two divergences and five oracle errors are not parity passes."
+}

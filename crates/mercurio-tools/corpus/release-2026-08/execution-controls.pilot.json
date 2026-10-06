@@ -1,0 +1,318 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "fixture_sha256": "222ccd8786eb43dd99f98a5e824cbf3452264e0dcf0d6689f46e7f847d80a8a7",
+  "runtime_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "e35de506200e33e83127f38bd300d4ea262f8fe35d948ab9d88bcea1599de790",
+  "class_sha256": "4accd6155dd20d4c10cd21dc02797106217c63f5cf32e798e51271cb632731c1",
+  "raw_sha256": "af831feed1f7f69f304f6fda657cdfaadb8f5a53a87aae425b06c449c93391bb",
+  "sources": {
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/ConditionalFunction.java": "343ea688ec64407395a08002eac36d05fbb09f93fdf09714c734bcaf0f2b4adf",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/NullCoalescingFunction.java": "4c41aa3f878c1f31f58164ab548f656d62da44a11d1996d8f327f3a0fdbaaf10",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/ConditionalImpliesFunction.java": "04858aaaef489f1724effba98d6bfb3f62392cef1dbbf096ed0e7cb7fb7942b9",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/base/IndexFunction.java": "c6984957fc95a87f0937ea13c7108009352b8b52df2b84ec37096fa276de8e06",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/XorFunction.java": "33e6b9ea7f9087b7127ad9ab97e95381af549b5a57154b03eced4b8e90707df8",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/AndFunction.java": "e2e4281e9ec3d8f4f074f658e445c523a04b7947743e86517e4a821f10fae166",
+    "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/OrFunction.java": "bb27820808ff3195de4aaea223534010a5960d5af7a3b514670f0362c0cd9852"
+  },
+  "observations": [
+    {
+      "id": "boolean_0",
+      "expression": "false & false",
+      "diagnostics": "CalculationUsage (38cd9b57-8863-4bc2-a3e4-3b1e601f94b4)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_1",
+      "expression": "false & true",
+      "diagnostics": "CalculationUsage (9f7f5ef4-1b3d-44df-a84e-cf9a37f793a2)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_2",
+      "expression": "true & false",
+      "diagnostics": "CalculationUsage (ad3cdafe-c0cf-4240-a9c7-affd96b3101e)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_3",
+      "expression": "true & true",
+      "diagnostics": "CalculationUsage (30451b8d-e903-4cbf-859f-e39d91438ca1)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_4",
+      "expression": "false | false",
+      "diagnostics": "CalculationUsage (8adf79bc-aada-42ec-8627-a28366d06541)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_5",
+      "expression": "false | true",
+      "diagnostics": "CalculationUsage (fccb91d2-8ec6-49d2-868d-6210331ce948)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_6",
+      "expression": "true | false",
+      "diagnostics": "CalculationUsage (7c27c2eb-ba64-4062-b3d7-aac4910991c3)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_7",
+      "expression": "true | true",
+      "diagnostics": "CalculationUsage (28e7628e-37dd-4a03-af87-850dd055b7ce)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_8",
+      "expression": "false xor false",
+      "diagnostics": "CalculationUsage (605cd306-0393-4e32-8d89-c0854fde6cf9)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_9",
+      "expression": "false xor true",
+      "diagnostics": "CalculationUsage (3873f3b5-8f92-4d42-8a17-5c843f961100)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_10",
+      "expression": "true xor false",
+      "diagnostics": "CalculationUsage (3d1c514b-10ca-4460-a678-92fc471f57c1)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_11",
+      "expression": "true xor true",
+      "diagnostics": "CalculationUsage (8478f955-38e0-46bb-8e39-9ed33bc13004)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_12",
+      "expression": "false implies false",
+      "diagnostics": "CalculationUsage (dc60c204-8ef2-4b0d-bc1c-30bfb27bfc89)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_13",
+      "expression": "false implies true",
+      "diagnostics": "CalculationUsage (a86654b0-b810-43f0-b1f2-0e935d646214)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_14",
+      "expression": "true implies false",
+      "diagnostics": "CalculationUsage (3ea1cb94-7e7e-4f79-bf49-41d3e6678bdb)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "boolean_15",
+      "expression": "true implies true",
+      "diagnostics": "CalculationUsage (fed415bd-7323-4238-a8de-ff5449524df9)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "conditional_yes",
+      "expression": "if true ? 7 else 8",
+      "diagnostics": "CalculationUsage (5ce02fc6-d5a8-49bd-83d0-f0dbca50d2df)\n",
+      "values": [
+        7
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "conditional_no",
+      "expression": "if false ? 7 else 8",
+      "diagnostics": "CalculationUsage (da1f643f-3b0d-4d23-adfd-c3589ff73bba)\n",
+      "values": [
+        8
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "conditional_lazy_yes",
+      "expression": "if true ? 7 else 1/0",
+      "diagnostics": "CalculationUsage (95c690d7-83d6-443d-be95-2eb27764b9bd)\n",
+      "values": [
+        7
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "conditional_lazy_no",
+      "expression": "if false ? 1/0 else 8",
+      "diagnostics": "CalculationUsage (51f138a0-e024-48ed-b8f0-428f70c131fb)\n",
+      "values": [
+        8
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_empty",
+      "expression": "null ?? 9",
+      "diagnostics": "CalculationUsage (896a8342-6bf6-4026-a40b-23dc2f653157)\n",
+      "values": [
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_tuple",
+      "expression": "() ?? 9",
+      "diagnostics": "CalculationUsage (412e0d87-abc3-49f1-a29d-5f913f42ade1)\n",
+      "values": [
+        9
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_zero",
+      "expression": "0 ?? 9",
+      "diagnostics": "CalculationUsage (b8624850-032f-4f65-a7e7-114312005175)\n",
+      "values": [
+        0
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_false",
+      "expression": "false ?? true",
+      "diagnostics": "CalculationUsage (64225d71-473e-461b-99ff-d0c744ed920e)\n",
+      "values": [
+        false
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_sequence",
+      "expression": "(11,22) ?? 9",
+      "diagnostics": "CalculationUsage (cf85e989-b053-43f6-97bd-719e427cd30e)\n",
+      "values": [
+        11,
+        22
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "coalesce_lazy",
+      "expression": "7 ?? 1/0",
+      "diagnostics": "CalculationUsage (12fa507f-5855-4dec-91d5-3e10bcfc31e9)\n",
+      "values": [
+        7
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "implies_lazy",
+      "expression": "false implies (1/0 > 0)",
+      "diagnostics": "CalculationUsage (1059cf06-21e3-4dbf-9323-4fba5a8999f1)\n",
+      "values": [
+        true
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "index_first",
+      "expression": "(11,22)#(1)",
+      "diagnostics": "CalculationUsage (f36d3356-c3da-48a9-b667-2209eef669cb)\n",
+      "values": [
+        11
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "index_second",
+      "expression": "(11,22)#(2)",
+      "diagnostics": "CalculationUsage (e0ce9097-1ff2-4c97-a0ae-ed01736d47d4)\n",
+      "values": [
+        22
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "index_zero",
+      "expression": "(11,22)#(0)",
+      "diagnostics": "CalculationUsage (921f5404-bf37-4d86-9bae-807df17a61bb)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "index_negative",
+      "expression": "(11,22)#(-1)",
+      "diagnostics": "CalculationUsage (4df2fab8-291f-407c-b486-e0b1b365c14e)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "index_outside",
+      "expression": "(11,22)#(3)",
+      "diagnostics": "CalculationUsage (0fff7d39-fea4-4d28-bab7-8a18a88b0605)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "index_empty",
+      "expression": "null#(1)",
+      "diagnostics": "CalculationUsage (6916a7bd-ae3b-4408-b8da-35158237197b)\n",
+      "values": [],
+      "status": "ok"
+    },
+    {
+      "id": "index_scalar",
+      "expression": "7#(1)",
+      "diagnostics": "CalculationUsage (d6de6bf8-0516-41fe-8680-a326e63628f2)\n",
+      "values": [
+        7
+      ],
+      "status": "ok"
+    }
+  ]
+}

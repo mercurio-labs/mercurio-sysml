@@ -1,0 +1,43 @@
+{
+  "schema": "dev.mercurio.transition-projection-normative.v1",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "normative_pdf": {
+    "path": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5"
+  },
+  "references": [
+    {
+      "pdf_pages": [
+        373,
+        374,
+        375,
+        378
+      ],
+      "assessment": "TransitionFeatureKind literal meanings, required kind and Step endpoint, TransitionUsage attribute descriptions and trigger/succession derivations define the projected roles and targets. Native getters use imported Ecore types/domains, resolved delegate identity and canonical membership. Required source/target and complete lifecycle constraints remain separate."
+    }
+  ],
+  "disagreements_and_boundaries": [
+    {
+      "topic": "Fresh required TransitionFeatureMembership.kind",
+      "assessment": "Imported Ecore lower=1 and default_value=trigger remain preserved. Independent fresh Pilot getter returns null. Native projection requires an explicit resolved enum kind rather than using a fabricated trigger fallback; 106 legal Step-carrier contexts exercise this pending/invalid initialization boundary. Absent attribute-read/constructor lifecycle support is not claimed."
+    },
+    {
+      "topic": "Printed effect and guard OCL bodies",
+      "pdf_pages": [
+        377,
+        378
+      ],
+      "assessment": "Printed deriveTransitionUsageEffectAction and deriveTransitionUsageGuardExpression bodies select trigger and contain inconsistent assigned property/type text. Native uses the explicit attribute descriptions, membership type constraints and literal meanings, corroborated independently by Pilot. The contradictory printed formulas are retained for normative review; no whole-family validation closure is earned."
+    },
+    {
+      "topic": "Unordered Ecore role collections",
+      "assessment": "Imported role references remain ordered=false and unique=true. Native retains canonical membership traversal order, matching Pilot controls, without changing their metadata or claiming that this incidental order is a normative ordered collection."
+    }
+  ],
+  "remaining": [
+    "Boolean-valued singleton guard result verification",
+    "Required role/type/owner and TransitionUsage constraints",
+    "Source/target featureTarget and connector transformation",
+    "Real library contribution/specialization and complete enum caller qualification"
+  ]
+}

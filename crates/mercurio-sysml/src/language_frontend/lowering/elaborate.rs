@@ -58,6 +58,7 @@ pub(crate) fn shorthand_reference_target(
     };
     if has_elaboration_rule(mappings, &usage.construct, rule_id)
         && usage.reference_target.is_none()
+        && usage.ty.is_none()
         && !usage.declared_name.is_empty()
     {
         return Some(QualifiedName {
@@ -111,12 +112,16 @@ mod tests {
 
     fn usage(construct: &str, declared_name: &str) -> CollectedUsage {
         CollectedUsage {
+        annotation_targets: Vec::new(),
+            implicit_type: None,
+            implicit_subsets: Vec::new(),
             construct: construct.to_string(),
             owner_construct: "Package".to_string(),
             owner_qualified_name: "root".to_string(),
             qualified_name: format!("root.{declared_name}"),
             declared_name: declared_name.to_string(),
             is_implicit_name: false,
+            has_explicit_specialization: false,
             ty: None,
             additional_types: Vec::new(),
             reference_target: None,

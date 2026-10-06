@@ -1,0 +1,60 @@
+{
+  "schema": "dev.mercurio.observed-definition-defaults.v1",
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_git_describe": "2026-08",
+    "pilot_dirty": false,
+    "export_sha256": "10758364c860faaffc65e2a56854c1204ccfad295eb1820703182aa587e3f931",
+    "fixture_sha256": "c652a83fcf7535b9942a38216651910ab5a50c2f9ee530e89ce76570704cd989",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1569,
+      "relationship_count": 12092,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../support-2026-08/defaults.sysml"
+      ],
+      "exported_at_utc": "2026-09-17T16:00:28.397328600Z"
+    }
+  },
+  "definitions": {
+    "ActionDefinition": [
+      "Actions::Action"
+    ],
+    "AnalysisCaseDefinition": [
+      "AnalysisCases::AnalysisCase"
+    ],
+    "CalculationDefinition": [
+      "Calculations::Calculation"
+    ],
+    "CaseDefinition": [
+      "Cases::Case"
+    ],
+    "ConstraintDefinition": [
+      "Constraints::ConstraintCheck"
+    ],
+    "FlowDefinition": [
+      "Flows::MessageAction"
+    ],
+    "MetadataDefinition": [
+      "Metadata::MetadataItem"
+    ],
+    "OccurrenceDefinition": [
+      "Occurrences::Occurrence"
+    ],
+    "RequirementDefinition": [
+      "Requirements::RequirementCheck"
+    ],
+    "StateDefinition": [
+      "States::StateAction"
+    ],
+    "UseCaseDefinition": [
+      "UseCases::UseCase"
+    ],
+    "VerificationCaseDefinition": [
+      "VerificationCases::VerificationCase"
+    ]
+  }
+}

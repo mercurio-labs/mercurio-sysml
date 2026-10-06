@@ -1,0 +1,68 @@
+{
+  "schema": "dev.mercurio.library-instantiation-normative-review.v1",
+  "normative_release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "sources": [
+    {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+    },
+    {
+      "path": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+      "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5"
+    }
+  ],
+  "review": [
+    {
+      "section": "KerML 8.3.4.8.17",
+      "pdf_pages": [
+        246
+      ],
+      "printed_pages": [
+        220
+      ],
+      "interpretation": "OperatorExpression invokes a Function resolved from BaseFunctions, DataFunctions, or ControlFunctions in that order. Imported utility recipes preserve the quoted operator spelling; canonical resolution uses the existing imported Name/QualifiedName converter. Null/malformed/incomplete operator inputs are getter controls, not valid callable models."
+    },
+    {
+      "section": "SysML 8.3.17.17-18",
+      "pdf_pages": [
+        361,
+        362,
+        363
+      ],
+      "printed_pages": [
+        329,
+        330,
+        331
+      ],
+      "interpretation": "when, at and after select Triggers::TriggerWhen, TriggerAt and TriggerAfter respectively. Grammar supplies the trigger kind, and argument constraints, result types and invocation validity remain independent obligations."
+    },
+    {
+      "section": "SysML 8.4.13.2",
+      "pdf_pages": [
+        465,
+        466
+      ],
+      "printed_pages": [
+        433,
+        434
+      ],
+      "interpretation": "A trigger invokes the corresponding library Function and binds its receiver to the containing AcceptActionUsage receiver. Clock/monitor defaults and containing occurrence context are separate implementation dependencies; lookup alone does not implement them."
+    }
+  ],
+  "disagreements_or_invalid_domain_controls": [
+    {
+      "topic": "Non-Type library candidates and wrong Type endpoints",
+      "decision": "Pilot getLibraryType skips non-Type candidates, selects the first Type, then casts operator results to Function. The normative OperatorExpression prose requires a Function, while the displayed OCL collects resolutions and casts the first element to Type without the same explicit filtering. Native getters preserve the measured Pilot selection and reject a first non-Function Type; Package/Class controls characterize invalid library inputs and do not certify normative validity. Full validation and a well-formed actual-library qualification remain required."
+    },
+    {
+      "topic": "Null TriggerKind",
+      "decision": "Pilot returns null. The normative nonoptional kind and parsed trigger syntax constrain valid trigger inputs. Native null getter behavior is not proof of a valid null-kind model."
+    },
+    {
+      "topic": "Provider failure",
+      "decision": "Upstream provider acquisition may turn framework failure into null. Native unresolved fields, ambiguous graphs and malformed values remain explicit typed prerequisites or errors. They are never classified as known absence by diagnostic text."
+    }
+  ],
+  "related_unresolved_review": "instantiation-normative-review.json",
+  "full_normative_qualification": false
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "source": {
+    "mode": "hand-curated-overlay",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "grammar": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext#Comment",
+    "reason": "Both textual languages share Comment body, locale and annotation-target resolution. Keep the existing annotatedElement compatibility field alongside canonical annotated_element; relationship ownership remains G05."
+  },
+  "usage_property_defaults": {
+    "CommentUsage": [
+      {
+        "property_values": {
+          "annotatedElement": "$reference_target",
+          "annotated_element": "$reference_target",
+          "body": "$metadata_body",
+          "locale": "$metadata_locale"
+        }
+      }
+    ]
+  },
+  "usage_resolution_policies": {
+    "CommentUsage": {
+      "reference_target_policy": "annotation_target_then_type_then_reference"
+    }
+  }
+}

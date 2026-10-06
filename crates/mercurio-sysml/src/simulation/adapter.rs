@@ -372,7 +372,13 @@ fn simulation_constraint_derived_rules(runtime: &Runtime) -> Vec<SimulationDeriv
         .graph()
         .elements()
         .iter()
-        .filter(|element| is_constraint_usage(element))
+        // Assertions check predicates; they do not introduce unconditional
+        // assignments. State/action-local rate assertions are already consumed
+        // through their owning behavior, and must not become global equations.
+        .filter(|element| {
+            is_constraint_usage(element) && !element.kind.contains("AssertConstraintUsage")
+                && crate::requirements::requirement_constraint_kind(runtime.graph(), element).is_none()
+        })
         .filter_map(constraint_derived_rule)
         .collect()
 }

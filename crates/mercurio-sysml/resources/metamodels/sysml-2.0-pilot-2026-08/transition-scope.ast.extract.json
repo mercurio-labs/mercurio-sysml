@@ -1,0 +1,2859 @@
+{
+  "coverage": {
+    "node_kinds": {
+      "JvmParameterizedTypeReference": 12,
+      "XBinaryOperation": 7,
+      "XBlockExpression": 10,
+      "XCastedExpression": 1,
+      "XClosure": 1,
+      "XFeatureCall": 34,
+      "XIfExpression": 7,
+      "XInstanceOfExpression": 7,
+      "XMemberFeatureCall": 18,
+      "XNumberLiteral": 2,
+      "XReturnExpression": 5,
+      "XUnaryOperation": 1,
+      "XtendFormalParameter": 1,
+      "XtendFunction": 2,
+      "XtendMember": 2,
+      "XtendParameter": 3,
+      "XtendVariableDeclaration": 8
+    },
+    "nodes": 121,
+    "selected_methods": 2,
+    "unresolved_references": 0
+  },
+  "methods": [
+    {
+      "declaring_type": "org.omg.sysml.xtext.scoping.SysMLScopeProvider",
+      "fields": {
+        "annotationInfo": {
+          "fields": {
+            "annotationInfo": null,
+            "annotations": [],
+            "modifiers": []
+          },
+          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/annotationInfo",
+          "kind": "XtendMember",
+          "span": {
+            "end_line": 41,
+            "length": 0,
+            "offset": 1677,
+            "start_line": 41
+          }
+        },
+        "annotations": [],
+        "createExtensionInfo": null,
+        "exceptions": [],
+        "expression": {
+          "fields": {
+            "expressions": [
+              {
+                "fields": {
+                  "conditionalExpression": false,
+                  "else": null,
+                  "if": {
+                    "fields": {
+                      "expression": {
+                        "fields": {
+                          "explicitOperationCall": false,
+                          "feature": {
+                            "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0"
+                          },
+                          "featureCallArguments": [],
+                          "invalidFeatureIssueCode": null,
+                          "typeArguments": []
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/if/expression",
+                        "kind": "XFeatureCall",
+                        "span": {
+                          "end_line": 44,
+                          "length": 7,
+                          "offset": 1741,
+                          "start_line": 44
+                        },
+                        "type": "org.eclipse.emf.ecore.EObject"
+                      },
+                      "type": {
+                        "fields": {
+                          "arguments": [],
+                          "type": {
+                            "$ref": "org.omg.sysml.lang.sysml.FeatureChaining"
+                          }
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/if/type",
+                        "kind": "JvmParameterizedTypeReference",
+                        "span": {
+                          "end_line": 44,
+                          "length": 15,
+                          "offset": 1760,
+                          "start_line": 44
+                        }
+                      }
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/if",
+                    "kind": "XInstanceOfExpression",
+                    "span": {
+                      "end_line": 44,
+                      "length": 34,
+                      "offset": 1741,
+                      "start_line": 44
+                    },
+                    "type": "boolean"
+                  },
+                  "then": {
+                    "fields": {
+                      "expressions": [
+                        {
+                          "fields": {
+                            "extension": false,
+                            "name": "featureChained",
+                            "right": {
+                              "fields": {
+                                "explicitOperationCall": false,
+                                "explicitStatic": false,
+                                "feature": {
+                                  "$ref": "org.omg.sysml.lang.sysml.FeatureChaining.getFeatureChained()"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "memberCallArguments": [],
+                                "memberCallTarget": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0"
+                                    },
+                                    "featureCallArguments": [],
+                                    "invalidFeatureIssueCode": null,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/0/right/memberCallTarget",
+                                  "kind": "XFeatureCall",
+                                  "span": {
+                                    "end_line": 45,
+                                    "length": 7,
+                                    "offset": 1804,
+                                    "start_line": 45
+                                  },
+                                  "type": "org.omg.sysml.lang.sysml.FeatureChaining"
+                                },
+                                "nullSafe": false,
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/0/right",
+                              "kind": "XMemberFeatureCall",
+                              "span": {
+                                "end_line": 45,
+                                "length": 22,
+                                "offset": 1804,
+                                "start_line": 45
+                              },
+                              "type": "org.omg.sysml.lang.sysml.Feature"
+                            },
+                            "type": null,
+                            "writeable": true
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/0",
+                          "kind": "XtendVariableDeclaration",
+                          "span": {
+                            "end_line": 45,
+                            "length": 43,
+                            "offset": 1783,
+                            "start_line": 45
+                          },
+                          "type": "void"
+                        },
+                        {
+                          "fields": {
+                            "extension": false,
+                            "name": "ownedFeatureChainings",
+                            "right": {
+                              "fields": {
+                                "explicitOperationCall": false,
+                                "explicitStatic": false,
+                                "feature": {
+                                  "$ref": "org.omg.sysml.lang.sysml.Feature.getOwnedFeatureChaining()"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "memberCallArguments": [],
+                                "memberCallTarget": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/0"
+                                    },
+                                    "featureCallArguments": [],
+                                    "invalidFeatureIssueCode": null,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/1/right/memberCallTarget",
+                                  "kind": "XFeatureCall",
+                                  "span": {
+                                    "end_line": 46,
+                                    "length": 14,
+                                    "offset": 1859,
+                                    "start_line": 46
+                                  },
+                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                },
+                                "nullSafe": false,
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/1/right",
+                              "kind": "XMemberFeatureCall",
+                              "span": {
+                                "end_line": 46,
+                                "length": 35,
+                                "offset": 1859,
+                                "start_line": 46
+                              },
+                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.FeatureChaining>"
+                            },
+                            "type": null,
+                            "writeable": false
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/1",
+                          "kind": "XtendVariableDeclaration",
+                          "span": {
+                            "end_line": 46,
+                            "length": 63,
+                            "offset": 1831,
+                            "start_line": 46
+                          },
+                          "type": "void"
+                        },
+                        {
+                          "fields": {
+                            "extension": false,
+                            "name": "i",
+                            "right": {
+                              "fields": {
+                                "explicitOperationCall": true,
+                                "explicitStatic": false,
+                                "feature": {
+                                  "$ref": "java.util.List.indexOf(java.lang.Object)"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "memberCallArguments": [
+                                  {
+                                    "fields": {
+                                      "explicitOperationCall": false,
+                                      "feature": {
+                                        "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0"
+                                      },
+                                      "featureCallArguments": [],
+                                      "invalidFeatureIssueCode": null,
+                                      "typeArguments": []
+                                    },
+                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/2/right/memberCallArguments/0",
+                                    "kind": "XFeatureCall",
+                                    "span": {
+                                      "end_line": 47,
+                                      "length": 7,
+                                      "offset": 1937,
+                                      "start_line": 47
+                                    },
+                                    "type": "org.omg.sysml.lang.sysml.FeatureChaining"
+                                  }
+                                ],
+                                "memberCallTarget": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/1"
+                                    },
+                                    "featureCallArguments": [],
+                                    "invalidFeatureIssueCode": null,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/2/right/memberCallTarget",
+                                  "kind": "XFeatureCall",
+                                  "span": {
+                                    "end_line": 47,
+                                    "length": 21,
+                                    "offset": 1907,
+                                    "start_line": 47
+                                  },
+                                  "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.FeatureChaining>"
+                                },
+                                "nullSafe": false,
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/2/right",
+                              "kind": "XMemberFeatureCall",
+                              "span": {
+                                "end_line": 47,
+                                "length": 38,
+                                "offset": 1907,
+                                "start_line": 47
+                              },
+                              "type": "int"
+                            },
+                            "type": null,
+                            "writeable": false
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/2",
+                          "kind": "XtendVariableDeclaration",
+                          "span": {
+                            "end_line": 47,
+                            "length": 46,
+                            "offset": 1899,
+                            "start_line": 47
+                          },
+                          "type": "void"
+                        },
+                        {
+                          "fields": {
+                            "conditionalExpression": false,
+                            "else": null,
+                            "if": {
+                              "fields": {
+                                "feature": {
+                                  "$ref": "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "leftOperand": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/2"
+                                    },
+                                    "featureCallArguments": [],
+                                    "invalidFeatureIssueCode": null,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/if/leftOperand",
+                                  "kind": "XFeatureCall",
+                                  "span": {
+                                    "end_line": 48,
+                                    "length": 1,
+                                    "offset": 1955,
+                                    "start_line": 48
+                                  },
+                                  "type": "int"
+                                },
+                                "reassignFirstArgument": false,
+                                "rightOperand": {
+                                  "fields": {
+                                    "value": "0"
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/if/rightOperand",
+                                  "kind": "XNumberLiteral",
+                                  "span": {
+                                    "end_line": 48,
+                                    "length": 1,
+                                    "offset": 1960,
+                                    "start_line": 48
+                                  },
+                                  "type": "int"
+                                },
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/if",
+                              "kind": "XBinaryOperation",
+                              "span": {
+                                "end_line": 48,
+                                "length": 6,
+                                "offset": 1955,
+                                "start_line": 48
+                              },
+                              "type": "boolean"
+                            },
+                            "then": {
+                              "fields": {
+                                "expressions": [
+                                  {
+                                    "fields": {
+                                      "expression": {
+                                        "fields": {
+                                          "explicitOperationCall": false,
+                                          "explicitStatic": false,
+                                          "feature": {
+                                            "$ref": "org.omg.sysml.lang.sysml.Element.getOwningRelationship()"
+                                          },
+                                          "invalidFeatureIssueCode": null,
+                                          "memberCallArguments": [],
+                                          "memberCallTarget": {
+                                            "fields": {
+                                              "explicitOperationCall": false,
+                                              "feature": {
+                                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/0"
+                                              },
+                                              "featureCallArguments": [],
+                                              "invalidFeatureIssueCode": null,
+                                              "typeArguments": []
+                                            },
+                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/then/expressions/0/expression/memberCallTarget",
+                                            "kind": "XFeatureCall",
+                                            "span": {
+                                              "end_line": 49,
+                                              "length": 14,
+                                              "offset": 1977,
+                                              "start_line": 49
+                                            },
+                                            "type": "org.omg.sysml.lang.sysml.Feature"
+                                          },
+                                          "nullSafe": false,
+                                          "typeArguments": []
+                                        },
+                                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/then/expressions/0/expression",
+                                        "kind": "XMemberFeatureCall",
+                                        "span": {
+                                          "end_line": 49,
+                                          "length": 33,
+                                          "offset": 1977,
+                                          "start_line": 49
+                                        },
+                                        "type": "org.omg.sysml.lang.sysml.Relationship"
+                                      }
+                                    },
+                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/then/expressions/0",
+                                    "kind": "XReturnExpression",
+                                    "span": {
+                                      "end_line": 49,
+                                      "length": 40,
+                                      "offset": 1970,
+                                      "start_line": 49
+                                    },
+                                    "type": "void"
+                                  }
+                                ]
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3/then",
+                              "kind": "XBlockExpression",
+                              "span": {
+                                "end_line": 50,
+                                "length": 53,
+                                "offset": 1963,
+                                "start_line": 48
+                              },
+                              "type": "void"
+                            }
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then/expressions/3",
+                          "kind": "XIfExpression",
+                          "span": {
+                            "end_line": 50,
+                            "length": 66,
+                            "offset": 1950,
+                            "start_line": 48
+                          },
+                          "type": "void"
+                        }
+                      ]
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0/then",
+                    "kind": "XBlockExpression",
+                    "span": {
+                      "end_line": 51,
+                      "length": 244,
+                      "offset": 1777,
+                      "start_line": 44
+                    },
+                    "type": "void"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/0",
+                "kind": "XIfExpression",
+                "span": {
+                  "end_line": 51,
+                  "length": 284,
+                  "offset": 1737,
+                  "start_line": 44
+                },
+                "type": "void"
+              },
+              {
+                "fields": {
+                  "expression": {
+                    "fields": {
+                      "explicitOperationCall": false,
+                      "feature": {
+                        "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0"
+                      },
+                      "featureCallArguments": [],
+                      "invalidFeatureIssueCode": null,
+                      "typeArguments": []
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/1/expression",
+                    "kind": "XFeatureCall",
+                    "span": {
+                      "end_line": 52,
+                      "length": 7,
+                      "offset": 2032,
+                      "start_line": 52
+                    },
+                    "type": "org.eclipse.emf.ecore.EObject"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression/expressions/1",
+                "kind": "XReturnExpression",
+                "span": {
+                  "end_line": 52,
+                  "length": 14,
+                  "offset": 2025,
+                  "start_line": 52
+                },
+                "type": "void"
+              }
+            ]
+          },
+          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/expression",
+          "kind": "XBlockExpression",
+          "span": {
+            "end_line": 53,
+            "length": 311,
+            "offset": 1732,
+            "start_line": 43
+          },
+          "type": "void"
+        },
+        "modifiers": [
+          "def"
+        ],
+        "name": "featureRelationship",
+        "parameters": [
+          {
+            "fields": {
+              "annotations": [],
+              "extension": false,
+              "name": "context",
+              "parameterType": {
+                "fields": {
+                  "arguments": [],
+                  "type": {
+                    "$ref": "org.eclipse.emf.ecore.EObject"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0/parameterType",
+                "kind": "JvmParameterizedTypeReference",
+                "span": {
+                  "end_line": 43,
+                  "length": 7,
+                  "offset": 1715,
+                  "start_line": 43
+                }
+              },
+              "varArg": false
+            },
+            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/parameters/0",
+            "kind": "XtendParameter",
+            "span": {
+              "end_line": 43,
+              "length": 15,
+              "offset": 1715,
+              "start_line": 43
+            },
+            "type": "org.eclipse.emf.ecore.EObject"
+          }
+        ],
+        "returnType": {
+          "fields": {
+            "arguments": [],
+            "type": {
+              "$ref": "org.eclipse.emf.ecore.EObject"
+            }
+          },
+          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship/returnType",
+          "kind": "JvmParameterizedTypeReference",
+          "span": {
+            "end_line": 43,
+            "length": 7,
+            "offset": 1687,
+            "start_line": 43
+          }
+        },
+        "typeParameters": []
+      },
+      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#featureRelationship",
+      "kind": "XtendFunction",
+      "name": "featureRelationship",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/scoping/SysMLScopeProvider.xtend",
+      "span": {
+        "end_line": 53,
+        "length": 360,
+        "offset": 1683,
+        "start_line": 43
+      }
+    },
+    {
+      "declaring_type": "org.omg.sysml.xtext.scoping.SysMLScopeProvider",
+      "fields": {
+        "annotationInfo": {
+          "fields": {
+            "annotationInfo": null,
+            "annotations": [],
+            "modifiers": []
+          },
+          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/annotationInfo",
+          "kind": "XtendMember",
+          "span": {
+            "end_line": 53,
+            "length": 0,
+            "offset": 2043,
+            "start_line": 53
+          }
+        },
+        "annotations": [],
+        "createExtensionInfo": null,
+        "exceptions": [],
+        "expression": {
+          "fields": {
+            "expressions": [
+              {
+                "fields": {
+                  "extension": false,
+                  "name": "relationship",
+                  "right": {
+                    "fields": {
+                      "explicitOperationCall": false,
+                      "explicitStatic": false,
+                      "feature": {
+                        "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider.featureRelationship(org.eclipse.emf.ecore.EObject)"
+                      },
+                      "invalidFeatureIssueCode": null,
+                      "memberCallArguments": [],
+                      "memberCallTarget": {
+                        "fields": {
+                          "explicitOperationCall": false,
+                          "feature": {
+                            "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0"
+                          },
+                          "featureCallArguments": [],
+                          "invalidFeatureIssueCode": null,
+                          "typeArguments": []
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0/right/memberCallTarget",
+                        "kind": "XFeatureCall",
+                        "span": {
+                          "end_line": 56,
+                          "length": 7,
+                          "offset": 2130,
+                          "start_line": 56
+                        },
+                        "type": "org.eclipse.emf.ecore.EObject"
+                      },
+                      "nullSafe": false,
+                      "typeArguments": []
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0/right",
+                    "kind": "XMemberFeatureCall",
+                    "span": {
+                      "end_line": 56,
+                      "length": 27,
+                      "offset": 2130,
+                      "start_line": 56
+                    },
+                    "type": "org.eclipse.emf.ecore.EObject"
+                  },
+                  "type": null,
+                  "writeable": true
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0",
+                "kind": "XtendVariableDeclaration",
+                "span": {
+                  "end_line": 56,
+                  "length": 46,
+                  "offset": 2111,
+                  "start_line": 56
+                },
+                "type": "void"
+              },
+              {
+                "fields": {
+                  "conditionalExpression": false,
+                  "else": {
+                    "fields": {
+                      "conditionalExpression": false,
+                      "else": null,
+                      "if": {
+                        "fields": {
+                          "expression": {
+                            "fields": {
+                              "explicitOperationCall": false,
+                              "feature": {
+                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0"
+                              },
+                              "featureCallArguments": [],
+                              "invalidFeatureIssueCode": null,
+                              "typeArguments": []
+                            },
+                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/if/expression",
+                            "kind": "XFeatureCall",
+                            "span": {
+                              "end_line": 67,
+                              "length": 12,
+                              "offset": 2697,
+                              "start_line": 67
+                            },
+                            "type": "org.eclipse.emf.ecore.EObject"
+                          },
+                          "type": {
+                            "fields": {
+                              "arguments": [],
+                              "type": {
+                                "$ref": "org.omg.sysml.lang.sysml.ReferenceSubsetting"
+                              }
+                            },
+                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/if/type",
+                            "kind": "JvmParameterizedTypeReference",
+                            "span": {
+                              "end_line": 67,
+                              "length": 19,
+                              "offset": 2721,
+                              "start_line": 67
+                            }
+                          }
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/if",
+                        "kind": "XInstanceOfExpression",
+                        "span": {
+                          "end_line": 67,
+                          "length": 43,
+                          "offset": 2697,
+                          "start_line": 67
+                        },
+                        "type": "boolean"
+                      },
+                      "then": {
+                        "fields": {
+                          "expressions": [
+                            {
+                              "fields": {
+                                "extension": false,
+                                "name": "owningFeature",
+                                "right": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "explicitStatic": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.lang.sysml.Subsetting.getOwningFeature()"
+                                    },
+                                    "invalidFeatureIssueCode": null,
+                                    "memberCallArguments": [],
+                                    "memberCallTarget": {
+                                      "fields": {
+                                        "explicitOperationCall": false,
+                                        "feature": {
+                                          "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0"
+                                        },
+                                        "featureCallArguments": [],
+                                        "invalidFeatureIssueCode": null,
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/0/right/memberCallTarget",
+                                      "kind": "XFeatureCall",
+                                      "span": {
+                                        "end_line": 68,
+                                        "length": 12,
+                                        "offset": 2768,
+                                        "start_line": 68
+                                      },
+                                      "type": "org.omg.sysml.lang.sysml.ReferenceSubsetting"
+                                    },
+                                    "nullSafe": false,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/0/right",
+                                  "kind": "XMemberFeatureCall",
+                                  "span": {
+                                    "end_line": 68,
+                                    "length": 26,
+                                    "offset": 2768,
+                                    "start_line": 68
+                                  },
+                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                },
+                                "type": null,
+                                "writeable": false
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/0",
+                              "kind": "XtendVariableDeclaration",
+                              "span": {
+                                "end_line": 68,
+                                "length": 46,
+                                "offset": 2748,
+                                "start_line": 68
+                              },
+                              "type": "void"
+                            },
+                            {
+                              "fields": {
+                                "extension": false,
+                                "name": "owningType",
+                                "right": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "explicitStatic": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.lang.sysml.Feature.getOwningType()"
+                                    },
+                                    "invalidFeatureIssueCode": null,
+                                    "memberCallArguments": [],
+                                    "memberCallTarget": {
+                                      "fields": {
+                                        "explicitOperationCall": false,
+                                        "feature": {
+                                          "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/0"
+                                        },
+                                        "featureCallArguments": [],
+                                        "invalidFeatureIssueCode": null,
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1/right/memberCallTarget",
+                                      "kind": "XFeatureCall",
+                                      "span": {
+                                        "end_line": 69,
+                                        "length": 13,
+                                        "offset": 2816,
+                                        "start_line": 69
+                                      },
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    },
+                                    "nullSafe": false,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1/right",
+                                  "kind": "XMemberFeatureCall",
+                                  "span": {
+                                    "end_line": 69,
+                                    "length": 24,
+                                    "offset": 2816,
+                                    "start_line": 69
+                                  },
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                },
+                                "type": null,
+                                "writeable": false
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1",
+                              "kind": "XtendVariableDeclaration",
+                              "span": {
+                                "end_line": 69,
+                                "length": 41,
+                                "offset": 2799,
+                                "start_line": 69
+                              },
+                              "type": "void"
+                            },
+                            {
+                              "fields": {
+                                "conditionalExpression": false,
+                                "else": null,
+                                "if": {
+                                  "fields": {
+                                    "feature": {
+                                      "$ref": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)"
+                                    },
+                                    "invalidFeatureIssueCode": null,
+                                    "leftOperand": {
+                                      "fields": {
+                                        "expression": {
+                                          "fields": {
+                                            "explicitOperationCall": false,
+                                            "feature": {
+                                              "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1"
+                                            },
+                                            "featureCallArguments": [],
+                                            "invalidFeatureIssueCode": null,
+                                            "typeArguments": []
+                                          },
+                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/leftOperand/expression",
+                                          "kind": "XFeatureCall",
+                                          "span": {
+                                            "end_line": 70,
+                                            "length": 10,
+                                            "offset": 2849,
+                                            "start_line": 70
+                                          },
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        },
+                                        "type": {
+                                          "fields": {
+                                            "arguments": [],
+                                            "type": {
+                                              "$ref": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+                                            }
+                                          },
+                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/leftOperand/type",
+                                          "kind": "JvmParameterizedTypeReference",
+                                          "span": {
+                                            "end_line": 70,
+                                            "length": 17,
+                                            "offset": 2871,
+                                            "start_line": 70
+                                          }
+                                        }
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/leftOperand",
+                                      "kind": "XInstanceOfExpression",
+                                      "span": {
+                                        "end_line": 70,
+                                        "length": 39,
+                                        "offset": 2849,
+                                        "start_line": 70
+                                      },
+                                      "type": "boolean"
+                                    },
+                                    "reassignFirstArgument": false,
+                                    "rightOperand": {
+                                      "fields": {
+                                        "feature": {
+                                          "$ref": "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)"
+                                        },
+                                        "invalidFeatureIssueCode": null,
+                                        "leftOperand": {
+                                          "fields": {
+                                            "explicitOperationCall": true,
+                                            "explicitStatic": false,
+                                            "feature": {
+                                              "$ref": "java.util.List.indexOf(java.lang.Object)"
+                                            },
+                                            "invalidFeatureIssueCode": null,
+                                            "memberCallArguments": [
+                                              {
+                                                "fields": {
+                                                  "explicitOperationCall": false,
+                                                  "feature": {
+                                                    "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/0"
+                                                  },
+                                                  "featureCallArguments": [],
+                                                  "invalidFeatureIssueCode": null,
+                                                  "typeArguments": []
+                                                },
+                                                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand/leftOperand/memberCallArguments/0",
+                                                "kind": "XFeatureCall",
+                                                "span": {
+                                                  "end_line": 70,
+                                                  "length": 13,
+                                                  "offset": 2927,
+                                                  "start_line": 70
+                                                },
+                                                "type": "org.omg.sysml.lang.sysml.Feature"
+                                              }
+                                            ],
+                                            "memberCallTarget": {
+                                              "fields": {
+                                                "explicitOperationCall": false,
+                                                "explicitStatic": false,
+                                                "feature": {
+                                                  "$ref": "org.omg.sysml.lang.sysml.Type.getOwnedEndFeature()"
+                                                },
+                                                "invalidFeatureIssueCode": null,
+                                                "memberCallArguments": [],
+                                                "memberCallTarget": {
+                                                  "fields": {
+                                                    "explicitOperationCall": false,
+                                                    "feature": {
+                                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1"
+                                                    },
+                                                    "featureCallArguments": [],
+                                                    "invalidFeatureIssueCode": null,
+                                                    "typeArguments": []
+                                                  },
+                                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand/leftOperand/memberCallTarget/memberCallTarget",
+                                                  "kind": "XFeatureCall",
+                                                  "span": {
+                                                    "end_line": 70,
+                                                    "length": 10,
+                                                    "offset": 2892,
+                                                    "start_line": 70
+                                                  },
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                },
+                                                "nullSafe": false,
+                                                "typeArguments": []
+                                              },
+                                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand/leftOperand/memberCallTarget",
+                                              "kind": "XMemberFeatureCall",
+                                              "span": {
+                                                "end_line": 70,
+                                                "length": 26,
+                                                "offset": 2892,
+                                                "start_line": 70
+                                              },
+                                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Feature>"
+                                            },
+                                            "nullSafe": false,
+                                            "typeArguments": []
+                                          },
+                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand/leftOperand",
+                                          "kind": "XMemberFeatureCall",
+                                          "span": {
+                                            "end_line": 70,
+                                            "length": 49,
+                                            "offset": 2892,
+                                            "start_line": 70
+                                          },
+                                          "type": "int"
+                                        },
+                                        "reassignFirstArgument": false,
+                                        "rightOperand": {
+                                          "fields": {
+                                            "value": "1"
+                                          },
+                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand/rightOperand",
+                                          "kind": "XNumberLiteral",
+                                          "span": {
+                                            "end_line": 70,
+                                            "length": 1,
+                                            "offset": 2945,
+                                            "start_line": 70
+                                          },
+                                          "type": "int"
+                                        },
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if/rightOperand",
+                                      "kind": "XBinaryOperation",
+                                      "span": {
+                                        "end_line": 70,
+                                        "length": 54,
+                                        "offset": 2892,
+                                        "start_line": 70
+                                      },
+                                      "type": "boolean"
+                                    },
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/if",
+                                  "kind": "XBinaryOperation",
+                                  "span": {
+                                    "end_line": 70,
+                                    "length": 97,
+                                    "offset": 2849,
+                                    "start_line": 70
+                                  },
+                                  "type": "boolean"
+                                },
+                                "then": {
+                                  "fields": {
+                                    "expressions": [
+                                      {
+                                        "fields": {
+                                          "extension": false,
+                                          "name": "outerNamespace",
+                                          "right": {
+                                            "fields": {
+                                              "explicitOperationCall": false,
+                                              "explicitStatic": false,
+                                              "feature": {
+                                                "$ref": "org.omg.sysml.lang.sysml.Element.getOwningNamespace()"
+                                              },
+                                              "invalidFeatureIssueCode": null,
+                                              "memberCallArguments": [],
+                                              "memberCallTarget": {
+                                                "fields": {
+                                                  "explicitOperationCall": false,
+                                                  "feature": {
+                                                    "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1"
+                                                  },
+                                                  "featureCallArguments": [],
+                                                  "invalidFeatureIssueCode": null,
+                                                  "typeArguments": []
+                                                },
+                                                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0/right/memberCallTarget",
+                                                "kind": "XFeatureCall",
+                                                "span": {
+                                                  "end_line": 71,
+                                                  "length": 10,
+                                                  "offset": 2976,
+                                                  "start_line": 71
+                                                },
+                                                "type": "org.omg.sysml.lang.sysml.Type"
+                                              },
+                                              "nullSafe": false,
+                                              "typeArguments": []
+                                            },
+                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0/right",
+                                            "kind": "XMemberFeatureCall",
+                                            "span": {
+                                              "end_line": 71,
+                                              "length": 26,
+                                              "offset": 2976,
+                                              "start_line": 71
+                                            },
+                                            "type": "org.omg.sysml.lang.sysml.Namespace"
+                                          },
+                                          "type": null,
+                                          "writeable": false
+                                        },
+                                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0",
+                                        "kind": "XtendVariableDeclaration",
+                                        "span": {
+                                          "end_line": 71,
+                                          "length": 47,
+                                          "offset": 2955,
+                                          "start_line": 71
+                                        },
+                                        "type": "void"
+                                      },
+                                      {
+                                        "fields": {
+                                          "conditionalExpression": false,
+                                          "else": null,
+                                          "if": {
+                                            "fields": {
+                                              "feature": {
+                                                "$ref": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)"
+                                              },
+                                              "invalidFeatureIssueCode": null,
+                                              "leftOperand": {
+                                                "fields": {
+                                                  "expression": {
+                                                    "fields": {
+                                                      "explicitOperationCall": false,
+                                                      "feature": {
+                                                        "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0"
+                                                      },
+                                                      "featureCallArguments": [],
+                                                      "invalidFeatureIssueCode": null,
+                                                      "typeArguments": []
+                                                    },
+                                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/leftOperand/expression",
+                                                    "kind": "XFeatureCall",
+                                                    "span": {
+                                                      "end_line": 72,
+                                                      "length": 14,
+                                                      "offset": 3012,
+                                                      "start_line": 72
+                                                    },
+                                                    "type": "org.omg.sysml.lang.sysml.Namespace"
+                                                  },
+                                                  "type": {
+                                                    "fields": {
+                                                      "arguments": [],
+                                                      "type": {
+                                                        "$ref": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                                      }
+                                                    },
+                                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/leftOperand/type",
+                                                    "kind": "JvmParameterizedTypeReference",
+                                                    "span": {
+                                                      "end_line": 72,
+                                                      "length": 15,
+                                                      "offset": 3038,
+                                                      "start_line": 72
+                                                    }
+                                                  }
+                                                },
+                                                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/leftOperand",
+                                                "kind": "XInstanceOfExpression",
+                                                "span": {
+                                                  "end_line": 72,
+                                                  "length": 41,
+                                                  "offset": 3012,
+                                                  "start_line": 72
+                                                },
+                                                "type": "boolean"
+                                              },
+                                              "reassignFirstArgument": false,
+                                              "rightOperand": {
+                                                "fields": {
+                                                  "feature": {
+                                                    "$ref": "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleEquals(java.lang.Object,java.lang.Object)"
+                                                  },
+                                                  "invalidFeatureIssueCode": null,
+                                                  "leftOperand": {
+                                                    "fields": {
+                                                      "explicitOperationCall": false,
+                                                      "feature": {
+                                                        "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/1"
+                                                      },
+                                                      "featureCallArguments": [],
+                                                      "invalidFeatureIssueCode": null,
+                                                      "typeArguments": []
+                                                    },
+                                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand/leftOperand",
+                                                    "kind": "XFeatureCall",
+                                                    "span": {
+                                                      "end_line": 72,
+                                                      "length": 10,
+                                                      "offset": 3057,
+                                                      "start_line": 72
+                                                    },
+                                                    "type": "org.omg.sysml.lang.sysml.Type"
+                                                  },
+                                                  "reassignFirstArgument": false,
+                                                  "rightOperand": {
+                                                    "fields": {
+                                                      "explicitOperationCall": false,
+                                                      "explicitStatic": false,
+                                                      "feature": {
+                                                        "$ref": "org.omg.sysml.lang.sysml.TransitionUsage.getSuccession()"
+                                                      },
+                                                      "invalidFeatureIssueCode": null,
+                                                      "memberCallArguments": [],
+                                                      "memberCallTarget": {
+                                                        "fields": {
+                                                          "target": {
+                                                            "fields": {
+                                                              "explicitOperationCall": false,
+                                                              "feature": {
+                                                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0"
+                                                              },
+                                                              "featureCallArguments": [],
+                                                              "invalidFeatureIssueCode": null,
+                                                              "typeArguments": []
+                                                            },
+                                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/target",
+                                                            "kind": "XFeatureCall",
+                                                            "span": {
+                                                              "end_line": 72,
+                                                              "length": 14,
+                                                              "offset": 3073,
+                                                              "start_line": 72
+                                                            },
+                                                            "type": "org.omg.sysml.lang.sysml.Namespace"
+                                                          },
+                                                          "type": {
+                                                            "fields": {
+                                                              "arguments": [],
+                                                              "type": {
+                                                                "$ref": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                                              }
+                                                            },
+                                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/type",
+                                                            "kind": "JvmParameterizedTypeReference",
+                                                            "span": {
+                                                              "end_line": 72,
+                                                              "length": 15,
+                                                              "offset": 3091,
+                                                              "start_line": 72
+                                                            }
+                                                          }
+                                                        },
+                                                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget",
+                                                        "kind": "XCastedExpression",
+                                                        "span": {
+                                                          "end_line": 72,
+                                                          "length": 33,
+                                                          "offset": 3073,
+                                                          "start_line": 72
+                                                        },
+                                                        "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                                      },
+                                                      "nullSafe": false,
+                                                      "typeArguments": []
+                                                    },
+                                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand/rightOperand",
+                                                    "kind": "XMemberFeatureCall",
+                                                    "span": {
+                                                      "end_line": 72,
+                                                      "length": 46,
+                                                      "offset": 3072,
+                                                      "start_line": 72
+                                                    },
+                                                    "type": "org.omg.sysml.lang.sysml.Succession"
+                                                  },
+                                                  "typeArguments": []
+                                                },
+                                                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if/rightOperand",
+                                                "kind": "XBinaryOperation",
+                                                "span": {
+                                                  "end_line": 72,
+                                                  "length": 61,
+                                                  "offset": 3057,
+                                                  "start_line": 72
+                                                },
+                                                "type": "boolean"
+                                              },
+                                              "typeArguments": []
+                                            },
+                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/if",
+                                            "kind": "XBinaryOperation",
+                                            "span": {
+                                              "end_line": 72,
+                                              "length": 106,
+                                              "offset": 3012,
+                                              "start_line": 72
+                                            },
+                                            "type": "boolean"
+                                          },
+                                          "then": {
+                                            "fields": {
+                                              "expressions": [
+                                                {
+                                                  "fields": {
+                                                    "expression": {
+                                                      "fields": {
+                                                        "explicitOperationCall": true,
+                                                        "explicitStatic": false,
+                                                        "feature": {
+                                                          "$ref": "org.omg.kerml.xtext.scoping.KerMLScopeProvider.scope_owningNamespace(org.omg.sysml.lang.sysml.Element,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)"
+                                                        },
+                                                        "invalidFeatureIssueCode": null,
+                                                        "memberCallArguments": [
+                                                          {
+                                                            "fields": {
+                                                              "explicitOperationCall": false,
+                                                              "feature": {
+                                                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0"
+                                                              },
+                                                              "featureCallArguments": [],
+                                                              "invalidFeatureIssueCode": null,
+                                                              "typeArguments": []
+                                                            },
+                                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then/expressions/0/expression/memberCallArguments/0",
+                                                            "kind": "XFeatureCall",
+                                                            "span": {
+                                                              "end_line": 73,
+                                                              "length": 7,
+                                                              "offset": 3172,
+                                                              "start_line": 73
+                                                            },
+                                                            "type": "org.eclipse.emf.ecore.EObject"
+                                                          },
+                                                          {
+                                                            "fields": {
+                                                              "explicitOperationCall": false,
+                                                              "feature": {
+                                                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/1"
+                                                              },
+                                                              "featureCallArguments": [],
+                                                              "invalidFeatureIssueCode": null,
+                                                              "typeArguments": []
+                                                            },
+                                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then/expressions/0/expression/memberCallArguments/1",
+                                                            "kind": "XFeatureCall",
+                                                            "span": {
+                                                              "end_line": 73,
+                                                              "length": 9,
+                                                              "offset": 3181,
+                                                              "start_line": 73
+                                                            },
+                                                            "type": "org.eclipse.emf.ecore.EReference"
+                                                          }
+                                                        ],
+                                                        "memberCallTarget": {
+                                                          "fields": {
+                                                            "explicitOperationCall": false,
+                                                            "feature": {
+                                                              "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/0"
+                                                            },
+                                                            "featureCallArguments": [],
+                                                            "invalidFeatureIssueCode": null,
+                                                            "typeArguments": []
+                                                          },
+                                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then/expressions/0/expression/memberCallTarget",
+                                                          "kind": "XFeatureCall",
+                                                          "span": {
+                                                            "end_line": 73,
+                                                            "length": 14,
+                                                            "offset": 3135,
+                                                            "start_line": 73
+                                                          },
+                                                          "type": "org.omg.sysml.lang.sysml.Namespace"
+                                                        },
+                                                        "nullSafe": false,
+                                                        "typeArguments": []
+                                                      },
+                                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then/expressions/0/expression",
+                                                      "kind": "XMemberFeatureCall",
+                                                      "span": {
+                                                        "end_line": 73,
+                                                        "length": 56,
+                                                        "offset": 3135,
+                                                        "start_line": 73
+                                                      },
+                                                      "type": "org.eclipse.xtext.scoping.IScope"
+                                                    }
+                                                  },
+                                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then/expressions/0",
+                                                  "kind": "XReturnExpression",
+                                                  "span": {
+                                                    "end_line": 73,
+                                                    "length": 63,
+                                                    "offset": 3128,
+                                                    "start_line": 73
+                                                  },
+                                                  "type": "void"
+                                                }
+                                              ]
+                                            },
+                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1/then",
+                                            "kind": "XBlockExpression",
+                                            "span": {
+                                              "end_line": 74,
+                                              "length": 78,
+                                              "offset": 3120,
+                                              "start_line": 72
+                                            },
+                                            "type": "void"
+                                          }
+                                        },
+                                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then/expressions/1",
+                                        "kind": "XIfExpression",
+                                        "span": {
+                                          "end_line": 74,
+                                          "length": 190,
+                                          "offset": 3008,
+                                          "start_line": 72
+                                        },
+                                        "type": "void"
+                                      }
+                                    ]
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2/then",
+                                  "kind": "XBlockExpression",
+                                  "span": {
+                                    "end_line": 75,
+                                    "length": 256,
+                                    "offset": 2948,
+                                    "start_line": 70
+                                  },
+                                  "type": "void"
+                                }
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then/expressions/2",
+                              "kind": "XIfExpression",
+                              "span": {
+                                "end_line": 75,
+                                "length": 359,
+                                "offset": 2845,
+                                "start_line": 70
+                              },
+                              "type": "void"
+                            }
+                          ]
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else/then",
+                        "kind": "XBlockExpression",
+                        "span": {
+                          "end_line": 76,
+                          "length": 467,
+                          "offset": 2742,
+                          "start_line": 67
+                        },
+                        "type": "void"
+                      }
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/else",
+                    "kind": "XIfExpression",
+                    "span": {
+                      "end_line": 76,
+                      "length": 516,
+                      "offset": 2693,
+                      "start_line": 67
+                    },
+                    "type": "void"
+                  },
+                  "if": {
+                    "fields": {
+                      "expression": {
+                        "fields": {
+                          "explicitOperationCall": false,
+                          "feature": {
+                            "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0"
+                          },
+                          "featureCallArguments": [],
+                          "invalidFeatureIssueCode": null,
+                          "typeArguments": []
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/if/expression",
+                        "kind": "XFeatureCall",
+                        "span": {
+                          "end_line": 59,
+                          "length": 12,
+                          "offset": 2250,
+                          "start_line": 59
+                        },
+                        "type": "org.eclipse.emf.ecore.EObject"
+                      },
+                      "type": {
+                        "fields": {
+                          "arguments": [],
+                          "type": {
+                            "$ref": "org.omg.sysml.lang.sysml.Membership"
+                          }
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/if/type",
+                        "kind": "JvmParameterizedTypeReference",
+                        "span": {
+                          "end_line": 59,
+                          "length": 10,
+                          "offset": 2274,
+                          "start_line": 59
+                        }
+                      }
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/if",
+                    "kind": "XInstanceOfExpression",
+                    "span": {
+                      "end_line": 59,
+                      "length": 34,
+                      "offset": 2250,
+                      "start_line": 59
+                    },
+                    "type": "boolean"
+                  },
+                  "then": {
+                    "fields": {
+                      "expressions": [
+                        {
+                          "fields": {
+                            "extension": false,
+                            "name": "owningNamespace",
+                            "right": {
+                              "fields": {
+                                "explicitOperationCall": false,
+                                "explicitStatic": false,
+                                "feature": {
+                                  "$ref": "org.omg.sysml.lang.sysml.Membership.getMembershipOwningNamespace()"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "memberCallArguments": [],
+                                "memberCallTarget": {
+                                  "fields": {
+                                    "explicitOperationCall": false,
+                                    "feature": {
+                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0"
+                                    },
+                                    "featureCallArguments": [],
+                                    "invalidFeatureIssueCode": null,
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0/right/memberCallTarget",
+                                  "kind": "XFeatureCall",
+                                  "span": {
+                                    "end_line": 60,
+                                    "length": 12,
+                                    "offset": 2314,
+                                    "start_line": 60
+                                  },
+                                  "type": "org.omg.sysml.lang.sysml.Membership"
+                                },
+                                "nullSafe": false,
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0/right",
+                              "kind": "XMemberFeatureCall",
+                              "span": {
+                                "end_line": 60,
+                                "length": 38,
+                                "offset": 2314,
+                                "start_line": 60
+                              },
+                              "type": "org.omg.sysml.lang.sysml.Namespace"
+                            },
+                            "type": null,
+                            "writeable": false
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0",
+                          "kind": "XtendVariableDeclaration",
+                          "span": {
+                            "end_line": 60,
+                            "length": 60,
+                            "offset": 2292,
+                            "start_line": 60
+                          },
+                          "type": "void"
+                        },
+                        {
+                          "fields": {
+                            "conditionalExpression": false,
+                            "else": null,
+                            "if": {
+                              "fields": {
+                                "feature": {
+                                  "$ref": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)"
+                                },
+                                "invalidFeatureIssueCode": null,
+                                "leftOperand": {
+                                  "fields": {
+                                    "expression": {
+                                      "fields": {
+                                        "explicitOperationCall": false,
+                                        "feature": {
+                                          "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0"
+                                        },
+                                        "featureCallArguments": [],
+                                        "invalidFeatureIssueCode": null,
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/leftOperand/expression",
+                                      "kind": "XFeatureCall",
+                                      "span": {
+                                        "end_line": 61,
+                                        "length": 15,
+                                        "offset": 2362,
+                                        "start_line": 61
+                                      },
+                                      "type": "org.omg.sysml.lang.sysml.Namespace"
+                                    },
+                                    "type": {
+                                      "fields": {
+                                        "arguments": [],
+                                        "type": {
+                                          "$ref": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                        }
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/leftOperand/type",
+                                      "kind": "JvmParameterizedTypeReference",
+                                      "span": {
+                                        "end_line": 61,
+                                        "length": 15,
+                                        "offset": 2389,
+                                        "start_line": 61
+                                      }
+                                    }
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/leftOperand",
+                                  "kind": "XInstanceOfExpression",
+                                  "span": {
+                                    "end_line": 61,
+                                    "length": 42,
+                                    "offset": 2362,
+                                    "start_line": 61
+                                  },
+                                  "type": "boolean"
+                                },
+                                "reassignFirstArgument": false,
+                                "rightOperand": {
+                                  "fields": {
+                                    "feature": {
+                                      "$ref": "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(java.lang.Object,java.lang.Object)"
+                                    },
+                                    "invalidFeatureIssueCode": null,
+                                    "leftOperand": {
+                                      "fields": {
+                                        "explicitOperationCall": false,
+                                        "feature": {
+                                          "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/0"
+                                        },
+                                        "featureCallArguments": [],
+                                        "invalidFeatureIssueCode": null,
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/leftOperand",
+                                      "kind": "XFeatureCall",
+                                      "span": {
+                                        "end_line": 62,
+                                        "length": 12,
+                                        "offset": 2414,
+                                        "start_line": 62
+                                      },
+                                      "type": "org.omg.sysml.lang.sysml.Membership"
+                                    },
+                                    "reassignFirstArgument": false,
+                                    "rightOperand": {
+                                      "fields": {
+                                        "explicitOperationCall": false,
+                                        "explicitStatic": false,
+                                        "feature": {
+                                          "$ref": "org.eclipse.xtext.xbase.lib.IterableExtensions.head(java.lang.Iterable)"
+                                        },
+                                        "invalidFeatureIssueCode": null,
+                                        "memberCallArguments": [],
+                                        "memberCallTarget": {
+                                          "fields": {
+                                            "explicitOperationCall": false,
+                                            "explicitStatic": false,
+                                            "feature": {
+                                              "$ref": "org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)"
+                                            },
+                                            "invalidFeatureIssueCode": null,
+                                            "memberCallArguments": [
+                                              {
+                                                "fields": {
+                                                  "declaredFormalParameters": [
+                                                    {
+                                                      "fields": {
+                                                        "annotations": [],
+                                                        "extension": false,
+                                                        "name": "mem",
+                                                        "parameterType": null
+                                                      },
+                                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/declaredFormalParameters/0",
+                                                      "kind": "XtendFormalParameter",
+                                                      "span": {
+                                                        "end_line": 62,
+                                                        "length": 3,
+                                                        "offset": 2469,
+                                                        "start_line": 62
+                                                      }
+                                                    }
+                                                  ],
+                                                  "explicitSyntax": true,
+                                                  "expression": {
+                                                    "fields": {
+                                                      "expressions": [
+                                                        {
+                                                          "fields": {
+                                                            "feature": {
+                                                              "$ref": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)"
+                                                            },
+                                                            "invalidFeatureIssueCode": null,
+                                                            "operand": {
+                                                              "fields": {
+                                                                "expression": {
+                                                                  "fields": {
+                                                                    "explicitOperationCall": false,
+                                                                    "feature": {
+                                                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/declaredFormalParameters/0"
+                                                                    },
+                                                                    "featureCallArguments": [],
+                                                                    "invalidFeatureIssueCode": null,
+                                                                    "typeArguments": []
+                                                                  },
+                                                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/expression/expressions/0/operand/expression",
+                                                                  "kind": "XFeatureCall",
+                                                                  "span": {
+                                                                    "end_line": 62,
+                                                                    "length": 3,
+                                                                    "offset": 2477,
+                                                                    "start_line": 62
+                                                                  },
+                                                                  "type": "org.omg.sysml.lang.sysml.Membership"
+                                                                },
+                                                                "type": {
+                                                                  "fields": {
+                                                                    "arguments": [],
+                                                                    "type": {
+                                                                      "$ref": "org.omg.sysml.lang.sysml.FeatureMembership"
+                                                                    }
+                                                                  },
+                                                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/expression/expressions/0/operand/type",
+                                                                  "kind": "JvmParameterizedTypeReference",
+                                                                  "span": {
+                                                                    "end_line": 62,
+                                                                    "length": 17,
+                                                                    "offset": 2492,
+                                                                    "start_line": 62
+                                                                  }
+                                                                }
+                                                              },
+                                                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/expression/expressions/0/operand",
+                                                              "kind": "XInstanceOfExpression",
+                                                              "span": {
+                                                                "end_line": 62,
+                                                                "length": 32,
+                                                                "offset": 2477,
+                                                                "start_line": 62
+                                                              },
+                                                              "type": "boolean"
+                                                            },
+                                                            "typeArguments": []
+                                                          },
+                                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/expression/expressions/0",
+                                                          "kind": "XUnaryOperation",
+                                                          "span": {
+                                                            "end_line": 62,
+                                                            "length": 35,
+                                                            "offset": 2475,
+                                                            "start_line": 62
+                                                          },
+                                                          "type": "boolean"
+                                                        }
+                                                      ]
+                                                    },
+                                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0/expression",
+                                                    "kind": "XBlockExpression",
+                                                    "span": {
+                                                      "end_line": 62,
+                                                      "length": 35,
+                                                      "offset": 2475,
+                                                      "start_line": 62
+                                                    },
+                                                    "type": "boolean"
+                                                  }
+                                                },
+                                                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallArguments/0",
+                                                "kind": "XClosure",
+                                                "span": {
+                                                  "end_line": 62,
+                                                  "length": 43,
+                                                  "offset": 2468,
+                                                  "start_line": 62
+                                                },
+                                                "type": "(org.omg.sysml.lang.sysml.Membership)=>boolean"
+                                              }
+                                            ],
+                                            "memberCallTarget": {
+                                              "fields": {
+                                                "explicitOperationCall": false,
+                                                "explicitStatic": false,
+                                                "feature": {
+                                                  "$ref": "org.omg.sysml.lang.sysml.Namespace.getOwnedMembership()"
+                                                },
+                                                "invalidFeatureIssueCode": null,
+                                                "memberCallArguments": [],
+                                                "memberCallTarget": {
+                                                  "fields": {
+                                                    "explicitOperationCall": false,
+                                                    "feature": {
+                                                      "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0"
+                                                    },
+                                                    "featureCallArguments": [],
+                                                    "invalidFeatureIssueCode": null,
+                                                    "typeArguments": []
+                                                  },
+                                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallTarget/memberCallTarget",
+                                                  "kind": "XFeatureCall",
+                                                  "span": {
+                                                    "end_line": 62,
+                                                    "length": 15,
+                                                    "offset": 2430,
+                                                    "start_line": 62
+                                                  },
+                                                  "type": "org.omg.sysml.lang.sysml.Namespace"
+                                                },
+                                                "nullSafe": false,
+                                                "typeArguments": []
+                                              },
+                                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget/memberCallTarget",
+                                              "kind": "XMemberFeatureCall",
+                                              "span": {
+                                                "end_line": 62,
+                                                "length": 31,
+                                                "offset": 2430,
+                                                "start_line": 62
+                                              },
+                                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Membership>"
+                                            },
+                                            "nullSafe": false,
+                                            "typeArguments": []
+                                          },
+                                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand/memberCallTarget",
+                                          "kind": "XMemberFeatureCall",
+                                          "span": {
+                                            "end_line": 62,
+                                            "length": 81,
+                                            "offset": 2430,
+                                            "start_line": 62
+                                          },
+                                          "type": "java.lang.Iterable<org.omg.sysml.lang.sysml.Membership>"
+                                        },
+                                        "nullSafe": false,
+                                        "typeArguments": []
+                                      },
+                                      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand/rightOperand",
+                                      "kind": "XMemberFeatureCall",
+                                      "span": {
+                                        "end_line": 62,
+                                        "length": 86,
+                                        "offset": 2430,
+                                        "start_line": 62
+                                      },
+                                      "type": "org.omg.sysml.lang.sysml.Membership"
+                                    },
+                                    "typeArguments": []
+                                  },
+                                  "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if/rightOperand",
+                                  "kind": "XBinaryOperation",
+                                  "span": {
+                                    "end_line": 62,
+                                    "length": 102,
+                                    "offset": 2414,
+                                    "start_line": 62
+                                  },
+                                  "type": "boolean"
+                                },
+                                "typeArguments": []
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/if",
+                              "kind": "XBinaryOperation",
+                              "span": {
+                                "end_line": 62,
+                                "length": 154,
+                                "offset": 2362,
+                                "start_line": 61
+                              },
+                              "type": "boolean"
+                            },
+                            "then": {
+                              "fields": {
+                                "expressions": [
+                                  {
+                                    "fields": {
+                                      "expression": {
+                                        "fields": {
+                                          "explicitOperationCall": true,
+                                          "explicitStatic": false,
+                                          "feature": {
+                                            "$ref": "org.omg.kerml.xtext.scoping.KerMLScopeProvider.scope_owningNamespace(org.omg.sysml.lang.sysml.Element,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)"
+                                          },
+                                          "invalidFeatureIssueCode": null,
+                                          "memberCallArguments": [
+                                            {
+                                              "fields": {
+                                                "explicitOperationCall": false,
+                                                "feature": {
+                                                  "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0"
+                                                },
+                                                "featureCallArguments": [],
+                                                "invalidFeatureIssueCode": null,
+                                                "typeArguments": []
+                                              },
+                                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then/expressions/0/expression/memberCallArguments/0",
+                                              "kind": "XFeatureCall",
+                                              "span": {
+                                                "end_line": 63,
+                                                "length": 7,
+                                                "offset": 2570,
+                                                "start_line": 63
+                                              },
+                                              "type": "org.eclipse.emf.ecore.EObject"
+                                            },
+                                            {
+                                              "fields": {
+                                                "explicitOperationCall": false,
+                                                "feature": {
+                                                  "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/1"
+                                                },
+                                                "featureCallArguments": [],
+                                                "invalidFeatureIssueCode": null,
+                                                "typeArguments": []
+                                              },
+                                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then/expressions/0/expression/memberCallArguments/1",
+                                              "kind": "XFeatureCall",
+                                              "span": {
+                                                "end_line": 63,
+                                                "length": 9,
+                                                "offset": 2579,
+                                                "start_line": 63
+                                              },
+                                              "type": "org.eclipse.emf.ecore.EReference"
+                                            }
+                                          ],
+                                          "memberCallTarget": {
+                                            "fields": {
+                                              "explicitOperationCall": false,
+                                              "feature": {
+                                                "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/0"
+                                              },
+                                              "featureCallArguments": [],
+                                              "invalidFeatureIssueCode": null,
+                                              "typeArguments": []
+                                            },
+                                            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then/expressions/0/expression/memberCallTarget",
+                                            "kind": "XFeatureCall",
+                                            "span": {
+                                              "end_line": 63,
+                                              "length": 15,
+                                              "offset": 2532,
+                                              "start_line": 63
+                                            },
+                                            "type": "org.omg.sysml.lang.sysml.Namespace"
+                                          },
+                                          "nullSafe": false,
+                                          "typeArguments": []
+                                        },
+                                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then/expressions/0/expression",
+                                        "kind": "XMemberFeatureCall",
+                                        "span": {
+                                          "end_line": 63,
+                                          "length": 57,
+                                          "offset": 2532,
+                                          "start_line": 63
+                                        },
+                                        "type": "org.eclipse.xtext.scoping.IScope"
+                                      }
+                                    },
+                                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then/expressions/0",
+                                    "kind": "XReturnExpression",
+                                    "span": {
+                                      "end_line": 63,
+                                      "length": 64,
+                                      "offset": 2525,
+                                      "start_line": 63
+                                    },
+                                    "type": "void"
+                                  }
+                                ]
+                              },
+                              "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1/then",
+                              "kind": "XBlockExpression",
+                              "span": {
+                                "end_line": 64,
+                                "length": 77,
+                                "offset": 2518,
+                                "start_line": 62
+                              },
+                              "type": "void"
+                            }
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then/expressions/1",
+                          "kind": "XIfExpression",
+                          "span": {
+                            "end_line": 64,
+                            "length": 237,
+                            "offset": 2358,
+                            "start_line": 61
+                          },
+                          "type": "void"
+                        }
+                      ]
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1/then",
+                    "kind": "XBlockExpression",
+                    "span": {
+                      "end_line": 67,
+                      "length": 401,
+                      "offset": 2286,
+                      "start_line": 59
+                    },
+                    "type": "void"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/1",
+                "kind": "XIfExpression",
+                "span": {
+                  "end_line": 76,
+                  "length": 963,
+                  "offset": 2246,
+                  "start_line": 59
+                },
+                "type": "void"
+              },
+              {
+                "fields": {
+                  "expression": {
+                    "fields": {
+                      "explicitOperationCall": true,
+                      "explicitStatic": false,
+                      "feature": {
+                        "$ref": "org.omg.kerml.xtext.scoping.KerMLScopeProvider.getScope(org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)"
+                      },
+                      "invalidFeatureIssueCode": null,
+                      "memberCallArguments": [
+                        {
+                          "fields": {
+                            "explicitOperationCall": false,
+                            "feature": {
+                              "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0"
+                            },
+                            "featureCallArguments": [],
+                            "invalidFeatureIssueCode": null,
+                            "typeArguments": []
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/2/expression/memberCallArguments/0",
+                          "kind": "XFeatureCall",
+                          "span": {
+                            "end_line": 77,
+                            "length": 7,
+                            "offset": 3235,
+                            "start_line": 77
+                          },
+                          "type": "org.eclipse.emf.ecore.EObject"
+                        },
+                        {
+                          "fields": {
+                            "explicitOperationCall": false,
+                            "feature": {
+                              "$ref": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/1"
+                            },
+                            "featureCallArguments": [],
+                            "invalidFeatureIssueCode": null,
+                            "typeArguments": []
+                          },
+                          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/2/expression/memberCallArguments/1",
+                          "kind": "XFeatureCall",
+                          "span": {
+                            "end_line": 77,
+                            "length": 9,
+                            "offset": 3244,
+                            "start_line": 77
+                          },
+                          "type": "org.eclipse.emf.ecore.EReference"
+                        }
+                      ],
+                      "memberCallTarget": {
+                        "fields": {
+                          "explicitOperationCall": false,
+                          "feature": {
+                            "$ref": "org.omg.kerml.xtext.scoping.KerMLScopeProvider"
+                          },
+                          "featureCallArguments": [],
+                          "invalidFeatureIssueCode": null,
+                          "typeArguments": []
+                        },
+                        "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/2/expression/memberCallTarget",
+                        "kind": "XFeatureCall",
+                        "span": {
+                          "end_line": 77,
+                          "length": 5,
+                          "offset": 3220,
+                          "start_line": 77
+                        },
+                        "type": "org.omg.kerml.xtext.scoping.KerMLScopeProvider"
+                      },
+                      "nullSafe": false,
+                      "typeArguments": []
+                    },
+                    "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/2/expression",
+                    "kind": "XMemberFeatureCall",
+                    "span": {
+                      "end_line": 77,
+                      "length": 34,
+                      "offset": 3220,
+                      "start_line": 77
+                    },
+                    "type": "org.eclipse.xtext.scoping.IScope"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression/expressions/2",
+                "kind": "XReturnExpression",
+                "span": {
+                  "end_line": 77,
+                  "length": 41,
+                  "offset": 3213,
+                  "start_line": 77
+                },
+                "type": "void"
+              }
+            ]
+          },
+          "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/expression",
+          "kind": "XBlockExpression",
+          "span": {
+            "end_line": 78,
+            "length": 1152,
+            "offset": 2106,
+            "start_line": 55
+          },
+          "type": "void"
+        },
+        "modifiers": [
+          "override"
+        ],
+        "name": "getScope",
+        "parameters": [
+          {
+            "fields": {
+              "annotations": [],
+              "extension": false,
+              "name": "context",
+              "parameterType": {
+                "fields": {
+                  "arguments": [],
+                  "type": {
+                    "$ref": "org.eclipse.emf.ecore.EObject"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0/parameterType",
+                "kind": "JvmParameterizedTypeReference",
+                "span": {
+                  "end_line": 55,
+                  "length": 7,
+                  "offset": 2067,
+                  "start_line": 55
+                }
+              },
+              "varArg": false
+            },
+            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/0",
+            "kind": "XtendParameter",
+            "span": {
+              "end_line": 55,
+              "length": 15,
+              "offset": 2067,
+              "start_line": 55
+            },
+            "type": "org.eclipse.emf.ecore.EObject"
+          },
+          {
+            "fields": {
+              "annotations": [],
+              "extension": false,
+              "name": "reference",
+              "parameterType": {
+                "fields": {
+                  "arguments": [],
+                  "type": {
+                    "$ref": "org.eclipse.emf.ecore.EReference"
+                  }
+                },
+                "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/1/parameterType",
+                "kind": "JvmParameterizedTypeReference",
+                "span": {
+                  "end_line": 55,
+                  "length": 10,
+                  "offset": 2084,
+                  "start_line": 55
+                }
+              },
+              "varArg": false
+            },
+            "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope/parameters/1",
+            "kind": "XtendParameter",
+            "span": {
+              "end_line": 55,
+              "length": 20,
+              "offset": 2084,
+              "start_line": 55
+            },
+            "type": "org.eclipse.emf.ecore.EReference"
+          }
+        ],
+        "returnType": null,
+        "typeParameters": []
+      },
+      "id": "org.omg.sysml.xtext.scoping.SysMLScopeProvider#getScope",
+      "kind": "XtendFunction",
+      "name": "getScope",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/scoping/SysMLScopeProvider.xtend",
+      "span": {
+        "end_line": 78,
+        "length": 1209,
+        "offset": 2049,
+        "start_line": 55
+      }
+    }
+  ],
+  "parser": "org.eclipse.xtend.core.XtendStandaloneSetup",
+  "provenance": {
+    "driver_sha256": "0df5e39b5760827aea74443847433804d8f2b4104a449e030fc859d6854386a9",
+    "exporter_sha256": "2529bffcf29c562459b0706e62ff7ee4de3ab5ff55ee9deded7e4ca180666783",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "sources_sha256": {
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/scoping/SysMLScopeProvider.xtend": "09aff6bd17292eb1572c5da8c773820634942fcb1545399efa15f7d441b2866d"
+    },
+    "xtend_jar_sha256": "aac6d80aaa36f9e897d45c76a6df39cd17764ba53ac86fff91f35252094cf4e0",
+    "xtend_version": "2.38.0"
+  },
+  "schema_version": 1,
+  "source_format": "raw-xtend",
+  "span_encoding": "utf-16-code-units",
+  "symbols": {
+    "java.util.List.indexOf(java.lang.Object)": {
+      "declaring_type": "java.util.List",
+      "identifier": "java.util.List.indexOf(java.lang.Object)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "java.lang.Object"
+      ],
+      "simple_name": "indexOf",
+      "static": false,
+      "type": "int",
+      "varargs": false
+    },
+    "org.eclipse.emf.ecore.EObject": {
+      "identifier": "org.eclipse.emf.ecore.EObject",
+      "kind": "JvmGenericType",
+      "simple_name": "EObject"
+    },
+    "org.eclipse.emf.ecore.EReference": {
+      "identifier": "org.eclipse.emf.ecore.EReference",
+      "kind": "JvmGenericType",
+      "simple_name": "EReference"
+    },
+    "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.BooleanExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "boolean",
+        "boolean"
+      ],
+      "simple_name": "operator_and",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.BooleanExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "boolean"
+      ],
+      "simple_name": "operator_not",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.IntegerExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "int",
+        "int"
+      ],
+      "simple_name": "operator_equals",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.IntegerExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_lessEqualsThan(int,int)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "int",
+        "int"
+      ],
+      "simple_name": "operator_lessEqualsThan",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.IterableExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "java.lang.Iterable<T>",
+        "org.eclipse.xtext.xbase.lib.Functions$Function1<? extends java.lang.Object & super T, java.lang.Boolean>"
+      ],
+      "simple_name": "filter",
+      "static": true,
+      "type": "java.lang.Iterable<T>",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.IterableExtensions.head(java.lang.Iterable)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.IterableExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.IterableExtensions.head(java.lang.Iterable)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "java.lang.Iterable<T>"
+      ],
+      "simple_name": "head",
+      "static": true,
+      "type": "T",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(java.lang.Object,java.lang.Object)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.ObjectExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(java.lang.Object,java.lang.Object)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
+      "simple_name": "operator_equals",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleEquals(java.lang.Object,java.lang.Object)": {
+      "declaring_type": "org.eclipse.xtext.xbase.lib.ObjectExtensions",
+      "identifier": "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleEquals(java.lang.Object,java.lang.Object)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "java.lang.Object",
+        "java.lang.Object"
+      ],
+      "simple_name": "operator_tripleEquals",
+      "static": true,
+      "type": "boolean",
+      "varargs": false
+    },
+    "org.omg.kerml.xtext.scoping.KerMLScopeProvider": {
+      "identifier": "org.omg.kerml.xtext.scoping.KerMLScopeProvider",
+      "kind": "JvmGenericType",
+      "simple_name": "KerMLScopeProvider"
+    },
+    "org.omg.kerml.xtext.scoping.KerMLScopeProvider.getScope(org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)": {
+      "declaring_type": "org.omg.kerml.xtext.scoping.KerMLScopeProvider",
+      "identifier": "org.omg.kerml.xtext.scoping.KerMLScopeProvider.getScope(org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "org.eclipse.emf.ecore.EObject",
+        "org.eclipse.emf.ecore.EReference"
+      ],
+      "simple_name": "getScope",
+      "static": false,
+      "type": "org.eclipse.xtext.scoping.IScope",
+      "varargs": false
+    },
+    "org.omg.kerml.xtext.scoping.KerMLScopeProvider.scope_owningNamespace(org.omg.sysml.lang.sysml.Element,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)": {
+      "declaring_type": "org.omg.kerml.xtext.scoping.KerMLScopeProvider",
+      "identifier": "org.omg.kerml.xtext.scoping.KerMLScopeProvider.scope_owningNamespace(org.omg.sysml.lang.sysml.Element,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EReference)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "org.omg.sysml.lang.sysml.Element",
+        "org.eclipse.emf.ecore.EObject",
+        "org.eclipse.emf.ecore.EReference"
+      ],
+      "simple_name": "scope_owningNamespace",
+      "static": false,
+      "type": "org.eclipse.xtext.scoping.IScope",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Element.getOwningNamespace()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Element",
+      "identifier": "org.omg.sysml.lang.sysml.Element.getOwningNamespace()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwningNamespace",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Namespace",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Element.getOwningRelationship()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Element",
+      "identifier": "org.omg.sysml.lang.sysml.Element.getOwningRelationship()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwningRelationship",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Relationship",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Feature.getOwnedFeatureChaining()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Feature",
+      "identifier": "org.omg.sysml.lang.sysml.Feature.getOwnedFeatureChaining()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwnedFeatureChaining",
+      "static": false,
+      "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.FeatureChaining>",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Feature.getOwningType()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Feature",
+      "identifier": "org.omg.sysml.lang.sysml.Feature.getOwningType()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwningType",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Type",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.FeatureChaining": {
+      "identifier": "org.omg.sysml.lang.sysml.FeatureChaining",
+      "kind": "JvmGenericType",
+      "simple_name": "FeatureChaining"
+    },
+    "org.omg.sysml.lang.sysml.FeatureChaining.getFeatureChained()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.FeatureChaining",
+      "identifier": "org.omg.sysml.lang.sysml.FeatureChaining.getFeatureChained()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getFeatureChained",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Feature",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.FeatureMembership": {
+      "identifier": "org.omg.sysml.lang.sysml.FeatureMembership",
+      "kind": "JvmGenericType",
+      "simple_name": "FeatureMembership"
+    },
+    "org.omg.sysml.lang.sysml.Membership": {
+      "identifier": "org.omg.sysml.lang.sysml.Membership",
+      "kind": "JvmGenericType",
+      "simple_name": "Membership"
+    },
+    "org.omg.sysml.lang.sysml.Membership.getMembershipOwningNamespace()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Membership",
+      "identifier": "org.omg.sysml.lang.sysml.Membership.getMembershipOwningNamespace()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getMembershipOwningNamespace",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Namespace",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Namespace.getOwnedMembership()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Namespace",
+      "identifier": "org.omg.sysml.lang.sysml.Namespace.getOwnedMembership()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwnedMembership",
+      "static": false,
+      "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Membership>",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.ReferenceSubsetting": {
+      "identifier": "org.omg.sysml.lang.sysml.ReferenceSubsetting",
+      "kind": "JvmGenericType",
+      "simple_name": "ReferenceSubsetting"
+    },
+    "org.omg.sysml.lang.sysml.Subsetting.getOwningFeature()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Subsetting",
+      "identifier": "org.omg.sysml.lang.sysml.Subsetting.getOwningFeature()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwningFeature",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Feature",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.SuccessionAsUsage": {
+      "identifier": "org.omg.sysml.lang.sysml.SuccessionAsUsage",
+      "kind": "JvmGenericType",
+      "simple_name": "SuccessionAsUsage"
+    },
+    "org.omg.sysml.lang.sysml.TransitionUsage": {
+      "identifier": "org.omg.sysml.lang.sysml.TransitionUsage",
+      "kind": "JvmGenericType",
+      "simple_name": "TransitionUsage"
+    },
+    "org.omg.sysml.lang.sysml.TransitionUsage.getSuccession()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.TransitionUsage",
+      "identifier": "org.omg.sysml.lang.sysml.TransitionUsage.getSuccession()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getSuccession",
+      "static": false,
+      "type": "org.omg.sysml.lang.sysml.Succession",
+      "varargs": false
+    },
+    "org.omg.sysml.lang.sysml.Type.getOwnedEndFeature()": {
+      "declaring_type": "org.omg.sysml.lang.sysml.Type",
+      "identifier": "org.omg.sysml.lang.sysml.Type.getOwnedEndFeature()",
+      "kind": "JvmOperation",
+      "parameter_types": [],
+      "simple_name": "getOwnedEndFeature",
+      "static": false,
+      "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Feature>",
+      "varargs": false
+    },
+    "org.omg.sysml.xtext.scoping.SysMLScopeProvider.featureRelationship(org.eclipse.emf.ecore.EObject)": {
+      "declaring_type": "org.omg.sysml.xtext.scoping.SysMLScopeProvider",
+      "identifier": "org.omg.sysml.xtext.scoping.SysMLScopeProvider.featureRelationship(org.eclipse.emf.ecore.EObject)",
+      "kind": "JvmOperation",
+      "parameter_types": [
+        "org.eclipse.emf.ecore.EObject"
+      ],
+      "simple_name": "featureRelationship",
+      "static": false,
+      "type": "org.eclipse.emf.ecore.EObject",
+      "varargs": false
+    }
+  },
+  "types": {
+    "boolean": {
+      "kind": "JvmPrimitiveType",
+      "supertypes": []
+    },
+    "int": {
+      "kind": "JvmPrimitiveType",
+      "supertypes": []
+    },
+    "java.lang.Iterable": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "java.lang.Object": {
+      "kind": "JvmGenericType",
+      "supertypes": []
+    },
+    "java.util.Collection": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Iterable<E>"
+      ]
+    },
+    "java.util.List": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.util.SequencedCollection<E>"
+      ]
+    },
+    "java.util.SequencedCollection": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.util.Collection<E>"
+      ]
+    },
+    "org.eclipse.emf.common.notify.Notifier": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.emf.common.util.EList": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.util.List<E>"
+      ]
+    },
+    "org.eclipse.emf.ecore.EModelElement": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.EObject"
+      ]
+    },
+    "org.eclipse.emf.ecore.ENamedElement": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.EModelElement"
+      ]
+    },
+    "org.eclipse.emf.ecore.EObject": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.common.notify.Notifier"
+      ]
+    },
+    "org.eclipse.emf.ecore.EReference": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.EStructuralFeature"
+      ]
+    },
+    "org.eclipse.emf.ecore.EStructuralFeature": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.ETypedElement"
+      ]
+    },
+    "org.eclipse.emf.ecore.ETypedElement": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.ENamedElement"
+      ]
+    },
+    "org.eclipse.xtext.scoping.IScope": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.scoping.IScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.scoping.impl.AbstractScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.xtext.scoping.IScopeProvider"
+      ]
+    },
+    "org.eclipse.xtext.scoping.impl.DelegatingScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.eclipse.xtext.scoping.impl.AbstractScopeProvider",
+        "org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider"
+      ]
+    },
+    "org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.xtext.scoping.IScopeProvider"
+      ]
+    },
+    "org.eclipse.xtext.xbase.lib.BooleanExtensions": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.xbase.lib.Functions$Function1": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.xbase.lib.IntegerExtensions": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.xbase.lib.IterableExtensions": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.eclipse.xtext.xbase.lib.ObjectExtensions": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object"
+      ]
+    },
+    "org.omg.kerml.expressions.xtext.scoping.AbstractKerMLExpressionsScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.eclipse.xtext.scoping.impl.DelegatingScopeProvider"
+      ]
+    },
+    "org.omg.kerml.expressions.xtext.scoping.KerMLExpressionsScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.omg.kerml.expressions.xtext.scoping.AbstractKerMLExpressionsScopeProvider"
+      ]
+    },
+    "org.omg.kerml.xtext.scoping.AbstractKerMLScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.omg.kerml.expressions.xtext.scoping.KerMLExpressionsScopeProvider"
+      ]
+    },
+    "org.omg.kerml.xtext.scoping.KerMLScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.omg.kerml.xtext.scoping.AbstractKerMLScopeProvider"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.ActionUsage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.OccurrenceUsage",
+        "org.omg.sysml.lang.sysml.Step"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Connector": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Feature",
+        "org.omg.sysml.lang.sysml.Relationship"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.ConnectorAsUsage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Usage",
+        "org.omg.sysml.lang.sysml.Connector"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Element": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.eclipse.emf.ecore.EObject"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Feature": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Type"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.FeatureChaining": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Relationship"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.FeatureMembership": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.OwningMembership"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Membership": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Relationship"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Namespace": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Element"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.OccurrenceUsage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Usage"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.OwningMembership": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Membership"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.ReferenceSubsetting": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Subsetting"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Relationship": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Element"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Specialization": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Relationship"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Step": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Feature"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Subsetting": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Specialization"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Succession": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Connector"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.SuccessionAsUsage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.ConnectorAsUsage",
+        "org.omg.sysml.lang.sysml.Succession"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.TransitionUsage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.ActionUsage"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Type": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Namespace"
+      ]
+    },
+    "org.omg.sysml.lang.sysml.Usage": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "java.lang.Object",
+        "org.omg.sysml.lang.sysml.Feature"
+      ]
+    },
+    "org.omg.sysml.xtext.scoping.SysMLScopeProvider": {
+      "kind": "JvmGenericType",
+      "supertypes": [
+        "org.omg.kerml.xtext.scoping.KerMLScopeProvider"
+      ]
+    },
+    "void": {
+      "kind": "JvmVoid",
+      "supertypes": []
+    }
+  }
+}

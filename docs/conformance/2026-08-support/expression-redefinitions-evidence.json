@@ -1,0 +1,271 @@
+{
+  "schema": "dev.mercurio.expression-redefinitions-evidence.v1",
+  "scope": "Ordinary computed redefinition admission and effective names for twenty concrete ExpressionAdapter bindings in detached, Package and Class contexts, with zero/two explicit redefinitions. Not complete expression transformation or validation.",
+  "inputs": {
+    "tools/generate_expression_redefinitions.py": "b597026afc2e45eb8b409e54b6097741826b4a834df531f6aad60d43741adbd1",
+    "tools/test_expression_redefinitions.py": "91487b9c614468bbf72cbdba00e979f74ae1b07c39c4dfb1fc1a9d203af82f20",
+    "tools/run_expression_redefinition_probe.py": "3787359b3572ece004d7ea9fcc9976fbbbdb2aeafdd8821cff69ed3503436b11",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotExpressionRedefinitionProbe.java": "877477dd7712d40831fe5f1785f1be39200c3fd415d5f1a196a771f4fbaebe34",
+    "docs/conformance/2026-08-support/expression-redefinition-pilot-controls.json": "094f252218e78339339a188a7f3acffe403c789474c717a4b47ff7052a69a746",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/expression_redefinitions_generated.rs": "c07e1c227e2ec86dd9d19d45693f516fbb325d36c0323dd57d8f8d1116e45390",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported_representation": [
+    "Resolved typed ExpressionAdapter.getRelevantFeatures Java AST",
+    "Resolved typed ExpressionUtil.isTransitionGuard Java AST",
+    "Pinned Ecore factories, canonical ownership and enumeration value contracts",
+    "Resolved inherited adapter method dispatch for twenty concrete expression kinds"
+  ],
+  "native_consumers": [
+    "definition_redefined_features",
+    "generated_effective_names",
+    "definition_expression_transition_guard"
+  ],
+  "generation_boundary": "A bounded reviewed full-tree contract, normalized only for unstable javac capture IDs, drives concrete binding admission, resolved dependency names and enum policy constants. Branch implementation is specialized to that reviewed tree, not a general Java/Xtend compiler. Any tree/dispatch change rejects generation.",
+  "handwritten_dependencies": [
+    "Canonical Ecore ownership bridge and checked enum reads",
+    "Shared Feature ordinary redefinition query, ordering and naming",
+    "Stored explicit redefinition endpoints, pending/invalid handling and persistence"
+  ],
+  "normative_reference": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "file": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      189,
+      190,
+      191
+    ],
+    "scope": "Feature effective names derive from namingFeature; default namingFeature is the first owned redefinition. Expression binding admission must preserve inherited Feature semantics.",
+    "disagreements": "No new disagreement observed in the bounded ordinary/name matrix; this does not resolve prior release disagreements."
+  },
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-child-native-tests.log",
+      "sha256": "8b82edf9e7290264fa1efcb30935c6e87953d74d5decae20d46a86a06b0a693f",
+      "passed": 302
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-redefinitions-focused-tests.log",
+      "sha256": "fb964ab759b8c7eaefd4be291c9408fa30c76453cc091c244ad21d59cf2abd20",
+      "passed": 11
+    },
+    "ordinary_factory_controls": 120,
+    "guard_classification_controls": 60,
+    "generator_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-redefinitions-generator-tests.log",
+      "sha256": "f987982a03897518311989993fb682cb26e1e45f9b88b7c4ea22dd047860aa22",
+      "passed": 5
+    },
+    "certificate_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-redefinitions-certificate-tests.log",
+      "sha256": "33d4388539c3d7f1a10f44b1fee5299a33bb66394fc3a4a3784b6bda246ce33d",
+      "passed": 15
+    },
+    "plan_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-redefinitions-plan-tests.log",
+      "sha256": "3a3d0770d1017f74730b3bf5dfdc882994b0f198fb831589bb558f0b38585226",
+      "passed": 14
+    },
+    "contexts": [
+      "Fixed twenty-kind matrix: detached/Package/Class x explicit 0/2",
+      "Canonical ordered redefinitions and naming",
+      "Reversed graph storage",
+      "Closed Ecore publication and AbstractSyntax JSON persistence/reload",
+      "Missing canonical relationships and inconsistent membership rejection",
+      "Three transition membership kinds per concrete expression, invalid/missing enum rejection",
+      "Transition-guard algorithm remains rejected; positional admission remains unchanged"
+    ],
+    "oracle_reproduction": "Pinned exporter --check reproduces all 180 observations and resolved trees exactly.",
+    "initial_plan_failure": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-redefinitions-plan-tests-initial-stale.log",
+      "reason": "Checker rejected expected stale operand-construction hashes before source/certificate refresh. Final 14-test plan suite passes without closure changes."
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "remaining_required_behavior": [
+    "Transition-guard own/general-type and guard library redefinition algorithms",
+    "FeatureValue owning-Type branch: imported policy only, native rejects until qualified",
+    "Expression positional end/parameter/constructor algorithms: original adapter checks retain rejection",
+    "Invariant negated/default selection",
+    "Inherited and pending expression-specific source controls beyond prior shared Feature evidence",
+    "Whole source-set contribution/validation lifecycle and final sample/Pilot/timing qualification"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "ordinary_feature_bindings_scoped": 50,
+    "ordinary_feature_bindings_inventory": 79,
+    "bindings_delta": 20,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  },
+  "feature_status": [
+    {
+      "feature": "twenty expression ordinary redefinition bindings",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "120 bounded factory controls including persistence and invalid ownership; not all contexts"
+    },
+    {
+      "feature": "transition guard predicate",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "60 classification controls, invalid/missing enum cases"
+    },
+    {
+      "feature": "transition guard redefinition algorithm",
+      "imported": true,
+      "native_consumer": false,
+      "verified": false
+    },
+    {
+      "feature": "FeatureValue owning-Type policy",
+      "imported": true,
+      "native_consumer": false,
+      "verified": false
+    }
+  ],
+  "resource_assessment": {
+    "status": "blocked",
+    "stage": "construction_or_linking",
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: expression defaults require detached, package or FeatureValue contexts; performance/positional contexts remain open\", kind: Syntax, span: None, subjects: [] }",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources": 16,
+    "source_bytes": 121245,
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-expression-redefinitions-native-results.jsonl",
+    "result_sha256": "092e3fa437b1c95e96fcf63aee24ea63265082ba033497227d16655bbc990aeb",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-expression-redefinitions-native-progress.log",
+    "progress_sha256": "eb92205f3b40f2c5387de8d0730791284073198c748975b721a7eb92deec2077",
+    "binary_sha256": "2f44a64f8da79c186571659e7a22aa67f0ac19ad35af84be0570568fab1a745d",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "input_manifest_sha256": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "first_blocker_only": true,
+    "profile": "Optimized release assessment; not comparable Pilot benchmark",
+    "boundary": "Clears Invariant computed redefinition dispatch; expression defaults in performance/positional contexts remain unsupported. No document published or promoted."
+  },
+  "remaining_binding_groups": [
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.AcceptActionUsageAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "AcceptActionUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    },
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "ActionUsage",
+        "AnalysisCaseUsage",
+        "AssignmentActionUsage",
+        "CalculationUsage",
+        "CaseUsage",
+        "DecisionNode",
+        "ExhibitStateUsage",
+        "ForLoopActionUsage",
+        "ForkNode",
+        "IfActionUsage",
+        "IncludeUseCaseUsage",
+        "JoinNode",
+        "MergeNode",
+        "PerformActionUsage",
+        "StateUsage",
+        "TransitionUsage",
+        "UseCaseUsage",
+        "VerificationCaseUsage",
+        "WhileLoopActionUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    },
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.RequirementUsageAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "ConcernUsage",
+        "RequirementUsage",
+        "SatisfyRequirementUsage",
+        "ViewpointUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    },
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "PayloadFeature",
+        "ReferenceUsage",
+        "RenderingUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    },
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.SendActionUsageAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "SendActionUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    },
+    {
+      "resolved_dispatch": {
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "addComputedRedefinitions": "org.omg.sysml.adapter.TerminateActionUsageAdapter#addComputedRedefinitions",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      },
+      "bindings": [
+        "TerminateActionUsage"
+      ],
+      "status": "unqualified across the ordinary fixed matrix; additional dispatch/dependency audit required"
+    }
+  ]
+}

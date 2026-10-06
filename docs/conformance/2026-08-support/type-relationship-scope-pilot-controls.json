@@ -1,0 +1,2193 @@
+{
+  "cases": [
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "A"
+          ]
+        }
+      ],
+      "name": "Unioning_lexical",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C unions A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "C",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "C",
+            "A"
+          ]
+        }
+      ],
+      "name": "Unioning_nested",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C unions A { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "G",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "G",
+            "A"
+          ]
+        }
+      ],
+      "name": "Unioning_inherited",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier G { classifier A; } classifier C specializes G unions A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Unioning_imported",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C unions A { private import Q::*; } package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Unioning_qualified",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C unions Q::A; package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 88,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Unioning_missing",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C unions Missing; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 88,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Unioning_wrong_kind",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C unions Q; package Q; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 88,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q::A'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "unioningType",
+          "kind": "Unioning",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Unioning_private",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C unions Q::A; package Q { private classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "A"
+          ]
+        }
+      ],
+      "name": "Intersecting_lexical",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C intersects A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "C",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "C",
+            "A"
+          ]
+        }
+      ],
+      "name": "Intersecting_nested",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C intersects A { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "G",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "G",
+            "A"
+          ]
+        }
+      ],
+      "name": "Intersecting_inherited",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier G { classifier A; } classifier C specializes G intersects A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Intersecting_imported",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C intersects A { private import Q::*; } package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Intersecting_qualified",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C intersects Q::A; package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 92,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Intersecting_missing",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C intersects Missing; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 92,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Intersecting_wrong_kind",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C intersects Q; package Q; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 92,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q::A'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "intersectingType",
+          "kind": "Intersecting",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Intersecting_private",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C intersects Q::A; package Q { private classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "A"
+          ]
+        }
+      ],
+      "name": "Differencing_lexical",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C differences A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "C",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "C",
+            "A"
+          ]
+        }
+      ],
+      "name": "Differencing_nested",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C differences A { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "G",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "G",
+            "A"
+          ]
+        }
+      ],
+      "name": "Differencing_inherited",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier G { classifier A; } classifier C specializes G differences A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Differencing_imported",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C differences A { private import Q::*; } package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Differencing_qualified",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C differences Q::A; package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 93,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Differencing_missing",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C differences Missing; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 93,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Differencing_wrong_kind",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C differences Q; package Q; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 93,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q::A'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "differencingType",
+          "kind": "Differencing",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Differencing_private",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C differences Q::A; package Q { private classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_lexical",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C disjoint from A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "C",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "C",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_nested",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier A; classifier C disjoint from A { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "G",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.G.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "G",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_inherited",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier G { classifier A; } classifier C specializes G disjoint from A; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_imported",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C disjoint from A { private import Q::*; } package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "Q",
+          "A"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "Q",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_qualified",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C disjoint from Q::A; package Q { classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 95,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Disjoining_missing",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C disjoint from Missing; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 95,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Disjoining_wrong_kind",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C disjoint from Q; package Q; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 95,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'Q::A'.",
+          "source_uri": "memory:/scope.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "Base.Anything",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.C",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.Q.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P.Q",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "C"
+          ],
+          "resolved": false
+        }
+      ],
+      "name": "Disjoining_private",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { classifier Anything; } package P { classifier C disjoint from Q::A; package Q { private classifier A; } }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored Type relationship endpoint lookup only; no validation or Type set semantics",
+        "target_path": [
+          "P",
+          "B"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Classifier",
+          "name": "P.A",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Classifier",
+          "name": "P.B",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/scope.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P"
+          ],
+          "resolved": true,
+          "target_kind": "Classifier",
+          "target_path": [
+            "P",
+            "B"
+          ],
+          "type_disjoined_path": [
+            "P",
+            "A"
+          ]
+        }
+      ],
+      "name": "Disjoining_standalone",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package P { classifier A; classifier B; disjoint A from B; }",
+          "uri": "memory:/scope.kerml"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "79e7da9b25f1864bb0d642ba5be7ab57f5fdf50ebfc4727ba8226c214866601d",
+    "helper_sha256": "966783e02f317eafd6e2559ea9580a3f96b62b7d1e257a84892b67da386f961a",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerMLRuntimeModule.xtend": "6af5a7dad3636f094210ce44146ae62e0bb81e60f478cd4d09660a4b310c7b58",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/naming/KerMLQualifiedNameProvider.java": "4f37219aaa8b63ac01525bc3e0fd2c8981bdd44006748e0ad5317ef5858472cf",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScope.xtend": "0bac05fcd4e104d21e9fee857ae069d7637c9bbebf7a926268c1b12b5b6989c6",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScopeProvider.xtend": "1de40e4a52087c70f0a514aa3aa111a05f741f135bb39bdfd8b25745e25fb6cb",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend": "42b8eda7fec0ff3031e025654f9341a9f45db0822e6f0ad3185f0f1981c501d9",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    }
+  },
+  "scope": "Thirty-three pinned Xtext source controls for Type relationship scope origins. Positive, negative, nested, inherited, imported and qualified contexts; stored endpoint identity only, not full validation or Type set semantics."
+}

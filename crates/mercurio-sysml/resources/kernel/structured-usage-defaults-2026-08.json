@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "6859079dc29b625b396679d76f491c942dbc480d3b2700b875cd35bde725fdc7",
+    "export_sha256": "856600807467251d07d4bcd29acb8ce83ca830b69b03015c8863a3bb44d15464",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 24284,
+      "relationship_count": 198690,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "sysml/src/examples/Simple Tests/ActionTest.sysml",
+        "sysml/src/examples/Simple Tests/AliasTest.sysml",
+        "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+        "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+        "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+        "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+        "sysml/src/examples/Simple Tests/CommentTest.sysml",
+        "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+        "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+        "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+        "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+        "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+        "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+        "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+        "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+        "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+        "sysml/src/examples/Simple Tests/ImportTest.sysml",
+        "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+        "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+        "sysml/src/examples/Simple Tests/ItemTest.sysml",
+        "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+        "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+        "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+        "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+        "sysml/src/examples/Simple Tests/PartTest.sysml",
+        "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+        "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+        "sysml/src/examples/Simple Tests/StateTest.sysml",
+        "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+        "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+        "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+        "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+        "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+        "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+        "sysml/src/examples/Simple Tests/ViewTest.sysml"
+      ],
+      "exported_at_utc": "2026-09-17T22:51:17.376124Z"
+    },
+    "selected_elements": {
+      "InputModel::sysml/src/examples/Simple Tests/StructuredControlTest.sysml::15::IfActionUsage": "IfNode",
+      "InputModel::sysml/src/examples/Simple Tests/StructuredControlTest.sysml::24::WhileLoopActionUsage": "WhileLoopNode",
+      "InputModel::sysml/src/examples/Simple Tests/StructuredControlTest.sysml::32::ForLoopActionUsage": "ForLoopNode"
+    },
+    "selected_member_elements": {
+      "InputModel::sysml/src/examples/Simple Tests/StructuredControlTest.sysml::7::IfActionUsage": "IfNode:else"
+    }
+  },
+  "usage_type_defaults": {
+    "IfNode": {
+      "type_ref": "Actions::IfThenAction",
+      "member_type_refs": {
+        "else": "Actions::IfThenElseAction"
+      }
+    },
+    "WhileLoopNode": {
+      "type_ref": "Actions::WhileLoopAction"
+    },
+    "ForLoopNode": {
+      "type_ref": "Actions::ForLoopAction"
+    }
+  }
+}

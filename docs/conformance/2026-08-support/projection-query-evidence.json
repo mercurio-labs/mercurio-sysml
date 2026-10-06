@@ -1,0 +1,126 @@
+{
+  "schema": "dev.mercurio.projection-query-evidence.v1",
+  "scope": "One immutable query view across existing Feature/end/parameter/result projections. Infrastructure verification against cached independent observations; not new semantics or a family certificate.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "docs/conformance/2026-08-support/normative-inheritance.json": "f534b050264b9e23ec522b2d712a77199da7e044dab0490a95315a5738d32ee1",
+    "docs/conformance/2026-08-support/inheritance-dag-query-evidence.json": "335ff75e69c4b37b2ae0de554c8ff8c5eff62a997ddb174e4d751c60900e6604",
+    "docs/conformance/2026-08-support/projection-query-batch-contract.md": "03ccad408890cef99f73eb648815fdcdab1fd7b7718b5446ab6f8df04e1a704a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-view-controls.log": "1b31ed41e213acd85970e5b0d5e46633435f2571b33db20fa25afdd9a40f5c24",
+    "docs/conformance/2026-08-support/enum-trigger-states-projection-query-assessment.json": "089f1a599246327863f81795b2ace08b14fcb43e0e218a3a146b8834b568b248",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-release-build.log": "2ea797d860b0aa9cc5c1d9bc99004e12e93161f03aa993c209ce153d98aa0417",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-projection-query-progress.log": "261ef3e943118e3e9e57dc0633f54c3d34629adc86623909bd55e97f66e69e67",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-tool-tests.log": "845a061d35d1109088b1493575c33c3c109e73f41750af62dbb23f0ba0c64dfc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-plan-tests.log": "0f2853dd94922cd0f0af77d105f9a23d16c4a9aee383b1945b10d846294cec27",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-certificate-tests.log": "9cc41f01ef1e3d4ee0624d94482c43a6d1bf1c735b54955e72640c0be04c9e82",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-trace-tests.log": "46a59d823d772c3809446eba836399e2612ba33924b6c71abe8e15b736b8f4b7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "definitions": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json",
+    "policies": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json",
+    "representation": "Resolved delegate identities, Ecore subsets/ancestry/ownership and bounded parameter/positional selection programs."
+  },
+  "native_consumption": {
+    "consumers": [
+      "definition_owned_features_query",
+      "definition_end_features_query",
+      "definition_effective_features_query",
+      "definition_positional_ends_query",
+      "definition_parameter_collection_query",
+      "definition_relevant_parameters_query",
+      "definition_positional_parameters_query",
+      "definition_result_parameter_query",
+      "generated_result_parameter_query",
+      "generated_owned_result_parameter_query"
+    ],
+    "handwritten_rust": "Ownership, effective inheritance, positional navigation, result/general traversal and implicit chaining equivalence remain explicit Rust algorithms consuming imported definitions.",
+    "change": "Propagate the computed-redefinition caller view through indexed ownership reads, general-type/scope queries, bounded DAG inheritance traversal, directed/result selection and implicit-chain duplicate suppression. Standalone entry points construct one view. Preserve original diagnostic boundaries including duplicate empty collections.",
+    "remaining_standalone_dependencies": [
+      "Additional-member readiness/transition and multiplicity services retain their existing graph-based interfaces. Strategy selection and general-type producer internals still contain graph-facing helpers. This batch does not claim elimination of every index construction."
+    ]
+  },
+  "verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "native_definition_tests_passed": 379,
+    "focused_tests_passed": 3,
+    "pilot_projection_cases_retained": 2511,
+    "pilot_projection_graph_orders": 2,
+    "caller_view_controls": {
+      "cases": 12,
+      "persisted_ordered_views": 24,
+      "repeated_queries": 48,
+      "observer_proves_general_type_view_consumption": true
+    },
+    "invalid_controls": [
+      "duplicate identities",
+      "missing member endpoints",
+      "empty collections duplicate guard"
+    ],
+    "fresh_full_pilot_comparison": false,
+    "comparable_pilot_timing": false,
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-projection-query-assessment.json",
+      "status": "time_box_expired",
+      "time_box_seconds": 300,
+      "parsed_input_files": 25,
+      "outcome": null,
+      "qualification": "not_assessed"
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "release_build_passed": true,
+    "candidate_pipeline_tests_passed": 8,
+    "latest_full_native_regression_passed": 379
+  },
+  "remaining": [
+    "Actual library/caller lifecycle, integrated enum constraints/persistence and global parser/model-construction contracts remain unqualified. No complete family contract is satisfied by projection infrastructure controls."
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

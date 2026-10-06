@@ -1,0 +1,815 @@
+{
+  "binding": "Succession",
+  "controls": [
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "detached",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "Package",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "Class",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "detached",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "Package",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 0,
+      "owner": "Class",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 0,
+      "owner": "detached",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 0,
+      "owner": "Package",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 0,
+      "owner": "Class",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "detached",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "Package",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "Class",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "detached",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "Package",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 1,
+      "owner": "Class",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 1,
+      "owner": "detached",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 1,
+      "owner": "Package",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 1,
+      "owner": "Class",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "detached",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Package",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Class",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "detached",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Package",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Class",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "detached",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Package",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Occurrences::happensBeforeLinks",
+      "owned_ends": 2,
+      "owner": "Class",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "detached",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "Package",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "Class",
+      "typing": "none"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "detached",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "Package",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Links::links",
+      "owned_ends": 3,
+      "owner": "Class",
+      "typing": "Class"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 3,
+      "owner": "detached",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 3,
+      "owner": "Package",
+      "typing": "Structure"
+    },
+    {
+      "default_supertype": "Objects::linkObjects",
+      "owned_ends": 3,
+      "owner": "Class",
+      "typing": "Structure"
+    }
+  ],
+  "defaults": {
+    "base": "Links::links",
+    "binary": "Occurrences::happensBeforeLinks",
+    "binaryObject": "Occurrences::happensBeforeLinks",
+    "object": "Objects::linkObjects"
+  },
+  "methods": {
+    "dispatch": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.FeatureAdapter#addDefaultGeneralType",
+      "computeImplicitGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#computeImplicitGeneralTypes",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectorAdapter#getDefaultSupertype",
+      "getSpecializationEClass": "org.omg.sysml.adapter.FeatureAdapter#getSpecializationEClass",
+      "hasStructureType": "org.omg.sysml.adapter.FeatureAdapter#hasStructureType"
+    },
+    "selector": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "symbol": "org.omg.sysml.adapter.ConnectorAdapter#getTarget",
+            "type": "org.omg.sysml.lang.sysml.Connector"
+          },
+          "kind": "VARIABLE",
+          "name": "target",
+          "type": "org.omg.sysml.lang.sysml.Connector"
+        },
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "arguments": [
+                {
+                  "kind": "IDENTIFIER",
+                  "name": "target",
+                  "type": "org.omg.sysml.lang.sysml.Connector"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "org.omg.sysml.lang.sysml.Type"
+              ],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "TypeUtil",
+                "type": "org.omg.sysml.util.TypeUtil"
+              },
+              "symbol": "org.omg.sysml.util.TypeUtil#getOwnedEndFeaturesOf",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Feature>"
+            },
+            "symbol": "java.util.List#size",
+            "type": "int"
+          },
+          "kind": "VARIABLE",
+          "name": "numEnds",
+          "type": "int"
+        },
+        {
+          "expression": {
+            "condition": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#hasStructureType",
+              "type": "boolean"
+            },
+            "false": {
+              "condition": {
+                "kind": "NOT_EQUAL_TO",
+                "left": {
+                  "kind": "IDENTIFIER",
+                  "name": "numEnds",
+                  "type": "int"
+                },
+                "right": {
+                  "kind": "INT_LITERAL",
+                  "type": "int",
+                  "value": 2
+                },
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "binary"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "base"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "condition": {
+                "kind": "NOT_EQUAL_TO",
+                "left": {
+                  "kind": "IDENTIFIER",
+                  "name": "numEnds",
+                  "type": "int"
+                },
+                "right": {
+                  "kind": "INT_LITERAL",
+                  "type": "int",
+                  "value": 2
+                },
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "binaryObject"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "object"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "type": "java.lang.String"
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "ast_helper_sha256": "f1f08a4094205c493772900a0be8df3a94d9add28e40b827df68c8b4a4f9c115",
+    "driver_sha256": "abd8b595e71c638a0b540053ea12953ab283abac56e3378effcef4bcc4232288",
+    "helper_sha256": "5ffab8b3bdc49fee171682bdb467ee7c61f1ec3b68de610b302508cd597dce03",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectorAdapter.java": "16df91fa326099d0bf70ac8886ca1f3c9a3b86f1b69230c37df9c0ebc56cdc7f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAdapter.java": "cfbd48e601d4cf3eea826010705011d51bc96da2481152f782f07f2a1442621d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "998b603de48883c0ccdbd020dec8afab20795e3e1c0711a6856b9f1d7c944000",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ImplicitGeneralizationMap.java": "71008c5448cb20b26b8dd96b74fe8d6c573cdc1ec2abda82c56534d2167436ce",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    },
+    "toolchain": {
+      "java": "openjdk version \"21.0.6\" 2025-01-21 LTS\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+      "javac": "javac 21.0.6"
+    }
+  },
+  "schema": "dev.mercurio.connector-defaults.v1",
+  "scope": "Resolved shared Connector selector with separate Succession and SuccessionAsUsage dispatch/maps; override behavior is recorded as a separate semantic dependency. Controls use explicit complete input types and owned end memberships. Native owned-end collection, structure ancestry, default installation, resource lookup and transformation completeness are separate obligations.",
+  "succession_as_usage": {
+    "binding": "SuccessionAsUsage",
+    "controls": [
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "detached",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "Package",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "Class",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "detached",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "Package",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 0,
+        "owner": "Class",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 0,
+        "owner": "detached",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 0,
+        "owner": "Package",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 0,
+        "owner": "Class",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "detached",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "Package",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "Class",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "detached",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "Package",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 1,
+        "owner": "Class",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 1,
+        "owner": "detached",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 1,
+        "owner": "Package",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 1,
+        "owner": "Class",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "detached",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Package",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Class",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "detached",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Package",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Class",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "detached",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Package",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 2,
+        "owner": "Class",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "detached",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "Package",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "Class",
+        "typing": "none"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "detached",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "Package",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Occurrences::happensBeforeLinks",
+        "owned_ends": 3,
+        "owner": "Class",
+        "typing": "Class"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 3,
+        "owner": "detached",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 3,
+        "owner": "Package",
+        "typing": "Structure"
+      },
+      {
+        "default_supertype": "Objects::objects",
+        "owned_ends": 3,
+        "owner": "Class",
+        "typing": "Structure"
+      }
+    ],
+    "defaults": {
+      "base": "Occurrences::happensBeforeLinks",
+      "binary": "Occurrences::happensBeforeLinks",
+      "binaryObject": "Occurrences::happensBeforeLinks",
+      "object": "Objects::objects"
+    },
+    "methods": {
+      "dispatch": {
+        "addDefaultGeneralType": "org.omg.sysml.adapter.SuccessionAsUsageAdapter#addDefaultGeneralType",
+        "computeImplicitGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#computeImplicitGeneralTypes",
+        "getDefaultSupertype": "org.omg.sysml.adapter.ConnectorAdapter#getDefaultSupertype",
+        "getSpecializationEClass": "org.omg.sysml.adapter.FeatureAdapter#getSpecializationEClass",
+        "hasStructureType": "org.omg.sysml.adapter.FeatureAdapter#hasStructureType"
+      },
+      "selector": {
+        "kind": "BLOCK",
+        "statements": [
+          {
+            "initializer": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.ConnectorAdapter#getTarget",
+              "type": "org.omg.sysml.lang.sysml.Connector"
+            },
+            "kind": "VARIABLE",
+            "name": "target",
+            "type": "org.omg.sysml.lang.sysml.Connector"
+          },
+          {
+            "initializer": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "arguments": [
+                  {
+                    "kind": "IDENTIFIER",
+                    "name": "target",
+                    "type": "org.omg.sysml.lang.sysml.Connector"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "org.omg.sysml.lang.sysml.Type"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "TypeUtil",
+                  "type": "org.omg.sysml.util.TypeUtil"
+                },
+                "symbol": "org.omg.sysml.util.TypeUtil#getOwnedEndFeaturesOf",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.Feature>"
+              },
+              "symbol": "java.util.List#size",
+              "type": "int"
+            },
+            "kind": "VARIABLE",
+            "name": "numEnds",
+            "type": "int"
+          },
+          {
+            "expression": {
+              "condition": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "symbol": "org.omg.sysml.adapter.FeatureAdapter#hasStructureType",
+                "type": "boolean"
+              },
+              "false": {
+                "condition": {
+                  "kind": "NOT_EQUAL_TO",
+                  "left": {
+                    "kind": "IDENTIFIER",
+                    "name": "numEnds",
+                    "type": "int"
+                  },
+                  "right": {
+                    "kind": "INT_LITERAL",
+                    "type": "int",
+                    "value": 2
+                  },
+                  "type": "boolean"
+                },
+                "false": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "binary"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                  "type": "java.lang.String"
+                },
+                "kind": "CONDITIONAL_EXPRESSION",
+                "true": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "base"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                  "type": "java.lang.String"
+                },
+                "type": "java.lang.String"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "condition": {
+                  "kind": "NOT_EQUAL_TO",
+                  "left": {
+                    "kind": "IDENTIFIER",
+                    "name": "numEnds",
+                    "type": "int"
+                  },
+                  "right": {
+                    "kind": "INT_LITERAL",
+                    "type": "int",
+                    "value": 2
+                  },
+                  "type": "boolean"
+                },
+                "false": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "binaryObject"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                  "type": "java.lang.String"
+                },
+                "kind": "CONDITIONAL_EXPRESSION",
+                "true": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "object"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                  "type": "java.lang.String"
+                },
+                "type": "java.lang.String"
+              },
+              "type": "java.lang.String"
+            },
+            "kind": "RETURN"
+          }
+        ]
+      }
+    },
+    "schema": "dev.mercurio.connector-defaults.v1"
+  }
+}

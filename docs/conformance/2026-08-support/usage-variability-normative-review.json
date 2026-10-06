@@ -1,0 +1,45 @@
+{
+  "schema": "dev.mercurio.usage-variability-normative-review.v1",
+  "normative_source": {
+    "path": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "pdf_pages": [
+      306,
+      203,
+      436
+    ],
+    "printed_pages": [
+      274,
+      171,
+      404
+    ],
+    "anchor": "deriveUsageMayTimeVary"
+  },
+  "verified_formula": "An owning Type specializes Occurrences::Occurrence; exclude portions, SelfLink/HappensLink specializations, and composite Action specializations. Eight independent input contexts exercise these branches, both compatibility call sites and every concrete pinned Usage getter binding.",
+  "reference_only_shortcuts": [
+    "Pilot delegate returns false upfront for SuccessionAsUsage and BindingConnectorAsUsage. Corresponding complete default/generalization constraints are not qualified by completed prototype fixtures. Do not count this shortcut as full normative model support."
+  ],
+  "handwritten_rust": [
+    "Canonical owning Type navigation and imported endpoint checks",
+    "Typed generalization/library-binding dependency propagation",
+    "Shared variability predicate and compatibility traversal"
+  ],
+  "definition_driven": [
+    "Resolved programs guard upstream executable predicates and getters",
+    "Generated library-role strings, exclusion classes and concrete getter-binding inventory",
+    "Imported Ecore delegate URI and candidate binding checked by native consumer"
+  ],
+  "fixture_correction": {
+    "historical_cache": "usage-compatibility-pilot-controls.json",
+    "current_cache": "usage-variability-pilot-controls.json",
+    "reason": "A Class owner can acquire implicit Occurrence generalizations despite a supplied completion flag. Fixed owner is now a DataType; other owners explicitly specialize Occurrence. Explicit/observed owner generalizations remain separately recorded.",
+    "raw_historical_observations_preserved": true
+  },
+  "remaining": [
+    "Actual cold owner/Usage/library lifecycle and implicit generalization completeness",
+    "Complete normative explanation and constraint verification for the two delegate shortcuts",
+    "Detached, conjugated, semantic-metadata and invalid-model contexts beyond these component fixtures",
+    "Whole resources, validators and family/global contracts"
+  ],
+  "full_normative_qualification": false
+}

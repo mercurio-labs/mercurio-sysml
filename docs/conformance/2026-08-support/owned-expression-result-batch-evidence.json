@@ -1,0 +1,79 @@
+{
+  "schema": "dev.mercurio.owned-expression-result-batch-evidence.v1",
+  "scope": "Atomic owned-result additional-member stage for seven imported bindings, integrated before opt-in candidate defaults. Inherited literal result support is not established.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "a8291832a75340675689a03ad1574b7a7c00ee90a9510fb7931efab44c4651b2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "1a521c0c80c393c19aa8059060229cac93ac16099368cd7b7d07d04558eab504",
+    "crates/mercurio-sysml/src/definition_document.rs": "e79e9e4cf8d18d25f03bb0f633e630791cdaa6f9c0cb4e878376f5dad0a917de",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "48719f201e1fd2773308c80c6e741074de0983ca82f01fad3808916879ad4617",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/result_construction_generated.rs": "e191c8f8fbd173e940e95a49feadabe49de42eea7b5eeb600ea9b9f8707e6426",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/result-construction.extract.json": "91c9d0e05d712e5f033527244219e7627ff4726ad842212e4bdeb22fd5fcec2d",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/owned-result-batch-native-tests.log": "1cb4091adee6a82803bb305e34eda72a684b417ff9b521a82631ac6788bbed37",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/owned-result-batch-focused-tests.log": "4564e7ad6028242e410b55ee1cc6b5800b946bf67c50cb2dd9e22a0eecefc71a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/owned-result-batch-generator-tests.log": "f62883825dfb6df192727b911cb533fd8624a948817bbceaeee0c2b400829418",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/owned-result-batch-audit-tests.log": "e3c6b342b12714e3f8574b7fabb6f376321dc950d63052d20715afc077b51a6d",
+    "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "../target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/MultiplicityAdapter.java": "928030a541b196353eeb21ed7afc414b186f1adbc39c015ac9f4bfad32100699"
+  },
+  "imported": {
+    "constructor_artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/result-construction.extract.json",
+    "bindings": 7,
+    "existing_independent_pilot_cases": 28,
+    "fresh_pilot_export": "not needed: upstream constructor inputs, schema and observations unchanged"
+  },
+  "native_consumer": {
+    "shared_algorithm": "One staged graph, deterministic canonical-owner identities, shared imported constructor/ownership primitive, input/output closed structural publication, all-or-nothing commit. Explicit handwritten transaction orchestration.",
+    "candidate_pipeline": "audit_release_compile --definition-defaults invokes this stage before default contribution producers. Plain parse path is unchanged.",
+    "replay": "Existing ReturnParameterMembership suppresses construction including empty membership; no transformation-completion flags changed."
+  },
+  "verification": {
+    "native_tests": 229,
+    "new_native_tests": 3,
+    "audit_tests": 11,
+    "generator_tests": 5,
+    "contexts": [
+      "All 28 cached positive/boundary constructor controls in one batch",
+      "Seven bindings, existing/absent/empty return memberships",
+      "Late collision rolls back earlier staged creations",
+      "Malformed identities and stored derived snapshots reject",
+      "Serialization/reversed storage produce stable identities and semantics",
+      "Parsed multiplicity literal bounds plus FeatureValue/reference/operator expressions",
+      "Candidate-stage insertion remains unqualified and downstream library guards stay active"
+    ]
+  },
+  "normative": {
+    "pdf_physical_page": 225,
+    "requirements": [
+      "deriveExpressionResult",
+      "validateExpressionResultParameterMembership"
+    ],
+    "boundary": "Construction supplies one owned out Feature through ReturnParameterMembership when the resolved provider requires it. Exactly-one effective membership validation, ordered inherited lookup, result expression bindings and complete transformation are separate; previously recorded inherited-result/Pilot discrepancies remain open."
+  },
+  "remaining_dependencies": [
+    "MultiplicityAdapter owner-sensitive classifier/feature/base defaults for Multiplicity and MultiplicityRange; source reference bounds currently reject missing provider",
+    "Actual library closure and inherited literal result qualification",
+    "Result typing, bindings, featuring, evaluation and validation",
+    "Full sample semantic comparison and comparable Pilot timings"
+  ],
+  "qualification": {
+    "matching_whole_models": 155,
+    "ordinary_bindings": [
+      50,
+      79
+    ],
+    "bounded_obligations": [
+      7,
+      9
+    ],
+    "families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "candidate": "unpromoted"
+  }
+}

@@ -1,0 +1,474 @@
+{
+  "check_count": 11,
+  "completion_gates": [
+    {
+      "qualification": "not established by this static report",
+      "requirement": "All 11 selected checks generate Rust from resolved ASTs and are bound into native compilation."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "checkOneType predicate is generated from its resolved helper body; no handwritten reconstruction."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Selected callers retain complete bodies and ordered diagnostics; no partial-method coverage."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Native type collection, metaclass and diagnostic bindings have independent focused controls."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Generated Rust agrees with actual Pilot for empty, single matching, single nonmatching and multiple-type cases."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Source mutation tests exercise helper and caller changes; unsupported constructs fail closed."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Remove superseded handwritten predicate evaluation for these seven callers."
+    },
+    {
+      "qualification": "not established by this static report",
+      "requirement": "Focused native tests pass with Java unavailable; reproducible generation checks pass."
+    }
+  ],
+  "excluded": [
+    "checkAllTypes and its callers",
+    "Guarded or multi-helper checkOneType callers",
+    "General Java/EMF execution, mutation, reflection or dynamic dispatch",
+    "Whole-language specification compliance and full-corpus benchmarking"
+  ],
+  "generated_check_count": 11,
+  "generated_check_percent": 100.0,
+  "generated_helper_count": 1,
+  "methods": [
+    {
+      "body_node_kinds": {
+        "XBinaryOperation": 13,
+        "XBlockExpression": 4,
+        "XFeatureCall": 23,
+        "XIfExpression": 3,
+        "XMemberFeatureCall": 3,
+        "XNullLiteral": 11,
+        "XtendVariableDeclaration": 3
+      },
+      "generated_rust": true,
+      "id": "org.omg.kerml.xtext.validation.KerMLValidator#checkAnnotation",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_or(boolean,boolean)",
+        "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleEquals(java.lang.Object,java.lang.Object)",
+        "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleNotEquals(java.lang.Object,java.lang.Object)",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_ANNOTATION_ANNOTATED_ELEMNT_OWNERSHIP",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_ANNOTATION_ANNOTATED_ELEMNT_OWNERSHIP_MSG_1",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_ANNOTATION_ANNOTATED_ELEMNT_OWNERSHIP_MSG_2",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_ANNOTATION_ANNOTATING_ELEMENT",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_ANNOTATION_ANNOTATING_ELEMENT_MSG",
+        "org.omg.sysml.lang.sysml.Annotation.getOwnedAnnotatingElement()",
+        "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatedElement()",
+        "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatingElement()"
+      ],
+      "role": "check",
+      "source": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "span": {
+        "end_line": 417,
+        "length": 992,
+        "offset": 27896,
+        "start_line": 399
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBinaryOperation": 5,
+        "XBlockExpression": 2,
+        "XFeatureCall": 8,
+        "XIfExpression": 1,
+        "XMemberFeatureCall": 5,
+        "XNullLiteral": 3
+      },
+      "generated_rust": true,
+      "id": "org.omg.kerml.xtext.validation.KerMLValidator#checkImport",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)",
+        "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleEquals(java.lang.Object,java.lang.Object)",
+        "org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_tripleNotEquals(java.lang.Object,java.lang.Object)",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_IMPORT_TOP_LEVEL_VISIBILITY",
+        "org.omg.kerml.xtext.validation.KerMLValidator.INVALID_IMPORT_TOP_LEVEL_VISIBILITY_MSG",
+        "org.omg.sysml.lang.sysml.Element.getOwner()",
+        "org.omg.sysml.lang.sysml.Import.getImportOwningNamespace()",
+        "org.omg.sysml.lang.sysml.Import.getVisibility()",
+        "org.omg.sysml.lang.sysml.VisibilityKind",
+        "org.omg.sysml.lang.sysml.VisibilityKind.PRIVATE"
+      ],
+      "role": "check",
+      "source": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "span": {
+        "end_line": 527,
+        "length": 347,
+        "offset": 33264,
+        "start_line": 520
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 2,
+        "XFeatureCall": 5,
+        "XIfExpression": 1,
+        "XMemberFeatureCall": 1,
+        "XNullLiteral": 1,
+        "XUnaryOperation": 1
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkReferenceUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)",
+        "org.omg.sysml.lang.sysml.Usage.isReference()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ATTRIBUTE_USAGE_IS_REFERENTIAL",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ATTRIBUTE_USAGE_IS_REFERENTIAL_MSG"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 495,
+        "length": 245,
+        "offset": 34987,
+        "start_line": 489
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 2,
+        "XFeatureCall": 5,
+        "XIfExpression": 1,
+        "XMemberFeatureCall": 1,
+        "XNullLiteral": 1,
+        "XUnaryOperation": 1
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationDefinition",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EObject,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)",
+        "org.omg.sysml.lang.sysml.Definition.isVariation()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ENUMERATION_DEFINITION_IS_VARIATION",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ENUMERATION_DEFINITION_IS_VARIATION_MSG"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 588,
+        "length": 271,
+        "offset": 39174,
+        "start_line": 582
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.EnumerationDefinition",
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getEnumerationUsage_EnumerationDefinition()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ENUMERATION_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ENUMERATION_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 594,
+        "length": 306,
+        "offset": 39451,
+        "start_line": 590
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkAnalysisCaseUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.AnalysisCaseDefinition",
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getAnalysisCaseUsage_AnalysisCaseDefinition()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ANALYSIS_CASE_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_ANALYSIS_CASE_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1220,
+        "length": 316,
+        "offset": 66979,
+        "start_line": 1216
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkVerificationCaseUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getVerificationCaseUsage_VerificationCaseDefinition()",
+        "org.omg.sysml.lang.sysml.VerificationCaseDefinition",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_VERIFICATION_CASE_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_VERIFICATION_CASE_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1239,
+        "length": 346,
+        "offset": 67892,
+        "start_line": 1235
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkUseCaseUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getUseCaseUsage_UseCaseDefinition()",
+        "org.omg.sysml.lang.sysml.UseCaseDefinition",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_USE_CASE_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_USE_CASE_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1251,
+        "length": 275,
+        "offset": 68490,
+        "start_line": 1247
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkRenderingUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.RenderingDefinition",
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getRenderingUsage_RenderingDefinition()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_RENDERING_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_RENDERING_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1270,
+        "length": 288,
+        "offset": 69191,
+        "start_line": 1266
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkViewpointUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getViewpointUsage_ViewpointDefinition()",
+        "org.omg.sysml.lang.sysml.ViewpointDefinition",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_VIEWPOINT_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_VIEWPOINT_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1291,
+        "length": 289,
+        "offset": 70139,
+        "start_line": 1287
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBlockExpression": 1,
+        "XFeatureCall": 6,
+        "XMemberFeatureCall": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkMetadataUsage",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "org.omg.sysml.lang.sysml.Metaclass",
+        "org.omg.sysml.lang.sysml.SysMLPackage",
+        "org.omg.sysml.lang.sysml.SysMLPackage.eINSTANCE",
+        "org.omg.sysml.lang.sysml.SysMLPackage.getMetadataUsage_MetadataDefinition()",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_METADATA_USAGE_TYPE",
+        "org.omg.sysml.xtext.validation.SysMLValidator.INVALID_METADATA_USAGE_TYPE_MSG",
+        "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+      ],
+      "role": "check",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1306,
+        "length": 264,
+        "offset": 70868,
+        "start_line": 1302
+      }
+    },
+    {
+      "body_node_kinds": {
+        "XBinaryOperation": 2,
+        "XBlockExpression": 2,
+        "XClosure": 1,
+        "XFeatureCall": 12,
+        "XIfExpression": 1,
+        "XMemberFeatureCall": 4,
+        "XNumberLiteral": 1,
+        "XReturnExpression": 1,
+        "XUnaryOperation": 1,
+        "XtendFormalParameter": 1,
+        "XtendVariableDeclaration": 2
+      },
+      "generated_rust": true,
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkOneType",
+      "qualification": "see selected binding report; full semantic qualification not established",
+      "resolved_ast": true,
+      "resolved_symbols": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])",
+        "org.eclipse.xtext.xbase.lib.ArrayExtensions.length(java.lang.Object[])",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_and(boolean,boolean)",
+        "org.eclipse.xtext.xbase.lib.BooleanExtensions.operator_not(boolean)",
+        "org.eclipse.xtext.xbase.lib.IntegerExtensions.operator_equals(int,int)",
+        "org.eclipse.xtext.xbase.lib.IterableExtensions.exists(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)",
+        "org.omg.sysml.util.FeatureUtil",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "role": "helper",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1422,
+        "length": 294,
+        "offset": 75230,
+        "start_line": 1416
+      }
+    }
+  ],
+  "native_services": [
+    {
+      "contract": "Return effective type objects with stable identity; qualify native all_types independently.",
+      "ownership": "handwritten-rust",
+      "symbol": "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+    },
+    {
+      "contract": "Test model metaclass inheritance; no Java reflection at runtime.",
+      "ownership": "handwritten-rust",
+      "symbol": "java.lang.Class.isInstance(java.lang.Object)"
+    },
+    {
+      "contract": "Preserve validator invocation subject and structural-feature diagnostic location.",
+      "ownership": "handwritten-rust",
+      "symbol": "org.eclipse.xtext.validation.AbstractDeclarativeValidator.error(java.lang.String,org.eclipse.emf.ecore.EStructuralFeature,java.lang.String,java.lang.String[])"
+    }
+  ],
+  "percent_meaning": "Generated selected checks / selected checks; not elapsed effort, overall completion, or specification compliance",
+  "provenance": {
+    "ast_sha256": "d6ec5a94e240c974a1b6ad81ced4d9a708a7c587b27aaefac1f870d891cd4d3c",
+    "boundary": {
+      "checker_sha256": "c66f735266c61bf9674c1e50066e5a4510225e76242018b06a83cf5486c89416",
+      "manifest_sha256": "6ac618fdc73df462d883cf2f8b762e6bf0396e98c83f3bc08d84c3d7fbceaccd",
+      "pilot_source_provenance": {
+        "driver_sha256": "a93e5ae49861bba6949fd6e8cc7ac8202699413f6c0817c008114ea8dcb0605e",
+        "exporter_sha256": "2529bffcf29c562459b0706e62ff7ee4de3ab5ff55ee9deded7e4ca180666783",
+        "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+        "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+        "sources_sha256": {
+          "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+          "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend": "65c78e229b61cc85b3ddea64cc25ef392f7e27176f5b9b33ee7eedc1f18a8583"
+        },
+        "xtend_jar_sha256": "aac6d80aaa36f9e897d45c76a6df39cd17764ba53ac86fff91f35252094cf4e0",
+        "xtend_version": "2.38.0"
+      },
+      "referenced_files_sha256": {
+        "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/validation-rust-generation.json": "a9a75c36f9bc394fd080612ab931e642df7bb5f60642c5c3b33af88481cc0084",
+        "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs": "1ddd7ce35c8b434d9f28aa0d73c7d221d96da855964dcda6209087b18280c822",
+        "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs": "286a7c28f8e6f12b301d6025fcd38ac499e25bda0ceb618aab6eb3621998baf6",
+        "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/scalar_checks.rs": "931c1e557811325a64ebc0de3996ec42e7241d96911ada23f1c27dccc47cdada",
+        "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/type_family_checks.rs": "95f376fb5fb7aa6579b17ab7f1bd5606cb11fb840a7c75da1ccbf5deb9614b60",
+        "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs": "275e9538f32ae644176287e6dfc205535cd60d4f012a2fc6c5ef9636a3ac2629",
+        "crates/mercurio-sysml/src/validation_rules.rs": "c3893e35559a0d6a4e94cf17bc918a5bd4aa8bcab331e32f64fce506b08b4f18",
+        "crates/mercurio-sysml/src/validation_rules_generated.rs": "c082055268b3af8ff16ee8ff102d27cf742287c32da28327ab338ad37af9e0aa",
+        "crates/mercurio-sysml/src/validation_rules_interpreter.rs": "2e1354e361bc3b792c9a18022bcbdb56e8dc18ff59c0a6a607a56125352ea29b",
+        "tools/generate_validation_rust.py": "16a60e9a691a92cc79efd7aa2ae909c03fc3d6b1546753a9c162b4dfc69c97dd"
+      },
+      "rules_sha256": "b70a4972a20174c99fc541c003f04f0ac4abe6acf987318921842baa541bd559",
+      "translated_rule_provenance": {
+        "family_translator_sha256": "338f3791d05e72b7954e6110acd8abaeb5d6768b3b269d2aa7ffa74f389d065d",
+        "input_sha256": "e29495d46ad54f65c593ad016b45da51256834c86dd555f16272933b182c739b",
+        "translator_sha256": "83fc4500e30d3e61de861f261e009afeb87eb5b23b5d92a2255460a8f373aa12"
+      }
+    },
+    "checker_sha256": "cbbc577d109fda7983badcd195bab6576a3a446a1983015e29d97c5a8e107f67",
+    "scope_sha256": "20ec900b5af5bdfa9b81f919e37110a8ba43e4081c6fab78d0dceca92f3d4015"
+  },
+  "resolved_helper_count": 1,
+  "schema_version": 1,
+  "scope_id": "bounded-xtend-one-type-v1",
+  "trial_complete": false
+}

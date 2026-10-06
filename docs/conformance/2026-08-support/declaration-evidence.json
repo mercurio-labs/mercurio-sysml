@@ -1,0 +1,5671 @@
+{
+  "status": "candidate_not_release_qualified",
+  "full_support": false,
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "assessment": "../2026-08-declaration-assessment/README.md",
+  "candidate_library": {
+    "path": "..\\target\\support-2026-08\\stdlib.inherited-types.kir.json",
+    "sha256": "b9b3057bcc9d4af92eb1bb9f0836496970ca624d5646ebb641a52b43bf20c174",
+    "kir_elements": 17166,
+    "named_source_elements": 10262,
+    "exported_relationships": 57831
+  },
+  "corpus_manifest_sha256": "5b4ecf95ed0948b0522d55dd3897a40967c4e1c4a1c785fe1774604bf77e8e3a",
+  "native_corpus": {
+    "total": 310,
+    "passed": 310,
+    "sha256": "4c98e113d9e43349c3f92a6c81f5c1b11d7c113e42067b0810e3d354d2ad9c61",
+    "results": [
+      {
+        "diagnostics": [],
+        "elapsed_ms": 385,
+        "element_count": 7,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Address Book Example/AddressBookModel.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 80,
+        "element_count": 72,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Association Examples/ProductSelection_N_ary.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 49,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Association Examples/ProductSelection_OwnedEnds.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 43,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Association Examples/ProductSelection_UnownedEnds.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 23,
+        "element_count": 5,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Behavior Examples/Camera.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 30,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Behavior Examples/TakePicture.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 32,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Individuals Examples/JohnIndividualExample.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 32,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-Atoms.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 38,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-ModelingInstances.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 16,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-2-WithoutConnectors.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 46,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-3-OneToOneConnectors.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 41,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-4-OneToUnrestrictedConnectors.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 82,
+        "element_count": 111,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-5-TimingForStructures.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 46,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-6-Sequences.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 63,
+        "element_count": 66,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-7-DecisionsAndMerges.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 170,
+        "element_count": 117,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-8-ChangingFeatureValues.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 77,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Mass Roll-up Example/MassRollup_1.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 82,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Mass Roll-up Example/MassRollup_2.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 91,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_1.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 103,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_2.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 111,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_3.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Massed Thing Example/MassedThings.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 30,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Named Collection Members Example/VehicleTanks.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Packet Example/PacketUsage.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Packet Example/Packets.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/ArgumentResolution.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Associations.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 16,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Behaviors.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 34,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Circular.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 47,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Classes.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 7,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Classifications.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 48,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 2,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Comments.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 5,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Conjugation.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 53,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Connectors.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 43,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Expansion.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 82,
+        "element_count": 54,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Expressions.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 47,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/FeatureChains.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/FeatureInheritance.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 65,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Features.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 43,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Filtering.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 32,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Imports.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Inheritance.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 35,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Inverses.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 51,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/MetadataTest.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 36,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Redefinition.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 38,
+        "element_count": 24,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Scoping.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 35,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 41,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Simple Tests/Types.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 45,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/ExtendedOccurrences.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 34,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/Moments.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 45,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingFeaturesEnhanced.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 26,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 83,
+        "element_count": 51,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/TimeVaryingCarDriver.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Variable Feature Examples/TimeVaryingFeatures.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Vehicle Example/VehicleDefinitions.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 60,
+        "element_count": 53,
+        "parse_ok": true,
+        "relative_path": "kerml/src/examples/Vehicle Example/VehicleUsages.kerml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 486,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Analysis Examples/AnalysisAnnotation.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 192,
+        "element_count": 72,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Analysis Examples/Dynamics.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 190,
+        "element_count": 82,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Analysis Examples/Turbojet Stage Analysis.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 335,
+        "element_count": 169,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Analysis Examples/Vehicle Analysis Demo.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 57,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFCoreLib.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 529,
+        "element_count": 173,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFNorwayTopics.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 97,
+        "element_count": 61,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFProfileLib.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 216,
+        "element_count": 87,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Association Examples/ProductSelection_N_ary.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 64,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Association Examples/ProductSelection_OwnedEnds.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 70,
+        "element_count": 25,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Association Examples/ProductSelection_UnownedEnds.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 38,
+        "element_count": 7,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Camera Example/Camera.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Camera Example/PictureTaking.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Cause and Effect Examples/CauseAndEffectExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 50,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Cause and Effect Examples/MedicalDeviceFailure.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 20,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Comment Examples/Comments.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 100,
+        "element_count": 42,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Flashlight Example/Flashlight Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 72,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Geometry Examples/CarWithEnvelopingShape.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 163,
+        "element_count": 50,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Geometry Examples/CarWithShapeAndCSG.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 93,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Geometry Examples/ExternalShapeRefExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 401,
+        "element_count": 122,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Geometry Examples/SimpleQuadcopter.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 193,
+        "element_count": 69,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Geometry Examples/VehicleGeometryAndCoordinateFrames.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 26,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Import Tests/AliasImport.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 38,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Import Tests/CircularImport.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Import Tests/PrivateImportTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 22,
+        "element_count": 7,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Import Tests/QualifiedNameImportTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 100,
+        "element_count": 62,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Individuals Examples/AnalysisIndividualExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 52,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Individuals Examples/JohnIndividualExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 115,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModel.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 58,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModelOutside.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 299,
+        "element_count": 97,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 284,
+        "element_count": 101,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-3.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 315,
+        "element_count": 100,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 267,
+        "element_count": 95,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-3.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 149,
+        "element_count": 60,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Mass Roll-up Example/MassConstraintExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 61,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Mass Roll-up Example/MassRollup.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 68,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Mass Roll-up Example/Vehicles.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 53,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Metadata Examples/IssueMetadataExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Metadata Examples/RationaleMetadataExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 43,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Metadata Examples/RequirementMetadataExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Metadata Examples/RiskMetadataExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Metadata Examples/VerificationMetadataExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 29,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Packet Example/PacketUsage.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 44,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Packet Example/Packets.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 72,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Requirements Examples/HSUVRequirements.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 50,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Requirements Examples/RequirementDerivationExample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 59,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Requirements Examples/VehicleRequirementDerivation.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 108,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Room Model/RoomModel.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 209,
+        "element_count": 51,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ActionTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 96,
+        "element_count": 15,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/AliasTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 110,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 74,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 198,
+        "element_count": 57,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 77,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 48,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/CommentTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 100,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 146,
+        "element_count": 56,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 209,
+        "element_count": 72,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 141,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 79,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 58,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 52,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 68,
+        "element_count": 24,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 111,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 53,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ImportTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 77,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 74,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 61,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ItemTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 83,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 74,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 90,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 62,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 134,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/PartTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 86,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 51,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 321,
+        "element_count": 77,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/StateTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 200,
+        "element_count": 52,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 67,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 115,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 166,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 145,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 89,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 92,
+        "element_count": 26,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Simple Tests/ViewTest.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 117,
+        "element_count": 36,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/State Space Representation Examples/CartSample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 483,
+        "element_count": 193,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/State Space Representation Examples/EVSample.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 75,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Timeslice and Snapshot Examples/TimeVaryingAttribute.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 362,
+        "element_count": 83,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Variability Examples/VehicleVariabilityModel.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 3546,
+        "element_count": 1317,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Vehicle Example/SysML v2 Spec Annex A SimpleVehicleModel.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 275,
+        "element_count": 34,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Vehicle Example/VehicleDefinitions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 289,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Vehicle Example/VehicleIndividuals.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 389,
+        "element_count": 59,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/Vehicle Example/VehicleUsages.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 126,
+        "element_count": 51,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package - Updated.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 120,
+        "element_count": 54,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 80,
+        "element_count": 33,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition - Updated.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 70,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 110,
+        "element_count": 59,
+        "parse_ok": true,
+        "relative_path": "sysml/src/examples/v1 Spec Examples/D.4.7.8 Dynamics/HSUVDynamics.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 22,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/01. Packages/Comment Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 21,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/01. Packages/Documentation Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/01. Packages/Package Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 41,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/02. Part Definitions/Part Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 24,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/03. Generalization/Generalization Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 39,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/04. Subsetting/Subsetting Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/05. Redefinition/Redefinition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 34,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 55,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 50,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/07. Parts/Parts Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 45,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/07. Parts/Parts Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/08. Items/Items Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 89,
+        "element_count": 33,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/09. Connections/Connections Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/10. Ports/Port Conjugation Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 34,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/10. Ports/Port Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 51,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/11. Interfaces/Interface Decomposition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 44,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/11. Interfaces/Interface Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 86,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 60,
+        "element_count": 16,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/13. Flows/Flow Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/13. Flows/Flow Interface Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 49,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/13. Flows/Flow Usage Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 77,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/14. Action Definitions/Action Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 54,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/14. Action Definitions/Action Shorthand Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 71,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/14. Action Definitions/Action Succession Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 59,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/14. Action Definitions/Action Succession Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 60,
+        "element_count": 25,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/15. Actions/Action Decomposition.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 59,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 61,
+        "element_count": 26,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 53,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/17. Control/Camera.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 72,
+        "element_count": 24,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/17. Control/Control Structures Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 62,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/17. Control/Decision Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 114,
+        "element_count": 42,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/17. Control/Fork Join Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 111,
+        "element_count": 38,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/17. Control/Merge Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 39,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/18. Action Performance/Action Performance Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 79,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 47,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 96,
+        "element_count": 40,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/20. Assignment Actions/Assignment Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 71,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/21. Asynchronous Messaging/Messaging Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 89,
+        "element_count": 34,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/21. Asynchronous Messaging/Messaging with Ports.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 22,
+        "element_count": 5,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/22. Opaque Actions/Opaque Action Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 108,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/23. State Definitions/State Definition Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 115,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/23. State Definitions/State Definition Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 130,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/24. States/State Actions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 107,
+        "element_count": 36,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/24. States/State Decomposition-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 109,
+        "element_count": 38,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/24. States/State Decomposition-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 183,
+        "element_count": 53,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/25. Transitions/Change and Time Triggers.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 175,
+        "element_count": 45,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/25. Transitions/Local Clock Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 156,
+        "element_count": 49,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/25. Transitions/Transition Actions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 53,
+        "element_count": 7,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/26. State Exhibition/State Exhibition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 54,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Event Occurrence Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 61,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Interaction Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 72,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Interaction Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 154,
+        "element_count": 44,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Interaction Realization-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 169,
+        "element_count": 47,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Interaction Realization-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 76,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Message Payload Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 16,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/27. Occurrences/Time Slice and Snapshot Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 51,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/28. Individuals/Individuals and Roles-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 65,
+        "element_count": 16,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/28. Individuals/Individuals and Snapshots Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/28. Individuals/Individuals and Time Slices.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 51,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 50,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 35,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/29. Expressions/MassRollup1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 37,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/29. Expressions/MassRollup2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 86,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/30. Calculations/Calculation Definitions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 92,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/30. Calculations/Calculation Usages-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 67,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/30. Calculations/Calculation Usages-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 179,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Analytical Constraints.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 147,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Constraint Assertions-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 160,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Constraint Assertions-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 143,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Constraints Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 144,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Constraints Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 150,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Derivation Constraints.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 215,
+        "element_count": 39,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/31. Constraints/Time Constraints.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 72,
+        "element_count": 26,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/32. Requirements/Requirement Definitions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 69,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/32. Requirements/Requirement Groups.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 78,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/32. Requirements/Requirement Satisfaction.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 62,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/32. Requirements/Requirement Usages.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 195,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/33. Analysis/Analysis Case Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 175,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/33. Analysis/Analysis Case Usage Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 255,
+        "element_count": 43,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/33. Analysis/Trade Study Analysis Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/34. Verification/Verification Case Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 76,
+        "element_count": 26,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/34. Verification/Verification Case Usage Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/35. Use Cases/Use Case Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 85,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/35. Use Cases/Use Case Usage Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 40,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/36. Variability/Variation Configuration.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 50,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/36. Variability/Variation Definitions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 49,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/36. Variability/Variation Usages.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 9,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/37. Dependencies/Dependency Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 62,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/38. Allocation/Allocation Definition Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 75,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/38. Allocation/Allocation Usage Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 63,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/39. Metadata/Metadata Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 66,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/39. Metadata/Metadata Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 91,
+        "element_count": 27,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/40. Filtering/Filtering Example-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 78,
+        "element_count": 25,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/40. Filtering/Filtering Example-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 47,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/41. Language Extension/Model Library Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 13,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/41. Language Extension/Semantic Metadata Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 59,
+        "element_count": 22,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/41. Language Extension/User Keyword Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 38,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/42. Views/Viewpoint Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 56,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/training/42. Views/Views Example.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 79,
+        "element_count": 34,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/01-Parts Tree/1a-Parts Tree.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 104,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/01-Parts Tree/1c-Parts Tree Redefinition.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 46,
+        "element_count": 20,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/01-Parts Tree/1d-Parts Tree with Reference.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 223,
+        "element_count": 120,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/02-Parts Interconnection/2a-Parts Interconnection.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 121,
+        "element_count": 48,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/02-Parts Interconnection/2c-Parts Interconnection-Multiple Decompositions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 232,
+        "element_count": 92,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 185,
+        "element_count": 76,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 149,
+        "element_count": 58,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-3.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 79,
+        "element_count": 29,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 92,
+        "element_count": 25,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 70,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-3.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 109,
+        "element_count": 45,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 94,
+        "element_count": 32,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/03-Function-based Behavior/3e-Function-based Behavior-item.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 146,
+        "element_count": 48,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/04-Functional Allocation/4a-Functional Allocation.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 666,
+        "element_count": 156,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 585,
+        "element_count": 158,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1a.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 473,
+        "element_count": 138,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 155,
+        "element_count": 89,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/06-Individual and Snapshots/6-Individual and Snapshots.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 90,
+        "element_count": 30,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/07-Variant Configuration/7a-Variant Configuration - General Concept.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 140,
+        "element_count": 47,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/07-Variant Configuration/7a1-Variant Configuration - General Concept-a.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 146,
+        "element_count": 88,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/07-Variant Configuration/7b-Variant Configurations.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 154,
+        "element_count": 93,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 100,
+        "element_count": 58,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/09-Verification/9-Verification-simplified.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 100,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/10-Analysis and Trades/10a-Analysis.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 160,
+        "element_count": 63,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/10-Analysis and Trades/10b-Trade-off Among Alternative Configurations.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 214,
+        "element_count": 90,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/10-Analysis and Trades/10c-Fuel Economy Analysis.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 150,
+        "element_count": 64,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/10-Analysis and Trades/10d-Dynamics Analysis.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 87,
+        "element_count": 34,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/11-View and Viewpoint/11a-View-Viewpoint.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 102,
+        "element_count": 46,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/11-View and Viewpoint/11b-Safety and Security Feature Views.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/12-Dependency Relationships/12a-Dependency.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 78,
+        "element_count": 35,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 58,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 65,
+        "element_count": 23,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/13-Model Containment/13a-Model Containment.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 117,
+        "element_count": 40,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-1.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 112,
+        "element_count": 36,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-2.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 80,
+        "element_count": 21,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 41,
+        "element_count": 15,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/14-Language Extensions/14a-Language Extensions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 67,
+        "element_count": 31,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/14-Language Extensions/14b-Language Extensions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 199,
+        "element_count": 125,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/14-Language Extensions/14c-Language Extensions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 139,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 135,
+        "element_count": 12,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_02-Basic Value Properties.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 146,
+        "element_count": 18,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_03-Value Expression.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 132,
+        "element_count": 14,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_04-Logical Expressions.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 154,
+        "element_count": 25,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_05-Unification of Expression and Constraint Definition.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 119,
+        "element_count": 2,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_06-System of Quantities.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 123,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_07-System of Units and Scales.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 132,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_08-Range Restriction.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 152,
+        "element_count": 33,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_10-Primitive Data Types.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 135,
+        "element_count": 19,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_11-Variable Length Collection Types.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 132,
+        "element_count": 17,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_12-Compound Value Type.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 187,
+        "element_count": 58,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_13-Discretely Sampled Function Value.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 162,
+        "element_count": 49,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_19-Materials with Properties.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 173,
+        "element_count": 50,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_19a-Materials with Properties.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 62,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/17-Sequence Modeling/17a-Sequence-Modeling.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 78,
+        "element_count": 28,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/17-Sequence Modeling/17b-Sequence-Modeling.sysml",
+        "status": "ok"
+      },
+      {
+        "diagnostics": [],
+        "elapsed_ms": 133,
+        "element_count": 51,
+        "parse_ok": true,
+        "relative_path": "sysml/src/validation/18-Use Case/18-Use Case.sysml",
+        "status": "ok"
+      }
+    ]
+  },
+  "validation_controls": [
+    {
+      "batch": "single-type-controls",
+      "relative_path": "enum-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "3b736f2b59a6f7ff6d249677c12c410846503b8b51bed789acbadce6b3b8b85f",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 415,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "enum-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "enum-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 213
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "enum-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateEnumerationUsageType_",
+      "source_sha256": "281e7b5f70723f122cbd0aa9d2ec4077d12b87e7f531a4dc84aa6f769e54329a",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateEnumerationUsageType_: An enumeration must be typed by one enumeration definition. Usage `value` has effective types [type.SingleType_enum_multiple.A, type.SingleType_enum_multiple.B].",
+            "span": {
+              "end_col": 76,
+              "end_line": 1,
+              "start_col": 60,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 29,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/enum-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "enum-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "enum-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateEnumerationUsageType_",
+            "message": "An enumeration must be typed by one enumeration definition.",
+            "line": 1,
+            "column": 60
+          }
+        ],
+        "elapsed_ms": 30
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "enum-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "569b733741205d61da3032a57feb59d1496e35849ac29591ba4a24d1d2fbddeb",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 26,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "enum-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "enum-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 11
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "calc-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "b45709021ec4dd1ae4bac94adc24bdc08773eeadbe763de15eea9679c27ba923",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 29,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "calc-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "calc-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 256
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "calc-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateCalculationUsageType_",
+      "source_sha256": "1cae4945e720dc917e6891634e50393eed64218f18e02a26ed7e26f5544e0535",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateCalculationUsageType_: A calculation must be typed by one calculation definition. Usage `value` has effective types [type.SingleType_calc_multiple.A, type.SingleType_calc_multiple.B].",
+            "span": {
+              "end_col": 76,
+              "end_line": 1,
+              "start_col": 60,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 26,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/calc-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "calc-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "calc-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateCalculationUsageType_",
+            "message": "A calculation must be typed by one calculation definition.",
+            "line": 1,
+            "column": 60
+          }
+        ],
+        "elapsed_ms": 31
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "calc-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "b4f204a225ad33975aaae6ecf34ec276a05bb01bdb8b6a8c34a2d83c835cd5a6",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 26,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "calc-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "calc-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 25
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "constraint-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "1c06b92f4c8a946c42efdfbfb468ca8a72c9cb2c8c76bd7a9cdea51b972cffd6",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "constraint-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "constraint-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 38
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "constraint-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "Invalid Constraint Usage - invalid type",
+      "source_sha256": "f21e52a56dd495702e419108b75137d948baaca8ff3e7c9734b00be8bcf75f2d",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "Invalid Constraint Usage - invalid type: A constraint must be typed by one constraint definition. Usage `value` has effective types [type.SingleType_constraint_multiple.A, type.SingleType_constraint_multiple.B].",
+            "span": {
+              "end_col": 100,
+              "end_line": 1,
+              "start_col": 78,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 23,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "constraint-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "constraint-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "Invalid Constraint Usage - invalid type",
+            "message": "A constraint must be typed by one constraint definition.",
+            "line": 1,
+            "column": 78
+          }
+        ],
+        "elapsed_ms": 21
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "constraint-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "42226f7e0ada3cf0de8893028c52f9116c4d6e49ee7f1292050588b8b459f9f9",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "constraint-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "constraint-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 18
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "requirement-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "df3cab0bb91f8e8fc8b0f570e129e51e8d9ea432d090013cf96f1d411800cd01",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "requirement-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "requirement-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 131
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "requirement-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateRequirementUsageType_",
+      "source_sha256": "674369ae77d8607da6cc7415d2067b88c5a89bcea616ba85f7ae516393b3e2fe",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateRequirementUsageType_: A requirement must be typed by one requirement definition. Usage `value` has effective types [type.SingleType_requirement_multiple.A, type.SingleType_requirement_multiple.B].",
+            "span": {
+              "end_col": 104,
+              "end_line": 1,
+              "start_col": 81,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 27,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/requirement-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "requirement-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "requirement-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateRequirementUsageType_",
+            "message": "A requirement must be typed by one requirement definition.",
+            "line": 1,
+            "column": 81
+          }
+        ],
+        "elapsed_ms": 62
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "requirement-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "dcb3f9a78a6fee7641fb93ec510c6457dab2b50b5262e744207571339f0cd2e4",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 24,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "requirement-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "requirement-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 48
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "analysis-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "8d4ccaef9953ece6c86e01c4a39bda0d11f4ec18676108fabddd42ee4b3b6312",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "analysis-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "analysis-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 103
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "analysis-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateAnalysisCaseUsageType_",
+      "source_sha256": "94c85a76caf4f9a8ae114fffad9a67fa0283c24196d7070ece745f508666fa57",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateAnalysisCaseUsageType_: An analysis case must be typed by one analysis case definition. Usage `value` has effective types [type.SingleType_analysis_multiple.A, type.SingleType_analysis_multiple.B].",
+            "span": {
+              "end_col": 92,
+              "end_line": 1,
+              "start_col": 72,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 24,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/analysis-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "analysis-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "analysis-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateAnalysisCaseUsageType_",
+            "message": "An analysis case must be typed by one analysis case definition.",
+            "line": 1,
+            "column": 72
+          }
+        ],
+        "elapsed_ms": 66
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "analysis-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "e4edf8174417ba85d23520b5d14905cd43e617252ff9c022cbf2d2b6dac12963",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "analysis-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "analysis-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 46
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "verification-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "2d072e1cc75ee161beffbc83eadcc71b67f1503e11ba97209b182c2e547a0651",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "verification-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "verification-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 116
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "verification-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateVerificationCaseUsageType_",
+      "source_sha256": "60bbaf041ab3a0e06f84fe76d43994265bf5d396993fac7d4b9da42611571fce",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateVerificationCaseUsageType_: A verification case must be typed by one verification case definition. Usage `value` has effective types [type.SingleType_verification_multiple.A, type.SingleType_verification_multiple.B].",
+            "span": {
+              "end_col": 108,
+              "end_line": 1,
+              "start_col": 84,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 25,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/verification-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "verification-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "verification-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateVerificationCaseUsageType_",
+            "message": "A verification case must be typed by one verification case definition.",
+            "line": 1,
+            "column": 84
+          }
+        ],
+        "elapsed_ms": 48
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "verification-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "84073149e2372649f387dceecb9dc73271f9ea0e776ebaf28267f86c596ff43e",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "verification-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "verification-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 40
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "use-case-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "cb334ef970945b60b5fcaa1faf3d4e770ccd43884a1da2e5118d4789d2456afb",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 27,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "use-case-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "use-case-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 75
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "use-case-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateUseCaseUsageType_",
+      "source_sha256": "d471a131cc0c84e5b443328cc92e403cf3012b08c1ec0b64b79716678236fbdf",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateUseCaseUsageType_: A use case must be typed by one use case definition. Usage `value` has effective types [type.SingleType_use_case_multiple.A, type.SingleType_use_case_multiple.B].",
+            "span": {
+              "end_col": 92,
+              "end_line": 1,
+              "start_col": 72,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 29,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/use-case-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "use-case-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "use-case-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateUseCaseUsageType_",
+            "message": "A use case must be typed by one use case definition.",
+            "line": 1,
+            "column": 72
+          }
+        ],
+        "elapsed_ms": 34
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "use-case-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "f7e24a287a07664890804096c607be2e91cb7e29fd6476e0a82150379f61deeb",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 28,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "use-case-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "use-case-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 34
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "rendering-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "422160ee16b238ac2b423c6b64ee66e2ff67e9663341b57cfa25210f7e7f952d",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 24,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "rendering-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "rendering-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 79
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "rendering-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateRenderingUsageType_",
+      "source_sha256": "97ab8fcf5aa9af14b17cc0896f6d32a56ad536b161186d254ed2ff215b52ef66",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateRenderingUsageType_: A rendering must be typed by one rendering definition. Usage `value` has effective types [type.SingleType_rendering_multiple.A, type.SingleType_rendering_multiple.B].",
+            "span": {
+              "end_col": 96,
+              "end_line": 1,
+              "start_col": 75,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 26,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/rendering-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "rendering-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "rendering-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateRenderingUsageType_",
+            "message": "A rendering must be typed by one rendering definition.",
+            "line": 1,
+            "column": 75
+          }
+        ],
+        "elapsed_ms": 15
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "rendering-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "5d4171ab2a6c07b7db0cdc6f68fe31f28ab429f3664486717018e1772a0525ab",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "rendering-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "rendering-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 16
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "viewpoint-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "382de35d824558c6f12f8d6f80c5c407b6d05dd40419ceeb19c24a17bb101f1f",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "viewpoint-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "viewpoint-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 44
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "viewpoint-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateRequirementUsageType_",
+      "source_sha256": "971a78f10dc2dd0c9099a58d0a189d48ba4e2c63366f3a53221f59328159020f",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateRequirementUsageType_: A requirement must be typed by one requirement definition. Usage `value` has effective types [type.SingleType_viewpoint_multiple.A, type.SingleType_viewpoint_multiple.B].",
+            "span": {
+              "end_col": 96,
+              "end_line": 1,
+              "start_col": 75,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 23,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/viewpoint-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "viewpoint-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "viewpoint-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateViewpointUsageType_",
+            "message": "A viewpoint must be typed by one viewpoint definition.",
+            "line": 1,
+            "column": 75
+          },
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateRequirementUsageType_",
+            "message": "A requirement must be typed by one requirement definition.",
+            "line": 1,
+            "column": 75
+          }
+        ],
+        "elapsed_ms": 34
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "viewpoint-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "18f26144a212da2581fda2d57f27101ca9900f01ad09a2a29d8bed58e06fb78d",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 25,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "viewpoint-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "viewpoint-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 31
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "view-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "68b195d15e953e68b3239c507d00923c59807b4ef79e0f67992bbd82caa458d8",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 31,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "view-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "view-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 24
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "view-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateViewUsageType_",
+      "source_sha256": "90358194e4e3ccaabc812bf5fa9c2bde82852bf06a7b13e61917a11a2f32849b",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateViewUsageType_: A view must be typed by one view definition. Usage `value` has effective types [type.SingleType_view_multiple.A, type.SingleType_view_multiple.B].",
+            "span": {
+              "end_col": 76,
+              "end_line": 1,
+              "start_col": 60,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 28,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/view-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "view-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "view-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateViewUsageType_",
+            "message": "A view must be typed by one view definition.",
+            "line": 1,
+            "column": 60
+          }
+        ],
+        "elapsed_ms": 16
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "view-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "19163b5d019c11e3f64ee6facfe05de15d3b112b5eed6b54cc6db47f8de894d0",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 30,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "view-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "view-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 16
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "metadata-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "4434f09be80f571ab97adc46de5ae59da78fac7406bb277bd8fee2b9803872ce",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 29,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "metadata-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "metadata-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 400
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "metadata-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateMetadataUsageType_",
+      "source_sha256": "2a792c88d14e8dacb99b82ba8c0aa14752fdcb30b2ed0eb881f2fa913b37c1e4",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateMetadataUsageType_: A metadata usage must be typed by one metadata definition. Usage `value` has effective types [type.SingleType_metadata_multiple.Wrong].",
+            "span": {
+              "end_col": 82,
+              "end_line": 1,
+              "start_col": 61,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 26,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/metadata-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "metadata-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "metadata-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateMetadataUsageType_",
+            "message": "A metadata usage must be typed by one metadata definition.",
+            "line": 1,
+            "column": 61
+          },
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateMetadataFeatureMetadataNotAbstract",
+            "message": "Must have a concrete type",
+            "line": 1,
+            "column": 61
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from DataValue, MetadataItem",
+            "line": 1,
+            "column": 61
+          }
+        ],
+        "elapsed_ms": 28
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "metadata-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "0f1c0725365ed250988d13657073e3daecfb06aaef3a73be6716dc07095695d0",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 32,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "metadata-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "metadata-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 21
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "inherited-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "a4360e1bfff4b8374c5913f337a52569385cd1e0d92de5ff07ee7396617fc8e5",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 5,
+        "parse_ok": true,
+        "relative_path": "inherited-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "inherited-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 17
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "inherited-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateOccurrenceUsageType_",
+      "source_sha256": "94e9701b039c5505f84fdda241afed72ec8096f13c35eee9e685fb590d0d279f",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateOccurrenceUsageType_: An occurrence, item or part must be typed by occurrence definitions. Usage `b` has effective types [Parts::Part, type.SingleType_inherited_invalid.A].",
+            "span": {
+              "end_col": 89,
+              "end_line": 1,
+              "start_col": 73,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 23,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/inherited-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "inherited-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "inherited-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateOccurrenceUsageType_",
+            "message": "An occurrence, item or part must be typed by occurrence definitions.",
+            "line": 1,
+            "column": 73
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from DataValue, Part",
+            "line": 1,
+            "column": 73
+          }
+        ],
+        "elapsed_ms": 11
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "inherited-second-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateOccurrenceUsageType_",
+      "source_sha256": "8a80093990d8f39a4f0cb5e0c82401fe8dbafe21d4ad160e79f9b1d9d23ebbe8",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateOccurrenceUsageType_: An occurrence, item or part must be typed by occurrence definitions. Usage `c` has effective types [type.SingleType_inherited_second_invalid.A, type.SingleType_inherited_second_invalid.B].",
+            "span": {
+              "end_col": 122,
+              "end_line": 1,
+              "start_col": 103,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 28,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/inherited-second-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "inherited-second-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "inherited-second-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateOccurrenceUsageType_",
+            "message": "An occurrence, item or part must be typed by occurrence definitions.",
+            "line": 1,
+            "column": 103
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from DataValue, Part",
+            "line": 1,
+            "column": 103
+          }
+        ],
+        "elapsed_ms": 15
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "constraint-inherited-multiple.sysml",
+      "expected_status": "error",
+      "expected_issue": "Invalid Constraint Usage - invalid type",
+      "source_sha256": "837064c9a07c2a8636a9a46dc07466ea5d42aa01d1c8ced108bdeecb5cfe9753",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "Invalid Constraint Usage - invalid type: A constraint must be typed by one constraint definition. Usage `c` has effective types [type.SingleType_constraint_inherited_multiple.A, type.SingleType_constraint_inherited_multiple.B].",
+            "span": {
+              "end_col": 147,
+              "end_line": 1,
+              "start_col": 122,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 32,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-inherited-multiple.sysml",
+        "parse_ok": true,
+        "relative_path": "constraint-inherited-multiple.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "constraint-inherited-multiple.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "Invalid Constraint Usage - invalid type",
+            "message": "A constraint must be typed by one constraint definition.",
+            "line": 1,
+            "column": 122
+          }
+        ],
+        "elapsed_ms": 21
+      }
+    },
+    {
+      "batch": "single-type-controls",
+      "relative_path": "constraint-inherited-redundant.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "d96f54e6f6302a62f4b2bb907c430da1df35b24c772d5b54ad0535016dfa1971",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 36,
+        "element_count": 6,
+        "parse_ok": true,
+        "relative_path": "constraint-inherited-redundant.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "constraint-inherited-redundant.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 21
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "attribute-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateAttributeUsageType_",
+      "source_sha256": "bc1856978c0224441921e85eb84e9d396e4a53046f83b773697d621ad7a6cad4",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateAttributeUsageType_: An attribute must be typed by attribute definitions. Usage `value` has effective types [Base::DataValue, type.TypeCheck_attribute_invalid.T].",
+            "span": {
+              "end_col": 69,
+              "end_line": 1,
+              "start_col": 51,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 384,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\attribute-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "attribute-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "attribute-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateAttributeUsageType_",
+            "message": "An attribute must be typed by attribute definitions.",
+            "line": 1,
+            "column": 51
+          }
+        ],
+        "elapsed_ms": 444
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "attribute-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "0afc7cc606a644cecee2011c52dc4be8a00f00bcabfb92bce70f04217c4fdf75",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 21,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "attribute-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "attribute-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 12
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "port-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validatePortUsageType_",
+      "source_sha256": "3e71385e3d6a42a8ba1065c484f27c4e2ab268adfb97a43c49a9915d18f802d3",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validatePortUsageType_: A port must be typed by port definitions. Usage `value` has effective types [Ports::Port, type.TypeCheck_port_invalid.T].",
+            "span": {
+              "end_col": 59,
+              "end_line": 1,
+              "start_col": 46,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 24,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\port-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "port-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "port-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validatePortUsageType_",
+            "message": "A port must be typed by port definitions.",
+            "line": 1,
+            "column": 46
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from Part, Port",
+            "line": 1,
+            "column": 46
+          }
+        ],
+        "elapsed_ms": 55
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "port-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "5b2d7acc28bb8718870992e8191e035fe57f5e8366df78d76c3f9e04b2f372da",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 32,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "port-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "port-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 19
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "flow-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateFlowUsageType_",
+      "source_sha256": "fbbba891fd61170ed5657285b968982415a2577d1dcb8e4c820aac8dc415bf09",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateFlowUsageType_: A flow connection must be typed by flow connection definitions. Usage `value` has effective types [Flows::Flow, type.TypeCheck_flow_invalid.T].",
+            "span": {
+              "end_col": 59,
+              "end_line": 1,
+              "start_col": 46,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 25,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\flow-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "flow-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "flow-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateFlowUsageType_",
+            "message": "A flow connection must be typed by flow connection definitions.",
+            "line": 1,
+            "column": 46
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from Action, Part",
+            "line": 1,
+            "column": 46
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'done' from Action, Part",
+            "line": 1,
+            "column": 46
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'start' from Action, Part",
+            "line": 1,
+            "column": 46
+          }
+        ],
+        "elapsed_ms": 285
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "flow-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "888276f49fd20d807ed63e100efd3b3141426e3425832511c0f3abd34ce1bbd4",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 23,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "flow-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "flow-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 19
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "interface-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateInterfaceUsageType_",
+      "source_sha256": "dd47050b498685abbdb1ebdc1d4224a7430fdfe28afd75c917272d4906574822",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateInterfaceUsageType_: An interface must be typed by interface definitions. Usage `value` has effective types [type.TypeCheck_interface_invalid.T].",
+            "span": {
+              "end_col": 69,
+              "end_line": 1,
+              "start_col": 51,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 21,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\interface-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "interface-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "interface-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateInterfaceUsageType_",
+            "message": "An interface must be typed by interface definitions.",
+            "line": 1,
+            "column": 51
+          },
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateConnectorRelatedFeatures",
+            "message": "Must have at least two related elements",
+            "line": 1,
+            "column": 51
+          }
+        ],
+        "elapsed_ms": 43
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "interface-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "739dbfca595e70eccd2073adfe18b890190e37994b06d10c8d2064812ac755fa",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 42,
+        "element_count": 11,
+        "parse_ok": true,
+        "relative_path": "interface-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "interface-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 344
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "allocation-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateAllocationUsageType_",
+      "source_sha256": "46db940c91b648fec4737dfd78bae48f7c6e21f8ef0e2049e22a293b9c21c59a",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateAllocationUsageType_: An allocation must be typed by allocation definitions. Usage `value` has effective types [type.TypeCheck_allocation_invalid.T].",
+            "span": {
+              "end_col": 71,
+              "end_line": 1,
+              "start_col": 52,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 22,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\allocation-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "allocation-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "allocation-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateAllocationUsageType_",
+            "message": "An allocation must be typed by allocation definitions.",
+            "line": 1,
+            "column": 52
+          },
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateConnectorRelatedFeatures",
+            "message": "Must have at least two related elements",
+            "line": 1,
+            "column": 52
+          }
+        ],
+        "elapsed_ms": 45
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "allocation-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "4644878f4664e7578d125e0d091bea17a8e8a2aac0242827a8e93d2d61f7ccc2",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 41,
+        "element_count": 10,
+        "parse_ok": true,
+        "relative_path": "allocation-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "allocation-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 79
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "state-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateStateUsageType_",
+      "source_sha256": "2562adcb01b534ded97b5d33a575201d2488c3db19be1f25628c453383eb44bd",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateStateUsageType_: A state must be typed by state definitions. Usage `value` has effective types [States::StateAction, type.TypeCheck_state_invalid.T].",
+            "span": {
+              "end_col": 61,
+              "end_line": 1,
+              "start_col": 47,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 28,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\state-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "state-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "state-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateStateUsageType_",
+            "message": "A state must be typed by state definitions.",
+            "line": 1,
+            "column": 47
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from Part, StateAction",
+            "line": 1,
+            "column": 47
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'done' from Part, StateAction",
+            "line": 1,
+            "column": 47
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'start' from Part, StateAction",
+            "line": 1,
+            "column": 47
+          }
+        ],
+        "elapsed_ms": 85
+      }
+    },
+    {
+      "batch": "type-controls-shared-manifest",
+      "relative_path": "state-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "4c4767cd671fd622fbdf4f7a285cc2dd753b3d28f13a8f8dde323d6c15b32920",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 24,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "state-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "state-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 11
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "part-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "fc58a1284039ee03a1f96ef913d72b75563113d629e282edc1eb1c578dbb8e1f",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 396,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "part-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "part-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 463
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "part-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateOccurrenceUsageType_",
+      "source_sha256": "61f2a2779a37cd23e46be7b68e144296ff82ef0eb5c7851273f8946e5c11facf",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateOccurrenceUsageType_: An occurrence, item or part must be typed by occurrence definitions. Usage `value` has effective types [Parts::Part, type.ReleaseExtendedType_part_invalid.T].",
+            "span": {
+              "end_col": 74,
+              "end_line": 1,
+              "start_col": 61,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 18,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/part-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "part-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "part-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateOccurrenceUsageType_",
+            "message": "An occurrence, item or part must be typed by occurrence definitions.",
+            "line": 1,
+            "column": 61
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from DataValue, Part",
+            "line": 1,
+            "column": 61
+          }
+        ],
+        "elapsed_ms": 53
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "action-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "c5671db52785dde7760788c44e00e25e9d355d056489b9e929783c02a8a3da8c",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 20,
+        "element_count": 3,
+        "parse_ok": true,
+        "relative_path": "action-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "action-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 69
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "action-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateActionUsageType_",
+      "source_sha256": "bb4a745aeb07ce12fc748b01647a136ded1fd500f27c9076af378174fc4edcbe",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateActionUsageType_: An action must be typed by action definitions. Usage `value` has effective types [Actions::Action, type.ReleaseExtendedType_action_invalid.T].",
+            "span": {
+              "end_col": 78,
+              "end_line": 1,
+              "start_col": 63,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 23,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/action-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "action-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "action-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateActionUsageType_",
+            "message": "An action must be typed by action definitions.",
+            "line": 1,
+            "column": 63
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from Action, DataValue",
+            "line": 1,
+            "column": 63
+          }
+        ],
+        "elapsed_ms": 9
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "connection-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "4e9a5011e83a446e68d82ca46fc4ea22e058e9c72098d15eca99be1499bfefc7",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 30,
+        "element_count": 8,
+        "parse_ok": true,
+        "relative_path": "connection-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "connection-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 337
+      }
+    },
+    {
+      "batch": "extended-type-controls",
+      "relative_path": "connection-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateConnectionUsageType_",
+      "source_sha256": "0845387befab236e6989e94948d3713386651f9032e977c97a4abdb83e314767",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateConnectionUsageType_: A connection must be typed by connection definitions. Usage `value` has effective types [type.ReleaseExtendedType_connection_invalid.T].",
+            "span": {
+              "end_col": 135,
+              "end_line": 1,
+              "start_col": 101,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 24,
+        "input_path": "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/connection-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "connection-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "connection-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateConnectionUsageType_",
+            "message": "A connection must be typed by connection definitions.",
+            "line": 1,
+            "column": 101
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from DataValue, Part",
+            "line": 1,
+            "column": 101
+          }
+        ],
+        "elapsed_ms": 39
+      }
+    },
+    {
+      "batch": "include-controls",
+      "relative_path": "typed-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "4ef71915c26759ed11da127c336de75ad690fb0408eba7c9c29667dd8a09d446",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 476,
+        "element_count": 4,
+        "parse_ok": true,
+        "relative_path": "typed-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "typed-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 788
+      }
+    },
+    {
+      "batch": "include-controls",
+      "relative_path": "default-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "cf92ee8f46000965c5dbaae20e1e361896a79cb1e924fdec34ad6323d4781579",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 30,
+        "element_count": 2,
+        "parse_ok": true,
+        "relative_path": "default-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "default-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 27
+      }
+    },
+    {
+      "batch": "include-controls",
+      "relative_path": "reference-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null,
+      "source_sha256": "5507fd4f885da158e7b4a0c7f42950d170da771459ec9de6ace94455629a952d",
+      "native": {
+        "diagnostics": [],
+        "elapsed_ms": 33,
+        "element_count": 5,
+        "parse_ok": true,
+        "relative_path": "reference-valid.sysml",
+        "status": "ok"
+      },
+      "pilot": {
+        "relative_path": "reference-valid.sysml",
+        "parse_ok": true,
+        "status": "ok",
+        "diagnostics": [],
+        "elapsed_ms": 104
+      }
+    },
+    {
+      "batch": "include-controls",
+      "relative_path": "reference-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateIncludeUseCaseUsageReference",
+      "source_sha256": "abeb4a44c75e08fc97c0e99a2f716b82a068c5b5153003b247d71f3d184bd155",
+      "native": {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateIncludeUseCaseUsageReference: Must reference a use case. Referenced target `feature.IncludeInvalid.target`.",
+            "span": {
+              "end_col": 89,
+              "end_line": 1,
+              "start_col": 59,
+              "start_line": 1
+            }
+          }
+        ],
+        "elapsed_ms": 18,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\include-controls\\reference-invalid.sysml",
+        "parse_ok": true,
+        "relative_path": "reference-invalid.sysml",
+        "stage": "compile",
+        "status": "error"
+      },
+      "pilot": {
+        "relative_path": "reference-invalid.sysml",
+        "parse_ok": true,
+        "status": "error",
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateUseCaseUsageType_",
+            "message": "A use case must be typed by one use case definition.",
+            "line": 1,
+            "column": 59
+          },
+          {
+            "severity": "ERROR",
+            "syntax": false,
+            "code": "validateIncludeUseCaseUsageReference",
+            "message": "Must reference a use case.",
+            "line": 1,
+            "column": 67
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from Part, UseCase",
+            "line": 1,
+            "column": 59
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'done' from Part, UseCase",
+            "line": 1,
+            "column": 59
+          },
+          {
+            "severity": "WARNING",
+            "syntax": false,
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'start' from Part, UseCase",
+            "line": 1,
+            "column": 59
+          }
+        ],
+        "elapsed_ms": 190
+      }
+    }
+  ],
+  "control_provenance": [
+    {
+      "name": "single-type-controls",
+      "manifest_sha256": "cf42328784f081ea831264576e4744b137520064b143eaea18d28be907f51118",
+      "native_sha256": "b0fedd8e462f7f7a70a1bad4e38647565487b946b5491964a7e4cec96fc8ea88",
+      "pilot_sha256": "7f19a92e889f84bab34ebd204ddd9773bae0d81b87f7b522c0ea72204ea6132b",
+      "input_sha256": {
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/analysis-multiple.sysml": "94c85a76caf4f9a8ae114fffad9a67fa0283c24196d7070ece745f508666fa57",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/analysis-redundant.sysml": "e4edf8174417ba85d23520b5d14905cd43e617252ff9c022cbf2d2b6dac12963",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/analysis-valid.sysml": "8d4ccaef9953ece6c86e01c4a39bda0d11f4ec18676108fabddd42ee4b3b6312",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/calc-multiple.sysml": "1cae4945e720dc917e6891634e50393eed64218f18e02a26ed7e26f5544e0535",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/calc-redundant.sysml": "b4f204a225ad33975aaae6ecf34ec276a05bb01bdb8b6a8c34a2d83c835cd5a6",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/calc-valid.sysml": "b45709021ec4dd1ae4bac94adc24bdc08773eeadbe763de15eea9679c27ba923",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-inherited-multiple.sysml": "837064c9a07c2a8636a9a46dc07466ea5d42aa01d1c8ced108bdeecb5cfe9753",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-inherited-redundant.sysml": "d96f54e6f6302a62f4b2bb907c430da1df35b24c772d5b54ad0535016dfa1971",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-multiple.sysml": "f21e52a56dd495702e419108b75137d948baaca8ff3e7c9734b00be8bcf75f2d",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-redundant.sysml": "42226f7e0ada3cf0de8893028c52f9116c4d6e49ee7f1292050588b8b459f9f9",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/constraint-valid.sysml": "1c06b92f4c8a946c42efdfbfb468ca8a72c9cb2c8c76bd7a9cdea51b972cffd6",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/enum-multiple.sysml": "281e7b5f70723f122cbd0aa9d2ec4077d12b87e7f531a4dc84aa6f769e54329a",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/enum-redundant.sysml": "569b733741205d61da3032a57feb59d1496e35849ac29591ba4a24d1d2fbddeb",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/enum-valid.sysml": "3b736f2b59a6f7ff6d249677c12c410846503b8b51bed789acbadce6b3b8b85f",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/inherited-invalid.sysml": "94e9701b039c5505f84fdda241afed72ec8096f13c35eee9e685fb590d0d279f",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/inherited-second-invalid.sysml": "8a80093990d8f39a4f0cb5e0c82401fe8dbafe21d4ad160e79f9b1d9d23ebbe8",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/inherited-valid.sysml": "a4360e1bfff4b8374c5913f337a52569385cd1e0d92de5ff07ee7396617fc8e5",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/metadata-multiple.sysml": "2a792c88d14e8dacb99b82ba8c0aa14752fdcb30b2ed0eb881f2fa913b37c1e4",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/metadata-redundant.sysml": "0f1c0725365ed250988d13657073e3daecfb06aaef3a73be6716dc07095695d0",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/metadata-valid.sysml": "4434f09be80f571ab97adc46de5ae59da78fac7406bb277bd8fee2b9803872ce",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/rendering-multiple.sysml": "97ab8fcf5aa9af14b17cc0896f6d32a56ad536b161186d254ed2ff215b52ef66",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/rendering-redundant.sysml": "5d4171ab2a6c07b7db0cdc6f68fe31f28ab429f3664486717018e1772a0525ab",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/rendering-valid.sysml": "422160ee16b238ac2b423c6b64ee66e2ff67e9663341b57cfa25210f7e7f952d",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/requirement-multiple.sysml": "674369ae77d8607da6cc7415d2067b88c5a89bcea616ba85f7ae516393b3e2fe",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/requirement-redundant.sysml": "dcb3f9a78a6fee7641fb93ec510c6457dab2b50b5262e744207571339f0cd2e4",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/requirement-valid.sysml": "df3cab0bb91f8e8fc8b0f570e129e51e8d9ea432d090013cf96f1d411800cd01",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/use-case-multiple.sysml": "d471a131cc0c84e5b443328cc92e403cf3012b08c1ec0b64b79716678236fbdf",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/use-case-redundant.sysml": "f7e24a287a07664890804096c607be2e91cb7e29fd6476e0a82150379f61deeb",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/use-case-valid.sysml": "cb334ef970945b60b5fcaa1faf3d4e770ccd43884a1da2e5118d4789d2456afb",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/verification-multiple.sysml": "60bbaf041ab3a0e06f84fe76d43994265bf5d396993fac7d4b9da42611571fce",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/verification-redundant.sysml": "84073149e2372649f387dceecb9dc73271f9ea0e776ebaf28267f86c596ff43e",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/verification-valid.sysml": "2d072e1cc75ee161beffbc83eadcc71b67f1503e11ba97209b182c2e547a0651",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/view-multiple.sysml": "90358194e4e3ccaabc812bf5fa9c2bde82852bf06a7b13e61917a11a2f32849b",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/view-redundant.sysml": "19163b5d019c11e3f64ee6facfe05de15d3b112b5eed6b54cc6db47f8de894d0",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/view-valid.sysml": "68b195d15e953e68b3239c507d00923c59807b4ef79e0f67992bbd82caa458d8",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/viewpoint-multiple.sysml": "971a78f10dc2dd0c9099a58d0a189d48ba4e2c63366f3a53221f59328159020f",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/viewpoint-redundant.sysml": "18f26144a212da2581fda2d57f27101ca9900f01ad09a2a29d8bed58e06fb78d",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-controls/viewpoint-valid.sysml": "382de35d824558c6f12f8d6f80c5c407b6d05dd40419ceeb19c24a17bb101f1f"
+      }
+    },
+    {
+      "name": "type-controls-shared-manifest",
+      "manifest_sha256": "e35062268068ac7106571e8743f4cf25df0139b3a38364e5ec6a40e0214bbc17",
+      "native_sha256": "1f9e4a1bdec12c3e9d8d6d9b33cce01c1aa7d78e36732894f52ab62f876b047d",
+      "pilot_sha256": "46ea06f126c9b7723c29330366d7c0b77a68d731245147fbe98b6997fa68fa25",
+      "input_sha256": {
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\allocation-invalid.sysml": "46db940c91b648fec4737dfd78bae48f7c6e21f8ef0e2049e22a293b9c21c59a",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\allocation-valid.sysml": "4644878f4664e7578d125e0d091bea17a8e8a2aac0242827a8e93d2d61f7ccc2",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\attribute-invalid.sysml": "bc1856978c0224441921e85eb84e9d396e4a53046f83b773697d621ad7a6cad4",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\attribute-valid.sysml": "0afc7cc606a644cecee2011c52dc4be8a00f00bcabfb92bce70f04217c4fdf75",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\flow-invalid.sysml": "fbbba891fd61170ed5657285b968982415a2577d1dcb8e4c820aac8dc415bf09",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\flow-valid.sysml": "888276f49fd20d807ed63e100efd3b3141426e3425832511c0f3abd34ce1bbd4",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\interface-invalid.sysml": "dd47050b498685abbdb1ebdc1d4224a7430fdfe28afd75c917272d4906574822",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\interface-valid.sysml": "739dbfca595e70eccd2073adfe18b890190e37994b06d10c8d2064812ac755fa",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\port-invalid.sysml": "3e71385e3d6a42a8ba1065c484f27c4e2ab268adfb97a43c49a9915d18f802d3",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\port-valid.sysml": "5b2d7acc28bb8718870992e8191e035fe57f5e8366df78d76c3f9e04b2f372da",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\state-invalid.sysml": "2562adcb01b534ded97b5d33a575201d2488c3db19be1f25628c453383eb44bd",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\type-checks\\state-valid.sysml": "4c4767cd671fd622fbdf4f7a285cc2dd753b3d28f13a8f8dde323d6c15b32920"
+      }
+    },
+    {
+      "name": "extended-type-controls",
+      "manifest_sha256": "073d2563d7a2c5d5d83aa08ea179cdcbebabf9e4d7d59fcac8301e73026d2872",
+      "native_sha256": "c9785f179d8ddb618c70e9ba83a6f343d0b3f7fcfa0dfcf3c071777d9ad33dca",
+      "pilot_sha256": "2c01e6851d9c72e02056a73602fdfa089e3ddef8670f2ac581a78bc40ce1eb50",
+      "input_sha256": {
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/action-invalid.sysml": "bb4a745aeb07ce12fc748b01647a136ded1fd500f27c9076af378174fc4edcbe",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/action-valid.sysml": "c5671db52785dde7760788c44e00e25e9d355d056489b9e929783c02a8a3da8c",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/connection-invalid.sysml": "0845387befab236e6989e94948d3713386651f9032e977c97a4abdb83e314767",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/connection-valid.sysml": "4e9a5011e83a446e68d82ca46fc4ea22e058e9c72098d15eca99be1499bfefc7",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/part-invalid.sysml": "61f2a2779a37cd23e46be7b68e144296ff82ef0eb5c7851273f8946e5c11facf",
+        "C:/dev/git/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/type-checks/part-valid.sysml": "fc58a1284039ee03a1f96ef913d72b75563113d629e282edc1eb1c578dbb8e1f"
+      }
+    },
+    {
+      "name": "include-controls",
+      "manifest_sha256": "d8657c423e0e5b4cdf75cf5779b54b762eb6db59a0b70c29613a7c521cae9117",
+      "native_sha256": "81247e712a0189b6dbd0dba273b08a01c111b35fdd663954b3039a42e12f5b2d",
+      "pilot_sha256": "ad6bb68a529d0e188d64e807b43897ec63bac8e93ad8a132d9e7725b0d1d015a",
+      "input_sha256": {
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\include-controls\\default-valid.sysml": "cf92ee8f46000965c5dbaae20e1e361896a79cb1e924fdec34ad6323d4781579",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\include-controls\\reference-invalid.sysml": "abeb4a44c75e08fc97c0e99a2f716b82a068c5b5153003b247d71f3d184bd155",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\include-controls\\reference-valid.sysml": "5507fd4f885da158e7b4a0c7f42950d170da771459ec9de6ace94455629a952d",
+        "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\include-controls\\typed-valid.sysml": "4ef71915c26759ed11da127c336de75ad690fb0408eba7c9c29667dd8a09d446"
+      }
+    }
+  ],
+  "control_counts": {
+    "ok": 36,
+    "error": 24
+  },
+  "execution_controls": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "fixture_sha256": "222ccd8786eb43dd99f98a5e824cbf3452264e0dcf0d6689f46e7f847d80a8a7",
+    "runtime_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "helper_sha256": "e35de506200e33e83127f38bd300d4ea262f8fe35d948ab9d88bcea1599de790",
+    "class_sha256": "4accd6155dd20d4c10cd21dc02797106217c63f5cf32e798e51271cb632731c1",
+    "raw_sha256": "af831feed1f7f69f304f6fda657cdfaadb8f5a53a87aae425b06c449c93391bb",
+    "sources": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/ConditionalFunction.java": "343ea688ec64407395a08002eac36d05fbb09f93fdf09714c734bcaf0f2b4adf",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/NullCoalescingFunction.java": "4c41aa3f878c1f31f58164ab548f656d62da44a11d1996d8f327f3a0fdbaaf10",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/control/ConditionalImpliesFunction.java": "04858aaaef489f1724effba98d6bfb3f62392cef1dbbf096ed0e7cb7fb7942b9",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/base/IndexFunction.java": "c6984957fc95a87f0937ea13c7108009352b8b52df2b84ec37096fa276de8e06",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/XorFunction.java": "33e6b9ea7f9087b7127ad9ab97e95381af549b5a57154b03eced4b8e90707df8",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/AndFunction.java": "e2e4281e9ec3d8f4f074f658e445c523a04b7947743e86517e4a821f10fae166",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/expressions/functions/bool/OrFunction.java": "bb27820808ff3195de4aaea223534010a5960d5af7a3b514670f0362c0cd9852"
+    },
+    "observations": [
+      {
+        "id": "boolean_0",
+        "expression": "false & false",
+        "diagnostics": "CalculationUsage (38cd9b57-8863-4bc2-a3e4-3b1e601f94b4)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_1",
+        "expression": "false & true",
+        "diagnostics": "CalculationUsage (9f7f5ef4-1b3d-44df-a84e-cf9a37f793a2)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_2",
+        "expression": "true & false",
+        "diagnostics": "CalculationUsage (ad3cdafe-c0cf-4240-a9c7-affd96b3101e)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_3",
+        "expression": "true & true",
+        "diagnostics": "CalculationUsage (30451b8d-e903-4cbf-859f-e39d91438ca1)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_4",
+        "expression": "false | false",
+        "diagnostics": "CalculationUsage (8adf79bc-aada-42ec-8627-a28366d06541)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_5",
+        "expression": "false | true",
+        "diagnostics": "CalculationUsage (fccb91d2-8ec6-49d2-868d-6210331ce948)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_6",
+        "expression": "true | false",
+        "diagnostics": "CalculationUsage (7c27c2eb-ba64-4062-b3d7-aac4910991c3)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_7",
+        "expression": "true | true",
+        "diagnostics": "CalculationUsage (28e7628e-37dd-4a03-af87-850dd055b7ce)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_8",
+        "expression": "false xor false",
+        "diagnostics": "CalculationUsage (605cd306-0393-4e32-8d89-c0854fde6cf9)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_9",
+        "expression": "false xor true",
+        "diagnostics": "CalculationUsage (3873f3b5-8f92-4d42-8a17-5c843f961100)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_10",
+        "expression": "true xor false",
+        "diagnostics": "CalculationUsage (3d1c514b-10ca-4460-a678-92fc471f57c1)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_11",
+        "expression": "true xor true",
+        "diagnostics": "CalculationUsage (8478f955-38e0-46bb-8e39-9ed33bc13004)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_12",
+        "expression": "false implies false",
+        "diagnostics": "CalculationUsage (dc60c204-8ef2-4b0d-bc1c-30bfb27bfc89)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_13",
+        "expression": "false implies true",
+        "diagnostics": "CalculationUsage (a86654b0-b810-43f0-b1f2-0e935d646214)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_14",
+        "expression": "true implies false",
+        "diagnostics": "CalculationUsage (3ea1cb94-7e7e-4f79-bf49-41d3e6678bdb)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "boolean_15",
+        "expression": "true implies true",
+        "diagnostics": "CalculationUsage (fed415bd-7323-4238-a8de-ff5449524df9)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "conditional_yes",
+        "expression": "if true ? 7 else 8",
+        "diagnostics": "CalculationUsage (5ce02fc6-d5a8-49bd-83d0-f0dbca50d2df)\n",
+        "values": [
+          7
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "conditional_no",
+        "expression": "if false ? 7 else 8",
+        "diagnostics": "CalculationUsage (da1f643f-3b0d-4d23-adfd-c3589ff73bba)\n",
+        "values": [
+          8
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "conditional_lazy_yes",
+        "expression": "if true ? 7 else 1/0",
+        "diagnostics": "CalculationUsage (95c690d7-83d6-443d-be95-2eb27764b9bd)\n",
+        "values": [
+          7
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "conditional_lazy_no",
+        "expression": "if false ? 1/0 else 8",
+        "diagnostics": "CalculationUsage (51f138a0-e024-48ed-b8f0-428f70c131fb)\n",
+        "values": [
+          8
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_empty",
+        "expression": "null ?? 9",
+        "diagnostics": "CalculationUsage (896a8342-6bf6-4026-a40b-23dc2f653157)\n",
+        "values": [
+          9
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_tuple",
+        "expression": "() ?? 9",
+        "diagnostics": "CalculationUsage (412e0d87-abc3-49f1-a29d-5f913f42ade1)\n",
+        "values": [
+          9
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_zero",
+        "expression": "0 ?? 9",
+        "diagnostics": "CalculationUsage (b8624850-032f-4f65-a7e7-114312005175)\n",
+        "values": [
+          0
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_false",
+        "expression": "false ?? true",
+        "diagnostics": "CalculationUsage (64225d71-473e-461b-99ff-d0c744ed920e)\n",
+        "values": [
+          false
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_sequence",
+        "expression": "(11,22) ?? 9",
+        "diagnostics": "CalculationUsage (cf85e989-b053-43f6-97bd-719e427cd30e)\n",
+        "values": [
+          11,
+          22
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "coalesce_lazy",
+        "expression": "7 ?? 1/0",
+        "diagnostics": "CalculationUsage (12fa507f-5855-4dec-91d5-3e10bcfc31e9)\n",
+        "values": [
+          7
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "implies_lazy",
+        "expression": "false implies (1/0 > 0)",
+        "diagnostics": "CalculationUsage (1059cf06-21e3-4dbf-9323-4fba5a8999f1)\n",
+        "values": [
+          true
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "index_first",
+        "expression": "(11,22)#(1)",
+        "diagnostics": "CalculationUsage (f36d3356-c3da-48a9-b667-2209eef669cb)\n",
+        "values": [
+          11
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "index_second",
+        "expression": "(11,22)#(2)",
+        "diagnostics": "CalculationUsage (e0ce9097-1ff2-4c97-a0ae-ed01736d47d4)\n",
+        "values": [
+          22
+        ],
+        "status": "ok"
+      },
+      {
+        "id": "index_zero",
+        "expression": "(11,22)#(0)",
+        "diagnostics": "CalculationUsage (921f5404-bf37-4d86-9bae-807df17a61bb)\n",
+        "values": [],
+        "status": "ok"
+      },
+      {
+        "id": "index_negative",
+        "expression": "(11,22)#(-1)",
+        "diagnostics": "CalculationUsage (4df2fab8-291f-407c-b486-e0b1b365c14e)\n",
+        "values": [],
+        "status": "ok"
+      },
+      {
+        "id": "index_outside",
+        "expression": "(11,22)#(3)",
+        "diagnostics": "CalculationUsage (0fff7d39-fea4-4d28-bab7-8a18a88b0605)\n",
+        "values": [],
+        "status": "ok"
+      },
+      {
+        "id": "index_empty",
+        "expression": "null#(1)",
+        "diagnostics": "CalculationUsage (6916a7bd-ae3b-4408-b8da-35158237197b)\n",
+        "values": [],
+        "status": "ok"
+      },
+      {
+        "id": "index_scalar",
+        "expression": "7#(1)",
+        "diagnostics": "CalculationUsage (d6de6bf8-0516-41fe-8680-a326e63628f2)\n",
+        "values": [
+          7
+        ],
+        "status": "ok"
+      }
+    ]
+  },
+  "execution_comparisons": {
+    "expressions": 34,
+    "languages": [
+      "SysML",
+      "KerML"
+    ],
+    "matched": 68,
+    "candidate_library_log_sha256": "af661570ca82bd58fcf2e5baafb4e0c43913794087ca1852dfcee980132a98af"
+  },
+  "usage_flags_controls": {
+    "source": {
+      "export_sha256": "97e209240053f68e3ce57db0e96ef4be24c3c8c59c318366fbc526fe00ffb573",
+      "fixture_sha256": "33e811148905d093646a678fe56319829170bde4ff82363afdfadb5d2148377e",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+      "helper_java_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00"
+    },
+    "observations": [
+      {
+        "qualified_name": "ReleaseUsageFlags::Behavior::value",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Bus::nestedPort",
+        "kind": "PortUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": true,
+          "is_reference": false,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Data::field",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::composed",
+        "kind": "ActionUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": true,
+          "is_reference": false,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::nested",
+        "kind": "PartUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": true,
+          "is_reference": false,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::nested::nestedValue",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::observed",
+        "kind": "ActionUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::parameter",
+        "kind": "ActionUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::portion",
+        "kind": "PartUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": true,
+          "is_reference": false,
+          "is_portion": true,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::socket",
+        "kind": "PortUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::stable",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": true,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::Host::varying",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": true,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": true,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::sequence",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": true,
+          "is_unique": false
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::topAction",
+        "kind": "ActionUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      },
+      {
+        "qualified_name": "ReleaseUsageFlags::topAttribute",
+        "kind": "AttributeUsage",
+        "properties": {
+          "is_variable": false,
+          "is_composite": false,
+          "is_reference": true,
+          "is_portion": false,
+          "is_constant": false,
+          "may_time_vary": false,
+          "is_ordered": false,
+          "is_unique": true
+        }
+      }
+    ]
+  },
+  "validator_inventory": {
+    "annotated_methods": 113,
+    "partial": 23,
+    "untraced": 90
+  },
+  "verification_logs": {
+    "execution-foundation-tests": {
+      "sha256": "7f3a5be1cbc6a24371122095eab14eeab1d5d01bf9bef5d7f5e22872cc84572e",
+      "passed": 503
+    },
+    "execution-cache-sysml-tests": {
+      "sha256": "3a4a6db6ac11c4da0f1536d8414be219bc7f1429e1eda1ffa4a9abf13135a5e1",
+      "passed": 393
+    },
+    "execution-foundation-wasm": {
+      "sha256": "ce4ccb28f2ecbba09f14fd0a11bcb749fe9934a99b57925d941483ceff464122",
+      "passed": true
+    },
+    "execution-sysml-wasm": {
+      "sha256": "6be8890459a896cf175f861bbaca44ce58786e704249a9606bd2a2aecad08a63",
+      "passed": true
+    },
+    "execution-workspace-check": {
+      "sha256": "a785bf0e07845886a0770ed1f056d8dc344c8b50ff370227da8bd09308dfacc0",
+      "passed": true
+    },
+    "execution-cache-host-native": {
+      "sha256": "b59f2f0f7ff01a6e758bcba2ce369e1f83604e17faf403a260f98e30bf300469",
+      "passed": true
+    },
+    "execution-cache-host-wasm": {
+      "sha256": "ebfa125ff1fd204d3d45a190e029abf9a606782b3c49228bc526060df3328705",
+      "passed": true
+    },
+    "execution-cache-plugins": {
+      "sha256": "5eff145151b93d0dd47feae540ced5562a7ebc6020645d78139c06f23803dbf3",
+      "passed": true
+    },
+    "execution-cache-product-api": {
+      "sha256": "b8fdd346fd03d445562285dd546852ab318634b5890a7ebfb671d45851cde9fc",
+      "passed": true
+    },
+    "execution-release-build-verified": {
+      "sha256": "5322f0b2d5358886a3a523fd0499a5f5629bf065b0f0cf0ffd5efd46c9252906",
+      "passed": true
+    },
+    "execution-boundaries": {
+      "sha256": "e59e96eebc4813a5ffffd8b57871b0d4d7a8885a3d40db4cd9befd03a9293965",
+      "passed": true
+    }
+  },
+  "generator_drift_checks": [
+    "generate_release_emission_kinds.py: 27 canonical kinds",
+    "generate_release_fields.py: 16 additive fields",
+    "generate_release_type_checks.py: 22 type checks plus include reference predicate",
+    "generate_release_usage_flags.py: Pilot variability/composition facts"
+  ],
+  "expression_projection_tests": 5,
+  "retained_failed_run": {
+    "path": "..\\target\\support-2026-08\\execution-sysml-tests.log",
+    "sha256": "0423304299800aa061a72848c0ecc093798b9096b4336c7937dba9e8477136cd",
+    "failure": "intermittent unresolved duration before cache-key repair",
+    "isolated_recheck_sha256": "157a13e871fb45a4f2309e788e4109df1674ba84205afb5b6a9845fb70fcc9d6",
+    "repair": "cache keys hash semantic properties and language mapping inputs; two regression tests and complete 393-test rerun pass"
+  },
+  "limitations": [
+    "113-method validator ledger remains incomplete: 23 partial, 90 untraced",
+    "Arbitrary lambda bodies, general typing, classification, identity, units and user invocation execution remain open",
+    "Direct JSON sequence indexing does not implement typed Array/OrderedCollection objects or complete numeric type distinctions",
+    "Full lossless semantic projection and release/runtime qualification remain open",
+    "Current shipped/default release was not promoted"
+  ],
+  "final_assessment": {
+    "raw_aggregate": {
+      "compared": 310,
+      "native_elements": 11228,
+      "pilot_elements": 247516,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8073,
+      "native_only": 3155,
+      "pilot_only": 239443
+    },
+    "named_declaration_projection": {
+      "native_named_anchors_without_pilot_pair": 2168,
+      "unique_named_pairs": 6602,
+      "relation_fields_checked": 21798,
+      "relation_fields_equal_after_explicit_projection": 18071,
+      "extended_boolean_fields_missing_counterpart": 7576,
+      "relation_fields_missing_direct_counterpart": 4596,
+      "extended_boolean_fields_checked": 22438,
+      "relation_field_differences": 3727,
+      "boolean_differences": 268,
+      "extended_boolean_differences": 328,
+      "named_declarations_with_pilot_initializer": 503,
+      "pilot_initializer_without_native_expression_ir": 17,
+      "name_or_direction_differences": 187,
+      "literal_initializers_checked": 49,
+      "pilot_named_anchors_without_native_pair": 197,
+      "metaclass_mismatches": 121,
+      "ambiguous_named_anchors": 1
+    },
+    "ordered_expression_projection": {
+      "unassessed": 310,
+      "equal": 186,
+      "different": 7
+    },
+    "performance": {
+      "method": "fresh process, OS filesystem cache uncontrolled/warm, optimized native/prebuilt stdlib, Pilot CheckMode.ALL with published .index.json enabled, graph export excluded",
+      "successful_measurements": 48,
+      "total_measurements": 48,
+      "failures": [],
+      "groups": [
+        {
+          "group": "8b548aad4810",
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 702.4141000001691,
+              "min": 685.0036999967415,
+              "max": 963.1393000017852
+            },
+            "engine_ms": {
+              "median": 620.7812,
+              "min": 596.2349,
+              "max": 854.4099000000001
+            },
+            "library_ms": {
+              "median": 272.10240000000005,
+              "min": 262.4753,
+              "max": 339.5535
+            },
+            "model_work_ms": {
+              "median": 348.53940000000006,
+              "min": 333.54449999999997,
+              "max": 514.6738
+            }
+          },
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 10952.947400015546,
+              "min": 8015.476200002013,
+              "max": 13074.412699992536
+            },
+            "engine_ms": {
+              "median": 10563.5893,
+              "min": 7802.7111,
+              "max": 12700.8521
+            },
+            "library_ms": {
+              "median": 4667.8759,
+              "min": 3689.0557,
+              "max": 6711.7143
+            },
+            "model_work_ms": {
+              "median": 441.1657,
+              "min": 429.7129,
+              "max": 660.1361999999999
+            }
+          },
+          "pilot_over_native_wall": 15.593290909184352,
+          "pilot_over_native_model_work": 1.265755607543939
+        },
+        {
+          "group": "87b28b080d1d",
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 10811.874899984105,
+              "min": 10338.727599999402,
+              "max": 11250.024800014216
+            },
+            "engine_ms": {
+              "median": 10571.2922,
+              "min": 10064.2159,
+              "max": 11017.7279
+            },
+            "library_ms": {
+              "median": 3990.5417,
+              "min": 3624.7673,
+              "max": 4159.0343
+            },
+            "model_work_ms": {
+              "median": 2927.3858999999998,
+              "min": 2692.0891,
+              "max": 2974.6986
+            }
+          },
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 1504.7681000141893,
+              "min": 1461.0732999863103,
+              "max": 1514.9560999998357
+            },
+            "engine_ms": {
+              "median": 1418.5095999999999,
+              "min": 1382.4557,
+              "max": 1432.0836
+            },
+            "library_ms": {
+              "median": 270.3493,
+              "min": 266.9122,
+              "max": 278.9776
+            },
+            "model_work_ms": {
+              "median": 1138.8044000000002,
+              "min": 1111.7034,
+              "max": 1164.8118000000002
+            }
+          },
+          "pilot_over_native_wall": 7.185077155664154,
+          "pilot_over_native_model_work": 2.5705783188052305
+        },
+        {
+          "group": "a01633e4052a",
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 3432.980999990832,
+              "min": 3412.3057999822777,
+              "max": 3654.334299993934
+            },
+            "engine_ms": {
+              "median": 3356.7988,
+              "min": 3333.1283,
+              "max": 3570.0085
+            },
+            "library_ms": {
+              "median": 264.9651,
+              "min": 253.836,
+              "max": 278.8997
+            },
+            "model_work_ms": {
+              "median": 3090.5842000000002,
+              "min": 3078.382,
+              "max": 3290.5457
+            }
+          },
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 12960.74400001089,
+              "min": 12821.064099989599,
+              "max": 13295.767499977956
+            },
+            "engine_ms": {
+              "median": 12750.8795,
+              "min": 12616.8118,
+              "max": 13077.8863
+            },
+            "library_ms": {
+              "median": 3756.4432,
+              "min": 3651.2295,
+              "max": 3854.6429
+            },
+            "model_work_ms": {
+              "median": 5369.0271999999995,
+              "min": 5230.3759,
+              "max": 5477.1055
+            }
+          },
+          "pilot_over_native_wall": 3.7753614133155713,
+          "pilot_over_native_model_work": 1.7372208141101606
+        },
+        {
+          "group": "dca25ec10fb9",
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 16147.122199996375,
+              "min": 16066.558399994392,
+              "max": 17797.15430000215
+            },
+            "engine_ms": {
+              "median": 15913.2946,
+              "min": 15850.5184,
+              "max": 17563.0603
+            },
+            "library_ms": {
+              "median": 3593.5756,
+              "min": 3495.6562,
+              "max": 4166.5398
+            },
+            "model_work_ms": {
+              "median": 8660.169,
+              "min": 8604.4703,
+              "max": 9439.330300000001
+            }
+          },
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 4294.200700009242,
+              "min": 4165.167099999962,
+              "max": 4330.275200016331
+            },
+            "engine_ms": {
+              "median": 4216.8844,
+              "min": 4088.0211,
+              "max": 4241.7925
+            },
+            "library_ms": {
+              "median": 354.84159999999997,
+              "min": 253.6735,
+              "max": 396.3374
+            },
+            "model_work_ms": {
+              "median": 3834.1963,
+              "min": 3820.3993,
+              "max": 3886.7172
+            }
+          },
+          "pilot_over_native_wall": 3.7602160047995947,
+          "pilot_over_native_model_work": 2.258666046910535
+        },
+        {
+          "group": "87c575b90bce",
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 686.6280999965966,
+              "min": 605.6896999944001,
+              "max": 829.6854999789502
+            },
+            "engine_ms": {
+              "median": 591.0789,
+              "min": 536.9528,
+              "max": 722.2760000000001
+            },
+            "library_ms": {
+              "median": 249.41,
+              "min": 248.06210000000002,
+              "max": 388.701
+            },
+            "model_work_ms": {
+              "median": 333.4069,
+              "min": 288.69730000000004,
+              "max": 341.53
+            }
+          },
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 8054.62300000363,
+              "min": 7880.882400000701,
+              "max": 8367.476599989459
+            },
+            "engine_ms": {
+              "median": 7808.8741,
+              "min": 7670.7873,
+              "max": 8163.4249
+            },
+            "library_ms": {
+              "median": 3658.3762,
+              "min": 3560.7831,
+              "max": 3934.1875
+            },
+            "model_work_ms": {
+              "median": 539.5704,
+              "min": 520.7328,
+              "max": 555.4175
+            }
+          },
+          "pilot_over_native_wall": 11.730692350114357,
+          "pilot_over_native_model_work": 1.6183540292657408
+        },
+        {
+          "group": "8b2a5d1a6608",
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 8875.307800015435,
+              "min": 8535.557900002459,
+              "max": 8895.39639998111
+            },
+            "engine_ms": {
+              "median": 8636.8404,
+              "min": 8317.7281,
+              "max": 8669.1241
+            },
+            "library_ms": {
+              "median": 3601.669,
+              "min": 3586.2559,
+              "max": 3832.7686
+            },
+            "model_work_ms": {
+              "median": 1212.2694999999999,
+              "min": 1152.4848000000002,
+              "max": 1352.7765
+            }
+          },
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 716.2618000002112,
+              "min": 710.460400005104,
+              "max": 717.2711000021081
+            },
+            "engine_ms": {
+              "median": 639.9916,
+              "min": 626.5690999999999,
+              "max": 641.4623
+            },
+            "library_ms": {
+              "median": 255.68970000000002,
+              "min": 251.0449,
+              "max": 266.86510000000004
+            },
+            "model_work_ms": {
+              "median": 375.3639,
+              "min": 374.49260000000004,
+              "max": 384.14979999999997
+            }
+          },
+          "pilot_over_native_wall": 12.391150554186776,
+          "pilot_over_native_model_work": 3.229584677695431
+        },
+        {
+          "group": "e250900ba1e2",
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 816.5036000136752,
+              "min": 806.770700000925,
+              "max": 856.9895999971777
+            },
+            "engine_ms": {
+              "median": 740.1364,
+              "min": 730.7588000000001,
+              "max": 769.3366000000001
+            },
+            "library_ms": {
+              "median": 258.42179999999996,
+              "min": 256.59340000000003,
+              "max": 260.05420000000004
+            },
+            "model_work_ms": {
+              "median": 479.9309,
+              "min": 472.18440000000004,
+              "max": 512.5748
+            }
+          },
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 8588.15890000551,
+              "min": 8506.25229999423,
+              "max": 8875.240299996221
+            },
+            "engine_ms": {
+              "median": 8342.6684,
+              "min": 8276.4966,
+              "max": 8654.2732
+            },
+            "library_ms": {
+              "median": 3596.9593,
+              "min": 3576.0,
+              "max": 3776.3837
+            },
+            "model_work_ms": {
+              "median": 1148.5213999999999,
+              "min": 1127.4167,
+              "max": 1308.3156000000001
+            }
+          },
+          "pilot_over_native_wall": 10.518213146716894,
+          "pilot_over_native_model_work": 2.393097422983183
+        },
+        {
+          "group": "020f131610d2",
+          "pilot": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 8972.093899996253,
+              "min": 8786.366100015584,
+              "max": 9469.594099995447
+            },
+            "engine_ms": {
+              "median": 8742.3426,
+              "min": 8554.3072,
+              "max": 9228.0237
+            },
+            "library_ms": {
+              "median": 3560.794,
+              "min": 3476.5917,
+              "max": 3843.8414
+            },
+            "model_work_ms": {
+              "median": 1439.7188999999998,
+              "min": 1382.6398000000002,
+              "max": 1587.0047
+            }
+          },
+          "native": {
+            "repetitions": 3,
+            "wall_ms": {
+              "median": 881.7699999781325,
+              "min": 871.6412000067066,
+              "max": 911.7813000048045
+            },
+            "engine_ms": {
+              "median": 803.4417000000001,
+              "min": 786.8546,
+              "max": 835.5622000000001
+            },
+            "library_ms": {
+              "median": 266.7655,
+              "min": 264.2314,
+              "max": 272.5553
+            },
+            "model_work_ms": {
+              "median": 530.6766,
+              "min": 519.8816,
+              "max": 571.1359
+            }
+          },
+          "pilot_over_native_wall": 10.175095433297523,
+          "pilot_over_native_model_work": 2.7129873448348767
+        }
+      ],
+      "caveat": "Native validation and semantic preservation are incomplete. These workflow timings do not establish equivalent work or a conformance-adjusted speedup."
+    }
+  },
+  "assessment_findings": [
+    "Metaclass differences reduced 273 to 121 and name/direction differences 690 to 187",
+    "Ordered and unique differences reduced to zero",
+    "Direct Boolean differences increased 173 to 268; this checkpoint requires further derived-flag repair"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "a26a5315b7b0a60bcb2a5b4e3d9cd4d628c7f73349ea5f62faa51575889a9c9d",
+    "export_sha256": "a557611646b44fcc10496ee16de1db7831952137b06291017fe3ecd8be9e9fac",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1738,
+      "relationship_count": 12162,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/audit-derived-flags.sysml"
+      ],
+      "exported_at_utc": "2026-09-18T13:32:06.978349800Z"
+    },
+    "selected_elements": {
+      "AuditFlags::Behavior::merged": "MergeNode",
+      "AuditFlags::Behavior::forked": "ForkNode",
+      "AuditFlags::Behavior::joined": "JoinNode",
+      "AuditFlags::Behavior::decided": "DecisionNode",
+      "AuditFlags::envelope": "Message"
+    }
+  },
+  "usage_type_defaults": {
+    "DecisionNode": {
+      "type_ref": "Actions::DecisionAction"
+    },
+    "ForkNode": {
+      "type_ref": "Actions::ForkAction"
+    },
+    "JoinNode": {
+      "type_ref": "Actions::JoinAction"
+    },
+    "MergeNode": {
+      "type_ref": "Actions::MergeAction"
+    },
+    "Message": {
+      "type_ref": "Flows::Message"
+    }
+  }
+}

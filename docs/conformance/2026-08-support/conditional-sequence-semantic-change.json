@@ -1,0 +1,116 @@
+{
+  "status": "candidate_not_release_qualified",
+  "previous": "../2026-08-derived-flags-assessment/README.md",
+  "current": "../2026-08-conditional-sequences-assessment/README.md",
+  "projection_before": {
+    "native_named_anchors_without_pilot_pair": 2132,
+    "unique_named_pairs": 6602,
+    "relation_fields_checked": 21923,
+    "relation_fields_equal_after_explicit_projection": 18205,
+    "extended_boolean_fields_missing_counterpart": 7407,
+    "relation_fields_missing_direct_counterpart": 4471,
+    "extended_boolean_fields_checked": 22607,
+    "relation_field_differences": 3718,
+    "named_declarations_with_pilot_initializer": 503,
+    "pilot_initializer_without_native_expression_ir": 17,
+    "name_or_direction_differences": 187,
+    "literal_initializers_checked": 49,
+    "pilot_named_anchors_without_native_pair": 197,
+    "metaclass_mismatches": 121,
+    "boolean_differences": 83,
+    "extended_boolean_differences": 86,
+    "ambiguous_named_anchors": 1
+  },
+  "projection_after": {
+    "native_named_anchors_without_pilot_pair": 1953,
+    "unique_named_pairs": 6616,
+    "relation_fields_checked": 22218,
+    "relation_fields_equal_after_explicit_projection": 18456,
+    "extended_boolean_fields_missing_counterpart": 7407,
+    "relation_fields_missing_direct_counterpart": 4250,
+    "extended_boolean_fields_checked": 22697,
+    "relation_field_differences": 3762,
+    "named_declarations_with_pilot_initializer": 503,
+    "pilot_initializer_without_native_expression_ir": 17,
+    "name_or_direction_differences": 187,
+    "literal_initializers_checked": 49,
+    "pilot_named_anchors_without_native_pair": 183,
+    "metaclass_mismatches": 126,
+    "ambiguous_named_anchors": 1,
+    "boolean_differences": 32,
+    "extended_boolean_differences": 34
+  },
+  "resolved_metaclass_differences": [
+    {
+      "source": "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+      "line": 17,
+      "name": "S",
+      "property": "metaclass",
+      "native": "SuccessionFlowUsage",
+      "pilot": "TransitionUsage",
+      "classification": "declaration-level difference"
+    }
+  ],
+  "newly_observed_metaclass_differences": [
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 81,
+      "name": "apsc",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    },
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 79,
+      "name": "apsph",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    },
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 80,
+      "name": "apspm",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    },
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 82,
+      "name": "mqget",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    },
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 83,
+      "name": "mqgive",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    },
+    {
+      "source": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "line": 78,
+      "name": "tlu",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PortUsage",
+      "classification": "declaration-level difference"
+    }
+  ],
+  "newly_observed_explanation": "The six AHFSequences.sysml named interface ends were absent from the previous native snapshot. They are now preserved with ReferenceSubsetting objects, but their native ReferenceUsage metaclass still differs from Pilot PortUsage. The pinned InterfaceEnd grammar returns PortUsage; this remains an implementation defect.",
+  "remaining_expression_projection": {
+    "unassessed": 310,
+    "equal": 186,
+    "different": 7
+  }
+}

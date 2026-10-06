@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "scope": "selected translated validators",
+  "runtime": {
+    "implementation_kind": "handwritten-rust",
+    "path": "crates/mercurio-sysml/src/validation_rules.rs",
+    "entrypoint": "pub(crate) fn evaluate(",
+    "role": "generated-rust-support",
+    "java_required": false
+  },
+  "bindings": [
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Annotation.getOwnedAnnotatingElement()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+      "entrypoint": "impl SemanticModel for AnnotationModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Reads the explicit canonical owned_annotating_element KIR field. Omitted/null means absent only for this optional relationship.",
+        "Focused ownership combinations do not qualify complete graph materialization or the known Pilot inverse-delegate difference."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+          "entrypoint": "fn annotation_checks_cover_all_ownership_combinations("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatedElement()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+      "entrypoint": "impl SemanticModel for AnnotationModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Reads the explicit canonical owning_annotated_element KIR field. Omitted/null means absent only for this optional relationship.",
+        "Focused ownership combinations do not qualify complete graph materialization or the known Pilot inverse-delegate difference."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+          "entrypoint": "fn annotation_checks_cover_all_ownership_combinations("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatingElement()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+      "entrypoint": "impl SemanticModel for AnnotationModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Reads the explicit canonical owning_annotating_element KIR field. Omitted/null means absent only for this optional relationship.",
+        "Focused ownership combinations do not qualify complete graph materialization or the known Pilot inverse-delegate difference."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/emit/annotation_checks.rs",
+          "entrypoint": "fn annotation_checks_cover_all_ownership_combinations("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Element.getOwner()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+      "entrypoint": "impl SemanticModel for ImportModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Bound only for the import owning namespace in the collected textual scope. owner_qualified_name supplies owner presence.",
+        "Returns a presence identity for this predicate; this is not a general Element ownership graph implementation."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+          "entrypoint": "fn translated_import_check_covers_visibility_and_owner_nullness("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Import.getImportOwningNamespace()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+      "entrypoint": "impl SemanticModel for ImportModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Bound to the collected textual import context, including its unnamed resource namespace.",
+        "Returns a presence identity for this predicate; arbitrary programmatic or unresolved Import graphs are not qualified."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+          "entrypoint": "fn translated_import_check_covers_visibility_and_owner_nullness("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Import.getVisibility()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+      "entrypoint": "impl SemanticModel for ImportModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Maps collected private/protected/public modifiers; expose visibility comes from the generated grammar contract.",
+        "This binding does not implement qualified/inherited accessibility, import-all behavior or scope construction."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/namespace_checks.rs",
+          "entrypoint": "fn translated_import_check_covers_visibility_and_owner_nullness("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Usage.isReference()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/scalar_checks.rs",
+      "entrypoint": "impl SemanticModel for ScalarModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Reads required derived is_reference after usage flag derivation; missing flags fail closed. Broader ownership and type derivation remains handwritten and incompletely qualified."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/scalar_checks.rs",
+          "entrypoint": "fn translated_scalar_bindings_cover_flags_and_reject_missing_values("
+        },
+        {
+          "path": "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs",
+          "entrypoint": "fn release_2026_08_translated_scalar_enumeration_default_and_reference_flags("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.lang.sysml.Definition.isVariation()",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/scalar_checks.rs",
+      "entrypoint": "impl SemanticModel for ScalarModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Reads ResolvedDefinition.is_variation. Enumeration model default true is handwritten in collect.rs and independently checked against actual Pilot model construction; other definition kinds are outside this binding scope."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/scalar_checks.rs",
+          "entrypoint": "fn translated_scalar_bindings_cover_flags_and_reject_missing_values("
+        },
+        {
+          "path": "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs",
+          "entrypoint": "fn release_2026_08_translated_scalar_enumeration_default_and_reference_flags("
+        }
+      ]
+    },
+    {
+      "symbol": "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/type_family_checks.rs",
+      "entrypoint": "impl SemanticModel for TypeModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Bound to native all_types. Computed conjugation, cross-feature and implicit-expression graph edges remain incompletely qualified; generated predicate coverage does not establish graph completeness.",
+        "Diagnostics retain the Ecore feature token in text; native source location is currently the declaration span."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/type_family_checks.rs",
+          "entrypoint": "fn translated_type_family_bindings_cover_cardinality_and_metaclasses("
+        }
+      ]
+    },
+    {
+      "symbol": "java.lang.Class.isInstance(java.lang.Object)",
+      "implementation_kind": "handwritten-rust",
+      "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/type_family_checks.rs",
+      "entrypoint": "impl SemanticModel for TypeModel<'_>",
+      "status": "implemented",
+      "qualification": "focused-controls",
+      "limitations": [
+        "Handwritten receiver lookup calls shared metaclass_conforms, whose class closure is generated from resolved EMF in ecore_hierarchy_generated.rs. Missing effective-type metaclasses fail closed; no runtime reflection or Java. This does not qualify type-collection algorithms.",
+        "Diagnostics retain the Ecore feature token in text; native source location is currently the declaration span."
+      ],
+      "tests": [
+        {
+          "path": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/type_family_checks.rs",
+          "entrypoint": "fn translated_type_family_bindings_cover_cardinality_and_metaclasses("
+        }
+      ]
+    }
+  ],
+  "reference_interpreter": {
+    "implementation_kind": "handwritten-rust",
+    "path": "crates/mercurio-sysml/src/validation_rules_interpreter.rs",
+    "entrypoint": "fn evaluate(",
+    "role": "typed-ir-reference-interpreter",
+    "java_required": false,
+    "test_only": true,
+    "test_gate": {
+      "path": "crates/mercurio-sysml/src/validation_rules.rs",
+      "entrypoint": "#[cfg(test)]\n#[path = \"validation_rules_interpreter.rs\"]\nmod interpreter;"
+    }
+  },
+  "generation": {
+    "implementation_kind": "generated-rust",
+    "role": "selected-rule-predicates",
+    "manifest_path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/validation-rust-generation.json",
+    "generator_path": "tools/generate_validation_rust.py",
+    "module_gate": {
+      "path": "crates/mercurio-sysml/src/validation_rules.rs",
+      "entrypoint": "#[path = \"validation_rules_generated.rs\"]\nmod generated;"
+    },
+    "runtime_dispatch": {
+      "path": "crates/mercurio-sysml/src/validation_rules.rs",
+      "entrypoint": "generated::evaluate("
+    }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-missing-body.sysml": "46c1ded732ebe30ac593f3a15f412058b6fec5d489c535fa374e56a4810ec200",
+    "invalid-self.sysml": "9f3e2677f31fa0030ba6665458b4cd8fcd298a3cd1fc1bb4d4480821d076eb6b",
+    "invalid-target.sysml": "d9a1c25fbdd7dc5cbef1c76d26db5f4b5f7c0a80e1f70446a263915e9594548b",
+    "invalid-unresolved-annotation.sysml": "1d656fb1bf59d64871af3cb6bb03c37ca404a67eb94b3b55bf1d19c5343da0ed",
+    "positive-membership.sysml": "c4a404e04a23303b9e62fb2d6b4d2749bd43149d3f8a8c05337ab6fa54f6eaf6",
+    "positive-namespace.sysml": "cfd124f8debd46399c49dd63f1c485f110ad256c4496b564439552f1809f7b74",
+    "positive-recursive-member.sysml": "181b312e384e24e9b8933918c6e41e6c27a1b892e218a93ded9d1ee5a3d3faad",
+    "positive-recursive-namespace.sysml": "5e9feee3ca29696b40bcc2464f4a65cb5f748ead9f9c8aef5843c59f4fd073c4"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-missing-body.sysml",
+      "status": "error",
+      "validation_ms": 701.8573,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-self.sysml",
+      "status": "error",
+      "validation_ms": 687.0119,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'note'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-target.sysml",
+      "status": "error",
+      "validation_ms": 1207.0802,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Membership 'Missing'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-unresolved-annotation.sysml",
+      "status": "error",
+      "validation_ms": 897.632,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-membership.sysml",
+      "status": "ok",
+      "validation_ms": 1168.4116,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-namespace.sysml",
+      "status": "ok",
+      "validation_ms": 1367.5883,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-recursive-member.sysml",
+      "status": "ok",
+      "validation_ms": 1064.0153,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-recursive-namespace.sysml",
+      "status": "ok",
+      "validation_ms": 1026.6468,
+      "diagnostics": []
+    }
+  ]
+}

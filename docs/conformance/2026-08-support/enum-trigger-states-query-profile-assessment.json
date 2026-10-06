@@ -1,0 +1,254 @@
+{
+  "schema": "dev.mercurio.enum-trigger-states-query-profile-assessment.v1",
+  "scope": "Full nested query trace of the current optimized candidate on the same pinned resource closure. Diagnostic attribution only; not semantic qualification or a comparable Pilot benchmark.",
+  "native_executable": {
+    "path": "target/release/audit_release_compile.exe",
+    "sha256": "5cc1aaadc539b6e5c0e98c156635b9a7bb1745ebe2cdccca43a7df6fef81c2af"
+  },
+  "source_sha256": {
+    "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e",
+    "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+    "sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126",
+    "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a",
+    "sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6",
+    "sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml": "5a6a9e18199c6072252b99d82ad7b04657290475f1c2acee46a9b5ae0fec21d9",
+    "sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98",
+    "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml": "d7433722414a609f0ad2583b2f910e1c34a2bc1d7ac3abfe7ebbb7c239941f60",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml": "b6f9e5349c7c7f393591c0334c3bec86f1766b3e37209819179310c2f8fe1fb7",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml": "47da8348d01c426c0839b679e87a35fb58d090a43c0faa4514542cc83e893e3a",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0",
+    "sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml": "407c222276f63b32fae108ac3c886671198894e6ff4c2beec6b6ce091fe910f9",
+    "sysml.library/Systems Library/Actions.sysml": "f80cc391abd8f5d8171d581788c8595cd44811779a47259fd5d24680e3fe300b",
+    "sysml.library/Systems Library/Flows.sysml": "89567552fea20e13b615ab7f3e76588bec9e9c7ffcfa94340eb74c742d36ebee",
+    "sysml.library/Systems Library/States.sysml": "10d503f4409549df91ec71dbcdc7633994d1275947b0d69f3c755c647dd84b82"
+  },
+  "caller_sha256": "e59bdba0afa0a1bdc014f36aa8106c48612c0bb73f48631df6ba6360aa316e93",
+  "caller_source_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-caller.sysml",
+  "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-source-inputs.json",
+  "result": "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-query-profile-results.jsonl",
+  "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-query-profile-progress.log",
+  "time_box_seconds": 300,
+  "semantic_qualification": "not_assessed",
+  "concurrent_native_regression": false,
+  "build_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-release-build.log",
+  "status": "time_box_expired",
+  "sampled_query_events": [],
+  "sampling_policy": "All query start/finish events retained in the progress log; analyze nested exclusive time separately. Full tracing may change elapsed time.",
+  "phase_events": [
+    {
+      "elapsed_seconds": 0.047,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/target/enum-trigger-caller.sysml"
+    },
+    {
+      "elapsed_seconds": 0.422,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/target/enum-trigger-caller.sysml"
+    },
+    {
+      "elapsed_seconds": 0.422,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml"
+    },
+    {
+      "elapsed_seconds": 0.969,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml"
+    },
+    {
+      "elapsed_seconds": 0.969,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml"
+    },
+    {
+      "elapsed_seconds": 1.047,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml"
+    },
+    {
+      "elapsed_seconds": 1.047,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 2.281,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 2.281,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 4.375,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 4.375,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 5.75,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 5.75,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 6.781,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 6.781,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 7.969,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 7.969,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 12.172,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml"
+    },
+    {
+      "elapsed_seconds": 12.172,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml"
+    },
+    {
+      "elapsed_seconds": 12.344,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml"
+    },
+    {
+      "elapsed_seconds": 12.344,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml"
+    },
+    {
+      "elapsed_seconds": 13.062,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml"
+    },
+    {
+      "elapsed_seconds": 13.062,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 13.719,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 13.719,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 14.969,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 14.969,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml"
+    },
+    {
+      "elapsed_seconds": 33.25,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml"
+    },
+    {
+      "elapsed_seconds": 33.25,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml"
+    },
+    {
+      "elapsed_seconds": 33.5,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml"
+    },
+    {
+      "elapsed_seconds": 33.5,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml"
+    },
+    {
+      "elapsed_seconds": 33.609,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml"
+    },
+    {
+      "elapsed_seconds": 33.609,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml"
+    },
+    {
+      "elapsed_seconds": 35.078,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml"
+    },
+    {
+      "elapsed_seconds": 35.078,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml"
+    },
+    {
+      "elapsed_seconds": 55.25,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml"
+    },
+    {
+      "elapsed_seconds": 55.25,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml"
+    },
+    {
+      "elapsed_seconds": 56.656,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml"
+    },
+    {
+      "elapsed_seconds": 56.656,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 58.844,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 58.844,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    },
+    {
+      "elapsed_seconds": 61.047,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    },
+    {
+      "elapsed_seconds": 61.047,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 61.687,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml"
+    },
+    {
+      "elapsed_seconds": 61.687,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Actions.sysml"
+    },
+    {
+      "elapsed_seconds": 77.375,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Actions.sysml"
+    },
+    {
+      "elapsed_seconds": 77.375,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Flows.sysml"
+    },
+    {
+      "elapsed_seconds": 78.859,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Flows.sysml"
+    },
+    {
+      "elapsed_seconds": 78.859,
+      "phase": "Parsing D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/States.sysml"
+    },
+    {
+      "elapsed_seconds": 81.25,
+      "phase": "Parsed D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/States.sysml"
+    },
+    {
+      "elapsed_seconds": 81.25,
+      "phase": "ConstructionAndLinking <source set>"
+    }
+  ],
+  "total_elapsed_seconds": 300.062,
+  "progress_sha256": "fc71f34da55366163b3be7786a79957f36aabf9ca46d9a87f52774a2a4c8bc17"
+}

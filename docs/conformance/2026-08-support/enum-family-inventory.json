@@ -1,0 +1,519 @@
+{
+  "schema": "dev.mercurio.enum-family-inventory.v1",
+  "inputs": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/enum-rules.extract.json": "0a76cbca06b55dbe9943911ac8dd497b86a83cab9c527d0488d07e90c5ce09db",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "declaration_ids": [
+    "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/0",
+    "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/1",
+    "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/2",
+    "org.omg.kerml.xtext.KerML::FilterPackageMemberVisibility/alternatives",
+    "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/0",
+    "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/1",
+    "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/2",
+    "org.omg.sysml.xtext.SysML::EffectFeatureKind/alternatives",
+    "org.omg.sysml.xtext.SysML::ExposeVisibilityKind/alternatives",
+    "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/0",
+    "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/1",
+    "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/2",
+    "org.omg.sysml.xtext.SysML::FilterPackageMemberVisibility/alternatives",
+    "org.omg.sysml.xtext.SysML::FramedConcernKind/alternatives",
+    "org.omg.sysml.xtext.SysML::GuardFeatureKind/alternatives",
+    "org.omg.sysml.xtext.SysML::PortionKind/alternatives/elements/0",
+    "org.omg.sysml.xtext.SysML::PortionKind/alternatives/elements/1",
+    "org.omg.sysml.xtext.SysML::RequirementConstraintKind/alternatives/elements/0",
+    "org.omg.sysml.xtext.SysML::RequirementConstraintKind/alternatives/elements/1",
+    "org.omg.sysml.xtext.SysML::RequirementVerificationKind/alternatives",
+    "org.omg.sysml.xtext.SysML::TriggerFeatureKind/alternatives",
+    "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/0",
+    "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/1",
+    "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/2"
+  ],
+  "direct_calls": [
+    {
+      "id": "org.omg.kerml.xtext.KerML::MemberPrefix/alternatives/terminal",
+      "target": "org.omg.kerml.xtext.KerML::VisibilityIndicator"
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/0/terminal",
+      "target": "org.omg.kerml.xtext.KerML::VisibilityIndicator"
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FilterPackageMember/alternatives/elements/0/terminal",
+      "target": "org.omg.kerml.xtext.KerML::FilterPackageMemberVisibility"
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/0/terminal",
+      "target": "org.omg.kerml.xtext.KerML::FeatureDirection"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MemberPrefix/alternatives/terminal",
+      "target": "org.omg.sysml.xtext.SysML::VisibilityIndicator"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::VisibilityIndicator"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FilterPackageMember/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::FilterPackageMemberVisibility"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RefPrefix/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::FeatureDirection"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::OccurrenceUsagePrefix/alternatives/elements/0/elements/1/elements/2/terminal",
+      "target": "org.omg.sysml.xtext.SysML::PortionKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortionUsage/alternatives/elements/2/terminal",
+      "target": "org.omg.sysml.xtext.SysML::PortionKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ControlNodePrefix/alternatives/elements/2/terminal",
+      "target": "org.omg.sysml.xtext.SysML::PortionKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TriggerActionMember/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::TriggerFeatureKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardExpressionMember/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::GuardFeatureKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EffectBehaviorMember/alternatives/elements/0/terminal",
+      "target": "org.omg.sysml.xtext.SysML::EffectFeatureKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementConstraintMember/alternatives/elements/1/terminal",
+      "target": "org.omg.sysml.xtext.SysML::RequirementConstraintKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FramedConcernMember/alternatives/elements/1/terminal",
+      "target": "org.omg.sysml.xtext.SysML::FramedConcernKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementVerificationMember/alternatives/elements/1/terminal",
+      "target": "org.omg.sysml.xtext.SysML::RequirementVerificationKind"
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExposePrefix/alternatives/terminal",
+      "target": "org.omg.sysml.xtext.SysML::ExposeVisibilityKind"
+    }
+  ],
+  "model_contexts": [
+    {
+      "carrier_rule": "FilterPackageMember",
+      "field": "visibility",
+      "kind": "ElementFilterMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": true,
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[true]",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "public",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "public package P;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "public",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "public import P::*;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "private package P;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "private import P::*;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "protected package P;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "protected",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "protected import P::*;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "in",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "in feature f;",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "out",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "out feature f;",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "inout",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "inout feature f;",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "carrier_rule": "FilterPackageMember",
+      "field": "visibility",
+      "kind": "ElementFilterMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": true,
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[true]",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "public",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "public package P;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "public",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "public import P::*;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "private package P;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "private import P::*;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "protected package P;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "protected import P::*;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "in",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "in attribute f;",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "out",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "out attribute f;",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "inout",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "inout attribute f;",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PartUsage",
+      "field": "portionKind",
+      "kind": "PartUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": true,
+      "rule": "PortionKind",
+      "source": "snapshot part p;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PortionUsage",
+      "field": "portionKind",
+      "kind": "OccurrenceUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "snapshot p;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "MergeNode",
+      "field": "portionKind",
+      "kind": "MergeNode",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "snapshot merge m;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PartUsage",
+      "field": "portionKind",
+      "kind": "PartUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": true,
+      "rule": "PortionKind",
+      "source": "timeslice part p;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PortionUsage",
+      "field": "portionKind",
+      "kind": "OccurrenceUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "timeslice p;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "MergeNode",
+      "field": "portionKind",
+      "kind": "MergeNode",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "timeslice merge m;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "TriggerActionMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "trigger",
+      "primary": true,
+      "rule": "TriggerFeatureKind",
+      "source": "accept x",
+      "token": "accept",
+      "value": 0
+    },
+    {
+      "carrier_rule": "GuardExpressionMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "guard",
+      "primary": true,
+      "rule": "GuardFeatureKind",
+      "source": "if true",
+      "token": "if",
+      "value": 1
+    },
+    {
+      "carrier_rule": "EffectBehaviorMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "effect",
+      "primary": true,
+      "rule": "EffectFeatureKind",
+      "source": "do",
+      "token": "do",
+      "value": 2
+    },
+    {
+      "carrier_rule": "RequirementConstraintMember",
+      "field": "kind",
+      "kind": "RequirementConstraintMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "assumption",
+      "primary": true,
+      "rule": "RequirementConstraintKind",
+      "source": "assume constraint c;",
+      "token": "assume",
+      "value": 0
+    },
+    {
+      "carrier_rule": "RequirementConstraintMember",
+      "field": "kind",
+      "kind": "RequirementConstraintMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "RequirementConstraintKind",
+      "source": "require constraint c;",
+      "token": "require",
+      "value": 1
+    },
+    {
+      "carrier_rule": "FramedConcernMember",
+      "field": "kind",
+      "kind": "FramedConcernMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "FramedConcernKind",
+      "source": "frame concern c;",
+      "token": "frame",
+      "value": 1
+    },
+    {
+      "carrier_rule": "RequirementVerificationMember",
+      "field": "kind",
+      "kind": "RequirementVerificationMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "RequirementVerificationKind",
+      "source": "verify requirement r;",
+      "token": "verify",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Expose",
+      "field": "visibility",
+      "kind": "NamespaceExpose",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "ExposeVisibilityKind",
+      "source": "expose P::*;",
+      "token": "expose",
+      "value": 1
+    }
+  ],
+  "scope": "All 24 declaration identities, 14 rules and 18 direct call sites. The 34 raw carrier cases cover these direct enum assignments; transitive document validation and publication remain separate required evidence."
+}

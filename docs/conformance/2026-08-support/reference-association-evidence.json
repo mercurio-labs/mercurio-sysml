@@ -1,0 +1,49 @@
+{
+  "schema": "dev.mercurio.reference-association-evidence.v1",
+  "scope": "Exact Feature absent-reference queries guarded by supported generalization providers; exact Association/AssociationStructure default providers and their exact Feature ends",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "imported_sha256": "209e7c3c1059748eb17d5000f002d969478a85a4749c1395efddb777bc7f26b9",
+  "association_selector_controls": 16,
+  "independent_source_models": 9,
+  "absent_reference_projection_queries": 15,
+  "association_general_queries": 4,
+  "source_nodes": 237,
+  "source_reference_observations": 414,
+  "native_consumers": [
+    "definition_referenced_feature",
+    "definition_association_default_name",
+    "feature_defaults_generated::association_default_name",
+    "definition_general_type_inputs"
+  ],
+  "implementation_boundary": "Association selector is generated from resolved javac AST and default bindings; exact inherited adapter dispatch is verified. Native ownership collection, provider guards and scalar queries remain explicit handwritten services over imported Ecore contracts.",
+  "absent_reference_semantics": "A locally redefined end does not inherit an owned reference. Actual inherited ends retain explicit references. Unreferenced ends are omitted before choosing source and target. Empty results require successful guarded exact-Feature generalization; missing contributors still reject.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      210,
+      212
+    ],
+    "constraints": [
+      "checkAssociationBinarySpecialization",
+      "checkAssociationSpecialization",
+      "checkAssociationStructureBinarySpecialization",
+      "checkAssociationStructureSpecialization"
+    ]
+  },
+  "normative_boundary": "Pilot default selection uses owned end count. Written constraints use effective associationEnd/endFeature count; complete inherited-end equivalence and validation remain unqualified. Page 210 prose names Links::binaryLink while its formula uses Links::BinaryLink; imported mapping agrees with the formula. No complete family is qualified by these selector controls.",
+  "unsupported": [
+    "Implicit ReferenceSubsetting-producing subclasses",
+    "Feature-owned ends",
+    "Valuation, crossing and semantic metadata contributions",
+    "Full effective-end constraint validation and release sample qualification"
+  ],
+  "matching_source_models_total": 129,
+  "closure": "Ordinary obligations 3/4; families 0/34; release gates 0/5 unchanged.",
+  "subsequent_evidence": "shared-typing-evidence.json qualifies bounded exact Association type delegates; all other exclusions remain.",
+  "current_focused_reverification": {
+    "tests": 99,
+    "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-usage-provider-focused.log",
+    "sha256": "60a7e066e82f5838abb0cef474e87ec7ab3f137ae5e10b0f4cc54218a940dd75"
+  }
+}

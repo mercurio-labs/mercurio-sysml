@@ -1,0 +1,257 @@
+{
+  "cases": [
+    {
+      "relative_path": "enum-valid.sysml",
+      "expected_status": "ok",
+      "family": "Enumeration",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "enum-multiple.sysml",
+      "expected_status": "error",
+      "family": "Enumeration",
+      "pilot_error_codes": [
+        "validateEnumerationUsageType_"
+      ]
+    },
+    {
+      "relative_path": "enum-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Enumeration",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "calc-valid.sysml",
+      "expected_status": "ok",
+      "family": "Calculation",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "calc-multiple.sysml",
+      "expected_status": "error",
+      "family": "Calculation",
+      "pilot_error_codes": [
+        "validateCalculationUsageType_"
+      ]
+    },
+    {
+      "relative_path": "calc-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Calculation",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "constraint-valid.sysml",
+      "expected_status": "ok",
+      "family": "Constraint",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "constraint-multiple.sysml",
+      "expected_status": "error",
+      "family": "Constraint",
+      "pilot_error_codes": [
+        "Invalid Constraint Usage - invalid type"
+      ]
+    },
+    {
+      "relative_path": "constraint-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Constraint",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "requirement-valid.sysml",
+      "expected_status": "ok",
+      "family": "Requirement",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "requirement-multiple.sysml",
+      "expected_status": "error",
+      "family": "Requirement",
+      "pilot_error_codes": [
+        "validateRequirementUsageType_"
+      ]
+    },
+    {
+      "relative_path": "requirement-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Requirement",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "analysis-valid.sysml",
+      "expected_status": "ok",
+      "family": "AnalysisCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "analysis-multiple.sysml",
+      "expected_status": "error",
+      "family": "AnalysisCase",
+      "pilot_error_codes": [
+        "validateAnalysisCaseUsageType_"
+      ]
+    },
+    {
+      "relative_path": "analysis-redundant.sysml",
+      "expected_status": "ok",
+      "family": "AnalysisCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "verification-valid.sysml",
+      "expected_status": "ok",
+      "family": "VerificationCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "verification-multiple.sysml",
+      "expected_status": "error",
+      "family": "VerificationCase",
+      "pilot_error_codes": [
+        "validateVerificationCaseUsageType_"
+      ]
+    },
+    {
+      "relative_path": "verification-redundant.sysml",
+      "expected_status": "ok",
+      "family": "VerificationCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "use-case-valid.sysml",
+      "expected_status": "ok",
+      "family": "UseCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "use-case-multiple.sysml",
+      "expected_status": "error",
+      "family": "UseCase",
+      "pilot_error_codes": [
+        "validateUseCaseUsageType_"
+      ]
+    },
+    {
+      "relative_path": "use-case-redundant.sysml",
+      "expected_status": "ok",
+      "family": "UseCase",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "rendering-valid.sysml",
+      "expected_status": "ok",
+      "family": "Rendering",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "rendering-multiple.sysml",
+      "expected_status": "error",
+      "family": "Rendering",
+      "pilot_error_codes": [
+        "validateRenderingUsageType_"
+      ]
+    },
+    {
+      "relative_path": "rendering-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Rendering",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "viewpoint-valid.sysml",
+      "expected_status": "ok",
+      "family": "Viewpoint",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "viewpoint-multiple.sysml",
+      "expected_status": "error",
+      "family": "Viewpoint",
+      "pilot_error_codes": [
+        "validateRequirementUsageType_",
+        "validateViewpointUsageType_"
+      ]
+    },
+    {
+      "relative_path": "viewpoint-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Viewpoint",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "view-valid.sysml",
+      "expected_status": "ok",
+      "family": "View",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "view-multiple.sysml",
+      "expected_status": "error",
+      "family": "View",
+      "pilot_error_codes": [
+        "validateViewUsageType_"
+      ]
+    },
+    {
+      "relative_path": "view-redundant.sysml",
+      "expected_status": "ok",
+      "family": "View",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "metadata-valid.sysml",
+      "expected_status": "ok",
+      "family": "Metadata",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "metadata-multiple.sysml",
+      "expected_status": "error",
+      "family": "Metadata",
+      "pilot_error_codes": [
+        "validateMetadataUsageType_",
+        "validateMetadataFeatureMetadataNotAbstract"
+      ]
+    },
+    {
+      "relative_path": "metadata-redundant.sysml",
+      "expected_status": "ok",
+      "family": "Metadata",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "inherited-valid.sysml",
+      "expected_status": "ok",
+      "pilot_error_codes": []
+    },
+    {
+      "relative_path": "inherited-invalid.sysml",
+      "expected_status": "error",
+      "pilot_error_codes": [
+        "validateOccurrenceUsageType_"
+      ]
+    },
+    {
+      "relative_path": "inherited-second-invalid.sysml",
+      "expected_status": "error",
+      "pilot_error_codes": [
+        "validateOccurrenceUsageType_"
+      ]
+    },
+    {
+      "relative_path": "constraint-inherited-multiple.sysml",
+      "expected_status": "error",
+      "pilot_error_codes": [
+        "Invalid Constraint Usage - invalid type"
+      ]
+    },
+    {
+      "relative_path": "constraint-inherited-redundant.sysml",
+      "expected_status": "ok",
+      "pilot_error_codes": []
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "schema": "dev.mercurio.redefinition-cache-evidence.v1",
+  "scope": "Successful canonical full redefinition closure reuse within one immutable query. Builds on the shared ownership/index milestone; does not add semantic feature qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "3ce10170a86971efc919ba4115ad112a996a06896d61f77a0c319289d92bd655",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "71dbfee234b30e418d693f8985ab15543d4eb08b5ca7320e118555eae93c7a6a",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-view-analysis.json": "e2e7a05f34e608b2ee63dc850ef8f69e7d1608c9549cc865b66aa079466a1ea5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-view-supervision.json": "51e2cfa79bcfd00fc603a90f485de8db37e67de35e6766462abc92b71a998656",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-cache-trace.log": "42bd264b64141743fb7f9c986baf61c4524dd0965abbe463c12cc5700ca3ed80",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-cache-analysis.json": "b610a9c1fdaa396f81aa910ad4ff832d4817bf8362c738c813c85fc1e8c17f26",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-cache-supervision.json": "375fed846323879f93522f2040d12bae64af282202c1b5bcff57a0df6cd2fd72",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-cache-results.jsonl": "9c64ef34f82c09d9a049a896f7731bab04954ff6d64b0b459abc3eb7cb44c45e"
+  },
+  "imported_representation": [
+    "Pinned Ecore ancestry, reciprocal ownership, endpoint and redefinition subset contracts",
+    "Existing generated bounded strategy selection"
+  ],
+  "native_consumers": [
+    "materialized_redefinition_closure_query",
+    "materialized_redefinition_closure_evaluate",
+    "remove_redefined_memberships_evaluate",
+    "DefinitionNameQuery"
+  ],
+  "handwritten_boundary": "Closure traversal, query caching and dependency scheduling remain handwritten Rust. Imported contracts and bounded generated strategies supply allowed structure and behavior selection. No runtime Java or production clock/I/O.",
+  "measured_reason": {
+    "historical_source_sha256": "1a9d5c2ee77d103a0202b8d51e12cdeae68acc306658c050ecfed43f57e160de",
+    "repeated_closures": [
+      {
+        "query_id": 159,
+        "stage": "RedefinitionClosure",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.16.owned_related_element.0.owned_relationship.2.owned_related_element.0",
+        "field": "",
+        "calls": 5,
+        "completed_inclusive_ms": 5498
+      },
+      {
+        "query_id": 160,
+        "stage": "RedefinitionClosure",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.16.owned_related_element.0.owned_relationship.2.owned_related_element.0",
+        "field": "",
+        "calls": 5,
+        "completed_inclusive_ms": 5394
+      },
+      {
+        "query_id": 159,
+        "stage": "RedefinitionClosure",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.17.owned_related_element.0.owned_relationship.2.owned_related_element.0",
+        "field": "",
+        "calls": 3,
+        "completed_inclusive_ms": 3592
+      },
+      {
+        "query_id": 160,
+        "stage": "RedefinitionClosure",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.17.owned_related_element.0.owned_relationship.2.owned_related_element.0",
+        "field": "",
+        "calls": 3,
+        "completed_inclusive_ms": 3574
+      }
+    ],
+    "decision": "Successful full closures have no first-only, exclusion or visibility input. Reuse identical canonical Feature results within one immutable reference view; keep filter-specific arguments outside the cache."
+  },
+  "invalidation_contract": [
+    "Only a pointer-identical canonical object in a unique-identity graph may reuse or store a success.",
+    "The key is the Feature identity; the value is the exact full closure set consumed by filtering.",
+    "Errors and prerequisite failures are not cached. Explicit pending dependency checks still run before filtering.",
+    "Noncanonical/cloned inputs evaluate without reuse, preserving their previous validation behavior.",
+    "Edits, construction retries and persistence reload create new immutable views; no cross-edit or process-global cache."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-cache-native-tests.log",
+      "sha256": "77bfe4b83f8be44a3d3902d1074026ce4b237de95b69cc8f265f4be38a2b4310",
+      "passed": 225
+    },
+    "focused_cache_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-cache-focused-tests.log",
+      "sha256": "8308ade4db8e5b6671d5f5545f46088be1f1c59554881d295f9b116681bac8db",
+      "passed": 2
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-cache-tool-tests.log",
+      "sha256": "ff2eb79c087b44daff462c5bb1e4e78765c1d6e0134924e7e70d9b5cc796d650",
+      "passed": 10
+    },
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-cache-certificate-tests.log",
+      "sha256": "4fddf04b9f72fa307cc21939e88d8630137462593e794f22d5724345c22f6c5b",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-cache-plan-tests.log",
+      "sha256": "7038f2a01586aa021700d0d61010525c614749100abc3e4454318b329bad9cb3",
+      "passed": 14
+    }
+  },
+  "focused_contexts": [
+    "Five identical requests produce one evaluation boundary and equal closure sets",
+    "Malformed clone with identical identity rejects despite cached canonical success",
+    "Repeated missing endpoint and wrong metaclass remain uncached errors",
+    "Endpoint repair reevaluates in a fresh view; self-cycle edit changes the result",
+    "Reload and reversed storage invalidate previous view",
+    "Existing independent cached Pilot source/strategy and round-trip controls pass"
+  ],
+  "cost_diagnostic": {
+    "supervision": {
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "completed",
+      "elapsed_seconds": 101.32799999997951,
+      "exit_code": 1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "05544fee202969b6e858954b69f767d531351850669d9dd5b901ee5d4a907810",
+      "source_sha256": "3ce10170a86971efc919ba4115ad112a996a06896d61f77a0c319289d92bd655",
+      "wall_budget_seconds": 240,
+      "linking_budget_seconds": 55,
+      "semantic_qualification": "not_assessed"
+    },
+    "completed_reference_attempts": 166,
+    "prior_attempts": 160,
+    "attempt_delta": 6,
+    "stage_summary": {
+      "Resource": {
+        "completed": 16,
+        "inclusive_ms": 119,
+        "exclusive_ms": 119,
+        "max_ms": 33
+      },
+      "MembershipNames": {
+        "completed": 7169,
+        "inclusive_ms": 1882,
+        "exclusive_ms": 1882,
+        "max_ms": 117
+      },
+      "ScopeMemberships": {
+        "completed": 885,
+        "inclusive_ms": 1340,
+        "exclusive_ms": 247,
+        "max_ms": 104
+      },
+      "Reference": {
+        "completed": 166,
+        "inclusive_ms": 42515,
+        "exclusive_ms": 2946,
+        "max_ms": 7507
+      },
+      "LibraryPath": {
+        "completed": 245,
+        "inclusive_ms": 184,
+        "exclusive_ms": 184,
+        "max_ms": 2
+      },
+      "GeneralTypes": {
+        "completed": 260,
+        "inclusive_ms": 19717,
+        "exclusive_ms": 19533,
+        "max_ms": 425
+      },
+      "InheritedMemberships": {
+        "completed": 41,
+        "inclusive_ms": 38430,
+        "exclusive_ms": 67,
+        "max_ms": 7108
+      },
+      "RedefinitionFilter": {
+        "completed": 220,
+        "inclusive_ms": 17656,
+        "exclusive_ms": 10534,
+        "max_ms": 1310
+      },
+      "RedefinitionClosureEvaluation": {
+        "completed": 761,
+        "inclusive_ms": 6943,
+        "exclusive_ms": 6943,
+        "max_ms": 1209
+      },
+      "RedefinitionClosure": {
+        "completed": 4846,
+        "inclusive_ms": 7122,
+        "exclusive_ms": 179,
+        "max_ms": 1210
+      },
+      "Linking": {
+        "completed": 1,
+        "inclusive_ms": 45917,
+        "exclusive_ms": 3402,
+        "max_ms": 45917
+      }
+    },
+    "semantic_qualification": "not_assessed",
+    "pipeline_status": "blocked",
+    "stage": "construction_or_linking",
+    "reported_error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: reference requires a different scope-origin service: SysML::Intersecting (OrderedCollection)\", kind: Syntax, span: None, subjects: [] }",
+    "linking_ms": 45917,
+    "closure_requests": 4846,
+    "closure_evaluations": 761
+  },
+  "limits": [
+    "Reference attempts include prerequisites/retries and do not count distinct qualified fields.",
+    "Inclusive stage timings overlap.",
+    "Timeout does not qualify construction, publication or validation.",
+    "No final Pilot timing or complete sample comparison was run.",
+    "The prior shared-view capsule remains historical; only current native semantic capsules and strategy certificates are refreshed."
+  ],
+  "feature_status": {
+    "imported": "Existing pinned definitions retained",
+    "consumed": "Canonical full closure results drive shared filtering through a per-query success cache",
+    "semantically_verified": "225-test bounded regression and focused cache/identity/invalidation controls; no whole-family closure",
+    "unsupported": "Existing specialized strategies, delegates, metadata, validation and complete resource lifecycle obligations remain open"
+  },
+  "metrics": {
+    "verified_whole_models": 155,
+    "ordinary_bindings": {
+      "verified": 50,
+      "total": 79
+    },
+    "bounded_obligations": {
+      "closed": 7,
+      "total": 9
+    },
+    "families": {
+      "qualified": 0,
+      "total": 34
+    },
+    "release_gates": {
+      "qualified": 0,
+      "total": 5
+    },
+    "candidate_promoted": false
+  },
+  "remaining_dependency": {
+    "owner_kind": "Intersecting",
+    "field": "intersecting_type",
+    "reference": "OrderedCollection",
+    "category": "Type-owned relationship reference scope origin",
+    "imported": "Pinned grammar cross-reference and Ecore endpoint contract already represented",
+    "native_consumer": "generated_resource_reference_traced scope-origin dispatch",
+    "required_work": "Audit the resolved Pilot scope provider and written specification for all Type-owned intersection/union/disjoining reference origins; implement one definition-directed shared policy with focused positive, negative and context controls.",
+    "status": "unsupported; construction stops before publication"
+  }
+}

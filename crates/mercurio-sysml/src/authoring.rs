@@ -125,6 +125,65 @@ mod tests {
     }
 
     #[test]
+    fn source_add_move_remove_recompiles_ecore_ownership_opposites() {
+        fn assert_reciprocal_ownership(document: &KirDocument) {
+            let by_id = document.elements.iter().map(|element| (element.id.as_str(), element)).collect::<BTreeMap<_, _>>();
+            for owner in &document.elements {
+                for (forward, inverse) in [
+                    ("owned_relationship", "owning_related_element"),
+                    ("owned_related_element", "owning_relationship"),
+                ] {
+                    let Some(children) = owner.properties.get(forward) else { continue };
+                    for child_id in children.as_array().unwrap().iter().filter_map(|value| value.as_str()) {
+                        let child = by_id.get(child_id).unwrap_or_else(|| panic!("missing {child_id}"));
+                        assert_eq!(child.properties.get(inverse), Some(&serde_json::json!(owner.id)), "{forward}: {} -> {child_id}", owner.id);
+                    }
+                }
+            }
+            for child in &document.elements {
+                for (inverse, forward) in [
+                    ("owning_related_element", "owned_relationship"),
+                    ("owning_relationship", "owned_related_element"),
+                ] {
+                    let Some(owner_id) = child.properties.get(inverse).and_then(|value| value.as_str()) else { continue };
+                    let owner = by_id.get(owner_id).unwrap_or_else(|| panic!("missing {owner_id}"));
+                    assert!(owner.properties.get(forward).and_then(|value| value.as_array()).is_some_and(|children| children.iter().any(|value| value.as_str() == Some(&child.id))), "{inverse}: {} -> {owner_id}", child.id);
+                }
+            }
+        }
+
+        let mut project = load_authoring_project_from_sysml(BTreeMap::from([(
+            "ownership.sysml".into(), "package P {} package Q {}".into(),
+        )])).unwrap();
+        let add = project.apply_mutation(Mutation::AddDefinition {
+            container: ContainerSelector::Package { qualified_name: QualifiedName(vec!["P".into()]) },
+            keyword: "part".into(), name: "A".into(), specializes: Vec::new(),
+        }).unwrap();
+        project.write_back_mutation(&add).unwrap();
+        let added = project.compile_kir_document().unwrap();
+        assert_reciprocal_ownership(&added);
+        assert!(added.elements.iter().any(|element| element.properties.get("qualified_name") == Some(&serde_json::json!("P.A"))));
+
+        let moved = project.apply_mutation(Mutation::MoveDeclaration {
+            qualified_name: QualifiedName(vec!["P".into(), "A".into()]),
+            destination: ContainerSelector::Package { qualified_name: QualifiedName(vec!["Q".into()]) },
+        }).unwrap();
+        project.write_back_mutation(&moved).unwrap();
+        let after_move = project.compile_kir_document().unwrap();
+        assert_reciprocal_ownership(&after_move);
+        assert!(after_move.elements.iter().any(|element| element.properties.get("qualified_name") == Some(&serde_json::json!("Q.A"))));
+        assert!(!after_move.elements.iter().any(|element| element.properties.get("qualified_name") == Some(&serde_json::json!("P.A"))));
+
+        let removed = project.apply_mutation(Mutation::RemoveDeclaration {
+            qualified_name: QualifiedName(vec!["Q".into(), "A".into()]),
+        }).unwrap();
+        project.write_back_mutation(&removed).unwrap();
+        let after_remove = project.compile_kir_document().unwrap();
+        assert_reciprocal_ownership(&after_remove);
+        assert!(!after_remove.elements.iter().any(|element| element.properties.get("declared_name") == Some(&serde_json::json!("A"))));
+    }
+
+    #[test]
     fn compiles_authoring_project_with_package_imported_scalar_type() {
         let project = load_authoring_project_from_sysml(BTreeMap::from([(
             "decision.sysml".to_string(),
@@ -166,4 +225,163 @@ mod tests {
             "compiled document should contain the cross-file definition"
         );
     }
+
+    fn semantic_expression_properties(document: &KirDocument) -> BTreeMap<String, serde_json::Value> {
+        fn without_spans(value: &mut serde_json::Value) {
+            match value {
+                serde_json::Value::Array(items) => items.iter_mut().for_each(without_spans),
+                serde_json::Value::Object(properties) => {
+                    properties.remove("span");
+                    properties.values_mut().for_each(without_spans);
+                }
+                _ => {}
+            }
+        }
+        document.elements.iter().filter(|element| element.properties.contains_key("expression_ir"))
+            .map(|element| {
+                let mut properties = serde_json::json!({
+                    "expression": element.properties["expression_ir"],
+                    "initial": element.properties.get("expression_is_initial"),
+                    "default": element.properties.get("expression_is_default"),
+                });
+                without_spans(&mut properties);
+                (element.id.clone(), properties)
+            }).collect()
+    }
+
+    #[test]
+    fn release_authoring_preserves_feature_values_and_precedence() {
+        let source = "package P { attribute a = (1 + 2) * 3; attribute b := 4; attribute c default = 5; attribute d default := 6; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "values.sysml", &library).unwrap();
+        let project = load_authoring_project_from_sysml(BTreeMap::from([("values.sysml".into(), source.into())])).unwrap();
+        let rendered = project.render_new_file("values.sysml").unwrap();
+        let after = crate::compile_sysml_text(&rendered, "values.sysml", &library).unwrap();
+        assert_eq!(semantic_expression_properties(&before), semantic_expression_properties(&after), "{rendered}");
+        assert!(rendered.contains("default :="), "{rendered}");
+    }
+
+    #[test]
+    fn release_authoring_preserves_lambda_parameters() {
+        let source = "package P { attribute def Number; attribute data = (1, 2); attribute result = data.?{in ref 'odd item': Number[1] default := 2; 'odd item' > 1}; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "lambda.sysml", &library).unwrap();
+        let project = load_authoring_project_from_sysml(BTreeMap::from([("lambda.sysml".into(), source.into())])).unwrap();
+        let rendered = project.render_new_file("lambda.sysml").unwrap();
+        let after = crate::compile_sysml_text(&rendered, "lambda.sysml", &library).unwrap();
+        assert_eq!(semantic_expression_properties(&before), semantic_expression_properties(&after), "{rendered}");
+    }
+
+    #[test]
+    fn release_authoring_from_kir_preserves_structured_values() {
+        let source = "package P { attribute a = (1 + 2) * 3; attribute b := 4; attribute c default = 5; attribute d default := 6; attribute def Number; attribute data = (1, 2); attribute result = data.?{in ref 'odd item': Number[1] default := 2; 'odd item' > 1}; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "values.sysml", &library).unwrap();
+        let project = AuthoringProject::from_kir_document(&before).unwrap();
+        let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+        let after = crate::compile_sysml_text(&rendered, "values.sysml", &library).unwrap();
+        assert_eq!(semantic_expression_properties(&before), semantic_expression_properties(&after), "{rendered}");
+    }
+
+    #[test]
+    fn release_authoring_preserves_multiple_types() {
+        let source = "package P { part def A; part def B; part p: A, B; }";
+        let project = load_authoring_project_from_sysml(BTreeMap::from([("types.sysml".into(), source.into())])).unwrap();
+        let rendered = project.render_new_file("types.sysml").unwrap();
+        assert!(rendered.contains("p: A, B"), "{rendered}");
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "types.sysml", &library).unwrap();
+        let after = crate::compile_sysml_text(&rendered, "types.sysml", &library).unwrap();
+        let types = |document: &KirDocument| document.elements.iter().find(|e| e.id == "feature.P.p").unwrap().properties["type"].clone();
+        assert_eq!(types(&before), types(&after));
+    }
+
+
+    #[test]
+    fn release_authoring_from_kir_preserves_multiple_types_and_quoted_members() {
+        let source = "package P { part def A { attribute 'odd value'; } part def B; part data: A, B; attribute result = data.{in item: A; item.'odd value'}; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "types.sysml", &library).unwrap();
+        let project = AuthoringProject::from_kir_document(&before).unwrap();
+        let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+        let after = crate::compile_sysml_text(&rendered, "types.sysml", &library).unwrap();
+        assert_eq!(semantic_expression_properties(&before), semantic_expression_properties(&after), "{rendered}");
+        let types = |document: &KirDocument| {
+            let value = &document.elements.iter().find(|e| e.id == "feature.P.data").unwrap().properties["type"];
+            value.as_array().unwrap().iter().map(|v| v.as_str().unwrap().to_string()).collect::<std::collections::BTreeSet<_>>()
+        };
+        let expected = std::collections::BTreeSet::from(["type.P.A".to_string(), "type.P.B".to_string()]);
+        assert_eq!(types(&before), expected);
+        assert_eq!(types(&after), expected, "{rendered}");
+    }
+
+    #[test]
+    fn release_authoring_from_kir_preserves_library_package_prefixes() {
+        let source = "standard library package L { library package Nested; package Plain; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "library.sysml", &library).unwrap();
+        let project = AuthoringProject::from_kir_document(&before).unwrap();
+        let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+        assert!(rendered.contains("standard library package L"), "{rendered}");
+        let after = crate::compile_sysml_text(&rendered, "library.sysml", &library).unwrap();
+        for id in ["pkg.L", "pkg.L.Nested", "pkg.L.Plain"] {
+            let left = before.elements.iter().find(|element| element.id == id).unwrap();
+            let right = after.elements.iter().find(|element| element.id == id).unwrap();
+            assert_eq!(left.kind, right.kind, "{id}: {rendered}");
+            assert_eq!(left.properties.get("is_standard"), right.properties.get("is_standard"), "{id}: {rendered}");
+        }
+    }
+
+    #[test]
+    fn release_authoring_preserves_included_use_cases() {
+        let source = "package P { use case def U; use case target: U; use case def Main { include use case child: U; include P::target; } }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "include.sysml", &library).unwrap();
+        let from_source = load_authoring_project_from_sysml(BTreeMap::from([("include.sysml".into(), source.into())])).unwrap();
+        let from_kir = AuthoringProject::from_kir_document(&before).unwrap();
+        for project in [from_source, from_kir] {
+            let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+            let after = crate::compile_sysml_text(&rendered, "include.sysml", &library).unwrap_or_else(|error| panic!("{error}: {rendered}"));
+            assert_eq!(after.elements.iter().filter(|e| e.kind.ends_with("IncludeUseCaseUsage")).count(), 2, "{rendered}");
+            let relationship = after.elements.iter().find(|e| e.kind.ends_with("ReferenceSubsetting")).unwrap();
+            assert_eq!(relationship.properties["referenced_feature"], "use-case.P.target", "{rendered}");
+        }
+    }
+
+    #[test]
+    fn release_authoring_preserves_ordered_nonunique_collections() {
+        let source = "package P { attribute values[*] ordered nonunique; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "flags.sysml", &library).unwrap();
+        let from_source = load_authoring_project_from_sysml(BTreeMap::from([("flags.sysml".into(), source.into())])).unwrap();
+        let from_kir = AuthoringProject::from_kir_document(&before).unwrap();
+        for project in [from_source, from_kir] {
+            let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+            let after = crate::compile_sysml_text(&rendered, "flags.sysml", &library).unwrap_or_else(|error| panic!("{error}: {rendered}"));
+            let values = after.elements.iter().find(|e| e.properties.get("declared_name").is_some_and(|v| v == "values")).unwrap();
+            assert_eq!(values.properties["is_ordered"], true, "{rendered}");
+            assert_eq!(values.properties["is_unique"], false, "{rendered}");
+        }
+    }
+
+    #[test]
+    fn release_authoring_preserves_variation_and_abstract_declarations() {
+        let source = "package P { variation action def Choice; abstract part def Shape; variation use case choices; }";
+        let library = shared_sysml_baseline().unwrap();
+        let before = crate::compile_sysml_text(source, "variation.sysml", &library).unwrap();
+        let project = AuthoringProject::from_kir_document(&before).unwrap();
+        let rendered = project.files().map(|(path, _)| project.render_new_file(path).unwrap()).collect::<Vec<_>>().join("\n");
+        assert!(rendered.contains("variation action def Choice"), "{rendered}");
+        assert!(rendered.contains("abstract part def Shape"), "{rendered}");
+        assert!(rendered.contains("variation use case choices"), "{rendered}");
+        let after = crate::compile_sysml_text(&rendered, "variation.sysml", &library).unwrap();
+        for name in ["Choice", "Shape", "choices"] {
+            let left = before.elements.iter().find(|e| e.properties.get("declared_name").is_some_and(|v| v == name)).unwrap();
+            let right = after.elements.iter().find(|e| e.properties.get("declared_name").is_some_and(|v| v == name)).unwrap();
+            for key in ["is_abstract", "is_variation"] {
+                assert_eq!(left.properties.get(key), right.properties.get(key), "{name}.{key}: {rendered}");
+            }
+        }
+    }
+
 }

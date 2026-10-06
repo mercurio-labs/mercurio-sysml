@@ -1,0 +1,445 @@
+{
+  "schema": "dev.mercurio.operand-construction-controls.v1",
+  "scope": "Two distinct equal-valued operands appended through the actual InternalEList adapter for all seven concrete InvocationExpression classes. Compare ordered stored containment, wrapper classes, visibility, input direction, literal values and ownership inverses. No library loading, argument derivation, specialization, reparenting, control-function bodies or full sample qualification.",
+  "normative_boundary": "operand is a Pilot Xtext parsing extension, not a normative stored property. Its append adapter constructs the input-parameter/FeatureValue structure described by KerML 1.1 Beta 2 sections 8.4.4.9.5 and 8.4.4.9.6. Its empty read facade is not InstantiationExpression.argument.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/InvocationExpression_operand_SettingDelegate.java": "6abbd5e7060d4f1792af3b245dce1e93515dcc51c244115bab3212d023c6bf21",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/FeatureValue_value_SettingDelegate.java": "dcb6cdb268466223ad5ca7e806776976ba79bd10fd9aef3dabcee828c468e52a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/OwningMembership_ownedMemberElement_SettingDelegate.java": "3da9656411292ffe181e5395c2fc3c90ee3d4263dde1fc01434160fbb4707021",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/InvocationExpressionAdapter.java": "a62a675127ea161fdf7dedc2f49cc0302e08095aca37e75d408ff4bc7e8b4c44",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/OperandEList.java": "89b22aafc9d7d65496781b395195d3954f7440d9a94d8a86e99778c19a792e00",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ExpressionUtil.java": "0828947218f049a4b5b42a729345ebbea3c32b5932aa66f6b9bb82981e40c5af",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "class_sha256": {
+      "delegate/setting/InvocationExpression_operand_SettingDelegate": "04bd44eb66d2677fffec135214ad9162c775b5e7fb3bea15d02ae2238141c5fc",
+      "delegate/setting/FeatureValue_value_SettingDelegate": "c099f794ff34b45bdc95e71dc04f60310f3843b7878ffaa7a56fc35a05153176",
+      "delegate/setting/OwningMembership_ownedMemberElement_SettingDelegate": "f2a6e236031f9d4be116822b89106d1e9afd0cec6aff2bf97887ad3b826002b2",
+      "adapter/InvocationExpressionAdapter": "23e673ffd801c430dd0cceb852e854d9faac7b934825be1f98e4fcc798fec726",
+      "util/OperandEList": "790716db5026b1ac3813673a1d9e3001c41e01cfdd2159b30b4c2c5ee6ab3ec6",
+      "util/ExpressionUtil": "18b95f709ed5531c0a629d44da3d16e6c9bc7959b321b0056fd8ddd69da1c4e6",
+      "util/TypeUtil": "af67ebb305f22a31e062a5a6e5de09ab949db4a1eed9d3663c4ea12708508c0f",
+      "util/FeatureUtil": "19805dbc170e3fb8012ac9471cf80e52059003635cbcdb2f704df6819a0eb4b0"
+    },
+    "helper_sha256": "7bf24e4d6cbb9c0d7203aaea9315bcee4125b06341f4cfd7f5d926a1fef3525b"
+  },
+  "cases": [
+    {
+      "class": "CollectExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "CollectExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "FeatureChainExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "FeatureChainExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "IndexExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "IndexExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "InvocationExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "InvocationExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "OperatorExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "OperatorExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "SelectExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "SelectExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    },
+    {
+      "class": "TriggerInvocationExpression",
+      "operand_read_size": 0,
+      "tree": {
+        "kind": "TriggerInvocationExpression",
+        "relationships": [
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          },
+          {
+            "elements": [
+              {
+                "direction": "in",
+                "kind": "Feature",
+                "relationships": [
+                  {
+                    "elements": [
+                      {
+                        "kind": "LiteralInteger",
+                        "relationships": [],
+                        "value": 2
+                      }
+                    ],
+                    "kind": "FeatureValue",
+                    "relationships": [],
+                    "visibility": "public"
+                  }
+                ]
+              }
+            ],
+            "kind": "ParameterMembership",
+            "relationships": [],
+            "visibility": "private"
+          }
+        ]
+      }
+    }
+  ]
+}

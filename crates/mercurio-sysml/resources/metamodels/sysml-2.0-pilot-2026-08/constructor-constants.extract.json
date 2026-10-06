@@ -1,0 +1,69 @@
+{
+  "controls": [
+    {
+      "class": "CollectExpression",
+      "constant": "org.omg.sysml.lang.sysml.impl.CollectExpressionImpl.COLLECT_OPERATOR",
+      "constant_type": "java.lang.String",
+      "field": "operator",
+      "observed_value": "collect",
+      "value": "collect",
+      "writes": [
+        "operator",
+        "OPERATOR_EDEFAULT"
+      ]
+    },
+    {
+      "class": "FeatureChainExpression",
+      "constant": "org.omg.sysml.lang.sysml.impl.FeatureChainExpressionImpl.FEATURE_CHAIN_OPERATOR",
+      "constant_type": "java.lang.String",
+      "field": "operator",
+      "observed_value": ".",
+      "value": ".",
+      "writes": [
+        "operator",
+        "OPERATOR_EDEFAULT"
+      ]
+    },
+    {
+      "class": "IndexExpression",
+      "constant": "org.omg.sysml.lang.sysml.impl.IndexExpressionImpl.INDEX_OPERATOR",
+      "constant_type": "java.lang.String",
+      "field": "operator",
+      "observed_value": "#",
+      "value": "#",
+      "writes": [
+        "operator",
+        "OPERATOR_EDEFAULT"
+      ]
+    },
+    {
+      "class": "SelectExpression",
+      "constant": "org.omg.sysml.lang.sysml.impl.SelectExpressionImpl.SELECT_OPERATOR",
+      "constant_type": "java.lang.String",
+      "field": "operator",
+      "observed_value": "select",
+      "value": "select",
+      "writes": [
+        "operator",
+        "OPERATOR_EDEFAULT"
+      ]
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "744cb63f288fa6bf2dfdffc70a95ff7b6ab1fcf7aaa6b396e367528859cb3268",
+    "ecore_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "helper_sha256": "7e4b6ae487db1cd082ad538eaa8bafe868dc02f8b84a75de32c958f114de4345",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/CollectExpressionImpl.java": "5cdf1fd60057b59ef9f72c078f4f40bc26b2ea912fca0d5d6d30b48faac09caf",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/FeatureChainExpressionImpl.java": "687d464070b72d1b2a5a3b3b42db3142160d1ed7a9056bc81b8d05edb4b94100",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/IndexExpressionImpl.java": "230bbb8c47aed172792ed578fe9fa5ece3fe1d84ac8723966a59712cfd0e0855",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/OperatorExpressionImpl.java": "8af4405a9f801aa2ed7406e185aa16da852d325dcf55158a697cf4adce16a8bf",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/SelectExpressionImpl.java": "3aeb3ea2220a752aba971c1f2c6b90d0bb243c8a19cd1e9a2ae279242533f9d9",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Resolved constant constructor assignments only; superclass construction, setting delegates and expression evaluation are separate dependencies. Runtime observations independently verify the initialized operator value."
+}

@@ -1,0 +1,65 @@
+{
+  "scope": "Bounded source construction and effective endpoint views. These clauses do not qualify complete type semantics, inherited scope, computed generals, variability or validators.",
+  "source_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "documents": [
+    {
+      "source_path": "doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "clauses": [
+        {
+          "section": "8.3.3.1.2 Conjugation",
+          "pdf_pages": [
+            164
+          ],
+          "requirements": [
+            "Conjugated and original types redefine relationship source and target; an owning Type is also the conjugated Type."
+          ]
+        },
+        {
+          "section": "8.3.3.1.8 Specialization",
+          "pdf_pages": [
+            167,
+            168
+          ],
+          "requirements": [
+            "Specific and general types redefine relationship source and target; the owning Type is also the specific Type."
+          ]
+        },
+        {
+          "section": "8.3.3.2.3 Subclassification",
+          "pdf_pages": [
+            180
+          ],
+          "requirements": [
+            "Subclassifier and superclassifier redefine specific and general with Classifier endpoint types."
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "doc/2a-OMG_Systems_Modeling_Language.pdf",
+      "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+      "clauses": [
+        {
+          "section": "8.2.2.6.2 Usages, parsing notes",
+          "pdf_pages": [
+            202,
+            203
+          ],
+          "requirements": [
+            "Usage composition defaults are conditional on ref, usage category, direction, end status and featuring ownership; PortUsage has an additional ownership condition."
+          ]
+        },
+        {
+          "section": "8.3.6.4 Usage, deriveUsageIsReference",
+          "pdf_pages": [
+            306
+          ],
+          "requirements": [
+            "isReference is the logical negation of isComposite."
+          ]
+        }
+      ]
+    }
+  ]
+}

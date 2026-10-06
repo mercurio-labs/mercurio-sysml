@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-private-specialization.kerml": "b408de929a9a5ebb5552e4e80e910bcfd466dd70e01ec80d88da05915624b758",
+    "invalid-private-type.kerml": "bc2442128525313c36ab9851829f9882d26c1bdab31ea3df3949ba7484b34bca",
+    "invalid-qualified-inherited.kerml": "cca8d1f2efd89956c76ce13566d5247994aee4a8fefb6571e1e8658acf674e98",
+    "invalid-qualified-protected.kerml": "e7b3ad8cc4f360e068b5d73312c4253334e01a66286076d1074b7e2a301731dc",
+    "positive-protected-type.kerml": "69f5501fdb0882da795978c77678dc746f14f930b2d216901f420eedc6276a01",
+    "positive-public-alias.kerml": "e41b7f6dc06ab7e5807e5980a3887be8a9736e1cac9e7120a3519ff1c053976c",
+    "positive-qualified-public.kerml": "938f319979529f8cd8cfcaeca62dede3ef1e4afc984d07daf35030a5884d7dd5",
+    "positive-specialization.kerml": "47055c3395f6d62d39eca2bdec2733436f4f0cabb5974a119440a3598698fe64"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-private-specialization.kerml",
+      "status": "error",
+      "validation_ms": 1045.6593,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-type.kerml",
+      "status": "error",
+      "validation_ms": 1144.7825,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-inherited.kerml",
+      "status": "error",
+      "validation_ms": 830.9835,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'B::Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-protected.kerml",
+      "status": "error",
+      "validation_ms": 742.1728,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'A::Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-protected-type.kerml",
+      "status": "ok",
+      "validation_ms": 777.8178,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias.kerml",
+      "status": "ok",
+      "validation_ms": 720.102,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-qualified-public.kerml",
+      "status": "ok",
+      "validation_ms": 609.5191,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-specialization.kerml",
+      "status": "ok",
+      "validation_ms": 828.1052,
+      "diagnostics": []
+    }
+  ]
+}

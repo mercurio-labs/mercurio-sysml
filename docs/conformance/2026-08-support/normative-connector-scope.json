@@ -1,0 +1,27 @@
+{
+  "scope": "Shared ReferenceSubsetting connector-end scope origin and EndFeatureMembership postprocessing. These are named handwritten Rust dependencies driven by imported Ecore ancestry, ownership and value contracts.",
+  "normative": {
+    "file": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_page": 185,
+    "clause": "8.3.3.3.3 validateEndFeatureMembershipIsEnd"
+  },
+  "pilot_sources": {
+    "org.omg.kerml.xtext/src/org/omg/kerml/xtext/postprocessing/EndFeatureMembershipParserPostProcessor.java": "30bdcdef7d64fe33f67f5a9daa19adda69493997b7945ef9048e559960d095cd",
+    "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "dd9c246972c4cc8247b12deb298fc1cc4caa6022efb94693a818361baa2b1d12"
+  },
+  "native_source_sha256": "f85667a2696ffdc58c4a90382a7c93fb293f6e6a464899bcbacee718eead27dd",
+  "evidence": {
+    "whole_document_controls_added": 5,
+    "connector_scope_controls": 4,
+    "source_batch_cases": 25,
+    "source_batch_complete_matches": 21,
+    "remaining_connector_dependencies": [
+      "Connector.sourceFeature/targetFeature/relatedFeature",
+      "ReferenceSubsetting.referencingFeature derived projection"
+    ],
+    "test_log": "definition-pipeline-evidence/ordinary-source-tests.log",
+    "test_log_sha256": "d3a96df479bda336dc8ffd475396dbc1c51d1d2e70415fcad9022c1d10ba786f"
+  },
+  "remaining": "No connector full-model or entire redefinition-strategy closure. FlowEnd, Multiplicity and Usage still lack source observations; BindingConnectorAsUsage and SuccessionAsUsage have partial connector observations only."
+}

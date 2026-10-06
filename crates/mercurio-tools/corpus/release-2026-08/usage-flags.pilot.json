@@ -1,0 +1,221 @@
+{
+  "source": {
+    "export_sha256": "97e209240053f68e3ce57db0e96ef4be24c3c8c59c318366fbc526fe00ffb573",
+    "fixture_sha256": "33e811148905d093646a678fe56319829170bde4ff82363afdfadb5d2148377e",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "helper_java_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00"
+  },
+  "observations": [
+    {
+      "qualified_name": "ReleaseUsageFlags::Behavior::value",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Bus::nestedPort",
+      "kind": "PortUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": true,
+        "is_reference": false,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Data::field",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::composed",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": true,
+        "is_reference": false,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::nested",
+      "kind": "PartUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": true,
+        "is_reference": false,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::nested::nestedValue",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::observed",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::parameter",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::portion",
+      "kind": "PartUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": true,
+        "is_reference": false,
+        "is_portion": true,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::socket",
+      "kind": "PortUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::stable",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": true,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::Host::varying",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": true,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::sequence",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": true,
+        "is_unique": false
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::topAction",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    },
+    {
+      "qualified_name": "ReleaseUsageFlags::topAttribute",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_variable": false,
+        "is_composite": false,
+        "is_reference": true,
+        "is_portion": false,
+        "is_constant": false,
+        "may_time_vary": false,
+        "is_ordered": false,
+        "is_unique": true
+      }
+    }
+  ]
+}

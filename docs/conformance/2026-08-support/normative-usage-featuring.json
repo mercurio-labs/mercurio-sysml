@@ -1,0 +1,40 @@
+{
+  "scope": "Resolved Usage getter dispatch to shared native owning-type featuring; complete-generalization controlled inputs only.",
+  "imported": {
+    "feature_bindings": 79,
+    "stored_getter_bindings": 32,
+    "usage_getter_bindings": 47,
+    "required_usage_method": "UsageImpl#isMayTimeVary"
+  },
+  "native_consumer": "Generated owning_type_featuring_uses_variability selects handwritten definition_may_time_vary; imported delegate URI, status and implementation identity are checked. No raw stored-variable fallback.",
+  "verification": {
+    "pilot_usage_cases": 94,
+    "variable": 45,
+    "fixed": 49,
+    "missing_dependency_class_controls": 47,
+    "focused_native_tests": 80,
+    "tooling_tests": 41,
+    "both_exporters_reproduce": true,
+    "full_certificate": "Prior 739-test certificate stale; not refreshed this batch.",
+    "log": "definition-pipeline-evidence/native-tests-usage-featuring-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "bad7a4e94f7c2b46a3c60c32a161b358ddc56113dd5602b5d8fe29fc253065c0",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "8f4d63a51199ded1e85c43ca23b4b57f3e75656b5a20c8d2174f7bedcb1b5621",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "71dbfee234b30e418d693f8985ab15543d4eb08b5ca7320e118555eae93c7a6a",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "f0cf3567cb805c64bbd8e90af206a152984128b109007680f360b353a23cd74f"
+    }
+  },
+  "normative_references": [
+    "normative-variability.json",
+    "normative-owning-type-featuring.json",
+    "normative-variable-featuring.json"
+  ],
+  "remaining": [
+    "Ordinary source Usage implicit generalization providers",
+    "Expression/multiplicity/cross-feature implicit featuring",
+    "Full featuringType projection and ordered closure",
+    "Connector compatibility and transformation",
+    "Full release sample and timing qualification"
+  ]
+}

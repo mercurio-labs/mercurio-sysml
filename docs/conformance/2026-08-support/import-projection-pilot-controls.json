@@ -1,0 +1,103 @@
+{
+  "cases": [
+    {
+      "observations": [
+        {
+          "imported_element": "P",
+          "kind": "NamespaceImport",
+          "stored_target": "P"
+        },
+        {
+          "imported_element": "A",
+          "kind": "MembershipImport",
+          "stored_target": "a"
+        }
+      ],
+      "source": "package P { class A; alias a for A; } package Q { private import P::*; private import P::a; }"
+    },
+    {
+      "observations": [
+        {
+          "imported_element": "P",
+          "kind": "NamespaceImport",
+          "stored_target": "P"
+        },
+        {
+          "imported_element": "A",
+          "kind": "MembershipImport",
+          "stored_target": "a"
+        }
+      ],
+      "source": "package Q { private import P::*; private import P::a; } package P { class A; alias a for A; }"
+    },
+    {
+      "observations": [
+        {
+          "imported_element": "N",
+          "kind": "NamespaceImport",
+          "stored_target": "N"
+        },
+        {
+          "imported_element": "A",
+          "kind": "MembershipImport",
+          "stored_target": "A"
+        }
+      ],
+      "source": "package P { package N { class A; } } package Q { private import P::N::*; private import P::N::A; }"
+    },
+    {
+      "observations": [
+        {
+          "imported_element": "P",
+          "kind": "NamespaceImport",
+          "stored_target": "P"
+        },
+        {
+          "imported_element": "A",
+          "kind": "MembershipImport",
+          "stored_target": "aliasAlpha"
+        }
+      ],
+      "source": "package P { class A; alias aliasAlpha for aliasBeta; alias aliasBeta for A; } package Q { private import P::*; private import P::aliasAlpha; }"
+    },
+    {
+      "observations": [
+        {
+          "imported_element": null,
+          "kind": "NamespaceImport",
+          "stored_target": null
+        },
+        {
+          "imported_element": null,
+          "kind": "MembershipImport",
+          "stored_target": null
+        }
+      ],
+      "shape": "missing_targets"
+    },
+    {
+      "observation": {
+        "imported_element": "factoryTarget",
+        "kind": "MembershipImport",
+        "stored_target": null
+      },
+      "shape": "detached_membership_target"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "0fa732984611b2f4ef412156196029579cb77df20b33af3aca6752434d2477f9",
+    "helper_sha256": "5dce754f8ff4e16b674b7ed0654753b41200c702bbb1e9fbbec9d4e277d6bdea",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Import_importedElement_SettingDelegate.java": "e179d040133328ef9af8cd16f5466b259df17298f4006c2df06e545436a29f1b",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.import-projection-controls.v1",
+  "scope": "Four source controls for both concrete import kinds, forward order, nested namespaces and alias chains; missing targets and detached membership factories. Getter behavior only."
+}

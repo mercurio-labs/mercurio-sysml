@@ -1,0 +1,58 @@
+{
+  "schema": "dev.mercurio.native-resource-milestone.v1",
+  "scope": "Frozen post-membership, pre-additional-member-dependency assessment. Diagnostic only, not semantic qualification or benchmark.",
+  "supervision": {
+    "schema": "dev.mercurio.native-assessment-supervision.v1",
+    "status": "completed",
+    "elapsed_seconds": 138.39000000001397,
+    "exit_code": 1,
+    "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+    "binary_sha256": "391812580e5b6840faa8105a687b569dd69585fdb65fe373293ed92ff67e6629",
+    "source_sha256": "69639895b7ade8a16dda87b2c1d73bcd846f6713db227bc0c4f04c0883f49ba6",
+    "wall_budget_seconds": 300,
+    "linking_budget_seconds": 180,
+    "semantic_qualification": "not_assessed"
+  },
+  "inputs": {
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-membership-milestone-build.log": "f15792b072b08f34e32c8cb561a3f7df4608c84a006fe1335e2a0353a3eb83b2",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-membership-milestone-supervision.json": "f53215d42f7511dbe8580f53cc09da07a392f1a913cbdf9902f4bd14264d8d5c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-membership-milestone-results.jsonl": "bfc898a7d90137fa54640d11334c53726b8ad8b46c76ce8da66849c4b73f1369",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-membership-milestone-trace.log": "f7f0abb681675ea5853829dc8870b4960d00feb386df405b5506a422351fcd00",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-membership-milestone-analysis.json": "a5bf6dbcc0ee5470b85f3e3f1989cf2529bab52d7a147669c94eeefcdbbbc3a7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9"
+  },
+  "resource_files": 16,
+  "source_bytes": 121245,
+  "initial_elements": 12288,
+  "completed_reference_attempts": 191,
+  "inflight_frames": 0,
+  "outcome": {
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: Feature filtering requires complete owned Features: unsupported added-member strategy\", kind: Syntax, span: None, subjects: [] }",
+    "input_files": [
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    ],
+    "relative_path": "Performances-explicit-import-source-set.kerml",
+    "resource_mode": "separate",
+    "semantic_qualification": "not_assessed",
+    "source_bytes": 121245,
+    "source_set_cache_hit": false,
+    "stage": "construction_or_linking",
+    "status": "blocked"
+  },
+  "interpretation": "Previous standalone-membership input guard no longer stops this query. Candidate reaches inherited Feature filtering on FeatureReferenceExpression, which requires its additional-member producer before linking can continue. No published model or completed default/result stage. Frozen binary predates the dependency correction; unchanged assessment budgets do not make failed cohorts a qualification benchmark."
+}

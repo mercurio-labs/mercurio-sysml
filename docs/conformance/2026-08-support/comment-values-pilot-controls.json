@@ -1,0 +1,402 @@
+{
+  "scope": "Raw Comment, Documentation, TextualRepresentation and LiteralString parser objects in both pinned languages. Includes eight complete document parser controls with nested documentation. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "c5561ad0bbcb79013f6306874bf882e68a384b18a2e696657dfa2b7b768a00a7"
+  },
+  "cases": [
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "kind": "Documentation",
+      "language": "kerml",
+      "locale": null,
+      "source": "doc /**/"
+    },
+    {
+      "body": "/* a\n b */",
+      "declaredName": "D",
+      "kind": "Documentation",
+      "language": "kerml",
+      "locale": null,
+      "source": "doc D /* a\n b */"
+    },
+    {
+      "body": "/* a /* b */",
+      "declaredName": "D",
+      "kind": "Documentation",
+      "language": "kerml",
+      "locale": "\"en\"",
+      "source": "doc D locale \"en\" /* a /* b */"
+    },
+    {
+      "kind": "LiteralString",
+      "language": "kerml",
+      "source": "\"text\"",
+      "value": "\"text\""
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "kerml",
+      "languageValue": "\"text\"",
+      "source": "language \"text\" /**/"
+    },
+    {
+      "body": "/* raw */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "kerml",
+      "languageValue": "\"text\"",
+      "source": "rep language \"text\" /* raw */"
+    },
+    {
+      "body": "/* a\n b */",
+      "declaredName": "R",
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "kerml",
+      "languageValue": "\"text\"",
+      "source": "rep R language \"text\" /* a\n b */"
+    },
+    {
+      "body": "/* a /* b */",
+      "declaredName": "R",
+      "declaredShortName": "short",
+      "kind": "TextualRepresentation",
+      "language": "kerml",
+      "languageValue": "\"text\\tplain\"",
+      "source": "rep <short> R language \"text\\tplain\" /* a /* b */"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": null,
+      "declaredShortName": "short",
+      "kind": "TextualRepresentation",
+      "language": "kerml",
+      "languageValue": "\"text\"",
+      "source": "rep <short> language \"text\" /* body */"
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": null,
+      "references": [],
+      "source": "/**/"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": "\"en\"",
+      "references": [],
+      "source": "locale \"en\" /* body */"
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": null,
+      "references": [],
+      "source": "comment /**/"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": "C",
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": null,
+      "references": [],
+      "source": "comment C /* body */"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": "C",
+      "declaredShortName": "s",
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": "\"en\"",
+      "references": [
+        {
+          "kind": "Annotation",
+          "spelling": "P::A",
+          "targetType": "Element"
+        },
+        {
+          "kind": "Annotation",
+          "spelling": "'B.C'",
+          "targetType": "Element"
+        }
+      ],
+      "source": "comment <s> C about P::A, 'B.C' locale \"en\" /* body */"
+    },
+    {
+      "body": "/* repeat */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "kerml",
+      "locale": null,
+      "references": [
+        {
+          "kind": "Annotation",
+          "spelling": "A",
+          "targetType": "Element"
+        },
+        {
+          "kind": "Annotation",
+          "spelling": "A",
+          "targetType": "Element"
+        }
+      ],
+      "source": "comment about A, A /* repeat */"
+    },
+    {
+      "language": "kerml",
+      "bodies": [
+        "/**/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /**/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "kerml",
+      "bodies": [
+        "/*two\nlines*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*two\nlines*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "kerml",
+      "bodies": [
+        "/*quoted \"text\" and 'names'*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*quoted \"text\" and 'names'*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "kerml",
+      "bodies": [
+        "/*/* nested opener*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*/* nested opener*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "kind": "Documentation",
+      "language": "sysml",
+      "locale": null,
+      "source": "doc /**/"
+    },
+    {
+      "body": "/* a\n b */",
+      "declaredName": "D",
+      "kind": "Documentation",
+      "language": "sysml",
+      "locale": null,
+      "source": "doc D /* a\n b */"
+    },
+    {
+      "body": "/* a /* b */",
+      "declaredName": "D",
+      "kind": "Documentation",
+      "language": "sysml",
+      "locale": "\"en\"",
+      "source": "doc D locale \"en\" /* a /* b */"
+    },
+    {
+      "kind": "LiteralString",
+      "language": "sysml",
+      "source": "\"text\"",
+      "value": "\"text\""
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "sysml",
+      "languageValue": "\"text\"",
+      "source": "language \"text\" /**/"
+    },
+    {
+      "body": "/* raw */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "sysml",
+      "languageValue": "\"text\"",
+      "source": "rep language \"text\" /* raw */"
+    },
+    {
+      "body": "/* a\n b */",
+      "declaredName": "R",
+      "declaredShortName": null,
+      "kind": "TextualRepresentation",
+      "language": "sysml",
+      "languageValue": "\"text\"",
+      "source": "rep R language \"text\" /* a\n b */"
+    },
+    {
+      "body": "/* a /* b */",
+      "declaredName": "R",
+      "declaredShortName": "short",
+      "kind": "TextualRepresentation",
+      "language": "sysml",
+      "languageValue": "\"text\\tplain\"",
+      "source": "rep <short> R language \"text\\tplain\" /* a /* b */"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": null,
+      "declaredShortName": "short",
+      "kind": "TextualRepresentation",
+      "language": "sysml",
+      "languageValue": "\"text\"",
+      "source": "rep <short> language \"text\" /* body */"
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": null,
+      "references": [],
+      "source": "/**/"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": "\"en\"",
+      "references": [],
+      "source": "locale \"en\" /* body */"
+    },
+    {
+      "body": "/**/",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": null,
+      "references": [],
+      "source": "comment /**/"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": "C",
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": null,
+      "references": [],
+      "source": "comment C /* body */"
+    },
+    {
+      "body": "/* body */",
+      "declaredName": "C",
+      "declaredShortName": "s",
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": "\"en\"",
+      "references": [
+        {
+          "kind": "Annotation",
+          "spelling": "P::A",
+          "targetType": "Element"
+        },
+        {
+          "kind": "Annotation",
+          "spelling": "'B.C'",
+          "targetType": "Element"
+        }
+      ],
+      "source": "comment <s> C about P::A, 'B.C' locale \"en\" /* body */"
+    },
+    {
+      "body": "/* repeat */",
+      "declaredName": null,
+      "declaredShortName": null,
+      "kind": "Comment",
+      "language": "sysml",
+      "locale": null,
+      "references": [
+        {
+          "kind": "Annotation",
+          "spelling": "A",
+          "targetType": "Element"
+        },
+        {
+          "kind": "Annotation",
+          "spelling": "A",
+          "targetType": "Element"
+        }
+      ],
+      "source": "comment about A, A /* repeat */"
+    },
+    {
+      "language": "sysml",
+      "bodies": [
+        "/**/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /**/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "sysml",
+      "bodies": [
+        "/*two\nlines*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*two\nlines*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "sysml",
+      "bodies": [
+        "/*quoted \"text\" and 'names'*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*quoted \"text\" and 'names'*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    },
+    {
+      "language": "sysml",
+      "bodies": [
+        "/*/* nested opener*/",
+        "/*inside*/"
+      ],
+      "source": "package P { doc /*/* nested opener*/ package Q { doc /*inside*/ } }",
+      "kind": "RootNamespace"
+    }
+  ]
+}

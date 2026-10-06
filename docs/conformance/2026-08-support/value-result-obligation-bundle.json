@@ -1,0 +1,2706 @@
+{
+  "schema": "dev.mercurio.value-result-obligation-bundle.v1",
+  "qualification_certificate": false,
+  "obligation": "V01",
+  "review": {
+    "status": "acceptance_and_contexts_reviewed_dependency_resolution_open",
+    "acceptance": "All 12 source cases select the actual result: nine explicit returns own it, three shorthand bodies reuse an inherited result without fabricating an owned ReturnParameterMembership. Imported delegate and ancestry contracts drive selection separately from construction.",
+    "dependency_obligations": [
+      "V05"
+    ],
+    "scope": "All 26 fixed B1 contexts. Nine original owned returns, three original inherited results, twelve source companions and two explicit Ecore mutations. No denominator or release acceptance change.",
+    "boundary": "A complete native terminal outcome requires actual pinned dependencies and all applicable stages. A blocker, partial graph, prepared lifecycle flag or imported signature cannot close a context."
+  },
+  "batch_exit": {
+    "complete_contexts_required": 26,
+    "complete_contexts_verified": 0,
+    "strict_obligation_status": "open",
+    "required": [
+      "All dependency reads/constructions have stable typed identities, explicit algorithms and successful native evidence or a precise mandatory unresolved dependency.",
+      "All admitted cases execute the genuine native source pipeline, scoped validation, Closed canonical publication and fresh persistence/query comparison.",
+      "All seven independent negative cases reject at their actual required stage; unrelated missing dependencies or unsupported implementations do not count as expected rejections.",
+      "Nine original functions own the selected result, three reuse an inherited result without a fabricated return membership.",
+      "Every specified/Pilot disagreement has a reviewed normative disposition and focused verification.",
+      "Validate certificate inputs/stages/dependencies; only then close V01. Full service and strict family qualification remain separate."
+    ],
+    "broad_run_policy": "No broad diagnostic to find the next local error. Full native obligation matrix at dependency-bundle boundary; broad comparisons after completed bundle."
+  },
+  "algorithms": [
+    {
+      "id": "R01",
+      "category": "Pinned parsing and canonical construction",
+      "depends_on": [],
+      "implementation": "generated/mixed",
+      "required_semantics": "Pinned Xtext interpreter and Ecore construction/ownership/default/endpoint contracts",
+      "consumer": "Existing parser/materializer",
+      "status": "partial_native",
+      "evidence": []
+    },
+    {
+      "id": "R02",
+      "category": "Ordered owned result/parameter selection",
+      "depends_on": [
+        "R01"
+      ],
+      "implementation": "generated/mixed",
+      "required_semantics": "Ecore ReturnParameterMembership/Feature direction and resolved result/parameter selectors",
+      "consumer": "generated_owned_result_parameter_query / generated_result_parameter_query",
+      "status": "partial_native",
+      "evidence": []
+    },
+    {
+      "id": "R03",
+      "category": "Real prototype resolution and inherited result closure",
+      "depends_on": [
+        "R02",
+        "R04",
+        "R05"
+      ],
+      "implementation": "generated/mixed",
+      "required_semantics": "Imported default dispatch; actual Function prototypes and ordered generalizations",
+      "consumer": "definition_result_parameter_typed_query / definition_general_type_inputs_with_view",
+      "status": "partial_native",
+      "evidence": []
+    },
+    {
+      "id": "R04",
+      "category": "Namespace, reference and inherited membership semantics",
+      "depends_on": [
+        "R01"
+      ],
+      "implementation": "handwritten_rust",
+      "required_semantics": "Scoping/linking plus imported name/redefinition programs and typed endpoint contracts",
+      "consumer": "DefinitionNameQuery / native document reference service",
+      "status": "partial_native",
+      "evidence": []
+    },
+    {
+      "id": "R05",
+      "category": "Transformation prerequisite plans and atomic scheduling",
+      "depends_on": [
+        "R01"
+      ],
+      "implementation": "handwritten_rust",
+      "required_semantics": "ReadField, AdditionalMembers, BinaryCrossing, CrossSpecialization, reference-result and value producer jobs; lifecycle prerequisites of supplied providers",
+      "consumer": "Existing typed document scheduler and generated construction dispatch",
+      "status": "partial_native",
+      "evidence": []
+    },
+    {
+      "id": "R06",
+      "category": "Value/argument/result producers across expression categories",
+      "depends_on": [
+        "R03",
+        "R05"
+      ],
+      "implementation": "generated/mixed",
+      "required_semantics": "Literal, operator/control, reference, chain, index and invocation operation dependencies",
+      "consumer": "Existing imported programs, additional members and cold_literal_values/literal_value_binding; expand shared native consumers only",
+      "status": "literal_subset_native_other_contexts_open",
+      "evidence": []
+    },
+    {
+      "id": "R07",
+      "category": "Scoped constraints and canonical publication",
+      "depends_on": [
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06"
+      ],
+      "implementation": "generated/mixed",
+      "required_semantics": "Every applicable structural invariant and semantic validator/delegate; normative disagreement dispositions",
+      "consumer": "Ecore required/reference checks plus explicit handwritten validators",
+      "status": "complete_applicable_validator_inventory_open",
+      "evidence": []
+    },
+    {
+      "id": "R08",
+      "category": "Persistence and fresh query recomputation",
+      "depends_on": [
+        "R07"
+      ],
+      "implementation": "handwritten_rust",
+      "required_semantics": "Closed stored model/ownership plus recomputed result, type, parameter and referencing getters",
+      "consumer": "Existing native persistence/query APIs",
+      "status": "full_context_open",
+      "evidence": []
+    },
+    {
+      "id": "R09",
+      "category": "Independent result/prototype/ownership observations",
+      "depends_on": [
+        "R02",
+        "R03"
+      ],
+      "implementation": "build_time_java_only",
+      "required_semantics": "Actual resolved result getters, canonical library ReturnParameterMembership storage, ordered references/flags/bounds; reuse frozen full-model/diagnostic observations",
+      "consumer": "One bounded supplemental Pilot observation batch; no new translation backend",
+      "status": "direct_library_observation_gap",
+      "evidence": []
+    }
+  ],
+  "contexts": [
+    {
+      "id": "valuation-source-00",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-00.kerml",
+      "source_sha256": "0c6d2db6948f55a4526032a342e2c56c30db0baec3ee3978fe7c428f5eff371e",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-01",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-01.kerml",
+      "source_sha256": "dd738831ba3189dbfafee2d090faf891634f152d06c63c650c46db769d805a41",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralBoolean",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-02",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-02.kerml",
+      "source_sha256": "8b5256c0dd2021bd13e0917a1be933988cbff50a69b64bd75bc73d704dc2e77a",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralInteger",
+        "Namespace",
+        "OperatorExpression",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-03",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-03.kerml",
+      "source_sha256": "71d1f75bde0743edfff734650d23d71ca9c23a9d1991db1e1ab7c2c80ceaba68",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralBoolean",
+        "LiteralInteger",
+        "Namespace",
+        "OperatorExpression",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-04",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-04.kerml",
+      "source_sha256": "85740fbeac26c88d31a502591c5492604c1aeb09c8e40d65b4258c43bfe01cfe",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-05",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-05.kerml",
+      "source_sha256": "2ddfa57ba94aa47766fd2f06b67dc713f2980962218f86175acf3b5ad19d0b66",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChainExpression",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-06",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-06.kerml",
+      "source_sha256": "0a65afb6b9cfa57b8f1733b6d5983555a9de52750def4126951a11335eac0810",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChainExpression",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-07",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-07.kerml",
+      "source_sha256": "f3fc72dffb7ce6384c4aae63caf9f249501ffdbc9608b200f074d2fe0753651f",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChainExpression",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "InvocationExpression",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-08",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-08.kerml",
+      "source_sha256": "765484bcf40aab5e29032b79b85a35edf5a9f3164868b7bd1c9b95c6067dc696",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "owned",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "IndexExpression",
+        "LiteralInfinity",
+        "LiteralInteger",
+        "Membership",
+        "MultiplicityRange",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-09",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-09.kerml",
+      "source_sha256": "44df58b9fd42198409afc90f33072dda969d8cc7b04b254b19e3367d99458e51",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "inherited",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChainExpression",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ResultExpressionMembership",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-10",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-10.kerml",
+      "source_sha256": "82c707850c7ece1ed7982ac6f8c129f6016ac80bcd329e336b65770235b97489",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "inherited",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "IndexExpression",
+        "LiteralInfinity",
+        "LiteralInteger",
+        "Membership",
+        "MultiplicityRange",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ResultExpressionMembership",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-source-11",
+      "role": "original_parsed_control",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-source-11.kerml",
+      "source_sha256": "6a56c76ed69806b1199b6026ac57dc31f4d7a6786f70b417be0e73ebe3780f91",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "inherited",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralInteger",
+        "Membership",
+        "Namespace",
+        "OperatorExpression",
+        "OwningMembership",
+        "Package",
+        "ParameterMembership",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ResultExpressionMembership",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-bound",
+      "role": "bound_nondefault",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-bound.kerml",
+      "source_sha256": "2f0c752664e1bc7696814915dda663dce880638214908cfd30d78d24c3c103c7",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-default",
+      "role": "default_valuation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-default.kerml",
+      "source_sha256": "85b41b02f3fa13ce81f336f9d4987524d427e8d89615e28c5dfd5a055d3be194",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "Feature",
+        "FeatureTyping",
+        "FeatureValue",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Subsetting"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-initial",
+      "role": "initial_valuation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-initial.kerml",
+      "source_sha256": "c6967668f53c2a05cda76384967bad9057c648eae53dc41e07a933d1abc43108",
+      "mutation": null,
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "validate",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-default-initial",
+      "role": "default_initial_valuation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-default-initial.kerml",
+      "source_sha256": "c87e1520f6d499cba3713e0d38bf18525c75aded050efa76fe05bffb230d8cf7",
+      "mutation": null,
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "validate",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-explicit-subset",
+      "role": "explicit_specialization",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-explicit-subset.kerml",
+      "source_sha256": "a3a7ba259f19a609d5fdf5b606c1165a638b1fda219997db38c1224d4823071a",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-directed",
+      "role": "directed_valuation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-directed.kerml",
+      "source_sha256": "b6672bce7d8b40a805c11677e0364f3cc95fe15a303d84d313a03ead247dbdd0",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-feature-value",
+      "role": "reference_value",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-feature-value.kerml",
+      "source_sha256": "cead9a16a57a7949cf7eb724ea7290f6fcea384eeb99791ed1d397fb02f276fd",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureReferenceExpression",
+        "FeatureTyping",
+        "FeatureValue",
+        "Membership",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-explicit-return-default",
+      "role": "directed_return_default",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-explicit-return-default.kerml",
+      "source_sha256": "082bc7cbb43131f4bae1baf5d23984f3ec97412d31c35c1751bc189fa11cd563",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "Feature",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-missing-value",
+      "role": "syntax_negative",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-missing-value.kerml",
+      "source_sha256": "ca9f02e280f022a4f46634d45bbcce061c36b824867e50e31a35b5993e67d051",
+      "mutation": null,
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "parse",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-missing-function",
+      "role": "link_negative",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-missing-function.kerml",
+      "source_sha256": "029de191f5e19ce08fb439eba3f607166cd23c19876fe6bfee68d4c0f16f2e1f",
+      "mutation": null,
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "link",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-missing-member",
+      "role": "link_negative",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-missing-member.kerml",
+      "source_sha256": "edb61e7e3885b16ba58951c3af0e5d96ff95b2af03752567b14cb58f9951a935",
+      "mutation": null,
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "link",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-wrong-type",
+      "role": "validation_boundary",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-wrong-type.kerml",
+      "source_sha256": "09ae737bb92331326ee3298a581dc2dd3d25ff1efd0ce094e69c081965c38e71",
+      "mutation": null,
+      "independent_outcome": "accepted",
+      "required_rejection_stage": null,
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [
+        "BindingConnector",
+        "Feature",
+        "FeatureChaining",
+        "FeatureMembership",
+        "FeatureTyping",
+        "FeatureValue",
+        "Function",
+        "LiteralInteger",
+        "Namespace",
+        "OwningMembership",
+        "Package",
+        "Redefinition",
+        "ReferenceSubsetting",
+        "ReturnParameterMembership",
+        "Subclassification",
+        "Subsetting",
+        "TypeFeaturing"
+      ],
+      "reference_resource_envelope": [
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+        "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+        "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+      ],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "open_boolean_integer_boundary",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-append_nondefault_valuation",
+      "role": "explicit_ecore_mutation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-append_nondefault_valuation.kerml",
+      "source_sha256": "475315e4873a3327f5f8ad08d62bdfa61283713a33ecf15418476179a121d80a",
+      "mutation": "append_nondefault_valuation",
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "validate",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    },
+    {
+      "id": "valuation-append_default_valuation",
+      "role": "explicit_ecore_mutation",
+      "source": "docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/valuation-append_default_valuation.kerml",
+      "source_sha256": "db1d17335bacc5f571124fb01e0dab1bca9e12452505a4be8f7d4de1e9071f87",
+      "mutation": "append_default_valuation",
+      "independent_outcome": "rejected",
+      "required_rejection_stage": "validate",
+      "original_result_branch": "receiver_or_negative_boundary",
+      "observed_source_kinds": [],
+      "reference_resource_envelope": [],
+      "required_algorithms": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09"
+      ],
+      "normative_disposition": "existing_review_required_as_applicable",
+      "required_stages": [
+        "parse",
+        "construct",
+        "link",
+        "transform",
+        "validate",
+        "publish",
+        "persist",
+        "compare"
+      ],
+      "stage_results": {
+        "parse": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "construct": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "link": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "transform": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "validate": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "publish": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "persist": {
+          "status": "not_assessed",
+          "evidence": []
+        },
+        "compare": {
+          "status": "not_assessed",
+          "evidence": []
+        }
+      },
+      "complete": false
+    }
+  ],
+  "resource_environment": {
+    "pinned_library_fingerprints": {
+      "sysml.library/Domain Libraries/Analysis/AnalysisTooling.sysml": "9c42e7b07c31d0c6f5add4da41e2c6b08fd7d07adeac79b69619c7887a8c0a60",
+      "sysml.library/Domain Libraries/Analysis/SampledFunctions.sysml": "2fc1fb0e887754c598158fa137c02c5c565a9355318788150890433b659b6a23",
+      "sysml.library/Domain Libraries/Analysis/StateSpaceRepresentation.sysml": "e216ad311376c97216703d5a99d6a2725e02ec66dad8c6c4e2374cf0b4e4d34a",
+      "sysml.library/Domain Libraries/Analysis/TradeStudies.sysml": "92ef291e85a292cb4012c9630e3095c9c5d8a394501385e62e71b375b966236e",
+      "sysml.library/Domain Libraries/Cause and Effect/CausationConnections.sysml": "ba6f0b12b0d74360e3cfb4db6dee719db01a676c109d30fae33e610da1c2d241",
+      "sysml.library/Domain Libraries/Cause and Effect/CauseAndEffect.sysml": "e8dbd601bf6e5a0f4023561c8add8936e127430f34f38ae06d40f550599e6485",
+      "sysml.library/Domain Libraries/Geometry/ShapeItems.sysml": "e7f713a959a56fbbb78455386623f1fe410fa67c1a253ca1487c1d0bb3135962",
+      "sysml.library/Domain Libraries/Geometry/SpatialItems.sysml": "8f0a399026360f36b8b271392541dcc218227fbae90ba185a0d9462b6edeea15",
+      "sysml.library/Domain Libraries/Metadata/ImageMetadata.sysml": "d0d39b4be26f697f6db3359eb7b3a5cd3eb133077a8698a610708a992a29afab",
+      "sysml.library/Domain Libraries/Metadata/ModelingMetadata.sysml": "6214cf07d16a3405692f8414798930cd8869f183367d9c827eb5c70ab5af2397",
+      "sysml.library/Domain Libraries/Metadata/ParametersOfInterestMetadata.sysml": "51474ef5606a9f2be33b860e85b4758008573591b6f3dba984fd40aa5a2ca694",
+      "sysml.library/Domain Libraries/Metadata/RiskMetadata.sysml": "ee822eefcc56e16a775f7a941bcc068668fdb64fa829dfeb2438a0e91e11f6de",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQ.sysml": "7c67aa8b16201bea752d26943388304a5d8c97d101e14d4663150f6984dfd563",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQAcoustics.sysml": "a212e1b1e96cb7270912ec201d87c9c6c793132555c6ec3477ba34ed8c9df0cb",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQAtomicNuclear.sysml": "95976d154514bc66348fbdf5786fa209d57f6c6bb54d239dde8452abbb2ab24a",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQBase.sysml": "82f91f99155e1ee9fa23acb3e9cea4bec39d86138ad95b54a3a7ea9d7e692b89",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQCharacteristicNumbers.sysml": "75227197c3ada14f522cb80e9d98566d4d486b748734f0fd352cb5f3bf380475",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQChemistryMolecular.sysml": "2d00ef50cb9ef25fe7144d3a0bb82a72f3ca6bb61776192fd3b797cd3e49176a",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQCondensedMatter.sysml": "60188ea7c02f19cc2440a95d8eafea881e33d758a7225877be08e1ebeb6f6636",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQElectromagnetism.sysml": "d4f286af34060889109a8f59134f2d036a20d30dcfb9b3adc68228950550a504",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQInformation.sysml": "0cdbd940fe6b4879a1cd044b70e6a6dec5773690d4c2f4eb01887ebcc347fa77",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQLight.sysml": "8221b57a3b82a5ff28a481ae93a6fd9bd6de4ba1695cb27b0e554c5192ae87e3",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQMechanics.sysml": "507f9be9eb54353d5b9e487ee70fb28a9327cb2ed591a5ed04939dfe6ebdb964",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQSpaceTime.sysml": "934d6725ca490c078f042cc3ba8ef4c09da19a41f30da5b5d32da3f3909ba462",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQThermodynamics.sysml": "ae0929b78c0b08f635e976ad52727ad8626f492970d47e7f7f5be54110524c92",
+      "sysml.library/Domain Libraries/Quantities and Units/MeasurementRefCalculations.sysml": "4eca94723410a11906abf2183db2bc82f849a63b8e6323b27beef363e42e298c",
+      "sysml.library/Domain Libraries/Quantities and Units/MeasurementReferences.sysml": "663d7b2e503fd7dcdd12d174b03a5eefd95735b71ac34d682f3b85e055f76517",
+      "sysml.library/Domain Libraries/Quantities and Units/Quantities.sysml": "d4ed609e120e50dcb93f67922624863d98581b5275f8032b8172202040055bb6",
+      "sysml.library/Domain Libraries/Quantities and Units/QuantityCalculations.sysml": "ef235e95327b476f45abb270b04fe37cdc51f6271683b8629c79019bae688d86",
+      "sysml.library/Domain Libraries/Quantities and Units/SI.sysml": "c6af4b72d6d098b7655f737ee162e7bae58089e8bcf7b9209e71041707c1e4e0",
+      "sysml.library/Domain Libraries/Quantities and Units/SIPrefixes.sysml": "90e604fcda40f8ec920114a457097cb2fed6d898d422c80277b4c8e9c3e70638",
+      "sysml.library/Domain Libraries/Quantities and Units/TensorCalculations.sysml": "0011fefd4cc62d3c1cb252a73a4a5b1a8024fb1bb2d69f626344690dc63d2923",
+      "sysml.library/Domain Libraries/Quantities and Units/Time.sysml": "3db3dde710d3298fbfa6c148972743c4a88e9371b4c1166a29e22a9600cd6fd5",
+      "sysml.library/Domain Libraries/Quantities and Units/USCustomaryUnits.sysml": "52a817f637ae237386b227d4c7a3a0401dbd494853719dbd210eb784fe68db70",
+      "sysml.library/Domain Libraries/Quantities and Units/VectorCalculations.sysml": "61dab53484ca1141036be18bcbc07d3ecd2a5668cf80792da8cd38175da1315d",
+      "sysml.library/Domain Libraries/Requirement Derivation/DerivationConnections.sysml": "f9f587423c1151f6ea89dae3e4a2e9b446906c5660bd8b3532952876fd9b9adc",
+      "sysml.library/Domain Libraries/Requirement Derivation/RequirementDerivation.sysml": "ae3e65ca5c709869163cf17d04114ff7a6263c5b6f03d7ab05d62e0459d07f5d",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/VectorValues.kerml": "4d0d194f3437d15d10c978912ec7d2d3eadab926881ea61d2b724b8cdb7217d5",
+      "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml": "728420cf580a119310f319b142e7d38932e556745a2508e6ce9453d243bc6a54",
+      "sysml.library/Kernel Libraries/Kernel Function Library/BooleanFunctions.kerml": "4da6ad54f1e36ecf22f538a4b5153cb2a9831870b190b291e73e4c7a21e7ac50",
+      "sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ComplexFunctions.kerml": "df0347537e6f711f3d60c1798335ef354afc420726bdc5919a80fafa348cc97a",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a",
+      "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml": "8c219a2becac038dcbf101ddf64eee57b568dcd95b204be26c2ed3a83ec510af",
+      "sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6",
+      "sysml.library/Kernel Libraries/Kernel Function Library/NaturalFunctions.kerml": "9bf320732fbc48685a296771384489130353ac22c33bb68c54b238ce554fb8ee",
+      "sysml.library/Kernel Libraries/Kernel Function Library/NumericalFunctions.kerml": "702ab0f027b46621c31e316de0d0108538da4b87e959a41fad464ada153acf58",
+      "sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml": "5a6a9e18199c6072252b99d82ad7b04657290475f1c2acee46a9b5ae0fec21d9",
+      "sysml.library/Kernel Libraries/Kernel Function Library/RationalFunctions.kerml": "e3ab60e171c271566878a27984391f57db1b9557cdf0dc9f0ec28d2ac4c0b3a4",
+      "sysml.library/Kernel Libraries/Kernel Function Library/RealFunctions.kerml": "ef861eb293190368dd4cae24f190e8803a3bb2ac01a31c6d95eda1b71ac0e2ec",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98",
+      "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869",
+      "sysml.library/Kernel Libraries/Kernel Function Library/StringFunctions.kerml": "c52d1f5450cec75267970d18f4206ba552db033432ceea6f8ecc4e6bac4ceb59",
+      "sysml.library/Kernel Libraries/Kernel Function Library/TrigFunctions.kerml": "614c0f168370a2efc292b40712401d57a186ef065ddebfbd63dab598701a580f",
+      "sysml.library/Kernel Libraries/Kernel Function Library/VectorFunctions.kerml": "dba38be553b153af66e1a008e08072f9f8aa76ee4695c7b4bc9586498dec1125",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml": "d7433722414a609f0ad2583b2f910e1c34a2bc1d7ac3abfe7ebbb7c239941f60",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml": "b6f9e5349c7c7f393591c0334c3bec86f1766b3e37209819179310c2f8fe1fb7",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Observation.kerml": "cbf87b0e9e358f0a1cf5ec99128a2abd5ccd59af67b696efc9581239e86a01a9",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/SpatialFrames.kerml": "1c7095c4845fa24bdb51c3affe617dc723e054aea2abebfafcba1a1687c49de3",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml": "47da8348d01c426c0839b679e87a35fb58d090a43c0faa4514542cc83e893e3a",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml": "407c222276f63b32fae108ac3c886671198894e6ff4c2beec6b6ce091fe910f9",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Triggers.kerml": "7819af0ada0d753c2e3bbe395282f218e9829ca297012eb7aae5861db094631e",
+      "sysml.library/Systems Library/Actions.sysml": "f80cc391abd8f5d8171d581788c8595cd44811779a47259fd5d24680e3fe300b",
+      "sysml.library/Systems Library/Allocations.sysml": "77c881254d552847ee3ac5686ff84fa7baaa9e90541b59f2b3221cc1752be56f",
+      "sysml.library/Systems Library/AnalysisCases.sysml": "839177ea10bf5eae65b8eac406c99ca54cea7404e075e77ae937b19d7c485da1",
+      "sysml.library/Systems Library/Attributes.sysml": "eb853c5bc97965d726478e6de7e1323ea7c236b0ad69fb03fb43852b2f711bf1",
+      "sysml.library/Systems Library/Calculations.sysml": "e35be6d273ea61ca86cd2e7d77b0e7a5d5f714d984e9a601ecfb1bfa6e225271",
+      "sysml.library/Systems Library/Cases.sysml": "207bc825621bcef5c365a779e1e87c0cfe1bc49e44f6c0d7cc1ca2677503cf16",
+      "sysml.library/Systems Library/Connections.sysml": "13c20eb2e2388646bb23ae8d204fb2dccfe9d1ef07ddb9ac6528fbe37200a701",
+      "sysml.library/Systems Library/Constraints.sysml": "a8085cadbaa9bc4e4f1b2460c2facfbea8cb7ea3e0436e1ce9a6230daa16b757",
+      "sysml.library/Systems Library/Flows.sysml": "89567552fea20e13b615ab7f3e76588bec9e9c7ffcfa94340eb74c742d36ebee",
+      "sysml.library/Systems Library/Interfaces.sysml": "eac8920019f6fea45c39ab550ea2e7bcde0773a569db969ed178a284a9b62873",
+      "sysml.library/Systems Library/Items.sysml": "508c789f9d8425176ce9f8c70cb7853d2848228920d17927aa4ab5e0088745e6",
+      "sysml.library/Systems Library/Metadata.sysml": "2261103c64c193b2ee1495a7ce8f5cf4711027388b640011d0c380a77de9c916",
+      "sysml.library/Systems Library/Parts.sysml": "127a820928b34628c5cdb34444debab9bc93a63284ba5e6dd6bb2c8707ea9b2c",
+      "sysml.library/Systems Library/Ports.sysml": "a5d0e567124a734437648c986e71b6a892557711f5643c429d2c7cf4598805be",
+      "sysml.library/Systems Library/Requirements.sysml": "e6b715b569bb99629990ad554c51e0094a1de6c6fa2439093ab9a830d635b10f",
+      "sysml.library/Systems Library/StandardViewDefinitions.sysml": "2075fe906ddeefb5e8b38ee681acd3b6409a5ec2c1b04135a4a9d013c9d35ec8",
+      "sysml.library/Systems Library/States.sysml": "10d503f4409549df91ec71dbcdc7633994d1275947b0d69f3c755c647dd84b82",
+      "sysml.library/Systems Library/SysML.sysml": "9879496bc52b75fae6915d8ea4b1ef2e60b8f81e8df9b86e7b951c290ca36be6",
+      "sysml.library/Systems Library/UseCases.sysml": "6dc9298dc491ef9b91214741c9977cd911b80e3bfc464b7ea2d3da96733b9f5f",
+      "sysml.library/Systems Library/VerificationCases.sysml": "498e93de337a79b6aea4421866dbdc4898d8471bdadb2b0f92507d599b9db346",
+      "sysml.library/Systems Library/Views.sysml": "068b8cbad08f21f194a462d6923a7705a84bbf3ad31727f7f032834530633539"
+    },
+    "reference_available_count": 94,
+    "reference_observed_envelope": [
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml",
+      "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    ],
+    "reference_envelope_is_native_closure_proof": false,
+    "native_closure_status": "open",
+    "required": "Identify native explicit/implicit/global resources through imported definitions and typed semantic plans. An observed reference envelope or 22-library diagnostic subset is not a complete dependency certificate."
+  },
+  "observation_gaps": [
+    "Direct Function/Expression.result getter identities in the full context",
+    "Canonical library result membership/feature/reference sequences and flags/bounds",
+    "Every applicable validation dependency in the source/prototype closure"
+  ],
+  "inputs": {
+    "docs/conformance/2026-08-support/value-service-reference-manifest.json": "99e18d8d57786c559e73783502d46879a42fb56186ec8f4a54f9addefbf00839",
+    "docs/conformance/2026-08-support/value-service-reference-controls.json.gz": "ab8542d44e03a1d4010e7e87a395742fd0e0d1c84fd86de0813626d8bc0b27b8",
+    "docs/conformance/2026-08-support/value-service-normative-review.json": "33d14a0a60dc0a0fc0155a14d89cb6327db58bcf159b81fe77c3b4980fbc07b3",
+    "docs/conformance/2026-08-support/value-service-literal-field-contract.json": "9a0690fcd8a4dba2654ba75d8939fe70d092c82d91ecbd6a2fa3bb926b175c69",
+    "docs/conformance/2026-08-support/parsed-result-valuation-pilot-controls.json": "45492581f3d40df090a29ce95b47b48622b48eb78e7d3a29b4d02f4846549362",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/result-construction.extract.json": "91c9d0e05d712e5f033527244219e7627ff4726ad842212e4bdeb22fd5fcec2d"
+  },
+  "native_consumer_baseline": {
+    "crates/mercurio-sysml/src/definition_document.rs": "3dd52d6abb5e182c465696c55695dbc72f452e69d4b9402aba46c4f11b681fc6",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "b6f3eb06720b9b7dd1658d4773ea1373d2151a231688ab6b932f350fe2e7766d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "550020506c63da6363b6b37470d810256fd909e58ecda50892a4eafaab8aa511",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_value_validation.rs": "1cd2c4c3b3b20c4bcd8f816c8b0a8a5d5354c8d5b1d43deea276ccc0aeaafb57",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/cold_literal_values.rs": "9da1c1914e0df8fb189849edb6bf4ce6f8d34c58c50207baf7695fcfbf0458ba",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "1a7f44c13010090e8162f0d71476560329f8e6f1b8ad598d42216a7add70d75b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "c531af268c2efecbfebeaa70bad37b14eaa0498b146d6ef4f8d42073fb449bac",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "b5c063cf07b2dd554fd1a27afadf8bc12fade61aa669ada945b790ee839cdfe9",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "878bf82af90b0d22a03704bab62f48a18616ec4b8ad477f322e9c508484ba771",
+    "tools/export_pilot_connector_defaults.py": "97dbd7e5320927fcd07679adbb569df7a485810a4283a492a86bec40ab741052",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotConnectorDefaultExporter.java": "6bca6016147da5fc7a10541b4d9f9f331698fb2b5009ace9f7c7442acd5550ef",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "5c629b7193c1d966d45456566da0d19ecda851b24ac915f4af6408f62f2e4e24",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "c98baac06d89b6e582ef6137b63f511afd94c1a9817f01e9a922c5e79843bb28",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_result_scope.rs": "cd0ce01f251241e26c4edb0677429d781e80fdeff17ab6fd79e25ea0be87337e",
+    "tools/prepare_native_reference_inputs.py": "b412fb9fe8c3f0849a554f89b0b0dfc093c258a0d7bb1b07c59394dcc20275d0",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a",
+    "crates/mercurio-tools/src/bin/audit_release_compile/profile.rs": "2f052a7184d7c24d9ac94c550384f1ac4a5bd8658d89b36f38ddc9d20e13fdcc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "bb546e2e6fbc25c292a446f02c610aea80876eab5d984facc06e785333c052bd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_context_stage.rs": "bd8b183039e703af73af84f5395e82dc91f92d3f073633dddcdba239fc21115b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source.rs": "a7253ab773e03dd921ae12cad1fce2b9b29dd043ac57a22aafc69c902bc06957",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source_query.rs": "a2f29801c739574cfa00da14715ef0a788483d6db8fa047f98c8da7f6aaa40b2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/multiplicity_construction.rs": "52b1ccb963d70adaa2768c86cd383db360af8b00300618c03d4c2c024d750e6e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/type_set_contributions.rs": "8255551572f9729da06a34edbc48f8fc870a3962b03e54ca03c7f2cdf0ea184e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/type_set_roles_generated.rs": "2b8b6a41c2ac6835fc4c4d0023056c927f3dca50d913ccf76726529cb189e438",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/type-set-roles.extract.json": "ac869cab2967bb7e95ea35ed2b1614c5f8957dc2331483f85acd925b71607dd8",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "tools/generate_type_set_roles.py": "f623473568c4cb6c88067b1a19f1ebf29a15f41e4aa67dfa6fa03e8dcec7ca72"
+  }
+}

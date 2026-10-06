@@ -1,0 +1,2606 @@
+{
+  "bindings": [
+    {
+      "adapter": "org.omg.sysml.adapter.ActionDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ActionDefinition",
+      "labels": {
+        "base": "Actions::Action",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.ConnectionDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "AllocationDefinition",
+      "labels": {
+        "base": "Allocations::Allocation",
+        "binary": "Allocations::Allocation",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.CaseDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "AnalysisCaseDefinition",
+      "labels": {
+        "base": "AnalysisCases::AnalysisCase",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.AttributeDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "kind": "AttributeDefinition",
+      "labels": {
+        "base": "Base::DataValue"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.CalculationDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "CalculationDefinition",
+      "labels": {
+        "base": "Calculations::Calculation",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.CaseDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "CaseDefinition",
+      "labels": {
+        "base": "Cases::Case",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.RequirementDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ConcernDefinition",
+      "labels": {
+        "base": "Requirements::ConcernCheck",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.PortDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "kind": "ConjugatedPortDefinition",
+      "labels": {
+        "base": "Ports::Port",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.ConnectionDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ConnectionDefinition",
+      "labels": {
+        "base": "Connections::Connection",
+        "binary": "Connections::BinaryConnection",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.ConstraintDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ConstraintDefinition",
+      "labels": {
+        "base": "Constraints::ConstraintCheck",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.DefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "kind": "Definition",
+      "labels": {
+        "base": "Base::Anything"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.AttributeDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "kind": "EnumerationDefinition",
+      "labels": {
+        "base": "Base::DataValue"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.FlowDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "FlowDefinition",
+      "labels": {
+        "base": "Flows::MessageAction",
+        "binary": "Flows::Message",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.FlowDefinitionAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.ConnectionDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "InterfaceDefinition",
+      "labels": {
+        "base": "Interfaces::Interface",
+        "binary": "Interfaces::BinaryInterface",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.ItemDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ItemDefinition",
+      "labels": {
+        "base": "Items::Item",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.MetadataDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "MetadataDefinition",
+      "labels": {
+        "base": "Metadata::MetadataItem",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "OccurrenceDefinition",
+      "labels": {
+        "base": "Occurrences::Occurrence",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.PartDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "PartDefinition",
+      "labels": {
+        "base": "Parts::Part",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.PortDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "kind": "PortDefinition",
+      "labels": {
+        "base": "Ports::Port",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.PartDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "RenderingDefinition",
+      "labels": {
+        "base": "Views::Rendering",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.RequirementDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "RequirementDefinition",
+      "labels": {
+        "base": "Requirements::RequirementCheck",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.StateDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "StateDefinition",
+      "labels": {
+        "base": "States::StateAction",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.CaseDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "UseCaseDefinition",
+      "labels": {
+        "base": "UseCases::UseCase",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.CaseDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "VerificationCaseDefinition",
+      "labels": {
+        "base": "VerificationCases::VerificationCase",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.PartDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ViewDefinition",
+      "labels": {
+        "base": "Views::View",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    },
+    {
+      "adapter": "org.omg.sysml.adapter.RequirementDefinitionAdapter",
+      "additional_members": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "additions": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "kind": "ViewpointDefinition",
+      "labels": {
+        "base": "Views::ViewpointCheck",
+        "life": "Occurrences::Life"
+      },
+      "selection": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype"
+    }
+  ],
+  "controls": [
+    {
+      "general_types": [
+        "Actions::Action"
+      ],
+      "individual": false,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Actions::Action",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Actions::Action"
+      ],
+      "individual": false,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Actions::Action",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Actions::Action"
+      ],
+      "individual": false,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Actions::Action",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Actions::Action"
+      ],
+      "individual": false,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Actions::Action",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ActionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation"
+      ],
+      "individual": false,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation"
+      ],
+      "individual": false,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation"
+      ],
+      "individual": false,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation"
+      ],
+      "individual": false,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Allocations::Allocation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AllocationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase"
+      ],
+      "individual": false,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase"
+      ],
+      "individual": false,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase"
+      ],
+      "individual": false,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase"
+      ],
+      "individual": false,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "AnalysisCases::AnalysisCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "AnalysisCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "AttributeDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "AttributeDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "AttributeDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "AttributeDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation"
+      ],
+      "individual": false,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation"
+      ],
+      "individual": false,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation"
+      ],
+      "individual": false,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation"
+      ],
+      "individual": false,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Calculations::Calculation",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CalculationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Cases::Case"
+      ],
+      "individual": false,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Cases::Case",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Cases::Case"
+      ],
+      "individual": false,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Cases::Case",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Cases::Case"
+      ],
+      "individual": false,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Cases::Case",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Cases::Case"
+      ],
+      "individual": false,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Cases::Case",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "CaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck"
+      ],
+      "individual": false,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck"
+      ],
+      "individual": false,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck"
+      ],
+      "individual": false,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck"
+      ],
+      "individual": false,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Requirements::ConcernCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConcernDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "ConjugatedPortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Connections::Connection"
+      ],
+      "individual": false,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Connections::Connection",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Connections::Connection"
+      ],
+      "individual": false,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Connections::Connection",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Connections::BinaryConnection"
+      ],
+      "individual": false,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Connections::BinaryConnection",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Connections::Connection"
+      ],
+      "individual": false,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Connections::Connection",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConnectionDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck"
+      ],
+      "individual": false,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck"
+      ],
+      "individual": false,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck"
+      ],
+      "individual": false,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck"
+      ],
+      "individual": false,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Constraints::ConstraintCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ConstraintDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Base::Anything"
+      ],
+      "individual": false,
+      "kind": "Definition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Base::Anything"
+      ],
+      "individual": false,
+      "kind": "Definition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Base::Anything"
+      ],
+      "individual": false,
+      "kind": "Definition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Base::Anything"
+      ],
+      "individual": false,
+      "kind": "Definition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "EnumerationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "EnumerationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "EnumerationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Base::DataValue"
+      ],
+      "individual": false,
+      "kind": "EnumerationDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction"
+      ],
+      "individual": false,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction"
+      ],
+      "individual": false,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Flows::Message"
+      ],
+      "individual": false,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Flows::Message",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction"
+      ],
+      "individual": false,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Flows::MessageAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "FlowDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface"
+      ],
+      "individual": false,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface"
+      ],
+      "individual": false,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Interfaces::BinaryInterface"
+      ],
+      "individual": false,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Interfaces::BinaryInterface",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface"
+      ],
+      "individual": false,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Interfaces::Interface",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "InterfaceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Items::Item"
+      ],
+      "individual": false,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Items::Item",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Items::Item"
+      ],
+      "individual": false,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Items::Item",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Items::Item"
+      ],
+      "individual": false,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Items::Item",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Items::Item"
+      ],
+      "individual": false,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Items::Item",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ItemDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem"
+      ],
+      "individual": false,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem"
+      ],
+      "individual": false,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem"
+      ],
+      "individual": false,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem"
+      ],
+      "individual": false,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Metadata::MetadataItem",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "MetadataDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence"
+      ],
+      "individual": false,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence"
+      ],
+      "individual": false,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence"
+      ],
+      "individual": false,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence"
+      ],
+      "individual": false,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Occurrences::Occurrence",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "OccurrenceDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Parts::Part"
+      ],
+      "individual": false,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Parts::Part",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Parts::Part"
+      ],
+      "individual": false,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Parts::Part",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Parts::Part"
+      ],
+      "individual": false,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Parts::Part",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Parts::Part"
+      ],
+      "individual": false,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Parts::Part",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "PartDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": false,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Ports::Port"
+      ],
+      "individual": true,
+      "kind": "PortDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::Rendering"
+      ],
+      "individual": false,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::Rendering",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::Rendering"
+      ],
+      "individual": false,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::Rendering",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::Rendering"
+      ],
+      "individual": false,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::Rendering",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::Rendering"
+      ],
+      "individual": false,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::Rendering",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RenderingDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck"
+      ],
+      "individual": false,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck"
+      ],
+      "individual": false,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck"
+      ],
+      "individual": false,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck"
+      ],
+      "individual": false,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Requirements::RequirementCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "RequirementDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "States::StateAction"
+      ],
+      "individual": false,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "States::StateAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "States::StateAction"
+      ],
+      "individual": false,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "States::StateAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "States::StateAction"
+      ],
+      "individual": false,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "States::StateAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "States::StateAction"
+      ],
+      "individual": false,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "States::StateAction",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "StateDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase"
+      ],
+      "individual": false,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase"
+      ],
+      "individual": false,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase"
+      ],
+      "individual": false,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase"
+      ],
+      "individual": false,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "UseCases::UseCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "UseCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase"
+      ],
+      "individual": false,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase"
+      ],
+      "individual": false,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase"
+      ],
+      "individual": false,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase"
+      ],
+      "individual": false,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "VerificationCases::VerificationCase",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "VerificationCaseDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::View"
+      ],
+      "individual": false,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::View",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::View"
+      ],
+      "individual": false,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::View",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::View"
+      ],
+      "individual": false,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::View",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::View"
+      ],
+      "individual": false,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::View",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck"
+      ],
+      "individual": false,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 0,
+      "owned_ends": 0
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck"
+      ],
+      "individual": false,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 1,
+      "owned_ends": 1
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck"
+      ],
+      "individual": false,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 2,
+      "owned_ends": 2
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck"
+      ],
+      "individual": false,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    },
+    {
+      "general_types": [
+        "Views::ViewpointCheck",
+        "Occurrences::Life"
+      ],
+      "individual": true,
+      "kind": "ViewpointDefinition",
+      "non_end_features": 1,
+      "observed_owned_ends": 3,
+      "owned_ends": 3
+    }
+  ],
+  "methods": {
+    "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "condition": {
+              "kind": "NOT_EQUAL_TO",
+              "left": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "receiver": {
+                    "arguments": [],
+                    "kind": "METHOD_INVOCATION",
+                    "parameters": [],
+                    "symbol": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getTarget",
+                    "type": "org.omg.sysml.lang.sysml.ConnectionDefinition"
+                  },
+                  "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedEndFeature",
+                  "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Feature>"
+                },
+                "symbol": "java.util.List#size",
+                "type": "int"
+              },
+              "right": {
+                "kind": "INT_LITERAL",
+                "type": "int",
+                "value": 2
+              },
+              "type": "boolean"
+            },
+            "false": {
+              "arguments": [
+                {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "binary"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.String"
+              ],
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "arguments": [
+                {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "base"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.String"
+              ],
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+              "type": "java.lang.String"
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.FlowDefinitionAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "condition": {
+              "kind": "NOT_EQUAL_TO",
+              "left": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "receiver": {
+                    "arguments": [],
+                    "kind": "METHOD_INVOCATION",
+                    "parameters": [],
+                    "symbol": "org.omg.sysml.adapter.FlowDefinitionAdapter#getTarget",
+                    "type": "org.omg.sysml.lang.sysml.FlowDefinition"
+                  },
+                  "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedEndFeature",
+                  "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Feature>"
+                },
+                "symbol": "java.util.List#size",
+                "type": "int"
+              },
+              "right": {
+                "kind": "INT_LITERAL",
+                "type": "int",
+                "value": 2
+              },
+              "type": "boolean"
+            },
+            "false": {
+              "arguments": [
+                {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "binary"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.String"
+              ],
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "arguments": [
+                {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "base"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.String"
+              ],
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+              "type": "java.lang.String"
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers": {
+      "kind": "BLOCK",
+      "statements": []
+    },
+    "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "super",
+              "type": "org.omg.sysml.adapter.DefinitionAdapter"
+            },
+            "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+            "type": "void"
+          },
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "condition": {
+            "expression": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "symbol": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#getTarget",
+                "type": "org.omg.sysml.lang.sysml.OccurrenceDefinition"
+              },
+              "symbol": "org.omg.sysml.lang.sysml.OccurrenceDefinition#isIndividual",
+              "type": "boolean"
+            },
+            "kind": "PARENTHESIZED",
+            "type": "boolean"
+          },
+          "kind": "IF",
+          "then": {
+            "kind": "BLOCK",
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "life"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+                  "type": "void"
+                },
+                "kind": "EXPRESSION_STATEMENT"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [
+              {
+                "kind": "STRING_LITERAL",
+                "type": "java.lang.String",
+                "value": "base"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "java.lang.String"
+            ],
+            "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "driver_sha256": "8ae06036c0bffc944ae19ee74ddffc4a9f4380ade4f92aa523d79efea617843a",
+    "helper_sha256": "5e81045cb6932c64c44dcf1e998a6a5a0c2be0021e6d71308536e358ce6ea7a0",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ActionDefinitionAdapter.java": "d6dfc399527bd646c9747c37e0c0de9cf45e53687ff650f8abb75854a568eebb",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/AttributeDefinitionAdapter.java": "a21247b14588faa5d3fafae7add8e725476fc62038a6b90cdbc5cb204df8cf41",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/CalculationDefinitionAdapter.java": "389f19a5feb287cc9a4d3608505ccda574a923a0fa7b1b3ab263a20ca683872e",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/CaseDefinitionAdapter.java": "d8296ba46b2a11c0b7f9ac13f824330032615df1c32b65206322cacf4d384380",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ClassifierAdapter.java": "eed019b0585bc97490993d3e11c544a6278b245eb4ad7f08990573574f437a91",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectionDefinitionAdapter.java": "8fb291cea21cb5ed1cd5ae7c7d105b9d181d12b46a271a022f6458f13465f085",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConstraintDefinitionAdapter.java": "ce9bc42a1ea1f85c2525ce4702bb3ce039ae71248cfb3b0db5873562aa911333",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/DefinitionAdapter.java": "0dae317157b3ec663627606cb69ee17355afce36587a3aa4135c49f2fe612533",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FlowDefinitionAdapter.java": "f60642badf24cfe401ad96bd17ef861cf61f94d4aa398921a4565a1e0505ace2",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ItemDefinitionAdapter.java": "21e093173df66b78e19c62cf58dd44b5860ce433f2387a31123c9d77596b74a3",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/MetadataDefinitionAdapter.java": "1c2972bb452be415cfaf7473bffebfb671fa791f563c5a90eb2185d6d91493ee",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/NamespaceAdapter.java": "bed12509fe1d53f695296144cded354d1af799624d247912d2f3736062febc56",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/OccurrenceDefinitionAdapter.java": "f548ecf5a734fd15f50be64eb6453e280f43ef5db1137e7f7c4d802e80775acc",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/PartDefinitionAdapter.java": "10a57d52206a2dfaf37bba90f93bf51eb5bd98b1eb9cdf7314de1fe8672924ce",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/PortDefinitionAdapter.java": "dd990a70850c1643c217ed5da4e669475d6d40b41833a1132eb047ff23b83d18",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/RequirementDefinitionAdapter.java": "47a6ca6a59da17c619f4e8580c04119dfc878849bcedce768a74a755cbddf83c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/StateDefinitionAdapter.java": "853f750ae3f1e51c4327f08218bb56bada6db3bbae37a7e0a6f35945e1f3f797",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedEndFeature_SettingDelegate.java": "8b9edcf30af8321cdac2a46bd78acbfee9cb286ab0cf15f4e65af44fcf6021d7",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedFeature_SettingDelegate.java": "f7875d7eabb3227f0cfd3cca77c1fda21d4602b8ac8ec9085b2bd56c4b0d884b",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ImplicitGeneralizationMap.java": "71008c5448cb20b26b8dd96b74fe8d6c573cdc1ec2abda82c56534d2167436ce",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Bounded resolved default-selector and conditional-addition bodies for concrete Definition adapters. Actual runtime controls supply library bindings only. Canonical owned-end derivation, semantic metadata, general-type filtering, added members and library lookup are separate native dependencies; extraction alone is not support."
+}

@@ -1,0 +1,89 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "29be56a9d262cdc2ce0b6137a56230a85e93b0ec69ec0090caea7f9f13f8e353",
+    "fixtures": {
+      "kernel-crossing-features.kerml": "a23fe97be7b5fde0a57d6d7a2903952fc3e5094e08e0eeaa88f0be04fa279593",
+      "typed-binding-variability.sysml": "2f7eb18698c0ad2238ef512e3986d165bebac07cd23b096e0565207c3d879e8e"
+    },
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350"
+  },
+  "named_declarations": [
+    {
+      "file": "kernel-crossing-features.kerml",
+      "name": "left",
+      "qualified_name": "CrossingFeatures::Link::left",
+      "kind": "Feature",
+      "type": [
+        "CrossingFeatures::Value"
+      ],
+      "owner": [
+        "CrossingFeatures::Link"
+      ],
+      "flags": {
+        "is_end": true
+      }
+    },
+    {
+      "file": "kernel-crossing-features.kerml",
+      "name": "crossing",
+      "qualified_name": "CrossingFeatures::Link::left::crossing",
+      "kind": "Feature",
+      "type": [
+        "CrossingFeatures::Value"
+      ],
+      "owner": [
+        "CrossingFeatures::Link::left"
+      ],
+      "flags": {
+        "is_end": false
+      }
+    },
+    {
+      "file": "kernel-crossing-features.kerml",
+      "name": "right",
+      "qualified_name": "CrossingFeatures::Link::right",
+      "kind": "Feature",
+      "type": [
+        "CrossingFeatures::Value"
+      ],
+      "owner": [
+        "CrossingFeatures::Link"
+      ],
+      "flags": {
+        "is_end": true
+      }
+    },
+    {
+      "file": "kernel-crossing-features.kerml",
+      "name": "third",
+      "qualified_name": "CrossingFeatures::Link::third",
+      "kind": "Feature",
+      "type": [
+        "CrossingFeatures::Value"
+      ],
+      "owner": [
+        "CrossingFeatures::Link"
+      ],
+      "flags": {
+        "is_end": true
+      }
+    },
+    {
+      "file": "typed-binding-variability.sysml",
+      "name": "bound",
+      "qualified_name": "TypedBindingVariability::Scope::bound",
+      "kind": "BindingConnectorAsUsage",
+      "type": [
+        "TypedBindingVariability::AB"
+      ],
+      "owner": [
+        "TypedBindingVariability::Scope"
+      ],
+      "flags": {
+        "is_variable": false,
+        "may_time_vary": false
+      }
+    }
+  ]
+}

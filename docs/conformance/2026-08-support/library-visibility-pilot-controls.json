@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-private-actions-qualified.kerml": "9f839c01a98db4f643ad29d331566cc6a83ada7f6d2bbc337751050baf54950b",
+    "invalid-private-inherited.kerml": "131f3fa4c9557dccc5a3faa51fddc822878ef2f2377cef4945133ac335bf8db8",
+    "invalid-private-qualified.kerml": "85f3c1888ced95f1db4c45c1110ba2e4b9fd356e9a93cc55a76805e884fe94e4",
+    "invalid-protected-qualified.kerml": "046882cb8cf5fdc119362901481b51a069bc40761c70614f16433c69d58d6e60",
+    "positive-protected-inherited.kerml": "57aacfbc1e0c665b69bc42831d383b01c0613706f676be1deec7387079ed268d",
+    "positive-public-inherited.kerml": "28fb20576b4e1a9afb550ea6efe42cf69f3f765e188ebb0b28e50748f26f811c",
+    "positive-public-qualified.kerml": "1d27a874a0261b14314fca417ecfe636d356be961a0527be90f7e70b4b170f25",
+    "positive-public-typed.kerml": "15a70f02904519c8abbc860cd792e336092d0f7ee75ad0625849d24dcf9f6e42"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-private-actions-qualified.kerml",
+      "status": "error",
+      "validation_ms": 1267.2289,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Actions::ForLoopAction::index'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-inherited.kerml",
+      "status": "error",
+      "validation_ms": 1287.5714,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'monitor1'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-qualified.kerml",
+      "status": "error",
+      "validation_ms": 843.2694,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'FeatureReferencingPerformances::BooleanEvaluationResultToMonitorPerformance::monitor1'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-protected-qualified.kerml",
+      "status": "error",
+      "validation_ms": 783.5987,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'FeatureReferencingPerformances::FeatureMonitorPerformance::endWhen'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-protected-inherited.kerml",
+      "status": "ok",
+      "validation_ms": 1097.4728,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-inherited.kerml",
+      "status": "ok",
+      "validation_ms": 835.6247,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-qualified.kerml",
+      "status": "ok",
+      "validation_ms": 615.0699,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-typed.kerml",
+      "status": "ok",
+      "validation_ms": 904.4754,
+      "diagnostics": []
+    }
+  ]
+}

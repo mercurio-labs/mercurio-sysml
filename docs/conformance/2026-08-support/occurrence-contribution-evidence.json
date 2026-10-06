@@ -1,0 +1,419 @@
+{
+  "schema": "dev.mercurio.occurrence-contribution-evidence.v1",
+  "scope": "Non-end, non-parameter, non-variant Occurrence/Item/Metadata/View default contributions with direct canonical typing and assessed owner contexts. Factory role libraries are controlled dependencies, not actual stdlib qualification.",
+  "inputs": {
+    "tools/run_occurrence_contribution_probe.py": "58d98c7a7e5a5e1e4ee141015187fbf63dcbb66e87a7e302597c6bc0c10b275b",
+    "tools/generate_occurrence_contributions.py": "70fe5d64df640953c76a1c8c001f38ac90e50d43fcd471a60392b090f3e17513",
+    "tools/test_occurrence_contributions.py": "cd85a5687b3d42a8268d4fcfe0c155ccc9e4e0ecf8cd8059452f6c6a5819e384",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotOccurrenceContributionProbe.java": "304e1d81709dc9065fb0d3e81888932a92833b1f307c0a48c4fcf0eb38ace249",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStepStrategyProbe.java": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "docs/conformance/2026-08-support/occurrence-contribution-pilot-controls.json": "9e9c01d834253795642972ab896416d7f86bf8452119c55a34000ee9149dfca4",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/occurrence_contributions_generated.rs": "919d635257a763b11f79671d5163e62d3ef810349674c6b9fd2efe0baa7861df",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/occurrence_contributions.rs": "d3b0abdf34117c8ff00a91911897d6527c117b0d898820b1ef817cdd7c5b8545",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_nullable_defaults_generated.rs": "39be1961e9d7f4499b3ed21d8ff9326e8bb19076dccaf52718d43296321ad755",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_defaults.rs": "ab9f417ff9dc4df54ec609eb0e3019822f85843f5659b9b16d76ee0f3feb270e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-native-tests.log": "ed9ec8354ed6d37852568383525b3a97d26fcd4b73edc7c7fed74a9caf42f947",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-focused-tests.log": "6c09811dac4c690b7484365c9ccc49d3b2538629076cd39bdd1fd070345afd8b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-source-tests.log": "36fa2f92f784d341b8ef0b8bb53855ae82338335174c0584ce6885e7a13b6e9e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-generator-tests.log": "e8e74d1e7bea88d8108e115007e8a5ae74f095f6604b186a9a59c94df8d4a8ad",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-pilot-export.log": "1ca22b010ef396cf37a5129bcc427b72e093528fd7784f3ee26565c989303d94",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-pilot-check.log": "1ca22b010ef396cf37a5129bcc427b72e093528fd7784f3ee26565c989303d94",
+    "docs/conformance/2026-08-support/occurrence-contribution-normative.json": "0c5739273ae6b10245528e2230423b3f82a215233df57513205da4e8156d693e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-plan-tests.log": "e8263747416792b43faa89d75c3f037300aa5c7b3b207acaa9e79c657a10c3ae",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/occurrence-contribution-certificate-tests.log": "90039cf191bbac7da6f492eaff4c37a0ff9971ec34b633140450c3c1a6fa6f9a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": "15 resolved javac method trees, actual concrete selector/contribution dispatch, imported default maps, nullable field initializer/constructor/getter IR and four independent fresh-null reads. All overriding Usage dispatches are preserved as exclusions.",
+  "generated": "Bounded typed expression/effect visitor translates resolved predicates, dynamic/super calls, conditionals and ordered contributions into Rust. Separate generated table supplies absent PortionKind reads; imported Ecore metadata is preserved. Unassessed nodes and tree/mapping/observation/contract drift reject.",
+  "native_consumers": [
+    "occurrence_contributions::names_query",
+    "occurrence_contributions::contributions",
+    "definition_general_type_inputs_evaluate",
+    "definition_general_type_inputs_ready",
+    "definition_materialize_feature_defaults",
+    "ecore_defaults::read_attribute"
+  ],
+  "handwritten_dependencies": [
+    "Canonical Ecore ownership and metaclass ancestry",
+    "Direct owned FeatureTyping projection, endpoint checks and pending-field prerequisites",
+    "Admission of the guarded inherited Feature stage; variation, ends, parameters, applied metadata, valuation, crossing and compound owner typing reject",
+    "Existing standard-library resource lookup, transaction/reduction, canonical specialization insertion, publication and replay"
+  ],
+  "verification": {
+    "concrete_bindings": 4,
+    "matching_contribution_controls": 2304,
+    "matching_absent_portion_reads": 4,
+    "public_query_contribution_replay_contexts": 48,
+    "serialized_reordered_graph": true,
+    "required_field_vs_unsupported_dependency_distinguished": true,
+    "generator_tests": 10,
+    "native_definition_tests": 258,
+    "new_native_tests": 5,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-native-tests.log",
+      "sha256": "016a835184ef16d9d3518299f0011293140967d0343ffa2f2ea0b3c51c5848f7",
+      "passed": 258
+    },
+    "cache_reproduced": true,
+    "source_pipeline": "Required view-expose source links and materializes default with an explicit dependency fixture; protected visibility and persisted/reversed replay pass. Standalone input now requires actual Views root. Full model validation and actual library closure remain unqualified.",
+    "plan_tests": 14,
+    "certificate_tests": 33,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "excluded_dispatches": {
+    "AcceptActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.AcceptActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "ActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "AllocationUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ConnectionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.ItemUsageAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ItemUsageAdapter#isSuboccurrence"
+    },
+    "AnalysisCaseUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "AssertConstraintUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.AssertConstraintUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "AssignmentActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "AttributeUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.UsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FeatureAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "BindingConnectorAsUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.UsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FeatureAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "CalculationUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "CaseUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "ConcernUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ConcernUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConcernUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "ConnectionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ConnectionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.ItemUsageAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ItemUsageAdapter#isSuboccurrence"
+    },
+    "ConstraintUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConstraintUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "DecisionNode": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "EnumerationUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.UsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FeatureAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "EventOccurrenceUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.EventOccurrenceUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.EventOccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "ExhibitStateUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ExhibitStateUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "FlowUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.FlowUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FlowUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FlowUsageAdapter#isSuboccurrence"
+    },
+    "ForLoopActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "ForkNode": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "IfActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.IfActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "IncludeUseCaseUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.IncludeUseCaseUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "InterfaceUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ConnectionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.ItemUsageAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ItemUsageAdapter#isSuboccurrence"
+    },
+    "JoinNode": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "MergeNode": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "PartUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.PartUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.ItemUsageAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ItemUsageAdapter#isSuboccurrence"
+    },
+    "PerformActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.PerformActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "PortUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.PortUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.PortUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "ReferenceUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ReferenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FeatureAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "RenderingUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.RenderingUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.RenderingUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.ItemUsageAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ItemUsageAdapter#isSuboccurrence"
+    },
+    "RequirementUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.RequirementUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "SatisfyRequirementUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.SatisfyRequirementUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "SendActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "StateUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "SuccessionAsUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.NamespaceAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.SuccessionAsUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectorAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "SuccessionFlowUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.FlowUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FlowUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FlowUsageAdapter#isSuboccurrence"
+    },
+    "TerminateActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "TransitionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.TransitionUsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TransitionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "Usage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.UsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FeatureAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.FeatureAdapter#isSuboccurrence"
+    },
+    "UseCaseUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "VerificationCaseUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    },
+    "ViewpointUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ViewpointUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.OccurrenceUsageAdapter#isSuboccurrence"
+    },
+    "WhileLoopActionUsage": {
+      "addAdditionalMembers": "org.omg.sysml.adapter.UsageAdapter#addAdditionalMembers",
+      "addDefaultGeneralType": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ActionUsageAdapter#getDefaultSupertype",
+      "isSubobject": "org.omg.sysml.adapter.FeatureAdapter#isSubobject",
+      "isSuboccurrence": "org.omg.sysml.adapter.ActionUsageAdapter#isSuboccurrence"
+    }
+  },
+  "remaining": [
+    "TransitionUsage custom source/link/connector and contribution lifecycle",
+    "Actual Views/Occurrence/Item library closure and model constraints",
+    "Variation, positional/end/parameter and inferred/chained owner type contexts",
+    "View includeAsExposed/view condition algorithms and required delegate validation",
+    "Strict global native_parser/model_construction certificates"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "matched_whole_pilot_models": 155,
+    "candidate_promoted": false,
+    "certificate_issued": false
+  }
+}

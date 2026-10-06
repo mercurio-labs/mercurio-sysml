@@ -1,0 +1,46 @@
+{
+  "document": "Kernel Modeling Language v1.1, Beta 2",
+  "source_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "source_path": "doc/1-Kernel_Modeling_Language.pdf",
+  "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+  "clauses": [
+    {
+      "section": "8.2.3.5.1 Name Resolution Overview",
+      "pdf_page": 109,
+      "printed_page": 83,
+      "requirement": "Resolve the qualification prefix, then use visible resolution for the final segment."
+    },
+    {
+      "section": "8.2.3.5.3 Local and Visible Resolution",
+      "pdf_page": 111,
+      "printed_page": 85,
+      "requirement": "Visible resolution admits public owned, publicly imported and public inherited memberships."
+    },
+    {
+      "section": "8.2.3.5.4 Full Resolution",
+      "pdf_page": 111,
+      "printed_page": 85,
+      "requirement": "Unqualified lookup starts locally and proceeds outward; visibility of qualified segments must not prohibit lexical private access."
+    },
+    {
+      "section": "7.3.2.3 Specialization",
+      "pdf_page": 54,
+      "printed_page": 28,
+      "requirement": "A type inherits public and protected memberships of its general types, but not private memberships."
+    }
+  ],
+  "pilot_reference": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_path": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend",
+    "sha256": "fa7a564822803123b152fb561f3b351e6c416b7e1ee7ed16cc09b7bc12efda6c",
+    "method": "owned",
+    "observed_rule": "Inside-scope access and inherited protected access are distinct from ordinary external access."
+  },
+  "implementation": "Handwritten native access service over collected membership identities and visibility; not an Xtend translation. Grammar cross-reference representation alone does not supply scoping.",
+  "verified_scope": "Qualified local memberships; protected/private inheritance of local features, nested types and aliases; and selected named local import visibility, public re-exports and imported feature references. Alias access uses the membership visibility, not the target visibility.",
+  "remaining": [
+    "Library member visibility and canonical imported membership identity; remaining import/redefinition/expression paths, ambiguity and shadowing",
+    "Callable names encoded outside QualifiedName, lambda parameter scopes and dot feature chains",
+    "Complete scope/linking and global-namespace resolution"
+  ]
+}

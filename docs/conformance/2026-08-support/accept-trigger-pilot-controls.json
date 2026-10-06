@@ -1,0 +1,129 @@
+{
+  "controls": [
+    {
+      "explicit": 0,
+      "general_types": [],
+      "is_implied_included": false,
+      "library_lookups": [],
+      "owner_generals": 0
+    },
+    {
+      "explicit": 1,
+      "general_types": [
+        "explicit0"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [],
+      "owner_generals": 0
+    },
+    {
+      "explicit": 2,
+      "general_types": [
+        "explicit0",
+        "explicit1"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [],
+      "owner_generals": 0
+    },
+    {
+      "explicit": 0,
+      "general_types": [
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 1
+    },
+    {
+      "explicit": 1,
+      "general_types": [
+        "explicit0",
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 1
+    },
+    {
+      "explicit": 2,
+      "general_types": [
+        "explicit0",
+        "explicit1",
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 1
+    },
+    {
+      "explicit": 0,
+      "general_types": [
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter",
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 2
+    },
+    {
+      "explicit": 1,
+      "general_types": [
+        "explicit0",
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter",
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 2
+    },
+    {
+      "explicit": 2,
+      "general_types": [
+        "explicit0",
+        "explicit1",
+        "accepter"
+      ],
+      "is_implied_included": false,
+      "library_lookups": [
+        "Actions::TransitionAction::accepter",
+        "Actions::TransitionAction::accepter"
+      ],
+      "owner_generals": 2
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "a16402aba96267f776dfe50582816c717dbbcf8f1f30201ac0104266568d98a6",
+    "helper_sha256": "8dd7890b0634fcccd595448022584e78766f14aaba5110a6093a280c2addc842",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/AcceptActionUsageAdapter.java": "cf930c50bc79b9047fc6348b561d81c15d2649876209f0a8dfc96f37917c5bfa",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ActionUsageAdapter.java": "bf5dfca23b2c4551a84bda68fd7eaeb11d9cdf0ba95c3c38ac5ec5881a44a695",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/OccurrenceUsageAdapter.java": "bb49ae883f1fef349d48f611ddbd3302793471f58ace0634385261c326123f33",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TransitionUsageAdapter.java": "ecdad498337fa47d7b22ebff371e9107539916664bbc65422b707ebec9ad127f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java": "9c5aa069abcea042dec9997c3752b8856c27614902ac1f9705c169b0a111930a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/OccurrenceUsageImpl.java": "8667269a8afe8ba8a20009d7e2d0213fdf38df62dea5c8b01d0df930c013eee5",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.accept-trigger-controls.v1",
+  "scope": "Accept trigger generalization lifecycle only; owner generalizations and library endpoint supplied complete. Actual resources, ordinary Accept defaults, payload construction and validation remain open."
+}

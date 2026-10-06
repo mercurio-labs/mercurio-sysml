@@ -1,0 +1,17 @@
+{
+  "schema": "dev.mercurio.normative-disagreement.v1",
+  "id": "feature-type-mutual-specialization",
+  "source": "standard library package Base { feature things; } standard library package Occurrences { class Occurrence; feature occurrences; } package P { class A specializes B; class B specializes A; feature x : A, B; }",
+  "pilot_types": [
+    "A"
+  ],
+  "normative_types": [],
+  "normative_reference": {
+    "document": "KerML 2026-08",
+    "pdf_page": 198,
+    "printed_page": 172,
+    "constraint": "deriveFeatureType",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+  },
+  "reason": "The written reject predicate compares every candidate with the original types set. Pilot removes entries in reverse order from a shrinking list and retains the first mutually specializing type. Native follows the written predicate. This case is excluded from matching-source counts; model storage and persistence still agree."
+}

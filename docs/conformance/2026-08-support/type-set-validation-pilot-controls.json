@@ -1,0 +1,2014 @@
+{
+  "boundaries": [
+    {
+      "mode": "canonical",
+      "owned_count": 1,
+      "owning_is_receiver": true,
+      "owning_present": true,
+      "stored_source_is_receiver": true
+    },
+    {
+      "mode": "foreign_source",
+      "owned_count": 0,
+      "owning_is_receiver": true,
+      "owning_present": true,
+      "stored_source_is_receiver": false
+    },
+    {
+      "mode": "package_owner",
+      "owned_count": 0,
+      "owning_is_receiver": false,
+      "owning_present": false,
+      "stored_source_is_receiver": true
+    }
+  ],
+  "cases": [
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedUnioningNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one unioning",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeUnioningTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot union with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Unioning"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedIntersectingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one intersecting",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeIntersectingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot intersect with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Intersecting"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Feature",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "Connector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 0,
+      "diagnostics": [],
+      "endpoints": [],
+      "owned": [],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 1,
+      "diagnostics": [
+        {
+          "code": "validateOwnedDifferencingNotOne",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Cannot have only one differencing",
+          "severity": "error",
+          "subject": "relation0"
+        },
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation0"
+        }
+      ],
+      "endpoints": [
+        "receiver"
+      ],
+      "owned": [
+        "relation0"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 2,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation1"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0",
+        "target1",
+        "target2"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "distinct",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [],
+      "endpoints": [
+        "target0"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "duplicate",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    },
+    {
+      "count": 3,
+      "diagnostics": [
+        {
+          "code": "validateTypeDifferencingTypesNotSelf",
+          "data": [],
+          "feature": null,
+          "index": -1,
+          "message": "Type cannot difference with itself",
+          "severity": "error",
+          "subject": "relation2"
+        }
+      ],
+      "endpoints": [
+        "target0",
+        "target1",
+        "receiver"
+      ],
+      "owned": [
+        "relation0",
+        "relation1",
+        "relation2"
+      ],
+      "pattern": "self",
+      "receiver_kind": "BindingConnector",
+      "relation": "Differencing"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "a84dfb6bb23c7351a88e482265e34a87233e6b43a5035dd21b0f22e4a2f35819",
+    "helper_sha256": "e0db24f11dabeba836475506d6caa288e967aae426efb03ba5dfaf7ba4ba1cdb",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)\n",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend": "757132ac89abe69c81bb42552e28d5ddbadf169b850f719b14b810909091251c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Feature_typingFeatures_InvocationDelegate.java": "e20458f47744cd4efffd0a2ec17b60b9fdaa1b32b9b7732e91f74230dff8ccd8",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/DefaultDerivedPropertySettingDelegate.java": "8c012e95eb2ff7664f95c620eadff056b7afe565fdaa4a892966b89bf658b50d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Disjoining_owningType_SettingDelegate.java": "4e0b35f469060b72756ab04fe45b7d3654fc95d604c503398d44ef772cb028fb",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_differencingType_SettingDelegate.java": "aab730352e19254fce21c3a991f371bd8ad3eebb4c6a83f5c1f34fccaf7e9372",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_intersectingType_SettingDelegate.java": "af0116f42f7875f1917cf1255dd41299922241a2d7bc34a44dfa4eda2b90ac44",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedDisjoining_SettingDelegate.java": "37832ff073e42cc927fea6c7aedc8c6520d3396b014253d2fd9241a4a0b22e8f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_unioningType_SettingDelegate.java": "847b638b94f460e671c1e6c03b5485ff15726cd782068f3b7e730b04a83ff803",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/ConnectorImpl.java": "61c5a9b61bf8d14374819dde986b69b1043ee2b7a6a5631a5a4c9ccf7dcb6ca5"
+    }
+  },
+  "qualification_certificate": false,
+  "schema": "dev.mercurio.type-set-validation-reference.v1",
+  "scope": "108 supplied-completed predicate/projection contexts and three Disjoining source/owner controls; no cold lifecycle or whole-model qualification."
+}

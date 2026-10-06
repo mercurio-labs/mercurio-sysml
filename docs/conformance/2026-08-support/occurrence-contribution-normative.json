@@ -1,0 +1,49 @@
+{
+  "schema": "dev.mercurio.occurrence-contribution-normative.v1",
+  "normative_pdf": {
+    "path": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7"
+  },
+  "constraints": [
+    {
+      "name": "Occurrence portion cardinality/default",
+      "pdf_page": 317,
+      "assessment": "portionKind is optional and non-null denotes an actual temporal portion. Imported Ecore reports default_value timeslice; resolved Pilot storage initializer is null. Native retains Ecore metadata and separately consumes the qualified nullable initializer for the four observed concrete bindings."
+    },
+    {
+      "name": "checkOccurrenceUsageSpecialization/Subview/Item/Part contribution conditions",
+      "pdf_pages": [
+        318,
+        321,
+        324,
+        426
+      ],
+      "assessment": "Native contribution selectors implement the resolved programs with canonical owned typing and owner ancestry. Complete indirect specialization through real libraries and full validation are separate obligations."
+    }
+  ],
+  "disagreements_or_boundaries": [
+    {
+      "topic": "View subview composite condition",
+      "sources": {
+        "abstract_constraint_pdf_page": 426,
+        "semantic_prose_pdf_page": 492
+      },
+      "assessment": "The explicit abstract-syntax constraint and Pilot predicate apply to any View-owned ViewUsage. Semantic prose adds a composite condition. Bounded native selection follows the explicit constraint, matching both composite values in the independent matrix; the inconsistent prose is retained for normative review. No complete-family validation claimed."
+    },
+    {
+      "topic": "Owner Feature type versus Pilot owned/implicit typing helper",
+      "pdf_page": 318,
+      "assessment": "The normative constraint refers to derived Feature.type. Pilot helper reads owned and implicit FeatureTyping. Native implements the observed direct-owned slice and explicitly rejects inherited/chained/conjugated Feature owner typing rather than assuming an empty computed type set. Variation/other implicit FeatureTyping remains unsupported."
+    },
+    {
+      "topic": "timeSlices identifier spelling",
+      "pdf_pages": [
+        318,
+        441
+      ],
+      "assessment": "The explicit constraint and pinned default map name timeSlices; the explanatory example uses timeslices. Native uses the imported canonical identifier without manufacturing an alias."
+    }
+  ],
+  "remaining": "Derived types through every context, complete required libraries, executable validation and View includeAsExposed/view-condition delegates remain unqualified."
+}

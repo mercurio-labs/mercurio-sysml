@@ -1,0 +1,80 @@
+{
+  "schema": "dev.mercurio.relative-namespace-normative-review.v1",
+  "written_specification": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Release\\doc\\1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_page": 239,
+    "printed_page": 213,
+    "rule": "deriveInvocationExpressionArgument",
+    "derivation": "instantiatedType.input -> collect each ownedFeature redefining that input, select non-null valuations, then value",
+    "authority": "Normative ordering and value selection; repeated values are observable from the ordered collect."
+  },
+  "ecore": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml\\model\\SysML.ecore",
+    "sha256": "22719934c65588180fc19658f8a7c891cb209458e4027bf90ddf005c80ddc17f",
+    "feature": "InstantiationExpression.argument",
+    "unique": true,
+    "ordered": true,
+    "derived": true
+  },
+  "pilot": {
+    "commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "resolved_methods": [
+      "org.omg.sysml.delegate.setting.AssignmentActionUsage_targetArgument_SettingDelegate#basicGet",
+      "org.omg.sysml.util.ExpressionUtil#addArguments",
+      "org.omg.sysml.util.ExpressionUtil#getArgumentOf",
+      "org.omg.sysml.util.FeatureUtil#getValuationFor",
+      "org.omg.sysml.util.FeatureUtil#getValueExpressionFor",
+      "org.omg.sysml.util.FeatureUtil#isInputParameter",
+      "org.omg.sysml.util.NamespaceUtil#getRelativeNamespaceFor",
+      "org.omg.sysml.util.NamespaceUtil#getResultNamespaceFor",
+      "org.omg.sysml.util.TypeUtil#getInputOf"
+    ],
+    "duplicate_controls": [
+      {
+        "arguments": [
+          "value0.0",
+          "value0.0",
+          "value1.0"
+        ],
+        "direction": "in",
+        "has_callable_typing": true,
+        "kind": "FeatureChainExpression",
+        "namespace_is_implied_included": true,
+        "parameter_is_implied_included": false,
+        "relative": "result0.0",
+        "result_generated": false,
+        "shape": "two_redefinitions"
+      },
+      {
+        "arguments": [
+          "value0.0",
+          "value0.0",
+          "value1.0"
+        ],
+        "direction": "inout",
+        "has_callable_typing": true,
+        "kind": "FeatureChainExpression",
+        "namespace_is_implied_included": true,
+        "parameter_is_implied_included": false,
+        "relative": "result0.0",
+        "result_generated": false,
+        "shape": "two_redefinitions"
+      }
+    ]
+  },
+  "decision": "Keep raw independent observations and exact comparisons unchanged. Native argument derivation follows the written ordered collect and resolved upstream executable rule. Ecore uniqueness versus repeated derivation values remains an explicit unresolved full-support obligation; no full property or family qualification is issued.",
+  "automatic_review": {
+    "rejected_action": "Normalize expected Pilot arguments by deduplication",
+    "reason": "Would weaken the exact comparison and strict acceptance.",
+    "applied": false,
+    "safer_resolution": "Corrected the native derivation to retain exact sequence output. Reference expectations and global acceptance remain unchanged."
+  },
+  "fixture_repair": {
+    "historical_observations": "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-precanonical-fixture-controls.json",
+    "reason": "Initial supplied completion flags lacked callable specialization, and upstream still lazily produced positional redefinitions and results. Canonical callable typing is now explicit in both implementations; argument Features are incomplete. Native missing-result construction is executed and replayed rather than asserting completion.",
+    "cached_new_inputs_explicit": true,
+    "upstream_generated_id_policy": "A newly constructed result receives generated.<owning-expression-id>; no results or expectations are discarded."
+  },
+  "scope_algorithm_authority": "NamespaceUtil is an explicitly named implementation dependency outside grammar; its two origin selectors are resolved and independent controls retained. Full upstream transform semantics remain unqualified."
+}

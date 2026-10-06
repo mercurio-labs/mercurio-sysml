@@ -1,0 +1,3975 @@
+{
+  "schema": "dev.mercurio.namespace-grammar-contract.v1",
+  "languages": {
+    "sysml": {
+      "grammar": "org.omg.sysml.xtext.SysML",
+      "relationship_body": {
+        "rule": "org.omg.sysml.xtext.SysML::RelationshipBody",
+        "slots": [
+          {
+            "feature": "ownedRelationship",
+            "rule": "org.omg.sysml.xtext.SysML::OwnedAnnotation",
+            "metaclass": "SysML::Annotation",
+            "evidence": {
+              "feature": "ownedRelationship",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::RelationshipBody/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 1712,
+                  "length": 15,
+                  "start_line": 48,
+                  "end_line": 48
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::OwnedAnnotation"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::RelationshipBody"
+              ],
+              "context": [
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": "*",
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 1691,
+                "length": 36,
+                "start_line": 48,
+                "end_line": 48
+              },
+              "field_contract": {
+                "owner": "SysML::Element",
+                "name": "ownedRelationship",
+                "qualified_name": "SysML::Element::ownedRelationship",
+                "kind": "reference",
+                "target": "SysML::Relationship",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Relationship::owningRelatedElement",
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 1475
+              }
+            }
+          }
+        ]
+      },
+      "owned_related_element": null,
+      "owned_annotation": {
+        "metaclass": "SysML::Annotation",
+        "assignment": {
+          "feature": "ownedRelatedElement",
+          "operator": "+=",
+          "terminal": {
+            "kind": "RuleCall",
+            "id": "org.omg.sysml.xtext.SysML::OwnedAnnotation/alternatives/terminal",
+            "origin": "source",
+            "span": {
+              "offset": 2314,
+              "length": 17,
+              "start_line": 68,
+              "end_line": 68
+            },
+            "fields": {
+              "arguments": [],
+              "cardinality": null,
+              "explicitlyCalled": false,
+              "firstSetPredicated": false,
+              "predicated": false,
+              "rule": {
+                "$ref": "org.omg.sysml.xtext.SysML::AnnotatingElement"
+              }
+            }
+          },
+          "rule_path": [
+            "org.omg.sysml.xtext.SysML::OwnedAnnotation"
+          ],
+          "context": [
+            {
+              "kind": "Assignment",
+              "cardinality": null,
+              "predicated": false,
+              "first_set_predicated": false
+            }
+          ],
+          "span": {
+            "offset": 2291,
+            "length": 40,
+            "start_line": 68,
+            "end_line": 68
+          },
+          "field_contract": {
+            "owner": "SysML::Relationship",
+            "name": "ownedRelatedElement",
+            "qualified_name": "SysML::Relationship::ownedRelatedElement",
+            "kind": "reference",
+            "target": "SysML::Element",
+            "lower_bound": 0,
+            "upper_bound": -1,
+            "containment": true,
+            "derived": false,
+            "transient": false,
+            "volatile": false,
+            "ordered": true,
+            "unique": true,
+            "id": false,
+            "default_value": null,
+            "opposite": "SysML::Element::owningRelationship",
+            "subsets": [
+              "SysML::Relationship::relatedElement"
+            ],
+            "redefines": [],
+            "source_file": "org.omg.sysml/model/SysML.ecore",
+            "line": 3477
+          }
+        },
+        "elements": [
+          {
+            "rule": "org.omg.sysml.xtext.SysML::Comment",
+            "metaclass": "SysML::Comment"
+          },
+          {
+            "rule": "org.omg.sysml.xtext.SysML::Documentation",
+            "metaclass": "SysML::Documentation"
+          },
+          {
+            "rule": "org.omg.sysml.xtext.SysML::TextualRepresentation",
+            "metaclass": "SysML::TextualRepresentation"
+          },
+          {
+            "rule": "org.omg.sysml.xtext.SysML::MetadataUsage",
+            "metaclass": "SysML::MetadataUsage"
+          }
+        ]
+      },
+      "alias": {
+        "rule": "org.omg.sysml.xtext.SysML::AliasMember",
+        "metaclass": "SysML::Membership",
+        "assignments": [
+          {
+            "feature": "visibility",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.sysml.xtext.SysML::MemberPrefix/alternatives/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 5968,
+                "length": 19,
+                "start_line": 217,
+                "end_line": 217
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.sysml.xtext.SysML::VisibilityIndicator"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.sysml.xtext.SysML::AliasMember",
+              "org.omg.sysml.xtext.SysML::MemberPrefix"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 5955,
+              "length": 32,
+              "start_line": 217,
+              "end_line": 217
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "visibility",
+              "qualified_name": "SysML::Membership::visibility",
+              "kind": "attribute",
+              "target": "SysML::VisibilityKind",
+              "lower_bound": 1,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": "public",
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2784
+            }
+          },
+          {
+            "feature": "memberShortName",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/2/elements/1/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 6384,
+                "length": 4,
+                "start_line": 234,
+                "end_line": 234
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::Name"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.sysml.xtext.SysML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Group",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 6366,
+              "length": 22,
+              "start_line": 234,
+              "end_line": 234
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberShortName",
+              "qualified_name": "SysML::Membership::memberShortName",
+              "kind": "attribute",
+              "target": "SysML::EString",
+              "lower_bound": 0,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2768
+            }
+          },
+          {
+            "feature": "memberName",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/3/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 6411,
+                "length": 4,
+                "start_line": 234,
+                "end_line": 234
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::Name"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.sysml.xtext.SysML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 6398,
+              "length": 17,
+              "start_line": 234,
+              "end_line": 234
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberName",
+              "qualified_name": "SysML::Membership::memberName",
+              "kind": "attribute",
+              "target": "SysML::EString",
+              "lower_bound": 0,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2762
+            }
+          },
+          {
+            "feature": "memberElement",
+            "operator": "=",
+            "terminal": {
+              "kind": "CrossReference",
+              "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/5/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 6443,
+                "length": 30,
+                "start_line": 235,
+                "end_line": 235
+              },
+              "fields": {
+                "cardinality": null,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "terminal": {
+                  "kind": "RuleCall",
+                  "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/5/terminal/terminal",
+                  "origin": "source",
+                  "span": {
+                    "offset": 6459,
+                    "length": 13,
+                    "start_line": 235,
+                    "end_line": 235
+                  },
+                  "fields": {
+                    "arguments": [],
+                    "cardinality": null,
+                    "explicitlyCalled": false,
+                    "firstSetPredicated": false,
+                    "predicated": false,
+                    "rule": {
+                      "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                    }
+                  }
+                },
+                "type": {
+                  "kind": "TypeRef",
+                  "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/5/terminal/type",
+                  "origin": "source",
+                  "span": {
+                    "offset": 6444,
+                    "length": 14,
+                    "start_line": 235,
+                    "end_line": 235
+                  },
+                  "fields": {
+                    "classifier": {
+                      "$ref": "https://www.omg.org/spec/SysML/20250201#//Element"
+                    },
+                    "metamodel": {
+                      "$ref": "org.omg.sysml.xtext.SysML/metamodelDeclarations/1"
+                    }
+                  }
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.sysml.xtext.SysML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 6427,
+              "length": 46,
+              "start_line": 235,
+              "end_line": 235
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberElement",
+              "qualified_name": "SysML::Membership::memberElement",
+              "kind": "reference",
+              "target": "SysML::Element",
+              "lower_bound": 1,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [
+                "SysML::Relationship::target"
+              ],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2744
+            }
+          },
+          {
+            "feature": "ownedRelationship",
+            "operator": "+=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.sysml.xtext.SysML::RelationshipBody/alternatives/elements/1/elements/1/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 1712,
+                "length": 15,
+                "start_line": 48,
+                "end_line": 48
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.sysml.xtext.SysML::OwnedAnnotation"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.sysml.xtext.SysML::AliasMember",
+              "org.omg.sysml.xtext.SysML::RelationshipBody"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Alternatives",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": "*",
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 1691,
+              "length": 36,
+              "start_line": 48,
+              "end_line": 48
+            },
+            "field_contract": {
+              "owner": "SysML::Element",
+              "name": "ownedRelationship",
+              "qualified_name": "SysML::Element::ownedRelationship",
+              "kind": "reference",
+              "target": "SysML::Relationship",
+              "lower_bound": 0,
+              "upper_bound": -1,
+              "containment": true,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": true,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": "SysML::Relationship::owningRelatedElement",
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 1475
+            }
+          }
+        ]
+      },
+      "visibility": [
+        {
+          "token": "public",
+          "value": "public"
+        },
+        {
+          "token": "private",
+          "value": "private"
+        },
+        {
+          "token": "protected",
+          "value": "protected"
+        }
+      ],
+      "queries": {
+        "MembershipImport": {
+          "rule": "org.omg.sysml.xtext.SysML::MembershipImport",
+          "metaclass": "SysML::MembershipImport",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6560,
+                  "length": 19,
+                  "start_line": 240,
+                  "end_line": 240
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::VisibilityIndicator"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipImport",
+                "org.omg.sysml.xtext.SysML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6547,
+                "length": 32,
+                "start_line": 240,
+                "end_line": 240
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "isImportAll",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/2/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6610,
+                  "length": 5,
+                  "start_line": 241,
+                  "end_line": 241
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "all"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipImport",
+                "org.omg.sysml.xtext.SysML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6595,
+                "length": 20,
+                "start_line": 241,
+                "end_line": 241
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isImportAll",
+                "qualified_name": "SysML::Import::isImportAll",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2467
+              }
+            },
+            {
+              "feature": "importedMembership",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6898,
+                  "length": 33,
+                  "start_line": 254,
+                  "end_line": 254
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 6917,
+                      "length": 13,
+                      "start_line": 254,
+                      "end_line": 254
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 6899,
+                      "length": 17,
+                      "start_line": 254,
+                      "end_line": 254
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Membership"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.sysml.xtext.SysML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipImport",
+                "org.omg.sysml.xtext.SysML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6877,
+                "length": 54,
+                "start_line": 254,
+                "end_line": 254
+              },
+              "field_contract": {
+                "owner": "SysML::MembershipImport",
+                "name": "importedMembership",
+                "qualified_name": "SysML::MembershipImport::importedMembership",
+                "kind": "reference",
+                "target": "SysML::Membership",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2800
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6956,
+                  "length": 4,
+                  "start_line": 255,
+                  "end_line": 255
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipImport",
+                "org.omg.sysml.xtext.SysML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6941,
+                "length": 19,
+                "start_line": 255,
+                "end_line": 255
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            }
+          ]
+        },
+        "NamespaceImport": {
+          "rule": "org.omg.sysml.xtext.SysML::NamespaceImport",
+          "metaclass": "SysML::NamespaceImport",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6560,
+                  "length": 19,
+                  "start_line": 240,
+                  "end_line": 240
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::VisibilityIndicator"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceImport",
+                "org.omg.sysml.xtext.SysML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6547,
+                "length": 32,
+                "start_line": 240,
+                "end_line": 240
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "isImportAll",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/2/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6610,
+                  "length": 5,
+                  "start_line": 241,
+                  "end_line": 241
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "all"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceImport",
+                "org.omg.sysml.xtext.SysML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6595,
+                "length": 20,
+                "start_line": 241,
+                "end_line": 241
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isImportAll",
+                "qualified_name": "SysML::Import::isImportAll",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2467
+              }
+            },
+            {
+              "feature": "importedNamespace",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 7191,
+                  "length": 32,
+                  "start_line": 266,
+                  "end_line": 266
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 7209,
+                      "length": 13,
+                      "start_line": 266,
+                      "end_line": 266
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 7192,
+                      "length": 16,
+                      "start_line": 266,
+                      "end_line": 266
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Namespace"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.sysml.xtext.SysML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceImport",
+                "org.omg.sysml.xtext.SysML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 7171,
+                "length": 52,
+                "start_line": 266,
+                "end_line": 266
+              },
+              "field_contract": {
+                "owner": "SysML::NamespaceImport",
+                "name": "importedNamespace",
+                "qualified_name": "SysML::NamespaceImport::importedNamespace",
+                "kind": "reference",
+                "target": "SysML::Namespace",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3113
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/3/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 7257,
+                  "length": 4,
+                  "start_line": 267,
+                  "end_line": 267
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceImport",
+                "org.omg.sysml.xtext.SysML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 7242,
+                "length": 19,
+                "start_line": 267,
+                "end_line": 267
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            },
+            {
+              "feature": "ownedRelatedElement",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::NamespaceImport/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 7085,
+                  "length": 13,
+                  "start_line": 261,
+                  "end_line": 261
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::FilterPackage"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceImport"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 7062,
+                "length": 36,
+                "start_line": 261,
+                "end_line": 261
+              },
+              "field_contract": {
+                "owner": "SysML::Relationship",
+                "name": "ownedRelatedElement",
+                "qualified_name": "SysML::Relationship::ownedRelatedElement",
+                "kind": "reference",
+                "target": "SysML::Element",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Element::owningRelationship",
+                "subsets": [
+                  "SysML::Relationship::relatedElement"
+                ],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3477
+              }
+            }
+          ]
+        },
+        "MembershipExpose": {
+          "rule": "org.omg.sysml.xtext.SysML::MembershipExpose",
+          "metaclass": "SysML::MembershipExpose",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::ExposePrefix/alternatives/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 60410,
+                  "length": 20,
+                  "start_line": 2367,
+                  "end_line": 2367
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::ExposeVisibilityKind"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipExpose",
+                "org.omg.sysml.xtext.SysML::ExposePrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 60397,
+                "length": 33,
+                "start_line": 2367,
+                "end_line": 2367
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "importedMembership",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6898,
+                  "length": 33,
+                  "start_line": 254,
+                  "end_line": 254
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 6917,
+                      "length": 13,
+                      "start_line": 254,
+                      "end_line": 254
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 6899,
+                      "length": 17,
+                      "start_line": 254,
+                      "end_line": 254
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Membership"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.sysml.xtext.SysML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipExpose",
+                "org.omg.sysml.xtext.SysML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6877,
+                "length": 54,
+                "start_line": 254,
+                "end_line": 254
+              },
+              "field_contract": {
+                "owner": "SysML::MembershipImport",
+                "name": "importedMembership",
+                "qualified_name": "SysML::MembershipImport::importedMembership",
+                "kind": "reference",
+                "target": "SysML::Membership",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2800
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 6956,
+                  "length": 4,
+                  "start_line": 255,
+                  "end_line": 255
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::MembershipExpose",
+                "org.omg.sysml.xtext.SysML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 6941,
+                "length": 19,
+                "start_line": 255,
+                "end_line": 255
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            }
+          ]
+        },
+        "NamespaceExpose": {
+          "rule": "org.omg.sysml.xtext.SysML::NamespaceExpose",
+          "metaclass": "SysML::NamespaceExpose",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::ExposePrefix/alternatives/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 60410,
+                  "length": 20,
+                  "start_line": 2367,
+                  "end_line": 2367
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::ExposeVisibilityKind"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceExpose",
+                "org.omg.sysml.xtext.SysML::ExposePrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 60397,
+                "length": 33,
+                "start_line": 2367,
+                "end_line": 2367
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "importedNamespace",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 7191,
+                  "length": 32,
+                  "start_line": 266,
+                  "end_line": 266
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 7209,
+                      "length": 13,
+                      "start_line": 266,
+                      "end_line": 266
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 7192,
+                      "length": 16,
+                      "start_line": 266,
+                      "end_line": 266
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Namespace"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.sysml.xtext.SysML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceExpose",
+                "org.omg.sysml.xtext.SysML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 7171,
+                "length": 52,
+                "start_line": 266,
+                "end_line": 266
+              },
+              "field_contract": {
+                "owner": "SysML::NamespaceImport",
+                "name": "importedNamespace",
+                "qualified_name": "SysML::NamespaceImport::importedNamespace",
+                "kind": "reference",
+                "target": "SysML::Namespace",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3113
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/3/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 7257,
+                  "length": 4,
+                  "start_line": 267,
+                  "end_line": 267
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceExpose",
+                "org.omg.sysml.xtext.SysML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 7242,
+                "length": 19,
+                "start_line": 267,
+                "end_line": 267
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            },
+            {
+              "feature": "ownedRelatedElement",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.sysml.xtext.SysML::NamespaceExpose/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 60826,
+                  "length": 13,
+                  "start_line": 2386,
+                  "end_line": 2386
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.sysml.xtext.SysML::FilterPackage"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.sysml.xtext.SysML::NamespaceExpose"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 60803,
+                "length": 36,
+                "start_line": 2386,
+                "end_line": 2386
+              },
+              "field_contract": {
+                "owner": "SysML::Relationship",
+                "name": "ownedRelatedElement",
+                "qualified_name": "SysML::Relationship::ownedRelatedElement",
+                "kind": "reference",
+                "target": "SysML::Element",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Element::owningRelationship",
+                "subsets": [
+                  "SysML::Relationship::relatedElement"
+                ],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3477
+              }
+            }
+          ]
+        }
+      },
+      "expose_visibility": [
+        {
+          "token": "expose",
+          "value": "protected"
+        }
+      ]
+    },
+    "kerml": {
+      "grammar": "org.omg.kerml.xtext.KerML",
+      "relationship_body": {
+        "rule": "org.omg.kerml.xtext.KerML::RelationshipBody",
+        "slots": [
+          {
+            "feature": "ownedRelatedElement",
+            "rule": "org.omg.kerml.xtext.KerML::OwnedRelatedElement",
+            "metaclass": "SysML::Element",
+            "evidence": {
+              "feature": "ownedRelatedElement",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.kerml.xtext.KerML::RelationshipOwnedElement/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 1857,
+                  "length": 19,
+                  "start_line": 56,
+                  "end_line": 56
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.kerml.xtext.KerML::OwnedRelatedElement"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::RelationshipBody",
+                "org.omg.kerml.xtext.KerML::RelationshipOwnedElement"
+              ],
+              "context": [
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": "*",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 1834,
+                "length": 42,
+                "start_line": 56,
+                "end_line": 56
+              },
+              "field_contract": {
+                "owner": "SysML::Relationship",
+                "name": "ownedRelatedElement",
+                "qualified_name": "SysML::Relationship::ownedRelatedElement",
+                "kind": "reference",
+                "target": "SysML::Element",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Element::owningRelationship",
+                "subsets": [
+                  "SysML::Relationship::relatedElement"
+                ],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3477
+              }
+            }
+          },
+          {
+            "feature": "ownedRelationship",
+            "rule": "org.omg.kerml.xtext.KerML::OwnedAnnotation",
+            "metaclass": "SysML::Annotation",
+            "evidence": {
+              "feature": "ownedRelationship",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.kerml.xtext.KerML::RelationshipOwnedElement/alternatives/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 1905,
+                  "length": 15,
+                  "start_line": 57,
+                  "end_line": 57
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.kerml.xtext.KerML::OwnedAnnotation"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::RelationshipBody",
+                "org.omg.kerml.xtext.KerML::RelationshipOwnedElement"
+              ],
+              "context": [
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": "*",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 1884,
+                "length": 36,
+                "start_line": 57,
+                "end_line": 57
+              },
+              "field_contract": {
+                "owner": "SysML::Element",
+                "name": "ownedRelationship",
+                "qualified_name": "SysML::Element::ownedRelationship",
+                "kind": "reference",
+                "target": "SysML::Relationship",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Relationship::owningRelatedElement",
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 1475
+              }
+            }
+          }
+        ]
+      },
+      "owned_related_element": {
+        "rule": "org.omg.kerml.xtext.KerML::OwnedRelatedElement",
+        "families": [
+          {
+            "rule": "org.omg.kerml.xtext.KerML::NonFeatureElement",
+            "elements": [
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Dependency",
+                "metaclass": "SysML::Dependency"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Namespace",
+                "metaclass": "SysML::Namespace"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Package",
+                "metaclass": "SysML::Package"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::LibraryPackage",
+                "metaclass": "SysML::LibraryPackage"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Multiplicity",
+                "metaclass": "SysML::Multiplicity"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Type",
+                "metaclass": "SysML::Type"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Classifier",
+                "metaclass": "SysML::Classifier"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Class",
+                "metaclass": "SysML::Class"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Structure",
+                "metaclass": "SysML::Structure"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Metaclass",
+                "metaclass": "SysML::Metaclass"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::DataType",
+                "metaclass": "SysML::DataType"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Association",
+                "metaclass": "SysML::Association"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::AssociationStructure",
+                "metaclass": "SysML::AssociationStructure"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Interaction",
+                "metaclass": "SysML::Interaction"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Behavior",
+                "metaclass": "SysML::Behavior"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Function",
+                "metaclass": "SysML::Function"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Predicate",
+                "metaclass": "SysML::Predicate"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Specialization",
+                "metaclass": "SysML::Specialization"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Conjugation",
+                "metaclass": "SysML::Conjugation"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::FeatureTyping",
+                "metaclass": "SysML::FeatureTyping"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Subclassification",
+                "metaclass": "SysML::Subclassification"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Disjoining",
+                "metaclass": "SysML::Disjoining"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::FeatureInverting",
+                "metaclass": "SysML::FeatureInverting"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Subsetting",
+                "metaclass": "SysML::Subsetting"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Redefinition",
+                "metaclass": "SysML::Redefinition"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::TypeFeaturing",
+                "metaclass": "SysML::TypeFeaturing"
+              }
+            ]
+          },
+          {
+            "rule": "org.omg.kerml.xtext.KerML::FeatureElement",
+            "elements": [
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Feature",
+                "metaclass": "SysML::Feature"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Step",
+                "metaclass": "SysML::Step"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Expression",
+                "metaclass": "SysML::Expression"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::BooleanExpression",
+                "metaclass": "SysML::BooleanExpression"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Invariant",
+                "metaclass": "SysML::Invariant"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Connector",
+                "metaclass": "SysML::Connector"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::BindingConnector",
+                "metaclass": "SysML::BindingConnector"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Succession",
+                "metaclass": "SysML::Succession"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::Flow",
+                "metaclass": "SysML::Flow"
+              },
+              {
+                "rule": "org.omg.kerml.xtext.KerML::SuccessionFlow",
+                "metaclass": "SysML::SuccessionFlow"
+              }
+            ]
+          }
+        ]
+      },
+      "owned_annotation": {
+        "metaclass": "SysML::Annotation",
+        "assignment": {
+          "feature": "ownedRelatedElement",
+          "operator": "+=",
+          "terminal": {
+            "kind": "RuleCall",
+            "id": "org.omg.kerml.xtext.KerML::OwnedAnnotation/alternatives/terminal",
+            "origin": "source",
+            "span": {
+              "offset": 2591,
+              "length": 17,
+              "start_line": 81,
+              "end_line": 81
+            },
+            "fields": {
+              "arguments": [],
+              "cardinality": null,
+              "explicitlyCalled": false,
+              "firstSetPredicated": false,
+              "predicated": false,
+              "rule": {
+                "$ref": "org.omg.kerml.xtext.KerML::AnnotatingElement"
+              }
+            }
+          },
+          "rule_path": [
+            "org.omg.kerml.xtext.KerML::OwnedAnnotation"
+          ],
+          "context": [
+            {
+              "kind": "Assignment",
+              "cardinality": null,
+              "predicated": false,
+              "first_set_predicated": false
+            }
+          ],
+          "span": {
+            "offset": 2568,
+            "length": 40,
+            "start_line": 81,
+            "end_line": 81
+          },
+          "field_contract": {
+            "owner": "SysML::Relationship",
+            "name": "ownedRelatedElement",
+            "qualified_name": "SysML::Relationship::ownedRelatedElement",
+            "kind": "reference",
+            "target": "SysML::Element",
+            "lower_bound": 0,
+            "upper_bound": -1,
+            "containment": true,
+            "derived": false,
+            "transient": false,
+            "volatile": false,
+            "ordered": true,
+            "unique": true,
+            "id": false,
+            "default_value": null,
+            "opposite": "SysML::Element::owningRelationship",
+            "subsets": [
+              "SysML::Relationship::relatedElement"
+            ],
+            "redefines": [],
+            "source_file": "org.omg.sysml/model/SysML.ecore",
+            "line": 3477
+          }
+        },
+        "elements": [
+          {
+            "rule": "org.omg.kerml.xtext.KerML::Comment",
+            "metaclass": "SysML::Comment"
+          },
+          {
+            "rule": "org.omg.kerml.xtext.KerML::Documentation",
+            "metaclass": "SysML::Documentation"
+          },
+          {
+            "rule": "org.omg.kerml.xtext.KerML::TextualRepresentation",
+            "metaclass": "SysML::TextualRepresentation"
+          },
+          {
+            "rule": "org.omg.kerml.xtext.KerML::MetadataFeature",
+            "metaclass": "SysML::MetadataFeature"
+          }
+        ]
+      },
+      "alias": {
+        "rule": "org.omg.kerml.xtext.KerML::AliasMember",
+        "metaclass": "SysML::Membership",
+        "assignments": [
+          {
+            "feature": "visibility",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.kerml.xtext.KerML::MemberPrefix/alternatives/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 4170,
+                "length": 19,
+                "start_line": 146,
+                "end_line": 146
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.xtext.KerML::VisibilityIndicator"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember",
+              "org.omg.kerml.xtext.KerML::MemberPrefix"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 4157,
+              "length": 32,
+              "start_line": 146,
+              "end_line": 146
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "visibility",
+              "qualified_name": "SysML::Membership::visibility",
+              "kind": "attribute",
+              "target": "SysML::VisibilityKind",
+              "lower_bound": 1,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": "public",
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2784
+            }
+          },
+          {
+            "feature": "memberShortName",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/2/elements/1/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 4620,
+                "length": 4,
+                "start_line": 163,
+                "end_line": 163
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::Name"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Group",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 4602,
+              "length": 22,
+              "start_line": 163,
+              "end_line": 163
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberShortName",
+              "qualified_name": "SysML::Membership::memberShortName",
+              "kind": "attribute",
+              "target": "SysML::EString",
+              "lower_bound": 0,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2768
+            }
+          },
+          {
+            "feature": "memberName",
+            "operator": "=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/3/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 4647,
+                "length": 4,
+                "start_line": 163,
+                "end_line": 163
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::Name"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": "?",
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 4634,
+              "length": 17,
+              "start_line": 163,
+              "end_line": 163
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberName",
+              "qualified_name": "SysML::Membership::memberName",
+              "kind": "attribute",
+              "target": "SysML::EString",
+              "lower_bound": 0,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2762
+            }
+          },
+          {
+            "feature": "memberElement",
+            "operator": "=",
+            "terminal": {
+              "kind": "CrossReference",
+              "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/5/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 4679,
+                "length": 30,
+                "start_line": 164,
+                "end_line": 164
+              },
+              "fields": {
+                "cardinality": null,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "terminal": {
+                  "kind": "RuleCall",
+                  "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/5/terminal/terminal",
+                  "origin": "source",
+                  "span": {
+                    "offset": 4695,
+                    "length": 13,
+                    "start_line": 164,
+                    "end_line": 164
+                  },
+                  "fields": {
+                    "arguments": [],
+                    "cardinality": null,
+                    "explicitlyCalled": false,
+                    "firstSetPredicated": false,
+                    "predicated": false,
+                    "rule": {
+                      "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                    }
+                  }
+                },
+                "type": {
+                  "kind": "TypeRef",
+                  "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/5/terminal/type",
+                  "origin": "source",
+                  "span": {
+                    "offset": 4680,
+                    "length": 14,
+                    "start_line": 164,
+                    "end_line": 164
+                  },
+                  "fields": {
+                    "classifier": {
+                      "$ref": "https://www.omg.org/spec/SysML/20250201#//Element"
+                    },
+                    "metamodel": {
+                      "$ref": "org.omg.kerml.xtext.KerML/metamodelDeclarations/1"
+                    }
+                  }
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 4663,
+              "length": 46,
+              "start_line": 164,
+              "end_line": 164
+            },
+            "field_contract": {
+              "owner": "SysML::Membership",
+              "name": "memberElement",
+              "qualified_name": "SysML::Membership::memberElement",
+              "kind": "reference",
+              "target": "SysML::Element",
+              "lower_bound": 1,
+              "upper_bound": 1,
+              "containment": false,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": false,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": null,
+              "subsets": [],
+              "redefines": [
+                "SysML::Relationship::target"
+              ],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 2744
+            }
+          },
+          {
+            "feature": "ownedRelatedElement",
+            "operator": "+=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.kerml.xtext.KerML::RelationshipOwnedElement/alternatives/elements/0/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 1857,
+                "length": 19,
+                "start_line": 56,
+                "end_line": 56
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.xtext.KerML::OwnedRelatedElement"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember",
+              "org.omg.kerml.xtext.KerML::RelationshipBody",
+              "org.omg.kerml.xtext.KerML::RelationshipOwnedElement"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Alternatives",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": "*",
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Alternatives",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 1834,
+              "length": 42,
+              "start_line": 56,
+              "end_line": 56
+            },
+            "field_contract": {
+              "owner": "SysML::Relationship",
+              "name": "ownedRelatedElement",
+              "qualified_name": "SysML::Relationship::ownedRelatedElement",
+              "kind": "reference",
+              "target": "SysML::Element",
+              "lower_bound": 0,
+              "upper_bound": -1,
+              "containment": true,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": true,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": "SysML::Element::owningRelationship",
+              "subsets": [
+                "SysML::Relationship::relatedElement"
+              ],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 3477
+            }
+          },
+          {
+            "feature": "ownedRelationship",
+            "operator": "+=",
+            "terminal": {
+              "kind": "RuleCall",
+              "id": "org.omg.kerml.xtext.KerML::RelationshipOwnedElement/alternatives/elements/1/terminal",
+              "origin": "source",
+              "span": {
+                "offset": 1905,
+                "length": 15,
+                "start_line": 57,
+                "end_line": 57
+              },
+              "fields": {
+                "arguments": [],
+                "cardinality": null,
+                "explicitlyCalled": false,
+                "firstSetPredicated": false,
+                "predicated": false,
+                "rule": {
+                  "$ref": "org.omg.kerml.xtext.KerML::OwnedAnnotation"
+                }
+              }
+            },
+            "rule_path": [
+              "org.omg.kerml.xtext.KerML::AliasMember",
+              "org.omg.kerml.xtext.KerML::RelationshipBody",
+              "org.omg.kerml.xtext.KerML::RelationshipOwnedElement"
+            ],
+            "context": [
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Alternatives",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Group",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "RuleCall",
+                "cardinality": "*",
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Alternatives",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              },
+              {
+                "kind": "Assignment",
+                "cardinality": null,
+                "predicated": false,
+                "first_set_predicated": false
+              }
+            ],
+            "span": {
+              "offset": 1884,
+              "length": 36,
+              "start_line": 57,
+              "end_line": 57
+            },
+            "field_contract": {
+              "owner": "SysML::Element",
+              "name": "ownedRelationship",
+              "qualified_name": "SysML::Element::ownedRelationship",
+              "kind": "reference",
+              "target": "SysML::Relationship",
+              "lower_bound": 0,
+              "upper_bound": -1,
+              "containment": true,
+              "derived": false,
+              "transient": false,
+              "volatile": false,
+              "ordered": true,
+              "unique": true,
+              "id": false,
+              "default_value": null,
+              "opposite": "SysML::Relationship::owningRelatedElement",
+              "subsets": [],
+              "redefines": [],
+              "source_file": "org.omg.sysml/model/SysML.ecore",
+              "line": 1475
+            }
+          }
+        ]
+      },
+      "visibility": [
+        {
+          "token": "public",
+          "value": "public"
+        },
+        {
+          "token": "private",
+          "value": "private"
+        },
+        {
+          "token": "protected",
+          "value": "protected"
+        }
+      ],
+      "queries": {
+        "MembershipImport": {
+          "rule": "org.omg.kerml.xtext.KerML::MembershipImport",
+          "metaclass": "SysML::MembershipImport",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 4796,
+                  "length": 19,
+                  "start_line": 169,
+                  "end_line": 169
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.kerml.xtext.KerML::VisibilityIndicator"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::MembershipImport",
+                "org.omg.kerml.xtext.KerML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 4783,
+                "length": 32,
+                "start_line": 169,
+                "end_line": 169
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "isImportAll",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/2/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 4846,
+                  "length": 5,
+                  "start_line": 170,
+                  "end_line": 170
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "all"
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::MembershipImport",
+                "org.omg.kerml.xtext.KerML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 4831,
+                "length": 20,
+                "start_line": 170,
+                "end_line": 170
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isImportAll",
+                "qualified_name": "SysML::Import::isImportAll",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2467
+              }
+            },
+            {
+              "feature": "importedMembership",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 5134,
+                  "length": 33,
+                  "start_line": 183,
+                  "end_line": 183
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 5153,
+                      "length": 13,
+                      "start_line": 183,
+                      "end_line": 183
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 5135,
+                      "length": 17,
+                      "start_line": 183,
+                      "end_line": 183
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Membership"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.kerml.xtext.KerML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::MembershipImport",
+                "org.omg.kerml.xtext.KerML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 5113,
+                "length": 54,
+                "start_line": 183,
+                "end_line": 183
+              },
+              "field_contract": {
+                "owner": "SysML::MembershipImport",
+                "name": "importedMembership",
+                "qualified_name": "SysML::MembershipImport::importedMembership",
+                "kind": "reference",
+                "target": "SysML::Membership",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2800
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 5192,
+                  "length": 4,
+                  "start_line": 184,
+                  "end_line": 184
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::MembershipImport",
+                "org.omg.kerml.xtext.KerML::ImportedMembership"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 5177,
+                "length": 19,
+                "start_line": 184,
+                "end_line": 184
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            }
+          ]
+        },
+        "NamespaceImport": {
+          "rule": "org.omg.kerml.xtext.KerML::NamespaceImport",
+          "metaclass": "SysML::NamespaceImport",
+          "assignments": [
+            {
+              "feature": "visibility",
+              "operator": "=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 4796,
+                  "length": 19,
+                  "start_line": 169,
+                  "end_line": 169
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.kerml.xtext.KerML::VisibilityIndicator"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::NamespaceImport",
+                "org.omg.kerml.xtext.KerML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 4783,
+                "length": 32,
+                "start_line": 169,
+                "end_line": 169
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "visibility",
+                "qualified_name": "SysML::Import::visibility",
+                "kind": "attribute",
+                "target": "SysML::VisibilityKind",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "private",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2481
+              }
+            },
+            {
+              "feature": "isImportAll",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/2/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 4846,
+                  "length": 5,
+                  "start_line": 170,
+                  "end_line": 170
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "all"
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::NamespaceImport",
+                "org.omg.kerml.xtext.KerML::ImportPrefix"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 4831,
+                "length": 20,
+                "start_line": 170,
+                "end_line": 170
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isImportAll",
+                "qualified_name": "SysML::Import::isImportAll",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2467
+              }
+            },
+            {
+              "feature": "importedNamespace",
+              "operator": "=",
+              "terminal": {
+                "kind": "CrossReference",
+                "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/0/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 5427,
+                  "length": 32,
+                  "start_line": 195,
+                  "end_line": 195
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "terminal": {
+                    "kind": "RuleCall",
+                    "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/0/terminal/terminal",
+                    "origin": "source",
+                    "span": {
+                      "offset": 5445,
+                      "length": 13,
+                      "start_line": 195,
+                      "end_line": 195
+                    },
+                    "fields": {
+                      "arguments": [],
+                      "cardinality": null,
+                      "explicitlyCalled": false,
+                      "firstSetPredicated": false,
+                      "predicated": false,
+                      "rule": {
+                        "$ref": "org.omg.kerml.expressions.xtext.KerMLExpressions::QualifiedName"
+                      }
+                    }
+                  },
+                  "type": {
+                    "kind": "TypeRef",
+                    "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/0/terminal/type",
+                    "origin": "source",
+                    "span": {
+                      "offset": 5428,
+                      "length": 16,
+                      "start_line": 195,
+                      "end_line": 195
+                    },
+                    "fields": {
+                      "classifier": {
+                        "$ref": "https://www.omg.org/spec/SysML/20250201#//Namespace"
+                      },
+                      "metamodel": {
+                        "$ref": "org.omg.kerml.xtext.KerML/metamodelDeclarations/1"
+                      }
+                    }
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::NamespaceImport",
+                "org.omg.kerml.xtext.KerML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 5407,
+                "length": 52,
+                "start_line": 195,
+                "end_line": 195
+              },
+              "field_contract": {
+                "owner": "SysML::NamespaceImport",
+                "name": "importedNamespace",
+                "qualified_name": "SysML::NamespaceImport::importedNamespace",
+                "kind": "reference",
+                "target": "SysML::Namespace",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": null,
+                "subsets": [],
+                "redefines": [
+                  "SysML::Relationship::target"
+                ],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3113
+              }
+            },
+            {
+              "feature": "isRecursive",
+              "operator": "?=",
+              "terminal": {
+                "kind": "Keyword",
+                "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/3/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 5493,
+                  "length": 4,
+                  "start_line": 196,
+                  "end_line": 196
+                },
+                "fields": {
+                  "cardinality": null,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "value": "**"
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::NamespaceImport",
+                "org.omg.kerml.xtext.KerML::ImportedNamespace"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "RuleCall",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Group",
+                  "cardinality": "?",
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 5478,
+                "length": 19,
+                "start_line": 196,
+                "end_line": 196
+              },
+              "field_contract": {
+                "owner": "SysML::Import",
+                "name": "isRecursive",
+                "qualified_name": "SysML::Import::isRecursive",
+                "kind": "attribute",
+                "target": "SysML::EBoolean",
+                "lower_bound": 1,
+                "upper_bound": 1,
+                "containment": false,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": false,
+                "unique": true,
+                "id": false,
+                "default_value": "false",
+                "opposite": null,
+                "subsets": [],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 2474
+              }
+            },
+            {
+              "feature": "ownedRelatedElement",
+              "operator": "+=",
+              "terminal": {
+                "kind": "RuleCall",
+                "id": "org.omg.kerml.xtext.KerML::NamespaceImport/alternatives/elements/1/elements/1/terminal",
+                "origin": "source",
+                "span": {
+                  "offset": 5321,
+                  "length": 13,
+                  "start_line": 190,
+                  "end_line": 190
+                },
+                "fields": {
+                  "arguments": [],
+                  "cardinality": null,
+                  "explicitlyCalled": false,
+                  "firstSetPredicated": false,
+                  "predicated": false,
+                  "rule": {
+                    "$ref": "org.omg.kerml.xtext.KerML::FilterPackage"
+                  }
+                }
+              },
+              "rule_path": [
+                "org.omg.kerml.xtext.KerML::NamespaceImport"
+              ],
+              "context": [
+                {
+                  "kind": "Group",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Alternatives",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                },
+                {
+                  "kind": "Assignment",
+                  "cardinality": null,
+                  "predicated": false,
+                  "first_set_predicated": false
+                }
+              ],
+              "span": {
+                "offset": 5298,
+                "length": 36,
+                "start_line": 190,
+                "end_line": 190
+              },
+              "field_contract": {
+                "owner": "SysML::Relationship",
+                "name": "ownedRelatedElement",
+                "qualified_name": "SysML::Relationship::ownedRelatedElement",
+                "kind": "reference",
+                "target": "SysML::Element",
+                "lower_bound": 0,
+                "upper_bound": -1,
+                "containment": true,
+                "derived": false,
+                "transient": false,
+                "volatile": false,
+                "ordered": true,
+                "unique": true,
+                "id": false,
+                "default_value": null,
+                "opposite": "SysML::Element::owningRelationship",
+                "subsets": [
+                  "SysML::Relationship::relatedElement"
+                ],
+                "redefines": [],
+                "source_file": "org.omg.sysml/model/SysML.ecore",
+                "line": 3477
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "source": {
+    "grammar_sha256": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "metamodel_sha256": "76fd2db0933f329f9a1f8fc8fdc7693b3a5575b86463d64471db252f5027d84b",
+    "generator_sha256": "95449e1d509a4933785f44a4d824960a6992e14fe2bd81b44d40f6a35626d24c",
+    "generator": "generate_namespace_grammar_contracts.py"
+  }
+}

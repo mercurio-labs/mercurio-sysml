@@ -1,0 +1,127 @@
+{
+  "cases": [
+    {
+      "observations": [
+        {
+          "annotation_count": 0,
+          "documented": "P",
+          "kind": "Documentation",
+          "name": "note",
+          "targets": [
+            "P"
+          ]
+        },
+        {
+          "annotation_count": 0,
+          "documented": "f",
+          "kind": "Documentation",
+          "name": "nested",
+          "targets": [
+            "f"
+          ]
+        }
+      ],
+      "source": "package P { doc note /*package*/ feature f { doc nested /*feature*/ } }"
+    },
+    {
+      "observations": [
+        {
+          "annotation_count": 2,
+          "kind": "Comment",
+          "name": "c",
+          "targets": [
+            "B",
+            "A"
+          ]
+        },
+        {
+          "annotation_count": 0,
+          "kind": "Comment",
+          "name": "fallback",
+          "targets": [
+            "P"
+          ]
+        }
+      ],
+      "source": "package P { classifier A; classifier B; comment c about B,A /*ordered*/ comment fallback /*owner*/ }"
+    },
+    {
+      "observations": [
+        {
+          "feature_chained": "chain",
+          "kind": "FeatureChaining",
+          "ordinal": 0,
+          "owner": "chain"
+        },
+        {
+          "feature_chained": "chain",
+          "kind": "FeatureChaining",
+          "ordinal": 1,
+          "owner": "chain"
+        }
+      ],
+      "source": "package P { feature base { feature leaf; } feature chain chains base.leaf; }"
+    },
+    {
+      "observations": [
+        {
+          "annotation_count": 3,
+          "kind": "Comment",
+          "name": "c",
+          "targets": [
+            "a",
+            "b"
+          ]
+        }
+      ],
+      "source": "package P { feature a; feature b; comment c about a,a,b /*unique*/ }"
+    },
+    {
+      "observation": {
+        "annotation_count": 1,
+        "kind": "Comment",
+        "name": "mixed",
+        "targets": [
+          "target"
+        ]
+      },
+      "shape": "owning_then_owned"
+    },
+    {
+      "observation": {
+        "annotation_count": 0,
+        "kind": "Comment",
+        "name": "detached",
+        "targets": []
+      },
+      "shape": "detached",
+      "wrong_container_feature_chained": null
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "962d515de4c3d696b8d1e4217b97b94c676e5de2879856ba99fafcdddaf373f9",
+    "helper_sha256": "ce22b379839f62b81f2fd0b6bd62f1ddac7d6d2d18d07e065f053d52d42a42e3",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/AnnotatingElement_annotatedElement_SettingDelegate.java": "221fccee528610c9f682ae2c40d07a76d3a48ef11ee137fb684182ba637e8c26",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/AnnotatingElement_annotation_SettingDelegate.java": "efad723d317d377e85159a531565438d05a4add9996da2b744c028a969e4bbd5",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/AnnotatingElement_ownedAnnotatingRelationship_SettingDelegate.java": "937ec78d0c40eff09e0d120652decb4cdc8f9bb57ed10459f46bb77043e6d7e5",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/AnnotatingElement_owningAnnotatingRelationship_SettingDelegate.java": "411213ac0e191b394abe84f87c65f01e22b6582500835f6fca34a5776561dbcc",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Documentation_documentedElement_SettingDelegate.java": "8e3b34ad228dea60cbc68cfb005bb6e2cd063db4b0e3b1556982a3cc48d06686",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Element_owner_SettingDelegate.java": "4f171bad1ec719f6483b108c75f8ea1f4f3929aed94e3bb50d67c676edcd92b4",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/FeatureChaining_featureChained_SettingDelegate.java": "64a2681ddeb9f60563036a6918dd2a636864722cf1f5da6362239ef5f7ec28c2",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Relationship_owningRelatedElement_SettingDelegate.java": "6b0117fb47ae696aa5721693700d0d838afb8d80925bad27b20c8cbfff2ea4cc",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/NamespaceUtil.java": "e411c4c1517fb895f99336d3714d595a94b9ef261180316f517c83014714ffce",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.ownership-projection-controls.v1",
+  "scope": "Four independent source controls: documentation, explicit/implicit comment targets, duplicate targets and FeatureChaining ownership; owning-before-owned and detached/wrong-container factory controls. Getter behavior only, no completion or full validation."
+}

@@ -1,0 +1,235 @@
+{
+  "schema": "dev.mercurio.instantiation-strategy-batch.v1",
+  "status": "all_getters_and_default_recipes_bounded_native",
+  "qualification_delta": 0,
+  "rows": [
+    {
+      "kind": "CollectExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Operator spelling-to-qualified-name mapping and global Function lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "ConstructorExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.InstantiationExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Canonical owned-membership projection, ordered resolved endpoints, first-result selection and Ecore Type ancestry",
+      "default_provider": "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::constructorEvaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-strategy-evidence.json",
+      "bounded_native_operation_verified": true,
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Operator spelling-to-qualified-name mapping and global Function lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "IndexExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Operator spelling-to-qualified-name mapping and global Function lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "InvocationExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.InstantiationExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Canonical owned-membership projection, ordered resolved endpoints, first-result selection and Ecore Type ancestry",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-strategy-evidence.json",
+      "bounded_native_operation_verified": true,
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "OperatorExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Operator spelling-to-qualified-name mapping and global Function lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "SelectExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.OperatorExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "Operator spelling-to-qualified-name mapping and global Function lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "selected_delegate": "org.omg.sysml.delegate.invocation.TriggerInvocationExpression_instantiatedType_InvocationDelegate",
+      "imported": true,
+      "native_consumer": "definition_instantiated_type_query + definition_expression_default_contributions_query -> Ecore/reference/default/generalization consumers",
+      "semantically_verified": false,
+      "required_dependency": "TriggerKind-to-role mapping and global Type lookup",
+      "default_provider": "org.omg.sysml.adapter.InvocationExpressionAdapter#addDefaultGeneralType",
+      "role_bindings": {
+        "base": "Performances::evaluations",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      },
+      "bounded_native_operation_verified": true,
+      "verification_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+      "bounded_native_default_recipe_verified": true
+    }
+  ],
+  "resolved_methods": 9,
+  "independent_cached_controls": 20,
+  "cache_reproduction": "exact --check passed",
+  "ordered_implementation": [
+    "Review the pinned normative instantiatedType operation, ordering and specialization requirements against these observations; record disagreements before selecting native rules.",
+    "Implement the imported common first-membership delegate as a shared typed canonical query. Preserve pending member endpoints, null members, ordering and first non-Type stopping. Do not read derived instantiated_type from raw KIR.",
+    "Connect the Invocation default-generalization recipe to that query and shared Expression/Step contributions, preserving Feature Subsetting versus other Type FeatureTyping. Constructor defaults remain distinct; its target contributes to result typing rather than to expression defaults.",
+    "Implement operator and trigger target recipes from their imported mapping definitions and resolved global providers. Do not default a missing global target to evaluations.",
+    "Qualify the complete shared strategy in owning/value/multiplicity contexts, persisted and reordered canonical graphs, with focused native/reference checks. Broader resource assessment occurs after the batch boundary."
+  ],
+  "handwritten_native_dependencies": [
+    "Canonical graph ownership and ordered membership navigation",
+    "Typed prerequisite propagation and transaction/publication lifecycle",
+    "Global resource linking and normative validation"
+  ],
+  "unsupported": [
+    "Full owning/value/multiplicity/direction/end/metadata/conjugation contexts and inherited computed contributions beyond the bounded recipe proofs",
+    "Invocation/Constructor argument/result/default-value validation and bindings; trigger receiver/clock/monitor and argument validation",
+    "Normative inconsistencies and invalid-domain controls remain explicit; a matching supplied target does not prove callable/library validity",
+    "Actual global library resource closure, global parser/model contracts and final sample/comparison/timing gates"
+  ],
+  "inputs": {
+    "tools/run_instantiation_strategy_probe.py": "35ddb8fc3cfb8622228237578f6f5ea0aa82e52b292aa5570b40f0440a9d10e2",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotInstantiationStrategyProbe.java": "9cfc806e38d1d2925e81b5de019b7300150714cba65bfd4076332cb43f7fad0e",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStepStrategyProbe.java": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotResultConstructionExporter.java": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotOperandProbe.java": "7bf24e4d6cbb9c0d7203aaea9315bcee4125b06341f4cfd7f5d926a1fef3525b",
+    "docs/conformance/2026-08-support/instantiation-strategy-pilot-controls.json": "9d23c03504c469f5bc181c2948ce207ab18a7e75bdf7c53dab30b1841029c41d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-export.log": "b54da6e23bcb856e45ab9bb68b6a5d633b46daa62e90e41bedb4fc2717bcf773",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-cache-check.log": "b54da6e23bcb856e45ab9bb68b6a5d633b46daa62e90e41bedb4fc2717bcf773",
+    "docs/conformance/2026-08-support/instantiation-strategy-evidence.json": "e5f6669b9bd6db095e1a5c235155957b711da1b6650ee3ab1f84e7cc6dd6f76c",
+    "docs/conformance/2026-08-support/library-instantiation-evidence.json": "bf46200052e37d725a7f723e96dbee3dc6489bedf6bb4733792360587a497f95",
+    "docs/conformance/2026-08-support/instantiation-contribution-evidence.json": "5817c8efd8c58071e0238d7c53edc0a3fea237b30414b8bfde7187843de24425",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "normative_review": "docs/conformance/2026-08-support/instantiation-normative-review.json",
+  "native_consumed_common_bindings": 2,
+  "latest_verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log",
+    "native_definition_tests_passed": 364,
+    "focused_native_tests_passed": 2,
+    "common_recipe_regression_tests_passed": 2,
+    "generator_controls_passed": 6,
+    "candidate_pipeline_tests_passed": 8,
+    "tool_binary_tests_passed": 11,
+    "independent_contribution_controls": 228,
+    "independent_equivalence_controls": 8,
+    "contribution_comparison_contexts": 912,
+    "equivalence_comparison_contexts": 32,
+    "physical_default_idempotence_abstract_syntax_persistence_contexts": 80,
+    "operator_trigger_adapter_bindings_consumed": 6,
+    "all_instantiation_getter_bindings_consumed": 8,
+    "all_instantiation_default_recipe_bindings_consumed": 8,
+    "relationship_kinds_not_collapsed": true,
+    "typed_chaining_prerequisite_retry_and_malformed_rejection": true,
+    "completion_flags_written": false,
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "resource_assessment_current_code": false,
+    "optimized_build": "passes"
+  },
+  "remaining_implementation": [
+    "Full owning/value/multiplicity/direction/end/metadata/conjugation contexts and inherited computed producer dependencies",
+    "Complete Invocation/Constructor argument/result/default-value validation and bindings, Trigger receiver/clock/monitor and argument constraints",
+    "Actual enum/global resource closure and strict family/global/sample qualification"
+  ],
+  "resolved_library_programs": 25,
+  "library_selection_evidence": "docs/conformance/2026-08-support/library-instantiation-evidence.json",
+  "native_consumed_library_getter_bindings": 6,
+  "all_native_consumed_getter_bindings": 8,
+  "remaining_external_getter_bindings": 0,
+  "resolved_contribution_programs": 6,
+  "contribution_evidence": "docs/conformance/2026-08-support/instantiation-contribution-evidence.json",
+  "all_native_consumed_default_recipe_bindings": 8,
+  "native_consumed_operator_trigger_adapter_bindings": 6,
+  "remaining_external_adapter_recipe_bindings": 0,
+  "verified": {
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  }
+}

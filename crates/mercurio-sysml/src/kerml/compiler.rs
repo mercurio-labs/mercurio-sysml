@@ -169,6 +169,26 @@ pub fn compile_kerml_module_with_context(
         .map_err(semantic_diagnostic)
 }
 
+/// Compile a complete KerML model, rejecting unresolved references.
+/// The permissive entry points remain available for incomplete editor models.
+pub fn compile_kerml_module_strict_with_context(
+    module: &SysmlModule,
+    source_name: &str,
+    context_modules: &[SysmlModule],
+    library_context: &KirDocument,
+) -> Result<KirDocument, Diagnostic> {
+    let profile = LanguageProfile::load(SourceLanguage::Kerml).map_err(semantic_diagnostic)?;
+    let resolved = crate::language_frontend::lowering::resolve::resolve_module_with_context(
+        module,
+        context_modules,
+        library_context,
+        profile.mappings,
+    )
+    .map_err(semantic_diagnostic)?;
+    transpile_module_with_source(&resolved, source_name, "kerml", profile.mappings)
+        .map_err(semantic_diagnostic)
+}
+
 pub fn compile_kerml_module_with_resolver_context(
     module: &SysmlModule,
     source_name: &str,

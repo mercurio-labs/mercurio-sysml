@@ -1,0 +1,173 @@
+{
+  "scope": "Parsed raw declaredName and explicit ElementUtil.unescapeString values. Native represented names follow pinned KerML 1.1 section 8.2.2.3; raw Pilot lexical storage remains distinct. This does not qualify scoping or complete name resolution.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "500a27d5bb99c8b7e317608cd32100b60ab4d656d67cdb0412f69112e66d301c"
+  },
+  "cases": [
+    {
+      "kerml": true,
+      "raw_declared_name": "plain",
+      "represented_name": "plain",
+      "spelling": "plain"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'action'",
+      "represented_name": "action",
+      "spelling": "'action'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a b'",
+      "represented_name": "a b",
+      "spelling": "'a b'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'\u00e9'",
+      "represented_name": "\u00e9",
+      "spelling": "'\u00e9'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "''",
+      "represented_name": "",
+      "spelling": "''"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\bb'",
+      "represented_name": "a\bb",
+      "spelling": "'a\\bb'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\tb'",
+      "represented_name": "a\tb",
+      "spelling": "'a\\tb'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\nb'",
+      "represented_name": "a\nb",
+      "spelling": "'a\\nb'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\fb'",
+      "represented_name": "a\fb",
+      "spelling": "'a\\fb'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\rb'",
+      "represented_name": "a\rb",
+      "spelling": "'a\\rb'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\\"b'",
+      "represented_name": "a\"b",
+      "spelling": "'a\\\"b'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\'b'",
+      "represented_name": "a'b",
+      "spelling": "'a\\'b'"
+    },
+    {
+      "kerml": true,
+      "raw_declared_name": "'a\\\\b'",
+      "represented_name": "a\\b",
+      "spelling": "'a\\\\b'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "plain",
+      "represented_name": "plain",
+      "spelling": "plain"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'action'",
+      "represented_name": "action",
+      "spelling": "'action'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a b'",
+      "represented_name": "a b",
+      "spelling": "'a b'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'\u00e9'",
+      "represented_name": "\u00e9",
+      "spelling": "'\u00e9'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "''",
+      "represented_name": "",
+      "spelling": "''"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\bb'",
+      "represented_name": "a\bb",
+      "spelling": "'a\\bb'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\tb'",
+      "represented_name": "a\tb",
+      "spelling": "'a\\tb'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\nb'",
+      "represented_name": "a\nb",
+      "spelling": "'a\\nb'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\fb'",
+      "represented_name": "a\fb",
+      "spelling": "'a\\fb'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\rb'",
+      "represented_name": "a\rb",
+      "spelling": "'a\\rb'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\\"b'",
+      "represented_name": "a\"b",
+      "spelling": "'a\\\"b'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\'b'",
+      "represented_name": "a'b",
+      "spelling": "'a\\'b'"
+    },
+    {
+      "kerml": false,
+      "raw_declared_name": "'a\\\\b'",
+      "represented_name": "a\\b",
+      "spelling": "'a\\\\b'"
+    }
+  ]
+}

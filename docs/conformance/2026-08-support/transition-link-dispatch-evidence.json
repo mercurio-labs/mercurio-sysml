@@ -1,0 +1,51 @@
+{
+  "schema": "dev.mercurio.transition-link-dispatch-evidence.v1",
+  "scope": "ReferenceUsage computed-redefinition fallback selection only; full TransitionUsage/AcceptActionUsage and enum-family semantics remain unqualified.",
+  "imported": "Resolved javac owner-type guard and target identity comparison, including typed UsageUtil query argument. Pinned UsageUtil source is fingerprinted in feature-defaults.extract.json.",
+  "native_consumer": "definition_redefinition_strategy_kind",
+  "handwritten_dependency": "definition_transition_link_feature reads ordered canonical FeatureMembership endpoints, excludes TransitionFeatureMembership and ParameterMembership through imported Ecore ancestry, and checks endpoint types. Generated predicate decides fallback.",
+  "inputs": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "3d7292a5de42960b14f88816a99d1b9ddfe12d411877e4ca6e0d6db301b0d29e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "0979f053858a6216348a3cd35d9195c47b6d97e0ecf8253ccf127743293f11fd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "34eb9236cf955b69a9e67d45cf1724ebf347a271194ee2bc06ba03cbfb64f1d0",
+    "tools/export_pilot_feature_defaults.py": "5fd13b7aaf2a05d69961953758496301d70c30d3f59a50a36a5818c32fcb0466",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureDefaultExporter.java": "504d063f1c2cc411c3a9c3e301df5ced92c921d33a14b9255660f5eefd78a053",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureRedefinitionExporter.java": "f1f08a4094205c493772900a0be8df3a94d9add28e40b827df68c8b4a4f9c115",
+    "tools/test_feature_defaults.py": "6325053ba3a74ba97fa3bb1348ad334dbb131e02402c5bb0a5c8e989465c3fa5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-native-tests.log": "b5c2b5ecd7d26e0d8fb2fcb2a76dd77dccf562d7f2cd3862752fd662dfe2750b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-importer-tests.log": "9534b916146fb7c546b536728a949fc510f6f848af9f64113dfe69a671058389",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-pilot-export.log": "cac07580de9f7fd269d18df6fd7b2c80d51447ebb165aef5484c791547b6a6c0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-certificate-tests.log": "b16b5446c4e579bf424c068840bcb18a7616ffb8992b77ebfd9a9192cc649ea9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-plan-tests.log": "1ae9fd37fa2f0aa7ed2176ffb340b7dfa93d5df4fdeea60f894f75ca1a1986ae",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-link-pilot-check.log": "cac07580de9f7fd269d18df6fd7b2c80d51447ebb165aef5484c791547b6a6c0"
+  },
+  "verification": {
+    "pilot_identity_controls": 6,
+    "matching_native_controls": 6,
+    "contexts": [
+      "first ordinary feature selected",
+      "later ordinary feature excluded",
+      "parameter membership excluded",
+      "transition feature membership excluded",
+      "persisted/reordered graph",
+      "incomplete relationships rejected"
+    ],
+    "importer_guards": 35,
+    "definition_regression": 244,
+    "certificate_tests": 33,
+    "plan_tests": 14,
+    "cached_pilot_reproduces": true
+  },
+  "integrated_result": {
+    "trigger": "ReferenceUsage blocker removed; now rejects at AcceptActionUsage contribution/redefinition lifecycle",
+    "expose": "ViewUsage generalization provider still unavailable"
+  },
+  "qualification": {
+    "families": [
+      0,
+      34
+    ],
+    "closed_family_obligations": 0,
+    "candidate": "unpromoted"
+  }
+}

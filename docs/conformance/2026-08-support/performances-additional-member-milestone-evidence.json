@@ -1,0 +1,59 @@
+{
+  "schema": "dev.mercurio.native-resource-milestone.v1",
+  "scope": "Frozen post-additional-member-scheduler, pre-directed-parameter-default assessment. Diagnostic only; not semantic qualification or benchmark.",
+  "supervision": {
+    "schema": "dev.mercurio.native-assessment-supervision.v1",
+    "status": "completed",
+    "elapsed_seconds": 150.39100000000326,
+    "exit_code": 1,
+    "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+    "binary_sha256": "86f5b96abe753fcbbbd7ba5341dc6c40a5962cdde4f83efd41c5f5b722f8053b",
+    "source_sha256": "5640f39ee0619ba7d18e492c42ab13e743a056ce3c956110e7c2d20d2209ae57",
+    "wall_budget_seconds": 300,
+    "linking_budget_seconds": 180,
+    "semantic_qualification": "not_assessed"
+  },
+  "inputs": {
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-additional-member-milestone-build.log": "2b2dd55903e92a94028dc44cc0f787fe54e1c022075762d2146e7a0587f4e280",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-additional-member-milestone-supervision.json": "21a989aeb50e7cd4ca9053bd0ed7cc054a1e4b776bd2f910409150a285a88146",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-additional-member-milestone-results.jsonl": "efe9d7ae5e2a917fc895ec603d68c7a653a451442d15b354946d661092f75cb7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-additional-member-milestone-trace.log": "d3049072c84f4a8d9ec5eec6ce233c9b62d2ae0534ef196c48686178c710c207",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-additional-member-milestone-analysis.json": "ae4d25fa7f81624c4bdc6f4c90c31dc516550bb0ad17569c1469d25092b421ad",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9"
+  },
+  "resource_files": 16,
+  "source_bytes": 121245,
+  "initial_elements": 12288,
+  "elements_after_scheduled_producer": 12290,
+  "completed_reference_attempts": 192,
+  "inflight_frames": 0,
+  "outcome": {
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: ordinary Feature/Connector provider requires ordinary non-end/non-parameter context or a supported Class/Structure/Connector-owned Feature end\", kind: Syntax, span: None, subjects: [] }",
+    "input_files": [
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml"
+    ],
+    "relative_path": "Performances-explicit-import-source-set.kerml",
+    "resource_mode": "separate",
+    "semantic_qualification": "not_assessed",
+    "source_bytes": 121245,
+    "source_set_cache_hit": false,
+    "stage": "construction_or_linking",
+    "status": "blocked"
+  },
+  "interpretation": "Automatic linking actually consumes AdditionalMembers, attaches the generated canonical return/result pair and retries the interrupted FeatureTyping target query. The next unsupported input is the ordinary default/generalization provider for a directed exact Feature operand parameter. This earns stage integration evidence, not a linked/published whole model. Frozen binary predates the parameter correction; failed cohorts do not supply qualification timing."
+}

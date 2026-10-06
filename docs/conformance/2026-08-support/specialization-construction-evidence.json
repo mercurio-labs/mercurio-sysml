@@ -1,0 +1,76 @@
+{
+  "schema": "dev.mercurio.specialization-construction-evidence.v1",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/specialization-construction.extract.json",
+  "imported_sha256": "aa88e6990edef7e59364981d7d18b6a9c47da553888517cbbe78842a6c46fc2f",
+  "specialization_kinds": [
+    "ConjugatedPortTyping",
+    "CrossSubsetting",
+    "FeatureTyping",
+    "Redefinition",
+    "ReferenceSubsetting",
+    "Specialization",
+    "Subclassification",
+    "Subsetting"
+  ],
+  "insertion_controls": 24,
+  "result_subsetting_controls": 12,
+  "implementation_boundary": "One handwritten atomic insertion strategy uses imported Ecore endpoint redefinitions, narrowing and reciprocal ownership. Generated admission and result producer constants come from resolved pinned definitions. Pending contribution computation, chain deduplication, reduction and complete transformation remain separate. Of the eight tested insertion kinds, the new feature-reference result producer consumes Subsetting in the candidate API.",
+  "derived_endpoint_boundary": "ReferenceSubsetting and CrossSubsetting specific endpoints read canonical containment via imported delegates; no derived alias snapshots are written. Unowned membership suppresses general adoption, unlike connector construction.",
+  "native_consumers": [
+    "definition_append_implied_specialization",
+    "definition_materialize_reference_result_subsetting",
+    "definition_document::materialize_reference_result_subsetting"
+  ],
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      235,
+      279,
+      295
+    ],
+    "rule": "checkFeatureReferenceExpressionResultSpecialization",
+    "boundary": "Only explicit non-self referent result subsetting is covered; required binding and full transformation are not claimed."
+  },
+  "qualification": {
+    "focused_native_tests": 120,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-self-reference-focused.log",
+    "test_log_sha256": "05b0d9a163ec4c648fe890aec685025b845c441d351e9452b163205fb00e2d7a",
+    "tooling_tests": 77
+  },
+  "remaining": [
+    "Feature-reference binding connector, global resource discovery and full transformation",
+    "Invocation result typing and binding",
+    "Full expression transformation and bound-value integration",
+    "Pending specialization collection and reduction",
+    "Complete sample, semantic-release and timing qualification"
+  ],
+  "explicit_referent_query": {
+    "matching_pilot_controls": 10,
+    "self_reference_dependency_controls": 2,
+    "consumer": "definition_reference_targets: FeatureReferenceExpression.referent",
+    "shared_algorithm": "definition_explicit_expression_referent",
+    "source_verification": "definition_expression_result_constructor_reaches_candidate_source_and_persistence",
+    "boundary": "Explicit first nonparameter membership wins. With no explicit referent, the imported self-reference name resolves through the shared standard-library provider; missing, unresolved and mistyped targets reject.",
+    "provenance": "Pinned SettingDelegate source hash and independent expression.getReferent observations are included in the imported representation."
+  },
+  "self_reference_provider": {
+    "matching_pilot_controls": 3,
+    "imported_binding": "Base::Anything::self",
+    "implementation": "Generated runtime binding constant and handwritten delegate composition over shared ordered membership and standard-library resolution. Production is native.",
+    "pilot_boundary": "Independent actual delegate calls with a controlled library provider; not complete global resource discovery.",
+    "source_verification": "definition_self_reference_reaches_source_and_persistence",
+    "grammar_path": "ClassificationExpression -> SelfReferenceExpression -> SelfReferenceMember -> EmptyFeature; source uses hastype A, not a named self reference.",
+    "verified": [
+      "absent explicit referent uses library Feature",
+      "explicit Feature takes precedence",
+      "explicit non-Feature suppresses fallback",
+      "source query and persistence",
+      "missing and mistyped standard library rejection"
+    ],
+    "remaining": [
+      "global resource discovery",
+      "reference binding and full expression transformation"
+    ]
+  }
+}

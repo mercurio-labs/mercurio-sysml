@@ -1,0 +1,73 @@
+{
+  "scope": "Both variable branches of ordinary exact Feature owning-type featuring. Not full Feature/Usage transformation.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      190,
+      193
+    ],
+    "clauses": [
+      "Feature.isFeaturingType",
+      "checkFeatureFeatureMembershipTypeFeaturing"
+    ],
+    "boundary": "The snapshot definition carries an explicit library redefinition and a TypeFeaturing to its owning type; full derived featuringType, redefinition validation and specialized Usage behavior remain separate obligations."
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "FeatureAdapter.computeFeaturingType",
+      "FeatureUtil.insertImplicitTypeFeaturings",
+      "Element_qualifiedName_SettingDelegate",
+      "ElementUtil.escapeName"
+    ],
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "TypeFeaturing and Redefinition stored endpoint contracts; Feature identity/defaults; generated ownership opposites and closed publication; canonical namespace/member naming.",
+  "native_consumer": "materialize_owning_type_featuring delegates variable inputs to definition_materialize_variable_featuring. Occurrence owners reuse library snapshots; others construct and contain a snapshot Feature with redefinition and context relationships. Algorithms are explicitly handwritten Rust over imported definitions.",
+  "verification": {
+    "new_pilot_controls": 5,
+    "total_owning_type_controls": 13,
+    "contexts": [
+      "named class",
+      "nested class",
+      "quoted class name",
+      "anonymous class",
+      "Occurrence library owner"
+    ],
+    "checks": [
+      "source parse",
+      "snapshot name",
+      "snapshot containment",
+      "outer implied relationship and feature source",
+      "redefinition source and library target",
+      "snapshot TypeFeaturing source and owner target",
+      "canonical persistence",
+      "no completeness flag"
+    ],
+    "negative_controls": [
+      "missing library",
+      "missing snapshots",
+      "identity collision with complete libraries"
+    ],
+    "focused_tests": 77,
+    "tooling_tests": 39,
+    "pilot_export_reproduces": true,
+    "focused_log": "definition-pipeline-evidence/native-tests-variable-featuring-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "34cd77a3da9813c729f2291470b2d258abe484e79d90cf253215b346f44d52b3",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "4035a2e37bd48776fc465367cf5a754a44c50fc4d6b28bba1f7ad98cd79ba151",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "d8a4bf7e87c7473b15f90bce9f1750b1f2345d0c2a8cfe545273bbc89f8369a7"
+    }
+  },
+  "remaining": [
+    "Generalize provider dispatch by pinned resolved getter/adapter identity rather than per-subtype patches",
+    "Usage variability and other specialized producers",
+    "Full featuringType projection and breadth-first closure",
+    "Connector compatibility/context selection",
+    "Connector/expression transformation integration",
+    "Release qualification"
+  ],
+  "disagreements": "None observed in these five controls. Snapshot naming and per-invocation fresh identity are Pilot implementation choices, not asserted normative requirements.",
+  "repeat_policy": "Non-Occurrence variable calls create a fresh snapshot, matching direct upstream compute invocation. Callers provide fresh construction identities; duplicate identities reject atomically. Reused library targets suppress duplicate TypeFeaturing insertion."
+}

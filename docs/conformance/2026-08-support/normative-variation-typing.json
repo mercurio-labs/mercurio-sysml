@@ -1,0 +1,51 @@
+{
+  "scope": "Partial native Usage variation-typing contribution; positive conformance evidence without claiming complete implicit generalizations.",
+  "normative": {
+    "document": "2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "pdf_pages": [
+      305
+    ],
+    "clauses": [
+      "checkUsageVariationDefinitionSpecialization",
+      "checkUsageVariationUsageSpecialization"
+    ]
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "UsageAdapter.addVariationTyping",
+      "UsageUtil.isVariant",
+      "UsageUtil.getOwningVariationDefinitionFor",
+      "UsageUtil.getOwningVariationUsageFor"
+    ],
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "Pinned grammar VariantMembership construction; Ecore Usage/Definition ancestry, stored membership endpoints and FeatureTyping/Subsetting target contracts.",
+  "native_consumer": "Handwritten definition_variation_general checks canonical ownership and isVariation. definition_specializes consumes a proven variation path before requiring the remaining complete provider. It cannot conclude false from an absent contribution and never sets isImpliedIncluded or synthesizes relationships.",
+  "verified": {
+    "independent_contributions": 8,
+    "contexts": [
+      "part",
+      "item",
+      "attribute",
+      "action"
+    ],
+    "owners": [
+      "variation Definition",
+      "variation Usage"
+    ],
+    "persistence": "Positive specialization remains true after canonical JSON reload; complete model remains unchanged.",
+    "negative_cases": "Ordinary membership and unrelated targets still require complete Usage providers.",
+    "whole_document_comparison": "84 matching source models, 1325 nodes and 2487 effective reference slots; eight added controls match before/after persistence.",
+    "tooling_tests_passed": 38,
+    "native_tests_passed": 726,
+    "qualification": "definition-pipeline-qualification.json; full unfiltered native library run"
+  },
+  "remaining": [
+    "Other Usage metaclasses and nested variation chains require additional evidence",
+    "Explicit relationship materialization and complete implicit-generalization ordering",
+    "Feature bound-value/participant/crossing contributions, Occurrence extras and subtype selectors",
+    "Source effective Usage.isVariable and whole release qualification"
+  ]
+}

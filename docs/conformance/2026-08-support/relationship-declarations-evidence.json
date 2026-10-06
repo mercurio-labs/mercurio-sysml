@@ -1,0 +1,134 @@
+{
+  "scope": "G02 declaration/relationship preservation batch; full 2026-08 qualification remains open",
+  "branch": "codex/sysml-v2-compliance-2026-08",
+  "status": "focused_scope_complete",
+  "checks": {
+    "candidate_tests_passed": 107,
+    "focused_relationship_tests_passed": 5,
+    "fresh_positive_named_anonymous_declarations_compared": 18,
+    "fresh_missing_endpoint_negative_controls_rejected": 9,
+    "malformed_relationship_syntax_controls_rejected": 12,
+    "original_same_context_comparisons_completed": 5,
+    "original_metaclass_repairs_verified": 11,
+    "ordered_reference_fields_verified": 67,
+    "inline_feature_chains_verified": 1,
+    "inline_feature_chaining_objects_verified": 2,
+    "corpus_compilations_passed": 310,
+    "construct_seed_drift_check": "current"
+  },
+  "source_and_binary_inventory": {
+    "scope": "G02 batch source/fixture hash inventory; not a complete release source snapshot",
+    "files": {
+      "crates/mercurio-sysml/src/kerml/parser.rs": "73668f815fcc9c70637f28f486e24d87e30cf126139e8b77967b94da1a020de8",
+      "crates/mercurio-sysml/src/kerml/parser/relationships.rs": "89ed2be0291218d0b24f1ae312a12125daeb42bfe03d87dc728b4bf8eff81292",
+      "crates/mercurio-sysml/src/language_frontend/lowering/resolve.rs": "3097fe4ae97e6a6817c8f011f4bda67d04b3dc6ca10eb0787c21855975503f04",
+      "crates/mercurio-sysml/src/language_frontend/lowering/resolve/identities.rs": "c7c500695c54b2c4e854da776a0d92cb31f9137f32b8ea9ea18d818ec1e166c2",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "7849af678d0215f239636171bc22fd4388cd2a3505404fc19345b98b46c3a2b8",
+      "crates/mercurio-sysml/src/language_frontend/lowering/mod.rs": "e7158eeaa02fef5bfc0f13d441f79e41f5cbe490b3e5f164ef9e5cba7eac3575",
+      "crates/mercurio-sysml/src/language_frontend/lowering/relationship_declarations.rs": "67d85dc3f6db5f6c839b977d76bec49f727e6dce24f032e2110c25e176844e7c",
+      "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs": "029d2bbe4c939c0c9318d30d665a08f03a181aea72102b284f3e29a046172acb",
+      "crates/mercurio-sysml/resources/kernel/kerml-constructs.overlay.json": "63eb2146069eb953db4a7a2bfd9873ac7c74dcadd7134d50c6ca8c38cc60417d",
+      "crates/mercurio-sysml/resources/kernel/kerml-constructs.seed.json": "9ef077391e3a9031061373b5a317b0523c666b8f7b7c058c480a15f7ae770790",
+      "crates/mercurio-sysml/resources/kernel/kerml-mappings.overlay.json": "bc172f0edcb16bd51e122076f5713d0b495dd551bcff1fecba95a95cfb32a9f4",
+      "crates/mercurio-sysml/resources/kernel/relationship-declarations.overlay.json": "43e065a63b098ea0c42104bfcbed562e1d9ac54102bd6474ae59359285e61c46",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-conjugation-negative.kerml": "709beb43699134b6350e62f1ae1db470552cbbc452e1f71444c5dd1354e6a8f1",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-declarations-pilot-results.json": "609d7feabb4995a8979672711b71c2550f042af9942499bca84340096d5978d3",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-declarations.kerml": "4c7f208b88e7a71b3987e8630e91f0e520e12aee671c423d2e3657b232ea00f3",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-dependency-negative.kerml": "9d662071b499302db1b20e1780d4a1f5fe6899a9f3c5e2d75dfe7bde091c7709",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-feature-chain.kerml": "6ab43c8e7062cfa48a2f0f9ed54b73356098244874ac64c4c89d34f5e43101cd",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-feature-typing-negative.kerml": "eeb32d0b0fbc659f602da7b61fad0543546121bebd99d07936723d26fefe8054",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-featuring-negative.kerml": "5d41f677708291fab907be3a53ddbc8bdeac8417c4a436123d82061708b04804",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-inverting-negative.kerml": "d632679cd130ca912fc2fd71448fc510530ba0e90318ff861523aacda52ac74b",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-package-endpoints.kerml": "788df85bc513418ab4c57a47c039407a263a299b62ac8f4fe08be5d75307a346",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-redefinition-negative.kerml": "0e4de287820259038b85c924cea2267e1f7b59a23ebe7f3533a5bc46d154330a",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-specialization-negative.kerml": "3ede81964db1ae302d217b42b911c8c05a177569840f898750b387c11b41aee8",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-subclassification-negative.kerml": "a46645539b01772aa1dcf33d37ac190cfe1005c2c3711b0e7d9de884146dc7b5",
+      "crates/mercurio-tools/corpus/release-2026-08/relationship-subsetting-negative.kerml": "669454e2a42d9c7dfb637115820a0ff564fb01be8b40eece667610e65f7b4b4e"
+    },
+    "binaries": {
+      "audit_release_compile.exe": "4bf7cbbc5f700797bf2f1f9fe46978a5d563b362d068c22a76953ce6aaa96b3d",
+      "compare_pilot_semantics.exe": "2e676d306166c7c71e4c976e423ff425270e3843686d33369cde3950e26580a6"
+    }
+  },
+  "oracle_reuse": {
+    "scope": "Five original G02 targets, same 25-source context; not a milestone assessment",
+    "prior_assessment": "..\\target\\assessment-2026-08-declaration-validation",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_export_sha256": "f12cf35fda37a4fa84efd964b2c0c9cb6cd0c81a56c406abb88ed29cae402e6f",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "helper_class_sha256": "f537b8afce2535738b561fb779c970b4ed8a812e6a05a62f1898a1c94d17296c",
+    "sources": {
+      "kerml/src/examples/Simple Tests/ArgumentResolution.kerml": "ef41aea0c874d82dd385268eb17c632749ad5b941155cd7b2a5ce01fc6be35a2",
+      "kerml/src/examples/Simple Tests/Associations.kerml": "7847ecc8040da796396255a14da86644ca5721833508928a7f87918d6dedfd49",
+      "kerml/src/examples/Simple Tests/Behaviors.kerml": "12bb9172091ee9691d25175059329b9f44d2ae2572aa0e10ce95b377bb09c082",
+      "kerml/src/examples/Simple Tests/Circular.kerml": "823e6b6b459cb841fa50da55b6505d8ffad2368cd3e9cb91425131e487b1762b",
+      "kerml/src/examples/Simple Tests/Classes.kerml": "ffb8a13917841c9924cbb1a6105be515ac460a8df1b8bee92bd20454af4504f4",
+      "kerml/src/examples/Simple Tests/Classifications.kerml": "f8d9b7bdcf766d6dcb9a960bc79d002e00df5bfb50579ea8c2c4ab94bca93fbd",
+      "kerml/src/examples/Simple Tests/Classifiers.kerml": "a7880ec2c57a9102880e2f8099035f94094b578c623ca1533a3b31d7a42730f8",
+      "kerml/src/examples/Simple Tests/Comments.kerml": "b1b7d95f9558bfad81b63448a5197e90b6095abf35fc7797a27555f92e9fb30d",
+      "kerml/src/examples/Simple Tests/Conjugation.kerml": "692d4259e957d263495a2196721ef2b6feb1edf77d842ffabbaf6432efeb5e97",
+      "kerml/src/examples/Simple Tests/Connectors.kerml": "368e6ee6200753e84659b229b6a0ff9a998260058c67d69eeef049731a18f84b",
+      "kerml/src/examples/Simple Tests/Dependencies.kerml": "788df85bc513418ab4c57a47c039407a263a299b62ac8f4fe08be5d75307a346",
+      "kerml/src/examples/Simple Tests/Expansion.kerml": "ad0b0c916c227753fa4473212c9ac884dbd941d882322331d70bf3b998d6106f",
+      "kerml/src/examples/Simple Tests/Expressions.kerml": "bde514f7236c6206848574ca416688c1ee34b6e12d2dc522db166b8977f8b041",
+      "kerml/src/examples/Simple Tests/FeatureChains.kerml": "c25e39f9287b0f48934106065144047ae8313ac1776680c4acc438ad202718ce",
+      "kerml/src/examples/Simple Tests/FeatureInheritance.kerml": "86b9e1e8ad5e8eacef5e5576d727c722d4414bbf38fe9181d215aff4a3ad1bbe",
+      "kerml/src/examples/Simple Tests/Features.kerml": "45adcd57a019661daa1522e8a8bc3847f99870917ce1ca04054434bd6d1509c2",
+      "kerml/src/examples/Simple Tests/Filtering.kerml": "9de3e9969a02419eee2db0f89985e86c7012f08314bba4f2db5335e7b40f131c",
+      "kerml/src/examples/Simple Tests/Imports.kerml": "fdcdc033ac07b4477d3aa00082f2bb77138bf40b533800cc68536c2f4174072e",
+      "kerml/src/examples/Simple Tests/Inheritance.kerml": "76c818ba239c56269f93565a697a4edc504c1f0e78415fb0f231bcad38b6233c",
+      "kerml/src/examples/Simple Tests/Inverses.kerml": "6ab43c8e7062cfa48a2f0f9ed54b73356098244874ac64c4c89d34f5e43101cd",
+      "kerml/src/examples/Simple Tests/MetadataTest.kerml": "a9660b8ad6ea79534a98ece570244c49d5f961c2434bab88f48e32e6d2fa359b",
+      "kerml/src/examples/Simple Tests/Redefinition.kerml": "e5f74efd661737a4564f9badc715d402d155995dd23a233a26602a6ec86f290c",
+      "kerml/src/examples/Simple Tests/Scoping.kerml": "47a68673ab45a281aefd0a971abec79901c60ae5965ccc5180e753c52fae1015",
+      "kerml/src/examples/Simple Tests/TextualRepresentation.kerml": "064456e4d6d453e04d828390ae8d886af4f36dc01eda0ed5b482f8a5be1cc1f9",
+      "kerml/src/examples/Simple Tests/Types.kerml": "842b5b8053eb80142e8e90e58d7cd5ac5df9dc1c3699ab7dff4e79f6c69198a7"
+    },
+    "comparator_sha256": "2e676d306166c7c71e4c976e423ff425270e3843686d33369cde3950e26580a6"
+  },
+  "original_comparisons": {
+    "Classifiers": {
+      "path": "..\\target\\support-2026-08\\relationship-original-cases\\Classifiers.json",
+      "sha256": "92d0a26cae22328195b21d0c24347bfdee8b45a2b8094002397fac4e1c372737"
+    },
+    "Dependencies": {
+      "path": "..\\target\\support-2026-08\\relationship-original-cases\\Dependencies.json",
+      "sha256": "1b433ffe8c9630b4b62496a45632e7c1510611b53551885bec5a6298dfa7e9db"
+    },
+    "Features": {
+      "path": "..\\target\\support-2026-08\\relationship-original-cases\\Features.json",
+      "sha256": "8eb4143f1e2bb9f61a94bca913c7a87b4533dacd197b18cf4bf61e8af878e9bd"
+    },
+    "Inverses": {
+      "path": "..\\target\\support-2026-08\\relationship-original-cases\\Inverses.json",
+      "sha256": "0f8da01dcaa4f8051ac6c3fbc86ccab2196a92fdebcd1f831c7ef631a3c1bd84"
+    },
+    "Types": {
+      "path": "..\\target\\support-2026-08\\relationship-original-cases\\Types.json",
+      "sha256": "1ef81950d4acd100e6454bf51e05c5b89b3ce86a902a447499842ba1a52504cb"
+    }
+  },
+  "logs": {
+    "relationship-focused-tests.log": "eee4c2938e084731f2e5e5e2adf2a475d1dcfa38d61d686ec2168c2fbbe37c5e",
+    "relationship-candidate-tests.log": "53b937f28b1556c8f9e76fc22355aa68c6d1f3174ce66da76e156b84987faac9",
+    "relationship-debug-build.log": "ee98f9d65c4f54c508e0740b75873c7191b4343983452a25be94f4e82999053b",
+    "relationship-corpus-preflight.jsonl": "7a71dee8e19121cd5bc1bfddc4d36d107c8bf5a1e5826a513285d122f1a4f8ce"
+  },
+  "fresh_controls": "../../../crates/mercurio-tools/corpus/release-2026-08/relationship-declarations-pilot-results.json",
+  "verification_scripts": {
+    "run-relationship-focused.py": "ac9ecf44935c00fef0f2bb1975fd1b334cd7d269761530201dedd38cc3cd127b",
+    "run-relationship-original-cases.py": "b58177e4f16c19ac81cb69454ba68ff1d5bb538ab39f573471e44d9a29dc2147",
+    "audit-relationship-original-cases.py": "9f0d252c3ae21935223c33c13a8aad83824ac1f2536807a1ff693141cba8df14"
+  },
+  "deferred": {
+    "full_310_semantic_comparison": "M1 after G03/G04",
+    "performance_benchmark": "M1",
+    "full_unit_suite_and_wasm": "M1",
+    "complete_relationship_legality_and_implicit_semantics": "G06/G07/G13"
+  },
+  "limitations": [
+    "Negative controls agree on rejection; native endpoint diagnostics do not claim exact Pilot issue-code parity or all secondary diagnostics.",
+    "Inline-chain evidence covers the original inverse case and focused step/type/link regression, not complete computed-chain semantics.",
+    "Other graph differences remain open; no promotion or full-support claim."
+  ]
+}

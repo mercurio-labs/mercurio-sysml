@@ -1,0 +1,50 @@
+{
+  "schema": "dev.mercurio.shared-typing-evidence.v1",
+  "artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "artifact_sha256": "209e7c3c1059748eb17d5000f002d969478a85a4749c1395efddb777bc7f26b9",
+  "scope": "Exact Feature typing and exact Association/AssociationStructure type projections using supported native generalization providers",
+  "feature_controls": 8,
+  "association_controls": 8,
+  "matching_controls": 15,
+  "normative_disagreements": [
+    "feature-type-disagreement.json"
+  ],
+  "native_consumers": [
+    "definition_feature_types",
+    "definition_implicit_feature_generals",
+    "definition_reference_targets"
+  ],
+  "implementation": "Handwritten cycle-safe typing closure over imported Ecore relationships, generated generalization providers and shared specialization. Redundancy uses the written simultaneous rejection predicate; Association projections use imported uniqueness contracts. Java is build-time only.",
+  "verification": "All 16 stored models and persistence round trips match. Seven Feature derived queries and eight Association projection sets match Pilot. One cyclic classifier derived query follows the written specification and explicitly differs from Pilot. Mutation and unassessed-provider rejection are tested.",
+  "unsupported": [
+    "Feature subclass adapter overrides",
+    "Conjugated and crossed typing providers",
+    "Feature valuation and semantic metadata contributors",
+    "Complete global resources and implicit relationship materialization",
+    "Complete sample/release qualification"
+  ],
+  "matching_source_models_total": 144,
+  "families_closed": 0,
+  "release_gates_closed": 0,
+  "focused_native_tests": 96,
+  "tooling_tests": 60,
+  "checks": [
+    "Pinned Feature/Association exporter --check",
+    "Structural coverage regeneration and --check",
+    "Bounded ordinary-strategy certificate validation",
+    "git diff --check"
+  ],
+  "full_native_regression": {
+    "passed": 756,
+    "failed": 0,
+    "seconds": 228.42,
+    "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-shared-typing-full.log",
+    "sha256": "feb2e6b3db729c624ab9b710d3f15d362f1805ddd78cde39f274933699ae9be9",
+    "scope": "Native library regression only; not complete samples, Pilot semantics, or performance qualification"
+  },
+  "current_focused_reverification": {
+    "tests": 99,
+    "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-usage-provider-focused.log",
+    "sha256": "60a7e066e82f5838abb0cef474e87ec7ab3f137ae5e10b0f4cc54218a940dd75"
+  }
+}

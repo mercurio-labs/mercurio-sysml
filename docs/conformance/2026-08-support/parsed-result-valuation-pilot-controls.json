@@ -1,0 +1,494 @@
+{
+  "controls": [
+    {
+      "case": 0,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::Anything": "Classifier",
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "Links::BinaryLink": "Association",
+        "Links::Link": "Association",
+        "Links::selfLinks": "Feature",
+        "Occurrences::Occurrence": "Class",
+        "Performances::Evaluation": "Function",
+        "Performances::Performance": "Behavior",
+        "Performances::evaluations": "Expression",
+        "Performances::literalIntegerEvaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe0 { function f { return : ScalarValues::Integer = 1; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 1,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression",
+        "Performances::literalBooleanEvaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe1 { function f { return : ScalarValues::Boolean = true; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 2,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'+'": "absent",
+        "DataFunctions::'+'": "Function",
+        "Links::selfLinks": "Feature",
+        "Occurrences::occurrences": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression",
+        "Performances::performances": "Step"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe2 { function f { return : ScalarValues::Integer = 1 + 2; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 3,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'if'": "absent",
+        "ControlFunctions::'if'": "Function",
+        "DataFunctions::'if'": "absent",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe3 { function f { return : ScalarValues::Integer = if true ? 1 else 2; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 4,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe4 { function f { in x: ScalarValues::Integer; return : ScalarValues::Integer = x; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 5,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        }
+      ],
+      "library_lookups": {
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'.'": "absent",
+        "ControlFunctions::'.'": "Function",
+        "ControlFunctions::'.'::source::target": "Feature",
+        "DataFunctions::'.'": "absent",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe5 { function f { in e1: Collections::KeyValuePair; return : Base::Anything = e1.key; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 6,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        }
+      ],
+      "library_lookups": {
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'.'": "absent",
+        "ControlFunctions::'.'": "Function",
+        "ControlFunctions::'.'::source::target": "Feature",
+        "DataFunctions::'.'": "absent",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe6 { function f { in col: Collections::Collection; return : Base::Anything = col.elements; } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 7,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        },
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::dataValues"
+        }
+      ],
+      "library_lookups": {
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe7 { function f { in col: Collections::Collection; return : ScalarValues::Natural = SequenceFunctions::size(col.elements); } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 8,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Redefinition",
+          "target_kind": "Feature",
+          "target_name": "Performances::Evaluation::result"
+        }
+      ],
+      "library_lookups": {
+        "Base::DataValue": "DataType",
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'#'": "Function",
+        "Collections::Collection": "DataType",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 1,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": true,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe8 { function f { in indexes: ScalarValues::Positive[1..*]; return : Base::Anything = indexes#(1); } }",
+      "status": "observed_component",
+      "valuation_present": true
+    },
+    {
+      "case": 9,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::things"
+        }
+      ],
+      "library_lookups": {
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'.'": "absent",
+        "ControlFunctions::'.'": "Function",
+        "ControlFunctions::'.'::source::target": "Feature",
+        "DataFunctions::'.'": "absent",
+        "Links::selfLinks": "Feature",
+        "Occurrences::occurrences": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::Performance::enclosedPerformances": "Step",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 0,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": false,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe9 { function f { in e1: Collections::KeyValuePair; e1.key } }",
+      "status": "observed_component",
+      "valuation_present": false
+    },
+    {
+      "case": 10,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::things"
+        }
+      ],
+      "library_lookups": {
+        "Base::dataValues": "Feature",
+        "Base::things": "Feature",
+        "BaseFunctions::'#'": "Function",
+        "Collections::Collection": "DataType",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::Performance::enclosedPerformances": "Step",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 0,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": false,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe10 { function f { in indexes: ScalarValues::Positive[1..*]; indexes#(1) } }",
+      "status": "observed_component",
+      "valuation_present": false
+    },
+    {
+      "case": 11,
+      "direction": "out",
+      "effects": [
+        {
+          "kind": "Subsetting",
+          "target_kind": "Feature",
+          "target_name": "Base::things"
+        }
+      ],
+      "library_lookups": {
+        "Base::things": "Feature",
+        "BaseFunctions::'if'": "absent",
+        "ControlFunctions::'if'": "Function",
+        "DataFunctions::'if'": "absent",
+        "Links::selfLinks": "Feature",
+        "Performances::Evaluation": "Function",
+        "Performances::Performance::enclosedPerformances": "Step",
+        "Performances::evaluations": "Expression"
+      },
+      "owned_return_parameter_memberships": 0,
+      "resource_errors": [],
+      "result_kind": "Feature",
+      "result_owned_by_callable": false,
+      "result_owner_kind": "Function",
+      "source": "package ValuationProbe11 { function f { in x: ScalarValues::Integer; if x <= 1 ? x else x + 1 } }",
+      "status": "observed_component",
+      "valuation_present": false
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "397f95d065a93a59da5da92140fa2023c2847b52d1fe2a453e69b6c95d3ad003",
+    "helper_sha256": "1985e6aea600d1de649e7b1fb4419e748ca8e4fea41858be96c5a0b01a124b58",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "library_inputs": {
+      "sysml.library/Domain Libraries/Analysis/AnalysisTooling.sysml": "9c42e7b07c31d0c6f5add4da41e2c6b08fd7d07adeac79b69619c7887a8c0a60",
+      "sysml.library/Domain Libraries/Analysis/SampledFunctions.sysml": "2fc1fb0e887754c598158fa137c02c5c565a9355318788150890433b659b6a23",
+      "sysml.library/Domain Libraries/Analysis/StateSpaceRepresentation.sysml": "e216ad311376c97216703d5a99d6a2725e02ec66dad8c6c4e2374cf0b4e4d34a",
+      "sysml.library/Domain Libraries/Analysis/TradeStudies.sysml": "92ef291e85a292cb4012c9630e3095c9c5d8a394501385e62e71b375b966236e",
+      "sysml.library/Domain Libraries/Cause and Effect/CausationConnections.sysml": "ba6f0b12b0d74360e3cfb4db6dee719db01a676c109d30fae33e610da1c2d241",
+      "sysml.library/Domain Libraries/Cause and Effect/CauseAndEffect.sysml": "e8dbd601bf6e5a0f4023561c8add8936e127430f34f38ae06d40f550599e6485",
+      "sysml.library/Domain Libraries/Geometry/ShapeItems.sysml": "e7f713a959a56fbbb78455386623f1fe410fa67c1a253ca1487c1d0bb3135962",
+      "sysml.library/Domain Libraries/Geometry/SpatialItems.sysml": "8f0a399026360f36b8b271392541dcc218227fbae90ba185a0d9462b6edeea15",
+      "sysml.library/Domain Libraries/Metadata/ImageMetadata.sysml": "d0d39b4be26f697f6db3359eb7b3a5cd3eb133077a8698a610708a992a29afab",
+      "sysml.library/Domain Libraries/Metadata/ModelingMetadata.sysml": "6214cf07d16a3405692f8414798930cd8869f183367d9c827eb5c70ab5af2397",
+      "sysml.library/Domain Libraries/Metadata/ParametersOfInterestMetadata.sysml": "51474ef5606a9f2be33b860e85b4758008573591b6f3dba984fd40aa5a2ca694",
+      "sysml.library/Domain Libraries/Metadata/RiskMetadata.sysml": "ee822eefcc56e16a775f7a941bcc068668fdb64fa829dfeb2438a0e91e11f6de",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQ.sysml": "7c67aa8b16201bea752d26943388304a5d8c97d101e14d4663150f6984dfd563",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQAcoustics.sysml": "a212e1b1e96cb7270912ec201d87c9c6c793132555c6ec3477ba34ed8c9df0cb",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQAtomicNuclear.sysml": "95976d154514bc66348fbdf5786fa209d57f6c6bb54d239dde8452abbb2ab24a",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQBase.sysml": "82f91f99155e1ee9fa23acb3e9cea4bec39d86138ad95b54a3a7ea9d7e692b89",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQCharacteristicNumbers.sysml": "75227197c3ada14f522cb80e9d98566d4d486b748734f0fd352cb5f3bf380475",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQChemistryMolecular.sysml": "2d00ef50cb9ef25fe7144d3a0bb82a72f3ca6bb61776192fd3b797cd3e49176a",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQCondensedMatter.sysml": "60188ea7c02f19cc2440a95d8eafea881e33d758a7225877be08e1ebeb6f6636",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQElectromagnetism.sysml": "d4f286af34060889109a8f59134f2d036a20d30dcfb9b3adc68228950550a504",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQInformation.sysml": "0cdbd940fe6b4879a1cd044b70e6a6dec5773690d4c2f4eb01887ebcc347fa77",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQLight.sysml": "8221b57a3b82a5ff28a481ae93a6fd9bd6de4ba1695cb27b0e554c5192ae87e3",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQMechanics.sysml": "507f9be9eb54353d5b9e487ee70fb28a9327cb2ed591a5ed04939dfe6ebdb964",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQSpaceTime.sysml": "934d6725ca490c078f042cc3ba8ef4c09da19a41f30da5b5d32da3f3909ba462",
+      "sysml.library/Domain Libraries/Quantities and Units/ISQThermodynamics.sysml": "ae0929b78c0b08f635e976ad52727ad8626f492970d47e7f7f5be54110524c92",
+      "sysml.library/Domain Libraries/Quantities and Units/MeasurementRefCalculations.sysml": "4eca94723410a11906abf2183db2bc82f849a63b8e6323b27beef363e42e298c",
+      "sysml.library/Domain Libraries/Quantities and Units/MeasurementReferences.sysml": "663d7b2e503fd7dcdd12d174b03a5eefd95735b71ac34d682f3b85e055f76517",
+      "sysml.library/Domain Libraries/Quantities and Units/Quantities.sysml": "d4ed609e120e50dcb93f67922624863d98581b5275f8032b8172202040055bb6",
+      "sysml.library/Domain Libraries/Quantities and Units/QuantityCalculations.sysml": "ef235e95327b476f45abb270b04fe37cdc51f6271683b8629c79019bae688d86",
+      "sysml.library/Domain Libraries/Quantities and Units/SI.sysml": "c6af4b72d6d098b7655f737ee162e7bae58089e8bcf7b9209e71041707c1e4e0",
+      "sysml.library/Domain Libraries/Quantities and Units/SIPrefixes.sysml": "90e604fcda40f8ec920114a457097cb2fed6d898d422c80277b4c8e9c3e70638",
+      "sysml.library/Domain Libraries/Quantities and Units/TensorCalculations.sysml": "0011fefd4cc62d3c1cb252a73a4a5b1a8024fb1bb2d69f626344690dc63d2923",
+      "sysml.library/Domain Libraries/Quantities and Units/Time.sysml": "3db3dde710d3298fbfa6c148972743c4a88e9371b4c1166a29e22a9600cd6fd5",
+      "sysml.library/Domain Libraries/Quantities and Units/USCustomaryUnits.sysml": "52a817f637ae237386b227d4c7a3a0401dbd494853719dbd210eb784fe68db70",
+      "sysml.library/Domain Libraries/Quantities and Units/VectorCalculations.sysml": "61dab53484ca1141036be18bcbc07d3ecd2a5668cf80792da8cd38175da1315d",
+      "sysml.library/Domain Libraries/Requirement Derivation/DerivationConnections.sysml": "f9f587423c1151f6ea89dae3e4a2e9b446906c5660bd8b3532952876fd9b9adc",
+      "sysml.library/Domain Libraries/Requirement Derivation/RequirementDerivation.sysml": "ae3e65ca5c709869163cf17d04114ff7a6263c5b6f03d7ab05d62e0459d07f5d",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "sysml.library/Kernel Libraries/Kernel Data Type Library/VectorValues.kerml": "4d0d194f3437d15d10c978912ec7d2d3eadab926881ea61d2b724b8cdb7217d5",
+      "sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml": "728420cf580a119310f319b142e7d38932e556745a2508e6ce9453d243bc6a54",
+      "sysml.library/Kernel Libraries/Kernel Function Library/BooleanFunctions.kerml": "4da6ad54f1e36ecf22f538a4b5153cb2a9831870b190b291e73e4c7a21e7ac50",
+      "sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ComplexFunctions.kerml": "df0347537e6f711f3d60c1798335ef354afc420726bdc5919a80fafa348cc97a",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a",
+      "sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml": "8c219a2becac038dcbf101ddf64eee57b568dcd95b204be26c2ed3a83ec510af",
+      "sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6",
+      "sysml.library/Kernel Libraries/Kernel Function Library/NaturalFunctions.kerml": "9bf320732fbc48685a296771384489130353ac22c33bb68c54b238ce554fb8ee",
+      "sysml.library/Kernel Libraries/Kernel Function Library/NumericalFunctions.kerml": "702ab0f027b46621c31e316de0d0108538da4b87e959a41fad464ada153acf58",
+      "sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml": "5a6a9e18199c6072252b99d82ad7b04657290475f1c2acee46a9b5ae0fec21d9",
+      "sysml.library/Kernel Libraries/Kernel Function Library/RationalFunctions.kerml": "e3ab60e171c271566878a27984391f57db1b9557cdf0dc9f0ec28d2ac4c0b3a4",
+      "sysml.library/Kernel Libraries/Kernel Function Library/RealFunctions.kerml": "ef861eb293190368dd4cae24f190e8803a3bb2ac01a31c6d95eda1b71ac0e2ec",
+      "sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98",
+      "sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869",
+      "sysml.library/Kernel Libraries/Kernel Function Library/StringFunctions.kerml": "c52d1f5450cec75267970d18f4206ba552db033432ceea6f8ecc4e6bac4ceb59",
+      "sysml.library/Kernel Libraries/Kernel Function Library/TrigFunctions.kerml": "614c0f168370a2efc292b40712401d57a186ef065ddebfbd63dab598701a580f",
+      "sysml.library/Kernel Libraries/Kernel Function Library/VectorFunctions.kerml": "dba38be553b153af66e1a008e08072f9f8aa76ee4695c7b4bc9586498dec1125",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml": "d7433722414a609f0ad2583b2f910e1c34a2bc1d7ac3abfe7ebbb7c239941f60",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml": "b6f9e5349c7c7f393591c0334c3bec86f1766b3e37209819179310c2f8fe1fb7",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Observation.kerml": "cbf87b0e9e358f0a1cf5ec99128a2abd5ccd59af67b696efc9581239e86a01a9",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/SpatialFrames.kerml": "1c7095c4845fa24bdb51c3affe617dc723e054aea2abebfafcba1a1687c49de3",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml": "47da8348d01c426c0839b679e87a35fb58d090a43c0faa4514542cc83e893e3a",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml": "407c222276f63b32fae108ac3c886671198894e6ff4c2beec6b6ce091fe910f9",
+      "sysml.library/Kernel Libraries/Kernel Semantic Library/Triggers.kerml": "7819af0ada0d753c2e3bbe395282f218e9829ca297012eb7aae5861db094631e",
+      "sysml.library/Systems Library/Actions.sysml": "f80cc391abd8f5d8171d581788c8595cd44811779a47259fd5d24680e3fe300b",
+      "sysml.library/Systems Library/Allocations.sysml": "77c881254d552847ee3ac5686ff84fa7baaa9e90541b59f2b3221cc1752be56f",
+      "sysml.library/Systems Library/AnalysisCases.sysml": "839177ea10bf5eae65b8eac406c99ca54cea7404e075e77ae937b19d7c485da1",
+      "sysml.library/Systems Library/Attributes.sysml": "eb853c5bc97965d726478e6de7e1323ea7c236b0ad69fb03fb43852b2f711bf1",
+      "sysml.library/Systems Library/Calculations.sysml": "e35be6d273ea61ca86cd2e7d77b0e7a5d5f714d984e9a601ecfb1bfa6e225271",
+      "sysml.library/Systems Library/Cases.sysml": "207bc825621bcef5c365a779e1e87c0cfe1bc49e44f6c0d7cc1ca2677503cf16",
+      "sysml.library/Systems Library/Connections.sysml": "13c20eb2e2388646bb23ae8d204fb2dccfe9d1ef07ddb9ac6528fbe37200a701",
+      "sysml.library/Systems Library/Constraints.sysml": "a8085cadbaa9bc4e4f1b2460c2facfbea8cb7ea3e0436e1ce9a6230daa16b757",
+      "sysml.library/Systems Library/Flows.sysml": "89567552fea20e13b615ab7f3e76588bec9e9c7ffcfa94340eb74c742d36ebee",
+      "sysml.library/Systems Library/Interfaces.sysml": "eac8920019f6fea45c39ab550ea2e7bcde0773a569db969ed178a284a9b62873",
+      "sysml.library/Systems Library/Items.sysml": "508c789f9d8425176ce9f8c70cb7853d2848228920d17927aa4ab5e0088745e6",
+      "sysml.library/Systems Library/Metadata.sysml": "2261103c64c193b2ee1495a7ce8f5cf4711027388b640011d0c380a77de9c916",
+      "sysml.library/Systems Library/Parts.sysml": "127a820928b34628c5cdb34444debab9bc93a63284ba5e6dd6bb2c8707ea9b2c",
+      "sysml.library/Systems Library/Ports.sysml": "a5d0e567124a734437648c986e71b6a892557711f5643c429d2c7cf4598805be",
+      "sysml.library/Systems Library/Requirements.sysml": "e6b715b569bb99629990ad554c51e0094a1de6c6fa2439093ab9a830d635b10f",
+      "sysml.library/Systems Library/StandardViewDefinitions.sysml": "2075fe906ddeefb5e8b38ee681acd3b6409a5ec2c1b04135a4a9d013c9d35ec8",
+      "sysml.library/Systems Library/States.sysml": "10d503f4409549df91ec71dbcdc7633994d1275947b0d69f3c755c647dd84b82",
+      "sysml.library/Systems Library/SysML.sysml": "9879496bc52b75fae6915d8ea4b1ef2e60b8f81e8df9b86e7b951c290ca36be6",
+      "sysml.library/Systems Library/UseCases.sysml": "6dc9298dc491ef9b91214741c9977cd911b80e3bfc464b7ea2d3da96733b9f5f",
+      "sysml.library/Systems Library/VerificationCases.sysml": "498e93de337a79b6aea4421866dbdc4898d8471bdadb2b0f92507d599b9db346",
+      "sysml.library/Systems Library/Views.sysml": "068b8cbad08f21f194a462d6923a7705a84bbf3ad31727f7f032834530633539"
+    },
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945"
+  },
+  "schema": "dev.mercurio.parsed-result-valuation-controls.v1",
+  "scope": "Parsed result-valuation component observations using genuine typed pinned library declarations. No validation or native qualification. Dependency failures remain explicit."
+}

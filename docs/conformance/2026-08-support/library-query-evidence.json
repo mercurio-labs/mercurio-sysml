@@ -1,0 +1,251 @@
+{
+  "schema": "dev.mercurio.library-query-evidence.v1",
+  "scope": "Shared immutable library root/ancestor/path lookup through connected native general-type, inherited-scope and expression-default consumers. This optimizes existing bounded semantic services; it does not expand supported feature claims.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "b65346ecbe7712435580ac4c156d202268714adb51eede0c728943e8839b8992",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/name_dispatch_generated.rs": "5d5f83d5ff881897830fd55318af777481c8cdfaf950afc831dbc9fe12b206b9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-library-query-trace.log": "1fe66b15752dff442063f341feda510d2affde5bb8665de599142d35cfe10db0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-library-query-supervision.json": "b0934afd5cdd771c1caa5c0fe9de01eaa6bf902d280fb26e3bf6a8eb43342047",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/default_generals_generated.rs": "e4b052c98c94d44988f493c38a022932761330aca2b8f7a7db794f4a98a29059",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_defaults_generated.rs": "018a9a7ece7fd5a020d47b88e36bbf0c0a3fdf677b445cdff0dff737368757c7",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/expression_context_defaults_generated.rs": "a2326be0d66b1ee4834bcaa0904c8d08e91a4521103f3f646bfe216ff14ab286"
+  },
+  "imported_representation": [
+    "Pinned effective Ecore class ancestry and reciprocal ownership/opposite contracts",
+    "Generated effective-name and default-provider dispatch; explicit standard-library flags and names remain required"
+  ],
+  "native_consumers": [
+    "generated_parent_namespace_indexed",
+    "standard_default_binding_query",
+    "standard_default_binding_uncached",
+    "definition_general_type_inputs_with_view",
+    "definition_inherited_memberships",
+    "definition_expression_default_generals_query"
+  ],
+  "handwritten_boundary": "Canonical identity index, reciprocal containment traversal and lexical/library selection remain explicit handwritten Rust. Imported definitions select allowed fields, class conformance, names and defaults. No runtime Java or sample-specific library IDs.",
+  "invalidation_contract": [
+    "One immutable graph view owns successful names and local standard path results.",
+    "No error, external, deferred or construction-request value is cached.",
+    "Root checks scan actual standard LibraryPackages, reject nested/ambiguous roots and validate reciprocal ownership before selection.",
+    "Graph edits, dependency retries and serialized reload create fresh views; no cross-edit caches or completeness-flag changes."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-query-native-tests.log",
+      "sha256": "a9082f848e3ab31fb16a008b2f140efafa4a7f81317e217638dc2dc73ac56a9e",
+      "passed": 217
+    },
+    "boundary_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-query-boundary-tests.log",
+      "sha256": "ec67bdac787e1d23b5f68e730f475d24cee35b4b9c1d30cbb634152fc3ee01b8",
+      "passed": 2
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-query-tool-tests.log",
+      "sha256": "c6cd1e9a23cb1faf4281858e027cbfda28685b5311c5e2d7fd09c0e1a13add98",
+      "passed": 10
+    },
+    "contexts": [
+      "Successful repeated path lookup",
+      "Declared-name edit invalidates prior path",
+      "Persistence reload creates fresh state",
+      "Missing, ambiguous and nested roots remain rejected",
+      "Broken reciprocal containment rejected",
+      "Deferred alias reevaluated and never cached",
+      "Existing complete cached Pilot default, source-scope, ordering and persistence controls"
+    ],
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-query-certificate-tests.log",
+      "sha256": "dbf5d94764420d402bcc2b9301e06db75f2b4af8f4f35c114118b09300e966f6",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-query-plan-tests.log",
+      "sha256": "d454ffce4cecd7f60efc438e3370afb6d9580a9dba9160510d3e829c42c41554",
+      "passed": 14
+    }
+  },
+  "feature_status": {
+    "imported": "Existing pinned Ecore/name/default definitions retained",
+    "consumed": "Shared view now drives native root/ancestry/default path reads in connected consumers",
+    "semantically_verified": "Bounded controls and 217-test regression; no additional full feature-family closure",
+    "unsupported": "Existing unresolved semantic, delegate, metadata, specialized strategy and full-resource lifecycle dependencies remain guarded"
+  },
+  "cost_diagnostic": {
+    "status": "timed_out",
+    "semantic_qualification": "not_assessed",
+    "linking_budget_seconds": 55,
+    "wall_budget_seconds": 240,
+    "supervision": {
+      "elapsed_seconds": 112.9730249,
+      "exit_code": -1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "707bc6a2112bfc070015c3f8f36ab1e89e769203696999f1ceadb32456d6b376",
+      "wall_budget_seconds": 240,
+      "semantic_qualification": "not_assessed",
+      "linking_budget_seconds": 55,
+      "cpu_seconds": 100.484375,
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out"
+    },
+    "resources_parsed": 16,
+    "constructed_unpublished_elements": 12288,
+    "linking_started_ms": 56981,
+    "completed_reference_attempts": 153,
+    "successful_name_evaluations": 5790,
+    "summed_name_evaluation_ms": 9611,
+    "slowest_reference_attempts": [
+      {
+        "elapsed_ms": 6576,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 3894,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.15.owned_related_element.0.owned_relationship.3",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1434,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1390,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1376,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1366,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.4.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1365,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.4.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.expression.1.owned_relationship.0.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1351,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      }
+    ],
+    "inflight": [
+      {
+        "phase": "Reference",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.15.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.1",
+        "field": "redefined_feature",
+        "started_ms": 111534,
+        "kind": "Redefinition"
+      }
+    ],
+    "previous_completed_reference_attempts_in_same_link_budget": 134,
+    "diagnostic_delta": 19,
+    "interpretation": "153 completed attempts versus 134 previously in the same linking limit. Attempts include deferred dependencies and retries, not distinct qualified fields. This modest localization/progress gain is not a comparable Pilot benchmark or successful full-resource lifecycle.",
+    "next_fixed_batch": "Add bounded internal dependency/type-query tracing for the slow Collections expression-membership query and its Performance redefinition prerequisite. Identify dominant nested evaluator and repeated query keys, then extend the same immutable view into that connected semantic slice. Reuse cached observations; do not change unsupported/deferred guards or repeat unbounded closure runs."
+  },
+  "metrics": {
+    "matching_pilot_models": 155,
+    "ordinary_feature_bindings_verified": 50,
+    "ordinary_feature_bindings_total": 79,
+    "bounded_obligations_closed": 7,
+    "bounded_obligations_total": 9,
+    "whole_families_closed": 0,
+    "whole_families_total": 34,
+    "release_gates_closed": 0,
+    "release_gates_total": 5
+  },
+  "qualification_boundary": "Passing read/cache controls do not qualify a full resource or release gate. Candidate remains unpromoted.",
+  "resource_inputs": [
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "sha256": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "sha256": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "sha256": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "sha256": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "sha256": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "sha256": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "sha256": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "sha256": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "sha256": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "sha256": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "sha256": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "sha256": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+      "sha256": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0"
+    }
+  ]
+}

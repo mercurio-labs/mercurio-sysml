@@ -1,0 +1,128 @@
+{
+  "schema": "dev.mercurio.feature-owned-end-contributions.v1",
+  "scope": "Exact Feature ends under an exact Feature owner use the existing imported positional strategy. This batch also preserves an assessed crossing-chain wrapper after its exact untyped Feature default is inserted. Complete adapter transformation and semantic validation are not qualified.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "da8db14ea1d32b1edda29433f9a9ea9ee536438d0364987b00b30099d0b34c96",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "7e4e6234d90a9bd5a6c5c1c1e0b7705190c64bdf622bb31c0ef37ac81f247aaa",
+    "crates/mercurio-sysml/src/definition_document.rs": "3a4dffba14135211e0837ff4a4dfdfa9daaa1752a2a6f06d04f6e07d11672794",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureOwnedEndProbe.java": "f42fb34dcf56f783b6a7e70a838363092fa95c5cff9b21f51ed42978ec04f6e8",
+    "tools/run_feature_owned_end_probe.py": "cc8cc33152bdc50f3b75f37da68a1bee7aa1f6d39a33ee86e33fff7497e6820b",
+    "docs/conformance/2026-08-support/feature-owned-end-pilot-controls.json": "1b8b4a0dfd7dd0583285c3d4024222f28af43d6c3657248f33fc7ba92cee0302",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "8ba49953cf72f0196d1e5f9de1cbdb524d9d6eac192687003df3a15b4792f6d1",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "71dbfee234b30e418d693f8985ab15543d4eb08b5ca7320e118555eae93c7a6a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "26074f3979325af256fa818da622e43f5215b3197221e3c4578b9c8afe3c3b86",
+    "docs/conformance/2026-08-support/cross-feature-pilot-controls.json": "2d15af7ffceb5940be36bfbcfb6844bf8bde2684222db4859e2b435a467d9fe0"
+  },
+  "imported_representation": "Pinned Xtext programs construct the source controls and canonical Ecore memberships/endpoints. Resolved default and positional-selection programs are native inputs; recorded delegate identities alone earn no implementation credit.",
+  "native_consumers": [
+    "definition_feature_owned_end",
+    "definition_ordinary_feature_inputs_with_owners",
+    "definition_positional_ends",
+    "definition_assessed_cross_chain_parts",
+    "materialize_feature_defaults",
+    "audit_release_compile --definition-defaults"
+  ],
+  "handwritten_dependencies": [
+    "canonical membership and owner context admission",
+    "ordered effective-end traversal and positional deduplication",
+    "recomputed partial default/positional target recognition",
+    "fixed-snapshot reduction and atomic relationship construction",
+    "crossing wrapper shape admission for the exact imported untyped default",
+    "KIR persistence and stage replay verification"
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-feature-owned-ends.log",
+      "sha256": "4e50c9a6b2b371d05da9869ec7344982a0f4c943e2abd61be6cedfbe4007dbe0",
+      "passed": 179
+    },
+    "audit_tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-owned-end-audit-tool-tests.log",
+      "sha256": "0c278df9877fb048753d84f26fc9a34f30e023a7bd6b11bf98d224c8fe5346e2",
+      "passed": 10
+    },
+    "independent_pilot_source_controls": 8,
+    "ordered_general_queries": 18,
+    "contexts": [
+      "direct Association typing of the Feature owner",
+      "owner subsetting another typed Feature",
+      "an extra local end beyond inherited positions",
+      "explicit end redefinition",
+      "both library/model declaration orders",
+      "canonical insertion and unchanged replay before/after KIR persistence",
+      "wrong position, owner inputs, membership and implied typing reject atomically",
+      "explicit compound and constructed binary crossing wrappers keep ordered chain identity; wrong default rejects"
+    ],
+    "oracle_reproduction": "Fresh export and --check reproduce the fixed eight-control observations with pinned source, jar, helper and driver hashes. New Java is build-time reference tooling only.",
+    "build_toolchain": {
+      "java_version": "Temurin 21.0.6+7-LTS",
+      "javac_version": "21.0.6",
+      "binaries": {
+        "D:/dev/jdks/jdk21/bin/java.exe": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+        "D:/dev/jdks/jdk21/bin/javac.exe": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25"
+      }
+    },
+    "real_library_audit": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-feature-owned-end-replay-results.jsonl",
+      "sha256": "91b577a41dc95f92b04e7dae389568bc67015727c4c588f7b363a625ec7cc73a",
+      "spec": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-inputs.json",
+        "sha256": "f1536dfbc872b5d2ee3827537316ab03e11c9462db6c0c31e4f9dc52cc4148dc"
+      },
+      "resources": {
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+        "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-control.kerml": "59582d1475f8c550f6494c841b7b07bc4796108ccfa16280a41e7c6a1243e7d0"
+      },
+      "results": [
+        {
+          "source_set": "Base-and-ScalarValues.kerml",
+          "feature_selector_domain_owners": 6,
+          "inserted": 2,
+          "element_count": 147,
+          "persistence_replay": "idempotent_after_kir_persistence",
+          "transformation_completion": "not_assessed",
+          "semantic_qualification": "not_assessed"
+        },
+        {
+          "source_set": "Base-ScalarValues-and-Links.kerml",
+          "feature_selector_domain_owners": 20,
+          "inserted": 6,
+          "element_count": 277,
+          "persistence_replay": "idempotent_after_kir_persistence",
+          "transformation_completion": "not_assessed",
+          "semantic_qualification": "not_assessed"
+        },
+        {
+          "source_set": "feature-default-source-control.kerml",
+          "feature_selector_domain_owners": 8,
+          "inserted": 4,
+          "element_count": 157,
+          "persistence_replay": "idempotent_after_kir_persistence",
+          "transformation_completion": "not_assessed",
+          "semantic_qualification": "not_assessed"
+        }
+      ],
+      "meaning": "All three candidate source sets execute both bounded contribution stages and replay unchanged after KIR persistence. Counts are not whole-model semantic qualification."
+    }
+  },
+  "normative_boundary": "The written specification remains normative. Existing end/reduction/default assessments apply; Pilot observes executable implementation independently. No new complete semantic model comparison, written-spec closure or validator success is asserted.",
+  "remaining": [
+    "required stored/derived-value validation using real delegate consumers",
+    "complete Association and other adapter contribution strategies",
+    "other Feature-owned end typing/variation/parameter contexts and semantic legality",
+    "full candidate sample/model comparison and comparable timing"
+  ],
+  "metrics": {
+    "native_test_delta": 3,
+    "matching_pilot_documents": 155,
+    "matching_pilot_documents_delta": 0,
+    "new_strategy_obligation_closures": 0,
+    "qualified_feature_families": "0/34",
+    "qualified_release_gates": "0/5",
+    "overall_completion_percent": null,
+    "candidate": "unpromoted"
+  }
+}

@@ -1,0 +1,976 @@
+{
+  "schema": "dev.mercurio.validator-coverage-overlay.v1",
+  "source": {
+    "authorship": "hand-curated implementation evidence, distinct from mechanically extracted Pilot facts",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "inventory_sha256": "629fe099ee35730eb503a086db1ca367564b3627aa1a277527725ee8f952ea29"
+  },
+  "qualification": "open",
+  "checks": [
+    {
+      "id": "KerMLValidator::checkElement",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 390,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkAnnotation",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 400,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkNamespace",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 420,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkImport",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 521,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkSpecialization",
+      "classification": "specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 532,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkType",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 540,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkClassifier",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 570,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkEndFeatureMembership",
+      "classification": "containment",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 583,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFeature",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 592,
+      "status": "partial",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing/feature_checks.rs",
+      "evidence": [
+        "feature-checks.extract.json",
+        "crates/mercurio-tools/corpus/release-2026-08/feature-validation-pilot-results.json"
+      ],
+      "scope": "Two extracted predicates only: variable features require an occurrence owning type, and portions cannot be variable. Constant KerML features are normalized as variable by the extracted postprocessor. Owner ancestry is checked through the available local/default/library graph; incomplete-library fixtures skip the ancestry predicate. Six Pilot controls cover two accepts and four rejections. Other checkFeature branches and complete computed owning-type semantics remain open."
+    },
+    {
+      "id": "KerMLValidator::checkFeatureChaining",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 692,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkRedefinition",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 705,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkSubsetting",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 763,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkCrossSubsetting",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 837,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkDataType",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 861,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkClass",
+      "classification": "specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 871,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkStructure",
+      "classification": "specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 881,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkAssociation",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 891,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkBindingConnector",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 922,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkImplicitBindingConnectors",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 932,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkConnector",
+      "classification": "specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 976,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkBehavior",
+      "classification": "specialization",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1037,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkParameterMembership",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1047,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkExpression",
+      "classification": "containment",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1064,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFunction",
+      "classification": "containment",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1082,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkReturnParameterMembership",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1100,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkResultExpressionMembership",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1109,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkCollectExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1118,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFeatureChainExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1126,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFeatureReferenceExpression",
+      "classification": "reference",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1145,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkInstantiationExpression",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1160,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkConstructionExpression",
+      "classification": "containment",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1173,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkInvocationExpression",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1196,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkOperatorExpression",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1246,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkSelectExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1265,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkIndexExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1273,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFlow",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1281,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFlowEnd",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1288,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkFeatureValue",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1316,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkMultiplicityRange",
+      "classification": "typing",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1333,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkMetadataFeature",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1353,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkElementFilterMembership",
+      "classification": "containment",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1409,
+      "status": "untraced"
+    },
+    {
+      "id": "KerMLValidator::checkLibraryPackage",
+      "classification": "bespoke",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 1422,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkDefinition",
+      "classification": "specialization",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 473,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkReferenceUsage",
+      "classification": "reference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 490,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 498,
+      "status": "partial",
+      "predicate": "validateUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkVariantMembership",
+      "classification": "containment",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 544,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkAttributeDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 552,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkAttributeUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 560,
+      "status": "partial",
+      "predicate": "validateAttributeUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkEnumerationDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 583,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkEnumerationUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 591,
+      "status": "partial",
+      "predicate": "validateEnumerationUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkEventOccurrenceUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 597,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkOccurrenceDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 618,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkOccurrenceUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 622,
+      "status": "partial",
+      "predicate": "validateOccurrenceUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkConjugatedPortDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 660,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkPortDefinition",
+      "classification": "containment",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 674,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkPortUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 689,
+      "status": "partial",
+      "predicate": "validatePortUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkConnectionUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 705,
+      "status": "partial",
+      "predicate": "validateConnectionUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkFlowDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 712,
+      "status": "partial",
+      "predicate": "validateFlowDefinitionConnectionEnds",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks source-owned end overflow only. Complete inherited-end collection and all diagnostic locations remain open."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/flow-end-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkFlowUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 728,
+      "status": "partial",
+      "predicate": "validateFlowUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkInterfaceDefinitionEnds",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 734,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkInterfaceUsageEnds",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 744,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkInterfaceUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 754,
+      "status": "partial",
+      "predicate": "validateInterfaceUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkAllocationUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 760,
+      "status": "partial",
+      "predicate": "validateAllocationUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkAcceptActionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 766,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkActionUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 774,
+      "status": "partial",
+      "predicate": "validateActionUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkAssignmentActionUsage",
+      "classification": "reference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 781,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkTriggerInvocationExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 796,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkControlNode",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 858,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkDecisionNode",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 870,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkForkNode",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 876,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkJoinNode",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 881,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkMergeNode",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 886,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkPerformActionUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 892,
+      "status": "partial",
+      "predicate": "validatePerformActionUsageReference",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Native checks explicit reference targets and preserves owned ReferenceSubsetting. Computed basic-feature chains and diagnostic multiplicity/location remain unqualified."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkSendActionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 900,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkForLoopActionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 920,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkIfActionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 934,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkWhileLoopActionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 942,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkExhibitStateUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 950,
+      "status": "partial",
+      "predicate": "validateExhibitStateUsageReference",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Native checks explicit reference targets and preserves owned ReferenceSubsetting. Computed basic-feature chains and diagnostic multiplicity/location remain unqualified."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkStateDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 956,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkStateSubactionMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 964,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkStateUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 973,
+      "status": "partial",
+      "predicate": "validateStateUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkTransitionFeatureMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 991,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkTransitionUsage",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1026,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkSuccession",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1065,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkCalculationUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1074,
+      "status": "partial",
+      "predicate": "validateCalculationUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkAssertConstraintUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1081,
+      "status": "partial",
+      "predicate": "validateAssertConstraintUsageReference",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Native checks explicit reference targets and preserves owned ReferenceSubsetting. Computed basic-feature chains and diagnostic multiplicity/location remain unqualified."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkConstraintUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1087,
+      "status": "partial",
+      "predicate": "Invalid Constraint Usage - invalid type",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkActorMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1094,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkFramedConcernUsage",
+      "classification": "containment",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1104,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkRequirementConstraintMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1112,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkRequirementDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1127,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkRequirementUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1136,
+      "status": "partial",
+      "predicate": "validateRequirementUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkSatisfyRequirementUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1148,
+      "status": "partial",
+      "predicate": "validateSatisfyRequirementUsageReference",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Native checks explicit reference targets and preserves owned ReferenceSubsetting. Computed basic-feature chains and diagnostic multiplicity/location remain unqualified."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkStakeholderMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1154,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkSubjectMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1163,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkCaseDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1174,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkCaseUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1186,
+      "status": "partial",
+      "predicate": "validateCaseUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkObjectiveMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1202,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkAnalysisCaseUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1217,
+      "status": "partial",
+      "predicate": "validateAnalysisCaseUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkRequirementVerificationMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1223,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkVerificationCaseUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1236,
+      "status": "partial",
+      "predicate": "validateVerificationCaseUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkIncludeUseCaseUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1242,
+      "status": "partial",
+      "predicate": "validateIncludeUseCaseUsageReference",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Native checks explicit inclusion reference targets and preserves owned ReferenceSubsetting; full basic-feature equivalence for computed feature chains remains unqualified."
+      ],
+      "tests": "crates/mercurio-tools/corpus/release-2026-08/include-controls/pilot-results.json"
+    },
+    {
+      "id": "SysMLValidator::checkUseCaseUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1248,
+      "status": "partial",
+      "predicate": "validateUseCaseUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkExpose",
+      "classification": "containment",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1254,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkRenderingUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1267,
+      "status": "partial",
+      "predicate": "validateRenderingUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkViewDefinition",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1273,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkViewRenderingMembership",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1279,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkViewpointUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1288,
+      "status": "partial",
+      "predicate": "validateViewpointUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkViewUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1294,
+      "status": "partial",
+      "predicate": "validateViewUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkMetadataUsage",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1303,
+      "status": "partial",
+      "predicate": "validateMetadataUsageType_",
+      "implementation": "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs",
+      "limitations": [
+        "Checks traverse declared types, extracted usage defaults, subsetting/redefinition, reference values, and available library inheritance, then remove redundant supertypes. Computed conjugation, cross-feature and arbitrary expression-result typing remain incomplete.",
+        "Other statements in this validator method are not qualified by its extracted type predicate."
+      ]
+    },
+    {
+      "id": "SysMLValidator::checkDataType",
+      "classification": "typing",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1311,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkClass",
+      "classification": "specialization",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1322,
+      "status": "untraced"
+    },
+    {
+      "id": "SysMLValidator::checkOperatorExpression",
+      "classification": "bespoke",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1333,
+      "status": "untraced"
+    }
+  ]
+}

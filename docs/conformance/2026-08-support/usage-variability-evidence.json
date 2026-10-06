@@ -1,0 +1,77 @@
+{
+  "schema": "dev.mercurio.usage-variability-evidence.v1",
+  "scope": "Bounded derived Usage.isVariable/mayTimeVary and shared compatibility on 47 concrete bindings, eight explicit variability contexts and direct/first-chain call sites. Supplied completed dependency fixtures do not qualify full models or cold libraries.",
+  "pipeline": {
+    "pinned_artifacts": "Ecore Usage mayTimeVary delegate and resolved Usage adapter/util/getter programs",
+    "resolved_frontend": "Javac parse+analyze; 3 semantic programs plus 8 guarded lifecycle/getter programs",
+    "generated_consumer": "Library roles, delegate exclusions and concrete getter inventory",
+    "native_consumers": [
+      "definition_may_time_vary_typed_query",
+      "definition_is_compatible_query variable branch and first-chain branch"
+    ],
+    "handwritten_rust_dependencies": [
+      "Canonical owning Type navigation and imported endpoint checks",
+      "Typed generalization/library-binding dependency propagation",
+      "Shared variability predicate and compatibility traversal"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "independent_controls": 752,
+    "concrete_bindings": 47,
+    "contexts": 8,
+    "call_sites": 2,
+    "persisted_forward_reverse_controls": 1504,
+    "atomic_pending_or_malformed_controls": 4,
+    "focused_native_tests_passed": 3,
+    "cache_integrity_tests_passed": 5,
+    "cache_reproduced": true,
+    "raw_reference_expectations_normalized": false,
+    "completion_flags_written": false,
+    "full_native_regression": "passes",
+    "optimized_build": "passes",
+    "full_normative_qualification": false,
+    "full_transformation_proven": false,
+    "resource_assessment_current_code": false,
+    "native_definition_tests_passed": 379,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "tool_binary_tests_passed": 11,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "tests": [
+    "definition_usage_variability_bindings_match_pilot_compatibility_and_persistence",
+    "definition_usage_variability_compatibility_preserves_pending_and_invalid_dependencies",
+    "definition_usage_variability_preserves_pending_owner_ancestry"
+  ],
+  "inputs": {
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotUsageVariabilityProbe.java": "a3822e45d06ae7fff9ddaa331292f3ba972813882f9ae6375813b1dfc89d929b",
+    "tools/run_usage_variability_probe.py": "c0aec87f73e6dcdf10b2e78b1ab36864d3280ddac6e5c07f97bd9e0d02d3ce08",
+    "tools/generate_usage_variability.py": "6742558982348bd87ba57fc23507113419a82cd9b15df3d3e6a6a529caa176eb",
+    "tools/test_usage_variability.py": "d5be30b7ee8c400b734da91e5ce74b85f17836cf87d3cc6f33286905895f5bd7",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/usage_variability_generated.rs": "859c541e9817d5fe5770b099a0f9d26fb24501b4356ee47dcd983c51b577fd4b",
+    "docs/conformance/2026-08-support/usage-variability-pilot-controls.json": "4f3ecbd785410655677cddb05c8bc22f47ee077117045127bd4fc99c2c9121ff",
+    "docs/conformance/2026-08-support/usage-variability-normative-review.json": "7a4c9e7ae14cf4902e2db3bb60d7a71d9eb5ca2661bf6a257e8d722ad4c27fa9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-focused.log": "d6e2c69c47656beeb1a9624305404da9ff794612403538fd46be3ec090fefbbe",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-tool-tests.log": "1f1012cb5a8b9210a51785fb25402d74b6f70fead8d910d94283dce0d7df2b10",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-release-build.log": "6eac3ce7de65a44484be59b9ccca1dd3ff20dfbe239c535b67fa5577863e8c08",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-cache-check.log": "ee72e372eaee47eea38dba228fe5c495890d317d85543aa3c7e9c9428b59d362",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-cache-tests.log": "4051ce989319b335914011ed848ce3067ddc606def95498fbf57dbe3cc7877e3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "remaining": [
+    "Actual cold owner/Usage/library lifecycle and implicit generalization completeness",
+    "Complete normative explanation and constraint verification for the two delegate shortcuts",
+    "Detached, conjugated, semantic-metadata and invalid-model contexts beyond these component fixtures",
+    "Whole resources, validators and family/global contracts"
+  ],
+  "qualification": {
+    "qualified_families": 0,
+    "required_families": 34,
+    "qualified_release_gates": 0,
+    "required_release_gates": 5,
+    "overall_percent": null
+  }
+}

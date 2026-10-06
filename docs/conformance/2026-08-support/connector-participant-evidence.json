@@ -1,0 +1,31 @@
+{
+  "schema": "dev.mercurio.connector-participant-evidence.v1",
+  "scope": "Exact Feature ends of exact ordinary Connector; supported explicit references/redefinitions and positional computed redefinitions",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "imported_sha256": "af02ee3169ca991d5a115227444e41ab078c5e1fd5a457266737d4af2105ed73",
+  "resolved_predicate": "FeatureAdapter.addParticipantSubsetting exact condition and effect; AST drift rejects generation",
+  "native_consumer": "feature_defaults_generated::participant_required, definition_general_type_inputs and shared specialization_owner_reference",
+  "independent_source_models": 5,
+  "independent_general_queries": 6,
+  "independent_projection_queries": 15,
+  "source_nodes": 145,
+  "source_reference_observations": 295,
+  "semantics": "Explicit redefinition does not suppress participant fallback. At least one computed positional redefinition suppresses it. Mixed-position cases preserve fallback for the unmatched end. Implicit generalization order and explicit/computed duplication agree with Pilot. Participant library lookup is skipped when suppressed and remains mandatory otherwise.",
+  "shared_dependency_fix": "Scalar reference reads now use the same imported Specialization owner delegate as collection queries; ReferenceSubsetting specific resolves through reciprocal containment, not a stored derived snapshot.",
+  "native_source_behavior": "Parsing, canonical construction, link resolution, source/target/related projections and persistence; no completeness flags supplied or fabricated.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "constraint": "checkFeatureEndSpecialization",
+    "pdf_page": 193
+  },
+  "normative_boundary": "The normative rule requires direct or indirect specialization of Links::Link::participant. Pilot suppression is an implementation strategy relying on computed redefinitions to preserve the indirect path. These cases do not qualify all association/connector hierarchies or complete semantic validation.",
+  "unsupported": [
+    "Implicit referenced-feature computation when no owned ReferenceSubsetting exists",
+    "Feature-owned ends and full Association generalization providers",
+    "Connector subclasses, valuation/crossing/metadata contributors",
+    "Complete release validation and sample qualification"
+  ],
+  "matching_source_models_total": 120,
+  "closure": "Ordinary obligations 3/4; families 0/34; release gates 0/5 unchanged."
+}

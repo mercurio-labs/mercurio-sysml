@@ -1,0 +1,837 @@
+{
+  "cases": [
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.kerml"
+        }
+      ],
+      "name": "kerml_qualified_forward",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::T; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.kerml"
+        }
+      ],
+      "name": "kerml_qualified_reverse",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/provider.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::T; }",
+          "uri": "memory:/consumer.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.kerml"
+        }
+      ],
+      "name": "kerml_import_forward",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { private import A::*; feature x : T; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.sysml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartUsage",
+          "name": "B.x",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartDefinition",
+          "name": "A.T",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.sysml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "PartDefinition",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.sysml"
+        }
+      ],
+      "name": "sysml_qualified_forward",
+      "units": [
+        {
+          "language": "sysml",
+          "source": "package B { part x : A::T; }",
+          "uri": "memory:/consumer.sysml"
+        },
+        {
+          "language": "sysml",
+          "source": "package A { part def T; }",
+          "uri": "memory:/provider.sysml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.sysml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartUsage",
+          "name": "B.x",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartDefinition",
+          "name": "A.T",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.sysml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "PartDefinition",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.sysml"
+        }
+      ],
+      "name": "sysml_qualified_reverse",
+      "units": [
+        {
+          "language": "sysml",
+          "source": "package A { part def T; }",
+          "uri": "memory:/provider.sysml"
+        },
+        {
+          "language": "sysml",
+          "source": "package B { part x : A::T; }",
+          "uri": "memory:/consumer.sysml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.sysml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartUsage",
+          "name": "B.x",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "PartDefinition",
+          "name": "A.T",
+          "uri": "memory:/provider.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.sysml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "PartDefinition",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.sysml"
+        }
+      ],
+      "name": "sysml_import_forward",
+      "units": [
+        {
+          "language": "sysml",
+          "source": "package B { private import A::*; part x : T; }",
+          "uri": "memory:/consumer.sysml"
+        },
+        {
+          "language": "sysml",
+          "source": "package A { part def T; }",
+          "uri": "memory:/provider.sysml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.kerml"
+        }
+      ],
+      "name": "kerml_alias_forward",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::Alias; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { alias Alias for T; class T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": false,
+        "target_path": null,
+        "target_uri": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 25,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'A::T'.",
+          "source_uri": "memory:/consumer.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": false,
+          "source_uri": "memory:/consumer.kerml"
+        }
+      ],
+      "name": "kerml_private_export",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::T; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { private class T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": false,
+        "target_path": null,
+        "target_uri": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 25,
+          "line": 1,
+          "message": "Couldn't resolve reference to Type 'A::Missing'.",
+          "source_uri": "memory:/consumer.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": false,
+          "source_uri": "memory:/consumer.kerml"
+        }
+      ],
+      "name": "kerml_missing_endpoint",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::Missing; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Upstream duplicate export selects first loaded provider; native rejection is a separate fail-closed policy.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/first.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/first.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/first.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/second.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/second.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/first.kerml"
+        }
+      ],
+      "name": "duplicate_export_first",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::T; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/first.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/second.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Upstream duplicate export selects first loaded provider; native rejection is a separate fail-closed policy.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/second.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "B.x",
+          "uri": "memory:/consumer.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/first.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/first.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/second.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Class",
+          "name": "A.T",
+          "uri": "memory:/second.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.kerml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "Class",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/second.kerml"
+        }
+      ],
+      "name": "duplicate_export_reverse",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "package B { feature x : A::T; }",
+          "uri": "memory:/consumer.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/second.kerml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { class T; }",
+          "uri": "memory:/first.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "boundary": "Stored FeatureTyping.type resource linking only.",
+        "resolved": true,
+        "target_path": [
+          "A",
+          "T"
+        ],
+        "target_uri": "memory:/provider.kerml"
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Package",
+          "name": "B",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "AttributeUsage",
+          "name": "B.x",
+          "uri": "memory:/consumer.sysml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "A",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "DataType",
+          "name": "A.T",
+          "uri": "memory:/provider.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "type",
+          "owner_path": [
+            "B",
+            "x"
+          ],
+          "resolved": true,
+          "source_uri": "memory:/consumer.sysml",
+          "target_fragment": "//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0",
+          "target_kind": "DataType",
+          "target_path": [
+            "A",
+            "T"
+          ],
+          "target_uri": "memory:/provider.kerml"
+        }
+      ],
+      "name": "mixed_provider",
+      "units": [
+        {
+          "language": "sysml",
+          "source": "package B { attribute x : A::T; }",
+          "uri": "memory:/consumer.sysml"
+        },
+        {
+          "language": "kerml",
+          "source": "package A { datatype T; }",
+          "uri": "memory:/provider.kerml"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "b6b94e4fbd80daaca9b998716b6574dcdf43f7cd81697747d4e90b27cabbeba4",
+    "helper_sha256": "2852ed9f20e3aa3f800375d8cc2bf80f2f0aac1209ca179b6a44909f44ce75cf",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerMLRuntimeModule.xtend": "6af5a7dad3636f094210ce44146ae62e0bb81e60f478cd4d09660a4b310c7b58",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/naming/KerMLQualifiedNameProvider.java": "4f37219aaa8b63ac01525bc3e0fd2c8981bdd44006748e0ad5317ef5858472cf",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScope.xtend": "0bac05fcd4e104d21e9fee857ae069d7637c9bbebf7a926268c1b12b5b6989c6",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScopeProvider.xtend": "1de40e4a52087c70f0a514aa3aa111a05f741f135bb39bdfd8b25745e25fb6cb",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend": "42b8eda7fec0ff3031e025654f9341a9f45db0822e6f0ad3185f0f1981c501d9",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    }
+  },
+  "scope": "Twelve bounded controls using individually parsed KerML/SysML Xtext resources in one ResourceSet. Xtext live ResourceSet descriptions configure upstream Pilot global scoping; all name lookup and lazy linking use upstream services. Observations cover FeatureTyping.type only, including declared target path, actual source URI and unresolved resource diagnostics. Duplicate exports record upstream selection rather than claiming ambiguity rejection. No full validation, persistence qualification, complete graph equivalence, implicit completion, or general resource conformance."
+}

@@ -1,0 +1,5054 @@
+{
+  "controls": [
+    {
+      "connectors": [],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": false,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "source"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "parameter0"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "source"
+          ],
+          "target": [
+            "parameter0"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "source"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "parameter0"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "source"
+          ],
+          "target": [
+            "parameter0"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": null,
+      "link_snapshot": null,
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": false,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 1,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        },
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "source"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "parameter0"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "source"
+          ],
+          "target": [
+            "parameter0"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 2,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "succession"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "generatedLink"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "succession"
+          ],
+          "target": [
+            "generatedLink"
+          ]
+        },
+        {
+          "connector": {
+            "complete": true,
+            "end": false,
+            "featuring": [],
+            "generals": [
+              {
+                "implied": true,
+                "kind": "Subsetting",
+                "target": "selfLinks"
+              }
+            ],
+            "implied": true,
+            "kind": "BindingConnector",
+            "relationships": [
+              "FeatureMembership",
+              "FeatureMembership",
+              "Subsetting"
+            ]
+          },
+          "ends": [
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "source"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            },
+            {
+              "complete": true,
+              "end": true,
+              "featuring": [
+                "$binding"
+              ],
+              "generals": [
+                {
+                  "implied": false,
+                  "kind": "ReferenceSubsetting",
+                  "target": "parameter0"
+                },
+                {
+                  "implied": true,
+                  "kind": "Subsetting",
+                  "target": "participant"
+                }
+              ],
+              "implied": false,
+              "kind": "Feature",
+              "relationships": [
+                "ReferenceSubsetting",
+                "Subsetting",
+                "TypeFeaturing"
+              ]
+            }
+          ],
+          "membership": "OwningMembership",
+          "source": [
+            "source"
+          ],
+          "target": [
+            "parameter0"
+          ]
+        }
+      ],
+      "existing_link": false,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "generatedLink",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "transition"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Redefinition",
+            "target": "transitionLink"
+          }
+        ],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": [
+          "Redefinition",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "FeatureMembership",
+          "OwningMembership",
+          "OwningMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 2,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 0,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 1,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    },
+    {
+      "connectors": [],
+      "existing_link": true,
+      "library_inputs": {
+        "participant": {
+          "complete": true,
+          "end": false,
+          "featuring": [
+            "Link"
+          ],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting",
+            "TypeFeaturing"
+          ]
+        },
+        "selfLinks": {
+          "complete": true,
+          "end": false,
+          "featuring": [],
+          "generals": [
+            {
+              "implied": true,
+              "kind": "Subsetting",
+              "target": "things"
+            }
+          ],
+          "implied": false,
+          "kind": "Feature",
+          "relationships": [
+            "Subsetting"
+          ]
+        }
+      },
+      "link": "existing",
+      "link_snapshot": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "ReferenceUsage",
+        "relationships": []
+      },
+      "owner_after": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_before": {
+        "complete": false,
+        "end": false,
+        "featuring": [],
+        "generals": [],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership"
+        ]
+      },
+      "owner_repeat": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "Owner"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "transitionActions"
+          }
+        ],
+        "implied": false,
+        "kind": "TransitionUsage",
+        "relationships": [
+          "Membership",
+          "OwningMembership",
+          "FeatureMembership",
+          "ParameterMembership",
+          "ParameterMembership",
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "owner_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      },
+      "parameters": 2,
+      "parent_complete": true,
+      "repeat_connector_count": 0,
+      "role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [
+          "TransitionPerformance"
+        ],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting",
+          "TypeFeaturing"
+        ]
+      },
+      "source": "standard library package Base { feature things; } standard library package Links { assoc Link { feature participant; } feature selfLinks; } standard library package Occurrences { class Occurrence; feature happensBeforeLinks; } standard library package TransitionPerformances { class TransitionPerformance { feature transitionLink; }  } standard library package Actions { behavior Action; feature transitionActions; } package P { class Owner; }",
+      "source_action": true,
+      "succession": true,
+      "succession_role_input": {
+        "complete": true,
+        "end": false,
+        "featuring": [],
+        "generals": [
+          {
+            "implied": true,
+            "kind": "Subsetting",
+            "target": "things"
+          }
+        ],
+        "implied": false,
+        "kind": "Feature",
+        "relationships": [
+          "Subsetting"
+        ]
+      }
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "cf57d1c6e0ca4e6f1a72a9fd3ef77222b1eafbbb101ab76208a2cf1b33c52f88",
+    "helper_sha256": "8327c22989dc69be0821672071eaca55534adf45598ff8c6ec400a1e706469e9",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "observation_helpers_sha256": {
+      "PilotCompatibilityExporter": "9c7e632c91d6982ee52bff443d1a9fe565f63ef7c1aab05fcfeaf98c68d410f3",
+      "PilotOperandProbe": "7bf24e4d6cbb9c0d7203aaea9315bcee4125b06341f4cfd7f5d926a1fef3525b",
+      "PilotResultConstructionExporter": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567"
+    },
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "receiver_program_sha256": {
+      "docs/conformance/2026-08-support/action-contribution-pilot-controls.json": "2d236c48fa292a6312dba524a96866df44469fccb29771101aa02b869e52fd81",
+      "docs/conformance/2026-08-support/fresh-transition-link-pilot-controls.json": "1598598d79ecb9429571c44a83ec27ea4f8afa104f2dcb0d260bf2b321f8357b"
+    },
+    "resolved_inputs_sha256": {
+      "ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+      "feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+      "featuring-queries.extract.json": "51c4b864d861a39cf6d3a6d8cc869781be2becc1be5b70c149d4e516644a3e65"
+    },
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ActionUsageAdapter.java": "bf5dfca23b2c4551a84bda68fd7eaeb11d9cdf0ba95c3c38ac5ec5881a44a695",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectorAdapter.java": "16df91fa326099d0bf70ac8886ca1f3c9a3b86f1b69230c37df9c0ebc56cdc7f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ElementAdapter.java": "3ffe6e8117d2426a7662d631df3b984bf6624fdc48f9b9d90c3f3ba52415349e",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/OccurrenceUsageAdapter.java": "bb49ae883f1fef349d48f611ddbd3302793471f58ace0634385261c326123f33",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ReferenceUsageAdapter.java": "10a3a9f2ac36e2746fb054e950487dd0d402a455cc14a41a510a13f55792a8bd",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAdapter.java": "cfbd48e601d4cf3eea826010705011d51bc96da2481152f782f07f2a1442621d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "998b603de48883c0ccdbd020dec8afab20795e3e1c0711a6856b9f1d7c944000",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TransitionUsageAdapter.java": "ecdad498337fa47d7b22ebff371e9107539916664bbc65422b707ebec9ad127f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java": "9c5aa069abcea042dec9997c3752b8856c27614902ac1f9705c169b0a111930a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ConnectorUtil.java": "0c54aacdcda2209a3f82aaaece7d3c8409877c226819996edf052043abaee083",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/UsageUtil.java": "8796f4071719b2189a7c1628eb48893fcb93e19482ff5f38aec8a6254d2129ea",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.transition-owner-lifecycle-controls.v1",
+  "scope": "Complete fixed portion Transition receiver stages under ordinary Class ownership, including added-member branches and new fixed link/binding transformation. Parent, source, pre-existing members and physical role/library inputs are supplied; recursive transformation of pre-existing children and semantic validation are separate."
+}

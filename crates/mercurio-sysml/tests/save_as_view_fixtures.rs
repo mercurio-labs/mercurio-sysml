@@ -387,8 +387,8 @@ package Complex {
 ///
 /// It must not share `SysML::Import`: a saved view's scope is an Expose, and
 /// the whole point of reifying views is that the distinction survives into the
-/// model. `MembershipExpose` and `NamespaceExpose` collapse onto the abstract
-/// `SysML::Expose` exactly as their Import twins collapse onto `SysML::Import`.
+/// model. Recursive member queries preserve the concrete `MembershipExpose`
+/// and `MembershipImport` metaclasses from the release metamodel.
 #[test]
 fn sv1_expose_lowers_to_its_own_kir_kind_with_the_filter() {
     const SOURCE: &str = r#"
@@ -407,7 +407,7 @@ package Scoped {
     let exposes: Vec<_> = document
         .elements
         .iter()
-        .filter(|element| element.kind == "SysML::Expose")
+        .filter(|element| element.kind == "SysML::MembershipExpose")
         .collect();
     assert_eq!(
         exposes.len(),
@@ -429,7 +429,7 @@ package Scoped {
     let imports = document
         .elements
         .iter()
-        .filter(|element| element.kind == "SysML::Import")
+        .filter(|element| element.kind == "SysML::MembershipImport")
         .count();
     assert_eq!(imports, 1, "the plain import must still be an Import");
 }
@@ -451,7 +451,7 @@ package Plain {
     let expose = document
         .elements
         .iter()
-        .find(|element| element.kind == "SysML::Expose")
+        .find(|element| element.kind == "SysML::MembershipExpose")
         .expect("an Expose element is emitted");
     assert!(
         !expose.properties.contains_key("filter"),
@@ -508,24 +508,17 @@ package P {
             })
     };
 
-    assert_eq!(owner_of("What this view shows."), Some("view.P.v".to_string()));
-    assert_eq!(owner_of("What A is."), Some("type.P.A".to_string()));
+    assert_eq!(owner_of("What this view shows. "), Some("view.P.v".to_string()));
+    assert_eq!(owner_of("What A is. "), Some("type.P.A".to_string()));
 }
 
-/// The counterpart inconsistency this increment did **not** resolve, recorded
-/// so it is not mistaken for an oversight: at *package* level a prefix `doc`
-/// still documents the declaration that follows it.
-///
-/// SysML v2 says otherwise -- `doc` is an owned Documentation of its namespace
-/// -- but Mercurio has a shipped convention in the other direction here, and
-/// `set_documentation` depends on it: it replaces a prefix `doc` in place, and
-/// reversing the ownership makes it append a second one instead. That is an
-/// authoring-convention decision, not a parser fix.
+/// A documentation member belongs to its package namespace, including when it
+/// immediately precedes a part. This matches Pilot and canonical authoring.
 #[test]
-fn sv3_at_package_level_a_prefix_doc_still_annotates_the_next_declaration() {
+fn sv3_at_package_level_documentation_annotates_the_package() {
     let document = compile(
         "package P {
-    doc /* About the part, by current convention. */
+    doc /* About the package. */
     part v;
 }",
         "package-doc.sysml",
@@ -540,8 +533,8 @@ fn sv3_at_package_level_a_prefix_doc_still_annotates_the_next_declaration() {
 
     assert_eq!(
         owner,
-        Some("feature.P.v".to_string()),
-        "change this deliberately, together with set_documentation, not by accident"
+        Some("pkg.P".to_string()),
+        "documentation is owned by its enclosing namespace"
     );
 }
 
@@ -606,21 +599,10 @@ fn sv2_resolution_is_deterministic() {
 /// a typo should look broken rather than empty.
 #[test]
 fn sv2_an_unresolvable_scope_is_reported() {
-    let document = compile(
-        r#"
-package P {
-    part vehicle { part brake; }
-    view v { expose nosuchthing::**; }
-}
-"#,
-        "unresolvable.sysml",
-    );
-    let graph = Graph::from_document(document).expect("the source builds a graph");
-    let view = view_node(&graph, "v");
-
-    let resolution = resolve_exposed_elements(&graph, view);
-    assert!(resolution.elements.is_empty());
-    assert_eq!(resolution.unresolved, vec!["nosuchthing::**".to_string()]);
+    let source = "package P { view v { expose nosuchthing::**; } }";
+    let library = mercurio_sysml::load_sysml_baseline().unwrap();
+    let error = mercurio_sysml::compile_sysml_text(source, "unresolved-scope.sysml", &library).unwrap_err();
+    assert!(error.to_string().contains("unresolved expose target `nosuchthing`"), "{error}");
 }
 
 /// **The SV-2 exit criterion**, on the pilot's own discriminating case:
@@ -1009,7 +991,7 @@ package P {
     let imports = document
         .elements
         .iter()
-        .filter(|element| element.kind == "SysML::Import")
+        .filter(|element| element.kind == "SysML::MembershipImport")
         .collect::<Vec<_>>();
     assert_eq!(imports.len(), 1, "the source declares exactly one import");
 
@@ -1061,7 +1043,7 @@ package P {
     let target = document
         .elements
         .iter()
-        .find(|element| element.kind == "SysML::Import")
+        .find(|element| element.kind == "SysML::MembershipImport")
         .and_then(|element| element.properties.get("imports").cloned())
         .and_then(|value| value.as_array().and_then(|values| values.first().cloned()))
         .and_then(|value| value.as_str().map(str::to_string));

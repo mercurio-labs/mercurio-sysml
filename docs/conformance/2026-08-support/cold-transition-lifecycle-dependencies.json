@@ -1,0 +1,113 @@
+{
+  "schema": "dev.mercurio.cold-transition-lifecycle-dependencies.v1",
+  "scope": "Actual pinned-definition native cold construction and explicit-link controls. This is not Pilot full transformation or release qualification.",
+  "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "test": "definition_cold_transition_construction_preserves_lifecycle_dependencies",
+  "source_cases": [
+    "state s { state a; state b; transition first a then b; }",
+    "attribute x; state s { state a; state b; transition first a accept x then b; }"
+  ],
+  "native_graph_observations": {
+    "root": "Namespace",
+    "transition": "TransitionUsage",
+    "transition_is_composite": true,
+    "transition_is_portion": false,
+    "parent": "StateUsage",
+    "succession": "SuccessionAsUsage",
+    "succession_membership": "OwningMembership",
+    "source_pending_field": "Membership.member_element",
+    "all_completion_flags": false,
+    "controls": "Two parsed graphs, each restored and tested in both graph orders. Explicit source links resolved via the existing private linker with unique supplied lexical endpoints. Tree and graph preservation, Closed structural publication, source-stage readiness, additional-member incompleteness and atomic fixed-owner refusal are asserted."
+  },
+  "stages": [
+    {
+      "algorithm": "no-owning-Type common featuring",
+      "imported": true,
+      "native_consumed": true,
+      "bounded_verified": true,
+      "scope": "35 concrete common-producer classes, now including plain Namespace under OwningMembership and FeatureMembership; 1680 independent applicable controls in 6720 original/persisted/reordered comparisons. 44 specialized classes remain excluded."
+    },
+    {
+      "algorithm": "source alias linking",
+      "imported": true,
+      "native_consumed": true,
+      "bounded_verified": true,
+      "scope": "Cold missing member_element retains exact typed ReadField prerequisite; supplied unique explicit links make source membership stable without completing additional members."
+    },
+    {
+      "algorithm": "composite Transition lifecycle",
+      "imported": true,
+      "native_consumed": false,
+      "bounded_verified": false,
+      "dependency": "Existing fixed-portion receiver admission excludes the parsed composite receiver. State/Action-owned composite default selection, parent/source/parameter lifecycle and additional members need a coherent producer contract."
+    },
+    {
+      "algorithm": "Transition-owned Succession context",
+      "imported": true,
+      "native_consumed": true,
+      "bounded_verified": true,
+      "dependency": "The prepared parent-featuring projection and private physical context stage are implemented for the controlled OwningMembership path. Full parent/Connector lifecycle, all membership/variant/snapshot contexts and normative common-context validation remain required.",
+      "verification": "transition-context-stage.extract.json supplies 24 independent stage cases; 96 physical and 32 parent-query comparisons cover original/persisted/reordered inputs. Native pending fields, malformed rejection, cycle rollback and detached adoption controls are separate evidence."
+    },
+    {
+      "algorithm": "cold Connector ends and subclass transforms",
+      "imported": true,
+      "native_consumed": false,
+      "bounded_verified": false,
+      "dependency": "End subsetting, inherited lifecycle and actual global resources."
+    }
+  ],
+  "qualification": {
+    "families_closed_delta": 0,
+    "candidate_promoted": false,
+    "fresh_actual_resource_run": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_owner.rs": "fcd85f8576cff7ac1afc3ef41e12e2f43dc30162228cdb9abef010a5f070b38f",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/no-owning-type-featuring.extract.json": "39105ecc2ec99e9ca68fd100872b70151493ce28e1a1764b205e67610695daab",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-contexts.extract.json": "3121f652f21137dc0283a808e6dd18655f1fb7bd43025b9273b508b0e5179cee",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-focused.log": "1aefeb6055a27f03503b0eca7767487027d834d093c1031a58777e838a4c68f5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-root-focused.log": "2e13c0e48e9aefa9ef5c71d5c45d4bf4355616b7530596a7b14b2f39f2cc5656",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_context_stage.rs": "8988281a5f0b9cd04c4bacd7b19afe17c8d6f419751152e2341c8ed1ef939ee2",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/transition-context-stage.extract.json": "0b9b618808f8ab9e7272d3d2dfb843499bbe1c3c75e8069d57a26b51c4428302",
+    "docs/conformance/2026-08-support/state-contribution-evidence.json": "5772cb4de29e1bfc8bea30d15bc1f66fa40b65ea0fb6e333fc0cfef9f01062c0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "parent_reentrancy_reference": {
+    "status": "Entry guard, Feature/Type transform order and Succession context now imported as eight resolved typed programs. Native consumption implements only the independent featuring/context stage, not full parent transformation.",
+    "transform_entry": "ElementAdapter.transform sets adapter-local isTransformed=true before doTransform.",
+    "feature_order": "FeatureAdapter.doTransform computes featuring, value connectors and redefinitions before calling TypeAdapter.doTransform.",
+    "type_order": "TypeAdapter.doTransform computes implicit generalizations, which can invoke Transition additional-member production.",
+    "succession_context": "SuccessionAsUsageAdapter requests parent transform, which may return reentrantly while parent contribution stages are already prepared.",
+    "publication_distinction": "Adapter-local transformed state and Element.isImpliedIncluded/physical implicit insertion are separate. Native private phase state must preserve reentrancy without synthesizing publication-complete flags.",
+    "next_contract": [
+      "Integrate all remaining parent generalization, source/parameter and Connector end producers through typed private dependencies.",
+      "Qualify cold State/Action-owned composite receivers on actual global resources, with full normative validation.",
+      "Verify FeatureMembership, variant and snapshot providers separately; supplied OwningMembership stage controls do not cover them."
+    ]
+  },
+  "source_audit_sha256": {
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ElementAdapter.java": "3ffe6e8117d2426a7662d631df3b984bf6624fdc48f9b9d90c3f3ba52415349e",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TransitionUsageAdapter.java": "ecdad498337fa47d7b22ebff371e9107539916664bbc65422b707ebec9ad127f",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "998b603de48883c0ccdbd020dec8afab20795e3e1c0711a6856b9f1d7c944000",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441"
+  },
+  "verification_note": "The final native regression now passes 346 tests. Parent/context consumption is a bounded earlier stage, separate from full composite lifecycle and integrated resource qualification.",
+  "state_contribution_batch": {
+    "evidence": "docs/conformance/2026-08-support/state-contribution-evidence.json",
+    "native_consumed": true,
+    "bounded_verified": true,
+    "full_lifecycle_verified": false
+  },
+  "verified": {
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  }
+}

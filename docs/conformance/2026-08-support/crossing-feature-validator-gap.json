@@ -1,0 +1,79 @@
+{
+  "scope": "Known open negative-control divergence, excluded from the passing control count. Both engines used the exact same manifest and target-last support set.",
+  "manifest": {
+    "cases": [
+      {
+        "relative_path": "crossing-initial-invalid.kerml",
+        "input_files": [
+          "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\typed-binding-variability.sysml",
+          "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\crossing-initial-invalid.kerml"
+        ]
+      }
+    ]
+  },
+  "input_sha256": {
+    "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\crates\\mercurio-tools\\corpus\\release-2026-08\\typed-binding-variability.sysml": "2f7eb18698c0ad2238ef512e3986d165bebac07cd23b096e0565207c3d879e8e",
+    "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\crossing-initial-invalid.kerml": "4df78c0155676522f7709432a14182d32c313438fd287cec9ec6ee61e1414a39"
+  },
+  "pilot": {
+    "relative_path": "crossing-initial-invalid.kerml",
+    "status": "error",
+    "validation_ms": 609.3031,
+    "diagnostics": [
+      {
+        "severity": "ERROR",
+        "code": "validateFeatureIsVariable",
+        "message": "Must be owned by an occurrence type",
+        "line": 4
+      },
+      {
+        "severity": "WARNING",
+        "code": "validateFeatureEndFeatureMultiplicity",
+        "message": "End feature must have multiplicity 1",
+        "line": 6
+      }
+    ]
+  },
+  "native": {
+    "diagnostics": [],
+    "elapsed_ms": 411,
+    "element_count": 8,
+    "parse_ok": true,
+    "relative_path": "crossing-initial-invalid.kerml",
+    "status": "ok"
+  },
+  "source_fingerprint": "5940107fe9d64b8302728c9eb766c90c521f0b1cc8eec5ef1496c97bb7534a37",
+  "native_binary_sha256": "72ed5285d90ea4b3d97274dfd177a04fd00c1cfddb7badedcc3fc989fe5ac2ca",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_source_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "resolution": {
+    "status": "covered for the recorded source control",
+    "assessment": "../2026-08-declaration-validation-assessment/README.md",
+    "evidence": "declaration-validation-evidence.json",
+    "source_fingerprint": "0adcadb7c84bf358571f484a589a3fe843aff4d562afb9666db697cc3f89b72c",
+    "native_regression": [
+      {
+        "diagnostics": [
+          {
+            "kind": "validation",
+            "message": "validateFeatureIsVariable: Must be owned by an occurrence type",
+            "span": {
+              "end_col": 57,
+              "end_line": 4,
+              "start_col": 9,
+              "start_line": 4
+            }
+          }
+        ],
+        "elapsed_ms": 395,
+        "input_path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\crossing-initial-invalid.kerml",
+        "parse_ok": true,
+        "relative_path": "crossing-initial-invalid.kerml",
+        "stage": "compile",
+        "status": "error"
+      }
+    ],
+    "scope": "The exact earlier constant-end source now rejects with validateFeatureIsVariable. Complete KerMLValidator.checkFeature remains partial."
+  }
+}

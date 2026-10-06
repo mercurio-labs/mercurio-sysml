@@ -1,0 +1,79 @@
+{
+  "schema": "dev.mercurio.instantiation-normative-review.v1",
+  "normative": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "pdf": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "sections": [
+      {
+        "section": "8.3.4.8.7",
+        "pdf_pages": [
+          237,
+          238
+        ],
+        "printed_pages": [
+          211,
+          212
+        ],
+        "interpretation": "The first owned Membership that is not a FeatureMembership determines the common instantiatedType operation. A non-Type first member produces null. The derived property follows the operation, and a separate validation constraint requires a non-null instantiated Type."
+      },
+      {
+        "section": "8.3.4.8.8",
+        "pdf_pages": [
+          239,
+          240
+        ],
+        "printed_pages": [
+          213,
+          214
+        ],
+        "interpretation": "InvocationExpression specializes its instantiated Type. The Type must be a Behavior or a Feature typed by one Behavior. Result, parameter, default-value and ownership validations remain separate requirements."
+      },
+      {
+        "section": "8.4 implied relationship table",
+        "pdf_pages": [
+          278,
+          279
+        ],
+        "printed_pages": [
+          252,
+          253
+        ],
+        "interpretation": "The main implied-relationship row admits FeatureTyping, Subsetting and Specialization for Invocation target specialization, and places Constructor target specialization on its result. The accompanying Note 3 says Subclassification for a Classifier target, which conflicts with a Feature source and the Ecore Subclassification endpoint contract; this inconsistency is recorded below."
+      }
+    ]
+  },
+  "pilot_reference": "instantiation-strategy-pilot-controls.json",
+  "agreement": "Common non-null first-member selection, rejection of a first non-Type, FeatureMembership exclusion and Invocation versus Constructor effect placement agree in the bounded observations. Physical relation-kind observations agree with Pilot; the normative table-note conflict is not counted as resolved.",
+  "disagreements": [
+    {
+      "id": "empty-membership-before-type",
+      "scope": "Incomplete membership input; not an accepted complete model",
+      "pilot": "The common Java delegate filters null member endpoints, then selects a later Type.",
+      "normative": "The first eligible membership remains decisive; its explicit null member cannot select a later Type.",
+      "native": "Explicit null returns no instantiated Type; an absent stored endpoint retains the exact member_element prerequisite. Final publication/validation must still reject incomplete models.",
+      "observations": {
+        "kinds": [
+          "InvocationExpression",
+          "ConstructorExpression"
+        ],
+        "shape": "empty_then_class",
+        "count": 2
+      }
+    },
+    {
+      "id": "classifier-target-table-note-conflict",
+      "scope": "KerML Table 10, main row versus Note 3; native relationship choice is not claimed as fully normatively qualified",
+      "normative_conflict": "Note 3 selects Subclassification for a Classifier instantiatedType although the annotated InvocationExpression and Constructor result are Features. Subclassification requires a Classifier specific endpoint. The main table row includes FeatureTyping.",
+      "pilot": "InvocationExpressionAdapter emits FeatureTyping for a non-Feature Type and Subsetting for a Feature.",
+      "native": "The bounded physical recipe matches Pilot FeatureTyping for Classifier targets and Subsetting for Feature targets, consistent with canonical Ecore endpoint types and the specialization constraint. The conflicting Note 3 interpretation remains explicit and cannot establish full normative qualification."
+    }
+  ],
+  "specification_text_issue": "The displayed operation body references typeMembers in the successful branch although its declared local is members. Native selection follows the accompanying normative prose and the first-member test; no new local collection/filter algorithm is inferred.",
+  "not_qualified": [
+    "Full instantiated-type validation",
+    "Invocation/Constructor transformation, result typing and connectors",
+    "Global operator and trigger delegate providers",
+    "Whole family and resource qualification"
+  ]
+}

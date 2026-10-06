@@ -1,0 +1,52 @@
+{
+  "scope": "Bounded implicit-target deduplication by direct ordered chaining Feature identities.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      196
+    ],
+    "clause": "deriveFeatureChainingFeature",
+    "boundary": "The specification supplies the ordered chaining-feature projection. The particular implicit-target deduplication algorithm is Pilot implementation behavior verified separately, not claimed as complete semantic equivalence."
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithm": "TypeAdapter.areEquivalentImplicitGeneralTypes / addImplicitGeneralType",
+    "source_hashes": "feature-redefinitions.extract.json provenance.source_sha256"
+  },
+  "imported": "Ecore FeatureChaining class, ordered containment, ownedFeatureChaining subset, endpoint types and reciprocal ownership; resolved strategy dispatch still chooses relevant end/parameter targets.",
+  "native_consumer": "implicit_chain_signature validates canonical owned chainings; append_distinct_implicit keeps the first identity or equal nonempty ordered chain. Both positional end and parameter services use it. Empty chains are not equivalent merely because both are empty.",
+  "verification": {
+    "end_controls": 990,
+    "new_end_controls": 180,
+    "parameter_result_controls": 1440,
+    "new_parameter_result_controls": 240,
+    "shapes": [
+      "equal two-member chains with distinct wrappers",
+      "reversed two-member chains"
+    ],
+    "checks": [
+      "ordered targets",
+      "effective names",
+      "effective features/end lists",
+      "both graph storage orders",
+      "no mutation"
+    ],
+    "negative_controls": "Previously unsupported chain fixtures now have unresolved chaining endpoints and must still reject.",
+    "shared_batch": "68 focused native tests pass; 39 tooling tests pass",
+    "focused_log": "definition-pipeline-evidence/native-tests-chain-equivalence-focused.log",
+    "matching_documents": 90,
+    "full_suite": "Prior 726-test certificate remains stale; not rerun this increment",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "7dc4f976c4b808b8ea1e5d7c2a24f10a3ede94c751f000ba372372f7b60bc410",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "be17bf79b967713e14aa8d105cec4b28d6aea664384acf3eb55d9708ab423fb6",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "2cb812e34899503f259fba3b419d9ed6ca9d2354f4c5f746e5dac0236707596c"
+    }
+  },
+  "remaining": [
+    "Recursive chain construction and flattening",
+    "Feature-chain owner generalization providers",
+    "Bound-value expression transformation and crossing construction",
+    "Full release qualification"
+  ]
+}

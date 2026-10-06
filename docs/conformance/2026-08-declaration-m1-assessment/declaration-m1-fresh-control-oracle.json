@@ -1,0 +1,395 @@
+{
+  "cases": [
+    {
+      "relative_path": "requirement-constraint/requirement-constraint-controls.sysml",
+      "pilot": {
+        "relative_path": "requirement-constraint/requirement-constraint-controls.sysml",
+        "status": "ok",
+        "validation_ms": 1669.0638,
+        "diagnostics": [
+          {
+            "severity": "WARNING",
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of other owned member name",
+            "line": 7
+          },
+          {
+            "severity": "WARNING",
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of other owned member name",
+            "line": 8
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/requirement-constraint-controls.sysml": "47a612e25bf714c56b810796c17eea3a7263fc26e02f7ec4f5909bda6d63079f"
+      }
+    },
+    {
+      "relative_path": "requirement-constraint/requirement-constraint-negative.sysml",
+      "pilot": {
+        "relative_path": "requirement-constraint/requirement-constraint-negative.sysml",
+        "status": "error",
+        "validation_ms": 1322.608499,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "Invalid Constraint Usage - invalid type",
+            "message": "A constraint must be typed by one constraint definition.",
+            "line": 4
+          },
+          {
+            "severity": "WARNING",
+            "code": "validateNamespaceDistinguishablity",
+            "message": "Duplicate of inherited member name 'self' from ConstraintCheck, Item",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/requirement-constraint-negative.sysml": "9b21002450635f2d2b924beed7bfd81742eb5fcfde57347bbcb2162917c30730"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-declarations.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-declarations.kerml",
+        "status": "ok",
+        "validation_ms": 712.194801,
+        "diagnostics": []
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-declarations.kerml": "4c7f208b88e7a71b3987e8630e91f0e520e12aee671c423d2e3657b232ea00f3"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-subclassification-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-subclassification-negative.kerml",
+        "status": "error",
+        "validation_ms": 288.6601,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Classifier 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-subclassification-negative.kerml": "a46645539b01772aa1dcf33d37ac190cfe1005c2c3711b0e7d9de884146dc7b5"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-specialization-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-specialization-negative.kerml",
+        "status": "error",
+        "validation_ms": 292.6683,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Type 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-specialization-negative.kerml": "3ede81964db1ae302d217b42b911c8c05a177569840f898750b387c11b41aee8"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-feature-typing-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-feature-typing-negative.kerml",
+        "status": "error",
+        "validation_ms": 260.366801,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Type 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-feature-typing-negative.kerml": "eeb32d0b0fbc659f602da7b61fad0543546121bebd99d07936723d26fefe8054"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-subsetting-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-subsetting-negative.kerml",
+        "status": "error",
+        "validation_ms": 304.942199,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Feature 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-subsetting-negative.kerml": "669454e2a42d9c7dfb637115820a0ff564fb01be8b40eece667610e65f7b4b4e"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-redefinition-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-redefinition-negative.kerml",
+        "status": "error",
+        "validation_ms": 370.3968,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Feature 'Missing'.",
+            "line": 4
+          },
+          {
+            "severity": "ERROR",
+            "code": "validateRedefinitionFeaturingTypes",
+            "message": "A package-level feature cannot be redefined",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-redefinition-negative.kerml": "0e4de287820259038b85c924cea2267e1f7b59a23ebe7f3533a5bc46d154330a"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-conjugation-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-conjugation-negative.kerml",
+        "status": "error",
+        "validation_ms": 269.5893,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Type 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-conjugation-negative.kerml": "709beb43699134b6350e62f1ae1db470552cbbc452e1f71444c5dd1354e6a8f1"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-inverting-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-inverting-negative.kerml",
+        "status": "error",
+        "validation_ms": 282.1233,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Feature 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-inverting-negative.kerml": "d632679cd130ca912fc2fd71448fc510530ba0e90318ff861523aacda52ac74b"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-featuring-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-featuring-negative.kerml",
+        "status": "error",
+        "validation_ms": 256.6923,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Type 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-featuring-negative.kerml": "5d41f677708291fab907be3a53ddbc8bdeac8417c4a436123d82061708b04804"
+      }
+    },
+    {
+      "relative_path": "relationship-declarations/relationship-dependency-negative.kerml",
+      "pilot": {
+        "relative_path": "relationship-declarations/relationship-dependency-negative.kerml",
+        "status": "error",
+        "validation_ms": 265.1542,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+            "message": "Couldn't resolve reference to Element 'Missing'.",
+            "line": 4
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/relationship-dependency-negative.kerml": "9d662071b499302db1b20e1780d4a1f5fe6899a9f3c5e2d75dfe7bde091c7709"
+      }
+    },
+    {
+      "relative_path": "textual/textual-invariants.kerml",
+      "pilot": {
+        "relative_path": "textual/textual-invariants.kerml",
+        "status": "ok",
+        "validation_ms": 1026.2189,
+        "diagnostics": []
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/textual-invariants.kerml": "8d48d3fdc5fd6e5b4fc0a995039b9e07b7d84892ee5950183a4bc4cd260571f8"
+      }
+    },
+    {
+      "relative_path": "textual/textual-representations.sysml",
+      "pilot": {
+        "relative_path": "textual/textual-representations.sysml",
+        "status": "ok",
+        "validation_ms": 1164.5351,
+        "diagnostics": []
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/textual-representations.sysml": "df1015cce783165f6d3482afbb6380af0b5c6936458ebb8abf37736efbd09cc5"
+      }
+    },
+    {
+      "relative_path": "textual/textual-missing-language.kerml",
+      "pilot": {
+        "relative_path": "textual/textual-missing-language.kerml",
+        "status": "error",
+        "validation_ms": 220.8537,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+            "message": "mismatched input '/* body */' expecting 'language'",
+            "line": 1
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/textual-missing-language.kerml": "b71c463b627ee0d1586a01cfbfd1847a3e108ff85cebdaa730fb1581590933d6"
+      }
+    },
+    {
+      "relative_path": "textual/textual-missing-body.kerml",
+      "pilot": {
+        "relative_path": "textual/textual-missing-body.kerml",
+        "status": "error",
+        "validation_ms": 198.971,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+            "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+            "line": 1
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/textual-missing-body.kerml": "148a0e5240ede3a336e044258d9205ed7f62910bd8baee8f2f6c29942c61540e"
+      }
+    },
+    {
+      "relative_path": "textual/textual-unquoted-language.sysml",
+      "pilot": {
+        "relative_path": "textual/textual-unquoted-language.sysml",
+        "status": "error",
+        "validation_ms": 261.7541,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+            "message": "mismatched input 'ocl' expecting RULE_STRING_VALUE",
+            "line": 1
+          },
+          {
+            "severity": "ERROR",
+            "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+            "message": "no viable alternative at input '/* body */'",
+            "line": 1
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/textual-unquoted-language.sysml": "5ec329dfa50a386c2477265aaffbf18a379a6f56031e70ae138ddd36abc140e8"
+      }
+    },
+    {
+      "relative_path": "textual/invariant-invalid-result.kerml",
+      "pilot": {
+        "relative_path": "textual/invariant-invalid-result.kerml",
+        "status": "ok",
+        "validation_ms": 1095.0089,
+        "diagnostics": [
+          {
+            "severity": "WARNING",
+            "code": "validateBindingConnectorTypeConformance",
+            "message": "Bound features should have conforming types",
+            "line": 1
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/invariant-invalid-result.kerml": "c7126248181ed58fb41fcfb708ab765afa1559eb6eea688a03514be4c164a355"
+      }
+    },
+    {
+      "relative_path": "flag-name/flag-name-controls.sysml",
+      "pilot": {
+        "relative_path": "flag-name/flag-name-controls.sysml",
+        "status": "ok",
+        "validation_ms": 2482.1227,
+        "diagnostics": []
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml": "6e2f4eae7a17e0d28e632fb6543dca2885cde6f762a27b458ed8abf1e9a6f3b3"
+      }
+    },
+    {
+      "relative_path": "flag-name/flag-name-controls.kerml",
+      "pilot": {
+        "relative_path": "flag-name/flag-name-controls.kerml",
+        "status": "ok",
+        "validation_ms": 824.525,
+        "diagnostics": []
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.kerml": "c6dde06a18273f9110830b1354a5d8132a28e8d3e758123952ed17c4a7d08fb7"
+      }
+    },
+    {
+      "relative_path": "flag-name/flag-name-variable-negative.kerml",
+      "pilot": {
+        "relative_path": "flag-name/flag-name-variable-negative.kerml",
+        "status": "error",
+        "validation_ms": 599.1747,
+        "diagnostics": [
+          {
+            "severity": "ERROR",
+            "code": "validateFeatureIsVariable",
+            "message": "Must be owned by an occurrence type",
+            "line": 2
+          }
+        ]
+      },
+      "source_sha256": {
+        "crates/mercurio-tools/corpus/release-2026-08/flag-name-variable-negative.kerml": "08d4422a56105495f74bd64dff550ca6bf67b267eadc56e7ce90ca09110ccea8"
+      }
+    }
+  ],
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "scope": "Fresh isolated CheckMode.ALL acceptance controls; not benchmark measurements."
+}

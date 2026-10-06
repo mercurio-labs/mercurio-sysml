@@ -1,0 +1,263 @@
+{
+  "schema": "dev.mercurio.pinned-enum-rules.v1",
+  "rules": [
+    {
+      "id": "org.omg.kerml.xtext.KerML::FilterPackageMemberVisibility",
+      "language": "org.omg.kerml.xtext.KerML",
+      "name": "FilterPackageMemberVisibility",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind",
+      "literals": [
+        {
+          "token": "[",
+          "literal": "private",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:private"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::VisibilityIndicator",
+      "language": "org.omg.kerml.xtext.KerML",
+      "name": "VisibilityIndicator",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind",
+      "literals": [
+        {
+          "token": "public",
+          "literal": "public",
+          "value": 2,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:public"
+        },
+        {
+          "token": "private",
+          "literal": "private",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:private"
+        },
+        {
+          "token": "protected",
+          "literal": "protected",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:protected"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureDirection",
+      "language": "org.omg.kerml.xtext.KerML",
+      "name": "FeatureDirection",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind",
+      "literals": [
+        {
+          "token": "in",
+          "literal": "in",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:in"
+        },
+        {
+          "token": "out",
+          "literal": "out",
+          "value": 2,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:out"
+        },
+        {
+          "token": "inout",
+          "literal": "inout",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:inout"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FilterPackageMemberVisibility",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "FilterPackageMemberVisibility",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind",
+      "literals": [
+        {
+          "token": "[",
+          "literal": "private",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:private"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VisibilityIndicator",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "VisibilityIndicator",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind",
+      "literals": [
+        {
+          "token": "public",
+          "literal": "public",
+          "value": 2,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:public"
+        },
+        {
+          "token": "private",
+          "literal": "private",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:private"
+        },
+        {
+          "token": "protected",
+          "literal": "protected",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:protected"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureDirection",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "FeatureDirection",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind",
+      "literals": [
+        {
+          "token": "in",
+          "literal": "in",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:in"
+        },
+        {
+          "token": "out",
+          "literal": "out",
+          "value": 2,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:out"
+        },
+        {
+          "token": "inout",
+          "literal": "inout",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//FeatureDirectionKind/literal:inout"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortionKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "PortionKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//PortionKind",
+      "literals": [
+        {
+          "token": "snapshot",
+          "literal": "snapshot",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//PortionKind/literal:snapshot"
+        },
+        {
+          "token": "timeslice",
+          "literal": "timeslice",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//PortionKind/literal:timeslice"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TriggerFeatureKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "TriggerFeatureKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind",
+      "literals": [
+        {
+          "token": "accept",
+          "literal": "trigger",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind/literal:trigger"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardFeatureKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "GuardFeatureKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind",
+      "literals": [
+        {
+          "token": "if",
+          "literal": "guard",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind/literal:guard"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EffectFeatureKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "EffectFeatureKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind",
+      "literals": [
+        {
+          "token": "do",
+          "literal": "effect",
+          "value": 2,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//TransitionFeatureKind/literal:effect"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementConstraintKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "RequirementConstraintKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind",
+      "literals": [
+        {
+          "token": "assume",
+          "literal": "assumption",
+          "value": 0,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind/literal:assumption"
+        },
+        {
+          "token": "require",
+          "literal": "requirement",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind/literal:requirement"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FramedConcernKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "FramedConcernKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind",
+      "literals": [
+        {
+          "token": "frame",
+          "literal": "requirement",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind/literal:requirement"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementVerificationKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "RequirementVerificationKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind",
+      "literals": [
+        {
+          "token": "verify",
+          "literal": "requirement",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//RequirementConstraintKind/literal:requirement"
+        }
+      ]
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExposeVisibilityKind",
+      "language": "org.omg.sysml.xtext.SysML",
+      "name": "ExposeVisibilityKind",
+      "ecore_enum": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind",
+      "literals": [
+        {
+          "token": "expose",
+          "literal": "protected",
+          "value": 1,
+          "ecore_literal": "https://www.omg.org/spec/SysML/20250201#//VisibilityKind/literal:protected"
+        }
+      ]
+    }
+  ],
+  "grammar_sha256": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+  "ecore_sha256": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+}

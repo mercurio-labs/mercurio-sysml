@@ -150,6 +150,10 @@ pub struct ReferenceTypedSemanticsSeed {
 pub struct UsageTypeDefaultSeed {
     pub type_ref: Option<String>,
     #[serde(default)]
+    pub end_count_type_refs: BTreeMap<usize, String>,
+    #[serde(default)]
+    pub member_type_refs: BTreeMap<String, String>,
+    #[serde(default)]
     pub owner_type_refs: BTreeMap<String, String>,
 }
 

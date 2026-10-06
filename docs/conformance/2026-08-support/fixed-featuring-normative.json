@@ -1,0 +1,36 @@
+{
+  "schema": "dev.mercurio.fixed-featuring-normative.v1",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "normative_pdf": {
+    "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+  },
+  "references": [
+    {
+      "pdf_pages": [
+        193,
+        269
+      ],
+      "assessment": "A fixed Feature owned via FeatureMembership is featured by its owningType. The implied owning-Type contribution is computed by the resolved shared FeatureAdapter; concrete Usage getters consume mayTimeVary rather than raw isVariable storage."
+    },
+    {
+      "pdf_pages": [
+        196,
+        197
+      ],
+      "assessment": "The featuringType derivation combines typeFeaturing endpoints with the featuringTypes of the first chainingFeature, preserving uniqueness. Native includes explicit relationships, the fixed owning-Type contribution, and first-chain recursion. The last chain is not used for featuring."
+    }
+  ],
+  "disagreements": [
+    {
+      "assessment": "The written derivation uses all inverse typeFeaturing relationships; Pilot reads ownedTypeFeaturing. Native continues to reject externally owned inverse relationships pending normative assessment rather than silently omit them."
+    }
+  ],
+  "boundaries": [
+    "Variable snapshot construction does not become a read-only query; unresolved inputs reject",
+    "Usage variability still requires resolved library/generalization inputs",
+    "Explicit fixture libraries and supplied complete owner inputs are observation controls, not actual library lifecycle qualification",
+    "Detached specialized, cross-feature, value-expression and unresolved variant contributions retain their separate consumers/guards",
+    "Binding structure placement is verified separately from full connector/end transformation"
+  ]
+}

@@ -24,12 +24,18 @@ import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.omg.sysml.interactive.SysMLInteractive;
@@ -38,6 +44,8 @@ import org.omg.sysml.lang.sysml.Element;
 import org.omg.sysml.lang.sysml.Feature;
 import org.omg.sysml.lang.sysml.FeatureTyping;
 import org.omg.sysml.lang.sysml.Namespace;
+import org.omg.sysml.lang.sysml.Membership;
+import org.omg.sysml.lang.sysml.VisibilityKind;
 import org.omg.sysml.lang.sysml.Relationship;
 import org.omg.sysml.lang.sysml.Specialization;
 import org.omg.sysml.lang.sysml.Type;
@@ -47,6 +55,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 
 public final class PilotModelExporter {
+    private static final Map<Element, ICompositeNode> sourceNodeCache = new IdentityHashMap<>();
+    private static final Set<Resource> assessmentSources = java.util.Collections.newSetFromMap(new IdentityHashMap<>());
     private static final String KERNEL_LIBRARIES = "Kernel Libraries";
     private static final String SYSTEMS_LIBRARY = "Systems Library";
     private static final String DOMAIN_LIBRARIES = "Domain Libraries";
@@ -56,6 +66,10 @@ public final class PilotModelExporter {
     }
 
     public static void main(String[] args) throws Exception {
+        if (args.length >= 1 && "--assessment".equals(args[0])) {
+            runAssessment(args);
+            return;
+        }
         if (args.length >= 1 && "--syntax".equals(args[0])) {
             exportSyntax(args);
             return;
@@ -127,6 +141,82 @@ public final class PilotModelExporter {
         );
     }
 
+    /** Isolated source-set assessment. Export work is outside compilation/validation timing. */
+    private static void runAssessment(String[] args) throws Exception {
+        if (args.length != 5) throw new IllegalArgumentException("--assessment <library> <spec> <export-or-dash> <timings>");
+        long totalStart = System.nanoTime();
+        Path library = Paths.get(args[1]).toAbsolutePath().normalize();
+        BatchSpec spec = JSON.fromJson(Files.readString(Paths.get(args[2])), BatchSpec.class);
+        if (spec.cases == null || spec.cases.isEmpty()) throw new IllegalArgumentException("empty source set");
+        Set<String> expected = new TreeSet<>(spec.cases.get(0).input_files);
+        for (var entry : spec.cases) {
+            if (!expected.equals(new TreeSet<>(entry.input_files))) throw new IllegalArgumentException("assessment input sets differ");
+        }
+        Map<String, Object> result = new LinkedHashMap<>();
+        Map<String, Double> phases = new LinkedHashMap<>();
+        System.setProperty("org.eclipse.emf.common.util.ReferenceClearingQueue", "false");
+        long start = System.nanoTime();
+        var interactive = SysMLInteractive.getInstance();
+        // Semantic source oracle bypasses indexes; timing uses the published default index.
+        boolean sourceOracle = !"-".equals(args[3]);
+        interactive.getLibraryIndexCache().setIndexDisabled(sourceOracle);
+        interactive.setVerbose(false);
+        phases.put("initialize_ms", (System.nanoTime() - start) / 1e6);
+        start = System.nanoTime();
+        interactive.loadLibrary(library.toString());
+        phases.put("load_library_ms", (System.nanoTime() - start) / 1e6);
+        start = System.nanoTime();
+        Map<String, Resource> resources = new LinkedHashMap<>();
+        for (String path : spec.cases.get(0).input_files) {
+            Resource resource = interactive.readResource(Paths.get(path).toAbsolutePath().normalize().toString());
+            interactive.addInputResource(resource);
+            resources.put(path, resource);
+        }
+        phases.put("read_parse_inputs_ms", (System.nanoTime() - start) / 1e6);
+        ResourceSet resourceSet = interactive.getResourceSet();
+        System.err.println("Pilot source set parsed; validating with CheckMode.ALL");
+        start = System.nanoTime();
+        List<Map<String, Object>> cases = new ArrayList<>();
+        for (var entry : spec.cases) {
+            long caseStart = System.nanoTime();
+            XtextResource resource = (XtextResource)resources.get(entry.input_files.get(entry.input_files.size() - 1));
+            var issues = resource.getResourceServiceProvider().getResourceValidator().validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+            Map<String, Object> c = new LinkedHashMap<>();
+            c.put("relative_path", entry.relative_path);
+            c.put("status", issues.stream().anyMatch(i -> i.getSeverity() == Severity.ERROR) ? "error" : "ok");
+            c.put("validation_ms", (System.nanoTime() - caseStart) / 1e6);
+            c.put("diagnostics", issues.stream().map(i -> {
+                Map<String, Object> d = new LinkedHashMap<>();
+                d.put("severity", i.getSeverity().toString()); d.put("code", i.getCode());
+                d.put("message", i.getMessage()); d.put("line", i.getLineNumber()); return d;
+            }).toList());
+            cases.add(c);
+        }
+        phases.put("validate_targets_ms", (System.nanoTime() - start) / 1e6);
+        result.put("engine_total_ms", (System.nanoTime() - totalStart) / 1e6);
+        result.put("phases", phases); result.put("cases", cases);
+        result.put("input_files", spec.cases.get(0).input_files);
+        result.put("pilot_version", pilotVersion());
+        result.put("library_index_mode", sourceOracle ? "disabled-source-oracle" : "published-default");
+        // Write timings before optional graph export so an export timeout preserves validation evidence.
+        writeJson(Paths.get(args[4]), result);
+        if (!"-".equals(args[3])) {
+            start = System.nanoTime();
+            // Additional explicit materialization is for graph comparison, not Pilot process timing.
+            System.err.println("Validation completed; materializing model graph");
+            for (Resource resource : resources.values()) {
+                EcoreUtil2.resolveLazyCrossReferences(resource, null);
+                ElementUtil.transformAll(resource, true);
+            }
+            assessmentSources.addAll(resources.values());
+            System.err.println("Exporting materialized model graph, including all source attributes and stored references");
+            ExportDocument document = exportDocument(library, new ArrayList<>(resources.values()), resourceSet);
+            writeJson(Paths.get(args[3]), document);
+            result.put("materialize_export_and_write_ms", (System.nanoTime() - start) / 1e6);
+            writeJson(Paths.get(args[4]), result);
+        }
+    }
+
     private static void exportSyntax(String[] args) throws Exception {
         if (args.length < 4) {
             System.err.println(
@@ -193,6 +283,19 @@ public final class PilotModelExporter {
         BatchSpec spec = new Gson().fromJson(Files.readString(specPath, StandardCharsets.UTF_8), BatchSpec.class);
         if (spec == null || spec.cases == null) {
             throw new IllegalArgumentException("batch spec must contain cases");
+        }
+
+        // One resource set is safe only when every case has the same support inputs.
+        // Otherwise an unrelated case can resolve a name that should be unresolved.
+        Set<Path> expectedInputs = null;
+        for (BatchSpecCase batchCase : spec.cases) {
+            Set<Path> inputs = batchCase.input_files.stream()
+                .map(path -> Paths.get(path).toAbsolutePath().normalize())
+                .collect(Collectors.toSet());
+            if (expectedInputs == null) expectedInputs = inputs;
+            else if (!expectedInputs.equals(inputs)) {
+                throw new IllegalArgumentException("diagnostics batch input sets differ; run isolated batches");
+            }
         }
 
         BatchDiagnosticsDocument document = new BatchDiagnosticsDocument();
@@ -728,6 +831,26 @@ public final class PilotModelExporter {
         if (resource == null) {
             return;
         }
+        // Semantic validation must wait until every input has been loaded and resolved.
+        // Resource.getErrors() alone contains syntax/linking errors, not @Check results.
+        if ("resolve_transform".equals(stage) && resource instanceof XtextResource xtextResource) {
+            var issues = xtextResource.getResourceServiceProvider().getResourceValidator()
+                .validate(xtextResource, CheckMode.ALL, CancelIndicator.NullImpl);
+            for (var issue : issues) {
+                if (issue.getSeverity() != Severity.ERROR) continue;
+                CompileDiagnosticDocument entry = new CompileDiagnosticDocument(
+                    stage,
+                    diagnosticPath(repoRoot, resource),
+                    issue.getLineNumber(),
+                    issue.getColumn(),
+                    clean(issue.getMessage()),
+                    "error"
+                );
+                if (seenDiagnostics.add(CompileDiagnosticKey.from(entry))) {
+                    diagnostics.add(entry);
+                }
+            }
+        }
         for (Diagnostic diagnostic : resource.getErrors()) {
             CompileDiagnosticDocument entry = new CompileDiagnosticDocument(
                 stage,
@@ -770,6 +893,7 @@ public final class PilotModelExporter {
         List<Resource> inputResources,
         ResourceSet resourceSet
     ) {
+        sourceNodeCache.clear();
         Path repoRoot = libraryRoot.getParent();
         Map<String, Element> allByQualifiedName = new LinkedHashMap<>();
         Map<Element, String> elementIds = new IdentityHashMap<>();
@@ -1075,7 +1199,7 @@ public final class PilotModelExporter {
         export.library_group = libraryGroup;
         export.source = relativePath == null ? null : new ExportSource(relativePath, startLineOf(element), endLineOf(element));
         export.documentation = documentationOf(element);
-        export.properties = propertiesOf(element);
+        export.properties = propertiesOf(element, elementIds);
         return export;
     }
 
@@ -1091,7 +1215,7 @@ public final class PilotModelExporter {
         return docs;
     }
 
-    private static Map<String, Object> propertiesOf(Element element) {
+    private static Map<String, Object> propertiesOf(Element element, Map<Element, String> elementIds) {
         Map<String, Object> properties = new LinkedHashMap<>();
         putIfPresent(properties, "declared_name", clean(element.getDeclaredName()));
         putIfPresent(properties, "declared_short_name", clean(element.getDeclaredShortName()));
@@ -1119,8 +1243,109 @@ public final class PilotModelExporter {
             properties.put("is_implied", relationship.isImplied());
         }
 
+        if (element instanceof Namespace namespace && !namespace.getOwnedImport().isEmpty()) {
+            Map<String, String> visible = new java.util.TreeMap<>();
+            // Pilot resolveVisible selects the first matching name/short name from this
+            // exact list. Materialize it once instead of rebuilding it for every name.
+            Map<String, Membership> firstVisible = new LinkedHashMap<>();
+            for (Membership member : namespace.visibleMemberships(new org.eclipse.emf.common.util.BasicEList<>(), false, false)) {
+                if (member.getMemberName() != null) firstVisible.putIfAbsent(member.getMemberName(), member);
+                if (member.getMemberShortName() != null) firstVisible.putIfAbsent(member.getMemberShortName(), member);
+            }
+            // visibilityOf uses the first owned import containing a membership, then
+            // falls back to membership visibility. Preserve that precedence exactly.
+            Map<Membership, VisibilityKind> firstImportVisibility = new IdentityHashMap<>();
+            for (var ownedImport : namespace.getOwnedImport()) {
+                for (Membership member : ownedImport.importedMemberships(new org.eclipse.emf.common.util.BasicEList<>())) {
+                    firstImportVisibility.putIfAbsent(member, ownedImport.getVisibility());
+                }
+            }
+            Set<Membership> allMemberships = java.util.Collections.newSetFromMap(new IdentityHashMap<>());
+            allMemberships.addAll(namespace.getMembership());
+            for (Membership membership : new ArrayList<>(namespace.getImportedMembership())) {
+                VisibilityKind visibility = firstImportVisibility.get(membership);
+                if (visibility == null) visibility = allMemberships.contains(membership) ? membership.getVisibility() : VisibilityKind.PRIVATE;
+                if (visibility != VisibilityKind.PUBLIC) { continue; }
+                Element member = membership.getMemberElement();
+                String target = member == null ? null : clean(member.getQualifiedName());
+                if (target == null) { continue; }
+                for (String name : new String[] {membership.getMemberName(), membership.getMemberShortName()}) {
+                    name = clean(name);
+                    if (name != null && firstVisible.get(name) == membership) { visible.put(name, target); }
+                }
+            }
+            if (!visible.isEmpty()) { properties.put("public_memberships", visible); }
+        }
+
+        if (assessmentSources.contains(element.eResource())) {
+            // The legacy edge set deduplicates and reorders targets. Retain an
+            // independent sequence projection so operand order, duplicates, empty
+            // lists and self references remain observable in the source oracle.
+            Map<String, Object> sequences = new LinkedHashMap<>();
+            for (EReference reference : element.eClass().getEAllReferences()) {
+                boolean annotationProjection = (element instanceof org.omg.sysml.lang.sysml.AnnotatingElement
+                    || element instanceof org.omg.sysml.lang.sysml.Annotation)
+                    && Set.of("owner", "owningRelationship", "owningNamespace", "owningMembership",
+                        "annotation", "annotatedElement", "annotatingElement", "owningAnnotatingRelationship",
+                        "ownedAnnotatingRelationship", "ownedAnnotatingElement", "owningAnnotatingElement",
+                        "owningAnnotatedElement", "owningRelatedElement", "relatedElement").contains(reference.getName());
+                if (!annotationProjection && (reference.isContainer() || (reference.isDerived() && !isExpressionProjectionReference(reference.getName())))) continue;
+                Object raw = element.eGet(reference, false);
+                List<Object> targets = new ArrayList<>();
+                if (raw instanceof Element target) targets.add(projectedReference(target, elementIds));
+                else if (raw instanceof Collection<?> values) {
+                    for (Object value : values) {
+                        if (!(value instanceof Element target)) throw new IllegalArgumentException("non-element EReference " + reference.getName());
+                        targets.add(projectedReference(target, elementIds));
+                    }
+                } else if (raw != null) throw new IllegalArgumentException("unsupported EReference " + reference.getName());
+                Map<String, Object> row = new LinkedHashMap<>();
+                row.put("targets", targets);
+                row.put("ordered", reference.isOrdered());
+                row.put("unique", reference.isUnique());
+                row.put("many", reference.isMany());
+                row.put("derived", reference.isDerived());
+                sequences.put(normalizeReferenceName(reference.getName()), row);
+            }
+            properties.put("reference_sequences", sequences);
+            // Include literal values, operators, units and every other EAttribute.
+            // Existing semantic properties retain their established snake_case names.
+            for (EAttribute attribute : element.eClass().getEAllAttributes()) {
+                Object value = element.eGet(attribute);
+                if (value != null) properties.put(normalizeReferenceName(attribute.getName()), exportAttributeValue(value));
+            }
+        }
         properties.values().removeIf(Objects::isNull);
         return properties;
+    }
+
+    private static Object projectedReference(Element target, Map<Element, String> elementIds) {
+        String id = identifierOf(target, elementIds);
+        if (id != null) return id;
+        // Explicitly report an incomplete export closure instead of losing a target.
+        Map<String, Object> missing = new LinkedHashMap<>();
+        missing.put("unexported_element_id", target.getElementId());
+        missing.put("kind", target.eClass().getName());
+        return missing;
+    }
+
+    private static boolean isExpressionProjectionReference(String name) {
+        // Ecore-derived expression/multiplicity views needed to align structured
+        // native IR. Selection affects observation only, never native semantics.
+        return switch (name) {
+            case "operand", "argument", "parameter", "result", "function", "referent",
+                 "instantiatedType", "referencedElement", "targetFeature", "chainingFeature",
+                 "bound", "lowerBound", "upperBound", "multiplicity", "ownedResultExpression" -> true;
+            default -> false;
+        };
+    }
+
+    private static Object exportAttributeValue(Object value) {
+        if (value instanceof String || value instanceof Number || value instanceof Boolean) return value;
+        if (value instanceof Enumerator enumerator) return enumerator.getLiteral();
+        if (value instanceof Collection<?> values) return values.stream().map(PilotModelExporter::exportAttributeValue).toList();
+        if (value instanceof Enum<?> enumeration) return enumeration.toString();
+        throw new IllegalArgumentException("unhandled source EAttribute value: " + value.getClass().getName());
     }
 
     private static void collectRelationships(
@@ -1186,7 +1411,8 @@ public final class PilotModelExporter {
         collectDerivedMethodRelationships(element, sourceQualifiedName, elementIds, relationships);
 
         for (EReference reference : element.eClass().getEAllReferences()) {
-            if (reference.isContainer() || !shouldCollectReflectiveReference(reference.getName())) {
+            boolean storedSourceReference = assessmentSources.contains(element.eResource()) && !reference.isDerived();
+            if (reference.isContainer() || !(storedSourceReference || shouldCollectReflectiveReference(reference.getName()))) {
                 continue;
             }
 
@@ -1406,13 +1632,21 @@ public final class PilotModelExporter {
         return candidate;
     }
 
+    private static ICompositeNode sourceNodeOf(Element element) {
+        // Source associations are fixed during one export. Cache null associations too.
+        if (!sourceNodeCache.containsKey(element)) {
+            sourceNodeCache.put(element, NodeModelUtils.findActualNodeFor(element));
+        }
+        return sourceNodeCache.get(element);
+    }
+
     private static Integer startLineOf(Element element) {
-        ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
+        ICompositeNode node = sourceNodeOf(element);
         return node == null ? null : node.getStartLine();
     }
 
     private static Integer endLineOf(Element element) {
-        ICompositeNode node = NodeModelUtils.findActualNodeFor(element);
+        ICompositeNode node = sourceNodeOf(element);
         return node == null ? null : node.getEndLine();
     }
 

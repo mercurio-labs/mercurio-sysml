@@ -4,15 +4,15 @@ use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::time::Instant;
 
-use mercurio_core::source_set::{SourceDocument, compile_source_document_with_registry};
+use mercurio_core::source_set::SourceDocument;
 use mercurio_core::{
-    Graph, KirDocument, KirElement, LanguageRegistry, MetamodelAttributeRegistry,
-    PilotExportDocument, SemanticCompareOptions, SemanticCompareProfile, SemanticComparisonReport,
-    SnapshotMode, build_semantic_snapshot_with_profile,
-    build_semantic_snapshot_with_registry_and_profile, compare_snapshots_with_profile,
-    load_pilot_export, normalize_pilot_export_for_compare,
+    Graph, KirDocument, KirElement, MetamodelAttributeRegistry, PilotExportDocument,
+    SemanticCompareOptions, SemanticCompareProfile, SemanticComparisonReport, SnapshotMode,
+    build_semantic_snapshot_with_profile, build_semantic_snapshot_with_registry_and_profile,
+    compare_snapshots_with_profile, load_pilot_export, normalize_pilot_export_for_compare,
 };
-use mercurio_sysml::{SysmlLanguageModule, load_sysml_baseline};
+use mercurio_sysml::kerml::{compile_kerml_module_strict_with_context, parse_kerml};
+use mercurio_sysml::{compile_sysml_module_with_context, load_sysml_baseline, parse_sysml};
 use mercurio_tools::default_pilot_root;
 use serde::{Deserialize, Serialize};
 use time::OffsetDateTime;
@@ -20,7 +20,11 @@ use time::format_description::well_known::Rfc3339;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args()?;
-    let corpus_seed = PilotCorpusSeed::load()?;
+    let corpus_seed = if let Some(path) = &args.corpus_manifest {
+        PilotCorpusSeed::from_manifest(path, &args.pilot_root)?
+    } else {
+        PilotCorpusSeed::load()?
+    };
     let compare_profile = load_compare_profile(&args.profile_id)?;
     match &args.relative_path {
         Some(relative_path) => {
@@ -30,6 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 &corpus_seed,
                 args.compare_options,
                 &compare_profile,
+                args.pilot_export.as_deref(),
             )?;
 
             if let Some(parent) = args.output_path.parent() {
@@ -179,6 +184,8 @@ struct Args {
     relative_path: Option<String>,
     corpus_name: Option<String>,
     paths_file: Option<PathBuf>,
+    corpus_manifest: Option<PathBuf>,
+    pilot_export: Option<PathBuf>,
     output_path: PathBuf,
     compare_options: SemanticCompareOptions,
 }
@@ -408,6 +415,59 @@ impl PilotCorpusSeed {
         )?)?)
     }
 
+    fn from_manifest(path: &Path, pilot_root: &Path) -> Result<Self, Box<dyn std::error::Error>> {
+        #[derive(Deserialize)]
+        struct Manifest {
+            cases: Vec<ManifestCase>,
+        }
+        #[derive(Deserialize)]
+        struct ManifestCase {
+            relative_path: String,
+            input_files: Vec<String>,
+        }
+        let text = std::fs::read_to_string(path)?;
+        let manifest: Manifest = serde_json::from_str(text.trim_start_matches('\u{feff}'))?;
+        if manifest.cases.is_empty() {
+            return Err("empty comparison manifest".into());
+        }
+        let mut support_dependencies = BTreeMap::new();
+        let mut paths = Vec::new();
+        for case in manifest.cases {
+            let mut inputs = Vec::new();
+            for input in &case.input_files {
+                let normalized = input.replace('\\', "/");
+                let offset = ["sysml/src/", "kerml/src/"]
+                    .iter()
+                    .filter_map(|prefix| normalized.find(prefix))
+                    .min()
+                    .ok_or_else(|| {
+                        format!("manifest input is outside the release sample trees: {input}")
+                    })?;
+                let relative = normalized[offset..].to_string();
+                if std::fs::read(input)? != std::fs::read(pilot_root.join(&relative))? {
+                    return Err(
+                        format!("Pilot and release manifest input differ: {relative}").into(),
+                    );
+                }
+                inputs.push(relative);
+            }
+            if inputs.pop().as_deref() != Some(case.relative_path.as_str()) {
+                return Err(format!("manifest target must be last: {}", case.relative_path).into());
+            }
+            if support_dependencies
+                .insert(case.relative_path.clone(), inputs)
+                .is_some()
+            {
+                return Err(format!("duplicate manifest target: {}", case.relative_path).into());
+            }
+            paths.push(case.relative_path);
+        }
+        Ok(Self {
+            corpora: BTreeMap::from([("all".to_string(), paths)]),
+            support_dependencies,
+        })
+    }
+
     fn support_paths_for(&self, relative_path: &str) -> &[String] {
         self.support_dependencies
             .get(relative_path)
@@ -428,7 +488,7 @@ impl PilotCorpusSeed {
         name: &str,
         pilot_root: &Path,
     ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
-        if name == "all" {
+        if name == "all" && !self.corpora.contains_key("all") {
             return discover_all_pilot_examples(pilot_root);
         }
         self.corpora
@@ -494,6 +554,7 @@ fn group_paths_by_folder(relative_paths: &[String]) -> BTreeMap<String, Vec<Stri
 }
 
 #[derive(Debug, Deserialize)]
+#[serde(rename_all = "camelCase")]
 struct CompareToleranceOverlay {
     #[serde(default)]
     included_attributes: Vec<String>,
@@ -504,7 +565,8 @@ struct CompareToleranceOverlay {
 #[derive(Debug, Deserialize)]
 struct MetamodelExtract {
     #[serde(default)]
-    attributes: Vec<MetamodelExtractAttribute>,
+    #[serde(alias = "attributes")]
+    structural_features: Vec<MetamodelExtractAttribute>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -548,7 +610,7 @@ fn load_compare_profile(
     }
 
     let mut included_attributes = overlay.included_attributes.into_iter().collect::<Vec<_>>();
-    for attribute in metamodel.attributes {
+    for attribute in metamodel.structural_features {
         if !attribute.derived {
             included_attributes.push(attribute.name.clone());
             included_attributes.push(camel_to_snake(&attribute.name));
@@ -584,6 +646,8 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut relative_path = None;
     let mut corpus_name = None;
     let mut paths_file = None;
+    let mut corpus_manifest = None;
+    let mut pilot_export = None;
     let mut output_path = tool_repo_path("target/pilot_semantic_compare.json");
     let mut compare_options = SemanticCompareOptions::default();
     let args = env::args().skip(1).collect::<Vec<_>>();
@@ -619,6 +683,19 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                         .to_string(),
                 );
             }
+            "--corpus-manifest" => {
+                index += 1;
+                corpus_manifest = Some(PathBuf::from(
+                    args.get(index)
+                        .ok_or("missing value for --corpus-manifest")?,
+                ));
+            }
+            "--pilot-export" => {
+                index += 1;
+                pilot_export = Some(PathBuf::from(
+                    args.get(index).ok_or("missing value for --pilot-export")?,
+                ));
+            }
             "--paths-file" => {
                 index += 1;
                 paths_file = Some(PathBuf::from(
@@ -651,12 +728,17 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
         return Err("provide exactly one of --relative-path, --corpus, or --paths-file".into());
     }
 
+    if pilot_export.is_some() && relative_path.is_none() {
+        return Err("--pilot-export requires --relative-path".into());
+    }
     Ok(Args {
         pilot_root,
         profile_id,
         relative_path,
         corpus_name,
         paths_file,
+        corpus_manifest,
+        pilot_export,
         output_path,
         compare_options,
     })
@@ -664,7 +746,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin compare_pilot_semantics -- (--relative-path PATH | --corpus NAME|all | --paths-file PATH) [--pilot-root PATH] [--profile-id ID] [--out PATH] [--include-derived-properties] [--all-attributes]"
+        "Usage: cargo run -p mercurio-tools --bin compare_pilot_semantics -- (--relative-path PATH | --corpus NAME|all | --paths-file PATH) [--pilot-root PATH] [--profile-id ID] [--corpus-manifest PATH] [--pilot-export PATH] [--out PATH] [--include-derived-properties] [--all-attributes]"
     );
 }
 
@@ -674,18 +756,26 @@ fn run_compare_case(
     corpus_seed: &PilotCorpusSeed,
     compare_options: SemanticCompareOptions,
     compare_profile: &SemanticCompareProfile,
+    cached_export: Option<&Path>,
 ) -> Result<CompareOutput, Box<dyn std::error::Error>> {
     let mercurio = build_mercurio_case(pilot_root, relative_path, corpus_seed, compare_profile)?;
     let support_paths = mercurio.support_paths.clone();
 
     let pilot_start = Instant::now();
     let pilot_export_start = Instant::now();
-    let pilot_export_path = export_model_from_pilot(pilot_root, relative_path, &support_paths)?;
+    let pilot_export_path = if let Some(path) = cached_export {
+        path.to_path_buf()
+    } else {
+        export_model_from_pilot(pilot_root, relative_path, &support_paths)?
+    };
     let pilot_export_ms = elapsed_ms(pilot_export_start);
 
     let pilot_load_start = Instant::now();
     let pilot_export: PilotExportDocument = load_pilot_export(&pilot_export_path)?;
     let pilot_load_ms = elapsed_ms(pilot_load_start);
+    if cached_export.is_some() {
+        validate_cached_export_sources(&pilot_export, &support_paths, relative_path)?;
+    }
 
     let pilot_snapshot_start = Instant::now();
     let pilot_snapshot = build_semantic_snapshot_with_registry_and_profile(
@@ -709,7 +799,7 @@ fn run_compare_case(
             total_ms: pilot_total_ms,
             phases: vec![
                 PhaseTiming {
-                    name: "java_export_model".to_string(),
+                    name: if cached_export.is_some() { "cached_export_lookup" } else { "java_export_model" }.to_string(),
                     duration_ms: pilot_export_ms,
                 },
                 PhaseTiming {
@@ -722,10 +812,39 @@ fn run_compare_case(
                 },
             ],
         },
-        "Rust timings currently include loading prebuilt stdlib KIR JSON plus L2 compile/snapshot. Pilot timings currently include Java exporter wall-clock time for loading source libraries plus L2 export/snapshot.".to_string(),
+        if cached_export.is_some() { "Cached Pilot export: Pilot execution time is not included. Use the separate assessment timings; these comparison timings are not a compiler benchmark." } else { "Rust includes prebuilt-library loading and compile/snapshot; Pilot includes Java library loading and export/snapshot. These are different workflows." }.to_string(),
         compare_options,
         compare_profile,
     )
+}
+
+fn validate_cached_export_sources(
+    pilot_export: &PilotExportDocument,
+    support_paths: &[String],
+    relative_path: &str,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let actual = pilot_export
+        .metadata
+        .as_ref()
+        .and_then(|m| m.get("input_files"))
+        .and_then(|v| v.as_array())
+        .ok_or("cached Pilot export has no input_files metadata")?
+        .iter()
+        .map(|v| {
+            v.as_str()
+                .ok_or("invalid cached input path")
+                .map(str::to_owned)
+        })
+        .collect::<Result<std::collections::BTreeSet<_>, _>>()?;
+    let expected = support_paths
+        .iter()
+        .cloned()
+        .chain(std::iter::once(relative_path.to_string()))
+        .collect::<std::collections::BTreeSet<_>>();
+    if actual != expected {
+        return Err("cached Pilot export source set differs from requested corpus case".into());
+    }
+    Ok(())
 }
 
 fn run_compare_case_from_batch(
@@ -797,29 +916,26 @@ fn build_mercurio_case(
     let read_parse_ms = elapsed_ms(read_parse_start);
 
     let context_start = Instant::now();
-    let mut registry = LanguageRegistry::new();
-    registry.register(SysmlLanguageModule);
-    let context_ms = elapsed_ms(context_start);
-
-    let target_document = source_documents
+    let modules = source_documents
         .iter()
-        .find(|file| file.path == relative_path)
-        .ok_or_else(|| format!("source set missing target `{relative_path}`"))?;
-
+        .map(|source| {
+            if source.path.ends_with(".kerml") {
+                parse_kerml(&source.content)
+            } else {
+                parse_sysml(&source.content)
+            }
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    let context_ms = elapsed_ms(context_start);
     let compile_start = Instant::now();
     let mut source_kir = Vec::new();
-    source_kir.push(compile_source_document_with_registry(
-        target_document,
-        &stdlib,
-        &registry,
-    )?);
-    for file in source_documents
-        .iter()
-        .filter(|file| file.path != relative_path)
-    {
-        if let Ok(document) = compile_source_document_with_registry(file, &stdlib, &registry) {
-            source_kir.push(document);
-        }
+    for (source, module) in source_documents.iter().zip(&modules) {
+        let document = if source.path.ends_with(".kerml") {
+            compile_kerml_module_strict_with_context(module, &source.path, &modules, &stdlib)
+        } else {
+            compile_sysml_module_with_context(module, &source.path, &modules, &stdlib)
+        }?;
+        source_kir.push(document);
     }
     let (source_document, source_merge_stats) = merge_kir_documents_for_compare(source_kir)?;
     let compile_ms = elapsed_ms(compile_start);
@@ -1420,6 +1536,13 @@ fn export_corpus_group_from_pilot(
 }
 
 fn find_interactive_jar(pilot_root: &Path) -> Result<PathBuf, Box<dyn std::error::Error>> {
+    if let Some(path) = env::var_os("MERCURIO_PILOT_JAR") {
+        let path = PathBuf::from(path);
+        if !path.is_file() {
+            return Err(format!("Pilot jar does not exist: {}", path.display()).into());
+        }
+        return Ok(path);
+    }
     let target_dir = pilot_root.join("org.omg.sysml.interactive/target");
     let mut jars = std::fs::read_dir(&target_dir)?
         .filter_map(Result::ok)
@@ -1646,6 +1769,24 @@ fn elapsed_ms(start: Instant) -> u64 {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn cached_export_requires_the_identical_source_set() {
+        let export = PilotExportDocument {
+            metadata: Some(serde_json::json!({"input_files":["support.sysml","target.sysml"]})),
+            elements: vec![],
+            relationships: vec![],
+        };
+        assert!(
+            validate_cached_export_sources(&export, &["support.sysml".into()], "target.sysml")
+                .is_ok()
+        );
+        assert!(validate_cached_export_sources(&export, &[], "target.sysml").is_err());
+        assert!(
+            validate_cached_export_sources(&export, &["unrelated.sysml".into()], "target.sysml")
+                .is_err()
+        );
+    }
+
     use serde_json::json;
 
     fn element(id: &str, kind: &str, properties: &[(&str, serde_json::Value)]) -> KirElement {

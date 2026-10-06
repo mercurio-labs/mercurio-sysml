@@ -1,0 +1,4881 @@
+{
+  "controls": [
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Behavior",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Function",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Step",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "Expression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "OperatorExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "ParameterMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "in",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "out",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "none",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::things",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Classifier",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Occurrences::occurrences",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Class",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Objects::objects",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "Structure",
+      "valuation": "default"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "absent"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "value"
+    },
+    {
+      "default_name": "Base::dataValues",
+      "direction": "inout",
+      "is_parameter": true,
+      "membership": "FeatureMembership",
+      "owner": "InvocationExpression",
+      "typing": "DataType",
+      "valuation": "default"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "dcd01bba4ca9d135783361ce8b7dce1e5162dd90eab0da4e4cca46290c68db74",
+    "helper_sha256": "e679aef694101f22044f4a95cc925d3e36a4e679b1b84ff94ee40ba5db2aba40",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.parameter-defaults-controls.v1",
+  "scope": "540 fixed non-end/noncomposite exact Feature parameter selector controls across six owner classes, two membership kinds, three directions, five typings and three valuation states. Not complete transformation, result evaluation or validation."
+}

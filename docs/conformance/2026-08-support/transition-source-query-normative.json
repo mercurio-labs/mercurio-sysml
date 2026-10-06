@@ -1,0 +1,33 @@
+{
+  "schema": "dev.mercurio.transition-source-query-normative.v1",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "normative_pdf": {
+    "path": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5"
+  },
+  "references": [
+    {
+      "pdf_pages": [
+        375,
+        378
+      ],
+      "assessment": "sourceFeature returns the first non-FeatureMembership Feature whose featureTarget is an ActionUsage. source is that selected Feature’s featureTarget. Native preserves the raw selected feature and its direct final chain target separately; chains are not recursively flattened."
+    },
+    {
+      "pdf_pages": [
+        374,
+        377,
+        378,
+        475
+      ],
+      "assessment": "Required transition parameters, source/succession connectors, specializations, source/target validation and Boolean guard result obligations remain separate. Proving that the additional-member producer makes no edits does not verify these complete-model constraints."
+    }
+  ],
+  "execution_boundary": "Resolved computeSource and computeTransitionLinkConnectors establish a no-op only with an already resolved non-Parameter first membership and either an existing ordinary link or no owned Succession, no redirecting Transition chain, and no directed owned parameters. Native checks those conditions; actual producers remain explicit failures. It never asserts isImpliedIncluded.",
+  "remaining": [
+    "Actual link and binding-connector creation/transformation",
+    "Target getter/effective succession ends",
+    "Pending source scheduling for constructor branches",
+    "Real default/generalization/featuring dependencies and complete constraints"
+  ]
+}

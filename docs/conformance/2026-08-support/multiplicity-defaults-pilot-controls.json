@@ -1,0 +1,327 @@
+{
+  "bindings": {
+    "Multiplicity": {
+      "base": "Base::naturals",
+      "classifier": "Base::zeroOrOne",
+      "feature": "Base::exactlyOne"
+    },
+    "MultiplicityRange": {
+      "base": "Base::naturals",
+      "classifier": "Base::naturals",
+      "feature": "Base::naturals"
+    }
+  },
+  "controls": [
+    {
+      "canonical_owner": "detached",
+      "context": "detached",
+      "default_name": "Base::naturals",
+      "kind": "Multiplicity",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "detached",
+      "context": "detached",
+      "default_name": "Base::naturals",
+      "kind": "Multiplicity",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Package",
+      "context": "Package",
+      "default_name": "Base::naturals",
+      "kind": "Multiplicity",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Package",
+      "context": "Package",
+      "default_name": "Base::naturals",
+      "kind": "Multiplicity",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Classifier",
+      "context": "Classifier",
+      "default_name": "Base::zeroOrOne",
+      "kind": "Multiplicity",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Classifier",
+      "context": "Classifier",
+      "default_name": "Base::zeroOrOne",
+      "kind": "Multiplicity",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Class",
+      "context": "Class",
+      "default_name": "Base::zeroOrOne",
+      "kind": "Multiplicity",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Class",
+      "context": "Class",
+      "default_name": "Base::zeroOrOne",
+      "kind": "Multiplicity",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Feature",
+      "context": "Feature",
+      "default_name": "Base::exactlyOne",
+      "kind": "Multiplicity",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Feature",
+      "context": "Feature",
+      "default_name": "Base::exactlyOne",
+      "kind": "Multiplicity",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "detached",
+      "context": "detached",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "detached",
+      "context": "detached",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Package",
+      "context": "Package",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Package",
+      "context": "Package",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Classifier",
+      "context": "Classifier",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Classifier",
+      "context": "Classifier",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Class",
+      "context": "Class",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Class",
+      "context": "Class",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Feature",
+      "context": "Feature",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "OwningMembership",
+      "relevant_count": 0
+    },
+    {
+      "canonical_owner": "Feature",
+      "context": "Feature",
+      "default_name": "Base::naturals",
+      "kind": "MultiplicityRange",
+      "membership": "FeatureMembership",
+      "relevant_count": 0
+    }
+  ],
+  "library_sources": [
+    {
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "text": "standard library package Base {\r\n\tdoc \r\n\t/*\r\n\t * This package defines the classifiers and features that provide the bases for the typing\r\n\t * of all elements in the language.\r\n\t */\r\n\t \t\t\r\n\tabstract classifier Anything {\r\n\t\tdoc\r\n\t\t/*\r\n\t     * Anything is the top level generalized type in the language. \r\n\t     */\r\n\t\t\r\n\t\tfeature self: Anything[1] subsets things chains things.that {\r\n\t\t\tdoc\r\n\t\t\t/*\r\n\t\t\t * The source of a SelfLink of this thing to itself. self is thus a feature that\r\n\t\t\t * relates everything to itself. It is also the value of the nested \"that\" feature\r\n\t\t\t * of all other things featured by this thing.\r\n\t\t\t */\r\n\t\t}\r\n\t}\r\n\t\r\n\tabstract datatype DataValue specializes Anything {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * Value is the most general classifier of entities that are values that do not change\r\n\t\t * over time.\r\n\t\t */\r\n\t\t\r\n\t\tfeature self: DataValue redefines Anything::self;\r\n\t}\r\n\t\r\n\tabstract feature things: Anything [1..*] nonunique {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * things is the top-level feature in the language.\r\n\t\t */\r\n\r\n\t\tfeature that : Anything[1] {\r\n\t\t\tdoc\r\n\t\t\t/*\r\n\t\t\t * For each value of things, the \"featuring instance\" of that value. \r\n\t\t\t * This is enforced by declaring Anything::self to be the chaining of things.that, \r\n\t\t\t * restricting it the single value of self.\r\n\t\t\t */\t\t\t\r\n\t\t}\r\n\t}\r\n\t\r\n\tabstract feature dataValues: DataValue[0..*] nonunique subsets things {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * dataValues is a specialization of things restricted to type DataValue.\r\n\t\t */\r\n\t}\r\n\t\t \r\n\tabstract feature naturals: ScalarValues::Natural[0..*] subsets dataValues {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * naturals is a specialization of dataValues restricted to type Natural. \r\n\t\t * It is the root feature of all multiplicities, which map from a feature to\r\n\t\t * the set of Natural numbers representing allowable cardinalities of the feature.\r\n\t\t */\r\n\t}\r\n\t\r\n\tmultiplicity exactlyOne [1..1] {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * exactlyOne is a multiplicity range requiring a cardinality of exactly one.\r\n\t\t */\r\n\t}\r\n\t\r\n\tmultiplicity zeroOrOne [0..1] {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * zeroOrOne is a multiplicity range requiring a cardinality of zero or one.\r\n\t\t */\t\t\r\n\t}\r\n\t\r\n\tmultiplicity oneToMany [1..*] {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * oneToMany is a multiplicity range allowing any cardinality of one or more.\r\n\t\t */\r\n\t}\r\n\t\r\n\tmultiplicity zeroToMany [0..*] {\r\n\t\tdoc\r\n\t\t/*\r\n\t\t * zeroToMany is a multiplicity range allowing any cardinality of zero or more\r\n\t\t * (that is, no restriction).\r\n\t\t */\r\n\t}\r\n\t\r\n}",
+      "uri": "sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml"
+    },
+    {
+      "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "text": "standard library package ScalarValues {\r\n\tdoc\r\n\t/*\r\n\t * This package contains a basic set of primitive scalar (non-collection) data types. \r\n\t * These include Boolean and String types and a hierarchy of concrete Number types, from \r\n\t * the most general type of Complex numbers to the most specific type of Positive integers.</p>\r\n\t */\r\n\r\n\tprivate import Base::DataValue;\r\n\t\r\n\tabstract datatype ScalarValue specializes DataValue;\r\n\tdatatype Boolean specializes ScalarValue;\r\n\tdatatype String specializes ScalarValue;\r\n\tabstract datatype NumericalValue specializes ScalarValue;\r\n\t\r\n    abstract datatype Number specializes NumericalValue;\r\n\tdatatype Complex specializes Number;\r\n\tdatatype Real specializes Complex;\t\r\n\tdatatype Rational specializes Real;\r\n\tdatatype Integer specializes Rational;\r\n\tdatatype Natural specializes Integer;\r\n    datatype Positive specializes Natural;\t\r\n}\t\t\r\n",
+      "uri": "sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml"
+    }
+  ],
+  "methods": {
+    "org.omg.sysml.adapter.MultiplicityAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.MultiplicityAdapter#getTarget",
+              "type": "org.omg.sysml.lang.sysml.Multiplicity"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Element#getOwner",
+            "type": "org.omg.sysml.lang.sysml.Element"
+          },
+          "kind": "VARIABLE",
+          "name": "owner",
+          "type": "org.omg.sysml.lang.sysml.Element"
+        },
+        {
+          "expression": {
+            "condition": {
+              "expression": {
+                "kind": "IDENTIFIER",
+                "name": "owner",
+                "type": "org.omg.sysml.lang.sysml.Element"
+              },
+              "kind": "INSTANCE_OF",
+              "test_type": "org.omg.sysml.lang.sysml.Classifier",
+              "type": "boolean"
+            },
+            "false": {
+              "condition": {
+                "expression": {
+                  "kind": "IDENTIFIER",
+                  "name": "owner",
+                  "type": "org.omg.sysml.lang.sysml.Element"
+                },
+                "kind": "INSTANCE_OF",
+                "test_type": "org.omg.sysml.lang.sysml.Feature",
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "base"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [
+                  {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "feature"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "java.lang.String"
+                ],
+                "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+                "type": "java.lang.String"
+              },
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "arguments": [
+                {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "classifier"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.String"
+              ],
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+              "type": "java.lang.String"
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.MultiplicityAdapter#getRelevantFeatures": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "Collections",
+              "type": "java.util.Collections"
+            },
+            "symbol": "java.util.Collections#emptyList",
+            "type": "java.util.List<org.omg.sysml.lang.sysml.Multiplicity>"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "driver_sha256": "408ef1f207faf65b659c1e668baa368d1c0ce70eeeaa24294c55b3355434a46e",
+    "helper_sha256": "1286d106c2a6bb1210106169196d20f794c498f0f63c02aaff473bced6387460",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/MultiplicityAdapter.java": "9287e87f4b6561f9f0c8a2c1dd38619e8695193a7f3fc8487834b52062eab875",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    },
+    "tree_helper_sha256": "877477dd7712d40831fe5f1785f1be39200c3fd415d5f1a196a771f4fbaebe34"
+  },
+  "schema": "dev.mercurio.multiplicity-defaults-controls.v1",
+  "scope": "Resolved owner-sensitive Multiplicity defaults, two bindings, five owner categories and two membership kinds; selector and empty relevant-feature query only. No complete transformation or validation."
+}

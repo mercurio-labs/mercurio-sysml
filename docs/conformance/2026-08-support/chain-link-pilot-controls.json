@@ -1,0 +1,1573 @@
+{
+  "scope": "Actual KerML Xtext resource linking for typed FeatureChain references. Ordered targets and unresolved links are observed independently. Six additional raw declaration-identification acceptance controls. Eight source-order/cross-specialization dependency controls compare chained reference targets only; complete Feature transformation remains unqualified. Eight reciprocal-subsetting controls observe inherited chain resolution in both member and library declaration orders. No full validation, specification qualification, or complete scope coverage.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend": "42b8eda7fec0ff3031e025654f9341a9f45db0822e6f0ad3185f0f1981c501d9",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/NamespaceUtil.java": "e411c4c1517fb895f99336d3714d595a94b9ef261180316f517c83014714ffce"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "067b3d8c22113f548cf1c8e5198909b53fe8cc708405786e74d057e86fce9f61"
+  },
+  "cases": [
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "y"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "C",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y.z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "C",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "missing"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.missing of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "y::missing"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y::missing of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "C",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { feature y : C; } class B :> Base; class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "y",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Inner::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Inner::missing"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::missing of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Inner"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": false,
+          "spelling": "A"
+        },
+        {
+          "resolved": false,
+          "spelling": "z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; feature z : A; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A.z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Inner::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { feature Inner : C; } class B :> Base { class Inner { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Inner::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "Base",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { class Inner { feature z : A; } } class B :> Base; class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Inner::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "Base",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { class Inner { feature z : A; } } class Mid :> Base; class B :> Mid; class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Inner::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { class Inner { feature z : A; } } class Mid :> Base; class B :> Mid { class Inner { feature z : C; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Inner::z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { private class Inner { feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Inner::z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { private feature z : A; } } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Inner::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Inner::z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { private class Inner { feature z : A; } inverting Invert inverse A::x.Inner::z of C::z; } class C { feature z : A; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Shortcut::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } alias Shortcut for Inner; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "shortcut::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "C",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; alias shortcut for y; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Shortcut::z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } private alias Shortcut for Inner; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Shortcut::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "Base",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class Base { class Inner { feature z : A; } alias Shortcut for Inner; } class B :> Base; class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "shortcut::z"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; private alias shortcut for y; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "shortcut::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "C",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { private feature y : C; alias shortcut for y; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "Shortcut::z",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "Inner",
+            "z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } alias Shortcut for Other; alias Other for Inner; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Shortcut::z of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "shortcut"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { comment Note /* text */ alias shortcut for Note; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "shortcut"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { disjoining Link disjoint C from A; alias shortcut for Link; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "shortcut",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; alias shortcut for y; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "Shortcut"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { class Inner { feature z : A; } alias Shortcut for Inner; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.Shortcut of C::z; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "A::x",
+          "target_kind": "Feature",
+          "target_path": [
+            "ChainScope",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "shortcut",
+          "target_kind": "MultiplicityRange",
+          "target_path": [
+            "ChainScope",
+            "B",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package ChainScope { class A { feature x : B; } class B { multiplicity y [1..1]; alias shortcut for y; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.shortcut of C::z; }"
+    }
+  ],
+  "candidate_scope_controls": [
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature x { feature y; } feature f chains x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature f chains x.y; feature x { feature y; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature y; feature x { feature y; } feature f chains x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "y"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature y; feature x; feature f chains x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "y"
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature x { private feature y; } feature f chains x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature x { feature y; } feature f subsets x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature x { feature y; } feature f crosses x.y; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { class A { feature x { feature y; } feature f chains x.y; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'y::z'",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "x",
+            "y::z"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "package P { feature x { feature 'y::z'; } feature f chains x.'y::z'; }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "renamed"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "other"
+          ]
+        }
+      ],
+      "source": "standard library package Base { classifier Anything; } package P { classifier A { feature x { feature y; } feature other; } classifier B :> A { feature f chains x.y; feature renamed redefines other; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "x",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "renamed"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "other"
+          ]
+        }
+      ],
+      "source": "standard library package Base { classifier Anything; } package P { classifier B :> A { feature f chains x.y; feature renamed redefines other; } classifier A { feature x { feature y; } feature other; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "a2",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "B",
+            "a2"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "a",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "a2"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "a"
+          ]
+        },
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "b2"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "b"
+          ]
+        }
+      ],
+      "source": "standard library package Base { classifier Anything; feature things; } package P { classifier A { feature a { feature y; } feature b; } classifier B :> A { feature f chains a2.y; feature a2 redefines a; feature b2 redefines b; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "a2",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "B",
+            "a2"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "y",
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "A",
+            "a",
+            "y"
+          ]
+        }
+      ],
+      "redefinitions": [
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "b2"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "b"
+          ]
+        },
+        {
+          "owner_path": [
+            "P",
+            "B",
+            "a2"
+          ],
+          "resolved": true,
+          "target_path": [
+            "P",
+            "A",
+            "a"
+          ]
+        }
+      ],
+      "source": "standard library package Base { classifier Anything; feature things; } package P { classifier B :> A { feature f chains a2.y; feature b2 redefines b; feature a2 redefines a; } classifier A { feature a { feature y; } feature b; } }"
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "m",
+          "target_kind": "Feature",
+          "target_path": [
+            "T",
+            "m"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end cross feature e : T; end feature other; feature f chains e.'cross'.m; } classifier T { feature m; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "m",
+          "target_kind": "Feature",
+          "target_path": [
+            "T",
+            "m"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } classifier T { feature m; } class C { end cross feature e : T; end feature other; feature f chains e.'cross'.m; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "m",
+          "target_kind": "Feature",
+          "target_path": [
+            "T",
+            "m"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { feature f chains e.'cross'.m; end cross feature e : T; end feature other; } classifier T { feature m; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "m",
+          "target_kind": "Feature",
+          "target_path": [
+            "T",
+            "m"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } classifier T { feature m; } class C { feature f chains e.'cross'.m; end cross feature e : T; end feature other; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end cross feature e : T; end feature other; feature f chains e.'cross'.absent; } classifier T { feature m; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } classifier T { feature m; } class C { end cross feature e : T; end feature other; feature f chains e.'cross'.absent; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { feature f chains e.'cross'.absent; end cross feature e : T; end feature other; } classifier T { feature m; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "e",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "'cross'",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "e",
+            "cross"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Occurrences { feature occurrences; class Occurrence; } classifier T { feature m; } class C { feature f chains e.'cross'.absent; end cross feature e : T; end feature other; } "
+    }
+  ],
+  "reciprocal_scope_controls": [
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "self",
+          "target_kind": "Feature",
+          "target_path": [
+            "Base",
+            "Anything",
+            "self"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end feature thisThing : Base::Anything subsets sameThing crosses sameThing.self; end self2 feature sameThing : Base::Anything subsets thisThing; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "self",
+          "target_kind": "Feature",
+          "target_path": [
+            "Base",
+            "Anything",
+            "self"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "class C { end feature thisThing : Base::Anything subsets sameThing crosses sameThing.self; end self2 feature sameThing : Base::Anything subsets thisThing; } standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "self",
+          "target_kind": "Feature",
+          "target_path": [
+            "Base",
+            "Anything",
+            "self"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end self2 feature sameThing : Base::Anything subsets thisThing; end feature thisThing : Base::Anything subsets sameThing crosses sameThing.self; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": true,
+          "spelling": "self",
+          "target_kind": "Feature",
+          "target_path": [
+            "Base",
+            "Anything",
+            "self"
+          ]
+        }
+      ],
+      "redefinitions": [],
+      "source": "class C { end self2 feature sameThing : Base::Anything subsets thisThing; end feature thisThing : Base::Anything subsets sameThing crosses sameThing.self; } standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end feature thisThing : Base::Anything subsets sameThing crosses sameThing.absent; end self2 feature sameThing : Base::Anything subsets thisThing; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "class C { end feature thisThing : Base::Anything subsets sameThing crosses sameThing.absent; end self2 feature sameThing : Base::Anything subsets thisThing; } standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } class C { end self2 feature sameThing : Base::Anything subsets thisThing; end feature thisThing : Base::Anything subsets sameThing crosses sameThing.absent; } "
+    },
+    {
+      "links": [
+        {
+          "resolved": true,
+          "spelling": "sameThing",
+          "target_kind": "Feature",
+          "target_path": [
+            "C",
+            "sameThing"
+          ]
+        },
+        {
+          "resolved": false,
+          "spelling": "absent"
+        }
+      ],
+      "redefinitions": [],
+      "source": "class C { end self2 feature sameThing : Base::Anything subsets thisThing; end feature thisThing : Base::Anything subsets sameThing crosses sameThing.absent; } standard library package Base { classifier Anything { feature self : Anything; } feature things : Anything; } standard library package Occurrences { feature occurrences; class Occurrence; } "
+    }
+  ],
+  "identification_controls": [
+    {
+      "accepted": true,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "accepted": false,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting inv inverse A::x.y::z of C::z; }"
+    },
+    {
+      "accepted": true,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting 'inv' inverse A::x.y::z of C::z; }"
+    },
+    {
+      "accepted": true,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting <Short> Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "accepted": false,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting <inv> Invert inverse A::x.y::z of C::z; }"
+    },
+    {
+      "accepted": true,
+      "source": "package ChainScope { class A { feature x : B; } class B { feature y : C; } class C { feature z : A; } feature y : A; feature missing : A; inverting <'inv'> Invert inverse A::x.y::z of C::z; }"
+    }
+  ]
+}

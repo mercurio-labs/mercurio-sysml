@@ -1,0 +1,122 @@
+{
+  "schema": "dev.mercurio.feature-chain-members-evidence.v1",
+  "scope": "FeatureChainExpression additional-member producer only: inherited owned return and anonymous source-target storage. Exact prototype construction; complete transformation and validation remain unsupported.",
+  "pipeline": {
+    "pinned_artifacts": "Pinned Ecore, FeatureChainExpressionAdapter, InvocationExpressionAdapter, TypeUtil and ownedFeature delegate",
+    "resolved_representation": {
+      "path": "docs/conformance/2026-08-support/feature-chain-members-pilot-controls.json",
+      "typed_resolved_methods": 8,
+      "frontend": "JDK Javac parse+analyze with resolved symbols and types"
+    },
+    "generated_consumer": "feature_chain_members_generated.rs: resolved class binding, source position and declared name; unassessed programs rejected",
+    "native_consumers": [
+      "feature_chain_members::append -> transactional result/source-target construction",
+      "feature_chain_members::ready_query -> actual graph readiness",
+      "relative_namespace::arguments -> typed AdditionalMembers retry",
+      "Existing candidate additional-member scheduler -> shared producer"
+    ],
+    "handwritten_rust_dependencies": [
+      "Canonical graph, Ecore ownership and delegate validation",
+      "First directed owned-parameter selection and basic-feature projection",
+      "Atomic graph edits, fresh identity guards and field-only retry scheduling",
+      "Constructor-only ownedFeature null filtering; global strict validation unchanged"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "independent_controls": 56,
+    "structural_shapes": 7,
+    "direction_variants": 4,
+    "completion_flag_variants": 2,
+    "focused_native_tests_passed": 4,
+    "persisted_forward_reverse_controls": 112,
+    "rollback_negative_controls": 6,
+    "raw_reference_expectations_normalized": false,
+    "completion_flags_written": false,
+    "full_native_regression": "passes",
+    "native_definition_tests_passed": 379,
+    "optimized_build": "passes",
+    "tool_binary_tests_passed": 11,
+    "cache_integrity_tests_passed": 4,
+    "cache_reproduced": true,
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "resource_assessment_current_code": false,
+    "actual_resources_semantically_qualified": false,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "strategy_tests_passed": 15,
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-feature-chain-members-assessment.json",
+      "sha256": "f38e1621aa85afa4fb1bdfc2bfd2f6a94692ed92702df8b0079a53827927a87e",
+      "status": "assessed",
+      "native_executable": {
+        "path": "target/release/audit_release_compile.exe",
+        "sha256": "38ffdb818142cf10d468c655eedf1b02160beedae80d9ec53a96652b94d2b1a6"
+      },
+      "elapsed_seconds": 633.203,
+      "diagnostic_only": true,
+      "semantic_qualification": false,
+      "comparable_benchmark": false,
+      "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: result defaults require separate nested/valuation/crossing/typing dependencies\", kind: Syntax, span: None, subjects: [] }",
+      "exit_code": 1
+    },
+    "reference_progress": {
+      "prior_reference_finished_count": 523,
+      "current_reference_finished_count": 527,
+      "interpretation": "Diagnostic progress only; not qualified references or obligations"
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "Complete sourceTargetFeature operation and IN/INOUT distinctions",
+    "Target Feature and library-role redefinitions",
+    "Result chained subsetting and owningType constraints",
+    "TargetFeature derivation, argument conformance and operator validation",
+    "Complete cold-resource transformation and publication",
+    "Global native parser/model contracts",
+    "All release samples and comparable Pilot timing"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "closed_families_delta": 0,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "63abbc26d6032294171dd3d15d6de7af83ee7bb5a6898c8e824e747e8ea50755",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_chain_members.rs": "e5c29642e89eaa67142e4e25f233b1e4cffebc3c459e7b7fc12e876e3ffd10ab",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_chain_members_generated.rs": "1ab6ebc306c6bce87d01ad729cc6ab01642e3b106e00a0357c52f51fa21bff26",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "f760b69f942ff326c95fd17ce07e1b66428d753bf8685e67819b1409d24d37bc",
+    "tools/generate_feature_chain_members.py": "bd23f75e152dad4a57d1053f62b7076a75b60be44b59430f73260508446cc3e1",
+    "tools/run_feature_chain_members_probe.py": "8621c2ee69c7cd0d0222a796840c3a1c08b44f12700b35fa38bee23b28781027",
+    "tools/test_feature_chain_members.py": "726db2348bfc01813fae00714339c5bd918f019f62c11d83db9479ace07ca01d",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureChainMembersProbe.java": "648fa7e5f8e8d872e228a02e1921830a8a876be302bafeef487f1c6bb12c89ad",
+    "docs/conformance/2026-08-support/feature-chain-members-pilot-controls.json": "29b51b3aa46828497c0b43b35e33a85cf90f207d00b1ff4d2edd356fa283d34d",
+    "docs/conformance/2026-08-support/feature-chain-members-normative-review.json": "bc3ec64b0e15fc0a552e8ebfaebbfdb542c2c4817058e6c5ec2def1b6107884f",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-focused.log": "4d002ebc7d86a378b500f971ec884ae559ae04dce9adc6ae587d11595747ac4f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-tool-tests.log": "5921073b977c0e09ca567e502d6803c06460731f4c1e2c268570f6245db25a74",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-release-build.log": "a8f3ab5dffa4c50a18832d32b84dae1647293914f66d0a22cae0588d96f5a3ce",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-cache-check.log": "977ec2d1129487708f8fa04dbecd002a681ddc9e5d2fa555244e8737666e47dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-cache-tests.log": "441ce318e0f3881ac386d2d1b8f7d04c2c5cac74a10f4d99a7ee6725db08760e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-plan-tests.log": "b5a96574de8dcf9cd28675c69d1de0e85e13f61211a5e2af0ec5e62b3debd3e3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-certificate-tests.log": "565095ee35e53621bb060de0e7f2db6a1b80c09dddf84f9d978bace7d48d1649",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-strategy-tests.log": "1d0b0e49bc07a8761b601a9897acb22a2599d2cc86a801cb14a9868f901a7261",
+    "docs/conformance/2026-08-support/enum-trigger-states-feature-chain-members-assessment.json": "f38e1621aa85afa4fb1bdfc2bfd2f6a94692ed92702df8b0079a53827927a87e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  }
+}

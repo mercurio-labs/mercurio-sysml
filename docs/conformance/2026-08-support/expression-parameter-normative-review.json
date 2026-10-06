@@ -1,0 +1,29 @@
+{
+  "schema": "dev.mercurio.expression-parameter-normative-review.v1",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      194,
+      195
+    ],
+    "clauses": [
+      "checkFeatureParameterRedefinition",
+      "checkFeatureResultRedefinition"
+    ],
+    "requirement": "Non-result directed Features under Behavior/Step owners redefine the corresponding parameter of applicable direct supertypes. Results under Function/Expression owners redefine supertype results. Explicit InvocationExpression argument redefinitions suppress computed positional additions."
+  },
+  "resolved_implementation": {
+    "program": "ExpressionAdapter#getGeneralTypes",
+    "fallback": "Outside transition guards the resolved override delegates to FeatureAdapter#getGeneralTypes. Parameter selectors and filtering are inherited unchanged. Native canonical ownership supplies the guard predicate; general-type and ordered parameter traversal are explicitly handwritten shared Rust."
+  },
+  "bounded_controls": "20 reflected ExpressionAdapter selector bindings, twelve Function-ancestry topologies and four positions. Supplied completed owners and generals; incomplete expression receivers. These are independent query controls, not valid complete callable models or full source transformation.",
+  "disagreements_and_limits": [
+    "Pilot traverses its ordered general-type service, while the normative constraints prescribe obligations on applicable direct supertypes. Matching these query observations does not establish every computed contribution is required by the written specification; full validation remains open.",
+    "The transition-guard override selects a library default rather than ordinary general types. It remains explicitly unsupported by the new consumer.",
+    "Null operator, unspecified invocation target and other incomplete callable fixture fields are outside full normative model qualification.",
+    "Constructor result ancestry, FeatureValue ownership, assignment-write effects and complete lifecycle/publication remain separate requirements."
+  ],
+  "full_normative_qualification": false,
+  "candidate_promoted": false
+}

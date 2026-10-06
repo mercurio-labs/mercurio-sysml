@@ -1,0 +1,460 @@
+{
+  "scope": "Raw FeatureChainMember/InstantiatedTypeMember parser acceptance, root class and ordered contained classes in both pinned languages. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "d0133c64d6c39a9d5e29bc96f180e5eabc2c2993529d0a0ea1b18a4626a4d36f"
+  },
+  "cases": [
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "$::a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "'a.b'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a.b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a::b.c::d"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a.b.c"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "'a.b'.'c::d'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::a.b"
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a."
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a::"
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "FeatureChainMember",
+      "source": "a.("
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "$::a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "'a.b'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::b.c::d"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.b.c"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "'a.b'.'c::d'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::a.b"
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a."
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::"
+    },
+    {
+      "accepted": false,
+      "language": "kerml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.("
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "$::a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "'a.b'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a.b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a::b.c::d"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a.b.c"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "'a.b'.'c::d'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::a.b"
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a."
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a::"
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "FeatureChainMember",
+      "source": "a.("
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "$::a::b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [],
+      "kind": "Membership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "'a.b'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.b"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::b.c::d"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.b.c"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "'a.b'.'c::d'"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "Feature",
+        "FeatureChaining",
+        "FeatureChaining"
+      ],
+      "kind": "OwningMembership",
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::q::a.b"
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a."
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a::"
+    },
+    {
+      "accepted": false,
+      "language": "sysml",
+      "rule": "InstantiatedTypeMember",
+      "source": "a.("
+    }
+  ]
+}

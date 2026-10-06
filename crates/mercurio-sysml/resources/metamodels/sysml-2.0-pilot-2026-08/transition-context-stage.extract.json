@@ -1,0 +1,2713 @@
+{
+  "controls": [
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "TransitionUsage",
+      "physical": [],
+      "query": [],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": true,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": true,
+          "target": "a"
+        },
+        {
+          "implied": true,
+          "target": "b"
+        }
+      ],
+      "query": [
+        "a",
+        "b"
+      ],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        },
+        {
+          "implied": true,
+          "target": "b"
+        }
+      ],
+      "query": [
+        "a",
+        "b"
+      ],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": true,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "TransitionUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "StateUsage",
+      "physical": [],
+      "query": [],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "StateUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "StateUsage",
+      "physical": [],
+      "query": [],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "StateUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "StateUsage",
+      "physical": [],
+      "query": [],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "StateUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "StateUsage",
+      "physical": [],
+      "query": [],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "StateUsage",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "Namespace",
+      "physical": [],
+      "query": [],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "Namespace",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "empty",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "Namespace",
+      "physical": [],
+      "query": [],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "Namespace",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "one",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "Namespace",
+      "physical": [],
+      "query": [],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "Namespace",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "two",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": false,
+      "parent": "Namespace",
+      "physical": [],
+      "query": [],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    },
+    {
+      "completion_flags": false,
+      "existing": true,
+      "parent": "Namespace",
+      "physical": [
+        {
+          "implied": false,
+          "target": "a"
+        }
+      ],
+      "query": [
+        "a"
+      ],
+      "shape": "duplicate",
+      "stage_guard_supplied": true
+    }
+  ],
+  "definitions": {
+    "org.omg.sysml.adapter.ElementAdapter#doTransform": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.ElementAdapter#clearCaches()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.ElementAdapter#clearCaches()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.ElementAdapter#transform": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.ElementAdapter#isTransformed",
+                      "type": "boolean"
+                    }
+                  ],
+                  "kind": "LOGICAL_COMPLEMENT",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.ElementAdapter#isTransformed",
+                          "type": "boolean"
+                        },
+                        {
+                          "children": [],
+                          "kind": "BOOLEAN_LITERAL",
+                          "type": "boolean",
+                          "value": true
+                        }
+                      ],
+                      "kind": "ASSIGNMENT",
+                      "type": "boolean"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.ElementAdapter#doTransform()",
+                          "type": "()void"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.ElementAdapter#doTransform()",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.FeatureAdapter#computeFeaturingType": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Feature",
+              "type": "org.omg.sysml.lang.sysml.Feature"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#getTarget()",
+                  "type": "()org.omg.sysml.lang.sysml.Feature"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#getTarget()",
+              "type": "org.omg.sysml.lang.sysml.Feature"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "computeFeaturingType()#feature",
+          "type": "org.omg.sysml.lang.sysml.Feature"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "computeFeaturingType()#feature",
+                      "type": "org.omg.sysml.lang.sysml.Feature"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType()",
+                  "type": "()org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType()",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "computeFeaturingType()#owningType",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "computeFeaturingType()#owningType",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>"
+                    }
+                  ],
+                  "kind": "EQUAL_TO",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>"
+                    }
+                  ],
+                  "kind": "RETURN"
+                }
+              ],
+              "kind": "BLOCK"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "computeFeaturingType()#feature",
+                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "org.omg.sysml.lang.sysml.Feature#isVariable()",
+                              "type": "()boolean"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.lang.sysml.Feature#isVariable()",
+                          "type": "boolean"
+                        }
+                      ],
+                      "kind": "LOGICAL_COMPLEMENT",
+                      "type": "boolean"
+                    }
+                  ],
+                  "kind": "PARENTHESIZED",
+                  "type": "boolean"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                              "type": "(org.omg.sysml.lang.sysml.Type)void"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "computeFeaturingType()#owningType",
+                              "type": "org.omg.sysml.lang.sysml.Type"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                          "type": "void"
+                        }
+                      ],
+                      "kind": "EXPRESSION_STATEMENT"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "computeFeaturingType()#owningType",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        }
+                      ],
+                      "kind": "RETURN"
+                    }
+                  ],
+                  "kind": "BLOCK"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Element",
+                          "type": "org.omg.sysml.lang.sysml.Element"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType(java.lang.String...)",
+                              "type": "(java.lang.String[])org.omg.sysml.lang.sysml.Type"
+                            },
+                            {
+                              "children": [],
+                              "kind": "STRING_LITERAL",
+                              "type": "java.lang.String",
+                              "value": "Occurrences::Occurrence"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType(java.lang.String...)",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        }
+                      ],
+                      "kind": "VARIABLE",
+                      "symbol": "computeFeaturingType()#occurrenceClass",
+                      "type": "org.omg.sysml.lang.sysml.Element"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Feature",
+                          "type": "org.omg.sysml.lang.sysml.Feature"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Feature",
+                              "type": "org.omg.sysml.lang.sysml.Feature"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType(java.lang.String...)",
+                                  "type": "(java.lang.String[])org.omg.sysml.lang.sysml.Type"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "STRING_LITERAL",
+                                  "type": "java.lang.String",
+                                  "value": "Occurrences::Occurrence::snapshots"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType(java.lang.String...)",
+                              "type": "org.omg.sysml.lang.sysml.Type"
+                            }
+                          ],
+                          "kind": "TYPE_CAST",
+                          "type": "org.omg.sysml.lang.sysml.Feature"
+                        }
+                      ],
+                      "kind": "VARIABLE",
+                      "symbol": "computeFeaturingType()#snapshotsFeature",
+                      "type": "org.omg.sysml.lang.sysml.Feature"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Feature",
+                          "type": "org.omg.sysml.lang.sysml.Feature"
+                        }
+                      ],
+                      "kind": "VARIABLE",
+                      "symbol": "computeFeaturingType()#featuringType",
+                      "type": "org.omg.sysml.lang.sysml.Feature"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "computeFeaturingType()#owningType",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "computeFeaturingType()#occurrenceClass",
+                                  "type": "org.omg.sysml.lang.sysml.Element"
+                                }
+                              ],
+                              "kind": "EQUAL_TO",
+                              "type": "boolean"
+                            }
+                          ],
+                          "kind": "PARENTHESIZED",
+                          "type": "boolean"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#featuringType",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#snapshotsFeature",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    }
+                                  ],
+                                  "kind": "ASSIGNMENT",
+                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            }
+                          ],
+                          "kind": "BLOCK"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#featuringType",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLFactory",
+                                                  "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#eINSTANCE",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createFeature()",
+                                          "type": "()org.omg.sysml.lang.sysml.Feature"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createFeature()",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    }
+                                  ],
+                                  "kind": "ASSIGNMENT",
+                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "java.lang#java.lang.String",
+                                  "type": "java.lang.String"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#owningType",
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Element#getQualifiedName()",
+                                      "type": "()java.lang.String"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.Element#getQualifiedName()",
+                                  "type": "java.lang.String"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "computeFeaturingType()#name",
+                              "type": "java.lang.String"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#name",
+                                          "type": "java.lang.String"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "NULL_LITERAL",
+                                          "type": "<nulltype>"
+                                        }
+                                      ],
+                                      "kind": "EQUAL_TO",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "PARENTHESIZED",
+                                  "type": "boolean"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "computeFeaturingType()#name",
+                                              "type": "java.lang.String"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "STRING_LITERAL",
+                                              "type": "java.lang.String",
+                                              "value": ""
+                                            }
+                                          ],
+                                          "kind": "ASSIGNMENT",
+                                          "type": "java.lang.String"
+                                        }
+                                      ],
+                                      "kind": "EXPRESSION_STATEMENT"
+                                    }
+                                  ],
+                                  "kind": "BLOCK"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "MODIFIERS"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "PRIMITIVE_TYPE",
+                                          "type": "int"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "computeFeaturingType()#name",
+                                                  "type": "java.lang.String"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "java.lang.String#indexOf(java.lang.String)",
+                                              "type": "(java.lang.String)int"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "STRING_LITERAL",
+                                              "type": "java.lang.String",
+                                              "value": "::"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "java.lang.String#indexOf(java.lang.String)",
+                                          "type": "int"
+                                        }
+                                      ],
+                                      "kind": "VARIABLE",
+                                      "symbol": "computeFeaturingType()#i",
+                                      "type": "int"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "computeFeaturingType()#i",
+                                                  "type": "int"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "INT_LITERAL",
+                                                  "type": "int",
+                                                  "value": 0
+                                                }
+                                              ],
+                                              "kind": "GREATER_THAN_EQUAL",
+                                              "type": "boolean"
+                                            }
+                                          ],
+                                          "kind": "PARENTHESIZED",
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "computeFeaturingType()#name",
+                                                      "type": "java.lang.String"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "computeFeaturingType()#name",
+                                                              "type": "java.lang.String"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "java.lang.String#substring(int)",
+                                                          "type": "(int)java.lang.String"
+                                                        },
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "computeFeaturingType()#i",
+                                                              "type": "int"
+                                                            },
+                                                            {
+                                                              "children": [],
+                                                              "kind": "INT_LITERAL",
+                                                              "type": "int",
+                                                              "value": 2
+                                                            }
+                                                          ],
+                                                          "kind": "PLUS",
+                                                          "type": "int"
+                                                        }
+                                                      ],
+                                                      "kind": "METHOD_INVOCATION",
+                                                      "symbol": "java.lang.String#substring(int)",
+                                                      "type": "java.lang.String"
+                                                    }
+                                                  ],
+                                                  "kind": "ASSIGNMENT",
+                                                  "type": "java.lang.String"
+                                                }
+                                              ],
+                                              "kind": "EXPRESSION_STATEMENT"
+                                            }
+                                          ],
+                                          "kind": "BLOCK"
+                                        }
+                                      ],
+                                      "kind": "IF"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "computeFeaturingType()#name",
+                                              "type": "java.lang.String"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "computeFeaturingType()#name",
+                                                      "type": "java.lang.String"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "java.lang.String#replace(java.lang.CharSequence,java.lang.CharSequence)",
+                                                  "type": "(java.lang.CharSequence,java.lang.CharSequence)java.lang.String"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "STRING_LITERAL",
+                                                  "type": "java.lang.String",
+                                                  "value": "::"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "STRING_LITERAL",
+                                                  "type": "java.lang.String",
+                                                  "value": "_"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "java.lang.String#replace(java.lang.CharSequence,java.lang.CharSequence)",
+                                              "type": "java.lang.String"
+                                            }
+                                          ],
+                                          "kind": "ASSIGNMENT",
+                                          "type": "java.lang.String"
+                                        }
+                                      ],
+                                      "kind": "EXPRESSION_STATEMENT"
+                                    }
+                                  ],
+                                  "kind": "BLOCK"
+                                }
+                              ],
+                              "kind": "IF"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#featuringType",
+                                          "type": "org.omg.sysml.lang.sysml.Feature"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Element#setDeclaredName(java.lang.String)",
+                                      "type": "(java.lang.String)void"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#name",
+                                          "type": "java.lang.String"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "STRING_LITERAL",
+                                          "type": "java.lang.String",
+                                          "value": "_snapshots"
+                                        }
+                                      ],
+                                      "kind": "PLUS",
+                                      "type": "java.lang.String"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.Element#setDeclaredName(java.lang.String)",
+                                  "type": "void"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Redefinition",
+                                  "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLFactory",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#eINSTANCE",
+                                          "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createRedefinition()",
+                                      "type": "()org.omg.sysml.lang.sysml.Redefinition"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createRedefinition()",
+                                  "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "computeFeaturingType()#redefinition",
+                              "type": "org.omg.sysml.lang.sysml.Redefinition"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#redefinition",
+                                          "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Redefinition#setRedefinedFeature(org.omg.sysml.lang.sysml.Feature)",
+                                      "type": "(org.omg.sysml.lang.sysml.Feature)void"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#snapshotsFeature",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.Redefinition#setRedefinedFeature(org.omg.sysml.lang.sysml.Feature)",
+                                  "type": "void"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#redefinition",
+                                          "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Redefinition#setRedefiningFeature(org.omg.sysml.lang.sysml.Feature)",
+                                      "type": "(org.omg.sysml.lang.sysml.Feature)void"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#featuringType",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.Redefinition#setRedefiningFeature(org.omg.sysml.lang.sysml.Feature)",
+                                  "type": "void"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "computeFeaturingType()#featuringType",
+                                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                              "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                          "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "java.util.List#add(E)",
+                                      "type": "(org.omg.sysml.lang.sysml.Relationship)boolean"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#redefinition",
+                                      "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "java.util.List#add(E)",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TypeFeaturing",
+                                  "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLFactory",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#eINSTANCE",
+                                          "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createTypeFeaturing()",
+                                      "type": "()org.omg.sysml.lang.sysml.TypeFeaturing"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createTypeFeaturing()",
+                                  "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "computeFeaturingType()#typeFeaturing",
+                              "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#typeFeaturing",
+                                          "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                                      "type": "(org.omg.sysml.lang.sysml.Type)void"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#owningType",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                                  "type": "void"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "computeFeaturingType()#typeFeaturing",
+                                          "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeatureOfType(org.omg.sysml.lang.sysml.Feature)",
+                                      "type": "(org.omg.sysml.lang.sysml.Feature)void"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#featuringType",
+                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeatureOfType(org.omg.sysml.lang.sysml.Feature)",
+                                  "type": "void"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "computeFeaturingType()#featuringType",
+                                                  "type": "org.omg.sysml.lang.sysml.Feature"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                              "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                          "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "java.util.List#add(E)",
+                                      "type": "(org.omg.sysml.lang.sysml.Relationship)boolean"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "computeFeaturingType()#typeFeaturing",
+                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "java.util.List#add(E)",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "EXPRESSION_STATEMENT"
+                            }
+                          ],
+                          "kind": "BLOCK"
+                        }
+                      ],
+                      "kind": "IF"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                              "type": "(org.omg.sysml.lang.sysml.Type)void"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "computeFeaturingType()#featuringType",
+                              "type": "org.omg.sysml.lang.sysml.Feature"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                          "type": "void"
+                        }
+                      ],
+                      "kind": "EXPRESSION_STATEMENT"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "computeFeaturingType()#featuringType",
+                          "type": "org.omg.sysml.lang.sysml.Feature"
+                        }
+                      ],
+                      "kind": "RETURN"
+                    }
+                  ],
+                  "kind": "BLOCK"
+                }
+              ],
+              "kind": "IF"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.FeatureAdapter#doTransform": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#computeFeaturingType()",
+                  "type": "()org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#computeFeaturingType()",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#computeValueConnector()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#computeValueConnector()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#forceComputeRedefinitions()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#forceComputeRedefinitions()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#super",
+                      "type": "org.omg.sysml.adapter.TypeAdapter"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#doTransform()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#doTransform()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#addOwnedCrossFeatureTypeFeaturing()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#addOwnedCrossFeatureTypeFeaturing()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.SuccessionAsUsageAdapter#addContextFeaturingType": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SuccessionAsUsage",
+              "type": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.SuccessionAsUsageAdapter#getTarget()",
+                  "type": "()org.omg.sysml.lang.sysml.SuccessionAsUsage"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.SuccessionAsUsageAdapter#getTarget()",
+              "type": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "addContextFeaturingType()#target",
+          "type": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Namespace",
+              "type": "org.omg.sysml.lang.sysml.Namespace"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "addContextFeaturingType()#target",
+                      "type": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.lang.sysml.Element#getOwningNamespace()",
+                  "type": "()org.omg.sysml.lang.sysml.Namespace"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.lang.sysml.Element#getOwningNamespace()",
+              "type": "org.omg.sysml.lang.sysml.Namespace"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "addContextFeaturingType()#owningNamespace",
+          "type": "org.omg.sysml.lang.sysml.Namespace"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "addContextFeaturingType()#owningNamespace",
+                          "type": "org.omg.sysml.lang.sysml.Namespace"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TransitionUsage",
+                          "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                        }
+                      ],
+                      "kind": "INSTANCE_OF",
+                      "type": "boolean"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TransitionUsage",
+                                          "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "addContextFeaturingType()#owningNamespace",
+                                          "type": "org.omg.sysml.lang.sysml.Namespace"
+                                        }
+                                      ],
+                                      "kind": "TYPE_CAST",
+                                      "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                    }
+                                  ],
+                                  "kind": "PARENTHESIZED",
+                                  "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "org.omg.sysml.lang.sysml.TransitionUsage#getSuccession()",
+                              "type": "()org.omg.sysml.lang.sysml.Succession"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.lang.sysml.TransitionUsage#getSuccession()",
+                          "type": "org.omg.sysml.lang.sysml.Succession"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "addContextFeaturingType()#target",
+                          "type": "org.omg.sysml.lang.sysml.SuccessionAsUsage"
+                        }
+                      ],
+                      "kind": "EQUAL_TO",
+                      "type": "boolean"
+                    }
+                  ],
+                  "kind": "CONDITIONAL_AND",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.util#org.omg.sysml.util.ElementUtil",
+                              "type": "org.omg.sysml.util.ElementUtil"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "org.omg.sysml.util.ElementUtil#transform(org.omg.sysml.lang.sysml.Element)",
+                          "type": "(org.omg.sysml.lang.sysml.Element)void"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "addContextFeaturingType()#owningNamespace",
+                          "type": "org.omg.sysml.lang.sysml.Namespace"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.util.ElementUtil#transform(org.omg.sysml.lang.sysml.Element)",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingTypes(java.util.Collection<org.omg.sysml.lang.sysml.Type>)",
+                          "type": "(java.util.Collection<org.omg.sysml.lang.sysml.Type>)void"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TransitionUsage",
+                                          "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "addContextFeaturingType()#owningNamespace",
+                                          "type": "org.omg.sysml.lang.sysml.Namespace"
+                                        }
+                                      ],
+                                      "kind": "TYPE_CAST",
+                                      "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                    }
+                                  ],
+                                  "kind": "PARENTHESIZED",
+                                  "type": "org.omg.sysml.lang.sysml.TransitionUsage"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "org.omg.sysml.lang.sysml.Feature#getFeaturingType()",
+                              "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Type>"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "org.omg.sysml.lang.sysml.Feature#getFeaturingType()",
+                          "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Type>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#addFeaturingTypes(java.util.Collection<org.omg.sysml.lang.sysml.Type>)",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.adapter.TypeAdapter#doTransform": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#super",
+                      "type": "org.omg.sysml.adapter.NamespaceAdapter"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.adapter.NamespaceAdapter#doTransform()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.NamespaceAdapter#doTransform()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#computeImplicitGeneralTypes()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#computeImplicitGeneralTypes()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#removeUnnecessaryImplicitGeneralTypes()",
+                  "type": "()void"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#removeUnnecessaryImplicitGeneralTypes()",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.util.ElementUtil#transform": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.adapter#org.omg.sysml.adapter.ElementAdapter",
+              "type": "org.omg.sysml.adapter.ElementAdapter"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.util.ElementUtil#getElementAdapter(org.omg.sysml.lang.sysml.Element)",
+                  "type": "(org.omg.sysml.lang.sysml.Element)org.omg.sysml.adapter.ElementAdapter"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "transform(org.omg.sysml.lang.sysml.Element)#element",
+                  "type": "org.omg.sysml.lang.sysml.Element"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.util.ElementUtil#getElementAdapter(org.omg.sysml.lang.sysml.Element)",
+              "type": "org.omg.sysml.adapter.ElementAdapter"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "transform(org.omg.sysml.lang.sysml.Element)#transformer",
+          "type": "org.omg.sysml.adapter.ElementAdapter"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "transform(org.omg.sysml.lang.sysml.Element)#transformer",
+                      "type": "org.omg.sysml.adapter.ElementAdapter"
+                    },
+                    {
+                      "children": [],
+                      "kind": "NULL_LITERAL",
+                      "type": "<nulltype>"
+                    }
+                  ],
+                  "kind": "NOT_EQUAL_TO",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "transform(org.omg.sysml.lang.sysml.Element)#transformer",
+                              "type": "org.omg.sysml.adapter.ElementAdapter"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "org.omg.sysml.adapter.ElementAdapter#transform()",
+                          "type": "()void"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "org.omg.sysml.adapter.ElementAdapter#transform()",
+                      "type": "void"
+                    }
+                  ],
+                  "kind": "EXPRESSION_STATEMENT"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "org.omg.sysml.util.FeatureUtil#insertImplicitTypeFeaturings": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.util.FeatureUtil#forEachImplicitFeaturingTypeOf(org.omg.sysml.lang.sysml.Feature,java.util.function.Consumer<org.omg.sysml.lang.sysml.Type>)",
+                  "type": "(org.omg.sysml.lang.sysml.Feature,java.util.function.Consumer<org.omg.sysml.lang.sysml.Type>)void"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#feature",
+                  "type": "org.omg.sysml.lang.sysml.Feature"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "MODIFIERS"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "unnamed module#org",
+                                              "type": "org"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "unnamed module#org.omg",
+                                          "type": "org.omg"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "unnamed module#org.omg.sysml",
+                                      "type": "org.omg.sysml"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "unnamed module#org.omg.sysml.lang",
+                                  "type": "org.omg.sysml.lang"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                              "type": "org.omg.sysml.lang.sysml"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        }
+                      ],
+                      "kind": "VARIABLE",
+                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#type",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "MODIFIERS"
+                            },
+                            {
+                              "children": [],
+                              "kind": "PRIMITIVE_TYPE",
+                              "type": "boolean"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [],
+                                                                      "kind": "IDENTIFIER",
+                                                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#feature",
+                                                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                                                  "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                                                }
+                                                              ],
+                                                              "kind": "METHOD_INVOCATION",
+                                                              "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "java.util.Collection#stream()",
+                                                          "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Relationship>"
+                                                        }
+                                                      ],
+                                                      "kind": "METHOD_INVOCATION",
+                                                      "symbol": "java.util.Collection#stream()",
+                                                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Relationship>"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                                  "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Relationship>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Relationship>"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [],
+                                                          "kind": "IDENTIFIER",
+                                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TypeFeaturing",
+                                                          "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#class",
+                                                      "type": "java.lang.Class<org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_REFERENCE",
+                                                  "symbol": "java.lang.Class#isInstance(java.lang.Object)",
+                                                  "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Relationship>"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Relationship>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                                          "type": "(java.util.function.Function<? super org.omg.sysml.lang.sysml.Relationship,? extends org.omg.sysml.lang.sysml.TypeFeaturing>)java.util.stream.Stream<org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TypeFeaturing",
+                                                  "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#class",
+                                              "type": "java.lang.Class<org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_REFERENCE",
+                                          "symbol": "java.lang.Class#cast(java.lang.Object)",
+                                          "type": "java.util.function.Function<org.omg.sysml.lang.sysml.Relationship,org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.stream.Stream#noneMatch(java.util.function.Predicate<? super T>)",
+                                  "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.TypeFeaturing>)boolean"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "MODIFIERS"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "unnamed module#org",
+                                                              "type": "org"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "unnamed module#org.omg",
+                                                          "type": "org.omg"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "unnamed module#org.omg.sysml",
+                                                      "type": "org.omg.sysml"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "unnamed module#org.omg.sysml.lang",
+                                                  "type": "org.omg.sysml.lang"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                              "type": "org.omg.sysml.lang.sysml"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TypeFeaturing",
+                                          "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                        }
+                                      ],
+                                      "kind": "VARIABLE",
+                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#f",
+                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "java.util#java.util.Objects",
+                                                  "type": "java.util.Objects"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "java.util.Objects#equals(java.lang.Object,java.lang.Object)",
+                                              "type": "(java.lang.Object,java.lang.Object)boolean"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#f",
+                                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#getFeatureOfType()",
+                                                  "type": "()org.omg.sysml.lang.sysml.Feature"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#getFeatureOfType()",
+                                              "type": "org.omg.sysml.lang.sysml.Feature"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#feature",
+                                              "type": "org.omg.sysml.lang.sysml.Feature"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "java.util.Objects#equals(java.lang.Object,java.lang.Object)",
+                                          "type": "boolean"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "java.util#java.util.Objects",
+                                                  "type": "java.util.Objects"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "java.util.Objects#equals(java.lang.Object,java.lang.Object)",
+                                              "type": "(java.lang.Object,java.lang.Object)boolean"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#f",
+                                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#getFeaturingType()",
+                                                  "type": "()org.omg.sysml.lang.sysml.Type"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#getFeaturingType()",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#type",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "java.util.Objects#equals(java.lang.Object,java.lang.Object)",
+                                          "type": "boolean"
+                                        }
+                                      ],
+                                      "kind": "CONDITIONAL_AND",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "LAMBDA_EXPRESSION",
+                                  "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.TypeFeaturing>"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.stream.Stream#noneMatch(java.util.function.Predicate<? super T>)",
+                              "type": "boolean"
+                            }
+                          ],
+                          "kind": "VARIABLE",
+                          "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuringRequired",
+                          "type": "boolean"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuringRequired",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "PARENTHESIZED",
+                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuringRequired",
+                              "type": "boolean"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "MODIFIERS"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.TypeFeaturing",
+                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLFactory",
+                                                  "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#eINSTANCE",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLFactory"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createTypeFeaturing()",
+                                          "type": "()org.omg.sysml.lang.sysml.TypeFeaturing"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLFactory#createTypeFeaturing()",
+                                      "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                    }
+                                  ],
+                                  "kind": "VARIABLE",
+                                  "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                  "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                              "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.Relationship#setIsImplied(boolean)",
+                                          "type": "(boolean)void"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "BOOLEAN_LITERAL",
+                                          "type": "boolean",
+                                          "value": true
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.Relationship#setIsImplied(boolean)",
+                                      "type": "void"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                              "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                                          "type": "(org.omg.sysml.lang.sysml.Type)void"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#type",
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeaturingType(org.omg.sysml.lang.sysml.Type)",
+                                      "type": "void"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                              "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeatureOfType(org.omg.sysml.lang.sysml.Feature)",
+                                          "type": "(org.omg.sysml.lang.sysml.Feature)void"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#feature",
+                                          "type": "org.omg.sysml.lang.sysml.Feature"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.TypeFeaturing#setFeatureOfType(org.omg.sysml.lang.sysml.Feature)",
+                                      "type": "void"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#type",
+                                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "org.omg.sysml.lang.sysml.Element#getOwningRelationship()",
+                                                  "type": "()org.omg.sysml.lang.sysml.Relationship"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "org.omg.sysml.lang.sysml.Element#getOwningRelationship()",
+                                              "type": "org.omg.sysml.lang.sysml.Relationship"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "NULL_LITERAL",
+                                              "type": "<nulltype>"
+                                            }
+                                          ],
+                                          "kind": "EQUAL_TO",
+                                          "type": "boolean"
+                                        }
+                                      ],
+                                      "kind": "PARENTHESIZED",
+                                      "type": "boolean"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                                              "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "org.omg.sysml.lang.sysml.Relationship#getOwnedRelatedElement()",
+                                                          "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Element>"
+                                                        }
+                                                      ],
+                                                      "kind": "METHOD_INVOCATION",
+                                                      "symbol": "org.omg.sysml.lang.sysml.Relationship#getOwnedRelatedElement()",
+                                                      "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Element>"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "java.util.List#add(E)",
+                                                  "type": "(org.omg.sysml.lang.sysml.Element)boolean"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#type",
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "java.util.List#add(E)",
+                                              "type": "boolean"
+                                            }
+                                          ],
+                                          "kind": "EXPRESSION_STATEMENT"
+                                        }
+                                      ],
+                                      "kind": "BLOCK"
+                                    }
+                                  ],
+                                  "kind": "IF"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#feature",
+                                                      "type": "org.omg.sysml.lang.sysml.Feature"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                                  "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "org.omg.sysml.lang.sysml.Element#getOwnedRelationship()",
+                                              "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Relationship>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.List#add(E)",
+                                          "type": "(org.omg.sysml.lang.sysml.Relationship)boolean"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "insertImplicitTypeFeaturings(org.omg.sysml.lang.sysml.Feature)#featuring",
+                                          "type": "org.omg.sysml.lang.sysml.TypeFeaturing"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.List#add(E)",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            }
+                          ],
+                          "kind": "IF"
+                        }
+                      ],
+                      "kind": "BLOCK"
+                    }
+                  ],
+                  "kind": "LAMBDA_EXPRESSION",
+                  "type": "java.util.function.Consumer<org.omg.sysml.lang.sysml.Type>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.util.FeatureUtil#forEachImplicitFeaturingTypeOf(org.omg.sysml.lang.sysml.Feature,java.util.function.Consumer<org.omg.sysml.lang.sysml.Type>)",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        }
+      ],
+      "kind": "BLOCK"
+    }
+  },
+  "provenance": {
+    "concrete_inventory_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "driver_sha256": "ef3c4747edaf2eccb46dfa126d13b4b3e90f09bd07f892334155af26c981a971",
+    "ecore_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "helper_sha256": "7c67f815edd785714ff50664deb8f058a986650f2ea67ee97ec1d71227dd19bf",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "selector_helper_sha256": "f1f08a4094205c493772900a0be8df3a94d9add28e40b827df68c8b4a4f9c115",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ElementAdapter.java": "3ffe6e8117d2426a7662d631df3b984bf6624fdc48f9b9d90c3f3ba52415349e",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "998b603de48883c0ccdbd020dec8afab20795e3e1c0711a6856b9f1d7c944000",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780"
+    },
+    "toolchain": {
+      "java": "openjdk version \"21.0.6\" 2025-01-21 LTS\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+      "javac": "javac 21.0.6"
+    },
+    "tree_helper_sha256": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567"
+  },
+  "schema": "dev.mercurio.transition-context-stage.v1",
+  "scope": "Resolved prepared parent-featuring/context stage programs and independent supplied-stage observations. No complete parent or Connector lifecycle claim."
+}

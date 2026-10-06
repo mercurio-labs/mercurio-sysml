@@ -1,0 +1,147 @@
+{
+  "scope": "SysML EmptySuccessionMember: acceptance, root and ordered contained classes, and integer multiplicity values. Full action-body and succession endpoint resolution are not qualified by these raw parser controls. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "503ef1dc676d83b3aa6f8ffb59e611c3dbfb4e15bfc76697e66aae6eddeb680e"
+  },
+  "cases": [
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [],
+      "kind": "FeatureMembership",
+      "source": "then"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "OwningMembership",
+        "MultiplicityRange",
+        "OwningMembership",
+        "LiteralInteger",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [
+        1
+      ],
+      "kind": "FeatureMembership",
+      "source": "then [1]"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "OwningMembership",
+        "MultiplicityRange",
+        "OwningMembership",
+        "LiteralInteger",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [
+        0
+      ],
+      "kind": "FeatureMembership",
+      "source": "then [0]"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "OwningMembership",
+        "MultiplicityRange",
+        "OwningMembership",
+        "LiteralInfinity",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [],
+      "kind": "FeatureMembership",
+      "source": "then [*]"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "OwningMembership",
+        "MultiplicityRange",
+        "OwningMembership",
+        "LiteralInteger",
+        "OwningMembership",
+        "LiteralInteger",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [
+        1,
+        3
+      ],
+      "kind": "FeatureMembership",
+      "source": "then [1..3]"
+    },
+    {
+      "accepted": true,
+      "contained_kinds": [
+        "SuccessionAsUsage",
+        "EndFeatureMembership",
+        "ReferenceUsage",
+        "OwningMembership",
+        "MultiplicityRange",
+        "OwningMembership",
+        "LiteralInteger",
+        "OwningMembership",
+        "LiteralInfinity",
+        "EndFeatureMembership",
+        "ReferenceUsage"
+      ],
+      "integer_values": [
+        0
+      ],
+      "kind": "FeatureMembership",
+      "source": "then [0..*]"
+    },
+    {
+      "accepted": false,
+      "source": "then [1,2]"
+    },
+    {
+      "accepted": false,
+      "source": "then []"
+    },
+    {
+      "accepted": false,
+      "source": "then [1..]"
+    },
+    {
+      "accepted": false,
+      "source": "then ["
+    },
+    {
+      "accepted": false,
+      "source": "then 2"
+    }
+  ]
+}

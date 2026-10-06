@@ -1,0 +1,186 @@
+{
+  "schema": "dev.mercurio.pilot-constructs-overlay.v1",
+  "source": {
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Select control actions for shared native lowering; construct metaclasses are generated from pinned Pilot grammar."
+    }
+  },
+  "construct_selections": [
+    {
+      "construct": "ForkNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "JoinNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "MergeNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "DecisionNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "TerminateNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve control actions as their actual SysML metaclasses."
+    },
+    {
+      "construct": "AssignmentNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve release action and message grammar metaclasses."
+    },
+    {
+      "construct": "Message",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve release action and message grammar metaclasses."
+    },
+    {
+      "construct": "IfNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "WhileLoopNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "ForLoopNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve structured action nodes, operands and nested bodies."
+    },
+    {
+      "construct": "SendNode",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve send action operands and transition effect membership."
+    },
+    {
+      "construct": "PayloadFeature",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve message and flow payload typing and declared names as PayloadFeature."
+    },
+    {
+      "construct": "AssertConstraintUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Use the grammar metaclass for assertion declarations, replacing the legacy non-metamodel AssertUsage name."
+    },
+    {
+      "construct": "IndividualDefinition",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Individual grammar rules return Occurrence metaclasses with isIndividual=true; Individual is not an Ecore metaclass."
+    },
+    {
+      "construct": "IndividualUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Individual grammar rules return Occurrence metaclasses with isIndividual=true; Individual is not an Ecore metaclass."
+    },
+    {
+      "construct": "VerificationCaseUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Use the grammar-returned VerificationCaseUsage metaclass for validation and KIR."
+    },
+    {
+      "construct": "Comment",
+      "as_construct": "CommentUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "Dependency",
+      "as_construct": "DependencyUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "SatisfyRequirementUsage",
+      "as_construct": "SatisfyUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Retain the local lowering contract while deriving its real metaclass from pinned Pilot grammar."
+    },
+    {
+      "construct": "LibraryPackage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve library package identity rather than emitting every namespace as Package."
+    },
+    {
+      "construct": "IncludeUseCaseUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Retain inclusion identity and its reference subsetting."
+    },
+    {
+      "construct": "DefaultReferenceUsage",
+      "as_construct": "EndUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Untyped SysML end declarations are ReferenceUsage; preserve the legacy EndUsage collect contract without inventing an Ecore class."
+    },
+    {
+      "construct": "SuccessionFlowUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve succession-flow identity and action reference compatibility."
+    },
+    {
+      "construct": "ExtendedDefinition",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "ExtendedUsage",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+      "reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "RequirementConstraintUsage",
+      "as_construct": "AssumeUsage",
+      "reason": "Retain the internal requirement-role alias and stable ID prefix while using the grammar-returned ConstraintUsage metaclass.",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext"
+    },
+    {
+      "construct": "RequirementConstraintUsage",
+      "as_construct": "RequireUsage",
+      "reason": "Retain the internal requirement-role alias and stable ID prefix while using the grammar-returned ConstraintUsage metaclass.",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext"
+    }
+  ],
+  "explicit_constructs": [],
+  "keyword_registry": {
+    "reason": "Parser token routing for control actions.",
+    "definitions": {
+      "individual": "IndividualDefinition",
+      "extended": "ExtendedDefinition"
+    },
+    "usages": {
+      "fork": "ForkNode",
+      "join": "JoinNode",
+      "merge": "MergeNode",
+      "decide": "DecisionNode",
+      "terminate": "TerminateNode",
+      "assign": "AssignmentNode",
+      "message": "Message",
+      "if": "IfNode",
+      "loop": "WhileLoopNode",
+      "while": "WhileLoopNode",
+      "for": "ForLoopNode",
+      "send": "SendNode",
+      "payload": "PayloadFeature",
+      "assert": "AssertConstraintUsage",
+      "individual": "IndividualUsage",
+      "verification": "VerificationCaseUsage",
+      "extended": "ExtendedUsage"
+    }
+  },
+  "curated_sections": {
+    "reason": "No invented implicit semantics; defaults require separate oracle evidence.",
+    "default_specialization_anchors": {},
+    "semantic_specialization_defaults": {},
+    "usage_semantic_specialization_overrides": {},
+    "stdlib_aliases": {}
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "dev.mercurio.result-multiplicity-evidence.v1",
+  "scope": "Canonical owned MultiplicityRange contexts for fixed OUT Feature results under Expression, FeatureReferenceExpression, Function and Predicate. Bounded default effects and bound identities only.",
+  "pipeline": {
+    "pinned_artifacts": "Ecore Type/Multiplicity contracts, Type multiplicity delegate and Feature default programs",
+    "resolved_representation": {
+      "path": "docs/conformance/2026-08-support/result-multiplicity-pilot-controls.json",
+      "typed_resolved_methods": 5,
+      "frontend": "JDK Javac parse+analyze with resolved symbols and types"
+    },
+    "generated_consumer": "result_multiplicity_generated.rs program guard and resolved target class; existing generated Feature default selector",
+    "native_consumers": [
+      "result_multiplicity::is_owned_context -> shared result default input validation",
+      "Existing Ecore-bound projection -> ordered bound identities",
+      "Existing positional/default selection -> atomic shared generalization transaction"
+    ],
+    "handwritten_rust_dependencies": [
+      "Canonical owned-member and reciprocal ownership navigation",
+      "MultiplicityRange context admission and delegate validation",
+      "Existing bound identity projection; no numeric evaluation",
+      "Existing default predicate inputs and transactional storage"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "independent_controls": 160,
+    "owner_contexts": 4,
+    "typing_masks": 8,
+    "bound_shapes": 5,
+    "focused_native_tests_passed": 6,
+    "persisted_forward_reverse_controls": 320,
+    "atomic_negative_controls": 5,
+    "raw_reference_expectations_normalized": false,
+    "completion_flags_written": false,
+    "cache_integrity_tests_passed": 3,
+    "cache_reproduced": true,
+    "full_native_regression": "passes",
+    "optimized_build": "passes",
+    "resource_assessment_current_code": false,
+    "full_normative_qualification": false,
+    "full_transformation_proven": false,
+    "focused_native_source_construction": {
+      "cases": 6,
+      "result": "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-source-results.jsonl",
+      "stages_verified": [
+        "parse",
+        "construct",
+        "link",
+        "structural_publication"
+      ],
+      "semantic_qualification": false,
+      "source_persistence_verified": false,
+      "scope": "Function/Predicate return multiplicity source contexts. Factory-query controls separately verify persistence; source-level persistence remains distinct."
+    },
+    "native_definition_tests_passed": 379,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "tool_binary_tests_passed": 11,
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "strategy_tests_passed": 15,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "Inherited multiplicity derivation",
+    "Alias/import/non-range multiplicity contexts",
+    "Numeric evaluation, legality and required-bound validation",
+    "Full result typing, complete Function/Expression transformation",
+    "Actual resource publication and global parser/model contracts",
+    "All release samples and comparable Pilot timing"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "closed_families_delta": 0,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/result_multiplicity.rs": "b9f034d731d7b30fc5a521e335b48ddd00a39cf6736795e09bc29f1d115db67d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/result_multiplicity_generated.rs": "eb245c15d7cf891062f37c5aaa7cb00f94bf56bdabc6dfb73db5a184d7427d8a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "561b007d04389e6158c34615b49ce25bdc2320054e181d10ea5ed9464947b954",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "361ee368a19786926860e702b44f1a00184618e64ec85983f172b1d2aac2dce9",
+    "tools/generate_result_multiplicity.py": "2f58407c4aca4fdd87da052a44df39d86172bb339e66c1feb279fe23ede01a8a",
+    "tools/run_result_multiplicity_probe.py": "7140719fed750acf0b3b72282ccf940fcc2e426a678e30ecda4fc00b3311b9af",
+    "tools/test_result_multiplicity.py": "d4322f21f5c1de54bcc6b5198ad9514664bb2445d9e7efaae4b1e3b4ebddb81e",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotResultMultiplicityProbe.java": "71ed1ea37a0e876203dfb3132eb4773cc53b53ed00d8f09d89105425dceade45",
+    "docs/conformance/2026-08-support/result-multiplicity-pilot-controls.json": "5553d90a59562f4907253a59b7970dbf7614b99e2b01d9c2c8df3d52480564c6",
+    "docs/conformance/2026-08-support/result-multiplicity-normative-review.json": "76885746ae0056f57ec8f371c1dac187238189dd16097aab89498b58ede2b5d2",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-focused.log": "b94032719975a6df5ad25ec924b834192ef56fbbdd7b1c8e74ee3b103f72ac7c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-cache-check.log": "5ab24043bc422add82a531cec4ebc7a9d38db6b350818f8a50009828cd1845ac",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-cache-tests.log": "ccdeed50397d60467aa49189c1602a123cebda7c5779e234842581ae9a8410b7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-source-results.jsonl": "c4d0e81297f2336991d05cb1798cae64d80c779fb46bce2f817a4545db6fbd4c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-source.log": "60a6134d8566cdc2226094f2ab042292d975e64aabf8eb1440fc7ff92428f0cc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-source-inputs.json": "26c27c51f6d9759be98c8ebf48001f74b0f161f85d172c8664136f2e6b34ad72",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-function-single.kerml": "5190c9060ca050659e09d3816fd27e56a5fb87853025b7a3951318e231539e98",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-function-pair.kerml": "7af655b1fb887149489d990127c5ee16944095590f7af4f92e5d271e46ce0290",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-function-unlimited.kerml": "8b09258cfc0286e52fc190f04336abb5a9a8b350155b0d5852acb249b82288f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-predicate-single.kerml": "820d273162c47dfcdd7c8c01b357e9e76c83ba634f1de6594f984e9fc30a756b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-predicate-pair.kerml": "582807d407ee9fdca0aed83a7e890377dfd1c3453fb307e39b8c7d20e097a473",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-predicate-unlimited.kerml": "ef7febd2c4d338a607a9e8f3a0bbf6087dac63e2b25b623afed2f20ee8296a4f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-tool-tests.log": "4a82fd87df92330e5e8e8158ffc47ca7587d1dceef50c32a85171e954a1561e0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-release-build.log": "ae2ff62a13388272dae7be6c6b88b64728a8a8ff690234351e1a030436e00449",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-plan-tests.log": "513e64ca27ac3f2f084b5a3b24446a7802dbfcf1246005a13106126e5ff906e3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-certificate-tests.log": "49b63625cfde6ff2bbe28e749f3b7642c3b39a5d5da230e425c0d4b1427d72a1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-strategy-tests.log": "d46f77ad4ed9956f7283546d790d9132749ee3ca4c0c5b2e06a61bd597229239",
+    "docs/conformance/2026-08-support/enum-trigger-states-result-multiplicity-assessment.json": "eb2388a189fa94d4a734cdc6ea033111656b4a8623ad1c4f1aa38cc52d50b3ea",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "resource_assessment": {
+    "path": "docs/conformance/2026-08-support/enum-trigger-states-result-multiplicity-assessment.json",
+    "status": "blocked_before_publication",
+    "parsed_resources": 25,
+    "elapsed_seconds_diagnostic_only": 635.094,
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+    "prior_owned_multiplicity_blocker_cleared": true,
+    "native_definition_tests_at_assessment": 374,
+    "resource_assessment_current_code": false,
+    "semantic_qualification": false,
+    "boundary": "Assessment used the immutable pre-Usage source/binary snapshot in the report. Subsequent Usage changes require their own milestone assessment; timings are diagnostic only."
+  }
+}

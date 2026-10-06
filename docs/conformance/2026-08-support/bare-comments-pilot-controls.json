@@ -1,0 +1,79 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-header.kerml": "7ad6feff764e0de13dbf85135fa111fb10d2ad18b579829fe878eb3a71ca22b5",
+    "invalid-header.sysml": "7ec6655a6a34f6e8574589a50241fff3155d1d5fd576d6d47679eafd408767db",
+    "positive-basic.kerml": "1f8cc364db460d5ca9028fccc17e6592bcba57379551a67fc77d5ff389c85eeb",
+    "positive-basic.sysml": "8941dd7bd94b3bb5a8e6f208f5f1d12c8623007abe0fa68ea6692cfd998b74ef",
+    "positive-mixed.kerml": "99f8b8a27af669ba0d37a8013d04dbc770d53d780f62b0b9f50cc6ad4ff7536a",
+    "positive-mixed.sysml": "2d99f6b08c0fcb9651e5fef4bba44b05b2c24e18a856f350dc4a1f49113bf2c7",
+    "positive-relationship.kerml": "d7d001bff04670011707f3e9871c412c9201ffdc4b30c611ee1b8e5c3633adb0",
+    "positive-relationship.sysml": "a1c085688c7c0d3b48e53ba5638ef210140349438c2f3b40ec0acd0484fef20a"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-header.kerml",
+      "status": "error",
+      "validation_ms": 365.9926,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-header.sysml",
+      "status": "error",
+      "validation_ms": 374.9677,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-basic.kerml",
+      "status": "ok",
+      "validation_ms": 181.5463,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-basic.sysml",
+      "status": "ok",
+      "validation_ms": 224.208,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-mixed.kerml",
+      "status": "ok",
+      "validation_ms": 314.4724,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-mixed.sysml",
+      "status": "ok",
+      "validation_ms": 399.39,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-relationship.kerml",
+      "status": "ok",
+      "validation_ms": 270.2656,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-relationship.sysml",
+      "status": "ok",
+      "validation_ms": 473.1827,
+      "diagnostics": []
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "fixture_sha256": "0b1e4d282bab3faff079f040f73d6866e40c82bd6b35dedf1dd05b93b3d58820",
+  "export_sha256": "42df2e1fc97e2f8f22334d475982a877ab65d06c50a3b5bb7336e35ce1b15aed",
+  "timings_sha256": "f5e23c21e0839b619acdb705c84949a9090bb6a06caf5128bd5e0451d45493c1",
+  "validation_status": "ok",
+  "diagnostics": [],
+  "observations": [
+    {
+      "qualified_name": "NextDefaults::Lifecycle::move",
+      "kind": "TransitionUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 16,
+        "end_line": 16
+      },
+      "types": [
+        "States::StateTransitionAction"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false
+      }
+    },
+    {
+      "qualified_name": "NextDefaults::Workflow::move",
+      "kind": "TransitionUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 11,
+        "end_line": 11
+      },
+      "types": [
+        "Actions::DecisionTransitionAction"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false
+      }
+    },
+    {
+      "qualified_name": "NextDefaults::binary",
+      "kind": "ConnectionUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 6,
+        "end_line": 6
+      },
+      "types": [
+        "Connections::Connection",
+        "Objects::BinaryLinkObject"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "qualified_name": "NextDefaults::nary",
+      "kind": "ConnectionUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "types": [
+        "Connections::Connection"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "qualified_name": "NextDefaults::untyped",
+      "kind": "OccurrenceUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 2,
+        "end_line": 2
+      },
+      "types": [
+        "Occurrences::Occurrence"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "qualified_name": "NextDefaults::untyped::child",
+      "kind": "OccurrenceUsage",
+      "source": {
+        "file": "../../support-2026-08/next-defaults-grammar.sysml",
+        "start_line": 2,
+        "end_line": 2
+      },
+      "types": [
+        "Occurrences::Occurrence"
+      ],
+      "properties": {
+        "is_end": false,
+        "is_variable": true,
+        "is_composite": true,
+        "is_constant": false
+      }
+    }
+  ]
+}

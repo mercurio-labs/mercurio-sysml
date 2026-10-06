@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-private-alias.kerml": "5496662712f34ed2e9fe2a6b6ce04428969eac40d4abc1a1ec24472e31a6b5dd",
+    "invalid-private-feature.kerml": "1b10c2d1650bfadef40cc93f44bdfcd5caa078e2a5fd259f066145b7159ece24",
+    "invalid-qualified-base.kerml": "1c93e5c4265908b0459f8c1301dad896eac6e4c803acc51de6dbe12042708d3d",
+    "invalid-qualified-inherited.kerml": "362ec1d7ac39b150ece603ab62fe7c3f330f42f5fabfd2a2363cfa737c6beb5e",
+    "positive-nested-protected.kerml": "41fbbcd93df15e817eade701b5babca0daf8bac970f64ddcfb84eb5f3f7d5253",
+    "positive-protected-alias.kerml": "bb6372f7e6c02143bf5ec89bfa243b82bd42243c78804ab0650a3c4cf22ccc74",
+    "positive-protected-feature.kerml": "63915d7f1f4d1c1b152dc7260db09f0f6baa6f5c4fb1481194bd50e0118b5b55",
+    "positive-public-alias.kerml": "76c2355223b650119c250abeb5ce7661d8cf41aa0b39c134c9ce22e46ce21cfd"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-private-alias.kerml",
+      "status": "error",
+      "validation_ms": 1037.8446,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-feature.kerml",
+      "status": "error",
+      "validation_ms": 797.0726,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-base.kerml",
+      "status": "error",
+      "validation_ms": 838.5368,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'A::Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-inherited.kerml",
+      "status": "error",
+      "validation_ms": 751.8724,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'B::Hidden'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-nested-protected.kerml",
+      "status": "ok",
+      "validation_ms": 466.0813,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-protected-alias.kerml",
+      "status": "ok",
+      "validation_ms": 437.4688,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-protected-feature.kerml",
+      "status": "ok",
+      "validation_ms": 825.7068,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias.kerml",
+      "status": "ok",
+      "validation_ms": 315.7419,
+      "diagnostics": []
+    }
+  ]
+}

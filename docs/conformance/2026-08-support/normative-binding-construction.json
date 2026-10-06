@@ -1,0 +1,76 @@
+{
+  "scope": "Native ConnectorUtil.createBindingConnector dependency only, with atomic canonical construction and semantic-owner adoption. Not full connector or expression transformation.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      213,
+      214,
+      215
+    ],
+    "clauses": [
+      "8.3.4.5.2 Binding Connector",
+      "8.3.4.5.3 Connector"
+    ],
+    "boundary": "Required binary related features and semantic-library specialization remain qualification obligations. Null-end constructor controls exercise Pilot intermediate state, not valid completed models."
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "ConnectorUtil.createBindingConnector",
+      "ConnectorUtil.addConnectorEndTo",
+      "Element_owner_SettingDelegate"
+    ],
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "BindingConnector, FeatureMembership, Feature and ReferenceSubsetting types; defaults, stored containments, reference target contracts and inverse ownership pairs.",
+  "native_consumer": "definition_document::append_binding_connector invokes the explicit handwritten constructor; Ecore-driven attach/move/publication services perform atomic storage changes. Shared fresh_definition_element also constructs feature chains.",
+  "verification": {
+    "pilot_controls": 15,
+    "contexts": [
+      "detached",
+      "owned",
+      "orphan membership"
+    ],
+    "inputs": [
+      "null/null",
+      "source/null",
+      "null/target",
+      "distinct features",
+      "repeated feature"
+    ],
+    "compared": [
+      "ordered membership/end/reference kinds",
+      "isEnd",
+      "reference endpoints",
+      "reciprocal ownership",
+      "endpoint adoption",
+      "existing owned elements unchanged",
+      "canonical persistence fields"
+    ],
+    "negative_controls": [
+      "empty or duplicate connector identity",
+      "generated identity collision after staged adoption",
+      "missing endpoint",
+      "wrong endpoint class"
+    ],
+    "focused_tests": 73,
+    "tooling_tests": 39,
+    "document_models": 90,
+    "pilot_export_reproduces": true,
+    "focused_log": "definition-pipeline-evidence/native-tests-binding-construction-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "212b2ce04252d71dca5b25495fc65db27b7efb51a633c1d90cefb1119b0d89fb",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "2c2dbc8ad0c5d0377398112325b1b22ddc0fc7a58b395408e4f765087831e833",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "06dec41a20dcc8c961c4359a2ae76767cb0bde7eeaa1c52610c399bfc5621838"
+    }
+  },
+  "remaining": [
+    "Connector binary-library generalization and end transformation",
+    "Connector context/featuring selection and implicit membership publication",
+    "Expression transformation inherited from Feature/Type adapters: featuring, value connector, computed redefinitions and complete generalization",
+    "Result-binding integration and bound-value subsetting",
+    "Full native/sample qualification"
+  ],
+  "disagreements": "No constructor mismatch remains in these fifteen controls. No assertion of full normative conformance."
+}

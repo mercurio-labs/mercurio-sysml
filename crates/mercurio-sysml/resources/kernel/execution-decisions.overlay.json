@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "Explicit native execution decisions; these do not waive conformance or oracle differences.",
+  "decisions": [
+    {
+      "id": "numeric-value-equality",
+      "reason": "Retain committed native numeric-value equality across integer and real JSON representations. Pilot 0.62.0 EvaluationUtil.equal instead delegates to Java Object.equals. Both observations remain recorded as differences; full numeric typing/dispatch qualification remains open.",
+      "implementation_source": "mercurio-foundation commit 5633b3f5d616fc8d6d23214121ad2a93708cfc76",
+      "pilot_evidence": "sequence-execution-controls.pilot.json: sequence_11 and sequence_12"
+    },
+    {
+      "id": "bounded-integer-ranges",
+      "reason": "Shared execution rejects ranges exceeding 100000 results to bound allocation. This is an explicit runtime resource limit, not complete arbitrary-range support."
+    },
+    {
+      "id": "standard-function-intrinsics",
+      "reason": "The shared evaluator supports a bounded allowlist of numeric and sequence library functions. Five fresh Pilot probes are rejected or unresolved and are not counted as parity successes."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "dev.mercurio.feature-default-evidence.v1",
+  "scope": "Exact Feature with ordinary detached, Namespace, Package, LibraryPackage, Class or Structure ownership; no end/direction or unimplemented implicit contributors",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "native_consumers": [
+    "feature_defaults_generated::feature_default_name",
+    "definition_ordinary_feature_inputs",
+    "definition_general_type_inputs"
+  ],
+  "implementation_boundary": "Resolved javac selector AST and default map generate the seven-way selection. Predicate inputs, context guards, library resolution and ordered generalization assembly are explicitly handwritten Rust over imported Ecore contracts.",
+  "independent_pilot_controls": 128,
+  "control_dimensions": "8 combinations of explicit Class/Structure/DataType typing; detached/Package/Class/Structure owners; composite and portion flags both ways",
+  "native_source_checks": 1,
+  "native_source_behavior": "Connector -> Links::links -> Base::things specialization and inherited alias linking through parse_and_link; no mutation or fabricated completeness flags",
+  "matching_pilot_source_models_added": 0,
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      192,
+      195,
+      196
+    ],
+    "constraints": [
+      "checkFeatureDataValueSpecialization",
+      "checkFeaturePortionSpecialization",
+      "checkFeatureSpecialization",
+      "checkFeatureSubobjectSpecialization",
+      "checkFeatureSuboccurrenceSpecialization"
+    ]
+  },
+  "normative_boundary": "Selector priorities are independently verified Pilot behavior, not full satisfaction of every applicable specialization constraint. Transitive library content and effective typing remain dependencies. The portion constraint prose names Occurrences::Occurrence::portions, while its formula uses Occurrence::Occurrence::portions; imported Pilot mapping follows the prose. This textual discrepancy is recorded, not silently treated as equivalent.",
+  "unsupported": [
+    "Feature/behavior/constructor-owned contexts",
+    "End and parameter implicit redefinitions",
+    "Valuation, crossing, conjugation and semantic metadata contributions",
+    "Usage/subclass generalization providers",
+    "Full inherited effective-end constraints and complete language validation"
+  ],
+  "verification": {
+    "native_passes": 87,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-feature-default-focused.log",
+    "export_reproduced": true
+  },
+  "closure": "No new ordinary-strategy obligation, feature family or release gate is closed."
+}

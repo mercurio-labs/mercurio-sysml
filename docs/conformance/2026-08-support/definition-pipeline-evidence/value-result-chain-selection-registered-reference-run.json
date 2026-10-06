@@ -1,0 +1,103 @@
+{
+  "schema": "dev.mercurio.chain-selection-reference-run.v1",
+  "qualification_certificate": false,
+  "input_sha256": {
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\tools\\pilot-exporter\\src\\main\\java\\dev\\mercurio\\pilot\\PilotChainSelectionRegisteredControls.java": "6f4001ca03478c8bc9aa90b42f621238ac5b86f1de8f273f69849e9f27086743",
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.interactive\\target\\org.omg.sysml.interactive-0.62.0-SNAPSHOT-all.jar": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml\\model\\SysML.ecore": "22719934c65588180fc19658f8a7c891cb209458e4027bf90ddf005c80ddc17f",
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\delegate\\invocation\\FeatureChainExpression_sourceTargetFeature_InvocationDelegate.java": "02adf1725e36516852b385f352ed860f5468f208ad99c6c1630689ea6fa9197d",
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\util\\ExpressionUtil.java": "8803815a3359be8d2b08817a97c2ed9031edaadd670aa44369dac08bf3c43c65",
+    "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\delegate\\setting\\FeatureChainExpression_targetFeature_SettingDelegate.java": "c490152a9983935b817efa4007596ccaba6c5e119a8af17bc26f9c2e5ebe33c1"
+  },
+  "runs": [
+    {
+      "command": [
+        "D:/dev/jdks/jdk21/bin/javac.exe",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.interactive\\target\\org.omg.sysml.interactive-0.62.0-SNAPSHOT-all.jar",
+        "-d",
+        "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\value-result-chain-selection-registered-reference\\classes",
+        "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\tools\\pilot-exporter\\src\\main\\java\\dev\\mercurio\\pilot\\PilotChainSelectionRegisteredControls.java"
+      ],
+      "exit_code": 0,
+      "log_path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\value-result-chain-selection-registered-reference\\phase-0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsed_seconds": 0.906
+    },
+    {
+      "command": [
+        "D:/dev/jdks/jdk21/bin/java.exe",
+        "-cp",
+        "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\value-result-chain-selection-registered-reference\\classes;D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.interactive\\target\\org.omg.sysml.interactive-0.62.0-SNAPSHOT-all.jar",
+        "dev.mercurio.pilot.PilotChainSelectionRegisteredControls",
+        "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\value-result-chain-selection-registered-reference-controls.json"
+      ],
+      "exit_code": 0,
+      "log_path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\value-result-chain-selection-registered-reference\\phase-1.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "elapsed_seconds": 3.579
+    }
+  ],
+  "output_sha256": "6dccff315c030d6a0e3da178fca017b455f2a006ac0c877a023d85452f0d956d",
+  "inputs_unchanged": true,
+  "controls_observed": 9,
+  "normative_comparison": [
+    {
+      "id": "first_in",
+      "pilot": "first.target",
+      "normative": "first.target",
+      "disagrees": false
+    },
+    {
+      "id": "empty_first_in",
+      "pilot": "second.target",
+      "normative": null,
+      "disagrees": true
+    },
+    {
+      "id": "out_then_in",
+      "pilot": "second.target",
+      "normative": "second.target",
+      "disagrees": false
+    },
+    {
+      "id": "inout_then_in",
+      "pilot": "second.target",
+      "normative": "second.target",
+      "disagrees": false
+    },
+    {
+      "id": "empty_inputs",
+      "pilot": null,
+      "normative": null,
+      "disagrees": false
+    },
+    {
+      "id": "no_input",
+      "pilot": null,
+      "normative": null,
+      "disagrees": false
+    },
+    {
+      "id": "target_then_return",
+      "pilot": "target",
+      "normative": "target",
+      "disagrees": false
+    },
+    {
+      "id": "return_then_target",
+      "pilot": "result",
+      "normative": "target",
+      "disagrees": true
+    },
+    {
+      "id": "non_feature_target",
+      "pilot": null,
+      "normative": null,
+      "disagrees": false
+    }
+  ],
+  "status": "independent_boundaries_observed"
+}

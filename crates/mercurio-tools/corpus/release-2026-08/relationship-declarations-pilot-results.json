@@ -1,0 +1,599 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "2fe2470c2922a00aa4ca362220a57fb50d614ba39970e96e1c9a8465dfe35231",
+    "timings_sha256": "4dd3abd13e7a67d4bc8108e4bf4e4ac3fa7e793059c285008f246d83af8f428b",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "fixtures": {
+      "relationship-conjugation-negative.kerml": "709beb43699134b6350e62f1ae1db470552cbbc452e1f71444c5dd1354e6a8f1",
+      "relationship-declarations.kerml": "4c7f208b88e7a71b3987e8630e91f0e520e12aee671c423d2e3657b232ea00f3",
+      "relationship-dependency-negative.kerml": "9d662071b499302db1b20e1780d4a1f5fe6899a9f3c5e2d75dfe7bde091c7709",
+      "relationship-feature-typing-negative.kerml": "eeb32d0b0fbc659f602da7b61fad0543546121bebd99d07936723d26fefe8054",
+      "relationship-featuring-negative.kerml": "5d41f677708291fab907be3a53ddbc8bdeac8417c4a436123d82061708b04804",
+      "relationship-inverting-negative.kerml": "d632679cd130ca912fc2fd71448fc510530ba0e90318ff861523aacda52ac74b",
+      "relationship-redefinition-negative.kerml": "0e4de287820259038b85c924cea2267e1f7b59a23ebe7f3533a5bc46d154330a",
+      "relationship-specialization-negative.kerml": "3ede81964db1ae302d217b42b911c8c05a177569840f898750b387c11b41aee8",
+      "relationship-subclassification-negative.kerml": "a46645539b01772aa1dcf33d37ac190cfe1005c2c3711b0e7d9de884146dc7b5",
+      "relationship-subsetting-negative.kerml": "669454e2a42d9c7dfb637115820a0ff564fb01be8b40eece667610e65f7b4b4e"
+    }
+  },
+  "cases": [
+    {
+      "relative_path": "relationship-declarations.kerml",
+      "status": "ok",
+      "validation_ms": 223.8117,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "relationship-subclassification-negative.kerml",
+      "status": "error",
+      "validation_ms": 18.4856,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Classifier 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-specialization-negative.kerml",
+      "status": "error",
+      "validation_ms": 4.4703,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-feature-typing-negative.kerml",
+      "status": "error",
+      "validation_ms": 4.3774,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-subsetting-negative.kerml",
+      "status": "error",
+      "validation_ms": 3.9141,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-redefinition-negative.kerml",
+      "status": "error",
+      "validation_ms": 10.7175,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Missing'.",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateRedefinitionFeaturingTypes",
+          "message": "A package-level feature cannot be redefined",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-conjugation-negative.kerml",
+      "status": "error",
+      "validation_ms": 5.1895,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-inverting-negative.kerml",
+      "status": "error",
+      "validation_ms": 15.2601,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-featuring-negative.kerml",
+      "status": "error",
+      "validation_ms": 4.1318,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "relationship-dependency-negative.kerml",
+      "status": "error",
+      "validation_ms": 3.3697,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 4
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "line": 10,
+      "kind": "Subclassification",
+      "declared_name": "Super",
+      "declared_short_name": "sc",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::B"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "subclassifier": [
+          "RelationshipDeclarations::B"
+        ],
+        "specific": [
+          "RelationshipDeclarations::B"
+        ],
+        "superclassifier": [
+          "RelationshipDeclarations::A"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 11,
+      "kind": "Specialization",
+      "declared_name": "Gen",
+      "declared_short_name": "sp",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::B"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "specific": [
+          "RelationshipDeclarations::B"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 12,
+      "kind": "FeatureTyping",
+      "declared_name": "Typing",
+      "declared_short_name": "ft",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "typed_feature": [
+          "RelationshipDeclarations::f"
+        ],
+        "specific": [
+          "RelationshipDeclarations::f"
+        ],
+        "type": [
+          "RelationshipDeclarations::A"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 13,
+      "kind": "Subsetting",
+      "declared_name": "Sub",
+      "declared_short_name": "ss",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::g"
+        ],
+        "subsetting_feature": [
+          "RelationshipDeclarations::f"
+        ],
+        "specific": [
+          "RelationshipDeclarations::f"
+        ],
+        "subsetted_feature": [
+          "RelationshipDeclarations::g"
+        ],
+        "general": [
+          "RelationshipDeclarations::g"
+        ]
+      }
+    },
+    {
+      "line": 14,
+      "kind": "Redefinition",
+      "declared_name": "Redef",
+      "declared_short_name": "rd",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "target": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "redefining_feature": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "subsetting_feature": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "specific": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "redefined_feature": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "subsetted_feature": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "general": [
+          "RelationshipDeclarations::Parent::x"
+        ]
+      }
+    },
+    {
+      "line": 15,
+      "kind": "Conjugation",
+      "declared_name": "Conj",
+      "declared_short_name": "cj",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::Conjugated"
+        ],
+        "target": [
+          "RelationshipDeclarations::Original"
+        ],
+        "conjugated_type": [
+          "RelationshipDeclarations::Conjugated"
+        ],
+        "original_type": [
+          "RelationshipDeclarations::Original"
+        ]
+      }
+    },
+    {
+      "line": 16,
+      "kind": "FeatureInverting",
+      "declared_name": "Invert",
+      "declared_short_name": "iv",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::g"
+        ],
+        "feature_inverted": [
+          "RelationshipDeclarations::f"
+        ],
+        "inverting_feature": [
+          "RelationshipDeclarations::g"
+        ]
+      }
+    },
+    {
+      "line": 17,
+      "kind": "TypeFeaturing",
+      "declared_name": "Featuring",
+      "declared_short_name": "tf",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "feature_of_type": [
+          "RelationshipDeclarations::f"
+        ],
+        "featuring_type": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 18,
+      "kind": "Dependency",
+      "declared_name": "Use",
+      "declared_short_name": "dp",
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::A",
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::B",
+          "RelationshipDeclarations::g"
+        ],
+        "client": [
+          "RelationshipDeclarations::A",
+          "RelationshipDeclarations::f"
+        ],
+        "supplier": [
+          "RelationshipDeclarations::B",
+          "RelationshipDeclarations::g"
+        ]
+      }
+    },
+    {
+      "line": 19,
+      "kind": "Subclassification",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::B"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "subclassifier": [
+          "RelationshipDeclarations::B"
+        ],
+        "specific": [
+          "RelationshipDeclarations::B"
+        ],
+        "superclassifier": [
+          "RelationshipDeclarations::A"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 20,
+      "kind": "Specialization",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::B"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "specific": [
+          "RelationshipDeclarations::B"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 21,
+      "kind": "FeatureTyping",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::g"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "typed_feature": [
+          "RelationshipDeclarations::g"
+        ],
+        "specific": [
+          "RelationshipDeclarations::g"
+        ],
+        "type": [
+          "RelationshipDeclarations::A"
+        ],
+        "general": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 22,
+      "kind": "Subsetting",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::g"
+        ],
+        "subsetting_feature": [
+          "RelationshipDeclarations::f"
+        ],
+        "specific": [
+          "RelationshipDeclarations::f"
+        ],
+        "subsetted_feature": [
+          "RelationshipDeclarations::g"
+        ],
+        "general": [
+          "RelationshipDeclarations::g"
+        ]
+      }
+    },
+    {
+      "line": 23,
+      "kind": "Redefinition",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "target": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "redefining_feature": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "subsetting_feature": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "specific": [
+          "RelationshipDeclarations::Child::y"
+        ],
+        "redefined_feature": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "subsetted_feature": [
+          "RelationshipDeclarations::Parent::x"
+        ],
+        "general": [
+          "RelationshipDeclarations::Parent::x"
+        ]
+      }
+    },
+    {
+      "line": 24,
+      "kind": "Conjugation",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::Conjugated"
+        ],
+        "target": [
+          "RelationshipDeclarations::Original"
+        ],
+        "conjugated_type": [
+          "RelationshipDeclarations::Conjugated"
+        ],
+        "original_type": [
+          "RelationshipDeclarations::Original"
+        ]
+      }
+    },
+    {
+      "line": 25,
+      "kind": "FeatureInverting",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::f"
+        ],
+        "target": [
+          "RelationshipDeclarations::g"
+        ],
+        "feature_inverted": [
+          "RelationshipDeclarations::f"
+        ],
+        "inverting_feature": [
+          "RelationshipDeclarations::g"
+        ]
+      }
+    },
+    {
+      "line": 26,
+      "kind": "TypeFeaturing",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::g"
+        ],
+        "target": [
+          "RelationshipDeclarations::A"
+        ],
+        "feature_of_type": [
+          "RelationshipDeclarations::g"
+        ],
+        "featuring_type": [
+          "RelationshipDeclarations::A"
+        ]
+      }
+    },
+    {
+      "line": 27,
+      "kind": "Dependency",
+      "declared_name": null,
+      "declared_short_name": null,
+      "owner": "RelationshipDeclarations",
+      "references": {
+        "source": [
+          "RelationshipDeclarations::B",
+          "RelationshipDeclarations::g"
+        ],
+        "target": [
+          "RelationshipDeclarations::A",
+          "RelationshipDeclarations::f"
+        ],
+        "client": [
+          "RelationshipDeclarations::B",
+          "RelationshipDeclarations::g"
+        ],
+        "supplier": [
+          "RelationshipDeclarations::A",
+          "RelationshipDeclarations::f"
+        ]
+      }
+    }
+  ]
+}

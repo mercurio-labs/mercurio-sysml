@@ -1,0 +1,195 @@
+{
+  "schema": "dev.mercurio.indexed-redefinition-evidence.v1",
+  "scope": "Shared inheritance redefinition filtering consumes the existing immutable identity index. This is a measured cost fix for existing supported behavior, not additional feature qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0fbcc1549b9d56a96c21b0825144b9444c1dba80b02e935cdea6df1e9fbd0d72",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "71dbfee234b30e418d693f8985ab15543d4eb08b5ca7320e118555eae93c7a6a",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "tools/analyze_definition_query_trace.py": "6a2e546817311efd6430d7093637ca5ccde7a386c05ce5fd93cb158b19bec543",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-filter-trace.log": "a80d9cd2eb24afb89c968cc672b12a8c58ae45f90ccf42fbd2f4605a82d6d58f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-filter-analysis.json": "9ffe458e13219037ec500bbc1dafb027358248ec4bf9b4c5adae695af467115e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-filter-supervision.json": "4982259c99a9e5eebf5731370802ef7e606cc6660c9c1594f397c71b95749d34",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-redefinition-trace.log": "6a88986b9156bfca720277f0c7b4d549cb9d322ba0bdc34609482158166e0f63",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-redefinition-analysis.json": "5036be67108bc8256c322e7a263de0d9da366b050246f706418027077a41b475",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-redefinition-supervision.json": "d3fbd26606776095e6de7a1d539610109b95df796157e1d65c80791def145599"
+  },
+  "imported_representation": [
+    "Pinned Ecore reference types, containment, opposites and specialization contracts",
+    "Generated relevant-redefinition and added-member provider dispatch"
+  ],
+  "native_consumers": [
+    "remove_redefined_memberships_query",
+    "remove_redefined_memberships_evaluate",
+    "pending_explicit_redefinition_indexed",
+    "explicit_recursive_inherited_memberships_query"
+  ],
+  "handwritten_boundary": "Scope and redefinition algorithms remain explicitly handwritten Rust; imported Ecore and generated bounded dispatch supply field, ownership and strategy rules. Production contains no clock, I/O or Java dependency.",
+  "implementation": [
+    "Reuse immutable identity index for membership endpoints, target lookup, namespace owned relationships and explicit-redefinition traversal.",
+    "Preserve depth-first explicit prerequisite order, imported endpoint validation, survivor ordering and owned/sibling suppression.",
+    "No new result caches, completeness assertions, graph edits or relaxed unsupported strategies."
+  ],
+  "measured_decision": {
+    "historical_filter": {
+      "completed": 90,
+      "inclusive_ms": 28080,
+      "exclusive_ms": 20102,
+      "max_ms": 2374
+    },
+    "historical_closure": {
+      "completed": 379,
+      "inclusive_ms": 8376,
+      "exclusive_ms": 8376,
+      "max_ms": 45
+    },
+    "historical_source_sha256": "1409d540f71daf20e21f6a1240bab766ba58bb4a6ae307bc01da03062388ed59",
+    "reason": "Most measured filter cost was outside closures; replace repeated identity-index builds in endpoint and explicit relationship reads."
+  },
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-redefinition-native-tests.log",
+      "sha256": "07e032d57f56a158f56c4e3b8a779b2f1be700e2636b941808b7d5ec714e4ac0",
+      "passed": 221
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-redefinition-focused-tests.log",
+      "sha256": "7a29ebaf24406333f0e9d0f9b3360cff434aa1b79f15e8fbf378a4b523a15ab3",
+      "passed": 2
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-redefinition-tool-tests.log",
+      "sha256": "a36283249ea29009eb978cbd2351135eb7f6701c4c658bb8e7265b4d5709f16d",
+      "passed": 10
+    },
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-redefinition-certificate-tests.log",
+      "sha256": "a177dfd2022d8a623584211d2fd1cad3477097bd1180e3481fc61e4280cdafa7",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-redefinition-plan-tests.log",
+      "sha256": "79f100af06423624d5bd4cb1cea1b6ea865a25f45d467ebd47eba8dc1efd6fa8",
+      "passed": 14
+    }
+  },
+  "focused_contexts": [
+    "Preserved prior algorithm oracle plus fixed expected survivors and prerequisites",
+    "Missing/invalid endpoint, wrong target type, broken reciprocal ownership and duplicate identity",
+    "Owned suppression, skipped declaring feature, cyclic redefinitions and pending owned endpoint",
+    "Reversed storage, repeated immutable queries and 256 unrelated elements"
+  ],
+  "cost_diagnostic": {
+    "supervision": {
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out",
+      "elapsed_seconds": 114.32900000002701,
+      "exit_code": 1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "ea8208a2b03fd328f30675c6e3569277208ea5ba4d9f4f01de3e162a3dabf425",
+      "source_sha256": "0fbcc1549b9d56a96c21b0825144b9444c1dba80b02e935cdea6df1e9fbd0d72",
+      "wall_budget_seconds": 240,
+      "linking_budget_seconds": 55,
+      "semantic_qualification": "not_assessed"
+    },
+    "completed_reference_attempts": 158,
+    "prior_attempts": 156,
+    "attempt_delta": 2,
+    "stage_summary": {
+      "Resource": {
+        "completed": 16,
+        "inclusive_ms": 117,
+        "exclusive_ms": 117,
+        "max_ms": 32
+      },
+      "MembershipNames": {
+        "completed": 6720,
+        "inclusive_ms": 4586,
+        "exclusive_ms": 4586,
+        "max_ms": 47
+      },
+      "ScopeMemberships": {
+        "completed": 527,
+        "inclusive_ms": 3011,
+        "exclusive_ms": 175,
+        "max_ms": 424
+      },
+      "Reference": {
+        "completed": 158,
+        "inclusive_ms": 47230,
+        "exclusive_ms": 2949,
+        "max_ms": 4663
+      },
+      "LibraryPath": {
+        "completed": 211,
+        "inclusive_ms": 165,
+        "exclusive_ms": 165,
+        "max_ms": 2
+      },
+      "GeneralTypes": {
+        "completed": 226,
+        "inclusive_ms": 18040,
+        "exclusive_ms": 17875,
+        "max_ms": 440
+      },
+      "InheritedMemberships": {
+        "completed": 36,
+        "inclusive_ms": 42273,
+        "exclusive_ms": 36,
+        "max_ms": 4594
+      },
+      "RedefinitionFilter": {
+        "completed": 97,
+        "inclusive_ms": 26192,
+        "exclusive_ms": 13515,
+        "max_ms": 1735
+      },
+      "RedefinitionClosure": {
+        "completed": 581,
+        "inclusive_ms": 12677,
+        "exclusive_ms": 12677,
+        "max_ms": 53
+      }
+    },
+    "semantic_qualification": "not_assessed"
+  },
+  "limits": [
+    "Timed-out construction does not qualify publication or validation.",
+    "Reference attempts include prerequisites/retries, not unique linked fields.",
+    "Inclusive stage times overlap and exclusive times include uninstrumented calls.",
+    "This is a bounded native cost diagnostic, not the final Pilot timing comparison.",
+    "The oracle checks preservation of previous native behavior; existing independent cached Pilot controls remain the behavioral reference."
+  ],
+  "feature_status": {
+    "imported": "Existing pinned Ecore and resolved bounded strategies retained",
+    "consumed": "Indexed endpoints and explicit dependencies now drive shared filtering",
+    "semantically_verified": "Focused controls plus 221-test regression; no additional complete family",
+    "unsupported": "Remaining specialized strategies, delegates, metadata, validation and complete-resource lifecycle stay open"
+  },
+  "metrics": {
+    "verified_whole_models": 155,
+    "ordinary_bindings": {
+      "verified": 50,
+      "total": 79
+    },
+    "bounded_obligations": {
+      "closed": 7,
+      "total": 9
+    },
+    "families": {
+      "qualified": 0,
+      "total": 34
+    },
+    "release_gates": {
+      "qualified": 0,
+      "total": 5
+    },
+    "candidate_promoted": false
+  },
+  "verification_repairs": [
+    "The coverage checker rejected seven obsolete native-consumer anchors after the filter refactor. All seven now identify remove_redefined_memberships_query; strict coverage and certificate tests pass without changing obligations."
+  ],
+  "next_fixed_batch": "Isolate the repeated definition_redefined_features calls inside the measured closure/owned-feature filter and the general-type evaluator. Reuse the existing immutable view for their canonical ownership/relationship reads, with a focused matched-query cost control before another resource retry."
+}

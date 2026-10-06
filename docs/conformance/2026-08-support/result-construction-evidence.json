@@ -1,0 +1,82 @@
+{
+  "schema": "dev.mercurio.result-construction-evidence.v1",
+  "scope": "Shared owned-result construction and candidate result query for seven resolved expression member providers; not full expression transformation",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/result-construction.extract.json",
+  "imported_sha256": "91c9d0e05d712e5f033527244219e7627ff4726ad842212e4bdeb22fd5fcec2d",
+  "bindings": [
+    "CollectExpression",
+    "FeatureReferenceExpression",
+    "IndexExpression",
+    "InvocationExpression",
+    "OperatorExpression",
+    "SelectExpression",
+    "TriggerInvocationExpression"
+  ],
+  "contexts_per_binding": [
+    "empty",
+    "ordinary_member",
+    "existing_return",
+    "empty_return"
+  ],
+  "independent_pilot_contexts": 28,
+  "source_pipeline_contexts": 2,
+  "matching_whole_source_models_total": 148,
+  "native_consumers": [
+    "definition_materialize_expression_result",
+    "definition_parameter_members_ready",
+    "definition_document::materialize_expression_result",
+    "definition_document::reference_targets"
+  ],
+  "implementation_boundary": "Resolved typed Java trees feed bounded constructor program and provider dispatch. Rust transaction execution, publication validation and ownership attachment are handwritten over imported Ecore contracts. No completeness flags are synthesized. Source integration controls do not count as independent full-model Pilot comparisons.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      235,
+      279,
+      295
+    ],
+    "boundary": "Result specialization and binding requirements exceed this construction-only step. Pilot empty-return suppression is a construction observation, not evidence that a missing required endpoint is semantically valid."
+  },
+  "excluded_providers": {
+    "AnalysisCaseUsage": "UsageAdapter#addAdditionalMembers/0",
+    "AssertConstraintUsage": "UsageAdapter#addAdditionalMembers/0",
+    "BooleanExpression": "NamespaceAdapter#addAdditionalMembers/0",
+    "CalculationUsage": "UsageAdapter#addAdditionalMembers/0",
+    "CaseUsage": "UsageAdapter#addAdditionalMembers/0",
+    "ConcernUsage": "UsageAdapter#addAdditionalMembers/0",
+    "ConstraintUsage": "UsageAdapter#addAdditionalMembers/0",
+    "ConstructorExpression": "ConstructorExpressionAdapter#addAdditionalMembers/0",
+    "Expression": "NamespaceAdapter#addAdditionalMembers/0",
+    "FeatureChainExpression": "FeatureChainExpressionAdapter#addAdditionalMembers/0",
+    "IncludeUseCaseUsage": "UsageAdapter#addAdditionalMembers/0",
+    "Invariant": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralBoolean": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralExpression": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralInfinity": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralInteger": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralRational": "NamespaceAdapter#addAdditionalMembers/0",
+    "LiteralString": "NamespaceAdapter#addAdditionalMembers/0",
+    "MetadataAccessExpression": "NamespaceAdapter#addAdditionalMembers/0",
+    "NullExpression": "NamespaceAdapter#addAdditionalMembers/0",
+    "RequirementUsage": "UsageAdapter#addAdditionalMembers/0",
+    "SatisfyRequirementUsage": "UsageAdapter#addAdditionalMembers/0",
+    "UseCaseUsage": "UsageAdapter#addAdditionalMembers/0",
+    "VerificationCaseUsage": "UsageAdapter#addAdditionalMembers/0",
+    "ViewpointUsage": "UsageAdapter#addAdditionalMembers/0"
+  },
+  "remaining": [
+    "ConstructorExpression additional result typing",
+    "Expression implicit generalization and featuring",
+    "Expression result binding and subtype-specific transformation",
+    "Bound-value chain and specialization integration",
+    "Full sample semantic and timing qualification"
+  ],
+  "qualification": {
+    "native_tests": 105,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-specialization-construction-focused.log",
+    "test_log_sha256": "fba58c3c75b7adfcf1f5614440e3b0d8dc62d21618a9a5446fe0bfb5690bd944",
+    "tooling_tests": 71,
+    "full_sample_and_timing_qualification": false
+  }
+}

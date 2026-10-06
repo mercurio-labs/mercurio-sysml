@@ -1,0 +1,105 @@
+{
+  "cases": [
+    {
+      "observation": {
+        "bounds": [
+          "*"
+        ],
+        "lower": null,
+        "upper": "*"
+      },
+      "source": "package P { feature f [*]; }"
+    },
+    {
+      "observation": {
+        "bounds": [
+          2
+        ],
+        "lower": null,
+        "upper": 2
+      },
+      "source": "package P { feature f [2]; }"
+    },
+    {
+      "observation": {
+        "bounds": [
+          1,
+          3
+        ],
+        "lower": 1,
+        "upper": 3
+      },
+      "source": "package P { feature f [1..3]; }"
+    },
+    {
+      "observation": {
+        "bounds": [
+          1,
+          "*"
+        ],
+        "lower": 1,
+        "upper": "*"
+      },
+      "source": "package P { feature f [1..*]; }"
+    },
+    {
+      "observation": {
+        "bounds": [],
+        "lower": null,
+        "upper": null
+      },
+      "owned_expression_count": 0
+    },
+    {
+      "observation": {
+        "bounds": [
+          1
+        ],
+        "lower": null,
+        "upper": 1
+      },
+      "owned_expression_count": 1
+    },
+    {
+      "observation": {
+        "bounds": [
+          1,
+          2
+        ],
+        "lower": 1,
+        "upper": 2
+      },
+      "owned_expression_count": 2
+    },
+    {
+      "observation": {
+        "bounds": [
+          1,
+          2
+        ],
+        "lower": 1,
+        "upper": 2
+      },
+      "owned_expression_count": 3
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "efa650f5167eba599f5808386a390aef01a50ddc4a27aa70694e4e001f72fb57",
+    "helper_sha256": "97a1e168afabe02a8a8554e6ed97675ea8107f5daa4f1b821beece7f98898b6a",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/MultiplicityRange_bound_SettingDelegate.java": "9b472183c3823ba95aeb0ac323ad51efd02fde3637f0ff035ac401d076e78085",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/MultiplicityRange_lowerBound_SettingDelegate.java": "0cbe2c907dd5f587603441075f8ca31dd6c79a38bb9f392fccd7cfe089c22542",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/MultiplicityRange_upperBound_SettingDelegate.java": "693e30bb166c4049dbb1917ac512b38b15802b433e08b37ad9b02db520d39a02",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/NamespaceUtil.java": "e411c4c1517fb895f99336d3714d595a94b9ef261180316f517c83014714ffce",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.multiplicity-projection-controls.v1",
+  "scope": "Four source controls and four zero/one/two/three-expression factories; owned nonexpressions and aliases excluded. Identity projections only; no numeric evaluation or validation."
+}

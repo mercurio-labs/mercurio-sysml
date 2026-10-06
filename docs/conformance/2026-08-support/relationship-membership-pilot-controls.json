@@ -1,0 +1,531 @@
+{
+  "bindings": [
+    "ConjugatedPortTyping",
+    "CrossSubsetting",
+    "Disjoining",
+    "FeatureInverting",
+    "FeatureTyping",
+    "Redefinition",
+    "ReferenceSubsetting",
+    "Specialization",
+    "Subclassification",
+    "Subsetting"
+  ],
+  "controls": [
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "ConjugatedPortTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "ConjugatedPortTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "ConjugatedPortTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "ConjugatedPortTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "ConjugatedPortTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "CrossSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "CrossSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "CrossSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "CrossSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "CrossSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Disjoining",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Disjoining",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "Disjoining",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "Disjoining",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "Disjoining",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "FeatureInverting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "FeatureInverting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "FeatureInverting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "FeatureInverting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "FeatureInverting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "FeatureTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "FeatureTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "FeatureTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "FeatureTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "FeatureTyping",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Redefinition",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Redefinition",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "Redefinition",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "Redefinition",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "Redefinition",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "ReferenceSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "ReferenceSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "ReferenceSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "ReferenceSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "ReferenceSubsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Specialization",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Specialization",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "Specialization",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "Specialization",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "Specialization",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Subclassification",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Subclassification",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "Subclassification",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "Subclassification",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "Subclassification",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Subsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 0,
+      "owned_typing": 0,
+      "typing": "none"
+    },
+    {
+      "after": "Base::things",
+      "before": "Base::things",
+      "kind": "Subsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Classifier"
+    },
+    {
+      "after": "Occurrences::occurrences",
+      "before": "Occurrences::occurrences",
+      "kind": "Subsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Class"
+    },
+    {
+      "after": "Objects::objects",
+      "before": "Objects::objects",
+      "kind": "Subsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "Structure"
+    },
+    {
+      "after": "Base::dataValues",
+      "before": "Base::dataValues",
+      "kind": "Subsetting",
+      "member_owner": true,
+      "owned_feature": 0,
+      "owned_specialization": 1,
+      "owned_typing": 1,
+      "typing": "DataType"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "99b491335e060f5ec85ee0393ddb94d7bfb3c77f03286176a8c9fd53b6c470ce",
+    "helper_sha256": "498254dfd5a176cafe4f4e199babe3f1f05c232643e4c85bf4285f4addcc9508",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.relationship-membership-controls.v1",
+  "scope": "Canonical wrapped Specialization, Disjoining and FeatureInverting declarations: default selector and direct-owned projection only. No relationship algorithm, transformation or validation."
+}

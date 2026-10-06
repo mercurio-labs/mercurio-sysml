@@ -43,6 +43,24 @@ pub(crate) fn assignment(text: &str) -> Result<(String, Value), Diagnostic> {
 
 fn lower(expr: &Expr) -> Result<ExpressionIr, Diagnostic> {
     Ok(match expr {
+        Expr::Operation {
+            operator, operands, ..
+        } => ExpressionIr::Operation {
+            operator: operator.clone(),
+            operands: operands.iter().map(lower).collect::<Result<_, _>>()?,
+        },
+        Expr::NamedArgument {
+            parameter, value, ..
+        } => ExpressionIr::NamedArgument {
+            parameter: parameter.as_colon_string(),
+            value: Box::new(lower(value)?),
+        },
+        Expr::TypeReference(_) | Expr::Lambda { .. } => {
+            return Err(Diagnostic::new(
+                "typed or higher-order behavior expression requires semantic binding",
+                Some(expr_span(expr)),
+            ));
+        }
         Expr::Literal(value) => ExpressionIr::Literal {
             value: match value {
                 LiteralExpr::Integer(n) => Value::from(*n),

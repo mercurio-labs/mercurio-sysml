@@ -1,0 +1,30 @@
+{
+  "schema": "dev.mercurio.reference-result-scope-normative-review.v1",
+  "written_specification": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Release\\doc\\1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      235,
+      236,
+      110
+    ],
+    "printed_pages": [
+      209,
+      210,
+      84
+    ],
+    "rules": [
+      "checkFeatureReferenceExpressionResultSpecialization",
+      "deriveFeatureReferenceExpressionReferent",
+      "validateFeatureReferenceExpressionResult",
+      "8.2.3.5.2 Local and Global Namespaces"
+    ]
+  },
+  "normative_agreement": "The admitted owned-result/Feature-referent contexts now establish actual Subsetting before lookup in the result namespace. This implements one required specialization effect, not complete expression transformation or constraint validation.",
+  "pilot_dependency": "Resolved FeatureReferenceExpressionAdapter.addResultSubsetting and existing generated Subsetting producer; scope prerequisite scheduling is explicitly handwritten Rust.",
+  "disagreements_and_boundaries": [
+    "Pilot getReferentFor skips null member elements, whereas the written derivation selects the first nonparameter membership. Explicit null memberships and invalid referents remain unqualified; do not normalize this disagreement.",
+    "Self-default handling, reference BindingConnector construction, redundant specialization minimization, full result typing and validators remain separate dependencies."
+  ],
+  "full_normative_qualification": false
+}

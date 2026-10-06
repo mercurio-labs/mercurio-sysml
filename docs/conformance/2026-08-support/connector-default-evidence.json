@@ -1,0 +1,26 @@
+{
+  "schema": "dev.mercurio.connector-default-evidence.v1",
+  "scope": "Exact Connector in detached or ordinary Package/Class/Namespace ownership; guarded pre-transform default-general contribution",
+  "imported": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json",
+  "native_consumer": "definition_connector_default_name",
+  "independent_selector_controls": 36,
+  "native_source_checks": 4,
+  "matching_whole_document_models_added": 0,
+  "verification": {
+    "native_tests": 85,
+    "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-connector-default-focused.log"
+  },
+  "guards": [
+    "No end/direction/parameter/constructor/write context",
+    "No metadata, valuation, crossing, conjugation or unimplemented implied relationships",
+    "Resolve selected library Feature through shared imported endpoint contracts",
+    "Preserve graph and completeness flags"
+  ],
+  "normative_boundary": "KerML PDF page 215 Connector specialization constraints use effective connector ends and association classification. Pilot selector uses owned-end count and Structure typing. These selector controls do not qualify the complete normative constraints; no contradiction is established.",
+  "unsupported": [
+    "Connector subclasses",
+    "Complete inherited library generalizations",
+    "Full effective-end/association constraint verification",
+    "Full source-model Pilot comparison for these four native checks"
+  ]
+}

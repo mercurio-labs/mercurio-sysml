@@ -684,6 +684,9 @@ impl GestureDeriver<'_> {
                     if imports_expressible {
                         pruned.members.push(Declaration::Import(
                             mercurio_foundation::authoring::Import {
+                                members: import.members.clone(),
+                                is_expose: import.is_expose,
+                                filter: import.filter.clone(),
                                 path: import.path.clone(),
                                 comments: Vec::new(),
                                 docs: Vec::new(),
@@ -844,6 +847,7 @@ impl GestureDeriver<'_> {
         }
 
         let mut pruned = Usage {
+            annotation_targets: usage.annotation_targets.clone(),
             keyword: usage.keyword.clone(),
             name: usage.name.clone(),
             is_implicit_name: usage.is_implicit_name,

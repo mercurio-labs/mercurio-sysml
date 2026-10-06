@@ -1,0 +1,163 @@
+{
+  "scope": "G03 focused declaration, ownership, embedded-text and invariant-result preservation; full support remains open",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "native_checks": {
+    "textual-focused-tests": 5,
+    "textual-candidate-tests": 112,
+    "textual-foundation-lexer": 14,
+    "textual-foundation-authoring": 47
+  },
+  "corpus_compilation": {
+    "passed": 310,
+    "failed": 0,
+    "sha256": "7900501ebe0dfbec9f7fab3659f80fa6e13fd28fb71ecb6c6ed36f1ec8c7c81b"
+  },
+  "original_sample_verification": {
+    "metaclass_repairs": 2,
+    "representation_language_body_owner_matches": 4,
+    "artifact": "textual-declarations-repairs.json",
+    "provenance": {
+      "scope": "Two original G03 samples with original support contexts; focused comparison only",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+      "helper_class_sha256": "f537b8afce2535738b561fb779c970b4ed8a812e6a05a62f1898a1c94d17296c",
+      "comparator_sha256": "6f8abd0ecb88ab32f697fb016316b8242f6fd088b68bf021ed17b5fbcc7331c9",
+      "groups": [
+        {
+          "id": "87b28b080d1d",
+          "pilot_export_sha256": "f12cf35fda37a4fa84efd964b2c0c9cb6cd0c81a56c406abb88ed29cae402e6f",
+          "sources": {
+            "kerml/src/examples/Simple Tests/ArgumentResolution.kerml": "ef41aea0c874d82dd385268eb17c632749ad5b941155cd7b2a5ce01fc6be35a2",
+            "kerml/src/examples/Simple Tests/Associations.kerml": "7847ecc8040da796396255a14da86644ca5721833508928a7f87918d6dedfd49",
+            "kerml/src/examples/Simple Tests/Behaviors.kerml": "12bb9172091ee9691d25175059329b9f44d2ae2572aa0e10ce95b377bb09c082",
+            "kerml/src/examples/Simple Tests/Circular.kerml": "823e6b6b459cb841fa50da55b6505d8ffad2368cd3e9cb91425131e487b1762b",
+            "kerml/src/examples/Simple Tests/Classes.kerml": "ffb8a13917841c9924cbb1a6105be515ac460a8df1b8bee92bd20454af4504f4",
+            "kerml/src/examples/Simple Tests/Classifications.kerml": "f8d9b7bdcf766d6dcb9a960bc79d002e00df5bfb50579ea8c2c4ab94bca93fbd",
+            "kerml/src/examples/Simple Tests/Classifiers.kerml": "a7880ec2c57a9102880e2f8099035f94094b578c623ca1533a3b31d7a42730f8",
+            "kerml/src/examples/Simple Tests/Comments.kerml": "b1b7d95f9558bfad81b63448a5197e90b6095abf35fc7797a27555f92e9fb30d",
+            "kerml/src/examples/Simple Tests/Conjugation.kerml": "692d4259e957d263495a2196721ef2b6feb1edf77d842ffabbaf6432efeb5e97",
+            "kerml/src/examples/Simple Tests/Connectors.kerml": "368e6ee6200753e84659b229b6a0ff9a998260058c67d69eeef049731a18f84b",
+            "kerml/src/examples/Simple Tests/Dependencies.kerml": "788df85bc513418ab4c57a47c039407a263a299b62ac8f4fe08be5d75307a346",
+            "kerml/src/examples/Simple Tests/Expansion.kerml": "ad0b0c916c227753fa4473212c9ac884dbd941d882322331d70bf3b998d6106f",
+            "kerml/src/examples/Simple Tests/Expressions.kerml": "bde514f7236c6206848574ca416688c1ee34b6e12d2dc522db166b8977f8b041",
+            "kerml/src/examples/Simple Tests/FeatureChains.kerml": "c25e39f9287b0f48934106065144047ae8313ac1776680c4acc438ad202718ce",
+            "kerml/src/examples/Simple Tests/FeatureInheritance.kerml": "86b9e1e8ad5e8eacef5e5576d727c722d4414bbf38fe9181d215aff4a3ad1bbe",
+            "kerml/src/examples/Simple Tests/Features.kerml": "45adcd57a019661daa1522e8a8bc3847f99870917ce1ca04054434bd6d1509c2",
+            "kerml/src/examples/Simple Tests/Filtering.kerml": "9de3e9969a02419eee2db0f89985e86c7012f08314bba4f2db5335e7b40f131c",
+            "kerml/src/examples/Simple Tests/Imports.kerml": "fdcdc033ac07b4477d3aa00082f2bb77138bf40b533800cc68536c2f4174072e",
+            "kerml/src/examples/Simple Tests/Inheritance.kerml": "76c818ba239c56269f93565a697a4edc504c1f0e78415fb0f231bcad38b6233c",
+            "kerml/src/examples/Simple Tests/Inverses.kerml": "6ab43c8e7062cfa48a2f0f9ed54b73356098244874ac64c4c89d34f5e43101cd",
+            "kerml/src/examples/Simple Tests/MetadataTest.kerml": "a9660b8ad6ea79534a98ece570244c49d5f961c2434bab88f48e32e6d2fa359b",
+            "kerml/src/examples/Simple Tests/Redefinition.kerml": "e5f74efd661737a4564f9badc715d402d155995dd23a233a26602a6ec86f290c",
+            "kerml/src/examples/Simple Tests/Scoping.kerml": "47a68673ab45a281aefd0a971abec79901c60ae5965ccc5180e753c52fae1015",
+            "kerml/src/examples/Simple Tests/TextualRepresentation.kerml": "064456e4d6d453e04d828390ae8d886af4f36dc01eda0ed5b482f8a5be1cc1f9",
+            "kerml/src/examples/Simple Tests/Types.kerml": "842b5b8053eb80142e8e90e58d7cd5ac5df9dc1c3699ab7dff4e79f6c69198a7"
+          }
+        },
+        {
+          "id": "a01633e4052a",
+          "pilot_export_sha256": "856600807467251d07d4bcd29acb8ce83ca830b69b03015c8863a3bb44d15464",
+          "sources": {
+            "sysml/src/examples/Simple Tests/ActionTest.sysml": "5d41213f104eae1c6180257d9e2969da37e42fb90365e984b73afdadebe69abd",
+            "sysml/src/examples/Simple Tests/AliasTest.sysml": "91ce2ab7419d3e860cd6bacfa597f361833b7f11cb0736790561e50e144195fe",
+            "sysml/src/examples/Simple Tests/AllocationTest.sysml": "dadd0da31a3b5657fdfcd68ed767c541253dd457b7605f4f6484dbdc33e6eda7",
+            "sysml/src/examples/Simple Tests/AnalysisTest.sysml": "bc9ec8a433e15d77f9f1843bee23760cb5bd9dee37ed50df6f272f9ae4b5afed",
+            "sysml/src/examples/Simple Tests/AssignmentTest.sysml": "d31136487043cba6362b47f4692eff4f1a33dc536f63fde633b10d52d204987d",
+            "sysml/src/examples/Simple Tests/CalculationTest.sysml": "38af0043838d799c5abdbcaadb1c21d4d666aeda3145516f1404fdc9ba3bf814",
+            "sysml/src/examples/Simple Tests/CommentTest.sysml": "56d5b21e061fca95508dfff29fc21d445eaf973420c2690faf507f4d3376b215",
+            "sysml/src/examples/Simple Tests/ConjugationTest.sysml": "91deacf8ad3dd3abff60a5c0ac665e46ad2331f48089c0d8b767bf6b88780267",
+            "sysml/src/examples/Simple Tests/ConnectionTest.sysml": "81dea0d21c6ea696da006f2cae5f4851d7ba66cad050aab81de428cd72ac5a64",
+            "sysml/src/examples/Simple Tests/ConstraintTest.sysml": "513d1bf9ae1a503bb8e7248242fdbafc819498a0af36163de49ef772760527c6",
+            "sysml/src/examples/Simple Tests/ControlNodeTest.sysml": "b77d91adcfd9c0e079177a4b48b0c4f86ae5c094c1187a7c9d1018b62961da1d",
+            "sysml/src/examples/Simple Tests/DecisionTest.sysml": "6ef6db215306f3819224a953d580248f9fc29ef9bfbe4bd935758cdb7f9f8ddc",
+            "sysml/src/examples/Simple Tests/DefaultValueTest.sysml": "b770da8931607bd2a7c0c631fd7f4e004efe3afa1beae7951e6ded5bb4a0c61f",
+            "sysml/src/examples/Simple Tests/DependencyTest.sysml": "1b3dc22874b5ee7ef8c4e354f16fe8d188f7936fec2f33d65da9bd4743b1b250",
+            "sysml/src/examples/Simple Tests/EnumerationTest.sysml": "eb75c999469b1a0793a19741dcbb7c42a8efa6999ea30f3c2ed37e96b33effe0",
+            "sysml/src/examples/Simple Tests/FeaturePathTest.sysml": "ea0eae80b7b1dfd8f2c713b64ef3d3f68de42e1bdc54958394fa1d9463ee8ae3",
+            "sysml/src/examples/Simple Tests/ImportTest.sysml": "46dc93640f8c0ee70b8d27931b8276919fb541405df59950b8cbcf4759f7e0cc",
+            "sysml/src/examples/Simple Tests/IndividualTest.sysml": "0919b61e25d3d6d10901aa95f6b7cff5ffe19519dd911d924a080d2895a05b9c",
+            "sysml/src/examples/Simple Tests/InterfaceTest.sysml": "47dc0961bea89af17f1329453f6d612732e3389e3a9fb42632abece6d1d6e7cb",
+            "sysml/src/examples/Simple Tests/ItemTest.sysml": "70546c6377bd80e51901d16108149245d46110114e0cb837c86a17b17b180439",
+            "sysml/src/examples/Simple Tests/MetadataTest.sysml": "56c6569da41422951e371106ce52f2186d63ebedd9a5bd958d6150edb1037d16",
+            "sysml/src/examples/Simple Tests/MultiplicityTest.sysml": "44cf700ab9cee38a21000badd0d2d3517293f1067e386cbba8f4e5eb82b53109",
+            "sysml/src/examples/Simple Tests/OccurrenceTest.sysml": "1ee2616adf7f32c5f3245e98252b6af8f58255ef81a62c7ab6c2348af57fdd04",
+            "sysml/src/examples/Simple Tests/ParameterTest.sysml": "e9f7e8a9f5b486f1b2a03391d2d0b379ccbf7fe32ab4786b434d8e9966437c12",
+            "sysml/src/examples/Simple Tests/PartTest.sysml": "66ce667ad118527436537c952fb24fd5f9843005a30a8b07084974c6711da38e",
+            "sysml/src/examples/Simple Tests/RequirementTest.sysml": "8f05d2d8c8c3d1f9fa0e2886eec173b15859ff1a1992092e0dffb453a5cdff55",
+            "sysml/src/examples/Simple Tests/RootPackageTest.sysml": "082e3b068cab5aa63b4ba6e1ab4fd58dcadebc4fa327000a81cfe363dd8b2a72",
+            "sysml/src/examples/Simple Tests/StateTest.sysml": "e0b27b37b74049cd880150203de5c36e2b3b6eadb2d042965e96aa8dd7d8041a",
+            "sysml/src/examples/Simple Tests/StructuredControlTest.sysml": "6859079dc29b625b396679d76f491c942dbc480d3b2700b875cd35bde725fdc7",
+            "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml": "f50c3754f3747867c7590e730020ada778ed74d9827adca49b4f778e85b1cf83",
+            "sysml/src/examples/Simple Tests/TradeStudyTest.sysml": "8cbd294cb83db2bea01cd45d1c6c3a541bcca63385bf88e2377605e7aa14a9ca",
+            "sysml/src/examples/Simple Tests/UseCaseTest.sysml": "9b2c769c791d4ad49bd7af537e653eb2d9125bc924e47081668c9c46cfaf6a07",
+            "sysml/src/examples/Simple Tests/VariabilityTest.sysml": "ef1456b8fad56830143f14238fcab639985438d8b87756dc2b1856c2ac522d0d",
+            "sysml/src/examples/Simple Tests/VerificationTest.sysml": "4f1a1ed7e0ca76b337bee1cb40931c1a76f2b3a82f52b11e7651ca7d697e8173",
+            "sysml/src/examples/Simple Tests/ViewTest.sysml": "99127c86e2f233b2a1db04f07bf716218126eb040af05760b45c777946d1db69"
+          }
+        }
+      ]
+    }
+  },
+  "fresh_pilot_controls": {
+    "primary": "../../../crates/mercurio-tools/corpus/release-2026-08/textual-pilot-results.json",
+    "positive_files": 2,
+    "syntax_negative_files": 3,
+    "non_boolean_invariant_result": "Pilot accepts with validateBindingConnectorTypeConformance warning; full diagnostic parity assigned to G09",
+    "escaped_language": {
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "export_sha256": "91d0dca2b1e777343e08b886e4e4af8e04d2cd4694b5f934f4c0f37f3fe6116d",
+      "fixture_sha256": "841836fded8916bf9b648df79cb8f60ee937743f0c4f1bf1e1525c94710e3a21",
+      "cases": [
+        {
+          "relative_path": "textual-escaped.sysml",
+          "status": "ok",
+          "validation_ms": 63.3951,
+          "diagnostics": []
+        }
+      ],
+      "properties": {
+        "body": "keep \"quoted\" and \\\\ literal ",
+        "language": "a\"b\\c\n"
+      }
+    }
+  },
+  "source_lock": {
+    "scope": "G03 source/fixtures and two debug tools, not a full-release source lock",
+    "sources": {
+      "crates/mercurio-sysml/src/parser.rs": "55df8c8e83dcea07c62694802bbcdb9c45e065005f3b8eb227ebd5f56c02658e",
+      "crates/mercurio-sysml/src/parser/textual_representation.rs": "56de3bb74b411482bcf724d26a4d0de13683dc86d9c4f5c3c9f199a93c67bc5e",
+      "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs": "493e89b1a29dfce3853e9f5b0241f1ba37826fbf25d20f5e0e1bb0e5ee647bf1",
+      "crates/mercurio-sysml/src/kerml/parser.rs": "86aa3574a7fcfc72bb894aa7547aeb289dcb39f70ff66e095ed8c51733b9265f",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "11ae0c15de9c7d79c32490ef33d6ab83c46ab41d2047403d4a8e55e3e7a88dac",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/textual_declarations.rs": "c2752c049f3f23dd5294ba529033ac905c7ea541dd052b517e08fdc535980bcb",
+      "crates/mercurio-sysml/resources/kernel/kerml-constructs.overlay.json": "87c3ca03e76f3b95eaefb711b619adf333c6d048b3ec80ccf1be70efd5eae19a",
+      "crates/mercurio-sysml/resources/kernel/kerml-constructs.seed.json": "42bf60fb736a473fbaaace492501abdbc7cb1027d3f1f966c5bd518253e5ec99",
+      "crates/mercurio-sysml/resources/kernel/kerml-mappings.overlay.json": "ad896757c3483af22b28a38f0c65c8bc89906c592578bc817bbdb0acf0331695",
+      "crates/mercurio-sysml/resources/kernel/kerml-lowering.overlay.json": "bec882ecee97ba004510ae1ac29f96252f591f2680d0c1f413212077344cad70",
+      "crates/mercurio-sysml/resources/kernel/textual-declarations.overlay.json": "42e5947c2a233eaef8a8c63fb80192432c876939c498af3a83d01e39cc9c9a78",
+      "../mercurio-foundation/crates/mercurio-foundation/src/modules/authoring/authoring.rs": "0da53d84b2d430483726ed126b5b5c054433b05fcd6d4181a2b5f7bed06237ab",
+      "../mercurio-foundation/crates/mercurio-foundation/src/modules/language_contracts/lexer.rs": "86821310391f4f98f6497874586f1a5ed4d8ae2db1cf0d2c112096ba7ce1e885",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-escaped.sysml": "841836fded8916bf9b648df79cb8f60ee937743f0c4f1bf1e1525c94710e3a21",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-invariants.kerml": "8d48d3fdc5fd6e5b4fc0a995039b9e07b7d84892ee5950183a4bc4cd260571f8",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-missing-body.kerml": "148a0e5240ede3a336e044258d9205ed7f62910bd8baee8f2f6c29942c61540e",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-missing-language.kerml": "b71c463b627ee0d1586a01cfbfd1847a3e108ff85cebdaa730fb1581590933d6",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-pilot-results.json": "0e95a1dc26b368ba28914b14ce60b85f593d25e101e577827999db892b3b8faf",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-representations.sysml": "df1015cce783165f6d3482afbb6380af0b5c6936458ebb8abf37736efbd09cc5",
+      "crates/mercurio-tools/corpus/release-2026-08/textual-unquoted-language.sysml": "5ec329dfa50a386c2477265aaffbf18a379a6f56031e70ae138ddd36abc140e8",
+      "crates/mercurio-tools/corpus/release-2026-08/invariant-invalid-result.kerml": "c7126248181ed58fb41fcfb708ab765afa1559eb6eea688a03514be4c164a355"
+    },
+    "binaries": {
+      "target/debug/audit_release_compile.exe": "4a7300b266247eefe9c3a872fb38db8f2a8e25aad4824ff1de5138fe83a4a3fc",
+      "target/debug/compare_pilot_semantics.exe": "6f8abd0ecb88ab32f697fb016316b8242f6fd088b68bf021ed17b5fbcc7331c9"
+    }
+  },
+  "generated_constructs_check": "passed",
+  "remaining_obligations": [
+    "G04 declared names/directions and derived flags before M1",
+    "G08 complete nested expression graphs, return parameters, FeatureValue and implicit binding objects; G03 retains expression IR and a result root/membership",
+    "G09 type/conformance warning parity, including invariant-invalid-result.kerml",
+    "M1 full unit/WASM, corpus graph comparisons and timing assessment remain pending"
+  ],
+  "full_comparison_run": false,
+  "benchmark_run": false
+}

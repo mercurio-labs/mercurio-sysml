@@ -1,9 +1,14 @@
+mod connectors;
+mod relationships;
+mod crossing_features;
+
 use mercurio_foundation::language_contracts::ast::{
-    AliasDecl, CommentNote, Declaration, GenericDefinitionDecl, GenericUsageDecl, ImportDecl,
-    PackageDecl, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
+    AliasDecl, CommentNote, Declaration, Expr, GenericDefinitionDecl, GenericUsageDecl,
+    MultiplicityRange, PackageDecl, ParsedModule as SysmlModule, QualifiedName, SourceSpan,
 };
 use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
-use mercurio_foundation::language_contracts::lexer::{Token, TokenKind, lex};
+use mercurio_foundation::language_contracts::lexer::{Token, TokenKind};
+use crate::xtext_terminal::lex;
 
 pub fn parse_kerml(input: &str) -> Result<SysmlModule, Diagnostic> {
     let tokens = lex(input)?;
@@ -14,11 +19,38 @@ pub fn parse(input: &str) -> Result<SysmlModule, Diagnostic> {
     parse_kerml(input)
 }
 
+/// Continue a shared alias/import header with KerML's own body productions.
+/// Both token ownership and cursor are restored even when parsing fails.
+pub(crate) fn parse_relationship_body_declarations(
+    tokens: &mut Vec<Token>, index: &mut usize,
+) -> Result<(Vec<Declaration>, Token), Diagnostic> {
+    let mut parser = Parser::new(std::mem::take(tokens));
+    parser.index = *index;
+    parser.reject_opaque_relationship_members = true;
+    let result = (|| {
+        parser.expect(TokenKind::LBrace, "expected relationship body")?;
+        let mut members = Vec::new();
+        while !matches!(parser.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+            let Some(member) = parser.parse_declaration()? else { break; };
+            if !crate::namespace_grammar::permits_relationship_member(true, &member) {
+                return Err(Diagnostic::new("expected an owned element or annotation in KerML relationship body", Some(crate::parser::declaration_span(&member).clone())));
+            }
+            members.push(member);
+        }
+        let end = parser.expect(TokenKind::RBrace, "expected `}` to close relationship body")?;
+        Ok((members, end))
+    })();
+    *index = parser.index;
+    *tokens = parser.tokens;
+    result
+}
+
 struct Parser {
     tokens: Vec<Token>,
     index: usize,
     pending_docs: Vec<String>,
     pending_comments: Vec<CommentNote>,
+    reject_opaque_relationship_members: bool,
 }
 
 impl Parser {
@@ -28,6 +60,7 @@ impl Parser {
             index: 0,
             pending_docs: Vec::new(),
             pending_comments: Vec::new(),
+            reject_opaque_relationship_members: false,
         }
     }
 
@@ -95,19 +128,70 @@ impl Parser {
     fn parse_declaration_inner(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         self.collect_docs();
         let docs = std::mem::take(&mut self.pending_docs);
-        let metadata_prefixes = self.parse_metadata_prefixes();
+        let annotation_start = self.current().span.clone();
+        let metadata_prefixes = self.parse_metadata_prefixes()?;
+        let modifier_start = self.index;
         let modifiers = self.parse_modifiers();
-        let metadata_prefixes_after_modifiers = self.parse_metadata_prefixes();
-        self.skip_multiplicity();
-        match self.peek_kind().clone() {
-            TokenKind::Package => Ok(Some(Declaration::Package(self.parse_package(docs)?))),
-            TokenKind::Import => Ok(Some(Declaration::Import(self.parse_import(docs)?))),
-            TokenKind::Identifier(value) if value == "alias" => {
-                Ok(Some(Declaration::Alias(self.parse_alias(docs)?)))
+        let metadata_prefixes_after_modifiers = self.parse_metadata_prefixes()?;
+        let prefixes = metadata_prefixes.iter().chain(&metadata_prefixes_after_modifiers).cloned().collect::<Vec<_>>();
+        if modifiers.iter().any(|modifier| modifier == "end") {
+            if let Some(feature) = self.parse_crossing_end_feature(modifier_start, docs.clone())? {
+                let declaration = Declaration::GenericUsage(feature);
+                return Ok(Some(if prefixes.is_empty() { declaration } else {
+                    crate::parser::attach_metadata_prefixes(declaration, &annotation_start, &prefixes)
+                }));
             }
-            TokenKind::Identifier(value) if is_definition_keyword(&value) => Ok(Some(
-                Declaration::GenericDefinition(self.parse_classifier(docs)?),
+        }
+        self.skip_multiplicity();
+        let declaration = if matches!(self.peek_kind(), TokenKind::Package) {
+            self.parse_package(docs, modifiers).map(Declaration::Package).map(Some)
+        } else if matches!(self.peek_kind(), TokenKind::Identifier(value) if is_definition_keyword(value)) {
+            self.parse_classifier(docs, modifiers).map(Declaration::GenericDefinition).map(Some)
+        } else {
+            self.parse_non_classifier_declaration(docs, modifiers, !prefixes.is_empty())
+        }?;
+        Ok(declaration.map(|declaration| if prefixes.is_empty() { declaration } else {
+            crate::parser::attach_metadata_prefixes(declaration, &annotation_start, &prefixes)
+        }))
+    }
+
+    // Keep the large leaf-declaration dispatcher out of recursive namespace/classifier frames.
+    #[inline(never)]
+    fn parse_non_classifier_declaration(
+        &mut self, docs: Vec<String>, modifiers: Vec<String>, has_metadata_prefixes: bool,
+    ) -> Result<Option<Declaration>, Diagnostic> {
+        match self.peek_kind().clone() {
+            TokenKind::BlockDoc(_) => Ok(Some(crate::parser::parse_bare_comment(&self.tokens, &mut self.index, docs, modifiers, true)?)),
+            TokenKind::At => Ok(Some(Declaration::GenericUsage(self.parse_metadata(docs, modifiers)?))),
+            TokenKind::Identifier(value) if value == "metadata" =>
+                Ok(Some(Declaration::GenericUsage(self.parse_metadata(docs, modifiers)?))),
+            TokenKind::Import => Ok(Some(Declaration::Import(crate::parser::parse_import_declaration(&mut self.tokens, &mut self.index, docs, modifiers)?))),
+            TokenKind::Identifier(value) if value == "alias" => {
+                Ok(Some(Declaration::Alias(self.parse_alias(docs, modifiers)?)))
+            }
+            TokenKind::Identifier(value) if value == "multiplicity" => Ok(Some(
+                Declaration::GenericUsage(self.parse_multiplicity_subset(docs, modifiers)?),
             )),
+            TokenKind::Identifier(value) if value == "flow"
+                || (value == "succession" && matches!(self.next_kind(), Some(TokenKind::Identifier(next)) if next == "flow")) => Ok(Some(
+                Declaration::GenericUsage(self.parse_bare_flow(docs, modifiers)?),
+            )),
+            TokenKind::Identifier(value) if matches!(value.as_str(), "connector" | "binding" | "succession") => {
+                Ok(Some(Declaration::GenericUsage(self.parse_connector(docs, modifiers)?)))
+            }
+            TokenKind::Identifier(value) if matches!(value.as_str(),
+                "specialization" | "subtype" | "subclassifier" | "typing" | "subset"
+                | "redefinition" | "conjugation" | "conjugate" | "inverting" | "inverse"
+                | "featuring" | "dependency" | "disjoining" | "disjoint") => Ok(Some(
+                    Declaration::GenericUsage(self.parse_relationship(docs, modifiers)?),
+                )),
+            TokenKind::Identifier(value) if value == "rep" || value == "language" => {
+                let start = self.current().clone();
+                self.advance();
+                crate::parser::textual_representation::parse(
+                    &mut self.tokens, &mut self.index, start, docs, modifiers, true,
+                ).map(|usage| Some(Declaration::GenericUsage(usage)))
+            }
             TokenKind::Identifier(value)
                 if value == "feature" && matches!(self.next_kind(), Some(TokenKind::Def)) =>
             {
@@ -115,15 +199,13 @@ impl Parser {
                     self.parse_feature_definition(docs)?,
                 )))
             }
-            TokenKind::Identifier(value) if value == "feature" => Ok(Some(
+            TokenKind::Identifier(value) if matches!(value.as_str(), "feature" | "step" | "expr" | "bool" | "inv") => Ok(Some(
                 Declaration::GenericUsage(self.parse_feature_with_modifiers(docs, modifiers)?),
             )),
-            TokenKind::Identifier(value)
-                if value == "comment" || value == "locale" || value == "doc" =>
-            {
-                Ok(Some(Declaration::GenericUsage(
-                    self.parse_opaque_declaration(docs, modifiers)?,
-                )))
+            TokenKind::Identifier(value) if value == "comment" || value == "locale" || value == "doc" => {
+                crate::parser::parse_comment_declaration(
+                    &mut self.tokens, &mut self.index, docs, modifiers,
+                ).map(|usage| Some(Declaration::GenericUsage(usage)))
             }
             TokenKind::Identifier(value)
                 if !modifiers.is_empty() || self.starts_unprefixed_feature(&value) =>
@@ -132,13 +214,18 @@ impl Parser {
                     self.parse_unprefixed_feature(docs, modifiers)?,
                 )))
             }
+            TokenKind::Colon | TokenKind::Specializes | TokenKind::Redefines => Ok(Some(
+                Declaration::GenericUsage(self.parse_unprefixed_feature(docs, modifiers)?),
+            )),
+            TokenKind::Semicolon | TokenKind::LBrace if modifiers.iter().any(|m| m == "return") => Ok(Some(
+                Declaration::GenericUsage(self.parse_unprefixed_feature(docs, modifiers)?),
+            )),
             TokenKind::Eof => Ok(None),
-            TokenKind::Identifier(_) | TokenKind::Specializes | TokenKind::Redefines => Ok(Some(
+            TokenKind::Identifier(_) => Ok(Some(
                 Declaration::GenericUsage(self.parse_opaque_declaration(docs, modifiers)?),
             )),
             TokenKind::LBrace | TokenKind::Semicolon
-                if !metadata_prefixes.is_empty()
-                    || !metadata_prefixes_after_modifiers.is_empty() =>
+                if has_metadata_prefixes =>
             {
                 Ok(Some(Declaration::GenericUsage(
                     self.parse_opaque_declaration(docs, modifiers)?,
@@ -151,7 +238,93 @@ impl Parser {
         }
     }
 
-    fn parse_package(&mut self, docs: Vec<String>) -> Result<PackageDecl, Diagnostic> {
+    // KerML.xtext MetadataFeatureDeclaration: optional identification/colon,
+    // required metaclass typing, optional annotations, then MetadataBody.
+    fn parse_metadata(
+        &mut self,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+    ) -> Result<GenericUsageDecl, Diagnostic> {
+        let start = self.current().clone();
+        self.advance();
+        let first = if matches!(self.peek_kind(), TokenKind::Colon) {
+            None
+        } else {
+            Some(self.parse_qualified_name()?)
+        };
+        let (name, ty, is_implicit_name) = if matches!(self.peek_kind(), TokenKind::Colon)
+            && !matches!(self.next_kind(), Some(TokenKind::Equals))
+        {
+            self.advance();
+            let ty = self.parse_qualified_name()?;
+            (
+                first
+                    .as_ref()
+                    .map(QualifiedName::as_dot_string)
+                    .unwrap_or_else(|| {
+                        format!(
+                            "metadata_{}_{}",
+                            start.span.start_line, start.span.start_col
+                        )
+                    }),
+                ty,
+                first.is_none(),
+            )
+        } else {
+            let ty = first.ok_or_else(|| self.error_here("expected metadata type"))?;
+            (
+                format!(
+                    "metadata_{}_{}",
+                    start.span.start_line, start.span.start_col
+                ),
+                ty,
+                true,
+            )
+        };
+        let reference_target = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "about")
+        {
+            self.advance();
+            Some(self.parse_qualified_name()?)
+        } else {
+            None
+        };
+        let mut body_members = Vec::new();
+        let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
+            self.advance();
+            while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                if let Some(member) = self.parse_declaration()? {
+                    body_members.push(member);
+                }
+            }
+            self.expect(TokenKind::RBrace, "expected `}` after metadata body")?
+        } else {
+            self.expect(TokenKind::Semicolon, "expected metadata body or `;`")?
+        };
+        Ok(GenericUsageDecl {
+        annotation_targets: Vec::new(),
+            keyword: "metadata".to_string(),
+            name,
+            is_implicit_name,
+            ty: Some(ty),
+            reference_target,
+            allocation_source: None,
+            allocation_target: None,
+            metadata_properties: Default::default(),
+            multiplicity: None,
+            expression: None,
+            additional_types: Vec::new(),
+            specializes: Vec::new(),
+            subsets: Vec::new(),
+            redefines: Vec::new(),
+            body_members,
+            comments: Vec::new(),
+            docs,
+            modifiers,
+            span: merge_span(&start.span, &end.span),
+        })
+    }
+
+    fn parse_package(&mut self, docs: Vec<String>, modifiers: Vec<String>) -> Result<PackageDecl, Diagnostic> {
         let start = self.expect(TokenKind::Package, "expected `package`")?;
         let name = self.parse_qualified_name()?;
         let _specializes = self.parse_optional_specializations()?;
@@ -164,7 +337,7 @@ impl Parser {
                 definitions: Vec::new(),
                 comments: Vec::new(),
                 docs,
-                modifiers: Vec::new(),
+                modifiers,
                 span: merge_span(&start.span, &end.span),
             });
         }
@@ -190,64 +363,239 @@ impl Parser {
             definitions: Vec::new(),
             comments: Vec::new(),
             docs,
-            modifiers: Vec::new(),
+            modifiers,
             span: merge_span(&start.span, &end.span),
         })
     }
 
-    fn parse_import(&mut self, docs: Vec<String>) -> Result<ImportDecl, Diagnostic> {
-        let start = self.expect(TokenKind::Import, "expected `import`")?;
-        let path = self.parse_import_path()?;
-        let end = if matches!(self.peek_kind(), TokenKind::Semicolon) {
-            self.expect(TokenKind::Semicolon, "expected `;` after import")?
-        } else {
-            self.consume_declaration_tail()
-        };
-        Ok(ImportDecl {
-            path,
-            // KerML has `import` but no `expose`; `expose` is a SysML view
-            // construct (save-as-view SV-1).
-            is_expose: false,
-            filter: None,
-            comments: Vec::new(),
-            docs,
-            modifiers: Vec::new(),
-            span: merge_span(&start.span, &end.span),
-        })
+    fn parse_alias(&mut self, docs: Vec<String>, modifiers: Vec<String>) -> Result<AliasDecl, Diagnostic> {
+        crate::parser::parse_alias_declaration(&mut self.tokens, &mut self.index, docs, modifiers)
     }
 
-    fn parse_alias(&mut self, docs: Vec<String>) -> Result<AliasDecl, Diagnostic> {
-        let start = self.expect_identifier_named("alias", "expected `alias`")?;
-        let name = self.expect_identifier("expected alias name")?;
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "for") {
+    // KerML.xtext Flow/SuccessionFlow with the empty and FlowEnd endpoint
+    // arms, literal ValuePart, and the typed PayloadFeature arm.
+    fn parse_bare_flow(&mut self, docs: Vec<String>, modifiers: Vec<String>) -> Result<GenericUsageDecl, Diagnostic> {
+        let start = self.current().clone();
+        let succession = matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "succession");
+        if succession {
             self.advance();
-        } else {
-            self.expect(TokenKind::Equals, "expected `=` after alias name")?;
         }
-        let target = self.parse_qualified_name()?;
-        let end = self.expect(TokenKind::Semicolon, "expected `;` after alias")?;
-        Ok(AliasDecl {
-            name,
-            target,
-            comments: Vec::new(),
-            docs,
-            modifiers: Vec::new(),
+        self.expect_identifier_named("flow", "expected `flow`")?;
+        let mut modifiers = modifiers;
+        if matches!(self.peek_kind(), TokenKind::LAngle) {
+            self.advance();
+            let short = self.expect_identifier("expected flow short name")?;
+            self.expect(TokenKind::RAngle, "expected `>` after flow short name")?;
+            modifiers.push(format!("short_name={short}"));
+        }
+        let all = matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "all");
+        if all { self.advance(); modifiers.push("is_sufficient".into()); }
+        let mut endpoints = None;
+        if all {
+            let source = self.parse_relationship_operand()?;
+            self.expect_identifier_named("to", "expected `to` between Flow ends")?;
+            let target = self.parse_relationship_operand()?;
+            endpoints = Some((source, target));
+        } else if !matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "from" || word == "of") {
+            let saved = self.index;
+            if let Ok(source) = self.parse_relationship_operand() {
+                if matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "to") {
+                    self.advance();
+                    let target = self.parse_relationship_operand()?;
+                    endpoints = Some((source, target));
+                }
+            }
+            if endpoints.is_none() { self.index = saved; }
+        }
+        let explicit_name = if endpoints.is_none() && matches!(self.peek_kind(), TokenKind::Identifier(word)
+            if !matches!(word.as_str(), "of" | "from" | "to" | "all" | "default")) {
+            Some(self.expect_identifier("expected flow name")?)
+        } else { None };
+        let expression = if all || endpoints.is_some() { None }
+            else { self.parse_feature_initializer(&mut modifiers)? };
+        let mut metadata_properties: std::collections::BTreeMap<String, String> = Default::default();
+        if !all && endpoints.is_none() && matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "of") {
+            self.advance();
+            let mut leading_bounds = self.parse_optional_multiplicity()?;
+            let mut payload_name = None;
+            if leading_bounds.is_none() && matches!(self.peek_kind(), TokenKind::Identifier(_))
+                && matches!(self.next_kind(), Some(TokenKind::LBracket)) {
+                let saved = self.index;
+                let candidate_name = self.expect_identifier("expected payload feature name")?;
+                let candidate_bounds = self.parse_optional_multiplicity()?;
+                if matches!(self.peek_kind(), TokenKind::Colon) {
+                    payload_name = Some(candidate_name);
+                    leading_bounds = candidate_bounds;
+                } else { self.index = saved; }
+            }
+            if payload_name.is_none() && matches!(self.peek_kind(), TokenKind::Identifier(_))
+                && matches!(self.next_kind(), Some(TokenKind::Colon)) {
+                payload_name = Some(self.expect_identifier("expected payload feature name")?);
+            }
+            if matches!(self.peek_kind(), TokenKind::Colon) { self.advance(); }
+            else if payload_name.is_some() {
+                return Err(self.error_here("expected `:` after payload feature name"));
+            }
+            let payload_type = self.parse_qualified_name()?;
+            let trailing_bounds = self.parse_optional_multiplicity()?;
+            if leading_bounds.is_some() && trailing_bounds.is_some() {
+                return Err(self.error_here("PayloadFeature may own only one multiplicity"));
+            }
+            metadata_properties.insert("__flow_payload_type".into(),
+                serde_json::to_string(&payload_type).expect("QualifiedName serializes"));
+            if let Some(name) = payload_name {
+                metadata_properties.insert("__flow_payload_name".into(), name);
+            }
+            let bounds_first = leading_bounds.is_some();
+            if let Some(bounds) = leading_bounds.or(trailing_bounds) {
+                let references = multiplicity_bound_references(&bounds)?;
+                metadata_properties.insert("__flow_payload_bounds".into(), bounds.raw);
+                metadata_properties.insert("__flow_payload_references".into(),
+                    serde_json::to_string(&references).expect("QualifiedName serializes"));
+                metadata_properties.insert("__flow_payload_bounds_first".into(),
+                    bounds_first.to_string());
+            }
+        }
+        if endpoints.is_none() && matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "from") {
+            self.advance();
+            let source = self.parse_relationship_operand()?;
+            self.expect_identifier_named("to", "expected `to` between Flow ends")?;
+            let target = self.parse_relationship_operand()?;
+            endpoints = Some((source, target));
+        }
+        if let Some((source, target)) = endpoints {
+            crate::language_frontend::lowering::relationship_declarations::store(
+                &mut metadata_properties,
+                &crate::language_frontend::lowering::relationship_declarations::Endpoints {
+                    sources: vec![source], targets: vec![target],
+                }, &start.span,
+            )?;
+        }
+        if !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::LBrace) {
+            return Err(self.error_here("remaining Flow payload and feature forms are not implemented"));
+        }
+        let mut body_members = Vec::new();
+        let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
+            self.advance();
+            while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                let Some(member) = self.parse_declaration()? else { break };
+                body_members.push(member);
+            }
+            self.expect(TokenKind::RBrace, "expected `}` after flow body")?
+        } else {
+            self.expect(TokenKind::Semicolon, "expected flow body or `;`")?
+        };
+        Ok(GenericUsageDecl {
+            annotation_targets: Vec::new(),
+            keyword: if succession { "kerml-succession-flow" } else { "kerml-flow" }.into(),
+            name: explicit_name.clone().unwrap_or_else(|| format!("flow_{}_{}", start.span.start_line, start.span.start_col)),
+            is_implicit_name: explicit_name.is_none(), ty: None, reference_target: None,
+            allocation_source: None, allocation_target: None, metadata_properties,
+            multiplicity: None, expression, additional_types: Vec::new(),
+            specializes: Vec::new(), subsets: Vec::new(), redefines: Vec::new(),
+            body_members, comments: Vec::new(), docs, modifiers,
             span: merge_span(&start.span, &end.span),
         })
     }
 
-    fn parse_classifier(&mut self, docs: Vec<String>) -> Result<GenericDefinitionDecl, Diagnostic> {
+    // KerML.xtext MultiplicitySubset and the literal-bound MultiplicityRange arm.
+    fn parse_multiplicity_subset(&mut self, docs: Vec<String>, mut modifiers: Vec<String>) -> Result<GenericUsageDecl, Diagnostic> {
+        let start = self.expect_identifier_named("multiplicity", "expected `multiplicity`")?;
+        if matches!(self.peek_kind(), TokenKind::LAngle) {
+            self.advance();
+            let short = self.expect_identifier("expected multiplicity short name")?;
+            self.expect(TokenKind::RAngle, "expected `>` after short name")?;
+            modifiers.push(format!("short_name={short}"));
+        }
+        let explicit_name = if matches!(self.peek_kind(), TokenKind::Identifier(word) if word != "subsets") {
+            Some(self.expect_identifier("expected multiplicity name")?)
+        } else { None };
+        let (keyword, subsets, metadata_properties) = if matches!(self.peek_kind(), TokenKind::LBracket) {
+            let bounds = self.parse_optional_multiplicity()?.expect("opening bracket checked");
+            let references = multiplicity_bound_references(&bounds)?;
+            let mut metadata = std::collections::BTreeMap::new();
+            metadata.insert("__multiplicity_range_bounds".into(), bounds.raw);
+            metadata.insert("__multiplicity_range_references".into(),
+                serde_json::to_string(&references).expect("QualifiedName serializes"));
+            ("multiplicity-range".to_string(), Vec::new(), metadata)
+        } else {
+            if matches!(self.peek_kind(), TokenKind::Specializes) {
+                self.advance();
+            } else if matches!(self.peek_kind(), TokenKind::Identifier(word) if word == "subsets") {
+                self.advance();
+            } else {
+                return Err(self.error_here("expected `subsets`, `:>`, or multiplicity bounds"));
+            }
+            let operand = self.parse_relationship_operand()?;
+            if operand.steps.len() > 1 {
+                let mut metadata = std::collections::BTreeMap::new();
+                crate::language_frontend::lowering::relationship_declarations::store(
+                    &mut metadata,
+                    &crate::language_frontend::lowering::relationship_declarations::Endpoints {
+                        sources: Vec::new(), targets: vec![operand],
+                    },
+                    &start.span,
+                )?;
+                ("multiplicity".to_string(), Vec::new(), metadata)
+            } else {
+                ("multiplicity".to_string(), operand.steps, Default::default())
+            }
+        };
+        let mut body_members = Vec::new();
+        let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
+            self.advance();
+            while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                let Some(member) = self.parse_declaration()? else { break };
+                body_members.push(member);
+            }
+            self.expect(TokenKind::RBrace, "expected `}` after multiplicity body")?
+        } else {
+            self.expect(TokenKind::Semicolon, "expected multiplicity body or `;`")?
+        };
+        Ok(GenericUsageDecl {
+            annotation_targets: Vec::new(), keyword,
+            name: explicit_name.clone().unwrap_or_else(|| format!("multiplicity_{}_{}", start.span.start_line, start.span.start_col)),
+            is_implicit_name: explicit_name.is_none(), ty: None, reference_target: None,
+            allocation_source: None, allocation_target: None, metadata_properties,
+            multiplicity: None, expression: None, additional_types: Vec::new(),
+            specializes: Vec::new(), subsets, redefines: Vec::new(),
+            body_members, comments: Vec::new(), docs, modifiers,
+            span: merge_span(&start.span, &end.span),
+        })
+    }
+
+    fn parse_classifier(
+        &mut self,
+        docs: Vec<String>,
+        mut modifiers: Vec<String>,
+    ) -> Result<GenericDefinitionDecl, Diagnostic> {
+        modifiers.push("definition_keyword_complete".into());
         let start = self.expect_identifier_token("expected classifier keyword")?;
-        let keyword = token_identifier(&start).to_string();
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if is_definition_keyword(value))
+        let mut keyword = token_identifier(&start).to_string();
+        if keyword == "assoc"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "struct")
         {
             self.advance();
+            keyword = "assoc-struct".to_string();
         }
-        self.skip_angle_metadata();
-        self.parse_modifiers();
-        let name = self.expect_identifier("expected classifier name")?;
-        self.skip_multiplicity();
-        let specializes = self.parse_classifier_relations()?;
+        modifiers.extend(self.parse_modifiers());
+        let name = if keyword == "namespace"
+            && matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::LBrace)
+        {
+            modifiers.push("anonymous_namespace".into());
+            format!("namespace_{}_{}", start.span.start_line, start.span.start_col)
+        } else {
+            let (consumed, name, short) = crate::xtext_fragment::definition_identification(true, &self.tokens[self.index..])?;
+            self.index += consumed;
+            if let Some(short) = short { modifiers.push(format!("short_name={short}")); }
+            name
+        };
+        let specializes = if keyword == "namespace" {
+            Vec::new()
+        } else {
+            self.skip_multiplicity();
+            self.parse_classifier_relations()?
+        };
 
         let mut members = Vec::new();
         let end = match self.peek_kind() {
@@ -256,6 +604,7 @@ impl Parser {
             TokenKind::LBrace => {
                 self.advance();
                 while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                    if self.try_parse_classifier_result(&keyword, &mut members)? { break; }
                     let Some(declaration) = self.parse_declaration()? else {
                         break;
                     };
@@ -273,9 +622,49 @@ impl Parser {
             members,
             comments: Vec::new(),
             docs,
-            modifiers: Vec::new(),
+            modifiers,
             span: merge_span(&start.span, &end.span),
         })
+    }
+
+    #[inline(never)]
+    fn try_parse_classifier_result(
+        &mut self, keyword: &str, members: &mut Vec<Declaration>,
+    ) -> Result<bool, Diagnostic> {
+        if matches!(
+            keyword,
+            "function" | "predicate" | "expression" | "bool"
+        ) {
+            if let Ok((expression, consumed)) =
+                crate::parser::parse_expression_prefix(&self.tokens[self.index..])
+            {
+                if matches!(
+                    self.tokens.get(self.index + consumed).map(|t| &t.kind),
+                    Some(TokenKind::RBrace)
+                ) {
+                    let span = merge_span(
+                        &self.current().span,
+                        &self.tokens[self.index + consumed - 1].span,
+                    );
+                    self.index += consumed;
+                    if let Some(Declaration::GenericUsage(result)) = members.iter_mut().find(|member| matches!(member, Declaration::GenericUsage(usage) if usage.modifiers.iter().any(|m| m == "return"))) {
+                        if result.expression.is_some() { return Err(self.error_here("function has both a return initializer and a result expression")); }
+                        result.expression = Some(expression);
+                    } else {
+                        members.push(Declaration::GenericUsage(GenericUsageDecl {
+                annotation_targets: Vec::new(),
+                            keyword: "feature".to_string(), name: "result".to_string(), is_implicit_name: true,
+                            ty: None, reference_target: None, allocation_source: None, allocation_target: None,
+                            metadata_properties: Default::default(), multiplicity: None, expression: Some(expression),
+                            additional_types: Vec::new(), specializes: Vec::new(), subsets: Vec::new(), redefines: Vec::new(),
+                            body_members: Vec::new(), comments: Vec::new(), docs: Vec::new(), modifiers: vec!["return".to_string()], span,
+                        }));
+                    }
+                    return Ok(true);
+                }
+            }
+        }
+        Ok(false)
     }
 
     fn parse_feature_definition(
@@ -324,40 +713,80 @@ impl Parser {
         docs: Vec<String>,
         modifiers: Vec<String>,
     ) -> Result<GenericUsageDecl, Diagnostic> {
-        let start = self.expect_identifier_named("feature", "expected `feature`")?;
-        let mut name = if matches!(
-            self.peek_kind(),
-            TokenKind::Colon | TokenKind::Specializes | TokenKind::Redefines
-        ) {
-            format!("feature_{}_{}", start.span.start_line, start.span.start_col)
-        } else {
-            self.expect_identifier("expected feature name")?
-        };
-        if is_relation_keyword_name(&name) {
-            if let TokenKind::Identifier(value) = self.peek_kind().clone() {
-                name = value;
-                self.advance();
-            }
+        let start = self.expect_identifier_token("expected feature keyword")?;
+        let keyword = token_identifier(&start).to_string();
+        let mut modifiers = modifiers;
+        if keyword == "inv" && matches!(self.peek_kind(), TokenKind::Identifier(s) if s == "true" || s == "false") {
+            if matches!(self.peek_kind(), TokenKind::Identifier(s) if s == "false") { modifiers.push("is_negated".into()); }
+            self.advance();
         }
-        self.skip_multiplicity();
+        self.parse_feature_declaration(start, keyword, docs, modifiers)
+    }
+
+    fn parse_feature_declaration(
+        &mut self,
+        start: Token,
+        keyword: String,
+        docs: Vec<String>,
+        mut modifiers: Vec<String>,
+    ) -> Result<GenericUsageDecl, Diagnostic> {
+        if matches!(self.peek_kind(), TokenKind::LAngle) {
+            self.advance();
+            let short_name = self.expect_identifier("expected short name")?;
+            self.expect(TokenKind::RAngle, "expected `>` after short name")?;
+            modifiers.push(format!("short_name={short_name}"));
+        }
+        modifiers.extend(self.parse_modifiers());
+        let explicit_name = if matches!(self.peek_kind(), TokenKind::Identifier(value) if !is_relation_keyword_name(value))
+        {
+            Some(self.expect_identifier("expected feature name")?)
+        } else {
+            None
+        };
+        let mut relations = self.parse_optional_feature_relations()?;
+        let name = explicit_name
+            .clone()
+            .or_else(|| {
+                relations
+                    .redefines
+                    .first()
+                    .and_then(|n| n.segments.last().cloned())
+            })
+            .unwrap_or_else(|| {
+                format!("feature_{}_{}", start.span.start_line, start.span.start_col)
+            });
+        let is_implicit_name = explicit_name.is_none();
+        let mut multiplicity = self.parse_optional_multiplicity()?;
         let mut additional_types = Vec::new();
-        let ty = if matches!(self.peek_kind(), TokenKind::Colon) {
+        let ty = if matches!(self.peek_kind(), TokenKind::Colon)
+            && !matches!(self.next_kind(), Some(TokenKind::Equals))
+        {
             self.advance();
             let ty = self.parse_qualified_name()?;
-            self.skip_multiplicity();
+            multiplicity = self.parse_optional_multiplicity()?.or(multiplicity);
             while matches!(self.peek_kind(), TokenKind::Comma) {
                 self.advance();
                 additional_types.push(self.parse_qualified_name()?);
-                self.skip_multiplicity();
+                multiplicity = self.parse_optional_multiplicity()?.or(multiplicity);
             }
             Some(ty)
         } else {
             None
         };
-        let relations = self.parse_optional_feature_relations()?;
-        if matches!(self.peek_kind(), TokenKind::Equals) {
-            self.skip_expression_tail();
-        } else {
+        modifiers.extend(self.parse_modifiers());
+        let trailing_relations = self.parse_optional_feature_relations()?;
+        relations.specializes.extend(trailing_relations.specializes);
+        relations.subsets.extend(trailing_relations.subsets);
+        relations.redefines.extend(trailing_relations.redefines);
+        if trailing_relations.references.is_some() {
+            if relations.references.is_some() {
+                return Err(self.error_here("a feature cannot own two reference subsettings"));
+            }
+            relations.references = trailing_relations.references;
+        }
+        modifiers.extend(self.parse_modifiers());
+        let mut expression = self.parse_feature_initializer(&mut modifiers)?;
+        if expression.is_none() {
             self.skip_feature_tail();
         }
 
@@ -368,6 +797,26 @@ impl Parser {
             TokenKind::LBrace => {
                 self.advance();
                 while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                    if matches!(keyword.as_str(), "expr" | "bool" | "inv") {
+                        if let Ok((result, consumed)) =
+                            crate::parser::parse_expression_prefix(&self.tokens[self.index..])
+                        {
+                            if matches!(
+                                self.tokens.get(self.index + consumed).map(|t| &t.kind),
+                                Some(TokenKind::RBrace)
+                            ) {
+                                if expression.is_some() {
+                                    return Err(self.error_here(
+                                        "expression has both an initializer and a result body",
+                                    ));
+                                }
+                                modifiers.push("expression_is_result".into());
+                                expression = Some(result);
+                                self.index += consumed;
+                                break;
+                            }
+                        }
+                    }
                     let Some(declaration) = self.parse_declaration()? else {
                         break;
                     };
@@ -379,16 +828,17 @@ impl Parser {
         };
 
         Ok(GenericUsageDecl {
-            keyword: "feature".to_string(),
+        annotation_targets: Vec::new(),
+            keyword,
             name,
-            is_implicit_name: false,
+            is_implicit_name,
             ty,
-            reference_target: None,
+            reference_target: relations.references,
             allocation_source: None,
             allocation_target: None,
             metadata_properties: Default::default(),
-            multiplicity: None,
-            expression: None,
+            multiplicity,
+            expression,
             additional_types,
             specializes: relations.specializes,
             subsets: relations.subsets,
@@ -406,94 +856,7 @@ impl Parser {
         docs: Vec<String>,
         modifiers: Vec<String>,
     ) -> Result<GenericUsageDecl, Diagnostic> {
-        let start = self.current().clone();
-        self.skip_multiplicity();
-        self.skip_angle_metadata();
-        let mut name = if matches!(
-            self.peek_kind(),
-            TokenKind::Colon | TokenKind::Specializes | TokenKind::Redefines
-        ) {
-            format!("feature_{}_{}", start.span.start_line, start.span.start_col)
-        } else {
-            self.expect_identifier("expected feature name")?
-        };
-        self.skip_multiplicity();
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "feature") {
-            self.advance();
-            name = if matches!(
-                self.peek_kind(),
-                TokenKind::Colon | TokenKind::Specializes | TokenKind::Redefines
-            ) {
-                format!("feature_{}_{}", start.span.start_line, start.span.start_col)
-            } else {
-                self.expect_identifier("expected feature name")?
-            };
-        }
-        if is_relation_keyword_name(&name) {
-            if let TokenKind::Identifier(value) = self.peek_kind().clone() {
-                name = value;
-                self.advance();
-            }
-        }
-        let mut additional_types = Vec::new();
-        let ty = if matches!(self.peek_kind(), TokenKind::Colon) {
-            self.advance();
-            let ty = self.parse_qualified_name()?;
-            self.skip_multiplicity();
-            while matches!(self.peek_kind(), TokenKind::Comma) {
-                self.advance();
-                additional_types.push(self.parse_qualified_name()?);
-                self.skip_multiplicity();
-            }
-            Some(ty)
-        } else {
-            None
-        };
-        let relations = self.parse_optional_feature_relations()?;
-        if matches!(self.peek_kind(), TokenKind::Equals) {
-            self.skip_expression_tail();
-        } else {
-            self.skip_feature_tail();
-        }
-
-        let mut body_members = Vec::new();
-        let end = match self.peek_kind() {
-            TokenKind::Semicolon => self.expect(TokenKind::Semicolon, "expected `;`")?,
-            TokenKind::RBrace => self.current().clone(),
-            TokenKind::LBrace => {
-                self.advance();
-                while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
-                    let Some(declaration) = self.parse_declaration()? else {
-                        break;
-                    };
-                    body_members.push(declaration);
-                }
-                self.expect(TokenKind::RBrace, "expected `}` to close feature")?
-            }
-            _ => return Err(self.error_here("expected `;` or `{` after feature declaration")),
-        };
-
-        Ok(GenericUsageDecl {
-            keyword: "feature".to_string(),
-            name,
-            is_implicit_name: false,
-            ty,
-            reference_target: None,
-            allocation_source: None,
-            allocation_target: None,
-            metadata_properties: Default::default(),
-            multiplicity: None,
-            expression: None,
-            additional_types,
-            specializes: relations.specializes,
-            subsets: relations.subsets,
-            redefines: relations.redefines,
-            body_members,
-            comments: Vec::new(),
-            docs,
-            modifiers,
-            span: merge_span(&start.span, &end.span),
-        })
+        self.parse_feature_declaration(self.current().clone(), "feature".into(), docs, modifiers)
     }
 
     fn parse_opaque_declaration(
@@ -501,6 +864,9 @@ impl Parser {
         docs: Vec<String>,
         modifiers: Vec<String>,
     ) -> Result<GenericUsageDecl, Diagnostic> {
+        if self.reject_opaque_relationship_members {
+            return Err(self.error_here("unsupported KerML relationship-body declaration"));
+        }
         let start = self.current().clone();
         let keyword = match self.peek_kind().clone() {
             TokenKind::Identifier(value) => {
@@ -518,19 +884,27 @@ impl Parser {
             _ => "declaration".to_string(),
         };
         self.skip_angle_metadata();
-        let name = match self.peek_kind().clone() {
-            TokenKind::Identifier(value) => {
-                self.advance();
-                value
+        // These relationship forms start with an operand, not an Identification.
+        // Until their relationship lowering is complete, never index that operand
+        // as a new feature that shadows the actual referenced declaration.
+        let is_implicit_name = matches!(keyword.as_str(),
+            "subtype" | "subclassifier" | "typing" | "subset" | "redefinition"
+                | "conjugate" | "disjoint" | "inverse");
+        let name = if is_implicit_name {
+            format!("{keyword}_{}_{}", start.span.start_line, start.span.start_col)
+        } else {
+            match self.peek_kind().clone() {
+                TokenKind::Identifier(value) => { self.advance(); value }
+                _ => keyword.clone(),
             }
-            _ => keyword.clone(),
         };
 
         let end = self.consume_declaration_tail();
         Ok(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword,
             name,
-            is_implicit_name: false,
+            is_implicit_name,
             ty: None,
             reference_target: None,
             allocation_source: None,
@@ -569,6 +943,12 @@ impl Parser {
         let mut specializes = Vec::new();
         loop {
             match self.peek_kind().clone() {
+                TokenKind::Tilde => {
+                    // Symbolic spelling of the existing conjugates clause.
+                    // Relationship-object lowering remains a separate gap.
+                    self.advance();
+                    let _ = self.parse_relation_targets()?;
+                }
                 TokenKind::Specializes => {
                     self.advance();
                     specializes.extend(self.parse_relation_targets()?);
@@ -640,7 +1020,18 @@ impl Parser {
                 }
                 TokenKind::Identifier(value) if value == "references" => {
                     self.advance();
-                    let _ = self.parse_relation_targets()?;
+                    if relations.references.is_some() {
+                        return Err(self.error_here("a feature cannot own two reference subsettings"));
+                    }
+                    relations.references = Some(self.parse_qualified_name()?);
+                }
+                TokenKind::ScopeSep if matches!(self.next_kind(), Some(TokenKind::RAngle)) => {
+                    self.advance();
+                    self.advance();
+                    if relations.references.is_some() {
+                        return Err(self.error_here("a feature cannot own two reference subsettings"));
+                    }
+                    relations.references = Some(self.parse_qualified_name()?);
                 }
                 TokenKind::Identifier(value) if value == "featured" => {
                     self.advance();
@@ -676,22 +1067,6 @@ impl Parser {
         Ok(targets)
     }
 
-    fn parse_import_path(&mut self) -> Result<QualifiedName, Diagnostic> {
-        let first = self.expect_identifier_token("expected import path")?;
-        let mut segments = vec![token_identifier(&first).to_string()];
-        let mut end = first.span.clone();
-        while matches!(self.peek_kind(), TokenKind::ScopeSep | TokenKind::Dot) {
-            self.advance();
-            let next = self.expect_path_segment("expected import path segment", true)?;
-            segments.push(token_path_segment(&next).to_string());
-            end = next.span.clone();
-        }
-        Ok(QualifiedName {
-            segments,
-            span: merge_span(&first.span, &end),
-        })
-    }
-
     fn parse_qualified_name(&mut self) -> Result<QualifiedName, Diagnostic> {
         let first = self.expect_name_token("expected name")?;
         let mut segments = vec![token_name(&first).to_string()];
@@ -721,19 +1096,15 @@ impl Parser {
         modifiers
     }
 
-    fn parse_metadata_prefixes(&mut self) -> Vec<String> {
+    fn parse_metadata_prefixes(&mut self) -> Result<Vec<String>, Diagnostic> {
         let mut prefixes = Vec::new();
-        while matches!(self.peek_kind(), TokenKind::At | TokenKind::Hash) {
+        while matches!(self.peek_kind(), TokenKind::Hash) {
             self.advance();
-            prefixes.push(match self.peek_kind().clone() {
-                TokenKind::Identifier(value) | TokenKind::String(value) => {
-                    self.advance();
-                    value
-                }
-                _ => "metadata".to_string(),
-            });
+            let (consumed, name) = crate::xtext_fragment::qualified_name(&self.tokens[self.index..], true)?;
+            self.index += consumed;
+            prefixes.push(name.as_colon_string());
         }
-        prefixes
+        Ok(prefixes)
     }
 
     fn starts_unprefixed_feature(&self, value: &str) -> bool {
@@ -764,44 +1135,45 @@ impl Parser {
         }
     }
 
-    fn skip_expression_tail(&mut self) {
-        if !matches!(self.peek_kind(), TokenKind::Equals) {
-            return;
+    fn parse_optional_multiplicity(&mut self) -> Result<Option<MultiplicityRange>, Diagnostic> {
+        if !matches!(self.peek_kind(), TokenKind::LBracket) {
+            return Ok(None);
         }
-        let mut brace_depth = 0usize;
-        let mut paren_depth = 0usize;
-        let mut bracket_depth = 0usize;
-        let mut angle_depth = 0usize;
-        while !matches!(self.peek_kind(), TokenKind::Eof) {
-            match self.peek_kind() {
-                TokenKind::Semicolon
-                    if brace_depth == 0
-                        && paren_depth == 0
-                        && bracket_depth == 0
-                        && angle_depth == 0 =>
-                {
-                    break;
-                }
-                TokenKind::RBrace
-                    if brace_depth == 0
-                        && paren_depth == 0
-                        && bracket_depth == 0
-                        && angle_depth == 0 =>
-                {
-                    break;
-                }
-                TokenKind::LBrace => brace_depth += 1,
-                TokenKind::RBrace => brace_depth = brace_depth.saturating_sub(1),
-                TokenKind::LParen => paren_depth += 1,
-                TokenKind::RParen => paren_depth = paren_depth.saturating_sub(1),
-                TokenKind::LBracket => bracket_depth += 1,
-                TokenKind::RBracket => bracket_depth = bracket_depth.saturating_sub(1),
-                TokenKind::LAngle => angle_depth += 1,
-                TokenKind::RAngle => angle_depth = angle_depth.saturating_sub(1),
-                _ => {}
-            }
+        let (range, consumed) =
+            crate::parser::parse_multiplicity_prefix(&self.tokens[self.index..])?;
+        self.index += consumed;
+        Ok(Some(range))
+    }
+
+    fn parse_feature_initializer(
+        &mut self,
+        modifiers: &mut Vec<String>,
+    ) -> Result<Option<Expr>, Diagnostic> {
+        let is_default =
+            matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "default");
+        if is_default {
             self.advance();
         }
+        let is_initial = matches!(self.peek_kind(), TokenKind::Colon)
+            && matches!(self.next_kind(), Some(TokenKind::Equals));
+        if is_initial {
+            self.advance();
+        }
+        if matches!(self.peek_kind(), TokenKind::Equals) {
+            self.advance();
+        } else if !is_default {
+            return Ok(None);
+        }
+        let (expression, consumed) =
+            crate::parser::parse_expression_prefix(&self.tokens[self.index..])?;
+        self.index += consumed;
+        if is_default {
+            modifiers.push("feature_value_is_default".to_string());
+        }
+        if is_initial {
+            modifiers.push("feature_value_is_initial".to_string());
+        }
+        Ok(Some(expression))
     }
 
     fn skip_feature_tail(&mut self) {
@@ -960,23 +1332,6 @@ impl Parser {
         }
     }
 
-    fn expect_path_segment(
-        &mut self,
-        message: &str,
-        allow_wildcards: bool,
-    ) -> Result<Token, Diagnostic> {
-        let token = self.current().clone();
-        match &token.kind {
-            TokenKind::Identifier(_) | TokenKind::Star | TokenKind::DoubleStar
-                if allow_wildcards || matches!(token.kind, TokenKind::Identifier(_)) =>
-            {
-                self.advance();
-                Ok(token)
-            }
-            _ => Err(Diagnostic::new(message, Some(token.span))),
-        }
-    }
-
     fn expect(&mut self, kind: TokenKind, message: &str) -> Result<Token, Diagnostic> {
         let token = self.current().clone();
         if std::mem::discriminant(&token.kind) == std::mem::discriminant(&kind) {
@@ -1016,9 +1371,33 @@ impl Parser {
 
 #[derive(Debug, Default)]
 struct FeatureRelations {
+    references: Option<QualifiedName>,
     specializes: Vec<QualifiedName>,
     subsets: Vec<QualifiedName>,
     redefines: Vec<QualifiedName>,
+}
+
+fn multiplicity_bound_references(bounds: &MultiplicityRange) -> Result<Vec<Option<QualifiedName>>, Diagnostic> {
+    let valid_integer = |text: &str| !text.is_empty() && text.bytes().all(|byte| byte.is_ascii_digit());
+    let parts = crate::parser::split_multiplicity_bound_text(&bounds.raw);
+    if !(1..=2).contains(&parts.len()) || parts.iter().any(|part| part.is_empty()) {
+        return Err(Diagnostic::new("invalid MultiplicityRange bounds", Some(bounds.span.clone())));
+    }
+    parts.iter().map(|part| {
+        if valid_integer(part) || *part == "*" || matches!(*part, "true" | "false")
+            || (part.as_bytes().first().is_some_and(u8::is_ascii_digit)
+                && part.parse::<f64>().is_ok())
+            || (part.starts_with('"') && serde_json::from_str::<String>(part).is_ok()) {
+            return Ok(None);
+        }
+        let mut parser = Parser::new(lex(part)?);
+        let mut name = parser.parse_qualified_name()?;
+        if !matches!(parser.peek_kind(), TokenKind::Eof) {
+            return Err(Diagnostic::new("unsupported MultiplicityRange bound expression", Some(bounds.span.clone())));
+        }
+        name.span = bounds.span.clone();
+        Ok(Some(name))
+    }).collect()
 }
 
 fn token_identifier(token: &Token) -> &str {
@@ -1036,19 +1415,11 @@ fn token_name(token: &Token) -> &str {
     }
 }
 
-fn token_path_segment(token: &Token) -> &str {
-    match &token.kind {
-        TokenKind::Identifier(value) => value,
-        TokenKind::Star => "*",
-        TokenKind::DoubleStar => "**",
-        _ => unreachable!(),
-    }
-}
-
 fn is_definition_keyword(value: &str) -> bool {
     matches!(
         value,
-        "classifier"
+        "type"
+            | "classifier"
             | "class"
             | "struct"
             | "datatype"
@@ -1059,28 +1430,27 @@ fn is_definition_keyword(value: &str) -> bool {
             | "association"
             | "assoc"
             | "metaclass"
+            | "namespace"
     )
 }
 
 fn is_modifier(value: &str) -> bool {
+    if crate::enum_grammar::declaration_modifier(true, value) { return true; }
     matches!(
         value,
-        "public"
-            | "private"
-            | "protected"
-            | "library"
+        "library"
+            | "standard"
             | "abstract"
             | "all"
             | "composite"
             | "portion"
             | "const"
+            | "var"
             | "member"
             | "readonly"
             | "derived"
             | "end"
-            | "in"
-            | "out"
-            | "inout"
+            | "return"
             | "ref"
             | "nonunique"
             | "ordered"
@@ -1090,7 +1460,7 @@ fn is_modifier(value: &str) -> bool {
 fn is_relation_keyword_name(value: &str) -> bool {
     matches!(
         value,
-        "redefines" | "subsets" | "specializes" | "typed" | "featured"
+        "redefines" | "subsets" | "specializes" | "typed" | "featured" | "references"
     )
 }
 

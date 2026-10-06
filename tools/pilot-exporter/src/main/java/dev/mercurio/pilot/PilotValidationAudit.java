@@ -30,10 +30,10 @@ public final class PilotValidationAudit {
         SysMLInteractive interactive = SysMLInteractive.getInstance();
         interactive.getLibraryIndexCache().setIndexDisabled(true);
         interactive.setVerbose(false);
-        interactive.loadLibrary(args[0]);
+        interactive.loadLibrary(Path.of(args[0]).toAbsolutePath().normalize().toString().replace('\\', '/'));
         Map<String, Resource> resources = new LinkedHashMap<>();
         for (String path : expected) {
-            Resource resource = interactive.readResource(path);
+            Resource resource = interactive.readResource(Path.of(path).toAbsolutePath().normalize().toString().replace('\\', '/'));
             interactive.addInputResource(resource);
             resources.put(path, resource);
         }

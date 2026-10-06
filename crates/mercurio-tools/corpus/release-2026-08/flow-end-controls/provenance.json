@@ -1,0 +1,19 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "runtime_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "class_sha256": "f537b8afce2535738b561fb779c970b4ed8a812e6a05a62f1898a1c94d17296c",
+  "fixtures": {
+    "abstract-zero.sysml": "7204ccaa89063195e844ec48f26dae71c731b4461c527ec449ba0a4430714a93",
+    "binary.sysml": "2c1bc4e95759fdf7172390ef63448cda1944e51fd8bf94dd8f5334a779ad7ba1",
+    "three-ends.sysml": "c22b61ce679da9ce0770d607417f69c5c95d49373a1f15581e9ae8bc77b2e2f9"
+  },
+  "results_sha256": "d0cc72408a29493bac5c1e6e21ad084ee2624cb8328d9f4eaa7ec8e26ab00f2a",
+  "validation": "CheckMode.ALL; target is last input in each case; identical support sets with distinct package names",
+  "library_index_mode": "published-default",
+  "retained_invalid_harness_runs": [
+    "../target/support-2026-08/flow-end-controls-contaminated-batch.json",
+    "../target/support-2026-08/flow-end-controls-wrong-target-assessment.json"
+  ],
+  "harness_repair": "The initial manifest mistakenly selected the final negative file for every case; target-last ordering was corrected. All 310 release corpus entries already satisfy target-last ordering."
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "files": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ImplicitGeneralizationMap.java": "c6a8b87a69b6eccb4432e60bb73ef87f01c29dd6ed90dc44b7edf91e03748507",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectionUsageAdapter.java": "ae04c81d4500004602adbd21f1bed37b8843a04234491bc4d53c18ab1c762fb6",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TransitionUsageAdapter.java": "140a5071f65026d845b760b11cf849c0e194e34bbf60595a8d7a6237df7fb3b2",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectorAdapter.java": "04fe78842cc8a1f2713fe90acfdc46357db67a5bc81c84e556cd992862c5c3ab",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/BindingConnectorImpl.java": "662da6c0d7b6e08d162cfe819c444396c873817c23f4d877ec27f1c178ea3f68",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/SuccessionImpl.java": "f10727212b93ae0f43b651ab34eed728b77964f66e140377f359c564372560f7",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "030619d07a3ae32e946920a40274bef61536259fa80d0667a783869cb71099fc",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/BindingConnectorAsUsageAdapter.java": "ab4345814037fe49c1d087006b0729f652598666036dc661da292fa01d7ca4bd",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectorAsUsageAdapter.java": "3dc1aa8720a797d55caa143016c736b11bc5d9254032caade9ef47db6c8d453b"
+    },
+    "extractor": "generate_release_conditional_usage_defaults.py"
+  },
+  "usage_defaults": {
+    "ConnectionUsage": {
+      "base": "Connections::connections",
+      "binary": "Connections::binaryConnections"
+    },
+    "TransitionUsage": {
+      "base": "Actions::transitionActions",
+      "stateTransition": "States::StateAction::stateTransitions",
+      "actionTransition": "Actions::Action::decisionTransitions"
+    },
+    "Connector": {
+      "base": "Links::links",
+      "binary": "Links::binaryLinks",
+      "object": "Objects::linkObjects",
+      "binaryObject": "Objects::binaryLinkObjects"
+    },
+    "BindingConnector": {
+      "base": "Links::links",
+      "binary": "Links::selfLinks",
+      "object": "Objects::linkObjects",
+      "binaryObject": "Links::selfLinks"
+    },
+    "Succession": {
+      "base": "Links::links",
+      "binary": "Occurrences::happensBeforeLinks",
+      "object": "Objects::linkObjects",
+      "binaryObject": "Occurrences::happensBeforeLinks"
+    },
+    "BindingConnectorAsUsage": {
+      "base": "Links::selfLinks",
+      "object": "Objects::objects",
+      "occurrence": "Occurrences::occurrences",
+      "portion": "Occurrences::Occurrence::portions",
+      "dataValue": "Base::dataValues"
+    },
+    "SuccessionAsUsage": {
+      "base": "Occurrences::happensBeforeLinks",
+      "binary": "Occurrences::happensBeforeLinks",
+      "binaryObject": "Occurrences::happensBeforeLinks"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "dev.mercurio.usage-provider-evidence.v1",
+  "scope": "Detached/package-owned exact Usage and untyped BindingConnectorAsUsage generalization defaults; non-transition ReferenceUsage fallback to the shared end and parameter/result redefinition strategies",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "imported_sha256": "4963c8b1ccce611deee5baab1586888d5c14f7463227d2092cb533898bfb1f4e",
+  "selector_observations": 128,
+  "native_generalization_contexts": 72,
+  "typed_binding_contexts_explicitly_rejected": 56,
+  "reference_end_controls": 33,
+  "matching_source_models": 4,
+  "source_nodes": 117,
+  "source_reference_observations": 278,
+  "matching_source_models_total": 148,
+  "basic_ordinary_binding_models": "26/30",
+  "native_consumers": [
+    "definition_usage_default_name",
+    "definition_general_type_inputs",
+    "definition_no_additional_members",
+    "definition_redefinition_strategy_kind",
+    "definition_positional_ends",
+    "definition_positional_parameters"
+  ],
+  "implementation_boundary": "Resolved javac selectors, contribution ordering, empty added-member condition, inherited dispatch and non-transition fallback feed generated native programs. Ownership, generalization, library lookup and positional algorithms are explicit handwritten Rust over imported contracts. No runtime Java or synthetic completeness flags. Factory end controls use explicitly complete owning-type inputs; source comparisons use incomplete native models.",
+  "normative_references": [
+    {
+      "document": "1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_pages": [
+        214,
+        290
+      ],
+      "constraint": "checkBindingConnectorSpecialization"
+    },
+    {
+      "document": "2a-OMG_Systems_Modeling_Language.pdf",
+      "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+      "pdf_pages": [
+        305,
+        448
+      ],
+      "constraints": [
+        "checkUsageVariationDefinitionSpecialization",
+        "checkUsageVariationUsageSpecialization",
+        "BindingConnectorAsUsage inherits BindingConnector constraints"
+      ]
+    }
+  ],
+  "normative_boundary": "The inherited Pilot selector can choose dataValues/objects/occurrences for explicitly typed BindingConnectorAsUsage instead of selfLinks. Selector agreement alone does not prove the required selfLinks specialization. Native generalization rejects these 56 contexts pending complete assessment. SysML page 448 prose spells Links:selfLink; the referenced KerML constraint/formula names Links::selfLinks. No full semantic disagreement about all Pilot generalizations is inferred from selector observations.",
+  "unsupported": [
+    "Type-owned and variant Usage defaults",
+    "End Usage multiplicity construction",
+    "Typed BindingConnectorAsUsage normative specialization",
+    "ReferenceUsage transition-link redefinition and transition/succession default contributions",
+    "SuccessionAsUsage decision/merge behavior",
+    "Complete real standard library and global resources",
+    "Complete ordinary redefinition context matrix and release qualification"
+  ],
+  "qualification": {
+    "focused_native_tests": 99,
+    "failed": 0,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-reference-parameters-focused.log",
+    "test_log_sha256": "9490ee94d220277667eda1c652141f14a5b5da305c8dbbe70718a65fc7ba4136",
+    "scope": "Full library result of 756 passing tests is prior-run evidence; not rerun. No complete sample, semantic-release or performance qualification.",
+    "tooling_tests": 95,
+    "tooling_scope": "31 feature defaults, 31 qualification certificate, 13 structural coverage, 15 strategy certificate tests, 5 native snapshot qualification tests"
+  },
+  "reference_parameter_controls": 48
+}

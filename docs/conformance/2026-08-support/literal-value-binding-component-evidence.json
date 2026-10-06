@@ -1,0 +1,157 @@
+{
+  "schema": "dev.mercurio.literal-value-binding-component-evidence.v1",
+  "status": "native_component_verified_in_bounded_typed_source_environment",
+  "qualification_certificate": false,
+  "scope": {
+    "batch": "B1",
+    "execution_revision": 4,
+    "fixed_reference_contexts": 26,
+    "complete_service_obligations_closed": 0,
+    "complete_service_obligations_required": 10,
+    "strict_families_qualified": 0,
+    "strict_families_required": 34,
+    "release_gates_qualified": 0,
+    "release_gates_required": 5
+  },
+  "native_path": [
+    "parse fresh bounded typed declarations through pinned grammar/Ecore construction and linking",
+    "complete selected cold literal/null receivers atomically",
+    "preserve default valuations without a binding",
+    "construct ordered literal/inherited-result feature chains for non-defaults",
+    "adopt chains under binding-end ReferenceSubsetting through canonical Ecore ownership",
+    "run shared fresh binding placement/default/positional-redefinition/reduction/featuring services",
+    "complete only fresh binding and end Types",
+    "closed Ecore publication checks and abstract-syntax persistence with semantic recomputation"
+  ],
+  "implementation": {
+    "handwritten_rust": "literal_value_binding transaction, stable non-typing owner/chain admission, common Feature.type/return-parameter traversal and canonical ownership. Completion and validity remain separate.",
+    "imported_consumers": "Resolved adapter default programs and Connector typing dispatch; grammar/Ecore classes, fields, defaults, containment/opposites, ordering and exact delegate contracts.",
+    "connector_typing_dispatch": "Build-time Pilot adapter reflection resolves Connector and BindingConnector getAllTypes/getTypes/getFeatureTypes to FeatureAdapter; generated admission reuses the native algorithm. A recorded dispatch alone is not support; independent native binding/chain/end typing controls execute it.",
+    "runtime": "Native Rust; Java is build-time only."
+  },
+  "controls": {
+    "admitted_literal_classes": [
+      "LiteralBoolean",
+      "LiteralInteger",
+      "LiteralRational",
+      "LiteralString",
+      "LiteralInfinity",
+      "NullExpression"
+    ],
+    "default_modes": 2,
+    "graph_order_modes": 2,
+    "native_persistence": true,
+    "atomic_negative_boundaries": [
+      "initial fixed valuation",
+      "variable owner",
+      "missing typing endpoint",
+      "missing default library",
+      "late identity collision after staged writes",
+      "multiple valuations"
+    ],
+    "independent_field_contexts": [
+      "valuation-source-00",
+      "valuation-source-01"
+    ],
+    "compared_fields": [
+      "binding attributes",
+      "binding type",
+      "result-chain type and canonical adoption",
+      "physical chain cardinality and implied flags",
+      "both binding end types before/after persistence"
+    ],
+    "full_owner_or_source_comparison": false
+  },
+  "source_environment": {
+    "fixture": "literal_value_binding_fixture in operand_construction.rs",
+    "meaning": "Fresh parsed declarations with pinned scalar ancestry and bounded Function/Links prototype shapes; no prepared completeness flags.",
+    "genuine_full_library_environment": false,
+    "supplied_objects": "Receiving Features, Function prototypes, inherited results and resources retain their original completeness and properties; only receiving containment gains a generated binding."
+  },
+  "verification": {
+    "definition_regression": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "mercurio-sysml",
+        "definition_",
+        "--lib",
+        "--",
+        "--nocapture"
+      ],
+      "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/literal-value-binding-native-regression.log",
+      "sha256": "a27ebe8498fee2044e1ceedf203e415c6011a804d1fb7cb0e8362de29175521e",
+      "passed": 397,
+      "failed": 0,
+      "other_tests_filtered": 665,
+      "test_seconds": 334.52,
+      "process_seconds": 334.781,
+      "native_inputs_unchanged_during_run": true,
+      "all_inputs": "docs/conformance/2026-08-support/definition-pipeline-evidence/literal-value-binding-native-regression-run.json",
+      "timing_kind": "regression cost, not a paired Pilot/native benchmark"
+    },
+    "new_component_tests": [
+      "language_frontend::lowering::emit::operand_construction::tests::definition_literal_value_bindings_complete_shared_transaction_and_persistence",
+      "language_frontend::lowering::emit::operand_construction::tests::definition_literal_value_bindings_match_frozen_binding_fields",
+      "language_frontend::lowering::emit::operand_construction::tests::definition_literal_value_bindings_reject_boundaries_and_late_failures_atomically"
+    ],
+    "inspection_tests": [
+      "definition_document::source_set_tests::definition_structure_inspection_matches_production_construction_and_resource_identity",
+      "definition_document::source_set_tests::definition_structure_inspection_preserves_unresolved_declaration_bodies",
+      "definition_document::source_set_tests::definition_structure_inspection_rejects_source_errors_without_partial_result"
+    ],
+    "historical_full_crate_descriptor": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-qualification.json",
+      "sha256": "721377e3f725ce8cacef288b569f8ad7cceb89c8d6fb98e849738de49e5451da",
+      "status": "stale; unchanged; filtered regression does not refresh it"
+    },
+    "audit_tool_tests": {
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "mercurio-tools",
+        "--bin",
+        "audit_release_compile",
+        "--",
+        "--nocapture"
+      ],
+      "passed": 12,
+      "failed": 0,
+      "filtered": 0,
+      "test_seconds": 3.97,
+      "process_seconds": 17.609,
+      "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/literal-value-binding-audit-tool-tests.log",
+      "sha256": "f234e8969b7f593e7db23c2cfb8a8f985c380b9360686c1e01e664c352104f55"
+    },
+    "focused_build_tools": {
+      "passed": 92,
+      "failed": 0,
+      "errors": 0,
+      "process_seconds": 23.844,
+      "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/literal-value-binding-tool-checks.log",
+      "sha256": "2a99f6ca2963f81bfc0b5bff4093d74382090ded9acf6c1508833d2cefbea2a5",
+      "meaning": "Value-service cache and controls, result valuation, strategy certificates, structural coverage, qualification acceptance, resolved Connector dispatch and genuine library result observations."
+    }
+  },
+  "remaining_required_behavior": [
+    "typed document scheduler integration for receiver/value binding lifecycle",
+    "complete unchanged real library prototype/owner lifecycle, typing, bounds and scoping dependencies",
+    "remaining expression/operator/call/chain categories and initial/variable valuations",
+    "normative default/implied/multiple-valuation branch assessment",
+    "all fixed 26 contexts through validation/publication/native persistence with full independent semantic comparison",
+    "B2-B4 connected models, all samples/families and comparable timings"
+  ],
+  "input_sha256": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "2b246a0e2925e66c638aa629d226bf8931a59e84c3f9d25f6935cc0c3cf1c0af",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "9f9eaf192ab266d911c9f16dfdbe2cbfd6ddf2e5cd0340bbe495e3c7d7aee21c",
+    "crates/mercurio-sysml/src/definition_document.rs": "5bb34efc2a3e87a8d050bfa7fb3db02eb4584b828b3dcd2a3385fdae25702c04",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "1c5a23265cd2cbfc1902e8125b90b7a7bd030c5284f790e9fc1da61d40742372",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "c531af268c2efecbfebeaa70bad37b14eaa0498b146d6ef4f8d42073fb449bac",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "b5c063cf07b2dd554fd1a27afadf8bc12fade61aa669ada945b790ee839cdfe9",
+    "tools/export_pilot_connector_defaults.py": "97dbd7e5320927fcd07679adbb569df7a485810a4283a492a86bec40ab741052",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotConnectorDefaultExporter.java": "6bca6016147da5fc7a10541b4d9f9f331698fb2b5009ace9f7c7442acd5550ef",
+    "docs/conformance/2026-08-support/value-service-literal-field-contract.json": "9a0690fcd8a4dba2654ba75d8939fe70d092c82d91ecbd6a2fa3bb926b175c69"
+  }
+}

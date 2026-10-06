@@ -1,0 +1,65 @@
+{
+  "schema": "dev.mercurio.release-type-controls.v1",
+  "cases": [
+    {
+      "relative_path": "attribute-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateAttributeUsageType_"
+    },
+    {
+      "relative_path": "attribute-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "port-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validatePortUsageType_"
+    },
+    {
+      "relative_path": "port-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "flow-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateFlowUsageType_"
+    },
+    {
+      "relative_path": "flow-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "interface-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateInterfaceUsageType_"
+    },
+    {
+      "relative_path": "interface-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "allocation-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateAllocationUsageType_"
+    },
+    {
+      "relative_path": "allocation-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    },
+    {
+      "relative_path": "state-invalid.sysml",
+      "expected_status": "error",
+      "expected_issue": "validateStateUsageType_"
+    },
+    {
+      "relative_path": "state-valid.sysml",
+      "expected_status": "ok",
+      "expected_issue": null
+    }
+  ]
+}

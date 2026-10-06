@@ -4,6 +4,7 @@
 //! recovery/reporting, compilation to KIR, and the SysML baseline library.
 
 pub mod abstract_syntax_json;
+pub mod definition_document;
 pub mod analysis;
 pub mod assessment;
 pub mod authoring;
@@ -12,9 +13,16 @@ pub mod builder;
 pub mod constraints;
 pub mod dsl;
 mod embedded_resources;
+mod enum_grammar;
+mod xtext_fragment;
+mod xtext_nfa_experiment;
 pub mod kerml;
 pub mod language_frontend;
 pub mod metamodel;
+mod namespace_grammar;
+mod xtext_assignment_contract;
+mod xtext_terminal;
+mod validation_rules;
 pub mod mutation;
 pub mod parse_session;
 pub mod parser;
@@ -26,12 +34,15 @@ pub mod session;
 pub mod simulation;
 
 pub use crate::language_frontend::SourceLanguage;
+pub use crate::language_frontend::lowering::ecore_defaults::promote_observed_library_defaults;
+pub use crate::language_frontend::lowering::ecore_model::reconcile_library_metafeatures_with_ecore;
 pub use abstract_syntax_json::{
     SYSML_JSON_EXPORTER_VERSION, SYSML_JSON_IMPORTER_VERSION, SysmlJsonExportDiagnostic,
     SysmlJsonExportError, SysmlJsonExportOptions, SysmlJsonExportReport, SysmlJsonExportSeverity,
     SysmlJsonImportDiagnostic, SysmlJsonImportError, SysmlJsonImportOptions, SysmlJsonImportReport,
     SysmlJsonImportSeverity, export_sysml_abstract_syntax_json, export_sysml_abstract_syntax_value,
     import_sysml_abstract_syntax_json, import_sysml_abstract_syntax_value,
+    sysml_json_field_registry,
     import_sysml_api_elements,
 };
 pub use analysis::{
@@ -321,7 +332,7 @@ mod tests {
     }
 
     #[test]
-    fn individual_part_compiles_to_individual_usage() {
+    fn individual_part_keeps_part_metaclass_and_flag() {
         let stdlib = load_sysml_baseline().unwrap();
         let document = compile_sysml_text(
             "package Demo { part def Printer; individual part printer : Printer; }",
@@ -333,13 +344,19 @@ mod tests {
         let printer = document
             .elements
             .iter()
-            .find(|element| element.id == "individual.Demo.printer")
+            .find(|element| {
+                element
+                    .properties
+                    .get("declared_name")
+                    .is_some_and(|value| value == "printer")
+            })
             .unwrap();
 
         assert_eq!(
             printer.properties["metatype"],
-            serde_json::json!("SysML::IndividualUsage")
+            serde_json::json!("SysML::Systems::PartUsage")
         );
+        assert_eq!(printer.properties["is_individual"], true);
         assert_eq!(
             printer.properties["type"],
             serde_json::json!("type.Demo.Printer")
@@ -559,12 +576,15 @@ mod tests {
                 .iter()
                 .find_map(|member| {
                     let definition = member.as_definition_like()?;
-                    (definition.name == name).then_some(definition.docs)
+                    (definition.name == name).then(|| definition.members.iter().filter_map(|member| {
+                        let usage = member.as_usage_like()?;
+                        (usage.keyword == "doc").then(|| usage.metadata_properties["body"].clone())
+                    }).collect::<Vec<_>>())
                 })
                 .unwrap()
         };
 
-        assert_eq!(definition_docs("A"), vec!["doc from A".to_string()]);
+        assert_eq!(definition_docs("A"), vec![" doc from A ".to_string()]);
         assert!(definition_docs("B").is_empty());
 
         let stdlib = load_sysml_baseline().unwrap();
@@ -582,23 +602,23 @@ mod tests {
         let documentation = document
             .elements
             .iter()
-            .find(|element| element.kind == "KerML::Root::Documentation")
+            .find(|element| element.kind == "SysML::Documentation")
             .unwrap();
 
         assert!(!a.properties.contains_key("doc"));
         assert!(!b.properties.contains_key("doc"));
         assert!(!a.properties.contains_key("ownedElement"));
-        assert!(!a.properties.contains_key("documentation"));
+        assert_eq!(a.properties["documentation"], serde_json::json!([documentation.id]));
         assert_eq!(
             documentation.properties["body"],
-            serde_json::json!("doc from A")
+            serde_json::json!("doc from A ")
         );
         assert_eq!(
             documentation.properties["owner"],
             serde_json::json!("type.Demo.A")
         );
-        assert!(!documentation.properties.contains_key("documentedElement"));
-        assert!(!documentation.properties.contains_key("annotatedElement"));
+        assert_eq!(documentation.properties["documented_element"], a.id);
+        assert_eq!(documentation.properties["annotated_element"], serde_json::json!([a.id]));
     }
 
     #[test]
@@ -615,14 +635,14 @@ mod tests {
             .iter()
             .find(|element| {
                 element.properties.get("metatype")
-                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    == Some(&serde_json::json!("SysML::Comment"))
                     && element.properties.get("declared_name") == Some(&serde_json::json!("cmt"))
             })
             .unwrap();
 
         assert_eq!(
             comment.properties["body"],
-            serde_json::json!("Named Comment")
+            serde_json::json!("Named Comment ")
         );
 
         let inner_comment = document
@@ -630,14 +650,14 @@ mod tests {
             .iter()
             .find(|element| {
                 element.properties.get("metatype")
-                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    == Some(&serde_json::json!("SysML::Comment"))
                     && element.properties.get("owner") == Some(&serde_json::json!("type.Demo.C"))
             })
             .unwrap();
 
         assert_eq!(
             inner_comment.properties["body"],
-            serde_json::json!("Inner Comment")
+            serde_json::json!("Inner Comment ")
         );
 
         let about_comment = document
@@ -645,8 +665,8 @@ mod tests {
             .iter()
             .find(|element| {
                 element.properties.get("metatype")
-                    == Some(&serde_json::json!("SysML::CommentUsage"))
-                    && element.properties.get("body") == Some(&serde_json::json!("About Named"))
+                    == Some(&serde_json::json!("SysML::Comment"))
+                    && element.properties.get("body") == Some(&serde_json::json!("About Named "))
             })
             .unwrap();
 
@@ -669,9 +689,9 @@ mod tests {
             .iter()
             .find(|element| {
                 element.properties.get("metatype")
-                    == Some(&serde_json::json!("SysML::CommentUsage"))
+                    == Some(&serde_json::json!("SysML::Comment"))
                     && element.properties.get("body")
-                        == Some(&serde_json::json!("About Definition"))
+                        == Some(&serde_json::json!("About Definition "))
             })
             .unwrap();
         assert_eq!(
@@ -684,8 +704,8 @@ mod tests {
             .iter()
             .find(|element| {
                 element.properties.get("metatype")
-                    == Some(&serde_json::json!("SysML::CommentUsage"))
-                    && element.properties.get("body") == Some(&serde_json::json!("About Package"))
+                    == Some(&serde_json::json!("SysML::Comment"))
+                    && element.properties.get("body") == Some(&serde_json::json!("About Package "))
             })
             .unwrap();
         assert_eq!(

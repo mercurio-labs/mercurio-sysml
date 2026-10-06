@@ -1,0 +1,105 @@
+{
+  "schema": "dev.mercurio.transition-source-evidence.v1",
+  "scope": "Bounded TransitionUsage computeSource stage over canonical ordinary membership and the five observed namespace contexts. Does not execute computeTransitionLinkConnectors or mark additional-members readiness.",
+  "inputs": {
+    "tools/run_transition_source_probe.py": "76de987484d844604751cc5a744fda4714f248e94a8f69efb8b4105aa11a9c97",
+    "tools/generate_transition_source.py": "6f0a5953ee807e3ba4d01c27b2377308cb72ab2891d4c430335ddecc7c0759e8",
+    "tools/test_transition_source.py": "7d206ae67b5bc5367842f061ddbb2573e26ef087d3e237ce017cf566d0b6db00",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTransitionSourceProbe.java": "c5480a4025ca75e30f15a8921881bb668cb96471bf9186c163874d1f8fe43c96",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStepStrategyProbe.java": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "docs/conformance/2026-08-support/transition-source-pilot-controls.json": "a723d3f247eea768edffb5964cf8d01e39920f54f811325c74502e24c9d2dcb1",
+    "docs/conformance/2026-08-support/transition-source-normative.json": "629f804f7c7a78269e9fdf095474799d0dc20fba8188e935d668ad29d91c14ce",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source.rs": "6877115a2b23e18abc2136b33d7dcdacc7c4dc9981c03558ad0993193b123637",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source_generated.rs": "424d7bfcf7ded4466a6f06230adb82c979607ec287e6d95adfb7fde71bab8593",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "63e60719c4b95d00f00145a68c89199f18d4f1952e99da8bd3b054f124a6eab4",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-native-tests.log": "016a835184ef16d9d3518299f0011293140967d0343ffa2f2ea0b3c51c5848f7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-focused-tests.log": "d85ac56dfa3f4e8f8ef20cd8a0178108f68dfb4062ba285ea8ea7498f8b2d5ee",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-generator-tests.log": "7e26d2498cb5fb78c35e0e5bb4b73254ecb045b85b89135ed0e85d9f70d14d5c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-pilot-check.log": "d746680bcdd6a28e46e48bd479001621abf1e1851b45e40e45f991af73941e4f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": "Four structured resolved javac bodies: TransitionUsageAdapter.computeSource, UsageUtil.getPreviousFeature/isMessage, FeatureUtil.isParameter. Ecore ancestry, ordered containment, scalar ranges and lower bounds remain independently imported.",
+  "generated": "Exact reviewed body fingerprint guards bounded insertion/eligibility policy; Membership factory metaclass comes from its resolved return type. This is not a general Java or Xtend translator.",
+  "handwritten_dependencies": [
+    "Canonical ordered namespace membership and owner/type projection",
+    "Alias reference, direct direction and owned Flow end projection",
+    "Previous eligible member reverse scan; parameter/transition/nonmessage connector filtering",
+    "Private atomic repair/insertion, exact source membership ordering, imported publication checks, fresh identities and persistence replay"
+  ],
+  "native_consumers": [
+    "definition_document::materialize_transition_source",
+    "definition_document::materialize_transition_sources",
+    "transition_source::previous",
+    "transition_source::append"
+  ],
+  "verification": {
+    "pilot_stage_controls": 180,
+    "matching_positive_construction_and_persisted_replay": 75,
+    "normative_null_source_rejections_with_rollback": 105,
+    "additional_intervening_member_boundary": true,
+    "duplicate_identity_snapshot_pending_field_and_batch_rollback": true,
+    "additional_members_readiness_not_promoted": true,
+    "generator_tests": 6,
+    "new_native_tests": 3,
+    "native_definition_tests": 258,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-source-native-tests.log",
+      "sha256": "016a835184ef16d9d3518299f0011293140967d0343ffa2f2ea0b3c51c5848f7",
+      "passed": 258
+    },
+    "cache_reproduced": true,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "remaining": [
+    "Whole source linker integration remains blocked on Transition provider/lifecycle",
+    "Connector transforms, featureTarget/sourceFeature semantics and actual standard-library dependencies",
+    "Contribution/inheritance and transition constraints",
+    "Global native_parser/model_construction and full enum family obligations"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "matched_whole_pilot_models": 155,
+    "certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

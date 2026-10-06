@@ -1,0 +1,86 @@
+{
+  "schema": "dev.mercurio.type-default-contributions.v1",
+  "scope": "One shared default-generalization producer for the exact imported five plain-Type and 26 Definition selector kinds; not complete Type/Definition transformation.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "7e8de063cac533297a8ee25f1c8dc04d5baff2877678e3892d33f71b586d4aab",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "bd565b5484f9635361817966ad2161f267c9463f3324c2fd4032e963e6acd3a2",
+    "crates/mercurio-sysml/src/definition_document.rs": "08b3ca393f755b2a37cd55c48ed8108f9e1f79d9ef9c35a1114e7022d5381778",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "2edc952dc77605ef4a24991e0b660f7b5bc4e75f3907a92551a69bc0de87e1ba",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-defaults.extract.json": "1f41eb4118ea044a42ed55ac60d59be3cc7ce7a93bc98a7626acbb3e094f27f0",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/default-general-pilot-controls.json": "89ff09a450fb7cc502df4b4c4015636d668deac06d5f62785a8e1f6f13e73a20",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/default_generals_generated.rs": "f2981184a5a1b98ae82ae1e1cc0100412247e7fe3292dddee745a7182290adee",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_defaults_generated.rs": "018a9a7ece7fd5a020d47b88e36bbf0c0a3fdf677b445cdff0dff737368757c7",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/implicit_reduction_generated.rs": "9198489ae46604419edb4a82782212076cf8195a7b8474d614a2bf70ff7223c2"
+  },
+  "imported_representation": "Pinned Ecore ownership, effective redefined endpoints and publication contracts; pinned Xtext grammar drives source construction. Resolved Pilot javac policy/default-map artifacts select defaults; they are implementation evidence, not normative language definitions.",
+  "native_consumer": "materialize_type_defaults selects qualified defaults for all requested owners, checks supported providers, normalizes nonself contributions and reuses immutable-snapshot reduction plus atomic canonical insertion. type_default_contribution_owners reports only this selector domain.",
+  "handwritten_dependencies": [
+    "qualified standard-library resolution",
+    "canonical stored inputs and assessed partial-default recognition",
+    "fixed-snapshot specialization reduction",
+    "transactional Ecore relationship construction"
+  ],
+  "verification": {
+    "cached_definition_controls": 196,
+    "definition_selector_kinds": 26,
+    "plain_type_selector_kinds": 5,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-type-default-transaction.log",
+      "sha256": "be2f9fef5eef3740b37e96c0d8bf2aa55ccd45737e7d6ef8373f8d7ec774495f",
+      "passed": 174
+    },
+    "audit_tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/type-default-audit-tool-tests.log",
+      "sha256": "9b758cfefb9ca156c912b4eb27fbe3881643ac98b1497619ec233bdf1e4c61ad",
+      "passed": 9
+    },
+    "contexts": [
+      "canonical relationship class and qualified general identity",
+      "196 individual/owned-end selector cases",
+      "no supplied completion flags",
+      "idempotent replay before and after persistence with reversed storage order",
+      "plain-Type self omission",
+      "late adapter/owner/prefix/identity/library/complete-input/unassessed-implied failures roll back atomically",
+      "candidate contribution status remains distinct from completion and validation"
+    ],
+    "real_library_results": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-type-default-results.jsonl",
+      "sha256": "993ad0842e4fd5517cbbfdfce52de1bebb09e68bfc20ebe359281f1a8e3958a4",
+      "applicable_type_owners": 13,
+      "inserted": 0,
+      "meaning": "Existing explicit generals cover these defaults. Features, Associations and other adapter categories were not processed."
+    },
+    "real_library_source_control": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/type-default-source-results.jsonl",
+      "sha256": "af9de12fe868d622493cd11b9ca5ad0284aab613a8ad34e3efff141dfb035cd1",
+      "inputs": {
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+        "docs/conformance/2026-08-support/definition-pipeline-evidence/type-default-source-control.kerml": "7b7b5c540d53bc79cbc386626033b8d61763b5c18db496b54c6c764630b6adfc"
+      },
+      "applicable_type_owners": 16,
+      "inserted": 2,
+      "element_count": 157,
+      "semantic_qualification": "not_assessed",
+      "independent_pilot_whole_model_comparison": "not_performed"
+    }
+  },
+  "normative_boundary": "Existing written-spec assessments remain applicable. Explicit FlowDefinition generalization/inherited-end disagreement remains rejected; individual Life selection does not establish individual multiplicity semantics. No new normative or whole-family closure is claimed.",
+  "remaining": [
+    "metadata-based defaults",
+    "conjugation and full conjugated-port transformation",
+    "other adapter contributions, including Feature/Association lifecycle",
+    "dependency scheduling beyond this bounded transaction",
+    "required-value validation and semantic legality",
+    "complete sample/Pilot comparison and comparable timing"
+  ],
+  "completion": {
+    "family_closures_added": 0,
+    "release_gate_closures_added": 0,
+    "strategy_obligation_closures_added": 0,
+    "candidate": "unpromoted",
+    "semantic_validation": "not_assessed"
+  }
+}

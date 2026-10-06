@@ -1,0 +1,132 @@
+{
+  "schema": "dev.mercurio.transition-members-evidence.v1",
+  "scope": "Both Transition additional-member connector branches through a shared source/binding transaction, on supplied complete owner/endpoints and physically completed fixture libraries. Native Transition owner/new ReferenceUsage lifecycle and production scheduler integration remain open.",
+  "inputs": {
+    "tools/run_transition_members_probe.py": "22804dea8be448a4e211c0bcb0f1980bdb3f7b560468c5c4f7d32303c3e0f5ad",
+    "tools/test_transition_members.py": "7f20bc6cbe619bb7d6c58fc770534b3aa368061cc0e1c00993930aac9991b6dd",
+    "tools/generate_transition_members.py": "bfe3159bfcad8733c9e62306290baf8ca0e9b8adbdb4d23b87714be87373fb0c",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTransitionMembersProbe.java": "34583ec91935f42ae09df634337958c61ceffa0d4cca83853d0ff868af3ba6ca",
+    "tools/generate_transition_source_queries.py": "a21dff4844dda62ffd8d19e3c49306c16e9de1de079a075ef0905cb8c7ae661d",
+    "docs/conformance/2026-08-support/transition-source-query-pilot-controls.json": "d4a44ea04a3bf30f43e8936efcb507c985724692c1849c5b093790e5ee4c82af",
+    "docs/conformance/2026-08-support/transition-members-pilot-controls.json": "202e712bbfded1f7732539a410940635fed3bd14a4abdbac4ac88515d5b4863f",
+    "docs/conformance/2026-08-support/transition-members-normative.json": "6f265e5b8da1d5b0109668c5fb00befc4571d2e67aa437c0b992ea70b6db7c37",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_members.rs": "8d17c16bbda1a2c8b1cc2f758644718ff445c6f1168bacae9433ced661f2da16",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_members_generated.rs": "2b5409fad41942a158f9e05cfb1f01a373d9bc22ac973c0c960dea67dc67cd2a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source_query.rs": "a6a8c70a7175c3afea03da5f7c5eaf6e1f2e8827a74fb38f0d99263914a0e45e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "63e60719c4b95d00f00145a68c89199f18d4f1952e99da8bd3b054f124a6eab4",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-members-native-tests.log": "9ee7d1c25107f31fe3b772d95df6d33ba34c6b1c548f46fe1b9387d2fa4292d1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-members-cache-tests.log": "ac3851b9eca4fddb2633b2804599c5b6a941fe9b233a4148755dc23a9bf55e48",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-members-pilot-check.log": "e0b5b18e3c9fb29fd55cd995092e3e1cf61432e64b1da2004911ea043120b2e1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-members-generation-check.log": "33908ba12e92ebb7d31913705862456950ed69473d325d86db429eecc0190d7b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "existing_resolved_program": "Eight full resolved source/query/producer methods guarded by generate_transition_source_queries; generated Transition/ReferenceUsage/FeatureMembership constructor identities used. Ecore contracts govern ownership, ranges and enum/direction values.",
+    "native_consumption": "Ordered source construction, existing-link suppression, optional succession-to-new-link binding and Action source-to-first-directed-parameter binding; shared context placement and fresh connector/end lifecycle."
+  },
+  "native_consumers": [
+    "transition_members::definition_materialize_transition_members",
+    "transition_source_query::source_feature_after_source_stage",
+    "definition_finish_fresh_binding",
+    "definition_ordinary_feature_inputs_with_owners",
+    "definition_general_type_inputs_evaluate"
+  ],
+  "handwritten_dependencies": [
+    "Canonical source/link/succession/parameter navigation and atomic staged graph planning",
+    "Shared binding-context, positional ends, default reduction, featuring and publication services",
+    "Fixed binary binding OwningMembership placement under explicitly complete Feature namespaces supplies containment without Feature.owningType",
+    "Completed parameter owner preflight consumes the supplied completion contract consistently with the existing parameter readiness service",
+    "Owner/endpoints and participant/selfLinks fixture library stages are supplied complete; they are not native lifecycle or actual resource qualification"
+  ],
+  "verification": {
+    "independent_pilot_controls": 24,
+    "first_call_constructed_bindings": 10,
+    "first_call_new_links": 6,
+    "completed_new_connector_and_end_types": 30,
+    "abstract_syntax_roundtrip_contexts": 24,
+    "repeated_calls_contexts": 24,
+    "source_only_repeat_creates_second_binding_cases": 2,
+    "rollback_boundaries": 7,
+    "cache_guard_tests": 7,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-members-native-tests.log",
+      "sha256": "9ee7d1c25107f31fe3b772d95df6d33ba34c6b1c548f46fe1b9387d2fa4292d1",
+      "passed": 294
+    },
+    "preexisting_completion_flags_changed": false,
+    "new_link_reference_usage_marked_complete": false,
+    "fresh_binding_completion_scope": "Only newly constructed connectors and two ends after the reviewed default/featuring/endpoint-read transaction; complete snapshots independently compared.",
+    "actual_resource_qualification": false,
+    "full_whole_model_comparison_performed": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_basis": {
+    "artifact": "docs/conformance/2026-08-support/transition-members-normative.json",
+    "clauses": [
+      "checkTransitionUsageSourceBindingConnector",
+      "checkTransitionUsageSuccessionBindingConnector"
+    ],
+    "pdf_pages": [
+      376,
+      377,
+      475
+    ],
+    "qualification": "Direct pinned normative references retained; full endpoint and Transition constraints remain required. Pilot repeat behavior is independent implementation evidence, not a normative completion rule.",
+    "disagreements": "No disagreement identified in these bounded constructor controls; historical unrelated disagreements remain open."
+  },
+  "remaining": [
+    "Native Transition owner lifecycle, ReferenceUsage transition-link contribution/featuring/variability lifecycle, and production scheduler integration",
+    "Chained basic-feature parameter contexts, payload/target semantics and complete State/Transition validation",
+    "Actual libraries, required integrated enum secondary fields and global native_parser/model_construction contracts"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

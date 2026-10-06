@@ -1,0 +1,59 @@
+{
+  "schema": "dev.mercurio.normative-plain-default-evidence.v1",
+  "specification": {
+    "release": "2026-08",
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "constraints": [
+      {
+        "name": "checkTypeSpecialization",
+        "pdf_page": 174,
+        "target": "Base::Anything"
+      },
+      {
+        "name": "checkDataTypeSpecialization",
+        "pdf_page": 206,
+        "target": "Base::DataValue"
+      },
+      {
+        "name": "checkClassSpecialization",
+        "pdf_page": 207,
+        "target": "Occurrences::Occurrence"
+      },
+      {
+        "name": "checkStructureSpecialization",
+        "pdf_page": 208,
+        "target": "Objects::Object"
+      }
+    ]
+  },
+  "import": "Actual pinned ImplicitGeneralizationMap runtime selection exports resolved defaults for Type, Classifier, Class, DataType and Structure. No Java source text matching or runtime JVM is used by native consumers.",
+  "native_consumer": "stored_plain_type_generalizations uses the generated table and the existing generated_general_types service; evaluate_plain_type_membership stages computed implied relationships privately and invokes the existing shared inheritance/union evaluator. evaluate_plain_type_membership_from_libraries resolves generated qualified defaults through stored_standard_default_bindings and shared canonical membership/name services.",
+  "handwritten_policy": "Exact supported plain metaclasses only; canonical ownership required; typed explicit library bindings; exclude self-default; explicit contributions precede computed defaults. Preserve contribution duplicates in general-type output, deduplicate final memberships through the shared service. Complete materialized Types do not add defaults. Automatic in-graph bindings select uniquely named root LibraryPackages using imported isStandard, metaclass ancestry and reciprocal ownership contracts. Public canonical membership lookup supports re-exports and effective names; missing/ambiguous roots and spelling-only identities reject.",
+  "independent_controls": "Twenty actual Pilot controls compare general-type identities and final memberships across five plain metaclasses with default-only, distinct explicit parent, repeated explicit/default target and self-default cases. Only library lookup is supplied through the upstream provider interface.",
+  "remaining_dependencies": [
+    "Automatic bindings cover canonical standard-library roots already in the closed graph. External/global resource loading remains unimplemented.",
+    "Incomplete graphs containing Annotation or MetadataFeature require semantic metadata assessment and reject conservatively.",
+    "Conditional subclass defaults, Feature defaults, conjugation and chained Feature generals remain unsupported by this bounded provider.",
+    "The existing whole-model plain evaluator requires every incomplete Type to be supported. The document scope path requires a provider only for Types reached by inheritance; inherited Features still require complete redefinitions.",
+    "The opt-in document API now resolves declared in-graph standard-library defaults. The legacy compiler and global resource provider remain unmigrated.",
+    "Complete sample, semantic and timing qualification remain pending."
+  ],
+  "no_promotion": true,
+  "native_integration_evidence": "Three focused native tests reuse the twenty Pilot semantic controls with canonical library roots, opaque IDs and reordered graphs, then check public re-exports, owned effective names, private/ambiguous/missing roots, malformed containers and ID-spelling decoys. These are native lookup integration controls, not independent qualification of upstream global lookup.",
+  "document_integration": {
+    "native_consumer": "definition_inherited_memberships -> stored_plain_type_generalizations -> explicit_recursive_inherited_memberships",
+    "scope": "Parse complete pinned KerML source, construct canonical Ecore objects, resolve source relationships transactionally, resolve required default names through standard LibraryPackages, compute general-type inputs privately and reuse native inherited membership filtering. Only reachable scope Types require providers; unrelated source Features do not trigger plain-Type dispatch. Anonymous unowned RootNamespace is transparent for library roots. No implied relationships are materialized and no isImpliedIncluded assertion is changed.",
+    "independent_matching_documents": 10,
+    "matching_scope": "All five plain metaclasses; owned/inherited/default names; forward explicit generals; diamonds; protected inherited names; public qualified names; conjugation; inherited shadowing; completed empty scope with lexical/import fallback.",
+    "evidence": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json",
+    "limitations": "Computed Feature redefinitions, conditional subtype defaults, semantic metadata, external resources and whole-language validation remain dependencies."
+  },
+  "library_provider_disagreement": {
+    "count": 2,
+    "upstream_dependency": "KerMLLibraryProvider.getElement uses the exported-object index; the alias and public re-export controls have accepted syntax but unresolved FromDefault typing targets.",
+    "native_policy": "Closed canonical graph lookup follows membership names, aliases and public re-exports, using the existing namespace service and transactional pending-field scheduler.",
+    "qualification": "Record as a provider policy disagreement, not matching Pilot evidence or a normative resolution. The written required default qualified names remain normative; equivalence of library-provider alias policy is unqualified.",
+    "test": "definition_library_provider_disagreements_remain_explicit"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "grammar": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext",
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Map pinned relationship grammar fields to KIR references. The existing generic AST metadata map carries a private serialized endpoint record through collect/resolve; it is consumed during emission and never emitted as a KIR property. Relationship identities are distinct from feature identities."
+    },
+    "metamodel": "org.omg.sysml/model/kerml.ecore#Relationship (source/target ordered unique; relatedElement union)",
+    "chain_grammar": "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext#OwnedFeatureChain,OwnedFeatureChaining"
+  },
+  "rules": {
+    "Subclassification": {
+      "source_fields": [
+        "subclassifier",
+        "specific"
+      ],
+      "target_fields": [
+        "superclassifier",
+        "general"
+      ],
+      "many": false
+    },
+    "Specialization": {
+      "source_fields": [
+        "specific"
+      ],
+      "target_fields": [
+        "general"
+      ],
+      "many": false
+    },
+    "FeatureTyping": {
+      "source_fields": [
+        "typed_feature",
+        "specific"
+      ],
+      "target_fields": [
+        "type",
+        "general"
+      ],
+      "many": false
+    },
+    "Subsetting": {
+      "source_fields": [
+        "subsetting_feature",
+        "specific"
+      ],
+      "target_fields": [
+        "subsetted_feature",
+        "general"
+      ],
+      "many": false
+    },
+    "Redefinition": {
+      "source_fields": [
+        "redefining_feature",
+        "subsetting_feature",
+        "specific"
+      ],
+      "target_fields": [
+        "redefined_feature",
+        "subsetted_feature",
+        "general"
+      ],
+      "many": false
+    },
+    "Conjugation": {
+      "source_fields": [
+        "conjugated_type"
+      ],
+      "target_fields": [
+        "original_type"
+      ],
+      "many": false
+    },
+    "FeatureInverting": {
+      "source_fields": [
+        "feature_inverted"
+      ],
+      "target_fields": [
+        "inverting_feature"
+      ],
+      "many": false
+    },
+    "TypeFeaturing": {
+      "source_fields": [
+        "feature_of_type"
+      ],
+      "target_fields": [
+        "featuring_type"
+      ],
+      "many": false
+    },
+    "Dependency": {
+      "source_fields": [
+        "client"
+      ],
+      "target_fields": [
+        "supplier"
+      ],
+      "many": true
+    },
+    "Disjoining": {
+      "source_fields": ["type_disjoined"],
+      "target_fields": ["disjoining_type"],
+      "many": false
+    }
+  }
+}

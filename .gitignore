@@ -3,3 +3,16 @@
 
 # Python maintainer tools
 __pycache__/
+
+# Historical raw runs are retained in place and recovered from the committed archives.
+/docs/conformance/2026-08-support/definition-pipeline-evidence/*
+/javac.*.args
+
+# Small directly consumed fixtures remain ordinary source files.
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/first-library-featuring-checks-run.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-result-chain-selection-registered-reference-controls.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-result-chain-selection-registered-reference-run.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-result-fresh-structure-pilot-controls.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-result-lifecycle-shared-services-pilot-controls.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-result-provider-completion-direction-controls.json
+!/docs/conformance/2026-08-support/definition-pipeline-evidence/value-service-inputs/

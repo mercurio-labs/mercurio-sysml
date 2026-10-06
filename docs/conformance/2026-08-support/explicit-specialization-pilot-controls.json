@@ -1,0 +1,370 @@
+{
+  "controls": [
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "goal"
+        ]
+      ],
+      "kind": "Feature",
+      "shape": "direct",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "Feature",
+      "shape": "chain",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "root",
+          "b"
+        ],
+        [
+          "a",
+          "goal"
+        ],
+        [
+          "b",
+          "goal"
+        ]
+      ],
+      "kind": "Feature",
+      "shape": "diamond",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "root"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "Feature",
+      "shape": "cycle",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "goal"
+        ]
+      ],
+      "kind": "ReferenceUsage",
+      "shape": "direct",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "ReferenceUsage",
+      "shape": "chain",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "root",
+          "b"
+        ],
+        [
+          "a",
+          "goal"
+        ],
+        [
+          "b",
+          "goal"
+        ]
+      ],
+      "kind": "ReferenceUsage",
+      "shape": "diamond",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "root"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "ReferenceUsage",
+      "shape": "cycle",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "goal"
+        ]
+      ],
+      "kind": "ActionUsage",
+      "shape": "direct",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "ActionUsage",
+      "shape": "chain",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "root",
+          "b"
+        ],
+        [
+          "a",
+          "goal"
+        ],
+        [
+          "b",
+          "goal"
+        ]
+      ],
+      "kind": "ActionUsage",
+      "shape": "diamond",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "root"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "ActionUsage",
+      "shape": "cycle",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "goal"
+        ]
+      ],
+      "kind": "TransitionUsage",
+      "shape": "direct",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "TransitionUsage",
+      "shape": "chain",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "root",
+          "b"
+        ],
+        [
+          "a",
+          "goal"
+        ],
+        [
+          "b",
+          "goal"
+        ]
+      ],
+      "kind": "TransitionUsage",
+      "shape": "diamond",
+      "specializes": true
+    },
+    {
+      "complete": false,
+      "edges": [
+        [
+          "root",
+          "a"
+        ],
+        [
+          "a",
+          "root"
+        ],
+        [
+          "a",
+          "goal"
+        ]
+      ],
+      "kind": "TransitionUsage",
+      "shape": "cycle",
+      "specializes": true
+    }
+  ],
+  "featuring_controls": [
+    {
+      "after": [
+        "owner"
+      ],
+      "candidate_complete": false,
+      "owner_complete": false,
+      "owner_kind": "Feature",
+      "query": [
+        "owner"
+      ],
+      "source": "standard library package Occurrences { class Occurrence; } package P;",
+      "variable": false
+    },
+    {
+      "after": [
+        "owner"
+      ],
+      "candidate_complete": false,
+      "owner_complete": false,
+      "owner_kind": "ReferenceUsage",
+      "query": [
+        "owner"
+      ],
+      "source": "standard library package Occurrences { class Occurrence; } package P;",
+      "variable": false
+    },
+    {
+      "after": [
+        "owner"
+      ],
+      "candidate_complete": false,
+      "owner_complete": false,
+      "owner_kind": "ActionUsage",
+      "query": [
+        "owner"
+      ],
+      "source": "standard library package Occurrences { class Occurrence; } package P;",
+      "variable": false
+    },
+    {
+      "after": [
+        "owner"
+      ],
+      "candidate_complete": false,
+      "owner_complete": false,
+      "owner_kind": "TransitionUsage",
+      "query": [
+        "owner"
+      ],
+      "source": "standard library package Occurrences { class Occurrence; } package P;",
+      "variable": false
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "6424bb112fa7d8a010ee1693f921043f42fc917fdedb510626329d6402373b9e",
+    "helper_sha256": "9896e366225f6af2b4ffdfd4dec32b913c5fb51b85e110c11af7573b0784505d",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "resolved_inputs_sha256": {
+      "ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+      "feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+      "featuring-queries.extract.json": "51c4b864d861a39cf6d3a6d8cc869781be2becc1be5b70c149d4e516644a3e65"
+    },
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TransitionUsageAdapter.java": "ecdad498337fa47d7b22ebff371e9107539916664bbc65422b707ebec9ad127f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java": "9c5aa069abcea042dec9997c3752b8856c27614902ac1f9705c169b0a111930a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.explicit-specialization-controls.v1",
+  "scope": "Fresh positive explicit Subsetting ancestry across four concrete Feature adapters/four graph shapes; four fresh fixed-portion ReferenceUsage featuring contexts under explicitly typed owners. No complete provider, negative Pilot query, full transformation or resource qualification."
+}

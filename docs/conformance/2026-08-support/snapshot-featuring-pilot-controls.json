@@ -1,0 +1,383 @@
+{
+  "controls": [
+    {
+      "after": [
+        "Owner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "Feature",
+      "query": [
+        "Owner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "named",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Owner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "Owner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "Feature",
+      "query": [
+        "Explicit",
+        "Owner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "named",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Owner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Nested_Inner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "Feature",
+      "query": [
+        "Nested_Inner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "nested",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Nested_Inner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "Nested_Inner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "Feature",
+      "query": [
+        "Explicit",
+        "Nested_Inner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "nested",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Nested_Inner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "Feature",
+      "query": [
+        "_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "anonymous",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "Feature",
+      "query": [
+        "Explicit",
+        "_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "anonymous",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [],
+      "direct_library": true,
+      "explicit": false,
+      "kind": "Feature",
+      "query": [
+        "snapshots"
+      ],
+      "redefined": [],
+      "shape": "occurrence",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [],
+      "direct_library": true,
+      "explicit": true,
+      "kind": "Feature",
+      "query": [
+        "Explicit",
+        "snapshots"
+      ],
+      "redefined": [],
+      "shape": "occurrence",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Owner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Owner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "named",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Owner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "Owner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Explicit",
+        "Owner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "named",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Owner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Nested_Inner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Nested_Inner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "nested",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Nested_Inner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "Nested_Inner_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Explicit",
+        "Nested_Inner_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "nested",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "Nested_Inner_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": false,
+      "kind": "ReferenceUsage",
+      "query": [
+        "_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "anonymous",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "_snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [
+        true
+      ],
+      "direct_library": false,
+      "explicit": true,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Explicit",
+        "_snapshots"
+      ],
+      "redefined": [
+        "snapshots"
+      ],
+      "shape": "anonymous",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "_snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [],
+      "direct_library": true,
+      "explicit": false,
+      "kind": "ReferenceUsage",
+      "query": [
+        "snapshots"
+      ],
+      "redefined": [],
+      "shape": "occurrence",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "snapshots",
+      "variable": true
+    },
+    {
+      "after": [
+        "Explicit",
+        "snapshots"
+      ],
+      "candidate_complete": false,
+      "context_is_owner": [],
+      "direct_library": true,
+      "explicit": true,
+      "kind": "ReferenceUsage",
+      "query": [
+        "Explicit",
+        "snapshots"
+      ],
+      "redefined": [],
+      "shape": "occurrence",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { class SelfLink; } standard library package Occurrences { class HappensLink; class Occurrence { feature snapshots; } } package P { class Owner; package Nested { class Inner; } class Explicit; }",
+      "target_name": "snapshots",
+      "variable": true
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "4692238357dc5b39e610a65447aa6f1ef689451748bc75ea4dc4614fc5f50a1e",
+    "helper_sha256": "dfac5dffecce6becaf2fcf06cd45ba5c2d424fa03ad190621294c8053c47e841",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "resolved_inputs_sha256": {
+      "ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+      "feature-redefinitions.extract.json": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+      "featuring-queries.extract.json": "51c4b864d861a39cf6d3a6d8cc869781be2becc1be5b70c149d4e516644a3e65"
+    },
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ReferenceUsageAdapter.java": "10a3a9f2ac36e2746fb054e950487dd0d402a455cc14a41a510a13f55792a8bd",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java": "9c5aa069abcea042dec9997c3752b8856c27614902ac1f9705c169b0a111930a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Feature_featuringType_SettingDelegate.java": "f5da74d330cdc5a2f1bc314575d92294994fececd328222732a055b5969e44d1",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Usage_mayTimeVary_SettingDelegate.java": "6cc960e833fcab56443e451aad58521e44b5b3b22aff378e7359790be7d104b1",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.snapshot-featuring-controls.v1",
+  "scope": "Fresh Feature/ReferenceUsage variable snapshot construction with fixture libraries, explicit featuring and name/containment shapes. ReferenceUsage is a non-end/non-composite/non-portion Class-owned FeatureMembership; no payload, succession, complete transformation or actual resource qualification."
+}

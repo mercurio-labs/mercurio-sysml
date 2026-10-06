@@ -1,0 +1,653 @@
+{
+  "controls": {
+    "initial": [
+      {
+        "class": "Package",
+        "fields": {
+          "ownedRelationship": [
+            "a",
+            "b"
+          ],
+          "owningRelationship": null
+        },
+        "id": "p"
+      },
+      {
+        "class": "Package",
+        "fields": {
+          "ownedRelationship": [
+            "c"
+          ],
+          "owningRelationship": null
+        },
+        "id": "q"
+      },
+      {
+        "class": "OwningMembership",
+        "fields": {
+          "ownedRelatedElement": [
+            "x"
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": "p",
+          "owningRelationship": null
+        },
+        "id": "a"
+      },
+      {
+        "class": "OwningMembership",
+        "fields": {
+          "ownedRelatedElement": [],
+          "ownedRelationship": [],
+          "owningRelatedElement": "p",
+          "owningRelationship": null
+        },
+        "id": "b"
+      },
+      {
+        "class": "OwningMembership",
+        "fields": {
+          "ownedRelatedElement": [],
+          "ownedRelationship": [],
+          "owningRelatedElement": "q",
+          "owningRelationship": null
+        },
+        "id": "c"
+      },
+      {
+        "class": "Class",
+        "fields": {
+          "ownedRelationship": [],
+          "owningRelationship": "a"
+        },
+        "id": "x"
+      }
+    ],
+    "steps": [
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "a"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "field": "ownedRelationship",
+        "owner": "q",
+        "recursive_destination": false,
+        "write_side": "forward"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "a"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "field": "ownedRelationship",
+        "owner": "q",
+        "recursive_destination": false,
+        "write_side": "forward"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "c"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "x",
+        "field": "ownedRelatedElement",
+        "owner": "c",
+        "recursive_destination": false,
+        "write_side": "forward"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": null,
+              "owningRelationship": "c"
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x",
+                "a"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "c"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "field": "ownedRelatedElement",
+        "owner": "c",
+        "recursive_destination": false,
+        "write_side": "forward"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "c"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "field": "ownedRelationship",
+        "owner": "p",
+        "recursive_destination": false,
+        "write_side": "inverse"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "a"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "x",
+        "field": "ownedRelatedElement",
+        "owner": "a",
+        "recursive_destination": false,
+        "write_side": "inverse"
+      },
+      {
+        "accepted": false,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b",
+                "a"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [],
+              "owningRelationship": "a"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "error": "IllegalArgumentException",
+        "field": "ownedRelationship",
+        "owner": "x",
+        "recursive_destination": true,
+        "write_side": "inverse"
+      },
+      {
+        "accepted": true,
+        "after": [
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "b"
+              ],
+              "owningRelationship": null
+            },
+            "id": "p"
+          },
+          {
+            "class": "Package",
+            "fields": {
+              "ownedRelationship": [
+                "c"
+              ],
+              "owningRelationship": null
+            },
+            "id": "q"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [
+                "x"
+              ],
+              "ownedRelationship": [],
+              "owningRelatedElement": "x",
+              "owningRelationship": null
+            },
+            "id": "a"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "p",
+              "owningRelationship": null
+            },
+            "id": "b"
+          },
+          {
+            "class": "OwningMembership",
+            "fields": {
+              "ownedRelatedElement": [],
+              "ownedRelationship": [],
+              "owningRelatedElement": "q",
+              "owningRelationship": null
+            },
+            "id": "c"
+          },
+          {
+            "class": "Class",
+            "fields": {
+              "ownedRelationship": [
+                "a"
+              ],
+              "owningRelationship": "a"
+            },
+            "id": "x"
+          }
+        ],
+        "child": "a",
+        "field": "ownedRelationship",
+        "owner": "x",
+        "recursive_destination": true,
+        "write_side": "forward"
+      }
+    ]
+  },
+  "provenance": {
+    "driver_sha256": "b903f25cf0a507c4de1a1be0025ce20eb1727299afbdad954ff6288cc086e7f1",
+    "ecore_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "helper_sha256": "11905819390a4b36742353375e53b794fed51560f7c3904a5adb26cb3aad4767",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/ElementImpl.java": "ad0bb0c6289e49e741efd8d01101bb9354f25434c9ebff7cc8d43440172360db",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/RelationshipImpl.java": "c82b9ad03941981d2dd3f5141554bba3e3f748ce4f7c99d680adffbf8088f445",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Actual EMF stored containment moves, including both write directions and cross-family reparenting. Derived values and validation beyond ownership are outside this observation."
+}

@@ -1,0 +1,110 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "583570da9883aa18e6d7eef8029f27005ec3a94793787a978e20c83c009d0bcc",
+    "timings_sha256": "e1f12b370f074eba7e04933d2914ce1d275c965631d876f19d1c2d6c964c85bf",
+    "fixtures": {
+      "requirement-constraint-controls.sysml": "47a612e25bf714c56b810796c17eea3a7263fc26e02f7ec4f5909bda6d63079f",
+      "requirement-constraint-negative.sysml": "9b21002450635f2d2b924beed7bfd81742eb5fcfde57347bbcb2162917c30730"
+    },
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350"
+  },
+  "cases": [
+    {
+      "relative_path": "requirement-constraint-controls.sysml",
+      "status": "ok",
+      "validation_ms": 582.8195,
+      "diagnostics": [
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 7
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 8
+        }
+      ]
+    },
+    {
+      "relative_path": "requirement-constraint-negative.sysml",
+      "status": "error",
+      "validation_ms": 46.4444,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "Invalid Constraint Usage - invalid type",
+          "message": "A constraint must be typed by one constraint definition.",
+          "line": 4
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'self' from ConstraintCheck, Item",
+          "line": 4
+        }
+      ]
+    }
+  ],
+  "memberships": [
+    {
+      "line": 5,
+      "membership_kind": "RequirementConstraintMembership",
+      "kind": "assumption",
+      "visibility": "private",
+      "member_kind": "ConstraintUsage",
+      "member_declared_name": "assumed",
+      "owner": "RequirementConstraintControls::Need",
+      "type": [
+        "RequirementConstraintControls::Condition"
+      ],
+      "reference_target": null,
+      "reference_target_line": null
+    },
+    {
+      "line": 6,
+      "membership_kind": "RequirementConstraintMembership",
+      "kind": "requirement",
+      "visibility": "public",
+      "member_kind": "ConstraintUsage",
+      "member_declared_name": "required",
+      "owner": "RequirementConstraintControls::Need",
+      "type": [
+        "RequirementConstraintControls::Condition"
+      ],
+      "reference_target": null,
+      "reference_target_line": null
+    },
+    {
+      "line": 7,
+      "membership_kind": "RequirementConstraintMembership",
+      "kind": "assumption",
+      "visibility": "public",
+      "member_kind": "ConstraintUsage",
+      "member_declared_name": null,
+      "owner": "RequirementConstraintControls::Need",
+      "type": [
+        "RequirementConstraintControls::Condition"
+      ],
+      "reference_target": null,
+      "reference_target_line": 8
+    },
+    {
+      "line": 8,
+      "membership_kind": "RequirementConstraintMembership",
+      "kind": "requirement",
+      "visibility": "public",
+      "member_kind": "ConstraintUsage",
+      "member_declared_name": null,
+      "owner": "RequirementConstraintControls::Need",
+      "type": [
+        "RequirementConstraintControls::Condition"
+      ],
+      "reference_target": "RequirementConstraintControls::available",
+      "reference_target_line": 3
+    }
+  ]
+}

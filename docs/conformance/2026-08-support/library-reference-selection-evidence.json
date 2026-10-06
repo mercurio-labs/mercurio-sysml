@@ -1,0 +1,51 @@
+{
+  "schema": "dev.mercurio.library-reference-selection-evidence.v1",
+  "scope": "Conservative build-time resource selection from parsed explicit imports and qualified noncontainment Ecore cross-reference syntax. No Xtext scoping, actual target resolution or implicit/global semantic closure is claimed.",
+  "pipeline": {
+    "pinned_frontends": "Xtext parse and upstream qualified-name converter; Ecore reference identities and receiver/target types",
+    "imported_resource_count": 94,
+    "imported_cross_reference_count": 18939,
+    "selected_library_count": 30,
+    "consumer": "Native definition candidate source-set input loader, package-prefix/global lookup and linker; expanded resource outcome pending",
+    "handwritten_dependencies": [
+      "Build-time package-prefix resource-selection graph traversal",
+      "Native scope/linking and default/implicit dependency handling"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "focused_selection_tests_passed": 6,
+    "inventory_exactly_reproduced": true,
+    "native_assessment_status": "blocked",
+    "qualified_families_delta": 0,
+    "full_semantic_qualification": false,
+    "upstream_qualified_name_converter_applied": true,
+    "reference_expectations_modified": false,
+    "actual_resource_error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: result defaults require separate nested/valuation/crossing/typing dependencies\", kind: Syntax, span: None, subjects: [] }",
+    "actual_resources_semantically_qualified": false,
+    "native_resource_inputs": 31,
+    "native_source_snapshot_current": true
+  },
+  "inputs": {
+    "tools/export_library_reference_inventory.py": "a4842713461a36a04a322a6ec4ac78cf38ddceb0e02d5a42c5d1a2b24514a345",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a",
+    "tools/test_prepare_library_reference_closure.py": "cbeb05eb279742818012a27a765348ed37970bdc21f857045bde24da5c0fe231",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotLibraryReferenceInventory.java": "c60cd96f5f10e06e7b3e4292c7505184dc391a9d3f407d6ab8b7c06fa5328f4f",
+    "docs/conformance/2026-08-support/library-reference-inventory.json": "aa9b5f93fdd55e5e77289ecd2a2685e5297c54e4631beaca5a9c2013f894e475",
+    "docs/conformance/2026-08-support/states-reference-resource-selection.json": "9370dd14c490acee4cf25537c42b113c6201c575e78e7e24bf7653467e40885c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/states-reference-source-inputs.json": "58c6c7530531338a59bd81f146410a2613c49c2a0eb7b4a6846c772ac2469cf9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-reference-selection-tests.log": "a27dcb877b89c21743e23fa5a5890b70615ed485e2b4c3dcf99dfd4d252d8b19",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-reference-cache-check.log": "bb0f54a323bf24bb69ace22792a144950b28a1952904a39d424b38791e996d71",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-reference-export.log": "bb0f54a323bf24bb69ace22792a144950b28a1952904a39d424b38791e996d71",
+    "docs/conformance/2026-08-support/enum-trigger-states-reference-closure-assessment.json": "24caf5910232b4f211c6200b15323d4e9a03d733c1322584be2c967b733300bb",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/states-reference-selection-first-version.json": "9500a5198dbd3d3d557eb686a0348a3423efd17867ae70863590da15af0a2150",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-reference-inventory-first-version.json": "1de4955df29cf5a6d90221a6594074bc8942e810256e5430934c0a80891fabf6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-reference-exporter-first-version.py": "5d30eb33ada3ffc68ff8e2b689d26c249726eab326fc92263688c65350159e27"
+  },
+  "remaining": [
+    "123 unresolved qualified package-prefix candidates require actual native scope resolution or explicit dependency identification",
+    "Unqualified names and implicit/default library dependencies",
+    "Native linking, validation, canonical publication and persistence across all required resources",
+    "All strict family/global/release contracts"
+  ]
+}

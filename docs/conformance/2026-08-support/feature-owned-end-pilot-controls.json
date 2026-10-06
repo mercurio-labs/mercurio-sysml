@@ -1,0 +1,345 @@
+{
+  "cases": [
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": false,
+      "shape": "direct",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }package P {feature outer : Links::BinaryLink {end feature leftEnd; end feature rightEnd;}}"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": true,
+      "shape": "direct",
+      "source": "package P {feature outer : Links::BinaryLink {end feature leftEnd; end feature rightEnd;}}standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": false,
+      "shape": "subsetted_owner",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }package P {feature base : Links::BinaryLink; feature outer subsets base {end feature leftEnd; end feature rightEnd;}}"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": true,
+      "shape": "subsetted_owner",
+      "source": "package P {feature base : Links::BinaryLink; feature outer subsets base {end feature leftEnd; end feature rightEnd;}}standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "extraEnd",
+          "generals": [
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": false,
+      "shape": "extra_end",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }package P {feature outer : Links::BinaryLink {end feature leftEnd; end feature rightEnd;end feature extraEnd;}}"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "extraEnd",
+          "generals": [
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": true,
+      "shape": "extra_end",
+      "source": "package P {feature outer : Links::BinaryLink {end feature leftEnd; end feature rightEnd;end feature extraEnd;}}standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": false,
+      "shape": "explicit",
+      "source": "standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }package P {feature outer : Links::BinaryLink {end feature leftEnd redefines Links::BinaryLink::source; end feature rightEnd;}}"
+    },
+    {
+      "observations": [
+        {
+          "default": "Base::things",
+          "feature": "leftEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Links",
+              "BinaryLink",
+              "source"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        },
+        {
+          "default": "Base::things",
+          "feature": "rightEnd",
+          "generals": [
+            [
+              "Links",
+              "BinaryLink",
+              "target"
+            ],
+            [
+              "Base",
+              "things"
+            ]
+          ]
+        }
+      ],
+      "reversed": true,
+      "shape": "explicit",
+      "source": "package P {feature outer : Links::BinaryLink {end feature leftEnd redefines Links::BinaryLink::source; end feature rightEnd;}}standard library package Base { classifier Anything; feature things; } standard library package Links { assoc Link specializes Base::Anything { feature participant; } assoc BinaryLink specializes Link { end feature source; end feature target; } }"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "cc8cc33152bdc50f3b75f37da68a1bee7aa1f6d39a33ee86e33fff7497e6820b",
+    "helper_sha256": "f42fb34dcf56f783b6a7e70a838363092fa95c5cff9b21f51ed42978ec04f6e8",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c"
+    }
+  },
+  "schema": "dev.mercurio.feature-owned-end-controls.v1",
+  "scope": "Eight independently parsed source controls: Feature-owned end default selection and ordered general-type queries only. Four contexts in two source orders; no supplied completion flags, complete transformation or model validation."
+}

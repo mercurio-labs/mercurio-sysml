@@ -1,0 +1,94 @@
+{
+  "schema": "dev.mercurio.type-set-roles.v1",
+  "qualification_certificate": false,
+  "scope": "Four reviewed relationship roles and seven Type projections; imported dispatch is not implementation.",
+  "inputs": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "bindings": [
+    {
+      "kind": "Differencing",
+      "source": "https://www.omg.org/spec/SysML/20250201#//Differencing/typeDifferenced",
+      "source_field": "type_differenced",
+      "source_derived": true,
+      "target": "https://www.omg.org/spec/SysML/20250201#//Differencing/differencingType",
+      "target_field": "differencing_type",
+      "owning_source": "https://www.omg.org/spec/SysML/20250201#//Differencing/typeDifferenced",
+      "owning_field": "type_differenced",
+      "owned_projection": "https://www.omg.org/spec/SysML/20250201#//Type/ownedDifferencing",
+      "owned_field": "owned_differencing",
+      "endpoint_projection": "https://www.omg.org/spec/SysML/20250201#//Type/differencingType",
+      "endpoint_field": "differencing_type",
+      "cardinality_constraint": "validateTypeOwnedDifferencingNotOne",
+      "self_constraint": "validateTypeDifferencingTypesNotSelf",
+      "grammar_references": [
+        "org.omg.kerml.xtext.KerML::Differencing/alternatives/elements/0/terminal"
+      ],
+      "algorithm": "handwritten canonical owningRelatedElement projection, stored endpoint reads, kind selection and normative count/self predicates"
+    },
+    {
+      "kind": "Disjoining",
+      "source": "https://www.omg.org/spec/SysML/20250201#//Disjoining/typeDisjoined",
+      "source_field": "type_disjoined",
+      "source_derived": false,
+      "target": "https://www.omg.org/spec/SysML/20250201#//Disjoining/disjoiningType",
+      "target_field": "disjoining_type",
+      "owning_source": "https://www.omg.org/spec/SysML/20250201#//Disjoining/owningType",
+      "owning_field": "owning_type",
+      "owned_projection": "https://www.omg.org/spec/SysML/20250201#//Type/ownedDisjoining",
+      "owned_field": "owned_disjoining",
+      "endpoint_projection": null,
+      "endpoint_field": null,
+      "cardinality_constraint": null,
+      "self_constraint": null,
+      "grammar_references": [
+        "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/4/elements/0/terminal",
+        "org.omg.kerml.xtext.KerML::OwnedDisjoining/alternatives/elements/0/terminal",
+        "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/2/elements/0/terminal"
+      ],
+      "algorithm": "handwritten canonical owningRelatedElement projection, stored endpoint reads, kind selection and normative count/self predicates"
+    },
+    {
+      "kind": "Intersecting",
+      "source": "https://www.omg.org/spec/SysML/20250201#//Intersecting/typeIntersected",
+      "source_field": "type_intersected",
+      "source_derived": true,
+      "target": "https://www.omg.org/spec/SysML/20250201#//Intersecting/intersectingType",
+      "target_field": "intersecting_type",
+      "owning_source": "https://www.omg.org/spec/SysML/20250201#//Intersecting/typeIntersected",
+      "owning_field": "type_intersected",
+      "owned_projection": "https://www.omg.org/spec/SysML/20250201#//Type/ownedIntersecting",
+      "owned_field": "owned_intersecting",
+      "endpoint_projection": "https://www.omg.org/spec/SysML/20250201#//Type/intersectingType",
+      "endpoint_field": "intersecting_type",
+      "cardinality_constraint": "validateTypeOwnedIntersectingNotOne",
+      "self_constraint": "validateTypeIntersectingTypesNotSelf",
+      "grammar_references": [
+        "org.omg.kerml.xtext.KerML::Intersecting/alternatives/elements/0/terminal"
+      ],
+      "algorithm": "handwritten canonical owningRelatedElement projection, stored endpoint reads, kind selection and normative count/self predicates"
+    },
+    {
+      "kind": "Unioning",
+      "source": "https://www.omg.org/spec/SysML/20250201#//Unioning/typeUnioned",
+      "source_field": "type_unioned",
+      "source_derived": true,
+      "target": "https://www.omg.org/spec/SysML/20250201#//Unioning/unioningType",
+      "target_field": "unioning_type",
+      "owning_source": "https://www.omg.org/spec/SysML/20250201#//Unioning/typeUnioned",
+      "owning_field": "type_unioned",
+      "owned_projection": "https://www.omg.org/spec/SysML/20250201#//Type/ownedUnioning",
+      "owned_field": "owned_unioning",
+      "endpoint_projection": "https://www.omg.org/spec/SysML/20250201#//Type/unioningType",
+      "endpoint_field": "unioning_type",
+      "cardinality_constraint": "validateTypeOwnedUnioningNotOne",
+      "self_constraint": "validateTypeUnioningTypesNotSelf",
+      "grammar_references": [
+        "org.omg.kerml.xtext.KerML::Unioning/alternatives/elements/0/terminal"
+      ],
+      "algorithm": "handwritten canonical owningRelatedElement projection, stored endpoint reads, kind selection and normative count/self predicates"
+    }
+  ]
+}

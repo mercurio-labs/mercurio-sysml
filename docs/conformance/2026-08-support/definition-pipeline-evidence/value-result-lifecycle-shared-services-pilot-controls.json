@@ -1,0 +1,195 @@
+{
+  "schema": "dev.mercurio.shared-reference-controls.v1",
+  "qualification_certificate": false,
+  "native_context_qualification": "not_assessed",
+  "fixture_preparation": "Factory containment inputs; no completion flags set; actual libraries unprepared.",
+  "observations": [
+    {
+      "owner": "P",
+      "feature": "ownedMember",
+      "native_field": "owned_member",
+      "targets": [
+        "G",
+        "H",
+        "A",
+        "we"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "G",
+      "feature": "ownedMember",
+      "native_field": "owned_member",
+      "targets": [
+        "f",
+        "g",
+        "m1",
+        "m2"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "A",
+      "feature": "ownedMember",
+      "native_field": "owned_member",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "G",
+      "feature": "multiplicity",
+      "native_field": "multiplicity",
+      "targets": [
+        "m1"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "H",
+      "feature": "multiplicity",
+      "native_field": "multiplicity",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "A",
+      "feature": "multiplicity",
+      "native_field": "multiplicity",
+      "targets": [
+        "m1"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "f",
+      "feature": "ownedCrossSubsetting",
+      "native_field": "owned_cross_subsetting",
+      "targets": [
+        "c1"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "g",
+      "feature": "ownedCrossSubsetting",
+      "native_field": "owned_cross_subsetting",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "v",
+      "feature": "featureWithValue",
+      "native_field": "feature_with_value",
+      "targets": [
+        "f"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "w",
+      "feature": "featureWithValue",
+      "native_field": "feature_with_value",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "P",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "G",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [
+        "P"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "f",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [
+        "G"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "m1",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [
+        "G"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "v",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "z",
+      "feature": "owningNamespace",
+      "native_field": "owning_namespace",
+      "targets": [],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "D",
+      "feature": "relatedElement",
+      "native_field": "related_element",
+      "targets": [
+        "f",
+        "g",
+        "g",
+        "f"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "c1",
+      "feature": "relatedElement",
+      "native_field": "related_element",
+      "targets": [
+        "f",
+        "g"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    },
+    {
+      "owner": "v",
+      "feature": "relatedElement",
+      "native_field": "related_element",
+      "targets": [
+        "f",
+        "e"
+      ],
+      "completion_before": false,
+      "completion_after": false
+    }
+  ]
+}

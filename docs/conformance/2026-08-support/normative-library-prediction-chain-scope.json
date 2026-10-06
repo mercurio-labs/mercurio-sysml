@@ -1,0 +1,107 @@
+{
+  "scope": "Bounded documentation prediction and ordered FeatureChaining scope through the opt-in candidate. No whole-document semantic or release qualification.",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "inputs": {
+    "crates/mercurio-sysml/src/xtext_fragment.rs": "05c84169984eda4cd4635fc4238b4df6438c9aa411294d309eb450165e7e9395",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "06c30fe6c71929c8eb841e810b1b4274141a09acee048ab262ef96de666b1659",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "1f8bba8566c680367558ee0c79d840081aeb5e2a86286287ba390d6280d470a5",
+    "tools/run_comment_value_probe.py": "e37a8bab7104eecd75715f7d316c4db55766fd51ef01b474307337e6de372453",
+    "tools/run_chain_link_probe.py": "a836837bb720a9223d524f8cb6bb2aab12bfa4767a00ea6913af644fb13e5c95",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotCommentProbe.java": "c5561ad0bbcb79013f6306874bf882e68a384b18a2e696657dfa2b7b768a00a7",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotChainLinkProbe.java": "4f2db4e950f33672f49dacd7bc4d2f7cf65e4d7bb73203f88d3e9034360e2dc8",
+    "docs/conformance/2026-08-support/comment-values-pilot-controls.json": "0b44f28e8c6601c0ddb6599697ef1e3f7ba3c69a7617ebf53641deaf1b489d40",
+    "docs/conformance/2026-08-support/chain-link-pilot-controls.json": "535160ce6d45813b40c7a7fdf560626b8073e8d85ae82428a3834edf60568e49"
+  },
+  "normative_reference": {
+    "file": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      186,
+      196,
+      198
+    ],
+    "claims": [
+      "Feature chaining is ordered; ownedFeatureChaining supplies chainingFeature in order.",
+      "Chaining-feature conformance requires each later feature to be featured within its predecessor. Scope target observation alone does not verify that constraint."
+    ],
+    "scope_algorithm": "Handwritten Rust dependency based on pinned KerMLScopeProvider and NamespaceUtil; not inferred solely from Ecore or Xtext."
+  },
+  "coverage": [
+    {
+      "feature": "Documentation prediction",
+      "imported": "REGULAR_COMMENT terminal and candidate root grammar programs",
+      "native_consumer": "xtext_fragment::decision_token",
+      "verification": "Eight independently parsed KerML/SysML roots preserve nested documentation body values; unterminated documentation remains lexical error. Thirty prior raw parser objects remain separately tested.",
+      "unsupported": "Complete documentation/model semantics and annotation validation are not inferred from body agreement."
+    },
+    {
+      "feature": "FeatureChaining scope origins",
+      "imported": "Feature ancestry, ordered owned_feature_chaining subset and reciprocal containment; Xtext references",
+      "native_consumer": "generated_package_reference shared scope/linker",
+      "verification": "Eleven independent source controls: nine resolved ordered target-path/kind comparisons and persistence; two unresolved/hidden endpoint rejections at construction/linking. Direct, forward, shadowed, nested subsetting, crossing and quoted-name contexts; two inherited classifier contexts require pending explicit redefinition resolution, including forward classifier declaration.",
+      "unsupported": "Transformed AssignmentActionUsage/FeatureChainExpression relative namespaces reject. Redefinition/connector-relative chain origins and all typed/inherited contexts are not qualified by these controls. Computed redefinition providers, cyclic lazy dependencies, and chaining conformance validation remain separate."
+    },
+    {
+      "feature": "Lazy inherited-membership dependencies",
+      "imported": "Canonical FeatureMembership ownership, Redefinition endpoints and Type inheritance contracts",
+      "native_consumer": "explicit_recursive_inherited_memberships / remove_redefined_memberships_except return ready or deferred results to the existing transactional linker",
+      "verification": "Required explicit redefinition endpoints are resolved before inherited filtering; two independent Pilot source controls and persistence verify resulting chain targets. Existing focused inheritance/redefinition regressions pass.",
+      "unsupported": "This supplies dependency scheduling, not new computed redefinition strategies. Pending cycles reject; incomplete imported/derived services remain errors. Public stored queries still require resolved dependencies."
+    },
+    {
+      "feature": "Real semantic-library construction",
+      "imported": "Actual pinned release Base.kerml and Links.kerml",
+      "native_consumer": "audit_release_compile --definition-candidate",
+      "verification": "Both files and combined source set pass parsing; all three remain blocked during construction/linking.",
+      "unsupported": "Base and combined Base/Links reach the ordinary Feature/Connector contribution-assessment guard. Links alone lacks external/type scope. No semantic completeness, whole-model agreement, sample or timing credit."
+    }
+  ],
+  "candidate_probe": {
+    "inputs": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-candidate-inputs.json",
+    "report": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-candidate-results.jsonl",
+    "report_sha256": "d9cf1880da9cbc17c3037486196e00c45af35da5e35bcd6ea9325847fe5ccac3",
+    "expected_exit": 1,
+    "empty_input_policy": "Reject empty library files; pinned Pilot sysml.library Links.kerml is empty, so use hash-bound release source matching pinned Pilot test library."
+  },
+  "library_sources": [
+    {
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "normalized_sha256": "56df84cda67f62c63d4e79e2786fc26046cfa361a958c4fcf0843d32a5707e09"
+    },
+    {
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "normalized_sha256": "dcf3c002717cb91f8e16f1890fdf5526f4e178ada898a189621c7d0c24b5ddc0"
+    }
+  ],
+  "verification_logs": [
+    {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-library-prediction-chain-scope.log",
+      "sha256": "ff9c8a5017f560e7f9fe44fca93a9d65b6c00ac198390deb9e5cbf96022f8297",
+      "passed": 151
+    },
+    {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-xtext-library-prediction.log",
+      "sha256": "335b05fa136f2f962f29bfe469750e6a8ff620d798b8038d68a97c6ad0db6249",
+      "passed": 54
+    },
+    {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-candidate-library-audit.log",
+      "sha256": "adb656f495804dfb944a31645403d6c2101100af7a365a0b44b7008643f1c0c9",
+      "passed": 2
+    }
+  ],
+  "metrics": {
+    "matching_pilot_documents": 155,
+    "matching_pilot_documents_delta": 0,
+    "basic_ordinary_binding_models": "26/30",
+    "bounded_strategy_obligations": "3/4",
+    "whole_families": "0/34",
+    "release_gates": "0/5"
+  },
+  "test_note": "Fresh 151-test definition suite includes the final lazy inheritance changes. The 54-test parser suite preceded only those scope changes, and the final 151 suite reran its documented-root regression. Two audit tests pass. Test groups overlap and must not be added as unique tests.",
+  "superseded_by": "normative-feature-owned-members.json",
+  "historical_note": "This record describes the preceding source revision and eleven-control batch. The current shared report path has been regenerated for five source sets; current hashes, results and source qualification are in the superseding record."
+}

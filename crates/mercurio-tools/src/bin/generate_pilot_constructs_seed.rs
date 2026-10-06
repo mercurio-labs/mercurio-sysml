@@ -128,6 +128,8 @@ struct ConstructsOverlay {
 #[derive(Deserialize)]
 struct ConstructSelection {
     construct: String,
+    #[serde(default)]
+    as_construct: Option<String>,
     source_file: String,
     reason: String,
 }
@@ -244,13 +246,7 @@ fn generate_seed(args: &Args) -> Result<GeneratedConstructSeed, Box<dyn std::err
             )
             .into());
         };
-        constructs.push(GeneratedConstruct {
-            construct: selected.construct.clone(),
-            metaclass: selected.metaclass.clone(),
-            grammar_file: Some(grammar_file_name(&selected.source_file)),
-            grammar_line: Some(selected.line),
-            overlay_reason: Some(selection.reason.clone()),
-        });
+        constructs.push(generate_selected_construct(selected, selection));
     }
     for explicit in &overlay.explicit_constructs {
         constructs.push(GeneratedConstruct {
@@ -305,8 +301,35 @@ fn generate_seed(args: &Args) -> Result<GeneratedConstructSeed, Box<dyn std::err
     })
 }
 
+fn generate_selected_construct(
+    selected: &GrammarConstruct,
+    selection: &ConstructSelection,
+) -> GeneratedConstruct {
+    GeneratedConstruct {
+        construct: selection
+            .as_construct
+            .clone()
+            .unwrap_or_else(|| selected.construct.clone()),
+        metaclass: selected.metaclass.clone(),
+        grammar_file: Some(grammar_file_name(&selected.source_file)),
+        grammar_line: Some(selected.line),
+        overlay_reason: Some(selection.reason.clone()),
+    }
+}
+
 fn validate_overlay_reasons(overlay: &ConstructsOverlay) -> Result<(), Box<dyn std::error::Error>> {
     for selection in &overlay.construct_selections {
+        if selection
+            .as_construct
+            .as_ref()
+            .is_some_and(|name| name.trim().is_empty())
+        {
+            return Err(format!(
+                "construct selection `{}` has an empty alias",
+                selection.construct
+            )
+            .into());
+        }
         if selection.reason.trim().is_empty() {
             return Err(format!(
                 "construct selection `{}` is missing reason",
@@ -386,6 +409,7 @@ mod tests {
         let overlay = ConstructsOverlay {
             construct_selections: vec![ConstructSelection {
                 construct: "PartDefinition".to_string(),
+                as_construct: None,
                 source_file: "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext".to_string(),
                 reason: "current compiler subset".to_string(),
             }],
@@ -414,13 +438,7 @@ mod tests {
             .iter()
             .find(|construct| construct.construct == "PartDefinition")
             .unwrap();
-        let generated = GeneratedConstruct {
-            construct: selected.construct.clone(),
-            metaclass: selected.metaclass.clone(),
-            grammar_file: Some(grammar_file_name(&selected.source_file)),
-            grammar_line: Some(selected.line),
-            overlay_reason: Some(overlay.construct_selections[0].reason.clone()),
-        };
+        let generated = generate_selected_construct(selected, &overlay.construct_selections[0]);
 
         assert_eq!(
             generated,
@@ -439,6 +457,7 @@ mod tests {
         let overlay = ConstructsOverlay {
             construct_selections: vec![ConstructSelection {
                 construct: "PartDefinition".to_string(),
+                as_construct: None,
                 source_file: "SysML.xtext".to_string(),
                 reason: String::new(),
             }],
@@ -458,5 +477,25 @@ mod tests {
         };
 
         assert!(validate_overlay_reasons(&overlay).is_err());
+    }
+    #[test]
+    fn local_alias_does_not_replace_the_extracted_metaclass_or_provenance() {
+        let selected = GrammarConstruct {
+            construct: "Comment".to_string(),
+            metaclass: "SysML::Comment".to_string(),
+            source_file: "path/SysML.xtext".to_string(),
+            line: 84,
+        };
+        let selection = ConstructSelection {
+            construct: "Comment".to_string(),
+            as_construct: Some("CommentUsage".to_string()),
+            source_file: selected.source_file.clone(),
+            reason: "Preserve local parser contract".to_string(),
+        };
+        let result = generate_selected_construct(&selected, &selection);
+        assert_eq!(result.construct, "CommentUsage");
+        assert_eq!(result.metaclass, "SysML::Comment");
+        assert_eq!(result.grammar_file.as_deref(), Some("SysML.xtext"));
+        assert_eq!(result.grammar_line, Some(84));
     }
 }

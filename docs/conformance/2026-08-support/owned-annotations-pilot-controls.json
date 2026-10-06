@@ -1,0 +1,79 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "positive-basic.kerml": "0f17ee1717af74d69b254af11458f58eda1a8a4cfd62c3ac0fb4f31bad7797f1",
+    "positive-basic.sysml": "b20932ad9c24987de9986999640f260ebc490845c23ebaa9f3d0646972293277",
+    "positive-explicit.kerml": "74b11ade57c4d79104f21dcb865fdb4bebf743565e936fe55a0de8f818d1a4f5",
+    "positive-explicit.sysml": "93e3639c92bcbcfe44dfbbfce6e0dadf17a44eec96f3824598812df7b7542dfd",
+    "positive-named.kerml": "4034e63afdbe1d1aea6f2b62da3a7c620c32430f48fb900475e42ac670eaf936",
+    "positive-named.sysml": "5257464c33eb451a53e07c6a42887629b89d1f5169667a12d29929b8f4a6d9a5",
+    "unresolved-later.kerml": "d1394d235c3511780e2ff2e309e2e7a2ece66059c200912fef3b18d0706c1932",
+    "unresolved-later.sysml": "e5cd322df6cf0f72b763cf3798b89d7c5a909b530876dc14601edf523c7a9d2e"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "positive-basic.kerml",
+      "status": "ok",
+      "validation_ms": 164.3047,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-basic.sysml",
+      "status": "ok",
+      "validation_ms": 259.1118,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-explicit.kerml",
+      "status": "ok",
+      "validation_ms": 256.2569,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-explicit.sysml",
+      "status": "ok",
+      "validation_ms": 328.4917,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-named.kerml",
+      "status": "ok",
+      "validation_ms": 272.6146,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-named.sysml",
+      "status": "ok",
+      "validation_ms": 362.5595,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "unresolved-later.kerml",
+      "status": "error",
+      "validation_ms": 495.1904,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "unresolved-later.sysml",
+      "status": "error",
+      "validation_ms": 327.317,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 4
+        }
+      ]
+    }
+  ]
+}

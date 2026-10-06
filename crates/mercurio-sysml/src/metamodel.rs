@@ -639,12 +639,12 @@ mod tests {
     fn stdlib_locator_resolves_2026_04_release_selector() {
         let locator = StdlibLocator::for_release("2026-04").unwrap();
 
-        assert!(matches!(locator, StdlibLocator::File { .. }));
-        assert!(
-            locator
-                .as_uri()
-                .contains("resources/metamodels/sysml-2.0-pilot-2026-04")
-        );
+        let StdlibLocator::File { path } = locator else {
+            panic!("release selector should resolve to a file locator");
+        };
+        assert!(path.ancestors().any(|ancestor| ancestor.ends_with(
+            std::path::Path::new("resources/metamodels/sysml-2.0-pilot-2026-04")
+        )), "unexpected release path: {path:?}");
     }
 
     #[test]

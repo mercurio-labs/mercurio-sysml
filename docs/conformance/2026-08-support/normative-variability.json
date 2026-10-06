@@ -1,0 +1,58 @@
+{
+  "scope": "Bounded native Usage.mayTimeVary decision on complete-generalization inputs. Does not qualify ordinary source Usage providers or the effective isVariable getter.",
+  "normative": {
+    "document": "2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "pdf_pages": [
+      306,
+      437
+    ],
+    "clause": "deriveUsageMayTimeVary"
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "Usage_mayTimeVary_SettingDelegate.basicGet",
+      "UsageAdapter.mayTimeVary"
+    ],
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "Ecore Usage ancestry and exact mayTimeVary delegate binding; source-derived ownership/library contracts and generated generalization policies remain separate inputs.",
+  "consumed": "definition_document::may_time_vary calls a named handwritten decision using shared definition_feature_owner, standard_default_binding and definition_specializes. It preserves short-circuit evaluation and rejects missing providers rather than treating unknown specialization as false.",
+  "verification": {
+    "independent_controls": 32,
+    "input_precondition": "Both runtimes receive explicit complete-generalization flags and the same composite/portion flags. Native production never promotes these flags. These controls are not counted as matching source models.",
+    "dimensions": [
+      "occurrence versus unrelated owner",
+      "unrelated versus SelfLink/HappensLink/Action type",
+      "composite flag",
+      "portion flag"
+    ],
+    "persistence": "Canonical JSON reload preserves answers; queries leave model unchanged.",
+    "negative_cases": [
+      "missing library/provider",
+      "non-Usage endpoint",
+      "missing identity",
+      "duplicate identities"
+    ],
+    "focused_tests": "64 native tests pass; no full-suite rerun",
+    "tooling_tests_passed": 20,
+    "fixture_correction": "First focused attempt required an explicit Items library root for native source linking. Added the same root to both runtimes; no production fallback was added.",
+    "focused_log": "definition-pipeline-evidence/native-tests-variability-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "f216ec3b8d91a978c60b9161f2d22f0f748a0f0a98d05da7c67b01c481fad437",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "9ccca89cc130fa9abd4a7e7dacc8bffb712f8a592c0b6ce729ba16750d49cec7",
+      "crates/mercurio-sysml/src/definition_document_pilot_tests.rs": "91b9f01816e76fdd762977ddd282535430861a16d4b2323be0488c9f90853832",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "205c2ef96dbcbb4e2e48d6c6bd8039947c2e4f02c6bf67ba90b81e9f04b9c94a"
+    }
+  },
+  "remaining_required_behavior": [
+    "Usage generalization provider: variation typing before default selection",
+    "Feature generalization provider: owned-cross-feature typing, bound-value subsetting, participant and crossing specializations",
+    "OccurrenceUsage extras: data/structure/suboccurrence and snapshot/timeslice selectors",
+    "Subtype-specific default selection and computed redefinitions",
+    "Wire effective Usage.isVariable through qualified variability rather than stored default projection",
+    "Independently qualify SuccessionAsUsage/BindingConnectorAsUsage override cases and all required Usage classes",
+    "Retained individual source mismatch, complete samples, final semantics and timings remain open"
+  ]
+}

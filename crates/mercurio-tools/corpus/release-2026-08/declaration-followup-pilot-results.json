@@ -1,0 +1,96 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "0d7fafe25a0a87378206fe627e4fae090677583cce060e7d9c102e57b3513f02",
+    "timings_sha256": "106bf6640bf2dfa0ec7b50706ae08c803249e640661f7892face71749952e209",
+    "fixtures": {
+      "terminate-flow-declarations.sysml": "bdcb0d7f202df6f8f96fcbbb2346f6debbf0bc65ec871f2dbb92b2b2da00b7cd",
+      "crossing-metadata-prefix.kerml": "982a8c8df52ac0ee1f61609ae2639f36244b38c501e0ec56d1d8e0b166b2de72"
+    },
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350"
+  },
+  "scope": "Seven explicitly named declarations; owner compared only where both owners have source names. Anonymous payload absence of declared_name is tested separately.",
+  "named_declarations": [
+    {
+      "file": "crossing-metadata-prefix.kerml",
+      "name": "anonymous",
+      "kind": "Feature",
+      "qualified_name": "CrossingMetadata::Link::anonymous",
+      "type": [
+        "CrossingMetadata::Value"
+      ],
+      "owner": [
+        "CrossingMetadata::Link"
+      ]
+    },
+    {
+      "file": "crossing-metadata-prefix.kerml",
+      "name": "crossed",
+      "kind": "Feature",
+      "qualified_name": "CrossingMetadata::Link::crossed",
+      "type": [
+        "CrossingMetadata::Value"
+      ],
+      "owner": [
+        "CrossingMetadata::Link"
+      ]
+    },
+    {
+      "file": "crossing-metadata-prefix.kerml",
+      "name": "cross",
+      "kind": "Feature",
+      "qualified_name": "CrossingMetadata::Link::crossed::cross",
+      "type": [
+        "CrossingMetadata::Value"
+      ],
+      "owner": [
+        "CrossingMetadata::Link::crossed"
+      ]
+    },
+    {
+      "file": "crossing-metadata-prefix.kerml",
+      "name": "plain",
+      "kind": "Feature",
+      "qualified_name": "CrossingMetadata::Link::plain",
+      "type": [
+        "CrossingMetadata::Value"
+      ],
+      "owner": [
+        "CrossingMetadata::Link"
+      ]
+    },
+    {
+      "file": "terminate-flow-declarations.sysml",
+      "name": "finish",
+      "kind": "TerminateActionUsage",
+      "qualified_name": "DeclarationControls::Run::finish",
+      "type": [
+        "Actions::TerminateAction"
+      ],
+      "owner": [
+        "DeclarationControls::Run"
+      ]
+    },
+    {
+      "file": "terminate-flow-declarations.sysml",
+      "name": "stop",
+      "kind": "TerminateActionUsage",
+      "qualified_name": "DeclarationControls::Run::stop",
+      "type": [
+        "Actions::TerminateAction"
+      ],
+      "owner": [
+        "DeclarationControls::Run"
+      ]
+    },
+    {
+      "file": "terminate-flow-declarations.sysml",
+      "name": "fuel",
+      "kind": "PayloadFeature",
+      "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/terminate-flow-declarations.sysml::6::fuel",
+      "type": [
+        "DeclarationControls::Fuel"
+      ]
+    }
+  ]
+}

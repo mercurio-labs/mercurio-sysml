@@ -1,0 +1,917 @@
+{
+  "schema": "dev.mercurio.field-specs.v1",
+  "source": {
+    "metamodel_sha256": "76fd2db0933f329f9a1f8fc8fdc7693b3a5575b86463d64471db252f5027d84b",
+    "selection_sha256": "3bf4423343fecb0b0de9f2bdefaa3effd960a4ed2de661bdebad973c732ada21",
+    "extractor": "generate_release_fields.py"
+  },
+  "fields": [
+    {
+      "field": "annotated_element",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::AnnotatingElement::annotatedElement",
+          "KerML::Annotation::annotatedElement",
+          "SysML::AnnotatingElement::annotatedElement",
+          "SysML::Annotation::annotatedElement"
+        ],
+        "reason": "Shared KIR navigation stores annotating-element targets as a list; Annotation singleton targets are accepted by ReferenceList."
+      }
+    },
+    {
+      "field": "annotating_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Annotation::annotatingElement",
+          "SysML::Annotation::annotatingElement"
+        ]
+      }
+    },
+    {
+      "field": "annotation",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::AnnotatingElement::annotation",
+          "SysML::AnnotatingElement::annotation"
+        ]
+      }
+    },
+    {
+      "field": "body",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Comment::body",
+          "KerML::TextualRepresentation::body",
+          "SysML::Comment::body",
+          "SysML::TextualRepresentation::body"
+        ]
+      }
+    },
+    {
+      "field": "client",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Dependency::client",
+          "SysML::Dependency::client"
+        ]
+      }
+    },
+    {
+      "field": "conjugated_type",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Conjugation::conjugatedType",
+          "SysML::Conjugation::conjugatedType"
+        ]
+      }
+    },
+    {
+      "field": "documentation",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::documentation",
+          "SysML::Element::documentation"
+        ]
+      }
+    },
+    {
+      "field": "documented_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Documentation::documentedElement",
+          "SysML::Documentation::documentedElement"
+        ]
+      }
+    },
+    {
+      "field": "expression_is_result",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-compatibility",
+        "reason": "Preserve whether the authored expression is a result body, separate from a feature initializer; the ResultExpressionMembership carries canonical ownership."
+      }
+    },
+    {
+      "field": "feature_inverted",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureInverting::featureInverted",
+          "SysML::FeatureInverting::featureInverted"
+        ]
+      }
+    },
+    {
+      "field": "feature_of_type",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::TypeFeaturing::featureOfType",
+          "SysML::TypeFeaturing::featureOfType"
+        ]
+      }
+    },
+    {
+      "field": "feature_with_value",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureValue::featureWithValue",
+          "SysML::FeatureValue::featureWithValue"
+        ]
+      }
+    },
+    {
+      "field": "function",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Expression::function",
+          "SysML::Expression::function"
+        ]
+      }
+    },
+    {
+      "field": "general",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Specialization::general",
+          "SysML::Specialization::general"
+        ]
+      }
+    },
+    {
+      "field": "import_owning_namespace",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Import::importOwningNamespace",
+          "SysML::Import::importOwningNamespace"
+        ]
+      }
+    },
+    {
+      "field": "imported_membership",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::MembershipImport::importedMembership",
+          "KerML::Namespace::importedMembership",
+          "SysML::MembershipImport::importedMembership",
+          "SysML::Namespace::importedMembership"
+        ],
+        "reason": "MembershipImport has one imported membership; Namespace derives a collection. The shared reference-list contract retains singleton and ordered collection projections."
+      }
+    },
+    {
+      "field": "imported_namespace",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::NamespaceImport::importedNamespace",
+          "SysML::NamespaceImport::importedNamespace"
+        ]
+      }
+    },
+    {
+      "field": "inverting_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureInverting::invertingFeature",
+          "SysML::FeatureInverting::invertingFeature"
+        ]
+      }
+    },
+    {
+      "field": "is_composite",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isComposite",
+          "SysML::Feature::isComposite"
+        ]
+      }
+    },
+    {
+      "field": "is_constant",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isConstant",
+          "SysML::Feature::isConstant"
+        ]
+      }
+    },
+    {
+      "field": "is_default",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureValue::isDefault",
+          "SysML::FeatureValue::isDefault"
+        ]
+      }
+    },
+    {
+      "field": "is_implied_included",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::isImpliedIncluded",
+          "SysML::Element::isImpliedIncluded"
+        ]
+      }
+    },
+    {
+      "field": "is_import_all",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Import::isImportAll",
+          "SysML::Import::isImportAll"
+        ]
+      }
+    },
+    {
+      "field": "is_individual",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::OccurrenceDefinition::isIndividual",
+          "SysML::OccurrenceUsage::isIndividual"
+        ]
+      }
+    },
+    {
+      "field": "is_library",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-compatibility",
+        "reason": "Retain the existing lowering flag alongside canonical LibraryPackage identity."
+      }
+    },
+    {
+      "field": "is_negated",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Invariant::isNegated",
+          "SysML::Invariant::isNegated"
+        ]
+      }
+    },
+    {
+      "field": "is_parallel",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::StateDefinition::isParallel",
+          "SysML::StateUsage::isParallel"
+        ]
+      }
+    },
+    {
+      "field": "is_portion",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::isPortion",
+          "SysML::Feature::isPortion"
+        ]
+      }
+    },
+    {
+      "field": "is_recursive",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Import::isRecursive",
+          "SysML::Import::isRecursive"
+        ]
+      }
+    },
+    {
+      "field": "is_reference",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::Usage::isReference"
+        ]
+      }
+    },
+    {
+      "field": "is_standard",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::LibraryPackage::isStandard",
+          "SysML::LibraryPackage::isStandard"
+        ]
+      }
+    },
+    {
+      "field": "is_sufficient",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Type::isSufficient",
+          "SysML::Type::isSufficient"
+        ]
+      }
+    },
+    {
+      "field": "is_variation",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::Definition::isVariation",
+          "SysML::Usage::isVariation"
+        ]
+      }
+    },
+    {
+      "field": "kind",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::RequirementConstraintMembership::kind",
+          "SysML::StateSubactionMembership::kind",
+          "SysML::TransitionFeatureMembership::kind",
+          "SysML::TriggerInvocationExpression::kind"
+        ]
+      }
+    },
+    {
+      "field": "language",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::TextualRepresentation::language",
+          "SysML::TextualRepresentation::language"
+        ]
+      }
+    },
+    {
+      "field": "may_time_vary",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::Usage::mayTimeVary"
+        ]
+      }
+    },
+    {
+      "field": "member_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Membership::memberElement",
+          "SysML::Membership::memberElement"
+        ]
+      }
+    },
+    {
+      "field": "member_name",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Membership::memberName",
+          "SysML::Membership::memberName"
+        ]
+      }
+    },
+    {
+      "field": "member_short_name",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Membership::memberShortName",
+          "SysML::Membership::memberShortName"
+        ]
+      }
+    },
+    {
+      "field": "membership",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Namespace::membership",
+          "SysML::Namespace::membership"
+        ]
+      }
+    },
+    {
+      "field": "membership_owning_namespace",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Membership::membershipOwningNamespace",
+          "SysML::Membership::membershipOwningNamespace"
+        ]
+      }
+    },
+    {
+      "field": "original_type",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Conjugation::originalType",
+          "SysML::Conjugation::originalType"
+        ]
+      }
+    },
+    {
+      "field": "owned_annotating_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Annotation::ownedAnnotatingElement",
+          "SysML::Annotation::ownedAnnotatingElement"
+        ]
+      }
+    },
+    {
+      "field": "owned_annotating_relationship",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::AnnotatingElement::ownedAnnotatingRelationship",
+          "SysML::AnnotatingElement::ownedAnnotatingRelationship"
+        ]
+      }
+    },
+    {
+      "field": "owned_annotation",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::ownedAnnotation",
+          "SysML::Element::ownedAnnotation"
+        ]
+      }
+    },
+    {
+      "field": "owned_import",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Namespace::ownedImport",
+          "SysML::Namespace::ownedImport"
+        ]
+      }
+    },
+    {
+      "field": "owned_member_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::OwningMembership::ownedMemberElement",
+          "SysML::OwningMembership::ownedMemberElement"
+        ]
+      }
+    },
+    {
+      "field": "owned_member_name",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::OwningMembership::ownedMemberName",
+          "SysML::OwningMembership::ownedMemberName"
+        ]
+      }
+    },
+    {
+      "field": "owned_member_short_name",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::OwningMembership::ownedMemberShortName",
+          "SysML::OwningMembership::ownedMemberShortName"
+        ]
+      }
+    },
+    {
+      "field": "owned_membership",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Namespace::ownedMembership",
+          "SysML::Namespace::ownedMembership"
+        ]
+      }
+    },
+    {
+      "field": "owned_reference_subsetting",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::ownedReferenceSubsetting",
+          "SysML::Feature::ownedReferenceSubsetting"
+        ]
+      }
+    },
+    {
+      "field": "owned_related_element",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Relationship::ownedRelatedElement",
+          "SysML::Relationship::ownedRelatedElement"
+        ]
+      }
+    },
+    {
+      "field": "owned_relationship",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::ownedRelationship",
+          "SysML::Element::ownedRelationship"
+        ]
+      }
+    },
+    {
+      "field": "owned_result_expression",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::ResultExpressionMembership::ownedResultExpression",
+          "SysML::ResultExpressionMembership::ownedResultExpression"
+        ]
+      }
+    },
+    {
+      "field": "owning_annotated_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Annotation::owningAnnotatedElement",
+          "SysML::Annotation::owningAnnotatedElement"
+        ]
+      }
+    },
+    {
+      "field": "owning_annotating_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Annotation::owningAnnotatingElement",
+          "SysML::Annotation::owningAnnotatingElement"
+        ]
+      }
+    },
+    {
+      "field": "owning_annotating_relationship",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::AnnotatingElement::owningAnnotatingRelationship",
+          "SysML::AnnotatingElement::owningAnnotatingRelationship"
+        ]
+      }
+    },
+    {
+      "field": "owning_feature_membership",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Feature::owningFeatureMembership",
+          "SysML::Feature::owningFeatureMembership"
+        ]
+      }
+    },
+    {
+      "field": "owning_membership",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::owningMembership",
+          "SysML::Element::owningMembership"
+        ]
+      }
+    },
+    {
+      "field": "owning_related_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Relationship::owningRelatedElement",
+          "SysML::Relationship::owningRelatedElement"
+        ]
+      }
+    },
+    {
+      "field": "owning_relationship",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::owningRelationship",
+          "SysML::Element::owningRelationship"
+        ]
+      }
+    },
+    {
+      "field": "parameter",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Behavior::parameter",
+          "KerML::Step::parameter",
+          "SysML::Behavior::parameter",
+          "SysML::Step::parameter"
+        ]
+      }
+    },
+    {
+      "field": "portion_kind",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::OccurrenceUsage::portionKind"
+        ]
+      }
+    },
+    {
+      "field": "redefined_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Redefinition::redefinedFeature",
+          "SysML::Redefinition::redefinedFeature"
+        ]
+      }
+    },
+    {
+      "field": "redefining_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Redefinition::redefiningFeature",
+          "SysML::Redefinition::redefiningFeature"
+        ]
+      }
+    },
+    {
+      "field": "referenced_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::ReferenceSubsetting::referencedFeature",
+          "SysML::ReferenceSubsetting::referencedFeature"
+        ]
+      }
+    },
+    {
+      "field": "related_element",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Relationship::relatedElement",
+          "SysML::Relationship::relatedElement"
+        ]
+      }
+    },
+    {
+      "field": "represented_element",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::TextualRepresentation::representedElement",
+          "SysML::TextualRepresentation::representedElement"
+        ]
+      }
+    },
+    {
+      "field": "result_expression",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "SysML::AnalysisCaseDefinition::resultExpression",
+          "SysML::AnalysisCaseUsage::resultExpression"
+        ]
+      }
+    },
+    {
+      "field": "source",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Relationship::source",
+          "SysML::Relationship::source",
+          "SysML::TransitionUsage::source"
+        ],
+        "reason": "Preserve ordered Relationship endpoints, including multi-client/supplier Dependencies. TransitionUsage singleton endpoints normalize through the shared reference-list contract."
+      }
+    },
+    {
+      "field": "specific",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Specialization::specific",
+          "SysML::Specialization::specific"
+        ]
+      }
+    },
+    {
+      "field": "subclassifier",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Subclassification::subclassifier",
+          "SysML::Subclassification::subclassifier"
+        ]
+      }
+    },
+    {
+      "field": "subsetted_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Subsetting::subsettedFeature",
+          "SysML::Subsetting::subsettedFeature"
+        ]
+      }
+    },
+    {
+      "field": "subsetting_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Subsetting::subsettingFeature",
+          "SysML::Subsetting::subsettingFeature"
+        ]
+      }
+    },
+    {
+      "field": "superclassifier",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Subclassification::superclassifier",
+          "SysML::Subclassification::superclassifier"
+        ]
+      }
+    },
+    {
+      "field": "supplier",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Dependency::supplier",
+          "SysML::Dependency::supplier"
+        ]
+      }
+    },
+    {
+      "field": "target",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Relationship::target",
+          "SysML::Relationship::target",
+          "SysML::TransitionUsage::target"
+        ],
+        "reason": "Preserve ordered Relationship endpoints, including multi-client/supplier Dependencies. TransitionUsage singleton endpoints normalize through the shared reference-list contract."
+      }
+    },
+    {
+      "field": "textual_representation",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Element::textualRepresentation",
+          "SysML::Element::textualRepresentation"
+        ]
+      }
+    },
+    {
+      "field": "typed_feature",
+      "kind": "Reference",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::FeatureTyping::typedFeature",
+          "SysML::FeatureTyping::typedFeature"
+        ]
+      }
+    },
+    {
+      "field": "value",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::LiteralBoolean::value",
+          "KerML::LiteralInteger::value",
+          "KerML::LiteralRational::value",
+          "KerML::LiteralString::value",
+          "SysML::LiteralBoolean::value",
+          "SysML::LiteralInteger::value",
+          "SysML::LiteralRational::value",
+          "SysML::LiteralString::value"
+        ],
+        "reason": "Literal expression values use their scalar Ecore shape. FeatureValue.value has a separate reference shape; kind-sensitive reference projection remains in G07-G08."
+      }
+    },
+    {
+      "field": "visibility",
+      "kind": "Scalar",
+      "source": {
+        "classification": "pilot-feature",
+        "pilot_features": [
+          "KerML::Import::visibility",
+          "KerML::Membership::visibility",
+          "SysML::Import::visibility",
+          "SysML::Membership::visibility"
+        ]
+      }
+    }
+  ]
+}

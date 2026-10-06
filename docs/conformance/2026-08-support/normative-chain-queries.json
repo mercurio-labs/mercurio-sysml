@@ -1,0 +1,46 @@
+{
+  "scope": "Three shared chain reference queries over canonical storage; no bound-value or expression-transform support claim.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      196,
+      197
+    ],
+    "clauses": [
+      "deriveFeatureChainingFeature",
+      "deriveFeatureFeatureTarget",
+      "deriveFeatureOwnedFeatureChaining"
+    ]
+  },
+  "imported": "Effective Ecore reference types, ordered/nonunique chaining features, owned relationship subset and delegate identities.",
+  "native_consumer": "definition_chain_reference_targets, consumed by public reference_targets, chain construction and positional implicit-target deduplication. Explicit handwritten algorithms; no cached derived input.",
+  "verification": {
+    "pilot_controls": 5,
+    "query_observations": 15,
+    "focused_tests": 71,
+    "tooling_tests": 39,
+    "pilot_export_reproduces": true,
+    "focused_log": "definition-pipeline-evidence/native-tests-chain-queries-focused.log",
+    "negative_scope": [
+      "missing containment storage",
+      "missing target",
+      "wrong endpoint type",
+      "wrong reciprocal owner",
+      "self target",
+      "stale derived snapshot ignored"
+    ],
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "afde82bc2eae702ac5b696d879bf38c357c3eb7ed1a14b441db04bfab789f9fa",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "604e57db53470d9203fdd287863927fefaaee1841cbf6f3a109dd80dd593496b",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "1cca771180a263333cb990e3d830d9f85bb74f938f4572cb1af57fad50793591"
+    }
+  },
+  "remaining": [
+    "Expression transformation: implicit featuring and result binding connectors",
+    "Bound-value subsetting",
+    "Crossing and specialized generalization providers",
+    "Whole-family and release qualification"
+  ],
+  "disagreements": "None observed in the five bounded chain fixtures; no broader agreement claim."
+}

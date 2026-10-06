@@ -1,0 +1,317 @@
+{
+  "source": {
+    "schema": "dev.mercurio.pilot-artifact-source.v1",
+    "kind": "generated-pilot-construct-seed",
+    "authorship": {
+      "mode": "generated-with-overlay",
+      "note": "Generated from grammar.extract.json and constructs.overlay.json; overlay carries Mercurio compiler subset and compatibility decisions."
+    },
+    "pilot": {
+      "commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "dirty": false,
+      "git_describe": "2026-08",
+      "repository": "SysML-v2-Pilot-Implementation"
+    },
+    "source_files": [
+      {
+        "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.extract.json",
+        "sha256": "24e66fffa007c3d34ea37ade3757832d2887ce4c29cd72fcc11a38d56be1a540"
+      },
+      {
+        "path": "crates/mercurio-sysml/resources/kernel/kerml-constructs.overlay.json",
+        "sha256": "ea72fd7b0d4d95325bf377c01522af5e392a3cf6d3fc842690259f100cb9902d"
+      }
+    ],
+    "extractor": {
+      "name": "generate_pilot_constructs_seed",
+      "version": "0.86.0"
+    },
+    "generated_at_utc": "2026-09-30T02:57:31.9607282Z"
+  },
+  "keyword_registry": {
+    "source": {
+      "mode": "overlay",
+      "reason": "Parser token routing for control actions."
+    },
+    "definitions": {
+      "assoc": "Association",
+      "assoc-struct": "AssociationStructure",
+      "association": "Association",
+      "behavior": "Behavior",
+      "class": "Class",
+      "datatype": "DataType",
+      "function": "Function",
+      "interaction": "Interaction",
+      "metaclass": "Metaclass",
+      "namespace": "Namespace",
+      "predicate": "Predicate",
+      "struct": "Structure",
+      "type": "Type"
+    },
+    "usages": {
+      "binding": "BindingConnector",
+      "bool": "BooleanExpression",
+      "connector": "Connector",
+      "expr": "Expression",
+      "inv": "Invariant",
+      "kerml-flow": "Flow",
+      "kerml-succession-flow": "SuccessionFlow",
+      "multiplicity": "MultiplicitySubset",
+      "multiplicity-range": "MultiplicityRange",
+      "rep": "TextualRepresentation",
+      "step": "Step",
+      "succession": "Succession"
+    }
+  },
+  "default_specialization_anchors": {},
+  "semantic_specialization_defaults": {},
+  "usage_semantic_specialization_overrides": {},
+  "stdlib_aliases": {},
+  "constructs": [
+    {
+      "construct": "Step",
+      "metaclass": "SysML::Step",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 911,
+      "overlay_reason": "Preserve typed KerML steps and their owned feature bodies."
+    },
+    {
+      "construct": "Association",
+      "metaclass": "SysML::Association",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 810,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Behavior",
+      "metaclass": "SysML::Behavior",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 904,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Class",
+      "metaclass": "SysML::Class",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 795,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "DataType",
+      "metaclass": "SysML::DataType",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 788,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Function",
+      "metaclass": "SysML::Function",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 924,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Interaction",
+      "metaclass": "SysML::Interaction",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 989,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Metaclass",
+      "metaclass": "SysML::Metaclass",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 1064,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Predicate",
+      "metaclass": "SysML::Predicate",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 966,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Structure",
+      "metaclass": "SysML::Structure",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 802,
+      "overlay_reason": "Preserve the concrete KerML classifier metaclass and its generated implicit specialization."
+    },
+    {
+      "construct": "Expression",
+      "metaclass": "SysML::Expression",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 955,
+      "overlay_reason": "Preserve owned KerML expression bodies and their concrete expression metaclass."
+    },
+    {
+      "construct": "BooleanExpression",
+      "metaclass": "SysML::BooleanExpression",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 973,
+      "overlay_reason": "Preserve owned KerML expression bodies and their concrete expression metaclass."
+    },
+    {
+      "construct": "LibraryPackage",
+      "metaclass": "SysML::LibraryPackage",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 283,
+      "overlay_reason": "Preserve library package identity rather than emitting every namespace as Package."
+    },
+    {
+      "construct": "Type",
+      "metaclass": "SysML::Type",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 318,
+      "overlay_reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "AssociationStructure",
+      "metaclass": "SysML::AssociationStructure",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 815,
+      "overlay_reason": "Preserve the pinned grammar metaclass and its owned declaration structure."
+    },
+    {
+      "construct": "Connector",
+      "metaclass": "SysML::Connector",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 824,
+      "overlay_reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "BindingConnector",
+      "metaclass": "SysML::BindingConnector",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 870,
+      "overlay_reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "Succession",
+      "metaclass": "SysML::Succession",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 886,
+      "overlay_reason": "Preserve connector-family metaclasses, typing, endpoint features and owned bodies."
+    },
+    {
+      "construct": "Subclassification",
+      "metaclass": "SysML::Subclassification",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 485,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Specialization",
+      "metaclass": "SysML::Specialization",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 389,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "FeatureTyping",
+      "metaclass": "SysML::FeatureTyping",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 664,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Subsetting",
+      "metaclass": "SysML::Subsetting",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 682,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Redefinition",
+      "metaclass": "SysML::Redefinition",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 711,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Conjugation",
+      "metaclass": "SysML::Conjugation",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 407,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "FeatureInverting",
+      "metaclass": "SysML::FeatureInverting",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 633,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "TypeFeaturing",
+      "metaclass": "SysML::TypeFeaturing",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 651,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Dependency",
+      "metaclass": "SysML::Dependency",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 66,
+      "overlay_reason": "Preserve named and anonymous relationship declarations and their actual metaclass."
+    },
+    {
+      "construct": "Disjoining",
+      "metaclass": "SysML::Disjoining",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 425,
+      "overlay_reason": "Preserve direct disjoining relationships and their pinned grammar endpoint assignments."
+    },
+    {
+      "construct": "Namespace",
+      "metaclass": "SysML::Namespace",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 118,
+      "overlay_reason": "Preserve the concrete Namespace metaclass and its optional source identification."
+    },
+    {
+      "construct": "MultiplicitySubset",
+      "metaclass": "SysML::Multiplicity",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 758,
+      "overlay_reason": "Preserve direct and owned-chain MultiplicitySubset targets and their Feature subsetting relation."
+    },
+    {
+      "construct": "MultiplicityRange",
+      "metaclass": "SysML::MultiplicityRange",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 762,
+      "overlay_reason": "Preserve direct multiplicity ranges with ordered owned bound-expression members."
+    },
+    {
+      "construct": "Flow",
+      "metaclass": "SysML::Flow",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 996,
+      "overlay_reason": "Preserve Flow declarations, ordered FlowEnd graphs, `all` sufficiency, directly typed PayloadFeature graphs and literal ValuePart relationships; nonliteral values and other payload alternatives remain separate."
+    },
+    {
+      "construct": "SuccessionFlow",
+      "metaclass": "SysML::SuccessionFlow",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 1001,
+      "overlay_reason": "Preserve SuccessionFlow declarations, ordered FlowEnd graphs, `all` sufficiency, directly typed PayloadFeature graphs and literal ValuePart relationships; nonliteral values and other payload alternatives remain separate."
+    },
+    {
+      "construct": "TextualRepresentation",
+      "metaclass": "SysML::TextualRepresentation",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 110,
+      "overlay_reason": "Preserve textual representation and invariant declaration identity and owned content."
+    },
+    {
+      "construct": "Invariant",
+      "metaclass": "SysML::Invariant",
+      "grammar_file": "KerML.xtext",
+      "grammar_line": 980,
+      "overlay_reason": "Preserve textual representation and invariant declaration identity and owned content."
+    }
+  ]
+}

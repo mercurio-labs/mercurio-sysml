@@ -6,6 +6,8 @@
 
 pub mod collect;
 pub mod elaborate;
+pub(crate) mod ecore_defaults;
+pub(crate) mod ecore_model;
 pub mod emit;
 pub mod imports;
 pub mod indexes;
@@ -19,3 +21,5 @@ pub mod rules;
 pub mod semantic_actions;
 pub mod semantic_defaults;
 pub mod semantic_properties;
+
+pub(crate) mod relationship_declarations;

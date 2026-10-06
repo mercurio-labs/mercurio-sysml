@@ -1,0 +1,119 @@
+{
+  "schema": "dev.mercurio.type-relationship-scope-evidence.v1",
+  "scope": "Stored endpoint lookup for five fields / six grammar occurrences; not full Type relationship semantics.",
+  "inputs": {
+    "tools/generate_type_relationship_scope.py": "d7d6e7346ee23b3c50147824466b914d3fe55af8de6ee4bfd01b4bf080f150e3",
+    "tools/test_generate_type_relationship_scope.py": "c06f89b171dd688be4b1f82f070f71ed4893ec8feb324234b0403daf66736d14",
+    "tools/run_type_relationship_scope_probe.py": "79e7da9b25f1864bb0d642ba5be7ab57f5fdf50ebfc4727ba8226c214866601d",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTypeRelationshipScopeProbe.java": "966783e02f317eafd6e2559ea9580a3f96b62b7d1e257a84892b67da386f961a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "953470d8612e55d2cc14f489526e0a67bf9b15b1354940c5dbcaae81b11cd4a9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "c17bf4a1eedbb8b44d0d1e7688eccb907e87d5a804f4da259123becb245d4bf4",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/type_relationship_scope_generated.rs": "4559a0ea152ed296599cf6b97513e32c21c2da573efa1deb82bece99684e30b3",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/type-relationship-scope.extract.json": "aab1dfe4e9f3f0467eb6cdbba4dd1ba2450ec1e285283249c2ab13919d5d3246",
+    "docs/conformance/2026-08-support/type-relationship-scope-pilot-controls.json": "6401cfbdfe56cc3678f1b1de3b8e7acaf9726f330a160e3c339ba42ab18c8a81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-relationship-native-tests.log": "7d6921342d098faa457b2a9ec9cd08d58bf636c815656f68d7a869769700ee00",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-relationship-audit-tests.log": "e3f13e4ea3d152748de8b2fb6db17703a9f234247e75e272ad2a2ff4106c251a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-relationship-pilot-check.log": "3cde4a3d83e237baf142b83d660887e72eba664b47619c0b69fc7336692c0319",
+    "../target/support-2026-08/pilot-pinned-2026-08/org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "dd9c246972c4cc8247b12deb298fc1cc4caa6022efb94693a818361baa2b1d12",
+    "../target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/util/NamespaceUtil.java": "c9b6a02608dc4523a59cac049e77a5cb55ee1bd0aafc58d84aa804e40e72a3a4",
+    "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-type-relationship-trace.log": "b15aea540ef0392113e0c63ec0b82c17513662713b85323415a51579bccf75ed",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-type-relationship-analysis.json": "976af85348e9e623049eaef5569aae982fe3f62ed5e31fc069c3126725fd2323",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-type-relationship-supervision.json": "f5d0ed306c7c1db5a6aba5f9bbd96a7e5d878376bbd7cd42a2782367616586b1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-type-relationship-results.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "imported": {
+    "artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/type-relationship-scope.extract.json",
+    "fields": 5,
+    "grammar_occurrences": 6,
+    "preserved": "Resolved target Type identity and grammar reference assignments."
+  },
+  "native_consumer": {
+    "selector": "type_relationship_scope_generated::permits",
+    "algorithm": "Explicit handwritten nearest-containing-Namespace origin (including owning Type), composed with shared lexical, inherited, imported and qualified name lookup. Grammar/Ecore specify fields and types, not this algorithm.",
+    "upstream_dependency": "KerMLScopeProvider generic Element fallback and NamespaceUtil.getParentNamespaceOf; Specialization remains separately scoped."
+  },
+  "normative": {
+    "pdf": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+    "sections": [
+      "7.2.5.1",
+      "7.2.5.2"
+    ],
+    "physical_pdf_pages": [
+      47,
+      48
+    ],
+    "assessment": "Name lookup starts in local containing Namespace and proceeds outward; Types are Namespaces. Private memberships are invisible outside their Namespace. No disagreement found for this bounded origin behavior; other previously recorded disagreements remain open."
+  },
+  "verified": {
+    "pilot_source_controls": 33,
+    "positive": 21,
+    "negative": 12,
+    "contexts": [
+      "lexical",
+      "nested shadowing",
+      "inherited",
+      "imported",
+      "qualified",
+      "missing target",
+      "wrong target kind",
+      "private target",
+      "standalone Disjoining both stored endpoints"
+    ],
+    "native_tests": 226,
+    "generator_drift_tests": 3,
+    "audit_tool_tests": 10,
+    "native_boundaries": [
+      "Canonical endpoint identity",
+      "Imported target type check",
+      "Serialization round trip",
+      "Reversed graph storage"
+    ],
+    "pilot_cache_reproduces": true
+  },
+  "resource_assessment": {
+    "supervision": {
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out",
+      "elapsed_seconds": 112.32799999997951,
+      "exit_code": 1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "e57fc53d21dfa1cff09e23d27a2af38c478221d8082284a22354ff33dc61b701",
+      "source_sha256": "c17bf4a1eedbb8b44d0d1e7688eccb907e87d5a804f4da259123becb245d4bf4",
+      "wall_budget_seconds": 240,
+      "linking_budget_seconds": 55,
+      "semantic_qualification": "not_assessed"
+    },
+    "results": [],
+    "semantic_qualification": "not_assessed"
+  },
+  "remaining_required": [
+    "Owned FeatureChain transformation and scoping",
+    "Full union/intersection/difference/disjoining derived semantics and constraints",
+    "Complete native validation lifecycle",
+    "Global resource and complete sample qualification",
+    "Comparable Pilot timing assessment"
+  ],
+  "qualification": {
+    "matching_whole_models": 155,
+    "ordinary_feature_bindings": [
+      50,
+      79
+    ],
+    "bounded_obligations": [
+      7,
+      9
+    ],
+    "families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "candidate": "unpromoted"
+  }
+}

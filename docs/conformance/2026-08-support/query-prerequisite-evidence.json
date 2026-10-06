@@ -1,0 +1,58 @@
+{
+  "schema": "dev.mercurio.query-prerequisite-evidence.v1",
+  "scope": "Bounded exact Feature type/chain/generalization/cross-specialization prerequisite transport; no complete Feature lifecycle or release qualification.",
+  "imported": "Pinned Ecore scalar reference/redefinition contracts, FeatureChaining ownership, stored Type general endpoints and CrossSubsetting chain shape; candidate parsing still uses pinned Xtext programs.",
+  "handwritten_native_consumers": {
+    "query_reference": "Absent canonical scalar fields yield a typed ReadField requirement. Present malformed/null/missing-target references remain rejected.",
+    "stored_feature_chain_target_query": "Preserves ordered chain-target prerequisites and canonical ownership validation.",
+    "definition_feature_types_query": "Preserves generalization/default/chain prerequisites; isolates crossing navigation only for structurally assessed owned or explicit crossing inputs.",
+    "definition_general_type_inputs_query": "Canonical endpoint and chain reads precede existing guarded providers. Requirements become existing Deferred/linker jobs without parsing diagnostic text.",
+    "definition_materialize_owned_cross_specialization_query": "Shares pending-obligation computation with admission. Linker retries only registered pending fields and records completed jobs only after insertion succeeds."
+  },
+  "verified": {
+    "pilot_source_controls": 8,
+    "positive": 4,
+    "negative": 4,
+    "contexts": [
+      "type declaration before/after the context",
+      "chain declaration before/after its end typing",
+      "cross specialization and inherited chain target before/after persistence",
+      "missing terminal target rejects",
+      "all six explicit-chain controls retain owner typing with unresolved navigation; direct chain queries still require that field",
+      "typed missing-field transport and malformed/null/missing-target rejection without mutation"
+    ],
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-query-prerequisites-final.log",
+      "sha256": "55b334c83f6b5e0941822178cb5cbfda6d01b479fe0bda0010093cf5287319e6",
+      "passed": 166
+    },
+    "oracle_reproduction": "Expanded chain-link controls reproduce in a fresh pinned JVM; whole-model semantics are not observed by this probe.",
+    "library_audit": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-query-prerequisites-final-results.jsonl",
+      "sha256": "dd4a778504271a5e4fbdccedac60339260b5bffb3f7d152ef4537636882b7f4b",
+      "result": "Base + ScalarValues constructs/links 144 elements, still semantically unqualified. Adding Links exposes a sameThing.self pending-link cycle; audit exits nonzero. This cycle is an unresolved native evaluation dependency, not evidence that the pinned source is invalid."
+    }
+  },
+  "remaining": [
+    "Full context/readiness handling for the library sameThing.self cycle and qualified Featuring scheduling.",
+    "Other nested query families still use immutable Diagnostic wrappers; pending-field transport is not yet universal.",
+    "General contribution-job consolidation and scoped readiness remain open.",
+    "Complete validation, all samples, release semantic comparison and comparable timing."
+  ],
+  "metrics": {
+    "matching_pilot_documents": 155,
+    "delta": 0,
+    "ordinary_strategy": "3/4",
+    "crossing_strategy": "4/5",
+    "whole_families": "0/34",
+    "release_gates": "0/5"
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "bff4bd4cb859e5e7a4432e56d1b561dd87e7445dc9d15892b2f703142daea98e",
+    "tools/run_chain_link_probe.py": "a6c6387cb7d3669939d8a1e011a3ef7e96a912d18fa5ebdcc445c29082aee3eb",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotChainLinkProbe.java": "f56299f474e6313fa869f4314549ab31d70e7227bdc04756fe5daadea6b8e4ae",
+    "docs/conformance/2026-08-support/chain-link-pilot-controls.json": "b73612e74c1cbe51a5e5694dd1557342bbc0ac93c7aa0ae72e914dc0b28f5e8d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "8135c6fd2c483cc9ede4add636a84cdbd81edb2d6cc711a1f722002f1e328bfb",
+    "crates/mercurio-sysml/src/definition_document.rs": "f45b1c593294b0999ac56364b9f2001220687eeb37665a7c89ca02c5599afa5c"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "dev.mercurio.transition-source-normative.v1",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "normative_pdfs": {
+    "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af"
+  },
+  "references": [
+    {
+      "pdf": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "pdf_page": 152,
+      "section": "8.3.2.4.3 Membership",
+      "assessment": "memberElement is a required Element, matching pinned imported lower_bound=1. Source insertion creates a non-owning Membership and preserves canonical Namespace ownership/order."
+    },
+    {
+      "pdf": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+      "pdf_pages": [
+        375,
+        377,
+        475
+      ],
+      "assessment": "Transition sourceFeature/source, succession source specialization and two binding-connector constraints are distinct. A valid raw source membership does not establish ActionUsage featureTarget, connector specialization, source/target validation or complete transition semantics."
+    }
+  ],
+  "disagreements": [
+    {
+      "topic": "Pilot computeSource absent eligible predecessor",
+      "pilot_cases": 105,
+      "assessment": "Pilot inserts a null memberElement or leaves its empty source slot. Native transaction rejects these incomplete source models under the normative/imported lower bound; it neither manufactures a source nor publishes null. Explicitly null first plain source slots may enter the private repair transaction, but every published output must satisfy the imported contract."
+    }
+  ],
+  "remaining": [
+    "sourceFeature filters and featureTarget dispatch, including chains",
+    "computeTransitionLinkConnectors and actual connector transformation",
+    "source/succession/parameter specialization, contributions and real library closure",
+    "Complete transition validation and required integrated enum caller qualification"
+  ]
+}

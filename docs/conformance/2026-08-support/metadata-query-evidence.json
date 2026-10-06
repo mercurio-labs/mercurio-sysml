@@ -1,0 +1,174 @@
+{
+  "schema": "dev.mercurio.metadata-query-evidence.v1",
+  "scope": "Share a checked immutable view across metadata/annotation reference selection and existing general-type consumers. This implements the existing empty-metadata branch efficiently; selected metadata still requires an unimplemented base-type semantic service. No family certificate.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "561b007d04389e6158c34615b49ce25bdc2320054e181d10ea5ed9464947b954",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/metadata-selection-evidence.json": "d2a52715c60dea5a47402ebc7d5d56b1d709f692e70430d40a235f39c17caea1",
+    "docs/conformance/2026-08-support/metadata-query-batch-contract.md": "b14f6edf4c76d95d1cb7129800123d3281564c3cff760afe8e5a753399aa0e60",
+    "docs/conformance/2026-08-support/metadata-selection-pilot-controls.json": "b377992cb5314a2730a98f9ab004bd6c830987401669fc22a518bd345913f932",
+    "docs/conformance/2026-08-support/projection-query-evidence.json": "261273c2f093418b6d977652a1276614cf93e9584000c3a4ab9796eb41738fc8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-focused.log": "5a508c7fa6ad801eacc3deee56e6b68c76e3b4735a1571ae262112e1d5d9af8f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-reference-guard.log": "57eb2bb34d5fcabbd23df2f400bdf1e3326c443bf46220e94355ff7a28f612b1",
+    "docs/conformance/2026-08-support/enum-trigger-states-metadata-query-assessment.json": "584008de91896483a76f37bece007958e399d43a1ce35ff0da6bc39dec7065c1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-release-build.log": "71189ecba1e2c09eb53186edf654729d6b327f849ed37babc327ab32244e8463",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-metadata-query-progress.log": "1faea3800fc844ec9e47c53811e2175b46ebcd13d4d2ecc83696c6257afdde3d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-query-profile-analysis.json": "0612f6c8336bb0ef988e341843d9301674654b61302332150d5785787666eb44",
+    "docs/conformance/2026-08-support/enum-trigger-states-query-profile-assessment.json": "374109315f47a214a046ee109b63652178b4226c9b36c4b7363cb36cd861092a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-query-profile-progress.log": "fc71f34da55366163b3be7786a79957f36aabf9ca46d9a87f52774a2a4c8bc17",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-tool-tests.log": "96aec926a8057b5c6fbeb851919fb58a63a0233e1f83e718333d8798211cf768",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-plan-tests.log": "848f627aebe8a8b4c6eb50a6a4d39a132673ab98fe8da8338d7c72432ffe31f7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-certificate-tests.log": "6b8a9326b7d9537a4d6e67b6f20766b98ec2ba104f89a568608c72a5d6e932a8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-trace-tests.log": "46a59d823d772c3809446eba836399e2612ba33924b6c71abe8e15b736b8f4b7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "definitions": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json",
+    "representation": [
+      "Element/ownedAnnotation",
+      "Annotation/annotatingElement",
+      "Annotation/ownedAnnotatingElement",
+      "Annotation/owningAnnotatingElement",
+      "canonical namespace membership and reciprocal containment contracts"
+    ],
+    "normative_evidence": "docs/conformance/2026-08-support/metadata-selection-evidence.json"
+  },
+  "diagnostic_basis": {
+    "profile": "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-query-profile-analysis.json",
+    "profile_assessment": "docs/conformance/2026-08-support/enum-trigger-states-query-profile-assessment.json",
+    "baseline_source_sha256": {
+      "kernel_sha256": "3eba309b58476ccdb1fe40ed8b42d804c33ebe199e4cc56cf869bd498498c21b",
+      "projection_sha256": "ce25b012e283b0e4d28e2ca2c25ddc998007569b15f61a3ebcbea8d48831d639"
+    },
+    "completed_general_type_frames": 794,
+    "completed_general_type_exclusive_ms": 185055,
+    "completed_redefinition_closure_evaluation_exclusive_ms": 2313,
+    "interpretation": "Exclusive time includes uninstrumented subcalls. Source audit finds standalone index reconstruction per owned member in metadata selection; profiling does not isolate every individual helper. Full tracing changes diagnostic elapsed time; not a comparable Pilot timing assessment."
+  },
+  "native_consumption": {
+    "consumers": [
+      "definition_reference_targets_query",
+      "definition_stored_reference_targets",
+      "stored_namespace_membership_inputs_query",
+      "definition_projection::reference_targets_query",
+      "definition_projection::project_query",
+      "definition_projection::metadata_features_query",
+      "definition_projection::require_empty_metadata_bases_query",
+      "stored_plain_type_generalizations_query",
+      "stored_definition_generalizations_query",
+      "generated_general_types_for_scope_query"
+    ],
+    "handwritten_rust": "Canonical ownership/annotation selection, traversal and general-type algorithms remain explicit Rust implementations driven by imported contracts and bounded upstream selection programs.",
+    "change": "One checked index is retained through annotation composition, every owning membership endpoint, and plain/Definition general-type metadata admission. No per-member index reconstruction in these paths. Stored-reference standalone entry remains lazy and preserves first-target behavior on invalid duplicate graphs.",
+    "remaining": "Other default providers retain graph-facing services. Metadata metaclass/specialization/value/baseType evaluation remains explicitly unsupported; no empty-list fallback or lifecycle/completion flag is inferred."
+  },
+  "verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "native_definition_tests_passed": 379,
+    "focused_metadata_tests_passed": 5,
+    "stored_reference_guard_tests_passed": 1,
+    "independent_pilot_metadata_cases": 9,
+    "persisted_caller_view_contexts": 18,
+    "repeated_caller_view_selections": 36,
+    "ordinary_members_per_context": 160,
+    "late_invalid_member_rejection_attempts": 2,
+    "fresh_full_pilot_comparison": false,
+    "comparable_pilot_timing": false,
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-metadata-query-assessment.json",
+      "status": "assessed",
+      "time_box_seconds": 300,
+      "parsed_input_files": 25,
+      "outcome": {
+        "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: effective membership name service is required\", kind: Syntax, span: None, subjects: [] }",
+        "input_files": [
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/target/enum-trigger-caller.sysml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Actions.sysml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Flows.sysml",
+          "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/States.sysml"
+        ],
+        "relative_path": "enum-trigger-with-States-explicit-imports",
+        "resource_mode": "separate",
+        "semantic_qualification": "not_assessed",
+        "source_bytes": 169828,
+        "source_set_cache_hit": false,
+        "stage": "construction_or_linking",
+        "status": "blocked"
+      },
+      "qualification": "not_assessed"
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "release_build_passed": true,
+    "candidate_pipeline_tests_passed": 8,
+    "latest_full_native_regression_passed": 379
+  },
+  "remaining": [
+    "Actual resource lifecycle, integrated enum constraints/publication/persistence and global parser/model-construction contracts remain unqualified. The actual resource run now rejects because the effective membership name service is required. Implement that shared dependency without narrowing acceptance."
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

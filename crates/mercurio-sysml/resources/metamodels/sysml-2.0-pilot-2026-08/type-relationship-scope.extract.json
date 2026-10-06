@@ -1,0 +1,70 @@
+{
+  "schema": "dev.mercurio.type-relationship-scope.v1",
+  "scope": "Five stored reference fields / six grammar occurrences; excludes owned feature-chain transformation and full Type set semantics.",
+  "inputs": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd"
+  },
+  "bindings": [
+    {
+      "kind": "Differencing",
+      "field": "differencing_type",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Differencing/differencingType",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::Differencing",
+      "cross_reference": "org.omg.kerml.xtext.KerML::Differencing/alternatives/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    },
+    {
+      "kind": "Disjoining",
+      "field": "disjoining_type",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Disjoining/disjoiningType",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::Disjoining",
+      "cross_reference": "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/4/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    },
+    {
+      "kind": "Disjoining",
+      "field": "disjoining_type",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Disjoining/disjoiningType",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::OwnedDisjoining",
+      "cross_reference": "org.omg.kerml.xtext.KerML::OwnedDisjoining/alternatives/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    },
+    {
+      "kind": "Disjoining",
+      "field": "type_disjoined",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Disjoining/typeDisjoined",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::Disjoining",
+      "cross_reference": "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/2/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    },
+    {
+      "kind": "Intersecting",
+      "field": "intersecting_type",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Intersecting/intersectingType",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::Intersecting",
+      "cross_reference": "org.omg.kerml.xtext.KerML::Intersecting/alternatives/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    },
+    {
+      "kind": "Unioning",
+      "field": "unioning_type",
+      "ecore_feature": "https://www.omg.org/spec/SysML/20250201#//Unioning/unioningType",
+      "target_type": "https://www.omg.org/spec/SysML/20250201#//Type",
+      "rule": "org.omg.kerml.xtext.KerML::Unioning",
+      "cross_reference": "org.omg.kerml.xtext.KerML::Unioning/alternatives/elements/0/terminal",
+      "origin": "nearest_containing_namespace",
+      "algorithm": "explicit handwritten KerML Element scoping fallback"
+    }
+  ]
+}

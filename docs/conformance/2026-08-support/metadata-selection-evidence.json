@@ -1,0 +1,165 @@
+{
+  "schema": "dev.mercurio.metadata-selection-evidence.v1",
+  "scope": "Four imported annotation reference delegates drive owner-specific metadata selection and the empty metadata-base branch in six default providers. Applicable metadata is selected but its metaclass/specialization/baseType evaluation is not implemented or qualified.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "561b007d04389e6158c34615b49ce25bdc2320054e181d10ea5ed9464947b954",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "ad2b20a5e5c68ee55c1e1a1a596bb0410241eec6ba845c7da98045182899e612",
+    "tools/run_metadata_selection_probe.py": "d8bab43d76b145973b9ff886381ba680ba3ce82c5117d80fe7e2e990b7cba53d",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotMetadataSelectionProbe.java": "9019586be5e17520b2a42e23eb939cd8b0b0cf36455b0e6b055a5ffc4fea907a",
+    "docs\\conformance\\2026-08-support\\metadata-selection-pilot-controls.json": "b377992cb5314a2730a98f9ab004bd6c830987401669fc22a518bd345913f932",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported_representation": [
+    "Element/ownedAnnotation",
+    "Annotation/annotatingElement",
+    "Annotation/ownedAnnotatingElement",
+    "Annotation/owningAnnotatingElement"
+  ],
+  "native_consumers": [
+    "definition_projection::reference_targets",
+    "definition_projection::metadata_features",
+    "definition_projection::require_empty_metadata_bases",
+    "plain-Type defaults",
+    "Definition defaults",
+    "ordinary Feature/Connector defaults",
+    "Association defaults",
+    "Expression defaults",
+    "result Feature defaults"
+  ],
+  "handwritten_dependencies": {
+    "metadata_selection": "ElementUtil.getAllMetadataFeaturesOf: metadata selected first from owned annotations whose target is this owner, then metadata owned through OwningMembership and annotating this Namespace. Preserve canonical relationship/member order; imported aliases and unrelated metadata do not count.",
+    "empty_metadata_branch": "TypeAdapter.getBaseTypes returns no metadata-derived bases when the selection is empty; no metaclass, global baseType or expression evaluation is then required.",
+    "remaining": "Any selected metadata still requires explicit metaclass/feature specialization/value-expression evaluation and global resource support. Missing annotation targets reject; scheduling those unresolved targets as typed prerequisites remains unqualified."
+  },
+  "normative_reference": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "file": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      96,
+      137,
+      146,
+      260
+    ],
+    "scope": "Owned annotations select canonically owned relationships targeting the owner. The annotating endpoint is owned or owning. Semantic metadata requires resolved baseType values and applicable implicit specializations; this batch leaves that behavior unsupported."
+  },
+  "independent_controls": {
+    "path": "docs/conformance/2026-08-support/metadata-selection-pilot-controls.json",
+    "cases": 9,
+    "scope": "Factory metadata/annotation identity observations, not complete document semantics or adapter transformation."
+  },
+  "verification": {
+    "status": "passed",
+    "focused": "Nine Pilot controls match selected identities/order and annotation endpoints; persistence, reversed storage, missing references, invalid ownership, stale snapshots, applied-metadata rejection and source linking in both declaration orders.",
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-child-native-tests.log",
+      "sha256": "8b82edf9e7290264fa1efcb30935c6e87953d74d5decae20d46a86a06b0a693f",
+      "passed": 302
+    },
+    "scope": "Nine scoped factory controls, two native selection/failure tests and one inherited-source test; no complete metadata transformation or validation qualification.",
+    "certificates": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-selection-certificate-tests.log",
+      "sha256": "586579eb5bcded095b91ccf82f332bfec7ebdc04b84a000b7ce223a8312bb6f8",
+      "passed": 15
+    },
+    "coverage_plan": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-selection-plan-tests.log",
+      "sha256": "9ba3205ce39a8e9eac66b99cadb818907369db3fd6ba844078141205a69cbceb",
+      "passed": 14
+    },
+    "audit_tool": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-selection-audit-tests.log",
+      "sha256": "0ff1c1896df31fe0bb03176c91e7ad393bcffc7beebfe9ec79fc8b72c2a4d21a",
+      "passed": 10
+    },
+    "initial_failure": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-metadata-selection-initial-failure.log",
+      "reason": "Obsolete control required global rejection for unrelated detached metadata. Corrected to accept unrelated metadata and continue rejecting metadata applied to the connector; full 199-test regression passes."
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "resource_assessment": {
+    "status": "blocked",
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-metadata-selection-native-results.jsonl",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-metadata-selection-native-progress.log",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "profile": "release; this is pipeline qualification, not a comparable Pilot timing assessment",
+    "binary_sha256": "ab562013afac9bef35b12ee6eea4a04f0e229a2476f4afb869dc4a476e9df7c7",
+    "input_manifest_sha256": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "stage": "construction_or_linking",
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: computed redefinitions require an unsupported adapter strategy for Invariant\", kind: Syntax, span: None, subjects: [] }",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources": 16,
+    "first_blocker_only": true,
+    "result_path_sha256": "aafdff6d87d7aa40eae99e6429b2ea54d663ede689bd067dec94b68b9eb44115",
+    "progress_log_sha256": "eb92205f3b40f2c5387de8d0730791284073198c748975b721a7eb92deec2077",
+    "boundary": "Shared owner-specific metadata selection clears the previous global metadata guard. The next blocker is unsupported Invariant computed-redefinition dispatch; no linked document or full semantics is qualified."
+  },
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "new_scoped_factory_controls": 9,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  },
+  "feature_status": [
+    {
+      "feature": "Element/ownedAnnotation",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "owner-target filtering, order and empty/nonempty selection in the fixed factory matrix"
+    },
+    {
+      "feature": "Annotation/ownedAnnotatingElement",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "owned endpoint selection through annotatingElement in metadata/documentation cases"
+    },
+    {
+      "feature": "Annotation/annotatingElement",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "owned endpoint branch; owning endpoint fallback requires independent control"
+    },
+    {
+      "feature": "Annotation/owningAnnotatingElement",
+      "imported": true,
+      "native_consumer": true,
+      "verified": false,
+      "remaining": "Independent canonical owning-endpoint control; container projection itself reuses existing checked ownership service"
+    }
+  ]
+}

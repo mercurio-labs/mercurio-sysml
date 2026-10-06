@@ -1,0 +1,1561 @@
+{
+  "schema": "dev.mercurio.release-type-checks.v1",
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "validator_sha256": "65c78e229b61cc85b3ddea64cc25ef392f7e27176f5b9b33ee7eedc1f18a8583",
+    "metamodel_sha256": "76fd2db0933f329f9a1f8fc8fdc7693b3a5575b86463d64471db252f5027d84b",
+    "typing_algorithm_sources": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "22305319e299ccf35c62c1a1054c5552d615a93e660faa4b8fa67765fae44358"
+    },
+    "selection": "All active leading checkAllTypes/checkOneType invocations and their negative instance guards; complete bodies of five direct reference-kind methods (including PerformAction exclusions); owned flow-end overflow. Computed basic-feature chains and inherited flow ends remain outside native coverage."
+  },
+  "checks": [
+    {
+      "quantifier": "all",
+      "context": "Usage",
+      "excluded_contexts": [
+        "AttributeUsage",
+        "OccurrenceUsage"
+      ],
+      "required_type": "Classifier",
+      "message": "A usage must be typed by definitions.",
+      "issue": "validateUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 501,
+      "reference": "SysMLPackage.eINSTANCE.usage_Definition",
+      "method": "checkUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "AttributeUsage",
+      "excluded_contexts": [],
+      "required_type": "DataType",
+      "message": "An attribute must be typed by attribute definitions.",
+      "issue": "validateAttributeUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 562,
+      "reference": "SysMLPackage.eINSTANCE.attributeUsage_AttributeDefinition",
+      "method": "checkAttributeUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "EnumerationUsage",
+      "excluded_contexts": [],
+      "required_type": "EnumerationDefinition",
+      "message": "An enumeration must be typed by one enumeration definition.",
+      "issue": "validateEnumerationUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 593,
+      "reference": "SysMLPackage.eINSTANCE.enumerationUsage_EnumerationDefinition",
+      "method": "checkEnumerationUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "OccurrenceUsage",
+      "excluded_contexts": [
+        "PortUsage",
+        "ConnectionUsage",
+        "MetadataUsage",
+        "Step"
+      ],
+      "required_type": "Class",
+      "message": "An occurrence, item or part must be typed by occurrence definitions.",
+      "issue": "validateOccurrenceUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 625,
+      "reference": "SysMLPackage.eINSTANCE.occurrenceUsage_OccurrenceDefinition",
+      "method": "checkOccurrenceUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "PortUsage",
+      "excluded_contexts": [],
+      "required_type": "PortDefinition",
+      "message": "A port must be typed by port definitions.",
+      "issue": "validatePortUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 691,
+      "reference": "SysMLPackage.eINSTANCE.portUsage_PortDefinition",
+      "method": "checkPortUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "ConnectionUsage",
+      "excluded_contexts": [
+        "FlowUsage",
+        "InterfaceUsage",
+        "AllocationUsage"
+      ],
+      "required_type": "Association",
+      "message": "A connection must be typed by connection definitions.",
+      "issue": "validateConnectionUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 708,
+      "reference": "SysMLPackage.eINSTANCE.connectionUsage_ConnectionDefinition",
+      "method": "checkConnectionUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "FlowUsage",
+      "excluded_contexts": [],
+      "required_type": "Interaction",
+      "message": "A flow connection must be typed by flow connection definitions.",
+      "issue": "validateFlowUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 730,
+      "reference": "SysMLPackage.eINSTANCE.flowUsage_FlowDefinition",
+      "method": "checkFlowUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "InterfaceUsage",
+      "excluded_contexts": [],
+      "required_type": "InterfaceDefinition",
+      "message": "An interface must be typed by interface definitions.",
+      "issue": "validateInterfaceUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 756,
+      "reference": "SysMLPackage.eINSTANCE.interfaceUsage_InterfaceDefinition",
+      "method": "checkInterfaceUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "AllocationUsage",
+      "excluded_contexts": [],
+      "required_type": "AllocationDefinition",
+      "message": "An allocation must be typed by allocation definitions.",
+      "issue": "validateAllocationUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 762,
+      "reference": "SysMLPackage.eINSTANCE.allocationUsage_AllocationDefinition",
+      "method": "checkAllocationUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "ActionUsage",
+      "excluded_contexts": [
+        "StateUsage",
+        "CalculationUsage",
+        "FlowUsage"
+      ],
+      "required_type": "Behavior",
+      "message": "An action must be typed by action definitions.",
+      "issue": "validateActionUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 777,
+      "reference": "SysMLPackage.eINSTANCE.actionUsage_ActionDefinition",
+      "method": "checkActionUsage"
+    },
+    {
+      "quantifier": "all",
+      "context": "StateUsage",
+      "excluded_contexts": [],
+      "required_type": "Behavior",
+      "message": "A state must be typed by state definitions.",
+      "issue": "validateStateUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 975,
+      "reference": "SysMLPackage.eINSTANCE.stateUsage_StateDefinition",
+      "method": "checkStateUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "CalculationUsage",
+      "excluded_contexts": [
+        "CaseUsage"
+      ],
+      "required_type": "Function",
+      "message": "A calculation must be typed by one calculation definition.",
+      "issue": "validateCalculationUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1077,
+      "reference": "SysMLPackage.eINSTANCE.calculationUsage_CalculationDefinition",
+      "method": "checkCalculationUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "ConstraintUsage",
+      "excluded_contexts": [
+        "RequirementUsage"
+      ],
+      "required_type": "Predicate",
+      "message": "A constraint must be typed by one constraint definition.",
+      "issue": "Invalid Constraint Usage - invalid type",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1090,
+      "reference": "SysMLPackage.eINSTANCE.constraintUsage_ConstraintDefinition",
+      "method": "checkConstraintUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "RequirementUsage",
+      "excluded_contexts": [],
+      "required_type": "RequirementDefinition",
+      "message": "A requirement must be typed by one requirement definition.",
+      "issue": "validateRequirementUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1138,
+      "reference": "SysMLPackage.eINSTANCE.requirementUsage_RequirementDefinition",
+      "method": "checkRequirementUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "CaseUsage",
+      "excluded_contexts": [
+        "AnalysisCaseUsage",
+        "VerificationCaseUsage",
+        "UseCaseUsage"
+      ],
+      "required_type": "CaseDefinition",
+      "message": "A case must be typed by one case definition.",
+      "issue": "validateCaseUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1189,
+      "reference": "SysMLPackage.eINSTANCE.caseUsage_CaseDefinition",
+      "method": "checkCaseUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "AnalysisCaseUsage",
+      "excluded_contexts": [],
+      "required_type": "AnalysisCaseDefinition",
+      "message": "An analysis case must be typed by one analysis case definition.",
+      "issue": "validateAnalysisCaseUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1219,
+      "reference": "SysMLPackage.eINSTANCE.analysisCaseUsage_AnalysisCaseDefinition",
+      "method": "checkAnalysisCaseUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "VerificationCaseUsage",
+      "excluded_contexts": [],
+      "required_type": "VerificationCaseDefinition",
+      "message": "A verification case must be typed by one verification case definition.",
+      "issue": "validateVerificationCaseUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1238,
+      "reference": "SysMLPackage.eINSTANCE.verificationCaseUsage_VerificationCaseDefinition",
+      "method": "checkVerificationCaseUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "UseCaseUsage",
+      "excluded_contexts": [],
+      "required_type": "UseCaseDefinition",
+      "message": "A use case must be typed by one use case definition.",
+      "issue": "validateUseCaseUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1250,
+      "reference": "SysMLPackage.eINSTANCE.useCaseUsage_UseCaseDefinition",
+      "method": "checkUseCaseUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "RenderingUsage",
+      "excluded_contexts": [],
+      "required_type": "RenderingDefinition",
+      "message": "A rendering must be typed by one rendering definition.",
+      "issue": "validateRenderingUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1269,
+      "reference": "SysMLPackage.eINSTANCE.renderingUsage_RenderingDefinition",
+      "method": "checkRenderingUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "ViewpointUsage",
+      "excluded_contexts": [],
+      "required_type": "ViewpointDefinition",
+      "message": "A viewpoint must be typed by one viewpoint definition.",
+      "issue": "validateViewpointUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1290,
+      "reference": "SysMLPackage.eINSTANCE.viewpointUsage_ViewpointDefinition",
+      "method": "checkViewpointUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "ViewUsage",
+      "excluded_contexts": [],
+      "required_type": "ViewDefinition",
+      "message": "A view must be typed by one view definition.",
+      "issue": "validateViewUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1296,
+      "reference": "SysMLPackage.eINSTANCE.viewUsage_ViewDefinition",
+      "method": "checkViewUsage"
+    },
+    {
+      "quantifier": "one",
+      "context": "MetadataUsage",
+      "excluded_contexts": [],
+      "required_type": "Metaclass",
+      "message": "A metadata usage must be typed by one metadata definition.",
+      "issue": "validateMetadataUsageType_",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1305,
+      "reference": "SysMLPackage.eINSTANCE.metadataUsage_MetadataDefinition",
+      "method": "checkMetadataUsage"
+    }
+  ],
+  "reference_checks": [
+    {
+      "context": "IncludeUseCaseUsage",
+      "excluded_contexts": [],
+      "required_type": "UseCaseUsage",
+      "message": "Must reference a use case.",
+      "issue": "validateIncludeUseCaseUsageReference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1241,
+      "method": "checkIncludeUseCaseUsage"
+    },
+    {
+      "context": "PerformActionUsage",
+      "excluded_contexts": [
+        "ExhibitStateUsage",
+        "IncludeUseCaseUsage"
+      ],
+      "required_type": "ActionUsage",
+      "message": "Must reference an action.",
+      "issue": "validatePerformActionUsageReference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 891,
+      "method": "checkPerformActionUsage"
+    },
+    {
+      "context": "ExhibitStateUsage",
+      "excluded_contexts": [],
+      "required_type": "StateUsage",
+      "message": "Must reference a state.",
+      "issue": "validateExhibitStateUsageReference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 949,
+      "method": "checkExhibitStateUsage"
+    },
+    {
+      "context": "AssertConstraintUsage",
+      "excluded_contexts": [],
+      "required_type": "ConstraintUsage",
+      "message": "Must reference a constraint.",
+      "issue": "validateAssertConstraintUsageReference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1080,
+      "method": "checkAssertConstraintUsage"
+    },
+    {
+      "context": "SatisfyRequirementUsage",
+      "excluded_contexts": [],
+      "required_type": "RequirementUsage",
+      "message": "Must reference a requirement.",
+      "issue": "validateSatisfyRequirementUsageReference",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 1147,
+      "method": "checkSatisfyRequirementUsage"
+    }
+  ],
+  "owned_end_checks": [
+    {
+      "context": "FlowDefinition",
+      "maximum": 2,
+      "issue": "validateFlowDefinitionConnectionEnds",
+      "message": "A flow connection definition can have at most two ends.",
+      "method": "checkFlowDefinition",
+      "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "line": 711,
+      "coverage": "Owned-end overflow only; inherited end collection and all diagnostic locations remain open."
+    }
+  ],
+  "generalizations": [
+    {
+      "specific": "KerML::AnnotatingElement",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "KerML::Annotation",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Association",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "KerML::Association",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::AssociationStructure",
+      "general": "SysML::Association"
+    },
+    {
+      "specific": "KerML::AssociationStructure",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "KerML::Behavior",
+      "general": "SysML::Class"
+    },
+    {
+      "specific": "KerML::BindingConnector",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "KerML::BooleanExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::Class",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "KerML::Classifier",
+      "general": "SysML::Type"
+    },
+    {
+      "specific": "KerML::CollectExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "KerML::Comment",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "KerML::Conjugation",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Connector",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::Connector",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::ConstructorExpression",
+      "general": "SysML::InstantiationExpression"
+    },
+    {
+      "specific": "KerML::CrossSubsetting",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "KerML::DataType",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "KerML::Dependency",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Differencing",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Disjoining",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Documentation",
+      "general": "SysML::Comment"
+    },
+    {
+      "specific": "KerML::ElementFilterMembership",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "KerML::EndFeatureMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "KerML::Expression",
+      "general": "SysML::Step"
+    },
+    {
+      "specific": "KerML::Feature",
+      "general": "SysML::Type"
+    },
+    {
+      "specific": "KerML::FeatureChainExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "KerML::FeatureChaining",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::FeatureInverting",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::FeatureMembership",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "KerML::FeatureReferenceExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::FeatureTyping",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "KerML::FeatureValue",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "KerML::Flow",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "KerML::Flow",
+      "general": "SysML::Step"
+    },
+    {
+      "specific": "KerML::FlowEnd",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::Function",
+      "general": "SysML::Behavior"
+    },
+    {
+      "specific": "KerML::Import",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::IndexExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "KerML::InstantiationExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::Interaction",
+      "general": "SysML::Association"
+    },
+    {
+      "specific": "KerML::Interaction",
+      "general": "SysML::Behavior"
+    },
+    {
+      "specific": "KerML::Intersecting",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Invariant",
+      "general": "SysML::BooleanExpression"
+    },
+    {
+      "specific": "KerML::InvocationExpression",
+      "general": "SysML::InstantiationExpression"
+    },
+    {
+      "specific": "KerML::LibraryPackage",
+      "general": "SysML::Package"
+    },
+    {
+      "specific": "KerML::LiteralBoolean",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "KerML::LiteralExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::LiteralInfinity",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "KerML::LiteralInteger",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "KerML::LiteralRational",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "KerML::LiteralString",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "KerML::Membership",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::MembershipImport",
+      "general": "SysML::Import"
+    },
+    {
+      "specific": "KerML::Metaclass",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "KerML::MetadataAccessExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::MetadataFeature",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "KerML::MetadataFeature",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::Multiplicity",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::MultiplicityRange",
+      "general": "SysML::Multiplicity"
+    },
+    {
+      "specific": "KerML::Namespace",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "KerML::NamespaceImport",
+      "general": "SysML::Import"
+    },
+    {
+      "specific": "KerML::NullExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "KerML::OperatorExpression",
+      "general": "SysML::InvocationExpression"
+    },
+    {
+      "specific": "KerML::OwningMembership",
+      "general": "SysML::Membership"
+    },
+    {
+      "specific": "KerML::Package",
+      "general": "SysML::Namespace"
+    },
+    {
+      "specific": "KerML::ParameterMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "KerML::PayloadFeature",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::Predicate",
+      "general": "SysML::Function"
+    },
+    {
+      "specific": "KerML::Redefinition",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "KerML::ReferenceSubsetting",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "KerML::Relationship",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "KerML::ResultExpressionMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "KerML::ReturnParameterMembership",
+      "general": "SysML::ParameterMembership"
+    },
+    {
+      "specific": "KerML::SelectExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "KerML::Specialization",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Step",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "KerML::Structure",
+      "general": "SysML::Class"
+    },
+    {
+      "specific": "KerML::Subclassification",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "KerML::Subsetting",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "KerML::Succession",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "KerML::SuccessionFlow",
+      "general": "SysML::Flow"
+    },
+    {
+      "specific": "KerML::SuccessionFlow",
+      "general": "SysML::Succession"
+    },
+    {
+      "specific": "KerML::TextualRepresentation",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "KerML::Type",
+      "general": "SysML::Namespace"
+    },
+    {
+      "specific": "KerML::TypeFeaturing",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "KerML::Unioning",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::AcceptActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::ActionDefinition",
+      "general": "SysML::Behavior"
+    },
+    {
+      "specific": "SysML::ActionDefinition",
+      "general": "SysML::OccurrenceDefinition"
+    },
+    {
+      "specific": "SysML::ActionUsage",
+      "general": "SysML::OccurrenceUsage"
+    },
+    {
+      "specific": "SysML::ActionUsage",
+      "general": "SysML::Step"
+    },
+    {
+      "specific": "SysML::ActorMembership",
+      "general": "SysML::ParameterMembership"
+    },
+    {
+      "specific": "SysML::AllocationDefinition",
+      "general": "SysML::ConnectionDefinition"
+    },
+    {
+      "specific": "SysML::AllocationUsage",
+      "general": "SysML::ConnectionUsage"
+    },
+    {
+      "specific": "SysML::AnalysisCaseDefinition",
+      "general": "SysML::CaseDefinition"
+    },
+    {
+      "specific": "SysML::AnalysisCaseUsage",
+      "general": "SysML::CaseUsage"
+    },
+    {
+      "specific": "SysML::AnnotatingElement",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "SysML::Annotation",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::AssertConstraintUsage",
+      "general": "SysML::ConstraintUsage"
+    },
+    {
+      "specific": "SysML::AssertConstraintUsage",
+      "general": "SysML::Invariant"
+    },
+    {
+      "specific": "SysML::AssignmentActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::Association",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "SysML::Association",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::AssociationStructure",
+      "general": "SysML::Association"
+    },
+    {
+      "specific": "SysML::AssociationStructure",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "SysML::AttributeDefinition",
+      "general": "SysML::DataType"
+    },
+    {
+      "specific": "SysML::AttributeDefinition",
+      "general": "SysML::Definition"
+    },
+    {
+      "specific": "SysML::AttributeUsage",
+      "general": "SysML::Usage"
+    },
+    {
+      "specific": "SysML::Behavior",
+      "general": "SysML::Class"
+    },
+    {
+      "specific": "SysML::BindingConnector",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "SysML::BindingConnectorAsUsage",
+      "general": "SysML::BindingConnector"
+    },
+    {
+      "specific": "SysML::BindingConnectorAsUsage",
+      "general": "SysML::ConnectorAsUsage"
+    },
+    {
+      "specific": "SysML::BooleanExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::CalculationDefinition",
+      "general": "SysML::ActionDefinition"
+    },
+    {
+      "specific": "SysML::CalculationDefinition",
+      "general": "SysML::Function"
+    },
+    {
+      "specific": "SysML::CalculationUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::CalculationUsage",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::CaseDefinition",
+      "general": "SysML::CalculationDefinition"
+    },
+    {
+      "specific": "SysML::CaseUsage",
+      "general": "SysML::CalculationUsage"
+    },
+    {
+      "specific": "SysML::Class",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "SysML::Classifier",
+      "general": "SysML::Type"
+    },
+    {
+      "specific": "SysML::CollectExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "SysML::Comment",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "SysML::ConcernDefinition",
+      "general": "SysML::RequirementDefinition"
+    },
+    {
+      "specific": "SysML::ConcernUsage",
+      "general": "SysML::RequirementUsage"
+    },
+    {
+      "specific": "SysML::ConjugatedPortDefinition",
+      "general": "SysML::PortDefinition"
+    },
+    {
+      "specific": "SysML::ConjugatedPortTyping",
+      "general": "SysML::FeatureTyping"
+    },
+    {
+      "specific": "SysML::Conjugation",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::ConnectionDefinition",
+      "general": "SysML::AssociationStructure"
+    },
+    {
+      "specific": "SysML::ConnectionDefinition",
+      "general": "SysML::PartDefinition"
+    },
+    {
+      "specific": "SysML::ConnectionUsage",
+      "general": "SysML::ConnectorAsUsage"
+    },
+    {
+      "specific": "SysML::ConnectionUsage",
+      "general": "SysML::PartUsage"
+    },
+    {
+      "specific": "SysML::Connector",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::Connector",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::ConnectorAsUsage",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "SysML::ConnectorAsUsage",
+      "general": "SysML::Usage"
+    },
+    {
+      "specific": "SysML::ConstraintDefinition",
+      "general": "SysML::OccurrenceDefinition"
+    },
+    {
+      "specific": "SysML::ConstraintDefinition",
+      "general": "SysML::Predicate"
+    },
+    {
+      "specific": "SysML::ConstraintUsage",
+      "general": "SysML::BooleanExpression"
+    },
+    {
+      "specific": "SysML::ConstraintUsage",
+      "general": "SysML::OccurrenceUsage"
+    },
+    {
+      "specific": "SysML::ConstructorExpression",
+      "general": "SysML::InstantiationExpression"
+    },
+    {
+      "specific": "SysML::ControlNode",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::CrossSubsetting",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "SysML::DataType",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "SysML::DecisionNode",
+      "general": "SysML::ControlNode"
+    },
+    {
+      "specific": "SysML::Definition",
+      "general": "SysML::Classifier"
+    },
+    {
+      "specific": "SysML::Dependency",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Differencing",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Disjoining",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Documentation",
+      "general": "SysML::Comment"
+    },
+    {
+      "specific": "SysML::ElementFilterMembership",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "SysML::EndFeatureMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::EnumerationDefinition",
+      "general": "SysML::AttributeDefinition"
+    },
+    {
+      "specific": "SysML::EnumerationUsage",
+      "general": "SysML::AttributeUsage"
+    },
+    {
+      "specific": "SysML::EventOccurrenceUsage",
+      "general": "SysML::OccurrenceUsage"
+    },
+    {
+      "specific": "SysML::ExhibitStateUsage",
+      "general": "SysML::PerformActionUsage"
+    },
+    {
+      "specific": "SysML::ExhibitStateUsage",
+      "general": "SysML::StateUsage"
+    },
+    {
+      "specific": "SysML::Expose",
+      "general": "SysML::Import"
+    },
+    {
+      "specific": "SysML::Expression",
+      "general": "SysML::Step"
+    },
+    {
+      "specific": "SysML::Feature",
+      "general": "SysML::Type"
+    },
+    {
+      "specific": "SysML::FeatureChainExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "SysML::FeatureChaining",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::FeatureInverting",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::FeatureMembership",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "SysML::FeatureReferenceExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::FeatureTyping",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "SysML::FeatureValue",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "SysML::Flow",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "SysML::Flow",
+      "general": "SysML::Step"
+    },
+    {
+      "specific": "SysML::FlowDefinition",
+      "general": "SysML::ActionDefinition"
+    },
+    {
+      "specific": "SysML::FlowDefinition",
+      "general": "SysML::Interaction"
+    },
+    {
+      "specific": "SysML::FlowEnd",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::FlowUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::FlowUsage",
+      "general": "SysML::ConnectorAsUsage"
+    },
+    {
+      "specific": "SysML::FlowUsage",
+      "general": "SysML::Flow"
+    },
+    {
+      "specific": "SysML::ForLoopActionUsage",
+      "general": "SysML::LoopActionUsage"
+    },
+    {
+      "specific": "SysML::ForkNode",
+      "general": "SysML::ControlNode"
+    },
+    {
+      "specific": "SysML::FramedConcernMembership",
+      "general": "SysML::RequirementConstraintMembership"
+    },
+    {
+      "specific": "SysML::Function",
+      "general": "SysML::Behavior"
+    },
+    {
+      "specific": "SysML::IfActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::Import",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::IncludeUseCaseUsage",
+      "general": "SysML::PerformActionUsage"
+    },
+    {
+      "specific": "SysML::IncludeUseCaseUsage",
+      "general": "SysML::UseCaseUsage"
+    },
+    {
+      "specific": "SysML::IndexExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "SysML::InstantiationExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::Interaction",
+      "general": "SysML::Association"
+    },
+    {
+      "specific": "SysML::Interaction",
+      "general": "SysML::Behavior"
+    },
+    {
+      "specific": "SysML::InterfaceDefinition",
+      "general": "SysML::ConnectionDefinition"
+    },
+    {
+      "specific": "SysML::InterfaceUsage",
+      "general": "SysML::ConnectionUsage"
+    },
+    {
+      "specific": "SysML::Intersecting",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Invariant",
+      "general": "SysML::BooleanExpression"
+    },
+    {
+      "specific": "SysML::InvocationExpression",
+      "general": "SysML::InstantiationExpression"
+    },
+    {
+      "specific": "SysML::ItemDefinition",
+      "general": "SysML::OccurrenceDefinition"
+    },
+    {
+      "specific": "SysML::ItemDefinition",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "SysML::ItemUsage",
+      "general": "SysML::OccurrenceUsage"
+    },
+    {
+      "specific": "SysML::JoinNode",
+      "general": "SysML::ControlNode"
+    },
+    {
+      "specific": "SysML::LibraryPackage",
+      "general": "SysML::Package"
+    },
+    {
+      "specific": "SysML::LiteralBoolean",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "SysML::LiteralExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::LiteralInfinity",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "SysML::LiteralInteger",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "SysML::LiteralRational",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "SysML::LiteralString",
+      "general": "SysML::LiteralExpression"
+    },
+    {
+      "specific": "SysML::LoopActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::Membership",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::MembershipExpose",
+      "general": "SysML::Expose"
+    },
+    {
+      "specific": "SysML::MembershipExpose",
+      "general": "SysML::MembershipImport"
+    },
+    {
+      "specific": "SysML::MembershipImport",
+      "general": "SysML::Import"
+    },
+    {
+      "specific": "SysML::MergeNode",
+      "general": "SysML::ControlNode"
+    },
+    {
+      "specific": "SysML::Metaclass",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "SysML::MetadataAccessExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::MetadataDefinition",
+      "general": "SysML::ItemDefinition"
+    },
+    {
+      "specific": "SysML::MetadataDefinition",
+      "general": "SysML::Metaclass"
+    },
+    {
+      "specific": "SysML::MetadataFeature",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "SysML::MetadataFeature",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::MetadataUsage",
+      "general": "SysML::ItemUsage"
+    },
+    {
+      "specific": "SysML::MetadataUsage",
+      "general": "SysML::MetadataFeature"
+    },
+    {
+      "specific": "SysML::Multiplicity",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::MultiplicityRange",
+      "general": "SysML::Multiplicity"
+    },
+    {
+      "specific": "SysML::Namespace",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "SysML::NamespaceExpose",
+      "general": "SysML::Expose"
+    },
+    {
+      "specific": "SysML::NamespaceExpose",
+      "general": "SysML::NamespaceImport"
+    },
+    {
+      "specific": "SysML::NamespaceImport",
+      "general": "SysML::Import"
+    },
+    {
+      "specific": "SysML::NullExpression",
+      "general": "SysML::Expression"
+    },
+    {
+      "specific": "SysML::ObjectiveMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::OccurrenceDefinition",
+      "general": "SysML::Class"
+    },
+    {
+      "specific": "SysML::OccurrenceDefinition",
+      "general": "SysML::Definition"
+    },
+    {
+      "specific": "SysML::OccurrenceUsage",
+      "general": "SysML::Usage"
+    },
+    {
+      "specific": "SysML::OperatorExpression",
+      "general": "SysML::InvocationExpression"
+    },
+    {
+      "specific": "SysML::OwningMembership",
+      "general": "SysML::Membership"
+    },
+    {
+      "specific": "SysML::Package",
+      "general": "SysML::Namespace"
+    },
+    {
+      "specific": "SysML::ParameterMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::PartDefinition",
+      "general": "SysML::ItemDefinition"
+    },
+    {
+      "specific": "SysML::PartUsage",
+      "general": "SysML::ItemUsage"
+    },
+    {
+      "specific": "SysML::PayloadFeature",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::PerformActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::PerformActionUsage",
+      "general": "SysML::EventOccurrenceUsage"
+    },
+    {
+      "specific": "SysML::PortConjugation",
+      "general": "SysML::Conjugation"
+    },
+    {
+      "specific": "SysML::PortDefinition",
+      "general": "SysML::OccurrenceDefinition"
+    },
+    {
+      "specific": "SysML::PortDefinition",
+      "general": "SysML::Structure"
+    },
+    {
+      "specific": "SysML::PortUsage",
+      "general": "SysML::OccurrenceUsage"
+    },
+    {
+      "specific": "SysML::Predicate",
+      "general": "SysML::Function"
+    },
+    {
+      "specific": "SysML::Redefinition",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "SysML::ReferenceSubsetting",
+      "general": "SysML::Subsetting"
+    },
+    {
+      "specific": "SysML::ReferenceUsage",
+      "general": "SysML::Usage"
+    },
+    {
+      "specific": "SysML::Relationship",
+      "general": "SysML::Element"
+    },
+    {
+      "specific": "SysML::RenderingDefinition",
+      "general": "SysML::PartDefinition"
+    },
+    {
+      "specific": "SysML::RenderingUsage",
+      "general": "SysML::PartUsage"
+    },
+    {
+      "specific": "SysML::RequirementConstraintMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::RequirementDefinition",
+      "general": "SysML::ConstraintDefinition"
+    },
+    {
+      "specific": "SysML::RequirementUsage",
+      "general": "SysML::ConstraintUsage"
+    },
+    {
+      "specific": "SysML::RequirementVerificationMembership",
+      "general": "SysML::RequirementConstraintMembership"
+    },
+    {
+      "specific": "SysML::ResultExpressionMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::ReturnParameterMembership",
+      "general": "SysML::ParameterMembership"
+    },
+    {
+      "specific": "SysML::SatisfyRequirementUsage",
+      "general": "SysML::AssertConstraintUsage"
+    },
+    {
+      "specific": "SysML::SatisfyRequirementUsage",
+      "general": "SysML::RequirementUsage"
+    },
+    {
+      "specific": "SysML::SelectExpression",
+      "general": "SysML::OperatorExpression"
+    },
+    {
+      "specific": "SysML::SendActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::Specialization",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::StakeholderMembership",
+      "general": "SysML::ParameterMembership"
+    },
+    {
+      "specific": "SysML::StateDefinition",
+      "general": "SysML::ActionDefinition"
+    },
+    {
+      "specific": "SysML::StateSubactionMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::StateUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::Step",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::Structure",
+      "general": "SysML::Class"
+    },
+    {
+      "specific": "SysML::Subclassification",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "SysML::SubjectMembership",
+      "general": "SysML::ParameterMembership"
+    },
+    {
+      "specific": "SysML::Subsetting",
+      "general": "SysML::Specialization"
+    },
+    {
+      "specific": "SysML::Succession",
+      "general": "SysML::Connector"
+    },
+    {
+      "specific": "SysML::SuccessionAsUsage",
+      "general": "SysML::ConnectorAsUsage"
+    },
+    {
+      "specific": "SysML::SuccessionAsUsage",
+      "general": "SysML::Succession"
+    },
+    {
+      "specific": "SysML::SuccessionFlow",
+      "general": "SysML::Flow"
+    },
+    {
+      "specific": "SysML::SuccessionFlow",
+      "general": "SysML::Succession"
+    },
+    {
+      "specific": "SysML::SuccessionFlowUsage",
+      "general": "SysML::FlowUsage"
+    },
+    {
+      "specific": "SysML::SuccessionFlowUsage",
+      "general": "SysML::SuccessionFlow"
+    },
+    {
+      "specific": "SysML::TerminateActionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::TextualRepresentation",
+      "general": "SysML::AnnotatingElement"
+    },
+    {
+      "specific": "SysML::TransitionFeatureMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::TransitionUsage",
+      "general": "SysML::ActionUsage"
+    },
+    {
+      "specific": "SysML::TriggerInvocationExpression",
+      "general": "SysML::InvocationExpression"
+    },
+    {
+      "specific": "SysML::Type",
+      "general": "SysML::Namespace"
+    },
+    {
+      "specific": "SysML::TypeFeaturing",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Unioning",
+      "general": "SysML::Relationship"
+    },
+    {
+      "specific": "SysML::Usage",
+      "general": "SysML::Feature"
+    },
+    {
+      "specific": "SysML::UseCaseDefinition",
+      "general": "SysML::CaseDefinition"
+    },
+    {
+      "specific": "SysML::UseCaseUsage",
+      "general": "SysML::CaseUsage"
+    },
+    {
+      "specific": "SysML::VariantMembership",
+      "general": "SysML::OwningMembership"
+    },
+    {
+      "specific": "SysML::VerificationCaseDefinition",
+      "general": "SysML::CaseDefinition"
+    },
+    {
+      "specific": "SysML::VerificationCaseUsage",
+      "general": "SysML::CaseUsage"
+    },
+    {
+      "specific": "SysML::ViewDefinition",
+      "general": "SysML::PartDefinition"
+    },
+    {
+      "specific": "SysML::ViewRenderingMembership",
+      "general": "SysML::FeatureMembership"
+    },
+    {
+      "specific": "SysML::ViewUsage",
+      "general": "SysML::PartUsage"
+    },
+    {
+      "specific": "SysML::ViewpointDefinition",
+      "general": "SysML::RequirementDefinition"
+    },
+    {
+      "specific": "SysML::ViewpointUsage",
+      "general": "SysML::RequirementUsage"
+    },
+    {
+      "specific": "SysML::WhileLoopActionUsage",
+      "general": "SysML::LoopActionUsage"
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "schema": "dev.mercurio.library-origin-conjugation-evidence.v1",
+  "scope": "Bounded native libraryNamespace invocation, isLibraryElement, ownedConjugator and isConjugated consumers; neither full transformation nor full validation is qualified.",
+  "inputs": {
+    "tools/generate_ecore_model.py": "68f427c0e963054f8950b428a2f34507e54968464c9cb5a294a715e5978b38bf",
+    "tools/test_generate_ecore_model.py": "953cf3304608afe308bf5961cbb910ddb08c7b13eaefc145c44c6db4347d87b9",
+    "tools/run_library_origin_probe.py": "5e60514dcc338ec7e3ea4be7a831620c39f836930ec79738ad77161bb659940d",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotLibraryOriginProbe.java": "3e3f4384ccfd93c3ed466bb59e43fab2406e24b7a7452a66b10b09a4b310acaf",
+    "crates/mercurio-sysml/src/definition_document.rs": "68ad642ac3634bce2290eb6dd428db03f5bdea61816980145461941a4f737436",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "9cbc72db63edf0f9c1356aac61ef4acc494f8dcc7f51de086d84d59d03a841a9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "9691dedd807a585f0ae179d02e67a478da1f91b03e32a7f43002dda9c287ae23",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "51c2e6d7a3a52d9752c7907c16f839e4c41dd8839bed5b4c7de887ced4c556f6",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0999e4125e9f6b210404bbf4719f9179c929e332747c9a6edf5efd5eb14195cb",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "66f1e1995febbcde3f9d9d86c963feff137a6508aed4c3fcaca5692380e05174",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "imported_representation": "Resolved Ecore operation owner, result bounds/type and dynamic invocation branches now generate a native contract. Imported feature redefinitions, containment/opposites, subset contracts, types and delegate identities drive native readers. No general semantic translation is claimed.",
+  "native_consumers": [
+    "library_namespace_contract",
+    "DefinitionLibraryOriginContext::namespace",
+    "definition_library_namespace",
+    "definition_attribute_value_with_origins",
+    "definition_reference_targets (owned_conjugator)",
+    "definition_document::library_namespace",
+    "definition_document::attribute_value",
+    "definition_document::assess_required_features"
+  ],
+  "handwritten_dependencies": [
+    "Most-specific dynamic dispatch through imported class hierarchy",
+    "Reciprocal ownership traversal, cycle detection and evaluation-local indexing/memoization",
+    "LibraryPackage self, Relationship owningRelatedElement/fallback and Element owningRelationship branches",
+    "Boolean non-null/existence projections",
+    "Ordered first-by-imported-Conjugation-kind selection; uniqueness invariant remains separate"
+  ],
+  "normative_reference": {
+    "release": "2026-08",
+    "release_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "document": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "clauses": [
+      {
+        "pdf_page": 139,
+        "rule": "Element.libraryNamespace and deriveElementIsLibraryElement",
+        "requirement": "Follow owningRelationship if present; library membership indicates a non-null returned namespace."
+      },
+      {
+        "pdf_page": 142,
+        "rule": "Relationship.libraryNamespace",
+        "requirement": "Prefer owningRelatedElement; otherwise follow owningRelationship; absent ownership returns null."
+      },
+      {
+        "pdf_page": 263,
+        "rule": "LibraryPackage.libraryNamespace",
+        "requirement": "A LibraryPackage returns itself."
+      },
+      {
+        "pdf_page": 170,
+        "rule": "Type.isConjugated",
+        "requirement": "The Boolean indicates whether an ownedConjugator is present."
+      },
+      {
+        "pdf_page": 176,
+        "rule": "deriveTypeOwnedConjugator",
+        "requirement": "Select the first owned Conjugation in relationship order, or null."
+      },
+      {
+        "pdf_page": 177,
+        "rule": "Type owned conjugation cardinality invariant",
+        "requirement": "At most one owned Conjugation is permitted; this separate validation is not closed by the getter batch."
+      }
+    ]
+  },
+  "verification": {
+    "logs": {
+      "native-tests-library-origin.log": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-library-origin.log",
+        "sha256": "e4fa41367ac9232df2b13d3fb61b00086f5410c3c62cd7d19875bb1981e45eca",
+        "passed": 185
+      },
+      "library-origin-required-value-tests.log": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-origin-required-value-tests.log",
+        "sha256": "5b0efa8887a95b9a5f0833070e8a1e2e9dc3659612fe0e5bfab71a9915b91e4d",
+        "passed": 8
+      },
+      "library-origin-focused-tests.log": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-origin-focused-tests.log",
+        "sha256": "f1dc4cebf94eb4015c22ebb4527c8a0641c9d9e7110c7945d253537805ce7e9d",
+        "passed": 2
+      },
+      "library-origin-audit-tool-tests.log": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-origin-audit-tool-tests.log",
+        "sha256": "ebb03d08041bac22460fe06b129c502fb94005a73a640c5e213a70a1efc977e4",
+        "passed": 10
+      }
+    },
+    "independent_pilot": {
+      "path": "docs/conformance/2026-08-support/library-origin-pilot-controls.json",
+      "sha256": "258c2a0dbad505abb6aa0cb24eef7963efac6f3a16c7f5c275c0f6d0f2a930df",
+      "source_controls": 5,
+      "named_element_observations": 22,
+      "alias_controls": 1,
+      "relationship_fallback_controls": 1,
+      "type_conjugation_observations": 11,
+      "supplied_completion_flags": false,
+      "disagreements": [],
+      "provenance": {
+        "driver_sha256": "5e60514dcc338ec7e3ea4be7a831620c39f836930ec79738ad77161bb659940d",
+        "helper_sha256": "3e3f4384ccfd93c3ed466bb59e43fab2406e24b7a7452a66b10b09a4b310acaf",
+        "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+        "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+        "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+        "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+        "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+        "source_sha256": {
+          "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Element_libraryNamespace_InvocationDelegate.java": "18b2ff1bd36016fa55332c81608843e9b60bcaaa4a4196ac5c3b2252c20bfb3e",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/LibraryPackage_libraryNamespace_InvocationDelegate.java": "77dc5694d0c0b147136f163da501c9c07881cad8cd35a11cf12c8fb711bdfc48",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Relationship_libraryNamespace_InvocationDelegate.java": "24e82bd3fa84cc9915377bee776c9129ef9fd24895b268db101f807f78050b64",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Element_isLibraryElement_SettingDelegate.java": "1e7d66d4b4d9924d859a14d9b271ab9c6f566584ec5b40ddae7523791186f80f",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_isConjugated_SettingDelegate.java": "2e50a2b8a248cdae3d3415682ef6aeed98671336d8cb471e39fd3988d5d31a19",
+          "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedConjugator_SettingDelegate.java": "5e79adeefc3ada74e09ca667f4593ada4a09b259da3e5ad0a87f5dd793285acd",
+          "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+        }
+      }
+    },
+    "persistence": "Focused source controls round-trip KIR and reverse element storage order without changing origin identities. No completion/semantic-validation stamp changes.",
+    "negative_controls": "Missing and cyclic ownership, cached Boolean/reference values, and incomplete conjugation relationship inputs are rejected or ignored as appropriate."
+  },
+  "source_set_assessment": {
+    "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-origin-conjugation-results.jsonl",
+    "sha256": "2449fb21d8d3a3de31c92abf892af9f9a8b24ab84bc72307845c67d50aeeb4f8",
+    "input_sha256": {
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-control.kerml": "59582d1475f8c550f6494c841b7b07bc4796108ccfa16280a41e7c6a1243e7d0"
+    },
+    "results": [
+      {
+        "source_set": "Base-and-ScalarValues.kerml",
+        "elements": 147,
+        "invalid_required_values": 0,
+        "unverified_required_values": 79,
+        "remaining_features": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "instances": 13,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "instances": 13,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "instances": 16,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "instances": 16,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "instances": 9,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "instances": 9,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "instances": 2,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "instances": 1,
+            "status": "unverified_dependency"
+          }
+        ],
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed"
+      },
+      {
+        "source_set": "Base-ScalarValues-and-Links.kerml",
+        "elements": 277,
+        "invalid_required_values": 0,
+        "unverified_required_values": 139,
+        "remaining_features": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "instances": 20,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "instances": 20,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "instances": 28,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "instances": 28,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "instances": 17,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "instances": 17,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "instances": 6,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "instances": 3,
+            "status": "unverified_dependency"
+          }
+        ],
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed"
+      },
+      {
+        "source_set": "feature-default-source-control.kerml",
+        "elements": 157,
+        "invalid_required_values": 0,
+        "unverified_required_values": 79,
+        "remaining_features": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "instances": 13,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "instances": 13,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "instances": 16,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "instances": 16,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "instances": 9,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "instances": 9,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "instances": 2,
+            "status": "unverified_dependency"
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "instances": 1,
+            "status": "unverified_dependency"
+          }
+        ],
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed"
+      }
+    ]
+  },
+  "metric": {
+    "scope": "Base+ScalarValues+Links required-value declaration instances",
+    "unverified_before": 497,
+    "unverified_after": 139,
+    "reduction": 358,
+    "invalid_after": 0,
+    "matching_pilot_document_models": 155,
+    "matching_document_delta": 0,
+    "whole_families_qualified": 0,
+    "release_gates_qualified": 0,
+    "overall_completion_percent": null
+  },
+  "remaining": "Annotations/Documentation targets, chained ownership, importedElement, expression evaluation/results and multiplicity bounds in this closure; other adapter transformations, specialized delegate contexts and complete release qualification remain open."
+}

@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL controls; not benchmark timings",
+  "source_sha256": {
+    "nested.kerml": "c2d2d729b0f23323018265aaeb64c9ce788c33d44ce59572ed53e14a51f9842e",
+    "nested.sysml": "474e9412700a2793ffaf5b6a859e6cdc56268fc7309117d95f232e7302e309aa",
+    "root-private.kerml": "29b83cec882125d67a52600da9188da83ac898fee6926879e4bd3e2e5a18b42b",
+    "root-private.sysml": "67b4a61fb10f6b86d189f9df3f76d0b65d4d4376ee37f4161786e0b5a277efa7",
+    "root-protected.kerml": "574d88e4983d5d4e8b45c7c727acf98e39256162e00012b2b9e41112c429d156",
+    "root-protected.sysml": "f0f8cf6ea00275cbd83228985019e9840a863a0eb4007acaa4fb3ce98263d06e",
+    "root-public.kerml": "eab491ede261d98338caf8e8b985955f1ca3365a6c330849855ad20fa615da2e",
+    "root-public.sysml": "3d0a3e88a20ec9bb3d8bc810a57cf094e2fac17ae3ca33a055088cb3c8833506"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "cases": [
+    {
+      "relative_path": "nested.kerml",
+      "status": "ok",
+      "validation_ms": 339.3578,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "nested.sysml",
+      "status": "ok",
+      "validation_ms": 453.6429,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "root-private.kerml",
+      "status": "ok",
+      "validation_ms": 356.7608,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "root-private.sysml",
+      "status": "ok",
+      "validation_ms": 386.001,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "root-protected.kerml",
+      "status": "error",
+      "validation_ms": 290.0318,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "root-protected.sysml",
+      "status": "error",
+      "validation_ms": 376.483,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "root-public.kerml",
+      "status": "error",
+      "validation_ms": 348.7229,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "root-public.sysml",
+      "status": "error",
+      "validation_ms": 380.6511,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "line": 1
+        }
+      ]
+    }
+  ]
+}

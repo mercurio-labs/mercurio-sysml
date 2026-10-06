@@ -1,0 +1,271 @@
+{
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "export_sha256": "97fdb6d12700ee28148028e51eb9c9f8f99917e7412a49d18cfaee4e40250e11",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "fixtures": {
+      "kernel-connectors.kerml": "1a18dc674c9cac00b1368909ad553f8857e83f981e7b1e6f9fb92f97333a6ea5",
+      "sysml-connectors.sysml": "06a4af9d904c9de5eccbd8641dc245f261bd64378ea27c2574682d7655e1176b"
+    },
+    "validation": [
+      {
+        "relative_path": "kernel-connectors.kerml",
+        "status": "ok",
+        "validation_ms": 883.1526,
+        "diagnostics": [
+          {
+            "severity": "WARNING",
+            "code": "validateFeatureEndFeatureMultiplicity",
+            "message": "End feature must have multiplicity 1",
+            "line": 12
+          },
+          {
+            "severity": "WARNING",
+            "code": "validateFeatureEndFeatureMultiplicity",
+            "message": "End feature must have multiplicity 1",
+            "line": 12
+          },
+          {
+            "severity": "WARNING",
+            "code": "validateFeatureEndFeatureMultiplicity",
+            "message": "End feature must have multiplicity 1",
+            "line": 12
+          }
+        ]
+      },
+      {
+        "relative_path": "sysml-connectors.sysml",
+        "status": "ok",
+        "validation_ms": 356.7105,
+        "diagnostics": []
+      }
+    ]
+  },
+  "named_declarations": [
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "binary",
+      "line": 11,
+      "kind": "Connector",
+      "type": [
+        "Links::BinaryLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "bound",
+      "line": 14,
+      "kind": "Connector",
+      "type": [
+        "Links::BinaryLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "result",
+      "line": 25,
+      "kind": "Feature",
+      "type": [
+        "KernelConnectors::Node"
+      ],
+      "source": [],
+      "target": []
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "decorated",
+      "line": 22,
+      "kind": "Connector",
+      "type": [
+        "Links::BinaryLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "equal",
+      "line": 16,
+      "kind": "BindingConnector",
+      "type": [
+        "Links::SelfLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "priorNext",
+      "line": 19,
+      "kind": "Succession",
+      "type": [
+        "Occurrences::HappensBefore"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "ternary",
+      "line": 12,
+      "kind": "Connector",
+      "type": [
+        "Links::Link"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b",
+        "KernelConnectors::Scope::c"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "typedBinding",
+      "line": 17,
+      "kind": "BindingConnector",
+      "type": [
+        "KernelConnectors::Pair",
+        "Links::SelfLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "typedLink",
+      "line": 13,
+      "kind": "Connector",
+      "type": [
+        "KernelConnectors::Pair"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "typedOrder",
+      "line": 20,
+      "kind": "Succession",
+      "type": [
+        "KernelConnectors::Pair",
+        "Occurrences::HappensBefore"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "kernel-connectors.kerml",
+      "name": "withBody",
+      "line": 15,
+      "kind": "Connector",
+      "type": [
+        "Links::BinaryLink"
+      ],
+      "source": [
+        "KernelConnectors::Scope::a"
+      ],
+      "target": [
+        "KernelConnectors::Scope::b"
+      ]
+    },
+    {
+      "file": "sysml-connectors.sysml",
+      "name": "namedBinding",
+      "line": 6,
+      "kind": "BindingConnectorAsUsage",
+      "type": [
+        "Links::SelfLink"
+      ],
+      "source": [
+        "SysmlConnectors::scope::a"
+      ],
+      "target": [
+        "SysmlConnectors::scope::b"
+      ]
+    },
+    {
+      "file": "sysml-connectors.sysml",
+      "name": "namedOrder",
+      "line": 9,
+      "kind": "SuccessionAsUsage",
+      "type": [
+        "Occurrences::HappensBefore"
+      ],
+      "source": [
+        "SysmlConnectors::scope::a"
+      ],
+      "target": [
+        "SysmlConnectors::scope::b"
+      ]
+    },
+    {
+      "file": "sysml-connectors.sysml",
+      "name": "typedBinding",
+      "line": 7,
+      "kind": "BindingConnectorAsUsage",
+      "type": [
+        "SysmlConnectors::Pair"
+      ],
+      "source": [
+        "SysmlConnectors::scope::a"
+      ],
+      "target": [
+        "SysmlConnectors::scope::b"
+      ]
+    },
+    {
+      "file": "sysml-connectors.sysml",
+      "name": "typedOrder",
+      "line": 10,
+      "kind": "SuccessionAsUsage",
+      "type": [
+        "Occurrences::HappensBefore",
+        "SysmlConnectors::Pair"
+      ],
+      "source": [
+        "SysmlConnectors::scope::a"
+      ],
+      "target": [
+        "SysmlConnectors::scope::b"
+      ]
+    }
+  ]
+}

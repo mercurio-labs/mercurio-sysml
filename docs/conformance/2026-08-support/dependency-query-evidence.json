@@ -1,0 +1,126 @@
+{
+  "schema": "dev.mercurio.dependency-query-evidence.v1",
+  "scope": "Measured shared recursive inheritance query view and caller-owned dependency tracing. No new language-support closure.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "110a440cbfd64940bcdb830e2d460a9206e5c34669b62f735eb6e4f46ceb7f4b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "95e8cc220a174d39acd721410abc6943494a4fa620c1be420c26b223b5d8517f",
+    "crates/mercurio-sysml/src/definition_document.rs": "946c9e2264c3e7c23446879a4dd2bd123a5cb3295c2b71ffb30a9fdc204e0d8b",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "4e7a550b558a2f63f26706a2ae997f31f5fd7caffc43c1b0df9e5da962783476",
+    "tools/analyze_definition_query_trace.py": "6a2e546817311efd6430d7093637ca5ccde7a386c05ce5fd93cb158b19bec543",
+    "tools/test_definition_query_trace.py": "02b76221457745dbe8e6d84742cc70ecc7540416fa279ad4fa19b334f9dc13b6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-dependency-query-trace.log": "16e93f64786e84c0f2c62eae43527815ca29f6d2a1e8ff6ad75e58795eb00ae1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-dependency-query-analysis.json": "b6df0b61477b0663bd91c5ccba3185dc0570e45ec0ca527fcc461778e6137a5e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-dependency-query-supervision.json": "716de8f6b07996a25c20e35a24f585346d9e1a49c487b724c00ebf84b7600b6b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-inheritance-trace.log": "e74a6a3a7ca53a26840cd1cb540299f92ee0810347af04e4a1e2d94065a6ab62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-inheritance-analysis.json": "294b6db24b0eaac8d92d81bbde710f3c5957e594e3ca7d2bcdd0b550e7df6c2d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-inheritance-supervision.json": "dd581fb05df27c0c1cdbf5315e9b0b60a076bb6f6c54da5685a5f2f5db35b4e1"
+  },
+  "imported_representation": [
+    "Pinned Ecore ancestry, reciprocal ownership, specialization subset and effective feature contracts",
+    "Generated default-provider/name dispatch retained"
+  ],
+  "native_consumers": [
+    "definition_inherited_memberships_evaluate",
+    "explicit_recursive_inherited_memberships_query",
+    "scope_memberships_query",
+    "definition_general_type_inputs_with_view",
+    "standard_default_binding_query"
+  ],
+  "handwritten_boundary": "Identity indexing, recursive scope, visibility, cycle guards and redefinition filtering are handwritten Rust driven by imported contracts. No runtime Java. Clocks, process supervision and analysis are tools only.",
+  "measured_decision": {
+    "prior_inherited_inclusive_ms": 28511,
+    "prior_inherited_exclusive_ms": 14955,
+    "selected_change": "Share one immutable identity/name/library-path view through public/protected parent scope and recursive inheritance; preserve supplied general maps, ordering, exclusions and deferred/error results.",
+    "rejected_optimization": "Repeated general-type keys did not justify another result cache.",
+    "historical_baseline_source_sha256": "afec68235b3196eb287d83622a8b87c9996d82f97d40cb8c05dbf47bb10efeeb"
+  },
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-native-tests.log",
+      "sha256": "8e00db4b5d644cacea93c74d8a1db4a984052857c3eafafff847e2d8f7ad37d1",
+      "passed": 219
+    },
+    "focused_required_rejected_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-result-tests.log",
+      "sha256": "4c4e23ee2ed3820402b26f86485e244c9f89945d7b46ea4a3d627eff683f5bdc",
+      "passed": 1
+    },
+    "focused_inheritance_view_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-view-tests.log",
+      "sha256": "7cac166f39688286af345bf47dc123e2c0be7c94eece83ff0fb8b8eaca9eba1e",
+      "passed": 1
+    },
+    "trace_analyzer_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-analysis-tests.log",
+      "sha256": "6ce19fe5c6e39322ca0b13f5b467573e2eeec70d41fbf64d3e414ddbe59845d6",
+      "passed": 5
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-tool-tests.log",
+      "sha256": "0254f189e156fd9bd19ce7ca7abb4fca7d7c511a75dcd1d7f0736acb652dd277",
+      "passed": 10
+    },
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-certificate-tests.log",
+      "sha256": "46a43443a95103cfea9774c1c3a6ae8ae665709d258cc399e23faaf2822383a9",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/dependency-query-plan-tests.log",
+      "sha256": "b8c76870ff408fedb853de41fe9b92da3674a3f2f4d695869db953524548db63",
+      "passed": 14
+    }
+  },
+  "verification_limits": [
+    "The supplied-general-map test is a bounded stage control, not a complete Type lifecycle qualification.",
+    "Failed GeneralTypes routine results include Required prerequisites; observer booleans do not assert model invalidity.",
+    "Inclusive times overlap; exclusive times include uninstrumented calls.",
+    "Reference attempts include retries/prerequisites, not distinct qualified fields."
+  ],
+  "cost_diagnostic": {
+    "supervision": {
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out",
+      "elapsed_seconds": 112.39000000001397,
+      "exit_code": 1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "cc3bdb62c744572a727215eaf169f0670d918e6f6f8f26c6d753f2cb2475dd50",
+      "source_sha256": "110a440cbfd64940bcdb830e2d460a9206e5c34669b62f735eb6e4f46ceb7f4b",
+      "wall_budget_seconds": 240,
+      "linking_budget_seconds": 55,
+      "semantic_qualification": "not_assessed"
+    },
+    "completed_reference_attempts": 156,
+    "prior_attempts": 153,
+    "attempt_delta": 3,
+    "semantic_qualification": "not_assessed",
+    "analysis": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-inheritance-analysis.json"
+  },
+  "feature_status": {
+    "imported": "Existing pinned definitions retained",
+    "consumed": "Recursive scope now shares caller view and reports nested dependency work",
+    "semantically_verified": "219-test bounded regression and focused result/order controls",
+    "unsupported": "Remaining full-resource lifecycle, delegate, metadata, specialized strategy and validation obligations stay open"
+  },
+  "metrics": {
+    "verified_whole_models": 155,
+    "ordinary_bindings": {
+      "verified": 50,
+      "total": 79
+    },
+    "bounded_obligations": {
+      "closed": 7,
+      "total": 9
+    },
+    "families": {
+      "qualified": 0,
+      "total": 34
+    },
+    "release_gates": {
+      "qualified": 0,
+      "total": 5
+    },
+    "candidate_promoted": false
+  }
+}

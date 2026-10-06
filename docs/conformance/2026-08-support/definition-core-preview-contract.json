@@ -1,0 +1,622 @@
+{
+  "acceptance": [
+    "preserve_deferred_semantics",
+    "resolved_pinned_definitions_and_current_generation",
+    "native_supported_subset_and_independent_reference",
+    "portable_exports_and_fresh_persistence",
+    "explicit_boundaries_and_native_execution",
+    "reviewable_extraction_manifest_and_exclusions"
+  ],
+  "candidate_promoted": false,
+  "cases": [
+    {
+      "case_id": "core-000",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "b0839143c9c40203f2c57852e26434c220929ca2800417233a6022b822eae91b"
+    },
+    {
+      "case_id": "core-001",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "561c388f84fe8d3fd5ef4ae775da0a21dacde66e59f5d4f77de80c655d1207c1"
+    },
+    {
+      "case_id": "core-002",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "7fcaa47921a475b9422c010071e88a9513efe1eabcd1db55f854305ff99b22f1"
+    },
+    {
+      "case_id": "core-003",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "598323fd3e10ead2cf698d3cab90c1db2e860fca4f499f94e1dc07568b29dd4d"
+    },
+    {
+      "case_id": "core-004",
+      "expected_stage": "syntax",
+      "language": "kerml",
+      "source_sha256": "a0f248a03aa5d9de61bb2c9997c99877e4c009b8508093b58bd83ad2133a6f0c"
+    },
+    {
+      "case_id": "core-005",
+      "expected_stage": "syntax",
+      "language": "kerml",
+      "source_sha256": "800e2f2bb5fe7110adf9fca73ad4aa3ca6e6e7dcca92843b7e8e23fc5cfac82a"
+    },
+    {
+      "case_id": "core-006",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "3a4b850fb7af34a01167362ba588ad7b78c9d2ac4c49dc65acfbf23dea6e0443"
+    },
+    {
+      "case_id": "core-007",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "a04d0e0759d8468fe03d41eef66a52b49881ff6bdddfea3173f76aed071f03aa"
+    },
+    {
+      "case_id": "core-008",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "1069efceb857d478895e7cdd3567f2e3ec3e838755392f50da19ceba1c13cb3e"
+    },
+    {
+      "case_id": "core-009",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "b7211111437981f18be825f6bcae46c53c7d418b69e06a5e2494b1c9aeb3bc7f"
+    },
+    {
+      "case_id": "core-010",
+      "expected_stage": "syntax",
+      "language": "sysml",
+      "source_sha256": "a0f248a03aa5d9de61bb2c9997c99877e4c009b8508093b58bd83ad2133a6f0c"
+    },
+    {
+      "case_id": "core-011",
+      "expected_stage": "syntax",
+      "language": "sysml",
+      "source_sha256": "598e95896aca80eae01c8720cfa65a791fcd78f33ce8e413c931f3064803a9b6"
+    },
+    {
+      "case_id": "core-012",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "ba3014ac5fd21a4b0de57666be7277b8429e21edf4a527009c79acf6fffb134b"
+    },
+    {
+      "case_id": "core-013",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "08b1d8a3030c03f0d93f48834af21194dfa81966a11b6ad3ac2976677c8195ee"
+    },
+    {
+      "case_id": "core-014",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "d787d4664d10045083dcb2f711e29732cc5978b838a2c780bd7cfac0b9caf369"
+    },
+    {
+      "case_id": "core-015",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "2b461be77ba02357541e18c1f613eb11eff44f4ef8186c08a92b23628ead2933"
+    },
+    {
+      "case_id": "core-016",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "d66f45d3237fa7bfd4f46c3ceecbe200b519c27e458105822919757a36b5e92a"
+    },
+    {
+      "case_id": "core-017",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "fbf343c2d83ca1f3959608a197d2e0ed1366fed7b9ece374d9c3291ddb0c5b22"
+    },
+    {
+      "case_id": "core-018",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "b08a813db532c1f86685dbd0826a1c34d1bc538a6f357be12a555db3d96f31ae"
+    },
+    {
+      "case_id": "core-019",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "b8128889258b8d4d2d61c1bcc33a137c18835430ca0a5b47c2bc4d8ca5b7981b"
+    },
+    {
+      "case_id": "core-020",
+      "expected_stage": "syntax",
+      "language": "kerml",
+      "source_sha256": "561b5cb718078547e2d974c8f53a719c01c3721a9ca9663b009d6cf298eafbee"
+    },
+    {
+      "case_id": "core-021",
+      "expected_stage": "syntax",
+      "language": "kerml",
+      "source_sha256": "4f98e94be64cce2fa6b42aa8bc9e9ddf4790eabb96b906571b2788f89af600ee"
+    },
+    {
+      "case_id": "core-022",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "e838539b39ca95d3c6b407cd9d6b084465c1e8fa481618e7ce63f8c371f8510c"
+    },
+    {
+      "case_id": "core-023",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "582377e188362fca64fccf125a1de005bebb6b39fb265e6456f97c791b86aaba"
+    },
+    {
+      "case_id": "core-024",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "345e934e96cd11f964f3e83e7829d539844de704e11fa784e26f6ae9be80c618"
+    },
+    {
+      "case_id": "core-025",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "46eadbb4d16877601017fefd2d000a2e1a0cccf7e22eebeecdb46f3fee3127b9"
+    },
+    {
+      "case_id": "core-026",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "8ef998ff4e791c098393d3c81973f42dfaf9be8a9e514d5a793d4a442783b270"
+    },
+    {
+      "case_id": "core-027",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "abc8f273ce50726f0208a23967d4fafee3ebdf30d044e258f407925e3288b854"
+    },
+    {
+      "case_id": "core-028",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "d33cceaede7c4615699d63e15ce55566b328b35d24ef659ed653d7ee4f6bed29"
+    },
+    {
+      "case_id": "core-029",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "1dd6737b6e63b0c624ba6178371421ca6e169fb669f0f47f7c4f94bcde909bf4"
+    },
+    {
+      "case_id": "core-030",
+      "expected_stage": "syntax",
+      "language": "sysml",
+      "source_sha256": "b97ed03cd615b3f459077a46a117d5ca7f2150fcb45915b546ee753d2858e6f1"
+    },
+    {
+      "case_id": "core-031",
+      "expected_stage": "syntax",
+      "language": "sysml",
+      "source_sha256": "55215cd162ee968b03da7849fbdb97953cb4fa92bbdaab90ce3a3d7f49ffd2a2"
+    },
+    {
+      "case_id": "core-032",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "fffe42578f821f0e910d8b6e88391e469f2b114e7925378e6f503d53c239cec9"
+    },
+    {
+      "case_id": "core-033",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "3181b23f7f0b2ad33cb95ec53479d1b75ba6644282a62deb7d5b43b3dd5d0189"
+    },
+    {
+      "case_id": "core-034",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "4ae3aa3e954776d8efa87aea1afd228c3e4fd560c880725776553236e64a7b82"
+    },
+    {
+      "case_id": "core-035",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "6507769eb5c607e78459f287ad92911aab8a695fd11681d13573d70d66c09816"
+    },
+    {
+      "case_id": "core-036",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "bcbdb58ef190c319a9ccd9533b74bb8b86faa6b89ded7fe5181e600fdfbf11c9"
+    },
+    {
+      "case_id": "core-037",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "13ab38d3609b1f2d51f3eb490c95dce56ee9981ae93dc9cb62b97be0a06767e4"
+    },
+    {
+      "case_id": "core-038",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "51a94b5b2df6e245e75786259006fde14a98ebc12d654d3fe5bcfecb0644fc54"
+    },
+    {
+      "case_id": "core-039",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "cfb89f35f13bfa6d8a30f923fff7913ce682da2d3485e4dffb7b94137619a389"
+    },
+    {
+      "case_id": "core-040",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "e7f71b8525a3243498979e9f76f59e05331fc3a458a865371fd4436bd09a07da"
+    },
+    {
+      "case_id": "core-041",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "22f63e37292d65e7f8cfd4a4bb85d4a8c11de1d81a13d903f08143e286aa609d"
+    },
+    {
+      "case_id": "core-042",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "e4bbc45353c040570a49c52efdbcf18542e555f2e1c96e98c382a7b004b78418"
+    },
+    {
+      "case_id": "core-043",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "92f2e97535ff02ce19f271b127c46c91818f3e8341bfda125983b37fe3e6a07a"
+    },
+    {
+      "case_id": "core-044",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "4aa0377244600ce066b03834b8a5f92fb076fdb2160c697bc8458f27ea538e26"
+    },
+    {
+      "case_id": "core-045",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "186945921bc11e19fc41195a15dbd26cc3d2aeb363107ee562856e5c2fe6eb13"
+    },
+    {
+      "case_id": "core-046",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "9fc83d901892f525b5853715191228523bf3799dc7bbf85fb2a5b51f9a93a854"
+    },
+    {
+      "case_id": "core-047",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "1bfdcbe425a527a4744eded05d80b03c041d18dc6fe9f84a0482f79c4ed8e35d"
+    },
+    {
+      "case_id": "core-048",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "8a55cec3ab0113ca6c58531ff19bd122f7910a7174a3e08401b4efe385432b55"
+    },
+    {
+      "case_id": "core-049",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "874aab727bf3696cd0e5719a2bdc57b889983301696610dfc02fbe55e6e66d41"
+    },
+    {
+      "case_id": "core-050",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "47160b2467a0b9ded087858d92c75b4bd2f0ea1404ff0aa11aafe02a3d8ac60a"
+    },
+    {
+      "case_id": "core-051",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "11a4eeeb48c10bdf8915393e3451ae1f22cc3dc08b2309fe4d8cc6d527b01287"
+    },
+    {
+      "case_id": "core-052",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "7255c03a34b318a4b4dd1aefb7328cedd75e960fa6dd4aabebae8cce5107420f"
+    },
+    {
+      "case_id": "core-053",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "fa75f95a46d324e64191befd42f5db0f8d59b2d3842507282460a0ffd5554237"
+    },
+    {
+      "case_id": "core-054",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "7847079f470a62b2b0de8442564d81375fcb314a13b9812bb0d56b92dab66fa6"
+    },
+    {
+      "case_id": "core-055",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "90203a87465010294a24c033b203b9446d0c9c99595f729ab83fba97cc443caf"
+    },
+    {
+      "case_id": "core-056",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "4cb8c5344d3d1362e2c8e039f62684cce6bd4a61cb209defa8001ef1c4b92a1b"
+    },
+    {
+      "case_id": "core-057",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "3051e3c5ed7c47bd819d5fe9b92bd20c3b252b7458cc37ba50338ac4352fb1ec"
+    },
+    {
+      "case_id": "core-058",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "cceb4c4feb09020d89f808e6fcf52eccf5dd9bff8f37b30075f44f94e2eec82e"
+    },
+    {
+      "case_id": "core-059",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "f4e726ad0ad481e6447a9b4fe3c599391029ee605a565e7cc1d98f13c4eed206"
+    },
+    {
+      "case_id": "core-060",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "4c22cbd884232e4a319d79b48143e4046fa361a22ba3339f1367373d42c6469d"
+    },
+    {
+      "case_id": "core-061",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "89b0097ab4f3c03816b148d041ace7a6d5de06d34df2d9c880ea12b5706fe857"
+    },
+    {
+      "case_id": "core-062",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "3a582fa9b445906e2e215bbd58c47993647e3f9558947cfc80987dc591e7a622"
+    },
+    {
+      "case_id": "core-063",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "9dc2820461b9a296dcada501e88c66b6ebb3da8c181ef729c0211265b0d7a77a"
+    },
+    {
+      "case_id": "core-064",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "8de0d56b45368663fe447b1f963a07b2c1274656e455cdfdee89edf4241a78f9"
+    },
+    {
+      "case_id": "core-065",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "8c2be23f72b408c433f5b462be0aeed9a992f8f27891a0a466ebb45802062205"
+    },
+    {
+      "case_id": "core-066",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "00461b3250241562525e2cc73a8c0f1d0d3022d422fae7f3adb9a435276e8a98"
+    },
+    {
+      "case_id": "core-067",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "016d0e9381cb9a414b33fa704f0101dd5d1d0042933df1ef13307baf28e6191d"
+    },
+    {
+      "case_id": "core-068",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "62b9e2441e53f7d9eeb27535f70973242be39cdddf97182d9017335e01e05e02"
+    },
+    {
+      "case_id": "core-069",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "fe93c3981e83ed0d5d4ef80c17ea5ec200d0f59aa1b99c5aa9dca2a59aca8dc1"
+    },
+    {
+      "case_id": "core-070",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "b13350f90fe2ea95a6b8dd3d81b26e49672f7f349094ea1ac03016201403b42f"
+    },
+    {
+      "case_id": "core-071",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "fe3bcbddaafa6a5a243dceef93d6160e569b63e41a492525f64de6e492767c6b"
+    },
+    {
+      "case_id": "core-072",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "371b5d246e1a0b20df3d94f9118b9b7f2d91518a441c3311db54b1fe937b72b4"
+    },
+    {
+      "case_id": "core-073",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "e98b5fd9ea9d0d98e16727c9e434b42910bdb5f477bfda9932cf9b5a59fa6619"
+    },
+    {
+      "case_id": "core-074",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "52253dfc503a49ee80ca6f95e5f08b44dd89892d38b0e333e8266aedd9a57170"
+    },
+    {
+      "case_id": "core-075",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "e5dc4e9c63ec19d0177d8621cefc02293fefd41d851ef8f3f3e68acda1ea7323"
+    },
+    {
+      "case_id": "core-076",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "f006561f1379e3f4842b3f998dcd4e96920e8f70da883f7791ac806b14dc5fea"
+    },
+    {
+      "case_id": "core-077",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "4ad8ad1dd73a4553870f123c3f7aa6eae22f288881ef745cdd8f2a30f451ee2e"
+    },
+    {
+      "case_id": "core-078",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "59fddac10d2f247e2a8558f113dde16d1a1f396d6ea5a3cdcda7e50624210a77"
+    },
+    {
+      "case_id": "core-079",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "055d75f4e2cba811f0e4840b2160dfd67751aab40da2a3b344e80ae623a31a0e"
+    },
+    {
+      "case_id": "core-080",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "260049600d89535c57bb67e39e883241fb913dac207e77d6748ef0df5a680707"
+    },
+    {
+      "case_id": "core-081",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "74f6b3ea91bb7a5d8895039cf93ccdc6a205347923a4aa9a881788d7f1e63a62"
+    },
+    {
+      "case_id": "core-082",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "df4c4e926148b5b7138d9575639f61a9e295a625cb7a2d442bd6f97583af7d65"
+    },
+    {
+      "case_id": "core-083",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "772ee9d905dfc61b8681f0d9070e0c594ca744220867b8bfa5e489b8e7084eaa"
+    },
+    {
+      "case_id": "core-084",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "84af9da80639230d2d4460ba65e80b817b8f5b38467fa04aaefedfa42be2f959"
+    },
+    {
+      "case_id": "core-085",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "a2b073a8bbd27990380d6649d5ebeaa9ffc17ea2806f7da1550fca19dca666f6"
+    },
+    {
+      "case_id": "core-086",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "21ef9f7e4df92ddca9276781d8a7d198f38b5ab9931b2c54a85dcab15eb2207f"
+    },
+    {
+      "case_id": "core-087",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "08d6c038f93c33107ea44f637bc640cc3f896a9f0e882e514275f3601cd1bbc1"
+    },
+    {
+      "case_id": "core-088",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "823753667ffe7360b2bea3453d13d3469a14e9a09517cd31cc9ca0458f9ea084"
+    },
+    {
+      "case_id": "core-089",
+      "expected_stage": "core_constructed",
+      "language": "kerml",
+      "source_sha256": "8b336e1eaec6158370e771560432b8e053ed1abe711a3ea5cdbf68fab0dc07e0"
+    },
+    {
+      "case_id": "core-090",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "94a16e2171376185cdbcb870bdb8c303c9d1684ddd494bd13af3fb3543c3ca92"
+    },
+    {
+      "case_id": "core-091",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "f940b0fe083abf8e5ee35a796d2142413cb84b10507e49706c1c614309071884"
+    },
+    {
+      "case_id": "core-092",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "f7d8c0974ab3293f2cbcb49d0d800bd9ee7266865c0faa2c58febe288cc7f2e6"
+    },
+    {
+      "case_id": "core-093",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "71bc4e124c307cd83b508d7d57db78c0e401e704250c060b171eaa0dcd051251"
+    },
+    {
+      "case_id": "core-094",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "6797d1817cf86cad920f3e3363ffd00ac95a6acd8295cb9208c25a2a90093414"
+    },
+    {
+      "case_id": "core-095",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "7d8068f8d9ee2f070c501b0eb7812c6cc3f71466615079ad03a8a09592f82d95"
+    },
+    {
+      "case_id": "core-096",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "23021d5c2caf4fa24dcf7c6847e810cbbcd9ca5ccb861107eccd44d3fb5f72a9"
+    },
+    {
+      "case_id": "core-097",
+      "expected_stage": "core_constructed",
+      "language": "sysml",
+      "source_sha256": "19b1db63ced1fc339b4527d9ea561b533469a1fa4fcd3fa144a7b3eebd037610"
+    }
+  ],
+  "deferred": [
+    "Full 34-family / 10-B1-obligation / 26-V01-context / 5-release-gate qualification",
+    "All 310 release samples through every semantic stage",
+    "Full 94-library semantic dependency closure and global resource providers",
+    "Complete implicit transformation, validation, evaluation and derived delegates/operations",
+    "Remaining result/self-result connectors, enclosing lifecycle and bounds",
+    "Unresolved normative disagreements, n-ary crossing and full isFeaturingType validation",
+    "Additional Xtend translation and a general Xtend compiler",
+    "Complete semantic comparison, paired benchmarks, publication or candidate promotion",
+    "An independently extracted or published Rust crate"
+  ],
+  "expected_native_nodes": 1403,
+  "expected_reference_slots": 2595,
+  "full_release_qualification": false,
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "positive_controls": 90,
+  "profile": "sysml-2.0-pilot-2026-08",
+  "reference_path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json",
+  "reference_sha256": "012393102469db076910314c809508fc814fb7e87aeb7d585c74df1643527db4",
+  "schema": "dev.mercurio.definition-core-preview-contract.v1",
+  "syntax_negative_controls": 8
+}

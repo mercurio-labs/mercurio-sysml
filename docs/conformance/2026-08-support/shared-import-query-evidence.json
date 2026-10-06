@@ -1,0 +1,892 @@
+{
+  "schema": "dev.mercurio.shared-import-query-evidence.v1",
+  "scope": "Immutable native name/index reuse through lexical selection, recursive imports and pairwise collision checks. Semantic algorithms and required dependencies are unchanged.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "c66d7781b88368bd5a09b0b187130615b4b9501a8332faed9a27f2b0d795957b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/name_dispatch_generated.rs": "5d5f83d5ff881897830fd55318af777481c8cdfaf950afc831dbc9fe12b206b9",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-name-query-trace.log": "62ac061dba3f64f8f664f9d5a8f945436de376dfa19c55ef80cd3579c9557c1f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-shared-name-query-supervision.json": "d35ebe6f4f7090b99516f0996aa7db52f40c7cfb141c6e0f4b7af088950ccb89",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-name-query-trace.log": "373f0362dc5b98ca9003c20fa4a70949beeaa308975c9a0c00e1d36326844c09",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-name-query-supervision.json": "d5e653db68af31d7f172423d0411ba3c812e36bb754d5bcda96735f5858dbf73"
+  },
+  "imported_representation": [
+    "Pinned effective Ecore class ancestry, membership endpoint/ownership opposites and visibility attributes",
+    "Generated upstream most-specific effective-name dispatch; inherited Feature names retain their existing redefinition dependencies"
+  ],
+  "native_consumers": [
+    "DefinitionNameQuery",
+    "scope_memberships_query",
+    "generated_resource_reference_traced"
+  ],
+  "handwritten_dependencies": [
+    "Graph identity lookup, ordered traversal and import distinguishability remain explicit handwritten Rust. Imported metaclass ancestry selects distinguishability; generated name dispatch selects derivation.",
+    "Successful membership-name results cached only within one immutable graph view. Recursive imports and collision checks share it. Errors are not cached; retry and graph edits create fresh views.",
+    "Canonical membership object identity is checked; foreign objects with the same ID cannot poison the cache.",
+    "Existing cycle exclusions, visibility, expected-type selection, pending-reference handling and whole-membership ambiguity/hiding rules remain unchanged."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/name-query-native-tests.log",
+      "sha256": "81f391b0715a962a1c20889895f2925e50d80b761b605098230c1f4bce48ed06",
+      "passed": 213
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/name-query-cache-tests.log",
+      "sha256": "4bafd9af2a70167176d0c72a0948e8574c5be8de6822abcba1ab3c4ac936414a",
+      "passed": 2
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/name-query-tool-tests.log",
+      "sha256": "629a91b7fe6968dd5192934e4164b4bea4775797824973ff5b39cc9fe166df6e",
+      "passed": 10
+    },
+    "contexts": [
+      "Successful repeated query versus uncached projection",
+      "Failed dependency evaluated on every attempt",
+      "Changed declared name seen after graph edit/new query",
+      "Serialized reload uses fresh query state",
+      "Foreign object with reused identity rejected",
+      "Existing full Pilot document/import/naming controls, declaration/storage order, guards and persistence"
+    ],
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/name-query-certificate-tests.log",
+      "sha256": "ca343375381dcde74aa1809e6e0038ab70803d7d04c7429d61cae7f77e3aff94",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/name-query-plan-tests.log",
+      "sha256": "ecb774c253af02b1746e0d4d7f7575edd0c3c2dbc3fae6f8282f2657942e88ef",
+      "passed": 14
+    }
+  },
+  "cost_diagnostic": {
+    "status": "timed_out",
+    "semantic_qualification": "not_assessed",
+    "linking_budget_seconds": 55,
+    "wall_budget_seconds": 240,
+    "comparison_limit": "Bounded localization only; no Pilot timing comparison or release timing qualification. The earlier name-only probe did not instrument recursive collision projections and does not fingerprint its intermediate binary.",
+    "supervision": {
+      "wall_budget_seconds": 240,
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out",
+      "semantic_qualification": "not_assessed",
+      "exit_code": -1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "cpu_seconds": 101.890625,
+      "linking_budget_seconds": 55,
+      "elapsed_seconds": 112.9488172,
+      "binary_sha256": "c3b3e7b7f29a15e2761c674081ac3091aac188ef74b6ed738bdd39a22b7588bc"
+    },
+    "resources_parsed": 16,
+    "constructed_unpublished_elements": 12288,
+    "linking_started_ms": 56936,
+    "completed_reference_attempts": 134,
+    "successful_name_evaluations": 5191,
+    "summed_name_evaluation_ms": 7935,
+    "slowest_completed_reference_attempts": [
+      {
+        "elapsed_ms": 3145,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2846,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2241,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.4.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.expression.1.owned_relationship.0.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2235,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.4.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2211,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2205,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.4.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2195,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "kind": "Membership",
+        "field": "member_element",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 2190,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.0",
+        "kind": "FeatureTyping",
+        "field": "type",
+        "succeeded": "Some(true)"
+      }
+    ],
+    "completed_import_attempts": [
+      {
+        "elapsed_ms": 49,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 43,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 49,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 51,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 48,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 108,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 55,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 85,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 72,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 76,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 67,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 189,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 177,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 163,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 171,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 172,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 172,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 45,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 137,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f496e746567657246756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 48,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 139,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f5363616c617256616c7565732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 340,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 351,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 268,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 283,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 100,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 98,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 97,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 100,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 89,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 101,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 92,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.7",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 90,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 101,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.9",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 96,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 96,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.11",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 97,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 100,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.13",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 238,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.14",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 170,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.13",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 253,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 256,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.11",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 259,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 249,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.9",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 236,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 252,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.7",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 268,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 322,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 325,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 318,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 266,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 271,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f506572666f726d616e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 104,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 111,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 110,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 108,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 119,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 112,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 113,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.7",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 113,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 107,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.9",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 109,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 103,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.11",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 109,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 105,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.13",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 248,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.14",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 253,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.13",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 244,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 240,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.11",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 227,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 230,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.9",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 232,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 207,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.7",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 111,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 45,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 42,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 43,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 43,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 167,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 208,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 195,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 153,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 137,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f436c6f636b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 216,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.6",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 99,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 32,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 121,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 126,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 276,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 272,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 266,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 255,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 272,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      }
+    ],
+    "inflight": [
+      {
+        "phase": "Reference",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.0.owned_related_element.0.expression.0.owned_relationship.0",
+        "field": "member_element",
+        "started_ms": 111066,
+        "kind": "Membership"
+      }
+    ],
+    "prior_name_only_attempts_in_same_link_budget": 23,
+    "interpretation": "134 completed reference attempts in the bounded linking window, versus 23 in the earlier name-only probe. Cost localization improved; no linked or semantically validated full resource was produced. Attempt counts include dependency scheduling and retries, not distinct resolved fields.",
+    "next_bounded_algorithm": "Replace pairwise imported-member name collision enumeration with ordered name-index buckets. Preserve candidate order, endpoint validation, first-error behavior, alternate-name whole-membership hiding and cycle/visibility exclusions. Keep query invalidation scoped to immutable graph views; do not add cross-edit caches."
+  },
+  "metrics": {
+    "matching_pilot_models": 155,
+    "ordinary_feature_bindings_verified": 50,
+    "ordinary_feature_bindings_total": 79,
+    "bounded_obligations_closed": 7,
+    "bounded_obligations_total": 9,
+    "whole_families_closed": 0,
+    "whole_families_total": 34,
+    "release_gates_closed": 0,
+    "release_gates_total": 5
+  },
+  "qualification_boundary": "No additional semantic binding, whole model, family or release gate is closed by successful caching controls. Candidate remains unpromoted.",
+  "resource_inputs": [
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+      "sha256": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+      "sha256": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+      "sha256": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+      "sha256": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+      "sha256": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+      "sha256": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+      "sha256": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+      "sha256": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+      "sha256": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+      "sha256": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+      "sha256": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+      "sha256": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae"
+    },
+    {
+      "path": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+      "sha256": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-self.kerml": "7f7bf75a01311e052006cf28c850f51fbe906d8313ace9306cf8f7d2271d5c0f",
+    "invalid-self.sysml": "7f7bf75a01311e052006cf28c850f51fbe906d8313ace9306cf8f7d2271d5c0f",
+    "missing-body.kerml": "2c0fc333f7f8da7f9f3c2a3b3290c97c056bd32670d87fb0fbd3d3874d8f638b",
+    "missing-body.sysml": "2c0fc333f7f8da7f9f3c2a3b3290c97c056bd32670d87fb0fbd3d3874d8f638b",
+    "positive-explicit.kerml": "17b3be498baafa6802044abbd5fa06779ecaf7b0efb4579a667d04df1fb78f1e",
+    "positive-explicit.sysml": "17b3be498baafa6802044abbd5fa06779ecaf7b0efb4579a667d04df1fb78f1e",
+    "positive-owned.kerml": "61180c38640e3192aa9454d36aee4f497aa4604a85f1c7eb598bd5e8b9d51fd1",
+    "positive-owned.sysml": "35d7861369c8044cf8d7352ccc729767baa31c1075adab766ac053f991ec9dc4"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-self.kerml",
+      "status": "error",
+      "validation_ms": 144.3522,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-self.sysml",
+      "status": "error",
+      "validation_ms": 92.3188,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.kerml",
+      "status": "error",
+      "validation_ms": 30.1019,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.sysml",
+      "status": "error",
+      "validation_ms": 54.3558,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-explicit.kerml",
+      "status": "ok",
+      "validation_ms": 123.0982,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-explicit.sysml",
+      "status": "ok",
+      "validation_ms": 43.4364,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-owned.kerml",
+      "status": "ok",
+      "validation_ms": 244.5052,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-owned.sysml",
+      "status": "ok",
+      "validation_ms": 291.6828,
+      "diagnostics": []
+    }
+  ]
+}

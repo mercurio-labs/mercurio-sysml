@@ -1,0 +1,22 @@
+{
+  "schema": "dev.mercurio.variation-normative.v1",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "pdf": "../target/upstream/SysML-v2-Release/doc/2a-OMG_Systems_Modeling_Language.pdf",
+  "pdf_sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+  "pdf_pages": [
+    305,
+    437,
+    438
+  ],
+  "assessment": "A variant Usage must specialize its owning variation Definition/Usage; VariantMembership is an OwningMembership, not a FeatureMembership. Native canonical namespace projection selects Definition FeatureTyping or Usage Subsetting without fabricating owningType or completion.",
+  "pilot_disagreement": "SuccessionAsUsage selects SuccessionAsUsageAdapter and does not inherit UsageAdapter.addVariationTyping. The independent direct adapter observations remain empty in 73 active owner contexts. Native now supplies the mandatory written Usage specialization through an explicitly handwritten supplement, preserving this intentional disagreement.",
+  "remaining": [
+    "Whole Usage default/featuring/variability lifecycle",
+    "Validation and complete family contracts"
+  ],
+  "resolution": {
+    "native_behavior": "Shared canonical owner selection, Definition FeatureTyping or Usage Subsetting, and transactional insertion apply to SuccessionAsUsage under the written universal Usage rule.",
+    "verified_owner_contexts": 73,
+    "scope": "Variation specialization contribution only; no whole Succession or Usage lifecycle qualification."
+  }
+}

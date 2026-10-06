@@ -944,6 +944,7 @@ fn generate_lowering_rule_draft(
         schema_version: 1,
         source: BTreeMap::new(),
         rules: Vec::new(),
+        usage_context_overrides: Vec::new(),
     });
     draft.source.insert(
         "kind".to_string(),

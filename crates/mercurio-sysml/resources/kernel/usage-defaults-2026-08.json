@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "ff519fbc5418223f38d2e5fb6d0bfd14d63697c6fe7bc5c702940c60f8148827",
+    "export_sha256": "995337f6a996f6525d9a78db17fc13f5afc63955907a1369246d421388b60172",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1558,
+      "relationship_count": 12068,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/occurrence-defaults.sysml"
+      ],
+      "exported_at_utc": "2026-09-17T18:08:12.542952100Z"
+    }
+  },
+  "usage_type_defaults": {
+    "ActionUsage": {
+      "type_ref": "Actions::Action"
+    },
+    "SendActionUsage": {
+      "type_ref": "Actions::SendAction"
+    },
+    "UseCaseUsage": {
+      "type_ref": "UseCases::UseCase"
+    }
+  }
+}

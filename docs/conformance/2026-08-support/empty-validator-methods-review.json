@@ -1,0 +1,39 @@
+{
+  "status": "read_only_source_review_not_a_coverage_waiver",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "source_file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+  "source_sha256": "65c78e229b61cc85b3ddea64cc25ef392f7e27176f5b9b33ee7eedc1f18a8583",
+  "methods": [
+    {
+      "id": "SysMLValidator::checkOccurrenceDefinition",
+      "line": 617,
+      "active_body": "",
+      "original_body": ""
+    },
+    {
+      "id": "SysMLValidator::checkDecisionNode",
+      "line": 869,
+      "active_body": "",
+      "original_body": "// TODO: Check validateDecisionNodeIncomingSuccessions (?)\n\t\t// TODO: Check validateDecisionNodeOutgoingSuccessions (?)"
+    },
+    {
+      "id": "SysMLValidator::checkForkNode",
+      "line": 875,
+      "active_body": "",
+      "original_body": "// TODO: Check validateForkNodeIncomingSuccessions (?)"
+    },
+    {
+      "id": "SysMLValidator::checkJoinNode",
+      "line": 880,
+      "active_body": "",
+      "original_body": "// TODO: Check validateJoinNodeOutgoingSuccessions (?)"
+    },
+    {
+      "id": "SysMLValidator::checkMergeNode",
+      "line": 885,
+      "active_body": "",
+      "original_body": "// TODO: Check validateMergeNodeIncomingSuccessions (?)\n\t\t// TODO: Check validateMergeNodeOutgoingSucessions (?)"
+    }
+  ],
+  "interpretation": "These five annotated methods have no active statements at the pinned commit. The frozen 24-partial/89-untraced ledger is unchanged. This does not imply complete conformance for their metaclasses or inherited validators."
+}

@@ -1,0 +1,74 @@
+{
+  "scope": "Exact nonvariable Feature owning-type contribution, canonical materialization and ownedTypeFeaturing query. Not full featuringType or connector-context support.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      193,
+      198
+    ],
+    "clauses": [
+      "checkFeatureFeatureMembershipTypeFeaturing",
+      "deriveFeatureOwnedTypeFeaturing"
+    ],
+    "boundary": "The native producer covers the ordinary nonvariable owning-type branch; variable snapshots, specialized adapters and full isFeaturingType obligations remain open."
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "FeatureAdapter.computeFeaturingType",
+      "FeatureUtil.insertImplicitTypeFeaturings",
+      "Feature_ownedTypeFeaturing_SettingDelegate"
+    ],
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "Feature/FeatureMembership/Type ancestry; TypeFeaturing source and target types; containment opposites, subset and setting-delegate identity; stored isVariable default.",
+  "native_consumer": "definition_document::materialize_owning_type_featuring and reference_targets(owned_type_featuring). Explicit handwritten producer over imported Ecore construction/publication services.",
+  "verification": {
+    "pilot_controls": 8,
+    "contexts": [
+      "class owner",
+      "behavior owner with out parameter",
+      "nested Feature owner",
+      "package owner with no owning Type"
+    ],
+    "existing_relation_modes": [
+      false,
+      true
+    ],
+    "checks": [
+      "source parse to canonical ownership",
+      "materialization changed/no-op",
+      "exact relation kind, feature, owner, target and implied flag",
+      "duplicate suppression",
+      "idempotency",
+      "persistence",
+      "no implied-completeness promotion"
+    ],
+    "negative_controls": [
+      "variable Feature",
+      "specialized Usage",
+      "identity collision",
+      "missing Feature",
+      "stored derived snapshot"
+    ],
+    "focused_log": "definition-pipeline-evidence/native-tests-owning-featuring-focused.log",
+    "tooling_tests": 39,
+    "pilot_export_reproduces": true,
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "9d3978e6eaa34fc40f7e1d2689b4ec9cd89b6b0d30eab1f8d557cfbd12e29ed0",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "293b4eae1a816111047123b52f7f84630e683df7d4db51c56903407ac0ec7535",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "246c98272e4436dd44945913348e674d7391a65dbed86e844e02581c0b2d6f7d"
+    },
+    "focused_tests": 75
+  },
+  "remaining": [
+    "Variable snapshot construction",
+    "Specialized variability/adapter producers",
+    "Complete featuringType and breadth-first featuring closure",
+    "Connector compatibility/context selection",
+    "Connector and expression transformation integration",
+    "Final release qualification"
+  ],
+  "disagreements": "No mismatch remains in the eight bounded controls; no broader agreement claim."
+}

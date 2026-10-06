@@ -1,0 +1,870 @@
+{
+  "schema_version": 1,
+  "scope": "Actual unmodified compiled KerMLValidator.checkImport/checkAnnotation and SysML scalar and selected checkOneType caller/helper predicates with controlled getter/type-list values; the type-family cases use real model classes, a controlled FeatureAdapter.getAllTypes, and explicit Xtext currentObject. No library bootstrap or source/model loading. This does not assess getter implementations, validity of EMF model combinations, @Check dispatch, source spans, or whole-model conformance.",
+  "diagnostic_representation": {
+    "ordering": "Preserve the order of ValidationMessageAcceptor calls within each direct method invocation",
+    "severity": "error, warning, or info from the corresponding acceptor callback",
+    "subject": "Stable controlled-object identifier",
+    "feature": "ContainingClass::featureName when present; otherwise null",
+    "index": "Raw Pilot index, including -1 (INSIGNIFICANT_INDEX)",
+    "data": "Raw varargs array, preserving null versus empty",
+    "unsupported_callbacks": "Offset/length diagnostic overloads fail the probe rather than lose location information"
+  },
+  "model_defaults": {
+    "EnumerationDefinition.isVariation": true
+  },
+  "annotation_mask_bits": {
+    "0": "owned_annotating_element_present",
+    "1": "owning_annotating_element_present",
+    "2": "owning_annotated_element_present"
+  },
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend": "65c78e229b61cc85b3ddea64cc25ef392f7e27176f5b9b33ee7eedc1f18a8583"
+    },
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "validator_class_sha256": {
+      "org/omg/kerml/xtext/validation/KerMLValidator.class": "84f608533522c685cf0019dd78578380ab452b54901c5365339c33c01ed2ab22",
+      "org/omg/sysml/xtext/validation/SysMLValidator.class": "7d63ee773adf962d804fa377e743532c255ad3335fd96596dc6dd2c6056bfdf4"
+    },
+    "helper_sha256": "f596b45ee4bbe8040bc0e53d3c27c8c3da1773a255537bb44dd97aaf57970dc3",
+    "runner_sha256": "c89034693dacaddfe0fb74580f663d2177e6a989ba0aa65c6ee08a708cd50625"
+  },
+  "cases": [
+    {
+      "id": "import-namespace-false-owner-false-public",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": false,
+        "visibility": "public"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-false-owner-false-protected",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": false,
+        "visibility": "protected"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-false-owner-false-private",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": false,
+        "visibility": "private"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-false-owner-true-public",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": true,
+        "visibility": "public"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-false-owner-true-protected",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": true,
+        "visibility": "protected"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-false-owner-true-private",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": false,
+        "namespace_owner_present": true,
+        "visibility": "private"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-true-owner-false-public",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": false,
+        "visibility": "public"
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "subject": "import",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "import-namespace-true-owner-false-protected",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": false,
+        "visibility": "protected"
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateImportTopLevelVisibility",
+          "message": "Top level import must be private",
+          "subject": "import",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "import-namespace-true-owner-false-private",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": false,
+        "visibility": "private"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-true-owner-true-public",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": true,
+        "visibility": "public"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-true-owner-true-protected",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": true,
+        "visibility": "protected"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "import-namespace-true-owner-true-private",
+      "method": "checkImport",
+      "inputs": {
+        "namespace_present": true,
+        "namespace_owner_present": true,
+        "visibility": "private"
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "annotation-mask-0",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": false,
+        "owning_annotating_element_present": false,
+        "owning_annotated_element_present": false
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "annotation-mask-1",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": true,
+        "owning_annotating_element_present": false,
+        "owning_annotated_element_present": false
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must be owned by its annotated element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "annotation-mask-2",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": false,
+        "owning_annotating_element_present": true,
+        "owning_annotated_element_present": false
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "annotation-mask-3",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": true,
+        "owning_annotating_element_present": true,
+        "owning_annotated_element_present": false
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        },
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must be owned by its annotated element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "annotation-mask-4",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": false,
+        "owning_annotating_element_present": false,
+        "owning_annotated_element_present": true
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        },
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "annotation-mask-5",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": true,
+        "owning_annotating_element_present": false,
+        "owning_annotated_element_present": true
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "annotation-mask-6",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": false,
+        "owning_annotating_element_present": true,
+        "owning_annotated_element_present": true
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "annotation-mask-7",
+      "method": "checkAnnotation",
+      "inputs": {
+        "owned_annotating_element_present": true,
+        "owning_annotating_element_present": true,
+        "owning_annotated_element_present": true
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element",
+          "subject": "annotation",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "reference-false",
+      "method": "checkReferenceUsage",
+      "inputs": {
+        "is_reference": false
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAttributeUsageIsReferential",
+          "message": "An attribute usage must be referential.",
+          "subject": "reference",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "enumeration-false",
+      "method": "checkEnumerationDefinition",
+      "inputs": {
+        "is_variation": false
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateEnumerationDefinitionIsVariation",
+          "message": "An enumeration definition must be a variation.",
+          "subject": "enumeration",
+          "feature": null,
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "reference-true",
+      "method": "checkReferenceUsage",
+      "inputs": {
+        "is_reference": true
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "enumeration-true",
+      "method": "checkEnumerationDefinition",
+      "inputs": {
+        "is_variation": true
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "EnumerationUsage-empty",
+      "method": "checkEnumerationUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateEnumerationUsageType_",
+          "message": "An enumeration must be typed by one enumeration definition.",
+          "subject": "typed-usage",
+          "feature": "EnumerationUsage::enumerationDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "EnumerationUsage-matching",
+      "method": "checkEnumerationUsage",
+      "inputs": {
+        "type_kinds": [
+          "EnumerationDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "EnumerationUsage-wrong",
+      "method": "checkEnumerationUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateEnumerationUsageType_",
+          "message": "An enumeration must be typed by one enumeration definition.",
+          "subject": "typed-usage",
+          "feature": "EnumerationUsage::enumerationDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "EnumerationUsage-multiple",
+      "method": "checkEnumerationUsage",
+      "inputs": {
+        "type_kinds": [
+          "EnumerationDefinition",
+          "EnumerationDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateEnumerationUsageType_",
+          "message": "An enumeration must be typed by one enumeration definition.",
+          "subject": "typed-usage",
+          "feature": "EnumerationUsage::enumerationDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "AnalysisCaseUsage-empty",
+      "method": "checkAnalysisCaseUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnalysisCaseUsageType_",
+          "message": "An analysis case must be typed by one analysis case definition.",
+          "subject": "typed-usage",
+          "feature": "AnalysisCaseUsage::analysisCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "AnalysisCaseUsage-matching",
+      "method": "checkAnalysisCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "AnalysisCaseDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "AnalysisCaseUsage-wrong",
+      "method": "checkAnalysisCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnalysisCaseUsageType_",
+          "message": "An analysis case must be typed by one analysis case definition.",
+          "subject": "typed-usage",
+          "feature": "AnalysisCaseUsage::analysisCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "AnalysisCaseUsage-multiple",
+      "method": "checkAnalysisCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "AnalysisCaseDefinition",
+          "AnalysisCaseDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateAnalysisCaseUsageType_",
+          "message": "An analysis case must be typed by one analysis case definition.",
+          "subject": "typed-usage",
+          "feature": "AnalysisCaseUsage::analysisCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "VerificationCaseUsage-empty",
+      "method": "checkVerificationCaseUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateVerificationCaseUsageType_",
+          "message": "A verification case must be typed by one verification case definition.",
+          "subject": "typed-usage",
+          "feature": "VerificationCaseUsage::verificationCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "VerificationCaseUsage-matching",
+      "method": "checkVerificationCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "VerificationCaseDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "VerificationCaseUsage-wrong",
+      "method": "checkVerificationCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateVerificationCaseUsageType_",
+          "message": "A verification case must be typed by one verification case definition.",
+          "subject": "typed-usage",
+          "feature": "VerificationCaseUsage::verificationCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "VerificationCaseUsage-multiple",
+      "method": "checkVerificationCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "VerificationCaseDefinition",
+          "VerificationCaseDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateVerificationCaseUsageType_",
+          "message": "A verification case must be typed by one verification case definition.",
+          "subject": "typed-usage",
+          "feature": "VerificationCaseUsage::verificationCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "UseCaseUsage-empty",
+      "method": "checkUseCaseUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateUseCaseUsageType_",
+          "message": "A use case must be typed by one use case definition.",
+          "subject": "typed-usage",
+          "feature": "UseCaseUsage::useCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "UseCaseUsage-matching",
+      "method": "checkUseCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "UseCaseDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "UseCaseUsage-wrong",
+      "method": "checkUseCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateUseCaseUsageType_",
+          "message": "A use case must be typed by one use case definition.",
+          "subject": "typed-usage",
+          "feature": "UseCaseUsage::useCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "UseCaseUsage-multiple",
+      "method": "checkUseCaseUsage",
+      "inputs": {
+        "type_kinds": [
+          "UseCaseDefinition",
+          "UseCaseDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateUseCaseUsageType_",
+          "message": "A use case must be typed by one use case definition.",
+          "subject": "typed-usage",
+          "feature": "UseCaseUsage::useCaseDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "RenderingUsage-empty",
+      "method": "checkRenderingUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateRenderingUsageType_",
+          "message": "A rendering must be typed by one rendering definition.",
+          "subject": "typed-usage",
+          "feature": "RenderingUsage::renderingDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "RenderingUsage-matching",
+      "method": "checkRenderingUsage",
+      "inputs": {
+        "type_kinds": [
+          "RenderingDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "RenderingUsage-wrong",
+      "method": "checkRenderingUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateRenderingUsageType_",
+          "message": "A rendering must be typed by one rendering definition.",
+          "subject": "typed-usage",
+          "feature": "RenderingUsage::renderingDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "RenderingUsage-multiple",
+      "method": "checkRenderingUsage",
+      "inputs": {
+        "type_kinds": [
+          "RenderingDefinition",
+          "RenderingDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateRenderingUsageType_",
+          "message": "A rendering must be typed by one rendering definition.",
+          "subject": "typed-usage",
+          "feature": "RenderingUsage::renderingDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "ViewpointUsage-empty",
+      "method": "checkViewpointUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateViewpointUsageType_",
+          "message": "A viewpoint must be typed by one viewpoint definition.",
+          "subject": "typed-usage",
+          "feature": "ViewpointUsage::viewpointDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "ViewpointUsage-matching",
+      "method": "checkViewpointUsage",
+      "inputs": {
+        "type_kinds": [
+          "ViewpointDefinition"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "ViewpointUsage-wrong",
+      "method": "checkViewpointUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateViewpointUsageType_",
+          "message": "A viewpoint must be typed by one viewpoint definition.",
+          "subject": "typed-usage",
+          "feature": "ViewpointUsage::viewpointDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "ViewpointUsage-multiple",
+      "method": "checkViewpointUsage",
+      "inputs": {
+        "type_kinds": [
+          "ViewpointDefinition",
+          "ViewpointDefinition"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateViewpointUsageType_",
+          "message": "A viewpoint must be typed by one viewpoint definition.",
+          "subject": "typed-usage",
+          "feature": "ViewpointUsage::viewpointDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "MetadataUsage-empty",
+      "method": "checkMetadataUsage",
+      "inputs": {
+        "type_kinds": []
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateMetadataUsageType_",
+          "message": "A metadata usage must be typed by one metadata definition.",
+          "subject": "typed-usage",
+          "feature": "MetadataUsage::metadataDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "MetadataUsage-matching",
+      "method": "checkMetadataUsage",
+      "inputs": {
+        "type_kinds": [
+          "Metaclass"
+        ]
+      },
+      "diagnostics": []
+    },
+    {
+      "id": "MetadataUsage-wrong",
+      "method": "checkMetadataUsage",
+      "inputs": {
+        "type_kinds": [
+          "Class"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateMetadataUsageType_",
+          "message": "A metadata usage must be typed by one metadata definition.",
+          "subject": "typed-usage",
+          "feature": "MetadataUsage::metadataDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    },
+    {
+      "id": "MetadataUsage-multiple",
+      "method": "checkMetadataUsage",
+      "inputs": {
+        "type_kinds": [
+          "Metaclass",
+          "Metaclass"
+        ]
+      },
+      "diagnostics": [
+        {
+          "severity": "error",
+          "code": "validateMetadataUsageType_",
+          "message": "A metadata usage must be typed by one metadata definition.",
+          "subject": "typed-usage",
+          "feature": "MetadataUsage::metadataDefinition",
+          "index": -1,
+          "data": []
+        }
+      ]
+    }
+  ]
+}

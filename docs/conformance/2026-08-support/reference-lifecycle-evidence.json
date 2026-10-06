@@ -1,0 +1,120 @@
+{
+  "schema": "dev.mercurio.reference-lifecycle-evidence.v1",
+  "scope": "Fresh fixed non-end transition-link ReferenceUsage defaults, computed-role inherited typing and Usage definition projection. Explicit fixture libraries and native physical persistence do not qualify actual libraries or complete ReferenceUsage lifecycle.",
+  "inputs": {
+    "tools/run_reference_lifecycle_probe.py": "36203fc2c7c0597379db1c49802521b0ceaccad3c1c1df7d8403e68e25566eb2",
+    "tools/check_reference_lifecycle.py": "861e8a5d766b4d10830061fc347788e010ccc340083be9b65fc7a6021c3d2265",
+    "tools/test_reference_lifecycle.py": "c7a300028b63293c959c101c3bceccda395481908e4e94c4e98ae1a8e0030787",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotReferenceLifecycleProbe.java": "90eb4d0015b98481fcaaf6152a5358547b69e3704a05d7d23643cdf494450b2d",
+    "docs/conformance/2026-08-support/reference-lifecycle-pilot-controls.json": "995481e1b4113ef7af6bf1d0699a605d11ce04dd4077693e870cfb8f7c74c35a",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "361ee368a19786926860e702b44f1a00184618e64ec85983f172b1d2aac2dce9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_link_generated.rs": "34feb377e8194abde523379797bb5a5b7ffab11da1bb94c4714fc5d5890a5f72",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-lifecycle-native-tests.log": "cb18f5ebfc56897fb1036044d8e9454562920c911e700ec4b9ac87d97bf037c0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-lifecycle-focused-tests.log": "246cb5e40937e4700df70875280429e50fb0d2294e837b8526998851adb40b9e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-lifecycle-cache-tests.log": "b39ce996d11c082d569412cbeef995ba525717eb9e2a003799847a857ce7bf4e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-lifecycle-pilot-check.log": "80d9a7ac19492a7861424d6c76c6c6b1261ea8513010d75dc8239340e41b9b0d",
+    "docs/conformance/2026-08-support/feature-type-disagreement.json": "075becf9ed262d39983f247c94b2aa68c774629822aca3113457bfefd11fa07b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "resolved_programs": "Five guarded Reference role/selection programs plus six reused Feature typing/projection programs and resolved default selector",
+    "ecore": "Canonical FeatureMembership ownership, most-specific role endpoints and Usage.definition delegate/ranges"
+  },
+  "native_consumers": [
+    "definition_reference_transition_default_context",
+    "definition_usage_default_name",
+    "definition_ordinary_feature_inputs_with_owners",
+    "definition_implicit_feature_generals",
+    "definition_feature_types_query",
+    "definition_reference_targets",
+    "definition_materialize_feature_defaults"
+  ],
+  "handwritten_dependencies": [
+    "Canonical fixed selected-link admission; payload ParameterMembership and Succession ends are excluded explicitly",
+    "Shared role lookup and explicit/implicit type traversal",
+    "Shared reduction, transaction and canonical persistence"
+  ],
+  "verification": {
+    "independent_pilot_default_type_projection_contexts": 256,
+    "owned_typing_masks": 8,
+    "library_role_typing_masks": 8,
+    "preceding_parameter_contexts": 128,
+    "explicit_role_contexts": 128,
+    "native_physical_contexts": 256,
+    "actual_abstract_syntax_export_import_reversed_contexts": 256,
+    "idempotent_replays": 256,
+    "atomic_unsupported_or_missing_dependency_controls": 6,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-lifecycle-native-tests.log",
+      "sha256": "cb18f5ebfc56897fb1036044d8e9454562920c911e700ec4b9ac87d97bf037c0",
+      "passed": 276
+    },
+    "cache_guard_tests": 7,
+    "candidate_completion_flags_fabricated": false,
+    "pilot_query_candidate_complete": false,
+    "pilot_physical_model_comparison_performed": false,
+    "actual_resource_qualification": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "semantic_distinction": "Owned typing selects the default; types inherited through the computed transitionLink redefinition contribute to Feature.type and Usage.definition. A preceding payload parameter does not change ordinary selected-link identity.",
+  "normative_reference": {
+    "document": "Pinned KerML written specification",
+    "pdf_page": 198,
+    "constraint": "deriveFeatureType",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "disagreement_evidence": "feature-type-disagreement.json"
+  },
+  "remaining": [
+    "Complete generalization-query reduction/order qualification",
+    "Owner-dependent composition/portion contexts and variability/featuring",
+    "Transition payload and Succession end specialization",
+    "Integrated Transition source/link constructors and validation",
+    "Actual standard resources and full family/dependency contracts"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "source_sha256": "ef05bf1fba413303e922919862391fe199b63c8dc1616e949b8d5dbae4151748",
+  "remaining_bindings": 49,
+  "conceptual_groups": {
+    "action-default-addition": [
+      "AcceptActionUsage",
+      "SendActionUsage",
+      "TerminateActionUsage"
+    ],
+    "ActionUsageAdapter": [
+      "ActionUsage",
+      "AnalysisCaseUsage",
+      "AssignmentActionUsage",
+      "CalculationUsage",
+      "CaseUsage",
+      "DecisionNode",
+      "ExhibitStateUsage",
+      "ForLoopActionUsage",
+      "ForkNode",
+      "IfActionUsage",
+      "IncludeUseCaseUsage",
+      "JoinNode",
+      "MergeNode",
+      "PerformActionUsage",
+      "StateUsage",
+      "TransitionUsage",
+      "UseCaseUsage",
+      "VerificationCaseUsage",
+      "WhileLoopActionUsage"
+    ],
+    "ExpressionAdapter": [
+      "BooleanExpression",
+      "CollectExpression",
+      "ConstructorExpression",
+      "Expression",
+      "FeatureChainExpression",
+      "FeatureReferenceExpression",
+      "IndexExpression",
+      "Invariant",
+      "InvocationExpression",
+      "LiteralBoolean",
+      "LiteralExpression",
+      "LiteralInfinity",
+      "LiteralInteger",
+      "LiteralRational",
+      "LiteralString",
+      "MetadataAccessExpression",
+      "NullExpression",
+      "OperatorExpression",
+      "SelectExpression",
+      "TriggerInvocationExpression"
+    ],
+    "RequirementUsageAdapter": [
+      "ConcernUsage",
+      "RequirementUsage",
+      "SatisfyRequirementUsage",
+      "ViewpointUsage"
+    ],
+    "PayloadFeature": [
+      "PayloadFeature"
+    ],
+    "ReferenceUsage": [
+      "ReferenceUsage"
+    ],
+    "RenderingUsage": [
+      "RenderingUsage"
+    ]
+  },
+  "ranking": [
+    {
+      "dependency": "Library resolution plus complete implicit generalizations",
+      "blocked_groups": [
+        "ActionUsageAdapter",
+        "ExpressionAdapter",
+        "PayloadFeature",
+        "ReferenceUsage",
+        "RenderingUsage",
+        "action-default-addition"
+      ],
+      "reason": "Shared by six of seven groups; enables inherited names, selection and variability."
+    },
+    {
+      "dependency": "Objective membership and effective objective discovery",
+      "blocked_groups": [
+        "RequirementUsageAdapter"
+      ],
+      "reason": "Separate bounded algorithm for four bindings."
+    }
+  ],
+  "observation_policy": "Reuse pinned controls during Rust edits. Re-export only when pinned source/runtime, exporter, toolchain or observation schema changes. Existing extraction provenance is retained; no new upstream observations this batch."
+}

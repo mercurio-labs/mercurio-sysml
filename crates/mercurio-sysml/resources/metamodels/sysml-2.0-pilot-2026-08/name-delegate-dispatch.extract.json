@@ -1,0 +1,2914 @@
+{
+  "classes": [
+    "AcceptActionUsage",
+    "ActionDefinition",
+    "ActionUsage",
+    "ActorMembership",
+    "AllocationDefinition",
+    "AllocationUsage",
+    "AnalysisCaseDefinition",
+    "AnalysisCaseUsage",
+    "AnnotatingElement",
+    "Annotation",
+    "AssertConstraintUsage",
+    "AssignmentActionUsage",
+    "Association",
+    "AssociationStructure",
+    "AttributeDefinition",
+    "AttributeUsage",
+    "Behavior",
+    "BindingConnector",
+    "BindingConnectorAsUsage",
+    "BooleanExpression",
+    "CalculationDefinition",
+    "CalculationUsage",
+    "CaseDefinition",
+    "CaseUsage",
+    "Class",
+    "Classifier",
+    "CollectExpression",
+    "Comment",
+    "ConcernDefinition",
+    "ConcernUsage",
+    "ConjugatedPortDefinition",
+    "ConjugatedPortTyping",
+    "Conjugation",
+    "ConnectionDefinition",
+    "ConnectionUsage",
+    "Connector",
+    "ConnectorAsUsage",
+    "ConstraintDefinition",
+    "ConstraintUsage",
+    "ConstructorExpression",
+    "ControlNode",
+    "CrossSubsetting",
+    "DataType",
+    "DecisionNode",
+    "Definition",
+    "Dependency",
+    "Differencing",
+    "Disjoining",
+    "Documentation",
+    "Element",
+    "ElementFilterMembership",
+    "EndFeatureMembership",
+    "EnumerationDefinition",
+    "EnumerationUsage",
+    "EventOccurrenceUsage",
+    "ExhibitStateUsage",
+    "Expose",
+    "Expression",
+    "Feature",
+    "FeatureChainExpression",
+    "FeatureChaining",
+    "FeatureInverting",
+    "FeatureMembership",
+    "FeatureReferenceExpression",
+    "FeatureTyping",
+    "FeatureValue",
+    "Flow",
+    "FlowDefinition",
+    "FlowEnd",
+    "FlowUsage",
+    "ForLoopActionUsage",
+    "ForkNode",
+    "FramedConcernMembership",
+    "Function",
+    "IfActionUsage",
+    "Import",
+    "IncludeUseCaseUsage",
+    "IndexExpression",
+    "InstantiationExpression",
+    "Interaction",
+    "InterfaceDefinition",
+    "InterfaceUsage",
+    "Intersecting",
+    "Invariant",
+    "InvocationExpression",
+    "ItemDefinition",
+    "ItemUsage",
+    "JoinNode",
+    "LibraryPackage",
+    "LiteralBoolean",
+    "LiteralExpression",
+    "LiteralInfinity",
+    "LiteralInteger",
+    "LiteralRational",
+    "LiteralString",
+    "LoopActionUsage",
+    "Membership",
+    "MembershipExpose",
+    "MembershipImport",
+    "MergeNode",
+    "Metaclass",
+    "MetadataAccessExpression",
+    "MetadataDefinition",
+    "MetadataFeature",
+    "MetadataUsage",
+    "Multiplicity",
+    "MultiplicityRange",
+    "Namespace",
+    "NamespaceExpose",
+    "NamespaceImport",
+    "NullExpression",
+    "ObjectiveMembership",
+    "OccurrenceDefinition",
+    "OccurrenceUsage",
+    "OperatorExpression",
+    "OwningMembership",
+    "Package",
+    "ParameterMembership",
+    "PartDefinition",
+    "PartUsage",
+    "PayloadFeature",
+    "PerformActionUsage",
+    "PortConjugation",
+    "PortDefinition",
+    "PortUsage",
+    "Predicate",
+    "Redefinition",
+    "ReferenceSubsetting",
+    "ReferenceUsage",
+    "Relationship",
+    "RenderingDefinition",
+    "RenderingUsage",
+    "RequirementConstraintMembership",
+    "RequirementDefinition",
+    "RequirementUsage",
+    "RequirementVerificationMembership",
+    "ResultExpressionMembership",
+    "ReturnParameterMembership",
+    "SatisfyRequirementUsage",
+    "SelectExpression",
+    "SendActionUsage",
+    "Specialization",
+    "StakeholderMembership",
+    "StateDefinition",
+    "StateSubactionMembership",
+    "StateUsage",
+    "Step",
+    "Structure",
+    "Subclassification",
+    "SubjectMembership",
+    "Subsetting",
+    "Succession",
+    "SuccessionAsUsage",
+    "SuccessionFlow",
+    "SuccessionFlowUsage",
+    "TerminateActionUsage",
+    "TextualRepresentation",
+    "TransitionFeatureMembership",
+    "TransitionUsage",
+    "TriggerInvocationExpression",
+    "Type",
+    "TypeFeaturing",
+    "Unioning",
+    "Usage",
+    "UseCaseDefinition",
+    "UseCaseUsage",
+    "VariantMembership",
+    "VerificationCaseDefinition",
+    "VerificationCaseUsage",
+    "ViewDefinition",
+    "ViewRenderingMembership",
+    "ViewUsage",
+    "ViewpointDefinition",
+    "ViewpointUsage",
+    "WhileLoopActionUsage"
+  ],
+  "dispatch": [
+    {
+      "class": "AcceptActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AcceptActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActionDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActionDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActorMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ActorMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AllocationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AllocationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AllocationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AllocationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnalysisCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnalysisCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnalysisCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnalysisCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnnotatingElement",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AnnotatingElement",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Annotation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Annotation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssertConstraintUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssertConstraintUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssignmentActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssignmentActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Association",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Association",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssociationStructure",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AssociationStructure",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AttributeDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AttributeDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AttributeUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "AttributeUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Behavior",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Behavior",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BindingConnector",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BindingConnector",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BindingConnectorAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BindingConnectorAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BooleanExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "BooleanExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CalculationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CalculationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CalculationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CalculationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Class",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Class",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Classifier",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Classifier",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CollectExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CollectExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Comment",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Comment",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConcernDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConcernDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConcernUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConcernUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.ConjugatedPortDefinition_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConjugatedPortTyping",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConjugatedPortTyping",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Conjugation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Conjugation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectionDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectionDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Connector",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Connector",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectorAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConnectorAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstraintDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstraintDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstraintUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstraintUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstructorExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ConstructorExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ControlNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ControlNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CrossSubsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "CrossSubsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "DataType",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "DataType",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "DecisionNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "DecisionNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Definition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Definition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Dependency",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Dependency",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Differencing",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Differencing",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Disjoining",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Disjoining",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Documentation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Documentation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Element",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Element",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ElementFilterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ElementFilterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EndFeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EndFeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EnumerationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EnumerationDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EnumerationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EnumerationUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EventOccurrenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "EventOccurrenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ExhibitStateUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ExhibitStateUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Expose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Expose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Expression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Expression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Feature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Feature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureChainExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureChainExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureChaining",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureChaining",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureInverting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureInverting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureReferenceExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureReferenceExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureTyping",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureTyping",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureValue",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FeatureValue",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Flow",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Flow",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowEnd",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowEnd",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FlowUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ForLoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ForLoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ForkNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ForkNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FramedConcernMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "FramedConcernMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Function",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Function",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IfActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IfActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Import",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Import",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IncludeUseCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IncludeUseCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IndexExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "IndexExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InstantiationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InstantiationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Interaction",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Interaction",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InterfaceDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InterfaceDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InterfaceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InterfaceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Intersecting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Intersecting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Invariant",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Invariant",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InvocationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "InvocationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ItemDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ItemDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ItemUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ItemUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "JoinNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "JoinNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LibraryPackage",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LibraryPackage",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralBoolean",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralBoolean",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralInfinity",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralInfinity",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralInteger",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralInteger",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralRational",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralRational",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralString",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LiteralString",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "LoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Membership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Membership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MembershipExpose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MembershipExpose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MembershipImport",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MembershipImport",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MergeNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MergeNode",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Metaclass",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Metaclass",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataAccessExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataAccessExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataFeature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataFeature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MetadataUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Multiplicity",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Multiplicity",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MultiplicityRange",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "MultiplicityRange",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Namespace",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Namespace",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NamespaceExpose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NamespaceExpose",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NamespaceImport",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NamespaceImport",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NullExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "NullExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ObjectiveMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ObjectiveMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OccurrenceDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OccurrenceDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OccurrenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OccurrenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OperatorExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OperatorExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OwningMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "OwningMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Package",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Package",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ParameterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ParameterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PartDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PartDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PartUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PartUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PayloadFeature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PayloadFeature",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PerformActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PerformActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortConjugation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortConjugation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "PortUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Predicate",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Predicate",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Redefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Redefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReferenceSubsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReferenceSubsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReferenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReferenceUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Relationship",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Relationship",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RenderingDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RenderingDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RenderingUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RenderingUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementConstraintMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementConstraintMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementVerificationMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "RequirementVerificationMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ResultExpressionMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ResultExpressionMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReturnParameterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ReturnParameterMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SatisfyRequirementUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SatisfyRequirementUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SelectExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SelectExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SendActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SendActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Specialization",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Specialization",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StakeholderMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StakeholderMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateSubactionMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateSubactionMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "StateUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Step",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Step",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Structure",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Structure",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Subclassification",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Subclassification",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SubjectMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SubjectMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Subsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Subsetting",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Succession",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Succession",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionAsUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionFlow",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionFlow",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionFlowUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "SuccessionFlowUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TerminateActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TerminateActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TextualRepresentation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TextualRepresentation",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TransitionFeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TransitionFeatureMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TransitionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TransitionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TriggerInvocationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TriggerInvocationExpression",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Type",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Type",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TypeFeaturing",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "TypeFeaturing",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Unioning",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Unioning",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Usage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "Usage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "UseCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "UseCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "UseCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "UseCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VariantMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VariantMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VerificationCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VerificationCaseDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VerificationCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "VerificationCaseUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewRenderingMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewRenderingMembership",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewpointDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewpointDefinition",
+      "delegate": "org.omg.sysml.delegate.invocation.Element_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewpointUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "ViewpointUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "WhileLoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveName_InvocationDelegate",
+      "operation": "effectiveName",
+      "operation_owner": "Element"
+    },
+    {
+      "class": "WhileLoopActionUsage",
+      "delegate": "org.omg.sysml.delegate.invocation.Feature_effectiveShortName_InvocationDelegate",
+      "operation": "effectiveShortName",
+      "operation_owner": "Element"
+    }
+  ],
+  "meaning": "Selected upstream delegates; algorithm support is separately assessed",
+  "observations": [
+    {
+      "class": "Package",
+      "declared_name": null,
+      "declared_short_name": null,
+      "effective_name": null,
+      "effective_short_name": null
+    },
+    {
+      "class": "Package",
+      "declared_name": "Long",
+      "declared_short_name": null,
+      "effective_name": "Long",
+      "effective_short_name": null
+    },
+    {
+      "class": "Package",
+      "declared_name": null,
+      "declared_short_name": "Short",
+      "effective_name": null,
+      "effective_short_name": "Short"
+    },
+    {
+      "class": "PartDefinition",
+      "declared_name": null,
+      "declared_short_name": null,
+      "effective_name": null,
+      "effective_short_name": null
+    },
+    {
+      "class": "PartDefinition",
+      "declared_name": "Long",
+      "declared_short_name": null,
+      "effective_name": "Long",
+      "effective_short_name": null
+    },
+    {
+      "class": "PartDefinition",
+      "declared_name": null,
+      "declared_short_name": "Short",
+      "effective_name": null,
+      "effective_short_name": "Short"
+    },
+    {
+      "class": "PartUsage",
+      "declared_name": null,
+      "declared_short_name": null,
+      "effective_name": null,
+      "effective_short_name": null
+    },
+    {
+      "class": "PartUsage",
+      "declared_name": "Long",
+      "declared_short_name": null,
+      "effective_name": "Long",
+      "effective_short_name": null
+    },
+    {
+      "class": "PartUsage",
+      "declared_name": null,
+      "declared_short_name": "Short",
+      "effective_name": null,
+      "effective_short_name": "Short"
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": null,
+      "declared_short_name": null,
+      "effective_name": null,
+      "effective_short_name": null
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": "Long",
+      "declared_short_name": null,
+      "effective_name": null,
+      "effective_short_name": null
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": null,
+      "declared_short_name": "Short",
+      "effective_name": null,
+      "effective_short_name": "Short"
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": "Ignored",
+      "declared_short_name": "C",
+      "effective_name": null,
+      "effective_short_name": "C",
+      "original_declared_name": null,
+      "original_declared_short_name": null,
+      "original_port": true
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": "Ignored",
+      "declared_short_name": "C",
+      "effective_name": "~Original",
+      "effective_short_name": "C",
+      "original_declared_name": "Original",
+      "original_declared_short_name": null,
+      "original_port": true
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": "Ignored",
+      "declared_short_name": "C",
+      "effective_name": null,
+      "effective_short_name": "C",
+      "original_declared_name": null,
+      "original_declared_short_name": "O",
+      "original_port": true
+    },
+    {
+      "class": "ConjugatedPortDefinition",
+      "declared_name": "Ignored",
+      "declared_short_name": "C",
+      "effective_name": "~Original",
+      "effective_short_name": "C",
+      "original_declared_name": "Original",
+      "original_declared_short_name": "O",
+      "original_port": true
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "04bc7254e6572479e57f7daf3c0005699b7a6ad1be68a8ff9a03534be4941f96",
+    "ecore_effective_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "helper_sha256": "f9fdf486d7cc28b9d203e3a064d5ff4bb18db9fba6760f8cb325db3115ed7248",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/ConjugatedPortDefinition_effectiveName_InvocationDelegate.java": "b481eb8340b19da9a7a83beec4ded8704d4c7347eeb6e7f2362952e5fdcb783e",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Element_effectiveName_InvocationDelegate.java": "570719d1cec9e93bb790e9ba13f820322f51f123c779efe49245bf7516252f2d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Element_effectiveShortName_InvocationDelegate.java": "242fbc20c9c5cdcbf9ff8c87f436a32b5d994d2b692f0765e5a7b54a7f55c65a",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Feature_effectiveName_InvocationDelegate.java": "b0d2e1ea3a00292bef3b37047181625a734ecf31842fe495461d77297ff569e6",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Feature_effectiveShortName_InvocationDelegate.java": "6b3fd6d6c542592823afdee5f2f9276b20e83e62bcc97c4f5b3672ae24f58a4c",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Feature_namingFeature_InvocationDelegate.java": "c502179c1f0bfdfed75680c0b2263cddec70c2cf92e42d0425f8468aa9a1f526",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/OperationInvocationDelegateSelector.java": "29fae4b689573e1893e94e053df12935a64813205dc79ba41f75547f26e785b8",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/ConjugatedPortDefinition_originalPortDefinition_SettingDelegate.java": "749acdf97cfc300d44cb34a96e66d64795efd4413978324019bd9116047789d5",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/ConjugatedPortDefinition_ownedPortConjugator_SettingDelegate.java": "d34af46e93c04ade55615105c77181eca1aae72e0a71561fc8bf41440f3903fd",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Element_name_SettingDelegate.java": "c64ccbf6c95dac9f471e317e75e23a4bac7e86526fd4bd3e160ff33ae83f90e4",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Type_ownedSpecialization_SettingDelegate.java": "a456155c8b00d66f79ea0124b098dbe956d2177d6a04965d5c5c39f3b1ce2ac3",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "redefinition_observations": [
+    {
+      "effective_name": "First",
+      "effective_short_name": null,
+      "nodes": [
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": "First",
+          "declared_short_name": null,
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "Feature",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "Feature",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": "First",
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "Feature",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "Own",
+      "nodes": [
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": "Own",
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "Feature",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "Feature",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": "First",
+      "effective_short_name": null,
+      "nodes": [
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "First",
+          "declared_short_name": null,
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": "First",
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "Own",
+      "nodes": [
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": "Own",
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "PartUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": "First",
+      "effective_short_name": null,
+      "nodes": [
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "First",
+          "declared_short_name": null,
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": "First",
+      "effective_short_name": "F",
+      "nodes": [
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": "Own",
+      "nodes": [
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": "Own",
+          "id": "root",
+          "redefines": [
+            "middle"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": null,
+          "declared_short_name": null,
+          "id": "middle",
+          "redefines": [
+            "first",
+            "second"
+          ]
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "First",
+          "declared_short_name": "F",
+          "id": "first",
+          "redefines": []
+        },
+        {
+          "class": "AttributeUsage",
+          "declared_name": "Second",
+          "declared_short_name": "S",
+          "id": "second",
+          "redefines": []
+        }
+      ],
+      "root": "root"
+    }
+  ],
+  "schema": "dev.mercurio.name-delegate-dispatch.v1"
+}

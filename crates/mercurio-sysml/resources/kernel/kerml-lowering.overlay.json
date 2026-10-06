@@ -1,0 +1,745 @@
+{
+  "schema_version": 1,
+  "source": {
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Route the pinned KerML grammar classifier kinds through shared definition lowering."
+    },
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5"
+  },
+  "rules": [
+    {
+      "construct": "Class",
+      "metaclass": "SysML::Class",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "class"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Class"
+        ],
+        "ecore_class": "SysML::Class"
+      }
+    },
+    {
+      "construct": "Structure",
+      "metaclass": "SysML::Structure",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "struct"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Structure"
+        ],
+        "ecore_class": "SysML::Structure"
+      }
+    },
+    {
+      "construct": "Behavior",
+      "metaclass": "SysML::Behavior",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "behavior"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Behavior"
+        ],
+        "ecore_class": "SysML::Behavior"
+      }
+    },
+    {
+      "construct": "DataType",
+      "metaclass": "SysML::DataType",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "datatype"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "DataType"
+        ],
+        "ecore_class": "SysML::DataType"
+      }
+    },
+    {
+      "construct": "Function",
+      "metaclass": "SysML::Function",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "function"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Function"
+        ],
+        "ecore_class": "SysML::Function"
+      }
+    },
+    {
+      "construct": "Predicate",
+      "metaclass": "SysML::Predicate",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "predicate"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Predicate"
+        ],
+        "ecore_class": "SysML::Predicate"
+      }
+    },
+    {
+      "construct": "Association",
+      "metaclass": "SysML::Association",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "assoc"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Association"
+        ],
+        "ecore_class": "SysML::Association"
+      }
+    },
+    {
+      "construct": "Association",
+      "metaclass": "SysML::Association",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "association"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Association"
+        ],
+        "ecore_class": "SysML::Association"
+      }
+    },
+    {
+      "construct": "Interaction",
+      "metaclass": "SysML::Interaction",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "interaction"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Interaction"
+        ],
+        "ecore_class": "SysML::Interaction"
+      }
+    },
+    {
+      "construct": "Metaclass",
+      "metaclass": "SysML::Metaclass",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "metaclass"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Metaclass"
+        ],
+        "ecore_class": "SysML::Metaclass"
+      }
+    },
+    {
+      "construct": "Expression",
+      "metaclass": "SysML::Expression",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "expr"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Expression"
+        ],
+        "ecore_class": "SysML::Expression"
+      }
+    },
+    {
+      "construct": "BooleanExpression",
+      "metaclass": "SysML::BooleanExpression",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "bool"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "BooleanExpression"
+        ],
+        "ecore_class": "SysML::BooleanExpression"
+      }
+    },
+    {
+      "construct": "Type",
+      "metaclass": "SysML::Type",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "type"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Type"
+        ],
+        "ecore_class": "SysML::Type"
+      }
+    },
+    {
+      "construct": "AssociationStructure",
+      "metaclass": "SysML::AssociationStructure",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "assoc-struct"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.package_or_definition",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "is_abstract": "$is_abstract",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "specializes": "$specializes_refs"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "AssociationStructure"
+        ],
+        "ecore_class": "SysML::AssociationStructure"
+      }
+    },
+    {
+      "construct": "Connector",
+      "metaclass": "SysML::Connector",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "connector"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids",
+          "is_abstract": "$is_abstract",
+          "specializes": "$specializes_refs",
+          "subsetted_features": "$subsetted_feature_refs",
+          "redefined_features": "$redefined_feature_refs",
+          "is_end": "$is_end",
+          "is_ordered": "$is_ordered",
+          "is_unique": "$is_unique"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Connector"
+        ],
+        "ecore_class": "SysML::Connector"
+      }
+    },
+    {
+      "construct": "BindingConnector",
+      "metaclass": "SysML::BindingConnector",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "binding"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids",
+          "is_abstract": "$is_abstract",
+          "specializes": "$specializes_refs",
+          "subsetted_features": "$subsetted_feature_refs",
+          "redefined_features": "$redefined_feature_refs",
+          "is_end": "$is_end",
+          "is_ordered": "$is_ordered",
+          "is_unique": "$is_unique"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "BindingConnector"
+        ],
+        "ecore_class": "SysML::BindingConnector"
+      }
+    },
+    {
+      "construct": "Succession",
+      "metaclass": "SysML::Succession",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "succession"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids",
+          "is_abstract": "$is_abstract",
+          "specializes": "$specializes_refs",
+          "subsetted_features": "$subsetted_feature_refs",
+          "redefined_features": "$redefined_feature_refs",
+          "is_end": "$is_end",
+          "is_ordered": "$is_ordered",
+          "is_unique": "$is_unique"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Succession"
+        ],
+        "ecore_class": "SysML::Succession"
+      }
+    },
+    {
+      "construct": "TextualRepresentation",
+      "metaclass": "SysML::TextualRepresentation",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "rep"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "representation.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "members": "$member_ids"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "TextualRepresentation"
+        ],
+        "ecore_class": "SysML::TextualRepresentation"
+      }
+    },
+    {
+      "construct": "Invariant",
+      "metaclass": "SysML::Invariant",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "inv"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "expression": "$ast.expression",
+          "type": "$ast.ty",
+          "multiplicity": "$ast.multiplicity"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}",
+        "properties": {
+          "owner": "$owner_id",
+          "declared_name": "$declared_name",
+          "type": "$type_ref",
+          "members": "$member_ids"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Invariant"
+        ],
+        "ecore_class": "SysML::Invariant"
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "dev.mercurio.feature-default-contributions.v1",
+  "scope": "Exact ordinary non-end Feature default Subsetting replay; shared guarded Type/Feature contribution stages in the existing candidate audit. Other adapter contexts are not qualified.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "6c5742f0f564bfdf489088095282776d885d2d8ce9f0e12ef0945bca47e1a559",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "ded013e98ae9a20ded7842caaeba18477a962b1202b2cbafb03284bd5bcd773d",
+    "crates/mercurio-sysml/src/definition_document.rs": "3a4dffba14135211e0837ff4a4dfdfa9daaa1752a2a6f06d04f6e07d11672794",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "665ea6c3332fc668957453cb37e14e07ac04323250af5d3f30becb9f7399314c",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "8ba49953cf72f0196d1e5f9de1cbdb524d9d6eac192687003df3a15b4792f6d1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "26074f3979325af256fa818da622e43f5215b3197221e3c4578b9c8afe3c3b86",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "293b0965a410a960b85c516c5935b996ef0af6d1f656180e45498c8824e3b942",
+    "docs/conformance/2026-08-support/feature-default-evidence.json": "58364984e2b8e2d7759db9cb33c41cceacf32ac8dcb842e409cec8a95c4d14cc"
+  },
+  "imported_representation": "Pinned Xtext source programs and Ecore canonical ownership/redefined endpoints. The resolved javac Feature selector provides executable implementation evidence; the written language specification remains normative.",
+  "native_consumers": [
+    "materialize_feature_defaults",
+    "definition_feature_default_from_inputs",
+    "definition_unassessed_implied_feature_relation",
+    "definition_ordinary_feature_inputs_with_owners",
+    "feature_default_contribution_owners"
+  ],
+  "handwritten_semantics": "Read explicit stored typing and owning contexts, recompute the imported default, and admit only an exact canonical implied Subsetting to that resolved library target. The implied default cannot select itself. Shared fixed-snapshot reduction and atomic insertion remain unchanged. Result parameters retain their existing specialized provider.",
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-feature-default-transaction.log",
+      "sha256": "de151305e07aa9ce33dc51b4cf7707bd7327dbeedf3d8bb6446acd95f7050590",
+      "passed": 176
+    },
+    "audit_tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-audit-tool-tests.log",
+      "sha256": "609a2170b2c0c7fcf1ff2ffbf561cea4753c1555e61ec3b14f46e3076c06a326",
+      "passed": 10
+    },
+    "cached_source_controls": 8,
+    "additional_native_untyped_data_typed_cases": 2,
+    "negative_shapes": [
+      "wrong target",
+      "wrong specific",
+      "nested relationship",
+      "wrong category"
+    ],
+    "contexts": [
+      "replay before and after persistence",
+      "type query stability",
+      "redefinition queries after insertion",
+      "specialization with materialized featuring and default",
+      "late owner rejection leaves whole batch unchanged",
+      "no completion flags or semantic-success stamp"
+    ],
+    "real_library_audit": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-feature-default-results.jsonl",
+      "sha256": "06a89faf84876639c4db712112b2bea2d093604ddf743ab422d8f512d3934a4b",
+      "spec": {
+        "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-inputs.json",
+        "sha256": "f1536dfbc872b5d2ee3827537316ab03e11c9462db6c0c31e4f9dc52cc4148dc"
+      },
+      "resources": {
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+        "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+        "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-control.kerml": "59582d1475f8c550f6494c841b7b07bc4796108ccfa16280a41e7c6a1243e7d0"
+      },
+      "results": [
+        {
+          "source_set": "Base-and-ScalarValues.kerml",
+          "status": "constructed_unqualified",
+          "applicable_feature_owners": 6,
+          "inserted": 2,
+          "element_count": 147,
+          "semantic_qualification": "not_assessed"
+        },
+        {
+          "source_set": "Base-ScalarValues-and-Links.kerml",
+          "status": "blocked",
+          "applicable_feature_owners": 20,
+          "inserted": null,
+          "element_count": 271,
+          "semantic_qualification": "not_assessed"
+        },
+        {
+          "source_set": "feature-default-source-control.kerml",
+          "status": "constructed_unqualified",
+          "applicable_feature_owners": 8,
+          "inserted": 4,
+          "element_count": 157,
+          "semantic_qualification": "not_assessed"
+        }
+      ],
+      "failure_exit_code": 1,
+      "meaning": "Expected incomplete qualification: Base/ScalarValues contributes two defaults; the source control contributes four including library defaults. Links fails atomically at its Feature-owned end context. Applicability counts are not coverage counts."
+    }
+  },
+  "next_shared_dependency": {
+    "context": "Links::selfLinks::thisThing",
+    "owner_kind": "Feature",
+    "required": "Feature-owned end default and positional contributions, including admission/replay of their generated relationships. Ordinary non-end admission does not cover this context.",
+    "native_trace": "ConstructionOrLinking(\"Diagnostic { message: \\\"Operand construction: Feature default owner definition.resource.2e2e2f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8.owned_related_element.0.owned_relationship.4.owned_related_element.0 [Feature]: Operand construction: ordinary Feature/Connector provider requires ordinary non-end/non-parameter context or a supported Class/Structure/Connector-owned Feature end\\\", kind: Syntax, span: None, subjects: [] }\")"
+  },
+  "normative_boundary": "Reuse the recorded default-selector normative assessment; no new normative, model-comparison, whole-family or release-gate closure. Production remains native. Complete Feature transformation, required validation, Association/default and other adapter categories remain open.",
+  "metrics": {
+    "native_test_delta": 2,
+    "matching_pilot_documents": 155,
+    "matching_pilot_documents_delta": 0,
+    "new_strategy_obligation_closures": 0,
+    "qualified_feature_families": "0/34",
+    "qualified_release_gates": "0/5",
+    "overall_completion_percent": null,
+    "candidate": "unpromoted"
+  }
+}

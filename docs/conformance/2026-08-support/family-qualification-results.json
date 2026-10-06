@@ -1,0 +1,1221 @@
+{
+  "schema": "dev.mercurio.family-qualification-results.v1",
+  "basis": "docs/conformance/2026-08-support/structural-source-coverage.json",
+  "basis_sha256": "8389b2e6ff413d3eeb79c680ad15b28d336452008b98bf218b737b9d52776e2f",
+  "measure": "Strict whole-family certificates; not percent of implemented behavior",
+  "qualified_families": 0,
+  "required_families": 34,
+  "qualified_family_percent": 0,
+  "scope_evidence": "reference-result-scope-evidence.json",
+  "current_target": "xtext.EnumLiteralDeclaration",
+  "first_queue": [
+    "xtext.EnumLiteralDeclaration",
+    "xtext.EnumRule",
+    "ecore.packages_and_enums"
+  ],
+  "current_blockers": [
+    "The expanded 31-input assessment clears the prior missing BaseFunctions provider and stops at CollectionFunctions reference 774, member_element, on result-default nested/valuation/crossing/typing dependencies. Resolved valuation programs show value transformation and result chaining; native support remains unimplemented.",
+    "Actual Views/Occurrence/Item libraries, View delegates and validation",
+    "Required integrated enum secondary fields/constraints/persistence",
+    "Global native_parser/model_construction dependency contracts"
+  ],
+  "families": [
+    {
+      "family": "xtext.Action",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 53,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Two bare actions and five binary capture families have production consumers; all 26 individual capture contracts have focused graph controls. Enclosing recursive grammar execution, remaining bare actions, branch predicates, control-function semantics and complete action-context qualification remain open."
+    },
+    {
+      "family": "xtext.Alternatives",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 261,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.Annotation",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 4,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Type-preserving recursive fragments now have a fixed-point proof and native controls; type-changing fragment cycles remain unsupported. Complete expression closures remain blocked at KerML FeatureElement and SysML ActionBodyItem analysis limits. Qualify complete predicates and contexts, hidden tokens, converters and model construction."
+    },
+    {
+      "family": "xtext.Assignment",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 771,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion",
+        "scoping",
+        "linking"
+      ],
+      "remaining_required_behavior": "Selected scalar/containment/reference assignments and staged operand appends execute. Current-type joins and repetition closure now bind subtype fields in admitted acyclic programs. Qualify recursive contexts, implicit objects, lifecycle policies, source lexing and complete linking."
+    },
+    {
+      "family": "xtext.CharacterRange",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 7,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Qualify UTF-16 range boundaries against Pilot and connect ID/numeric terminal recognition to production token arbitration; parser-rule grouping and value conversion remain handwritten."
+    },
+    {
+      "family": "xtext.CrossReference",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 71,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "scoping",
+        "linking"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open. Global qualification ($::), arbitrary namespace traversal and complete inherited/implicit/visibility scopes remain unsupported by the production reference adapters. Subsequent qualified/unqualified steps traverse owned/type feature members from the preceding resolved Feature; imported name groups remain distinct through the AST."
+    },
+    {
+      "family": "xtext.EnumLiteralDeclaration",
+      "applicable": true,
+      "status": "open",
+      "review_status": "reviewed",
+      "imported_instances": 24,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Qualify every pinned declaration and direct call site through recognition, enum assignment, correct rejection/boundary behavior, canonical storage, integrated candidate publication/validation and persistence. All 24 declarations and 18 direct call sites have raw candidate controls; ReferenceUsage redefinitions and ViewUsage generalizations block two integrated sources. Secondary-carrier publication and full-context validation remain open."
+    },
+    {
+      "family": "xtext.EnumRule",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 14,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Extend native parser and construction consumers from visibility, direction, PortionKind and RequirementConstraintKind to all remaining enum rules; qualify Pilot model values and context-specific grammar semantics, including the `[` filter visibility token."
+    },
+    {
+      "family": "xtext.Grammar",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 3,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Type-preserving recursive fragments now have a fixed-point proof and native controls; type-changing fragment cycles remain unsupported. Complete expression closures remain blocked at KerML FeatureElement and SysML ActionBodyItem analysis limits. Qualify complete predicates and contexts, hidden tokens, converters and model construction."
+    },
+    {
+      "family": "xtext.Group",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 639,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.Keyword",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 663,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "Connect every parser keyword to token prediction and parser-rule execution; qualify keyword/ID boundary choices and language-specific reserved-name behavior against Pilot."
+    },
+    {
+      "family": "xtext.NegatedToken",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 4,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Qualify complement/EOF and supplementary-character behavior against Pilot; connect note terminals to production token arbitration without confusing rule recognition with DFA prediction."
+    },
+    {
+      "family": "xtext.ParserRule",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 704,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.ReferencedMetamodel",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 6,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Use resolved namespace/classifier imports in every generated model binding."
+    },
+    {
+      "family": "xtext.RuleCall",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 1724,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "scoping",
+        "linking",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.TerminalRule",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 9,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "All nine committed terminal bodies feed source scanning. Qualify complete language-specific visible keyword/punctuation arbitration, token-carrier boundaries, value conversion, diagnostics and complete lexical/grammar families."
+    },
+    {
+      "family": "xtext.TypeRef",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 851,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "Use resolved Ecore type identities throughout parser model construction."
+    },
+    {
+      "family": "xtext.UntilToken",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 2,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Both UntilToken bodies are consumed for native semantic comments and hidden notes, with independent first-delimiter/EOF observations. Full language-specific token arbitration, diagnostics and grammar-family integration remain required."
+    },
+    {
+      "family": "xtext.cardinality",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 4219,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.predicates",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 4219,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser"
+      ],
+      "remaining_required_behavior": "Thirty-eight roots/141 unique rules are admitted across language programs. Alternative and optional-entry discovery records 555 contextual automata and 18 unsupported decisions, separately from execution. The metadata declaration fragment consumes entry prediction; complete-expression admission still requires KerML FeatureElement and SysML ActionBodyItem decisions. Represented-name quote removal and all escapes have 26 normalized Pilot controls; raw declaredName storage remains explicitly distinct. Complete model execution, lexical/semantic dependencies, production integration and full qualification remain open."
+    },
+    {
+      "family": "xtext.hidden_tokens",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 707,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser"
+      ],
+      "remaining_required_behavior": "Qualify complete lexer arbitration and committed body behavior for all visible tokens, malformed-input diagnostics and any future grammar/rule hidden-policy overrides. Imported-table prediction is consumed for hidden tokens; complete lexical-family admission remains open."
+    },
+    {
+      "family": "xtext.rule_parameters",
+      "applicable": false,
+      "status": "unused_by_pin",
+      "review_status": "unreviewed",
+      "imported_instances": 2428,
+      "native_support": "not_used_in_pin",
+      "certificate": null,
+      "open_dependencies": [
+        "native_parser"
+      ],
+      "remaining_required_behavior": "No active occurrences in this pin; preserve the fields and reopen automatically if upstream begins using them."
+    },
+    {
+      "family": "ecore.inheritance",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 175,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Audit semantic_profile hierarchy consumers, which remain tied to registered release bundles; qualify abstract/interface construction and unknown/legacy metaclass boundaries."
+    },
+    {
+      "family": "ecore.types",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 724,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction",
+        "value_conversion"
+      ],
+      "remaining_required_behavior": "JSON interchange dispatches all 415 feature declarations and checks present attributes and local reference targets through Ecore ancestry. Extend this contract across source constructors, mutation and persistence; qualify package aliases, external target resolution and data-type semantics against normative text and Pilot. Missing required features and delegate-derived values remain uncomputed."
+    },
+    {
+      "family": "ecore.multiplicities",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 542,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Public required-feature assessment checks missing stored values, imported lower bounds and typed local endpoints, with explicit unverified semantic/default/external dependencies. Complete required-value semantics, validation integration across source emitters, mutations and other loaders/persistence paths remain unqualified."
+    },
+    {
+      "family": "ecore.containment",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 351,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Stored containment and fresh operand-adapter wrapper construction have bounded production consumers. General embedded JSON construction, reparenting, inverse mutation, remaining derived containment/delegates and all-path qualification remain open."
+    },
+    {
+      "family": "ecore.opposites",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 351,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Constructed multiplicity trees check generated inverse identities and emit reciprocal KIR ownership; explicit JSON graphs check consistency. General inverse synthesis, derived getter algorithms and mutation maintenance remain unqualified."
+    },
+    {
+      "family": "ecore.ordering",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 542,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Explicit JSON attribute/reference order survives native round trips, alongside bounded pinned-library evidence. Qualify derived ordering, mutation and persisted collection behavior across every construction path against normative text and Pilot."
+    },
+    {
+      "family": "ecore.uniqueness",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 542,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Explicit JSON attributes and references use Ecore uniqueness; duplicate exchange aliases are rechecked after native identity resolution. Extend enforcement to all constructors, mutations and persistence; qualify identity/value equality against normative text and Pilot."
+    },
+    {
+      "family": "ecore.defaults",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 415,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction",
+        "delegate_algorithms"
+      ],
+      "remaining_required_behavior": "Generated stored-attribute defaults now feed package-scope reads without requiring eager property materialization. Complete constructor overrides, attached-model delegate behavior, absent enum policies, required-value checks and all mutation/persistence paths remain open."
+    },
+    {
+      "family": "ecore.property_flags",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 415,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "model_construction",
+        "delegate_algorithms",
+        "linking"
+      ],
+      "remaining_required_behavior": "Implement lifecycle/read-write/derived/proxy semantics of flags actually present; report irrelevant flags with evidence."
+    },
+    {
+      "family": "ecore.operations",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 127,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "operation_dispatch",
+        "delegate_algorithms"
+      ],
+      "remaining_required_behavior": "Effective-name dispatch, ordinary and bounded positional-end redefinitions are consumed and verified. Complete parameter/result/constructor redefinitions and every remaining operation with explicit semantic dependencies; selected dispatch is not algorithm qualification."
+    },
+    {
+      "family": "ecore.annotations",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 687,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "delegate_algorithms"
+      ],
+      "remaining_required_behavior": "119 redefines annotations feed bounded dispatch; 190 subset annotations (224 direct edges) now generate transitive contracts consumed by explicit snapshot validation. Ordered union evaluation is verified over complete explicit inputs; qualifying complete import behavior and deriving inherited subset inputs, automatic update maintenance and complete normative/Pilot qualification remain open. Assess 280 opposite-role labels independently from actual eOpposite contracts, implement required delegate algorithms, and preserve 685 documentation annotations without executing formulas."
+    },
+    {
+      "family": "ecore.delegate_bindings",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 398,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "delegate_algorithms",
+        "operation_dispatch"
+      ],
+      "remaining_required_behavior": "All 328 setting-delegate records are preserved in native feature contracts. The operand append adapter has bounded native construction evidence; remaining settings, invocation dispatch, argument/getter semantics and transitive algorithms are unimplemented or unqualified."
+    },
+    {
+      "family": "ecore.packages_and_enums",
+      "applicable": true,
+      "status": "open",
+      "review_status": "unreviewed",
+      "imported_instances": 27,
+      "native_support": "partial",
+      "certificate": null,
+      "open_dependencies": [
+        "value_conversion",
+        "model_construction"
+      ],
+      "remaining_required_behavior": "Explicit JSON attributes now use generated Ecore domains and shapes; missing required values, reference projection, all source constructors, mutation paths and persisted registry integration remain open. Qualify against normative text and Pilot. Apply package and data-type identities throughout native construction, connect the remaining Xtext enum rules to their model properties, and qualify all enum conversions against Pilot. Imported identities and values alone do not establish runtime support."
+    }
+  ],
+  "latest_batch": {
+    "native_definition_tests_passed": 379,
+    "full_native_run_fresh_for_final_code": true,
+    "focused_transition_tests_passed": 22,
+    "candidate_pipeline_tests_passed": 8,
+    "independent_pilot_physical_cases": 24,
+    "graph_order_contexts": 48,
+    "persisted_contexts": 48,
+    "parsed_resource_input_files": 25,
+    "actual_resource_assessment_status": "blocked",
+    "actual_resources_semantically_qualified": false,
+    "reviewed_contracts": 2,
+    "total_contracts": 47,
+    "bounded_obligations_closed": 11,
+    "bounded_obligations_required": 14,
+    "closed_families_delta": 0,
+    "matched_whole_pilot_models": 155,
+    "candidate_promoted": false,
+    "connector_context_strategy": {
+      "representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-contexts.extract.json",
+      "resolved_concrete_bindings": 12,
+      "runtime_dispatch_groups": 6,
+      "typed_programs": 13,
+      "independent_pilot_utility_cases": 132,
+      "native_utility_comparisons": 528,
+      "native_checked_comparisons": 528,
+      "native_default_featuring_delegate_comparisons": 528,
+      "intentional_normative_corrections": 48,
+      "native_focused_tests": 2,
+      "generator_tests": 6,
+      "fresh_resource_assessment": false,
+      "scope": "Resolved shared ordered context utility over canonical relatedFeature projections and typed featuring/compatibility services. All concrete Connector classes in supplied complete fixtures; original and serialized graphs in both orders. Independent utility observations separate from checked common-context selection. Repeated typed pending fields, field-only retry, malformed rejection and no mutation. Source/lifecycle imports alone are not implementation. Parent/end/subclass transformations, global Anything semantics and full normative validation remain unsupported by this batch.",
+      "implementation_origin": "Generated concrete inventory and pinned resolved program guard; explicit handwritten common-context computation and normative all-related-feature shortcut check. Binding context and the checked imported defaultFeaturingType delegate now consume shared computation. Canonical Connector utility projection consumer is bounded and does not replace concrete context producers.",
+      "normative_review": "docs/conformance/2026-08-support/connector-context-normative-review.json",
+      "tests": [
+        "definition_connector_context_utility_matches_resolved_pilot_matrix",
+        "definition_connector_context_utility_preserves_pending_nary_inputs"
+      ]
+    },
+    "fresh_resource_assessment_for_final_code": true,
+    "general_type_query_view": {
+      "native_focused_tests": 3,
+      "independent_positional_comparisons": 72,
+      "scope": "Successful canonical general-type inputs reused within an immutable graph view, keyed by identity and scope exclusion. Typed pending fields and malformed failures remain uncached; edited/reloaded/reordered graphs get fresh views. Cloned same-ID objects do not consume canonical cached results. Shared indexed references and chain/Accept callbacks retain typed prerequisites. Completed explicit inputs are supplied by the cache mechanics fixtures; omitted library producers are not claimed.",
+      "implementation_origin": "Named handwritten evaluation and immutable result reuse over imported Ecore and resolved native general-type policies. Existing Pilot positional observations are reused with unchanged provenance; no new Pilot semantic observations.",
+      "tests": [
+        "definition_general_type_view_reuses_successes_with_scope_exclusions",
+        "definition_general_type_view_preserves_requirements_and_invalidates_on_edit",
+        "definition_general_type_view_reuses_pilot_positional_inputs"
+      ],
+      "sampled_resource_counts": {
+        "ResourceStarted": 3,
+        "ResourceFinished": 3,
+        "LinkingStarted": 1,
+        "ReferenceStarted": 8,
+        "MembershipNamesStarted": 28500,
+        "MembershipNamesFinished": 28500,
+        "ReferenceFinished": 8,
+        "InheritedMembershipsStarted": 3,
+        "GeneralTypesStarted": 7500,
+        "LibraryPathStarted": 2000,
+        "LibraryPathFinished": 2000,
+        "GeneralTypesFinished": 7500,
+        "InheritedMembershipsFinished": 3,
+        "ScopeMembershipsStarted": 13000,
+        "ScopeMembershipsFinished": 13000,
+        "MetadataSelectionStarted": 1000,
+        "MetadataSelectionFinished": 1000,
+        "RedefinitionFilterStarted": 5500,
+        "RedefinitionFilterFinished": 5500,
+        "RedefinitionClosureStarted": 237000,
+        "RedefinitionClosureEvaluationStarted": 12000,
+        "RedefinitionClosureEvaluationFinished": 12000,
+        "RedefinitionClosureFinished": 237000,
+        "ScopeMembershipsCacheHit": 8500,
+        "GeneralTypesCacheHit": 5000,
+        "InheritedTraversalCacheHit": 1000,
+        "LinkingFinished": 1
+      },
+      "sampled_resource_counts_basis": "docs/conformance/2026-08-support/enum-trigger-states-general-type-view-assessment.json"
+    },
+    "classifier_owner_selector": {
+      "reference": "docs/conformance/2026-08-support/classifier-feature-default-pilot-controls.json",
+      "owners": 37,
+      "independent_pilot_selector_observations": 1184,
+      "native_comparison_contexts": 4736,
+      "scope": "Ordinary Feature getDefaultSupertype across every concrete pinned Classifier owner, explicit Class/Structure/DataType typing subsets, composite and portion flags. Original and serialized canonical graphs in both orders; pending typing, malformed endpoints, broken reciprocal ownership, non-Classifier invocation guard and no mutation. Factory selector evidence does not qualify parsed resources or complete owner transformation.",
+      "implementation_origin": "Handwritten ordinary-owner admission now uses imported Ecore Classifier conformance; generated Feature selector predicates retain imported Class/Structure semantics. Specialized parameter, Feature-owned and crossing lifecycles stay separate."
+    },
+    "no_owning_type_featuring": {
+      "representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/no-owning-type-featuring.extract.json",
+      "resolved_concrete_feature_bindings": 79,
+      "common_producer_observations": 3792,
+      "native_admitted_classes": 35,
+      "native_applicable_controls": 1680,
+      "native_comparison_contexts": 6720,
+      "native_focused_tests": 3,
+      "generator_tests": 6,
+      "remaining_specialized_classes": 44,
+      "scope": "Resolved common owning-Type producer invoked before derived reads. Native canonical detached/package/library-package/plain-Namespace contexts; existing explicit and first-chain contributions, flags, uniqueness and source order. Typed pending endpoints, field-only resolved retry, malformed endpoints/ownership, persisted/reordered graphs, no query mutation. Specialized Connector/Expression and Feature/Class-owned namespaces stay guarded. No full transformation or actual-resource qualification.",
+      "implementation_origin": "Generated concrete dispatch from resolved upstream producer bindings and Ecore ancestry; named handwritten canonical ownership admission and semantic query composition.",
+      "normative_reference": {
+        "path": "docs/conformance/2026-08-support/fixed-featuring-normative.json",
+        "pdf_pages": [
+          193,
+          196,
+          197,
+          198
+        ],
+        "scope": "Owning-Type FeatureMembership contribution and ordered unique explicit/first-chain featuring derivation. Canonical detached/package scopes exclude that ownership condition. The previously documented all-inverse/owned-only disagreement remains guarded; no broader normative closure is claimed."
+      },
+      "negative_fixture_alignment": "Two old negative expression fixtures now give the variable owner canonical Class/FeatureMembership ownership, preserving the real snapshot dependency. A distinct positive persisted/reordered control verifies detached variable-owner expression composition without snapshot creation or completion flags. Final native regression follows test-only corrections; production assessment executable is unchanged."
+    },
+    "cold_transition_construction": {
+      "evidence": "docs/conformance/2026-08-support/cold-transition-lifecycle-dependencies.json",
+      "parsed_cases": 2,
+      "persisted_and_ordered_contexts": 8,
+      "focused_tests": 4,
+      "native_common_producer_comparisons": 6720,
+      "scope": "Cold canonical construction and supplied explicit-link controls distinguish parsed composite Transition receivers from fixed-portion lifecycle admission. Source typed prerequisites, common root featuring, incomplete additional members and atomic refusal are verified. No cold composite parent or Succession context producer implemented; no new resource qualification."
+    },
+    "transition_context_stage": {
+      "representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/transition-context-stage.extract.json",
+      "typed_programs": 8,
+      "independent_prepared_pilot_cases": 24,
+      "native_physical_comparisons": 96,
+      "native_parent_query_comparisons": 32,
+      "native_focused_tests": 2,
+      "native_transition_tests": 22,
+      "generator_tests": 5,
+      "scope": "Prepared parent-featuring projection and physical TypeFeaturing construction in the private Transition member transaction. Supplied-stage observations, original/persisted/reordered graphs, explicit/duplicate contributions, negative non-Transition context, exact typed missing fields, malformed rejection, no completion flags, idempotence and cycle rollback. Detached adoption has a native focused control and resolved algorithm; independent qualification remains required. Complete composite parent/Connector lifecycle and global validation are not claimed.",
+      "normative_review": "docs/conformance/2026-08-support/transition-context-stage-normative-review.json",
+      "implementation_origin": "Named handwritten stage execution guarded by pinned resolved programs and canonical Ecore ownership. Common parent featuring proofs and cycle tracking are shared; no runtime Java or producer-state completion flags."
+    },
+    "coverage_plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "generator_control_tests_passed": 5,
+    "state_contribution": {
+      "native_definition_tests_passed": 350,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log",
+      "focused_native_tests": 4,
+      "generator_tests": 8,
+      "independent_contribution_controls": 1632,
+      "native_contribution_comparisons": 6528,
+      "independent_ecore_invocation_controls": 320,
+      "native_ecore_invocation_comparisons": 1280,
+      "physical_default_contexts": 68,
+      "persistence": "Original/restored/reordered query controls; 68 physical Subsetting contexts with abstract-syntax export/import, idempotent replay and retained incomplete receiver flags",
+      "normative_review": "docs/conformance/2026-08-support/state-contribution-normative-review.json",
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-state-contribution-assessment.json",
+        "status": "time_box_expired",
+        "outcome": null,
+        "semantically_qualified": false
+      }
+    },
+    "redefinition_readiness": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log",
+      "native_definition_tests_passed": 353,
+      "focused_tests": 8,
+      "shared_name_tests": 5,
+      "shared_scope_tests": 2,
+      "candidate_pipeline_tests": 8,
+      "new_readiness_tests": 3,
+      "canonical_success_reads": 128,
+      "canonical_success_evaluations": 4,
+      "contexts": "original/restored in both graph orders",
+      "explicit_missing_reads": 32,
+      "malformed_explicit_reads": 16,
+      "computed_action_owner_pending_or_malformed_reads": 32,
+      "cycles_and_edits": "Self-cycle and non-self edge resolution, later field removal and fresh view invalidate prior readiness proofs. Same-ID foreign malformed objects do not reuse or poison canonical successes.",
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-redefinition-readiness-assessment.json",
+        "status": "assessed",
+        "outcome": {
+          "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: compatibility requires complete owned-feature contributions\", kind: Syntax, span: None, subjects: [] }",
+          "input_files": [
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/target/enum-trigger-caller.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Actions.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Flows.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/States.sysml"
+          ],
+          "relative_path": "enum-trigger-with-States-explicit-imports",
+          "resource_mode": "separate",
+          "semantic_qualification": "not_assessed",
+          "source_bytes": 169828,
+          "source_set_cache_hit": false,
+          "stage": "construction_or_linking",
+          "status": "blocked"
+        },
+        "parsed_input_files": 25,
+        "sampled_event_count_lower_bounds": {
+          "ResourceStarted": 3,
+          "ResourceFinished": 3,
+          "LinkingStarted": 1,
+          "ReferenceStarted": 8,
+          "MembershipNamesStarted": 28500,
+          "MembershipNamesFinished": 28500,
+          "ReferenceFinished": 8,
+          "InheritedMembershipsStarted": 3,
+          "GeneralTypesStarted": 8000,
+          "LibraryPathStarted": 2500,
+          "LibraryPathFinished": 2500,
+          "GeneralTypesFinished": 8000,
+          "InheritedMembershipsFinished": 3,
+          "ScopeMembershipsStarted": 15000,
+          "ScopeMembershipsFinished": 15000,
+          "MetadataSelectionStarted": 1000,
+          "MetadataSelectionFinished": 1000,
+          "RedefinitionFilterStarted": 6500,
+          "RedefinitionFilterFinished": 6500,
+          "ExplicitRedefinitionReadinessStarted": 14000,
+          "ExplicitRedefinitionReadinessFinished": 14000,
+          "RedefinitionClosureStarted": 269500,
+          "RedefinitionClosureEvaluationStarted": 12500,
+          "RedefinitionClosureEvaluationFinished": 12500,
+          "RedefinitionClosureFinished": 269500,
+          "ScopeMembershipsCacheHit": 9500,
+          "GeneralTypesCacheHit": 6000,
+          "InheritedTraversalCacheHit": 1000,
+          "LinkingFinished": 1
+        },
+        "qualification": "not_assessed",
+        "timing_scope": "diagnostic only; not a comparable Pilot benchmark"
+      }
+    },
+    "compatibility_owned_features": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log",
+      "native_definition_tests_passed": 354,
+      "focused_compatibility_tests": 3,
+      "multiplicity_tests": 2,
+      "independent_multiplicity_controls": 4050,
+      "owned_feature_consumer_checks": 12150,
+      "compatibility_reference_cases": 18,
+      "declared_child_persisted_reordered_contexts": 12,
+      "pending_and_malformed_boundary": "A fresh end StateUsage rejects before the multiplicity producer runs, succeeds after canonical insertion, and rejects malformed is_end. Declared child Features return nonempty before/after persistence and graph reversal.",
+      "full_transformation_proven": false,
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-compatibility-owned-features-assessment.json",
+        "status": "assessed",
+        "outcome": {
+          "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: type/inherited scope service is required: no document generalization provider for InvocationExpression\", kind: Syntax, span: None, subjects: [] }",
+          "input_files": [
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/target/enum-trigger-caller.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/OccurrenceFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/ControlPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/FeatureReferencingPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/StatePerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/TransitionPerformances.kerml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Actions.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/Flows.sysml",
+            "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Systems Library/States.sysml"
+          ],
+          "relative_path": "enum-trigger-with-States-explicit-imports",
+          "resource_mode": "separate",
+          "semantic_qualification": "not_assessed",
+          "source_bytes": 169828,
+          "source_set_cache_hit": false,
+          "stage": "construction_or_linking",
+          "status": "blocked"
+        },
+        "parsed_input_files": 25,
+        "sampled_event_count_lower_bounds": {
+          "ResourceStarted": 3,
+          "ResourceFinished": 3,
+          "LinkingStarted": 1,
+          "ReferenceStarted": 500,
+          "MembershipNamesStarted": 32000,
+          "MembershipNamesFinished": 32000,
+          "ReferenceFinished": 513,
+          "InheritedMembershipsStarted": 3,
+          "GeneralTypesStarted": 9500,
+          "LibraryPathStarted": 2500,
+          "LibraryPathFinished": 2500,
+          "GeneralTypesFinished": 9865,
+          "InheritedMembershipsFinished": 246,
+          "ScopeMembershipsStarted": 17000,
+          "ScopeMembershipsFinished": 17000,
+          "MetadataSelectionStarted": 1000,
+          "MetadataSelectionFinished": 1000,
+          "RedefinitionFilterStarted": 7500,
+          "RedefinitionFilterFinished": 7500,
+          "ExplicitRedefinitionReadinessStarted": 15000,
+          "ExplicitRedefinitionReadinessFinished": 15000,
+          "RedefinitionClosureStarted": 310000,
+          "RedefinitionClosureEvaluationStarted": 13500,
+          "RedefinitionClosureEvaluationFinished": 13500,
+          "RedefinitionClosureFinished": 310000,
+          "ScopeMembershipsCacheHit": 11000,
+          "GeneralTypesCacheHit": 7000,
+          "InheritedTraversalCacheHit": 1500,
+          "LinkingFinished": 1
+        },
+        "qualification": "not_assessed",
+        "timing_scope": "diagnostic only; not a comparable Pilot benchmark"
+      }
+    },
+    "next_batch": "Implement shared value transformation and chained-result dependency scheduling using valid parsed source controls and genuine typed library prototypes; retain result-default guards until verified.",
+    "instantiation_strategy": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log",
+      "native_definition_tests_passed": 356,
+      "focused_native_tests_passed": 2,
+      "ancestry_boundary_tests_passed": 1,
+      "generator_controls_passed": 6,
+      "candidate_pipeline_tests_passed": 8,
+      "imported_bindings": 8,
+      "native_common_operation_bindings": 2,
+      "common_operation_reference_comparisons": 72,
+      "documented_normative_disagreement_comparisons": 8,
+      "physical_defaults_idempotence_and_abstract_syntax_persistence_contexts": 64,
+      "cached_independent_controls": 20,
+      "typed_prerequisites": "Missing member0.member_element retains ReadField across persistence/order and resolves by changing that field alone; malformed values reject.",
+      "stored_derived_snapshots_ignored": true,
+      "full_transformation_proven": false,
+      "resource_assessment_current_code": false,
+      "last_resource_assessment_historical": "docs/conformance/2026-08-support/enum-trigger-states-compatibility-owned-features-assessment.json",
+      "optimized_build": "passes; final subsequent source edit only changes an obsolete negative test fixture, with no production behavior change"
+    },
+    "library_instantiation": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log",
+      "native_definition_tests_passed": 358,
+      "focused_native_tests_passed": 7,
+      "generator_controls_passed": 6,
+      "candidate_pipeline_tests_passed": 8,
+      "tool_binary_tests_passed": 11,
+      "independent_cached_controls": 1236,
+      "operator_trigger_bindings_consumed": 6,
+      "all_instantiation_getter_bindings_consumed": 8,
+      "persisted_and_reordered_reference_context_comparisons": 4944,
+      "derived_reference_reader_compared_in_every_context": true,
+      "typed_boundary_modes": 8,
+      "typed_boundary_repeat_and_reload_checks": 32,
+      "null_and_constructor_defaults_verified": true,
+      "quoted_operator_segments_verified": [
+        "+",
+        "a::b",
+        "a b",
+        ".",
+        "#"
+      ],
+      "failed_lookups_not_negative_cached": true,
+      "completion_flags_written": false,
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "resource_assessment_current_code": false,
+      "optimized_build": "passes"
+    },
+    "instantiation_contributions": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log",
+      "native_definition_tests_passed": 364,
+      "focused_native_tests_passed": 2,
+      "common_recipe_regression_tests_passed": 2,
+      "generator_controls_passed": 6,
+      "candidate_pipeline_tests_passed": 8,
+      "tool_binary_tests_passed": 11,
+      "independent_contribution_controls": 228,
+      "independent_equivalence_controls": 8,
+      "contribution_comparison_contexts": 912,
+      "equivalence_comparison_contexts": 32,
+      "physical_default_idempotence_abstract_syntax_persistence_contexts": 80,
+      "operator_trigger_adapter_bindings_consumed": 6,
+      "all_instantiation_getter_bindings_consumed": 8,
+      "all_instantiation_default_recipe_bindings_consumed": 8,
+      "relationship_kinds_not_collapsed": true,
+      "typed_chaining_prerequisite_retry_and_malformed_rejection": true,
+      "completion_flags_written": false,
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "resource_assessment_current_code": false,
+      "optimized_build": "passes"
+    },
+    "expression_parameters": {
+      "independent_controls": 960,
+      "native_comparison_contexts": 3840,
+      "native_bindings": 20,
+      "focused_native_tests_passed": 1,
+      "generator_control_tests_passed": 5,
+      "guard_rejections": 20,
+      "queries_preserve_graph": true,
+      "full_native_regression": "passes",
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json",
+        "sha256": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+        "status": "assessed",
+        "native_executable": {
+          "path": "target/release/audit_release_compile.exe",
+          "sha256": "3b2b9ad560826acfec9352920642d391f306154c04dadf16e7937bfeaa18534f"
+        },
+        "elapsed_seconds": 626.969,
+        "diagnostic_only": true,
+        "semantic_qualification": false,
+        "comparable_benchmark": false,
+        "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+        "exit_code": 1
+      },
+      "full_normative_qualification": false,
+      "native_definition_tests_passed": 364,
+      "candidate_pipeline_tests_passed": 8,
+      "tool_binary_tests_passed": 11,
+      "optimized_build": "passes",
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log",
+      "plan_tests_passed": 15,
+      "certificate_tests_passed": 33,
+      "strategy_tests_passed": 15,
+      "resource_assessment_current_code": false,
+      "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log",
+      "latest_full_native_regression_passed": 364
+    },
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-feature-chain-members-assessment.json",
+      "sha256": "f38e1621aa85afa4fb1bdfc2bfd2f6a94692ed92702df8b0079a53827927a87e",
+      "status": "assessed",
+      "native_executable": {
+        "path": "target/release/audit_release_compile.exe",
+        "sha256": "38ffdb818142cf10d468c655eedf1b02160beedae80d9ec53a96652b94d2b1a6"
+      },
+      "elapsed_seconds": 633.203,
+      "diagnostic_only": true,
+      "semantic_qualification": false,
+      "comparable_benchmark": false,
+      "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: result defaults require separate nested/valuation/crossing/typing dependencies\", kind: Syntax, span: None, subjects: [] }",
+      "exit_code": 1
+    },
+    "expression_context_contributions": {
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log",
+      "native_definition_tests_passed": 364,
+      "focused_native_tests_passed": 4,
+      "independent_context_controls": 960,
+      "concrete_expression_bindings": 20,
+      "direction_variants": 4,
+      "owner_contexts": 6,
+      "composite_variants": 2,
+      "query_comparison_contexts": 3840,
+      "physical_replay_abstract_syntax_persistence_contexts": 120,
+      "transactional_rejection_boundary_contexts": 720,
+      "typed_field_only_retry_and_malformed_contexts": 20,
+      "controls_validation_tests_passed": 5,
+      "candidate_pipeline_tests_passed": 8,
+      "tool_binary_tests_passed": 11,
+      "obsolete_guard_regression": {
+        "initial_result": "363 passed, one obsolete blanket-direction expectation failed",
+        "preserved_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native-obsolete-guard.log",
+        "correction": "Malformed direction rejects; valid directions remain independently verified by the complete cached matrix. No production change followed the failure.",
+        "focused_boundary_recheck": "passes"
+      },
+      "full_native_regression": "passes",
+      "optimized_build": "passes",
+      "completion_flags_written": false,
+      "resource_assessment_current_code": false,
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json",
+        "sha256": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+        "status": "assessed",
+        "native_executable": {
+          "path": "target/release/audit_release_compile.exe",
+          "sha256": "3b2b9ad560826acfec9352920642d391f306154c04dadf16e7937bfeaa18534f"
+        },
+        "elapsed_seconds": 626.969,
+        "diagnostic_only": true,
+        "semantic_qualification": false,
+        "comparable_benchmark": false,
+        "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+        "exit_code": 1
+      }
+    },
+    "relative_namespace": {
+      "independent_controls": 72,
+      "scope_origin_kinds": 2,
+      "shape_variants": 9,
+      "callable_direction_variants": 4,
+      "focused_native_tests_passed": 4,
+      "persisted_forward_reverse_controls": 144,
+      "raw_reference_expectations_normalized": false,
+      "full_native_regression": "passes",
+      "optimized_build": "passes",
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-relative-namespace-assessment.json",
+        "sha256": "296a1f16992656ed5bde7d8c2bab7360d8678703fbe4a6c5c3769f816e0c9884",
+        "status": "assessed",
+        "native_executable": {
+          "path": "target/release/audit_release_compile.exe",
+          "sha256": "fe60c37a7d0572bea8783030824ccfaa60c7450e85bfb223b2ceecf24c8d55b3"
+        },
+        "elapsed_seconds": 626.891,
+        "diagnostic_only": true,
+        "semantic_qualification": false,
+        "comparable_benchmark": false,
+        "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: parameter query requires an unsupported added-member strategy\", kind: Syntax, span: None, subjects: [] }",
+        "exit_code": 1
+      },
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "native_definition_tests_passed": 368,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log",
+      "tool_binary_tests_passed": 11,
+      "cache_integrity_tests_passed": 4,
+      "cache_reproduced": true,
+      "native_result_construction_and_replay_controls": 6,
+      "coverage_plan_tests_passed": 15,
+      "certificate_tests_passed": 33,
+      "strategy_tests_passed": 15,
+      "first_feature_chaining_origin": "Native integration consumed; dedicated first-chain controls still required",
+      "resource_assessment_current_code": false,
+      "actual_resources_semantically_qualified": false
+    },
+    "feature_chain_members": {
+      "independent_controls": 56,
+      "structural_shapes": 7,
+      "direction_variants": 4,
+      "completion_flag_variants": 2,
+      "focused_native_tests_passed": 4,
+      "persisted_forward_reverse_controls": 112,
+      "rollback_negative_controls": 6,
+      "raw_reference_expectations_normalized": false,
+      "completion_flags_written": false,
+      "full_native_regression": "passes",
+      "native_definition_tests_passed": 372,
+      "optimized_build": "passes",
+      "tool_binary_tests_passed": 11,
+      "cache_integrity_tests_passed": 4,
+      "cache_reproduced": true,
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "resource_assessment_current_code": false,
+      "actual_resources_semantically_qualified": false,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log",
+      "plan_tests_passed": 15,
+      "certificate_tests_passed": 33,
+      "strategy_tests_passed": 15,
+      "resource_assessment": {
+        "path": "docs/conformance/2026-08-support/enum-trigger-states-feature-chain-members-assessment.json",
+        "sha256": "f38e1621aa85afa4fb1bdfc2bfd2f6a94692ed92702df8b0079a53827927a87e",
+        "status": "assessed",
+        "native_executable": {
+          "path": "target/release/audit_release_compile.exe",
+          "sha256": "38ffdb818142cf10d468c655eedf1b02160beedae80d9ec53a96652b94d2b1a6"
+        },
+        "elapsed_seconds": 633.203,
+        "diagnostic_only": true,
+        "semantic_qualification": false,
+        "comparable_benchmark": false,
+        "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: result defaults require separate nested/valuation/crossing/typing dependencies\", kind: Syntax, span: None, subjects: [] }",
+        "exit_code": 1
+      },
+      "reference_progress": {
+        "prior_reference_finished_count": 523,
+        "current_reference_finished_count": 527,
+        "interpretation": "Diagnostic progress only; not qualified references or obligations"
+      }
+    },
+    "result_multiplicity": {
+      "independent_controls": 160,
+      "owner_contexts": 4,
+      "typing_masks": 8,
+      "bound_shapes": 5,
+      "focused_native_tests_passed": 6,
+      "persisted_forward_reverse_controls": 320,
+      "atomic_negative_controls": 5,
+      "raw_reference_expectations_normalized": false,
+      "completion_flags_written": false,
+      "cache_integrity_tests_passed": 3,
+      "cache_reproduced": true,
+      "full_native_regression": "passes",
+      "optimized_build": "passes",
+      "resource_assessment_current_code": false,
+      "full_normative_qualification": false,
+      "full_transformation_proven": false,
+      "focused_native_source_construction": {
+        "cases": 6,
+        "result": "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-source-results.jsonl",
+        "stages_verified": [
+          "parse",
+          "construct",
+          "link",
+          "structural_publication"
+        ],
+        "semantic_qualification": false,
+        "source_persistence_verified": false,
+        "scope": "Function/Predicate return multiplicity source contexts. Factory-query controls separately verify persistence; source-level persistence remains distinct."
+      },
+      "native_definition_tests_passed": 374,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log",
+      "tool_binary_tests_passed": 11,
+      "plan_tests_passed": 15,
+      "certificate_tests_passed": 33,
+      "strategy_tests_passed": 15
+    },
+    "usage_variability": {
+      "independent_controls": 752,
+      "concrete_bindings": 47,
+      "contexts": 8,
+      "call_sites": 2,
+      "persisted_forward_reverse_controls": 1504,
+      "atomic_pending_or_malformed_controls": 4,
+      "focused_native_tests_passed": 3,
+      "cache_integrity_tests_passed": 5,
+      "cache_reproduced": true,
+      "raw_reference_expectations_normalized": false,
+      "completion_flags_written": false,
+      "full_native_regression": "passes",
+      "optimized_build": "passes",
+      "full_normative_qualification": false,
+      "full_transformation_proven": false,
+      "resource_assessment_current_code": false,
+      "native_definition_tests_passed": 376,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log",
+      "tool_binary_tests_passed": 11,
+      "remaining_scope": "Actual libraries, cold lifecycle and complete normative validation are unsupported; eight supplied prototype contexts only."
+    },
+    "prior_result_multiplicity_resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-result-multiplicity-assessment.json",
+      "parsed_resources": 25,
+      "owned_multiplicity_blocker_cleared": true,
+      "blocker": "external/global scope service is required",
+      "current_code": false,
+      "semantic_qualification": false
+    },
+    "reference_result_scope": {
+      "focused_native_tests_passed": 4,
+      "existing_independent_reference_result_controls": 12,
+      "independent_cache_total_construction_controls": 24,
+      "typed_target_classes": 3,
+      "persisted_forward_reverse_contexts": 6,
+      "full_native_regression": "passes",
+      "optimized_build": "passes",
+      "completion_flags_written": false,
+      "full_transformation_proven": false,
+      "full_normative_qualification": false,
+      "resource_assessment_current_code": true,
+      "native_definition_tests_passed": 379,
+      "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+      "tool_binary_tests_passed": 11,
+      "cache_integrity_tests_passed": 8,
+      "cache_reproduced": true,
+      "plan_tests_passed": 15,
+      "certificate_tests_passed": 33,
+      "strategy_tests_passed": 15,
+      "actual_resources_semantically_qualified": false,
+      "actual_resource_status": "blocked",
+      "actual_resource_error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+      "resource_count": 25
+    },
+    "library_reference_selection": {
+      "focused_selection_tests_passed": 6,
+      "inventory_exactly_reproduced": true,
+      "native_assessment_status": "blocked",
+      "qualified_families_delta": 0,
+      "full_semantic_qualification": false,
+      "upstream_qualified_name_converter_applied": true,
+      "reference_expectations_modified": false,
+      "actual_resource_error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: result defaults require separate nested/valuation/crossing/typing dependencies\", kind: Syntax, span: None, subjects: [] }",
+      "actual_resources_semantically_qualified": false,
+      "native_resource_inputs": 31,
+      "native_source_snapshot_current": true
+    },
+    "valuation_evaluation": {
+      "imported_programs": 7,
+      "contexts": 768,
+      "observed_component_records": 704,
+      "fixture_dependency_failures": 64,
+      "native_support_added": false,
+      "genuine_typed_source_contexts": 12,
+      "genuine_source_resource_errors": 0
+    }
+  }
+}

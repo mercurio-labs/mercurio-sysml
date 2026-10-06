@@ -1,0 +1,212 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "fixture_sha256": "e684601081e69bec0151b7d606d18bb8e1444f0775f234fa34eb0acda5fa0244",
+  "export_sha256": "b2bf5b5855488354f8ea9eafb2347e01d5b032df1969c050bf3642fd8c9f33ac",
+  "timings_sha256": "de9c4c7a10733a8fc4c24422896d59c07638f2db0d65281a146439c97817ba64",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "grammar": {
+    "file": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+    "sha256": "7d9142742c454f5810fe4db61a089abef5e0b8d61ad8bf552631d9136b04f298",
+    "rule": "InterfaceEnd returns SysML::PortUsage; BinaryInterfacePart and NaryInterfacePart both use InterfaceEndMember."
+  },
+  "validation": {
+    "relative_path": "interface-ends.sysml",
+    "status": "ok",
+    "validation_ms": 1301.8567,
+    "diagnostics": []
+  },
+  "end_observations": [
+    {
+      "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml::8::PortUsage",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 8,
+        "end_line": 8
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml::8::PortUsage#2",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 8,
+        "end_line": 8
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml::8::PortUsage#3",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 8,
+        "end_line": 8
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::anonymousBinary::source",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 6,
+        "end_line": 6
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::anonymousBinary::target",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 6,
+        "end_line": 6
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::genericConnection::source",
+      "kind": "ReferenceUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 9,
+        "end_line": 9
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::genericConnection::target",
+      "kind": "ReferenceUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 9,
+        "end_line": 9
+      },
+      "properties": {
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::namedBinary::left",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 5,
+        "end_line": 5
+      },
+      "properties": {
+        "declared_name": "left",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::namedBinary::right",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 5,
+        "end_line": 5
+      },
+      "properties": {
+        "declared_name": "right",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::namedNary::alpha",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "properties": {
+        "declared_name": "alpha",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::namedNary::beta",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "properties": {
+        "declared_name": "beta",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    },
+    {
+      "qualified_name": "InterfaceEnds::namedNary::gamma",
+      "kind": "PortUsage",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/interface-ends.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "properties": {
+        "declared_name": "gamma",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_reference": true
+      }
+    }
+  ],
+  "retained_invalid_attempt": {
+    "reason": "Initial fixture used reserved words first/second as unquoted port names. Its syntax-error results are not semantic evidence.",
+    "fixture_sha256": "49cb7823a878009b9c1e52f350d1dc190cc935df3462554fb7717357b3838906",
+    "export_sha256": "e83e57028348e288ab2bb5dee2ad7a88e99740cdfb0f8e0e4c1a4064a59108a9",
+    "timings_sha256": "aa82a8888adfca0257be6775f0a220fcf248a2dd6b5f67e1f99e849db73b38c1"
+  }
+}

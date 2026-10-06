@@ -1,0 +1,132 @@
+{
+  "schema": "dev.mercurio.transition-parent-contexts-evidence.v1",
+  "scope": "Fixed untyped portion Transition stored stages with supplied complete parent/source/member and physical role fixtures. Parent contexts are Class, ActionDefinition, StateDefinition, ActionUsage and StateUsage. This is not composite Transition/source-document qualification, parent lifecycle, actual resources, complete derived ends or semantic constraints.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_owner.rs": "fcd85f8576cff7ac1afc3ef41e12e2f43dc30162228cdb9abef010a5f070b38f",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_child_stages.rs": "4c45d5d7e26478f62ff56254f9f6b5e1d228282cc4bf026d31d8aa33aca8f093",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/action_contributions.rs": "f47a62ef14b66728a6651dd742f87dfd7b45f102300301360fbb8f7d1ecbf722",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/action_contributions_generated.rs": "0a71fb7b3daeda4d3b2bf9130ddf6580022f413ac13dd89d853c8db0ef66d07a",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "tools/run_transition_owner_context_probe.py": "059af99b8f6a6c6916327963f08606555f1dfc0c98dd24901ef67e2dcf46df25",
+    "tools/test_transition_owner_contexts.py": "b55d5e0876251c285e603b0dc175446f290205da9f41979eb37cd715116190d2",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTransitionOwnerContextProbe.java": "988905c983692b02c354b77c777a132236b79487f667629eac09392c77ca1d10",
+    "docs/conformance/2026-08-support/transition-owner-context-pilot-controls.json": "0774199213c6c3d4c415c902c9ad316885b2f5fbde70ee3b40befb06fda72433",
+    "docs/conformance/2026-08-support/action-policy-normative.json": "09064acae4a80b3cfc3e1b65fbd8876dbed260e06a5ac8d47be2db58f236b9b5",
+    "docs/conformance/2026-08-support/transition-members-normative.json": "6f265e5b8da1d5b0109668c5fb00befc4571d2e67aa437c0b992ea70b6db7c37",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/action-contribution-pilot-controls.json": "2d236c48fa292a6312dba524a96866df44469fccb29771101aa02b869e52fd81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-focused.log": "ff575b102696d67525be96539d309463f3f3208cc202ab822eeee0e872ee5da3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-boundaries.log": "5048118657127bd608a7dfa55ae6d74cb55d5e09fae38ac18d254287aebfa31f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-cache-tests.log": "f29e93d786aebd694727cdeadaa4e6e2366e84ef2f41946930149ec7f0af1756",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-pilot-observation.log": "770b5bf225f39e6918bf557b1f499899b72a213550eaef31722cc92cb51c544c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-pilot-check.log": "770b5bf225f39e6918bf557b1f499899b72a213550eaef31722cc92cb51c544c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-native-tests.log": "b0c7c596b598056c0a9eb3d303f94b4b77337a0ac0584750c43c0823a22957d6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "parents_from_pinned_ecore": "Canonical concrete Ecore class identities and inheritance govern owner and relationship conformance.",
+    "selector": "Existing generated resolved Action/Transition predicates and actual default-role map; all selected inherited roles retained.",
+    "child_methods": "Four resolved full child bodies remain identical to the guarded prior child program. No new general compiler or runtime Java introduced."
+  },
+  "native_consumption": {
+    "transaction": "definition_complete_fixed_transition_stored_tree",
+    "admission": "transition_owner::stable_inputs",
+    "generalization": "occurrence_strategy_names / action_contributions generated predicates",
+    "required_roles": "Every selected role must resolve canonically and be physically supplied complete. Action/State contexts retain enclosedPerformance contributions rather than selecting only transitionActions.",
+    "handwritten_dependencies": [
+      "Exact admitted parent contexts and fixed receiver projection",
+      "Pure producer-disjointness proof and selected role readiness",
+      "Stage ordering, canonical mutation and binary context algorithm",
+      "Supplied parent/source/member/library inputs; no flag proves their real full lifecycle"
+    ]
+  },
+  "verification": {
+    "parent_kinds": [
+      "Class",
+      "ActionDefinition",
+      "StateDefinition",
+      "ActionUsage",
+      "StateUsage"
+    ],
+    "independent_stored_stage_contexts": 120,
+    "new_parent_contexts_over_prior_matrix": 96,
+    "original_children": 240,
+    "original_parameter_children": 120,
+    "original_reference_children": 60,
+    "original_succession_children": 60,
+    "owner_link_child_connector_end_snapshots_match": true,
+    "abstract_syntax_roundtrip_contexts": 120,
+    "rollback_boundaries": 16,
+    "cache_guard_tests": 8,
+    "pilot_cache_reproduced": true,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-native-tests.log",
+      "sha256": "b0c7c596b598056c0a9eb3d303f94b4b77337a0ac0584750c43c0823a22957d6",
+      "passed": 304
+    },
+    "full_whole_model_comparison_performed": false,
+    "actual_resource_qualification": false,
+    "production_scheduler_integrated": false,
+    "parent_lifecycle_qualified": false,
+    "composite_receiver_contexts_qualified": 0,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_basis": [
+    "docs/conformance/2026-08-support/action-policy-normative.json",
+    "docs/conformance/2026-08-support/transition-members-normative.json"
+  ],
+  "remaining": [
+    "Composite transitions in the required State/Action enum caller; source-dependent defaults and variable featuring",
+    "Production dependency scheduler integration and actual parent/library lifecycle",
+    "Accept payload/defaults, target/chain algorithms, effective ends and complete State/Transition/Connector constraints",
+    "Every complete mandatory family/parser/model-construction acceptance contract"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

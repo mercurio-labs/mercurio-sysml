@@ -1,0 +1,911 @@
+{
+  "schema_version": 1,
+  "source": {
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Mercurio emission decision: preserve SysML metaclass and give anonymous control actions source identities."
+    },
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5"
+  },
+  "rules": [
+    {
+      "construct": "DecisionNode",
+      "metaclass": "SysML::DecisionNode",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "decide"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "DecisionNode"
+        ],
+        "ecore_class": "SysML::DecisionNode"
+      }
+    },
+    {
+      "construct": "ForkNode",
+      "metaclass": "SysML::ForkNode",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "fork"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "ForkNode"
+        ],
+        "ecore_class": "SysML::ForkNode"
+      }
+    },
+    {
+      "construct": "JoinNode",
+      "metaclass": "SysML::JoinNode",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "join"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "JoinNode"
+        ],
+        "ecore_class": "SysML::JoinNode"
+      }
+    },
+    {
+      "construct": "MergeNode",
+      "metaclass": "SysML::MergeNode",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "merge"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "MergeNode"
+        ],
+        "ecore_class": "SysML::MergeNode"
+      }
+    },
+    {
+      "construct": "TerminateNode",
+      "metaclass": "SysML::TerminateActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "terminate"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "TerminateNode"
+        ],
+        "ecore_class": "SysML::TerminateActionUsage"
+      }
+    },
+    {
+      "construct": "AssignmentNode",
+      "metaclass": "SysML::AssignmentActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "assign"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "AssignmentNode"
+        ],
+        "ecore_class": "SysML::AssignmentActionUsage"
+      }
+    },
+    {
+      "construct": "Message",
+      "metaclass": "SysML::FlowUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "message"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "flow.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Message"
+        ],
+        "ecore_class": "SysML::FlowUsage"
+      }
+    },
+    {
+      "construct": "IfNode",
+      "metaclass": "SysML::IfActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "if"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "IfNode"
+        ],
+        "ecore_class": "SysML::IfActionUsage"
+      }
+    },
+    {
+      "construct": "WhileLoopNode",
+      "metaclass": "SysML::WhileLoopActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "while"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "WhileLoopNode"
+        ],
+        "ecore_class": "SysML::WhileLoopActionUsage"
+      }
+    },
+    {
+      "construct": "WhileLoopNode",
+      "metaclass": "SysML::WhileLoopActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "loop"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "WhileLoopNode"
+        ],
+        "ecore_class": "SysML::WhileLoopActionUsage"
+      }
+    },
+    {
+      "construct": "ForLoopNode",
+      "metaclass": "SysML::ForLoopActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "for"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "ForLoopNode"
+        ],
+        "ecore_class": "SysML::ForLoopActionUsage"
+      }
+    },
+    {
+      "construct": "SendNode",
+      "metaclass": "SysML::SendActionUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "send"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "feature.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "SendNode"
+        ],
+        "ecore_class": "SysML::SendActionUsage"
+      }
+    },
+    {
+      "construct": "PayloadFeature",
+      "metaclass": "SysML::PayloadFeature",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "payload"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "flow.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "PayloadFeature"
+        ],
+        "ecore_class": "SysML::PayloadFeature"
+      }
+    },
+    {
+      "construct": "AssertConstraintUsage",
+      "metaclass": "SysML::AssertConstraintUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "assert"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "assert.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "AssertConstraintUsage"
+        ],
+        "ecore_class": "SysML::AssertConstraintUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "IndividualDefinition",
+      "metaclass": "SysML::OccurrenceDefinition",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericDefinitionDecl",
+        "keyword": "individual"
+      },
+      "collect": {
+        "element": "definition",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "is_abstract": "$ast.modifiers contains abstract",
+          "members": "$ast.members[usage]",
+          "specializes": "$ast.specializes or semantic_default"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "type.{qualified_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "features": "$owned_feature_ids",
+          "specializes": "$specializes_refs",
+          "is_individual": "$is_individual"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "IndividualDefinition"
+        ],
+        "ecore_class": "SysML::OccurrenceDefinition",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "IndividualUsage",
+      "metaclass": "SysML::OccurrenceUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "individual"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "occurrence.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref",
+          "is_individual": "$is_individual"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "IndividualUsage"
+        ],
+        "ecore_class": "SysML::OccurrenceUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "VerificationCaseUsage",
+      "metaclass": "SysML::VerificationCaseUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "verification"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "verification.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "VerificationCaseUsage"
+        ],
+        "ecore_class": "SysML::VerificationCaseUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "CommentUsage",
+      "metaclass": "SysML::Comment",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "comment"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "annotation_target": "$ast.reference_target",
+          "body": "$ast.expression",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [
+        {
+          "id": "comment-annotation-target",
+          "when": "$usage.construct == CommentUsage",
+          "set": {
+            "reference_target": "$usage.annotation_target"
+          },
+          "note": "Current resolver resolves comment annotation targets through local definitions/usages and visible types."
+        }
+      ],
+      "emit": {
+        "id_template": "comment.{owner_path}.{declared_name}.{start_line}.{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Comment"
+        ],
+        "ecore_class": "SysML::Comment",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "DependencyUsage",
+      "metaclass": "SysML::Dependency",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "dependency"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "dependency.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "Dependency"
+        ],
+        "ecore_class": "SysML::Dependency",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "SatisfyUsage",
+      "metaclass": "SysML::SatisfyRequirementUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "satisfy"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "reference_target": "$ast.reference_target or $ast.name",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [
+        {
+          "id": "satisfy-name-as-reference-target",
+          "when": "$usage.construct == SatisfyUsage && empty($usage.reference_target) && !empty($usage.declared_name)",
+          "set": {
+            "reference_target": "$usage.declared_name"
+          },
+          "note": "Matches current resolver behavior for satisfy usage shorthand."
+        }
+      ],
+      "emit": {
+        "id_template": "satisfy.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "SatisfyRequirementUsage"
+        ],
+        "ecore_class": "SysML::SatisfyRequirementUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "IncludeUseCaseUsage",
+      "metaclass": "SysML::IncludeUseCaseUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "include"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty",
+          "reference_target": "$ast.reference_target"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "use-case.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref",
+          "is_unique": "$is_unique",
+          "is_variable": "$is_variable"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "IncludeUseCaseUsage"
+        ],
+        "ecore_class": "SysML::IncludeUseCaseUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "EndUsage",
+      "metaclass": "SysML::ReferenceUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "end"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "modifiers": "$ast.modifiers + end",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "reference.{owner_path}.{declared_name}.{start_line}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "featuring_type": "$featuring_type_ref",
+          "is_abstract": "$is_abstract",
+          "is_derived": "$is_derived",
+          "is_end": "$is_end",
+          "is_ordered": "$is_ordered",
+          "is_unique": "$is_unique",
+          "is_variable": "$is_variable",
+          "members": "$member_ids",
+          "metatype": "$metatype_ref",
+          "name": "$name",
+          "owner": "$owner_id",
+          "features": "$owned_feature_ids",
+          "redefined_features": "$redefined_feature_refs",
+          "specialized_features": "$specialized_feature_refs",
+          "specializes": "$specializes_refs",
+          "subsetted_features": "$subsetted_feature_refs",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "DefaultReferenceUsage"
+        ],
+        "ecore_class": "SysML::ReferenceUsage",
+        "transform_observations": []
+      }
+    },
+    {
+      "construct": "SuccessionFlowUsage",
+      "metaclass": "SysML::SuccessionFlowUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "succession-flow"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes",
+          "type": "$ast.ty"
+        }
+      },
+      "emit": {
+        "id_template": "flow.{owner_path}.{declared_name}.{start_line}_{start_col}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "SuccessionFlowUsage"
+        ],
+        "ecore_class": "SysML::SuccessionFlowUsage"
+      }
+    },
+    {
+      "construct": "AssumeUsage",
+      "metaclass": "SysML::ConstraintUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "assume"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "constraint.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "RequirementConstraintUsage",
+          "RequirementConstraintMember"
+        ],
+        "ecore_class": "SysML::ConstraintUsage"
+      }
+    },
+    {
+      "construct": "RequireUsage",
+      "metaclass": "SysML::ConstraintUsage",
+      "status": "reviewed",
+      "ast": {
+        "node": "GenericUsageDecl",
+        "keyword": "require"
+      },
+      "collect": {
+        "element": "usage",
+        "name": "$ast.name",
+        "owner": "$scope.owner",
+        "fields": {
+          "members": "$ast.body_members[usage]",
+          "specializes": "$ast.specializes or semantic_default",
+          "type": "$ast.ty"
+        }
+      },
+      "elaborate": [],
+      "emit": {
+        "id_template": "constraint.{owner_path}.{declared_name}",
+        "properties": {
+          "declared_name": "$declared_name",
+          "owner": "$owner_id",
+          "type": "$type_ref"
+        }
+      },
+      "pilot_sources": {
+        "grammar_rules": [
+          "RequirementConstraintUsage",
+          "RequirementConstraintMember"
+        ],
+        "ecore_class": "SysML::ConstraintUsage"
+      }
+    }
+  ],
+  "usage_context_overrides": [
+    {
+      "keyword": "end",
+      "owner": "InterfaceDefinition",
+      "construct": "PortUsage",
+      "reason": "KerML/SysML grammar DefaultInterfaceEnd returns PortUsage; end keyword is implicit port only in interface bodies.",
+      "pilot_rule": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext#DefaultInterfaceEnd"
+    },
+    {
+      "keyword": "end",
+      "owner": "InterfaceUsage",
+      "construct": "PortUsage",
+      "reason": "KerML/SysML grammar DefaultInterfaceEnd returns PortUsage; end keyword is implicit port only in interface bodies.",
+      "pilot_rule": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext#DefaultInterfaceEnd"
+    }
+  ]
+}

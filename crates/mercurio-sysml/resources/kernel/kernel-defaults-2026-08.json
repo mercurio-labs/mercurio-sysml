@@ -1,0 +1,51 @@
+{
+  "schema": "dev.mercurio.observed-definition-defaults.v1",
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_git_describe": "2026-08",
+    "pilot_dirty": false,
+    "export_sha256": "2a46d0db9cbc5754cd0d8a9e049bdb7df5fad02e982f750e5552f2d4ac8a738b",
+    "fixture_sha256": "60023fa4169c745524f15f9a5e1beca52603653c1c302188a68fc1fa6b28e823",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 820,
+      "relationship_count": 6055,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/kernel-defaults.kerml"
+      ],
+      "exported_at_utc": "2026-09-17T18:10:09.690047500Z"
+    }
+  },
+  "definitions": {
+    "Association": [
+      "Links::Link"
+    ],
+    "Behavior": [
+      "Performances::Performance"
+    ],
+    "Class": [
+      "Occurrences::Occurrence"
+    ],
+    "DataType": [
+      "Base::DataValue"
+    ],
+    "Function": [
+      "Performances::Evaluation"
+    ],
+    "Interaction": [
+      "Links::Link"
+    ],
+    "Metaclass": [
+      "Metaobjects::Metaobject"
+    ],
+    "Predicate": [
+      "Performances::BooleanEvaluation"
+    ],
+    "Structure": [
+      "Objects::Object"
+    ]
+  }
+}

@@ -1,0 +1,690 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "export_sha256": "a47b19af7c4d41f7a71ec456239b2213141c87ea8088315870cc809dba401037",
+  "cases": [
+    {
+      "relative_path": "flag-name-controls.sysml",
+      "status": "ok",
+      "validation_ms": 1370.6431,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "flag-name-controls.kerml",
+      "status": "ok",
+      "validation_ms": 2.9685,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "flag-name-variable-negative.kerml",
+      "status": "error",
+      "validation_ms": 3.9012,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateFeatureIsVariable",
+          "message": "Must be owned by an occurrence type",
+          "line": 2
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "FlagNameControls",
+      "kind": "Package",
+      "line": 1,
+      "properties": {
+        "declared_name": "FlagNameControls"
+      }
+    },
+    {
+      "name": "FlagNameControls::Cart",
+      "kind": "ItemDefinition",
+      "line": 9,
+      "properties": {
+        "declared_name": "Cart"
+      }
+    },
+    {
+      "name": "FlagNameControls::Drive",
+      "kind": "UseCaseDefinition",
+      "line": 8,
+      "properties": {
+        "declared_name": "Drive"
+      }
+    },
+    {
+      "name": "FlagNameControls::Drive::car",
+      "kind": "ReferenceUsage",
+      "line": 8,
+      "properties": {
+        "declared_name": "car",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Drive::driver",
+      "kind": "PartUsage",
+      "line": 8,
+      "properties": {
+        "declared_name": "driver",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::DrivePort",
+      "kind": "PortDefinition",
+      "line": 15,
+      "properties": {
+        "declared_name": "DrivePort"
+      }
+    },
+    {
+      "name": "FlagNameControls::Need",
+      "kind": "RequirementDefinition",
+      "line": 4,
+      "properties": {
+        "declared_name": "Need",
+        "declared_short_name": "req"
+      }
+    },
+    {
+      "name": "FlagNameControls::Need::reviewer",
+      "kind": "PartUsage",
+      "line": 6,
+      "properties": {
+        "declared_name": "reviewer",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Need::system",
+      "kind": "ReferenceUsage",
+      "line": 5,
+      "properties": {
+        "declared_name": "system",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Person",
+      "kind": "PartDefinition",
+      "line": 3,
+      "properties": {
+        "declared_name": "Person"
+      }
+    },
+    {
+      "name": "FlagNameControls::Product",
+      "kind": "ItemDefinition",
+      "line": 10,
+      "properties": {
+        "declared_name": "Product"
+      }
+    },
+    {
+      "name": "FlagNameControls::Selection",
+      "kind": "ConnectionDefinition",
+      "line": 11,
+      "properties": {
+        "declared_name": "Selection"
+      }
+    },
+    {
+      "name": "FlagNameControls::Selection::cart",
+      "kind": "ItemUsage",
+      "line": 12,
+      "properties": {
+        "declared_name": "cart",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Selection::cart::inCart",
+      "kind": "ReferenceUsage",
+      "line": 12,
+      "properties": {
+        "declared_name": "inCart",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Selection::product",
+      "kind": "ItemUsage",
+      "line": 13,
+      "properties": {
+        "declared_name": "product",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Selection::product::products",
+      "kind": "ReferenceUsage",
+      "line": 13,
+      "properties": {
+        "declared_name": "products",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::Vehicle",
+      "kind": "PartDefinition",
+      "line": 2,
+      "properties": {
+        "declared_name": "Vehicle",
+        "declared_short_name": "veh"
+      }
+    },
+    {
+      "name": "FlagNameControls::host",
+      "kind": "PartUsage",
+      "line": 16,
+      "properties": {
+        "declared_name": "host",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::behavior",
+      "kind": "ActionUsage",
+      "line": 21,
+      "properties": {
+        "declared_name": "behavior",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_reference": false
+      }
+    },
+    {
+      "name": "FlagNameControls::host::behavior::change",
+      "kind": "AssignmentActionUsage",
+      "line": 22,
+      "properties": {
+        "declared_name": "change",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_reference": false
+      }
+    },
+    {
+      "name": "FlagNameControls::host::flag",
+      "kind": "AttributeUsage",
+      "line": 20,
+      "properties": {
+        "declared_name": "flag",
+        "is_end": false,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::left",
+      "kind": "PortUsage",
+      "line": 17,
+      "properties": {
+        "declared_name": "left",
+        "is_end": false,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::right",
+      "kind": "PortUsage",
+      "line": 18,
+      "properties": {
+        "declared_name": "right",
+        "is_end": false,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::running",
+      "kind": "StateUsage",
+      "line": 26,
+      "properties": {
+        "declared_name": "running",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_reference": false
+      }
+    },
+    {
+      "name": "FlagNameControls::host::running::sense::temp",
+      "kind": "ReferenceUsage",
+      "line": 26,
+      "properties": {
+        "declared_name": "temp",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "out",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::sense",
+      "kind": "ActionUsage",
+      "line": 25,
+      "properties": {
+        "declared_name": "sense",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_reference": false
+      }
+    },
+    {
+      "name": "FlagNameControls::host::shaft",
+      "kind": "InterfaceUsage",
+      "line": 19,
+      "properties": {
+        "declared_name": "shaft",
+        "is_end": false,
+        "is_variable": true,
+        "is_composite": true,
+        "is_constant": false,
+        "is_reference": false
+      }
+    },
+    {
+      "name": "FlagNameControls::host::shaft::source",
+      "kind": "PortUsage",
+      "line": 19,
+      "properties": {
+        "declared_name": "source",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "FlagNameControls::host::shaft::target",
+      "kind": "PortUsage",
+      "line": 19,
+      "properties": {
+        "declared_name": "target",
+        "is_end": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::23::cycle",
+      "kind": "ActionUsage",
+      "line": 23,
+      "properties": {
+        "declared_name": "cycle",
+        "is_end": false,
+        "is_variable": true,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false,
+        "is_reference": true
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Drive_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Drive_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Drive_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Drive_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Need_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Need_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Need_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Need_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Selection_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Selection_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::Selection_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "Selection_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_behavior_change_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_behavior_change_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_behavior_change_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_behavior_change_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_behavior_change_target_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_behavior_change_target_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_behavior_change_target_startingAt_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_behavior_change_target_startingAt_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_running_sense_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_running_sense_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_running_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_running_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_shaft_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_shaft_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_shaft_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_shaft_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_snapshots",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_snapshots#2",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_snapshots#3",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/flag-name-controls.sysml::?::host_snapshots#4",
+      "kind": "Feature",
+      "line": null,
+      "properties": {
+        "declared_name": "host_snapshots",
+        "is_end": false,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "KernelFlagNames",
+      "kind": "Package",
+      "line": 1,
+      "properties": {
+        "declared_name": "KernelFlagNames"
+      }
+    },
+    {
+      "name": "KernelFlagNames::B",
+      "kind": "Behavior",
+      "line": 3,
+      "properties": {
+        "declared_name": "B"
+      }
+    },
+    {
+      "name": "KernelFlagNames::B::input",
+      "kind": "Feature",
+      "line": 3,
+      "properties": {
+        "declared_name": "input",
+        "is_end": false,
+        "is_variable": false,
+        "direction": "in",
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "KernelFlagNames::B::output",
+      "kind": "Feature",
+      "line": 3,
+      "properties": {
+        "declared_name": "output",
+        "is_end": false,
+        "is_variable": false,
+        "direction": "out",
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "KernelFlagNames::B::shared",
+      "kind": "Feature",
+      "line": 3,
+      "properties": {
+        "declared_name": "shared",
+        "is_end": false,
+        "is_variable": false,
+        "direction": "inout",
+        "is_composite": false,
+        "is_constant": false
+      }
+    },
+    {
+      "name": "KernelFlagNames::C",
+      "kind": "Class",
+      "line": 2,
+      "properties": {
+        "declared_name": "C",
+        "declared_short_name": "c"
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "scope": "G04 all measured flag/name/direction rows; full support remains open",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "matched_rows": 240,
+  "source_files": 54,
+  "properties": {
+    "direction": 154,
+    "declared_short_name": 32,
+    "is_variable": 18,
+    "is_end": 7,
+    "is_constant": 9,
+    "may_time_vary": 18,
+    "is_composite": 1,
+    "is_reference": 1
+  },
+  "focused_tests_passed": 3,
+  "candidate_tests_passed": 115,
+  "strict_boundaries": "passed",
+  "audit_contract_checks": [
+    "missing property rejected",
+    "unequal value rejected",
+    "ambiguous anchor rejected",
+    "absent anchor rejected",
+    "positive anchor matched"
+  ],
+  "original_contexts": "All inputs verified byte-identical to prior Pilot/Release source-lock hashes",
+  "source_sha256": {
+    "crates/mercurio-sysml/src/parser.rs": "f63b9d20eac61e00b162ed4296d0688a5b3261b93e53e27f0223654475753cae",
+    "crates/mercurio-sysml/src/kerml/parser.rs": "cdddb10a190c7df672e7067014529b59f3f18b7dd37e3a4f2a53eb869bb56eb5",
+    "crates/mercurio-sysml/src/parser/release_2026_08_tests.rs": "67244c49e654c0302b0d7b32282e335713cfdd220601ae2891ddc927852f01e2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/collect.rs": "b12f985a7a329a6206484e0cc853d0939a0afbb9237c31d4302ff2a2b9e06980",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "496535857a60e0fe876d0e49abbed7b49c03397423cee5650883d46bea93c765",
+    "crates/mercurio-sysml/src/language_frontend/lowering/resolve.rs": "8ecccb3fc96cad07430e1af3204726d3eebfb77adce3f38971711f2a2a9934e3",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ir.rs": "f26571359421cf4da9b7810b88412fc0116cd1265432b32768eb2c87cbdcf1bc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/mappings.rs": "d1ac1deb7340e36653aae1f37335b78527807ebd72df99490c86612424e449a5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/semantic_defaults.rs": "de7352d224f0029873a753a795ec3d9264229dfc3055c14002557df8f14e1368",
+    "crates/mercurio-sysml/src/language_frontend/lowering/resolve/typing.rs": "8feb934334569b756ae5e5ba9704e0f58e99cd921d9680bea62d83d587c27703",
+    "crates/mercurio-sysml/resources/kernel/flag-name-defaults.overlay.json": "5cf58b8e55dfc70966063e4bb122a47fcab7f309e0b98c4687642f9453a6fd94",
+    "../mercurio-foundation/crates/mercurio-foundation/src/modules/authoring/authoring.rs": "bfec8c66c88562373d193f3965de0dab6f0f908e882be6cd6a942a95fe2f8be4",
+    "crates/mercurio-tools/src/bin/audit_release_properties.rs": "43b29886923143c06fb7f3fc6e1496039c759bf4d194e4bda1ddd26206e9a6bd",
+    "crates/mercurio-tools/Cargo.toml": "9c19445accab50db1d62aadf39612c7a271d9826e63e69cd85d0c385695bd0ea"
+  },
+  "audit_binary_sha256": "9fb40fc4a0c23591658448452a134d5089b7529cb07f2fd38ab641d8c4a9af4b",
+  "audit_spec_sha256": "e7c1c2f75556c6400d299b6749cb71528ae9d1ab2ebdf2b3444b30574f4c1071",
+  "fresh_pilot_controls": "../../../crates/mercurio-tools/corpus/release-2026-08/flag-name-pilot-results.json",
+  "remaining": [
+    "M1 full unit/WASM, all 310 compilations, accumulated controls, all 310 graph comparisons and 48 timing trials",
+    "G05-G13 structural identities/relationships, expression graphs and semantic legality; G14-G16 qualification/promotion"
+  ],
+  "full_comparison_run": false,
+  "benchmark_run": false
+}

@@ -909,3 +909,17 @@ mod tests {
         assert_eq!(traces[0].target, "req.safeStart");
     }
 }
+
+/// The role belongs to the owning membership, not the ConstraintUsage metaclass.
+pub(crate) fn requirement_constraint_kind<'a>(
+    graph: &'a mercurio_foundation::graph::Graph,
+    constraint: &mercurio_foundation::graph::Element,
+) -> Option<&'a str> {
+    let membership_id = constraint.properties.get("owning_feature_membership")
+        .or_else(|| constraint.properties.get("owning_membership"))?.as_str()?;
+    let membership = graph.element_by_element_id(membership_id)?;
+    if membership.kind.rsplit("::").next() != Some("RequirementConstraintMembership") {
+        return None;
+    }
+    membership.properties.get("kind")?.as_str()
+}

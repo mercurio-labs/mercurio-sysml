@@ -1,0 +1,32 @@
+{
+  "schema": "dev.mercurio.class-end-general-evidence.v1",
+  "scope": "Exact Feature ends owned by exact Class or Structure; generated positional strategy feeds generalization assembly",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "imported_sha256": "0dbf7396f5f960ada2b70702198417308016f6dcca99060cea92cd6fa7820e69",
+  "independent_source_models": 2,
+  "independent_general_queries": 4,
+  "source_nodes": 59,
+  "source_reference_observations": 110,
+  "native_consumer": "definition_general_type_inputs reuses definition_positional_ends and generated_general_types",
+  "implementation_boundary": "Handwritten provider admission and assembly reuse the previously resolved end selectors, shared inherited feature traversal, Ecore ownership, and chain-aware implicit deduplication. Explicit generals precede computed positional redefinitions, then the selected default; the explicit/computed duplicate is preserved as independently observed in Pilot. No synthetic relationships or completeness flags are written.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "constraint": "checkFeatureEndRedefinition",
+    "pdf_page": 192
+  },
+  "verification": [
+    "definition_class_end_generalizations_match_pilot_source_queries",
+    "definition_feature_owned_sources_match_pilot_and_roundtrip"
+  ],
+  "unsupported": [
+    "Connector/Association ends require participant-subsetting suppression/fallback assessment",
+    "Feature-owned ends",
+    "Parameter/direction and constructor contexts",
+    "Conjugated or cyclic positional generalizations",
+    "Full release validation"
+  ],
+  "next_dependency": "Connector FeatureAdapter.addParticipantSubsetting: end owner can be Association or Connector, and any declared implicit Redefinition suppresses the participant default. Do not equate explicit Redefinition presence with that implicit-state condition.",
+  "matching_source_models_total": 115,
+  "closure": "Ordinary obligations 3/4; families 0/34; release gates 0/5 unchanged."
+}

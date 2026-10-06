@@ -1,0 +1,119 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-about.kerml": "b18674acf8e732e8722a87343b3f4b46abdd6cf965bca72677fea7784d1408e8",
+    "invalid-about.sysml": "0a17502fb3b75f6635d0384e4f11d3665148069c89f57d66b00fbc294bc3468e",
+    "missing-body.kerml": "1552a65fcd1b5fe584207f92b23727531c953dbe297df4820b49be13e94422d7",
+    "missing-body.sysml": "0f727e3c860fe0dc1270b82792244054662f0d8f5f8f79cfae58914376c0a9d8",
+    "missing-locale.kerml": "c5628645e966db3c2cce85bbed4099474ac50b1ec8f7f28832416d8ed12eb460",
+    "missing-locale.sysml": "e781a6030a85fe7acd87e6175683bc31831a79d5573b364d0d9d045665414ed3",
+    "positive.kerml": "7d4a8fcac9f3360e3a8645dad1e61e63b8197dae7f9a0b408a87596afe24ab41",
+    "positive.sysml": "920eb5ce7ceff3331315ddbd20aad6000da394f9e8d3a060791e7b36fa8df9ad"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "cases": [
+    {
+      "relative_path": "invalid-about.kerml",
+      "status": "error",
+      "validation_ms": 273.9768,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input 'about' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* Body */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-about.sysml",
+      "status": "error",
+      "validation_ms": 419.1771,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input 'about' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* Body */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.kerml",
+      "status": "error",
+      "validation_ms": 331.4197,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.sysml",
+      "status": "error",
+      "validation_ms": 364.6432,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input ';' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-locale.kerml",
+      "status": "error",
+      "validation_ms": 326.3262,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing RULE_STRING_VALUE at '/* Body */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-locale.sysml",
+      "status": "error",
+      "validation_ms": 308.2572,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing RULE_STRING_VALUE at '/* Body */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive.kerml",
+      "status": "ok",
+      "validation_ms": 245.6926,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive.sysml",
+      "status": "ok",
+      "validation_ms": 314.0029,
+      "diagnostics": []
+    }
+  ]
+}

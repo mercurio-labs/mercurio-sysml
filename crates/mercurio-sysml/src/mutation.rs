@@ -1500,12 +1500,8 @@ package  Vehicle {
         );
     }
 
-    /// Two consecutive text edits on the same requirement must BOTH patch
-    /// localized. The first splice introduces the doc-before form (`doc /*
-    /// ... */` above the declaration keyword); on the fresh parse the
-    /// recorded span must cover those doc lines, because the canonical
-    /// printer re-renders them with the declaration — a keyword-anchored
-    /// splice would duplicate the doc and force a whole-file rewrite.
+    /// Reparse between edits and replace the owned documentation member,
+    /// retaining a localized patch and all surrounding comments.
     #[test]
     fn sysml_set_attribute_text_twice_patches_localized_both_times() {
         let first = apply_fidelity_operation(SemanticMutation::SetAttribute {
@@ -1580,6 +1576,18 @@ package  Vehicle {
             .expect("suffix marker");
         assert!(text.starts_with(&first_text[..prefix_end]), "{text}");
         assert!(text.ends_with(&first_text[suffix_start..]), "{text}");
+        let parsed = crate::parse_sysml(text).unwrap();
+        let package = parsed.package.unwrap();
+        let requirement = package.members.iter().find_map(|member| {
+            let usage = member.as_usage_like()?;
+            (usage.name == "massLimit").then_some(usage)
+        }).unwrap();
+        let docs = requirement.body_members.iter().filter_map(|member| {
+            let usage = member.as_usage_like()?;
+            (usage.keyword == "doc").then_some(usage)
+        }).collect::<Vec<_>>();
+        assert_eq!(docs.len(), 1);
+        assert_eq!(docs[0].metadata_properties["body"].trim(), "Mass stays within the revised limit.");
     }
 
     #[test]

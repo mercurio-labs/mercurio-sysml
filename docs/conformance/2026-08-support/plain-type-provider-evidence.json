@@ -1,0 +1,377 @@
+{
+  "schema": "dev.mercurio.plain-type-provider-evidence.v1",
+  "scope": "Resolved shared TypeAdapter default selector and inherited generalization/membership query stages for fourteen non-Feature bindings. Full transformation, conjugated-port origination, result connectors and semantic validation remain unqualified.",
+  "inputs": {
+    "tools/export_pilot_default_generals.py": "da3ec2ba070f8bc04a9a782fccaf093f59047000bb8d6d65839f312ea13707c7",
+    "tools/test_plain_type_defaults.py": "fcfc74ed0a3030d7b9423ce435a7c22294794ab8420b9468626a51c06415dbe9",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotDefaultGeneralProbe.java": "c7d302104055925529c4e508ff4a68064a3c8ec77a5efa923f1dc2544141c6eb",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStepStrategyProbe.java": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/default-general-pilot-controls.json": "bd672804b2f28531deb17f59910b32358721b2c6b791d1ead17c8df7465b341b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/default_generals_generated.rs": "e4b052c98c94d44988f493c38a022932761330aca2b8f7a7db794f4a98a29059",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/abstract_syntax_json.rs": "8ab74ed3c5dc7fd61cb3d958ab7fce8b52a7bf5d589e19fdb9a5750bd08a9f58",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported_representation": [
+    "Full resolved typed zero-argument TypeAdapter.getDefaultSupertype tree; reviewed base-selector fingerprint",
+    "Runtime-resolved getDefaultSupertype/addDefaultGeneralType/getInheritedMemberships dispatch and static TypeUtil.getGeneralTypesOf entry point",
+    "Pinned implicit generalization names, reflected specialization EClasses and transformation dispatch per admitted binding",
+    "Twenty-four excluded non-Feature bindings retain their resolved overriding strategies; canonical Ecore ancestry and ownership contracts"
+  ],
+  "native_consumers": [
+    "default_generals_generated::DEFAULT_GENERALS",
+    "stored_plain_type_generalizations",
+    "stored_standard_default_bindings",
+    "stored_type_inherited_memberships",
+    "definition_general_type_inputs_ready",
+    "definition_type_default_contribution_owners",
+    "definition_materialize_type_defaults",
+    "public plain-Type generalization/membership and specializes queries"
+  ],
+  "generation_boundary": "Native admission and names come from resolved dispatch and pinned mappings. The complete selector tree and fixed binding/control inventory reject upstream drift. Shared traversal, reduction, ownership, metadata admission and linking remain explicitly handwritten Rust; importing dispatch does not qualify full transformation.",
+  "handwritten_dependencies": [
+    "Existing Type generalization/default reduction, general target validation and incomplete-state admission",
+    "Canonical membership visibility, inherited scope traversal and identity deduplication",
+    "Owner-specific empty metadata assessment; applied metadata and unassessed implicit categories reject",
+    "Explicit local standard-library linking and pending/deferred resolution",
+    "Atomic physical Subclassification/Specialization insertion, canonical containment and replay validation"
+  ],
+  "bindings": [
+    "Type",
+    "Classifier",
+    "Class",
+    "DataType",
+    "Structure",
+    "AttributeDefinition",
+    "Behavior",
+    "ConjugatedPortDefinition",
+    "Definition",
+    "EnumerationDefinition",
+    "Function",
+    "Metaclass",
+    "PortDefinition",
+    "Predicate"
+  ],
+  "excluded_bindings": {
+    "ActionDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "AllocationDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "AnalysisCaseDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.CalculationDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "Association": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.AssociationAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "AssociationStructure": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.AssociationAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "CalculationDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.CalculationDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "CaseDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.CalculationDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ConcernDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.ConstraintDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ConnectionDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ConstraintDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.ConstraintDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "FlowDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.FlowDefinitionAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "Interaction": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.AssociationAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "InterfaceDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.ConnectionDefinitionAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ItemDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "MetadataDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "OccurrenceDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "PartDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "RenderingDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "RequirementDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.ConstraintDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "StateDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "UseCaseDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.CalculationDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "VerificationCaseDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.CalculationDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ViewDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.TypeAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    },
+    "ViewpointDefinition": {
+      "addDefaultGeneralType": "org.omg.sysml.adapter.OccurrenceDefinitionAdapter#addDefaultGeneralType",
+      "doTransform": "org.omg.sysml.adapter.ConstraintDefinitionAdapter#doTransform",
+      "getDefaultSupertype": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+      "getGeneralTypesOf": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf",
+      "getInheritedMemberships": "org.omg.sysml.adapter.TypeAdapter#getInheritedMemberships"
+    }
+  },
+  "verification": {
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/plain-type-provider-focused-tests.log",
+      "sha256": "91fa385d8ec3c9bf4daa500c8b399ff3ed209a30ac62e3fc9a27944efb224ce2",
+      "passed": 5
+    },
+    "generator_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/plain-type-provider-generator-tests.log",
+      "sha256": "45c108b8354c88b4b75a885633d9a4026be8f62a24cda87bc0aec560d0c6edab",
+      "passed": 5
+    },
+    "pilot_stage_controls": 98,
+    "native_matching_stage_controls": 98,
+    "prior_stage_controls": 20,
+    "newly_observed_stage_controls": 78,
+    "newly_admitted_plain_type_bindings": 9,
+    "matrix": "Fourteen bindings x seven states: default-only, explicit-other, explicit-default overlap, self-default, private inherited member, protected inherited member, stored implied default while still incomplete.",
+    "contexts": [
+      "Public generalization/membership queries in original/reversed graph storage, unchanged model and JSON persistence",
+      "Atomic physical contributions and replay across every binding and fixed state, canonical library ownership and explicit provider lookup aliases",
+      "Parsed Behavior, Function, Predicate and Metaclass source through imported grammar/model construction and generated provider in both declaration orders",
+      "Parsed public specializes queries, physical contributions, replay and persistence without completion flags",
+      "Missing library, wrong-category target, invalid flags, malformed ownership, unknown implicit contributions and overriding PartDefinition provider remain rejected by existing guards"
+    ],
+    "partial_state_observation": "Pilot independently returns the stored plus recomputed default twice in every mode-6 incomplete factory. Native preserves ordered duplicate general entries; inherited membership projection still deduplicates identities. Physical insertion is not completion and must not silently impose full-transform normalization.",
+    "fixture_boundary": "Pilot factory lookup supplies same-kind endpoints. Replay controls retain the explicit supplied lookup alias while adding separate canonical library containment, preserving ConjugatedPortDefinition effective-name rules. These controls do not qualify real Ports library closure, conjugated-port origination or full transformation. Source controls use declared canonical library endpoints; the real sixteen-resource assessment is separate.",
+    "initial_failure_resolution": [
+      "Exporter initially requested a nonexistent adapter getGeneralTypes overload; resolved static TypeUtil entry point is now imported explicitly.",
+      "Existing Behavior rejection assertion now reaches the missing Performances root rather than an unsupported provider.",
+      "A physical replay fixture used alias-only detached endpoints; canonical containment is now supplied separately, without replacing the alias contract.",
+      "A test assumed partial replay removed duplicate defaults; independent Pilot partial-state observations disproved that assumption. No production deduplication was introduced."
+    ],
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-child-native-tests.log",
+      "sha256": "8b82edf9e7290264fa1efcb30935c6e87953d74d5decae20d46a86a06b0a693f",
+      "passed": 302
+    },
+    "plan_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/plain-type-provider-plan-tests.log",
+      "sha256": "5fb429fa944a1a274a9a11ef7104d563181066f4a4ca6ff0dfc50cfc2eb5b523",
+      "passed": 14
+    },
+    "certificate_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/plain-type-provider-certificate-tests.log",
+      "sha256": "76f44d9c14eedbd7738370e17aa0f764a81220e18f9b35110df5060c3383451f",
+      "passed": 15
+    },
+    "oracle_reproduction": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/plain-type-provider-cache-check.log",
+      "sha256": "bd5da63e009b531330f9bf7f8457909ed890ad96eabe8a1e7560da39e7ce70ac",
+      "status": "exact reproduction of resolved trees, dispatch, mappings and fixed observations"
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_reference": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "file": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      219,
+      226,
+      228,
+      258,
+      291,
+      292,
+      293,
+      306
+    ],
+    "scope": "Required Behavior/Function/Predicate/Metaclass base specializations. Parameter/result, forbidden-specialization, metadata and conjugation constraints remain separate; source/public specializes controls demonstrate base-query behavior only."
+  },
+  "disagreements": [],
+  "remaining_required_behavior": [
+    "Full Function result-connector transformation and parameter/result semantics",
+    "ConjugatedPortDefinition original-port/conjugation lifecycle and actual Ports standard-library environment",
+    "Applied metadata-derived bases, conjugation providers, occurrence-definition and association overrides",
+    "All required constraints and semantic validation; no full metaclass or family support claim",
+    "Complete release samples, independent whole-model comparison, comparable timing and prior recorded normative disagreements"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "ordinary_feature_bindings": "50/79",
+    "resolved_shared_plain_type_bindings": 14,
+    "newly_admitted_plain_type_bindings": 9,
+    "native_matching_stage_controls": 98,
+    "pilot_observation_inventory_added": 78,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "bounded_contract_obligations": "7/9",
+    "overall_percent": null
+  },
+  "resource_assessment": {
+    "status": "blocked",
+    "stage": "construction_or_linking",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources": 16,
+    "source_bytes": 121245,
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-plain-type-provider-native-results.jsonl",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-plain-type-provider-native-progress.log",
+    "binary_sha256": "2fc967e5a5bdbab87371437ddf93da32c291d9beb7f5673860b3dd56230a5207",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "input_manifest_sha256": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "profile": "Single optimized release qualification assessment, not a comparable Pilot benchmark",
+    "boundary": "Clears prior missing Behavior generalization provider. Positional parameter supertype category assessment is now the first blocker. No linked document, semantic qualification, promotion or whole-model credit.",
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: parameter supertype category requires normative assessment\", kind: Syntax, span: None, subjects: [] }",
+    "result_sha256": "eee6a27e90343bcd51853aab30f119ae2be9eb6c505fab55fd229853c194a52b",
+    "progress_sha256": "eb92205f3b40f2c5387de8d0730791284073198c748975b721a7eb92deec2077",
+    "first_blocker_only": true
+  },
+  "next_fixed_batch": {
+    "scope": "Shared positional-parameter collection/redefinition strategy across mixed general-type categories, with normative and independent Pilot controls.",
+    "contract": [
+      "Resolve/export TypeUtil owned/all parameter collections, FeatureUtil parameter predicates and result-parameter selection dependencies; preserve each overriding adapter strategy",
+      "Classify general Types by the imported collection/selection predicates, distinguishing empty collections from unsupported services",
+      "Qualify Behavior/Step/Function/Expression owners with Class/Classifier/Behavior/Step/Function general Types, mixed inheritance, visibility, positional boundaries and result/nonresult parameters in one cached batch",
+      "Use canonical ownership for parameter identity and direction predicates; inherited features retain their original owning-Type semantics",
+      "Preserve added-member, deferred generalization, conjugation/chaining and specialized invocation/constructor/result prerequisites explicitly",
+      "Verify native source/public queries, ordered redefinition identities, persistence and replay; full parameter validation and lifecycle are separate",
+      "Run one definition regression and one real-resource assessment after the connected batch, keeping complete sample comparison and comparable timings for substantial/final qualification"
+    ],
+    "completion_boundary": "A resolved shared collection/selection strategy verified across all applicable mixed-category contexts; removing the category guard alone is not qualification."
+  }
+}

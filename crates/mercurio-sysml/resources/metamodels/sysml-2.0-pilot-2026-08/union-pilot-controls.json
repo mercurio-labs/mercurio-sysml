@@ -1,0 +1,5797 @@
+{
+  "canonical_controls": [
+    {
+      "case": 0,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z"
+      ],
+      "membership": [
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 1,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 2,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            },
+            {
+              "@id": "duplicate"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "duplicate",
+          "@type": "MembershipImport",
+          "importedMembership": {
+            "@id": "z"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 3,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "relay"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "relay",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "reexport"
+            }
+          ]
+        },
+        {
+          "@id": "reexport",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "relay"
+          },
+          "visibility": "public"
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 4,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "inheritedMembership": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ],
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z"
+      ],
+      "membership": [
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z"
+      ]
+    },
+    {
+      "case": 5,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "inheritedMembership": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ],
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 6,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "inheritedMembership": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ],
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "external"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "external"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": [
+            {
+              "@id": "inheritedImport"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "external",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "inheritedImport",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "external"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "public"
+        }
+      ],
+      "imported_membership": [
+        "z"
+      ],
+      "membership": [
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z"
+      ]
+    },
+    {
+      "case": 7,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "inheritedMembership": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ],
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "external"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "external"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "inheritedMembership": [],
+          "ownedRelationship": [
+            {
+              "@id": "inheritedImport"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "external",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "inheritedImport",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "external"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "public"
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 8,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            },
+            {
+              "@id": "secondImport"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "relay0"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "relay0",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "reexport0"
+            }
+          ]
+        },
+        {
+          "@id": "reexport0",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "relay0"
+          },
+          "visibility": "public"
+        },
+        {
+          "@id": "secondImport",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "relay1"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "relay1",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "reexport1"
+            }
+          ]
+        },
+        {
+          "@id": "reexport1",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "relay1"
+          },
+          "visibility": "public"
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 9,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            },
+            {
+              "@id": "back"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "back",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "destination"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "public"
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "local",
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 10,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            },
+            {
+              "@id": "nesting"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "nested",
+          "@type": "Package",
+          "declaredName": "Nested",
+          "ownedRelationship": [
+            {
+              "@id": "leaf"
+            }
+          ],
+          "owningRelationship": {
+            "@id": "nesting"
+          }
+        },
+        {
+          "@id": "nesting",
+          "@type": "OwningMembership",
+          "ownedRelatedElement": [
+            {
+              "@id": "nested"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "leaf",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Leaf",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "nested"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a",
+        "nesting",
+        "leaf"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "nesting",
+        "leaf",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a",
+        "nesting"
+      ]
+    },
+    {
+      "case": 11,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z"
+      ],
+      "membership": [
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 12,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 13,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "down0"
+            },
+            {
+              "@id": "down1"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "branch0",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "up0"
+            }
+          ]
+        },
+        {
+          "@id": "up0",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "branch0"
+          },
+          "subclassifier": {
+            "@id": "branch0"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "down0",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "branch0"
+          }
+        },
+        {
+          "@id": "branch1",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "up1"
+            }
+          ]
+        },
+        {
+          "@id": "up1",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "branch1"
+          },
+          "subclassifier": {
+            "@id": "branch1"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "down1",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "branch1"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 14,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            },
+            {
+              "@id": "back"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "back",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "subclassifier": {
+            "@id": "base"
+          },
+          "superclassifier": {
+            "@id": "source"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 15,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "conjugation"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "conjugation",
+          "@type": "Conjugation",
+          "conjugatedType": {
+            "@id": "source"
+          },
+          "originalType": {
+            "@id": "base"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 16,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "external"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "inheritedImport"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "external",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "inheritedImport",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "external"
+          },
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 18,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "nesting"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImportAll": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "nested",
+          "@type": "Package",
+          "declaredName": "Nested",
+          "ownedRelationship": [
+            {
+              "@id": "leaf"
+            }
+          ],
+          "owningRelationship": {
+            "@id": "nesting"
+          }
+        },
+        {
+          "@id": "nesting",
+          "@type": "OwningMembership",
+          "ownedRelatedElement": [
+            {
+              "@id": "nested"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "leaf",
+          "@type": "Membership",
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Leaf",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "nested"
+          }
+        }
+      ],
+      "imported_membership": [
+        "nesting",
+        "leaf",
+        "z",
+        "a"
+      ],
+      "membership": [
+        "nesting",
+        "leaf",
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "nesting",
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 19,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 20,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 21,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "redefine"
+            }
+          ]
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "redefine",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "fz"
+          },
+          "redefinedFeature": {
+            "@id": "fa"
+          },
+          "redefiningFeature": {
+            "@id": "fz"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z"
+      ],
+      "membership": [
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z"
+      ]
+    },
+    {
+      "case": 22,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "ownMembership"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "own",
+          "@type": "Feature",
+          "declaredName": "Own",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "ownRedefinition"
+            }
+          ],
+          "owningRelationship": {
+            "@id": "ownMembership"
+          }
+        },
+        {
+          "@id": "ownMembership",
+          "@type": "FeatureMembership",
+          "isImpliedIncluded": true,
+          "ownedRelatedElement": [
+            {
+              "@id": "own"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "ownRedefinition",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "own"
+          },
+          "redefinedFeature": {
+            "@id": "fz"
+          },
+          "redefiningFeature": {
+            "@id": "own"
+          }
+        }
+      ],
+      "imported_membership": [
+        "ownMembership",
+        "a"
+      ],
+      "membership": [
+        "ownMembership",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "ownMembership",
+        "a"
+      ]
+    },
+    {
+      "case": 23,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "ownMembership"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "redefine"
+            }
+          ]
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "redefine",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "fz"
+          },
+          "redefinedFeature": {
+            "@id": "fa"
+          },
+          "redefiningFeature": {
+            "@id": "fz"
+          }
+        },
+        {
+          "@id": "own",
+          "@type": "Feature",
+          "declaredName": "Own",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "ownRedefinition"
+            }
+          ],
+          "owningRelationship": {
+            "@id": "ownMembership"
+          }
+        },
+        {
+          "@id": "ownMembership",
+          "@type": "FeatureMembership",
+          "isImpliedIncluded": true,
+          "ownedRelatedElement": [
+            {
+              "@id": "own"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "ownRedefinition",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "own"
+          },
+          "redefinedFeature": {
+            "@id": "fa"
+          },
+          "redefiningFeature": {
+            "@id": "own"
+          }
+        }
+      ],
+      "imported_membership": [
+        "ownMembership"
+      ],
+      "membership": [
+        "ownMembership",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "ownMembership"
+      ]
+    },
+    {
+      "case": 24,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImplied": true,
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        }
+      ],
+      "imported_membership": [
+        "z",
+        "a"
+      ],
+      "membership": [
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 25,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "redefine"
+            }
+          ]
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "reverseRedefinition"
+            }
+          ]
+        },
+        {
+          "@id": "redefine",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "fz"
+          },
+          "redefinedFeature": {
+            "@id": "fa"
+          },
+          "redefiningFeature": {
+            "@id": "fz"
+          }
+        },
+        {
+          "@id": "reverseRedefinition",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "fa"
+          },
+          "redefinedFeature": {
+            "@id": "fz"
+          },
+          "redefiningFeature": {
+            "@id": "fa"
+          }
+        }
+      ],
+      "imported_membership": [],
+      "membership": [
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": []
+    },
+    {
+      "case": 27,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "ownMembership"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "own",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelationship": {
+            "@id": "ownMembership"
+          }
+        },
+        {
+          "@id": "ownMembership",
+          "@type": "FeatureMembership",
+          "isImpliedIncluded": true,
+          "ownedRelatedElement": [
+            {
+              "@id": "own"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        }
+      ],
+      "imported_membership": [
+        "ownMembership",
+        "z",
+        "a"
+      ],
+      "membership": [
+        "ownMembership",
+        "z",
+        "a",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "ownMembership",
+        "z",
+        "a"
+      ]
+    },
+    {
+      "case": 28,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "specialization"
+            },
+            {
+              "@id": "ownMembership"
+            }
+          ]
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "local"
+            },
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "z",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fz"
+          },
+          "memberName": "Z",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "a",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "fa"
+          },
+          "memberName": "A",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "base"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "local",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Local",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        },
+        {
+          "@id": "base",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "z"
+            },
+            {
+              "@id": "a"
+            }
+          ]
+        },
+        {
+          "@id": "specialization",
+          "@type": "Subclassification",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subclassifier": {
+            "@id": "source"
+          },
+          "superclassifier": {
+            "@id": "base"
+          }
+        },
+        {
+          "@id": "fz",
+          "@type": "Feature",
+          "declaredName": "Z",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "fa",
+          "@type": "Feature",
+          "declaredName": "A",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "own",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "ownRedefinition"
+            }
+          ],
+          "owningRelationship": {
+            "@id": "ownMembership"
+          }
+        },
+        {
+          "@id": "ownMembership",
+          "@type": "FeatureMembership",
+          "isImpliedIncluded": true,
+          "ownedRelatedElement": [
+            {
+              "@id": "own"
+            }
+          ],
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "ownRedefinition",
+          "@type": "Redefinition",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "own"
+          },
+          "redefinedFeature": {
+            "@id": "fa"
+          },
+          "redefiningFeature": {
+            "@id": "own"
+          }
+        }
+      ],
+      "imported_membership": [
+        "ownMembership",
+        "z"
+      ],
+      "membership": [
+        "ownMembership",
+        "z",
+        "local"
+      ],
+      "owned_membership": [
+        "local"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "ownMembership",
+        "z"
+      ]
+    }
+  ],
+  "chaining_controls": [
+    {
+      "case": 0,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 1,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "subset"
+            },
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "subset",
+          "@type": "Subsetting",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subsettedFeature": {
+            "@id": "explicit"
+          },
+          "subsettingFeature": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Explicit",
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Explicit",
+        "Last"
+      ]
+    },
+    {
+      "case": 2,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isRecursive": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 3,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            },
+            {
+              "@id": "back0"
+            },
+            {
+              "@id": "back1"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "back0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "back1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 4,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "subset"
+            },
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "subset",
+          "@type": "Subsetting",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          },
+          "subsettedFeature": {
+            "@id": "last"
+          },
+          "subsettingFeature": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 5,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          },
+          "visibility": "protected"
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "isImportAll": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 6,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          },
+          "visibility": "private"
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [],
+      "root": "destination",
+      "source_membership": []
+    },
+    {
+      "case": 7,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "PartUsage",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Last"
+      ]
+    },
+    {
+      "case": 8,
+      "graph": [
+        {
+          "@id": "source",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "chain0"
+            },
+            {
+              "@id": "chain1"
+            },
+            {
+              "@id": "conjugation"
+            }
+          ]
+        },
+        {
+          "@id": "first",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "First"
+            }
+          ]
+        },
+        {
+          "@id": "last",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Last"
+            }
+          ]
+        },
+        {
+          "@id": "explicit",
+          "@type": "Feature",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "Explicit"
+            }
+          ]
+        },
+        {
+          "@id": "target",
+          "@type": "Class",
+          "isImpliedIncluded": true,
+          "ownedRelationship": []
+        },
+        {
+          "@id": "destination",
+          "@type": "Package",
+          "isImpliedIncluded": true,
+          "ownedRelationship": [
+            {
+              "@id": "import"
+            }
+          ]
+        },
+        {
+          "@id": "First",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "First",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "first"
+          }
+        },
+        {
+          "@id": "Last",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Last",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "last"
+          }
+        },
+        {
+          "@id": "Explicit",
+          "@type": "Membership",
+          "isImpliedIncluded": true,
+          "memberElement": {
+            "@id": "target"
+          },
+          "memberName": "Explicit",
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "explicit"
+          }
+        },
+        {
+          "@id": "chain0",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "first"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "chain1",
+          "@type": "FeatureChaining",
+          "chainingFeature": {
+            "@id": "last"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "conjugation",
+          "@type": "Conjugation",
+          "conjugatedType": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "originalType": {
+            "@id": "explicit"
+          },
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "source"
+          }
+        },
+        {
+          "@id": "import",
+          "@type": "NamespaceImport",
+          "importedNamespace": {
+            "@id": "source"
+          },
+          "isImpliedIncluded": true,
+          "ownedRelationship": [],
+          "owningRelatedElement": {
+            "@id": "destination"
+          }
+        }
+      ],
+      "membership": [
+        "Explicit",
+        "Last"
+      ],
+      "root": "destination",
+      "source_membership": [
+        "Explicit",
+        "Last"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "imported_membership": [],
+      "kind": "Namespace",
+      "membership": [],
+      "owned_membership": []
+    },
+    {
+      "imported_membership": [],
+      "inherited_membership": [],
+      "kind": "Type",
+      "membership": [],
+      "owned_membership": []
+    },
+    {
+      "imported_membership": [
+        "a"
+      ],
+      "kind": "Namespace",
+      "membership": [
+        "a",
+        "b"
+      ],
+      "owned_membership": [
+        "b"
+      ]
+    },
+    {
+      "imported_membership": [
+        "a"
+      ],
+      "inherited_membership": [
+        "c"
+      ],
+      "kind": "Type",
+      "membership": [
+        "a",
+        "b",
+        "c"
+      ],
+      "owned_membership": [
+        "b"
+      ]
+    },
+    {
+      "imported_membership": [
+        "a",
+        "b"
+      ],
+      "kind": "Namespace",
+      "membership": [
+        "a",
+        "b",
+        "c"
+      ],
+      "owned_membership": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "imported_membership": [
+        "a",
+        "b"
+      ],
+      "inherited_membership": [
+        "c",
+        "d"
+      ],
+      "kind": "Type",
+      "membership": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "owned_membership": [
+        "b",
+        "c"
+      ]
+    },
+    {
+      "imported_membership": [
+        "b",
+        "a"
+      ],
+      "kind": "Namespace",
+      "membership": [
+        "b",
+        "a"
+      ],
+      "owned_membership": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "imported_membership": [
+        "b",
+        "a"
+      ],
+      "inherited_membership": [
+        "d",
+        "c"
+      ],
+      "kind": "Type",
+      "membership": [
+        "b",
+        "a",
+        "d",
+        "c"
+      ],
+      "owned_membership": [
+        "a",
+        "b"
+      ]
+    }
+  ],
+  "implied_disagreement_control": {
+    "case": 17,
+    "graph": [
+      {
+        "@id": "source",
+        "@type": "Class",
+        "ownedRelationship": [
+          {
+            "@id": "specialization"
+          }
+        ]
+      },
+      {
+        "@id": "destination",
+        "@type": "Package",
+        "ownedRelationship": [
+          {
+            "@id": "local"
+          },
+          {
+            "@id": "import"
+          }
+        ]
+      },
+      {
+        "@id": "target",
+        "@type": "Class",
+        "ownedRelationship": []
+      },
+      {
+        "@id": "z",
+        "@type": "Membership",
+        "memberElement": {
+          "@id": "target"
+        },
+        "memberName": "Z",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "base"
+        }
+      },
+      {
+        "@id": "a",
+        "@type": "Membership",
+        "memberElement": {
+          "@id": "target"
+        },
+        "memberName": "A",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "base"
+        },
+        "visibility": "protected"
+      },
+      {
+        "@id": "local",
+        "@type": "Membership",
+        "memberElement": {
+          "@id": "target"
+        },
+        "memberName": "Local",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "destination"
+        }
+      },
+      {
+        "@id": "import",
+        "@type": "NamespaceImport",
+        "importedNamespace": {
+          "@id": "source"
+        },
+        "isImportAll": true,
+        "isRecursive": true,
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "destination"
+        }
+      },
+      {
+        "@id": "base",
+        "@type": "Class",
+        "ownedRelationship": [
+          {
+            "@id": "z"
+          },
+          {
+            "@id": "a"
+          }
+        ]
+      },
+      {
+        "@id": "specialization",
+        "@type": "Subclassification",
+        "isImplied": true,
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "source"
+        },
+        "subclassifier": {
+          "@id": "source"
+        },
+        "superclassifier": {
+          "@id": "base"
+        }
+      }
+    ],
+    "imported_membership": [
+      "z",
+      "a"
+    ],
+    "membership": [
+      "z",
+      "a",
+      "local"
+    ],
+    "owned_membership": [
+      "local"
+    ],
+    "root": "destination",
+    "source_membership": [
+      "z",
+      "a"
+    ]
+  },
+  "provenance": {
+    "driver_sha256": "7b7d1e2f53c66bc337deff3c121c0e42c6b0427ea4f29fd26f8a8995abb654ba",
+    "ecore_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "helper_sha256": "bec7fca439211a6ed6caa64bd4f43176c07edcd8d0e69d01e241509f6896922c",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/MembershipImportAdapter.java": "adc87cdfd00b660bb339367710d15922c9140e045c6281bfc61627a2f0c3a435",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/NamespaceAdapter.java": "bed12509fe1d53f695296144cded354d1af799624d247912d2f3736062febc56",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/NamespaceImportAdapter.java": "44990f28d076927662e22aca191fa1d8c8d243da9b43ad9e7a0ec8ececf28a58",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Feature_supertypes_InvocationDelegate.java": "b88571ec916545596d718073055d63b979cdcde2a9ea77d6236c261366f59905",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/Namespace_importedMemberships_InvocationDelegate.java": "928f0cafb48307d087e6c0a174989a9f1ef54ed00ac215391038ec3a3dee6b8f",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/FeatureChaining_featureChained_SettingDelegate.java": "64a2681ddeb9f60563036a6918dd2a636864722cf1f5da6362239ef5f7ec28c2",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Namespace_importedMembership_SettingDelegate.java": "d124f4975a7faa0afb8edd670a441e016bdb17fb2ca8500f493d7107f7414c00",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Namespace_ownedMembership_SettingDelegate.java": "d16eba7e8162852bf5b592c8be77c334f163be5f2be515f70d0d877c879dd6ac",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/FeatureChainingImpl.java": "18fc4ce5388316744925f11f300f45c59171bfc41e3e64267e454cd435dd9e4f",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/FeatureImpl.java": "255740db84a678b94fc7e748ad6b147b6965a03a7ac62b1bf9c72e0e54aeb647",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/NamespaceImpl.java": "c910150a1f9ffeefb93dd45a127ab100bb7007c652b21ac9e16cfa06943e57ff",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/TypeImpl.java": "615464d9a9cdb44243d1491b1962f80775dfe392fbe873784e220de68a224547",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/util/DerivedEObjectEList.java": "d661a1d6cd914a836134e68964ae2713779c58588f71e1181fa0917284009f3c",
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/util/DerivedUnionEObjectEList.java": "a761cf0589003fe3771138545c08ddab3b4e85f6562f1cc547451cacb4f592bf",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "redefinition_alias_disagreement_control": {
+    "case": 26,
+    "graph": [
+      {
+        "@id": "source",
+        "@type": "Class",
+        "isImpliedIncluded": true,
+        "ownedRelationship": [
+          {
+            "@id": "specialization"
+          }
+        ]
+      },
+      {
+        "@id": "destination",
+        "@type": "Package",
+        "isImpliedIncluded": true,
+        "ownedRelationship": [
+          {
+            "@id": "local"
+          },
+          {
+            "@id": "import"
+          }
+        ]
+      },
+      {
+        "@id": "target",
+        "@type": "Class",
+        "isImpliedIncluded": true,
+        "ownedRelationship": []
+      },
+      {
+        "@id": "z",
+        "@type": "Membership",
+        "isImpliedIncluded": true,
+        "memberElement": {
+          "@id": "fz"
+        },
+        "memberName": "Z",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "base"
+        }
+      },
+      {
+        "@id": "a",
+        "@type": "Membership",
+        "isImpliedIncluded": true,
+        "memberElement": {
+          "@id": "fz"
+        },
+        "memberName": "A",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "base"
+        },
+        "visibility": "protected"
+      },
+      {
+        "@id": "local",
+        "@type": "Membership",
+        "isImpliedIncluded": true,
+        "memberElement": {
+          "@id": "target"
+        },
+        "memberName": "Local",
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "destination"
+        }
+      },
+      {
+        "@id": "import",
+        "@type": "NamespaceImport",
+        "importedNamespace": {
+          "@id": "source"
+        },
+        "isImpliedIncluded": true,
+        "isImportAll": true,
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "destination"
+        }
+      },
+      {
+        "@id": "base",
+        "@type": "Class",
+        "isImpliedIncluded": true,
+        "ownedRelationship": [
+          {
+            "@id": "z"
+          },
+          {
+            "@id": "a"
+          }
+        ]
+      },
+      {
+        "@id": "specialization",
+        "@type": "Subclassification",
+        "isImpliedIncluded": true,
+        "ownedRelationship": [],
+        "owningRelatedElement": {
+          "@id": "source"
+        },
+        "subclassifier": {
+          "@id": "source"
+        },
+        "superclassifier": {
+          "@id": "base"
+        }
+      },
+      {
+        "@id": "fz",
+        "@type": "Feature",
+        "declaredName": "Z",
+        "isImpliedIncluded": true,
+        "ownedRelationship": []
+      },
+      {
+        "@id": "fa",
+        "@type": "Feature",
+        "declaredName": "A",
+        "isImpliedIncluded": true,
+        "ownedRelationship": []
+      }
+    ],
+    "imported_membership": [
+      "z",
+      "a"
+    ],
+    "membership": [
+      "z",
+      "a",
+      "local"
+    ],
+    "owned_membership": [
+      "local"
+    ],
+    "root": "destination",
+    "source_membership": [
+      "z",
+      "a"
+    ]
+  },
+  "schema_version": 1,
+  "scope": "Actual generated Namespace/Type union getters over supplied subset lists and their matching EMF eIsSet state. Composition controls supply dependencies. Separate canonical_controls use actual factory-created ownership/import graphs and runtime-derived package unions. Typed-import controls explicitly supply Pilot-derived inheritedMembership snapshots; Seven recursive typed controls derive non-Feature inheritance from stored specializations/conjugation without inherited snapshots. A separate implied-specialization disagreement records Pilot behavior versus the normative exclusion rule. Nine further controls provide complete materialized implied relationships and verify full inheritance, Feature redefinition filtering and complete unnamed/derived-name Features without inherited snapshots; fixture completeness is checked against Pilot computed redefinitions and implicit generals. A separate shared-Feature-alias disagreement compares the normative membership-based rejection predicate with Pilot target-based filtering. Nine further canonical Feature-chaining controls exercise ordered final-target inheritance, explicit parents, recursive imports, cycles, duplicate parents, visibility, PartUsage dispatch and conjugation. Computing missing implicit relationships, chain legality and filtered/external scopes remain unqualified."
+}

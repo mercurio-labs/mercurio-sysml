@@ -1,0 +1,641 @@
+{
+  "schema": "dev.mercurio.compatibility-evidence.v1",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/compatibility.extract.json",
+  "independent_pilot_contexts": 18,
+  "source_pipeline_contexts": 2,
+  "native_consumers": [
+    "definition_is_compatible",
+    "definition_document::is_compatible",
+    "definition_binding_context",
+    "definition_document::binding_context_for"
+  ],
+  "implementation_boundary": "Handwritten normative compatibility reuses imported ownership, generalization, redefinition and featuring services. Cycle-safe transitive access resolves Base::Anything through the native library service. Complete controlled graphs supply implicit inputs. Prospective binary binding-context selection consumes this shared query and ordered featuring closure; it does not transform or insert a connector. The resolved trees are drift guards, not generated semantic implementations.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      188,
+      189,
+      190
+    ],
+    "rules": [
+      "Feature.isCompatibleWith",
+      "Feature.canAccess",
+      "Feature.isFeaturedWithin"
+    ],
+    "assessment": "The written Feature.isCompatibleWith rule requires actual redefinition ancestry and transitive canAccess. Native follows that rule. Pilot FeatureUtil.canAccess agrees on the nested/global controls, while TypeUtil.isCompatible uses an immediate-only shortcut and disagrees on five positive controls. Missing library roots or unknown implicit providers remain errors. Binary context selection is independently observed implementation behavior, not full binding qualification."
+  },
+  "remaining": [
+    "Derived Usage.isVariable on compatibility fallback",
+    "Complete implicit generalization/featuring/owned-member providers",
+    "N-ary connector context selection",
+    "Full default/end transformation, pending queue lifecycle and post-insertion transformation; bounded membership placement is now verified",
+    "Complete samples, semantic comparison, and timing qualification"
+  ],
+  "imported_sha256": "be2840b8082bf8109ad22c8a2b8af057f8f47d874c1b2074c828996c9fc4809d",
+  "qualification": {
+    "native_tests": 149,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-expression-binding-defaults-focused.log",
+    "test_log_sha256": "b4b759e87eda782c3fb2354ef584e2324256b12ed338862217a7d826feab0705",
+    "tooling_tests": 95,
+    "complete_samples_and_timing_qualified": false
+  },
+  "independent_connector_contexts": 10,
+  "disagreements": [
+    {
+      "context": "nested_positive",
+      "pilot_is_compatible": false,
+      "pilot_can_access": true,
+      "native_is_compatible": true,
+      "normative_resolution": "Use Feature.isCompatibleWith with transitive/global canAccess, KerML PDF pages 188-190.",
+      "test": "language_frontend::lowering::emit::operand_construction::tests::definition_compatibility_matches_pilot_and_preserves_boundaries"
+    },
+    {
+      "context": "nested_diamond",
+      "pilot_is_compatible": false,
+      "pilot_can_access": true,
+      "native_is_compatible": true,
+      "normative_resolution": "Use Feature.isCompatibleWith with transitive/global canAccess, KerML PDF pages 188-190.",
+      "test": "language_frontend::lowering::emit::operand_construction::tests::definition_compatibility_matches_pilot_and_preserves_boundaries"
+    },
+    {
+      "context": "global_positive",
+      "pilot_is_compatible": false,
+      "pilot_can_access": true,
+      "native_is_compatible": true,
+      "normative_resolution": "Use Feature.isCompatibleWith with transitive/global canAccess, KerML PDF pages 188-190.",
+      "test": "language_frontend::lowering::emit::operand_construction::tests::definition_compatibility_matches_pilot_and_preserves_boundaries"
+    },
+    {
+      "context": "global_empty",
+      "pilot_is_compatible": false,
+      "pilot_can_access": true,
+      "native_is_compatible": true,
+      "normative_resolution": "Use Feature.isCompatibleWith with transitive/global canAccess, KerML PDF pages 188-190.",
+      "test": "language_frontend::lowering::emit::operand_construction::tests::definition_compatibility_matches_pilot_and_preserves_boundaries"
+    },
+    {
+      "context": "nested_global",
+      "pilot_is_compatible": false,
+      "pilot_can_access": true,
+      "native_is_compatible": true,
+      "normative_resolution": "Use Feature.isCompatibleWith with transitive/global canAccess, KerML PDF pages 188-190.",
+      "test": "language_frontend::lowering::emit::operand_construction::tests::definition_compatibility_matches_pilot_and_preserves_boundaries"
+    }
+  ],
+  "binding_placement": {
+    "matching_pilot_controls": 20,
+    "source_contexts": 2,
+    "native_consumer": "definition_document::materialize_binding_structure",
+    "verification": [
+      "definition_binding_placement_matches_pilot",
+      "definition_binding_placement_reaches_source_persistence_and_rollback"
+    ],
+    "implementation": "Handwritten TypeAdapter membership/context rule and TypeUtil physical membership placement, over shared context, Ecore ownership and binding construction. TypeAdapter source is fingerprinted as an inspected source-only dependency; the existing resolved javac unit remains unchanged.",
+    "pipeline": "Compute context on original graph; construct endpoints/connector; add explicit featuring only for a different nonempty context; select FeatureMembership for owner context, otherwise OwningMembership; validate and commit atomically.",
+    "boundaries": [
+      "selected binary endpoints only",
+      "no connector/end default or full transformation",
+      "no pending queue clearing or post-insertion transformation",
+      "no new whole-document Pilot match"
+    ],
+    "pilot_observation": "Actual TypeAdapter.addBindingConnector with complete endpoint inputs and controlled absent library provider; pending membership and explicit featuring are observed independently.",
+    "checks": [
+      "20 membership/featuring observations",
+      "both source membership paths",
+      "canonical persistence",
+      "late identity collision rollback",
+      "no implied-completeness assertion"
+    ]
+  },
+  "binding_stage_comparison": {
+    "controls": 4,
+    "projection_matches_excluding_completion": 4,
+    "fully_matching_transformed_models": 0,
+    "completion_flag_differences": 12,
+    "verification": "definition_binding_stage_matches_pilot_except_completion_boundary",
+    "observed": [
+      "membership kind",
+      "connector/end kinds",
+      "specialization kinds, targets and implied flags",
+      "featuring targets",
+      "owned relationship order",
+      "end and implied flags",
+      "completion flags"
+    ],
+    "pilot_pipeline": "Parse explicit Base/Links fixture; transform source endpoint Features with transformAll(...,true); addBindingConnector; insertImplicitBindingConnectors, which runs transformAll on the connector. Library lookup uses controlled qualified names from that parsed source.",
+    "native_pipeline": "Parse the same source, compute bounded endpoint inputs without completing endpoint graphs, run the native combined stage, compare connector/end projections before and after persistence.",
+    "fixed": "Pending specializations precede TypeFeaturing, including context featuring chosen during placement. Stable ordering within each group and canonical publication are checked.",
+    "remaining": "The original materialize_binding_defaults stage intentionally remains partial (12 flag differences/eight unsupported endpoint queries). The separate bounded_completion transaction closes these gaps for four whole-document controls; it does not qualify generic transformation."
+  },
+  "binding_subtree_comparison": {
+    "controls": 4,
+    "nodes": 56,
+    "effective_attribute_values": 292,
+    "reference_slots": 428,
+    "completion_flag_differences": 12,
+    "unsupported_endpoint_projections": 8,
+    "fully_matching_transformed_models": 0,
+    "verification": "definition_binding_stored_subtrees_identify_lifecycle_gaps",
+    "scope": "Every non-derived/non-transient/non-volatile Ecore attribute except elementId, and every such reference including containment and container pointers, within the constructed membership subtree. Compare before and after canonical persistence. External endpoints use ordinary explicit qualified names. Optional absent stored references normalize to empty only with lower bound zero. Source graph outside the subtree is not compared.",
+    "fix": "Context TypeFeaturing generated through the pending featuring queue is implied; native placement now marks it accordingly.",
+    "normative": "Pinned KerML PDF p.141: Relationship.isImplied marks tooling-generated semantic relationships. pp.137 and 141: isImpliedIncluded and validateElementIsImpliedIncluded require all implied relationships or none. This stage is not a qualified semantic publication.",
+    "capture_normalization": "Only javac type-string capture IDs are alpha-renamed in sorted-tree traversal, preserving repeated and distinct identities. The normalized guard was derived from the previously qualified artifact; semantic method trees were unchanged.",
+    "completed_alternative": "See bounded_completion: four complete matching subtrees and whole-document controls, with zero excluded fields. Original partial-stage differences remain asserted."
+  },
+  "lifecycle_audit": {
+    "source_sha256": {
+      "adapter/ElementAdapter.java": "aca551732782ce3bd1ccd633fb21675ffdccf83f3ffb720206bf2a395a546c2f",
+      "adapter/NamespaceAdapter.java": "b33c6142d4ef61790fb7f1bd8825a73d25a691a961ab69a9c402b2a643adc836",
+      "adapter/TypeAdapter.java": "4d103ec80db7a3e5da69e0fbb9ba5571030e39b5745631f5688134d91baeb08d",
+      "adapter/FeatureAdapter.java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+      "adapter/ConnectorAdapter.java": "04fe78842cc8a1f2713fe90acfdc46357db67a5bc81c84e556cd992862c5c3ab",
+      "util/ElementUtil.java": "3ebdc1c7b3dc2d11166e566a95059e2d7230df4e35a7918a9c6b9be853859507"
+    },
+    "findings": [
+      "ElementAdapter.transform is once-per-adapter and clears caches; NamespaceAdapter adds additional members before the Type/Feature pipeline.",
+      "FeatureAdapter computes featuring, value connectors and redefinitions, then generalizations/reduction and owned cross-feature featuring. Fresh bindings do not qualify all these branches.",
+      "ConnectorAdapter additionally computes context featuring and expression-valued end subsetting; the latter remains unqualified.",
+      "ElementUtil.transformAll recursively transforms contained elements, sets implied inclusion, and flushes binding, specialization and featuring queues. Native combined stage does not implement or certify the full lifecycle."
+    ],
+    "next": "Expand shared producer coverage beyond the now-qualified ordinary fixed Feature/fresh binding transaction; begin with value/expression binding dependencies. Keep broad completion claims gated by required contribution evidence."
+  },
+  "implied_inclusion_assessment": {
+    "rule": "validateElementIsImpliedIncluded",
+    "native_consumer": "definition_document::assess_implied_inclusion",
+    "implementation": "Explicit handwritten Rust predicate over imported effective Ecore containment/type/default services, after canonical closed-graph validation. Does not mutate the graph or mark completion.",
+    "independent_controls": 1670,
+    "concrete_classes": 167,
+    "contexts": [
+      "empty",
+      "explicit direct relationship",
+      "implied direct relationship",
+      "mixed explicit/implied",
+      "nested implied relationship"
+    ],
+    "complete_flags": [
+      false,
+      true
+    ],
+    "upstream_execution": "Actual KerMLValidator.checkElement compiled from pinned Xtend, with diagnostic interception only; full class inventory checked against imported effective Ecore.",
+    "normative_reference": "Pinned KerML PDF pages 137 and 141, Element.isImpliedIncluded and validateElementIsImpliedIncluded. Direct ownedRelationships only, not transitive containment.",
+    "verification": [
+      "definition_implied_inclusion_matches_pilot_across_concrete_classes",
+      "definition_implied_inclusion_rejects_invalid_inputs_without_mutation",
+      "definition_binding_stored_subtrees_identify_lifecycle_gaps"
+    ],
+    "source_controls": 4,
+    "source_findings": "Each constructed source control has three violating Types (binding and two ends), including after persistence. The source owner owns an explicit membership and is correctly not reported merely because that membership contains an implied binding.",
+    "decision": "For this small predicate, explicit Rust with imported contracts and an executable upstream oracle has low dependency burden; translating Xtext validator diagnostics/framework code adds no demonstrated maintenance benefit. No general Xtend translation added.",
+    "remaining": "An empty issue list proves only this implication, not that a true completion flag is justified. Complete transformation, all other validation rules, full samples and release qualification remain open."
+  },
+  "bounded_completion": {
+    "native_consumers": [
+      "definition_document::complete_ordinary_features",
+      "definition_document::materialize_complete_binding"
+    ],
+    "implementation": "Handwritten bounded adapter lifecycle over shared imported default selectors, Ecore ownership/ancestry, positional generalization, reduction, featuring and endpoint delegates. All producers run transactionally before admitted Type completion flags are committed. No runtime Java.",
+    "whole_document_matches": 4,
+    "matching_nodes": 164,
+    "matching_effective_attributes": 936,
+    "matching_reference_slots": 992,
+    "binding_subtree_matches": 4,
+    "completion_flag_differences": 0,
+    "unsupported_endpoint_projections": 0,
+    "pilot_pipeline": "Parse the explicit standard-library fixture; transformAll(x,true), transformAll(y,true); TypeAdapter.addBindingConnector then TypeUtil.insertImplicitBindingConnectors. Observe the entire canonical resource with all stored effective attributes (except elementId), references, containment and completion flags.",
+    "native_pipeline": "Parse and link the same source; complete ordinary endpoints in one input-snapshot batch; construct/complete the fresh binding transaction; assess implied inclusion; compare the entire document before and after canonical persistence.",
+    "verification": [
+      "definition_binding_stored_subtrees_identify_lifecycle_gaps",
+      "definition_complete_binding_preserves_existing_state_and_rejects_unqualified_branches",
+      "definition_ordinary_completion_is_transactional_and_context_bounded"
+    ],
+    "admission": {
+      "ordinary_features": "Exact fixed incomplete non-end/non-parameter leaf Features under exact FeatureMembership in Class; shared ordinary provider and no-additional-member dispatch must succeed.",
+      "binding": "Fresh binary binding under exact Class, with already-owned fixed exact Feature endpoints without nested Features. Existing endpoint generalizations must be readable. Only new connector and ends are marked complete.",
+      "excluded_graph_dependencies": [
+        "FeatureValue",
+        "CrossSubsetting",
+        "Conjugation",
+        "MetadataFeature",
+        "Annotation",
+        "Expression",
+        "AssignmentActionUsage"
+      ],
+      "failure_policy": "Missing library/provider, unsupported contexts, duplicate owner/prefix identities and late relation collisions roll back graph and completion flags."
+    },
+    "reviewed_contributions": [
+      {
+        "stage": "Namespace additional members",
+        "disposition": "Imported dispatch proves none for exact Feature and BindingConnector."
+      },
+      {
+        "stage": "Feature featuring",
+        "disposition": "Fresh/fixed Types use shared owning/context featuring; variable snapshot branch is excluded."
+      },
+      {
+        "stage": "Value connectors and bound-value subsetting",
+        "disposition": "FeatureValue and Expression dependencies are excluded across the graph, including inherited valuations."
+      },
+      {
+        "stage": "Feature write/parameter/constructor redefinitions",
+        "disposition": "Ordinary Class leaf Features are non-end/non-parameter; fresh end ancestry is BindingConnector under Class, not assignment/invocation; specialized owners reject."
+      },
+      {
+        "stage": "Defaults, positional ends and participant",
+        "disposition": "Imported selectors feed shared fixed-snapshot reduction and canonical insertion. Any unsupported generalization dependency rejects."
+      },
+      {
+        "stage": "Owned crossing and cross featuring",
+        "disposition": "Leaf input Features and fresh end memberships contain no cross-feature producer; CrossSubsetting/conjugation dependencies reject."
+      },
+      {
+        "stage": "Connector context and expression-valued ends",
+        "disposition": "Shared context featuring is inserted as implied; fresh ends own only reference subsetting, not expressions."
+      },
+      {
+        "stage": "Recursive transformation and flushing",
+        "disposition": "Endpoints must already be owned so construction adopts no source subtrees. Fresh connector/ends are the only new Types; their producers complete before flags. Generic queue lifecycle remains outside this bounded transaction."
+      }
+    ],
+    "remaining": "These four whole-document controls are qualified for their bounded pipeline. The rest of the document is not fully transformed; ordinary Class/library defaults remain as in Pilot source. Broader owners, adopted subtrees, variable/valuation/crossing/expression behavior, all samples and release qualification remain open."
+  },
+  "bound_value_producer": {
+    "native_consumer": "definition_document::materialize_bound_value_subsetting",
+    "implementation": "Explicit handwritten selection and admission guards over pinned Ecore FeatureValue ownership, scalar defaults and result delegates. Shared ordered-chain and specialization constructors perform atomic canonical insertion/adoption. No expression evaluation or Java runtime.",
+    "independent_controls": 11,
+    "matching_admitted_controls": 5,
+    "positive_contributions": 2,
+    "matching_noops": 3,
+    "explicitly_rejected_controls": 6,
+    "new_matching_whole_documents": 0,
+    "pilot_observation": "Invoke actual protected FeatureAdapter.addBoundValueSubsetting on controlled graphs and inspect pending general types/chains. Expression/result completion is a fixture precondition; absent library lookup is controlled. This is not full expression transformation qualification.",
+    "admitted_cases": [
+      "none",
+      "ordinary",
+      "initial",
+      "explicit_general",
+      "directional"
+    ],
+    "rejected_cases": [
+      "default",
+      "first_default",
+      "first_empty",
+      "missing_value",
+      "missing_result",
+      "implied_general"
+    ],
+    "normative_reference": {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_page": 196,
+      "constraint": "checkFeatureValuationSpecialization"
+    },
+    "disagreements": [
+      {
+        "dependency": "default and multiple valuations",
+        "written_rule": "Quantifies over all owned FeatureValues, without a default-value exception.",
+        "pilot": "Selects first FeatureValue and skips it when isDefault.",
+        "native": "Rejects default/multiple cases pending normative all-valuation assessment; never equates Pilot suppression with complete constraint support."
+      },
+      {
+        "dependency": "existing implied specialization",
+        "written_rule": "The constraint applies when all owned specializations are implied.",
+        "pilot": "Producer requires ownedSpecialization.isEmpty; implied specialization suppresses it.",
+        "native": "Rejects composition with existing implied specializations rather than dropping the required valuation obligation."
+      }
+    ],
+    "verification": [
+      "definition_bound_value_subsetting_matches_pilot_and_roundtrips",
+      "definition_bound_value_requires_expression_completion_and_rolls_back"
+    ],
+    "verified_boundaries": [
+      "ordered expression/result chain",
+      "implied Subsetting canonical endpoints",
+      "detached chain adopted by specialization",
+      "positive control persistence/reload",
+      "owner and chain remain incomplete",
+      "uncompleted parsed source expression rejects without mutation",
+      "late relation identity collision rolls back the newly built chain",
+      "mistyped expression rejects"
+    ],
+    "remaining": [
+      "expression lifecycle and evaluation",
+      "full default/multiple valuation rule",
+      "composition with existing implied specializations",
+      "value BindingConnector and initial-value featuring",
+      "full normative specializes(result) obligation after all chain producers",
+      "whole-source value model equivalence"
+    ],
+    "scope": "This is an isolated contribution producer. The prepared completion inputs are explicit assumptions. No full checkFeatureValuationSpecialization, Feature completion, new whole-document match or release closure is claimed."
+  },
+  "valuation_constraint_assessment": {
+    "native_consumer": "definition_document::assess_valuation_specialization",
+    "implementation": "Named handwritten written-rule predicate using imported Feature ancestry, canonical relationship ownership, redefined specialization endpoints, FeatureValue.value, Expression.result and shared Type specialization. No new Java/runtime dependency.",
+    "normative_reference": {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_page": 196,
+      "constraint": "checkFeatureValuationSpecialization"
+    },
+    "verified_contexts": [
+      "no valuation",
+      "ordinary valuation",
+      "default valuation",
+      "initial valuation",
+      "explicit specialization makes antecedent false",
+      "existing implied specialization does not suppress assessment",
+      "directed Feature makes antecedent false",
+      "multiple valuations all checked",
+      "only first valuation satisfied leaves second violation",
+      "all valuations satisfied",
+      "persistence/reload"
+    ],
+    "dependency_errors": [
+      "missing required expression",
+      "missing result",
+      "incomplete generalization provider",
+      "parsed untransformed value expression",
+      "duplicate canonical identity"
+    ],
+    "verification": [
+      "definition_valuation_assessment_checks_written_all_value_rule",
+      "definition_valuation_assessment_preserves_unknown_and_invalid_inputs"
+    ],
+    "pilot_disagreement": "The written validator includes default and later valuations and existing implied specializations. The independently captured Pilot producer suppressions remain recorded in bound_value_producer; producer agreement is not a normative validation oracle.",
+    "scope": "Controlled complete generalization inputs isolate this constraint. The public parsed incomplete expression remains an error. No expression lifecycle, complete Feature, sample or whole-family closure is claimed.",
+    "new_matching_whole_documents": 0,
+    "remaining": [
+      "expression default/result/featuring lifecycle",
+      "value BindingConnector and initial featuring",
+      "generate all required valuation contributions",
+      "assess fully transformed source models"
+    ]
+  },
+  "expression_featuring": {
+    "native_consumer": "definition_document::materialize_value_expression_featuring",
+    "normative_reference": {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_page": 225,
+      "constraint": "checkExpressionTypeFeaturing"
+    },
+    "imported": "Pinned effective Ecore ancestry enumerates all 32 concrete Expression classes. Runtime reflection resolves inherited featuring method declaration to ExpressionAdapter or FeatureAdapter. The generated native admission table covers exactly that set; unknown methods reject. Both upstream source files and the physical FeatureUtil insertion source are fingerprinted.",
+    "implementation": "Named handwritten selection over shared Feature.featuringType query, Ecore FeatureValue containment and TypeFeaturing contracts. Atomic insertion preserves ordering, suppresses existing pairs, adopts detached targets, and rejects ancestor adoption or identity collisions. Owner featuring may come from complete stored inputs or the qualified fixed ordinary Feature provider. No runtime Java.",
+    "independent_controls": 160,
+    "concrete_expression_classes": 32,
+    "contexts": [
+      "no featuring",
+      "one target",
+      "two ordered targets",
+      "duplicate source target",
+      "already-present explicit target"
+    ],
+    "oracle_boundary": "The owner adapter is transformed before attaching the controlled valuation and then receives controlled complete featuring storage. The actual inherited featuring method and FeatureUtil.insertImplicitTypeFeaturings execute. This intentionally isolates the stage and does not qualify the surrounding owner or expression lifecycle.",
+    "verification": [
+      "definition_value_expression_featuring_matches_all_pinned_dispatches",
+      "definition_value_expression_featuring_rejects_unready_and_rolls_back",
+      "definition_expression_featuring_query_preserves_dependency_errors"
+    ],
+    "native_evidence": [
+      "160 matching stored relation observations including implied/adopted flags before and after persistence",
+      "repeat execution creates no duplicates or mutations",
+      "variable owner provider, completed expression, wrong kinds and ownership reject",
+      "first/late collision and ancestor adoption roll back",
+      "real parsed class-owned value expression receives the Class featuring target and round-trips without owner/expression completion flags",
+      "The same 160 independently observed Pilot featuring getters match the read-only native projection before materialization and after persistence. Shared admission preserves unsupported-owner errors and detects recursive chaining through expression owners."
+    ],
+    "new_matching_whole_documents": 0,
+    "remaining": [
+      "MultiplicityRange bound featuring",
+      "other Feature implicit producers",
+      "expression defaults and complete result semantics",
+      "reference/result BindingConnectors",
+      "FeatureValue BindingConnector and initial-value featuring",
+      "full lifecycle and whole-document comparison"
+    ],
+    "scope": "FeatureValue expression featuring is verified for materialization and shared semantic queries. The owner dependency is complete stored input or the bounded ordinary provider. Other ownership contexts and full expression lifecycle remain unqualified.",
+    "native_consumers": [
+      "definition_document::materialize_value_expression_featuring",
+      "definition_featuring_types"
+    ]
+  },
+  "expression_defaults": {
+    "native_consumer": "definition_document::materialize_value_expression_defaults",
+    "imported": "Resolved javac trees for ExpressionAdapter.getDefaultSupertype and addDefaultGeneralType, reflected provider dispatch, actual pinned base-library mapping, and independent pending-contribution observations. The generator validates the typed base-key selector and guards the complete inherited/conditional contribution tree. Native table entries are generated from the imported bindings.",
+    "implementation": "Named handwritten admission proves detached/package/FeatureValue ownership, non-end/nondirected inputs, absence of semantic metadata and direct valuation/crossing/conjugation/partial implicit dependencies. Imported base selection feeds shared local standard-library resolution, generalization reduction and transactional Ecore insertion. Production remains Rust only.",
+    "bindings": {
+      "BooleanExpression": "Performances::booleanEvaluations",
+      "ConstructorExpression": "Performances::constructorEvaluations",
+      "Expression": "Performances::evaluations",
+      "FeatureReferenceExpression": "Performances::evaluations",
+      "Invariant": "Performances::trueEvaluations",
+      "LiteralBoolean": "Performances::literalBooleanEvaluations",
+      "LiteralExpression": "Performances::literalEvaluations",
+      "LiteralInfinity": "Performances::literalIntegerEvaluations",
+      "LiteralInteger": "Performances::literalIntegerEvaluations",
+      "LiteralRational": "Performances::literalRationalEvaluations",
+      "LiteralString": "Performances::literalStringEvaluations",
+      "MetadataAccessExpression": "Performances::metadataAccessEvaluations",
+      "NullExpression": "Performances::nullEvaluations"
+    },
+    "excluded_bindings": {
+      "AnalysisCaseUsage": "org.omg.sysml.adapter.ActionUsageAdapter",
+      "AssertConstraintUsage": "org.omg.sysml.adapter.OccurrenceUsageAdapter",
+      "CalculationUsage": "org.omg.sysml.adapter.ActionUsageAdapter",
+      "CaseUsage": "org.omg.sysml.adapter.ActionUsageAdapter",
+      "CollectExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "ConcernUsage": "org.omg.sysml.adapter.ConcernUsageAdapter",
+      "ConstraintUsage": "org.omg.sysml.adapter.OccurrenceUsageAdapter",
+      "FeatureChainExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "IncludeUseCaseUsage": "org.omg.sysml.adapter.IncludeUseCaseUsageAdapter",
+      "IndexExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "InvocationExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "OperatorExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "RequirementUsage": "org.omg.sysml.adapter.OccurrenceUsageAdapter",
+      "SatisfyRequirementUsage": "org.omg.sysml.adapter.OccurrenceUsageAdapter",
+      "SelectExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "TriggerInvocationExpression": "org.omg.sysml.adapter.InvocationExpressionAdapter",
+      "UseCaseUsage": "org.omg.sysml.adapter.ActionUsageAdapter",
+      "VerificationCaseUsage": "org.omg.sysml.adapter.ActionUsageAdapter",
+      "ViewpointUsage": "org.omg.sysml.adapter.OccurrenceUsageAdapter"
+    },
+    "independent_controls": 84,
+    "contexts": [
+      "detached noncomposite",
+      "detached composite",
+      "FeatureValue-owned noncomposite",
+      "FeatureValue-owned composite",
+      "package-owned noncomposite",
+      "package-owned composite"
+    ],
+    "oracle_boundary": "Actual addDefaultGeneralType executes with controlled library Feature endpoints. The observations qualify pending base-default contributions; they do not represent the complete semantic library, result lifecycle, or full expression transformation.",
+    "normative_reference": {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_page": 225,
+      "constraint": "checkExpressionSpecialization"
+    },
+    "verification": [
+      "definition_expression_defaults_match_pinned_resolved_program",
+      "definition_expression_defaults_preserve_dependency_errors_and_transactions",
+      "definition_expression_stages_compose_on_parsed_source",
+      "definition_expression_generalization_queries_preserve_known_and_unknown_states",
+      "definition_expression_library_result_redefinition_reaches_source"
+    ],
+    "verified": [
+      "84 pending contribution matches and canonical persistence, including package-owned and negated Invariant contexts",
+      "ten admission/dependency/collision failures preserve the graph",
+      "parsed reference expression composes result construction, featuring and default subsetting and persists all three stages without marking completion",
+      "shared read-only specialization provider consumes the imported default before and after physical insertion across the 56 controls",
+      "repeated default insertion is a no-op for a recognized existing default",
+      "transitive positive and negative queries on a native source library graph; missing library, unsupported ancestry and unrelated implicit state remain errors",
+      "parsed source now also materializes the reference-result Subsetting without completing the expression",
+      "package-owned default bases do not create self-specialization",
+      "independent Pilot parsed-source result redefinition agrees before/after native default materialization and persistence"
+    ],
+    "new_matching_whole_documents": 0,
+    "remaining": [
+      "specialized library defaults must transitively satisfy Performances::evaluations in the real library",
+      "owned Structure/Behavior/Step performance contexts",
+      "excluded adapter overrides",
+      "inherited semantic metadata and crossing/valuation producers",
+      "expression/result generalization providers and complete result semantics",
+      "result/reference/value BindingConnectors",
+      "atomic lifecycle and full-source comparison"
+    ],
+    "scope": "This is a guarded default contribution producer. Required whole-expression behavior and the normative transitive specialization obligation remain unqualified; no whole-document or release credit.",
+    "negated_bindings": {
+      "Invariant": "Performances::falseEvaluations"
+    },
+    "selector_dispatch": {
+      "BooleanExpression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "ConstructorExpression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "Expression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "FeatureReferenceExpression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "Invariant": "org.omg.sysml.adapter.InvariantAdapter",
+      "LiteralBoolean": "org.omg.sysml.adapter.ExpressionAdapter",
+      "LiteralExpression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "LiteralInfinity": "org.omg.sysml.adapter.ExpressionAdapter",
+      "LiteralInteger": "org.omg.sysml.adapter.ExpressionAdapter",
+      "LiteralRational": "org.omg.sysml.adapter.ExpressionAdapter",
+      "LiteralString": "org.omg.sysml.adapter.ExpressionAdapter",
+      "MetadataAccessExpression": "org.omg.sysml.adapter.ExpressionAdapter",
+      "NullExpression": "org.omg.sysml.adapter.ExpressionAdapter"
+    },
+    "selector_correction": {
+      "problem": "The prior import resolved addDefaultGeneralType dispatch but did not resolve getDefaultSupertype dispatch. A negated Invariant was incorrectly assigned its base default.",
+      "fix": "Resolve both methods. Import and guard the typed Invariant conditional selector, generate its actual negated library mapping, and read the Ecore isNegated attribute.",
+      "normative_pdf_pages": [
+        277,
+        294
+      ],
+      "constraint": "checkInvariantSpecialization",
+      "native": "non-negated -> Performances::trueEvaluations; negated -> Performances::falseEvaluations",
+      "prior_scope": "The earlier 52 controls had isNegated=false and did not establish support for the negated branch."
+    },
+    "query_scope": "The same guarded provider supplies semantic generalization queries and materialization. Recognized materialized default Subsettings can be consumed without isImpliedIncluded=true. An unrelated implied contribution remains an error. This is not full result, library or expression completion.",
+    "library_result_integration": {
+      "source_observation": "expression_defaults.library_result_case in compatibility.extract.json",
+      "upstream": "Actual KerML parse, controlled declared library lookup, TypeUtil.addResultParameterTo and FeatureUtil.getRedefinedFeaturesWithComputedOf. The expected inherited target is observed as libraryResult.",
+      "native": "Same source through parse_and_link, shared result constructor, expression generalization provider and existing generated positional result selector. No completion flags or dedicated result heuristic.",
+      "scope": "One independent result query on a library-shaped source. This does not qualify all stored fields of that document or the complete semantic library.",
+      "new_matching_whole_documents": 0
+    }
+  },
+  "result_feature_defaults": {
+    "native_consumer": "definition_document::materialize_result_feature_defaults",
+    "independent_controls": 24,
+    "contexts": "Exact fixed noncomposite out Feature under Expression, FeatureReferenceExpression or Function; all eight owned Class/Structure/DataType masks. Controlled complete owner and classifier inputs.",
+    "implementation": "Imported Feature default selector and positional redefinition strategy feed shared reduction and transactional Ecore construction. Handwritten context admission rejects unassessed dependencies. Known materialized result contributions are consumed without marking completion. Stored implied positional contributions are not recomputed; explicit/computed duplicates retain observed Pilot behavior.",
+    "verification": [
+      "definition_result_feature_defaults_match_pilot_typing_matrix",
+      "definition_result_feature_defaults_reject_unqualified_contexts_atomically",
+      "definition_expression_library_result_redefinition_reaches_source"
+    ],
+    "source_evidence": "Pinned parsed-source result redefinition plus default reduction matches libraryResult; native query and persistence remain stable after insertion.",
+    "remaining": [
+      "Composite, variable, portion, end and constructor contexts",
+      "Inherited and implicit typing dependencies",
+      "Result/reference/value BindingConnectors and complete expression lifecycle",
+      "Complete semantic library and whole-document qualification"
+    ],
+    "new_matching_whole_documents": 0
+  },
+  "reference_binding": {
+    "native_consumer": "definition_document::materialize_reference_binding",
+    "normative_reference": {
+      "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_pages": [
+        235,
+        295
+      ],
+      "constraint": "checkFeatureReferenceExpressionBindingConnector",
+      "additional_pdf_pages": [
+        192,
+        193,
+        214,
+        290
+      ],
+      "additional_constraints": [
+        "checkFeatureEndRedefinition",
+        "checkFeatureEndSpecialization",
+        "checkBindingConnectorSpecialization",
+        "validateBindingConnectorIsBinary"
+      ]
+    },
+    "implementation": "Named handwritten explicit referent/result selection reuses imported membership/result views, shared context selection, canonical binding construction and transactional Ecore ownership. No completion flags are set. A shared handwritten admission predicate proves exact OwningMembership, binary owned-end shape, fixed untyped noncomposite binding and non-end Expression context; it supplies no owning Class/Structure to the imported selector. Known partial default/redefinition relationships are revalidated without treating arbitrary implied relationships as complete.",
+    "oracle": "Pinned Pilot parses and transforms the entire controlled library-shaped source; the reference binding projection observes OwningMembership, featuring A, two ends, and ordered related features y then result. Whole-document transformation is necessary to compute owning-feature context; transforming the expression in isolation does not establish that context.",
+    "verification": [
+      "definition_reference_binding_matches_pilot_source_placement",
+      "definition_reference_binding_rejects_unqualified_inputs_atomically",
+      "definition_expression_owned_binding_defaults_match_pinned_dispatches",
+      "definition_expression_owned_binding_preserves_dependency_boundaries",
+      "definition_reference_binding_defaults_match_pilot_source_stages"
+    ],
+    "verified": [
+      "Owned binding placement, featuring and ordered constructed endpoints match the independent transformed Pilot projection and survive persistence",
+      "Missing result and identity collision leave the document unchanged",
+      "Completed expression, wrong provider and non-Feature referent reject transactionally",
+      "32 independent default contributions across every pinned concrete Expression owner agree on Links::selfLinks for fixed untyped binary BindingConnectors under exact OwningMembership",
+      "Two controlled source projections agree on connector and end default relationships, implied flags, featuring and relationship order through persistence; completion flags remain the explicit difference",
+      "The empty library-end case selects participant; the two inherited library ends select ordered left/right redefinitions. Shared effective-end and redefinition queries agree after materialization and persistence",
+      "One shared merge handles stored/computed positional ends and parameters, preserving observed explicit duplicates while not recomputing stored implied contributions",
+      "End namespaces, variable/composite bindings, FeatureMembership contexts and unknown implied generalizations preserve explicit dependency errors; failures are transactional"
+    ],
+    "remaining": [
+      "Real semantic-library closure, including transitive participant specialization through SelfLink",
+      "Typed, composite, variable and FeatureMembership-owned connector contexts",
+      "Self-reference fallback",
+      "Result-expression and valuation binding stages",
+      "Atomic expression lifecycle and full model comparison"
+    ],
+    "new_matching_whole_documents": 0,
+    "native_consumers": [
+      "definition_document::materialize_reference_binding",
+      "definition_document::materialize_reference_binding_defaults",
+      "definition_connector_default_name",
+      "definition_end_features",
+      "definition_redefined_features"
+    ],
+    "default_controls": 32,
+    "source_stage_projections": 2,
+    "oracle_boundary": "The two source controls use intentionally small library declarations. The inherited-end control verifies selection and filtering; it does not establish the real semantic library SelfLink/participant closure. Native completeness flags stay false. These projections are not additional whole-document matches.",
+    "library_dependency_audit": {
+      "release_tag": "2026-08",
+      "release_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "lf_normalized_sha256": "dcf3c002717cb91f8e16f1890fdf5526f4e178ada898a189621c7d0c24b5ddc0",
+      "matches_pinned_pilot_test_library": true,
+      "dependency_chain": [
+        "selfLinks is typed by SelfLink and subsets binaryLinks",
+        "SelfLink specializes BinaryLink, which specializes Link",
+        "SelfLink.thisThing crosses sameThing.self",
+        "SelfLink ends redefine source/target and subset each other",
+        "selfLinks ends carry multiple redefinitions, including inherited binaryLinks ends",
+        "Link.participant and BinaryLink ends carry typed multiplicities and ordering/uniqueness constraints"
+      ],
+      "scope": "Definition/source audit only. These declarations have not been qualified through the complete native pipeline."
+    }
+  }
+}

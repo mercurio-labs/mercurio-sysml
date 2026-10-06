@@ -1,0 +1,5156 @@
+{
+  "schema": "dev.mercurio.xtext-terminal-program.v1",
+  "offset_units": "utf-16-code-units",
+  "token_arbitration": "separate lexer-decision.extract.json; this artifact only recognizes selected terminal bodies",
+  "programs": [
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "range",
+      "left": 48,
+      "right": 57,
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1",
+      "cardinality": "*",
+      "op": "range",
+      "left": 48,
+      "right": 57,
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        0,
+        1
+      ],
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "call",
+      "child": 2,
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        101
+      ],
+      "body_first_ranges": [
+        [
+          101,
+          101
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        69
+      ],
+      "body_first_ranges": [
+        [
+          69,
+          69
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1",
+      "cardinality": "one",
+      "op": "choice",
+      "children": [
+        4,
+        5
+      ],
+      "body_first_ranges": [
+        [
+          69,
+          69
+        ],
+        [
+          101,
+          101
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        43
+      ],
+      "body_first_ranges": [
+        [
+          43,
+          43
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        45
+      ],
+      "body_first_ranges": [
+        [
+          45,
+          45
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2",
+      "cardinality": "?",
+      "op": "choice",
+      "children": [
+        7,
+        8
+      ],
+      "body_first_ranges": [
+        [
+          43,
+          43
+        ],
+        [
+          45,
+          45
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/3",
+      "cardinality": "one",
+      "op": "call",
+      "child": 2,
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        3,
+        6,
+        9,
+        10
+      ],
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0",
+      "cardinality": "one",
+      "op": "range",
+      "left": 97,
+      "right": 122,
+      "body_first_ranges": [
+        [
+          97,
+          122
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1",
+      "cardinality": "one",
+      "op": "range",
+      "left": 65,
+      "right": 90,
+      "body_first_ranges": [
+        [
+          65,
+          90
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        95
+      ],
+      "body_first_ranges": [
+        [
+          95,
+          95
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "choice",
+      "children": [
+        12,
+        13,
+        14
+      ],
+      "body_first_ranges": [
+        [
+          65,
+          90
+        ],
+        [
+          95,
+          95
+        ],
+        [
+          97,
+          122
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "range",
+      "left": 97,
+      "right": 122,
+      "body_first_ranges": [
+        [
+          97,
+          122
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "range",
+      "left": 65,
+      "right": 90,
+      "body_first_ranges": [
+        [
+          65,
+          90
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        95
+      ],
+      "body_first_ranges": [
+        [
+          95,
+          95
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3",
+      "cardinality": "one",
+      "op": "range",
+      "left": 48,
+      "right": 57,
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1",
+      "cardinality": "*",
+      "op": "choice",
+      "children": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "body_first_ranges": [
+        [
+          48,
+          57
+        ],
+        [
+          65,
+          90
+        ],
+        [
+          95,
+          95
+        ],
+        [
+          97,
+          122
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        15,
+        20
+      ],
+      "body_first_ranges": [
+        [
+          65,
+          90
+        ],
+        [
+          95,
+          95
+        ],
+        [
+          97,
+          122
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        39
+      ],
+      "body_first_ranges": [
+        [
+          39,
+          39
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        92
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        98
+      ],
+      "body_first_ranges": [
+        [
+          98,
+          98
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        116
+      ],
+      "body_first_ranges": [
+        [
+          116,
+          116
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        110
+      ],
+      "body_first_ranges": [
+        [
+          110,
+          110
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/3",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        102
+      ],
+      "body_first_ranges": [
+        [
+          102,
+          102
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/4",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        114
+      ],
+      "body_first_ranges": [
+        [
+          114,
+          114
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/5",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        34
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/6",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        39
+      ],
+      "body_first_ranges": [
+        [
+          39,
+          39
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/7",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        92
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1",
+      "cardinality": "one",
+      "op": "choice",
+      "children": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ],
+        [
+          39,
+          39
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          98,
+          98
+        ],
+        [
+          102,
+          102
+        ],
+        [
+          110,
+          110
+        ],
+        [
+          114,
+          114
+        ],
+        [
+          116,
+          116
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        23,
+        32
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "not_characters",
+      "units": [
+        39,
+        92
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          38
+        ],
+        [
+          40,
+          91
+        ],
+        [
+          93,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1",
+      "cardinality": "*",
+      "op": "choice",
+      "children": [
+        33,
+        34
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          38
+        ],
+        [
+          40,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        39
+      ],
+      "body_first_ranges": [
+        [
+          39,
+          39
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        22,
+        35,
+        36
+      ],
+      "body_first_ranges": [
+        [
+          39,
+          39
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        34
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        92
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        98
+      ],
+      "body_first_ranges": [
+        [
+          98,
+          98
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        116
+      ],
+      "body_first_ranges": [
+        [
+          116,
+          116
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        110
+      ],
+      "body_first_ranges": [
+        [
+          110,
+          110
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/3",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        102
+      ],
+      "body_first_ranges": [
+        [
+          102,
+          102
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/4",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        114
+      ],
+      "body_first_ranges": [
+        [
+          114,
+          114
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/5",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        34
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/6",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        39
+      ],
+      "body_first_ranges": [
+        [
+          39,
+          39
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/7",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        92
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1",
+      "cardinality": "one",
+      "op": "choice",
+      "children": [
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ],
+        [
+          39,
+          39
+        ],
+        [
+          92,
+          92
+        ],
+        [
+          98,
+          98
+        ],
+        [
+          102,
+          102
+        ],
+        [
+          110,
+          110
+        ],
+        [
+          114,
+          114
+        ],
+        [
+          116,
+          116
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        39,
+        48
+      ],
+      "body_first_ranges": [
+        [
+          92,
+          92
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1",
+      "cardinality": "one",
+      "op": "not_characters",
+      "units": [
+        34,
+        92
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          33
+        ],
+        [
+          35,
+          91
+        ],
+        [
+          93,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1",
+      "cardinality": "*",
+      "op": "choice",
+      "children": [
+        49,
+        50
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          33
+        ],
+        [
+          35,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        34
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        38,
+        51,
+        52
+      ],
+      "body_first_ranges": [
+        [
+          34,
+          34
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        47,
+        42
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/1",
+      "cardinality": "one",
+      "op": "until",
+      "units": [
+        42,
+        47
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        54,
+        55
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        47,
+        47,
+        42
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/1",
+      "cardinality": "one",
+      "op": "until",
+      "units": [
+        42,
+        47
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        57,
+        58
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        47,
+        47
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0",
+      "cardinality": "one",
+      "op": "not_characters",
+      "units": [
+        10,
+        13
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          9
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          14,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1",
+      "cardinality": "*",
+      "op": "not_characters",
+      "units": [
+        10,
+        13
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          9
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          14,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1",
+      "cardinality": "?",
+      "op": "sequence",
+      "children": [
+        61,
+        62
+      ],
+      "body_first_ranges": [
+        [
+          0,
+          9
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          14,
+          65535
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/0",
+      "cardinality": "?",
+      "op": "literal",
+      "units": [
+        13
+      ],
+      "body_first_ranges": [
+        [
+          13,
+          13
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        10
+      ],
+      "body_first_ranges": [
+        [
+          10,
+          10
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2",
+      "cardinality": "?",
+      "op": "sequence",
+      "children": [
+        64,
+        65
+      ],
+      "body_first_ranges": [
+        [
+          10,
+          10
+        ],
+        [
+          13,
+          13
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives",
+      "cardinality": "one",
+      "op": "sequence",
+      "children": [
+        60,
+        63,
+        66
+      ],
+      "body_first_ranges": [
+        [
+          47,
+          47
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/0",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        32
+      ],
+      "body_first_ranges": [
+        [
+          32,
+          32
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/1",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        9
+      ],
+      "body_first_ranges": [
+        [
+          9,
+          9
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/2",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        13
+      ],
+      "body_first_ranges": [
+        [
+          13,
+          13
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/3",
+      "cardinality": "one",
+      "op": "literal",
+      "units": [
+        10
+      ],
+      "body_first_ranges": [
+        [
+          10,
+          10
+        ]
+      ]
+    },
+    {
+      "source_id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives",
+      "cardinality": "+",
+      "op": "choice",
+      "children": [
+        68,
+        69,
+        70,
+        71
+      ],
+      "body_first_ranges": [
+        [
+          9,
+          10
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          32,
+          32
+        ]
+      ]
+    }
+  ],
+  "terminals": [
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE",
+      "name": "DECIMAL_VALUE",
+      "fragment": false,
+      "program": 2,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0/right",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1/right"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE",
+      "name": "EXP_VALUE",
+      "fragment": false,
+      "program": 11,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/3"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID",
+      "name": "ID",
+      "fragment": false,
+      "program": 21,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0/right",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1/right",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0/right",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1/right",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3/left",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3/right"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME",
+      "name": "UNRESTRICTED_NAME",
+      "fragment": false,
+      "program": 37,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/3",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/4",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/5",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/6",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/7",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1/terminal",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1/terminal/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1/terminal/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/2"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE",
+      "name": "STRING_VALUE",
+      "fragment": false,
+      "program": 53,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/3",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/4",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/5",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/6",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/7",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1/terminal",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1/terminal/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1/terminal/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/2"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT",
+      "name": "REGULAR_COMMENT",
+      "fragment": false,
+      "program": 56,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/1/terminal"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+      "name": "ML_NOTE",
+      "fragment": false,
+      "program": 59,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/1/terminal"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE",
+      "name": "SL_NOTE",
+      "fragment": false,
+      "program": 67,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0/terminal",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0/terminal/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0/terminal/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1/terminal",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1/terminal/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1/terminal/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/1"
+      ]
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS",
+      "name": "WS",
+      "fragment": false,
+      "program": 72,
+      "source_nodes": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/0",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/1",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/2",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/3"
+      ]
+    }
+  ],
+  "languages": {
+    "org.omg.kerml.expressions.xtext.KerMLExpressions": {
+      "keywords": [
+        "!=",
+        "!==",
+        "#",
+        "$",
+        "%",
+        "&",
+        "(",
+        ")",
+        "*",
+        "**",
+        "+",
+        ",",
+        "-",
+        "->",
+        ".",
+        "..",
+        ".?",
+        "/",
+        "::",
+        ";",
+        "<",
+        "<=",
+        "=",
+        "==",
+        "===",
+        ">",
+        ">=",
+        "?",
+        "??",
+        "@",
+        "@@",
+        "[",
+        "]",
+        "^",
+        "all",
+        "and",
+        "as",
+        "else",
+        "false",
+        "hastype",
+        "if",
+        "implies",
+        "in",
+        "istype",
+        "meta",
+        "metadata",
+        "new",
+        "not",
+        "null",
+        "or",
+        "true",
+        "xor",
+        "{",
+        "|",
+        "}",
+        "~"
+      ],
+      "terminals": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS"
+      ],
+      "inherited_hidden_tokens": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE"
+      ]
+    },
+    "org.omg.kerml.xtext.KerML": {
+      "keywords": [
+        "!=",
+        "!==",
+        "#",
+        "$",
+        "%",
+        "&",
+        "(",
+        ")",
+        "*",
+        "**",
+        "+",
+        ",",
+        "-",
+        "->",
+        ".",
+        "..",
+        ".?",
+        "/",
+        ":",
+        "::",
+        "::>",
+        ":=",
+        ":>",
+        ":>>",
+        ";",
+        "<",
+        "<=",
+        "=",
+        "==",
+        "===",
+        "=>",
+        ">",
+        ">=",
+        "?",
+        "??",
+        "@",
+        "@@",
+        "[",
+        "]",
+        "^",
+        "about",
+        "abstract",
+        "alias",
+        "all",
+        "and",
+        "as",
+        "assoc",
+        "behavior",
+        "binding",
+        "bool",
+        "by",
+        "chains",
+        "class",
+        "classifier",
+        "comment",
+        "composite",
+        "conjugate",
+        "conjugates",
+        "conjugation",
+        "connector",
+        "const",
+        "crosses",
+        "datatype",
+        "default",
+        "dependency",
+        "derived",
+        "differences",
+        "disjoining",
+        "disjoint",
+        "doc",
+        "else",
+        "end",
+        "expr",
+        "false",
+        "feature",
+        "featured",
+        "featuring",
+        "filter",
+        "first",
+        "flow",
+        "for",
+        "from",
+        "function",
+        "hastype",
+        "if",
+        "implies",
+        "import",
+        "in",
+        "inout",
+        "interaction",
+        "intersects",
+        "inv",
+        "inverse",
+        "inverting",
+        "istype",
+        "language",
+        "library",
+        "locale",
+        "member",
+        "meta",
+        "metaclass",
+        "metadata",
+        "multiplicity",
+        "namespace",
+        "new",
+        "nonunique",
+        "not",
+        "null",
+        "of",
+        "or",
+        "ordered",
+        "out",
+        "package",
+        "portion",
+        "predicate",
+        "private",
+        "protected",
+        "public",
+        "redefines",
+        "redefinition",
+        "references",
+        "rep",
+        "return",
+        "specialization",
+        "specializes",
+        "standard",
+        "step",
+        "struct",
+        "subclassifier",
+        "subset",
+        "subsets",
+        "subtype",
+        "succession",
+        "then",
+        "to",
+        "true",
+        "type",
+        "typed",
+        "typing",
+        "unions",
+        "var",
+        "xor",
+        "{",
+        "|",
+        "}",
+        "~"
+      ],
+      "terminals": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS"
+      ],
+      "inherited_hidden_tokens": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE"
+      ]
+    },
+    "org.omg.sysml.xtext.SysML": {
+      "keywords": [
+        "!=",
+        "!==",
+        "#",
+        "$",
+        "%",
+        "&",
+        "(",
+        ")",
+        "*",
+        "**",
+        "+",
+        ",",
+        "-",
+        "->",
+        ".",
+        "..",
+        ".?",
+        "/",
+        ":",
+        "::",
+        "::>",
+        ":=",
+        ":>",
+        ":>>",
+        ";",
+        "<",
+        "<=",
+        "=",
+        "==",
+        "===",
+        "=>",
+        ">",
+        ">=",
+        "?",
+        "??",
+        "@",
+        "@@",
+        "[",
+        "]",
+        "^",
+        "about",
+        "abstract",
+        "accept",
+        "action",
+        "actor",
+        "after",
+        "alias",
+        "all",
+        "allocate",
+        "allocation",
+        "analysis",
+        "and",
+        "as",
+        "assert",
+        "assign",
+        "assume",
+        "at",
+        "attribute",
+        "bind",
+        "binding",
+        "by",
+        "calc",
+        "case",
+        "comment",
+        "concern",
+        "connect",
+        "connection",
+        "constant",
+        "constraint",
+        "crosses",
+        "decide",
+        "def",
+        "default",
+        "defined",
+        "dependency",
+        "derived",
+        "do",
+        "doc",
+        "else",
+        "end",
+        "entry",
+        "enum",
+        "event",
+        "exhibit",
+        "exit",
+        "expose",
+        "false",
+        "filter",
+        "first",
+        "flow",
+        "for",
+        "fork",
+        "frame",
+        "from",
+        "hastype",
+        "if",
+        "implies",
+        "import",
+        "in",
+        "include",
+        "individual",
+        "inout",
+        "interface",
+        "istype",
+        "item",
+        "join",
+        "language",
+        "library",
+        "locale",
+        "loop",
+        "merge",
+        "message",
+        "meta",
+        "metadata",
+        "new",
+        "nonunique",
+        "not",
+        "null",
+        "objective",
+        "occurrence",
+        "of",
+        "or",
+        "ordered",
+        "out",
+        "package",
+        "parallel",
+        "part",
+        "perform",
+        "port",
+        "private",
+        "protected",
+        "public",
+        "redefines",
+        "ref",
+        "references",
+        "render",
+        "rendering",
+        "rep",
+        "require",
+        "requirement",
+        "return",
+        "satisfy",
+        "send",
+        "snapshot",
+        "specializes",
+        "stakeholder",
+        "standard",
+        "state",
+        "subject",
+        "subsets",
+        "succession",
+        "terminate",
+        "then",
+        "timeslice",
+        "to",
+        "transition",
+        "true",
+        "until",
+        "use",
+        "variant",
+        "variation",
+        "verification",
+        "verify",
+        "via",
+        "view",
+        "viewpoint",
+        "when",
+        "while",
+        "xor",
+        "{",
+        "|",
+        "}",
+        "~"
+      ],
+      "terminals": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ID",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS"
+      ],
+      "inherited_hidden_tokens": [
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::WS",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE",
+        "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE"
+      ]
+    }
+  },
+  "keyword_occurrences": [
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConditionalExpression/alternatives/elements/1/elements/3",
+      "value": "?",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConditionalExpression/alternatives/elements/1/elements/5",
+      "value": "else",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConditionalOperator/alternatives",
+      "value": "if",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NullCoalescingOperator/alternatives",
+      "value": "??",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ImpliesOperator/alternatives",
+      "value": "implies",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::OrOperator/alternatives",
+      "value": "|",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConditionalOrOperator/alternatives",
+      "value": "or",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::XorOperator/alternatives",
+      "value": "xor",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::AndOperator/alternatives",
+      "value": "&",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConditionalAndOperator/alternatives",
+      "value": "and",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EqualityOperator/alternatives/elements/0",
+      "value": "==",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EqualityOperator/alternatives/elements/1",
+      "value": "!=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EqualityOperator/alternatives/elements/2",
+      "value": "===",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EqualityOperator/alternatives/elements/3",
+      "value": "!==",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ClassificationTestOperator/alternatives/elements/0",
+      "value": "hastype",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ClassificationTestOperator/alternatives/elements/1",
+      "value": "istype",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ClassificationTestOperator/alternatives/elements/2",
+      "value": "@",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MetaClassificationTestOperator/alternatives",
+      "value": "@@",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::CastOperator/alternatives",
+      "value": "as",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MetaCastOperator/alternatives",
+      "value": "meta",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RelationalOperator/alternatives/elements/0",
+      "value": "<",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RelationalOperator/alternatives/elements/1",
+      "value": ">",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RelationalOperator/alternatives/elements/2",
+      "value": "<=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RelationalOperator/alternatives/elements/3",
+      "value": ">=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RangeExpression/alternatives/elements/1/elements/1/terminal",
+      "value": "..",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::AdditiveOperator/alternatives/elements/0",
+      "value": "+",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::AdditiveOperator/alternatives/elements/1",
+      "value": "-",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MultiplicativeOperator/alternatives/elements/0",
+      "value": "*",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MultiplicativeOperator/alternatives/elements/1",
+      "value": "/",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MultiplicativeOperator/alternatives/elements/2",
+      "value": "%",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExponentiationOperator/alternatives/elements/0",
+      "value": "**",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExponentiationOperator/alternatives/elements/1",
+      "value": "^",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UnaryOperator/alternatives/elements/0",
+      "value": "+",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UnaryOperator/alternatives/elements/1",
+      "value": "-",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UnaryOperator/alternatives/elements/2",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UnaryOperator/alternatives/elements/3",
+      "value": "not",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExtentExpression/alternatives/elements/0/elements/1/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/1/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/0/elements/1",
+      "value": "#",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/0/elements/2",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/0/elements/4",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/1/elements/1/terminal",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/1/elements/3",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/2/elements/1",
+      "value": "->",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/3/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/0/elements/4/elements/1",
+      "value": ".?",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PrimaryExpression/alternatives/elements/2/elements/1/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::BaseExpression/alternatives/elements/7/elements/0",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::BaseExpression/alternatives/elements/7/elements/2",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExpressionBody/alternatives/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExpressionBody/alternatives/elements/1/elements/1",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ExpressionBody/alternatives/elements/3",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::BodyParameterMember/alternatives/elements/0",
+      "value": "in",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SequenceExpression/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SequenceExpression/alternatives/elements/1/elements/1/elements/1/terminal",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MetadataAccessExpression/alternatives/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::MetadataAccessExpression/alternatives/elements/2",
+      "value": "metadata",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ConstructorExpression/alternatives/elements/0",
+      "value": "new",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::FeatureChain/alternatives/elements/1/elements/0",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ArgumentList/alternatives/elements/0",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ArgumentList/alternatives/elements/2",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::PositionalArgumentList/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NamedArgumentList/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NamedArgument/alternatives/elements/1",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NullExpression/alternatives/elements/1/elements/0",
+      "value": "null",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NullExpression/alternatives/elements/1/elements/1/elements/0",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::NullExpression/alternatives/elements/1/elements/1/elements/1",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::BooleanValue/alternatives/elements/0",
+      "value": "true",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::BooleanValue/alternatives/elements/1",
+      "value": "false",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::RealValue/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::LiteralInfinity/alternatives/elements/1",
+      "value": "*",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::GlobalQualification/alternatives/elements/0",
+      "value": "$",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::GlobalQualification/alternatives/elements/1",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::Qualification/alternatives/elements/1",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0/left",
+      "value": "0",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/0/right",
+      "value": "9",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1/left",
+      "value": "0",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::DECIMAL_VALUE/alternatives/elements/1/right",
+      "value": "9",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/0",
+      "value": "e",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/1/elements/1",
+      "value": "E",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/0",
+      "value": "+",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::EXP_VALUE/alternatives/elements/2/elements/1",
+      "value": "-",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0/left",
+      "value": "a",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/0/right",
+      "value": "z",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1/left",
+      "value": "A",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/1/right",
+      "value": "Z",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/0/elements/2",
+      "value": "_",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0/left",
+      "value": "a",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/0/right",
+      "value": "z",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1/left",
+      "value": "A",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/1/right",
+      "value": "Z",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/2",
+      "value": "_",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3/left",
+      "value": "0",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ID/alternatives/elements/1/elements/3/right",
+      "value": "9",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/0",
+      "value": "'",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/0",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/0",
+      "value": "b",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/1",
+      "value": "t",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/2",
+      "value": "n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/3",
+      "value": "f",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/4",
+      "value": "r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/5",
+      "value": "\"",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/6",
+      "value": "'",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/0/elements/1/elements/7",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1/terminal/elements/0",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/1/elements/1/terminal/elements/1",
+      "value": "'",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::UNRESTRICTED_NAME/alternatives/elements/2",
+      "value": "'",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/0",
+      "value": "\"",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/0",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/0",
+      "value": "b",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/1",
+      "value": "t",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/2",
+      "value": "n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/3",
+      "value": "f",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/4",
+      "value": "r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/5",
+      "value": "\"",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/6",
+      "value": "'",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/0/elements/1/elements/7",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1/terminal/elements/0",
+      "value": "\\",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/1/elements/1/terminal/elements/1",
+      "value": "\"",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::STRING_VALUE/alternatives/elements/2",
+      "value": "\"",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/0",
+      "value": "/*",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::REGULAR_COMMENT/alternatives/elements/1/terminal",
+      "value": "*/",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/0",
+      "value": "//*",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::ML_NOTE/alternatives/elements/1/terminal",
+      "value": "*/",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/0",
+      "value": "//",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0/terminal/elements/0",
+      "value": "\n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/0/terminal/elements/1",
+      "value": "\r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1/terminal/elements/0",
+      "value": "\n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/1/elements/1/terminal/elements/1",
+      "value": "\r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/0",
+      "value": "\r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::SL_NOTE/alternatives/elements/2/elements/1",
+      "value": "\n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/0",
+      "value": " ",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/1",
+      "value": "\t",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/2",
+      "value": "\r",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.expressions.xtext.KerMLExpressions::WS/alternatives/elements/3",
+      "value": "\n",
+      "terminal_context": true
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Identification/alternatives/elements/0/elements/0",
+      "value": "<",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Identification/alternatives/elements/0/elements/2",
+      "value": ">",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::RelationshipBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::RelationshipBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::RelationshipBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Dependency/alternatives/elements/1",
+      "value": "dependency",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Dependency/alternatives/elements/2/elements/1",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Dependency/alternatives/elements/4/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Dependency/alternatives/elements/5",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Dependency/alternatives/elements/7/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Comment/alternatives/elements/0/elements/0",
+      "value": "comment",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Comment/alternatives/elements/0/elements/2/elements/0",
+      "value": "about",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Comment/alternatives/elements/0/elements/2/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Comment/alternatives/elements/1/elements/0",
+      "value": "locale",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Documentation/alternatives/elements/0",
+      "value": "doc",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Documentation/alternatives/elements/2/elements/0",
+      "value": "locale",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TextualRepresentation/alternatives/elements/0/elements/0",
+      "value": "rep",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TextualRepresentation/alternatives/elements/1",
+      "value": "language",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NamespaceDeclaration/alternatives/elements/0",
+      "value": "namespace",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NamespaceBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NamespaceBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NamespaceBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/1",
+      "value": "alias",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/2/elements/0",
+      "value": "<",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/2/elements/2",
+      "value": ">",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AliasMember/alternatives/elements/4",
+      "value": "for",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/1",
+      "value": "import",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportPrefix/alternatives/elements/2/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/1/elements/0",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedMembership/alternatives/elements/1/elements/1/terminal",
+      "value": "**",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/1",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/2",
+      "value": "*",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/3/elements/0",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ImportedNamespace/alternatives/elements/3/elements/1/terminal",
+      "value": "**",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FilterPackageMember/alternatives/elements/2",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FilterPackageMemberVisibility/alternatives/literal",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/0/literal",
+      "value": "public",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/1/literal",
+      "value": "private",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::VisibilityIndicator/alternatives/elements/2/literal",
+      "value": "protected",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::LibraryPackage/alternatives/elements/0/terminal",
+      "value": "standard",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::LibraryPackage/alternatives/elements/1",
+      "value": "library",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PackageDeclaration/alternatives/elements/0",
+      "value": "package",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PackageBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PackageBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PackageBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ElementFilterMember/alternatives/elements/1",
+      "value": "filter",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ElementFilterMember/alternatives/elements/3",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypePrefix/alternatives/elements/0/terminal",
+      "value": "abstract",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Type/alternatives/elements/1",
+      "value": "type",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeDeclaration/alternatives/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SpecializationPart/alternatives/elements/0/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SpecializationPart/alternatives/elements/0/elements/1",
+      "value": "specializes",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SpecializationPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ConjugationPart/alternatives/elements/0/elements/0",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ConjugationPart/alternatives/elements/0/elements/1",
+      "value": "conjugates",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DisjoiningPart/alternatives/elements/0",
+      "value": "disjoint",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DisjoiningPart/alternatives/elements/1",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DisjoiningPart/alternatives/elements/3/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::UnioningPart/alternatives/elements/0",
+      "value": "unions",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::UnioningPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::IntersectingPart/alternatives/elements/0",
+      "value": "intersects",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::IntersectingPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DifferencingPart/alternatives/elements/0",
+      "value": "differences",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DifferencingPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeatureMember/alternatives/elements/1",
+      "value": "member",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Specialization/alternatives/elements/0/elements/0",
+      "value": "specialization",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Specialization/alternatives/elements/1",
+      "value": "subtype",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Specialization/alternatives/elements/3/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Specialization/alternatives/elements/3/elements/1",
+      "value": "specializes",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Conjugation/alternatives/elements/0/elements/0",
+      "value": "conjugation",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Conjugation/alternatives/elements/1",
+      "value": "conjugate",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Conjugation/alternatives/elements/3/elements/0",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Conjugation/alternatives/elements/3/elements/1",
+      "value": "conjugates",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/0/elements/0",
+      "value": "disjoining",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/1",
+      "value": "disjoint",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Disjoining/alternatives/elements/3",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Classifier/alternatives/elements/1",
+      "value": "classifier",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ClassifierDeclaration/alternatives/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuperclassingPart/alternatives/elements/0/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuperclassingPart/alternatives/elements/0/elements/1",
+      "value": "specializes",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuperclassingPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ClassifierConjugationPart/alternatives/elements/0/elements/0",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ClassifierConjugationPart/alternatives/elements/0/elements/1",
+      "value": "conjugates",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subclassification/alternatives/elements/0/elements/0",
+      "value": "specialization",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subclassification/alternatives/elements/1",
+      "value": "subclassifier",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subclassification/alternatives/elements/3/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subclassification/alternatives/elements/3/elements/1",
+      "value": "specializes",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/0/literal",
+      "value": "in",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/1/literal",
+      "value": "out",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureDirection/alternatives/elements/2/literal",
+      "value": "inout",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::EndFeaturePrefix/alternatives/elements/0/terminal",
+      "value": "const",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::EndFeaturePrefix/alternatives/elements/1/terminal",
+      "value": "end",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/1/terminal",
+      "value": "derived",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/2/terminal",
+      "value": "abstract",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/3/elements/0/terminal",
+      "value": "composite",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/3/elements/1/terminal",
+      "value": "portion",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/4/elements/0/terminal",
+      "value": "var",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BasicFeaturePrefix/alternatives/elements/4/elements/1/terminal",
+      "value": "const",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Feature/alternatives/elements/0/elements/0/elements/1/elements/0",
+      "value": "feature",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureDeclaration/alternatives/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ChainingPart/alternatives/elements/0",
+      "value": "chains",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::InvertingPart/alternatives/elements/0",
+      "value": "inverse",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::InvertingPart/alternatives/elements/1",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturingPart/alternatives/elements/0",
+      "value": "featured",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturingPart/alternatives/elements/1",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturingPart/alternatives/elements/3/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityPart/alternatives/elements/1/elements/1/elements/0/elements/0/terminal",
+      "value": "ordered",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityPart/alternatives/elements/1/elements/1/elements/1/elements/1/terminal",
+      "value": "ordered",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Nonunique/alternatives",
+      "value": "nonunique",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Typings/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypedBy/alternatives/elements/0/elements/0",
+      "value": ":",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypedBy/alternatives/elements/0/elements/1/elements/0",
+      "value": "typed",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypedBy/alternatives/elements/0/elements/1/elements/1",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsettings/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsets/alternatives/elements/0/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsets/alternatives/elements/0/elements/1",
+      "value": "subsets",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ReferencesKeyword/alternatives/elements/0",
+      "value": "::>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ReferencesKeyword/alternatives/elements/1",
+      "value": "references",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Crossings/alternatives/elements/0/elements/0",
+      "value": "=>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Crossings/alternatives/elements/0/elements/1",
+      "value": "crosses",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefinitions/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefines/alternatives/elements/0/elements/0",
+      "value": ":>>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefines/alternatives/elements/0/elements/1",
+      "value": "redefines",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureInverting/alternatives/elements/0/elements/0",
+      "value": "inverting",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureInverting/alternatives/elements/1",
+      "value": "inverse",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureInverting/alternatives/elements/3",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturing/alternatives/elements/0",
+      "value": "featuring",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturing/alternatives/elements/1/elements/1",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::TypeFeaturing/alternatives/elements/3",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureTyping/alternatives/elements/0/elements/0",
+      "value": "specialization",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureTyping/alternatives/elements/1",
+      "value": "typing",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureTyping/alternatives/elements/3/elements/0",
+      "value": ":",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureTyping/alternatives/elements/3/elements/1/elements/0",
+      "value": "typed",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureTyping/alternatives/elements/3/elements/1/elements/1",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsetting/alternatives/elements/0/elements/0",
+      "value": "specialization",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsetting/alternatives/elements/1",
+      "value": "subset",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsetting/alternatives/elements/3/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Subsetting/alternatives/elements/3/elements/1",
+      "value": "subsets",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefinition/alternatives/elements/0/elements/0",
+      "value": "specialization",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefinition/alternatives/elements/1",
+      "value": "redefinition",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefinition/alternatives/elements/3/elements/0",
+      "value": ":>>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Redefinition/alternatives/elements/3/elements/1",
+      "value": "redefines",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureConjugationPart/alternatives/elements/0/elements/0",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureConjugationPart/alternatives/elements/0/elements/1",
+      "value": "conjugates",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureValue/alternatives/elements/0/elements/0",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureValue/alternatives/elements/0/elements/1/terminal",
+      "value": ":=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureValue/alternatives/elements/0/elements/2/elements/0/terminal",
+      "value": "default",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureValue/alternatives/elements/0/elements/2/elements/1/elements/0",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureValue/alternatives/elements/0/elements/2/elements/1/elements/1/terminal",
+      "value": ":=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicitySubset/alternatives/elements/0",
+      "value": "multiplicity",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityRange/alternatives/elements/0",
+      "value": "multiplicity",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityBounds/alternatives/elements/0",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityBounds/alternatives/elements/2/elements/0",
+      "value": "..",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MultiplicityBounds/alternatives/elements/3",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::DataType/alternatives/elements/1",
+      "value": "datatype",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Class/alternatives/elements/1",
+      "value": "class",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Structure/alternatives/elements/1",
+      "value": "struct",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Association/alternatives/elements/1",
+      "value": "assoc",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AssociationStructure/alternatives/elements/1",
+      "value": "assoc",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::AssociationStructure/alternatives/elements/2",
+      "value": "struct",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Connector/alternatives/elements/1",
+      "value": "connector",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BinaryConnectorDeclaration/alternatives/elements/0/elements/0/elements/1",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BinaryConnectorDeclaration/alternatives/elements/0/elements/1/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BinaryConnectorDeclaration/alternatives/elements/0/elements/1/elements/1",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BinaryConnectorDeclaration/alternatives/elements/2",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NaryConnectorDeclaration/alternatives/elements/1",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NaryConnectorDeclaration/alternatives/elements/3",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NaryConnectorDeclaration/alternatives/elements/5/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::NaryConnectorDeclaration/alternatives/elements/6",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnector/alternatives/elements/1",
+      "value": "binding",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnectorDeclaration/alternatives/elements/0/elements/1/elements/0",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnectorDeclaration/alternatives/elements/0/elements/1/elements/2",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnectorDeclaration/alternatives/elements/1/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnectorDeclaration/alternatives/elements/1/elements/1/elements/0",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BindingConnectorDeclaration/alternatives/elements/1/elements/1/elements/2",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Succession/alternatives/elements/1",
+      "value": "succession",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionDeclaration/alternatives/elements/0/elements/1/elements/0",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionDeclaration/alternatives/elements/0/elements/1/elements/2",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionDeclaration/alternatives/elements/1/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionDeclaration/alternatives/elements/1/elements/1/elements/0",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionDeclaration/alternatives/elements/1/elements/1/elements/2",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Behavior/alternatives/elements/1",
+      "value": "behavior",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Step/alternatives/elements/1",
+      "value": "step",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Function/alternatives/elements/1",
+      "value": "function",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FunctionBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FunctionBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FunctionBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ReturnFeatureMember/alternatives/elements/1",
+      "value": "return",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Expression/alternatives/elements/1",
+      "value": "expr",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Predicate/alternatives/elements/1",
+      "value": "predicate",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::BooleanExpression/alternatives/elements/1",
+      "value": "bool",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Invariant/alternatives/elements/1",
+      "value": "inv",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Invariant/alternatives/elements/2/elements/0",
+      "value": "true",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Invariant/alternatives/elements/2/elements/1/terminal",
+      "value": "false",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Interaction/alternatives/elements/1",
+      "value": "interaction",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Flow/alternatives/elements/1",
+      "value": "flow",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionFlow/alternatives/elements/1",
+      "value": "succession",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::SuccessionFlow/alternatives/elements/2",
+      "value": "flow",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowDeclaration/alternatives/elements/0/elements/2/elements/0",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowDeclaration/alternatives/elements/0/elements/3/elements/0",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowDeclaration/alternatives/elements/0/elements/3/elements/2",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowDeclaration/alternatives/elements/1/elements/0/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowDeclaration/alternatives/elements/1/elements/2",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FlowEndSubsetting/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureChainPrefix/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::FeatureChainPrefix/alternatives/elements/2",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::Metaclass/alternatives/elements/1",
+      "value": "metaclass",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PrefixMetadataAnnotation/alternatives/elements/0",
+      "value": "#",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::PrefixMetadataMember/alternatives/elements/0",
+      "value": "#",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeature/alternatives/elements/1/elements/0",
+      "value": "@",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeature/alternatives/elements/1/elements/1",
+      "value": "metadata",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeature/alternatives/elements/3/elements/0",
+      "value": "about",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeature/alternatives/elements/3/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeatureDeclaration/alternatives/elements/0/elements/1/elements/0",
+      "value": ":",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeatureDeclaration/alternatives/elements/0/elements/1/elements/1/elements/0",
+      "value": "typed",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataFeatureDeclaration/alternatives/elements/0/elements/1/elements/1/elements/1",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBodyFeature/alternatives/elements/0",
+      "value": "feature",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBodyFeature/alternatives/elements/1/elements/0",
+      "value": ":>>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::MetadataBodyFeature/alternatives/elements/1/elements/1",
+      "value": "redefines",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ExpressionBody/alternatives/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.kerml.xtext.KerML::ExpressionBody/alternatives/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Identification/alternatives/elements/0/elements/0",
+      "value": "<",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Identification/alternatives/elements/0/elements/2",
+      "value": ">",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RelationshipBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RelationshipBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RelationshipBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Dependency/alternatives/elements/1",
+      "value": "dependency",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Dependency/alternatives/elements/2/elements/1",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Dependency/alternatives/elements/4/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Dependency/alternatives/elements/5",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Dependency/alternatives/elements/7/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Comment/alternatives/elements/0/elements/0",
+      "value": "comment",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Comment/alternatives/elements/0/elements/2/elements/0",
+      "value": "about",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Comment/alternatives/elements/0/elements/2/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Comment/alternatives/elements/1/elements/0",
+      "value": "locale",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Documentation/alternatives/elements/0",
+      "value": "doc",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Documentation/alternatives/elements/2/elements/0",
+      "value": "locale",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TextualRepresentation/alternatives/elements/0/elements/0",
+      "value": "rep",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TextualRepresentation/alternatives/elements/1",
+      "value": "language",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataKeyword/alternatives",
+      "value": "metadata",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataUsageKeyword/alternatives/elements/1",
+      "value": "@",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataDefinition/alternatives/elements/0/terminal",
+      "value": "abstract",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PrefixMetadataAnnotation/alternatives/elements/0",
+      "value": "#",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PrefixMetadataMember/alternatives/elements/0",
+      "value": "#",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataUsage/alternatives/elements/3/elements/0",
+      "value": "about",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataUsage/alternatives/elements/3/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBodyUsage/alternatives/elements/0",
+      "value": "ref",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBodyUsage/alternatives/elements/1/elements/0",
+      "value": ":>>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MetadataBodyUsage/alternatives/elements/1/elements/1",
+      "value": "redefines",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::LibraryPackage/alternatives/elements/0/terminal",
+      "value": "standard",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::LibraryPackage/alternatives/elements/1",
+      "value": "library",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PackageDeclaration/alternatives/elements/0",
+      "value": "package",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PackageBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PackageBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PackageBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ElementFilterMember/alternatives/elements/1",
+      "value": "filter",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ElementFilterMember/alternatives/elements/3",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/1",
+      "value": "alias",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/2/elements/0",
+      "value": "<",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/2/elements/2",
+      "value": ">",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AliasMember/alternatives/elements/4",
+      "value": "for",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/1",
+      "value": "import",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportPrefix/alternatives/elements/2/terminal",
+      "value": "all",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/1/elements/0",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedMembership/alternatives/elements/1/elements/1/terminal",
+      "value": "**",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/1",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/2",
+      "value": "*",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/3/elements/0",
+      "value": "::",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ImportedNamespace/alternatives/elements/3/elements/1/terminal",
+      "value": "**",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FilterPackageMember/alternatives/elements/2",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FilterPackageMemberVisibility/alternatives/literal",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/0/literal",
+      "value": "public",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/1/literal",
+      "value": "private",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VisibilityIndicator/alternatives/elements/2/literal",
+      "value": "protected",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SubclassificationPart/alternatives/elements/2/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SpecializesKeyword/alternatives/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SpecializesKeyword/alternatives/elements/1",
+      "value": "specializes",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MultiplicityPart/alternatives/elements/1/elements/1/elements/0/elements/0/terminal",
+      "value": "ordered",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MultiplicityPart/alternatives/elements/1/elements/1/elements/1/elements/1/terminal",
+      "value": "ordered",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Nonunique/alternatives",
+      "value": "nonunique",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Typings/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinedByKeyword/alternatives/elements/0",
+      "value": ":",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinedByKeyword/alternatives/elements/1/elements/0",
+      "value": "defined",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinedByKeyword/alternatives/elements/1/elements/1",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Subsettings/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SubsetsKeyword/alternatives/elements/0",
+      "value": ":>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SubsetsKeyword/alternatives/elements/1",
+      "value": "subsets",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ReferencesKeyword/alternatives/elements/0",
+      "value": "::>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ReferencesKeyword/alternatives/elements/1",
+      "value": "references",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CrossesKeyword/alternatives/elements/0",
+      "value": "=>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CrossesKeyword/alternatives/elements/1",
+      "value": "crosses",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RedefinesKeyword/alternatives/elements/0",
+      "value": ":>>",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RedefinesKeyword/alternatives/elements/1",
+      "value": "redefines",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::Redefinitions/alternatives/elements/1/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MultiplicityRange/alternatives/elements/0",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MultiplicityRange/alternatives/elements/2/elements/0",
+      "value": "..",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MultiplicityRange/alternatives/elements/3",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BasicDefinitionPrefix/alternatives/elements/0/terminal",
+      "value": "abstract",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BasicDefinitionPrefix/alternatives/elements/1/terminal",
+      "value": "variation",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinitionBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinitionBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefinitionBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VariantUsageMember/alternatives/elements/1",
+      "value": "variant",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/0/literal",
+      "value": "in",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/1/literal",
+      "value": "out",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureDirection/alternatives/elements/2/literal",
+      "value": "inout",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RefPrefix/alternatives/elements/1/terminal",
+      "value": "derived",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RefPrefix/alternatives/elements/2/elements/0/terminal",
+      "value": "abstract",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RefPrefix/alternatives/elements/2/elements/1/terminal",
+      "value": "variation",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RefPrefix/alternatives/elements/3/terminal",
+      "value": "constant",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BasicUsagePrefix/alternatives/elements/1/terminal",
+      "value": "ref",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EndUsagePrefix/alternatives/elements/0/terminal",
+      "value": "end",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureValue/alternatives/elements/0/elements/0",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureValue/alternatives/elements/0/elements/1/terminal",
+      "value": ":=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureValue/alternatives/elements/0/elements/2/elements/0/terminal",
+      "value": "default",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureValue/alternatives/elements/0/elements/2/elements/1/elements/0",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureValue/alternatives/elements/0/elements/2/elements/1/elements/1/terminal",
+      "value": ":=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ReferenceKeyword/alternatives",
+      "value": "ref",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefaultReferenceUsage/alternatives/elements/0/terminal",
+      "value": "end",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExtendedDefinition/alternatives/elements/2",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AttributeKeyword/alternatives",
+      "value": "attribute",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AttributeDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EnumerationKeyword/alternatives",
+      "value": "enum",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EnumerationDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EnumerationBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EnumerationBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EnumerationBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::OccurrenceKeyword/alternatives",
+      "value": "occurrence",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::OccurrenceDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::OccurrenceDefinitionPrefix/alternatives/elements/1/elements/0/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IndividualDefinition/alternatives/elements/1/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IndividualDefinition/alternatives/elements/4",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::OccurrenceUsagePrefix/alternatives/elements/0/elements/1/elements/1/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IndividualUsage/alternatives/elements/1/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortionUsage/alternatives/elements/1/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortionKind/alternatives/elements/0/literal",
+      "value": "snapshot",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortionKind/alternatives/elements/1/literal",
+      "value": "timeslice",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EventOccurrenceUsage/alternatives/elements/1",
+      "value": "event",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EmptySuccession/alternatives/elements/0",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ItemKeyword/alternatives",
+      "value": "item",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ItemDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PartKeyword/alternatives",
+      "value": "part",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PartDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortKeyword/alternatives",
+      "value": "port",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PortDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConjugatedQualifiedName/alternatives/elements/0",
+      "value": "~",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BindingKeyword/alternatives",
+      "value": "binding",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BindingConnectorAsUsage/alternatives/elements/2",
+      "value": "bind",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BindingConnectorAsUsage/alternatives/elements/4",
+      "value": "=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SuccessionKeyword/alternatives",
+      "value": "succession",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SuccessionAsUsage/alternatives/elements/2",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SuccessionAsUsage/alternatives/elements/4",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConnectionKeyword/alternatives",
+      "value": "connection",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConnectionDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConnectorKeyword/alternatives",
+      "value": "connect",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BinaryConnectorPart/alternatives/elements/1",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryConnectorPart/alternatives/elements/0",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryConnectorPart/alternatives/elements/2",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryConnectorPart/alternatives/elements/4/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryConnectorPart/alternatives/elements/5",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InterfaceKeyword/alternatives",
+      "value": "interface",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InterfaceDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InterfaceBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InterfaceBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InterfaceBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefaultInterfaceEnd/alternatives/elements/0/terminal",
+      "value": "end",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::BinaryInterfacePart/alternatives/elements/1",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryInterfacePart/alternatives/elements/0",
+      "value": "(",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryInterfacePart/alternatives/elements/2",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryInterfacePart/alternatives/elements/4/elements/0",
+      "value": ",",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::NaryInterfacePart/alternatives/elements/5",
+      "value": ")",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AllocationKeyword/alternatives",
+      "value": "allocation",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AllocationDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AllocateKeyword/alternatives",
+      "value": "allocate",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowKeyword/alternatives",
+      "value": "flow",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MessageKeyword/alternatives",
+      "value": "message",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MessageDeclaration/alternatives/elements/0/elements/2/elements/0",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MessageDeclaration/alternatives/elements/0/elements/3/elements/0",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MessageDeclaration/alternatives/elements/0/elements/3/elements/2",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MessageDeclaration/alternatives/elements/1/elements/1",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowDeclaration/alternatives/elements/0/elements/2/elements/0",
+      "value": "of",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowDeclaration/alternatives/elements/0/elements/3/elements/0",
+      "value": "from",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowDeclaration/alternatives/elements/0/elements/3/elements/2",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowDeclaration/alternatives/elements/1/elements/1",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FlowEndSubsetting/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureChainPrefix/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FeatureChainPrefix/alternatives/elements/2",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionKeyword/alternatives",
+      "value": "action",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::InitialNodeMember/alternatives/elements/1",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::PerformActionUsage/alternatives/elements/1",
+      "value": "perform",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AcceptNodeDeclaration/alternatives/elements/1",
+      "value": "accept",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AcceptParameterPart/alternatives/elements/1/elements/0",
+      "value": "via",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TimeTriggerKind/alternatives/elements/0",
+      "value": "at",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TimeTriggerKind/alternatives/elements/1",
+      "value": "after",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ChangeTriggerKind/alternatives",
+      "value": "when",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SendNode/alternatives/elements/2",
+      "value": "send",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SendNodeDeclaration/alternatives/elements/1",
+      "value": "send",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SenderReceiverPart/alternatives/elements/0/elements/0",
+      "value": "via",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SenderReceiverPart/alternatives/elements/0/elements/2/elements/0",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SenderReceiverPart/alternatives/elements/1/elements/1",
+      "value": "to",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AssignmentNodeDeclaration/alternatives/elements/1",
+      "value": "assign",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AssignmentNodeDeclaration/alternatives/elements/4",
+      "value": ":=",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetParameter/alternatives/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/0/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/1/elements/0/elements/1/terminal",
+      "value": "[",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/1/elements/0/elements/3",
+      "value": "]",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/1/elements/1/elements/1",
+      "value": "->",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/1/elements/2/elements/1",
+      "value": ".",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetExpression/alternatives/elements/1/elements/1/elements/3/elements/1",
+      "value": ".?",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IfNode/alternatives/elements/1",
+      "value": "if",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IfNode/alternatives/elements/4/elements/0",
+      "value": "else",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionBodyParameter/alternatives/elements/2",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActionBodyParameter/alternatives/elements/4",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::WhileLoopNode/alternatives/elements/1/elements/0/elements/0",
+      "value": "while",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::WhileLoopNode/alternatives/elements/1/elements/1/elements/0",
+      "value": "loop",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::WhileLoopNode/alternatives/elements/3/elements/0",
+      "value": "until",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::WhileLoopNode/alternatives/elements/3/elements/2",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ForLoopNode/alternatives/elements/1",
+      "value": "for",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ForLoopNode/alternatives/elements/3",
+      "value": "in",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TerminateNode/alternatives/elements/2",
+      "value": "terminate",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ControlNodePrefix/alternatives/elements/1/terminal",
+      "value": "individual",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::MergeNode/alternatives/elements/1/terminal",
+      "value": "merge",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DecisionNode/alternatives/elements/1/terminal",
+      "value": "decide",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::JoinNode/alternatives/elements/1/terminal",
+      "value": "join",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ForkNode/alternatives/elements/1/terminal",
+      "value": "fork",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetSuccession/alternatives/elements/1",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardedTargetSuccession/alternatives/elements/2",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DefaultTargetSuccession/alternatives/elements/1",
+      "value": "else",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardedSuccession/alternatives/elements/1",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardedSuccession/alternatives/elements/5",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateKeyword/alternatives",
+      "value": "state",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateDefBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateDefBody/alternatives/elements/1/elements/0/terminal",
+      "value": "parallel",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateDefBody/alternatives/elements/1/elements/1",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateDefBody/alternatives/elements/1/elements/3",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EntryActionKind/alternatives",
+      "value": "entry",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::DoActionKind/alternatives",
+      "value": "do",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExitActionKind/alternatives",
+      "value": "exit",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EntryTransitionMember/alternatives/elements/1/elements/1/elements/0",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EntryTransitionMember/alternatives/elements/2",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateActionUsage/alternatives/elements/0/elements/1",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateUsageBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateUsageBody/alternatives/elements/1/elements/0/terminal",
+      "value": "parallel",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateUsageBody/alternatives/elements/1/elements/1",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StateUsageBody/alternatives/elements/1/elements/3",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExhibitStateUsage/alternatives/elements/1",
+      "value": "exhibit",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TransitionUsageKeyword/alternatives",
+      "value": "transition",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TransitionUsage/alternatives/elements/1/elements/1",
+      "value": "first",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TransitionUsage/alternatives/elements/7",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TargetTransitionUsage/alternatives/elements/2",
+      "value": "then",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::TriggerFeatureKind/alternatives/literal",
+      "value": "accept",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::GuardFeatureKind/alternatives/literal",
+      "value": "if",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EffectFeatureKind/alternatives/literal",
+      "value": "do",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EffectBehaviorUsage/alternatives/elements/1/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::EffectBehaviorUsage/alternatives/elements/1/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CalculationKeyword/alternatives",
+      "value": "calc",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CalculationDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CalculationBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CalculationBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CalculationBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ReturnParameterMember/alternatives/elements/1",
+      "value": "return",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConstraintKeyword/alternatives",
+      "value": "constraint",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConstraintDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AssertConstraintUsage/alternatives/elements/1",
+      "value": "assert",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AssertConstraintUsage/alternatives/elements/2/terminal",
+      "value": "not",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementKeyword/alternatives",
+      "value": "requirement",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SubjectUsage/alternatives/elements/0",
+      "value": "subject",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementConstraintKind/alternatives/elements/0/literal",
+      "value": "assume",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementConstraintKind/alternatives/elements/1/literal",
+      "value": "require",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::FramedConcernKind/alternatives/literal",
+      "value": "frame",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ActorUsage/alternatives/elements/0",
+      "value": "actor",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::StakeholderUsage/alternatives/elements/0",
+      "value": "stakeholder",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SatisfyRequirementUsage/alternatives/elements/1",
+      "value": "assert",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SatisfyRequirementUsage/alternatives/elements/2/terminal",
+      "value": "not",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SatisfyRequirementUsage/alternatives/elements/3",
+      "value": "satisfy",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::SatisfyRequirementUsage/alternatives/elements/6/elements/0",
+      "value": "by",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConcernKeyword/alternatives",
+      "value": "concern",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ConcernDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CaseKeyword/alternatives",
+      "value": "case",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CaseDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CaseBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CaseBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::CaseBody/alternatives/elements/1/elements/3",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ObjectiveMember/alternatives/elements/1",
+      "value": "objective",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AnalysisCaseKeyword/alternatives",
+      "value": "analysis",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::AnalysisCaseDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VerificationCaseKeyword/alternatives",
+      "value": "verification",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::VerificationCaseDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RequirementVerificationKind/alternatives/literal",
+      "value": "verify",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::UseCaseKeyword/alternatives/elements/0",
+      "value": "use",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::UseCaseKeyword/alternatives/elements/1",
+      "value": "case",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::UseCaseDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::IncludeUseCaseUsage/alternatives/elements/1",
+      "value": "include",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewKeyword/alternatives",
+      "value": "view",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewDefinitionBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewDefinitionBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewDefinitionBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewRenderingMember/alternatives/elements/1",
+      "value": "render",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewRenderingUsage/alternatives/elements/1/elements/0/elements/0/elements/1",
+      "value": "rendering",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewBody/alternatives/elements/0",
+      "value": ";",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewBody/alternatives/elements/1/elements/0",
+      "value": "{",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewBody/alternatives/elements/1/elements/2",
+      "value": "}",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ExposeVisibilityKind/alternatives/literal",
+      "value": "expose",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewpointKeyword/alternatives",
+      "value": "viewpoint",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::ViewpointDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RenderingKeyword/alternatives",
+      "value": "rendering",
+      "terminal_context": false
+    },
+    {
+      "id": "org.omg.sysml.xtext.SysML::RenderingDefKeyword/alternatives/elements/1",
+      "value": "def",
+      "terminal_context": false
+    }
+  ],
+  "provenance": {
+    "grammar_sha256": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "generator_sha256": "a1c5cd2957b7f5dc86305e82bd27105ef3b8cc74d1cce2983fba3b68f9258684"
+  }
+}

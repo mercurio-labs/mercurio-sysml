@@ -1,0 +1,73 @@
+{
+  "schema": "dev.mercurio.parser-work-evidence.v1",
+  "scope": "Native execution resource policy and immutable-program syntax predicate reuse; grammar/model semantics remain definition-driven and unchanged. Library construction/linking/full semantics require separate qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/xtext_fragment.rs": "81c3f76001c7eaa10d80ec4d204270a2d2bece30bb90b67d2c7406014de2a4df",
+    "crates/mercurio-sysml/src/xtext_fragment_machine.rs": "fd7dc5706c0648b8608378d33e83ca86981311adbb650bfaaa7003e504230c52",
+    "crates/mercurio-sysml/src/definition_document.rs": "a2f7a59fd0d50371f838d237614fda9415efccdfe81bc78136c8bfe329cd4121",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "3587fb732a8d64de52aa676dc9c3b3a5a3b26aa16c5bd11cba59d5b9530e9b7d",
+    "docs\\conformance\\2026-08-support\\performances-import-closure.json": "f96b83897e50282cecbefd8793ca4aba681ea8c72df48dfe8ee0e23698aa0a4c",
+    "docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "Cargo.lock": "3bdc3ad12590c30844b7b978e9ddb055ac16a15ca39cb5993e1ac783b907f124",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/xtext-finite-programs.experimental.json": "de67053ab9c55c3e0c0e97f1aaf6baf9918b1cd0c371777237c2d8b6f17a3696",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/xtext-prediction-nfa.experimental.json": "7333880db79f05940a3804ade6f3ec9b3558fbeb148c7f9aa4796884ac8aff78",
+    "crates/mercurio-sysml/src/xtext_terminal.rs": "a63249e85586f22b5b84c0c510562064315540a0ec23ecae5f0a92b85d62a9e1"
+  },
+  "handwritten_dependencies": {
+    "work_policy": "100,000 initial frame steps, 128 additional steps per newly consumed token, absolute 4,000,000-step ceiling. Furthest progress never decreases; revisiting consumed tokens earns no additional credit. Input padding earns no credit until consumed. Existing 256 model frames, independent prediction/recursion limits and candidate 1 MiB source bound remain.",
+    "prediction_reuse": "Per-parse successful/failed boolean results for immutable guards owned by the same program, keyed by source identity, token offset and predicate kind. Maximum 65,536 entries. Temporary guards, nested predicate contexts and errors bypass caching; saturation changes reuse only."
+  },
+  "verification": {
+    "parser": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-parser-work.log",
+      "sha256": "c88c3c092d1d3ab7cbfd1330a71361c29d6bc1ea4f577508833e2d8f08c60e65",
+      "passed": 57
+    },
+    "definitions": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-parser-work-definitions.log",
+      "sha256": "eb9022bf7e852b362592e8da42256cd05ae9c31e1d648100a4336d8e582018d9",
+      "passed": 196
+    },
+    "certificates": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/parser-work-certificate-tests.log",
+      "sha256": "1cdf79a17cc2ff96e1551ed590b0de11124df27add2d4491c06fda99755aeac6",
+      "passed": 15
+    },
+    "audit_tool": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/parser-work-audit-tests.log",
+      "sha256": "fbd4c00e55a018ecd1add0f4a0ab45d60e25f89a3fcf5ff92b491b2502551e46",
+      "passed": 10
+    }
+  },
+  "resource_assessment": {
+    "status": "blocked",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-parser-work-native-results.jsonl",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-parser-work-native-progress.log",
+    "first_blocker_only": true,
+    "native_binary_sha256": "661cb800c2c83d704dd6a1d67c6bac9e6db036f54ff77fa11eecd00ce8ee00ac",
+    "build_profile": "dev (unoptimized); this is qualification-stage evidence, not a comparable release performance assessment",
+    "stage": "construction_or_linking",
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: default generalization requires semantic metadata assessment\", kind: Syntax, span: None, subjects: [] }",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources": 16,
+    "previous_parsed_resources": 9,
+    "parsed_resources_delta": 7,
+    "result_sha256": "a5039c62902dcef550c661bbc13de14efd07e17cf227706273deaa05b5ea878e",
+    "progress_sha256": "eb92205f3b40f2c5387de8d0730791284073198c748975b721a7eb92deec2077",
+    "boundary": "All selected resources parse through the pinned native programs. Construction/linking reaches the unimplemented semantic metadata assessment for default generalization; no document is published and semantics remain unassessed."
+  },
+  "metrics": {
+    "matching_pilot_models": 155,
+    "matching_models_delta": 0,
+    "families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  },
+  "remaining": [
+    "Implement shared semantic metadata assessment for default generalization using imported typing/annotation contracts and explicit resource dependencies; do not admit absence merely because a generated default exists.",
+    "Explicit-import source selection remains separate from complete implicit/global semantic resource closure",
+    "Expression-result inheritance/construction in required contexts",
+    "Complete validation lifecycle and release sample/semantic/timing gates"
+  ]
+}

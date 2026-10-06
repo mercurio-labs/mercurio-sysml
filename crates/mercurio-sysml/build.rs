@@ -290,12 +290,32 @@ fn load_generated_field_specs(resources: &Path, metamodel_id: &str) -> Vec<(Stri
         });
         fields.insert(field.field, kind);
     }
+    // Additive contracts for preserved candidate semantics do not register or
+    // promote a new release bundle. Historic profile artifacts remain unchanged.
+    let candidate_path =
+        resources.join("metamodels/sysml-2.0-pilot-2026-08/mappings/candidate-fields.extract.json");
+    println!("cargo:rerun-if-changed={}", candidate_path.display());
+    let candidate: GeneratedFieldSpecs = serde_json::from_str(include_str!(
+        "resources/metamodels/sysml-2.0-pilot-2026-08/mappings/candidate-fields.extract.json"
+    ))
+    .expect("valid extracted candidate field contracts");
+    for field in candidate.fields {
+        let kind = parse_field_kind(&field.kind).expect("known candidate field kind");
+        if let Some(existing) = fields.insert(field.field.clone(), kind) {
+            assert_eq!(
+                existing, kind,
+                "candidate field conflicts with existing contract: {}",
+                field.field
+            );
+        }
+    }
     fields.into_iter().collect()
 }
 
 fn parse_field_kind(value: &str) -> Option<KirFieldKind> {
     match value {
         "Scalar" => Some(KirFieldKind::Scalar),
+        "ScalarList" => Some(KirFieldKind::ScalarList),
         "Reference" => Some(KirFieldKind::Reference),
         "ReferenceList" => Some(KirFieldKind::ReferenceList),
         "Expression" => Some(KirFieldKind::Expression),
@@ -595,6 +615,7 @@ fn is_relationship_usage_construct(construct: &str) -> bool {
 fn field_kind_variant(kind: KirFieldKind) -> &'static str {
     match kind {
         KirFieldKind::Scalar => "Scalar",
+        KirFieldKind::ScalarList => "ScalarList",
         KirFieldKind::Reference => "Reference",
         KirFieldKind::ReferenceList => "ReferenceList",
         KirFieldKind::Expression => "Expression",

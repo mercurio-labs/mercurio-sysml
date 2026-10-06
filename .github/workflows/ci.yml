@@ -22,9 +22,48 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: mercurio-labs/mercurio-foundation
-          ref: develop
+          ref: 69c77d2971ef894052c52fb9981dcc095a6ccc5c
           path: mercurio-foundation
       - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check source-derived native contracts and coverage
+        working-directory: mercurio-sysml
+        run: |
+          python -B tools/translate_pilot_validators.py --check
+          python -B tools/generate_validation_rust.py --check
+          python -B tools/check_validation_bindings.py --check
+          python -B tools/classify_validator_inventory.py --check
+          python -B tools/check_bounded_translation.py --check
+          python -B tools/check_structural_source_coverage.py --check
+          python -B tools/generate_ecore_ownership.py --check
+          python -B tools/generate_ecore_hierarchy.py --check
+          python -B tools/generate_name_dispatch.py --check
+          python -B tools/generate_value_converter_dispatch.py --check
+          python -B tools/generate_required_feature_dependencies.py --check
+          python -B tools/generate_constructor_constants.py --check
+          python -B -m unittest discover -s tools -p test_generate_constructor_constants.py
+          python -B -m unittest discover -s tools -p test_generate_required_feature_dependencies.py
+          python -B -m unittest discover -s tools -p test_generate_value_converter_dispatch.py
+          python -B tools/generate_xtext_terminal_programs.py --check
+          python -B tools/export_pilot_lexer_decision.py --validate
+          python -B -m unittest discover -s tools -p test_export_pilot_lexer_decision.py
+          python -B -m unittest discover -s tools -p test_generate_xtext_terminal_programs.py
+          python -B -m unittest discover -s tools -p test_generate_name_dispatch.py
+          python -B -m unittest discover -s tools -p test_generate_ecore_hierarchy.py
+          python -B -m unittest discover -s tools -p test_generate_ecore_defaults.py
+          python -B -m unittest discover -s tools -p test_structural_coverage_plan.py
+          python -B -m unittest discover -s tools -p test_generate_ecore_ownership.py
+          python -B -m unittest discover -s tools -p test_extract_ecore_semantics.py
+          python -B -m unittest discover -s tools -p test_export_pilot_ecore_effective.py
+          python -B -m unittest discover -s tools -p test_structural_source_coverage.py
+          python -B -m unittest discover -s tools -p test_translate_pilot_validators.py
+          python -B -m unittest discover -s tools -p test_generate_validation_rust.py
+          python -B -m unittest discover -s tools -p test_check_validation_bindings.py
+          python -B -m unittest discover -s tools -p test_validator_inventory.py
+          python -B -m unittest discover -s tools -p test_bounded_translation.py
+          python -B -m unittest discover -s tools -p test_type_family_translation.py
       - name: Test workspace
         working-directory: mercurio-sysml
         run: cargo test --workspace --locked

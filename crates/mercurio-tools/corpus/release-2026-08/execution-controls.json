@@ -1,0 +1,138 @@
+[
+  {
+    "id": "boolean_0",
+    "expression": "false & false"
+  },
+  {
+    "id": "boolean_1",
+    "expression": "false & true"
+  },
+  {
+    "id": "boolean_2",
+    "expression": "true & false"
+  },
+  {
+    "id": "boolean_3",
+    "expression": "true & true"
+  },
+  {
+    "id": "boolean_4",
+    "expression": "false | false"
+  },
+  {
+    "id": "boolean_5",
+    "expression": "false | true"
+  },
+  {
+    "id": "boolean_6",
+    "expression": "true | false"
+  },
+  {
+    "id": "boolean_7",
+    "expression": "true | true"
+  },
+  {
+    "id": "boolean_8",
+    "expression": "false xor false"
+  },
+  {
+    "id": "boolean_9",
+    "expression": "false xor true"
+  },
+  {
+    "id": "boolean_10",
+    "expression": "true xor false"
+  },
+  {
+    "id": "boolean_11",
+    "expression": "true xor true"
+  },
+  {
+    "id": "boolean_12",
+    "expression": "false implies false"
+  },
+  {
+    "id": "boolean_13",
+    "expression": "false implies true"
+  },
+  {
+    "id": "boolean_14",
+    "expression": "true implies false"
+  },
+  {
+    "id": "boolean_15",
+    "expression": "true implies true"
+  },
+  {
+    "id": "conditional_yes",
+    "expression": "if true ? 7 else 8"
+  },
+  {
+    "id": "conditional_no",
+    "expression": "if false ? 7 else 8"
+  },
+  {
+    "id": "conditional_lazy_yes",
+    "expression": "if true ? 7 else 1/0"
+  },
+  {
+    "id": "conditional_lazy_no",
+    "expression": "if false ? 1/0 else 8"
+  },
+  {
+    "id": "coalesce_empty",
+    "expression": "null ?? 9"
+  },
+  {
+    "id": "coalesce_tuple",
+    "expression": "() ?? 9"
+  },
+  {
+    "id": "coalesce_zero",
+    "expression": "0 ?? 9"
+  },
+  {
+    "id": "coalesce_false",
+    "expression": "false ?? true"
+  },
+  {
+    "id": "coalesce_sequence",
+    "expression": "(11,22) ?? 9"
+  },
+  {
+    "id": "coalesce_lazy",
+    "expression": "7 ?? 1/0"
+  },
+  {
+    "id": "implies_lazy",
+    "expression": "false implies (1/0 > 0)"
+  },
+  {
+    "id": "index_first",
+    "expression": "(11,22)#(1)"
+  },
+  {
+    "id": "index_second",
+    "expression": "(11,22)#(2)"
+  },
+  {
+    "id": "index_zero",
+    "expression": "(11,22)#(0)"
+  },
+  {
+    "id": "index_negative",
+    "expression": "(11,22)#(-1)"
+  },
+  {
+    "id": "index_outside",
+    "expression": "(11,22)#(3)"
+  },
+  {
+    "id": "index_empty",
+    "expression": "null#(1)"
+  },
+  {
+    "id": "index_scalar",
+    "expression": "7#(1)"
+  }
+]

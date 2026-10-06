@@ -1,0 +1,86 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-private-reexport.kerml": "df06a1e03d2dc3d112071c31345bf369c7427f08a6d741b18e385fe9b7ef5625",
+    "invalid-private-sibling.kerml": "b3384e4f5daac15b27ca4725c54e3a997fdfe7079f746adb7270828ffedca08a",
+    "invalid-qualified-private.kerml": "4d8c4bf1cf281715de91b2dc428acf422edc38406ea8f0bf6f00bd17d77a61bb",
+    "positive-import-all-private.kerml": "49c387c1766ac5247234593c94dc8baf71b4a197aa5791bd34042cfabead36f5",
+    "positive-local-private.kerml": "013b33a4d8c15a8b50cd510c43a5e40f956a9408779bd2dd2edd03b3c6f69818",
+    "positive-public-alias-private.kerml": "fd4d6fe665a0ff8488b4aa32b0146200c2a384bcf9f0a90fcf77b90f659d2cd1",
+    "positive-public-reexport.kerml": "2dea79f05e048952f8f8a4a30c37222300c8b30fa75e5ee5571c0569429889f1",
+    "positive-qualified-public.kerml": "80d9a3c4b6a2346a2d4fe9241b770ae7910864701dc71c7c3e82a425314e250e"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-private-reexport.kerml",
+      "status": "error",
+      "validation_ms": 816.1081,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Visible'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-sibling.kerml",
+      "status": "error",
+      "validation_ms": 394.2814,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Visible'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-qualified-private.kerml",
+      "status": "error",
+      "validation_ms": 357.7001,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Feature 'Q::Visible'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-import-all-private.kerml",
+      "status": "ok",
+      "validation_ms": 439.5989,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-local-private.kerml",
+      "status": "ok",
+      "validation_ms": 242.9741,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias-private.kerml",
+      "status": "ok",
+      "validation_ms": 602.2734,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-reexport.kerml",
+      "status": "ok",
+      "validation_ms": 351.922,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-qualified-public.kerml",
+      "status": "ok",
+      "validation_ms": 553.7102,
+      "diagnostics": []
+    }
+  ]
+}

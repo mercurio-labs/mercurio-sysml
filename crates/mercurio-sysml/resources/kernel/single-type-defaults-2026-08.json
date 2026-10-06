@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "3299260543ba0d7e5d0f12096589d594004ecdc5c2099b2e423be766d072c8b6",
+    "export_sha256": "9c2303374b0e8a57bbb95e08ab676b4b0a41b1e9d80ef1e03f13262fe1d91e4a",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1614,
+      "relationship_count": 12507,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/single-type-defaults.sysml"
+      ],
+      "exported_at_utc": "2026-09-18T00:50:54.979548800Z"
+    }
+  },
+  "usage_type_defaults": {
+    "AnalysisCaseUsage": {
+      "type_ref": "AnalysisCases::AnalysisCase"
+    },
+    "AssertConstraintUsage": {
+      "type_ref": "Constraints::ConstraintCheck"
+    },
+    "CalculationUsage": {
+      "type_ref": "Calculations::Calculation"
+    },
+    "ConcernUsage": {
+      "type_ref": "Requirements::ConcernCheck"
+    },
+    "ConstraintUsage": {
+      "type_ref": "Constraints::ConstraintCheck"
+    },
+    "RenderingUsage": {
+      "type_ref": "Views::Rendering"
+    },
+    "RequirementUsage": {
+      "type_ref": "Requirements::RequirementCheck"
+    },
+    "UseCaseUsage": {
+      "type_ref": "UseCases::UseCase"
+    },
+    "VerificationCaseUsage": {
+      "type_ref": "VerificationCases::VerificationCase"
+    },
+    "ViewUsage": {
+      "type_ref": "Views::View"
+    },
+    "ViewpointUsage": {
+      "type_ref": "Views::ViewpointCheck"
+    }
+  }
+}

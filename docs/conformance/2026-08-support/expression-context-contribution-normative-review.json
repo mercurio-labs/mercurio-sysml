@@ -1,0 +1,58 @@
+{
+  "schema": "dev.mercurio.expression-context-contribution-normative-review.v1",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      220,
+      225,
+      292,
+      293
+    ],
+    "clauses": [
+      "checkExpressionSpecialization",
+      "checkStepSpecialization",
+      "checkStepSubperformanceSpecialization",
+      "checkStepEnclosedPerformanceSpecialization",
+      "checkStepOwnedPerformanceSpecialization"
+    ],
+    "requirement": "Expressions inherit Step specialization requirements. Composite and owning-type predicates determine additional structure-owned and behavior-owned specializations; these constraints do not exclude a Step merely because its direction is non-null."
+  },
+  "resolved_implementation": {
+    "programs": [
+      "ExpressionAdapter#addDefaultGeneralType",
+      "FeatureAdapter#addDefaultGeneralType",
+      "FeatureAdapter#addBoundValueSubsetting",
+      "OperatorExpressionAdapter#computeImplicitGeneralTypes",
+      "TriggerInvocationExpressionAdapter#computeImplicitGeneralTypes"
+    ],
+    "direction_boundary": "Expression default context roles are independent of direction. FeatureAdapter applies direction == null to its separate bound-value subsetting operation; that does not gate the inherited expression default operation. Receiver-owned valuations/crossing, metadata, conjugation, end and completed lifecycle remain excluded from this bounded consumer.",
+    "native_dependencies": "Generated base names, roles and adapter selectors; handwritten canonical owner predicates, typed navigation, effect composition and transactional physical materialization."
+  },
+  "bounded_controls": "960 independent observations across20 expression bindings, four directions, six ownership contexts and two composite flags. Receivers are incomplete/non-end; owners and library targets are supplied completed fixtures. This verifies a contribution component, not the validity of complete callable models or cold resource closure.",
+  "disagreements_and_limits": [
+    "The pinned PDF uses singular subperformance, enclosedPerformance and ownedPerformance names in Step constraints; the pinned Pilot programs use plural subperformances, enclosedPerformances and ownedPerformances. Native contribution controls preserve the imported pinned implementation names; normative agreement on these library roles remains open and must be resolved before full qualification.",
+    "Detached/package directed expressions and unspecified invocation/operator targets are boundary controls, not evidence of normative validity.",
+    "Direction enum values are validated through imported Ecore contracts. This does not implement argument/result direction validation for a complete model.",
+    "FeatureValue ownership is not equivalent to receiver-owned FeatureValue; bound-value algorithms remain a separate dependency."
+  ],
+  "full_normative_qualification": false,
+  "candidate_promoted": false,
+  "pinned_library_confirmation": {
+    "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml": {
+      "sha256": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+      "actual_names": [
+        "subperformances",
+        "enclosedPerformances"
+      ],
+      "singular_aliases_present": false
+    },
+    "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml": {
+      "sha256": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03",
+      "actual_names": [
+        "ownedPerformances"
+      ],
+      "singular_aliases_present": false
+    }
+  }
+}

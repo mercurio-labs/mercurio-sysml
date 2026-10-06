@@ -1,0 +1,51 @@
+{
+  "schema": "dev.mercurio.feature-chain-members-normative-review.v1",
+  "written_specification": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Release\\doc\\1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      233,
+      234
+    ],
+    "printed_pages": [
+      207,
+      208
+    ],
+    "rules": [
+      "sourceTargetFeature",
+      "checkFeatureChainExpressionResultSpecialization",
+      "checkFeatureChainExpressionSourceTargetRedefinition",
+      "checkFeatureChainExpressionTargetRedefinition",
+      "deriveFeatureChainExpressionTargetFeature",
+      "validateFeatureChainExpressionConformance",
+      "validateFeatureChainExpressionOperator"
+    ]
+  },
+  "pilot": {
+    "commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "resolved_methods": [
+      "org.omg.sysml.adapter.FeatureChainExpressionAdapter#addAdditionalMembers/0",
+      "org.omg.sysml.adapter.InvocationExpressionAdapter#addAdditionalMembers/0",
+      "org.omg.sysml.delegate.setting.Type_ownedFeature_SettingDelegate#basicGet/1",
+      "org.omg.sysml.util.TypeUtil#addOwnedFeatureTo/2",
+      "org.omg.sysml.util.TypeUtil#addResultParameterTo/1",
+      "org.omg.sysml.util.TypeUtil#addResultParameterTo/2",
+      "org.omg.sysml.util.TypeUtil#getOwnedParameterOf/3",
+      "org.omg.sysml.util.TypeUtil#getOwnedParametersOf/1"
+    ],
+    "binding": {
+      "FeatureChainExpression": "FeatureChainExpression->org.omg.sysml.adapter.FeatureChainExpressionAdapter#addAdditionalMembers"
+    }
+  },
+  "decision": "The bounded producer creates storage needed by the written source-target constraints. Exact construction agreement does not verify any listed constraint or the complete transformation. Algorithms for typing, target/result specialization and validation remain required native dependencies.",
+  "prototype_boundary": "Pilot construction selects the first owned directed parameter, including OUT; the written sourceTargetFeature operation selects the first owned IN parameter. OUT, empty and malformed-return controls verify construction on prototypes only and do not qualify valid complete FeatureChainExpression models.",
+  "unsupported": [
+    "Complete sourceTargetFeature operation and IN/INOUT distinctions",
+    "Target Feature and library-role redefinitions",
+    "Result chained subsetting and owningType constraints",
+    "TargetFeature derivation, argument conformance and operator validation",
+    "Complete cold-resource transformation and publication"
+  ],
+  "expectations_modified": false,
+  "full_normative_qualification": false
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "dev.mercurio.argument-result-specialization-bindings.v1",
+  "qualification_certificate": false,
+  "source_sha256": {
+    "crates\\mercurio-sysml\\resources\\metamodels\\sysml-2.0-pilot-2026-08\\ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "bindings": [
+    {
+      "kind": "IndexExpression",
+      "classifier_id": "https://www.omg.org/spec/SysML/20250201#//IndexExpression",
+      "normative_rule": "checkIndexExpressionResultSpecialization",
+      "argument_feature_id": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/argument",
+      "result_feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+      "first_argument_ordinal": 0,
+      "unless_specializes_library": "Collections::Collection",
+      "documentation": "<p>An <code>IndexExpression</code> is an <code>OperatorExpression</code> whose operator is <code>\"#\"</code>, which resolves to the <code>Function</code> <em><code>BasicFunctions::'#'</code></em> from the Kernel Functions Library.</p>\narguments->notEmpty() and \nnot arguments->first().result.specializesFromLibrary('Collections::Collection') implies\n    result.specializes(arguments->first().result)\noperator = '#'",
+      "documentation_interpretation": "documentation_only_not_executable",
+      "native_algorithm": "handwritten argument_result_specialization::plan/materialize_batch",
+      "translation_status": "reviewed_manual_algorithm_binding"
+    },
+    {
+      "kind": "SelectExpression",
+      "classifier_id": "https://www.omg.org/spec/SysML/20250201#//SelectExpression",
+      "normative_rule": "checkSelectExpressionResultSpecialization",
+      "argument_feature_id": "https://www.omg.org/spec/SysML/20250201#//InstantiationExpression/argument",
+      "result_feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+      "first_argument_ordinal": 0,
+      "unless_specializes_library": null,
+      "documentation": "<p>A <code>SelectExpression</code> is an <code>OperatorExpression</code> whose operator is <code>\"select\"</code>, which resolves to the <code>Function</code> <em><code>ControlFunctions::select</code></em> from the Kernel Functions Library.</p>\noperator = 'select'\narguments->notEmpty() implies\n    result.specializes(arguments->first().result)",
+      "documentation_interpretation": "documentation_only_not_executable",
+      "native_algorithm": "handwritten argument_result_specialization::plan/materialize_batch",
+      "translation_status": "reviewed_manual_algorithm_binding"
+    }
+  ],
+  "excluded": {
+    "CollectExpression": "No first-argument result specialization in this class documentation; separate operator/invocation behavior remains required."
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "source": {
+    "mode": "hand-curated-overlay",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "reason": "Restore missing concrete action and interface defaults before shared Usage flag derivation.",
+    "sources": [
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/postprocessing/ParameterMembershipParserPostProcessor.java",
+      "sysml/src/examples/Vehicle Example/VehicleUsages.sysml",
+      "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-1.sysml"
+    ]
+  },
+  "usage_type_defaults": {
+    "AssignmentNode": {
+      "type_ref": "Actions::AssignmentAction"
+    },
+    "PerformActionUsage": {
+      "type_ref": "Actions::Action"
+    },
+    "InterfaceUsage": {
+      "type_ref": "Interfaces::Interface",
+      "end_count_type_refs": {
+        "2": "Interfaces::BinaryInterface"
+      }
+    }
+  }
+}

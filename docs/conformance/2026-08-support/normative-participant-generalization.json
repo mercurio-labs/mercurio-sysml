@@ -1,0 +1,53 @@
+{
+  "scope": "Partial positive participant generalization for bare Feature ends owned by Associations and AssociationStructures; not a complete Feature provider.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      193,
+      283
+    ],
+    "clause": "checkFeatureEndSpecialization"
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithms": [
+      "FeatureAdapter.addParticipantSubsetting",
+      "FeatureAdapter.isAssociationEnd",
+      "Feature_endOwningType_SettingDelegate.basicGet"
+    ],
+    "source_hashes": "feature-redefinitions.extract.json provenance.source_sha256"
+  },
+  "imported": "Feature participant default name from ImplicitGeneralizationMap becomes generated PARTICIPANT_DEFAULT; imported Ecore ancestry and Subsetting endpoint contracts validate the native traversal.",
+  "consumed": "Named handwritten definition_participant_general supplies a proven positive path to definition_specializes. Shared standard_default_binding now prefers direct public owned members before requiring inherited/import scopes. No completeness flags or relationships are written.",
+  "verification": {
+    "independent_contexts": 6,
+    "positive_contributions": 2,
+    "absent_contributions": 4,
+    "focused_participant_test": "passed",
+    "whole_document_comparisons": "90 models, 1403 nodes, 2595 effective reference slots; all match before/after persistence",
+    "negative_cases": [
+      "missing standard library",
+      "missing canonical relationship endpoint",
+      "Connector owner requiring transformation"
+    ],
+    "tooling_tests_passed": 39,
+    "correction": "Initial query exposed over-eager inherited-scope evaluation for a direct library member. Fixed the shared lookup, not the sample.",
+    "focused_tests_passed": 68,
+    "focused_log": "definition-pipeline-evidence/native-tests-participant-focused.log",
+    "full_suite": "Not rerun; prior 726-test certificate is stale for these sources",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "51af5d081d73edfc97931b761e7ae872661b51cb503e55328194ceb4747aca92",
+      "crates/mercurio-sysml/src/definition_document_pilot_tests.rs": "6ab7fa1bba83bab048b24fa4c0a784b05f5e929fca0cb69d3fb16bd483912d75",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "2cb812e34899503f259fba3b419d9ed6ca9d2354f4c5f746e5dac0236707596c",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json": "03e817e2ab1032f8441cb7f6f3a0cff9d8e7a182ae5c43a71e1366a2344a17da"
+    }
+  },
+  "unsupported": [
+    "Connector and Usage ends",
+    "Non-bare Feature ends: bound values, crossing and redefinition dependencies",
+    "Unknown adapter-seeded implicit Redefinition state",
+    "Complete Feature defaults, transformations and relationship materialization",
+    "Whole release qualification"
+  ]
+}

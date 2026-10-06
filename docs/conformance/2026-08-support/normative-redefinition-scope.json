@@ -1,0 +1,61 @@
+{
+  "scope": "Bounded inherited-first owned Redefinition target lookup; handwritten scope algorithm consuming imported Ecore ancestry, reciprocal ownership, generated general-type policies and shared inheritance services.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      63,
+      109
+    ],
+    "clauses": [
+      "7.3.4 redefinition name lookup",
+      "8.2.3.5 qualified name resolution"
+    ],
+    "boundary": "The normative special case repeats basic resolution from direct general types. These controls establish only the common subset with the pinned Pilot inherited-first traversal; general-type ordering, conflicting names and differing lexical containers are not qualified."
+  },
+  "upstream": [
+    "KerMLScopeProvider.scope_Namespace",
+    "KerMLScope.resolve",
+    "KerMLScope.owned"
+  ],
+  "imported": "Pinned grammar cross-reference and Ecore class/endpoint contracts; scope source hashes recorded by definition-document-pilot-controls.json. The scope algorithm itself is handwritten, not generated.",
+  "consumed": [
+    "generated_package_reference: first type scope queries inherited members before lexical fallback; ordinary and qualified continuation reuse the shared member resolver.",
+    "explicit_recursive_inherited_memberships: excludes the owning Feature of the pending Redefinition from owned-feature filtering to avoid circular target resolution."
+  ],
+  "verified": {
+    "additional_matching_documents": 4,
+    "matching_documents": 76,
+    "canonical_nodes": 1269,
+    "reference_slots": 2415,
+    "controls": [
+      "same-name inherited target",
+      "protected target through intermediate supertype",
+      "qualified target",
+      "lexical fallback"
+    ],
+    "negative_cases": [
+      "private target",
+      "self-only target",
+      "owned-only sibling target",
+      "missing target"
+    ],
+    "full_qualification": "Not rerun in this focused batch; prior 719-test certificate does not cover these changes.",
+    "focused_tests_passed": 60,
+    "tooling_tests_passed": 20,
+    "focused_log": "definition-pipeline-evidence/native-tests-inherited-scope-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0842ac02a2e61cba31e04236b1606490614d7712c2aa60817eb2479f7a0ba30b",
+      "crates/mercurio-sysml/src/definition_document.rs": "4cc8c7fe36b2772a1bec80ac373f7f0a3ab0be6904c80037154c94cb444d0c64",
+      "crates/mercurio-sysml/src/definition_document_pilot_tests.rs": "d9530886d6a6a0950c7a7b1b2af9e4284f58755baaca6cea9fbe4a242688f758",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "1e019aa9e6bbf869caf0971e5c215e8904cf182aa93b96a158e72a043778897f"
+    }
+  },
+  "unsupported": [
+    "ReferenceSubsetting connector-relative scope",
+    "Cross-resource linking",
+    "Multiple pending redefinitions and specialized Feature providers",
+    "Conflicting targets across multiple general types and normative/Pilot precedence differences"
+  ],
+  "follow_up": "normative-feature-owned-members.json records the correction that skips declaring-type sibling redefinition filtering, with two additional independent multiple-pending-redefinition controls. Original counts and hashes above are historical."
+}

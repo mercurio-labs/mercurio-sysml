@@ -1,0 +1,1986 @@
+{
+  "bindings": [
+    "BooleanExpression",
+    "CollectExpression",
+    "ConstructorExpression",
+    "Expression",
+    "FeatureChainExpression",
+    "FeatureReferenceExpression",
+    "IndexExpression",
+    "Invariant",
+    "InvocationExpression",
+    "LiteralBoolean",
+    "LiteralExpression",
+    "LiteralInfinity",
+    "LiteralInteger",
+    "LiteralRational",
+    "LiteralString",
+    "MetadataAccessExpression",
+    "NullExpression",
+    "OperatorExpression",
+    "SelectExpression",
+    "TriggerInvocationExpression"
+  ],
+  "controls": [
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "BooleanExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "BooleanExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "BooleanExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "BooleanExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "BooleanExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "BooleanExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CollectExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CollectExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CollectExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CollectExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CollectExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CollectExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ConstructorExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ConstructorExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ConstructorExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ConstructorExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ConstructorExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ConstructorExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Expression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Expression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Expression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Expression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Expression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Expression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureChainExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "FeatureReferenceExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IndexExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IndexExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IndexExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IndexExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IndexExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IndexExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Invariant",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Invariant",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Invariant",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Invariant",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "Invariant",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "Invariant",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "InvocationExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "InvocationExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "InvocationExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "InvocationExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "InvocationExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "InvocationExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralBoolean",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralBoolean",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralBoolean",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralBoolean",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralBoolean",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralBoolean",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInfinity",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInfinity",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInfinity",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInfinity",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInfinity",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInfinity",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInteger",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInteger",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInteger",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInteger",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralInteger",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralInteger",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralRational",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralRational",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralRational",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralRational",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralRational",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralRational",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralString",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralString",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralString",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralString",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "LiteralString",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "LiteralString",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MetadataAccessExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "NullExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "NullExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "NullExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "NullExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "NullExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "NullExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "OperatorExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "OperatorExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "OperatorExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "OperatorExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "OperatorExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "OperatorExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "SelectExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "SelectExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "SelectExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "SelectExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "SelectExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "SelectExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "detached",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "Package",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [],
+      "transition_guard": false
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TriggerInvocationExpression",
+      "owner_kind": "Class",
+      "owning_type_is_feature_value": false,
+      "redefined_features": [
+        "general0",
+        "general1"
+      ],
+      "transition_guard": false
+    }
+  ],
+  "guard_controls": [
+    {
+      "kind": "BooleanExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "BooleanExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "BooleanExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "CollectExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "CollectExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "CollectExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "ConstructorExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "ConstructorExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "ConstructorExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "Expression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "Expression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "Expression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "FeatureReferenceExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "FeatureReferenceExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "FeatureReferenceExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "IndexExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "IndexExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "IndexExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "Invariant",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "Invariant",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "Invariant",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "InvocationExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "InvocationExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "InvocationExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralBoolean",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralBoolean",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralBoolean",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralInfinity",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralInfinity",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralInfinity",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralInteger",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralInteger",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralInteger",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralRational",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralRational",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralRational",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralString",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "LiteralString",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "LiteralString",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "MetadataAccessExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "MetadataAccessExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "MetadataAccessExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "NullExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "NullExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "NullExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "OperatorExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "OperatorExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "OperatorExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "SelectExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "SelectExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "SelectExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "membership_kind": "trigger",
+      "transition_guard": false
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "membership_kind": "guard",
+      "transition_guard": true
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "membership_kind": "effect",
+      "transition_guard": false
+    }
+  ],
+  "methods": {
+    "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "symbol": "org.omg.sysml.adapter.ExpressionAdapter#getTarget",
+            "type": "org.omg.sysml.lang.sysml.Expression"
+          },
+          "kind": "VARIABLE",
+          "name": "target",
+          "type": "org.omg.sysml.lang.sysml.Expression"
+        },
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "target",
+              "type": "org.omg.sysml.lang.sysml.Expression"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType",
+            "type": "org.omg.sysml.lang.sysml.Type"
+          },
+          "kind": "VARIABLE",
+          "name": "owningType",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "expression": {
+            "condition": {
+              "arguments": [
+                {
+                  "kind": "IDENTIFIER",
+                  "name": "target",
+                  "type": "org.omg.sysml.lang.sysml.Expression"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "org.omg.sysml.lang.sysml.Expression"
+              ],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "ExpressionUtil",
+                "type": "org.omg.sysml.util.ExpressionUtil"
+              },
+              "symbol": "org.omg.sysml.util.ExpressionUtil#isTransitionGuard",
+              "type": "boolean"
+            },
+            "false": {
+              "condition": {
+                "expression": {
+                  "kind": "IDENTIFIER",
+                  "name": "owningType",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                "kind": "INSTANCE_OF",
+                "test_type": "org.omg.sysml.lang.sysml.FeatureValue",
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "kind": "IDENTIFIER",
+                    "name": "type",
+                    "type": "org.omg.sysml.lang.sysml.Type"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "org.omg.sysml.lang.sysml.Type"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "super",
+                  "type": "org.omg.sysml.adapter.StepAdapter"
+                },
+                "symbol": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+                "type": "java.util.List<capture#686 of ? extends org.omg.sysml.lang.sysml.Feature>"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "Collections",
+                  "type": "java.util.Collections"
+                },
+                "symbol": "java.util.Collections#emptyList",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.Feature>"
+              },
+              "type": "java.util.List<? extends org.omg.sysml.lang.sysml.Feature>"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "condition": {
+                "kind": "EQUAL_TO",
+                "left": {
+                  "kind": "IDENTIFIER",
+                  "name": "type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                "right": {
+                  "kind": "IDENTIFIER",
+                  "name": "owningType",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "cast_type": "org.omg.sysml.lang.sysml.Feature",
+                    "expression": {
+                      "arguments": [
+                        {
+                          "kind": "IDENTIFIER",
+                          "name": "EXPRESSION_GUARD_FEATURE",
+                          "type": "java.lang.String"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "parameters": [
+                        "java.lang.String[]"
+                      ],
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    "kind": "TYPE_CAST",
+                    "type": "org.omg.sysml.lang.sysml.Feature"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "T"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "Collections",
+                  "type": "java.util.Collections"
+                },
+                "symbol": "java.util.Collections#singletonList",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.Feature>"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [
+                  {
+                    "kind": "IDENTIFIER",
+                    "name": "target",
+                    "type": "org.omg.sysml.lang.sysml.Expression"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "T"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "Collections",
+                  "type": "java.util.Collections"
+                },
+                "symbol": "java.util.Collections#singletonList",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.Expression>"
+              },
+              "type": "java.util.List<? extends org.omg.sysml.lang.sysml.Feature>"
+            },
+            "type": "java.util.List<? extends org.omg.sysml.lang.sysml.Feature>"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.util.ExpressionUtil#isTransitionGuard": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "expression",
+              "type": "org.omg.sysml.lang.sysml.Expression"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningFeatureMembership",
+            "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+          },
+          "kind": "VARIABLE",
+          "name": "membership",
+          "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+        },
+        {
+          "expression": {
+            "kind": "CONDITIONAL_AND",
+            "left": {
+              "expression": {
+                "expression": {
+                  "kind": "IDENTIFIER",
+                  "name": "membership",
+                  "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                },
+                "kind": "INSTANCE_OF",
+                "test_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+                "type": "boolean"
+              },
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            "right": {
+              "kind": "EQUAL_TO",
+              "left": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "expression": {
+                    "cast_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+                    "expression": {
+                      "kind": "IDENTIFIER",
+                      "name": "membership",
+                      "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                    },
+                    "kind": "TYPE_CAST",
+                    "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                  },
+                  "kind": "PARENTHESIZED",
+                  "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                },
+                "symbol": "org.omg.sysml.lang.sysml.TransitionFeatureMembership#getKind",
+                "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+              },
+              "right": {
+                "kind": "MEMBER_SELECT",
+                "name": "GUARD",
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "TransitionFeatureKind",
+                  "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+                },
+                "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+              },
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "driver_sha256": "3787359b3572ece004d7ea9fcc9976fbbbdb2aeafdd8821cff69ed3503436b11",
+    "helper_sha256": "877477dd7712d40831fe5f1785f1be39200c3fd415d5f1a196a771f4fbaebe34",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ExpressionAdapter.java": "435d8f22006137d91f793d4a20be3c88e72a017db838bf1b1d7da654672d7141",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ExpressionUtil.java": "0828947218f049a4b5b42a729345ebbea3c32b5932aa66f6b9bb82981e40c5af",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.expression-redefinition-controls.v1",
+  "scope": "Twenty concrete expression bindings: 120 canonical ordinary redefinition/name observations and 60 transition-membership guard classifications. Guard redefinition, positional expression strategies and FeatureValue owning-Type contexts are not qualified."
+}

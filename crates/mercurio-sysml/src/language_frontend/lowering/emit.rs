@@ -1,3 +1,17 @@
+pub use operand_construction::{DefinitionConstructionEvent, DefinitionConstructionPhase, DefinitionPendingReference};
+mod textual_declarations;
+mod annotation_checks;
+mod memberships;
+mod relationship_bodies;
+mod multiplicity_ranges;
+mod operand_construction;
+mod type_relationship_scope_generated;
+pub use operand_construction::{DefinitionQueryPrerequisite, DefinitionReferenceQueryError};
+pub(crate) use operand_construction::{definition_direction_of_with_dependencies,definition_reference_target_batch_with_dependencies,definition_reference_targets_with_dependencies,inspect_definition_resources_traced,inspect_definition_resources_with_plan_traced,inspect_constructed_resources_with_plan_traced, definition_complete_literal_value_expressions, definition_complete_literal_value_bindings, definition_assess_feature_values, definition_assess_type_sets, definition_complete_fixed_transition_stored_tree,definition_complete_fixed_transition_owner,definition_materialize_transition_members_with_fixed_links,definition_complete_fresh_transition_link,definition_materialize_transition_members,definition_variation_contributions, definition_materialize_variation_typing, definition_materialize_transition_link_redefinition, definition_transition_source_feature, definition_materialize_transition_source, definition_materialize_transition_sources, definition_materialize_usage_multiplicities, definition_materialize_binary_cross_featuring, definition_materialize_owned_cross_specialization, definition_owned_cross_feature, definition_materialize_binary_crossing, definition_materialize_reference_binding_defaults, definition_materialize_reference_binding, definition_materialize_result_feature_defaults, definition_materialize_value_expression_defaults, definition_materialize_value_expression_featuring, definition_assess_valuation_specialization, definition_materialize_bound_value_subsetting, definition_materialize_selected_generals, definition_materialize_general_batch, definition_materialize_feature_defaults, definition_materialize_type_defaults, definition_type_default_contribution_owners, definition_feature_default_contribution_owners, definition_binding_context, definition_is_compatible, definition_all_featuring_types, definition_materialize_reference_result_subsetting, definition_materialize_expression_result, definition_materialize_owned_expression_results, definition_materialize_owning_type_featuring, definition_append_binding_connector, definition_materialize_binding_structure, definition_materialize_binding_defaults, definition_materialize_complete_binding, definition_materialize_resolved_binding, definition_complete_ordinary_features, definition_append_feature_chain, definition_may_time_vary, definition_specializes, definition_reference_targets, definition_attribute_value, definition_attribute_value_with_origins, DefinitionLibraryOriginContext, definition_library_namespace, materialize_definition_document, materialize_definition_resources_with_literal_bindings_traced, stored_standard_default_bindings, stored_plain_type_generalizations, stored_type_inherited_memberships, stored_namespace_imported_memberships, stored_namespace_membership_inputs, stored_package_import_members,generated_effective_names, stored_explicit_general_types, stored_membership_endpoint, StoredMembershipEndpoint};
+mod flows;
+mod ecore_ownership;
+mod ecore_ownership_generated;
+mod requirement_memberships;
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::sync::OnceLock;
 
@@ -161,34 +175,68 @@ impl MappingBundle {
     }
 
     fn load_uncached_for_language(language: SourceLanguage) -> Result<Self, Diagnostic> {
-        let construct_seed = match language {
-            SourceLanguage::Kerml => kerml_construct_seed(),
+        let overlay: KermlMappingOverlay = serde_json::from_str(include_str!(
+            "../../../resources/kernel/kerml-mappings.overlay.json"
+        ))
+        .map_err(|error| {
+            Diagnostic::new(format!("invalid KerML mapping overlay: {error}"), None)
+        })?;
+        let generated: MetamodelConstructSeed = serde_json::from_str(include_str!(
+            "../../../resources/kernel/kerml-constructs.seed.json"
+        ))
+        .map_err(|e| Diagnostic::new(format!("invalid KerML release constructs: {e}"), None))?;
+        let kerml_constructs = merge_construct_seeds(
+            merge_construct_seeds(kerml_construct_seed(), overlay.constructs),
+            generated,
+        );
+        let kerml_emission = merge_emission_seeds(kerml_emission_seed(), overlay.emission);
+        let mut construct_seed = match language {
+            SourceLanguage::Kerml => kerml_constructs,
             SourceLanguage::Sysml => {
                 let sysml_seed: MetamodelConstructSeed =
                     serde_json::from_str(&load_metamodel_constructs_seed()?).map_err(|err| {
                         Diagnostic::new(format!("failed to parse mapping file: {err}"), None)
                     })?;
-                merge_construct_seeds(kerml_construct_seed(), sysml_seed)
+                let control_seed: MetamodelConstructSeed = serde_json::from_str(include_str!(
+                    "../../../resources/metamodels/sysml-2.0-pilot-2026-08/mappings/control-constructs.seed.json"
+                )).map_err(|err| Diagnostic::new(format!("invalid control constructs: {err}"), None))?;
+                merge_construct_seeds(
+                    merge_construct_seeds(kerml_constructs, sysml_seed),
+                    merge_construct_seeds(
+                        control_seed,
+                        serde_json::from_str(include_str!(
+                            "../../../resources/kernel/kerml-constructs.seed.json"
+                        ))
+                        .map_err(|err| {
+                            Diagnostic::new(format!("invalid kernel constructs: {err}"), None)
+                        })?,
+                    ),
+                )
             }
         };
         let kir_emission = match language {
-            SourceLanguage::Kerml => kerml_emission_seed(),
+            SourceLanguage::Kerml => kerml_emission,
             SourceLanguage::Sysml => {
                 let sysml_emission: KirEmissionSeed =
                     serde_json::from_str(&load_kir_emission_seed()?).map_err(|err| {
                         Diagnostic::new(format!("failed to parse emission file: {err}"), None)
                     })?;
-                merge_emission_seeds(kerml_emission_seed(), sysml_emission)
+                let control_emission: KirEmissionSeed = serde_json::from_str(include_str!(
+                    "../../../resources/metamodels/sysml-2.0-pilot-2026-08/mappings/control-emission.overlay.json"
+                )).map_err(|err| Diagnostic::new(format!("invalid control emission: {err}"), None))?;
+                let canonical_kinds: KirEmissionSeed = serde_json::from_str(include_str!(
+                    "../../../resources/metamodels/sysml-2.0-pilot-2026-08/mappings/emission-kinds.extract.json"
+                )).map_err(|err| Diagnostic::new(format!("invalid extracted emission kinds: {err}"), None))?;
+                merge_emission_seeds(
+                    merge_emission_seeds(
+                        merge_emission_seeds(kerml_emission, sysml_emission),
+                        canonical_kinds,
+                    ),
+                    control_emission,
+                )
             }
         };
-        let lowering_rules = match language {
-            SourceLanguage::Kerml => None,
-            SourceLanguage::Sysml => Some(
-                serde_json::from_str(load_lowering_rules_seed()).map_err(|err| {
-                    Diagnostic::new(format!("failed to parse lowering rule file: {err}"), None)
-                })?,
-            ),
-        };
+        let lowering_rules = LoweringRuleSeed::load_for_language(language)?.cloned();
         let semantic_defaults = match language {
             SourceLanguage::Kerml => SemanticDefaultsSeed::default(),
             SourceLanguage::Sysml => {
@@ -201,6 +249,74 @@ impl MappingBundle {
             }
         };
 
+        let kernel_defaults: ObservedDefinitionDefaults = serde_json::from_str(include_str!(
+            "../../../resources/kernel/kernel-defaults-2026-08.json"
+        ))
+        .map_err(|error| Diagnostic::new(format!("invalid kernel defaults: {error}"), None))?;
+        construct_seed
+            .semantic_specialization_defaults
+            .definitions
+            .extend(kernel_defaults.definitions);
+        if language == SourceLanguage::Sysml {
+            for source in [
+                include_str!("../../../resources/kernel/definition-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/view-definition-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/connection-definition-defaults-2026-08.json"),
+            ] {
+                let observed: ObservedDefinitionDefaults =
+                    serde_json::from_str(source).map_err(|error| {
+                        Diagnostic::new(format!("invalid observed defaults: {error}"), None)
+                    })?;
+                for (construct, parents) in observed.definitions {
+                    construct_seed
+                        .semantic_specialization_defaults
+                        .definitions
+                        .entry(construct)
+                        .or_insert(parents);
+                }
+            }
+        }
+        let mut semantic_defaults = semantic_defaults;
+        let comment_defaults: SemanticDefaultsSeed = serde_json::from_str(include_str!(
+            "../../../resources/kernel/comment-defaults.overlay.json"
+        )).map_err(|e| Diagnostic::new(format!("invalid shared comment defaults: {e}"), None))?;
+        semantic_defaults.usage_property_defaults.extend(comment_defaults.usage_property_defaults);
+        semantic_defaults.usage_resolution_policies.extend(comment_defaults.usage_resolution_policies);
+        // Expressions in both source languages inherit Evaluation's features.
+        // Keep this default tied to the pinned Pilot observation.
+        let expression_defaults: SemanticDefaultsSeed = serde_json::from_str(include_str!(
+            "../../../resources/kernel/expression-defaults-2026-08.json"
+        ))
+        .map_err(|error| Diagnostic::new(format!("invalid expression defaults: {error}"), None))?;
+        semantic_defaults
+            .usage_type_defaults
+            .extend(expression_defaults.usage_type_defaults);
+        semantic_defaults
+            .usage_subset_defaults
+            .extend(expression_defaults.usage_subset_defaults);
+        if language == SourceLanguage::Sysml {
+            for source in [
+                include_str!("../../../resources/kernel/flag-name-defaults.overlay.json"),
+                include_str!("../../../resources/kernel/usage-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/single-type-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/include-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/control-usage-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/terminate-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/succession-flow-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/structured-usage-defaults-2026-08.json"),
+                include_str!("../../../resources/kernel/occurrence-usage-defaults-2026-08.json"),
+            ] {
+                let observed: SemanticDefaultsSeed = serde_json::from_str(source).map_err(|e| {
+                    Diagnostic::new(format!("invalid observed usage defaults: {e}"), None)
+                })?;
+                for (construct, default) in observed.usage_type_defaults {
+                    semantic_defaults
+                        .usage_type_defaults
+                        .entry(construct)
+                        .or_insert(default);
+                }
+            }
+        }
         Self::from_seeds(
             construct_seed,
             kir_emission,
@@ -323,6 +439,9 @@ impl MappingBundle {
     }
 
     pub fn definition_construct_for(&self, keyword: &str) -> String {
+        if let Some(construct) = self.definition_keyword_constructs.get(keyword) {
+            return construct.clone();
+        }
         if let Some(rule) = self.lowering_rule_for_ast("GenericDefinitionDecl", keyword) {
             return rule.construct.clone();
         }
@@ -332,13 +451,27 @@ impl MappingBundle {
             .unwrap_or_else(|| format!("{}Definition", pascal_case(keyword)))
     }
 
+    pub fn usage_construct_in_context(&self, keyword: &str, owner: &str) -> String {
+        self.lowering_rules
+            .as_ref()
+            .and_then(|rules| {
+                rules
+                    .usage_context_overrides
+                    .iter()
+                    .find(|rule| rule.keyword == keyword && rule.owner == owner)
+            })
+            .map(|rule| rule.construct.clone())
+            .unwrap_or_else(|| self.usage_construct_for(keyword))
+    }
+
     pub fn usage_construct_for(&self, keyword: &str) -> String {
-        if let Some(rule) = self.lowering_rule_for_ast("GenericUsageDecl", keyword) {
-            return rule.construct.clone();
-        }
         self.usage_keyword_constructs
             .get(keyword)
             .cloned()
+            .or_else(|| {
+                self.lowering_rule_for_ast("GenericUsageDecl", keyword)
+                    .map(|rule| rule.construct.clone())
+            })
             .unwrap_or_else(|| format!("{}Usage", pascal_case(keyword)))
     }
 
@@ -363,11 +496,67 @@ impl MappingBundle {
         })
     }
 
+    pub(crate) fn usage_type_for_end_count(&self, construct: &str, count: usize) -> Option<String> {
+        self.semantic_defaults.usage_type_defaults.get(construct)?
+            .end_count_type_refs.get(&count).cloned()
+    }
+
+    pub(crate) fn constant_usage_type_default(&self, construct: &str) -> Option<String> {
+        self.semantic_defaults
+            .usage_type_defaults
+            .get(construct)
+            .or_else(|| {
+                self.construct_to_metaclass
+                    .get(construct)
+                    .and_then(|metaclass| {
+                        self.semantic_defaults
+                            .usage_type_defaults
+                            .get(metaclass.rsplit("::").next().unwrap_or(metaclass))
+                    })
+            })?
+            .type_ref
+            .clone()
+            .filter(|value| !value.contains('{'))
+    }
+
+    pub(crate) fn constant_usage_subset_defaults(&self, construct: &str) -> Vec<String> {
+        let Some(default) = self.semantic_defaults.usage_subset_defaults.get(construct) else {
+            return Vec::new();
+        };
+        // Context-sensitive defaults are selected later, once the owner is resolved.
+        if !default.owner_subsetted_feature_refs.is_empty()
+            || !default.modifier_owner_subsetted_feature_refs.is_empty()
+            || !default.suppress_default_for_modifiers.is_empty()
+            || default.specialized_feature_subset.is_some()
+        {
+            return Vec::new();
+        }
+        default.subsetted_feature_refs.clone()
+    }
+
     pub(crate) fn usage_type_default(&self, usage: &ResolvedUsage) -> Option<String> {
         let default = self
             .semantic_defaults
             .usage_type_defaults
-            .get(&usage.construct)?;
+            .get(&usage.construct)
+            .or_else(|| {
+                self.construct_to_metaclass
+                    .get(&usage.construct)
+                    .and_then(|metaclass| {
+                        self.semantic_defaults
+                            .usage_type_defaults
+                            .get(metaclass.rsplit("::").next().unwrap_or(metaclass))
+                    })
+            })?;
+        let end_count = usage.members.iter().filter(|m| usage_is_end(m)).count();
+        if let Some(type_ref) = default.end_count_type_refs.get(&end_count) {
+            return Some(resolve_semantic_default_value(type_ref, usage));
+        }
+        for member in &usage.members {
+            if let Some(type_ref) = default.member_type_refs.get(&member.declared_name) {
+                return Some(resolve_semantic_default_value(type_ref, usage));
+            }
+        }
         if let Some(owner_type_ref) = default.owner_type_refs.get(&usage.owner_construct) {
             return Some(resolve_semantic_default_value(owner_type_ref, usage));
         }
@@ -533,6 +722,10 @@ impl MappingBundle {
         &self,
         usage: &ResolvedUsage,
     ) -> bool {
+        // A payload role does not erase a name explicitly declared in source.
+        if !usage.is_implicit_name && usage.modifiers.iter().any(|m| m == "payload") {
+            return false;
+        }
         self.semantic_defaults
             .reference_usage_semantics
             .constructs
@@ -593,17 +786,13 @@ impl MappingBundle {
         &'a self,
         usage: &ResolvedUsage,
     ) -> Option<&'a str> {
-        self.semantic_defaults
-            .usage_context
-            .direction_modifiers
-            .iter()
-            .find(|direction| {
-                usage
-                    .modifiers
-                    .iter()
-                    .any(|modifier| modifier == *direction)
-            })
+        // Honor profile precedence, then fall back to the shared KerML directions.
+        self.semantic_defaults.usage_context.direction_modifiers.iter()
+            .find(|direction| usage.modifiers.contains(direction))
             .map(String::as_str)
+            .or_else(|| ["inout", "out", "in"].into_iter()
+                .find(|direction| usage.modifiers.iter().any(|m| m == direction))
+                .and_then(|direction| crate::enum_grammar::shared_literal("FeatureDirection", direction)))
     }
 
     pub(crate) fn usage_property_defaults(
@@ -676,16 +865,6 @@ impl MappingBundle {
             .is_some_and(|policy| policy.records_previous_state)
     }
 
-    pub(crate) fn usage_appends_source_location_if_missing_start_col(
-        &self,
-        usage: &ResolvedUsage,
-    ) -> bool {
-        self.semantic_defaults
-            .usage_id_policies
-            .get(&usage.construct)
-            .is_some_and(|policy| policy.append_source_location_if_missing_start_col)
-    }
-
     pub(crate) fn generated_companion_construct_for_definition(
         &self,
         construct: &str,
@@ -719,6 +898,21 @@ impl MappingBundle {
             .get(construct)
             .cloned()
             .unwrap_or_default()
+    }
+
+    pub(crate) fn connection_definition_defaults(
+        &self,
+        construct: &str,
+        end_count: usize,
+    ) -> Result<Option<Vec<String>>, Diagnostic> {
+        static DEFAULTS: OnceLock<Result<ConnectionDefinitionDefaults, String>> = OnceLock::new();
+        let defaults = DEFAULTS.get_or_init(|| serde_json::from_str(include_str!(
+            "../../../resources/kernel/connection-defaults.extract.json"
+        )).map_err(|error| error.to_string())).as_ref()
+            .map_err(|error| Diagnostic::new(format!("invalid connection defaults: {error}"), None))?;
+        Ok(defaults.definitions.get(construct).map(|selectors| {
+            vec![if end_count == 2 { &selectors.binary } else { &selectors.base }.clone()]
+        }))
     }
 
     pub fn semantic_specializations_for_usage(
@@ -973,10 +1167,6 @@ fn load_kir_emission_seed() -> Result<String, Diagnostic> {
     Ok(crate::resources::SYSML_057_KIR_EMISSION.to_string())
 }
 
-fn load_lowering_rules_seed() -> &'static str {
-    crate::resources::SYSML_057_LOWERING_RULES
-}
-
 fn load_semantic_defaults_seed() -> &'static str {
     crate::resources::SYSML_057_SEMANTIC_DEFAULTS
 }
@@ -1133,6 +1323,31 @@ pub fn transpile_module_with_source(
             render_usage_id(usage, &owner_id, mappings).map(|id| (usage.qualified_name.clone(), id))
         })
         .collect::<Result<BTreeMap<_, _>, _>>()?;
+    let mut namespace_ids = package_ids.clone();
+    namespace_ids.extend(definition_ids.clone());
+    namespace_ids.extend(top_level_usage_ids.clone());
+    for definition in &module.definitions {
+        if let Some(owner_id) = definition_ids.get(&definition.qualified_name) {
+            index_owned_usage_ids(
+                &definition.members,
+                owner_id,
+                mappings,
+                source_language == "kerml",
+                &mut namespace_ids,
+            )?;
+        }
+    }
+    for usage in &module.usages {
+        if let Some(owner_id) = top_level_usage_ids.get(&usage.qualified_name) {
+            index_owned_usage_ids(
+                &usage.members,
+                owner_id,
+                mappings,
+                source_language == "kerml",
+                &mut namespace_ids,
+            )?;
+        }
+    }
     let package_member_ids = build_package_member_ids(
         module,
         &package_ids,
@@ -1166,26 +1381,49 @@ pub fn transpile_module_with_source(
             &package.span,
             source_file,
             source_language,
-        );
+        )?;
     }
 
+    let mut relationship_scopes = BTreeMap::new();
+    for alias in &module.aliases {
+        let owner_id = namespace_ids.get(&alias.owner_qualified_name).cloned().unwrap_or_else(|| "pkg.root".into());
+        let id = format!("membership.alias.{}.{}.{}", alias.qualified_name, alias.span.start_line, alias.span.start_col);
+        let target = &alias.target;
+        let mut properties = BTreeMap::from([
+            ("membership_owning_namespace".into(), json!(owner_id)),
+            ("owning_related_element".into(), json!(owner_id)),
+            ("member_element".into(), json!(target)),
+            ("source".into(), json!([owner_id])),
+            ("target".into(), json!([alias.target])),
+            ("related_element".into(), json!(dedupe_refs(vec![owner_id.clone(), target.clone()]))),
+            ("owned_related_element".into(), json!([])),
+            ("visibility".into(), json!(alias.visibility)),
+            ("is_implied".into(), json!(false)),
+            ("metadata".into(), json!({"source_file":source_file, "source_language":source_language,
+                "source_span":alias.span, "lowering":{"construct":"AliasMember", "metaclass":"SysML::Membership"}})),
+        ]);
+        if !alias.declared_name.is_empty() { properties.insert("member_name".into(), json!(alias.declared_name)); }
+        if let Some(short) = &alias.declared_short_name { properties.insert("member_short_name".into(), json!(short)); }
+        elements.push(KirElement { id: id.clone(), kind: "SysML::Membership".into(), layer: 2, properties });
+        relationship_scopes.insert(alias.qualified_name.clone(), id.clone());
+        index_owned_usage_ids(&alias.members, &id, mappings, source_language == "kerml", &mut namespace_ids)?;
+        append_documentation_elements(&mut elements, &id, &alias.docs, &alias.span, source_file, source_language)?;
+        transpile_usage_tree(&alias.members, &id, source_file, source_language, mappings, &mut elements)?;
+    }
+
+    let mut import_objects = Vec::new();
     for import in &module.imports {
         // A namespace query is owned by whatever namespace declares it, which
         // is not always a package: `view v { expose x::**; }` is owned by the
         // view *usage*. Consulting only `package_ids` silently reparented every
         // such query onto `pkg.root`, which made a view's exposes
-        // indistinguishable from the next view's — fatal for
+        // indistinguishable from the next view's â€” fatal for
         // `exposed_elements`, which has to ask what *this* view exposes
         // (save-as-view SV-2).
         let owner_id = import
             .owner_qualified_name
             .as_ref()
-            .and_then(|qualified_name| {
-                package_ids
-                    .get(qualified_name)
-                    .or_else(|| definition_ids.get(qualified_name))
-                    .or_else(|| top_level_usage_ids.get(qualified_name))
-            })
+            .and_then(|qualified_name| namespace_ids.get(qualified_name))
             .cloned()
             .unwrap_or_else(|| "pkg.root".to_string());
         elements.push(transpile_import(
@@ -1199,6 +1437,9 @@ pub fn transpile_module_with_source(
             .last()
             .map(|element| element.id.clone())
             .ok_or_else(|| Diagnostic::new("missing import id", None))?;
+        import_objects.push(import_id.clone());
+        relationship_scopes.insert(format!("{}.__import_{}_{}", import.owner_qualified_name.as_deref().unwrap_or("root"), import.span.start_line, import.span.start_col), import_id.clone());
+        index_owned_usage_ids(&import.members, &import_id, mappings, source_language == "kerml", &mut namespace_ids)?;
         append_documentation_elements(
             &mut elements,
             &import_id,
@@ -1206,7 +1447,9 @@ pub fn transpile_module_with_source(
             &import.span,
             source_file,
             source_language,
-        );
+        )?;
+        transpile_usage_tree(&import.members, &import_id, source_file, source_language, mappings, &mut elements)?;
+
     }
 
     for definition in &module.definitions {
@@ -1240,7 +1483,7 @@ pub fn transpile_module_with_source(
             &definition.span,
             source_file,
             source_language,
-        );
+        )?;
         transpile_usage_tree(
             &definition.members,
             &definition_id,
@@ -1273,6 +1516,67 @@ pub fn transpile_module_with_source(
         )?;
     }
 
+    // Alias objects precede body declarations, but their namespace owners may
+    // be definitions or usages emitted later. Link after every owner exists.
+    for alias in &module.aliases {
+        let owner_id = namespace_ids.get(&alias.owner_qualified_name).cloned().unwrap_or_else(|| "pkg.root".into());
+        let id = &relationship_scopes[&alias.qualified_name];
+        if let Some(owner) = elements.iter_mut().find(|e| e.id == owner_id) {
+            for key in ["owned_relationship", "owned_membership", "membership"] {
+                append_unique_property_ref_list(&mut owner.properties, key, id);
+            }
+        }
+    }
+
+    // Every concrete Relationship may own a RelationshipBody. Resolve the
+    // indexed source scopes through generated Ecore ancestry after emission,
+    // including nested relationship declarations (not only aliases/imports).
+    if source_language == "kerml" {
+        let relationship_ids = elements.iter()
+            .filter_map(|element| match super::relationship_declarations::has_direct_relationship_body(&element.kind) {
+                Ok(true) => Some(Ok(element.id.as_str())),
+                Ok(false) => None,
+                Err(error) => Some(Err(error)),
+            })
+            .collect::<Result<std::collections::BTreeSet<_>, Diagnostic>>()?;
+        for (name, id) in &namespace_ids {
+            if relationship_ids.contains(id.as_str()) {
+                relationship_scopes.insert(name.clone(), id.clone());
+            }
+        }
+    }
+    relationship_bodies::attach(&relationship_scopes, &namespace_ids, source_language == "kerml", &mut elements)?;
+    memberships::materialize(module, &namespace_ids, source_file, source_language, &mut elements)?;
+    for (import, id) in module.imports.iter().zip(import_objects) {
+        let namespace = import.target_id.ends_with("::*") || import.target_id.ends_with("::*::**");
+        let target_id = import.referenced_element_id.clone().unwrap_or_else(|| import.target_id.clone());
+        if namespace {
+            if let Some(target) = elements.iter().find(|e| e.id == target_id) {
+                if !super::relationship_declarations::metaclass_is(&target.kind, "Namespace")? {
+                    return Err(Diagnostic::semantic("namespace import/expose target must be a Namespace", Some(import.span.clone())));
+                }
+            }
+        }
+        let target = if namespace { Some(target_id.clone()) } else {
+            import.alias_membership_id.clone().or_else(|| elements.iter().find(|e| e.id == target_id)
+                .and_then(|e| e.properties.get("owning_membership")).and_then(Value::as_str).map(str::to_string))
+        };
+        let owner = import.owner_qualified_name.as_ref().and_then(|q| namespace_ids.get(q)).cloned().unwrap_or_else(|| "pkg.root".into());
+        if let Some(parent) = elements.iter_mut().find(|e| e.id == owner) {
+            append_unique_property_ref_list(&mut parent.properties, "owned_relationship", &id);
+            append_unique_property_ref_list(&mut parent.properties, "owned_import", &id);
+        }
+        let element = elements.iter_mut().find(|e| e.id == id).unwrap();
+        element.properties.insert("source".into(), json!([owner]));
+        element.properties.entry("owned_related_element".into()).or_insert(json!([]));
+        if let Some(target) = target {
+            element.properties.insert(if namespace { "imported_namespace" } else { "imported_membership" }.into(), json!(target));
+            element.properties.insert("target".into(), json!([target]));
+            element.properties.insert("related_element".into(), json!([owner, target]));
+        }
+    }
+
+    link_nested_namespaces(module, &namespace_ids, &mut elements);
     if source_language == "kerml" {
         disambiguate_duplicate_element_ids(&mut elements);
     }
@@ -1280,7 +1584,11 @@ pub fn transpile_module_with_source(
     if source_language == "sysml" {
         materialize_referenced_state_done(&mut elements);
     }
+    memberships::order_source_relationships(&mut elements);
+    memberships::qualify_resource_namespace(&mut elements, source_file);
+    super::ecore_defaults::apply(&mut elements);
     validate_unique_ids(&elements)?;
+    annotation_checks::validate(&elements)?;
 
     Ok(KirDocument {
         metadata: [
@@ -1309,15 +1617,28 @@ pub fn transpile_module_with_source(
 fn materialize_referenced_state_done(elements: &mut Vec<KirElement>) {
     let mut generated = BTreeMap::new();
     for transition in elements.iter() {
-        let Some(target) = transition.properties.get("target").and_then(Value::as_str) else { continue; };
-        let Some(parent_id) = target.strip_suffix(".done") else { continue; };
+        let Some(target) = transition.properties.get("target").and_then(Value::as_str) else {
+            continue;
+        };
+        let Some(parent_id) = target.strip_suffix(".done") else {
+            continue;
+        };
         if transition.properties.get("owner").and_then(Value::as_str) != Some(parent_id)
             || !transition.properties.contains_key("source")
-            || elements.iter().any(|element| element.id == target) {
+            || elements.iter().any(|element| element.id == target)
+        {
             continue;
         }
-        let Some(parent) = elements.iter().find(|element| element.id == parent_id
-            && element.properties.get("metatype").and_then(Value::as_str).is_some_and(|kind| kind.contains("StateUsage"))) else { continue; };
+        let Some(parent) = elements.iter().find(|element| {
+            element.id == parent_id
+                && element
+                    .properties
+                    .get("metatype")
+                    .and_then(Value::as_str)
+                    .is_some_and(|kind| kind.contains("StateUsage"))
+        }) else {
+            continue;
+        };
         generated.entry(target.to_string()).or_insert_with(|| KirElement {
             id: target.into(), kind: parent.kind.clone(), layer: parent.layer,
             properties: BTreeMap::from([
@@ -1353,14 +1674,23 @@ fn transpile_package(
     source_language: &str,
     mappings: &MappingBundle,
 ) -> Result<KirElement, Diagnostic> {
-    let metaclass = mappings.metaclass_for("Package")?;
+    let construct = if package
+        .modifiers
+        .iter()
+        .any(|modifier| modifier == "library")
+    {
+        "LibraryPackage"
+    } else {
+        "Package"
+    };
+    let metaclass = mappings.metaclass_for(construct)?;
     let emission = mappings.emission_for(metaclass)?;
-    let lowering_rule = mappings.lowering_rule_for_construct("Package");
+    let lowering_rule = mappings.lowering_rule_for_construct(construct);
     if let Some(rule) = lowering_rule {
         validate_rule_emission_compatibility(rule, metaclass, emission)?;
     }
     let metatype_ref = mappings
-        .default_specialization_for_package("Package")
+        .default_specialization_for_package(construct)
         .or(Some(metaclass))
         .map(|value| Value::String(value.to_string()))
         .unwrap_or(Value::Null);
@@ -1396,9 +1726,13 @@ fn transpile_package(
                 .unwrap_or(Value::Null),
         ),
         ("metatype_ref".to_string(), metatype_ref),
+        (
+            "is_library".to_string(),
+            Value::Bool(construct == "LibraryPackage"),
+        ),
     ]);
 
-    build_element(
+    let mut element = build_element(
         package_id,
         &package.span,
         source_file,
@@ -1406,7 +1740,19 @@ fn transpile_package(
         emission,
         lowering_rule,
         context,
-    )
+    )?;
+    if construct == "LibraryPackage" {
+        element.properties.insert(
+            "is_standard".to_string(),
+            Value::Bool(
+                package
+                    .modifiers
+                    .iter()
+                    .any(|modifier| modifier == "standard"),
+            ),
+        );
+    }
+    Ok(element)
 }
 
 fn validate_rule_emission_compatibility(
@@ -1512,7 +1858,7 @@ fn transpile_import(
         ("metatype_ref".to_string(), metatype_ref),
     ]);
 
-    build_element(
+    let mut element = build_element(
         &id,
         &import.span,
         source_file,
@@ -1520,7 +1866,20 @@ fn transpile_import(
         emission,
         lowering_rule,
         context,
-    )
+    )?;
+    let namespace = import.target_id.ends_with("::*") || import.target_id.ends_with("::*::**");
+    let concrete = crate::namespace_grammar::query_kind(source_language == "kerml", import.is_expose, namespace)
+        .ok_or_else(|| Diagnostic::new("expose is not a KerML grammar construct", Some(import.span.clone())))?;
+    element.kind = concrete.to_string();
+    element.properties.insert("metatype".into(), json!(element.kind));
+    if let Some(metadata) = element.properties.get_mut("metadata") { metadata["lowering"] = json!({"construct":construct,"metaclass":element.kind}); }
+    element.properties.insert("owning_related_element".into(), json!(owner_id));
+    element.properties.insert("import_owning_namespace".into(), json!(owner_id));
+    element.properties.insert("visibility".into(), json!(import.visibility));
+    element.properties.insert("is_implied".into(), json!(false));
+    element.properties.insert("is_import_all".into(), json!(import.is_import_all));
+    element.properties.insert("is_recursive".into(), json!(import.target_id.ends_with("::**")));
+    Ok(element)
 }
 
 fn transpile_definition(
@@ -1546,6 +1905,10 @@ fn transpile_definition(
         .map(|value| Value::String(value.to_string()))
         .unwrap_or(Value::Null);
     let context = BTreeMap::from([
+        (
+            "is_individual".to_string(),
+            Value::Bool(definition.construct.starts_with("Individual")),
+        ),
         (
             "qualified_name".to_string(),
             Value::String(definition.qualified_name.clone()),
@@ -1581,7 +1944,7 @@ fn transpile_definition(
         ("metatype_ref".to_string(), metatype_ref),
     ]);
 
-    build_element(
+    let mut element = build_element(
         definition_id,
         &definition.span,
         source_file,
@@ -1589,7 +1952,19 @@ fn transpile_definition(
         emission,
         lowering_rule,
         context,
-    )
+    )?;
+    if definition.construct == "Namespace" && definition.is_anonymous {
+        element.properties.remove("declared_name");
+        element.properties.remove("name");
+    }
+    element.properties.insert("is_abstract".into(), Value::Bool(mappings.definition_is_abstract(definition)));
+    if let Some(short) = &definition.declared_short_name {
+        element.properties.insert("declared_short_name".into(), json!(short));
+    }
+    if definition.is_variation {
+        element.properties.insert("is_variation".into(), Value::Bool(true));
+    }
+    Ok(element)
 }
 
 fn transpile_conjugated_port_definition(
@@ -1699,6 +2074,10 @@ fn transpile_usage(
         .map(|value| Value::String(value.to_string()))
         .unwrap_or(Value::Null);
     let context = BTreeMap::from([
+        (
+            "is_individual".to_string(),
+            Value::Bool(usage.construct.starts_with("Individual")),
+        ),
         ("owner_id".to_string(), Value::String(owner_id.to_string())),
         (
             "owner_path".to_string(),
@@ -1861,10 +2240,73 @@ fn transpile_usage(
         lowering_rule,
         context,
     )?;
+    if let Some(direction) = usage_direction(usage, mappings, reference_semantics.as_ref()) {
+        element.properties.insert(
+            "direction".to_string(),
+            Value::String(direction.to_string()),
+        );
+    }
+    if crate::language_frontend::lowering::relationship_declarations::metaclass_conforms(
+        &element.kind, "OccurrenceUsage",
+    ) {
+        if let Some(portion) = usage.modifiers.iter().find_map(|modifier|
+            crate::enum_grammar::lookup(false, "PortionKind", modifier)) {
+            element.properties.insert("portion_kind".into(), json!(portion.literal));
+        }
+    }
+    if matches!(element.kind.rsplit("::").next(), Some("AssertConstraintUsage" | "SatisfyRequirementUsage")) {
+        element.properties.insert("is_negated".into(), Value::Bool(usage.modifiers.iter().any(|m| m == "is_negated")));
+    }
+    if usage_is_end(usage) {
+        element.properties.insert("is_end".into(), Value::Bool(true));
+    }
+    if usage.modifiers.iter().any(|modifier| modifier == "owned_crossing_feature") {
+        element.properties.insert("is_end".into(), Value::Bool(false));
+    }
+    if let Some(index) = usage.members.iter().position(|member| member.modifiers.iter().any(|modifier| modifier == "owned_crossing_feature")) {
+        let ids = render_sibling_usage_ids(&usage.members, usage_id, mappings)?;
+        if let Some(id) = ids.get(index) {
+            element.properties.insert("cross_feature".into(), Value::String(id.clone()));
+        }
+    }
+
+    if usage.modifiers.iter().any(|m| m == "individual") {
+        element
+            .properties
+            .insert("is_individual".to_string(), Value::Bool(true));
+    }
+    if let Some(short_name) = usage
+        .modifiers
+        .iter()
+        .find_map(|modifier| modifier.strip_prefix("short_name="))
+    {
+        element.properties.insert(
+            "declared_short_name".to_string(),
+            Value::String(short_name.to_string()),
+        );
+    }
     if let Some(expression) = &usage.expression {
         element.properties.insert(
             "expression_ir".to_string(),
             render_expression_ir(expression)?,
+        );
+        element.properties.insert(
+            "expression_is_initial".to_string(),
+            Value::Bool(
+                usage
+                    .modifiers
+                    .iter()
+                    .any(|m| m == "feature_value_is_initial"),
+            ),
+        );
+        element.properties.insert(
+            "expression_is_default".to_string(),
+            Value::Bool(
+                usage
+                    .modifiers
+                    .iter()
+                    .any(|m| m == "feature_value_is_default"),
+            ),
         );
     }
     if let Some(multiplicity) = &usage.multiplicity {
@@ -1914,24 +2356,66 @@ fn transpile_usage(
         );
     }
     enrich_usage_semantics(&mut element, usage, owner_id, mappings);
+    if usage.modifiers.iter().any(|modifier| modifier == "ordered") {
+        element
+            .properties
+            .insert("is_ordered".into(), Value::Bool(true));
+    }
+    if usage
+        .modifiers
+        .iter()
+        .any(|modifier| modifier == "nonunique")
+    {
+        element
+            .properties
+            .insert("is_unique".into(), Value::Bool(false));
+    }
+    for (key, value) in &usage.derived_properties {
+        element.properties.insert(key.clone(), Value::Bool(*value));
+    }
     if usage.construct == "TransitionUsage" {
-        let modifier = |prefix: &str| usage.modifiers.iter().find_map(|value| value.strip_prefix(prefix));
+        let modifier = |prefix: &str| {
+            usage
+                .modifiers
+                .iter()
+                .find_map(|value| value.strip_prefix(prefix))
+        };
         let guard = modifier("guard=").or_else(|| {
             (modifier("trigger_kind=") == Some("when"))
-                .then(|| modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))).flatten()
+                .then(|| {
+                    modifier("trigger=").map(|text| text.strip_prefix("when ").unwrap_or(text))
+                })
+                .flatten()
         });
         if let Some(guard) = guard {
-            let expression = crate::parser::behavior_expression::expression(guard)
-                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
-            element.properties.insert("expression_ir".into(), expression);
+            let expression =
+                crate::parser::behavior_expression::expression(guard).map_err(|error| {
+                    Diagnostic::new(
+                        format!("{}: {error}", usage.qualified_name),
+                        Some(usage.span.clone()),
+                    )
+                })?;
+            element
+                .properties
+                .insert("expression_ir".into(), expression);
         }
-        if let Some(effect) = modifier("effect=").filter(|effect| effect.trim_start().starts_with("assign ")) {
+        if let Some(effect) =
+            modifier("effect=").filter(|effect| effect.trim_start().starts_with("assign "))
+        {
             let (feature, expression) = crate::parser::behavior_expression::assignment(effect)
-                .map_err(|error| Diagnostic::new(format!("{}: {error}", usage.qualified_name), Some(usage.span.clone())))?;
-            element.properties.insert("effects".into(), json!([{
-                "kind":"assign_expression", "feature":feature, "expression":expression,
-                "source":usage.qualified_name,
-            }]));
+                .map_err(|error| {
+                    Diagnostic::new(
+                        format!("{}: {error}", usage.qualified_name),
+                        Some(usage.span.clone()),
+                    )
+                })?;
+            element.properties.insert(
+                "effects".into(),
+                json!([{
+                    "kind":"assign_expression", "feature":feature, "expression":expression,
+                    "source":usage.qualified_name,
+                }]),
+            );
         }
     }
     Ok(element)
@@ -2047,7 +2531,9 @@ fn rate_term(expression: &ResolvedExpr) -> Option<RateTerm> {
     }
     match expression {
         ResolvedExpr::Literal(Value::Number(number)) => number.as_f64().map(RateTerm::Constant),
-        _ => render_expression_ir(expression).ok().map(RateTerm::Expression),
+        _ => render_expression_ir(expression)
+            .ok()
+            .map(RateTerm::Expression),
     }
 }
 
@@ -2171,7 +2657,7 @@ fn append_documentation_elements(
     span: &SourceSpan,
     source_file: &str,
     source_language: &str,
-) {
+) -> Result<(), Diagnostic> {
     for (index, body) in docs.iter().enumerate() {
         let mut properties = BTreeMap::new();
         properties.insert("owner".to_string(), Value::String(owner_id.to_string()));
@@ -2202,13 +2688,16 @@ fn append_documentation_elements(
         );
         properties.insert("metadata".to_string(), Value::Object(metadata));
 
-        elements.push(KirElement {
+        let mut element = KirElement {
             id: format!("doc.{owner_id}.{}", index + 1),
-            kind: "KerML::Root::Documentation".to_string(),
+            kind: "SysML::Documentation".to_string(),
             layer: 2,
             properties,
-        });
+        };
+        textual_declarations::attach_legacy_documentation(owner_id, &mut element, elements)?;
+        elements.push(element);
     }
+    Ok(())
 }
 
 fn render_value(template: &str, context: &BTreeMap<String, Value>) -> Result<Value, Diagnostic> {
@@ -2331,7 +2820,10 @@ fn enrich_usage_semantics(
         if let Some(type_ref) = &usage.type_ref {
             prepend_unique_property_ref(&mut element.properties, "definition", type_ref);
         }
-        for type_ref in &usage.additional_type_refs {
+    }
+    for type_ref in &usage.additional_type_refs {
+        append_unique_property_ref_list(&mut element.properties, "type", type_ref);
+        if usage.has_explicit_type {
             prepend_unique_property_ref(&mut element.properties, "definition", type_ref);
         }
     }
@@ -2478,7 +2970,7 @@ fn insert_property_ref_if_missing(
     }
 }
 
-fn append_unique_property_ref_list(
+pub(crate) fn append_unique_property_ref_list(
     properties: &mut BTreeMap<String, Value>,
     key: &str,
     value: &str,
@@ -2540,6 +3032,59 @@ fn transpile_usage_tree(
             previous_state_id.as_deref(),
             mappings,
         );
+        if let Some((source, targets)) = usage.related_features.split_first() {
+            set_property_refs(&mut element.properties, "source", std::slice::from_ref(source));
+            element.properties.insert("source_feature".into(), json!(source));
+            set_property_refs(&mut element.properties, "target", targets);
+            element.properties.insert("target_feature".into(), json!(targets));
+            element.properties.insert("related_feature".into(), json!(usage.related_features));
+            element.properties.insert("related_element".into(), json!(dedupe_refs(usage.related_features.clone())));
+        }
+        textual_declarations::emit(usage, owner_id, &mut element, elements)?;
+        super::relationship_declarations::emit(usage, &mut element, elements)?;
+        super::relationship_declarations::emit_multiplicity_subsettings(usage, &mut element, elements)?;
+        multiplicity_ranges::emit(usage, &mut element, elements)?;
+        flows::emit(usage, &mut element, elements)?;
+        requirement_memberships::emit(usage, owner_id, &mut element, elements)?;
+        if (matches!(element.kind.rsplit("::").next(),
+                Some("IncludeUseCaseUsage" | "PerformActionUsage" | "ExhibitStateUsage"
+                    | "AssertConstraintUsage" | "SatisfyRequirementUsage" | "ConstraintUsage"))
+            || element.kind.rsplit("::").next() == Some("Feature")
+            || (matches!(usage.construct.as_str(), "ReferenceUsage" | "EndUsage" | "PortUsage")
+                && usage.modifiers.iter().any(|m| m == "end" || m.starts_with("end-"))))
+            && let Some(target) = &usage.reference_target
+        {
+            let relationship_id = format!("{usage_id}.reference-subsetting");
+            element
+                .properties
+                .insert("owned_reference_subsetting".into(), json!(relationship_id));
+            append_unique_property_ref_list(
+                &mut element.properties,
+                "owned_relationship",
+                &relationship_id,
+            );
+            append_unique_property_ref_list(&mut element.properties, "subsetted_features", target);
+            append_unique_property_ref_list(&mut element.properties, "specializes", target);
+            let mut properties = BTreeMap::from([
+                ("owning_related_element".into(), json!(usage_id)),
+                ("subsetting_feature".into(), json!(usage_id)),
+                ("subsetted_feature".into(), json!(target)),
+                ("referenced_feature".into(), json!(target)),
+                ("source".into(), json!(usage_id)),
+                ("target".into(), json!(target)),
+                ("related_element".into(), json!([usage_id, target])),
+                ("is_implied".into(), json!(false)),
+            ]);
+            if let Some(metadata) = element.properties.get("metadata") {
+                properties.insert("metadata".into(), metadata.clone());
+            }
+            elements.push(KirElement {
+                id: relationship_id,
+                kind: "SysML::ReferenceSubsetting".into(),
+                layer: 2,
+                properties,
+            });
+        }
         elements.push(element);
         append_documentation_elements(
             elements,
@@ -2548,7 +3093,7 @@ fn transpile_usage_tree(
             &usage.span,
             source_file,
             source_language,
-        );
+        )?;
         transpile_usage_tree(
             &usage.members,
             &usage_id,
@@ -2562,6 +3107,62 @@ fn transpile_usage_tree(
         }
     }
     Ok(())
+}
+
+fn index_owned_usage_ids(
+    usages: &[ResolvedUsage],
+    owner_id: &str,
+    mappings: &MappingBundle,
+    disambiguate: bool,
+    ids: &mut BTreeMap<String, String>,
+) -> Result<(), Diagnostic> {
+    let rendered = if disambiguate {
+        render_sibling_usage_ids(usages, owner_id, mappings)?
+    } else {
+        usages
+            .iter()
+            .map(|usage| render_usage_id(usage, owner_id, mappings))
+            .collect::<Result<Vec<_>, _>>()?
+    };
+    for (usage, id) in usages.iter().zip(rendered) {
+        index_owned_usage_ids(&usage.members, &id, mappings, disambiguate, ids)?;
+        ids.insert(usage.qualified_name.clone(), id);
+    }
+    Ok(())
+}
+
+fn link_nested_namespaces(
+    module: &ResolvedModule,
+    ids: &BTreeMap<String, String>,
+    elements: &mut [KirElement],
+) {
+    let positions = elements
+        .iter()
+        .enumerate()
+        .map(|(index, e)| (e.id.clone(), index))
+        .collect::<BTreeMap<_, _>>();
+    let namespaces = module
+        .packages
+        .iter()
+        .map(|p| p.qualified_name.as_str())
+        .chain(module.definitions.iter().map(|d| d.qualified_name.as_str()));
+    for name in namespaces {
+        let Some((owner, _)) = name.rsplit_once('.') else {
+            continue;
+        };
+        let (Some(child_id), Some(owner_id)) = (ids.get(name), ids.get(owner)) else {
+            continue;
+        };
+        let (Some(&child_index), Some(&owner_index)) =
+            (positions.get(child_id), positions.get(owner_id))
+        else {
+            continue;
+        };
+        elements[child_index]
+            .properties
+            .insert("owner".to_string(), json!(owner_id));
+        append_unique_property_ref_list(&mut elements[owner_index].properties, "members", child_id);
+    }
 }
 
 fn render_sibling_usage_ids(
@@ -2608,34 +3209,86 @@ fn render_definition_id(
     )
 }
 
-fn render_usage_id(
+pub(crate) fn render_usage_id(
     usage: &ResolvedUsage,
     owner_id: &str,
     mappings: &MappingBundle,
 ) -> Result<String, Diagnostic> {
-    let metaclass = mappings.metaclass_for(&usage.construct)?;
+    render_usage_identity(
+        &usage.construct,
+        &usage.owner_qualified_name,
+        &usage.declared_name,
+        usage.is_implicit_name,
+        !usage.redefined_features.is_empty(),
+        &usage.span,
+        owner_id,
+        mappings,
+    )
+}
+
+pub(crate) fn render_collected_usage_id(
+    usage: &super::collect::CollectedUsage,
+    owner_id: &str,
+    mappings: &MappingBundle,
+) -> Result<String, Diagnostic> {
+    render_usage_identity(
+        &usage.construct,
+        &usage.owner_qualified_name,
+        &usage.declared_name,
+        usage.is_implicit_name,
+        !usage.redefines.is_empty(),
+        &usage.span,
+        owner_id,
+        mappings,
+    )
+}
+
+fn render_usage_identity(
+    construct: &str,
+    owner_path: &str,
+    declared_name: &str,
+    is_implicit_name: bool,
+    has_redefinitions: bool,
+    span: &SourceSpan,
+    owner_id: &str,
+    mappings: &MappingBundle,
+) -> Result<String, Diagnostic> {
+    let metaclass = mappings.metaclass_for(construct)?;
     let emission = mappings.emission_for(metaclass)?;
-    let id_template = id_template_for_construct(&usage.construct, metaclass, emission, mappings)?;
+    let id_template = id_template_for_construct(construct, metaclass, emission, mappings)?;
     let mut id = render_string(
         id_template,
         &BTreeMap::from([
             ("owner_id".to_string(), Value::String(owner_id.to_string())),
             (
                 "owner_path".to_string(),
-                Value::String(usage.owner_qualified_name.clone()),
+                Value::String(owner_path.to_string()),
             ),
             (
                 "declared_name".to_string(),
-                Value::String(usage.declared_name.clone()),
+                Value::String(declared_name.to_string()),
             ),
-            ("start_line".to_string(), json!(usage.span.start_line)),
-            ("start_col".to_string(), json!(usage.span.start_col)),
+            ("start_line".to_string(), json!(span.start_line)),
+            ("start_col".to_string(), json!(span.start_col)),
         ]),
     )?;
-    if mappings.usage_appends_source_location_if_missing_start_col(usage)
-        && !id.ends_with(&format!(".{}", usage.span.start_col))
+    // The named overlay preserves role IDs used by existing consumers while
+    // the element itself uses the actual ConstraintUsage metaclass/template.
+    if let Some(prefix) = requirement_memberships::compatibility_id_prefix(construct)? {
+        if let Some((_, tail)) = id.split_once('.') {
+            id = format!("{prefix}.{tail}");
+        }
+    }
+    let append_location = mappings
+        .semantic_defaults
+        .usage_id_policies
+        .get(construct)
+        .is_some_and(|policy| policy.append_source_location_if_missing_start_col);
+    if ((is_implicit_name && !has_redefinitions) || append_location)
+        && !id.ends_with(&format!(".{}_{}", span.start_line, span.start_col))
+        && !id_template.contains("{start_line}")
     {
-        id = format!("{}.{}_{}", id, usage.span.start_line, usage.span.start_col);
+        id = format!("{}.{}_{}", id, span.start_line, span.start_col);
     }
     Ok(id)
 }
@@ -2740,6 +3393,7 @@ fn definition_owner_id(
         owner_package_qualified_name: None,
         qualified_name: owner.to_string(),
         declared_name: owner.rsplit('.').next().unwrap_or(owner).to_string(),
+        modifiers: Vec::new(),
         docs: Vec::new(),
         span: definition.span.clone(),
     };
@@ -2892,6 +3546,9 @@ fn usage_direction<'a>(
         return Some(direction);
     }
 
+    if usage.modifiers.iter().any(|modifier| modifier == "return") {
+        return Some("out");
+    }
     mappings.usage_direction_from_modifiers(usage)
 }
 
@@ -2911,6 +3568,40 @@ fn render_expression_ir(expr: &ResolvedExpr) -> Result<Value, Diagnostic> {
 
 fn build_expression_ir(expr: &ResolvedExpr) -> Result<ExpressionIr, Diagnostic> {
     match expr {
+        ResolvedExpr::Operation { operator, operands } => Ok(ExpressionIr::Operation {
+            operator: operator.clone(),
+            operands: operands
+                .iter()
+                .map(build_expression_ir)
+                .collect::<Result<Vec<_>, _>>()?,
+        }),
+        ResolvedExpr::TypeReference { target } => Ok(ExpressionIr::TypeReference {
+            target: target.clone(),
+        }),
+        ResolvedExpr::Variable { name } => Ok(ExpressionIr::Variable { name: name.clone() }),
+        ResolvedExpr::NamedArgument { parameter, value } => Ok(ExpressionIr::NamedArgument {
+            parameter: parameter.clone(),
+            value: Box::new(build_expression_ir(value)?),
+        }),
+        ResolvedExpr::Lambda { parameters, body } => Ok(ExpressionIr::Lambda {
+            parameters: parameters
+                .iter()
+                .map(|p| {
+                    Ok(mercurio_foundation::kir::ExpressionParameter {
+                        name: p.name.clone(),
+                        type_ref: p.type_ref.clone(),
+                        properties: p.properties.clone(),
+                        default: p
+                            .default
+                            .as_deref()
+                            .map(build_expression_ir)
+                            .transpose()?
+                            .map(Box::new),
+                    })
+                })
+                .collect::<Result<Vec<_>, Diagnostic>>()?,
+            body: Box::new(build_expression_ir(body)?),
+        }),
         ResolvedExpr::Literal(value) => Ok(ExpressionIr::Literal {
             value: value.clone(),
         }),
@@ -2932,6 +3623,10 @@ fn build_expression_ir(expr: &ResolvedExpr) -> Result<ExpressionIr, Diagnostic> 
         }),
         ResolvedExpr::FeaturePath { segments } => Ok(ExpressionIr::Path {
             root: ExpressionPathRoot::SelfRef,
+            segments: segments.iter().map(expression_path_segment).collect(),
+        }),
+        ResolvedExpr::Select { root, segments } => Ok(ExpressionIr::Select {
+            root: Box::new(build_expression_ir(root)?),
             segments: segments.iter().map(expression_path_segment).collect(),
         }),
         ResolvedExpr::Call { function, args } => Ok(ExpressionIr::Call {
@@ -3220,6 +3915,8 @@ mod lowering_golden_tests {
 
     fn reference_usage(declared_name: &str) -> ResolvedUsage {
         ResolvedUsage {
+        annotation_targets: Vec::new(),
+            derived_properties: BTreeMap::new(),
             construct: "ReferenceUsage".to_string(),
             owner_construct: "Package".to_string(),
             owner_qualified_name: "root".to_string(),
@@ -3227,6 +3924,8 @@ mod lowering_golden_tests {
             declared_name: declared_name.to_string(),
             is_implicit_name: false,
             has_explicit_type: false,
+            has_explicit_specialization: false,
+            related_features: Vec::new(),
             type_ref: None,
             additional_type_refs: Vec::new(),
             reference_target: None,
@@ -3276,10 +3975,12 @@ mod lowering_golden_tests {
     fn package_lowering_trace_is_stable() {
         let mappings = MappingBundle::load().unwrap();
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: vec![ResolvedPackage {
                 owner_package_qualified_name: None,
                 qualified_name: "Demo".to_string(),
                 declared_name: "Demo".to_string(),
+                modifiers: Vec::new(),
                 docs: Vec::new(),
                 span: span(1),
             }],
@@ -3302,13 +4003,18 @@ mod lowering_golden_tests {
     fn connection_definition_lowering_trace_records_elaboration_rule() {
         let mappings = MappingBundle::load().unwrap();
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: vec![ResolvedDefinition {
+                visibility: "public".into(),
+                declared_short_name: None,
+                is_anonymous: false,
                 construct: "ConnectionDefinition".to_string(),
                 qualified_name: "Link".to_string(),
                 declared_name: "Link".to_string(),
                 is_abstract: false,
+                is_variation: false,
                 specializes: Vec::new(),
                 members: Vec::new(),
                 docs: Vec::new(),
@@ -3333,10 +4039,13 @@ mod lowering_golden_tests {
     fn usage_family_defaults_are_profile_backed_in_kir() {
         let mappings = MappingBundle::load().unwrap();
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
             usages: vec![ResolvedUsage {
+        annotation_targets: Vec::new(),
+                derived_properties: BTreeMap::new(),
                 construct: "ActionUsage".to_string(),
                 owner_construct: "Package".to_string(),
                 owner_qualified_name: "root".to_string(),
@@ -3344,6 +4053,8 @@ mod lowering_golden_tests {
                 declared_name: "act".to_string(),
                 is_implicit_name: false,
                 has_explicit_type: false,
+                has_explicit_specialization: false,
+                related_features: Vec::new(),
                 type_ref: None,
                 additional_type_refs: Vec::new(),
                 reference_target: None,
@@ -3419,10 +4130,13 @@ mod lowering_golden_tests {
     fn usage_property_defaults_are_profile_backed_in_kir() {
         let mappings = MappingBundle::load().unwrap();
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
             usages: vec![ResolvedUsage {
+        annotation_targets: Vec::new(),
+                derived_properties: BTreeMap::new(),
                 construct: "PartUsage".to_string(),
                 owner_construct: "ItemDefinition".to_string(),
                 owner_qualified_name: "Items::Item".to_string(),
@@ -3430,6 +4144,8 @@ mod lowering_golden_tests {
                 declared_name: "child".to_string(),
                 is_implicit_name: false,
                 has_explicit_type: false,
+                has_explicit_specialization: false,
+                related_features: Vec::new(),
                 type_ref: None,
                 additional_type_refs: Vec::new(),
                 reference_target: None,
@@ -3461,10 +4177,13 @@ mod lowering_golden_tests {
     fn explicit_part_usage_definition_preserves_family_default() {
         let mappings = MappingBundle::load().unwrap();
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
             usages: vec![ResolvedUsage {
+        annotation_targets: Vec::new(),
+                derived_properties: BTreeMap::new(),
                 construct: "PartUsage".to_string(),
                 owner_construct: "ItemDefinition".to_string(),
                 owner_qualified_name: "ItemTest.B".to_string(),
@@ -3472,6 +4191,8 @@ mod lowering_golden_tests {
                 declared_name: "a".to_string(),
                 is_implicit_name: false,
                 has_explicit_type: true,
+                has_explicit_specialization: true,
+                related_features: Vec::new(),
                 type_ref: Some("type.ItemTest.A".to_string()),
                 additional_type_refs: Vec::new(),
                 reference_target: None,
@@ -3505,6 +4226,8 @@ mod lowering_golden_tests {
     fn usage_property_values_are_profile_backed_in_kir() {
         let mappings = MappingBundle::load().unwrap();
         let child_state = ResolvedUsage {
+        annotation_targets: Vec::new(),
+            derived_properties: BTreeMap::new(),
             construct: "StateUsage".to_string(),
             owner_construct: "StateUsage".to_string(),
             owner_qualified_name: "root.parent".to_string(),
@@ -3512,6 +4235,8 @@ mod lowering_golden_tests {
             declared_name: "child".to_string(),
             is_implicit_name: false,
             has_explicit_type: false,
+            has_explicit_specialization: false,
+            related_features: Vec::new(),
             type_ref: None,
             additional_type_refs: Vec::new(),
             reference_target: None,
@@ -3531,6 +4256,8 @@ mod lowering_golden_tests {
             span: span(2),
         };
         let parent_state = ResolvedUsage {
+        annotation_targets: Vec::new(),
+            derived_properties: BTreeMap::new(),
             construct: "StateUsage".to_string(),
             owner_construct: "Package".to_string(),
             owner_qualified_name: "root".to_string(),
@@ -3538,6 +4265,8 @@ mod lowering_golden_tests {
             declared_name: "parent".to_string(),
             is_implicit_name: false,
             has_explicit_type: false,
+            has_explicit_specialization: false,
+            related_features: Vec::new(),
             type_ref: None,
             additional_type_refs: Vec::new(),
             reference_target: None,
@@ -3557,6 +4286,8 @@ mod lowering_golden_tests {
             span: span(1),
         };
         let succession = ResolvedUsage {
+        annotation_targets: Vec::new(),
+            derived_properties: BTreeMap::new(),
             construct: "SuccessionUsage".to_string(),
             owner_construct: "Package".to_string(),
             owner_qualified_name: "root".to_string(),
@@ -3564,6 +4295,8 @@ mod lowering_golden_tests {
             declared_name: "next".to_string(),
             is_implicit_name: false,
             has_explicit_type: false,
+            has_explicit_specialization: false,
+            related_features: Vec::new(),
             type_ref: None,
             additional_type_refs: Vec::new(),
             reference_target: None,
@@ -3583,6 +4316,7 @@ mod lowering_golden_tests {
             span: span(3),
         };
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3620,6 +4354,7 @@ mod lowering_golden_tests {
         state.members = vec![action];
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3659,6 +4394,7 @@ mod lowering_golden_tests {
         allocation.allocation_target = Some("feature.target".to_string());
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3669,7 +4405,7 @@ mod lowering_golden_tests {
         let accept = element(&document, "accept.root.acceptA.1_1");
         let allocation = element(&document, "allocation.root.allocA");
 
-        assert_eq!(accept.properties["source"], "pkg.root");
+        assert_eq!(accept.properties["source"], document.elements.iter().find(|e| e.kind == "SysML::Namespace").unwrap().id);
         assert_eq!(accept.properties["trigger"], "go");
         assert_eq!(accept.properties["trigger_kind"], "signal");
         assert_eq!(accept.properties["target"], "state.root.done");
@@ -3693,6 +4429,7 @@ mod lowering_golden_tests {
         verify.reference_target = Some("requirement.reqB".to_string());
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3704,10 +4441,10 @@ mod lowering_golden_tests {
         let verify = element(&document, "verify.root.verA");
 
         assert_eq!(satisfy.kind, "SysML::Requirements::SatisfyRequirementUsage");
-        assert_eq!(satisfy.properties["source"], "pkg.root");
+        assert_eq!(satisfy.properties["source"], document.elements.iter().find(|e| e.kind == "SysML::Namespace").unwrap().id);
         assert_eq!(satisfy.properties["target"], "requirement.reqA");
         assert_eq!(verify.kind, "SysML::Requirements::VerifyRequirementUsage");
-        assert_eq!(verify.properties["source"], "pkg.root");
+        assert_eq!(verify.properties["source"], document.elements.iter().find(|e| e.kind == "SysML::Namespace").unwrap().id);
         assert_eq!(verify.properties["target"], "requirement.reqB");
     }
 
@@ -3726,6 +4463,7 @@ mod lowering_golden_tests {
             .insert("locale".to_string(), "en-US".to_string());
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3749,6 +4487,7 @@ mod lowering_golden_tests {
         perform.specialized_features = vec!["feature.root.action".to_string()];
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3775,6 +4514,7 @@ mod lowering_golden_tests {
             owner_package_qualified_name: None,
             qualified_name: "root".to_string(),
             declared_name: "root".to_string(),
+            modifiers: Vec::new(),
             docs: Vec::new(),
             span: span(1),
         };
@@ -3798,6 +4538,7 @@ mod lowering_golden_tests {
             .insert("level".to_string(), "package".to_string());
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: vec![package],
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3839,6 +4580,7 @@ mod lowering_golden_tests {
         action.members = vec![state, accept];
 
         let module = ResolvedModule {
+            aliases: Vec::new(),
             packages: Vec::new(),
             imports: Vec::new(),
             definitions: Vec::new(),
@@ -3850,4 +4592,26 @@ mod lowering_golden_tests {
 
         assert_eq!(accept.properties["source"], "state.root.act.ready");
     }
+}
+
+#[derive(Deserialize)]
+struct KermlMappingOverlay {
+    constructs: MetamodelConstructSeed,
+    emission: KirEmissionSeed,
+}
+
+#[derive(Deserialize)]
+struct ObservedDefinitionDefaults {
+    definitions: BTreeMap<String, Vec<String>>,
+}
+
+#[derive(Deserialize)]
+struct ConnectionDefinitionDefaults {
+    definitions: BTreeMap<String, ConnectionDefinitionSelectors>,
+}
+
+#[derive(Deserialize)]
+struct ConnectionDefinitionSelectors {
+    base: String,
+    binary: String,
 }

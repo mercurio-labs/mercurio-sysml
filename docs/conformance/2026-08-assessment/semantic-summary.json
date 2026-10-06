@@ -1,0 +1,4981 @@
+{
+  "scope": {
+    "requested_targets": 310,
+    "recorded_targets": 310
+  },
+  "raw_aggregate": {
+    "compared": 310,
+    "native_elements": 11170,
+    "pilot_elements": 247516,
+    "exact_pairs": 0,
+    "mismatched_pairs": 7635,
+    "native_only": 3535,
+    "pilot_only": 239881
+  },
+  "pilot_validation_statuses": {
+    "ok": 310
+  },
+  "raw_attribute_difference_counts": {
+    "alias_ids": 7635,
+    "element_id": 7635,
+    "is_implied_included": 7635,
+    "is_library_element": 7635,
+    "metatype": 7635,
+    "metatype_specialization_chain": 7635,
+    "owner": 7635,
+    "owning_namespace": 7635,
+    "owned_relationship": 7620,
+    "owning_membership": 7590,
+    "qualified_name": 7438,
+    "name": 7172,
+    "is_conjugated": 7031,
+    "is_sufficient": 7031,
+    "qualifiedName": 7016,
+    "members": 6734,
+    "ownedElement": 6246,
+    "specializes": 6070,
+    "is_variation": 6002,
+    "is_composite": 5546,
+    "is_constant": 5546,
+    "is_portion": 5546,
+    "type": 5546,
+    "owned_subsetting": 5543,
+    "features": 5231,
+    "definition": 5212,
+    "featuring_type": 4911,
+    "owning_type": 4909,
+    "is_reference": 4751,
+    "may_time_vary": 4751,
+    "owning_feature_membership": 4614,
+    "subsets": 4377,
+    "doc": 4036,
+    "is_individual": 3878,
+    "owning_definition": 3717,
+    "owned_typing": 3701,
+    "subsetted_features": 3210,
+    "is_abstract": 2935,
+    "is_ordered": 2317,
+    "is_derived": 2303,
+    "is_end": 2253,
+    "multiplicity": 1923,
+    "declared_name": 1884,
+    "owned_redefinition": 1736,
+    "declared_short_name": 1526,
+    "short_name": 1526,
+    "redefines": 1466,
+    "owned_annotation": 1459,
+    "owned_element": 1459,
+    "owning_relationship": 1459,
+    "textual_representation": 1459,
+    "differencing_type": 1418,
+    "directed_feature": 1418,
+    "end_feature": 1418,
+    "feature": 1418,
+    "feature_membership": 1418,
+    "imported_membership": 1418,
+    "inherited_feature": 1418,
+    "inherited_membership": 1418,
+    "input": 1418,
+    "intersecting_type": 1418,
+    "member": 1418,
+    "membership": 1418,
+    "output": 1418,
+    "owned_conjugator": 1418,
+    "owned_differencing": 1418,
+    "owned_disjoining": 1418,
+    "owned_end_feature": 1418,
+    "owned_feature_membership": 1418,
+    "owned_import": 1418,
+    "owned_intersecting": 1418,
+    "owned_membership": 1418,
+    "owned_unioning": 1418,
+    "unioning_type": 1418,
+    "is_variable": 1402,
+    "is_unique": 1162,
+    "direction": 993,
+    "redefined_features": 839,
+    "expression_ir": 620,
+    "chaining_feature": 612,
+    "source": 538,
+    "target": 515,
+    "isLibraryElement": 457,
+    "is_implied": 455,
+    "directed_usage": 447,
+    "usage": 447,
+    "variant": 447,
+    "variant_membership": 447,
+    "multiplicity_lower": 431,
+    "multiplicity_upper": 431,
+    "nested_action": 405,
+    "nested_allocation": 405,
+    "nested_analysis_case": 405,
+    "nested_attribute": 405,
+    "nested_calculation": 405,
+    "nested_case": 405,
+    "nested_concern": 405,
+    "nested_connection": 405,
+    "nested_constraint": 405,
+    "nested_enumeration": 405,
+    "nested_flow": 405,
+    "nested_interface": 405,
+    "nested_item": 405,
+    "nested_metadata": 405,
+    "nested_occurrence": 405,
+    "nested_part": 405,
+    "nested_port": 405,
+    "nested_reference": 405,
+    "nested_rendering": 405,
+    "nested_requirement": 405,
+    "nested_state": 405,
+    "nested_transition": 405,
+    "nested_usage": 405,
+    "nested_use_case": 405,
+    "nested_verification_case": 405,
+    "nested_view": 405,
+    "nested_viewpoint": 405,
+    "owning_usage": 405,
+    "is_model_level_evaluable": 385,
+    "specialized_features": 348,
+    "portion_kind": 311,
+    "individual_definition": 304,
+    "occurrence_definition": 304,
+    "cross_feature": 287,
+    "end_owning_type": 287,
+    "feature_target": 287,
+    "owned_cross_subsetting": 287,
+    "owned_feature_chaining": 287,
+    "owned_feature_inverting": 287,
+    "owned_reference_subsetting": 287,
+    "owned_type_featuring": 287,
+    "owned_subclassification": 247,
+    "documentation": 200,
+    "parameter": 189,
+    "behavior": 188,
+    "owned_related_element": 185,
+    "owning_related_element": 185,
+    "related_element": 185,
+    "text": 172,
+    "is_parallel": 165,
+    "action_definition": 143,
+    "association": 118,
+    "connector_end": 118,
+    "default_featuring_type": 118,
+    "related_feature": 118,
+    "source_feature": 118,
+    "target_feature": 118,
+    "flow_end": 102,
+    "interaction": 102,
+    "payload_feature": 102,
+    "payload_type": 102,
+    "source_output_feature": 102,
+    "target_input_feature": 102,
+    "public_memberships": 84,
+    "parent_state": 77,
+    "shortName": 65,
+    "trigger": 61,
+    "trigger_kind": 61,
+    "req_id": 56,
+    "port_definition": 52,
+    "function": 52,
+    "result": 52,
+    "predicate": 42,
+    "owned_action": 42,
+    "owned_allocation": 42,
+    "owned_analysis_case": 42,
+    "owned_attribute": 42,
+    "owned_calculation": 42,
+    "owned_case": 42,
+    "owned_concern": 42,
+    "owned_connection": 42,
+    "owned_constraint": 42,
+    "owned_enumeration": 42,
+    "owned_flow": 42,
+    "owned_interface": 42,
+    "owned_item": 42,
+    "owned_metadata": 42,
+    "owned_occurrence": 42,
+    "owned_part": 42,
+    "owned_port": 42,
+    "owned_reference": 42,
+    "owned_rendering": 42,
+    "owned_requirement": 42,
+    "owned_state": 42,
+    "owned_transition": 42,
+    "owned_usage": 42,
+    "owned_use_case": 42,
+    "owned_verification_case": 42,
+    "owned_view": 42,
+    "owned_viewpoint": 42,
+    "constraint_definition": 41,
+    "is_negated": 38,
+    "asserted_constraint": 37,
+    "actor_parameter": 26,
+    "subject_parameter": 26,
+    "assumed_constraint": 19,
+    "framed_concern": 19,
+    "required_constraint": 19,
+    "requirement_definition": 19,
+    "satisfied_requirement": 19,
+    "satisfying_feature": 19,
+    "stakeholder_parameter": 19,
+    "allocated": 18,
+    "allocated_to": 18,
+    "condition": 16,
+    "member_element": 16,
+    "member_element_id": 16,
+    "member_name": 16,
+    "member_short_name": 16,
+    "membership_owning_namespace": 16,
+    "owned_member_element": 16,
+    "owned_member_element_id": 16,
+    "owned_member_name": 16,
+    "owned_member_short_name": 16,
+    "visibility": 16,
+    "client": 11,
+    "supplier": 11,
+    "annotated_element": 10,
+    "annotation": 10,
+    "owned_annotating_relationship": 10,
+    "owning_annotating_relationship": 10,
+    "effect_action": 9,
+    "guard_expression": 9,
+    "succession": 9,
+    "trigger_action": 9,
+    "is_standard": 9,
+    "body_action": 8,
+    "calculation_definition": 7,
+    "case_definition": 7,
+    "objective_requirement": 7,
+    "verification_case_definition": 7,
+    "verified_requirement": 7,
+    "event_occurrence": 6,
+    "performed_action": 6,
+    "use_case_included": 6,
+    "general": 6,
+    "specific": 6,
+    "owning_feature": 5,
+    "flow_definition": 4,
+    "item_definition": 4,
+    "part_definition": 4,
+    "body": 4,
+    "referent": 4,
+    "target_argument": 4,
+    "value_expression": 4,
+    "locale": 3,
+    "payload_argument": 2,
+    "payload_parameter": 2,
+    "receiver_argument": 2,
+    "typed_feature": 2,
+    "subsetted_feature": 2,
+    "subsetting_feature": 2,
+    "conjugated_type": 2,
+    "original_type": 2,
+    "language": 1,
+    "represented_element": 1,
+    "owning_classifier": 1,
+    "subclassifier": 1,
+    "superclassifier": 1,
+    "step": 1,
+    "feature_of_type": 1,
+    "owning_feature_of_type": 1,
+    "redefined_feature": 1,
+    "redefining_feature": 1,
+    "feature_inverted": 1,
+    "inverting_feature": 1,
+    "terminated_occurrence_argument": 1,
+    "annotatedElement": 1
+  },
+  "native_only_kinds": {
+    "KerML::Core::Feature": 1315,
+    "SysML::ReferenceUsage": 1144,
+    "SysML::Import": 547,
+    "KerML::Root::Documentation": 188,
+    "KerML::Import": 130,
+    "SysML::ConjugatedPortDefinition": 93,
+    "Association": 21,
+    "SendActionUsage": 17,
+    "Behavior": 16,
+    "KerML::Core::Type": 12,
+    "Structure": 11,
+    "SysML::Expose": 9,
+    "SysML::Systems::ItemDefinition": 6,
+    "SysML::ActionDefinition": 6,
+    "SysML::Requirements::VerifyRequirementUsage": 5,
+    "SysML::ItemUsage": 5,
+    "SysML::AttributeDefinition": 4,
+    "SysML::Package": 3,
+    "IfActionUsage": 1,
+    "MetadataFeature": 1,
+    "SysML::StateDefinition": 1
+  },
+  "pilot_only_kinds": {
+    "TypeFeaturing": 46990,
+    "Redefinition": 31738,
+    "Feature": 30950,
+    "Subsetting": 24997,
+    "FeatureMembership": 19316,
+    "OwningMembership": 14997,
+    "ReferenceSubsetting": 14706,
+    "FeatureChaining": 11728,
+    "BindingConnector": 6458,
+    "FeatureTyping": 5239,
+    "FeatureValue": 4213,
+    "ReturnParameterMembership": 3759,
+    "ParameterMembership": 3495,
+    "Membership": 2547,
+    "Multiplicity": 2372,
+    "ReferenceUsage": 2277,
+    "FeatureReferenceExpression": 1897,
+    "Subclassification": 1678,
+    "LiteralInteger": 1451,
+    "EndFeatureMembership": 1444,
+    "OperatorExpression": 1070,
+    "MultiplicityRange": 918,
+    "FeatureChainExpression": 441,
+    "NamespaceImport": 436,
+    "SuccessionAsUsage": 354,
+    "Namespace": 310,
+    "MembershipImport": 252,
+    "Comment": 245,
+    "Documentation": 201,
+    "FlowEnd": 196,
+    "LiteralInfinity": 181,
+    "MetadataUsage": 177,
+    "CrossSubsetting": 169,
+    "EventOccurrenceUsage": 128,
+    "SubjectMembership": 122,
+    "TransitionFeatureMembership": 121,
+    "ResultExpressionMembership": 115,
+    "LiteralRational": 112,
+    "InvocationExpression": 108,
+    "VariantMembership": 107,
+    "PerformActionUsage": 104,
+    "ConjugatedPortDefinition": 93,
+    "PortConjugation": 93,
+    "ConstructorExpression": 92,
+    "AcceptActionUsage": 87,
+    "TransitionUsage": 78,
+    "MetadataFeature": 67,
+    "LiteralBoolean": 65,
+    "BindingConnectorAsUsage": 62,
+    "PortUsage": 60,
+    "LiteralString": 59,
+    "ConstraintUsage": 58,
+    "StateSubactionMembership": 56,
+    "RequirementConstraintMembership": 56,
+    "Unioning": 51,
+    "ConjugatedPortTyping": 48,
+    "IndexExpression": 45,
+    "ActorMembership": 42,
+    "ActionUsage": 32,
+    "Annotation": 31,
+    "MetadataAccessExpression": 31,
+    "RequirementUsage": 29,
+    "AssertConstraintUsage": 29,
+    "ObjectiveMembership": 26,
+    "Succession": 26,
+    "Connector": 23,
+    "Usage": 23,
+    "Expression": 21,
+    "Association": 21,
+    "OccurrenceUsage": 21,
+    "PayloadFeature": 20,
+    "TriggerInvocationExpression": 18,
+    "SendActionUsage": 18,
+    "Specialization": 16,
+    "Behavior": 16,
+    "ElementFilterMembership": 14,
+    "ViewRenderingMembership": 12,
+    "RenderingUsage": 12,
+    "NullExpression": 12,
+    "Package": 12,
+    "Classifier": 12,
+    "ItemUsage": 12,
+    "Differencing": 11,
+    "Structure": 11,
+    "InterfaceUsage": 10,
+    "ExhibitStateUsage": 10,
+    "PartUsage": 9,
+    "CalculationUsage": 8,
+    "Intersecting": 8,
+    "ConcernUsage": 7,
+    "FramedConcernMembership": 7,
+    "IncludeUseCaseUsage": 7,
+    "StakeholderMembership": 7,
+    "Disjoining": 7,
+    "RequirementVerificationMembership": 6,
+    "NamespaceExpose": 6,
+    "Conjugation": 6,
+    "Type": 5,
+    "SuccessionFlowUsage": 4,
+    "TextualRepresentation": 4,
+    "AttributeUsage": 3,
+    "EnumerationUsage": 3,
+    "SatisfyRequirementUsage": 3,
+    "SelectExpression": 3,
+    "FeatureInverting": 3,
+    "MembershipExpose": 3,
+    "Flow": 2,
+    "Class": 2,
+    "Dependency": 2,
+    "PartDefinition": 1,
+    "ConnectionUsage": 1,
+    "IfActionUsage": 1,
+    "CollectExpression": 1,
+    "SuccessionFlow": 1,
+    "Invariant": 1
+  },
+  "named_declaration_projection": {
+    "native_named_anchors_without_pilot_pair": 2150,
+    "pilot_named_anchors_without_native_pair": 252,
+    "unique_named_pairs": 6547,
+    "relation_fields_checked": 21331,
+    "relation_fields_equal_after_explicit_projection": 17504,
+    "relation_fields_missing_direct_counterpart": 4714,
+    "relation_field_differences": 3827,
+    "boolean_differences": 171,
+    "name_or_direction_differences": 714,
+    "named_declarations_with_pilot_initializer": 497,
+    "metaclass_mismatches": 374,
+    "literal_initializers_checked": 29,
+    "ambiguous_named_anchors": 1,
+    "pilot_initializer_without_native_expression_ir": 82
+  },
+  "projection_rules": [
+    "Match only unique (declared name, start line) pairs within one source file.",
+    "Reference IDs map only through those observed pairs in the same isolated source group.",
+    "For the six enumerated reference fields only, scalar/singleton-array and duplicate/order differences are reported as equal sets.",
+    "Missing direct fields, anonymous expressions and unpaired elements are not declared equivalent.",
+    "No raw mismatch is removed; projection results are triage, not a conformance pass."
+  ],
+  "failures": [],
+  "cases": [
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ActionTest.sysml",
+      "native_elements": 51,
+      "pilot_elements": 1313,
+      "exact_pairs": 0,
+      "mismatched_pairs": 30,
+      "native_only": 21,
+      "pilot_only": 1283,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 13,
+        "relation_field_differences": 10,
+        "boolean_differences": 1,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/AliasTest.sysml",
+      "native_elements": 15,
+      "pilot_elements": 119,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 5,
+      "pilot_only": 109,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+      "native_elements": 27,
+      "pilot_elements": 239,
+      "exact_pairs": 0,
+      "mismatched_pairs": 21,
+      "native_only": 6,
+      "pilot_only": 218,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 12,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+      "native_elements": 19,
+      "pilot_elements": 257,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 4,
+      "pilot_only": 242,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 20,
+        "relation_field_differences": 6,
+        "boolean_differences": 2,
+        "metaclass_mismatches": 1,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+      "native_elements": 57,
+      "pilot_elements": 1723,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 31,
+      "pilot_only": 1697,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 16
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+      "native_elements": 18,
+      "pilot_elements": 833,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 2,
+      "pilot_only": 817,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 11,
+        "relation_field_differences": 14,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/CommentTest.sysml",
+      "native_elements": 6,
+      "pilot_elements": 42,
+      "exact_pairs": 0,
+      "mismatched_pairs": 2,
+      "native_only": 4,
+      "pilot_only": 40,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+      "native_elements": 22,
+      "pilot_elements": 220,
+      "exact_pairs": 0,
+      "mismatched_pairs": 21,
+      "native_only": 1,
+      "pilot_only": 199,
+      "named_declaration_triage": {
+        "unique_named_pairs": 21,
+        "relation_fields_missing_direct_counterpart": 16,
+        "relation_field_differences": 24,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+      "native_elements": 56,
+      "pilot_elements": 609,
+      "exact_pairs": 0,
+      "mismatched_pairs": 40,
+      "native_only": 16,
+      "pilot_only": 569,
+      "named_declaration_triage": {
+        "unique_named_pairs": 35,
+        "relation_field_differences": 17,
+        "relation_fields_missing_direct_counterpart": 34,
+        "metaclass_mismatches": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+      "native_elements": 72,
+      "pilot_elements": 2738,
+      "exact_pairs": 0,
+      "mismatched_pairs": 42,
+      "native_only": 30,
+      "pilot_only": 2696,
+      "named_declaration_triage": {
+        "unique_named_pairs": 36,
+        "relation_fields_missing_direct_counterpart": 32,
+        "name_or_direction_differences": 10,
+        "relation_field_differences": 27,
+        "metaclass_mismatches": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+      "native_elements": 35,
+      "pilot_elements": 331,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 18,
+      "pilot_only": 314,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_field_differences": 15,
+        "relation_fields_missing_direct_counterpart": 25,
+        "name_or_direction_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+      "native_elements": 10,
+      "pilot_elements": 909,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 2,
+      "pilot_only": 901,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 9,
+        "metaclass_mismatches": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+      "native_elements": 9,
+      "pilot_elements": 153,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 0,
+      "pilot_only": 144,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+      "native_elements": 12,
+      "pilot_elements": 27,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 1,
+      "pilot_only": 16,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+      "native_elements": 24,
+      "pilot_elements": 326,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 6,
+      "pilot_only": 308,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 3,
+        "relation_field_differences": 20
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+      "native_elements": 31,
+      "pilot_elements": 412,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 9,
+      "pilot_only": 390,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 20
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ImportTest.sysml",
+      "native_elements": 12,
+      "pilot_elements": 25,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 4,
+      "pilot_only": 17,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+      "native_elements": 22,
+      "pilot_elements": 153,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 2,
+      "pilot_only": 133,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_field_differences": 9,
+        "metaclass_mismatches": 3,
+        "relation_fields_missing_direct_counterpart": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+      "native_elements": 20,
+      "pilot_elements": 211,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 4,
+      "pilot_only": 195,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 14,
+        "relation_field_differences": 5,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ItemTest.sysml",
+      "native_elements": 13,
+      "pilot_elements": 91,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 1,
+      "pilot_only": 79,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+      "native_elements": 22,
+      "pilot_elements": 300,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 7,
+      "pilot_only": 285,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 13,
+        "metaclass_mismatches": 3,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+      "native_elements": 13,
+      "pilot_elements": 208,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 0,
+      "pilot_only": 195,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+      "native_elements": 22,
+      "pilot_elements": 148,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 0,
+      "pilot_only": 126,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_field_differences": 19,
+        "relation_fields_missing_direct_counterpart": 38,
+        "metaclass_mismatches": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+      "native_elements": 13,
+      "pilot_elements": 416,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 0,
+      "pilot_only": 403,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 18,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/PartTest.sysml",
+      "native_elements": 43,
+      "pilot_elements": 380,
+      "exact_pairs": 0,
+      "mismatched_pairs": 41,
+      "native_only": 2,
+      "pilot_only": 339,
+      "named_declaration_triage": {
+        "unique_named_pairs": 35,
+        "name_or_direction_differences": 2,
+        "relation_field_differences": 29,
+        "boolean_differences": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+      "native_elements": 29,
+      "pilot_elements": 361,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 11,
+      "pilot_only": 343,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "name_or_direction_differences": 2,
+        "relation_fields_missing_direct_counterpart": 23,
+        "relation_field_differences": 7,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+      "native_elements": 8,
+      "pilot_elements": 19,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 2,
+      "pilot_only": 13,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/StateTest.sysml",
+      "native_elements": 77,
+      "pilot_elements": 1002,
+      "exact_pairs": 0,
+      "mismatched_pairs": 30,
+      "native_only": 47,
+      "pilot_only": 972,
+      "named_declaration_triage": {
+        "unique_named_pairs": 28,
+        "relation_field_differences": 37,
+        "relation_fields_missing_direct_counterpart": 19,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+      "native_elements": 52,
+      "pilot_elements": 1724,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 34,
+      "pilot_only": 1706,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "native_elements": 9,
+      "pilot_elements": 50,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 1,
+      "pilot_only": 42,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 5,
+        "metaclass_mismatches": 2,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+      "native_elements": 13,
+      "pilot_elements": 204,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 5,
+      "pilot_only": 196,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 2,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+      "native_elements": 24,
+      "pilot_elements": 237,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 8,
+      "pilot_only": 221,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 5,
+        "name_or_direction_differences": 3,
+        "metaclass_mismatches": 2,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+      "native_elements": 23,
+      "pilot_elements": 133,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 0,
+      "pilot_only": 110,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "boolean_differences": 6,
+        "relation_fields_missing_direct_counterpart": 23,
+        "relation_field_differences": 9,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+      "native_elements": 19,
+      "pilot_elements": 309,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 5,
+      "pilot_only": 295,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 13,
+        "metaclass_mismatches": 3,
+        "relation_field_differences": 6,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Simple Tests/ViewTest.sysml",
+      "native_elements": 26,
+      "pilot_elements": 198,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 8,
+      "pilot_only": 180,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 23,
+        "relation_field_differences": 6,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/ArgumentResolution.kerml",
+      "native_elements": 10,
+      "pilot_elements": 126,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 1,
+      "pilot_only": 117,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 14,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Associations.kerml",
+      "native_elements": 17,
+      "pilot_elements": 170,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 0,
+      "pilot_only": 153,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_field_differences": 8,
+        "relation_fields_missing_direct_counterpart": 20,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Behaviors.kerml",
+      "native_elements": 16,
+      "pilot_elements": 316,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 3,
+      "pilot_only": 303,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 25,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 5,
+        "pilot_initializer_without_native_expression_ir": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Circular.kerml",
+      "native_elements": 8,
+      "pilot_elements": 24,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 1,
+      "pilot_only": 17,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Classes.kerml",
+      "native_elements": 19,
+      "pilot_elements": 97,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 0,
+      "pilot_only": 78,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "name_or_direction_differences": 3,
+        "relation_fields_missing_direct_counterpart": 30,
+        "relation_field_differences": 14
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Classifications.kerml",
+      "native_elements": 7,
+      "pilot_elements": 449,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 0,
+      "pilot_only": 442,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 16,
+        "pilot_initializer_without_native_expression_ir": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+      "native_elements": 11,
+      "pilot_elements": 37,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 3,
+      "pilot_only": 29,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 5,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Comments.kerml",
+      "native_elements": 2,
+      "pilot_elements": 42,
+      "exact_pairs": 0,
+      "mismatched_pairs": 1,
+      "native_only": 1,
+      "pilot_only": 41,
+      "named_declaration_triage": {
+        "unique_named_pairs": 1,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Conjugation.kerml",
+      "native_elements": 5,
+      "pilot_elements": 16,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 0,
+      "pilot_only": 11,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 6,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Connectors.kerml",
+      "native_elements": 24,
+      "pilot_elements": 299,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 10,
+      "pilot_only": 285,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "metaclass_mismatches": 6,
+        "relation_field_differences": 4,
+        "relation_fields_missing_direct_counterpart": 28
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+      "native_elements": 12,
+      "pilot_elements": 28,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 3,
+      "pilot_only": 19,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 10,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Expansion.kerml",
+      "native_elements": 3,
+      "pilot_elements": 235,
+      "exact_pairs": 0,
+      "mismatched_pairs": 2,
+      "native_only": 1,
+      "pilot_only": 233,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 4,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Expressions.kerml",
+      "native_elements": 45,
+      "pilot_elements": 5572,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 7,
+      "pilot_only": 5534,
+      "named_declaration_triage": {
+        "unique_named_pairs": 37,
+        "relation_fields_missing_direct_counterpart": 86,
+        "relation_field_differences": 13,
+        "pilot_initializer_without_native_expression_ir": 20,
+        "name_or_direction_differences": 6,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/FeatureChains.kerml",
+      "native_elements": 21,
+      "pilot_elements": 255,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 6,
+      "pilot_only": 240,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 28,
+        "relation_field_differences": 8,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/FeatureInheritance.kerml",
+      "native_elements": 4,
+      "pilot_elements": 14,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 0,
+      "pilot_only": 10,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Features.kerml",
+      "native_elements": 43,
+      "pilot_elements": 406,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 5,
+      "pilot_only": 368,
+      "named_declaration_triage": {
+        "unique_named_pairs": 38,
+        "relation_fields_missing_direct_counterpart": 67,
+        "metaclass_mismatches": 5,
+        "relation_field_differences": 7,
+        "name_or_direction_differences": 1,
+        "pilot_initializer_without_native_expression_ir": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Filtering.kerml",
+      "native_elements": 29,
+      "pilot_elements": 1140,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 12,
+      "pilot_only": 1123,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Imports.kerml",
+      "native_elements": 28,
+      "pilot_elements": 66,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 5,
+      "pilot_only": 43,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Inheritance.kerml",
+      "native_elements": 8,
+      "pilot_elements": 30,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 0,
+      "pilot_only": 22,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Inverses.kerml",
+      "native_elements": 9,
+      "pilot_elements": 39,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 1,
+      "pilot_only": 31,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 9,
+        "metaclass_mismatches": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/MetadataTest.kerml",
+      "native_elements": 32,
+      "pilot_elements": 606,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 7,
+      "pilot_only": 581,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 26,
+        "relation_field_differences": 6,
+        "metaclass_mismatches": 1,
+        "pilot_initializer_without_native_expression_ir": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Redefinition.kerml",
+      "native_elements": 12,
+      "pilot_elements": 44,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 0,
+      "pilot_only": 32,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 8,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Scoping.kerml",
+      "native_elements": 24,
+      "pilot_elements": 74,
+      "exact_pairs": 0,
+      "mismatched_pairs": 24,
+      "native_only": 0,
+      "pilot_only": 50,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_field_differences": 1,
+        "relation_fields_missing_direct_counterpart": 13
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "native_elements": 9,
+      "pilot_elements": 33,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 2,
+      "pilot_only": 26,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 2,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Simple Tests/Types.kerml",
+      "native_elements": 17,
+      "pilot_elements": 81,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 3,
+      "pilot_only": 67,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "metaclass_mismatches": 13,
+        "relation_fields_missing_direct_counterpart": 9
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+      "native_elements": 19,
+      "pilot_elements": 963,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 5,
+      "pilot_only": 949,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_02-Basic Value Properties.sysml",
+      "native_elements": 12,
+      "pilot_elements": 133,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 2,
+      "pilot_only": 123,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_03-Value Expression.sysml",
+      "native_elements": 18,
+      "pilot_elements": 1157,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 3,
+      "pilot_only": 1142,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 5,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_04-Logical Expressions.sysml",
+      "native_elements": 14,
+      "pilot_elements": 828,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 3,
+      "pilot_only": 817,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_05-Unification of Expression and Constraint Definition.sysml",
+      "native_elements": 25,
+      "pilot_elements": 1247,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 5,
+      "pilot_only": 1227,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 15,
+        "relation_field_differences": 5,
+        "name_or_direction_differences": 3,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_06-System of Quantities.sysml",
+      "native_elements": 2,
+      "pilot_elements": 8,
+      "exact_pairs": 0,
+      "mismatched_pairs": 1,
+      "native_only": 1,
+      "pilot_only": 7,
+      "named_declaration_triage": {
+        "unique_named_pairs": 1,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_07-System of Units and Scales.sysml",
+      "native_elements": 3,
+      "pilot_elements": 9,
+      "exact_pairs": 0,
+      "mismatched_pairs": 1,
+      "native_only": 2,
+      "pilot_only": 8,
+      "named_declaration_triage": {
+        "unique_named_pairs": 1,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_08-Range Restriction.sysml",
+      "native_elements": 10,
+      "pilot_elements": 439,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 5,
+      "pilot_only": 434,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_10-Primitive Data Types.sysml",
+      "native_elements": 33,
+      "pilot_elements": 662,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 13,
+      "pilot_only": 642,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 30
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_11-Variable Length Collection Types.sysml",
+      "native_elements": 19,
+      "pilot_elements": 98,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 2,
+      "pilot_only": 81,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 2,
+        "relation_field_differences": 7,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_12-Compound Value Type.sysml",
+      "native_elements": 17,
+      "pilot_elements": 253,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 2,
+      "pilot_only": 238,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_13-Discretely Sampled Function Value.sysml",
+      "native_elements": 58,
+      "pilot_elements": 2765,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 33,
+      "pilot_only": 2740,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 3,
+        "boolean_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_19-Materials with Properties.sysml",
+      "native_elements": 49,
+      "pilot_elements": 1689,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 11,
+      "pilot_only": 1651,
+      "named_declaration_triage": {
+        "unique_named_pairs": 28,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 4,
+        "relation_field_differences": 15,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/15-Properties-Values-Expressions/15_19a-Materials with Properties.sysml",
+      "native_elements": 50,
+      "pilot_elements": 1987,
+      "exact_pairs": 0,
+      "mismatched_pairs": 30,
+      "native_only": 20,
+      "pilot_only": 1957,
+      "named_declaration_triage": {
+        "unique_named_pairs": 26,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 1,
+        "boolean_differences": 4,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-Atoms.kerml",
+      "native_elements": 6,
+      "pilot_elements": 73,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 2,
+      "pilot_only": 69,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 5,
+        "name_or_direction_differences": 1,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-2-ModelingInstances.kerml",
+      "native_elements": 18,
+      "pilot_elements": 98,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 6,
+      "pilot_only": 86,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 8,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-2-WithoutConnectors.kerml",
+      "native_elements": 16,
+      "pilot_elements": 77,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 7,
+      "pilot_only": 68,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-3-OneToOneConnectors.kerml",
+      "native_elements": 32,
+      "pilot_elements": 245,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 15,
+      "pilot_only": 228,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 16,
+        "relation_field_differences": 5,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-4-OneToUnrestrictedConnectors.kerml",
+      "native_elements": 32,
+      "pilot_elements": 263,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 14,
+      "pilot_only": 245,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 5,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-5-TimingForStructures.kerml",
+      "native_elements": 111,
+      "pilot_elements": 755,
+      "exact_pairs": 0,
+      "mismatched_pairs": 59,
+      "native_only": 52,
+      "pilot_only": 696,
+      "named_declaration_triage": {
+        "unique_named_pairs": 29,
+        "relation_field_differences": 16,
+        "relation_fields_missing_direct_counterpart": 26,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-6-Sequences.kerml",
+      "native_elements": 35,
+      "pilot_elements": 326,
+      "exact_pairs": 0,
+      "mismatched_pairs": 21,
+      "native_only": 14,
+      "pilot_only": 305,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 14,
+        "metaclass_mismatches": 2,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-7-DecisionsAndMerges.kerml",
+      "native_elements": 66,
+      "pilot_elements": 900,
+      "exact_pairs": 0,
+      "mismatched_pairs": 40,
+      "native_only": 26,
+      "pilot_only": 860,
+      "named_declaration_triage": {
+        "unique_named_pairs": 24,
+        "relation_fields_missing_direct_counterpart": 42,
+        "metaclass_mismatches": 8,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/KerML Spec Annex A Examples/A-3-8-ChangingFeatureValues.kerml",
+      "native_elements": 109,
+      "pilot_elements": 1857,
+      "exact_pairs": 0,
+      "mismatched_pairs": 73,
+      "native_only": 36,
+      "pilot_only": 1784,
+      "named_declaration_triage": {
+        "unique_named_pairs": 50,
+        "relation_fields_missing_direct_counterpart": 101,
+        "relation_field_differences": 48,
+        "metaclass_mismatches": 3,
+        "pilot_initializer_without_native_expression_ir": 18,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-1.sysml",
+      "native_elements": 92,
+      "pilot_elements": 675,
+      "exact_pairs": 0,
+      "mismatched_pairs": 40,
+      "native_only": 52,
+      "pilot_only": 635,
+      "named_declaration_triage": {
+        "unique_named_pairs": 34,
+        "relation_fields_missing_direct_counterpart": 11,
+        "name_or_direction_differences": 12,
+        "relation_field_differences": 11
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-2.sysml",
+      "native_elements": 76,
+      "pilot_elements": 631,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 38,
+      "pilot_only": 593,
+      "named_declaration_triage": {
+        "unique_named_pairs": 35,
+        "relation_fields_missing_direct_counterpart": 15,
+        "name_or_direction_differences": 13,
+        "relation_field_differences": 12
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3a-Function-based Behavior-3.sysml",
+      "native_elements": 57,
+      "pilot_elements": 474,
+      "exact_pairs": 0,
+      "mismatched_pairs": 44,
+      "native_only": 13,
+      "pilot_only": 430,
+      "named_declaration_triage": {
+        "unique_named_pairs": 40,
+        "relation_fields_missing_direct_counterpart": 27,
+        "relation_field_differences": 28,
+        "name_or_direction_differences": 21
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-1.sysml",
+      "native_elements": 25,
+      "pilot_elements": 514,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 3,
+      "pilot_only": 492,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 10,
+        "metaclass_mismatches": 3,
+        "relation_field_differences": 18,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-2.sysml",
+      "native_elements": 25,
+      "pilot_elements": 249,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 3,
+      "pilot_only": 227,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3c-Function-based Behavior-structure mod-3.sysml",
+      "native_elements": 17,
+      "pilot_elements": 373,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 1,
+      "pilot_only": 357,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 2,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "native_elements": 45,
+      "pilot_elements": 692,
+      "exact_pairs": 0,
+      "mismatched_pairs": 33,
+      "native_only": 12,
+      "pilot_only": 659,
+      "named_declaration_triage": {
+        "unique_named_pairs": 30,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 13,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/03-Function-based Behavior/3e-Function-based Behavior-item.sysml",
+      "native_elements": 32,
+      "pilot_elements": 497,
+      "exact_pairs": 0,
+      "mismatched_pairs": 27,
+      "native_only": 5,
+      "pilot_only": 470,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Event Occurrence Example.sysml",
+      "native_elements": 17,
+      "pilot_elements": 148,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 0,
+      "pilot_only": 131,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 25
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Interaction Example-1.sysml",
+      "native_elements": 23,
+      "pilot_elements": 170,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 10,
+      "pilot_only": 157,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Interaction Example-2.sysml",
+      "native_elements": 23,
+      "pilot_elements": 241,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 1,
+      "pilot_only": 219,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Interaction Realization-1.sysml",
+      "native_elements": 44,
+      "pilot_elements": 994,
+      "exact_pairs": 0,
+      "mismatched_pairs": 37,
+      "native_only": 7,
+      "pilot_only": 957,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 8,
+        "relation_field_differences": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Interaction Realization-2.sysml",
+      "native_elements": 47,
+      "pilot_elements": 728,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 9,
+      "pilot_only": 690,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Message Payload Example.sysml",
+      "native_elements": 30,
+      "pilot_elements": 398,
+      "exact_pairs": 0,
+      "mismatched_pairs": 21,
+      "native_only": 9,
+      "pilot_only": 377,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 31,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/27. Occurrences/Time Slice and Snapshot Example.sysml",
+      "native_elements": 16,
+      "pilot_elements": 238,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 3,
+      "pilot_only": 225,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 25,
+        "metaclass_mismatches": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Analytical Constraints.sysml",
+      "native_elements": 31,
+      "pilot_elements": 1540,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 2,
+      "pilot_only": 1511,
+      "named_declaration_triage": {
+        "unique_named_pairs": 29,
+        "relation_fields_missing_direct_counterpart": 34,
+        "name_or_direction_differences": 24,
+        "relation_field_differences": 9,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Constraint Assertions-1.sysml",
+      "native_elements": 18,
+      "pilot_elements": 642,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 3,
+      "pilot_only": 627,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 10,
+        "metaclass_mismatches": 1,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Constraint Assertions-2.sysml",
+      "native_elements": 21,
+      "pilot_elements": 674,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 4,
+      "pilot_only": 657,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 14,
+        "relation_field_differences": 7,
+        "name_or_direction_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Constraints Example-1.sysml",
+      "native_elements": 18,
+      "pilot_elements": 641,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 3,
+      "pilot_only": 626,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Constraints Example-2.sysml",
+      "native_elements": 18,
+      "pilot_elements": 645,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 5,
+      "pilot_only": 632,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 2,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Derivation Constraints.sysml",
+      "native_elements": 14,
+      "pilot_elements": 1279,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 3,
+      "pilot_only": 1268,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 1,
+        "name_or_direction_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/31. Constraints/Time Constraints.sysml",
+      "native_elements": 39,
+      "pilot_elements": 1420,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 25,
+      "pilot_only": 1406,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModel.sysml",
+      "native_elements": 31,
+      "pilot_elements": 304,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 8,
+      "pilot_only": 281,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 41,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceModelOutside.sysml",
+      "native_elements": 12,
+      "pilot_elements": 621,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 7,
+      "pilot_only": 616,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-2.sysml",
+      "native_elements": 97,
+      "pilot_elements": 1835,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 58,
+      "pilot_only": 1796,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 15,
+        "relation_field_differences": 18
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceOutsideRealization-3.sysml",
+      "native_elements": 101,
+      "pilot_elements": 2739,
+      "exact_pairs": 0,
+      "mismatched_pairs": 90,
+      "native_only": 11,
+      "pilot_only": 2649,
+      "named_declaration_triage": {
+        "unique_named_pairs": 56,
+        "relation_fields_missing_direct_counterpart": 19,
+        "relation_field_differences": 50,
+        "name_or_direction_differences": 3,
+        "metaclass_mismatches": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-2.sysml",
+      "native_elements": 100,
+      "pilot_elements": 1818,
+      "exact_pairs": 0,
+      "mismatched_pairs": 45,
+      "native_only": 55,
+      "pilot_only": 1773,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 15,
+        "relation_field_differences": 18
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Interaction Sequencing Examples/ServerSequenceRealization-3.sysml",
+      "native_elements": 95,
+      "pilot_elements": 2575,
+      "exact_pairs": 0,
+      "mismatched_pairs": 84,
+      "native_only": 11,
+      "pilot_only": 2491,
+      "named_declaration_triage": {
+        "unique_named_pairs": 56,
+        "relation_fields_missing_direct_counterpart": 19,
+        "relation_field_differences": 50,
+        "name_or_direction_differences": 3,
+        "metaclass_mismatches": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Geometry Examples/CarWithEnvelopingShape.sysml",
+      "native_elements": 9,
+      "pilot_elements": 332,
+      "exact_pairs": 0,
+      "mismatched_pairs": 3,
+      "native_only": 6,
+      "pilot_only": 329,
+      "named_declaration_triage": {
+        "unique_named_pairs": 3,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Geometry Examples/CarWithShapeAndCSG.sysml",
+      "native_elements": 50,
+      "pilot_elements": 3513,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 30,
+      "pilot_only": 3493,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 5,
+        "relation_field_differences": 18,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Geometry Examples/ExternalShapeRefExample.sysml",
+      "native_elements": 18,
+      "pilot_elements": 429,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 11,
+      "pilot_only": 422,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Geometry Examples/SimpleQuadcopter.sysml",
+      "native_elements": 122,
+      "pilot_elements": 13403,
+      "exact_pairs": 0,
+      "mismatched_pairs": 58,
+      "native_only": 64,
+      "pilot_only": 13345,
+      "named_declaration_triage": {
+        "unique_named_pairs": 29,
+        "relation_fields_missing_direct_counterpart": 3,
+        "relation_field_differences": 60
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Geometry Examples/VehicleGeometryAndCoordinateFrames.sysml",
+      "native_elements": 69,
+      "pilot_elements": 7122,
+      "exact_pairs": 0,
+      "mismatched_pairs": 45,
+      "native_only": 24,
+      "pilot_only": 7077,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 23,
+        "pilot_initializer_without_native_expression_ir": 1,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Mass Roll-up Example/MassRollup_1.kerml",
+      "native_elements": 6,
+      "pilot_elements": 223,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 1,
+      "pilot_only": 218,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 3,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Mass Roll-up Example/MassRollup_2.kerml",
+      "native_elements": 8,
+      "pilot_elements": 224,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 2,
+      "pilot_only": 218,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 8,
+        "relation_field_differences": 3,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_1.kerml",
+      "native_elements": 21,
+      "pilot_elements": 139,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 3,
+      "pilot_only": 121,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 19,
+        "pilot_initializer_without_native_expression_ir": 3,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_2.kerml",
+      "native_elements": 18,
+      "pilot_elements": 139,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 3,
+      "pilot_only": 124,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 16,
+        "pilot_initializer_without_native_expression_ir": 3,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Mass Roll-up Example/Vehicles_3.kerml",
+      "native_elements": 23,
+      "pilot_elements": 228,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 5,
+      "pilot_only": 210,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 18,
+        "pilot_initializer_without_native_expression_ir": 3,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Metadata Examples/IssueMetadataExample.sysml",
+      "native_elements": 18,
+      "pilot_elements": 311,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 6,
+      "pilot_only": 299,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 7,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Metadata Examples/RationaleMetadataExample.sysml",
+      "native_elements": 12,
+      "pilot_elements": 240,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 4,
+      "pilot_only": 232,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 9,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Metadata Examples/RequirementMetadataExample.sysml",
+      "native_elements": 13,
+      "pilot_elements": 418,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 7,
+      "pilot_only": 412,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 1,
+        "boolean_differences": 1,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Metadata Examples/RiskMetadataExample.sysml",
+      "native_elements": 6,
+      "pilot_elements": 214,
+      "exact_pairs": 0,
+      "mismatched_pairs": 2,
+      "native_only": 4,
+      "pilot_only": 212,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Metadata Examples/VerificationMetadataExample.sysml",
+      "native_elements": 9,
+      "pilot_elements": 200,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 5,
+      "pilot_only": 196,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 2,
+        "metaclass_mismatches": 1,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/17. Control/Camera.sysml",
+      "native_elements": 17,
+      "pilot_elements": 182,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 3,
+      "pilot_only": 168,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 23
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/17. Control/Control Structures Example.sysml",
+      "native_elements": 24,
+      "pilot_elements": 495,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 6,
+      "pilot_only": 477,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 11,
+        "relation_field_differences": 5,
+        "name_or_direction_differences": 5,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/17. Control/Decision Example.sysml",
+      "native_elements": 22,
+      "pilot_elements": 664,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 7,
+      "pilot_only": 649,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 1,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/17. Control/Fork Join Example.sysml",
+      "native_elements": 42,
+      "pilot_elements": 347,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 19,
+      "pilot_only": 324,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 21,
+        "relation_field_differences": 8,
+        "name_or_direction_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/17. Control/Merge Example.sysml",
+      "native_elements": 38,
+      "pilot_elements": 414,
+      "exact_pairs": 0,
+      "mismatched_pairs": 28,
+      "native_only": 10,
+      "pilot_only": 386,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 25,
+        "relation_field_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/32. Requirements/Requirement Definitions.sysml",
+      "native_elements": 26,
+      "pilot_elements": 664,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 9,
+      "pilot_only": 647,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "name_or_direction_differences": 6,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/32. Requirements/Requirement Groups.sysml",
+      "native_elements": 18,
+      "pilot_elements": 264,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 8,
+      "pilot_only": 254,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 15,
+        "relation_field_differences": 6,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/32. Requirements/Requirement Satisfaction.sysml",
+      "native_elements": 14,
+      "pilot_elements": 183,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 4,
+      "pilot_only": 173,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/32. Requirements/Requirement Usages.sysml",
+      "native_elements": 13,
+      "pilot_elements": 656,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 6,
+      "pilot_only": 649,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 5,
+        "relation_field_differences": 4,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Import Tests/AliasImport.sysml",
+      "native_elements": 6,
+      "pilot_elements": 16,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 1,
+      "pilot_only": 11,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Import Tests/CircularImport.sysml",
+      "native_elements": 17,
+      "pilot_elements": 45,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 4,
+      "pilot_only": 32,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Import Tests/PrivateImportTest.sysml",
+      "native_elements": 14,
+      "pilot_elements": 33,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 4,
+      "pilot_only": 23,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Import Tests/QualifiedNameImportTest.sysml",
+      "native_elements": 7,
+      "pilot_elements": 17,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 1,
+      "pilot_only": 11,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/10-Analysis and Trades/10a-Analysis.sysml",
+      "native_elements": 35,
+      "pilot_elements": 831,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 10,
+      "pilot_only": 806,
+      "named_declaration_triage": {
+        "unique_named_pairs": 25,
+        "relation_fields_missing_direct_counterpart": 22,
+        "relation_field_differences": 11,
+        "boolean_differences": 2,
+        "metaclass_mismatches": 5,
+        "name_or_direction_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/10-Analysis and Trades/10b-Trade-off Among Alternative Configurations.sysml",
+      "native_elements": 63,
+      "pilot_elements": 1162,
+      "exact_pairs": 0,
+      "mismatched_pairs": 55,
+      "native_only": 8,
+      "pilot_only": 1107,
+      "named_declaration_triage": {
+        "unique_named_pairs": 48,
+        "relation_fields_missing_direct_counterpart": 45,
+        "relation_field_differences": 42,
+        "boolean_differences": 7,
+        "metaclass_mismatches": 6,
+        "name_or_direction_differences": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/10-Analysis and Trades/10c-Fuel Economy Analysis.sysml",
+      "native_elements": 90,
+      "pilot_elements": 2463,
+      "exact_pairs": 0,
+      "mismatched_pairs": 58,
+      "native_only": 32,
+      "pilot_only": 2405,
+      "named_declaration_triage": {
+        "unique_named_pairs": 56,
+        "relation_fields_missing_direct_counterpart": 52,
+        "relation_field_differences": 35,
+        "metaclass_mismatches": 4,
+        "name_or_direction_differences": 12,
+        "boolean_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/10-Analysis and Trades/10d-Dynamics Analysis.sysml",
+      "native_elements": 64,
+      "pilot_elements": 2536,
+      "exact_pairs": 0,
+      "mismatched_pairs": 50,
+      "native_only": 14,
+      "pilot_only": 2486,
+      "named_declaration_triage": {
+        "unique_named_pairs": 43,
+        "relation_fields_missing_direct_counterpart": 27,
+        "name_or_direction_differences": 24,
+        "relation_field_differences": 44
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFCoreLib.sysml",
+      "native_elements": 29,
+      "pilot_elements": 251,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 9,
+      "pilot_only": 231,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "metaclass_mismatches": 13,
+        "relation_fields_missing_direct_counterpart": 41,
+        "relation_field_differences": 12
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFNorwayTopics.sysml",
+      "native_elements": 173,
+      "pilot_elements": 3228,
+      "exact_pairs": 0,
+      "mismatched_pairs": 73,
+      "native_only": 100,
+      "pilot_only": 3155,
+      "named_declaration_triage": {
+        "unique_named_pairs": 53,
+        "relation_fields_missing_direct_counterpart": 35,
+        "metaclass_mismatches": 20,
+        "relation_field_differences": 70,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFProfileLib.sysml",
+      "native_elements": 61,
+      "pilot_elements": 768,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 22,
+      "pilot_only": 729,
+      "named_declaration_triage": {
+        "unique_named_pairs": 36,
+        "metaclass_mismatches": 2,
+        "relation_fields_missing_direct_counterpart": 2,
+        "name_or_direction_differences": 8,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Arrowhead Framework Example/AHFSequences.sysml",
+      "native_elements": 87,
+      "pilot_elements": 1974,
+      "exact_pairs": 0,
+      "mismatched_pairs": 53,
+      "native_only": 34,
+      "pilot_only": 1921,
+      "named_declaration_triage": {
+        "unique_named_pairs": 45,
+        "relation_field_differences": 39,
+        "relation_fields_missing_direct_counterpart": 108,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/ExtendedOccurrences.kerml",
+      "native_elements": 23,
+      "pilot_elements": 438,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 7,
+      "pilot_only": 422,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 17,
+        "metaclass_mismatches": 2,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/Moments.kerml",
+      "native_elements": 19,
+      "pilot_elements": 140,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 11,
+      "pilot_only": 132,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 4,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingFeaturesEnhanced.kerml",
+      "native_elements": 31,
+      "pilot_elements": 444,
+      "exact_pairs": 0,
+      "mismatched_pairs": 21,
+      "native_only": 10,
+      "pilot_only": 423,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 33,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/Enhancements/TimeVaryingSteps.kerml",
+      "native_elements": 26,
+      "pilot_elements": 461,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 10,
+      "pilot_only": 445,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 21,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 1.sysml",
+      "native_elements": 17,
+      "pilot_elements": 387,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 3,
+      "pilot_only": 373,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/29. Expressions/Car Mass Rollup Example 2.sysml",
+      "native_elements": 17,
+      "pilot_elements": 385,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 3,
+      "pilot_only": 371,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/29. Expressions/MassRollup1.sysml",
+      "native_elements": 10,
+      "pilot_elements": 295,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 1,
+      "pilot_only": 286,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/29. Expressions/MassRollup2.sysml",
+      "native_elements": 11,
+      "pilot_elements": 663,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 1,
+      "pilot_only": 653,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 16,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/14. Action Definitions/Action Definition Example.sysml",
+      "native_elements": 28,
+      "pilot_elements": 171,
+      "exact_pairs": 0,
+      "mismatched_pairs": 3,
+      "native_only": 25,
+      "pilot_only": 168,
+      "named_declaration_triage": {}
+    },
+    {
+      "relative_path": "sysml/src/training/14. Action Definitions/Action Shorthand Example.sysml",
+      "native_elements": 22,
+      "pilot_elements": 268,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 3,
+      "pilot_only": 249,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/14. Action Definitions/Action Succession Example-1.sysml",
+      "native_elements": 31,
+      "pilot_elements": 220,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 9,
+      "pilot_only": 198,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 4,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/14. Action Definitions/Action Succession Example-2.sysml",
+      "native_elements": 28,
+      "pilot_elements": 198,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 5,
+      "pilot_only": 175,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 8,
+        "name_or_direction_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/13-Model Containment/13a-Model Containment.sysml",
+      "native_elements": 23,
+      "pilot_elements": 38,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 14,
+      "pilot_only": 29,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 9
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-1.sysml",
+      "native_elements": 40,
+      "pilot_elements": 867,
+      "exact_pairs": 0,
+      "mismatched_pairs": 27,
+      "native_only": 13,
+      "pilot_only": 840,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group-2.sysml",
+      "native_elements": 36,
+      "pilot_elements": 875,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 13,
+      "pilot_only": 852,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/13-Model Containment/13b-Safety and Security Features Element Group.sysml",
+      "native_elements": 21,
+      "pilot_elements": 132,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 7,
+      "pilot_only": 118,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Vehicle Example/SysML v2 Spec Annex A SimpleVehicleModel.sysml",
+      "native_elements": 1317,
+      "pilot_elements": 29592,
+      "exact_pairs": 0,
+      "mismatched_pairs": 886,
+      "native_only": 431,
+      "pilot_only": 28706,
+      "named_declaration_triage": {
+        "unique_named_pairs": 766,
+        "relation_fields_missing_direct_counterpart": 465,
+        "metaclass_mismatches": 64,
+        "relation_field_differences": 616,
+        "boolean_differences": 16,
+        "name_or_direction_differences": 74,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Vehicle Example/VehicleDefinitions.sysml",
+      "native_elements": 34,
+      "pilot_elements": 191,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 12,
+      "pilot_only": 169,
+      "named_declaration_triage": {
+        "unique_named_pairs": 21,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 16,
+        "name_or_direction_differences": 3,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Vehicle Example/VehicleIndividuals.sysml",
+      "native_elements": 43,
+      "pilot_elements": 474,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 18,
+      "pilot_only": 449,
+      "named_declaration_triage": {
+        "unique_named_pairs": 21,
+        "relation_field_differences": 12,
+        "relation_fields_missing_direct_counterpart": 17,
+        "metaclass_mismatches": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Vehicle Example/VehicleUsages.sysml",
+      "native_elements": 59,
+      "pilot_elements": 1359,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 20,
+      "pilot_only": 1320,
+      "named_declaration_triage": {
+        "unique_named_pairs": 31,
+        "metaclass_mismatches": 4,
+        "relation_fields_missing_direct_counterpart": 21,
+        "relation_field_differences": 38
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Analysis Examples/AnalysisAnnotation.sysml",
+      "native_elements": 28,
+      "pilot_elements": 469,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 16,
+      "pilot_only": 457,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1,
+        "name_or_direction_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Analysis Examples/Dynamics.sysml",
+      "native_elements": 72,
+      "pilot_elements": 4129,
+      "exact_pairs": 0,
+      "mismatched_pairs": 63,
+      "native_only": 9,
+      "pilot_only": 4066,
+      "named_declaration_triage": {
+        "unique_named_pairs": 57,
+        "name_or_direction_differences": 27,
+        "relation_field_differences": 24,
+        "relation_fields_missing_direct_counterpart": 58,
+        "boolean_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Analysis Examples/Turbojet Stage Analysis.sysml",
+      "native_elements": 82,
+      "pilot_elements": 2967,
+      "exact_pairs": 0,
+      "mismatched_pairs": 66,
+      "native_only": 16,
+      "pilot_only": 2901,
+      "named_declaration_triage": {
+        "unique_named_pairs": 60,
+        "name_or_direction_differences": 27,
+        "relation_fields_missing_direct_counterpart": 69,
+        "relation_field_differences": 45,
+        "boolean_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Analysis Examples/Vehicle Analysis Demo.sysml",
+      "native_elements": 169,
+      "pilot_elements": 7377,
+      "exact_pairs": 0,
+      "mismatched_pairs": 129,
+      "native_only": 40,
+      "pilot_only": 7248,
+      "named_declaration_triage": {
+        "unique_named_pairs": 118,
+        "relation_field_differences": 43,
+        "relation_fields_missing_direct_counterpart": 81,
+        "name_or_direction_differences": 46,
+        "boolean_differences": 2,
+        "metaclass_mismatches": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Mass Roll-up Example/MassConstraintExample.sysml",
+      "native_elements": 60,
+      "pilot_elements": 2181,
+      "exact_pairs": 0,
+      "mismatched_pairs": 55,
+      "native_only": 5,
+      "pilot_only": 2126,
+      "named_declaration_triage": {
+        "unique_named_pairs": 47,
+        "relation_fields_missing_direct_counterpart": 32,
+        "relation_field_differences": 21,
+        "name_or_direction_differences": 14,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Mass Roll-up Example/MassRollup.sysml",
+      "native_elements": 13,
+      "pilot_elements": 690,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 1,
+      "pilot_only": 678,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 14
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Mass Roll-up Example/Vehicles.sysml",
+      "native_elements": 17,
+      "pilot_elements": 387,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 6,
+      "pilot_only": 376,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 11
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/41. Language Extension/Model Library Example.sysml",
+      "native_elements": 20,
+      "pilot_elements": 179,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 7,
+      "pilot_only": 166,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "metaclass_mismatches": 1,
+        "relation_fields_missing_direct_counterpart": 5,
+        "relation_field_differences": 8,
+        "boolean_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/41. Language Extension/Semantic Metadata Example.sysml",
+      "native_elements": 13,
+      "pilot_elements": 325,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 7,
+      "pilot_only": 319,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "metaclass_mismatches": 1,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/41. Language Extension/User Keyword Example.sysml",
+      "native_elements": 22,
+      "pilot_elements": 400,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 10,
+      "pilot_only": 388,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "metaclass_mismatches": 4,
+        "relation_fields_missing_direct_counterpart": 14
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/28. Individuals/Individuals and Roles-1.sysml",
+      "native_elements": 12,
+      "pilot_elements": 101,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 1,
+      "pilot_only": 90,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 4,
+        "relation_field_differences": 9,
+        "metaclass_mismatches": 3,
+        "boolean_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/28. Individuals/Individuals and Snapshots Example.sysml",
+      "native_elements": 16,
+      "pilot_elements": 219,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 12,
+      "pilot_only": 215,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 5,
+        "boolean_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/28. Individuals/Individuals and Time Slices.sysml",
+      "native_elements": 13,
+      "pilot_elements": 132,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 6,
+      "pilot_only": 125,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_field_differences": 4,
+        "relation_fields_missing_direct_counterpart": 9,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/24. States/State Actions.sysml",
+      "native_elements": 43,
+      "pilot_elements": 426,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 23,
+      "pilot_only": 406,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 11,
+        "relation_field_differences": 13,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/24. States/State Decomposition-1.sysml",
+      "native_elements": 36,
+      "pilot_elements": 323,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 24,
+      "pilot_only": 311,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/24. States/State Decomposition-2.sysml",
+      "native_elements": 38,
+      "pilot_elements": 327,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 30,
+      "pilot_only": 319,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/25. Transitions/Change and Time Triggers.sysml",
+      "native_elements": 53,
+      "pilot_elements": 1584,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 33,
+      "pilot_only": 1564,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/25. Transitions/Local Clock Example.sysml",
+      "native_elements": 45,
+      "pilot_elements": 846,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 31,
+      "pilot_only": 832,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/25. Transitions/Transition Actions.sysml",
+      "native_elements": 49,
+      "pilot_elements": 598,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 26,
+      "pilot_only": 575,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 13,
+        "metaclass_mismatches": 1,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1.sysml",
+      "native_elements": 156,
+      "pilot_elements": 2120,
+      "exact_pairs": 0,
+      "mismatched_pairs": 66,
+      "native_only": 90,
+      "pilot_only": 2054,
+      "named_declaration_triage": {
+        "unique_named_pairs": 59,
+        "relation_fields_missing_direct_counterpart": 51,
+        "relation_field_differences": 45,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-1a.sysml",
+      "native_elements": 158,
+      "pilot_elements": 2120,
+      "exact_pairs": 0,
+      "mismatched_pairs": 68,
+      "native_only": 90,
+      "pilot_only": 2052,
+      "named_declaration_triage": {
+        "unique_named_pairs": 61,
+        "relation_fields_missing_direct_counterpart": 49,
+        "relation_field_differences": 42,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/05-State-based Behavior/5-State-based Behavior-2.sysml",
+      "native_elements": 138,
+      "pilot_elements": 1952,
+      "exact_pairs": 0,
+      "mismatched_pairs": 55,
+      "native_only": 83,
+      "pilot_only": 1897,
+      "named_declaration_triage": {
+        "unique_named_pairs": 46,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 42,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/07-Variant Configuration/7a-Variant Configuration - General Concept.sysml",
+      "native_elements": 30,
+      "pilot_elements": 630,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 1,
+      "pilot_only": 601,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 16,
+        "boolean_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/07-Variant Configuration/7a1-Variant Configuration - General Concept-a.sysml",
+      "native_elements": 47,
+      "pilot_elements": 934,
+      "exact_pairs": 0,
+      "mismatched_pairs": 40,
+      "native_only": 7,
+      "pilot_only": 894,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 14,
+        "boolean_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/07-Variant Configuration/7b-Variant Configurations.sysml",
+      "native_elements": 88,
+      "pilot_elements": 2469,
+      "exact_pairs": 0,
+      "mismatched_pairs": 73,
+      "native_only": 15,
+      "pilot_only": 2396,
+      "named_declaration_triage": {
+        "unique_named_pairs": 64,
+        "relation_field_differences": 29,
+        "boolean_differences": 12,
+        "relation_fields_missing_direct_counterpart": 16,
+        "metaclass_mismatches": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/12-Dependency Relationships/12a-Dependency.sysml",
+      "native_elements": 10,
+      "pilot_elements": 24,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 0,
+      "pilot_only": 14,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation-1.sysml",
+      "native_elements": 35,
+      "pilot_elements": 552,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 9,
+      "pilot_only": 526,
+      "named_declaration_triage": {
+        "unique_named_pairs": 24,
+        "relation_fields_missing_direct_counterpart": 19,
+        "relation_field_differences": 10,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/12-Dependency Relationships/12b-Allocation.sysml",
+      "native_elements": 18,
+      "pilot_elements": 125,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 8,
+      "pilot_only": 115,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/33. Analysis/Analysis Case Definition Example.sysml",
+      "native_elements": 35,
+      "pilot_elements": 2895,
+      "exact_pairs": 0,
+      "mismatched_pairs": 24,
+      "native_only": 11,
+      "pilot_only": 2871,
+      "named_declaration_triage": {
+        "unique_named_pairs": 24,
+        "relation_fields_missing_direct_counterpart": 11,
+        "name_or_direction_differences": 6,
+        "relation_field_differences": 9,
+        "metaclass_mismatches": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/33. Analysis/Analysis Case Usage Example.sysml",
+      "native_elements": 17,
+      "pilot_elements": 540,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 1,
+      "pilot_only": 524,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 25,
+        "relation_field_differences": 5,
+        "boolean_differences": 2,
+        "name_or_direction_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/33. Analysis/Trade Study Analysis Example.sysml",
+      "native_elements": 43,
+      "pilot_elements": 915,
+      "exact_pairs": 0,
+      "mismatched_pairs": 38,
+      "native_only": 5,
+      "pilot_only": 877,
+      "named_declaration_triage": {
+        "unique_named_pairs": 32,
+        "relation_fields_missing_direct_counterpart": 40,
+        "relation_field_differences": 21,
+        "name_or_direction_differences": 13,
+        "boolean_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/30. Calculations/Calculation Definitions.sysml",
+      "native_elements": 27,
+      "pilot_elements": 1269,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 2,
+      "pilot_only": 1244,
+      "named_declaration_triage": {
+        "unique_named_pairs": 21,
+        "relation_fields_missing_direct_counterpart": 1,
+        "name_or_direction_differences": 14,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/30. Calculations/Calculation Usages-1.sysml",
+      "native_elements": 30,
+      "pilot_elements": 1018,
+      "exact_pairs": 0,
+      "mismatched_pairs": 27,
+      "native_only": 3,
+      "pilot_only": 991,
+      "named_declaration_triage": {
+        "unique_named_pairs": 27,
+        "relation_fields_missing_direct_counterpart": 52,
+        "relation_field_differences": 15,
+        "name_or_direction_differences": 17,
+        "boolean_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/30. Calculations/Calculation Usages-2.sysml",
+      "native_elements": 19,
+      "pilot_elements": 1032,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 5,
+      "pilot_only": 1018,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 2,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/01-Parts Tree/1a-Parts Tree.sysml",
+      "native_elements": 34,
+      "pilot_elements": 868,
+      "exact_pairs": 0,
+      "mismatched_pairs": 31,
+      "native_only": 3,
+      "pilot_only": 837,
+      "named_declaration_triage": {
+        "unique_named_pairs": 31,
+        "relation_fields_missing_direct_counterpart": 1,
+        "boolean_differences": 4,
+        "relation_field_differences": 20
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/01-Parts Tree/1c-Parts Tree Redefinition.sysml",
+      "native_elements": 32,
+      "pilot_elements": 790,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 3,
+      "pilot_only": 761,
+      "named_declaration_triage": {
+        "unique_named_pairs": 29,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 30,
+        "boolean_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/01-Parts Tree/1d-Parts Tree with Reference.sysml",
+      "native_elements": 20,
+      "pilot_elements": 218,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 4,
+      "pilot_only": 202,
+      "named_declaration_triage": {
+        "unique_named_pairs": 16,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Association Examples/ProductSelection_N_ary.sysml",
+      "native_elements": 12,
+      "pilot_elements": 276,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 0,
+      "pilot_only": 264,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_field_differences": 14,
+        "relation_fields_missing_direct_counterpart": 4,
+        "boolean_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Association Examples/ProductSelection_OwnedEnds.sysml",
+      "native_elements": 30,
+      "pilot_elements": 591,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 7,
+      "pilot_only": 568,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 12,
+        "relation_field_differences": 17,
+        "boolean_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Association Examples/ProductSelection_UnownedEnds.sysml",
+      "native_elements": 25,
+      "pilot_elements": 415,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 6,
+      "pilot_only": 396,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 11,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Association Examples/ProductSelection_N_ary.kerml",
+      "native_elements": 72,
+      "pilot_elements": 1164,
+      "exact_pairs": 0,
+      "mismatched_pairs": 66,
+      "native_only": 6,
+      "pilot_only": 1098,
+      "named_declaration_triage": {
+        "unique_named_pairs": 66,
+        "relation_fields_missing_direct_counterpart": 104,
+        "relation_field_differences": 44,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Association Examples/ProductSelection_OwnedEnds.kerml",
+      "native_elements": 49,
+      "pilot_elements": 794,
+      "exact_pairs": 0,
+      "mismatched_pairs": 45,
+      "native_only": 4,
+      "pilot_only": 749,
+      "named_declaration_triage": {
+        "unique_named_pairs": 45,
+        "relation_field_differences": 30,
+        "relation_fields_missing_direct_counterpart": 64,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Association Examples/ProductSelection_UnownedEnds.kerml",
+      "native_elements": 23,
+      "pilot_elements": 392,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 1,
+      "pilot_only": 370,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_field_differences": 12,
+        "relation_fields_missing_direct_counterpart": 27,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/13. Flows/Flow Definition Example.sysml",
+      "native_elements": 11,
+      "pilot_elements": 121,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 1,
+      "pilot_only": 111,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 3,
+        "relation_field_differences": 15
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/13. Flows/Flow Interface Example.sysml",
+      "native_elements": 18,
+      "pilot_elements": 167,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 6,
+      "pilot_only": 155,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 8,
+        "metaclass_mismatches": 4,
+        "relation_field_differences": 20
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/13. Flows/Flow Usage Example.sysml",
+      "native_elements": 14,
+      "pilot_elements": 125,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 7,
+      "pilot_only": 118,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Requirements Examples/HSUVRequirements.sysml",
+      "native_elements": 20,
+      "pilot_elements": 123,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 5,
+      "pilot_only": 108,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 42,
+        "relation_field_differences": 5,
+        "name_or_direction_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Requirements Examples/RequirementDerivationExample.sysml",
+      "native_elements": 21,
+      "pilot_elements": 343,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 1,
+      "pilot_only": 323,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_field_differences": 7,
+        "relation_fields_missing_direct_counterpart": 16,
+        "metaclass_mismatches": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Requirements Examples/VehicleRequirementDerivation.sysml",
+      "native_elements": 19,
+      "pilot_elements": 544,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 3,
+      "pilot_only": 528,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 8,
+        "relation_field_differences": 20,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/14-Language Extensions/14a-Language Extensions.sysml",
+      "native_elements": 15,
+      "pilot_elements": 156,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 4,
+      "pilot_only": 145,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 9
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/14-Language Extensions/14b-Language Extensions.sysml",
+      "native_elements": 31,
+      "pilot_elements": 230,
+      "exact_pairs": 0,
+      "mismatched_pairs": 24,
+      "native_only": 7,
+      "pilot_only": 206,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/14-Language Extensions/14c-Language Extensions.sysml",
+      "native_elements": 125,
+      "pilot_elements": 1754,
+      "exact_pairs": 0,
+      "mismatched_pairs": 71,
+      "native_only": 54,
+      "pilot_only": 1683,
+      "named_declaration_triage": {
+        "unique_named_pairs": 65,
+        "relation_fields_missing_direct_counterpart": 35,
+        "relation_field_differences": 30,
+        "name_or_direction_differences": 10,
+        "metaclass_mismatches": 2,
+        "boolean_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/36. Variability/Variation Configuration.sysml",
+      "native_elements": 8,
+      "pilot_elements": 194,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 1,
+      "pilot_only": 187,
+      "named_declaration_triage": {
+        "unique_named_pairs": 3,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/36. Variability/Variation Definitions.sysml",
+      "native_elements": 18,
+      "pilot_elements": 306,
+      "exact_pairs": 0,
+      "mismatched_pairs": 16,
+      "native_only": 2,
+      "pilot_only": 290,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "boolean_differences": 2,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/36. Variability/Variation Usages.sysml",
+      "native_elements": 12,
+      "pilot_elements": 686,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 2,
+      "pilot_only": 676,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/01. Packages/Comment Example.sysml",
+      "native_elements": 4,
+      "pilot_elements": 17,
+      "exact_pairs": 0,
+      "mismatched_pairs": 3,
+      "native_only": 1,
+      "pilot_only": 14,
+      "named_declaration_triage": {
+        "unique_named_pairs": 3,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/01. Packages/Documentation Example.sysml",
+      "native_elements": 4,
+      "pilot_elements": 14,
+      "exact_pairs": 0,
+      "mismatched_pairs": 2,
+      "native_only": 2,
+      "pilot_only": 12,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/01. Packages/Package Example.sysml",
+      "native_elements": 4,
+      "pilot_elements": 10,
+      "exact_pairs": 0,
+      "mismatched_pairs": 2,
+      "native_only": 2,
+      "pilot_only": 8,
+      "named_declaration_triage": {
+        "unique_named_pairs": 2,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/39. Metadata/Metadata Example-1.sysml",
+      "native_elements": 17,
+      "pilot_elements": 148,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 4,
+      "pilot_only": 135,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/39. Metadata/Metadata Example-2.sysml",
+      "native_elements": 18,
+      "pilot_elements": 307,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 10,
+      "pilot_only": 299,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "name_or_direction_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/21. Asynchronous Messaging/Messaging Example.sysml",
+      "native_elements": 29,
+      "pilot_elements": 494,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 19,
+      "pilot_only": 484,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 16,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/21. Asynchronous Messaging/Messaging with Ports.sysml",
+      "native_elements": 34,
+      "pilot_elements": 586,
+      "exact_pairs": 0,
+      "mismatched_pairs": 28,
+      "native_only": 6,
+      "pilot_only": 558,
+      "named_declaration_triage": {
+        "unique_named_pairs": 26,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Packet Example/PacketUsage.kerml",
+      "native_elements": 9,
+      "pilot_elements": 30,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 2,
+      "pilot_only": 23,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 5
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Packet Example/Packets.kerml",
+      "native_elements": 21,
+      "pilot_elements": 80,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 2,
+      "pilot_only": 61,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 29,
+        "relation_field_differences": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/35. Use Cases/Use Case Definition Example.sysml",
+      "native_elements": 20,
+      "pilot_elements": 168,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 2,
+      "pilot_only": 150,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 14,
+        "relation_field_differences": 10,
+        "name_or_direction_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/35. Use Cases/Use Case Usage Example.sysml",
+      "native_elements": 28,
+      "pilot_elements": 628,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 6,
+      "pilot_only": 606,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 60,
+        "boolean_differences": 1,
+        "name_or_direction_differences": 15,
+        "metaclass_mismatches": 2,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-1.sysml",
+      "native_elements": 27,
+      "pilot_elements": 409,
+      "exact_pairs": 0,
+      "mismatched_pairs": 23,
+      "native_only": 4,
+      "pilot_only": 386,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 6,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/16. Conditional Succession/Conditional Succession Example-2.sysml",
+      "native_elements": 26,
+      "pilot_elements": 409,
+      "exact_pairs": 0,
+      "mismatched_pairs": 24,
+      "native_only": 2,
+      "pilot_only": 385,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 20,
+        "relation_field_differences": 7,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Vehicle Example/VehicleDefinitions.kerml",
+      "native_elements": 19,
+      "pilot_elements": 83,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 2,
+      "pilot_only": 66,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_field_differences": 6,
+        "relation_fields_missing_direct_counterpart": 16,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Vehicle Example/VehicleUsages.kerml",
+      "native_elements": 39,
+      "pilot_elements": 888,
+      "exact_pairs": 0,
+      "mismatched_pairs": 32,
+      "native_only": 7,
+      "pilot_only": 856,
+      "named_declaration_triage": {
+        "unique_named_pairs": 32,
+        "pilot_initializer_without_native_expression_ir": 6,
+        "relation_fields_missing_direct_counterpart": 54,
+        "relation_field_differences": 14,
+        "name_or_direction_differences": 2,
+        "metaclass_mismatches": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/State Space Representation Examples/CartSample.sysml",
+      "native_elements": 36,
+      "pilot_elements": 610,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 7,
+      "pilot_only": 581,
+      "named_declaration_triage": {
+        "unique_named_pairs": 26,
+        "relation_field_differences": 41,
+        "relation_fields_missing_direct_counterpart": 15,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/State Space Representation Examples/EVSample.sysml",
+      "native_elements": 193,
+      "pilot_elements": 5325,
+      "exact_pairs": 0,
+      "mismatched_pairs": 134,
+      "native_only": 59,
+      "pilot_only": 5191,
+      "named_declaration_triage": {
+        "unique_named_pairs": 117,
+        "relation_field_differences": 170,
+        "relation_fields_missing_direct_counterpart": 93,
+        "name_or_direction_differences": 20,
+        "boolean_differences": 8,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/38. Allocation/Allocation Definition Example.sysml",
+      "native_elements": 23,
+      "pilot_elements": 137,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 5,
+      "pilot_only": 119,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/38. Allocation/Allocation Usage Example.sysml",
+      "native_elements": 22,
+      "pilot_elements": 144,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 7,
+      "pilot_only": 129,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Packet Example/PacketUsage.sysml",
+      "native_elements": 9,
+      "pilot_elements": 37,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 2,
+      "pilot_only": 30,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 1,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Packet Example/Packets.sysml",
+      "native_elements": 21,
+      "pilot_elements": 141,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 2,
+      "pilot_only": 122,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 1,
+        "boolean_differences": 11
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-1.sysml",
+      "native_elements": 23,
+      "pilot_elements": 185,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 13,
+      "pilot_only": 175,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 1,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-2.sysml",
+      "native_elements": 11,
+      "pilot_elements": 174,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 2,
+      "pilot_only": 165,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 2,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/11-View and Viewpoint/11a-View-Viewpoint.sysml",
+      "native_elements": 34,
+      "pilot_elements": 621,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 8,
+      "pilot_only": 595,
+      "named_declaration_triage": {
+        "unique_named_pairs": 24,
+        "relation_fields_missing_direct_counterpart": 13,
+        "relation_field_differences": 12
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/11-View and Viewpoint/11b-Safety and Security Feature Views.sysml",
+      "native_elements": 46,
+      "pilot_elements": 1051,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 17,
+      "pilot_only": 1022,
+      "named_declaration_triage": {
+        "unique_named_pairs": 26,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/17-Sequence Modeling/17a-Sequence-Modeling.sysml",
+      "native_elements": 28,
+      "pilot_elements": 353,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 2,
+      "pilot_only": 327,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 41,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/17-Sequence Modeling/17b-Sequence-Modeling.sysml",
+      "native_elements": 28,
+      "pilot_elements": 305,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 2,
+      "pilot_only": 279,
+      "named_declaration_triage": {
+        "unique_named_pairs": 17,
+        "relation_fields_missing_direct_counterpart": 17,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-1.sysml",
+      "native_elements": 10,
+      "pilot_elements": 83,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 1,
+      "pilot_only": 74,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 9
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/06. Enumeration Definitions/Enumeration Definitions-2.sysml",
+      "native_elements": 22,
+      "pilot_elements": 381,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 8,
+      "pilot_only": 367,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_field_differences": 29,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Individuals Examples/AnalysisIndividualExample.sysml",
+      "native_elements": 62,
+      "pilot_elements": 1475,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 23,
+      "pilot_only": 1436,
+      "named_declaration_triage": {
+        "unique_named_pairs": 34,
+        "relation_fields_missing_direct_counterpart": 13,
+        "relation_field_differences": 21,
+        "name_or_direction_differences": 7
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Individuals Examples/JohnIndividualExample.sysml",
+      "native_elements": 19,
+      "pilot_elements": 232,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 7,
+      "pilot_only": 220,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_field_differences": 10,
+        "relation_fields_missing_direct_counterpart": 4,
+        "boolean_differences": 1,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/TimeVaryingCarDriver.kerml",
+      "native_elements": 50,
+      "pilot_elements": 607,
+      "exact_pairs": 0,
+      "mismatched_pairs": 41,
+      "native_only": 9,
+      "pilot_only": 566,
+      "named_declaration_triage": {
+        "unique_named_pairs": 36,
+        "relation_fields_missing_direct_counterpart": 54,
+        "relation_field_differences": 13,
+        "metaclass_mismatches": 1,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Variable Feature Examples/TimeVaryingFeatures.kerml",
+      "native_elements": 19,
+      "pilot_elements": 364,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 6,
+      "pilot_only": 351,
+      "named_declaration_triage": {
+        "unique_named_pairs": 13,
+        "relation_fields_missing_direct_counterpart": 23,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/34. Verification/Verification Case Definition Example.sysml",
+      "native_elements": 23,
+      "pilot_elements": 953,
+      "exact_pairs": 0,
+      "mismatched_pairs": 19,
+      "native_only": 4,
+      "pilot_only": 934,
+      "named_declaration_triage": {
+        "unique_named_pairs": 19,
+        "relation_fields_missing_direct_counterpart": 25,
+        "relation_field_differences": 27,
+        "name_or_direction_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/34. Verification/Verification Case Usage Example.sysml",
+      "native_elements": 26,
+      "pilot_elements": 498,
+      "exact_pairs": 0,
+      "mismatched_pairs": 17,
+      "native_only": 9,
+      "pilot_only": 481,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "metaclass_mismatches": 8,
+        "relation_field_differences": 6,
+        "relation_fields_missing_direct_counterpart": 17,
+        "name_or_direction_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-1.sysml",
+      "native_elements": 22,
+      "pilot_elements": 182,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 7,
+      "pilot_only": 167,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 19
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/12. Binding Connectors/Binding Connectors Example-2.sysml",
+      "native_elements": 16,
+      "pilot_elements": 282,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 1,
+      "pilot_only": 267,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 19
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/02-Parts Interconnection/2a-Parts Interconnection.sysml",
+      "native_elements": 120,
+      "pilot_elements": 1499,
+      "exact_pairs": 0,
+      "mismatched_pairs": 77,
+      "native_only": 43,
+      "pilot_only": 1422,
+      "named_declaration_triage": {
+        "unique_named_pairs": 68,
+        "relation_fields_missing_direct_counterpart": 7,
+        "metaclass_mismatches": 4,
+        "relation_field_differences": 12,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/02-Parts Interconnection/2c-Parts Interconnection-Multiple Decompositions.sysml",
+      "native_elements": 48,
+      "pilot_elements": 1062,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 9,
+      "pilot_only": 1023,
+      "named_declaration_triage": {
+        "unique_named_pairs": 32,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition - Updated.sysml",
+      "native_elements": 33,
+      "pilot_elements": 389,
+      "exact_pairs": 0,
+      "mismatched_pairs": 32,
+      "native_only": 1,
+      "pilot_only": 357,
+      "named_declaration_triage": {
+        "unique_named_pairs": 20,
+        "relation_fields_missing_direct_counterpart": 3,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.5 Constraining Decomposition/Vehicle Decomposition.sysml",
+      "native_elements": 32,
+      "pilot_elements": 575,
+      "exact_pairs": 0,
+      "mismatched_pairs": 25,
+      "native_only": 7,
+      "pilot_only": 550,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/10. Ports/Port Conjugation Example.sysml",
+      "native_elements": 12,
+      "pilot_elements": 81,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 1,
+      "pilot_only": 70,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/10. Ports/Port Example.sysml",
+      "native_elements": 17,
+      "pilot_elements": 123,
+      "exact_pairs": 0,
+      "mismatched_pairs": 15,
+      "native_only": 2,
+      "pilot_only": 108,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package - Updated.sysml",
+      "native_elements": 51,
+      "pilot_elements": 634,
+      "exact_pairs": 0,
+      "mismatched_pairs": 43,
+      "native_only": 8,
+      "pilot_only": 591,
+      "named_declaration_triage": {
+        "unique_named_pairs": 42,
+        "relation_fields_missing_direct_counterpart": 30,
+        "metaclass_mismatches": 10,
+        "relation_field_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/v1 Spec Examples/8.4.1 Wheel Hub Assembly/Wheel Package.sysml",
+      "native_elements": 54,
+      "pilot_elements": 660,
+      "exact_pairs": 0,
+      "mismatched_pairs": 44,
+      "native_only": 10,
+      "pilot_only": 616,
+      "named_declaration_triage": {
+        "unique_named_pairs": 43,
+        "relation_fields_missing_direct_counterpart": 30,
+        "relation_field_differences": 5,
+        "metaclass_mismatches": 10
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Cause and Effect Examples/CauseAndEffectExample.sysml",
+      "native_elements": 30,
+      "pilot_elements": 512,
+      "exact_pairs": 0,
+      "mismatched_pairs": 24,
+      "native_only": 6,
+      "pilot_only": 488,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 19,
+        "relation_field_differences": 1,
+        "metaclass_mismatches": 4
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Cause and Effect Examples/MedicalDeviceFailure.sysml",
+      "native_elements": 13,
+      "pilot_elements": 161,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 3,
+      "pilot_only": 151,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 19,
+        "relation_field_differences": 2,
+        "boolean_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/11. Interfaces/Interface Decomposition Example.sysml",
+      "native_elements": 22,
+      "pilot_elements": 220,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 8,
+      "pilot_only": 206,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/11. Interfaces/Interface Example.sysml",
+      "native_elements": 12,
+      "pilot_elements": 105,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 2,
+      "pilot_only": 95,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 8,
+        "metaclass_mismatches": 4,
+        "relation_field_differences": 20
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/42. Views/Viewpoint Example.sysml",
+      "native_elements": 17,
+      "pilot_elements": 97,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 8,
+      "pilot_only": 88,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 16,
+        "relation_field_differences": 3,
+        "name_or_direction_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/42. Views/Views Example.sysml",
+      "native_elements": 20,
+      "pilot_elements": 330,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 10,
+      "pilot_only": 320,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_fields_missing_direct_counterpart": 12,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/23. State Definitions/State Definition Example-1.sysml",
+      "native_elements": 35,
+      "pilot_elements": 319,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 21,
+      "pilot_only": 305,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 13,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/23. State Definitions/State Definition Example-2.sysml",
+      "native_elements": 35,
+      "pilot_elements": 319,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 24,
+      "pilot_only": 308,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 6
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Behavior Examples/Camera.kerml",
+      "native_elements": 5,
+      "pilot_elements": 29,
+      "exact_pairs": 0,
+      "mismatched_pairs": 3,
+      "native_only": 2,
+      "pilot_only": 26,
+      "named_declaration_triage": {
+        "unique_named_pairs": 3,
+        "relation_fields_missing_direct_counterpart": 3,
+        "relation_field_differences": 4
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Behavior Examples/TakePicture.kerml",
+      "native_elements": 13,
+      "pilot_elements": 138,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 4,
+      "pilot_only": 129,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 10,
+        "relation_field_differences": 7,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/40. Filtering/Filtering Example-1.sysml",
+      "native_elements": 27,
+      "pilot_elements": 592,
+      "exact_pairs": 0,
+      "mismatched_pairs": 20,
+      "native_only": 7,
+      "pilot_only": 572,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/40. Filtering/Filtering Example-2.sysml",
+      "native_elements": 25,
+      "pilot_elements": 596,
+      "exact_pairs": 0,
+      "mismatched_pairs": 18,
+      "native_only": 7,
+      "pilot_only": 578,
+      "named_declaration_triage": {
+        "unique_named_pairs": 18,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Camera Example/Camera.sysml",
+      "native_elements": 7,
+      "pilot_elements": 67,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 3,
+      "pilot_only": 63,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Camera Example/PictureTaking.sysml",
+      "native_elements": 13,
+      "pilot_elements": 94,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 1,
+      "pilot_only": 82,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/07. Parts/Parts Example-1.sysml",
+      "native_elements": 12,
+      "pilot_elements": 96,
+      "exact_pairs": 0,
+      "mismatched_pairs": 12,
+      "native_only": 0,
+      "pilot_only": 84,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/07. Parts/Parts Example-2.sysml",
+      "native_elements": 13,
+      "pilot_elements": 98,
+      "exact_pairs": 0,
+      "mismatched_pairs": 13,
+      "native_only": 0,
+      "pilot_only": 85,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/15. Actions/Action Decomposition.sysml",
+      "native_elements": 25,
+      "pilot_elements": 266,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 3,
+      "pilot_only": 244,
+      "named_declaration_triage": {
+        "unique_named_pairs": 21,
+        "relation_fields_missing_direct_counterpart": 16,
+        "relation_field_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/06-Individual and Snapshots/6-Individual and Snapshots.sysml",
+      "native_elements": 89,
+      "pilot_elements": 1417,
+      "exact_pairs": 0,
+      "mismatched_pairs": 53,
+      "native_only": 36,
+      "pilot_only": 1364,
+      "named_declaration_triage": {
+        "unique_named_pairs": 53,
+        "relation_fields_missing_direct_counterpart": 10,
+        "metaclass_mismatches": 13,
+        "relation_field_differences": 22
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/03. Generalization/Generalization Example.sysml",
+      "native_elements": 9,
+      "pilot_elements": 46,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 0,
+      "pilot_only": 37,
+      "named_declaration_triage": {
+        "unique_named_pairs": 9,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/08. Items/Items Example.sysml",
+      "native_elements": 9,
+      "pilot_elements": 60,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 1,
+      "pilot_only": 52,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Individuals Examples/JohnIndividualExample.kerml",
+      "native_elements": 31,
+      "pilot_elements": 248,
+      "exact_pairs": 0,
+      "mismatched_pairs": 22,
+      "native_only": 9,
+      "pilot_only": 226,
+      "named_declaration_triage": {
+        "unique_named_pairs": 15,
+        "relation_fields_missing_direct_counterpart": 6,
+        "relation_field_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Variability Examples/VehicleVariabilityModel.sysml",
+      "native_elements": 83,
+      "pilot_elements": 2592,
+      "exact_pairs": 0,
+      "mismatched_pairs": 69,
+      "native_only": 14,
+      "pilot_only": 2523,
+      "named_declaration_triage": {
+        "unique_named_pairs": 50,
+        "relation_field_differences": 32,
+        "boolean_differences": 6,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Massed Thing Example/MassedThings.kerml",
+      "native_elements": 8,
+      "pilot_elements": 93,
+      "exact_pairs": 0,
+      "mismatched_pairs": 7,
+      "native_only": 1,
+      "pilot_only": 86,
+      "named_declaration_triage": {
+        "unique_named_pairs": 7,
+        "relation_field_differences": 5,
+        "relation_fields_missing_direct_counterpart": 9,
+        "pilot_initializer_without_native_expression_ir": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/09. Connections/Connections Example.sysml",
+      "native_elements": 33,
+      "pilot_elements": 440,
+      "exact_pairs": 0,
+      "mismatched_pairs": 29,
+      "native_only": 4,
+      "pilot_only": 411,
+      "named_declaration_triage": {
+        "unique_named_pairs": 26,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 8
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/18-Use Case/18-Use Case.sysml",
+      "native_elements": 48,
+      "pilot_elements": 680,
+      "exact_pairs": 0,
+      "mismatched_pairs": 26,
+      "native_only": 22,
+      "pilot_only": 654,
+      "named_declaration_triage": {
+        "unique_named_pairs": 23,
+        "relation_fields_missing_direct_counterpart": 28,
+        "boolean_differences": 1,
+        "relation_field_differences": 13,
+        "name_or_direction_differences": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/22. Opaque Actions/Opaque Action Example.sysml",
+      "native_elements": 5,
+      "pilot_elements": 39,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 0,
+      "pilot_only": 34,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/02. Part Definitions/Part Definition Example.sysml",
+      "native_elements": 12,
+      "pilot_elements": 82,
+      "exact_pairs": 0,
+      "mismatched_pairs": 11,
+      "native_only": 1,
+      "pilot_only": 71,
+      "named_declaration_triage": {
+        "unique_named_pairs": 11,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/09-Verification/9-Verification-simplified.sysml",
+      "native_elements": 58,
+      "pilot_elements": 1487,
+      "exact_pairs": 0,
+      "mismatched_pairs": 44,
+      "native_only": 14,
+      "pilot_only": 1443,
+      "named_declaration_triage": {
+        "unique_named_pairs": 41,
+        "relation_fields_missing_direct_counterpart": 39,
+        "name_or_direction_differences": 9,
+        "metaclass_mismatches": 8,
+        "relation_field_differences": 40
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/20. Assignment Actions/Assignment Example.sysml",
+      "native_elements": 40,
+      "pilot_elements": 1047,
+      "exact_pairs": 0,
+      "mismatched_pairs": 31,
+      "native_only": 9,
+      "pilot_only": 1016,
+      "named_declaration_triage": {
+        "unique_named_pairs": 27,
+        "relation_fields_missing_direct_counterpart": 32,
+        "relation_field_differences": 45,
+        "name_or_direction_differences": 14
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Address Book Example/AddressBookModel.kerml",
+      "native_elements": 7,
+      "pilot_elements": 33,
+      "exact_pairs": 0,
+      "mismatched_pairs": 6,
+      "native_only": 1,
+      "pilot_only": 27,
+      "named_declaration_triage": {
+        "unique_named_pairs": 6,
+        "relation_fields_missing_direct_counterpart": 7,
+        "relation_field_differences": 3
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/v1 Spec Examples/D.4.7.8 Dynamics/HSUVDynamics.sysml",
+      "native_elements": 59,
+      "pilot_elements": 3998,
+      "exact_pairs": 0,
+      "mismatched_pairs": 56,
+      "native_only": 3,
+      "pilot_only": 3942,
+      "named_declaration_triage": {
+        "unique_named_pairs": 40,
+        "relation_fields_missing_direct_counterpart": 5,
+        "relation_field_differences": 4,
+        "boolean_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/26. State Exhibition/State Exhibition Example.sysml",
+      "native_elements": 7,
+      "pilot_elements": 121,
+      "exact_pairs": 0,
+      "mismatched_pairs": 5,
+      "native_only": 2,
+      "pilot_only": 116,
+      "named_declaration_triage": {
+        "unique_named_pairs": 5,
+        "relation_fields_missing_direct_counterpart": 9,
+        "relation_field_differences": 10,
+        "name_or_direction_differences": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/37. Dependencies/Dependency Example.sysml",
+      "native_elements": 9,
+      "pilot_elements": 40,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 0,
+      "pilot_only": 31,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "kerml/src/examples/Named Collection Members Example/VehicleTanks.kerml",
+      "native_elements": 20,
+      "pilot_elements": 695,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 6,
+      "pilot_only": 681,
+      "named_declaration_triage": {
+        "unique_named_pairs": 14,
+        "relation_fields_missing_direct_counterpart": 15,
+        "pilot_initializer_without_native_expression_ir": 5,
+        "relation_field_differences": 13
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Comment Examples/Comments.sysml",
+      "native_elements": 10,
+      "pilot_elements": 25,
+      "exact_pairs": 0,
+      "mismatched_pairs": 4,
+      "native_only": 6,
+      "pilot_only": 21,
+      "named_declaration_triage": {
+        "unique_named_pairs": 4,
+        "relation_fields_missing_direct_counterpart": 1,
+        "metaclass_mismatches": 2
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Room Model/RoomModel.sysml",
+      "native_elements": 43,
+      "pilot_elements": 421,
+      "exact_pairs": 0,
+      "mismatched_pairs": 35,
+      "native_only": 8,
+      "pilot_only": 386,
+      "named_declaration_triage": {
+        "unique_named_pairs": 35,
+        "relation_field_differences": 18,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/04-Functional Allocation/4a-Functional Allocation.sysml",
+      "native_elements": 48,
+      "pilot_elements": 1152,
+      "exact_pairs": 0,
+      "mismatched_pairs": 39,
+      "native_only": 9,
+      "pilot_only": 1113,
+      "named_declaration_triage": {
+        "unique_named_pairs": 22,
+        "relation_fields_missing_direct_counterpart": 41,
+        "relation_field_differences": 42,
+        "name_or_direction_differences": 17
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/05. Redefinition/Redefinition Example.sysml",
+      "native_elements": 14,
+      "pilot_elements": 102,
+      "exact_pairs": 0,
+      "mismatched_pairs": 14,
+      "native_only": 0,
+      "pilot_only": 88,
+      "named_declaration_triage": {
+        "unique_named_pairs": 12,
+        "relation_fields_missing_direct_counterpart": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Flashlight Example/Flashlight Example.sysml",
+      "native_elements": 42,
+      "pilot_elements": 662,
+      "exact_pairs": 0,
+      "mismatched_pairs": 32,
+      "native_only": 10,
+      "pilot_only": 630,
+      "named_declaration_triage": {
+        "unique_named_pairs": 28,
+        "relation_fields_missing_direct_counterpart": 23,
+        "relation_field_differences": 26,
+        "name_or_direction_differences": 5
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/04. Subsetting/Subsetting Example.sysml",
+      "native_elements": 10,
+      "pilot_elements": 66,
+      "exact_pairs": 0,
+      "mismatched_pairs": 10,
+      "native_only": 0,
+      "pilot_only": 56,
+      "named_declaration_triage": {
+        "unique_named_pairs": 10,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+      "native_elements": 93,
+      "pilot_elements": 1870,
+      "exact_pairs": 0,
+      "mismatched_pairs": 63,
+      "native_only": 30,
+      "pilot_only": 1807,
+      "named_declaration_triage": {
+        "unique_named_pairs": 50,
+        "relation_fields_missing_direct_counterpart": 52,
+        "name_or_direction_differences": 15,
+        "metaclass_mismatches": 4,
+        "relation_field_differences": 16
+      }
+    },
+    {
+      "relative_path": "sysml/src/examples/Timeslice and Snapshot Examples/TimeVaryingAttribute.sysml",
+      "native_elements": 23,
+      "pilot_elements": 902,
+      "exact_pairs": 0,
+      "mismatched_pairs": 9,
+      "native_only": 14,
+      "pilot_only": 893,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 5,
+        "relation_field_differences": 8,
+        "metaclass_mismatches": 1
+      }
+    },
+    {
+      "relative_path": "sysml/src/training/18. Action Performance/Action Performance Example.sysml",
+      "native_elements": 11,
+      "pilot_elements": 81,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8,
+      "native_only": 3,
+      "pilot_only": 73,
+      "named_declaration_triage": {
+        "unique_named_pairs": 8,
+        "relation_fields_missing_direct_counterpart": 1,
+        "relation_field_differences": 4
+      }
+    }
+  ]
+}

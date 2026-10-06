@@ -1,0 +1,62 @@
+{
+  "schema": "dev.mercurio.type-set-contribution-reference-preparation.v1",
+  "qualification_certificate": false,
+  "status": "independent_component_reference_prepared_native_assessment_unsupported",
+  "scope": "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-contribution-batch-scope.json",
+  "normative_review": "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-contribution-normative-review.json",
+  "getter_contexts": 2304,
+  "endpoint_boundary_observations": 8,
+  "reference_integrity_tests_passed": 7,
+  "deterministic_reproduction": "passed",
+  "native_contribution_contexts_verified": 0,
+  "complete_obligations_closed": 0,
+  "coverage": [
+    {
+      "kind": "Disjoining",
+      "imported": "Ecore class/source/target/ownership metadata and resolved Xtext reference slots",
+      "native_consumed": "Existing stored cross-reference origin policy; shared contribution assessment not yet implemented",
+      "reference_verified_getter_contexts": 576,
+      "native_contribution_verified": false,
+      "full_semantics": "unsupported"
+    },
+    {
+      "kind": "Unioning",
+      "imported": "Ecore class/source/target/ownership metadata and resolved Xtext reference slots",
+      "native_consumed": "Existing stored cross-reference origin policy; shared contribution assessment not yet implemented",
+      "reference_verified_getter_contexts": 576,
+      "native_contribution_verified": false,
+      "full_semantics": "unsupported"
+    },
+    {
+      "kind": "Intersecting",
+      "imported": "Ecore class/source/target/ownership metadata and resolved Xtext reference slots",
+      "native_consumed": "Existing stored cross-reference origin policy; shared contribution assessment not yet implemented",
+      "reference_verified_getter_contexts": 576,
+      "native_contribution_verified": false,
+      "full_semantics": "unsupported"
+    },
+    {
+      "kind": "Differencing",
+      "imported": "Ecore class/source/target/ownership metadata and resolved Xtext reference slots",
+      "native_consumed": "Existing stored cross-reference origin policy; shared contribution assessment not yet implemented",
+      "reference_verified_getter_contexts": 576,
+      "native_contribution_verified": false,
+      "full_semantics": "unsupported"
+    }
+  ],
+  "getter_dispatch": "feature_property_types invokes Feature.getType; adapter_all_types invokes FeatureUtil.getAllTypesOf; general_types invokes TypeUtil.getGeneralTypesOf. Default selector is the actual resolved concrete adapter method. Connector public type follows association redefinition.",
+  "runtime_provenance": "Reference jar matches imported Feature/Connector program runtime_sha256. The older Ecore import jar has a different archive hash; no claim of archive identity is made. Pinned normative PDF hash unchanged.",
+  "preliminary_repairs": "Initial exporter used a nonexistent getIsImpliedIncluded signature; corrected to the pinned Boolean getter. The unfrozen 576-row preliminary matrix expanded to 2304 to include actual Feature endpoints. Concrete property and adapter getter dispatch were split before freezing.",
+  "limits": "Supplied completion flags and getter-only fixtures do not establish valid models, transformations, library lifecycle, source pipeline or Type set interpretation/constraints.",
+  "input_sha256": {
+    "docs/conformance/2026-08-support/type-set-contribution-pilot-controls.json": "8a1403875f5fca50d59eb3ad153311fa0e88c7e458532da8aa2cdfbabf76bfe7",
+    "tools/export_pilot_type_set_contributions.py": "af5dbe9b67c602964777457b65b26e4f33a0b64e18e55746586f98026a65c81b",
+    "tools/test_type_set_contributions.py": "6fdca90612e79987f330bff496d6f372177e3de6ecc785d9bcfdc99334828e43",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTypeSetContributionProbe.java": "be86d07cb96ee421736c1522cf976ea331eda26fc0b20c5b0cfb00475458743b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-contribution-normative-review.json": "5f2583e798d5e67c7ee7b72535e8e218f0b9196a3ebe4f2f6855a36d3cad82cb",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-reference-preparation-run.json": "c0a912eabd4cad91d2ba5daf04acc61d856cc7e13015f5933e07340898725c80",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-reference-reproduction.log": "2638e56edb7e891e589a78e200f468bd4e9323067cb91a6abda277bc1789826a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-reference-controls.log": "eb13a9f2116228b07d8b5c2ed3c7dd8ced12de18432506d88be5208e2f433ec3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/type-set-contribution-batch-scope.json": "dd208c6b5228831f2d6ca869d4a6364ce20530719b889ac62cebc7edfe836df3"
+  }
+}

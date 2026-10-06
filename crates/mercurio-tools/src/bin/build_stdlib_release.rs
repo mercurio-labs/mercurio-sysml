@@ -11,7 +11,10 @@ use mercurio_core::{
     validate_mpack_manifest, write_kpar_package,
 };
 use mercurio_language_frontend::lowering::emit::{KirEmissionSeed, PilotConstructSeed};
-use mercurio_sysml::sysml_metamodel_adapter_from_graph;
+use mercurio_sysml::{
+    promote_observed_library_defaults, reconcile_library_metafeatures_with_ecore,
+    sysml_metamodel_adapter_from_graph,
+};
 use mercurio_tools::{
     attach_stdlib_derived_feature_manifest, load_pilot_lock, sha256_file, split_language_baselines,
 };
@@ -57,6 +60,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         args.profile_id
     );
     let mut kir = normalize_pilot_export(export.clone())?;
+    if export
+        .metadata
+        .as_ref()
+        .and_then(|metadata| metadata.get("observed_ecore_defaults_v1"))
+        == Some(&Value::Bool(true))
+    {
+        promote_observed_library_defaults(&mut kir.elements)?;
+        reconcile_library_metafeatures_with_ecore(&mut kir.elements)?;
+    }
     kir.metadata = build_kir_metadata(&args, &source_id, &export_digest, &export_sha256, &export);
     attach_stdlib_derived_feature_manifest(
         &mut kir,

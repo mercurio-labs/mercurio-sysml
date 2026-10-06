@@ -285,6 +285,13 @@ fn build_extract(args: &Args) -> Result<ValidatorsExtract, Box<dyn std::error::E
 
         let constants = parse_issue_constants(&text, &source_file);
         let checks = parse_checks(&text);
+        let annotation_count = text
+            .lines()
+            .filter(|line| !is_commented_line(line) && line.trim().starts_with("@Check"))
+            .count();
+        if checks.len() != annotation_count {
+            return Err(format!("unsupported or unpaired @Check declaration in {source_file}: {annotation_count} annotations, {} parsed checks", checks.len()).into());
+        }
         let diagnostic_use_count = checks
             .iter()
             .map(|check| check.diagnostics.len())
@@ -446,10 +453,9 @@ fn parse_checks(text: &str) -> Vec<ParsedCheck> {
                 signature_index += 1;
                 continue;
             }
-            if candidate.contains("def ") {
-                break;
-            }
-            signature_index += 1;
+            // An annotation applies to the immediately following declaration.
+            // Walking past an override associates it with an unrelated helper.
+            break;
         }
         if signature_index >= lines.len() {
             index += 1;
@@ -475,10 +481,18 @@ struct Signature {
 }
 
 fn parse_signature(line: &str) -> Option<Signature> {
-    let def_index = line.find("def ")?;
-    let after_def = line[def_index + 4..].trim_start();
+    let trimmed = line.trim();
+    let after_def = if let Some(index) = trimmed.find("def ") {
+        trimmed[index + 4..].trim_start()
+    } else {
+        trimmed.strip_prefix("override ")?.trim_start()
+    };
     let paren_index = after_def.find('(')?;
-    let method = after_def[..paren_index].trim().to_string();
+    // Xtend permits an explicit return type before the method name.
+    let method = after_def[..paren_index]
+        .split_whitespace()
+        .last()?
+        .to_string();
     let params = after_def[paren_index + 1..].split(')').next()?.trim();
     let (parameter_type, parameter_name) = parse_first_parameter(params);
     Some(Signature {
@@ -986,5 +1000,34 @@ mod tests {
 
         assert!(parse_checks(text).is_empty());
         assert!(parse_issue_constants(text, "Commented.xtend").is_empty());
+    }
+    #[test]
+    fn extracts_annotated_overrides_without_absorbing_later_helpers() {
+        let source = r#"
+            @Check
+            override checkClass(org.example.Class value) {
+                error(INVALID_CLASS_MSG, value, null, INVALID_CLASS)
+            }
+            @Check
+            override checkOperatorExpression(Expression value) {}
+            def boolean resultConformsTo(Expression expr, Type type) { true }
+        "#;
+        let checks = parse_checks(source);
+        assert_eq!(checks.len(), 2);
+        assert_eq!(checks[0].method, "checkClass");
+        assert_eq!(
+            checks[0].parameter_type.as_deref(),
+            Some("org.example.Class")
+        );
+        assert_eq!(checks[0].diagnostics.len(), 1);
+        assert_eq!(checks[1].method, "checkOperatorExpression");
+        assert!(checks.iter().all(|check| check.annotations.len() == 1));
+    }
+
+    #[test]
+    fn unsupported_annotated_declaration_does_not_consume_a_later_method() {
+        assert!(parse_checks("@Check\nval unrelated = 0\ndef helper(Thing value) {} ").is_empty());
+        let signature = parse_signature("def boolean checkThing(Thing value) {").unwrap();
+        assert_eq!(signature.method, "checkThing");
     }
 }

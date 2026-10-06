@@ -1,0 +1,31 @@
+{
+  "schema": "dev.mercurio.feature-owner-default-evidence.v1",
+  "scope": "Exact Feature owned through exact FeatureMembership by exact Feature; all owners must pass shared ordinary-context guards",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json",
+  "imported_sha256": "885ff085e19f7dde2b2108265c789fb5ac95a07ce1f4e976136f4ad6d896be95",
+  "independent_selector_controls": 384,
+  "new_owner_controls": 256,
+  "control_dimensions": "Eight child typing masks by eight owner typing masks by composite/portion flags; previous 128 detached/package/class/structure contexts retained",
+  "independent_source_models": 2,
+  "source_nodes": 46,
+  "source_reference_observations": 84,
+  "native_consumer": "definition_ordinary_feature_inputs_with_owners",
+  "native_evidence": [
+    "definition_feature_owned_defaults_reach_source_and_reject_unknown_owners",
+    "definition_feature_owned_defaults_reject_ownership_cycles",
+    "definition_feature_owned_sources_match_pilot_and_roundtrip",
+    "definition_feature_defaults_match_resolved_pilot_controls"
+  ],
+  "semantic_dependencies": "Generated selector remains unchanged. Handwritten Rust obtains owner typing from imported Ecore contracts and recursively proves supported ordinary context; exact FeatureMembership excludes owned-cross-feature construction. Cyclic ownership and depth above 64 reject. No completeness flags are synthesized.",
+  "normative_reference": "feature-default-evidence.json records the pinned KerML specialization constraints and portion-name textual discrepancy. Current cases add direct explicit typed Feature ownership; inherited/chained effective owner classification remains unqualified.",
+  "verification_boundary": "Source comparison checks canonical construction, scalars/defaults, containment and observed reference slots before and after persistence. It does not claim complete validation or all derived semantics.",
+  "unsupported": [
+    "Positional ends and parameters",
+    "Constructor and specialized owner subclasses",
+    "Valuation, crossing and metadata implicit contributions",
+    "Owner classification through inherited/chained effective typing",
+    "Complete Connector effective-end constraints and full release qualification"
+  ],
+  "full_model_total": 113,
+  "closure": "Ordinary obligations 3/4; feature families 0/34; release gates 0/5 unchanged."
+}

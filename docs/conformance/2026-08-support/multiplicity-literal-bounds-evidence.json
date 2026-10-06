@@ -1,0 +1,27 @@
+{
+  "schema": "dev.mercurio.multiplicity-literal-bounds-evidence.v1",
+  "scope": "Pinned KerML grammar parses Boolean, string and real MultiplicityExpressionMember literals; Pilot transformation rejects their non-Natural values before successful model construction.",
+  "fixture_sha256": "675b277506d6df99f1a79c4e7a3bd7bc3ad0bf1fc463fcbcddcc78fbb8d3688b",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "pilot_status": "error",
+  "pilot_failure_stage": "resolve_transform",
+  "pilot_diagnostics": [
+    {
+      "line": 2,
+      "column": 32,
+      "message": "Must have a Natural value"
+    },
+    {
+      "line": 3,
+      "column": 31,
+      "message": "Must have a Natural value"
+    },
+    {
+      "line": 4,
+      "column": 29,
+      "message": "Must have a Natural value"
+    }
+  ],
+  "native_control": "multiplicity_literal_syntax_reaches_pilot_natural_value_check"
+}

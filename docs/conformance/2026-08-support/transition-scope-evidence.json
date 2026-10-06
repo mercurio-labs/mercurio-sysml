@@ -1,0 +1,157 @@
+{
+  "schema": "dev.mercurio.transition-scope-evidence.v1",
+  "scope": "First non-Feature transition Membership source origin and typed missing stored alias endpoint, with staged ordinary Action-role owner generalization prerequisites. Does not qualify target/chain origins, global scopes, complete linking, source constructors or Action/State lifecycle.",
+  "inputs": {
+    "tools/export_transition_scope_xtend.py": "0df5e39b5760827aea74443847433804d8f2b4104a449e030fc859d6854386a9",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotXtendExporter.java": "2529bffcf29c562459b0706e62ff7ee4de3ab5ff55ee9deded7e4ca180666783",
+    "tools/run_transition_scope_probe.py": "64f3add7b72a6b7c183e1d9b740d835b4d720edd96b070a9ca4f5c747ff32a3f",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotTransitionScopeProbe.java": "a9d6406b8cdfbd01483bd01beef3b6139a0421d7fc9828f45c32dcc15728dcfa",
+    "tools/generate_transition_scope.py": "485bf1e21a561cecee0de2ba5e9c61e69b92e69e674fe1d30fa332ecd8d75bb5",
+    "tools/test_transition_scope.py": "20f94c9406eea0a68ef29f4d0ed9337e2b97596a701f9b3eb4d4f7991476f90e",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/transition-scope.ast.extract.json": "b9edd3d3a96dab8e26e6809fa9d404fde035ecbe8bad4682ea04b44b3fd0cc06",
+    "docs/conformance/2026-08-support/transition-scope-pilot-controls.json": "c25b0a05c34574a9cc1ad9364186bdabe2ddd97de651d4719e88469e54b80a6d",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_scope.rs": "37e81d425047dc74ae499f837c2559913bd0d7f03197ab2941bfeee29f5b55cc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_scope_generated.rs": "3a4aca8d6a4f67ad2235357c1ee085b450eb5f97f40a8bd90dca47d5c217b47e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source.rs": "6877115a2b23e18abc2136b33d7dcdacc7c4dc9981c03558ad0993193b123637",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source_query.rs": "a6a8c70a7175c3afea03da5f7c5eaf6e1f2e8827a74fb38f0d99263914a0e45e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/action_contributions.rs": "f47a62ef14b66728a6651dd742f87dfd7b45f102300301360fbb8f7d1ecbf722",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "docs/conformance/2026-08-support/action-contribution-pilot-controls.json": "2d236c48fa292a6312dba524a96866df44469fccb29771101aa02b869e52fd81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-native-tests.log": "2f9cfb8442f3d40898cbef3f63314a66d4de4b417b1b5e402fc57fe4356b0dc4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-prerequisite-tests.log": "efa2e1a8e2c5627ae45ce395d98dadc0aeb608672fb1f51da2ac0ae86295868e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-cache-tests.log": "88fe21e73646ffed058842fde392bc591baa421e1741cc6c97211a0db52fd647",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-pilot-check.log": "c9f6290c754cc924047c0be67b0f1666d1b1db685bd75b2734d91f1bba91d28d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-generation-check.log": "afab1d8b097d5c44b4202212453c6d92f664f253d5746444fe22b212743e0ef6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-xtend-check.log": "cd50c5d0f13b35fac0bdb3db213bde3a6ab07133aa8adff788689daac948c46d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "resolved_xtend_methods": 2,
+    "native_source_origin_rules": 1,
+    "frontend": "Actual org.eclipse.xtend.core.XtendStandaloneSetup parser, linker and type system; full resolved typed method bodies and JVM symbols retained.",
+    "reference_only": [
+      "featureRelationship normalization",
+      "getScope succession-target branch"
+    ],
+    "generated": "Guarded resolved Membership/FeatureMembership/TransitionUsage classifier identities. Canonical origin navigation is handwritten Rust."
+  },
+  "native_consumers": [
+    "transition_scope::source_origin",
+    "transition_source::member_query",
+    "transition_source_query::ready_query",
+    "transition_source_query::source_feature_query",
+    "action_contributions::names_query",
+    "pending_explicit_redefinition_indexed"
+  ],
+  "handwritten_dependencies": [
+    "Canonical ordered membership and enclosing namespace navigation; only direct Membership source reference production dispatch is consumed",
+    "Typed field requirement uses imported most-specific endpoint contract; explicit null, malformed values and missing target objects remain distinct",
+    "Computed Action redefinition preflight preserves owner generalization prerequisites before the existing diagnostic closure boundary",
+    "Existing transactional linker schedules real pending fields; no empty generalization/closure fallback or complete flags",
+    "Factory fixture libraries and explicitly complete owner/type inputs scope the 192 contribution controls"
+  ],
+  "verification": {
+    "independent_pilot_scope_origins": 54,
+    "scope_membership_classes": [
+      "Membership",
+      "OwningMembership",
+      "FeatureMembership"
+    ],
+    "scope_preceding_memberships": [
+      "none",
+      "FeatureMembership",
+      "Membership"
+    ],
+    "scope_parent_classes": [
+      "Package",
+      "Class",
+      "StateUsage"
+    ],
+    "scope_owner_classes": [
+      "TransitionUsage",
+      "ActionUsage"
+    ],
+    "scope_controls_globals_explicitly_empty": true,
+    "scope_lookup_or_resources_qualified": false,
+    "native_scope_serialized_reversed_replays": 54,
+    "cached_pilot_contribution_deferral_resume_cases": 192,
+    "native_resumed_physical_idempotent_constructions": 192,
+    "alias_storage_states": [
+      "missing prerequisite",
+      "explicit null",
+      "resolved endpoint",
+      "missing target object",
+      "invalid numeric/boolean values",
+      "unsupported derived endpoint"
+    ],
+    "cache_guard_tests": 5,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-scope-native-tests.log",
+      "sha256": "2f9cfb8442f3d40898cbef3f63314a66d4de4b417b1b5e402fc57fe4356b0dc4",
+      "passed": 290
+    },
+    "completion_flags_fabricated": false,
+    "supplied_complete_contribution_fixture_inputs": true,
+    "actual_resource_qualification": false,
+    "full_whole_model_comparison_performed": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_basis": {
+    "reference": "Written pinned specification remains normative; SysMLScopeProvider is an explicitly identified external-to-grammar implementation dependency, not the specification. Imported Ecore reference contracts govern storage/endpoint validity.",
+    "remaining": "Complete written-spec mapping of scope/link behavior and positive/negative/boundary qualified documents remain required."
+  },
+  "remaining": [
+    "AcceptActionUsage specialized generalization/default/redefinition lifecycle",
+    "Transition target/feature-chain origin rules (imported only), full scoping/linking and source constructors",
+    "Complete State/Transition contributions/constraints and actual resources",
+    "Required enum secondary publication and global native_parser/model_construction contracts"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  }
+}

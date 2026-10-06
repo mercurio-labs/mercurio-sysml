@@ -1,0 +1,81 @@
+{
+  "schema": "dev.mercurio.performances-resource-evidence.v1",
+  "scope": "Build-time Xtext import/package inventory drives native candidate resource selection; diagnostic stage observation does not change or qualify semantic algorithms.",
+  "inputs": {
+    "tools/export_library_import_inventory.py": "2e7563122d28fda1188d854b0d0f94be6ea1da9c6bc72087c356ce9dee3cb101",
+    "tools/prepare_library_import_closure.py": "a50d99da3f99fd64e4bcc12b102f2b25e5652d5a5eaf5fdae91c7c2beaa4640c",
+    "tools/test_prepare_library_import_closure.py": "b173c88cb11be44fa41b117a66be9341006f3d613decf2b5f94066dd84ccfefc",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotLibraryImportInventory.java": "0dfaf636b3489ed20bfdd1f842f7624f75b175737ebeeb1e3ace5897460f97f0",
+    "docs/conformance/2026-08-support/library-import-inventory.json": "7b05e7c648e7fe8b2ece102db8f7c044c831f70f1f3b23b785571318984c28fb",
+    "docs/conformance/2026-08-support/performances-import-closure.json": "f96b83897e50282cecbefd8793ca4aba681ea8c72df48dfe8ee0e23698aa0a4c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "crates/mercurio-sysml/src/definition_document.rs": "a2f7a59fd0d50371f838d237614fda9415efccdfe81bc78136c8bfe329cd4121",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "3587fb732a8d64de52aa676dc9c3b3a5a3b26aa16c5bd11cba59d5b9530e9b7d"
+  },
+  "imported_representation": "Pinned upstream Xtext frontends parse all 94 frozen library sources. Import EClass/reference feature, qualified-name converter segments, package ancestry and source offsets are exported without resolving semantic targets.",
+  "native_consumers": [
+    "prepare_library_import_closure.select prepares the actual candidate input manifest",
+    "definition_document::parse_and_link_sources_observed",
+    "audit_release_compile definition candidate mode"
+  ],
+  "handwritten_dependencies": [
+    "Package-prefix source selection consumes at least one target segment; owner prefix alone cannot masquerade as a self import",
+    "Cycles deduplicated; missing or ambiguous package providers explicit; nested filter imports kept",
+    "Native atomic parsing/construction/linking emits caller-owned progress events; no kernel I/O or Java dependency"
+  ],
+  "inventory": {
+    "resources": 94,
+    "import_declarations": 582,
+    "selected_resources": 16,
+    "selected_bytes": 121245,
+    "unresolved_import_prefixes": 0
+  },
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-resource-progress.log",
+      "sha256": "2fb2a7acb44e93072cea94a90788e1e110df35c859c096e5abc911cbb5808587",
+      "passed": 196
+    },
+    "scope": "Four focused source-selection controls; one native observer test compares the observed/unobserved pipeline and checks syntax/linking failure events. Whole definition regression unchanged.",
+    "tooling_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-resource-tooling-tests.log",
+      "sha256": "66f4b5b7a751324683ce5fa489000c08c7a932bbe0325aa48e9697e04ad47acc",
+      "passed": 78
+    },
+    "audit_tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-resource-audit-tool-tests.log",
+      "sha256": "12681718da0301fc8b78d649a9ecc1525ba599b373e056c441b8a6d4ea7f3060",
+      "passed": 10
+    }
+  },
+  "native_assessment": {
+    "status": "blocked",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-native-results.jsonl",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-native-progress.log",
+    "initial_attempt": "Interrupted without a result to add phase diagnostics; that attempt is not qualification evidence.",
+    "stage": "resource_limit",
+    "error": "Candidate definition document resource limit: D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml: Xtext execution step budget exceeded",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources_before_blocker": 9,
+    "result_sha256": "68241a5c431614dda912b94340ed44f5923a3824498af72cf594a1fa36cf7e9b",
+    "progress_sha256": "16d0947c9febe61a55a98ac8ba5b1cd8cc0bcf2458403a5a6857e4c46d8ffacc",
+    "native_binary_sha256": "836e7c51ea52e771787d0278a0c5bb655a09c9a2cbe51047897f81919e4972e2",
+    "boundary": "First blocker only: fixed 100,000-step native parser budget exceeded in KerML.kerml. Construction and linking were not entered; remaining resources and implicit/global closure remain unassessed."
+  },
+  "remaining": [
+    "Explicit import package-prefix selection is not complete semantic or implicit/global resource closure",
+    "Bound native parser work by a reviewed input-aware execution policy and eliminate repeated pure syntax prediction work where measured; preserve cycle/depth/resource-limit failures. Qualify the same 16-resource manifest before changing expression semantics.",
+    "Qualify actual expression result inheritance/construction with equivalent resources",
+    "No full sample/Pilot/timing gate is closed by inventory extraction or progress events"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "prior_small_cohort_required_unverified": 28,
+    "small_cohort_delta": 0,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  }
+}

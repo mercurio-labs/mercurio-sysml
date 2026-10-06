@@ -1,0 +1,1036 @@
+{
+  "schema": "dev.mercurio.normative-feature-redefinitions.v1",
+  "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      172,
+      173,
+      174,
+      175,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195
+    ],
+    "clauses": [
+      "Feature.effectiveName",
+      "Feature.effectiveShortName",
+      "Feature.namingFeature",
+      "Type.removeRedefinedFeatures",
+      "checkFeatureEndRedefinition",
+      "checkFeatureParameterRedefinition",
+      "Type.endFeature",
+      "Type.featureMembership",
+      "checkFeatureResultRedefinition"
+    ],
+    "rule": "Declared names take precedence; an unnamed Feature takes names from its first redefined Feature. Inheritance removes redefined Features using the normative membership predicates. checkFeatureEndRedefinition pairs each owned end with the end at the same position in each direct supertype (PDF pages 192-193). Type.endFeature selects end-marked owned and inherited Features; imports from unrelated types do not become Features. Parameter/result obligations remain required."
+  },
+  "imported": {
+    "artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-redefinitions.extract.json",
+    "frontend": "Resolved javac selector expression trees and actual adapter method dispatch over all 79 concrete Feature metaclasses; includes owned-versus-effective end selection and the empty Namespace additional-member body. Eight resolved bodies include parameter/result branches and stream-filter exclusion predicates.",
+    "selector_programs": 30,
+    "unimplemented_adapter_bindings": 49
+  },
+  "consumed": {
+    "generated": "feature_redefinitions_generated.rs selects relevant-feature categories, owned/effective end sources, supported end/general adapters and known empty added-member hooks. Resolved parameter/result branches, owned/effective parameter collections and ignored-result predicates also generate native selectors.",
+    "handwritten": [
+      "definition_feature_owner: imported Ecore ancestry, endpoint redefinition and reciprocal containment determine owningType.",
+      "definition_redefined_features: ordered explicit targets plus generated strategy selection. Ordinary contexts compute empty implicit contributions; ends use a shared positional query. Naming may consume the first explicit target without computing unused trailing contributions.",
+      "materialized_redefinition_closure / remove_materialized_redefined_memberships now reuse the same query. Source order, transitive closure, membership identity and the existing normative filtering predicates are retained.",
+      "Constructor-result and parameter context predicates are named Rust algorithms; Feature direction absence follows the established canonical parameter policy, not the first EMF enum literal. Assignment-write contexts reject.",
+      "definition_general_type_inputs: shared complete explicit/computed generalizations for namespace inheritance and positional redefinition; generated defaults resolve through canonical standard-library roots.",
+      "definition_end_features: imported Ecore delegate/subset contracts, owned Features and the existing inherited-membership filter produce effective ends, including through definition_document::reference_targets(end_feature).",
+      "definition_positional_ends: pair the owned position with each general type effective-end position; preserve direct-general order, deduplicate computed targets, retain explicit contributions, and leave stored flags/relationships unchanged.",
+      "definition_effective_features shares ordered inheritance and redefinition filtering between end and parameter consumers. definition_relevant_parameters and definition_positional_parameters provide directed-feature filtering, membership-based results and positional selection; definition_result_parameter binds the existing result traversal to real owner/generalization providers.",
+      "Document-only ReturnParameterMembership postprocessing sets validated out direction from the pinned constant invocation delegate before usage composition is determined. This is explicitly handwritten Rust; raw grammar construction is unchanged. Other ParameterMembership subtypes are not qualified by this hook."
+    ]
+  },
+  "verified": {
+    "pilot_runtime_controls": 180,
+    "runtime_scope": "Thirty selected strategies, each detached, Package-owned and Class-owned, with zero or two explicit redefinitions. Each verifies ordered targets and both effective names without changing the graph; malformed ownership and missing collections reject. This is ordinary-context coverage, not every strategy branch.",
+    "new_matching_documents": 9,
+    "matching_documents": 72,
+    "matching_nodes": 1198,
+    "matching_reference_slots": 2266,
+    "syntax_negatives": 8,
+    "persistence": "Every matching document is compared before and after canonical JSON reload.",
+    "filtering": "Existing independent canonical case 23 still matches when each ordinary Feature completeness flag is false, including explicit chains and filtering by owned Features; no flag is promoted.",
+    "positional_pilot_runtime_controls": 810,
+    "positional_end_bindings": 28,
+    "empty_selector_bindings": 2,
+    "positional_new_matching_documents": 6,
+    "positional_scope": "Thirty bounded adapters x nine topologies x three positions. Twenty-eight select ends and two Multiplicity adapters return empty selections. Independently observed ordered targets, names and Type.endFeature lists match in both graph-record orders. Materialized Class ancestry is input scope, not fabricated by the native service. Covers short lists, interspersed ordinary members, multiple generals, duplicate generals, inherited ends, diamonds, private/protected visibility, and explicit-plus-computed contributions. Six whole-source models independently exercise unmaterialized KerML Class and SysML ConnectionDefinition defaults, anonymous end names, and persistence.",
+    "qualification": {
+      "native_tests_passed": 719,
+      "tooling_tests_passed": 38,
+      "certificate": "definition-pipeline-qualification.json",
+      "failed_first_attempt": "definition-pipeline-evidence/native-tests-positional-end-first-attempt.log",
+      "integration_correction": "Explicit inherited flowEnd dependency guard at FlowDefinition default selection; focused regression and corrected full run pass.",
+      "current_run": "719 native tests pass unfiltered; all 38 tooling tests pass; both exporters reproduce. The first focused document comparison exposed absent return direction; the shared document postprocessor corrected it and all 72 models now match."
+    },
+    "parameter_runtime_controls": 1200,
+    "invocation_runtime_controls": 30,
+    "parameter_new_matching_documents": 8,
+    "parameter_scope": "Thirty bounded adapters x ten Function-owned topologies x four positions, in both graph record orders. Targets, names, effective Type.feature and Function.result agree without graph mutation. Thirty explicit InvocationExpression argument cases test suppression. Eight source ActionDefinition/CalculationDefinition controls verify linking and persistence, including return direction. Materialized runtime owners are input preconditions; source cases use actual default providers."
+  },
+  "unsupported": [
+    "Constructor relevant-feature algorithms; assignment-write effects; 49 specialized adapter bindings. Positional end/parameter computation rejects missing/unbound providers, cycles, conjugated ancestry, unsupported added-member hooks and Feature-chain equivalence. Cross-category parameter general types require normative assessment; unrelated ParameterMembership postprocessors remain unqualified.",
+    "Inherited-first Redefinition scope origins, broader Feature/Usage generalization providers and adapter-added members.",
+    "Individual source now parses and links and its Multiplicity names are computed. Its retained independent Pilot model still differs at Usage.isVariable (native false, Pilot true) because Usage.mayTimeVary needs semantic conformance. This case is excluded from matching models.",
+    "Individual Multiplicity specialization to Base::zeroOrOne and full semantic validation remain open.",
+    "FlowDefinition with explicit generals is rejected at default selection: the written constraint counts flowEnd, while Pilot counts ownedEndFeature. Generic end naming must not bypass that separate normative dependency. Full samples, final semantics and timing remain unqualified."
+  ],
+  "coverage": [
+    {
+      "kind": "AcceptActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.AcceptActionUsageAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "AllocationUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "AnalysisCaseUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "AssertConstraintUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "AssignmentActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "AttributeUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "BindingConnector",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "BindingConnectorAsUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "BooleanExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "CalculationUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "CaseUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "CollectExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ConcernUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.RequirementUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ConnectionUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "Connector",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ConstraintUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ConstructorExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "DecisionNode",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "EnumerationUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "EventOccurrenceUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ExhibitStateUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "Expression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "Feature",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "FeatureChainExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "FeatureReferenceExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "Flow",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "FlowEnd",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "FlowUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ForLoopActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ForkNode",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "IfActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "IncludeUseCaseUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "IndexExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "InterfaceUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "Invariant",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "InvocationExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ItemUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "JoinNode",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralBoolean",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralInfinity",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralInteger",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralRational",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "LiteralString",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "MergeNode",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "MetadataAccessExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "MetadataFeature",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "MetadataUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "Multiplicity",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "MultiplicityRange",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "NullExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "OccurrenceUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "OperatorExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "PartUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "PayloadFeature",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.PayloadFeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "PerformActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "PortUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ReferenceUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.ReferenceUsageAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "RenderingUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.RenderingUsageAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "RequirementUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.RequirementUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "SatisfyRequirementUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.RequirementUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "SelectExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "SendActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.SendActionUsageAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "StateUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "Step",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "Succession",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "SuccessionAsUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "SuccessionFlow",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "SuccessionFlowUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "TerminateActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.TerminateActionUsageAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "TransitionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "TriggerInvocationExpression",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.ExpressionAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ExpressionAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "Usage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "UseCaseUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "VerificationCaseUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "ViewUsage",
+      "imported": true,
+      "native_consumed": true,
+      "semantic_verification": "six ordinary-context controls and 27 positional-end controls; effective Type.endFeature lists verified separately from targets and names; 40 Function-owned parameter/result controls plus one explicit InvocationExpression suppression case",
+      "remaining": "constructor contexts, assignment writes, unbound providers and rejected positional dependency boundaries remain required"
+    },
+    {
+      "kind": "ViewpointUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.RequirementUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions"
+      }
+    },
+    {
+      "kind": "WhileLoopActionUsage",
+      "imported": true,
+      "native_consumed": false,
+      "semantic_verification": "unsupported strategy; no native behavior claimed",
+      "remaining": {
+        "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+        "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+        "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+        "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+      }
+    }
+  ],
+  "no_promotion": true
+}

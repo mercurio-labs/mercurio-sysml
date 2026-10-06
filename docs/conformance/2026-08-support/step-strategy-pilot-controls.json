@@ -1,0 +1,898 @@
+{
+  "bindings": {
+    "Step": {
+      "dispatch": {
+        "addDefaultGeneralType": "org.omg.sysml.adapter.FeatureAdapter#addDefaultGeneralType",
+        "getAllTypes": "org.omg.sysml.adapter.FeatureAdapter#getAllTypes",
+        "getFeatureTypes": "org.omg.sysml.adapter.FeatureAdapter#getFeatureTypes",
+        "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+        "getRelevantFeatures": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+        "getTypes": "org.omg.sysml.adapter.FeatureAdapter#getTypes"
+      },
+      "names": {
+        "base": "Performances::performances",
+        "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+        "incomingTransfer": "Occurrences::Occurrence::incomingTransfers",
+        "ownedPerformance": "Objects::Object::ownedPerformances",
+        "subperformance": "Performances::Performance::subperformances"
+      }
+    }
+  },
+  "controls": [
+    {
+      "composite": false,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "detached",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Occurrences::Occurrence::incomingTransfers"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::performances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "none"
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "ordinary"
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "owned"
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Step",
+      "payload": "alias"
+    }
+  ],
+  "methods": {
+    "org.omg.sysml.adapter.StepAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [
+              {
+                "condition": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "symbol": "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite",
+                  "type": "boolean"
+                },
+                "false": {
+                  "condition": {
+                    "arguments": [],
+                    "kind": "METHOD_INVOCATION",
+                    "parameters": [],
+                    "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite",
+                    "type": "boolean"
+                  },
+                  "false": {
+                    "condition": {
+                      "arguments": [],
+                      "kind": "METHOD_INVOCATION",
+                      "parameters": [],
+                      "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned",
+                      "type": "boolean"
+                    },
+                    "false": {
+                      "condition": {
+                        "arguments": [],
+                        "kind": "METHOD_INVOCATION",
+                        "parameters": [],
+                        "symbol": "org.omg.sysml.adapter.StepAdapter#isIncomingTransfer",
+                        "type": "boolean"
+                      },
+                      "false": {
+                        "kind": "STRING_LITERAL",
+                        "type": "java.lang.String",
+                        "value": "base"
+                      },
+                      "kind": "CONDITIONAL_EXPRESSION",
+                      "true": {
+                        "kind": "STRING_LITERAL",
+                        "type": "java.lang.String",
+                        "value": "incomingTransfer"
+                      },
+                      "type": "java.lang.String"
+                    },
+                    "kind": "CONDITIONAL_EXPRESSION",
+                    "true": {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "enclosedPerformance"
+                    },
+                    "type": "java.lang.String"
+                  },
+                  "kind": "CONDITIONAL_EXPRESSION",
+                  "true": {
+                    "kind": "STRING_LITERAL",
+                    "type": "java.lang.String",
+                    "value": "subperformance"
+                  },
+                  "type": "java.lang.String"
+                },
+                "kind": "CONDITIONAL_EXPRESSION",
+                "true": {
+                  "kind": "STRING_LITERAL",
+                  "type": "java.lang.String",
+                  "value": "ownedPerformance"
+                },
+                "type": "java.lang.String"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "java.lang.String"
+            ],
+            "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.StepAdapter#isIncomingTransfer": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [
+              {
+                "kind": "MEMBER_REFERENCE",
+                "name": "isInstance",
+                "receiver": {
+                  "kind": "MEMBER_SELECT",
+                  "name": "class",
+                  "receiver": {
+                    "kind": "IDENTIFIER",
+                    "name": "PayloadFeature",
+                    "type": "org.omg.sysml.lang.sysml.PayloadFeature"
+                  },
+                  "type": "java.lang.Class<org.omg.sysml.lang.sysml.PayloadFeature>"
+                },
+                "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Feature>"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "java.util.function.Predicate<? super T>"
+            ],
+            "receiver": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "symbol": "org.omg.sysml.adapter.StepAdapter#getTarget",
+                  "type": "org.omg.sysml.lang.sysml.Step"
+                },
+                "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedFeature",
+                "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Feature>"
+              },
+              "symbol": "java.util.Collection#stream",
+              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Feature>"
+            },
+            "symbol": "java.util.stream.Stream#anyMatch",
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "driver_sha256": "e8b4b55abfe6d1ada3ca7e96ca82fbb0790b923af17889732c8f997b4a54e1ab",
+    "helper_sha256": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/StepAdapter.java": "cf75298adaed3dbee80ac7d51a6675b3aca17cffa04f84d6c6fa46d98c36fa17",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ExpressionUtil.java": "0828947218f049a4b5b42a729345ebbea3c32b5932aa66f6b9bb82981e40c5af",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.step-strategy-controls.v1",
+  "scope": "Resolved Step selector bindings, seven ownership contexts, composite and payload-presence variants, plus complete-state typing controls. Default and typing stages only; full transformation and validation remain unqualified.",
+  "typing_controls": [
+    {
+      "kind": "Step",
+      "shape": "implicit_default",
+      "types": [
+        "type"
+      ]
+    },
+    {
+      "kind": "Step",
+      "shape": "empty",
+      "types": []
+    },
+    {
+      "kind": "Step",
+      "shape": "direct",
+      "types": [
+        "type"
+      ]
+    },
+    {
+      "kind": "Step",
+      "shape": "subset",
+      "types": [
+        "type"
+      ]
+    },
+    {
+      "kind": "Step",
+      "shape": "cycle",
+      "types": [
+        "type"
+      ]
+    },
+    {
+      "kind": "Step",
+      "shape": "diamond",
+      "types": [
+        "type"
+      ]
+    }
+  ]
+}

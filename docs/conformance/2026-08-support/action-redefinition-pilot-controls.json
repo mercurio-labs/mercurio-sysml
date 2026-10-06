@@ -1,0 +1,3218 @@
+{
+  "bindings": {
+    "AcceptActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.AcceptActionUsageAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "ActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "AnalysisCaseUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "AssignmentActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "CalculationUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "CaseUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "DecisionNode": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "ExhibitStateUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "ForLoopActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "ForkNode": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "IfActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "IncludeUseCaseUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "JoinNode": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "MergeNode": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "PerformActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "SendActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.SendActionUsageAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "StateUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "TerminateActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.TerminateActionUsageAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "TransitionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "UseCaseUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "VerificationCaseUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    },
+    "WhileLoopActionUsage": {
+      "addComputedRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+      "addFeatureWriteTypes": "org.omg.sysml.adapter.FeatureAdapter#addFeatureWriteTypes",
+      "addRedefinitions": "org.omg.sysml.adapter.FeatureAdapter#addRedefinitions",
+      "getGeneralTypes": "org.omg.sysml.adapter.FeatureAdapter#getGeneralTypes",
+      "getRedefinedFeaturesWithComputed": "org.omg.sysml.adapter.FeatureAdapter#getRedefinedFeaturesWithComputed",
+      "getRelevantFeatures": "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures",
+      "isComputeRedefinitions": "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions"
+    }
+  },
+  "controls": [
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "is_trigger_action": true,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "is_trigger_action": false,
+      "kind": "AcceptActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "ActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "ActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "ActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "ActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "AnalysisCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "AssignmentActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "CalculationUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "CaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "CaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "CaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "CaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "DecisionNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "DecisionNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "DecisionNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "DecisionNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "ExhibitStateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "ForLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "ForkNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "ForkNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "ForkNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "ForkNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "IfActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "IncludeUseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "JoinNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "JoinNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "JoinNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "JoinNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "MergeNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "MergeNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "MergeNode",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "MergeNode",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "PerformActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "SendActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "StateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "StateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "StateUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "StateUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "TerminateActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "TransitionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "UseCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "VerificationCaseUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "detached",
+      "default_redefined_feature": null,
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "ordinary",
+      "default_redefined_feature": null,
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "parameter",
+      "default_redefined_feature": null,
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 0
+    },
+    {
+      "context": "state:entry",
+      "default_redefined_feature": "States::StateAction::entryAction",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:do",
+      "default_redefined_feature": "States::StateAction::doAction",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "state:exit",
+      "default_redefined_feature": "States::StateAction::exitAction",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:trigger",
+      "default_redefined_feature": "Actions::TransitionAction::accepter",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:guard",
+      "default_redefined_feature": "Actions::TransitionAction::guard",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    },
+    {
+      "context": "transition:effect",
+      "default_redefined_feature": "Actions::TransitionAction::effect",
+      "kind": "WhileLoopActionUsage",
+      "same_owner_relevant": 1
+    }
+  ],
+  "defaults": {
+    "AcceptActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "ActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "AnalysisCaseUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "AssignmentActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "CalculationUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "CaseUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "DecisionNode": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "ExhibitStateUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "ForLoopActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "ForkNode": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "IfActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "IncludeUseCaseUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "JoinNode": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "MergeNode": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "PerformActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "SendActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "StateUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "TerminateActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "TransitionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "UseCaseUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "VerificationCaseUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    },
+    "WhileLoopActionUsage": {
+      "do": "States::StateAction::doAction",
+      "effect": "Actions::TransitionAction::effect",
+      "entry": "States::StateAction::entryAction",
+      "exit": "States::StateAction::exitAction",
+      "guard": "Actions::TransitionAction::guard",
+      "trigger": "Actions::TransitionAction::accepter"
+    }
+  },
+  "methods": {
+    "accept_default": {
+      "condition": {
+        "expression": {
+          "expression": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "symbol": "org.omg.sysml.adapter.AcceptActionUsageAdapter#isTriggerAction",
+            "type": "boolean"
+          },
+          "kind": "LOGICAL_COMPLEMENT",
+          "type": "boolean"
+        },
+        "kind": "PARENTHESIZED",
+        "type": "boolean"
+      },
+      "effect": {
+        "arguments": [],
+        "kind": "METHOD_INVOCATION",
+        "parameters": [],
+        "receiver": {
+          "kind": "IDENTIFIER",
+          "name": "super",
+          "type": "org.omg.sysml.adapter.ActionUsageAdapter"
+        },
+        "symbol": "org.omg.sysml.adapter.ActionUsageAdapter#addDefaultGeneralType",
+        "type": "void"
+      }
+    },
+    "accept_redefinitions": [
+      {
+        "arguments": [],
+        "kind": "METHOD_INVOCATION",
+        "parameters": [],
+        "symbol": "org.omg.sysml.adapter.AcceptActionUsageAdapter#addDefaultGeneralType",
+        "type": "void"
+      },
+      {
+        "arguments": [
+          {
+            "kind": "IDENTIFIER",
+            "name": "skip",
+            "type": "org.omg.sysml.lang.sysml.Element"
+          }
+        ],
+        "kind": "METHOD_INVOCATION",
+        "parameters": [
+          "org.omg.sysml.lang.sysml.Element"
+        ],
+        "receiver": {
+          "kind": "IDENTIFIER",
+          "name": "super",
+          "type": "org.omg.sysml.adapter.ActionUsageAdapter"
+        },
+        "symbol": "org.omg.sysml.adapter.FeatureAdapter#addComputedRedefinitions",
+        "type": "void"
+      }
+    ],
+    "org.omg.sysml.adapter.AcceptActionUsageAdapter#isTriggerAction": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.AcceptActionUsageAdapter#getTarget",
+              "type": "org.omg.sysml.lang.sysml.AcceptActionUsage"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningFeatureMembership",
+            "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+          },
+          "kind": "VARIABLE",
+          "name": "owningFeatureMembership",
+          "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+        },
+        {
+          "expression": {
+            "kind": "CONDITIONAL_AND",
+            "left": {
+              "expression": {
+                "kind": "IDENTIFIER",
+                "name": "owningFeatureMembership",
+                "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+              },
+              "kind": "INSTANCE_OF",
+              "test_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+              "type": "boolean"
+            },
+            "right": {
+              "kind": "EQUAL_TO",
+              "left": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "expression": {
+                    "cast_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+                    "expression": {
+                      "kind": "IDENTIFIER",
+                      "name": "owningFeatureMembership",
+                      "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                    },
+                    "kind": "TYPE_CAST",
+                    "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                  },
+                  "kind": "PARENTHESIZED",
+                  "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                },
+                "symbol": "org.omg.sysml.lang.sysml.TransitionFeatureMembership#getKind",
+                "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+              },
+              "right": {
+                "kind": "MEMBER_SELECT",
+                "name": "TRIGGER",
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "TransitionFeatureKind",
+                  "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+                },
+                "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+              },
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.ActionUsageAdapter#getRedefinedFeature": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "target",
+              "type": "org.omg.sysml.lang.sysml.Feature"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningFeatureMembership",
+            "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+          },
+          "kind": "VARIABLE",
+          "name": "membership",
+          "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+        },
+        {
+          "initializer": {
+            "condition": {
+              "expression": {
+                "kind": "IDENTIFIER",
+                "name": "membership",
+                "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+              },
+              "kind": "INSTANCE_OF",
+              "test_type": "org.omg.sysml.lang.sysml.StateSubactionMembership",
+              "type": "boolean"
+            },
+            "false": {
+              "condition": {
+                "expression": {
+                  "kind": "IDENTIFIER",
+                  "name": "membership",
+                  "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                },
+                "kind": "INSTANCE_OF",
+                "test_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+                "type": "boolean"
+              },
+              "false": {
+                "kind": "NULL_LITERAL",
+                "type": "<nulltype>",
+                "value": null
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "receiver": {
+                    "expression": {
+                      "cast_type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership",
+                      "expression": {
+                        "kind": "IDENTIFIER",
+                        "name": "membership",
+                        "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                      },
+                      "kind": "TYPE_CAST",
+                      "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                    },
+                    "kind": "PARENTHESIZED",
+                    "type": "org.omg.sysml.lang.sysml.TransitionFeatureMembership"
+                  },
+                  "symbol": "org.omg.sysml.lang.sysml.TransitionFeatureMembership#getKind",
+                  "type": "org.omg.sysml.lang.sysml.TransitionFeatureKind"
+                },
+                "symbol": "org.omg.sysml.lang.sysml.TransitionFeatureKind#toString",
+                "type": "java.lang.String"
+              },
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "receiver": {
+                  "expression": {
+                    "cast_type": "org.omg.sysml.lang.sysml.StateSubactionMembership",
+                    "expression": {
+                      "kind": "IDENTIFIER",
+                      "name": "membership",
+                      "type": "org.omg.sysml.lang.sysml.FeatureMembership"
+                    },
+                    "kind": "TYPE_CAST",
+                    "type": "org.omg.sysml.lang.sysml.StateSubactionMembership"
+                  },
+                  "kind": "PARENTHESIZED",
+                  "type": "org.omg.sysml.lang.sysml.StateSubactionMembership"
+                },
+                "symbol": "org.omg.sysml.lang.sysml.StateSubactionMembership#getKind",
+                "type": "org.omg.sysml.lang.sysml.StateSubactionKind"
+              },
+              "symbol": "org.omg.sysml.lang.sysml.StateSubactionKind#toString",
+              "type": "java.lang.String"
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "VARIABLE",
+          "name": "kind",
+          "type": "java.lang.String"
+        },
+        {
+          "expression": {
+            "condition": {
+              "kind": "EQUAL_TO",
+              "left": {
+                "kind": "IDENTIFIER",
+                "name": "kind",
+                "type": "java.lang.String"
+              },
+              "right": {
+                "kind": "NULL_LITERAL",
+                "type": "<nulltype>",
+                "value": null
+              },
+              "type": "boolean"
+            },
+            "false": {
+              "arguments": [
+                {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "receiver": {
+                    "kind": "IDENTIFIER",
+                    "name": "target",
+                    "type": "org.omg.sysml.lang.sysml.Feature"
+                  },
+                  "symbol": "java.lang.Object#getClass",
+                  "type": "java.lang.Class<capture#528 of ? extends org.omg.sysml.lang.sysml.Feature>"
+                },
+                {
+                  "kind": "IDENTIFIER",
+                  "name": "kind",
+                  "type": "java.lang.String"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "java.lang.Class<?>",
+                "java.lang.String"
+              ],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "ImplicitGeneralizationMap",
+                "type": "org.omg.sysml.util.ImplicitGeneralizationMap"
+              },
+              "symbol": "org.omg.sysml.util.ImplicitGeneralizationMap#getDefaultSupertypeFor",
+              "type": "java.lang.String"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "kind": "NULL_LITERAL",
+              "type": "<nulltype>",
+              "value": null
+            },
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.ActionUsageAdapter#getRelevantFeatures": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "symbol": "org.omg.sysml.adapter.ActionUsageAdapter#getTarget",
+            "type": "org.omg.sysml.lang.sysml.ActionUsage"
+          },
+          "kind": "VARIABLE",
+          "name": "target",
+          "type": "org.omg.sysml.lang.sysml.ActionUsage"
+        },
+        {
+          "initializer": {
+            "arguments": [
+              {
+                "kind": "IDENTIFIER",
+                "name": "target",
+                "type": "org.omg.sysml.lang.sysml.ActionUsage"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "org.omg.sysml.lang.sysml.Feature"
+            ],
+            "symbol": "org.omg.sysml.adapter.ActionUsageAdapter#getRedefinedFeature",
+            "type": "java.lang.String"
+          },
+          "kind": "VARIABLE",
+          "name": "redefinedFeature",
+          "type": "java.lang.String"
+        },
+        {
+          "expression": {
+            "condition": {
+              "kind": "EQUAL_TO",
+              "left": {
+                "kind": "IDENTIFIER",
+                "name": "redefinedFeature",
+                "type": "java.lang.String"
+              },
+              "right": {
+                "kind": "NULL_LITERAL",
+                "type": "<nulltype>",
+                "value": null
+              },
+              "type": "boolean"
+            },
+            "false": {
+              "condition": {
+                "kind": "EQUAL_TO",
+                "left": {
+                  "kind": "IDENTIFIER",
+                  "name": "type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                "right": {
+                  "arguments": [],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [],
+                  "receiver": {
+                    "kind": "IDENTIFIER",
+                    "name": "target",
+                    "type": "org.omg.sysml.lang.sysml.ActionUsage"
+                  },
+                  "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                "type": "boolean"
+              },
+              "false": {
+                "arguments": [
+                  {
+                    "cast_type": "org.omg.sysml.lang.sysml.Feature",
+                    "expression": {
+                      "arguments": [
+                        {
+                          "kind": "IDENTIFIER",
+                          "name": "redefinedFeature",
+                          "type": "java.lang.String"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "parameters": [
+                        "java.lang.String[]"
+                      ],
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#getLibraryType",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    "kind": "TYPE_CAST",
+                    "type": "org.omg.sysml.lang.sysml.Feature"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "T"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "Collections",
+                  "type": "java.util.Collections"
+                },
+                "symbol": "java.util.Collections#singletonList",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.Feature>"
+              },
+              "kind": "CONDITIONAL_EXPRESSION",
+              "true": {
+                "arguments": [
+                  {
+                    "kind": "IDENTIFIER",
+                    "name": "target",
+                    "type": "org.omg.sysml.lang.sysml.ActionUsage"
+                  }
+                ],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [
+                  "T"
+                ],
+                "receiver": {
+                  "kind": "IDENTIFIER",
+                  "name": "Collections",
+                  "type": "java.util.Collections"
+                },
+                "symbol": "java.util.Collections#singletonList",
+                "type": "java.util.List<org.omg.sysml.lang.sysml.ActionUsage>"
+              },
+              "type": "java.util.List<? extends org.omg.sysml.lang.sysml.Feature>"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "arguments": [
+                {
+                  "kind": "IDENTIFIER",
+                  "name": "type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [
+                "org.omg.sysml.lang.sysml.Type"
+              ],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "super",
+                "type": "org.omg.sysml.adapter.OccurrenceUsageAdapter"
+              },
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#getRelevantFeatures",
+              "type": "java.util.List<capture#238 of ? extends org.omg.sysml.lang.sysml.Feature>"
+            },
+            "type": "java.util.List<? extends org.omg.sysml.lang.sysml.Feature>"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.ActionUsageAdapter#isComputeRedefinitions": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [
+              {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "symbol": "org.omg.sysml.adapter.ActionUsageAdapter#getTarget",
+                "type": "org.omg.sysml.lang.sysml.ActionUsage"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "org.omg.sysml.lang.sysml.Feature"
+            ],
+            "symbol": "org.omg.sysml.adapter.ActionUsageAdapter#getRedefinedFeature",
+            "type": "java.lang.String"
+          },
+          "kind": "VARIABLE",
+          "name": "redefinedFeature",
+          "type": "java.lang.String"
+        },
+        {
+          "expression": {
+            "condition": {
+              "kind": "NOT_EQUAL_TO",
+              "left": {
+                "kind": "IDENTIFIER",
+                "name": "redefinedFeature",
+                "type": "java.lang.String"
+              },
+              "right": {
+                "kind": "NULL_LITERAL",
+                "type": "<nulltype>",
+                "value": null
+              },
+              "type": "boolean"
+            },
+            "false": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "super",
+                "type": "org.omg.sysml.adapter.OccurrenceUsageAdapter"
+              },
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isComputeRedefinitions",
+              "type": "boolean"
+            },
+            "kind": "CONDITIONAL_EXPRESSION",
+            "true": {
+              "kind": "IDENTIFIER",
+              "name": "isComputeRedefinitions",
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "ordinary_controls": [
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AnalysisCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "AssignmentActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CalculationUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CalculationUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CalculationUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CalculationUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CalculationUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CalculationUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "CaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "CaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "DecisionNode",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "DecisionNode",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "DecisionNode",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "DecisionNode",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "DecisionNode",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "DecisionNode",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ExhibitStateUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForLoopActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForkNode",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForkNode",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForkNode",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForkNode",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "ForkNode",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "ForkNode",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IfActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IfActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IfActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IfActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IfActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IfActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "IncludeUseCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "JoinNode",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "JoinNode",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "JoinNode",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "JoinNode",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "JoinNode",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "JoinNode",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MergeNode",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MergeNode",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MergeNode",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MergeNode",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "MergeNode",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "MergeNode",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "PerformActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "PerformActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "PerformActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "PerformActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "PerformActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "PerformActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "StateUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "StateUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "StateUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "StateUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "StateUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "StateUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TransitionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TransitionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TransitionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TransitionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "TransitionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "TransitionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "UseCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "UseCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "UseCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "UseCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "UseCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "UseCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "VerificationCaseUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "detached",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "Package",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    },
+    {
+      "effective_name": null,
+      "effective_short_name": null,
+      "explicit": 0,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": []
+    },
+    {
+      "effective_name": "General0",
+      "effective_short_name": null,
+      "explicit": 2,
+      "kind": "WhileLoopActionUsage",
+      "owner_kind": "Class",
+      "redefined_features": [
+        "general0",
+        "general1"
+      ]
+    }
+  ],
+  "provenance": {
+    "ast_helper_sha256": "877477dd7712d40831fe5f1785f1be39200c3fd415d5f1a196a771f4fbaebe34",
+    "driver_sha256": "f8e3dbe8ca42ad0452970cefca7d20f5d801631a66bd9172e223ecc271ef96f4",
+    "helper_sha256": "03825d5b9ba41cb509a25d102a79f1700de495e4a8b8f4f127f90f3f276d6e84",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/AcceptActionUsageAdapter.java": "cf930c50bc79b9047fc6348b561d81c15d2649876209f0a8dfc96f37917c5bfa",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ActionUsageAdapter.java": "bf5dfca23b2c4551a84bda68fd7eaeb11d9cdf0ba95c3c38ac5ec5881a44a695",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ImplicitGeneralizationMap.java": "71008c5448cb20b26b8dd96b74fe8d6c573cdc1ec2abda82c56534d2167436ce",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.action-redefinition-controls.v1",
+  "scope": "Resolved Action/Accept membership selector and lifecycle dispatch. Factory observations identify library default names only; complete redefinition and model qualification are separate."
+}

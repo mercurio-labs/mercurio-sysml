@@ -1,0 +1,98 @@
+{
+  "cases": [
+    {
+      "metadata": [],
+      "owned_annotations": [],
+      "shape": "empty"
+    },
+    {
+      "metadata": [],
+      "owned_annotations": [
+        {
+          "annotating": "doc",
+          "target": "subject"
+        }
+      ],
+      "shape": "documentation"
+    },
+    {
+      "metadata": [],
+      "owned_annotations": [],
+      "shape": "unrelated"
+    },
+    {
+      "metadata": [
+        "applied"
+      ],
+      "owned_annotations": [
+        {
+          "annotating": "applied",
+          "target": "subject"
+        }
+      ],
+      "shape": "annotation_owned"
+    },
+    {
+      "metadata": [],
+      "owned_annotations": [],
+      "shape": "annotation_external"
+    },
+    {
+      "metadata": [
+        "member"
+      ],
+      "owned_annotations": [],
+      "shape": "member_implicit"
+    },
+    {
+      "metadata": [],
+      "owned_annotations": [],
+      "shape": "member_other"
+    },
+    {
+      "metadata": [],
+      "owned_annotations": [],
+      "shape": "alias"
+    },
+    {
+      "metadata": [
+        "first",
+        "second",
+        "third"
+      ],
+      "owned_annotations": [
+        {
+          "annotating": "first",
+          "target": "subject"
+        },
+        {
+          "annotating": "second",
+          "target": "subject"
+        }
+      ],
+      "shape": "ordered"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "d8bab43d76b145973b9ff886381ba680ba3ce82c5117d80fe7e2e990b7cba53d",
+    "helper_sha256": "9019586be5e17520b2a42e23eb939cd8b0b0cf36455b0e6b055a5ffc4fea907a",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Annotation_annotatingElement_SettingDelegate.java": "61a309b7badbc8450baac1fa797cb5d57d1f8f35e3d0bd2dfe6436b074b2c476",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Annotation_ownedAnnotatingElement_SettingDelegate.java": "6f270c6cd644c1ac3b3c9df810a5d796f7b287cb486c8c4e9aef951982b5d282",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Annotation_owningAnnotatingElement_SettingDelegate.java": "1ec165fa38906288f0f4ac355e4fd2a7ad61ff23130f9bf1a47c8a67a122ef99",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Element_ownedAnnotation_SettingDelegate.java": "645484980d97a66a8a03edb01d6d1ebfcc37c2b503dd5069b968f6ee6df40317",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Namespace_ownedMember_SettingDelegate.java": "6eb9d7c9e041d06409ddd4ab2b80f614f0032dbf6084328e04b74fbde9125e97",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/NamespaceUtil.java": "e411c4c1517fb895f99336d3714d595a94b9ef261180316f517c83014714ffce",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.metadata-selection-controls.v1",
+  "scope": "Nine canonical factory controls verify owned annotations, annotating endpoints and owner-specific metadata selection. Nonempty selection does not qualify metaclass/baseType resolution or evaluation."
+}

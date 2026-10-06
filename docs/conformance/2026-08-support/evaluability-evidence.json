@@ -1,0 +1,162 @@
+{
+  "schema": "dev.mercurio.evaluability-evidence.v1",
+  "scope": "Typed modelLevelEvaluable invocation dispatch and three constant-true native bodies; neither actual evaluation, result construction nor full validation is qualified.",
+  "inputs": {
+    "tools/generate_ecore_model.py": "bc5a54a024b85533d4b7827b35af6903d04629a90e94a06afc48c576f89e9cbb",
+    "tools/test_generate_ecore_model.py": "a61a15879879c7b3d6fe8dccd6e16297a2b595a6c731bb866018d0719387c752",
+    "tools/run_evaluability_probe.py": "4e9806a90ee90800664f14fe6a3395da6193689a0895e33cb25c4fc2775ddebd",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotEvaluabilityProbe.java": "c03fa6877754f5b68e570e8a8944947432e368e9956d8698e93a4d3f3dfc8e3a",
+    "docs/conformance/2026-08-support/evaluability-pilot-controls.json": "8d5e95c7158e16ff9672c0eb7a4aa1b3c1266b78421d5006677287215ce3289a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "ad2b20a5e5c68ee55c1e1a1a596bb0410241eec6ba845c7da98045182899e612",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "e1bcab093ddb1c9319fcc8258072378073565653a4d90aada1fe8740a62bd2c9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "e2dc8b0d3e323ea894f339ca04700ce82fc994bf5aaa9ddff56b82fb93912c61",
+    "crates/mercurio-sysml/src/definition_document.rs": "70ce8dda64f3753641228394b0de327f89d8440d81963e8bc78d8114d5340de7",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/compatibility_generated.rs": "2cb4046c1b127592f8eaaa770fe96a16920efd833fc21227964084c835ab355f",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "imported_representation": "Resolved Ecore operation owner, Boolean result bounds/flags, visited Feature parameter signature and nine invocation candidates generate a native InvocationContract. Changed signature/selector or unresolved branches reject generation.",
+  "native_consumers": [
+    "ecore_model::model_level_evaluable_contract",
+    "definition_projection::model_level_evaluable",
+    "definition_attribute_value_with_origins",
+    "definition_document::attribute_value",
+    "definition_document::assess_required_features"
+  ],
+  "handwritten_dependencies": [
+    "Most-specific branch selection through imported EClass inheritance",
+    "Three constant-true bodies: LiteralExpression, NullExpression, MetadataAccessExpression",
+    "Setting delegate invokes the bounded operation consumer; serialized derived flags ignored"
+  ],
+  "branch_coverage": {
+    "imported": 9,
+    "consumed_dispatch": 9,
+    "implemented_algorithms": [
+      "LiteralExpression",
+      "NullExpression",
+      "MetadataAccessExpression"
+    ],
+    "unsupported_algorithms": [
+      "Expression",
+      "FeatureReferenceExpression",
+      "InvocationExpression",
+      "ConstructorExpression",
+      "CalculationUsage",
+      "ConstraintUsage"
+    ],
+    "verified_contexts": [
+      "LiteralInteger",
+      "LiteralRational",
+      "LiteralBoolean",
+      "LiteralString",
+      "LiteralInfinity",
+      "NullExpression",
+      "MetadataAccessExpression"
+    ]
+  },
+  "normative_reference": {
+    "release": "2026-08",
+    "revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "document": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "clauses": [
+      {
+        "pdf_page": 241,
+        "section": "8.3.4.8.10",
+        "requirement": "LiteralExpression modelLevelEvaluable returns true."
+      },
+      {
+        "pdf_pages": [
+          244,
+          245
+        ],
+        "section": "8.3.4.8.15",
+        "requirement": "MetadataAccessExpression modelLevelEvaluable returns true."
+      },
+      {
+        "pdf_page": 245,
+        "section": "8.3.4.8.16",
+        "requirement": "NullExpression modelLevelEvaluable returns true."
+      }
+    ]
+  },
+  "pilot_reference": {
+    "path": "docs/conformance/2026-08-support/evaluability-pilot-controls.json",
+    "sha256": "8d5e95c7158e16ff9672c0eb7a4aa1b3c1266b78421d5006677287215ce3289a",
+    "source_cases": 6,
+    "factory_cases": 7,
+    "observations": 13,
+    "scope": "Independent attribute and empty-visited operation observations for constant branches only."
+  },
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-evaluability.log",
+      "sha256": "a9fe4169bf79893c66604cb8f3f6f6b84376e9996f60fbaaa13e4888556e2e26",
+      "passed": 195
+    },
+    "focused_test_names": [
+      "definition_document::tests::definition_evaluability_leaves_other_dynamic_algorithms_explicit",
+      "definition_document::tests::definition_evaluability_matches_pilot_constant_branches_and_persistence"
+    ],
+    "cohort": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-evaluability-results.jsonl",
+      "sha256": "3826da0006ade20b8b2956c908f1b4d8eba3f4212d9ad957ba0259a683e47361",
+      "source_sets": [
+        {
+          "name": "Base-and-ScalarValues.kerml",
+          "elements": 147,
+          "required_unverified": 16,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "name": "Base-ScalarValues-and-Links.kerml",
+          "elements": 277,
+          "required_unverified": 28,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "name": "feature-default-source-control.kerml",
+          "elements": 157,
+          "required_unverified": 16,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        }
+      ]
+    },
+    "tooling": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/evaluability-tooling-tests.log",
+      "sha256": "339b7ea7a327f866a5dc6db55c5f6681196c4a3cc8c3dc4ad6a5550def03f003",
+      "passed": 74
+    },
+    "audit_tools": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/evaluability-audit-tool-tests.log",
+      "sha256": "e460a2c4904f84fb419e54430f22c3898fa266c3b3e285eed55781839a6c5bc3",
+      "passed": 10
+    }
+  },
+  "remaining": [
+    "28 Expression.result instances in Base + ScalarValues + Links",
+    "Supply real Performances library/resource closure before qualifying result default inheritance/construction in MultiplicityRange and FeatureValue contexts",
+    "Six nonconstant evaluability algorithms and their parameter/valuation/reference/invocation dependencies",
+    "Numeric evaluation, full validation and contribution lifecycle, reviewed release denominator, full samples/semantic comparison/timing"
+  ],
+  "result_resource_dependency": {
+    "source": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml",
+    "sha256": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+    "resolved_literal_default": "Performances::literalIntegerEvaluations",
+    "status": "Absent from the bounded cohort; no fabricated substitute or completion flags"
+  },
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "required_unverified_before": 56,
+    "required_unverified_after": 28,
+    "required_invalid": 0,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  }
+}

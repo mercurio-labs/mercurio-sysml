@@ -1,0 +1,62 @@
+{
+  "schema": "dev.mercurio.result-valuation-evaluation.v1",
+  "scope": "Bounded evaluation of result-default selection with owned FeatureValue contexts. This is not native support, source/model qualification or a completed value-transformation implementation.",
+  "imported": {
+    "resolved_programs": 7,
+    "program_sha256": "f2f16e298e2b69bbb49e663d02d195fba991ff784cb4a303bc8132cdd9519d81",
+    "upstream_frontend": "Javac parse+analyze",
+    "control_contexts": 768,
+    "owner_classes": 4,
+    "typing_masks": 8,
+    "value_expression_classes": 6,
+    "valuation_flag_modes": 4
+  },
+  "native_consumed": false,
+  "semantically_verified_native": false,
+  "evaluation": {
+    "recorded_component_observations": 704,
+    "fixture_dependency_failures": 64,
+    "failure_kind": "Generic Feature library placeholders cannot satisfy the Function required by FeatureChainExpression operator instantiation. This is a probe-fixture dependency failure, not evidence of a Pilot defect.",
+    "dependency_call_sequence": [
+      "FeatureAdapter.addDefaultGeneralType",
+      "FeatureAdapter.addBoundValueSubsetting",
+      "FeatureAdapter.getBoundValueResult",
+      "ElementUtil.transform(value)",
+      "value.getResult",
+      "FeatureUtil.chainFeatures(value,value.getResult)"
+    ],
+    "decision": "Retain the current native guard. Implement explicit native value-transformation orchestration and chain construction using pinned definitions/programs, with genuine typed library prototypes and valid parsed source controls before expanding result-default admission. Pure predicate generation remains bounded; a general Xtend compiler is outside scope.",
+    "handwritten_rust_dependencies": [
+      "Transformation scheduling and dependency-cycle handling",
+      "Invocation/operator prototype binding and argument/result construction",
+      "Physical chained-feature construction and complete publication"
+    ],
+    "full_model_constraints_verified": false,
+    "cache_tests_passed": 5,
+    "families_closed_delta": 0,
+    "genuine_typed_source_followup": {
+      "contexts": 12,
+      "observed_component_records": 12,
+      "resource_errors": 0,
+      "exactly_reproduced": true,
+      "native_support_added": false,
+      "scope": "Parsed explicit and shorthand Function returns: literals, unary/binary/control operators, feature chains, index and invocation; real pinned library declarations. Validation, whole model comparison and persistence remain unqualified.",
+      "result_ownership": "Nine explicit returns own their result. Three shorthand Function bodies create no owned return membership and reuse an inherited result owned by another Function; result construction and result selection must remain separate."
+    }
+  },
+  "inputs": {
+    "tools/run_result_valuation_probe.py": "be2b53d1ddc4f338099ee4bbabba9c2b7ebfa48cec51771617446eb9266cf7a6",
+    "tools/test_result_valuation.py": "9c70a5bbb7449dfea9a5fdef2de256325ceea09e637b5552a65330e8209f5070",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotResultValuationProbe.java": "f07a7b508ddbd09e7f8031101bda64e6121bec75e81708828825309154856127",
+    "docs/conformance/2026-08-support/result-valuation-pilot-controls.json": "cb097f423f0dd5ac060106e97581da2cd871721599ef562fc3e1bbe48f8949c3",
+    "docs/conformance/2026-08-support/enum-trigger-states-reference-closure-assessment.json": "24caf5910232b4f211c6200b15323d4e9a03d733c1322584be2c967b733300bb",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-valuation-cache-export.log": "f053b2f3224e997b394322a984fe6ff8b69199c911d68a349bb523659ec3363b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-valuation-cache-tests.log": "670cd46755561682941fbac49ac57726c20d9b9d92ec0454f83ca579cc7cf36a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-valuation-first-fixture-failure.log": "b3644b257a1ae9b08a4388ed84fe48fb52fa806216c18dd0311af19b35c00654",
+    "tools/run_parsed_result_valuation_probe.py": "397f95d065a93a59da5da92140fa2023c2847b52d1fe2a453e69b6c95d3ad003",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotParsedResultValuationProbe.java": "1985e6aea600d1de649e7b1fb4419e748ca8e4fea41858be96c5a0b01a124b58",
+    "docs/conformance/2026-08-support/parsed-result-valuation-pilot-controls.json": "45492581f3d40df090a29ce95b47b48622b48eb78e7d3a29b4d02f4846549362",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parsed-result-valuation-cache-export.log": "ffd870c9721b8a3355ea904f883bdc61dc8202d42a8ced4ada0ba1684fcd3841",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parsed-result-valuation-cache-check.log": "ffd870c9721b8a3355ea904f883bdc61dc8202d42a8ced4ada0ba1684fcd3841"
+  }
+}

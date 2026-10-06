@@ -1,0 +1,15 @@
+{
+  "schema": "dev.mercurio.result-multiplicity-normative-review.v1",
+  "written_specification": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Release\\doc\\1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_page": 175,
+    "printed_page": 149,
+    "rule": "deriveTypeMultiplicity"
+  },
+  "normative_boundary": "The written rule includes inheritance when an owned multiplicity is absent. This batch admits canonical owned MultiplicityRange contexts only, using existing bound identity projection. Inherited lookup, bound evaluation/numeric legality and full model validation remain unsupported.",
+  "pilot_boundary": "Resolved Type multiplicity delegate selects the first owned membership referencing a Multiplicity. Native result context admission is limited to canonical OwningMembership with an owned MultiplicityRange; alias/import and other multiplicity implementations remain unassessed. No general Type.multiplicity support is claimed.",
+  "result_default_authority": "The existing resolved Feature default selector reads owned typing and fixed result flags. Owned multiplicity does not change this selector. Independent exact default effects verify every combination; additional expression/multiplicity transformations are separate dependencies.",
+  "prototype_controls": "Empty multiplicity and supplied completed owner fixtures qualify bounded default effects, not valid complete callable models. No construction completion flags are written.",
+  "full_normative_qualification": false
+}

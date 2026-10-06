@@ -1,0 +1,117 @@
+{
+  "schema": "dev.mercurio.relative-namespace-evidence.v1",
+  "scope": "Bounded non-conjugated Invocation argument and Assignment targetArgument origins. Supplied completed callable/namespace/result fixtures, incomplete parameter Features, actual native missing-result construction. Full argument/result validation, full transform and cold resources remain unqualified.",
+  "pipeline": {
+    "pinned_artifacts": "Pinned SysML.ecore, Java namespace/argument/value utilities and delegate source; written invocation derivation.",
+    "resolved_representation": {
+      "path": "docs/conformance/2026-08-support/relative-namespace-pilot-controls.json",
+      "typed_resolved_methods": 9,
+      "frontend": "JDK Javac parse+analyze with resolved symbols and types"
+    },
+    "generated_consumer": "relative_namespace_generated.rs (bounded dispatch and input-direction predicates; unassessed programs rejected)",
+    "native_consumers": [
+      "relative_namespace::arguments -> shared Ecore reference-property consumer",
+      "relative_namespace::namespace -> Membership relative scope and first FeatureChaining scope",
+      "Existing native result constructor -> typed AdditionalMembers retry -> result-origin recomputation"
+    ],
+    "handwritten_rust_dependencies": [
+      "Canonical graph/delegate checking and ordered value-expression navigation",
+      "Shared effective Feature and computed direct-redefinition queries",
+      "Non-conjugated input-direction projection",
+      "Existing native result lifecycle and typed pending-field scheduler",
+      "Canonical public/inherited namespace membership lookup; relative scopes prohibit lexical/global fallback"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "independent_controls": 72,
+    "scope_origin_kinds": 2,
+    "shape_variants": 9,
+    "callable_direction_variants": 4,
+    "focused_native_tests_passed": 4,
+    "persisted_forward_reverse_controls": 144,
+    "raw_reference_expectations_normalized": false,
+    "full_native_regression": "passes",
+    "optimized_build": "passes",
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-relative-namespace-assessment.json",
+      "sha256": "296a1f16992656ed5bde7d8c2bab7360d8678703fbe4a6c5c3769f816e0c9884",
+      "status": "assessed",
+      "native_executable": {
+        "path": "target/release/audit_release_compile.exe",
+        "sha256": "fe60c37a7d0572bea8783030824ccfaa60c7450e85bfb223b2ceecf24c8d55b3"
+      },
+      "elapsed_seconds": 626.891,
+      "diagnostic_only": true,
+      "semantic_qualification": false,
+      "comparable_benchmark": false,
+      "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: parameter query requires an unsupported added-member strategy\", kind: Syntax, span: None, subjects: [] }",
+      "exit_code": 1
+    },
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "native_definition_tests_passed": 379,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "tool_binary_tests_passed": 11,
+    "cache_integrity_tests_passed": 4,
+    "cache_reproduced": true,
+    "native_result_construction_and_replay_controls": 6,
+    "coverage_plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "strategy_tests_passed": 15,
+    "first_feature_chaining_origin": "Native integration consumed; dedicated first-chain controls still required",
+    "resource_assessment_current_code": false,
+    "actual_resources_semantically_qualified": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "Constructor argument ordering/bindings",
+    "Conjugated callable inputs and directionOf general algorithm",
+    "Complete upstream transformation, default values, result typing and callable validation",
+    "Ecore unique argument contract versus repeated collect/Pilot sequence results",
+    "Uncached real-resource publication and global parser/model contracts",
+    "Complete sample semantic comparison and comparable Pilot timing",
+    "Dedicated first FeatureChaining relative-origin controls"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "closed_families_delta": 0,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "63abbc26d6032294171dd3d15d6de7af83ee7bb5a6898c8e824e747e8ea50755",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace_generated.rs": "2524a454b606a00cf9234e1f6f8491091d6f4a73e811e6a6ac1ca274cbd17db3",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "f760b69f942ff326c95fd17ce07e1b66428d753bf8685e67819b1409d24d37bc",
+    "tools/generate_relative_namespace.py": "5a7f770a9817cb0477a9735ddea39b6e7d7dbf955b80734ac112bbe36f585f15",
+    "tools/run_relative_namespace_probe.py": "34c86f52f1199cee680b6c89a953ae77b4d54034bda8ec148745b26d3a6d6378",
+    "tools/test_relative_namespace.py": "da986cd2995affe3e5f270eb752b1059de8162a1ff3c19815ef2d55a6527ba35",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotRelativeNamespaceProbe.java": "d5086e3b26495fd2867c8ef7ecdde5098407c2b0c8b60f543e5032f5a8c5393c",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/relative-namespace-pilot-controls.json": "35edbe1c22f9a6c205654c735f5d229bddf460b914c873613c12f5b8834c0e51",
+    "docs/conformance/2026-08-support/relative-namespace-normative-review.json": "2fd14512f2284d70a12fc006e0c8c937f01201fcb852779b06f1c875724c6f7c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-focused.log": "94d3e7b114871d8db5db4ad1f7aea55a65c2ee04da7aa765d35bb8eadf499446",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-tool-tests.log": "fdd1b6f4f5a2b65a6dccbccc3a9f8b19bcde4f5a1e137d62e6628a2d3d3aa7c0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-release-build.log": "dce9143bf33f3333370d9c1e328a4902020700ab93419a609ba62182fa2d5e7a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-cache-check.log": "9456319e9d6f69621f19ed9ca50218b3b9248f521720658bec7c7b1f9e0d24dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-cache-tests.log": "6afff3ab8c7e5c3b36d2f2b5d1cddbc42deaf57bb824f45ad828ac8493028be8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-plan-tests.log": "3f19357e1b02cc978b032b3dc786a7e4f5ddedb006e7e0c0485eb2e92c463bb2",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-certificate-tests.log": "4bfcd46a09b03f41af14ca80c72bb0dbbf3720022c58cfd2801994466d9b1305",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-strategy-tests.log": "55a80dd918292976f604ddbb55416211f5fe8df21b714ab42c85f9fb72c4d333",
+    "docs/conformance/2026-08-support/enum-trigger-states-relative-namespace-assessment.json": "296a1f16992656ed5bde7d8c2bab7360d8678703fbe4a6c5c3769f816e0c9884",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  }
+}

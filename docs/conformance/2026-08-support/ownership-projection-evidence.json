@@ -1,0 +1,133 @@
+{
+  "schema": "dev.mercurio.ownership-projection-evidence.v1",
+  "scope": "Bounded derived ownership/reference readers and Annotation parent-namespace linking; required-value bounds only, not full validation or transformation.",
+  "inputs": {
+    "crates/mercurio-sysml/src/definition_document.rs": "510cdc9ebd15ddecf28421f0f734ac0b73a8f4b979002e6bf0c89fefdf7ab1e8",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "91afc58904fd390646edada37844037ac1b23b7ed39eff947550f6a65b967a1c",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "9691dedd807a585f0ae179d02e67a478da1f91b03e32a7f43002dda9c287ae23",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "f85f1fdd5bdfd65e97767138d9e414de4f807b2f3f1886401e4bd9f4ac0583af",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "db7bea65f492566d423a2a65169ace53d33caf9b25272e1178ed65d3f365192b",
+    "tools/run_ownership_projection_probe.py": "962d515de4c3d696b8d1e4217b97b94c676e5de2879856ba99fafcdddaf373f9",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotOwnershipProjectionProbe.java": "ce22b379839f62b81f2fd0b6bd62f1ddac7d6d2d18d07e065f053d52d42a42e3",
+    "docs/conformance/2026-08-support/ownership-projection-pilot-controls.json": "f045137d4df3b39d9f852e0c65e15128c5698d634b5e49145f67c38f8f51aa0b"
+  },
+  "native_consumers": [
+    "definition_projection::reference_targets",
+    "definition_reference_targets",
+    "definition_document::reference_targets",
+    "definition_document::assess_required_features",
+    "generated_document_link_target (Annotation parent namespace)"
+  ],
+  "imported_representation": "Pinned Ecore effective feature contracts, hierarchy, containment/opposites, redefinitions, ordering, uniqueness and delegate identity are consumed. Pinned Xtext source construction creates canonical annotation/chaining objects; canonical stored target linking uses the shared namespace resolver.",
+  "handwritten_dependencies": [
+    "Reciprocal ownership projection, no ancestor skipping",
+    "Annotation owning-first then owned order, self-target exclusion and first-occurrence uniqueness",
+    "Owning namespace fallback using the existing shared namespace reader",
+    "Annotation scope origin from the Element branch of KerMLScopeProvider; no generalized Xtend translation",
+    "Singular redefinition value projected into original many-valued bounds for required-value assessment"
+  ],
+  "normative_reference": {
+    "release": "2026-08",
+    "release_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "document": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "clauses": [
+      {
+        "pdf_pages": [
+          144,
+          145
+        ],
+        "section": "8.3.2.3.2",
+        "requirement": "An owning Annotation precedes owned annotations. Owned annotations targeting self are excluded. With no annotation, use the owning namespace."
+      }
+    ]
+  },
+  "pilot_reference": {
+    "path": "docs/conformance/2026-08-support/ownership-projection-pilot-controls.json",
+    "sha256": "f045137d4df3b39d9f852e0c65e15128c5698d634b5e49145f67c38f8f51aa0b",
+    "cases": 6,
+    "source_observations": 7,
+    "matching_whole_model_gain": 0
+  },
+  "disagreements": [
+    {
+      "control": "owning_then_owned factory",
+      "pilot_targets": [
+        "target"
+      ],
+      "normative_native_targets": [
+        "P",
+        "target"
+      ],
+      "reason": "Pinned owningAnnotatingRelationship delegate extends the Relationship owningRelatedElement helper, which tests RELATIONSHIP__OWNING_RELATED_ELEMENT. The contained Comment uses ELEMENT__OWNING_RELATIONSHIP and is omitted by Pilot. Native projection follows the specified owningRelationship subset.",
+      "scope": "Getter disagreement only; no full-model qualification claimed."
+    }
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-ownership-projection.log",
+      "sha256": "685a9fc179d316bba05387ffb696e4c91e76dce5da57345badf5cca57bdf0c49",
+      "passed": 189
+    },
+    "focused_test_names": [
+      "language_frontend::lowering::ecore_model::tests::definition_required_redefinitions_check_narrowed_and_original_bounds",
+      "definition_document::tests::definition_ownership_projection_matches_source_controls_and_persistence",
+      "definition_document::tests::definition_ownership_projection_follows_normative_annotation_order",
+      "definition_document::tests::definition_ownership_projection_linking_checks_order_privacy_and_missing_targets"
+    ],
+    "cohort": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-ownership-projection-results.jsonl",
+      "sha256": "90a10845df77d759453177867b6a4814d28c084e7e3fa5f55aba224d4d4193f0",
+      "observations": [
+        {
+          "source_set": "Base-and-ScalarValues.kerml",
+          "elements": 147,
+          "required_unverified": 51,
+          "required_invalid": 0,
+          "default_replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "source_set": "Base-ScalarValues-and-Links.kerml",
+          "elements": 277,
+          "required_unverified": 93,
+          "required_invalid": 0,
+          "default_replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "source_set": "feature-default-source-control.kerml",
+          "elements": 157,
+          "required_unverified": 51,
+          "required_invalid": 0,
+          "default_replay": "idempotent_after_kir_persistence"
+        }
+      ]
+    },
+    "tooling": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/ownership-projection-tooling-tests.log",
+      "sha256": "b3fcb628bf62a922fdfec9cd2dd3b5a59b98f90973d426a23c56547bc0eb653a",
+      "passed": 72
+    },
+    "audit_tools": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/ownership-projection-audit-tool-tests.log",
+      "sha256": "6a4ae035b91c18cbedab9b7dbe279fd7f91ffaba2732beff150335d86f5f1c22",
+      "passed": 10
+    }
+  },
+  "remaining": [
+    "Import/importedElement: 3 instances in Base + ScalarValues + Links",
+    "MultiplicityRange/bound and upperBound: 34 instances",
+    "Expression/isModelLevelEvaluable and result: 56 instances",
+    "Annotation, documentation and chaining invariants beyond required-value checks",
+    "Full transformation/semantic validation, all samples, broad Pilot comparison and timing remain unqualified"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "delta": 0,
+    "required_unverified_before": 139,
+    "required_unverified_after": 93,
+    "required_invalid": 0,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  }
+}

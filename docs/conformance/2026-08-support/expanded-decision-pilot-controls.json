@@ -1,0 +1,276 @@
+{
+  "scope": "Nine expanded-budget, upstream predicate-retry, first-set and hoisted-predicate decision families in KerML and SysML: independent generated-parser node evidence. Native checks cover decision execution only, not complete model construction. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ElementUtil.java": "e50851a0c5515b9e78273eaad4003d8384303903b51a527f3b9ef3241f217441",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "500a27d5bb99c8b7e317608cd32100b60ab4d656d67cdb0412f69112e66d301c"
+  },
+  "cases": [
+    {
+      "alternative": 0,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "ConnectorDeclaration",
+      "input": "a to b;",
+      "source": "connector a to b;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "ConnectorDeclaration",
+      "input": "(a,b);",
+      "source": "connector (a,b);"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "ConnectorDeclaration",
+      "input": "c from a to b;",
+      "source": "connector c from a to b;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "ConnectorDeclaration",
+      "input": "c(a,b,c);",
+      "source": "connector c(a,b,c);"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "FunctionBodyPart",
+      "input": "class C; }",
+      "source": "function F { class C; }"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "FunctionBodyPart",
+      "input": "feature f; }",
+      "source": "function F { feature f; }"
+    },
+    {
+      "alternative": 2,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "FunctionBodyPart",
+      "input": "alias a for b; }",
+      "source": "function F { alias a for b; }"
+    },
+    {
+      "alternative": 3,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "FunctionBodyPart",
+      "input": "public import a::*; }",
+      "source": "function F { public import a::*; }"
+    },
+    {
+      "alternative": 4,
+      "context": "org.omg.kerml.xtext.KerML",
+      "decision": "FunctionBodyPart",
+      "input": "return feature r; }",
+      "source": "function F { return feature r; }"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PackageMember",
+      "input": "part def P;",
+      "source": "part def P;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PackageMember",
+      "input": "part p;",
+      "source": "part p;"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PackageMember",
+      "input": "attribute def A;",
+      "source": "attribute def A;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PackageMember",
+      "input": "attribute a;",
+      "source": "attribute a;"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "IfNode",
+      "input": "{}",
+      "source": "if true {} else {}"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "IfNode",
+      "input": "if false {}",
+      "source": "if true {} else if false {}"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PayloadParameter",
+      "input": "x",
+      "source": "x"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PayloadParameter",
+      "input": "after 1",
+      "source": "after 1"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PayloadParameter",
+      "input": "when true",
+      "source": "when true"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PerformedActionUsage",
+      "input": "a",
+      "source": "a"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PerformedActionUsage",
+      "input": "accept x",
+      "source": "accept x"
+    },
+    {
+      "alternative": 2,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PerformedActionUsage",
+      "input": "send x",
+      "source": "send x"
+    },
+    {
+      "alternative": 3,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "PerformedActionUsage",
+      "input": "assign x := 1",
+      "source": "assign x := 1"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": ";",
+      "source": "send ;"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": "{}",
+      "source": "send {}"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": "x;",
+      "source": "send x;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": "x to y;",
+      "source": "send x to y;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": "via x;",
+      "source": "send via x;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "SendNode#/elements/3",
+      "input": "to y;",
+      "source": "send to y;"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": ";",
+      "source": "terminate ;"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": "{}",
+      "source": "terminate {}"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": "x;",
+      "source": "terminate x;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": "1;",
+      "source": "terminate 1;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": "x + y;",
+      "source": "terminate x + y;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "TerminateNode",
+      "input": "'end';",
+      "source": "terminate 'end';"
+    },
+    {
+      "alternative": 0,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "CalculationBody",
+      "input": ";",
+      "source": "calc def C ;"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "CalculationBody",
+      "input": "{}",
+      "source": "calc def C {}"
+    },
+    {
+      "alternative": 1,
+      "context": "org.omg.sysml.xtext.SysML",
+      "decision": "CalculationBody",
+      "input": "{ return r; }",
+      "source": "calc def C { return r; }"
+    }
+  ]
+}

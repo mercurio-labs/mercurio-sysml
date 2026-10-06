@@ -1,0 +1,95 @@
+{
+  "scope": "Raw metaclass comparison of all three targeted uniquely paired declarations; missing anchors are not counted as repairs. New metaclass/Boolean differences are listed, not waived.",
+  "verified_repairs": [
+    {
+      "source": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "line": 45,
+      "name": "fuel",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PayloadFeature",
+      "classification": "declaration-level difference",
+      "after": {
+        "mercurio_snapshot": "PayloadFeature",
+        "pilot_snapshot": "PayloadFeature"
+      },
+      "artifact": {
+        "path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\assessment-2026-08-declaration-validation\\groups\\f63e7d4692e6\\compare-006.json.gz",
+        "uncompressed_sha256": "cb8daede0c87495e526877338a2fc42319f7e4e7a7f93a0d6baca3f602f7facd"
+      }
+    },
+    {
+      "source": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "line": 59,
+      "name": "fuel",
+      "property": "metaclass",
+      "native": "ReferenceUsage",
+      "pilot": "PayloadFeature",
+      "classification": "declaration-level difference",
+      "after": {
+        "mercurio_snapshot": "PayloadFeature",
+        "pilot_snapshot": "PayloadFeature"
+      },
+      "artifact": {
+        "path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\assessment-2026-08-declaration-validation\\groups\\f63e7d4692e6\\compare-006.json.gz",
+        "uncompressed_sha256": "cb8daede0c87495e526877338a2fc42319f7e4e7a7f93a0d6baca3f602f7facd"
+      }
+    },
+    {
+      "source": "sysml/src/training/19. Terminate Actions/Terminate Actions Example-1.sysml",
+      "line": 26,
+      "name": "stop",
+      "property": "metaclass",
+      "native": "ActionUsage",
+      "pilot": "TerminateActionUsage",
+      "classification": "declaration-level difference",
+      "after": {
+        "mercurio_snapshot": "TerminateActionUsage",
+        "pilot_snapshot": "TerminateActionUsage"
+      },
+      "artifact": {
+        "path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\assessment-2026-08-declaration-validation\\groups\\68dd4f769c14\\compare-000.json.gz",
+        "uncompressed_sha256": "749d58151bfac6fefe985f76cf19226420c095aebdc9b61b601d287b4facdd0d"
+      }
+    }
+  ],
+  "repair_count": 3,
+  "verified_boolean_repairs": [
+    {
+      "source": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "line": 45,
+      "name": "fuel",
+      "property": "is_variable",
+      "native": true,
+      "pilot": false,
+      "classification": "direct Boolean difference",
+      "after": {
+        "mercurio_snapshot": false,
+        "pilot_snapshot": false
+      },
+      "artifact": {
+        "path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\assessment-2026-08-declaration-validation\\groups\\f63e7d4692e6\\compare-006.json.gz",
+        "uncompressed_sha256": "cb8daede0c87495e526877338a2fc42319f7e4e7a7f93a0d6baca3f602f7facd"
+      }
+    },
+    {
+      "source": "sysml/src/validation/03-Function-based Behavior/3d-Function-based Behavior-item.sysml",
+      "line": 59,
+      "name": "fuel",
+      "property": "is_variable",
+      "native": true,
+      "pilot": false,
+      "classification": "direct Boolean difference",
+      "after": {
+        "mercurio_snapshot": false,
+        "pilot_snapshot": false
+      },
+      "artifact": {
+        "path": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\assessment-2026-08-declaration-validation\\groups\\f63e7d4692e6\\compare-006.json.gz",
+        "uncompressed_sha256": "cb8daede0c87495e526877338a2fc42319f7e4e7a7f93a0d6baca3f602f7facd"
+      }
+    }
+  ],
+  "boolean_repair_count": 2,
+  "new_metaclass_or_boolean_differences": []
+}

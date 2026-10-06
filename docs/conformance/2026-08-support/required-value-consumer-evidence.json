@@ -1,0 +1,347 @@
+{
+  "schema": "dev.mercurio.required-value-consumers.v1",
+  "scope": "Required Ecore values in the opt-in candidate. No full semantic validation, transformation completion or new Pilot qualification is claimed.",
+  "inputs": {
+    "crates/mercurio-sysml/src/definition_document.rs": "e62db111ca0013e358165e8bdea7a66e114abdd8a973c1b025e9fed30afddf9e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "48be7b303e92049457f89594a54a102ff9b4c424f5a8d7e6b1830172283b561a",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "6179346b34aebd8b18ff1798edbc8833cb4af150a4b3da538b0aba59f6af46c2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "5eff69b537c0e3e985eb2efb1d2de589ca701b84ee21dbfe6c5798f5003713e0",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "6ea3b0f3c8fbb1f79d2cea3887a9393a08acd9544f42d2ba509996646cd71aaa",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "979cfd92dc2258456e9194e87894812ef9062a5319d4d70b28310d7ceaf575e9",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527"
+  },
+  "imported_representation": "Resolved Ecore inheritance/redefinitions, bounds, endpoint types and delegate identities; parsed resources remain canonical KIR.",
+  "native_consumers": [
+    "ecore_model::assess_required_features_with",
+    "ecore_model::redefined_feature",
+    "definition_reference_targets",
+    "definition_attribute_value",
+    "definition_document::assess_required_features",
+    "audit_release_compile --definition-defaults"
+  ],
+  "handwritten_dependencies": [
+    "Consumer dispatch and Ecore-shaped result checking",
+    "Membership/OwningMembership identity projection using canonical endpoints",
+    "KIR identity representation for Element.elementId",
+    "Candidate resource closure and native delegate prerequisites"
+  ],
+  "upstream_implementation_reference": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "inputs": {
+      "../target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Membership_memberElementId_SettingDelegate.java": "763d4a4df04565ec0d565a5a9f1e4f5923a498feac95170dd69b81156587d846",
+      "../target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/OwningMembership_ownedMemberElementId_SettingDelegate.java": "2030b039a1983962eefbd7adcd55479c6f660ee49a2d42ab5f4410d04b7086d7"
+    },
+    "role": "Independent source evidence only; new identity projections still need independent executable controls for qualification."
+  },
+  "verification": {
+    "native-tests-required-values.log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-required-values.log",
+      "sha256": "8238ca9cf6136338b979b0f546adb267a9e2f2a9fd49246ce4a097f4dca2e135",
+      "passed": 182
+    },
+    "required-value-focused-tests.log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/required-value-focused-tests.log",
+      "sha256": "0cff8d7884364e8226b1cd3db6dc84fce4db2044f6284e90938a97be0f679be6",
+      "passed": 8
+    },
+    "required-value-audit-tool-tests.log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/required-value-audit-tool-tests.log",
+      "sha256": "8e413ffb3acff3ab3d6eb49139361c8ba9f85a3a4f01037f9f09dcaf748c7b21",
+      "passed": 10
+    }
+  },
+  "source_set_assessment": {
+    "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-required-value-results.jsonl",
+    "sha256": "68cd986a1bc8eb3b40e27020d24f82a6547a8bc167e765d271ac404470f6528c",
+    "inputs": {
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-default-source-control.kerml": "59582d1475f8c550f6494c841b7b07bc4796108ccfa16280a41e7c6a1243e7d0"
+    },
+    "results": [
+      {
+        "name": "Base-and-ScalarValues.kerml",
+        "elements": 147,
+        "invalid_required_values": 0,
+        "unverified_required_values": 270,
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed",
+        "remaining_dependencies": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement",
+            "count": 147,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Type/isConjugated",
+            "count": 44,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Type/isConjugated: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Type/isConjugated requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "count": 16,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "count": 16,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/result: Diagnostic { message: \"Operand construction: expression defaults require detached, package or FeatureValue contexts; performance/positional contexts remain open\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "count": 13,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "count": 13,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "count": 9,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "count": 9,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "count": 2,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "count": 1,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Import/importedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Import/importedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Base-ScalarValues-and-Links.kerml",
+        "elements": 277,
+        "invalid_required_values": 0,
+        "unverified_required_values": 497,
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed",
+        "remaining_dependencies": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement",
+            "count": 277,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Type/isConjugated",
+            "count": 81,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Type/isConjugated: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Type/isConjugated requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "count": 28,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "count": 28,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/result: Diagnostic { message: \"Operand construction: expression defaults require detached, package or FeatureValue contexts; performance/positional contexts remain open\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "count": 20,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "count": 20,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "count": 17,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "count": 17,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "count": 6,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "count": 3,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Import/importedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Import/importedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "feature-default-source-control.kerml",
+        "elements": 157,
+        "invalid_required_values": 0,
+        "unverified_required_values": 282,
+        "default_replay": "idempotent_after_kir_persistence",
+        "semantic_qualification": "not_assessed",
+        "remaining_dependencies": [
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement",
+            "count": 157,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Element/isLibraryElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Type/isConjugated",
+            "count": 46,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Type/isConjugated: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Type/isConjugated requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable",
+            "count": 16,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable: Diagnostic { message: \"Operand construction: attribute https://www.omg.org/spec/SysML/20250201#//Expression/isModelLevelEvaluable requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Expression/result",
+            "count": 16,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Expression/result: Diagnostic { message: \"Operand construction: expression defaults require detached, package or FeatureValue contexts; performance/positional contexts remain open\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement",
+            "count": 13,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//AnnotatingElement/annotatedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement",
+            "count": 13,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Documentation/documentedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound",
+            "count": 9,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/bound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound",
+            "count": 9,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//MultiplicityRange/upperBound requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained",
+            "count": 2,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//FeatureChaining/featureChained requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          },
+          {
+            "feature_id": "https://www.omg.org/spec/SysML/20250201#//Import/importedElement",
+            "count": 1,
+            "status": "unverified_dependency",
+            "dependency_messages": [
+              "Required Ecore feature https://www.omg.org/spec/SysML/20250201#//Import/importedElement: Diagnostic { message: \"Operand construction: reference https://www.omg.org/spec/SysML/20250201#//Import/importedElement requires an unsupported derived service\", kind: Syntax, span: None, subjects: [] }"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "metric": {
+    "scope": "Base+ScalarValues+Links required-value declaration instances",
+    "unverified_before_identity_projection": 701,
+    "unverified_after": 497,
+    "reduction": 204,
+    "invalid_after": 0,
+    "fully_qualified_families": 0,
+    "closed_release_gates": 0,
+    "overall_completion_percent": null
+  },
+  "remaining": "Ownership/libraryNamespace and conjugation; annotation, chained owner, expression evaluation/result, multiplicity and imported-element dependencies; independent identity controls; complete adapter transformations and release-wide qualification remain open."
+}

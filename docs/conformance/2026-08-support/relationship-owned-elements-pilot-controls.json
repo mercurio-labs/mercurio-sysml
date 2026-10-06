@@ -1,0 +1,155 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-alias.kerml": "a46bff829b58f4a810b51f6d87dc7732d900e46d3dae7a2dbc7f37a0740f4294",
+    "invalid-alias.sysml": "87d7eb622a2fe13ce42518a6c2a6da7185302ca840d27eb9f7f2a3adabc8a23c",
+    "invalid-import.kerml": "c8f8498053562b348b4ebee2274f0692324db7e3ff8df676b8307ced4c0d2e6f",
+    "invalid-import.sysml": "5738d94e748a94121fe1e740aeada5769a47d648bfe0d5abedd43ca318643fc3",
+    "positive-alias.kerml": "24b257079ca2c2b5a6b9e449803277d9e17b8467983976d9647b6890726eaf9b",
+    "positive-alias.sysml": "141116391eca388288c18d392bd8c50990e0057715cf74264c17a28846914609",
+    "positive-import.kerml": "d6ea24d271f7d4616dfeb527802c882ff5cf5bb8ef85752fb91ebd9e734cf805",
+    "positive-import.sysml": "81c3d8dd794594ca6ae99fd60c1c958723968128779189dc5fdd65e5c85c1243"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-alias.kerml",
+      "status": "error",
+      "validation_ms": 725.7086,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-alias.sysml",
+      "status": "error",
+      "validation_ms": 1123.2562,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing '}' at 'part'",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "extraneous input '}' expecting EOF",
+          "line": 6
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-import.kerml",
+      "status": "error",
+      "validation_ms": 851.6669,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-import.sysml",
+      "status": "error",
+      "validation_ms": 1269.4531,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing '}' at 'part'",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "extraneous input '}' expecting EOF",
+          "line": 6
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Missing'.",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 4
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-alias.kerml",
+      "status": "ok",
+      "validation_ms": 489.8431,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-alias.sysml",
+      "status": "error",
+      "validation_ms": 1730.6752,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing '}' at 'part'",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "extraneous input '}' expecting EOF",
+          "line": 7
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-import.kerml",
+      "status": "ok",
+      "validation_ms": 459.0447,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-import.sysml",
+      "status": "error",
+      "validation_ms": 736.2208,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing '}' at 'part'",
+          "line": 4
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "extraneous input '}' expecting EOF",
+          "line": 7
+        }
+      ]
+    }
+  ]
+}

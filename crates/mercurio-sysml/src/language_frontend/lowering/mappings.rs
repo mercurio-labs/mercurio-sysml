@@ -425,6 +425,8 @@ mod tests {
 
     fn test_usage(construct: &str, owner_construct: &str) -> ResolvedUsage {
         ResolvedUsage {
+        annotation_targets: Vec::new(),
+            derived_properties: Default::default(),
             construct: construct.to_string(),
             owner_construct: owner_construct.to_string(),
             owner_qualified_name: "root".to_string(),
@@ -432,6 +434,8 @@ mod tests {
             declared_name: "x".to_string(),
             is_implicit_name: false,
             has_explicit_type: false,
+            has_explicit_specialization: false,
+            related_features: Vec::new(),
             type_ref: None,
             additional_type_refs: Vec::new(),
             reference_target: None,
@@ -459,10 +463,14 @@ mod tests {
 
     fn test_definition(construct: &str) -> ResolvedDefinition {
         ResolvedDefinition {
+            visibility: "public".into(),
+            declared_short_name: None,
+            is_anonymous: false,
             construct: construct.to_string(),
             qualified_name: "root.X".to_string(),
             declared_name: "X".to_string(),
             is_abstract: false,
+            is_variation: false,
             specializes: Vec::new(),
             members: Vec::new(),
             docs: Vec::new(),

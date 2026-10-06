@@ -1,0 +1,1054 @@
+{
+  "controls": [
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "polarity": "positive",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "'['",
+      "token": "["
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[x",
+      "token": "["
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "public",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "public",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'public'",
+      "token": "public"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "publicx",
+      "token": "public"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "private",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'private'",
+      "token": "private"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "privatex",
+      "token": "private"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "protected",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "protected",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'protected'",
+      "token": "protected"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "protectedx",
+      "token": "protected"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "in",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "in",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'in'",
+      "token": "in"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "inx",
+      "token": "in"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "out",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "out",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'out'",
+      "token": "out"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "outx",
+      "token": "out"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "inout",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "inout",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'inout'",
+      "token": "inout"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.kerml.xtext.KerML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "inoutx",
+      "token": "inout"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "polarity": "positive",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "'['",
+      "token": "["
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[x",
+      "token": "["
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "public",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "public",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'public'",
+      "token": "public"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "publicx",
+      "token": "public"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "private",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'private'",
+      "token": "private"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "privatex",
+      "token": "private"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "polarity": "positive",
+      "rule": "VisibilityIndicator",
+      "source": "protected",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "VisibilityIndicator",
+      "source": "'protected'",
+      "token": "protected"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "VisibilityIndicator",
+      "source": "protectedx",
+      "token": "protected"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "in",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "in",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'in'",
+      "token": "in"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "inx",
+      "token": "in"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "out",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "out",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'out'",
+      "token": "out"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "outx",
+      "token": "out"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "inout",
+      "polarity": "positive",
+      "rule": "FeatureDirection",
+      "source": "inout",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "FeatureDirection",
+      "source": "'inout'",
+      "token": "inout"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "FeatureDirection",
+      "source": "inoutx",
+      "token": "inout"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "polarity": "positive",
+      "rule": "PortionKind",
+      "source": "snapshot",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "PortionKind",
+      "source": "'snapshot'",
+      "token": "snapshot"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "PortionKind",
+      "source": "snapshotx",
+      "token": "snapshot"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "polarity": "positive",
+      "rule": "PortionKind",
+      "source": "timeslice",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "PortionKind",
+      "source": "'timeslice'",
+      "token": "timeslice"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "PortionKind",
+      "source": "timeslicex",
+      "token": "timeslice"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "trigger",
+      "polarity": "positive",
+      "rule": "TriggerFeatureKind",
+      "source": "accept",
+      "token": "accept",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "TriggerFeatureKind",
+      "source": "'accept'",
+      "token": "accept"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "TriggerFeatureKind",
+      "source": "acceptx",
+      "token": "accept"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "guard",
+      "polarity": "positive",
+      "rule": "GuardFeatureKind",
+      "source": "if",
+      "token": "if",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "GuardFeatureKind",
+      "source": "'if'",
+      "token": "if"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "GuardFeatureKind",
+      "source": "ifx",
+      "token": "if"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "effect",
+      "polarity": "positive",
+      "rule": "EffectFeatureKind",
+      "source": "do",
+      "token": "do",
+      "value": 2
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "EffectFeatureKind",
+      "source": "'do'",
+      "token": "do"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "EffectFeatureKind",
+      "source": "dox",
+      "token": "do"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "assumption",
+      "polarity": "positive",
+      "rule": "RequirementConstraintKind",
+      "source": "assume",
+      "token": "assume",
+      "value": 0
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "RequirementConstraintKind",
+      "source": "'assume'",
+      "token": "assume"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "RequirementConstraintKind",
+      "source": "assumex",
+      "token": "assume"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "polarity": "positive",
+      "rule": "RequirementConstraintKind",
+      "source": "require",
+      "token": "require",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "RequirementConstraintKind",
+      "source": "'require'",
+      "token": "require"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "RequirementConstraintKind",
+      "source": "requirex",
+      "token": "require"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "polarity": "positive",
+      "rule": "FramedConcernKind",
+      "source": "frame",
+      "token": "frame",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "FramedConcernKind",
+      "source": "'frame'",
+      "token": "frame"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "FramedConcernKind",
+      "source": "framex",
+      "token": "frame"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "polarity": "positive",
+      "rule": "RequirementVerificationKind",
+      "source": "verify",
+      "token": "verify",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "RequirementVerificationKind",
+      "source": "'verify'",
+      "token": "verify"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "RequirementVerificationKind",
+      "source": "verifyx",
+      "token": "verify"
+    },
+    {
+      "accepted": true,
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "polarity": "positive",
+      "rule": "ExposeVisibilityKind",
+      "source": "expose",
+      "token": "expose",
+      "value": 1
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "negative",
+      "rule": "ExposeVisibilityKind",
+      "source": "'expose'",
+      "token": "expose"
+    },
+    {
+      "accepted": false,
+      "language": "org.omg.sysml.xtext.SysML",
+      "polarity": "boundary",
+      "rule": "ExposeVisibilityKind",
+      "source": "exposex",
+      "token": "expose"
+    }
+  ],
+  "model_controls": [
+    {
+      "carrier_rule": "FilterPackageMember",
+      "field": "visibility",
+      "kind": "ElementFilterMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": true,
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[true]",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "public",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "public package P;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "public",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "public import P::*;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "private package P;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "private",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "private import P::*;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "NonFeatureMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "protected package P;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "protected",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "protected import P::*;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "in",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "in feature f;",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "out",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "out feature f;",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Feature",
+      "field": "direction",
+      "kind": "Feature",
+      "language": "org.omg.kerml.xtext.KerML",
+      "literal": "inout",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "inout feature f;",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "carrier_rule": "FilterPackageMember",
+      "field": "visibility",
+      "kind": "ElementFilterMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": true,
+      "rule": "FilterPackageMemberVisibility",
+      "source": "[true]",
+      "token": "[",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "public",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "public package P;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "public",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "public import P::*;",
+      "token": "public",
+      "value": 2
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "private package P;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "private",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "private import P::*;",
+      "token": "private",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PackageMember",
+      "field": "visibility",
+      "kind": "OwningMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "VisibilityIndicator",
+      "source": "protected package P;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Import",
+      "field": "visibility",
+      "kind": "NamespaceImport",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": false,
+      "rule": "VisibilityIndicator",
+      "source": "protected import P::*;",
+      "token": "protected",
+      "value": 1
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "in",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "in attribute f;",
+      "token": "in",
+      "value": 0
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "out",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "out attribute f;",
+      "token": "out",
+      "value": 2
+    },
+    {
+      "carrier_rule": "AttributeUsage",
+      "field": "direction",
+      "kind": "AttributeUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "inout",
+      "primary": true,
+      "rule": "FeatureDirection",
+      "source": "inout attribute f;",
+      "token": "inout",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PartUsage",
+      "field": "portionKind",
+      "kind": "PartUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": true,
+      "rule": "PortionKind",
+      "source": "snapshot part p;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PortionUsage",
+      "field": "portionKind",
+      "kind": "OccurrenceUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "snapshot p;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "MergeNode",
+      "field": "portionKind",
+      "kind": "MergeNode",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "snapshot",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "snapshot merge m;",
+      "token": "snapshot",
+      "value": 1
+    },
+    {
+      "carrier_rule": "PartUsage",
+      "field": "portionKind",
+      "kind": "PartUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": true,
+      "rule": "PortionKind",
+      "source": "timeslice part p;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "PortionUsage",
+      "field": "portionKind",
+      "kind": "OccurrenceUsage",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "timeslice p;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "MergeNode",
+      "field": "portionKind",
+      "kind": "MergeNode",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "timeslice",
+      "primary": false,
+      "rule": "PortionKind",
+      "source": "timeslice merge m;",
+      "token": "timeslice",
+      "value": 0
+    },
+    {
+      "carrier_rule": "TriggerActionMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "trigger",
+      "primary": true,
+      "rule": "TriggerFeatureKind",
+      "source": "accept x",
+      "token": "accept",
+      "value": 0
+    },
+    {
+      "carrier_rule": "GuardExpressionMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "guard",
+      "primary": true,
+      "rule": "GuardFeatureKind",
+      "source": "if true",
+      "token": "if",
+      "value": 1
+    },
+    {
+      "carrier_rule": "EffectBehaviorMember",
+      "field": "kind",
+      "kind": "TransitionFeatureMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "effect",
+      "primary": true,
+      "rule": "EffectFeatureKind",
+      "source": "do",
+      "token": "do",
+      "value": 2
+    },
+    {
+      "carrier_rule": "RequirementConstraintMember",
+      "field": "kind",
+      "kind": "RequirementConstraintMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "assumption",
+      "primary": true,
+      "rule": "RequirementConstraintKind",
+      "source": "assume constraint c;",
+      "token": "assume",
+      "value": 0
+    },
+    {
+      "carrier_rule": "RequirementConstraintMember",
+      "field": "kind",
+      "kind": "RequirementConstraintMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "RequirementConstraintKind",
+      "source": "require constraint c;",
+      "token": "require",
+      "value": 1
+    },
+    {
+      "carrier_rule": "FramedConcernMember",
+      "field": "kind",
+      "kind": "FramedConcernMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "FramedConcernKind",
+      "source": "frame concern c;",
+      "token": "frame",
+      "value": 1
+    },
+    {
+      "carrier_rule": "RequirementVerificationMember",
+      "field": "kind",
+      "kind": "RequirementVerificationMembership",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "requirement",
+      "primary": true,
+      "rule": "RequirementVerificationKind",
+      "source": "verify requirement r;",
+      "token": "verify",
+      "value": 1
+    },
+    {
+      "carrier_rule": "Expose",
+      "field": "visibility",
+      "kind": "NamespaceExpose",
+      "language": "org.omg.sysml.xtext.SysML",
+      "literal": "protected",
+      "primary": true,
+      "rule": "ExposeVisibilityKind",
+      "source": "expose P::*;",
+      "token": "expose",
+      "value": 1
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "f67de32118dca4be553de268a1a44ee7c60b7195cf2b99b90d259ee1c2f3a3eb",
+    "helper_sha256": "370f2faf18e883c0bd68e92462c0ee13a9164742a63e1136e607ca130aa81c51",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.enum-family-controls.v1",
+  "scope": "All 24 pinned enum declarations in both language contexts: generated upstream parser rule values, quoted-name rejection and keyword/ID boundaries. Includes 34 raw caller model observations spanning all 18 direct enum call sites. Linking, validation and whole-family qualification remain separate."
+}

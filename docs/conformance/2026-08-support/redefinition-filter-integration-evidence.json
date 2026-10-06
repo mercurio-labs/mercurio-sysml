@@ -1,0 +1,102 @@
+{
+  "schema": "dev.mercurio.redefinition-filter-integration-evidence.v1",
+  "qualification_certificate": false,
+  "status": "shared_filter_semantics_and_bounded_literal_source_regression_verified",
+  "scope": {
+    "execution_revision": 7,
+    "whole_model_qualified": false,
+    "bounded_literal_class_contexts": 12,
+    "frozen_reference_contexts": 26,
+    "complete_b1_obligations_closed": 0,
+    "complete_b1_obligations_required": 10,
+    "strict_families_qualified": 0,
+    "strict_families_required": 34,
+    "release_gates_qualified": 0,
+    "release_gates_required": 5
+  },
+  "implementation": {
+    "imported": "Pinned Type/removeRedefinedFeatures rule and Ecore canonical membership/endpoint contracts; existing native predicate is unchanged.",
+    "native_consumer": "remove_redefined_memberships_query",
+    "handwritten": "Memoize successful whole-collection predicates inside one immutable DefinitionNameQuery. Canonical namespace/membership object identities, exact membership order/duplicates and skipped/skip-owned context form the key. Stored results retain canonical membership IDs. No pointer is dereferenced or serialized as cache data; no cache crosses an edit/retry/persistence boundary.",
+    "rejects": "Foreign canonical-identity copies cannot hit the cache. Missing fields/deferred construction, invalid endpoints, rejected predicates and cycle failures are uncached. No readiness/completeness flags are invented.",
+    "runtime": "Native kernel; no runtime Java or new Cargo dependencies."
+  },
+  "focused_controls": {
+    "new_native_tests": 2,
+    "collection_contexts": 20,
+    "serialization_and_graph_order_variants": 4,
+    "cache_hits_per_context": 2,
+    "coverage": [
+      "original-order and duplicate memberships",
+      "skipped owner Feature and skip-owned branch",
+      "missing registered redefinition field remains deferred",
+      "malformed endpoint remains rejected",
+      "foreign namespace/membership must execute original validation",
+      "graph edits and persistence recompute query results"
+    ]
+  },
+  "verification": {
+    "native_tests_passed": 406,
+    "native_tests_failed": 0,
+    "other_tests_filtered": 665,
+    "total_registered": 1071,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-native-regression.log",
+    "native_log_sha256": "b07df373272806cf506ec5c3bf1972aa3a667e132a0e716a47cc9ac6ee1f6eda",
+    "native_test_seconds": 410.95,
+    "native_process_seconds": 411.219,
+    "all_native_inputs_run": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-native-regression-run.json",
+    "native_inputs_unchanged_during_run": true,
+    "audit_tests_passed": 14,
+    "audit_tests_failed": 0,
+    "tools_run": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-tools-run.json",
+    "focused_tool_checks": 107,
+    "resource_input_checks_passed": 15,
+    "full_crate_descriptor": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-qualification.json",
+      "sha256": "721377e3f725ce8cacef288b569f8ad7cceb89c8d6fb98e849738de49e5451da",
+      "status": "stale and unchanged"
+    },
+    "focused_tool_checks_failed": 0,
+    "tool_checks_run": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-tool-checks-run.json",
+    "tool_checks_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-tool-checks.log",
+    "tool_checks_log_sha256": "98a207c6f479ebf811d243c66bc53dd7461494d841b6fc8a38d57b091171c823",
+    "resource_input_checks_meaning": "15 of the combined 107 checks; not an additional total."
+  },
+  "current_source_pipeline_meaning": "Current regression re-exercises the revision-6 source producer path for all six classes under default/non-default policies (12 bounded class contexts), its atomic typed prerequisites, Closed structural publication and persistence. Historical receiver/binding field comparisons are re-exercised. This is not independent whole-context validation or qualification of any frozen genuine context.",
+  "diagnostic_assessments": {
+    "original_18_resources": {
+      "run": "docs/conformance/2026-08-support/definition-pipeline-evidence/genuine-literal-producer-preflight-run.json",
+      "status": "blocked: omitted BaseFunctions provider in import-only subset"
+    },
+    "definition_selected_24_resources_before_memo": {
+      "run": "docs/conformance/2026-08-support/definition-pipeline-evidence/genuine-literal-producer-reference-preflight-run.json",
+      "status": "incomplete diagnostic budget",
+      "sampled_filter_calls_at_least": 223000,
+      "sampled_closure_wrapper_calls_at_least": 9384000,
+      "sampled_closure_evaluations_at_least": 21500,
+      "meaning": "Existing individual-closure cache works; repeated collection filtering motivates this shared memo."
+    },
+    "same_24_resources_after_memo": {
+      "run": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-filter-native-preflight-run.json",
+      "status": "incomplete_diagnostic_budget",
+      "budget_seconds": 180,
+      "process_seconds": 180.5,
+      "inputs_unchanged": true,
+      "native_linking_publication_validation_persistence_semantics": "not qualified",
+      "meaning": "No candidate row emitted; parsing/construction reached linking. Concurrent regression occurred. Incomplete workloads do not establish a speedup or paired Pilot timing."
+    }
+  },
+  "remaining_required_behavior": [
+    "Isolate and trace the genuine literal producer prerequisite path using the same constructed 22-library environment; carry shared query views/indexes across its typed stages before another expensive whole-source assessment. Do not infer dependency completion from counts or model growth.",
+    "Complete real prototype/result/bounds/library lifecycle and required validation/delegates. Qualify all 26 frozen contexts and V01-V10 before expanding.",
+    "B2 unchanged 31-input model, B3 full required feature domains/94 libraries, B4 all 310 samples/34 families/five release gates with independent detailed semantics and comparable timing remain open."
+  ],
+  "input_sha256": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "ec82f6ebc8389c9888cea6683b7dcecf551adf0b4a112d1e0edeec30d6bda7cc",
+    "crates/mercurio-sysml/src/definition_document.rs": "e58bd287519b59e5fce9d068a7f3838a602a7b6098f040602f967d1195af19bb",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "304a06f449e8090d22e8fde6859a694d5d8a35fe90ffc763713b71851c983aa2",
+    "tools/prepare_native_reference_inputs.py": "b412fb9fe8c3f0849a554f89b0b0dfc093c258a0d7bb1b07c59394dcc20275d0",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a",
+    "docs/conformance/2026-08-support/value-service-native-resource-selection.json": "bcdd050974276f62aeced776c3ff70b8a711b511121bd4dddaf81093dac37696"
+  }
+}

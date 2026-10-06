@@ -1,0 +1,105 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-hidden-parent.kerml": "1cfcd05619eff5220251b6fc9a6fd9c1cedd156201161c678a915ed6cd53b5c4",
+    "invalid-hidden-parent.sysml": "381e3e9e90df9ed27e1b6b53ace04bb6dfc917a3d8bbc32c551cd8ca15cd290b",
+    "invalid-private-alias.kerml": "5dd11d527f868d31ac54db0b980599015ea06fcee3477a7d7a82475d7d91da2a",
+    "invalid-private-alias.sysml": "8d10b1d55f353c3b36c90fcf16eb3ede31ee322e6790da357cc34a4bff2e8420",
+    "positive-all.kerml": "0bedadd0b71b6349ecf4d7556d1d88c8132837370d829c8b11ae53121f184bee",
+    "positive-all.sysml": "c0de0e832b692718d494ef993bf8d6c3180af062c271fc3905600beb5c65ea6d",
+    "positive-public-alias.kerml": "ae8df93c45622282f0d63af29fdf0140fc01767a519be305b98ef7b94821a108",
+    "positive-public-alias.sysml": "bf07e315aba5ebb7423771a42ea74895fa291e9a485d9db9ab035481933bae64"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "83d318ada4f92aa257ef718613072ebb47ebc8565a710185808e1c4d6fb2593f",
+  "cases": [
+    {
+      "relative_path": "invalid-hidden-parent.kerml",
+      "status": "error",
+      "validation_ms": 1021.6357,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Hidden'.",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-hidden-parent.sysml",
+      "status": "error",
+      "validation_ms": 1322.7632,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Hidden'.",
+          "line": 2
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-alias.kerml",
+      "status": "error",
+      "validation_ms": 961.5266,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Secret'.",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-private-alias.sysml",
+      "status": "error",
+      "validation_ms": 1508.8293,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Type 'Secret'.",
+          "line": 2
+        },
+        {
+          "severity": "ERROR",
+          "code": "validateOccurrenceUsageType_",
+          "message": "An occurrence, item or part must be typed by occurrence definitions.",
+          "line": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-all.kerml",
+      "status": "ok",
+      "validation_ms": 693.1346,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-all.sysml",
+      "status": "ok",
+      "validation_ms": 1395.3733,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias.kerml",
+      "status": "ok",
+      "validation_ms": 699.2749,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-public-alias.sysml",
+      "status": "ok",
+      "validation_ms": 864.4549,
+      "diagnostics": []
+    }
+  ]
+}

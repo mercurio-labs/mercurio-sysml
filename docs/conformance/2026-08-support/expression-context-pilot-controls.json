@@ -1,0 +1,3275 @@
+{
+  "bindings": {
+    "BooleanExpression": {
+      "base": "Performances::booleanEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "ConstructorExpression": {
+      "base": "Performances::constructorEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "Expression": {
+      "base": "Performances::evaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "FeatureReferenceExpression": {
+      "base": "Performances::evaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "Invariant": {
+      "base": "Performances::trueEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralBoolean": {
+      "base": "Performances::literalBooleanEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralExpression": {
+      "base": "Performances::literalEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralInfinity": {
+      "base": "Performances::literalIntegerEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralInteger": {
+      "base": "Performances::literalIntegerEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralRational": {
+      "base": "Performances::literalRationalEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "LiteralString": {
+      "base": "Performances::literalStringEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "MetadataAccessExpression": {
+      "base": "Performances::metadataAccessEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    },
+    "NullExpression": {
+      "base": "Performances::nullEvaluations",
+      "enclosedPerformance": "Performances::Performance::enclosedPerformances",
+      "ownedPerformance": "Objects::Object::ownedPerformances",
+      "subperformance": "Performances::Performance::subperformances"
+    }
+  },
+  "controls": [
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::booleanEvaluations"
+        }
+      ],
+      "kind": "BooleanExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::constructorEvaluations"
+        }
+      ],
+      "kind": "ConstructorExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "Expression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::evaluations"
+        }
+      ],
+      "kind": "FeatureReferenceExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::trueEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::falseEvaluations"
+        }
+      ],
+      "kind": "Invariant",
+      "negated": true
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalBooleanEvaluations"
+        }
+      ],
+      "kind": "LiteralBoolean",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalEvaluations"
+        }
+      ],
+      "kind": "LiteralExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInfinity",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalIntegerEvaluations"
+        }
+      ],
+      "kind": "LiteralInteger",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalRationalEvaluations"
+        }
+      ],
+      "kind": "LiteralRational",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::literalStringEvaluations"
+        }
+      ],
+      "kind": "LiteralString",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::metadataAccessEvaluations"
+        }
+      ],
+      "kind": "MetadataAccessExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Class",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Step",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::subperformances"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Performances::Performance::enclosedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_empty",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_structure",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        },
+        {
+          "kind": "Subsetting",
+          "target": "Objects::Object::ownedPerformances"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": false,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    },
+    {
+      "composite": true,
+      "context": "Feature_behavior",
+      "generals": [
+        {
+          "kind": "Subsetting",
+          "target": "Performances::nullEvaluations"
+        }
+      ],
+      "kind": "NullExpression",
+      "negated": false
+    }
+  ],
+  "methods": {
+    "org.omg.sysml.adapter.ExpressionAdapter#addDefaultGeneralType": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "super",
+              "type": "org.omg.sysml.adapter.StepAdapter"
+            },
+            "symbol": "org.omg.sysml.adapter.FeatureAdapter#addDefaultGeneralType",
+            "type": "void"
+          },
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "condition": {
+            "expression": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite",
+              "type": "boolean"
+            },
+            "kind": "PARENTHESIZED",
+            "type": "boolean"
+          },
+          "kind": "IF",
+          "then": {
+            "kind": "BLOCK",
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "ownedPerformance"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+                  "type": "void"
+                },
+                "kind": "EXPRESSION_STATEMENT"
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "expression": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite",
+              "type": "boolean"
+            },
+            "kind": "PARENTHESIZED",
+            "type": "boolean"
+          },
+          "kind": "IF",
+          "then": {
+            "kind": "BLOCK",
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "subperformance"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+                  "type": "void"
+                },
+                "kind": "EXPRESSION_STATEMENT"
+              }
+            ]
+          }
+        },
+        {
+          "condition": {
+            "expression": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned",
+              "type": "boolean"
+            },
+            "kind": "PARENTHESIZED",
+            "type": "boolean"
+          },
+          "kind": "IF",
+          "then": {
+            "kind": "BLOCK",
+            "statements": [
+              {
+                "expression": {
+                  "arguments": [
+                    {
+                      "kind": "STRING_LITERAL",
+                      "type": "java.lang.String",
+                      "value": "enclosedPerformance"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "parameters": [
+                    "java.lang.String"
+                  ],
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#addDefaultGeneralType",
+                  "type": "void"
+                },
+                "kind": "EXPRESSION_STATEMENT"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.ExpressionAdapter#getDefaultSupertype": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [
+              {
+                "kind": "STRING_LITERAL",
+                "type": "java.lang.String",
+                "value": "base"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "java.lang.String"
+            ],
+            "symbol": "org.omg.sysml.adapter.TypeAdapter#getDefaultSupertype",
+            "type": "java.lang.String"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "arguments": [
+              {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "symbol": "org.omg.sysml.adapter.FeatureAdapter#getTarget",
+                "type": "org.omg.sysml.lang.sysml.Feature"
+              }
+            ],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [
+              "org.omg.sysml.lang.sysml.Feature"
+            ],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "FeatureUtil",
+              "type": "org.omg.sysml.util.FeatureUtil"
+            },
+            "symbol": "org.omg.sysml.util.FeatureUtil#isPerformanceFeature",
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwnedComposite": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "expression": {
+            "kind": "CONDITIONAL_AND",
+            "left": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "symbol": "org.omg.sysml.adapter.FeatureAdapter#isBehaviorOwned",
+              "type": "boolean"
+            },
+            "right": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "arguments": [],
+                "kind": "METHOD_INVOCATION",
+                "parameters": [],
+                "symbol": "org.omg.sysml.adapter.FeatureAdapter#getTarget",
+                "type": "org.omg.sysml.lang.sysml.Feature"
+              },
+              "symbol": "org.omg.sysml.lang.sysml.Feature#isComposite",
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.adapter.FeatureAdapter#isStructureOwnedComposite": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "symbol": "org.omg.sysml.adapter.FeatureAdapter#getTarget",
+            "type": "org.omg.sysml.lang.sysml.Feature"
+          },
+          "kind": "VARIABLE",
+          "name": "target",
+          "type": "org.omg.sysml.lang.sysml.Feature"
+        },
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "target",
+              "type": "org.omg.sysml.lang.sysml.Feature"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType",
+            "type": "org.omg.sysml.lang.sysml.Type"
+          },
+          "kind": "VARIABLE",
+          "name": "owningType",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "expression": {
+            "kind": "CONDITIONAL_AND",
+            "left": {
+              "arguments": [],
+              "kind": "METHOD_INVOCATION",
+              "parameters": [],
+              "receiver": {
+                "kind": "IDENTIFIER",
+                "name": "target",
+                "type": "org.omg.sysml.lang.sysml.Feature"
+              },
+              "symbol": "org.omg.sysml.lang.sysml.Feature#isComposite",
+              "type": "boolean"
+            },
+            "right": {
+              "expression": {
+                "kind": "CONDITIONAL_OR",
+                "left": {
+                  "expression": {
+                    "kind": "IDENTIFIER",
+                    "name": "owningType",
+                    "type": "org.omg.sysml.lang.sysml.Type"
+                  },
+                  "kind": "INSTANCE_OF",
+                  "test_type": "org.omg.sysml.lang.sysml.Structure",
+                  "type": "boolean"
+                },
+                "right": {
+                  "kind": "CONDITIONAL_AND",
+                  "left": {
+                    "expression": {
+                      "kind": "IDENTIFIER",
+                      "name": "owningType",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    "kind": "INSTANCE_OF",
+                    "test_type": "org.omg.sysml.lang.sysml.Feature",
+                    "type": "boolean"
+                  },
+                  "right": {
+                    "arguments": [
+                      {
+                        "cast_type": "org.omg.sysml.lang.sysml.Feature",
+                        "expression": {
+                          "kind": "IDENTIFIER",
+                          "name": "owningType",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        },
+                        "kind": "TYPE_CAST",
+                        "type": "org.omg.sysml.lang.sysml.Feature"
+                      }
+                    ],
+                    "kind": "METHOD_INVOCATION",
+                    "parameters": [
+                      "org.omg.sysml.lang.sysml.Feature"
+                    ],
+                    "symbol": "org.omg.sysml.adapter.FeatureAdapter#hasStructureType",
+                    "type": "boolean"
+                  },
+                  "type": "boolean"
+                },
+                "type": "boolean"
+              },
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    },
+    "org.omg.sysml.util.FeatureUtil#isPerformanceFeature": {
+      "kind": "BLOCK",
+      "statements": [
+        {
+          "initializer": {
+            "arguments": [],
+            "kind": "METHOD_INVOCATION",
+            "parameters": [],
+            "receiver": {
+              "kind": "IDENTIFIER",
+              "name": "step",
+              "type": "org.omg.sysml.lang.sysml.Feature"
+            },
+            "symbol": "org.omg.sysml.lang.sysml.Feature#getOwningType",
+            "type": "org.omg.sysml.lang.sysml.Type"
+          },
+          "kind": "VARIABLE",
+          "name": "owningType",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "expression": {
+            "kind": "CONDITIONAL_OR",
+            "left": {
+              "expression": {
+                "kind": "IDENTIFIER",
+                "name": "owningType",
+                "type": "org.omg.sysml.lang.sysml.Type"
+              },
+              "kind": "INSTANCE_OF",
+              "test_type": "org.omg.sysml.lang.sysml.Behavior",
+              "type": "boolean"
+            },
+            "right": {
+              "expression": {
+                "kind": "IDENTIFIER",
+                "name": "owningType",
+                "type": "org.omg.sysml.lang.sysml.Type"
+              },
+              "kind": "INSTANCE_OF",
+              "test_type": "org.omg.sysml.lang.sysml.Step",
+              "type": "boolean"
+            },
+            "type": "boolean"
+          },
+          "kind": "RETURN"
+        }
+      ]
+    }
+  },
+  "provenance": {
+    "driver_sha256": "d98992a1ed875e1c18b8fe6860c31240f97e99b30f0a282ad18794a548fbc2ce",
+    "helper_sha256": "0346705255571e6101a404f140c7fd61c9d49d955bd1292b85d2f4b013b7556e",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ExpressionAdapter.java": "435d8f22006137d91f793d4a20be3c88e72a017db838bf1b1d7da654672d7141",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ExpressionUtil.java": "0828947218f049a4b5b42a729345ebbea3c32b5932aa66f6b9bb82981e40c5af",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.expression-context-controls.v1",
+  "scope": "Thirteen base ExpressionAdapter default providers, seven canonical owning-Type contexts, composite and Invariant-negation variants. Only the default-contribution stage is observed; full transformation and validation remain separate."
+}

@@ -1,0 +1,21 @@
+# Full enum-literal family qualification obligations
+
+This review targets family/xtext.EnumLiteralDeclaration, not a subset of its literals. The imported pin contains 24 declarations in 14 enum rules and 18 direct rule-call sites. All declaration identities and direct callers are frozen in enum-family-inventory.json. This is an obligation review, not a closure certificate.
+
+The written 2026-08 release specification remains normative: KerML PDF pages 158Ã¢â‚¬â€œ159 (VisibilityKind), 166 (FeatureDirectionKind); SysML PDF pages 319 (PortionKind), 373Ã¢â‚¬â€œ374 (TransitionFeatureKind and its membership constraints), 389Ã¢â‚¬â€œ390 (RequirementConstraintKind). enum-family-normative.json retains exact source hashes, release revision and page text. Ecore ordinal values are storage representation, not execution of direction, temporal, transition or requirement semantics. The TransitionActionKind prose typo is retained separately from the correct section/type identity.
+
+Required coverage is imported identities and fields, native recognition and assignment, positive/negative/boundary semantics, and integrated candidate model publication/persistence in every required caller context. The current evidence proves 72 selected-rule controls (three polarities for every declaration), 34 raw caller values covering all 18 direct calls, and canonical construction/persisted values for 22 of the 24 primary carriers. Invalid enum values fail closed publication in those 22 controls. Those checks do not qualify full model constraints, secondary-carrier publication or complete source documents.
+
+## Required integrated contexts remain open
+
+- TriggerFeatureKind: the actual trigger caller and all 24 pinned explicit-import resources parse with the optimized candidate. [Typed naming-prerequisite evidence](typed-name-prerequisite-evidence.json) records the common scheduler fix and endpoint/persistence controls. All 24 pinned library resources and the caller parse natively, but the uncontended optimized assessment exceeds its 600-second allowance during construction/linking. Actual lifecycle, source/default/connector completion and validation remain unqualified. This remains prerequisite evidence; full source/default/added-member lifecycle and validation are required.
+- ExposeVisibilityKind: the real source `package P; view v { expose P::*; }` now reaches its actual Views library dependency; the current test preserves that prerequisite and rejects the former missing-provider failure. Raw Expose construction has protected visibility. The source target is an actual sibling package; no resolver or library stand-in bypasses the dependency.
+- Complete positive, negative and boundary document cases for every direct caller, including secondary import/portion/control-node carriers, must publish or reject as required, validate relevant model constraints and preserve correct storage after reload. Named integrated qualification tests are intentionally pending; passing prerequisite-failure tests cannot substitute for them.
+
+## Dependency closure is strict
+
+The existing checker also requires dependency/native_parser and dependency/model_construction to qualify before this family can close. Those are global, still-open dependency contracts. They have not been deleted, narrowed or marked complete. There is no family certificate. Release gates and the family denominator are unchanged.
+
+## Next implementation work
+
+The complete ReferenceUsage transition-link identity predicate is imported and consumed; six independent Pilot controls verify its handwritten canonical-membership projection. Its actual transition-link library branch remains unsupported. The shared Action policy now has 198 selector controls and 114 ordinary query matches across 19 standard-lifecycle classes; the Accept trigger branch remains library-dependent. Implement the full TransitionUsage and ViewUsage contribution/added-member lifecycle with actual resources, then finish the required integrated contexts. Then use the cached enum observations to complete all-context candidate publication/validation and the pending integrated qualification tests. The single active completion plan remains remaining-gap-checklist.md.

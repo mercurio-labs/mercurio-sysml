@@ -1,0 +1,92 @@
+{
+  "schema": "dev.mercurio.chain-selection-reference-controls.v1",
+  "qualification_certificate": false,
+  "native_qualification": "not_assessed",
+  "scope": "Unprepared Ecore prototypes; complete validation and expression transformation are not assessed.",
+  "controls": [
+    {
+      "id": "first_in",
+      "operation": "sourceTargetFeature",
+      "first_direction": "in",
+      "first_owned_feature": true,
+      "second_owned_feature": true,
+      "second_direction": "in",
+      "pilot_endpoint": "first.target",
+      "completion_flag": false
+    },
+    {
+      "id": "empty_first_in",
+      "operation": "sourceTargetFeature",
+      "first_direction": "in",
+      "first_owned_feature": false,
+      "second_owned_feature": true,
+      "second_direction": "in",
+      "pilot_endpoint": "second.target",
+      "completion_flag": false
+    },
+    {
+      "id": "out_then_in",
+      "operation": "sourceTargetFeature",
+      "first_direction": "out",
+      "first_owned_feature": true,
+      "second_owned_feature": true,
+      "second_direction": "in",
+      "pilot_endpoint": "second.target",
+      "completion_flag": false
+    },
+    {
+      "id": "inout_then_in",
+      "operation": "sourceTargetFeature",
+      "first_direction": "inout",
+      "first_owned_feature": true,
+      "second_owned_feature": true,
+      "second_direction": "in",
+      "pilot_endpoint": "second.target",
+      "completion_flag": false
+    },
+    {
+      "id": "empty_inputs",
+      "operation": "sourceTargetFeature",
+      "first_direction": "in",
+      "first_owned_feature": false,
+      "second_owned_feature": false,
+      "second_direction": "in",
+      "pilot_endpoint": null,
+      "completion_flag": false
+    },
+    {
+      "id": "no_input",
+      "operation": "sourceTargetFeature",
+      "first_direction": "out",
+      "first_owned_feature": true,
+      "second_owned_feature": true,
+      "second_direction": "out",
+      "pilot_endpoint": null,
+      "completion_flag": false
+    },
+    {
+      "id": "target_then_return",
+      "operation": "targetFeature",
+      "return_before_target": false,
+      "target_is_data_type": false,
+      "pilot_endpoint": "target",
+      "completion_flag": false
+    },
+    {
+      "id": "return_then_target",
+      "operation": "targetFeature",
+      "return_before_target": true,
+      "target_is_data_type": false,
+      "pilot_endpoint": "result",
+      "completion_flag": false
+    },
+    {
+      "id": "non_feature_target",
+      "operation": "targetFeature",
+      "return_before_target": false,
+      "target_is_data_type": true,
+      "pilot_endpoint": null,
+      "completion_flag": false
+    }
+  ]
+}

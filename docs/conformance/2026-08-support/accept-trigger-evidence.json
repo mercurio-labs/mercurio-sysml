@@ -1,0 +1,117 @@
+{
+  "schema": "dev.mercurio.accept-trigger-evidence.v1",
+  "scope": "Bounded trigger AcceptActionUsage generalization lifecycle; supplied complete owner generalizations and canonical fixture library. Ordinary Accept defaults, added members, payload typing, actual libraries, full constraints and family qualification remain open.",
+  "inputs": {
+    "tools/run_accept_trigger_probe.py": "a16402aba96267f776dfe50582816c717dbbcf8f1f30201ac0104266568d98a6",
+    "tools/test_accept_trigger.py": "6cb8bdd5fa895179ab67f20d989864304d8c2c8d9e4ac364073b7d563ed1584a",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotAcceptTriggerProbe.java": "8dd7890b0634fcccd595448022584e78766f14aaba5110a6093a280c2addc842",
+    "tools/generate_action_redefinitions.py": "ffc62a69b9f9cab059c1ff47a70a56dd5e86960357a64132cf77de6da310afab",
+    "docs/conformance/2026-08-support/action-redefinition-pilot-controls.json": "047162955e38147610b04fb5df22645ae091b908ccb3829ab116a27fc1d41867",
+    "docs/conformance/2026-08-support/accept-trigger-pilot-controls.json": "df0f271306bcee25dfcbe3bcb93299dc18cb5c4ee749cf954239add4dfaa695c",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/action_redefinitions_generated.rs": "6d5ef495fa76f247541d33036d5ea63f01d4e36cb3856972bb7a2af8f479c3eb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/accept-trigger-native-tests.log": "73ed88f950a7f01ee41c0cccafa4fdb8d0ef5b96dd5068811177168b456a28e2",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/accept-trigger-cache-tests.log": "970596b861026dd1013bc3c489ecb55817d0a390bf94da264efd5f67ba376fe0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/accept-trigger-pilot-check.log": "c4d7f18d7c0afa12485411e9a5cad1b450a63b05a8e71308a72d0bef82a4c90f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "existing_resolved_policy": "Guarded Action/Accept method bodies and actual adapter binding dispatch retained in action-redefinition-pilot-controls.json; generated membership classifier, trigger role and redefinition target used. No new general Xtend translation.",
+    "consumed": "Trigger default suppression plus computed accepter redefinition; explicit generalizations and feature-chain navigation use existing shared native services."
+  },
+  "native_consumers": [
+    "definition_accept_trigger_generals",
+    "definition_general_type_inputs_evaluate"
+  ],
+  "handwritten_dependencies": [
+    "Canonical membership/owner projection with imported Ecore endpoint and enum validation",
+    "Owner general-type traversal with typed prerequisite propagation",
+    "Standard-library binding resolution and ordered generalization composition",
+    "Positive controls supply completed owner and library stages. Pilot owner adapter is executed against an explicitly empty library before trigger attachment; Rust receives the corresponding completed owner input. This does not qualify those stages."
+  ],
+  "verification": {
+    "independent_pilot_controls": 9,
+    "owner_general_counts": [
+      0,
+      1,
+      2
+    ],
+    "explicit_redefinition_counts": [
+      0,
+      1,
+      2
+    ],
+    "native_serialized_reversed_replays": 9,
+    "repeated_queries": true,
+    "missing_owner_general_endpoint_preserves_typed_requirement": true,
+    "non_trigger_and_invalid_enum_boundaries": 5,
+    "cache_guard_tests": 5,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/accept-trigger-native-tests.log",
+      "sha256": "73ed88f950a7f01ee41c0cccafa4fdb8d0ef5b96dd5068811177168b456a28e2",
+      "passed": 292
+    },
+    "completion_flags_fabricated": false,
+    "actual_resource_qualification": false,
+    "family_certificate_issued": false,
+    "whole_model_comparison_performed": false,
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_basis": {
+    "reference": "Pilot AcceptActionUsageAdapter identifies checkAcceptActionUsageTriggerActionSpecialization. Pinned written 2026-08 specification remains normative; direct normative clause mapping and complete required model validation still required.",
+    "disagreements_observed": "None in these bounded generalization controls; this does not resolve historical unrelated disagreements."
+  },
+  "remaining": [
+    "Complete Transition additional-member/link/connector construction",
+    "Ordinary Accept defaults, payload typing, full State/Transition constraints",
+    "Target/chain scope origins, actual resource lifecycle and required enum secondary fields",
+    "Global native_parser/model_construction contracts"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "candidate_promoted": false
+  }
+}

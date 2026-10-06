@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "files": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/UsageAdapter.java": "028265ffcb5b64878d824480313a98c56100d35187a7af39094ceaae0fcbb36a",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/postprocessing/UsageParserPostProcessor.java": "0f24438b9581dfbaada8f8674a84cf6f69fc550ba5f1b3cbf9ade6096154bbfb",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/postprocessing/PortUsageParserPostProcessor.java": "bed459db4062981d94f1f006c8d7aaa2d071fc5331a87c214d16fc1da168b3cf",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Usage_mayTimeVary_SettingDelegate.java": "106ec561500624b40120009ed6bf0aec94c21fac92af4fc65592741470ac4aff"
+    },
+    "metamodel_sha256": "76fd2db0933f329f9a1f8fc8fdc7693b3a5575b86463d64471db252f5027d84b",
+    "extractor": "generate_release_usage_flags.py"
+  },
+  "non_variable_contexts": [
+    "SuccessionAsUsage",
+    "BindingConnectorAsUsage"
+  ],
+  "owner_type": "Occurrences::Occurrence",
+  "excluded_types": [
+    "Links::SelfLink",
+    "Occurrences::HappensLink"
+  ],
+  "composite_excluded_type": "Actions::Action",
+  "non_composite_contexts": [
+    "AttributeUsage",
+    "BindingConnectorAsUsage",
+    "EventOccurrenceUsage",
+    "ExhibitStateUsage",
+    "IncludeUseCaseUsage",
+    "PerformActionUsage",
+    "ReferenceUsage",
+    "SuccessionAsUsage"
+  ]
+}

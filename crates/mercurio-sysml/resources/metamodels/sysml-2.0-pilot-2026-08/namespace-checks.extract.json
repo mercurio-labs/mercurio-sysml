@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+    "sha256": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+    "extractor": "generate_release_namespace_checks.py"
+  },
+  "import_top_level": {
+    "method": "checkImport",
+    "required_visibility": "private",
+    "issue": "validateImportTopLevelVisibility",
+    "message": "Top level import must be private"
+  },
+  "annotation": {
+    "method": "checkAnnotation",
+    "presence_bits": [
+      "owned_annotating_element",
+      "owning_annotating_element",
+      "owning_annotated_element"
+    ],
+    "failures_by_mask": [
+      [
+        {
+          "issue": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element"
+        }
+      ],
+      [
+        {
+          "issue": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must be owned by its annotated element"
+        }
+      ],
+      [],
+      [
+        {
+          "issue": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element"
+        },
+        {
+          "issue": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must be owned by its annotated element"
+        }
+      ],
+      [
+        {
+          "issue": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element"
+        },
+        {
+          "issue": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element"
+        }
+      ],
+      [],
+      [
+        {
+          "issue": "validateAnnotationAnnotatedElementOwnership",
+          "message": "Must own its annotating element"
+        }
+      ],
+      [
+        {
+          "issue": "validateAnnotationAnnotatingElement",
+          "message": "Must either own or be owned by its annotating element"
+        }
+      ]
+    ]
+  }
+}

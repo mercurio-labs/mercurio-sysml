@@ -1,0 +1,49 @@
+{
+  "schema": "dev.mercurio.transition-succession-context-dependency.v1",
+  "scope": "Next dependency identification only. Source/control inspection does not implement or qualify the context producer. No diagnostic text is decoded into runtime prerequisites.",
+  "assessment": "docs/conformance/2026-08-support/enum-trigger-states-general-type-view-assessment.json",
+  "assessment_sha256": "b84419712e5e87bda06b307f9ccfd6f7513942fe9cc04acb3ba9d27950cda734",
+  "upstream_pin": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "sources": {
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "7d9142742c454f5810fe4db61a089abef5e0b8d61ad8bf552631d9136b04f298",
+    "target/support-2026-08/pilot-pinned-2026-08/org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/SuccessionAsUsageAdapter.java": "030619d07a3ae32e946920a40274bef61536259fa80d0667a783869cb71099fc"
+  },
+  "canonical_subject_evidence": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: featuring query requires complete implicit inputs or a fixed owning-type provider\", kind: Syntax, span: None, subjects: [\"definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f6d6572637572696f2d7379736d6c2f7461726765742f656e756d2d747269676765722d63616c6c65722e7379736d6c.owned_relationship.1.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.4.owned_related_element.0\"] }",
+  "grammar_mapping": {
+    "rule": "TransitionUsage",
+    "ordered_roles": [
+      "TransitionSourceMember",
+      "EmptyParameterMember",
+      "EmptyParameterMember",
+      "TriggerActionMember",
+      "TransitionSuccessionMember"
+    ],
+    "subject_role_index": 4,
+    "membership_rule": "TransitionSuccessionMember",
+    "membership_kind": "OwningMembership",
+    "element_rule": "TransitionSuccession",
+    "element_kind": "SuccessionAsUsage",
+    "mapping_status": "Derived from the pinned grammar assignment order and diagnostic structural identity; not an exported failed native graph."
+  },
+  "producer_reference": {
+    "method": "SuccessionAsUsageAdapter.addContextFeaturingType",
+    "requirements": [
+      "Canonical owning namespace is TransitionUsage",
+      "Owning transition succession identity matches this node",
+      "Transform owning transition before consuming featuring types",
+      "Add owning transition featuring types through inherited adapter producer"
+    ],
+    "status": "Source reference only; resolved typed program, complete binding inventory and independent controls are required before native implementation."
+  },
+  "next_batch_contract": [
+    "Resolve actual context-producer dispatch for every applicable pinned Connector binding; group overrides by algorithm",
+    "Export typed programs and batch independent positive/negative/boundary observations with pinned provenance",
+    "Implement native context production and required parent lifecycle algorithms; preserve typed pending requirements, rollback and strict publication",
+    "Verify applicable concrete bindings and contexts, including serialization and graph order, before another integrated resource milestone"
+  ],
+  "qualification": {
+    "families_closed": 0,
+    "new_native_producers_implemented": 0,
+    "candidate_promoted": false
+  }
+}

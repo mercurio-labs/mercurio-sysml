@@ -1,0 +1,28 @@
+{
+  "schema": "dev.mercurio.state-contribution-normative-review.v1",
+  "normative_reference": {
+    "path": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Release\\doc\\2a-OMG_Systems_Modeling_Language.pdf",
+    "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "pdf_pages": [
+      371,
+      372
+    ],
+    "clauses": [
+      "StateUsage.isSubstateUsage",
+      "checkStateUsageExclusiveStateSpecialization",
+      "checkStateUsageSubstateSpecialization"
+    ]
+  },
+  "review": {
+    "operation": "Composite StateUsage; StateDefinition/StateUsage owningType with isParallel equal to the argument; exclude every StateSubactionMembership. Receiver isParallel is irrelevant.",
+    "pilot_agreement": "Selected Ecore delegate and 320 independent eInvoke/direct-method observations agree with the normative operation. No disagreement found for this operation.",
+    "implementation": "Explicit handwritten canonical Ecore ownership/default query; bounded resolved inherited State/Action contribution generation. Both consumed by the shared document generalization provider.",
+    "boundaries": [
+      "Full State/Action transformation and inherited typing are not qualified by supplied-complete fixtures.",
+      "Default specialization generation does not establish all normative constraints.",
+      "Variant/end/parameter/chaining/crossing/valuation contexts remain guarded dependencies.",
+      "Whole resource models, complete family contexts, sample corpus and comparable timing remain required."
+    ]
+  }
+}

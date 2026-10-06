@@ -1,0 +1,108 @@
+{
+  "scope": "Bounded Feature default-input ownership and inherited-first Redefinition lookup. Native construction of the actual Base/ScalarValues closure is separate from semantic qualification.",
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "f3e9edac8eb99937ea684dbab2d41a901c16aeb7f57fe961afc7c0674de0a3c1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "8ba49953cf72f0196d1e5f9de1cbdb524d9d6eac192687003df3a15b4792f6d1",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "26074f3979325af256fa818da622e43f5215b3197221e3c4578b9c8afe3c3b86",
+    "tools/export_pilot_feature_defaults.py": "b67ab4725dbcc12810d98232708586dcdcd9e13d58de50eb5cbe9e5e0d0b3618",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotFeatureDefaultExporter.java": "7cc424a077dfd3bce200f4142d28000f313df0fdcc0be39544260c8ec3437baf",
+    "tools/run_chain_link_probe.py": "023e441fda92b281fc114f6ab3d4b0c087327badff4dd92e5d65c683b07c527e",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotChainLinkProbe.java": "4b505b720b19a844122e966fff061401b4da1efeb0957f208ecbc385fa1f20b5",
+    "docs/conformance/2026-08-support/chain-link-pilot-controls.json": "239b079e25f6e15fd77771b2808dc8e6b0335fb11a5a0da21e9b5b2f514a8868"
+  },
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      63,
+      109
+    ],
+    "clauses": [
+      "7.3.4 redefinition name lookup",
+      "8.2.3.5 qualified name resolution"
+    ],
+    "assessment": "Owned redefinition target lookup begins in direct supertypes, excluding the declaring type local namespace. Its sibling redefinitions must not remove the target candidates. Filtering within general types and among inherited candidates remains active. This bounded correction does not qualify differences in general-type ordering or lexical fallback."
+  },
+  "coverage": [
+    {
+      "feature": "Non-typing owned members in Feature default selection",
+      "imported": "Ecore Comment/Documentation, TextualRepresentation and Multiplicity ancestry, canonical OwningMembership containment; resolved upstream selector program",
+      "consumer": "definition_owned_non_typing_membership and definition_ordinary_feature_inputs_with_owners",
+      "verified": "96 independent Pilot source default selectors: three owners (Package, Classifier, DataType), typed/untyped Feature, four annotation states and four multiplicity states. Native selector values agree before/after persistence without mutation.",
+      "remaining": "This does not evaluate multiplicity bounds or annotation/metadata semantics. FeatureValue, owned cross-features, metadata contributions, and specialized owner strategies remain guarded."
+    },
+    {
+      "feature": "Multiple pending redefinition target lookup",
+      "imported": "Grammar reference types and Ecore Feature/Redefinition ownership; existing generated generalization/redefinition providers",
+      "consumer": "explicit_recursive_inherited_memberships and remove_redefined_memberships_except",
+      "verified": "Two additional Pilot source controls reverse declaration/general-type order. All chain endpoints and explicit redefinition owner/target paths agree before/after persistence. Thirteen bounded chain controls total.",
+      "remaining": "Scope traversal is explicitly handwritten. Cross-general conflicts, general-type ordering, transformed expression scopes and specialized providers remain unqualified. Cyclic unresolved dependencies still reject."
+    },
+    {
+      "feature": "Real library source closure",
+      "imported": "Unmodified pinned release Base.kerml and ScalarValues.kerml",
+      "consumer": "audit_release_compile --definition-candidate and public definition_document::parse_and_link",
+      "verified": "Complete Base + ScalarValues source set constructs and links 144 native elements.",
+      "remaining": "No full semantic comparison or multiplicity/constraint validation is claimed. Adding actual Links.kerml reaches unsupported owned cross-feature contribution semantics. Missing-context single-file probes remain failures, not evidence of invalid source."
+    }
+  ],
+  "candidate_probe": {
+    "inputs": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-candidate-inputs.json",
+    "report": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-candidate-results.jsonl",
+    "report_sha256": "21fefa842bb9a3f3c58b52aa0f05b93b59c334191cde3ec3ab40ec7a4d0da64d",
+    "successful_construction": {
+      "source_set": "Base-and-ScalarValues.kerml",
+      "elements": 144,
+      "status": "constructed_unqualified"
+    },
+    "aggregate_exit": 1
+  },
+  "library_sources": [
+    {
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml",
+      "sha256": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398"
+    },
+    {
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml",
+      "sha256": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e"
+    },
+    {
+      "path": "../target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+      "sha256": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189"
+    }
+  ],
+  "verification": {
+    "status": "focused_regression_passed",
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-feature-owned-members.log",
+    "native_log_sha256": "133ed4990bc911009556c182410df74ac6292a039a3966d7061feab0b5d5427e",
+    "native_passed": 152,
+    "tooling_tests": [
+      "test_feature_defaults: 32 passed",
+      "test_compatibility: 34 passed",
+      "test_strategy_qualification: 15 passed",
+      "test_qualification_certificates: 33 passed"
+    ],
+    "independent_observation_checks": [
+      "export_pilot_feature_defaults.py --check passed",
+      "run_chain_link_probe.py --check passed"
+    ],
+    "not_run": [
+      "Full release samples",
+      "Full Pilot semantic qualification",
+      "Timing assessment"
+    ]
+  },
+  "metrics": {
+    "matching_pilot_documents": 155,
+    "matching_pilot_documents_delta": 0,
+    "basic_ordinary_binding_models": "26/30",
+    "bounded_strategy_obligations": "3/4",
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "new_default_selector_controls": 96,
+    "new_chain_scope_controls": 2,
+    "actual_library_elements_constructed": 144
+  }
+}

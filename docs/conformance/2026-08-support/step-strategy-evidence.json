@@ -1,0 +1,228 @@
+{
+  "schema": "dev.mercurio.step-strategy-evidence.v1",
+  "scope": "Exact resolved StepAdapter default selector and inherited Feature typing in bounded canonical contexts. Does not admit ActionUsage/Expression overrides or qualify complete transformation/validation.",
+  "inputs": {
+    "tools/generate_step_defaults.py": "b2b945b4fad89c8b7f3426a9852b056eacb67aaa78df4e550646253204a86902",
+    "tools/test_step_defaults.py": "36c5bbb513a933ab7cb169e8bd860581a7f1e0720082cd9245799d5986e66365",
+    "tools/run_step_strategy_probe.py": "e8b4b55abfe6d1ada3ca7e96ca82fbb0790b923af17889732c8f997b4a54e1ab",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStepStrategyProbe.java": "af0f7dec0e0000fb0cb9bfb22e3d2f4f401628a851810f299172ffb54f34daa4",
+    "docs/conformance/2026-08-support/step-strategy-pilot-controls.json": "f7655d597ac752f5c0a4a96ebfa0ba08caeba424eae5d15565003f6e9fe7f64c",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/step_defaults_generated.rs": "dcb7051aa727eb8804ccdb80f3babe0454c4812f28baec54ed3d15ad664cf6da",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/compatibility_generated.rs": "2cb4046c1b127592f8eaaa770fe96a16920efd833fc21227964084c835ab355f",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/compatibility.extract.json": "be2840b8082bf8109ad22c8a2b8af057f8f47d874c1b2074c828996c9fc4809d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/indexed-reference-native.log": "c4e8dc8e415d520e855c4e0b9c38474a221d6d10d88a17bf999a1cb13e0ef24e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/scope-context-native.log": "229cf8150944fab95547d11da0688e477260b3de77418d3ec1a1161404cffc62",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported_representation": [
+    "Resolved typed StepAdapter getDefaultSupertype/isIncomingTransfer trees, including PayloadFeature method-reference receiver type",
+    "Exact Step binding, pinned default-name mappings and resolved inherited FeatureAdapter dispatch for six methods",
+    "Canonical Ecore ancestry, ownership, FeatureTyping/Subsetting contracts and defaults"
+  ],
+  "native_consumers": [
+    "definition_step_default_name",
+    "definition_performance_owner_predicates",
+    "definition_feature_types_query",
+    "definition_general_type_inputs_ready",
+    "definition_feature_default_contribution_owners",
+    "definition_materialize_feature_defaults",
+    "public generalization, specializes and Feature type projections"
+  ],
+  "generation_boundary": "Bounded generator recursively consumes the reviewed typed conditional tree, generating exclusive ordered default selection and names. Full-tree fingerprint rejects upstream drift; exact dispatch inventory excludes overriding subclasses. Not a general Xtend/Java compiler.",
+  "handwritten_dependencies": [
+    "Canonical owning-Type/ownedFeature projections and Ecore ancestry predicates",
+    "Shared Feature type traversal, cycle handling and minimal-type reduction; exact Step admitted only for the resolved inherited algorithm",
+    "Incomplete-state implicit default prerequisites and deferred-query propagation",
+    "Owner-specific metadata, direction/end, crossing/valuation/chaining and partial-state admission guards",
+    "Local library linking, replay validation and atomic physical Subsetting insertion; completion flags remain unchanged"
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-child-native-tests.log",
+      "sha256": "8b82edf9e7290264fa1efcb30935c6e87953d74d5decae20d46a86a06b0a693f",
+      "passed": 302
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/step-strategy-focused-tests.log",
+      "sha256": "66dec3f1f2cf7eb12e157833720beb990d13e8cefa09503a39b4a8cd28b260dc",
+      "passed": 3
+    },
+    "generator_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/step-strategy-generator-tests.log",
+      "sha256": "f7dc1c65d9bf1c31f1cb9a0be1fc0c0840290cbe7f978a8864c6557dbd2fbb5e",
+      "passed": 5
+    },
+    "certificate_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/step-strategy-certificate-tests.log",
+      "sha256": "117fa69ef7971f894b3f84529b423bf399082ca283661240ac4b466b259926a5",
+      "passed": 15
+    },
+    "pilot_default_controls": 56,
+    "native_matching_default_stage_controls": 56,
+    "pilot_typing_controls": 6,
+    "native_matching_typing_controls": 6,
+    "newly_matching_expression_context_controls": 14,
+    "matrix": "Seven owning-Type contexts x composite false/true x no payload/ordinary feature/owned PayloadFeature/alias PayloadFeature. Fixed exact Step binding.",
+    "typing_scope": "Five stored-query controls: empty, direct, subset, cycle, diamond; one incomplete Step implicit default typed by Structure. Complete stored controls isolate an untyped library endpoint environment and do not qualify transformation lifecycle.",
+    "contexts": [
+      "Read-only default selection, public generalization/type/specializes projections",
+      "Ordered physical contributions, replay, reversed graph storage, JSON persistence/reload",
+      "Parsed package/step source with canonical supplied library endpoints in both declaration orders",
+      "Directed/end, overriding ActionUsage, applied metadata, FeatureValue/CrossSubsetting, missing typing target and identity collision reject without mutation",
+      "All fourteen composite-Step expression owner cases now agree with cached Pilot observations"
+    ],
+    "oracle_reproduction": "Pinned build-time probe --check reproduces resolved trees, mappings, dispatch and observations exactly.",
+    "oracle_fixture_correction": "The initial typed implicit-default provider leaked into subsequent stored-query fixtures. Each stored fixture now explicitly resets to untyped endpoint lookup. Regenerated cache separates stored-query and incomplete-default environments; no production rule was changed to match the contaminated observation.",
+    "diagnostic_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/step-strategy-typing-diagnostic.log",
+    "plan_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/step-strategy-plan-tests.log",
+      "sha256": "9e5e8cfb12c50dadfa201210cbc553e75300473f751560fc00d2c6a41f7193db",
+      "passed": 14
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "normative_reference": {
+    "release_commit": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "file": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      198,
+      220,
+      292,
+      344,
+      354
+    ],
+    "scope": "Feature typing closure/redundancy and Step ownership/composition specialization requirements; library sections provide actual qualified endpoints."
+  },
+  "disagreements": [
+    {
+      "status": "open normative naming inconsistency",
+      "constraint_and_semantics_pages": [
+        220,
+        292
+      ],
+      "pdf_constraint_names": [
+        "Objects::Object::ownedPerformance",
+        "Performances::Performance::subperformance",
+        "Performances::Performance::enclosedPerformance"
+      ],
+      "pdf_library_definition_pages": [
+        344,
+        354
+      ],
+      "pinned_library_and_pilot_names": [
+        "Objects::Object::ownedPerformances",
+        "Performances::Performance::subperformances",
+        "Performances::Performance::enclosedPerformances"
+      ],
+      "native_behavior": "Uses actual pinned library declarations, agreeing with the PDF library-definition sections and Pilot. Does not invent singular aliases. Constraint-name inconsistency remains recorded; no full normative qualification claim."
+    },
+    {
+      "status": "open normative/Pilot type reduction disagreement",
+      "scope": "Mutually specializing types",
+      "normative_behavior": "deriveFeatureType rejects all redundant candidates against the original union.",
+      "pilot_behavior": "Existing shared reducer mutates the candidate list in reverse order.",
+      "native_behavior": "Existing Pilot-compatible shared implementation preserved. This batch verifies acyclic/cyclic feature traversal and diamond deduplication, not resolution of this normative disagreement."
+    }
+  ],
+  "feature_status": [
+    {
+      "feature": "exact Step conditional defaults",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "56 bounded stage controls plus source/replay controls"
+    },
+    {
+      "feature": "exact Step inherited Feature typing",
+      "imported": true,
+      "native_consumer": true,
+      "verified": "6 stored/implicit-default controls plus 14 expression-context controls"
+    },
+    {
+      "feature": "other adapters and full Step lifecycle",
+      "imported": "resolved dispatch distinguishes overrides",
+      "native_consumer": "partial stages",
+      "verified": false
+    }
+  ],
+  "remaining_required_behavior": [
+    "Directed/end/positional Step semantics and parameters/results",
+    "ActionUsage/Expression/PayloadFeature and other overriding algorithms",
+    "Deferred typing/contribution scheduling beyond the admitted shared query",
+    "Applied metadata-derived bases, valuation/chaining/crossing composition and unrelated implicit contributions",
+    "Full Step transformation, semantic validation, complete source census and independent whole-model comparison",
+    "Comparable timing assessment and unresolved normative disagreements"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "ordinary_feature_bindings": "50/79",
+    "new_native_step_default_stage_controls": 56,
+    "new_native_step_typing_controls": 6,
+    "newly_matching_expression_context_controls": 14,
+    "pilot_observation_inventory_added": 62,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "bounded_contract_obligations": "7/9",
+    "overall_percent": null
+  },
+  "resource_assessment": {
+    "status": "blocked",
+    "stage": "construction_or_linking",
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: type/inherited scope service is required: no document generalization provider for Behavior\", kind: Syntax, span: None, subjects: [] }",
+    "semantic_qualification": "not_assessed",
+    "parsed_resources": 16,
+    "source_bytes": 121245,
+    "result_path": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-step-strategy-native-results.jsonl",
+    "result_sha256": "471a975a44380a6152bb56678329e9d3526027845b898679d9214cf70eaeed95",
+    "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-step-strategy-native-progress.log",
+    "progress_sha256": "eb92205f3b40f2c5387de8d0730791284073198c748975b721a7eb92deec2077",
+    "binary_sha256": "dc6b317d524a903a12bf953bad27997bf502e7128dbe2ddb5a0ee33ad2466e7d",
+    "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json",
+    "input_manifest_sha256": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "first_blocker_only": true,
+    "profile": "Optimized release qualification assessment, not a comparable Pilot benchmark",
+    "boundary": "Clears prior Step generalization provider blocker. Behavior is the next unresolved provider. No linked document, semantic qualification or promotion."
+  },
+  "next_fixed_batch": {
+    "scope": "Resolved plain-Type default/general-type strategy expansion for Behavior and all non-Feature concrete bindings sharing that algorithm. Use resolved dispatch; do not infer support from Ecore ancestry alone.",
+    "contract": [
+      "Export default selection, addDefaultGeneralType/getGeneralTypes/inherited-membership dispatch and pinned name mappings for every candidate binding",
+      "Separate Behavior/Function/Predicate shared query stages from Function.doTransform result-connector behavior and all custom definition/association/metaclass providers",
+      "Reuse canonical plain-Type generalization, metadata-empty assessment and deferred library resolution; preserve conjugation, unknown implicit categories and adapter overrides",
+      "Observe each applicable binding across default-only, explicit-general, duplicate-default, self-default, inherited visibility and missing/deferred contexts in one cached upstream batch",
+      "Verify native source, public inheritance, atomic physical contributions, replay and persistence for supported query stages; no implied-completion flags",
+      "One regression and real-resource assessment only after the connected strategy is implemented"
+    ],
+    "completion_boundary": "Evidence-backed support for the resolved common query strategy across its applicable bindings; full behavior transformation and validation remain separate obligations."
+  }
+}

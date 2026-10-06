@@ -1,0 +1,874 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "fixture_sha256": {
+    "assert-negative.sysml": "d97a087118d835b6bf868abf30cc8c6a39e89209364a3c08924da624cfa7ef25",
+    "assert-positive.sysml": "e451c77560809b4c3b3aa6c37d82916db05e4e71cf25f2c645acaad093a565f8",
+    "exhibit-negative.sysml": "a11c475a0678e97587f5ab6965bd853fffee28fadb517e05743dfd3139e4b110",
+    "exhibit-positive.sysml": "3c9644ea79cc9a689041e006a3ccab8071d434c944ea0d5129c9c34a9c827639",
+    "perform-negative.sysml": "03ca976d8bb8f97a1704237ac3c6233f961b3cf578bbc39fe986fd9ec4f0b17a",
+    "perform-positive.sysml": "b0f608b22b27a8e70d19e32fd9f52436aa47a544bd924f149b75d842cf9c78a0",
+    "satisfy-negative.sysml": "ed3d83f646f0ec8bb20a7f2e5564e8848788ef402bafb98b18b1de4eb29b9d90",
+    "satisfy-positive.sysml": "9928381f663498285e14714a6de80031e712d6a612bd66714284d6b7dfde8980"
+  },
+  "source_set_spec_sha256": "0efe5a672a7c7340726d9c280b262a817562d95a30e7f0c5e796f7c253cb5ed0",
+  "timings_sha256": "bc61116d8aae4a3b7179826b19a3da2d49e6dd926ab3da40456313303945c2be",
+  "validation": [
+    {
+      "relative_path": "perform-positive.sysml",
+      "status": "ok",
+      "validation_ms": 539.9342,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "perform-negative.sysml",
+      "status": "error",
+      "validation_ms": 95.1334,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateActionUsageType_",
+          "message": "An action must be typed by action definitions.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "validatePerformActionUsageReference",
+          "message": "Must reference an action.",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'done' from Action, Part",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'start' from Action, Part",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'self' from Action, Part",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "exhibit-positive.sysml",
+      "status": "ok",
+      "validation_ms": 61.7258,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "exhibit-negative.sysml",
+      "status": "error",
+      "validation_ms": 12.0369,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateExhibitStateUsageReference",
+          "message": "Must reference a state.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "assert-positive.sysml",
+      "status": "ok",
+      "validation_ms": 92.0398,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "assert-negative.sysml",
+      "status": "error",
+      "validation_ms": 14.5128,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateAssertConstraintUsageReference",
+          "message": "Must reference a constraint.",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "Invalid Constraint Usage - invalid type",
+          "message": "A constraint must be typed by one constraint definition.",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of inherited member name 'self' from Action, ConstraintCheck",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "satisfy-positive.sysml",
+      "status": "ok",
+      "validation_ms": 124.3547,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "satisfy-negative.sysml",
+      "status": "error",
+      "validation_ms": 46.7621,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "validateSatisfyRequirementUsageReference",
+          "message": "Must reference a requirement.",
+          "line": 1
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Checks explicit direct reference targets; computed basic-feature chains and diagnostic multiplicity/location remain unqualified."
+  ],
+  "prefixes_and_flow": {
+    "fixture_sha256": "4f7fa8e4a2c4e805e8f3f3bf946be4809e8e241f260ed0426bcb40f12090e66c",
+    "export_sha256": "ff4f3037bf5e43f0c82f719ab6a65654d16ae2e45b712417b641d8ca6e67a75e",
+    "timings_sha256": "ec7812f7a63d2a882f0b66854c2e27d5a133700b2fcde0a9bc797c90815d84f6",
+    "validation": [
+      {
+        "relative_path": "prefixes-and-flow.sysml",
+        "status": "ok",
+        "validation_ms": 5344.3526,
+        "diagnostics": []
+      }
+    ],
+    "observations": [
+      {
+        "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::13::AssertConstraintUsage",
+        "kind": "AssertConstraintUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 13,
+          "end_line": 13
+        },
+        "documentation": [],
+        "properties": {
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "Expression",
+            "BooleanExpression",
+            "ConstraintUsage",
+            "Invariant"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::13::ReferenceSubsetting",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#14"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "Performances::BooleanEvaluation::result"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "function": {
+              "targets": [
+                "Constraints::ConstraintCheck"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "result": {
+              "targets": [
+                "Performances::BooleanEvaluation::result"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "28cf2a2b-8074-4755-aa5b-93e189d53a4c",
+          "is_implied_included": true,
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false,
+          "is_model_level_evaluable": false,
+          "is_negated": true
+        }
+      },
+      {
+        "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::15::SatisfyRequirementUsage",
+        "kind": "SatisfyRequirementUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 15,
+          "end_line": 15
+        },
+        "documentation": [],
+        "properties": {
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "Expression",
+            "BooleanExpression",
+            "ConstraintUsage",
+            "RequirementUsage",
+            "Invariant",
+            "AssertConstraintUsage"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::15::ReferenceSubsetting",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::15::SubjectMembership",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#23"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::15::subj",
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "function": {
+              "targets": [
+                "Requirements::RequirementCheck"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "result": {
+              "targets": [
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "4c1303da-b446-43a4-aa81-1980f0f4e7a3",
+          "is_implied_included": true,
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false,
+          "is_model_level_evaluable": false,
+          "text": [],
+          "is_negated": true
+        }
+      },
+      {
+        "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::16::SatisfyRequirementUsage",
+        "kind": "SatisfyRequirementUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 16,
+          "end_line": 16
+        },
+        "documentation": [],
+        "properties": {
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "Expression",
+            "BooleanExpression",
+            "ConstraintUsage",
+            "RequirementUsage",
+            "Invariant",
+            "AssertConstraintUsage"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::16::ReferenceSubsetting",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::16::SubjectMembership",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#28"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::16::subj",
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "function": {
+              "targets": [
+                "Requirements::RequirementCheck"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "result": {
+              "targets": [
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "e817d633-7b4d-4df3-9233-23c16f3d8c56",
+          "is_implied_included": true,
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false,
+          "is_model_level_evaluable": false,
+          "text": [],
+          "is_negated": false
+        }
+      },
+      {
+        "qualified_name": "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::17::SatisfyRequirementUsage",
+        "kind": "SatisfyRequirementUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 17,
+          "end_line": 17
+        },
+        "documentation": [],
+        "properties": {
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "Expression",
+            "BooleanExpression",
+            "ConstraintUsage",
+            "RequirementUsage",
+            "Invariant",
+            "AssertConstraintUsage"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::17::ReferenceSubsetting",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::17::SubjectMembership",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#33"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::17::subj",
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "function": {
+              "targets": [
+                "Requirements::RequirementCheck"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "result": {
+              "targets": [
+                "Requirements::RequirementConstraintCheck::result"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "26a9c13c-3f3d-4624-9f9b-e724b3051c5e",
+          "is_implied_included": true,
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false,
+          "is_model_level_evaluable": false,
+          "text": [],
+          "is_negated": true
+        }
+      },
+      {
+        "qualified_name": "ReferencePrefixes::Targets::work::handoff",
+        "kind": "SuccessionFlowUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 9,
+          "end_line": 9
+        },
+        "documentation": [],
+        "properties": {
+          "declared_name": "handoff",
+          "name": "handoff",
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "Relationship",
+            "Connector",
+            "ConnectorAsUsage",
+            "OccurrenceUsage",
+            "Step",
+            "ActionUsage",
+            "Flow",
+            "FlowUsage",
+            "Succession",
+            "SuccessionFlow"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::9::EndFeatureMembership",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::9::EndFeatureMembership#2",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#10",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#11",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::TypeFeaturing#16"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "owned_related_element": {
+              "targets": [],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "source": {
+              "targets": [
+                "ReferencePrefixes::Targets::work::sender"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "target": {
+              "targets": [
+                "ReferencePrefixes::Targets::work::receiver"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "target_feature": {
+              "targets": [
+                "ReferencePrefixes::Targets::work::receiver"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "Flows::Message::sourceEvent",
+                "Flows::Message::targetEvent"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "932e9fbb-67d7-406d-b360-400ec4bd03f7",
+          "is_implied_included": true,
+          "qualified_name": "ReferencePrefixes::Targets::work::handoff",
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": true,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": false,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_implied": false,
+          "is_individual": false
+        }
+      },
+      {
+        "qualified_name": "ReferencePrefixes::handoff",
+        "kind": "PerformActionUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 18,
+          "end_line": 18
+        },
+        "documentation": [],
+        "properties": {
+          "name": "handoff",
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "ActionUsage",
+            "EventOccurrenceUsage"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::18::ReferenceSubsetting"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "Flows::Message::sourceEvent",
+                "Flows::Message::targetEvent"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "95948eb4-6b88-4316-84a5-05962642c04e",
+          "is_implied_included": true,
+          "qualified_name": "ReferencePrefixes::handoff",
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false
+        }
+      },
+      {
+        "qualified_name": "ReferencePrefixes::inline",
+        "kind": "AssertConstraintUsage",
+        "library_group": "Input Model",
+        "source": {
+          "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml",
+          "start_line": 14,
+          "end_line": 14
+        },
+        "documentation": [],
+        "properties": {
+          "declared_name": "inline",
+          "name": "inline",
+          "is_library_element": false,
+          "metatype_specialization_chain": [
+            "Element",
+            "Namespace",
+            "Type",
+            "Feature",
+            "Usage",
+            "OccurrenceUsage",
+            "Step",
+            "Expression",
+            "BooleanExpression",
+            "ConstraintUsage",
+            "Invariant"
+          ],
+          "is_abstract": false,
+          "is_derived": false,
+          "is_end": false,
+          "is_ordered": false,
+          "is_unique": true,
+          "is_variable": false,
+          "reference_sequences": {
+            "owned_relationship": {
+              "targets": [
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::14::ResultExpressionMembership",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::OwningMembership#2",
+                "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml::?::Subsetting#18"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": false
+            },
+            "multiplicity": {
+              "targets": [],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "chaining_feature": {
+              "targets": [],
+              "ordered": true,
+              "unique": false,
+              "many": true,
+              "derived": true
+            },
+            "parameter": {
+              "targets": [
+                "Performances::BooleanEvaluation::result"
+              ],
+              "ordered": true,
+              "unique": true,
+              "many": true,
+              "derived": true
+            },
+            "function": {
+              "targets": [
+                "Constraints::ConstraintCheck"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            },
+            "result": {
+              "targets": [
+                "Performances::BooleanEvaluation::result"
+              ],
+              "ordered": false,
+              "unique": true,
+              "many": false,
+              "derived": true
+            }
+          },
+          "alias_ids": [],
+          "element_id": "76df2909-b05a-4b18-ae58-adc445c07237",
+          "is_implied_included": true,
+          "qualified_name": "ReferencePrefixes::inline",
+          "is_conjugated": false,
+          "is_sufficient": false,
+          "is_composite": false,
+          "is_constant": false,
+          "is_portion": false,
+          "is_reference": true,
+          "is_variation": false,
+          "may_time_vary": false,
+          "is_individual": false,
+          "is_model_level_evaluable": false,
+          "is_negated": true
+        }
+      }
+    ]
+  }
+}

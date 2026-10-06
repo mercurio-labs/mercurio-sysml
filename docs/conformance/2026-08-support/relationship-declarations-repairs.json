@@ -1,0 +1,834 @@
+{
+  "repairs": [
+    {
+      "source": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+      "line": 5,
+      "name": "Super",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Subclassification",
+      "pilot_kind": "Subclassification",
+      "native_id": "relationship.Classifiers.Super",
+      "pilot_id": "Classifiers::Super",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Classifiers"
+          ],
+          "pilot": [
+            "Classifiers"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "type.Classifiers.A"
+          ],
+          "pilot": [
+            "Classifiers::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Classifiers.B"
+          ],
+          "pilot": [
+            "Classifiers::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "subclassifier",
+          "native": [
+            "type.Classifiers.A"
+          ],
+          "pilot": [
+            "Classifiers::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "type.Classifiers.A"
+          ],
+          "pilot": [
+            "Classifiers::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "superclassifier",
+          "native": [
+            "type.Classifiers.B"
+          ],
+          "pilot": [
+            "Classifiers::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "type.Classifiers.B"
+          ],
+          "pilot": [
+            "Classifiers::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+      "line": 11,
+      "name": "Use",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Dependency",
+      "pilot_kind": "Dependency",
+      "native_id": "relationship.Dependencies.Use",
+      "pilot_id": "Dependencies::Use",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Dependencies"
+          ],
+          "pilot": [
+            "Dependencies"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "pkg.Dependencies.System.Application Layer"
+          ],
+          "pilot": [
+            "Dependencies::System::'Application Layer'"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "pkg.Dependencies.System.Service Layer"
+          ],
+          "pilot": [
+            "Dependencies::System::'Service Layer'"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "client",
+          "native": [
+            "pkg.Dependencies.System.Application Layer"
+          ],
+          "pilot": [
+            "Dependencies::System::'Application Layer'"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "supplier",
+          "native": [
+            "pkg.Dependencies.System.Service Layer"
+          ],
+          "pilot": [
+            "Dependencies::System::'Service Layer'"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 16,
+      "name": "F",
+      "native_before_kind": "Feature",
+      "native_after_kind": "TypeFeaturing",
+      "pilot_kind": "TypeFeaturing",
+      "native_id": "relationship.Features.F",
+      "pilot_id": "Features::F",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Features"
+          ],
+          "pilot": [
+            "Features"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "feature.Features.y"
+          ],
+          "pilot": [
+            "Features::y"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Features.C"
+          ],
+          "pilot": [
+            "Features::C"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "feature_of_type",
+          "native": [
+            "feature.Features.y"
+          ],
+          "pilot": [
+            "Features::y"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "featuring_type",
+          "native": [
+            "type.Features.C"
+          ],
+          "pilot": [
+            "Features::C"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 68,
+      "name": "Redef",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Redefinition",
+      "pilot_kind": "Redefinition",
+      "native_id": "relationship.Features.Redef",
+      "pilot_id": "Features::Redef",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Features"
+          ],
+          "pilot": [
+            "Features"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "feature.Features.LegalRecord.guardian"
+          ],
+          "pilot": [
+            "Features::LegalRecord::guardian"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "redefining_feature",
+          "native": [
+            "feature.Features.LegalRecord.guardian"
+          ],
+          "pilot": [
+            "Features::LegalRecord::guardian"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "subsetting_feature",
+          "native": [
+            "feature.Features.LegalRecord.guardian"
+          ],
+          "pilot": [
+            "Features::LegalRecord::guardian"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "feature.Features.LegalRecord.guardian"
+          ],
+          "pilot": [
+            "Features::LegalRecord::guardian"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "redefined_feature",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "subsetted_feature",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 45,
+      "name": "Sub",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Subsetting",
+      "pilot_kind": "Subsetting",
+      "native_id": "relationship.Features.Sub",
+      "pilot_id": "Features::Sub",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Features"
+          ],
+          "pilot": [
+            "Features"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "feature.Features.person"
+          ],
+          "pilot": [
+            "Features::person"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "subsetting_feature",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "feature.Features.parent"
+          ],
+          "pilot": [
+            "Features::parent"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "subsetted_feature",
+          "native": [
+            "feature.Features.person"
+          ],
+          "pilot": [
+            "Features::person"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "feature.Features.person"
+          ],
+          "pilot": [
+            "Features::person"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 42,
+      "name": "t1",
+      "native_before_kind": "Feature",
+      "native_after_kind": "FeatureTyping",
+      "pilot_kind": "FeatureTyping",
+      "native_id": "relationship.Features.t1",
+      "pilot_id": "Features::t1",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Features"
+          ],
+          "pilot": [
+            "Features"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "feature.Features.f"
+          ],
+          "pilot": [
+            "Features::f"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Features.B"
+          ],
+          "pilot": [
+            "Features::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "typed_feature",
+          "native": [
+            "feature.Features.f"
+          ],
+          "pilot": [
+            "Features::f"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "feature.Features.f"
+          ],
+          "pilot": [
+            "Features::f"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "type",
+          "native": [
+            "type.Features.B"
+          ],
+          "pilot": [
+            "Features::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "type.Features.B"
+          ],
+          "pilot": [
+            "Features::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 43,
+      "name": "t2",
+      "native_before_kind": "Feature",
+      "native_after_kind": "FeatureTyping",
+      "pilot_kind": "FeatureTyping",
+      "native_id": "relationship.Features.t2",
+      "pilot_id": "Features::t2",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Features"
+          ],
+          "pilot": [
+            "Features"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "feature.Features.g"
+          ],
+          "pilot": [
+            "Features::g"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Features.A"
+          ],
+          "pilot": [
+            "Features::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "typed_feature",
+          "native": [
+            "feature.Features.g"
+          ],
+          "pilot": [
+            "Features::g"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "feature.Features.g"
+          ],
+          "pilot": [
+            "Features::g"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "type",
+          "native": [
+            "type.Features.A"
+          ],
+          "pilot": [
+            "Features::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "type.Features.A"
+          ],
+          "pilot": [
+            "Features::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Inverses.kerml",
+      "line": 12,
+      "name": "Invert",
+      "native_before_kind": "Feature",
+      "native_after_kind": "FeatureInverting",
+      "pilot_kind": "FeatureInverting",
+      "native_id": "relationship.Inverses.Invert",
+      "pilot_id": "Inverses::Invert",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Inverses"
+          ],
+          "pilot": [
+            "Inverses"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "relationship.Inverses.Invert.source.0.chain"
+          ],
+          "pilot": [
+            "InputModel::kerml/src/examples/Simple Tests/Inverses.kerml::12::Feature"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "feature.Inverses.A.h"
+          ],
+          "pilot": [
+            "Inverses::A::h"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "feature_inverted",
+          "native": [
+            "relationship.Inverses.Invert.source.0.chain"
+          ],
+          "pilot": [
+            "InputModel::kerml/src/examples/Simple Tests/Inverses.kerml::12::Feature"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "inverting_feature",
+          "native": [
+            "feature.Inverses.A.h"
+          ],
+          "pilot": [
+            "Inverses::A::h"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": [
+        {
+          "native_id": "relationship.Inverses.Invert.source.0.chain",
+          "pilot_id": "InputModel::kerml/src/examples/Simple Tests/Inverses.kerml::12::Feature",
+          "ordered_steps": [
+            "Inverses::B::g",
+            "Inverses::A::f"
+          ],
+          "feature_chaining_objects": 2,
+          "type": [
+            "Inverses::B"
+          ],
+          "ownership_and_links_verified": true
+        }
+      ]
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 17,
+      "name": "Gen",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Specialization",
+      "pilot_kind": "Specialization",
+      "native_id": "relationship.Types.Gen",
+      "pilot_id": "Types::Gen",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Types"
+          ],
+          "pilot": [
+            "Types"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "type.Types.A"
+          ],
+          "pilot": [
+            "Types::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Types.B"
+          ],
+          "pilot": [
+            "Types::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "specific",
+          "native": [
+            "type.Types.A"
+          ],
+          "pilot": [
+            "Types::A"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "general",
+          "native": [
+            "type.Types.B"
+          ],
+          "pilot": [
+            "Types::B"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 25,
+      "name": "c1",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Conjugation",
+      "pilot_kind": "Conjugation",
+      "native_id": "relationship.Types.c1",
+      "pilot_id": "Types::c1",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Types"
+          ],
+          "pilot": [
+            "Types"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "type.Types.Conjugate1"
+          ],
+          "pilot": [
+            "Types::Conjugate1"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Types.Original"
+          ],
+          "pilot": [
+            "Types::Original"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "conjugated_type",
+          "native": [
+            "type.Types.Conjugate1"
+          ],
+          "pilot": [
+            "Types::Conjugate1"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "original_type",
+          "native": [
+            "type.Types.Original"
+          ],
+          "pilot": [
+            "Types::Original"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 26,
+      "name": "c2",
+      "native_before_kind": "Feature",
+      "native_after_kind": "Conjugation",
+      "pilot_kind": "Conjugation",
+      "native_id": "relationship.Types.c2",
+      "pilot_id": "Types::c2",
+      "references": [
+        {
+          "field": "owner",
+          "native": [
+            "pkg.Types"
+          ],
+          "pilot": [
+            "Types"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "source",
+          "native": [
+            "type.Types.Conjugate2"
+          ],
+          "pilot": [
+            "Types::Conjugate2"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "target",
+          "native": [
+            "type.Types.Original"
+          ],
+          "pilot": [
+            "Types::Original"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "conjugated_type",
+          "native": [
+            "type.Types.Conjugate2"
+          ],
+          "pilot": [
+            "Types::Conjugate2"
+          ],
+          "equal_after_observed_identity_mapping": true
+        },
+        {
+          "field": "original_type",
+          "native": [
+            "type.Types.Original"
+          ],
+          "pilot": [
+            "Types::Original"
+          ],
+          "equal_after_observed_identity_mapping": true
+        }
+      ],
+      "inline_chains": []
+    }
+  ],
+  "repair_count": 11,
+  "checked_reference_fields": 67,
+  "scope": "Exactly the eleven original named relationship discrepancies; unique observed named pairs, direct reference fields with retained ordered reference sequences where available (not the legacy set-normalized Pilot attribute lists). Other raw graph differences remain open."
+}

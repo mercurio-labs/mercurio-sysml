@@ -69,6 +69,17 @@ pub struct LoweringRuleSeed {
     pub source: BTreeMap<String, Value>,
     #[serde(default)]
     pub rules: Vec<LoweringRule>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub usage_context_overrides: Vec<UsageContextOverride>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct UsageContextOverride {
+    pub keyword: String,
+    pub owner: String,
+    pub construct: String,
+    pub reason: String,
+    pub pilot_rule: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -151,8 +162,21 @@ impl LoweringRuleSeed {
         static SYSML_LOWERING_RULES: OnceLock<Result<LoweringRuleSeed, String>> = OnceLock::new();
 
         match SYSML_LOWERING_RULES.get_or_init(|| {
-            serde_json::from_str(load_sysml_lowering_rules_seed())
-                .map_err(|err| format!("failed to parse lowering rule seed: {err}"))
+            let mut seed: Self = serde_json::from_str(load_sysml_lowering_rules_seed())
+                .map_err(|err| format!("failed to parse lowering rule seed: {err}"))?;
+            let overlay: Self = serde_json::from_str(include_str!(
+                "../../../resources/metamodels/sysml-2.0-pilot-2026-08/mappings/control-lowering.overlay.json"
+            )).map_err(|err| format!("failed to parse control lowering overlay: {err}"))?;
+            seed.rules.retain(|rule| !overlay.rules.iter().any(|replacement|
+                replacement.ast.node == rule.ast.node && replacement.ast.keyword == rule.ast.keyword));
+            seed.rules.extend(overlay.rules);
+            seed.usage_context_overrides.extend(overlay.usage_context_overrides);
+            let kernel: Self = serde_json::from_str(include_str!("../../../resources/kernel/kerml-lowering.overlay.json"))
+                .map_err(|err| format!("failed to parse kernel lowering overlay: {err}"))?;
+            seed.rules.retain(|rule| !kernel.rules.iter().any(|replacement|
+                replacement.ast.node == rule.ast.node && replacement.ast.keyword == rule.ast.keyword));
+            seed.rules.extend(kernel.rules);
+            Ok(seed)
         }) {
             Ok(rules) => Ok(rules),
             Err(message) => Err(Diagnostic::new(message.clone(), None)),

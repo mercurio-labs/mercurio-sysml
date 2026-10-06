@@ -1,0 +1,92 @@
+{
+  "schema": "dev.mercurio.parameter-defaults-evidence.v1",
+  "scope": "Fixed directed exact Feature parameters under Behavior/Step-compatible owners; selectors and shared positional default/generalization integration. Not complete parameter semantics or actual-library qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "295b9cd0b1d958ffb0c87ed10532e5be11996aba9f31558da36aec320117ef84",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/mixed-parameter-pilot-controls.json": "735abedb2e178c6bb97ae7bb5c8e43aab7c4a65de8951909cb04bc2bc7ccb9ce",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/parameter_collections_generated.rs": "0dbbe45a2aa142a26d990bbbc9d66ab6beb84641ab254a2caff2f02b687a2bb2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_defaults_generated.rs": "26074f3979325af256fa818da622e43f5215b3197221e3c4578b9c8afe3c3b86",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/result-construction.extract.json": "91c9d0e05d712e5f033527244219e7627ff4726ad842212e4bdeb22fd5fcec2d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/result_construction_generated.rs": "e191c8f8fbd173e940e95a49feadabe49de42eea7b5eeb600ea9b9f8707e6426",
+    "tools/run_parameter_defaults_probe.py": "dcd01bba4ca9d135783361ce8b7dce1e5162dd90eab0da4e4cca46290c68db74",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotParameterDefaultsProbe.java": "e679aef694101f22044f4a95cc925d3e36a4e679b1b84ff94ee40ba5db2aba40",
+    "docs/conformance/2026-08-support/parameter-defaults-pilot-controls.json": "c3fa4cbc80b4b1656528b1b6689326b14c850ff84bc57aebb825145c60ef51c0",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-native-tests.log": "12ba7179dcc621b3b07c29b52094e6dd6a05bee65a4446b1011d745478eeec47",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-focused-tests.log": "a2e210f79b9f28a9fb7def1ba21df92d4b10261defaf05db895717fe91e0638c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-pilot-export.log": "67acfe4c8243893a09aaf0fc59cb62327a4b1683bfe2a6f8218bddd6b51fbbb4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-pilot-check.log": "67acfe4c8243893a09aaf0fc59cb62327a4b1683bfe2a6f8218bddd6b51fbbb4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-audit-tests.log": "2b6963aa3a56228caca144a8788f1a166f7b4df499e265d4ba017559fecbfc97",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-certificate-tests.log": "d4ad8e7a264bca0df1a15eb303aa0e1f216ee24829654f5e97d8098ce899b6d8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/parameter-defaults-plan-tests.log": "a2c09803eea41c7e529f62d412682f4ef2ab6d23787f0e9acbd634f9b934f110"
+  },
+  "imported": {
+    "owner_predicate": "Existing resolved parameter-collection predicate and imported Ecore ancestry establish owning Behavior/Step and directed Feature.",
+    "default_selector": "Existing generated ordinary Feature selector; parameter flags select the same resolved branch. No new per-owner hardcoded default names.",
+    "positional_strategy": "Existing thirty-binding resolved parameter collection and redefinition algorithms.",
+    "canonical_model": "Imported reference contracts and ownership attach FeatureValue/Expression, FeatureMembership/ParameterMembership, Specialization and Redefinition."
+  },
+  "native_consumption": {
+    "handwritten_context_policy": "Admit exact Feature, a valid direction, canonical parameter-compatible containment, and fixed non-end/nonvariable/noncomposite/nonportion flags. Return parameters use their existing separately assessed provider.",
+    "shared_queries": "Read-only default/general-type queries consume the generated predicate/selector plus existing ordered positional redefinitions. Preserve explicit relationships and assess generated implied redefinitions without completion flags.",
+    "typed_dependencies": "Owner additional-member construction and registered pending owner generalization fields propagate before entering the existing complete-snapshot positional API. No unresolved field is silently replaced by an empty result.",
+    "physical_contributions": "Existing shared implicit reduction and atomic canonical specialization insertion preserve only necessary defaults/redefinitions; inherited Base::things removes a redundant direct default. Persistence and unchanged replay reuse the same consumers.",
+    "valuations": "Preserve one canonical Expression per admitted nonimplied FeatureValue. Directed FeatureAdapter inputs do not acquire bound-value Subsetting. Expression evaluation/transformation remains separate.",
+    "runtime_java": false
+  },
+  "verification": {
+    "native_tests": 241,
+    "new_native_tests": 3,
+    "pilot_selector_controls": 540,
+    "matrix": "6 owner EClasses x 2 membership EClasses x 3 directions x 5 stored typing categories x 3 valuation states",
+    "cached_pilot_reproduces": true,
+    "pilot_provenance": {
+      "driver_sha256": "dcd01bba4ca9d135783361ce8b7dce1e5162dd90eab0da4e4cca46290c68db74",
+      "helper_sha256": "e679aef694101f22044f4a95cc925d3e36a4e679b1b84ff94ee40ba5db2aba40",
+      "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+      "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+      "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+      "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "source_sha256": {
+        "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+        "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+        "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/FeatureUtil.java": "332080c8e258a9e27feacb71d963a7d9d51425f9802e42c9e0ade2d18d7f7780",
+        "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+      }
+    },
+    "native_selector_control": "All 540 comparisons pass on reversed canonical storage and serialized reload; query leaves storage unchanged.",
+    "native_source_control": "Pinned grammar parses Function specialization with a valued directed parameter; public queries compute the positional Redefinition and Base default. Shared physical reduction inserts one Redefinition; original/reversed storage, serialized reload and zero-insertion replay match. Minimal native source fixture declares test library dependencies; it is not an actual standard-library comparison.",
+    "negative_controls": "Missing added members yields typed AdditionalMembers; pending owner general yields typed ReadField. Detached/package-owned, variable/composite/end, invalid direction, crossing and malformed valuation inputs reject.",
+    "real_library_stage": "Separate frozen 16-resource trace establishes automatic additional-member scheduling before this correction. New parameter strategy has not yet been reassessed in that complete source environment.",
+    "audit_tests": 11,
+    "certificate_tests": 33,
+    "plan_tests": 14
+  },
+  "remaining_required": [
+    "Complete actual sixteen-resource candidate linking and compare eight cached literal/null result observations",
+    "Other parameter contexts: return, variable/composite/portion/end, non-Behavior/Step ownership and unsupported adapter overrides retain separate boundaries",
+    "Nonconstant expression evaluation, featuring, full model validation and normative parameter/result disagreements",
+    "All pinned sample semantics and comparable final timing assessment"
+  ],
+  "qualification": {
+    "matching_whole_models": 155,
+    "ordinary_feature_bindings": [
+      50,
+      79
+    ],
+    "bounded_obligations": [
+      7,
+      9
+    ],
+    "families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "candidate": "unpromoted"
+  }
+}

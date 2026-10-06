@@ -1,0 +1,43 @@
+{
+  "source_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "source_tag": "2026-08",
+  "documents": [
+    {
+      "source_path": "doc/1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "clauses": [
+        {
+          "operation": "Element.effectiveName / effectiveShortName",
+          "pdf_page": 138,
+          "printed_page": 112,
+          "requirement": "The default effective name and short name are the corresponding declared fields."
+        },
+        {
+          "operation": "Feature.effectiveName / effectiveShortName",
+          "pdf_page": 189,
+          "printed_page": 163,
+          "requirement": "If either declared field is set, return the corresponding declared field; otherwise follow namingFeature. The unnamed Feature dependency remains unimplemented."
+        }
+      ]
+    },
+    {
+      "source_path": "doc/2a-OMG_Systems_Modeling_Language.pdf",
+      "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+      "clauses": [
+        {
+          "section": "8.3.12.2 ConjugatedPortDefinition",
+          "pdf_page": 325,
+          "printed_page": 293,
+          "requirement": "Use the original port name prefixed with ~; return no name when the original name is absent. This overrides the declared long name."
+        }
+      ]
+    }
+  ],
+  "implementation": "Actual upstream-selected invocation dispatch chooses named handwritten Rust algorithms; imported Ecore contracts validate containment and original-port reference reads.",
+  "verified_scope": "Default declared names, explicit Feature names, ordered explicit redefinition chains and conjugated names on explicit original-port graphs. Twenty-seven independent Pilot observations plus invalid graph regressions.",
+  "remaining": [
+    "Computed Feature redefinitions when no resolved explicit naming chain is present",
+    "Implicit conjugated model synthesis and lazy original-port linking",
+    "All other operation algorithms and full-language qualification"
+  ]
+}

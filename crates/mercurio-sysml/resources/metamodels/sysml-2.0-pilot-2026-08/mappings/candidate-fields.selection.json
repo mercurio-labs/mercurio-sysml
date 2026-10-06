@@ -1,0 +1,168 @@
+{
+  "fields": [
+    "is_composite",
+    "is_constant",
+    "is_reference",
+    "is_portion",
+    "portion_kind",
+    "is_variation",
+    "may_time_vary",
+    "is_standard",
+    "is_individual",
+    "is_implied_included",
+    "is_parallel",
+    "is_sufficient",
+    "is_default",
+    "feature_with_value",
+    "owned_relationship",
+    "owning_related_element",
+    "related_element",
+    "owned_reference_subsetting",
+    "subsetting_feature",
+    "subsetted_feature",
+    "referenced_feature",
+    "is_negated",
+    "owning_feature_membership",
+    "owning_membership",
+    "kind",
+    "member_element",
+    "membership_owning_namespace",
+    "owned_related_element",
+    "visibility",
+    "owned_membership",
+    "member_name",
+    "owned_member_name",
+    "language",
+    "body",
+    "represented_element",
+    "textual_representation",
+    "result_expression",
+    "client",
+    "conjugated_type",
+    "feature_inverted",
+    "feature_of_type",
+    "function",
+    "general",
+    "inverting_feature",
+    "member_short_name",
+    "original_type",
+    "owned_member_short_name",
+    "owned_result_expression",
+    "owning_relationship",
+    "parameter",
+    "redefined_feature",
+    "redefining_feature",
+    "specific",
+    "subclassifier",
+    "superclassifier",
+    "supplier",
+    "typed_feature",
+    "is_import_all",
+    "is_recursive",
+    "documented_element",
+    "documentation",
+    "annotation",
+    "annotating_element",
+    "owning_annotating_element",
+    "owned_annotating_element",
+    "owning_annotated_element",
+    "owned_annotation",
+    "owning_annotating_relationship",
+    "owned_annotating_relationship",
+    "owned_member_element",
+    "import_owning_namespace",
+    "imported_namespace",
+    "owned_import",
+    "membership"
+  ],
+  "extensions": [
+    {
+      "field": "is_library",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-compatibility",
+        "reason": "Retain the existing lowering flag alongside canonical LibraryPackage identity."
+      }
+    },
+    {
+      "field": "annotated_element",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::AnnotatingElement::annotatedElement",
+          "KerML::Annotation::annotatedElement",
+          "SysML::AnnotatingElement::annotatedElement",
+          "SysML::Annotation::annotatedElement"
+        ],
+        "reason": "Shared KIR navigation stores annotating-element targets as a list; Annotation singleton targets are accepted by ReferenceList."
+      }
+    },
+    {
+      "field": "expression_is_result",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-compatibility",
+        "reason": "Preserve whether the authored expression is a result body, separate from a feature initializer; the ResultExpressionMembership carries canonical ownership."
+      }
+    },
+    {
+      "field": "value",
+      "kind": "Scalar",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::LiteralBoolean::value",
+          "KerML::LiteralInteger::value",
+          "KerML::LiteralRational::value",
+          "KerML::LiteralString::value",
+          "SysML::LiteralBoolean::value",
+          "SysML::LiteralInteger::value",
+          "SysML::LiteralRational::value",
+          "SysML::LiteralString::value"
+        ],
+        "reason": "Literal expression values use their scalar Ecore shape. FeatureValue.value has a separate reference shape; kind-sensitive reference projection remains in G07-G08."
+      }
+    },
+    {
+      "field": "source",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Relationship::source",
+          "SysML::Relationship::source",
+          "SysML::TransitionUsage::source"
+        ],
+        "reason": "Preserve ordered Relationship endpoints, including multi-client/supplier Dependencies. TransitionUsage singleton endpoints normalize through the shared reference-list contract."
+      }
+    },
+    {
+      "field": "target",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::Relationship::target",
+          "SysML::Relationship::target",
+          "SysML::TransitionUsage::target"
+        ],
+        "reason": "Preserve ordered Relationship endpoints, including multi-client/supplier Dependencies. TransitionUsage singleton endpoints normalize through the shared reference-list contract."
+      }
+    },
+    {
+      "field": "imported_membership",
+      "kind": "ReferenceList",
+      "source": {
+        "classification": "kir-shape-override",
+        "pilot_features": [
+          "KerML::MembershipImport::importedMembership",
+          "KerML::Namespace::importedMembership",
+          "SysML::MembershipImport::importedMembership",
+          "SysML::Namespace::importedMembership"
+        ],
+        "reason": "MembershipImport has one imported membership; Namespace derives a collection. The shared reference-list contract retains singleton and ordered collection projections."
+      }
+    }
+  ]
+}

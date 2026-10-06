@@ -1,0 +1,221 @@
+{
+  "schema": "dev.mercurio.reference-index-integration-evidence.v1",
+  "qualification_certificate": false,
+  "status": "bounded_shared_reference_component_verified_genuine_service_unqualified",
+  "scope": {
+    "execution_revision": 17,
+    "new_native_controls": 2,
+    "existing_controls_promoted_to_regression": 6,
+    "independent_link_source_cases": 34,
+    "independent_attached_scope_source_cases": 84,
+    "attached_scope_graph_states": 3,
+    "attached_scope_reader_modes": 3,
+    "attached_scope_case_state_reader_comparisons": 756,
+    "complete_b1_obligations_closed": 0,
+    "complete_b1_obligations_required": 10,
+    "complete_services": 0,
+    "required_complete_services": 1,
+    "strict_families_qualified": 0,
+    "strict_families_required": 34,
+    "release_gates_qualified": 0,
+    "release_gates_required": 5
+  },
+  "coverage": [
+    {
+      "feature": "Immutable reference identity index",
+      "imported": "Canonical KIR identities and pinned Ecore/Xtext target/containment contracts.",
+      "consumer": "DefinitionReferenceView created once for an immutable field attempt; supplied through GeneratedReferenceSite to the native resource resolver.",
+      "verification": "Actual source-link callbacks receive canonical graph/index pointers. Same-ID copies, edits, reorderings and persistence force fresh lookup; duplicates reject.",
+      "remaining": "No query cache spans a graph mutation or changes semantic completeness. This implementation optimization is not a newly qualified semantic family."
+    },
+    {
+      "feature": "Parent/non-expression scope and ownership navigation",
+      "imported": "Resolved Ecore class inheritance, stored container/containment opposites and reference endpoint contracts.",
+      "consumer": "Shared indexed and query namespace traversal; successful reciprocal container checks are cached only in one fixed native lookup.",
+      "verification": "84 independent attached-expression source controls across original/reordered/persisted graphs and standalone/indexed/query readers; incomplete, malformed, conflicting, cyclic, absent and duplicate guards plus repairs.",
+      "remaining": "NamespaceUtil/KerMLScopeProvider traversal is explicitly handwritten Rust. Every external scope origin and full library lifecycle remain separate obligations."
+    },
+    {
+      "feature": "Reference endpoint/member/qualified-name lookup",
+      "imported": "Pinned grammar references and Ecore target narrowing; existing imported name/default/redefinition programs.",
+      "consumer": "Shared field view supplies Feature-chain children/previous targets, Feature owner, membership endpoints and qualified namespaces without rebuilding the graph index.",
+      "verification": "34 independent cached source-link cases, deferred alias retry, missing dependencies, cycles, wrong-kind/absent targets and late rollback; sparse default copies recompute.",
+      "remaining": "All inherited/global/default/prototype dependencies must still resolve. Pending and failed results remain uncached; no fallback supplies guessed endpoints."
+    },
+    {
+      "feature": "Complete source service",
+      "imported": "The unchanged 24-input genuine environment and 26-context B1 contract remain frozen.",
+      "consumer": "Existing candidate construction/link/producer pipeline; production remains native.",
+      "verification": "Current genuine assessment pending; bounded controls cannot qualify complete validation/publication/persistence.",
+      "remaining": "Whole-model linking, actual library defaults/lifecycle, all applicable constraints, all 26 B1 contexts, independent full semantic comparison and release timing remain open."
+    }
+  ],
+  "implementation": {
+    "native": "No runtime Java, I/O, clock, threading or Cargo dependency changes.",
+    "handwritten_dependencies": [
+      "NamespaceUtil non-expression traversal",
+      "KerMLScopeProvider scope-origin dispatch",
+      "resource/export and inherited member selection",
+      "typed prerequisite scheduler and immutable view lifetime"
+    ],
+    "cache_boundary": "The structural map belongs to one immutable field attempt. All graph-edit branches leave the attempt before retrying. Each resource reference gets a separate DefinitionNameQuery with its fixed type-set context; no semantic cache crosses writes.",
+    "foreign_graph_boundary": "Graph slice pointer and length bind view reuse; ID equality alone is insufficient. A copied site's foreign view is ignored and a new checked map is constructed.",
+    "preserved_guards": "Ecore reciprocal ownership, canonical identity, cardinality/type narrowing, scope cycles, pending registry/dependency cycles, ambiguity, lifecycle readiness and atomic rollback retained.",
+    "normative_change": "None intended; existing normative interpretation and documented disagreements retained. Independent Pilot observations verify existing algorithm outputs, not complete language support.",
+    "Xtend_decision": "No expansion. Imported programs remain consumers; handwritten scope algorithms are optimized and explicitly identified.",
+    "remaining_consumer_audit": "Production compilation identified AnnotatingElement's unannotated namespace fallback in definition_projection.rs. It now consumes the existing query. Fresh production build and complete definition regression verify this migration."
+  },
+  "batch_scope": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-batch-scope.json",
+  "verification": {
+    "native_definition_tests_passed": 435,
+    "native_definition_tests_failed": 0,
+    "focused_tests_passed": 8,
+    "focused_test_seconds": 15.02,
+    "focused_process_seconds": 59.172,
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-focused.log",
+      "sha256": "a34fb96301f99b20f16cef466b7d7d3908384bef2022372821556b5cfdaa673a"
+    },
+    "native_test_seconds": 41.61,
+    "native_process_seconds": 182.437,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-native-regression.log",
+      "sha256": "a8d32e40d679a284eec05cee6a56a84c3b63151628670318372434ede583d0e5"
+    },
+    "audit_tool_tests_passed": 17,
+    "tool_cache_certificate_checks_passed": 127,
+    "coverage_regenerated": true,
+    "reference_reuse": "Existing frozen independent observations; no new Pilot process needed for this algorithm-preserving batch.",
+    "tool_checks_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-tool-checks.log",
+      "sha256": "77db73376d417dae68bae3c7ddd11c9547649d012f8a65c3c5983b6b07cf3460"
+    },
+    "focused_provenance": "Eight focused checks precede the production projection migration; the final 435-test regression and production audit/build assess all current consumers."
+  },
+  "genuine_assessment": {
+    "current_source": true,
+    "status": "rejected_or_failed",
+    "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-genuine-assessment-run.json",
+    "input_resources": 24,
+    "budget_seconds": 300,
+    "process_seconds": 286.781,
+    "producer_completions": 2,
+    "constructed_candidates": 0,
+    "assessment_rows": 1,
+    "row_statuses": [
+      "blocked"
+    ],
+    "actual_rejections": [
+      "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: crossFeature requires assessed implicit crossing contributions; generated link requester_id=definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.1 requester_kind=FeatureChaining requester_field=chaining_feature\", kind: Syntax, span: None, subjects: [\"definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.1\"] }"
+    ],
+    "unique_registered_prerequisites_requested": 58,
+    "last_snapshot_checked_staged_writes": 1385,
+    "last_active_resource_uri": "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml",
+    "last_active_field": {
+      "attempt_elapsed_ms": 46.318,
+      "field": "chaining_feature",
+      "kind": "FeatureChaining",
+      "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4c696e6b732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.3.owned_related_element.0.owned_relationship.1"
+    },
+    "meaning": "One fixed-input/budget current assessment after the shared-reference milestone; not a paired Pilot benchmark or complete service proof.",
+    "historical_31_input_reference774": "unresolved"
+  },
+  "next_dependency": "Batch implicit-crossing contribution assessment and its semantic-metadata dependencies across the existing Feature adapters. The actual Links.kerml FeatureChaining.chaining_feature lookup rejects because crossFeature lacks an assessment; do not set completion flags or weaken that guard. Audit imported dispatch and upstream contribution algorithms, distinguish passive annotations from executable metadata, retain typed dependencies and independently verify the shared category. Then complete whole-model linking, pinned lifecycle, applicable validation/publication/persistence and all 26 B1 contexts. Historical 31-input reference774 remains unresolved.",
+  "preserved_inputs": {
+    "docs\\conformance\\2026-08-support\\definition-pipeline-qualification.json": "721377e3f725ce8cacef288b569f8ad7cceb89c8d6fb98e849738de49e5451da",
+    "docs\\conformance\\2026-08-support\\value-service-reference-controls.json.gz": "ab8542d44e03a1d4010e7e87a395742fd0e0d1c84fd86de0813626d8bc0b27b8",
+    "docs\\conformance\\2026-08-support\\value-service-reference-manifest.json": "99e18d8d57786c559e73783502d46879a42fb56186ec8f4a54f9addefbf00839"
+  },
+  "current_consumer_sha256": {
+    "crates/mercurio-sysml/src/definition_document.rs": "3dd52d6abb5e182c465696c55695dbc72f452e69d4b9402aba46c4f11b681fc6",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "b6f3eb06720b9b7dd1658d4773ea1373d2151a231688ab6b932f350fe2e7766d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "afd963d3efeb0ee69542430ea1393e4fc307578838f3d4e08df345d0834f43b3",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_value_validation.rs": "1cd2c4c3b3b20c4bcd8f816c8b0a8a5d5354c8d5b1d43deea276ccc0aeaafb57",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/cold_literal_values.rs": "9da1c1914e0df8fb189849edb6bf4ce6f8d34c58c50207baf7695fcfbf0458ba",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "1a7f44c13010090e8162f0d71476560329f8e6f1b8ad598d42216a7add70d75b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "c531af268c2efecbfebeaa70bad37b14eaa0498b146d6ef4f8d42073fb449bac",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "b5c063cf07b2dd554fd1a27afadf8bc12fade61aa669ada945b790ee839cdfe9",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "878bf82af90b0d22a03704bab62f48a18616ec4b8ad477f322e9c508484ba771",
+    "tools/export_pilot_connector_defaults.py": "97dbd7e5320927fcd07679adbb569df7a485810a4283a492a86bec40ab741052",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotConnectorDefaultExporter.java": "6bca6016147da5fc7a10541b4d9f9f331698fb2b5009ace9f7c7442acd5550ef",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "5c629b7193c1d966d45456566da0d19ecda851b24ac915f4af6408f62f2e4e24",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "c98baac06d89b6e582ef6137b63f511afd94c1a9817f01e9a922c5e79843bb28",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_result_scope.rs": "cd0ce01f251241e26c4edb0677429d781e80fdeff17ab6fd79e25ea0be87337e",
+    "tools/prepare_native_reference_inputs.py": "b412fb9fe8c3f0849a554f89b0b0dfc093c258a0d7bb1b07c59394dcc20275d0",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a",
+    "crates/mercurio-tools/src/bin/audit_release_compile/profile.rs": "2f052a7184d7c24d9ac94c550384f1ac4a5bd8658d89b36f38ddc9d20e13fdcc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "bb546e2e6fbc25c292a446f02c610aea80876eab5d984facc06e785333c052bd",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_context_stage.rs": "bd8b183039e703af73af84f5395e82dc91f92d3f073633dddcdba239fc21115b",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source.rs": "a7253ab773e03dd921ae12cad1fce2b9b29dd043ac57a22aafc69c902bc06957",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/transition_source_query.rs": "a2f29801c739574cfa00da14715ef0a788483d6db8fa047f98c8da7f6aaa40b2",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/multiplicity_construction.rs": "52b1ccb963d70adaa2768c86cd383db360af8b00300618c03d4c2c024d750e6e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/type_set_contributions.rs": "8255551572f9729da06a34edbc48f8fc870a3962b03e54ca03c7f2cdf0ea184e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/type_set_roles_generated.rs": "2b8b6a41c2ac6835fc4c4d0023056c927f3dca50d913ccf76726529cb189e438",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/type-set-roles.extract.json": "ac869cab2967bb7e95ea35ed2b1614c5f8957dc2331483f85acd925b71607dd8",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "tools/generate_type_set_roles.py": "f623473568c4cb6c88067b1a19f1ebf29a15f41e4aa67dfa6fa03e8dcec7ca72"
+  },
+  "reference_cache_sha256": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-contexts.extract.json": "3121f652f21137dc0283a808e6dd18655f1fb7bd43025b9273b508b0e5179cee",
+    "docs/conformance/2026-08-support/chain-link-pilot-controls.json": "2ef7ee97466876fbdeb7b0936a726e5a901030dd23045ee1814ed97c13cffbe8",
+    "docs/conformance/2026-08-support/fixed-featuring-pilot-controls.json": "9396f82da56a0e46d558db8dd3fefd6371df76703fe4045604df066b78fb6b0e",
+    "docs/conformance/2026-08-support/multiplicity-defaults-pilot-controls.json": "85bd80ef5e467a5cf6844bbdd74412fe31f5609d40895fbf03e7281eafad82b3",
+    "docs/conformance/2026-08-support/snapshot-featuring-pilot-controls.json": "bc7885e8080f3daa7e04918ea4eda7b63fb4582be980d1f7abd84cfecce5113c",
+    "docs/conformance/2026-08-support/step-strategy-pilot-controls.json": "f7655d597ac752f5c0a4a96ebfa0ba08caeba424eae5d15565003f6e9fe7f64c",
+    "docs/conformance/2026-08-support/usage-variability-pilot-controls.json": "4f3ecbd785410655677cddb05c8bc22f47ee077117045127bd4fc99c2c9121ff",
+    "docs/conformance/2026-08-support/type-set-contribution-pilot-controls.json": "8a1403875f5fca50d59eb3ad153311fa0e88c7e458532da8aa2cdfbabf76bfe7",
+    "docs/conformance/2026-08-support/type-set-validation-pilot-controls.json": "6743702ce2309c6e7de8d38d0ac995b27b2861cbd94e9173c3b64d9cc51c3325",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/xtext-prediction-nfa.experimental.json": "7333880db79f05940a3804ade6f3ec9b3558fbeb148c7f9aa4796884ac8aff78",
+    "docs/conformance/2026-08-support/expression-model-pilot-controls.json": "e69c6eeb007bede3bf8422db29f286b86cabd6638f69a7b6fc6cb67da7bf3e6c"
+  },
+  "evidence_sha256": {
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-batch-scope.json": "ea9bcd777c0783c9f8bb3c64f015879d2fc1487d8e3762ebca5dc9464bc27074",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-native-regression-run.json": "a980b459efa52693fde8b43cceb15b01c3fbef860133b21fcba2a4569a2b5d17",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-native-regression.log": "a8d32e40d679a284eec05cee6a56a84c3b63151628670318372434ede583d0e5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-focused-run.json": "a7af787f98d901789c65da2b9302cc317a2984a6b2380bc8135d2b98081164c1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-focused.log": "a34fb96301f99b20f16cef466b7d7d3908384bef2022372821556b5cfdaa673a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-tool-checks.log": "77db73376d417dae68bae3c7ddd11c9547649d012f8a65c3c5983b6b07cf3460",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-tool-checks-run.json": "0e697179aad3c7af5575f9bd0629ddde8d1e088277b659070477612a5d08ab63",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-tools-run.json": "a32ac618889fd1bc7c0ce32d275424b0f53d3ee937ab15b5a125c257b460292b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-genuine-assessment-run.json": "53de0d72d6b91e0be4d0d7510c58c1ca6c49bef43a4c020eb5d4d89d4821ecee",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-genuine-assessment.log": "b43b3bc9be805cab85bccb73dd068169fe2b0b132fef58823731edd7a36b594f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-genuine-assessment.jsonl": "c0ac81234aac14149a2e8c1f0744eca9cb0fa1a4c75372370eaf0b14c9fb3b63",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-audit-tests.log": "432f6676add37467870b67109f48f733aa87a623224d1f83622fd1149864731b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-index-release-build.log": "1454d10006de24812d8799ea8be2adf4fef109d2215ac6ea4825520d8ec40042"
+  },
+  "next_dependency_audit": {
+    "status": "reference_source_audit_only_not_native_support",
+    "reference": "Pinned Pilot implementation code; the written specification remains normative.",
+    "pinned_source_sha256": {
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\adapter\\FeatureAdapter.java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\adapter\\TypeAdapter.java": "4d103ec80db7a3e5da69e0fbb9ba5571030e39b5745631f5688134d91baeb08d",
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\support-2026-08\\pilot-pinned-2026-08\\org.omg.sysml.logic\\src\\main\\java\\org\\omg\\sysml\\util\\ElementUtil.java": "3ebdc1c7b3dc2d11166e566a95059e2d7230df4e35a7918a9c6b9be853859507"
+    },
+    "shared_algorithms": [
+      {
+        "name": "Owned cross-feature and implicit crossing readiness",
+        "reference_methods": [
+          "FeatureAdapter.addCrossingSpecialization",
+          "FeatureAdapter.getCrossFeatureOf"
+        ],
+        "observed": "getCrossFeatureOf transforms when the stored getter is absent, then reads implicit CrossSubsetting. addCrossingSpecialization separates binary and nonbinary featuring/typing construction.",
+        "native_boundary": "The registered scheduler and binary crossing constructor exist, but the crossFeature getter still rejects unassessed implicit contributions. Nonbinary dependencies remain explicit.",
+        "required": "Recover the actual failing receiver/kind/canonical context, route supported missing construction through typed prerequisites, batch pending/late/cycle/repair controls; no completeness flag shortcut."
+      },
+      {
+        "name": "Passive annotation versus metadata-derived type contributions",
+        "reference_methods": [
+          "ElementUtil.getAllMetadataFeaturesOf",
+          "TypeAdapter.getBaseTypes"
+        ],
+        "observed": "Metadata selection filters Annotation.annotatingElement and Namespace owned members by MetadataFeature; base-type contributions additionally depend on metaclass resolution, effective Features, baseType specialization, valuation and model-level evaluation.",
+        "native_boundary": "has_semantic_metadata is a conservative graph-wide MetadataFeature/Annotation presence guard. It does not assess all these semantic dependencies.",
+        "required": "Use imported Ecore classes, ownership and delegate contracts for faithful annotation/metadata selection. Independently verify passive annotations; retain unresolved or executable metadata as a typed/explicit unsupported dependency until its algorithms execute."
+      }
+    ],
+    "actual_failure_receiver_status": "The run identifies the Links.kerml FeatureChaining requester. Its generic rejected crossFeature guard does not record the internal failed receiver; do not assume which guard predicate rejected."
+  }
+}

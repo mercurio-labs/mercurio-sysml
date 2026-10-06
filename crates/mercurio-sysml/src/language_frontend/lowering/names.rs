@@ -51,7 +51,7 @@ pub(crate) fn resolve_local_namespace_dot(
     packages: &[ResolvedPackage],
 ) -> Option<String> {
     let dotted = namespace.replace("::", ".");
-    let mut candidates = vec![dotted.clone()];
+    let mut candidates = Vec::new();
     let mut cursor = owner_package_qualified_name;
     while !cursor.is_empty() {
         let candidate = format!("{cursor}.{dotted}");
@@ -63,6 +63,7 @@ pub(crate) fn resolve_local_namespace_dot(
         };
         cursor = parent;
     }
+    candidates.push(dotted.clone());
     if let Some(root) = root_package {
         if dotted != *root && !dotted.starts_with(&format!("{root}.")) {
             candidates.push(format!("{root}.{dotted}"));

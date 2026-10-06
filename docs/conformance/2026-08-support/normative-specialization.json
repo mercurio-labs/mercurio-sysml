@@ -1,0 +1,53 @@
+{
+  "scope": "Bounded public native specialization query; prerequisite for Usage variability, not completion of mayTimeVary.",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      172,
+      173,
+      174
+    ],
+    "operation": "Type.specializes"
+  },
+  "upstream": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "algorithm": "TypeUtil.specializes",
+    "source_hashes": "definition-document-pilot-controls.json provenance.source_sha256"
+  },
+  "imported": "Ecore Type ancestry and specialization endpoints, pinned generalization/default programs and independent Pilot observations.",
+  "native_consumer": "definition_document::specializes uses the handwritten visited-set traversal definition_specializes and shared definition_general_type_inputs; it does not write implied relationships or completeness flags.",
+  "verification": {
+    "independent_pairs": 82,
+    "source_topologies": 4,
+    "coverage": [
+      "reflexivity",
+      "transitive chains",
+      "multiple generals and diamonds",
+      "cyclic specializations",
+      "conjugated original type",
+      "negative unrelated targets"
+    ],
+    "negative_cases": [
+      "unknown Usage generalization provider",
+      "non-Type endpoint",
+      "missing endpoint",
+      "duplicate identities"
+    ],
+    "focused_batch": "62 native tests pass; 20 tooling tests pass; document exporter reproduces",
+    "full_suite": "Prior 719-test qualification remains stale; no full run in this increment.",
+    "focused_log": "definition-pipeline-evidence/native-tests-specialization-focused.log",
+    "source_sha256": {
+      "crates/mercurio-sysml/src/definition_document.rs": "ceab6e70a2f860319e13e44fad71d88ad7fc14e98640dd690b9396b38616ebbd",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "dc2841a58c9637174630d303ca06f065fc01eb305b670150c9bc85e30bd3a6c5",
+      "crates/mercurio-sysml/src/definition_document_pilot_tests.rs": "a3a3a1b24b7ecd349a95b90ebd22c2f033c66ed2e42c395be11dc0ceccf4798d",
+      "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-document-pilot-controls.json": "f40507142d73f5eef4832d102f24351f6f138875a448b75a26869ebc21d9ce35"
+    }
+  },
+  "remaining": [
+    "UsageAdapter default/generalization providers",
+    "Library-bound mayTimeVary decision and effective Usage.isVariable getter",
+    "Feature chaining and specialization providers outside the admitted scope",
+    "Full sample and release qualification"
+  ]
+}

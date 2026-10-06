@@ -1,0 +1,30 @@
+{
+  "schema": "dev.mercurio.compare-tolerances-overlay.v1",
+  "source": {
+    "profileId": "sysml-2.0-pilot-2026-08",
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Strict qualification: no accepted semantic waivers. Keep KIR direct expressions and relationship fields in the comparison alongside extracted Ecore attributes."
+    }
+  },
+  "includedAttributes": [
+    "declared_name",
+    "name",
+    "owner",
+    "type",
+    "definition",
+    "specializes",
+    "features",
+    "members",
+    "featuring_type",
+    "direction",
+    "subsets",
+    "redefines",
+    "expression_ir",
+    "source",
+    "target",
+    "allocated",
+    "allocated_to"
+  ],
+  "tolerances": []
+}

@@ -1,0 +1,40 @@
+{
+  "document": "Kernel Modeling Language v1.1, Beta 2",
+  "source_repository": "SysML-v2-Release",
+  "source_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "source_path": "doc/1-Kernel_Modeling_Language.pdf",
+  "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+  "clauses": [
+    {
+      "section": "8.4.4.9.5 Invocation Expressions",
+      "pdf_pages": [
+        296,
+        297
+      ],
+      "printed_pages": [
+        270,
+        271
+      ],
+      "requirements": [
+        "Invocation argument expressions are values of input parameters through FeatureValue relationships.",
+        "Function/type binding, parameter redefinition, result specialization and behavior binding connectors are additional semantic obligations; creating argument ownership does not satisfy them."
+      ]
+    },
+    {
+      "section": "8.4.4.9.6 Operator Expressions",
+      "pdf_pages": [
+        297
+      ],
+      "printed_pages": [
+        271
+      ],
+      "requirements": [
+        "Ordinary operator expressions represent invocation of the function identified by their operator symbol.",
+        "Control-function expression parameters require body-expression handling rather than ordinary eager-argument construction."
+      ]
+    }
+  ],
+  "pilot_boundary": "InvocationExpression.operand is a Pilot Ecore/Xtext parsing extension. Its append-only adapter constructs private ParameterMembership -> input Feature -> FeatureValue -> argument Expression. Its getter facade reports no elements and is not the normative argument derivation.",
+  "decision": "Explicit handwritten Rust construction, parameterized by imported Ecore contracts and guarded by the imported setting-delegate identity. No Xtend translation: the necessary dependency is Java model-adapter code.",
+  "verification_scope": "Initial fresh-operand attachment with ordered stored ownership, wrapper kinds, direction and visibility. Bounded literal/unary/eager-binary invariant-result production emission. No general getter, argument derivation, full expression/action translation or reparenting qualification."
+}

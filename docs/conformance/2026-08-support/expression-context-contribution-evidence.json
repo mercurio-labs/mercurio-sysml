@@ -1,0 +1,115 @@
+{
+  "schema": "dev.mercurio.expression-context-contribution-evidence.v1",
+  "scope": "Bounded directed expression default/generalization contributions across20 bindings, six canonical ownership contexts and both composite flags. Receivers are incomplete/non-end; owners and library targets are supplied completed controls. Direction is validated from the Ecore enum. No full callable model, inherited transformation or cold resource qualification is inferred.",
+  "pipeline": {
+    "pinned_reference": "docs/conformance/2026-08-support/expression-context-contribution-pilot-controls.json",
+    "resolved_import": "Existing six typed adapter/equivalence programs; generated expression context roles and instantiation selectors. Feature/Step context machinery is source-audited and independently observed, not generally translated.",
+    "native_consumers": [
+      "definition_expression_default_contributions_query",
+      "definition_materialize_value_expression_defaults",
+      "definition_performance_owner_predicates_typed_query"
+    ],
+    "handwritten_dependencies": [
+      "Canonical ownership and structure/behavior owner predicates",
+      "Typed library navigation and effect composition around generated recipes",
+      "Transactional physical FeatureTyping/Subsetting materialization"
+    ],
+    "normative": "docs/conformance/2026-08-support/expression-context-contribution-normative-review.json"
+  },
+  "verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "native_definition_tests_passed": 379,
+    "focused_native_tests_passed": 4,
+    "independent_context_controls": 960,
+    "concrete_expression_bindings": 20,
+    "direction_variants": 4,
+    "owner_contexts": 6,
+    "composite_variants": 2,
+    "query_comparison_contexts": 3840,
+    "physical_replay_abstract_syntax_persistence_contexts": 120,
+    "transactional_rejection_boundary_contexts": 720,
+    "typed_field_only_retry_and_malformed_contexts": 20,
+    "controls_validation_tests_passed": 5,
+    "candidate_pipeline_tests_passed": 8,
+    "tool_binary_tests_passed": 11,
+    "obsolete_guard_regression": {
+      "initial_result": "363 passed, one obsolete blanket-direction expectation failed",
+      "preserved_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native-obsolete-guard.log",
+      "correction": "Malformed direction rejects; valid directions remain independently verified by the complete cached matrix. No production change followed the failure.",
+      "focused_boundary_recheck": "passes"
+    },
+    "full_native_regression": "passes",
+    "optimized_build": "passes",
+    "completion_flags_written": false,
+    "resource_assessment_current_code": false,
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json",
+      "sha256": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+      "status": "assessed",
+      "native_executable": {
+        "path": "target/release/audit_release_compile.exe",
+        "sha256": "3b2b9ad560826acfec9352920642d391f306154c04dadf16e7937bfeaa18534f"
+      },
+      "elapsed_seconds": 626.969,
+      "diagnostic_only": true,
+      "semantic_qualification": false,
+      "comparable_benchmark": false,
+      "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+      "exit_code": 1
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "Complete inherited lifecycle and completed/end receiver semantics",
+    "Receiver-owned valuations, crossing, metadata, conjugation and unrelated computed contributions",
+    "Complete invocation/constructor arguments, defaults and results; trigger receiver/clock/monitor validation",
+    "Actual global resources, inherited scope origins and all required source publication contexts",
+    "Normative singular/plural library-role disagreement; global parser/model contracts and final sample/comparison/timing gates"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/definition_document.rs": "075a944b95d07b33a12007f2ccfa635cae35cbc00e963cfd7b0db3ae5c5a7257",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/expression_context_defaults_generated.rs": "a2326be0d66b1ee4834bcaa0904c8d08e91a4521103f3f646bfe216ff14ab286",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/instantiation_contributions_generated.rs": "09b2d180c54303bece95601bde1544c2b0919085ea58a228e1b3ced0f9732d00",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/instantiation_strategy_generated.rs": "bfc4fd2edbbbe59bc47abf058503a3bb84b47a912822f4ff3a0025c1b8768f28",
+    "tools/generate_expression_context_defaults.py": "fa9d0609eb2424acbab09c3e5aec2a4eb16bbfb78f6c76c3eae2bd83d9062791",
+    "tools/run_expression_context_contribution_probe.py": "0f591fa018986844074b35f5d0233d887732754f897b5a93085f34d5200764de",
+    "tools/check_expression_context_contributions.py": "b6d503680faaead50201de4ff855ec00c36fe59fe7961886eb4d4a9008d23f81",
+    "tools/test_expression_context_contributions.py": "0961f8dc598ee22a41a5c837961af1d6c520f91aaf10cf81ce381ffa6eaf0e62",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotExpressionContextContributionProbe.java": "79fb51ab29ffee9198aa1508a70710685af6292ad3a8845bead85246e9af88a3",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/expression-context-contribution-pilot-controls.json": "44182a22481aec36c32a77b0df7cdc19674e8fb4aff633d62fae2ce3616e76de",
+    "docs/conformance/2026-08-support/expression-context-contribution-normative-review.json": "2544e6b4be4f8be047262cc32187f00c74e4bf6189d99506353deafd227abb85",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-focused.log": "6f2efd2216a2a32fbd87c57f3fd9a5ba4abff3d376a09841597098a484585d9c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-boundary-regression.log": "7deb0d5707cb2fbb6dc57f37076c681c4508fe41ee6e7f70c915cc4c42a4f075",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native-obsolete-guard.log": "8898da00021bfdda9d82b13f12fffa3c498636ac9f6c5932c363f49d36221843",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-tool-tests.log": "19a240d730de304f6aff3023a58def2ee976b81eb1517038d47664dff2e2a1e9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-release-build.log": "68aeb0393aa82622a60ee9429814d787d62c8fcddf35564feb561cb8a284a83e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-cache-check.log": "2e082055db6587210f5e7406cf19440b8510a018839160abdcb35ac04456efb9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-export.log": "2e082055db6587210f5e7406cf19440b8510a018839160abdcb35ac04456efb9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-controls-tests.log": "7e88c665c268996c3b9da836ccdd5aab7940b6edbfd5eec86effe5d16845e86b",
+    "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-assessment.json": "d9278a9d974b5f5136ac9e862ad68a39b6710c1e305010ec1a2754b2116d65d6",
+    "docs/conformance/2026-08-support/enum-trigger-states-expression-context-contribution-extended-assessment.json": "b497c56e441e98a984a2acfdeda5d66edc5c9f111d02bc8d0e1d88db68a3843e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  }
+}

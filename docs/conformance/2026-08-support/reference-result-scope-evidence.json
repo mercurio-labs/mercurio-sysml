@@ -1,0 +1,86 @@
+{
+  "schema": "dev.mercurio.reference-result-scope-evidence.v1",
+  "scope": "Bounded FeatureReferenceExpression result Subsetting prerequisite for relative scope: Feature referents typed by Class/DataType/Structure, deferred source referent resolution, persistence, privacy and atomic failure. Whole resources and global scope contracts remain unsupported.",
+  "pipeline": {
+    "imported": "Existing resolved specialization-construction program and generated provider/relation identities",
+    "native_consumed": [
+      "relative_namespace::namespace",
+      "reference_result_scope::ready/materialize",
+      "link_generated_graph typed prerequisite scheduler"
+    ],
+    "handwritten_rust_dependencies": [
+      "Prerequisite readiness and deferred field-only scheduling",
+      "Canonical membership and relation endpoint checks",
+      "Transactional physical relation publication"
+    ],
+    "runtime_java_dependency": false
+  },
+  "verification": {
+    "focused_native_tests_passed": 4,
+    "existing_independent_reference_result_controls": 12,
+    "independent_cache_total_construction_controls": 24,
+    "typed_target_classes": 3,
+    "persisted_forward_reverse_contexts": 6,
+    "full_native_regression": "passes",
+    "optimized_build": "passes",
+    "completion_flags_written": false,
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "resource_assessment_current_code": true,
+    "native_definition_tests_passed": 379,
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "tool_binary_tests_passed": 11,
+    "cache_integrity_tests_passed": 8,
+    "cache_reproduced": true,
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "strategy_tests_passed": 15,
+    "actual_resources_semantically_qualified": false,
+    "actual_resource_status": "blocked",
+    "actual_resource_error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+    "resource_count": 25
+  },
+  "tests": [
+    "definition_reference_result_specialization_matches_pilot",
+    "definition_reference_result_scope_requires_physical_inheritance_and_persists",
+    "definition_reference_result_scope_preserves_field_retries_and_atomic_collisions",
+    "definition_reference_result_scope_scheduler_resolves_only_the_referent_then_publishes"
+  ],
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_result_scope.rs": "17a23d5f7c0a8df4b19df4016a901fca4920e4eefa74a5d53945e16b600bb91d",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "f760b69f942ff326c95fd17ce07e1b66428d753bf8685e67819b1409d24d37bc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "63abbc26d6032294171dd3d15d6de7af83ee7bb5a6898c8e824e747e8ea50755",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/specialization_construction_generated.rs": "b1c83d5a559f57f2f0bd1b0c222a0d7770d9f886978bb20eef72d631ed892920",
+    "docs/conformance/2026-08-support/reference-result-scope-normative-review.json": "3784104917ec99b315e223df974563458004837931f60d1f9c9865633cc9f01a",
+    "tools/export_pilot_specialization_construction.py": "7e2ed16b8436e51277b6d6b0ee4c4c94d6f1fd1f0bbf9a4409bc630add996893",
+    "tools/test_specialization_construction.py": "e7534093cec5e3234f7daea15d852f3f33e6172ec38685fc6815efe4333fbfd4",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "e7f912bf6cc4704aaa1d913fe9f88ed5cae4feaf2f34a00c74488a9574ca9351",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-focused.log": "57a09bd1f7e210a72ec1c924b9a933ad668a5efae01f58a79d20b9eb69a81029",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-tool-tests.log": "b53651ade949a969fc83e0af862ff0a42cce75e4d4a1618bb504a6ccf6403a4b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-release-build.log": "8eb76b648221ce98133d7ef9c597c6408a79cb3fe328d9128ee1c0cc8123491a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-cache-check.log": "3958580c8705f7a2f1d07da38bbacc6256824b1f28d7df4aca0d2375ad7e64d6",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-cache-tests.log": "bf3cc9b69b27aac7a2170d036e049b5bd4b744d04cee3643edc418407d915ff0",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/specialization-construction.extract.json": "aa88e6990edef7e59364981d7d18b6a9c47da553888517cbbe78842a6c46fc2f",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotSpecializationConstructionExporter.java": "24ceb4eb70611d105c69582f6c6ba945083b43501538617d4a14857268edeb6a",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotResultConstructionExporter.java": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567",
+    "docs/conformance/2026-08-support/enum-trigger-states-reference-result-scope-assessment.json": "c4a92765cdfa18f57cd6f22f63be65d079cf06baeb6df41c03843feca188dee2",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-plan-tests.log": "5c0cc81cf278cee3ddd4e713ae26ecc5ebfcd8ff060782b0f4095c865c7a2800",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-certificate-tests.log": "3cb1c101b4cdd94b0d6b06de83cff2c50b0065311238229b6849619ffd98927a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-strategy-tests.log": "76909980fd736ff6db80306da68822c2e1042c9726f6f7c667a80d93f258480b"
+  },
+  "remaining": [
+    "Null/invalid membership referents and self-default contexts",
+    "Reference connector and complete result typing/transform lifecycle",
+    "Cold library scope and whole-resource publication",
+    "Full model validators and strict global/family certificates"
+  ],
+  "qualification": {
+    "qualified_families": 0,
+    "required_families": 34,
+    "qualified_release_gates": 0,
+    "required_release_gates": 5,
+    "overall_percent": null
+  }
+}

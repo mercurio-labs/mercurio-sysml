@@ -9,16 +9,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.UUID;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
@@ -26,6 +28,8 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.omg.sysml.interactive.SysMLInteractive;
 import org.omg.sysml.lang.sysml.Documentation;
+import org.omg.sysml.lang.sysml.Membership;
+import org.omg.sysml.lang.sysml.VisibilityKind;
 import org.omg.sysml.lang.sysml.Element;
 import org.omg.sysml.lang.sysml.Feature;
 import org.omg.sysml.lang.sysml.Namespace;
@@ -33,6 +37,8 @@ import org.omg.sysml.lang.sysml.Relationship;
 import org.omg.sysml.lang.sysml.Specialization;
 import org.omg.sysml.lang.sysml.Type;
 import org.omg.sysml.util.ElementUtil;
+import org.omg.sysml.util.TypeUtil;
+import org.omg.sysml.util.FeatureUtil;
 
 import com.google.gson.GsonBuilder;
 
@@ -63,6 +69,13 @@ public final class PilotStdlibExporter {
         resourceSet.getResources().forEach(resource -> EcoreUtil2.resolveLazyCrossReferences(resource, null));
         ElementUtil.transformAll(resourceSet, false);
 
+        for (Resource resource : resourceSet.getResources()) {
+            if (!resource.getErrors().isEmpty()) {
+                throw new IllegalStateException("Pilot library parse errors in " + resource.getURI()
+                    + ": " + resource.getErrors().subList(0, Math.min(3, resource.getErrors().size())));
+            }
+        }
+
         ExportDocument document = exportDocument(libraryRoot, resourceSet);
         if (outputPath.getParent() != null) {
             Files.createDirectories(outputPath.getParent());
@@ -76,8 +89,9 @@ public final class PilotStdlibExporter {
 
     private static ExportDocument exportDocument(Path libraryRoot, ResourceSet resourceSet) {
         Map<String, ExportElement> elements = new LinkedHashMap<>();
-        Set<RelationshipKey> relationships = new LinkedHashSet<>();
+        List<RelationshipKey> relationships = new ArrayList<>();
         Set<String> libraryFiles = new TreeSet<>();
+        boolean hasModeledContent = false;
 
         for (Resource resource : resourceSet.getResources()) {
             Path resourcePath = resourcePath(resource);
@@ -99,16 +113,23 @@ public final class PilotStdlibExporter {
                     continue;
                 }
 
-                String qualifiedName = clean(element.getQualifiedName());
+                String qualifiedName = exportIdentityOf(element, libraryRoot);
                 if (qualifiedName == null) {
                     continue;
                 }
 
+                // Parsing a missing or damaged library can leave only unnamed
+                // resource Namespace wrappers, which are not library content.
+                if (!(element instanceof Namespace && element.eContainer() == null
+                    && clean(element.getDeclaredName()) == null
+                    && clean(element.getDeclaredShortName()) == null)) {
+                    hasModeledContent = true;
+                }
                 elements.computeIfAbsent(
                     qualifiedName,
                     ignored -> toExportElement(element, qualifiedName, libraryGroup, relativePath)
                 );
-                collectRelationships(element, qualifiedName, relationships);
+                collectRelationships(element, qualifiedName, relationships, libraryRoot);
             }
         }
 
@@ -119,12 +140,18 @@ public final class PilotStdlibExporter {
             .filter(relationship -> elements.containsKey(relationship.source))
             .filter(relationship -> elements.containsKey(relationship.target))
             .map(relationship -> new ExportRelationship(relationship.source, relationship.relation, relationship.target))
-            .sorted(
-                Comparator.comparing((ExportRelationship relationship) -> relationship.source)
-                    .thenComparing(relationship -> relationship.relation)
-                    .thenComparing(relationship -> relationship.target)
-            )
             .toList();
+
+        // Check the final projection, after dangling relationship filtering.
+        // This is a structural minimum, not a version-specific size threshold
+        // or a claim that every expected standard-library declaration exists.
+        if (!hasModeledContent || exportRelationships.isEmpty()) {
+            throw new IllegalStateException("Incomplete Pilot library export: expected modeled content beyond "
+                + "anonymous resource roots and retained relationships; observed " + libraryFiles.size()
+                + " library resources, " + exportElements.size() + " elements, modeled content="
+                + hasModeledContent + ", " + exportRelationships.size() + " relationships. "
+                + "Check that the library sources were loaded and transformed successfully.");
+        }
 
         ExportMetadata metadata = new ExportMetadata();
         metadata.element_count = exportElements.size();
@@ -133,6 +160,7 @@ public final class PilotStdlibExporter {
         metadata.library_files = new ArrayList<>(libraryFiles);
         metadata.exported_at_utc = Instant.now().toString();
         metadata.pilot_version = pilotVersion();
+        metadata.observed_ecore_defaults_v1 = true;
 
         ExportDocument document = new ExportDocument();
         document.metadata = metadata;
@@ -176,6 +204,24 @@ public final class PilotStdlibExporter {
         putIfPresent(properties, "name", clean(element.getName()));
         putIfPresent(properties, "short_name", clean(element.getShortName()));
         properties.put("is_library_element", element.isLibraryElement());
+        if (element.eResource() != null && qualifiedNameOf(element) == null) {
+            properties.put("resource_fragment", element.eResource().getURIFragment(element));
+        }
+        if (element instanceof Membership membership) {
+            properties.put("member_element_present", membership.getMemberElement() != null);
+            properties.put("membership_owning_namespace_present",
+                membership.getMembershipOwningNamespace() != null);
+            putIfPresent(properties, "member_name", clean(membership.getMemberName()));
+            putIfPresent(properties, "member_short_name", clean(membership.getMemberShortName()));
+            if (membership.getVisibility() != null) {
+                properties.put("visibility", membership.getVisibility().toString().toLowerCase(Locale.ROOT));
+            }
+        }
+        Membership owningMembership = element.getOwningMembership();
+        if (owningMembership != null && owningMembership.getVisibility() != null) {
+            properties.put("owning_membership_visibility",
+                owningMembership.getVisibility().toString().toLowerCase(Locale.ROOT));
+        }
 
         if (element instanceof Feature feature) {
             properties.put("is_abstract", feature.isAbstract());
@@ -193,6 +239,57 @@ public final class PilotStdlibExporter {
             properties.put("is_implied", relationship.isImplied());
         }
 
+        // The effective Ecore contract identifies explicit defaults, while
+        // generated Pilot getters may override them. Export their observed
+        // values from attached library objects; the native importer promotes
+        // these values instead of guessing from Ecore literals.
+        for (EAttribute attribute : element.eClass().getEAllAttributes()) {
+            if (attribute.getDefaultValueLiteral() == null) { continue; }
+            Object value;
+            try {
+                value = element.eGet(attribute);
+            } catch (RuntimeException error) {
+                throw new IllegalStateException("Cannot observe " + qualifiedNameOf(element)
+                    + " (" + element.eClass().getName() + ")." + attribute.getName(), error);
+            }
+            if (value instanceof Enumerator enumerator) value = enumerator.getLiteral();
+            if (!(value instanceof String || value instanceof Number || value instanceof Boolean)) {
+                throw new IllegalStateException("Unsupported explicit-default attribute "
+                    + element.eClass().getName() + "." + attribute.getName());
+            }
+            String name = normalizeAttributeName(attribute.getName());
+            Object previous = properties.put(name, value);
+            if (previous != null && !Objects.equals(previous, value)) {
+                throw new IllegalStateException("Conflicting Pilot attribute projection "
+                    + element.eClass().getName() + "." + name);
+            }
+        }
+
+        if (element instanceof Namespace namespace) {
+            Map<String, String> visible = new java.util.TreeMap<>();
+            List<Membership> candidates = new ArrayList<>(namespace.getOwnedMembership());
+            if (!namespace.getOwnedImport().isEmpty()) {
+                candidates.addAll(new ArrayList<>(namespace.getImportedMembership()));
+            }
+            for (Membership membership : candidates) {
+                if (namespace.visibilityOf(membership) != VisibilityKind.PUBLIC) {
+                    continue;
+                }
+                String target = qualifiedNameOf(membership.getMemberElement());
+                if (target == null) { continue; }
+                for (String name : new String[] {membership.getMemberName(), membership.getMemberShortName()}) {
+                    name = clean(name);
+                    // Direct owned names already have canonical IDs. Export only
+                    // aliases and imported names, after Pilot checks visibility.
+                    if (name != null && !target.equals(qualifiedNameOf(namespace) + "::" + name)
+                        && namespace.resolveVisible(name) == membership) {
+                        visible.put(name, target);
+                    }
+                }
+            }
+            if (!visible.isEmpty()) { properties.put("public_memberships", visible); }
+        }
+
         properties.values().removeIf(Objects::isNull);
         return properties;
     }
@@ -200,41 +297,52 @@ public final class PilotStdlibExporter {
     private static void collectRelationships(
         Element element,
         String sourceQualifiedName,
-        Set<RelationshipKey> relationships
+        List<RelationshipKey> relationships,
+        Path libraryRoot
     ) {
-        addRelationship(relationships, sourceQualifiedName, "owner", qualifiedNameOf(element.getOwner()));
+        addRelationship(relationships, sourceQualifiedName, "owner", exportIdentityOf(element.getOwner(), libraryRoot));
+        addRelationship(relationships, sourceQualifiedName, "owning_membership", exportIdentityOf(element.getOwningMembership(), libraryRoot));
+
+        if (element instanceof Membership membership) {
+            addRelationship(relationships, sourceQualifiedName, "member_element", exportIdentityOf(membership.getMemberElement(), libraryRoot));
+            addRelationship(relationships, sourceQualifiedName, "membership_owning_namespace", exportIdentityOf(membership.getMembershipOwningNamespace(), libraryRoot));
+        }
 
         if (element instanceof Namespace namespace) {
-            addRelationships(relationships, sourceQualifiedName, "members", namespace.getOwnedMember());
+            addRelationships(relationships, sourceQualifiedName, "members", namespace.getOwnedMember(), libraryRoot);
+            for (Membership membership : namespace.getOwnedMembership()) {
+                addRelationship(relationships, sourceQualifiedName, "owned_membership", exportIdentityOf(membership, libraryRoot));
+            }
         }
 
         if (element instanceof Type type) {
-            for (Specialization specialization : type.getOwnedSpecialization()) {
-                addRelationship(relationships, sourceQualifiedName, "specializes", qualifiedNameOf(specialization.getGeneral()));
-            }
-            addRelationships(relationships, sourceQualifiedName, "features", type.getOwnedFeature());
+            // Implicit supertypes may live only in the Pilot adapter cache.
+            // getOwnedSpecialization alone silently drops those relationships.
+            addRelationships(relationships, sourceQualifiedName, "specializes", TypeUtil.getSupertypesOf(type, false), libraryRoot);
+            addRelationships(relationships, sourceQualifiedName, "features", type.getOwnedFeature(), libraryRoot);
         }
 
         if (element instanceof Feature feature) {
-            addRelationships(relationships, sourceQualifiedName, "type", feature.getType());
-            addRelationships(relationships, sourceQualifiedName, "featuring_type", feature.getFeaturingType());
-            addRelationships(relationships, sourceQualifiedName, "chaining_feature", feature.getChainingFeature());
+            addRelationships(relationships, sourceQualifiedName, "type", FeatureUtil.getAllTypesOf(feature), libraryRoot);
+            addRelationships(relationships, sourceQualifiedName, "featuring_type", feature.getFeaturingType(), libraryRoot);
+            addRelationships(relationships, sourceQualifiedName, "chaining_feature", feature.getChainingFeature(), libraryRoot);
         }
     }
 
     private static void addRelationships(
-        Set<RelationshipKey> relationships,
+        List<RelationshipKey> relationships,
         String source,
         String relation,
-        Collection<? extends Element> targets
+        Collection<? extends Element> targets,
+        Path libraryRoot
     ) {
         for (Element target : targets) {
-            addRelationship(relationships, source, relation, qualifiedNameOf(target));
+            addRelationship(relationships, source, relation, exportIdentityOf(target, libraryRoot));
         }
     }
 
     private static void addRelationship(
-        Set<RelationshipKey> relationships,
+        List<RelationshipKey> relationships,
         String source,
         String relation,
         String target
@@ -247,6 +355,19 @@ public final class PilotStdlibExporter {
 
     private static String qualifiedNameOf(Element element) {
         return element == null ? null : clean(element.getQualifiedName());
+    }
+
+    private static String exportIdentityOf(Element element, Path libraryRoot) {
+        if (element == null) { return null; }
+        String qualifiedName = qualifiedNameOf(element);
+        if (qualifiedName != null) { return qualifiedName; }
+        if (element.eResource() == null) { return null; }
+        Path resource = resourcePath(element.eResource());
+        if (resource == null || !resource.startsWith(libraryRoot)) { return null; }
+        String fragment = element.eResource().getURIFragment(element);
+        String prefix = element instanceof Membership ? "LibraryMembership::" : "LibraryAnonymous::";
+        return prefix + normalizeRelativePath(libraryRoot.relativize(resource))
+            + "::" + UUID.nameUUIDFromBytes(fragment.getBytes(StandardCharsets.UTF_8));
     }
 
     private static Integer startLineOf(Element element) {
@@ -287,6 +408,16 @@ public final class PilotStdlibExporter {
         if (value != null) {
             properties.put(key, value);
         }
+    }
+
+    private static String normalizeAttributeName(String name) {
+        StringBuilder normalized = new StringBuilder();
+        for (int i = 0; i < name.length(); i++) {
+            char current = name.charAt(i);
+            if (Character.isUpperCase(current)) normalized.append('_');
+            normalized.append(Character.toLowerCase(current));
+        }
+        return normalized.toString();
     }
 
     private static String clean(String value) {
@@ -351,6 +482,7 @@ public final class PilotStdlibExporter {
     }
 
     private static final class ExportMetadata {
+        private boolean observed_ecore_defaults_v1;
         private int element_count;
         private int relationship_count;
         private String library_root;

@@ -1,0 +1,64 @@
+{
+  "schema": "dev.mercurio.value-result-type-warning-disposition.v1",
+  "qualification_certificate": false,
+  "context": "valuation-wrong-type",
+  "status": "no_blanket_static_rejection_required_native_diagnostic_unverified",
+  "normative": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      213,
+      214,
+      215
+    ],
+    "clauses": [
+      "8.3.4.5.2 Binding Connector",
+      "8.3.4.5.3 Connector"
+    ],
+    "binding_specific_constraints": [
+      "checkBindingConnectorSpecialization",
+      "validateBindingConnectorIsBinary"
+    ],
+    "review": "The BindingConnector requires equal related values, base selfLinks specialization and binary arity. These binding-specific clauses prescribe no static rejection simply because the two endpoint type names differ. Equality/satisfiability and the other inherited constraints remain distinct obligations; this review does not assert the complete model is semantically verified."
+  },
+  "pilot": {
+    "revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "validator_method": "org.omg.kerml.xtext.validation.KerMLValidator#doCheckBindingConnector(org.omg.sysml.lang.sysml.BindingConnector,org.omg.sysml.lang.sysml.Element)",
+    "source": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+    "source_sha256": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+    "span": {
+      "end_line": 972,
+      "length": 1747,
+      "offset": 52369,
+      "start_line": 944
+    },
+    "observed_outcome": "accepted",
+    "observed_diagnostic": {
+      "code": "validateBindingConnectorTypeConformance",
+      "column": 56,
+      "line": 1,
+      "message": "Bound features should have conforming types",
+      "severity": "WARNING",
+      "syntax": false
+    },
+    "behavior": "The pinned binding conformance helper warns on failed symmetric type conformance, with a separate Boolean-expression exception. Warning severity permits model transformation/export. No value coercion was observed or prescribed."
+  },
+  "native_contract": {
+    "terminal_expectation": "Retain the frozen accepted boundary; differing endpoint names alone must not become a new error or unsupported negative expectation.",
+    "storage": "Preserve the Boolean result declaration, integer literal, actual inherited integer result and required binding. Do not coerce a value or replace either type to match Pilot.",
+    "diagnostic": "Implement and independently verify any applicable conformance diagnostic through the shared native type/prototype and expression algorithms. The diagnostic algorithm is currently unverified.",
+    "remaining": [
+      "Actual input/provider lifecycle, inherited validation constraints, canonical publication and persistence.",
+      "Native symmetric type conformance and Boolean-expression semantic dependencies used by the reference diagnostic.",
+      "Full model satisfiability/equality must not be claimed from static warning behavior."
+    ]
+  },
+  "inputs": {
+    "docs/conformance/2026-08-support/value-result-obligation-bundle.json": "97d45c55e5dc096c63518d0fd02a5713d183b6213d91c0c164931a8714bc7ab2",
+    "docs/conformance/2026-08-support/value-result-reference-controls.json.gz": "bf78a570b997f5245140a215b9643026c576df8bedde382a06692e390da01767",
+    "docs/conformance/2026-08-support/value-service-normative-review.json": "33d14a0a60dc0a0fc0155a14d89cb6327db58bcf159b81fe77c3b4980fbc07b3",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/validators.inventory.extract.json": "8738715858dfda661c58dd70de4cf3c41cc21331959020589c5d570353e9eb9c"
+  },
+  "native_context_verified": false,
+  "acceptance_change": false
+}

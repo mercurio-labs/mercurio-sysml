@@ -1,0 +1,93 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "missing-after-comma.kerml": "cd9a6e38d3308c64856c6ea135817ea0771d8291679ce019e7508d7193d7cdb6",
+    "missing-after-comma.sysml": "a7597da2f307563659a0d0a21112009b9e435b44e7f06f281ff5b7c12f27c674",
+    "positive-default.kerml": "7e920088c75dfba185cc8e53c00d0a3d70d2f032454f48d7a2e956f1fb169168",
+    "positive-default.sysml": "10d6505ae65f9bf8f7fb926b6f38378a9fb13f9996eb5812ba58e761248a6be5",
+    "positive-ordered.kerml": "3eb1460b07ff54119195d2d7e2daa5f86eaee34b1de14257243adf32d44ad4b4",
+    "positive-ordered.sysml": "984ef92f0b3ca43ad8f0d6899b7f70678160db47ed3e8abe8488ed4ee29d3c96",
+    "unresolved-later.kerml": "6992dc1c0b58d7c502ca982646a94dded17c38c43d6e51ddfd861b2e43447605",
+    "unresolved-later.sysml": "57883a0f3638262485f76d1550081c0b488aa415bd3a6e60f02c86170154c54e"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "cases": [
+    {
+      "relative_path": "missing-after-comma.kerml",
+      "status": "error",
+      "validation_ms": 342.2285,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-after-comma.sysml",
+      "status": "error",
+      "validation_ms": 368.0838,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-default.kerml",
+      "status": "ok",
+      "validation_ms": 277.806899,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-default.sysml",
+      "status": "ok",
+      "validation_ms": 249.424701,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-ordered.kerml",
+      "status": "ok",
+      "validation_ms": 188.983,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-ordered.sysml",
+      "status": "ok",
+      "validation_ms": 239.4419,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "unresolved-later.kerml",
+      "status": "error",
+      "validation_ms": 416.7273,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "unresolved-later.sysml",
+      "status": "error",
+      "validation_ms": 310.2576,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Linking",
+          "message": "Couldn't resolve reference to Element 'Missing'.",
+          "line": 1
+        }
+      ]
+    }
+  ]
+}

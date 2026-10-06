@@ -1,0 +1,129 @@
+{
+  "scope": "Isolated CheckMode.ALL documentation controls; no benchmark",
+  "source_sha256": {
+    "invalid-about.kerml": "9365c8a1cd4ee77b3c636dcef8eb2b30c8022181dc16e56839ce4c8cfeba0976",
+    "invalid-about.sysml": "31a64567f753b931a48016656afcd186b1279fbc2aa58f75d0ac0d33fe6cde86",
+    "missing-body.kerml": "6ee0a9176ba0bb285add98114ae0836401f0299677bd0eb0a0cfe536bfe0b656",
+    "missing-body.sysml": "6ee0a9176ba0bb285add98114ae0836401f0299677bd0eb0a0cfe536bfe0b656",
+    "positive-body.kerml": "d9391d6caac9d6f05bbd9ee43645525f0bb93f5a934e33bceed65e7732e97816",
+    "positive-body.sysml": "d9391d6caac9d6f05bbd9ee43645525f0bb93f5a934e33bceed65e7732e97816",
+    "positive-nested.kerml": "53218e9c6592f61ccded98183fd134ecdfe91dc6399d08068e0d7aa42389d7c2",
+    "positive-nested.sysml": "3972eaf6f7a6ac528a5c131515eae17a03eec6e9b07abe5108e85188204397ae"
+  },
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "cases": [
+    {
+      "relative_path": "invalid-about.kerml",
+      "status": "error",
+      "validation_ms": 649.3792,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input 'about' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "invalid-about.sysml",
+      "status": "error",
+      "validation_ms": 745.806,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "mismatched input 'about' expecting RULE_REGULAR_COMMENT",
+          "line": 1
+        },
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "no viable alternative at input '/* invalid */'",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 1
+        },
+        {
+          "severity": "WARNING",
+          "code": "validateNamespaceDistinguishablity",
+          "message": "Duplicate of other owned member name",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.kerml",
+      "status": "error",
+      "validation_ms": 48.4266,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing RULE_REGULAR_COMMENT at '}'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "missing-body.sysml",
+      "status": "error",
+      "validation_ms": 103.5101,
+      "diagnostics": [
+        {
+          "severity": "ERROR",
+          "code": "org.eclipse.xtext.diagnostics.Diagnostic.Syntax",
+          "message": "missing RULE_REGULAR_COMMENT at '}'",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "relative_path": "positive-body.kerml",
+      "status": "ok",
+      "validation_ms": 40.2983,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-body.sysml",
+      "status": "ok",
+      "validation_ms": 48.5061,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-nested.kerml",
+      "status": "ok",
+      "validation_ms": 226.5705,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "positive-nested.sysml",
+      "status": "ok",
+      "validation_ms": 391.8488,
+      "diagnostics": []
+    }
+  ]
+}

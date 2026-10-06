@@ -1,0 +1,42 @@
+{
+  "schema": "dev.mercurio.clocks-resource-diagnostic.v1",
+  "scope": "Isolated actual pinned Clocks resource through the existing native candidate path. Required sibling libraries deliberately absent; diagnostic only, not model/resource qualification or comparable timing.",
+  "source_path": "sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml",
+  "source_sha256": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65",
+  "input_manifest": "docs/conformance/2026-08-support/definition-pipeline-evidence/clocks-resource-diagnostic-inputs.json",
+  "result": "docs/conformance/2026-08-support/definition-pipeline-evidence/clocks-resource-diagnostic-results.jsonl",
+  "progress_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/clocks-resource-diagnostic-progress.log",
+  "time_box_seconds": 90,
+  "semantic_qualification": "not_assessed",
+  "concurrent_native_regression": true,
+  "status": "assessed",
+  "exit_code": 1,
+  "outcome": {
+    "error": "Candidate definition document construction, linking or publication: Diagnostic { message: \"Operand construction: external/global scope service is required\", kind: Syntax, span: None, subjects: [] }",
+    "input_files": [
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml"
+    ],
+    "relative_path": "actual-Clocks-resource-isolation",
+    "resource_mode": "separate",
+    "semantic_qualification": "not_assessed",
+    "source_bytes": 4008,
+    "source_set_cache_hit": false,
+    "stage": "construction_or_linking",
+    "status": "blocked"
+  },
+  "progress_sha256": "284a4952b7a137985451a55ad2a3cd2940f215088b246c4ab744eabae7810352",
+  "native_executable": {
+    "path": "target/debug/audit_release_compile.exe",
+    "sha256": "d16168f21671aead16d609e7821968205fe1f8742f8653204d18b9235ad7b75e"
+  },
+  "replay_command": [
+    "target/debug/audit_release_compile.exe",
+    "--definition-candidate",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/clocks-resource-diagnostic-inputs.json",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/clocks-resource-diagnostic-results.jsonl"
+  ],
+  "progress_environment": {
+    "MERCURIO_DEFINITION_PROGRESS": "1"
+  },
+  "comparable_timing_assessed": false
+}

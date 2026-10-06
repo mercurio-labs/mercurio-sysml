@@ -1,0 +1,28 @@
+{
+  "scope": "Read-only typed containment projection; connector endpoints and generalizations remain open.",
+  "bindings": [
+    "Specialization_owningType",
+    "Subsetting_owningFeature",
+    "FeatureTyping_owningFeature",
+    "ReferenceSubsetting_referencingFeature"
+  ],
+  "upstream_sha256": {
+    "Specialization_owningType": "12978eadfa2253221c7c4a5d4b8c8f36872d433d4624b2d4f51551dbd6574492",
+    "Subsetting_owningFeature": "40eb34916bf495158e1181d7356b1283498a71cd565d608958d51ce9080f0e45",
+    "FeatureTyping_owningFeature": "09a203bee158da8006d076181fa13788327c7ca7a81bef6719f26f1472322221",
+    "ReferenceSubsetting_referencingFeature": "5f5319f108cb26b929164622e80cf12ddb27e1fc916bd0500ca2ce11440f79ec"
+  },
+  "native_source_sha256": "c56fbf39244cd0f957666550bc96474a9d2921f1003d3852e247103b13762eb4",
+  "verification": {
+    "detached_cases": 4,
+    "typed_owner_cases": 12,
+    "broken_reciprocal_cases": 12,
+    "pilot_connector_controls": 4,
+    "native_log": "definition-pipeline-evidence/specialization-owner-tests.log"
+  },
+  "remaining": [
+    "Complete connector inherited ends and generalizations",
+    "Connector source/target/relatedFeature projections",
+    "Owner mutation semantics"
+  ]
+}

@@ -1,4 +1,7 @@
+pub(crate) mod textual_representation;
+mod documentation;
 pub(crate) mod behavior_expression;
+mod release_expression;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, OnceLock};
@@ -16,7 +19,8 @@ use mercurio_foundation::language_contracts::ast::{
     QualifiedName, SourceSpan, UnaryOp,
 };
 use mercurio_foundation::language_contracts::diagnostics::Diagnostic;
-use mercurio_foundation::language_contracts::lexer::{Token, TokenKind, lex};
+use mercurio_foundation::language_contracts::lexer::{Token, TokenKind};
+use crate::xtext_terminal::lex;
 pub use mercurio_foundation::language_contracts::reports::{ParseReport, SemanticCompileStatus};
 use serde_json::Value;
 
@@ -126,11 +130,11 @@ pub fn default_sysml_library_path() -> PathBuf {
 /// or cache keys.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum StdlibLocator {
-    /// `embedded:sysml-stdlib/{metamodel_id}` — KIR bytes compiled into this binary.
+    /// `embedded:sysml-stdlib/{metamodel_id}` â€” KIR bytes compiled into this binary.
     Embedded { metamodel_id: String },
     /// `file:{path}` (or a bare path from the legacy `MERCURIO_STDLIB_PATH` env var).
     File { path: PathBuf },
-    /// `kpar:{name}:{version}` — delegates to the foundation package system.
+    /// `kpar:{name}:{version}` â€” delegates to the foundation package system.
     Kpar { locator: String },
 }
 
@@ -167,7 +171,7 @@ impl StdlibLocator {
                 locator: s.to_string(),
             };
         }
-        // Bare path — accept legacy MERCURIO_STDLIB_PATH values unchanged.
+        // Bare path â€” accept legacy MERCURIO_STDLIB_PATH values unchanged.
         Self::File {
             path: PathBuf::from(s),
         }
@@ -725,7 +729,12 @@ fn validate_metadata_usages(resolved: &ResolvedModule) -> Result<(), Diagnostic>
         let attributes = definition
             .members
             .iter()
-            .filter(|member| member.construct == "AttributeUsage")
+            .filter(|member| {
+                matches!(
+                    member.construct.as_str(),
+                    "AttributeUsage" | "ReferenceUsage"
+                )
+            })
             .map(|member| (member.declared_name.as_str(), member))
             .collect::<BTreeMap<_, _>>();
 
@@ -949,7 +958,7 @@ fn strip_type_in_declaration(declaration: &mut Declaration, span: &SourceSpan) -
     }
 }
 
-fn declaration_span(declaration: &Declaration) -> &SourceSpan {
+pub(crate) fn declaration_span(declaration: &Declaration) -> &SourceSpan {
     match declaration {
         Declaration::Package(declaration) => &declaration.span,
         Declaration::Import(declaration) => &declaration.span,
@@ -1079,6 +1088,78 @@ pub fn parse_sysml(input: &str) -> Result<SysmlModule, Diagnostic> {
         .map(|report| report.module)
 }
 
+pub(crate) fn parse_bare_comment(
+    tokens: &[Token], index: &mut usize, docs: Vec<String>, modifiers: Vec<String>, kerml: bool,
+) -> Result<Declaration, Diagnostic> {
+    let (consumed, mut declaration) = documentation::parse_comment(&tokens[*index..], kerml, docs, modifiers)?;
+    declaration.metadata_properties.insert("__bare_comment".into(), "true".into());
+    *index += consumed;
+    Ok(Declaration::GenericUsage(declaration))
+}
+
+pub(crate) fn parse_comment_declaration(
+    tokens: &mut Vec<Token>, index: &mut usize, docs: Vec<String>, modifiers: Vec<String>,
+) -> Result<GenericUsageDecl, Diagnostic> {
+    let mut parser = Parser::new(std::mem::take(tokens), false);
+    parser.index = *index;
+    parser.kerml_relationship_bodies = true;
+    let start = parser.current().clone();
+    let keyword = match &start.kind {
+        TokenKind::Identifier(value) => value.clone(),
+        _ => unreachable!("comment declaration keyword"),
+    };
+    parser.advance();
+    let result = parser.parse_usage_after_keyword(&keyword, start, docs, modifiers);
+    *index = parser.index;
+    *tokens = parser.tokens;
+    result.map(|declaration| match declaration {
+        Declaration::GenericUsage(usage) => usage,
+        _ => unreachable!("comment usage"),
+    })
+}
+
+// KerML and SysML share ImportPrefix/ImportedNamespace syntax. Keep one parser
+// so visibility, import-all, recursive paths and filters survive both surfaces.
+pub(crate) fn parse_alias_declaration(
+    tokens: &mut Vec<Token>, index: &mut usize, docs: Vec<String>, modifiers: Vec<String>,
+) -> Result<AliasDecl, Diagnostic> {
+    let mut parser = Parser::new(std::mem::take(tokens), false);
+    parser.index = *index;
+    parser.kerml_relationship_bodies = true;
+    let result = parser.parse_alias(docs, modifiers);
+    *index = parser.index;
+    *tokens = parser.tokens;
+    result
+}
+
+pub(crate) fn parse_import_declaration(
+    tokens: &mut Vec<Token>, index: &mut usize, docs: Vec<String>, modifiers: Vec<String>,
+) -> Result<ImportDecl, Diagnostic> {
+    let mut parser = Parser::new(std::mem::take(tokens), false);
+    parser.index = *index;
+    parser.kerml_relationship_bodies = true;
+    let result = parser.parse_import(docs, modifiers);
+    *index = parser.index;
+    *tokens = parser.tokens;
+    result
+}
+
+pub(crate) fn attach_metadata_prefixes(
+    mut declaration: Declaration, start: &SourceSpan, prefixes: &[String],
+) -> Declaration {
+    let (span, modifiers) = match &mut declaration {
+        Declaration::Package(d) => (&mut d.span, &mut d.modifiers),
+        Declaration::Import(d) => (&mut d.span, &mut d.modifiers),
+        Declaration::GenericDefinition(d) => (&mut d.span, &mut d.modifiers),
+        Declaration::GenericUsage(d) => (&mut d.span, &mut d.modifiers),
+        Declaration::Alias(d) => (&mut d.span, &mut d.modifiers),
+    };
+    span.start_line = start.start_line;
+    span.start_col = start.start_col;
+    modifiers.extend(prefixes.iter().map(|name| format!("language_extension={name}")));
+    declaration
+}
+
 pub fn parse_sysml_recovering(input: &str) -> Result<ParseReport, Diagnostic> {
     let tokens = lex(input)?;
     Parser::new(tokens, true).parse()
@@ -1091,6 +1172,7 @@ struct Parser {
     pending_comments: Vec<CommentNote>,
     diagnostics: Vec<Diagnostic>,
     recover: bool,
+    kerml_relationship_bodies: bool,
 }
 
 impl Parser {
@@ -1102,6 +1184,7 @@ impl Parser {
             pending_comments: Vec::new(),
             diagnostics: Vec::new(),
             recover,
+            kerml_relationship_bodies: false,
         }
     }
 
@@ -1144,7 +1227,7 @@ impl Parser {
     /// v1 scope: only LEADING own-line comments are preserved. Trailing
     /// same-line comments (`part x; // note`) and dangling comments before a
     /// closing `}` are lexed as trivia of the *next* token (or of `}`/EOF)
-    /// and are dropped here — preserving them is a documented follow-up.
+    /// and are dropped here â€” preserving them is a documented follow-up.
     fn parse_declaration(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         let comments = self.take_leading_comments();
         let declaration = self.parse_declaration_inner()?;
@@ -1153,7 +1236,7 @@ impl Parser {
 
     /// Drains the pending comment queue plus the own-line comment trivia
     /// attached to the current token (the first token of the upcoming
-    /// declaration — a modifier, keyword, or name).
+    /// declaration â€” a modifier, keyword, or name).
     fn take_leading_comments(&mut self) -> Vec<CommentNote> {
         let mut comments = std::mem::take(&mut self.pending_comments);
         if let Some(token) = self.tokens.get_mut(self.index) {
@@ -1172,6 +1255,7 @@ impl Parser {
 
     fn parse_declaration_inner(&mut self) -> Result<Option<Declaration>, Diagnostic> {
         let docs = std::mem::take(&mut self.pending_docs);
+        let declaration_start = self.current().span.clone();
         let modifiers = self.consume_declaration_modifiers();
         if let Some(keyword) = self.modifier_led_definition_keyword(&modifiers) {
             let start = self.current().clone();
@@ -1196,26 +1280,48 @@ impl Parser {
         {
             return Ok(Some(self.parse_modifier_only_declaration(docs, modifiers)?));
         }
+        // Assertion and satisfaction share the optional negation prefix, but
+        // `assert [not] satisfy` is a SatisfyRequirementUsage in the grammar.
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "assert" || value == "not") {
+            let start = self.current().clone();
+            let mut index = self.index;
+            if matches!(&self.tokens[index].kind, TokenKind::Identifier(value) if value == "assert") {
+                index += 1;
+            }
+            let negated = matches!(self.tokens.get(index).map(|t| &t.kind), Some(TokenKind::Identifier(value)) if value == "not");
+            if negated { index += 1; }
+            if matches!(self.tokens.get(index).map(|t| &t.kind), Some(TokenKind::Identifier(value)) if value == "satisfy") {
+                self.index = index + 1;
+                let mut modifiers = modifiers;
+                if negated { modifiers.push("is_negated".into()); }
+                return self.parse_usage_after_keyword("satisfy", start, docs, modifiers).map(Some);
+            }
+        }
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "rep" || value == "language") {
+            let start = self.current().clone();
+            self.advance();
+            return self.parse_textual_representation_after_keyword(start, docs, modifiers).map(Some);
+        }
         let current_kind = self.peek_kind().clone();
         let declaration = match current_kind {
-            TokenKind::Package => Declaration::Package(self.parse_package(docs, modifiers)?),
-            TokenKind::Import => Declaration::Import(self.parse_import(docs, modifiers)?),
+            TokenKind::BlockDoc(_) => parse_bare_comment(&self.tokens, &mut self.index, docs, modifiers, self.kerml_relationship_bodies)?,
+            TokenKind::Package | TokenKind::Import => self.parse_namespace_declaration(docs, modifiers)?,
             TokenKind::At => self.parse_annotation_usage(docs, modifiers)?,
             TokenKind::Part => self.parse_feature_declaration("part", docs, modifiers)?,
             TokenKind::Specializes | TokenKind::Redefines => {
                 self.parse_relation_led_declaration(docs, modifiers)?
             }
             TokenKind::Identifier(ref value) if value == "alias" => {
-                Declaration::Alias(self.parse_alias(docs, modifiers)?)
+                self.parse_namespace_declaration(docs, modifiers)?
             }
             // `expose` is import-shaped, not usage-shaped. Without this arm it
             // falls through to generic usage parsing and mis-parses into a
             // feature named after the first path segment, silently dropping the
             // `::**` wildcard (save-as-view SV-1).
             TokenKind::Identifier(ref value) if value == "expose" => {
-                Declaration::Import(self.parse_expose(docs, modifiers)?)
+                self.parse_namespace_declaration(docs, modifiers)?
             }
-            // `filter <condition>;` — an ElementFilterMembership on the owning
+            // `filter <condition>;` â€” an ElementFilterMembership on the owning
             // view or package. Guarded against `filter def`, so a user type
             // named `filter` still parses as a definition (save-as-view SV-1).
             TokenKind::Identifier(ref value)
@@ -1255,7 +1361,10 @@ impl Parser {
                     modifiers,
                 )?
             }
-            TokenKind::Hash => self.parse_hashed_declaration(docs, modifiers)?,
+            TokenKind::Hash => {
+                let declaration = self.parse_hashed_declaration(docs, modifiers)?;
+                attach_metadata_prefixes(declaration, &declaration_start, &[])
+            },
             TokenKind::Identifier(ref value) if self.should_parse_as_feature_keyword(value) => {
                 self.parse_feature_declaration(value, docs, modifiers)?
             }
@@ -1271,10 +1380,22 @@ impl Parser {
         Ok(Some(declaration))
     }
 
+    // Construct the larger namespace declaration variants outside the recursive
+    // dispatch frame, which must also fit deeply nested bodies on Windows.
+    fn parse_namespace_declaration(&mut self, docs: Vec<String>, modifiers: Vec<String>) -> Result<Declaration, Diagnostic> {
+        match self.peek_kind() {
+            TokenKind::Package => self.parse_package(docs, modifiers).map(Declaration::Package),
+            TokenKind::Import => self.parse_import(docs, modifiers).map(Declaration::Import),
+            TokenKind::Identifier(value) if value == "alias" => self.parse_alias(docs, modifiers).map(Declaration::Alias),
+            TokenKind::Identifier(value) if value == "expose" => self.parse_expose(docs, modifiers).map(Declaration::Import),
+            _ => unreachable!("namespace dispatch"),
+        }
+    }
+
     fn parse_relation_led_declaration(
         &mut self,
         docs: Vec<String>,
-        modifiers: Vec<String>,
+        mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.current().clone();
         let relation_kind = self.peek_kind().clone();
@@ -1297,7 +1418,9 @@ impl Parser {
         let end = self.finish_usage("declaration", tail.had_body)?;
         let keyword = implicit_usage_keyword(&modifiers);
 
+        tail.append_value_modifiers(&mut modifiers);
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: keyword.to_string(),
             name,
             is_implicit_name: false,
@@ -1323,89 +1446,34 @@ impl Parser {
     fn parse_hashed_declaration(
         &mut self,
         docs: Vec<String>,
-        modifiers: Vec<String>,
+        mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
-        self.expect(TokenKind::Hash, "expected `#`")?;
-        match self.peek_kind().clone() {
-            TokenKind::Identifier(value)
-                if value == "derivation"
-                    && matches!(self.next_kind(), Some(TokenKind::Identifier(next)) if next == "connection") =>
-            {
-                let mut hashed_modifiers = modifiers;
-                hashed_modifiers.push("derivation".to_string());
-                self.parse_composite_feature_declaration(
-                    "derivation",
-                    "connection",
-                    "connection",
-                    docs,
-                    hashed_modifiers,
-                )
-            }
-            TokenKind::Identifier(value)
-                if value == "causation"
-                    && matches!(self.next_kind(), Some(TokenKind::Identifier(next)) if next == "connect") =>
-            {
-                self.parse_composite_feature_declaration(
-                    "causation",
-                    "connect",
-                    "connect",
-                    docs,
-                    modifiers,
-                )
-            }
-            TokenKind::Identifier(value) if matches!(self.next_kind(), Some(TokenKind::Hash)) => {
-                let mut hashed_modifiers = modifiers;
-                hashed_modifiers.push(value);
-                self.advance();
-                while matches!(self.peek_kind(), TokenKind::Hash)
-                    && matches!(self.next_kind(), Some(TokenKind::Identifier(_)))
-                {
-                    self.expect(TokenKind::Hash, "expected `#`")?;
-                    let modifier = self.expect_identifier("expected metadata annotation name")?;
-                    hashed_modifiers.push(modifier);
-                }
-                match self.peek_kind().clone() {
-                    TokenKind::Identifier(next) if self.should_parse_as_feature_keyword(&next) => {
-                        self.parse_feature_declaration(&next, docs, hashed_modifiers)
-                    }
-                    TokenKind::Part => {
-                        self.parse_feature_declaration("part", docs, hashed_modifiers)
-                    }
-                    _ => self.parse_implicit_usage(docs, hashed_modifiers),
-                }
-            }
-            TokenKind::Identifier(value)
-                if !matches!(value.as_str(), "cause" | "effect")
-                    && (matches!(
-                        self.next_kind(),
-                        Some(TokenKind::Package | TokenKind::Import | TokenKind::Part)
-                    ) || matches!(
-                        self.next_kind(),
-                        Some(TokenKind::Identifier(next)) if is_feature_keyword(next)
-                    )) =>
-            {
-                let mut hashed_modifiers = modifiers;
-                hashed_modifiers.push(value);
-                self.advance();
-                match self.peek_kind().clone() {
-                    TokenKind::Package => Ok(Declaration::Package(
-                        self.parse_package(docs, hashed_modifiers)?,
-                    )),
-                    TokenKind::Import => Ok(Declaration::Import(
-                        self.parse_import(docs, hashed_modifiers)?,
-                    )),
-                    TokenKind::Part => {
-                        self.parse_feature_declaration("part", docs, hashed_modifiers)
-                    }
-                    TokenKind::Identifier(next) => {
-                        self.parse_feature_declaration(&next, docs, hashed_modifiers)
-                    }
-                    _ => unreachable!(),
-                }
-            }
-            TokenKind::Identifier(value) => self.parse_feature_declaration(&value, docs, modifiers),
-            _ => Err(self.error_here("expected hashed declaration keyword after `#`")),
+        let start = self.current().clone();
+        let annotation_start = start.span.clone();
+        while matches!(self.peek_kind(), TokenKind::Hash) {
+            self.advance();
+            let name = self.parse_grammar_qualified_name()?;
+            modifiers.push(format!("language_extension={}", name.segments.join("::")));
         }
+        // SysML.xtext ExtendedDefinition/ExtendedUsage retain the base
+        // Definition/Usage metaclass. Extension keywords are metadata, never
+        // names of new metaclasses. Explicit language keywords keep their kind.
+        let declaration = match self.peek_kind().clone() {
+            TokenKind::Def => {
+                self.advance();
+                self.parse_definition_after_keyword("extended", start, docs, modifiers)
+            }
+            TokenKind::Package => Ok(Declaration::Package(self.parse_package(docs, modifiers)?)),
+            TokenKind::Import => Ok(Declaration::Import(self.parse_import(docs, modifiers)?)),
+            TokenKind::Part => self.parse_feature_declaration("part", docs, modifiers),
+            TokenKind::Identifier(value) if is_feature_keyword(&value) => {
+                self.parse_feature_declaration(&value, docs, modifiers)
+            }
+            _ => self.parse_usage_after_keyword("extended", start, docs, modifiers),
+        }?;
+        // The annotation prefix belongs to the declaration's source extent.
+        // Retain it for identity pairing and source-preserving authoring edits.
+        Ok(attach_metadata_prefixes(declaration, &annotation_start, &[]))
     }
 
     fn parse_composite_feature_declaration(
@@ -1436,12 +1504,14 @@ impl Parser {
     fn parse_modifier_only_declaration(
         &mut self,
         docs: Vec<String>,
-        modifiers: Vec<String>,
+        mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.current().span.clone();
         let mut tail = self.parse_usage_tail(&[])?;
         let keyword = implicit_usage_keyword(&modifiers);
-        let name = if matches!(self.peek_kind(), TokenKind::Semicolon) {
+        let name = if !tail.redefines.is_empty() || !tail.specializes.is_empty() {
+            tail.derived_name(keyword)
+        } else if matches!(self.peek_kind(), TokenKind::Semicolon) {
             modifiers
                 .last()
                 .cloned()
@@ -1453,7 +1523,9 @@ impl Parser {
         let has_type = tail.ty.is_some();
         let reference_target = infer_reference_target(keyword, &name, has_type, &mut tail);
 
+        tail.append_value_modifiers(&mut modifiers);
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: keyword.to_string(),
             name,
             is_implicit_name: true,
@@ -1484,6 +1556,11 @@ impl Parser {
             return false;
         }
 
+        if matches!(self.peek_kind(), TokenKind::Identifier(value)
+            if matches!(value.as_str(), "fork" | "join" | "merge" | "decide" | "terminate"))
+        {
+            return false;
+        }
         match (self.peek_kind(), self.next_kind()) {
             (TokenKind::Identifier(_), Some(TokenKind::Semicolon)) => true,
             (TokenKind::Identifier(_), Some(TokenKind::Identifier(next))) => next == "then",
@@ -1555,6 +1632,7 @@ impl Parser {
         }
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: "succession-as".to_string(),
             name: String::new(),
             is_implicit_name: true,
@@ -1650,16 +1728,17 @@ impl Parser {
     fn parse_import(
         &mut self,
         docs: Vec<String>,
-        modifiers: Vec<String>,
+        mut modifiers: Vec<String>,
     ) -> Result<ImportDecl, Diagnostic> {
         let start = self.expect(TokenKind::Import, "expected `import`")?;
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "all") {
             self.expect_identifier_named("all", "expected `all` after `import`")?;
+            modifiers.push("import_all".to_string());
         }
         self.parse_namespace_query_tail(start, false, docs, modifiers, "import")
     }
 
-    /// `expose <path>[<filter>];` — the view-scoped twin of `import`.
+    /// `expose <path>[<filter>];` â€” the view-scoped twin of `import`.
     ///
     /// `SysML::MembershipExpose`/`NamespaceExpose` are parallel to
     /// `MembershipImport`/`NamespaceImport` in the metamodel and share the same
@@ -1685,16 +1764,10 @@ impl Parser {
     ) -> Result<ImportDecl, Diagnostic> {
         let path = self.parse_import_path()?;
         let filter = self.parse_namespace_query_filter()?;
-        let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
-            self.consume_opaque_block_with_open()?
-        } else {
-            self.expect(
-                TokenKind::Semicolon,
-                &format!("expected `;` after {keyword}"),
-            )?
-        };
+        let (body_members, end) = self.parse_relationship_body(keyword)?;
 
         Ok(ImportDecl {
+            body_members,
             path,
             is_expose,
             filter,
@@ -1705,7 +1778,7 @@ impl Parser {
         })
     }
 
-    /// `filter <condition>;` — an `SysML::ElementFilterMembership` on the
+    /// `filter <condition>;` â€” an `SysML::ElementFilterMembership` on the
     /// owning view definition or package.
     ///
     /// Like a namespace-query filter, the condition is held as raw text; SV-2
@@ -1718,7 +1791,7 @@ impl Parser {
     ) -> Result<Declaration, Diagnostic> {
         let start = self.expect_identifier_named("filter", "expected `filter`")?;
 
-        // The interoperable case is exactly `filter @<QualifiedName>` — a
+        // The interoperable case is exactly `filter @<QualifiedName>` â€” a
         // metaclass predicate, which is what maps onto TableRowTypeDto. Capture
         // that shape structurally in `reference_target`; anything richer keeps
         // its raw text and is resolved by SV-2.
@@ -1764,6 +1837,7 @@ impl Parser {
         properties.insert("condition".to_string(), condition);
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: "filter".to_string(),
             name: String::new(),
             is_implicit_name: true,
@@ -1789,7 +1863,7 @@ impl Parser {
     /// A bracketed filter condition on a namespace query, e.g. `[@Safety]` or
     /// `[not (@Safety)]`.
     ///
-    /// Captured as raw text. The parser's job here is to stop *losing* it —
+    /// Captured as raw text. The parser's job here is to stop *losing* it â€”
     /// before this, `consume_suffix_adornments` mis-read the brackets as a
     /// multiplicity range and discarded the result, so `vehicle::**[@Safety]`
     /// silently resolved as `vehicle::**`. Evaluating the condition against an
@@ -1839,11 +1913,12 @@ impl Parser {
         modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.expect(TokenKind::At, "expected `@`")?;
-        let name = self.parse_qualified_name()?.as_colon_string();
+        let ty = self.parse_grammar_qualified_name()?;
+        let name = ty.as_colon_string();
         let reference_target = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "about")
         {
             self.expect_identifier_named("about", "expected `about` after annotation name")?;
-            Some(self.parse_qualified_name()?)
+            Some(self.parse_grammar_qualified_name()?)
         } else {
             None
         };
@@ -1857,10 +1932,11 @@ impl Parser {
         };
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: "metadata".to_string(),
             name,
             is_implicit_name: false,
-            ty: None,
+            ty: Some(ty),
             reference_target,
             allocation_source: None,
             allocation_target: None,
@@ -1956,14 +2032,23 @@ impl Parser {
 
         let value = parts.join("");
         // Numeric metadata must retain its decimal/exponent spelling.
-        if value.parse::<f64>().is_ok() { return Ok(value); }
+        if value.parse::<f64>().is_ok() {
+            return Ok(value);
+        }
         // Only shorten qualified identifier literals (e.g. Enum::member).
         // Never turn an unsupported arithmetic expression into a valid number.
-        let identifier_path = value.split("::").flat_map(|part| part.split('.')).all(|part| {
-            part.chars().next().is_some_and(|c| c.is_alphabetic() || c == '_')
-                && part.chars().all(|c| c.is_alphanumeric() || c == '_')
-        });
-        if !identifier_path { return Ok(value); }
+        let identifier_path = value
+            .split("::")
+            .flat_map(|part| part.split('.'))
+            .all(|part| {
+                part.chars()
+                    .next()
+                    .is_some_and(|c| c.is_alphabetic() || c == '_')
+                    && part.chars().all(|c| c.is_alphanumeric() || c == '_')
+            });
+        if !identifier_path {
+            return Ok(value);
+        }
         Ok(value
             .rsplit([':', '.'])
             .find(|part| !part.is_empty())
@@ -1981,14 +2066,6 @@ impl Parser {
         if keyword == "end" {
             return self.parse_end_feature_declaration(start, docs, modifiers);
         }
-        if keyword == "include"
-            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "use")
-            && matches!(self.next_kind(), Some(TokenKind::Identifier(next)) if next == "case")
-        {
-            self.expect_identifier_named("use", "expected `use` after `include`")?;
-            self.expect_identifier_named("case", "expected `case` after `include use`")?;
-            return self.parse_usage_after_keyword("use-case", start, docs, modifiers);
-        }
         let is_definition = matches!(self.peek_kind(), TokenKind::Def);
         if is_definition {
             self.advance();
@@ -2004,6 +2081,41 @@ impl Parser {
         mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         modifiers.push("end".to_string());
+        if let Some(feature_index) = (self.index..self.tokens.len())
+            .take_while(|i| !matches!(self.tokens[*i].kind, TokenKind::Semicolon | TokenKind::LBrace | TokenKind::RBrace | TokenKind::Eof))
+            .find(|i| matches!(&self.tokens[*i].kind, TokenKind::Part)
+                || matches!(&self.tokens[*i].kind, TokenKind::Identifier(k) if k == "item" || k == "port"))
+            && feature_index > self.index
+        {
+            let mut header = self.tokens[self.index..feature_index].to_vec();
+            let mut terminator = self.tokens[feature_index].clone();
+            terminator.kind = TokenKind::Semicolon;
+            header.push(terminator.clone());
+            terminator.kind = TokenKind::Eof;
+            header.push(terminator);
+            let mut crossing_parser = Parser::new(header, false);
+            let mut crossing = if matches!(crossing_parser.peek_kind(), TokenKind::Identifier(_)) {
+                crossing_parser.parse_implicit_usage(Vec::new(), Vec::new())?
+            } else {
+                let mut crossing = synthetic_reference_usage("cross", None, None, &[], &start.span);
+                if let Declaration::GenericUsage(usage) = &mut crossing {
+                    usage.is_implicit_name = true;
+                    usage.multiplicity = crossing_parser.consume_suffix_adornments()?;
+                    usage.modifiers.extend(crossing_parser.consume_declaration_modifiers());
+                }
+                crossing
+            };
+            if let Declaration::GenericUsage(usage) = &mut crossing {
+                usage.keyword = "reference".into();
+                usage.modifiers.push("owned_crossing_feature".into());
+            }
+            self.index = feature_index;
+            let keyword = match self.peek_kind() { TokenKind::Part => "part", TokenKind::Identifier(k) => k.as_str(), _ => unreachable!() }.to_string();
+            self.advance();
+            let mut end = self.parse_usage_after_keyword(&keyword, start, docs, modifiers)?;
+            if let Declaration::GenericUsage(usage) = &mut end { usage.body_members.insert(0, crossing); }
+            return Ok(end);
+        }
         self.consume_suffix_adornments()?;
 
         match self.peek_kind() {
@@ -2030,8 +2142,9 @@ impl Parser {
         mut docs: Vec<String>,
         mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
-        modifiers.extend(self.consume_angle_adornments()?);
-        let name = self.expect_identifier(&format!("expected {keyword} definition name"))?;
+        let (consumed, name, short) = crate::xtext_fragment::definition_identification(false, &self.tokens[self.index..])?;
+        self.index += consumed;
+        if let Some(short) = short { modifiers.push(format!("short_name={short}")); }
         self.consume_suffix_adornments()?;
         let mut specializes = Vec::new();
 
@@ -2057,6 +2170,24 @@ impl Parser {
             _ => return Err(self.error_here("expected `;` or `{` after part definition")),
         };
 
+        if keyword == "metadata" {
+            for member in &mut members {
+                if let Declaration::GenericUsage(usage) = member {
+                    if usage.keyword == "feature" {
+                        usage.keyword = "reference".to_string();
+                    }
+                }
+            }
+        }
+        if keyword == "enum" {
+            for member in &mut members {
+                if let Declaration::GenericUsage(usage) = member {
+                    if matches!(usage.keyword.as_str(), "reference" | "feature") {
+                        usage.keyword = "enum".to_string();
+                    }
+                }
+            }
+        }
         let span = merge_span(&start.span, &end.span);
         Ok(Declaration::GenericDefinition(GenericDefinitionDecl {
             keyword: keyword.to_string(),
@@ -2074,35 +2205,619 @@ impl Parser {
         &mut self,
         keyword: &str,
         start: Token,
-        mut docs: Vec<String>,
+        docs: Vec<String>,
         mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
-        modifiers.extend(self.consume_angle_adornments()?);
-        if keyword == "comment" {
-            return self.parse_comment_usage_after_keyword(start, docs, modifiers);
+        if keyword == "doc" {
+            return self.parse_documentation_after_keyword(docs, modifiers);
         }
-        if keyword == "rep" {
+        if keyword == "rep" || keyword == "language" {
             return self.parse_textual_representation_after_keyword(start, docs, modifiers);
         }
+        if matches!(keyword, "comment" | "locale") {
+            return self.parse_comment_usage_after_keyword(start, docs, modifiers);
+        }
+        modifiers.extend(self.consume_angle_adornments()?);
+        if matches!(keyword, "subject" | "actor" | "stakeholder")
+            && !modifiers.iter().any(|m| matches!(m.as_str(), "in" | "out" | "inout"))
+        { modifiers.push("in".into()); }
+        if matches!(keyword, "if" | "while" | "loop" | "for") {
+            return self.parse_structured_action(keyword, start, docs, modifiers, None);
+        }
+        // The optional action keyword precedes the accept/send node itself.
+        if keyword == "action"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if matches!(value.as_str(), "accept" | "send" | "terminate"))
+        {
+            let node = self.expect_identifier("expected action node")?;
+            return self.parse_usage_after_keyword(&node, start, docs, modifiers);
+        }
+        let UsageHead {
+            mut effective_keyword,
+            mut synthetic_body_members,
+            mut force_implicit_name,
+            accept_target_span,
+            leading_specialization,
+            mut allocation_source,
+            mut allocation_target,
+            explicit_reference_target,
+            mut explicit_name,
+        } = self.parse_usage_head(keyword, &start, &mut modifiers)?;
+        if keyword == "action" && explicit_name.is_some() {
+            if let TokenKind::Identifier(control) = self.peek_kind().clone() {
+                if matches!(control.as_str(), "if" | "while" | "loop" | "for") {
+                    self.advance();
+                    return self.parse_structured_action(
+                        &control,
+                        start,
+                        docs,
+                        modifiers,
+                        explicit_name,
+                    );
+                }
+            }
+        }
+        if keyword == "action" && explicit_name.is_some() {
+            if let TokenKind::Identifier(node) = self.peek_kind().clone() {
+                if matches!(node.as_str(), "assign" | "accept" | "send" | "terminate") {
+                    self.advance();
+                    effective_keyword = node.clone();
+                    let mut head = self.parse_usage_head(&node, &start, &mut modifiers)?;
+                    synthetic_body_members.append(&mut head.synthetic_body_members);
+                }
+            }
+        }
+        if keyword == "message" { self.append_message_members(&start, &mut synthetic_body_members)?; }
+        // Pilot GuardedSuccession is a TransitionUsage. Its declaration prefix
+        // uses `succession`, but its source/guard/target have transition semantics.
+        let guarded_succession = keyword == "succession"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first")
+            && self.tokens[self.index..].iter()
+                .take_while(|token| !matches!(&token.kind, TokenKind::Semicolon | TokenKind::LBrace | TokenKind::RBrace | TokenKind::Eof)
+                    && !matches!(&token.kind, TokenKind::Identifier(value) if value == "then"))
+                .any(|token| matches!(&token.kind, TokenKind::Identifier(value) if value == "if"));
+        let parsed_transition_shorthand = if keyword == "transition" || guarded_succession {
+            if guarded_succession { effective_keyword = "transition".to_string(); }
+            self.parse_transition_usage_shorthand(&mut modifiers, &mut synthetic_body_members)?
+        } else {
+            false
+        };
+        // Reroute the standalone `accept â€¦ then Y` shorthand. The pilot models it
+        // as an anonymous TransitionUsage whose source is the immediately
+        // preceding sibling state, owning an `accepter` AcceptActionUsage (which
+        // in turn owns the payload), not a bare AcceptActionUsage. Detect it by
+        // the `transition_target=` modifier the accept branches recorded, and
+        // mark it for previous-sibling-state source resolution during lowering.
+        if keyword == "accept"
+            && modifiers
+                .iter()
+                .any(|modifier| modifier.starts_with("transition_target="))
+        {
+            let accept_members = std::mem::take(&mut synthetic_body_members);
+            synthetic_body_members.push(accepter_action_with_members(accept_members, &start.span));
+            // The happensBefore succession is anchored at the `then` clause and
+            // pairs cleanly. The transition's transitionLinkSource/payload link
+            // features are deferred: the pilot anchors them at the accept head
+            // with a span rule not yet replicated for the standalone shorthand.
+            if let Some(then_span) = &accept_target_span {
+                synthetic_body_members.push(standalone_happens_before_succession(then_span));
+            }
+            modifiers.push("implicit_transition_source".to_string());
+            effective_keyword = "transition".to_string();
+            explicit_name = None;
+            force_implicit_name = true;
+        }
+        let is_implicit_name = explicit_name.is_none() || force_implicit_name;
+        let mut tail = if keyword == "connect" {
+            Box::new(UsageTail {
+                is_ordered: false,
+                is_nonunique: false,
+                value_is_initial: false,
+                value_is_default: false,
+                ty: None,
+                multiplicity: None,
+                expression: None,
+                additional_types: Vec::new(),
+                specializes: Vec::new(),
+                subsets: Vec::new(),
+                redefines: Vec::new(),
+                body_members: Vec::new(),
+                owner_docs: Vec::new(),
+                had_body: false,
+            })
+        } else if parsed_transition_shorthand {
+            // TransitionUsage ends in ActionBody, just like other action usages.
+            self.parse_usage_tail(&[])?
+        } else if is_constraint_expression_usage(&effective_keyword, &modifiers) {
+            if let Some(tail) = self.try_parse_constraint_expression_tail()? {
+                tail
+            } else {
+                self.parse_usage_tail(&[])?
+            }
+        } else {
+            self.parse_usage_tail(if matches!(keyword, "connection" | "interface") {
+                &["connect"]
+            } else if keyword == "allocation" {
+                &["allocate"]
+            } else if keyword == "binding" {
+                &["bind"]
+            } else if keyword == "succession" && effective_keyword != "succession-flow" {
+                &["first"]
+            } else {
+                &[]
+            })?
+        };
+        if let Some(connector) = self.parse_named_binary_connector(keyword, &effective_keyword, guarded_succession, &mut tail)? {
+            effective_keyword = connector.into();
+        }
+        if keyword == "allocation"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "allocate")
+        {
+            self.advance();
+            let ends = self.parse_connector_part()?;
+            allocation_source = ends.first().and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            allocation_target = ends.get(1).and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            tail.body_members.extend(ends);
+            let body = self.parse_usage_tail(&[])?;
+            tail.body_members.extend(body.body_members);
+            tail.owner_docs.extend(body.owner_docs);
+            tail.had_body = body.had_body;
+        }
+        if let Some(target) = leading_specialization {
+            tail.specializes.insert(0, target);
+        }
+        if !synthetic_body_members.is_empty() {
+            tail.body_members.extend(synthetic_body_members);
+        }
+        self.parse_connection_end_members(keyword, &mut tail)?;
+        self.finish_parsed_usage(effective_keyword, explicit_name, is_implicit_name, tail,
+            explicit_reference_target, allocation_source, allocation_target, docs, modifiers, start)
+    }
+
+    // Run final AST assembly after child-body recursion has returned, keeping
+    // large temporary declarations off every active recursive usage frame.
+    #[inline(never)]
+    fn finish_parsed_usage(
+        &mut self, effective_keyword: String, explicit_name: Option<String>, is_implicit_name: bool,
+        mut tail: Box<UsageTail>, explicit_reference_target: Option<QualifiedName>,
+        allocation_source: Option<QualifiedName>, allocation_target: Option<QualifiedName>,
+        mut docs: Vec<String>, mut modifiers: Vec<String>, start: Token,
+    ) -> Result<Declaration, Diagnostic> {
+        let name = explicit_name.unwrap_or_else(|| tail.derived_name(&effective_keyword));
+        let end = self.finish_usage(&effective_keyword, tail.had_body)?;
+        let span = merge_span(&start.span, &end.span);
+        docs.append(&mut tail.owner_docs);
+        // MetadataUsageDeclaration also permits the type without a colon
+        // when no feature identification is supplied.
+        if effective_keyword == "metadata" && tail.ty.is_none() {
+            tail.ty = Some(QualifiedName { segments: name.split("::").map(str::to_string).collect(), span: span.clone() });
+        }
+        let has_type = tail.ty.is_some();
+        let reference_target = explicit_reference_target
+            .or_else(|| infer_reference_target(&effective_keyword, &name, has_type, &mut tail))
+            .or_else(|| {
+                if effective_keyword == "require"
+                    && tail.ty.is_none()
+                    && name != "constraint"
+                    && !modifiers.iter().any(|modifier| modifier == "constraint")
+                {
+                    Some(QualifiedName {
+                        segments: vec![name.clone()],
+                        span: span.clone(),
+                    })
+                } else {
+                    None
+                }
+            });
+
+        tail.append_value_modifiers(&mut modifiers);
+        Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
+            keyword: effective_keyword,
+            name,
+            is_implicit_name,
+            ty: tail.ty,
+            reference_target,
+            allocation_source,
+            allocation_target,
+            metadata_properties: Default::default(),
+            multiplicity: tail.multiplicity,
+            expression: tail.expression,
+            additional_types: tail.additional_types,
+            specializes: tail.specializes,
+            subsets: tail.subsets,
+            redefines: tail.redefines,
+            body_members: tail.body_members,
+            comments: Vec::new(),
+            docs,
+            modifiers,
+            span,
+        }))
+    }
+
+    // Keep head parsing off the recursive declaration-body stack. The Vehicle
+    // sample's nested occurrences exhausted the Windows debug main stack when
+    // all shorthand alternatives and body parsing shared a single large frame.
+    fn parse_structured_action(
+        &mut self,
+        keyword: &str,
+        start: Token,
+        docs: Vec<String>,
+        modifiers: Vec<String>,
+        explicit_name: Option<String>,
+    ) -> Result<Declaration, Diagnostic> {
+        let mut members = Vec::new();
+        let mut parameter = |name: &str, expression: Expr| {
+            let mut member = synthetic_reference_usage(name, None, None, &["in"], &start.span);
+            if let Declaration::GenericUsage(usage) = &mut member {
+                usage.expression = Some(expression);
+            }
+            members.push(member);
+        };
+        if matches!(keyword, "if" | "while") {
+            parameter("condition", self.parse_expression()?);
+        } else if keyword == "for" {
+            let name = self.expect_identifier("expected loop variable")?;
+            let ty = if matches!(self.peek_kind(), TokenKind::Colon) {
+                self.advance();
+                Some(self.parse_qualified_name()?)
+            } else {
+                None
+            };
+            self.expect_identifier_named("in", "expected `in` after loop variable")?;
+            parameter("sequence", self.parse_expression()?);
+            members.push(synthetic_reference_usage(&name, ty, None, &[], &start.span));
+        }
+        // ActionBodyParameter can have its own declaration name.
+        let mut body_name = if keyword == "if" {
+            "then".to_string()
+        } else {
+            "body".to_string()
+        };
+        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "action") {
+            self.advance();
+            if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+                body_name = self.expect_identifier("expected action body name")?;
+            }
+        }
+        self.expect(TokenKind::LBrace, "expected structured action body")?;
+        let block = self.parse_declaration_block_contents_after_open()?;
+        let mut end = block.end;
+        let mut body = synthetic_reference_usage(&body_name, None, None, &["in"], &start.span);
+        if let Declaration::GenericUsage(usage) = &mut body {
+            usage.keyword = "action".to_string();
+            usage.body_members = block.members;
+            usage.docs = block.owner_docs;
+        }
+        members.push(body);
+        if keyword == "if"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "else")
+        {
+            self.advance();
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+                let nested_start = self.current().clone();
+                self.advance();
+                let nested = self.parse_structured_action(
+                    "if",
+                    nested_start,
+                    Vec::new(),
+                    Vec::new(),
+                    Some("else".to_string()),
+                )?;
+                if let Declaration::GenericUsage(usage) = &nested {
+                    end.span = usage.span.clone();
+                }
+                members.push(nested);
+            } else {
+                self.expect(TokenKind::LBrace, "expected else action body")?;
+                let block = self.parse_declaration_block_contents_after_open()?;
+                end = block.end;
+                let mut body = synthetic_reference_usage("else", None, None, &["in"], &start.span);
+                if let Declaration::GenericUsage(usage) = &mut body {
+                    usage.keyword = "action".to_string();
+                    usage.body_members = block.members;
+                    usage.docs = block.owner_docs;
+                }
+                members.push(body);
+            }
+        }
+        if matches!(keyword, "while" | "loop")
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "until")
+        {
+            self.advance();
+            let mut until = synthetic_reference_usage("until", None, None, &["in"], &start.span);
+            if let Declaration::GenericUsage(usage) = &mut until {
+                usage.expression = Some(self.parse_expression()?);
+            }
+            members.push(until);
+            end = self.expect(TokenKind::Semicolon, "expected `;` after until condition")?;
+        }
+        let mut declaration = synthetic_reference_usage(
+            explicit_name.as_deref().unwrap_or(keyword),
+            None,
+            None,
+            &[],
+            &start.span,
+        );
+        if let Declaration::GenericUsage(usage) = &mut declaration {
+            usage.keyword = keyword.to_string();
+            usage.is_implicit_name = explicit_name.is_none();
+            usage.body_members = members;
+            usage.modifiers = modifiers;
+            usage.docs = docs;
+            usage.span = merge_span(&start.span, &end.span);
+        }
+        Ok(declaration)
+    }
+
+    fn starts_anonymous_flow(&self) -> bool {
+        let mut index = self.index;
+        if matches!(self.tokens.get(index).map(|t| &t.kind), Some(TokenKind::Identifier(value)) if value == "from")
+        {
+            return true;
+        }
+        if !matches!(
+            self.tokens.get(index).map(|t| &t.kind),
+            Some(TokenKind::Identifier(_))
+        ) {
+            return false;
+        }
+        index += 1;
+        while matches!(
+            self.tokens.get(index).map(|t| &t.kind),
+            Some(TokenKind::Dot | TokenKind::ScopeSep)
+        ) && matches!(
+            self.tokens.get(index + 1).map(|t| &t.kind),
+            Some(TokenKind::Identifier(_))
+        ) {
+            index += 2;
+        }
+        matches!(self.tokens.get(index).map(|t| &t.kind), Some(TokenKind::Identifier(value)) if value == "to")
+    }
+
+    fn append_message_members(&mut self, start: &Token, synthetic_body_members: &mut Vec<Declaration>) -> Result<(), Diagnostic> {
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "of") {
+                self.advance();
+                let payload = self.parse_qualified_name()?;
+                let (name, ty, implicit_payload) = if matches!(self.peek_kind(), TokenKind::Colon) {
+                    self.advance();
+                    (payload.as_dot_string(), self.parse_qualified_name()?, false)
+                } else {
+                    ("payload".to_string(), payload, true)
+                };
+                let mut member =
+                    synthetic_reference_usage(&name, Some(ty), None, &["payload"], &start.span);
+                if let Declaration::GenericUsage(usage) = &mut member {
+                    usage.keyword = "payload".to_string();
+                    usage.is_implicit_name = implicit_payload;
+                }
+                if matches!(self.peek_kind(), TokenKind::Equals) {
+                    self.advance();
+                    let expression = self.parse_expression()?;
+                    if let Declaration::GenericUsage(usage) = &mut member {
+                        usage.expression = Some(expression);
+                    }
+                }
+                synthetic_body_members.push(member);
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "from") {
+                self.advance();
+                let source = self.parse_qualified_name()?;
+                self.expect_identifier_named("to", "expected `to` between message events")?;
+                let target = self.parse_qualified_name()?;
+                for (name, reference) in [("source", source), ("target", target)] {
+                    let mut member =
+                        synthetic_reference_usage(name, None, Some(reference), &[], &start.span);
+                    if let Declaration::GenericUsage(usage) = &mut member {
+                        usage.keyword = "event".to_string();
+                    }
+                    synthetic_body_members.push(member);
+                }
+            }
+        Ok(())
+    }
+
+    fn parse_usage_head(
+        &mut self,
+        keyword: &str,
+        start: &Token,
+        modifiers: &mut Vec<String>,
+    ) -> Result<UsageHead, Diagnostic> {
         let mut effective_keyword = keyword.to_string();
+        if keyword == "assert" && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "not") {
+            self.advance();
+            modifiers.push("is_negated".into());
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "constraint") {
+                self.advance();
+                modifiers.push("constraint".into());
+            }
+        }
         let mut synthetic_body_members = Vec::new();
         let mut force_implicit_name = false;
         // Span of the `then` target in a standalone accept shorthand, used to
         // anchor the materialized succession at the `then` clause like the pilot.
         let mut accept_target_span: Option<SourceSpan> = None;
-        let mut leading_specialization = None;
+        let leading_specialization = None;
         let mut allocation_source = None;
         let mut allocation_target = None;
         let mut explicit_reference_target = None;
 
-        let mut explicit_name = if keyword == "accept"
+        let explicit_name = if matches!(keyword, "assume" | "require")
+            && !modifiers.iter().any(|m| m == "constraint")
+        {
+            // RequirementConstraintUsage's reference alternative owns an
+            // anonymous ConstraintUsage with an OwnedReferenceSubsetting.
+            let target = self.parse_qualified_name()?;
+            let name = target.segments.last().cloned();
+            explicit_reference_target = Some(target);
+            force_implicit_name = true;
+            name
+        } else if keyword == "message"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "of" || value == "from")
+        {
+            None
+        } else if keyword == "dependency" {
+            let named = self.tokens[self.index..]
+                .iter()
+                .take_while(|t| !matches!(t.kind, TokenKind::Semicolon | TokenKind::LBrace))
+                .take_while(|t| !matches!(&t.kind, TokenKind::Identifier(v) if v == "to"))
+                .any(|t| matches!(&t.kind, TokenKind::Identifier(v) if v == "from"));
+            if named {
+                if matches!(self.peek_kind(), TokenKind::Identifier(v) if v == "from") {
+                    self.advance();
+                    None
+                } else {
+                    let name = self.expect_identifier("expected dependency name")?;
+                    self.expect_identifier_named("from", "expected `from`")?;
+                    Some(name)
+                }
+            } else {
+                force_implicit_name = true;
+                None
+            }
+        } else if keyword == "allocate" {
+            effective_keyword = "allocation".to_string();
+            let ends = self.parse_connector_part()?;
+            allocation_source = ends.first().and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            allocation_target = ends.get(1).and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            synthetic_body_members.extend(ends);
+            None
+        } else if keyword == "send" {
+            for (name, marker) in [
+                ("payload", None),
+                ("sender", Some("via")),
+                ("receiver", Some("to")),
+            ] {
+                let present = match marker {
+                    Some(marker) => {
+                        matches!(self.peek_kind(), TokenKind::Identifier(value) if value == marker)
+                    }
+                    None => {
+                        !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::LBrace)
+                            && !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "via" || value == "to")
+                    }
+                };
+                if present {
+                    if marker.is_some() {
+                        self.advance();
+                    }
+                    let expression = self.parse_expression()?;
+                    let mut parameter =
+                        synthetic_reference_usage(name, None, None, &["in"], &start.span);
+                    if let Declaration::GenericUsage(usage) = &mut parameter {
+                        usage.expression = Some(expression);
+                    }
+                    synthetic_body_members.push(parameter);
+                }
+            }
+            None
+        } else if keyword == "assign" {
+            let target = self.parse_expression()?;
+            self.expect(TokenKind::Colon, "expected `:=` after assignment target")?;
+            self.expect(TokenKind::Equals, "expected `:=` after assignment target")?;
+            let value = self.parse_expression()?;
+            for (name, expression) in [("target", target), ("replacementValues", value)] {
+                let mut parameter =
+                    synthetic_reference_usage(name, None, None, &["in"], &start.span);
+                if let Declaration::GenericUsage(usage) = &mut parameter {
+                    usage.expression = Some(expression);
+                }
+                synthetic_body_members.push(parameter);
+            }
+            None
+        } else if keyword == "event"
+            && !matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "occurrence")
+        {
+            explicit_reference_target = Some(self.parse_qualified_name()?);
+            None
+        } else if keyword == "bind" {
+            let source = self.parse_expression()?;
+            self.expect(TokenKind::Equals, "expected `=` between binding ends")?;
+            let target = self.parse_expression()?;
+            for (name, expression) in [("source", source), ("target", target)] {
+                let mut end = synthetic_reference_usage(name, None, None, &["end"], &start.span);
+                if let Declaration::GenericUsage(usage) = &mut end {
+                    usage.expression = Some(expression);
+                }
+                synthetic_body_members.push(end);
+            }
+            None
+        } else if matches!(keyword, "flow" | "interface") && self.starts_anonymous_flow() {
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "from") {
+                self.advance();
+            }
+            let source = self.parse_qualified_name()?;
+            self.expect_identifier_named("to", "expected `to` between connection ends")?;
+            let target = self.parse_qualified_name()?;
+            synthetic_body_members.push(synthetic_reference_usage(
+                "source",
+                None,
+                Some(source),
+                &["end", "out"],
+                &start.span,
+            ));
+            synthetic_body_members.push(synthetic_reference_usage(
+                "target",
+                None,
+                Some(target),
+                &["end", "in"],
+                &start.span,
+            ));
+            None
+        } else if keyword == "terminate" {
+            if !matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::LBrace) {
+                let expression = self.parse_expression()?;
+                let mut parameter = synthetic_reference_usage(
+                    "terminatedOccurrence",
+                    None,
+                    None,
+                    &["in"],
+                    &start.span,
+                );
+                if let Declaration::GenericUsage(usage) = &mut parameter {
+                    usage.expression = Some(expression);
+                }
+                synthetic_body_members.push(parameter);
+            }
+            None
+        } else if keyword == "transition"
+            && (matches!(self.peek_kind(), TokenKind::Identifier(value) if matches!(value.as_str(), "first" | "from" | "then" | "accept" | "if" | "do"))
+                || !matches!(self.next_kind(), Some(TokenKind::Identifier(value)) if value == "first" || value == "from" || !matches!(value.as_str(), "then" | "accept" | "if" | "do" | "to")))
+        {
+            None
+        } else if keyword == "accept"
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "at" || value == "when" || value == "after")
         {
             let trigger_kind = self.expect_identifier("expected accept trigger kind")?;
             modifiers.push(format!("trigger_kind={trigger_kind}"));
-            let trigger = self.collect_behavior_text_until_then_or_end();
+            let trigger = self.collect_behavior_text(&["if", "do", "then"]);
             if !trigger.is_empty() {
                 modifiers.push(format!("trigger={trigger_kind} {trigger}"));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+                self.advance();
+                modifiers.push(format!(
+                    "guard={}",
+                    self.collect_behavior_text_until_do_then_or_end()
+                ));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+                self.advance();
+                modifiers.push(format!(
+                    "effect={}",
+                    self.collect_transition_effect(&mut synthetic_body_members)?
+                ));
             }
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept trigger")?;
@@ -2119,7 +2834,7 @@ impl Parser {
             let payload_name = self.expect_identifier("expected accept payload name")?;
             modifiers.push(format!("trigger={payload_name}"));
             modifiers.push("trigger_kind=event".to_string());
-            synthetic_body_members.push(synthetic_reference_usage(
+            synthetic_body_members.push(explicit_payload_reference(
                 &payload_name,
                 None,
                 None,
@@ -2127,9 +2842,23 @@ impl Parser {
                 &start.span,
             ));
             self.expect_identifier_named("after", "expected `after` after accept payload")?;
-            let trigger = self.collect_behavior_text_until_then_or_end();
+            let trigger = self.collect_behavior_text(&["if", "do", "then"]);
             if !trigger.is_empty() {
                 modifiers.push(format!("trigger_after={trigger}"));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+                self.advance();
+                modifiers.push(format!(
+                    "guard={}",
+                    self.collect_behavior_text_until_do_then_or_end()
+                ));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+                self.advance();
+                modifiers.push(format!(
+                    "effect={}",
+                    self.collect_transition_effect(&mut synthetic_body_members)?
+                ));
             }
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept trigger")?;
@@ -2148,7 +2877,7 @@ impl Parser {
             modifiers.push("trigger_kind=event".to_string());
             self.expect(TokenKind::Colon, "expected `:` after accept payload name")?;
             let payload_type = self.parse_qualified_name()?;
-            synthetic_body_members.push(synthetic_reference_usage(
+            synthetic_body_members.push(explicit_payload_reference(
                 &payload_name,
                 Some(payload_type),
                 None,
@@ -2157,7 +2886,28 @@ impl Parser {
             ));
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "via") {
                 self.expect_identifier_named("via", "expected `via` after accept payload")?;
-                let _receiver = self.parse_qualified_name()?;
+                let receiver = self.parse_qualified_name()?;
+                synthetic_body_members.push(synthetic_reference_usage(
+                    "receiver",
+                    None,
+                    Some(receiver),
+                    &["receiver", "in"],
+                    &start.span,
+                ));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
+                self.advance();
+                modifiers.push(format!(
+                    "guard={}",
+                    self.collect_behavior_text_until_do_then_or_end()
+                ));
+            }
+            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
+                self.advance();
+                modifiers.push(format!(
+                    "effect={}",
+                    self.collect_transition_effect(&mut synthetic_body_members)?
+                ));
             }
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
                 self.expect_identifier_named("then", "expected `then` after accept payload")?;
@@ -2180,11 +2930,11 @@ impl Parser {
             ));
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "via") {
                 self.expect_identifier_named("via", "expected `via` after accept payload")?;
-                let _receiver = self.parse_qualified_name()?;
+                let receiver = self.parse_qualified_name()?;
                 synthetic_body_members.push(synthetic_reference_usage(
                     "receiver",
                     None,
-                    None,
+                    Some(receiver),
                     &["receiver", "in"],
                     &start.span,
                 ));
@@ -2201,7 +2951,7 @@ impl Parser {
             }
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
                 self.expect_identifier_named("do", "expected `do` effect in accept transition")?;
-                let effect = self.collect_behavior_text_until_then_or_end();
+                let effect = self.collect_transition_effect(&mut synthetic_body_members)?;
                 if !effect.is_empty() {
                     modifiers.push(format!("effect={effect}"));
                 }
@@ -2218,7 +2968,26 @@ impl Parser {
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "of")
         {
             self.expect_identifier_named("of", "expected `of` after `flow`")?;
-            let _payload_type = self.parse_qualified_name()?;
+            let payload = self.parse_qualified_name()?;
+            let payload_span = payload.span.clone();
+            let (payload_name, payload_type, implicit_payload) = if matches!(self.peek_kind(), TokenKind::Colon) {
+                self.advance();
+                (payload.as_colon_string(), self.parse_qualified_name()?, false)
+            } else {
+                ("payload".to_string(), payload, true)
+            };
+            let mut member = synthetic_reference_usage(
+                &payload_name,
+                Some(payload_type),
+                None,
+                &["payload"],
+                &payload_span,
+            );
+            if let Declaration::GenericUsage(usage) = &mut member {
+                usage.keyword = "payload".to_string();
+                usage.is_implicit_name = implicit_payload;
+            }
+            synthetic_body_members.push(member);
             self.expect_identifier_named("from", "expected `from` before flow source")?;
             let source = self.parse_qualified_name()?;
             self.expect_identifier_named("to", "expected `to` between flow ends")?;
@@ -2295,8 +3064,23 @@ impl Parser {
                 &["target-input", "in"],
                 &start.span,
             ));
-            force_implicit_name = true;
+            effective_keyword = "succession-flow".into();
+            force_implicit_name = explicit_flow_name.is_none();
             explicit_flow_name.or_else(|| Some("SuccessionFlowUsage".to_string()))
+        } else if keyword == "include"
+            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "use")
+        {
+            self.expect_identifier_named("use", "expected `use` after `include`")?;
+            self.expect_identifier_named("case", "expected `case` after `include use`")?;
+            if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+                Some(self.expect_identifier("expected included use case name")?)
+            } else { None }
+        } else if keyword == "include" && matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+            force_implicit_name = true;
+            let target = self.parse_qualified_name()?;
+            let name = target.segments.last().cloned();
+            explicit_reference_target = Some(target);
+            name
         } else if keyword == "perform"
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "action")
         {
@@ -2313,12 +3097,10 @@ impl Parser {
             } else {
                 Some(self.expect_identifier("expected perform action name")?)
             }
-        } else if keyword == "perform"
-            && matches!(self.peek_kind(), TokenKind::Identifier(_))
-            && matches!(self.next_kind(), Some(TokenKind::Dot))
-        {
+        } else if keyword == "perform" && matches!(self.peek_kind(), TokenKind::Identifier(_)) {
             let qualified = self.parse_qualified_name()?;
-            leading_specialization = Some(qualified.clone());
+            force_implicit_name = true;
+            explicit_reference_target = Some(qualified.clone());
             Some(
                 qualified
                     .segments
@@ -2326,13 +3108,27 @@ impl Parser {
                     .cloned()
                     .unwrap_or_else(|| "perform".to_string()),
             )
-        } else if keyword == "satisfy"
+        } else if matches!(keyword, "satisfy" | "verify")
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "requirement")
         {
             self.expect_identifier_named("requirement", "expected `requirement` after `satisfy`")?;
-            explicit_reference_target = Some(self.parse_qualified_name()?);
-            Some("satisfy".to_string())
+            if matches!(
+                self.peek_kind(),
+                TokenKind::Colon | TokenKind::LBrace | TokenKind::Semicolon
+            ) {
+                None
+            } else {
+                let target = self.parse_qualified_name()?;
+                if matches!(self.peek_kind(), TokenKind::Colon) {
+                    Some(target.as_colon_string())
+                } else {
+                    explicit_reference_target = Some(target);
+                    force_implicit_name = true;
+                    Some(keyword.to_string())
+                }
+            }
         } else if keyword == "satisfy" && matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+            force_implicit_name = true;
             explicit_reference_target = Some(self.parse_qualified_name()?);
             Some("satisfy".to_string())
         } else if keyword == "exhibit"
@@ -2340,15 +3136,31 @@ impl Parser {
         {
             self.expect_identifier_named("state", "expected `state` after `exhibit`")?;
             Some(self.expect_identifier("expected exhibit state name")?)
+        } else if (keyword == "exhibit"
+            || (keyword == "assert" && !modifiers.iter().any(|m| m == "constraint")))
+            && matches!(self.peek_kind(), TokenKind::Identifier(_))
+        {
+            let target = self.parse_qualified_name()?;
+            force_implicit_name = true;
+            let name = target.segments.last().cloned();
+            explicit_reference_target = Some(target);
+            name
         } else if keyword == "allocation"
             && matches!(self.peek_kind(), TokenKind::Identifier(_))
             && matches!(self.next_kind(), Some(TokenKind::Identifier(value)) if value == "allocate")
         {
             let name = self.expect_identifier("expected allocation declaration name")?;
             self.expect_identifier_named("allocate", "expected `allocate` after allocation name")?;
-            allocation_source = Some(self.parse_qualified_name()?);
-            self.expect_identifier_named("to", "expected `to` between allocation ends")?;
-            allocation_target = Some(self.parse_qualified_name()?);
+            let ends = self.parse_connector_part()?;
+            allocation_source = ends.first().and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            allocation_target = ends.get(1).and_then(|end| match end {
+                Declaration::GenericUsage(usage) => usage.reference_target.clone(),
+                _ => None,
+            });
+            synthetic_body_members.extend(ends);
             Some(name)
         } else if matches!(
             self.peek_kind(),
@@ -2367,153 +3179,24 @@ impl Parser {
                 TokenKind::LParen | TokenKind::LBracket | TokenKind::Identifier(_)
             ))
             || (keyword == "connection" && matches!(self.peek_kind(), TokenKind::Colon))
+            || (keyword == "binding" && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "bind"))
+            || (keyword == "succession" && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first"))
         {
             None
         } else {
             Some(self.expect_identifier(&format!("expected {keyword} declaration name"))?)
         };
-        if keyword == "action"
-            && explicit_name.is_some()
-            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "accept")
-        {
-            self.expect_identifier_named("accept", "expected `accept` after action name")?;
-            effective_keyword = "accept".to_string();
-            let payload = self.parse_qualified_name()?;
-            synthetic_body_members.push(synthetic_reference_usage(
-                "payload",
-                Some(payload),
-                None,
-                &["payload", "in"],
-                &start.span,
-            ));
-        }
-        if keyword == "action"
-            && explicit_name.is_some()
-            && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "send")
-        {
-            self.expect_identifier_named("send", "expected `send` after action name")?;
-            effective_keyword = "send".to_string();
-        }
-        let parsed_transition_shorthand = if keyword == "transition" && explicit_name.is_some() {
-            self.parse_transition_usage_shorthand(&mut modifiers, &mut synthetic_body_members)?
-        } else {
-            false
-        };
-        // Reroute the standalone `accept … then Y` shorthand. The pilot models it
-        // as an anonymous TransitionUsage whose source is the immediately
-        // preceding sibling state, owning an `accepter` AcceptActionUsage (which
-        // in turn owns the payload), not a bare AcceptActionUsage. Detect it by
-        // the `transition_target=` modifier the accept branches recorded, and
-        // mark it for previous-sibling-state source resolution during lowering.
-        if keyword == "accept"
-            && modifiers
-                .iter()
-                .any(|modifier| modifier.starts_with("transition_target="))
-        {
-            let accept_members = std::mem::take(&mut synthetic_body_members);
-            synthetic_body_members.push(accepter_action_with_members(accept_members, &start.span));
-            // The happensBefore succession is anchored at the `then` clause and
-            // pairs cleanly. The transition's transitionLinkSource/payload link
-            // features are deferred: the pilot anchors them at the accept head
-            // with a span rule not yet replicated for the standalone shorthand.
-            if let Some(then_span) = &accept_target_span {
-                synthetic_body_members.push(standalone_happens_before_succession(then_span));
-            }
-            modifiers.push("implicit_transition_source".to_string());
-            effective_keyword = "transition".to_string();
-            explicit_name = None;
-            force_implicit_name = true;
-        }
-        let is_implicit_name = explicit_name.is_none() || force_implicit_name;
-        let mut tail = if keyword == "connect" {
-            UsageTail {
-                ty: None,
-                multiplicity: None,
-                expression: None,
-                additional_types: Vec::new(),
-                specializes: Vec::new(),
-                subsets: Vec::new(),
-                redefines: Vec::new(),
-                body_members: Vec::new(),
-                owner_docs: Vec::new(),
-                had_body: false,
-            }
-        } else if parsed_transition_shorthand {
-            UsageTail {
-                ty: None,
-                multiplicity: None,
-                expression: None,
-                additional_types: Vec::new(),
-                specializes: Vec::new(),
-                subsets: Vec::new(),
-                redefines: Vec::new(),
-                body_members: Vec::new(),
-                owner_docs: Vec::new(),
-                had_body: false,
-            }
-        } else if is_constraint_expression_usage(&effective_keyword, &modifiers) {
-            if let Some(tail) = self.try_parse_constraint_expression_tail()? {
-                tail
-            } else {
-                self.parse_usage_tail(&[])?
-            }
-        } else {
-            self.parse_usage_tail(if matches!(keyword, "connection" | "interface") {
-                &["connect"]
-            } else {
-                &[]
-            })?
-        };
-        if let Some(target) = leading_specialization {
-            tail.specializes.insert(0, target);
-        }
-        if !synthetic_body_members.is_empty() {
-            tail.body_members.extend(synthetic_body_members);
-        }
-        self.parse_connection_end_members(keyword, &mut tail)?;
-        let name = explicit_name.unwrap_or_else(|| tail.derived_name(&effective_keyword));
-        let end = self.finish_usage(&effective_keyword, tail.had_body)?;
-        let span = merge_span(&start.span, &end.span);
-        docs.append(&mut tail.owner_docs);
-        let has_type = tail.ty.is_some();
-        let reference_target = explicit_reference_target
-            .or_else(|| infer_reference_target(&effective_keyword, &name, has_type, &mut tail))
-            .or_else(|| {
-                if effective_keyword == "require"
-                    && tail.ty.is_none()
-                    && name != "constraint"
-                    && !modifiers.iter().any(|modifier| modifier == "constraint")
-                {
-                    Some(QualifiedName {
-                        segments: vec![name.clone()],
-                        span: span.clone(),
-                    })
-                } else {
-                    None
-                }
-            });
-
-        Ok(Declaration::GenericUsage(GenericUsageDecl {
-            keyword: effective_keyword,
-            name,
-            is_implicit_name,
-            ty: tail.ty,
-            reference_target,
+        Ok(UsageHead {
+            effective_keyword,
+            synthetic_body_members,
+            force_implicit_name,
+            accept_target_span,
+            leading_specialization,
             allocation_source,
             allocation_target,
-            metadata_properties: Default::default(),
-            multiplicity: tail.multiplicity,
-            expression: tail.expression,
-            additional_types: tail.additional_types,
-            specializes: tail.specializes,
-            subsets: tail.subsets,
-            redefines: tail.redefines,
-            body_members: tail.body_members,
-            comments: Vec::new(),
-            docs,
-            modifiers,
-            span,
-        }))
+            explicit_reference_target,
+            explicit_name,
+        })
     }
 
     fn parse_transition_usage_shorthand(
@@ -2549,12 +3232,12 @@ impl Parser {
             has_trigger = true;
             // The accepter AcceptActionUsage and its payload are anchored at the
             // `accept` keyword (the trigger clause).
-            synthetic_body_members.push(transition_accepter_action(&accept_token.span));
+            let mut accepter = transition_accepter_action(&accept_token.span);
             if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "after" || value == "when" || value == "at")
             {
                 let trigger_kind = self.expect_identifier("expected transition trigger kind")?;
                 modifiers.push(format!("trigger_kind={trigger_kind}"));
-                let trigger = self.collect_behavior_text_until_then_or_end();
+                let trigger = self.collect_behavior_text(&["if", "do", "then"]);
                 if !trigger.is_empty() {
                     modifiers.push(format!("trigger={trigger}"));
                 }
@@ -2562,7 +3245,34 @@ impl Parser {
                 let trigger = self.parse_qualified_name()?;
                 modifiers.push(format!("trigger={}", trigger.as_dot_string()));
                 modifiers.push("trigger_kind=event".to_string());
+                let (name, ty) = if matches!(self.peek_kind(), TokenKind::Colon) {
+                    self.advance();
+                    (trigger.as_colon_string(), self.parse_qualified_name()?)
+                } else {
+                    ("payload".to_string(), trigger)
+                };
+                if let Declaration::GenericUsage(usage) = &mut accepter {
+                    usage.body_members = vec![synthetic_reference_usage(
+                        &name,
+                        Some(ty),
+                        None,
+                        &["payload", "in"],
+                        &accept_token.span,
+                    )];
+                    if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "via") {
+                        self.advance();
+                        let receiver = self.parse_qualified_name()?;
+                        usage.body_members.push(synthetic_reference_usage(
+                            "receiver",
+                            None,
+                            Some(receiver),
+                            &["receiver", "in"],
+                            &accept_token.span,
+                        ));
+                    }
+                }
             }
+            synthetic_body_members.push(accepter);
         }
 
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "if") {
@@ -2572,7 +3282,7 @@ impl Parser {
         }
         if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do") {
             self.advance();
-            let effect = self.collect_behavior_text_until_then_or_end();
+            let effect = self.collect_transition_effect(synthetic_body_members)?;
             modifiers.push(format!("effect={effect}"));
         }
 
@@ -2612,195 +3322,65 @@ impl Parser {
         Ok(true)
     }
 
-    fn parse_comment_usage_after_keyword(
-        &mut self,
-        start: Token,
-        mut docs: Vec<String>,
-        modifiers: Vec<String>,
+    #[inline(never)]
+    fn parse_documentation_after_keyword(
+        &mut self, docs: Vec<String>, modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
-        let mut end = start.clone();
-        let explicit_name = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value != "about")
-        {
-            let token = self.expect_identifier_token("expected comment declaration name")?;
-            end = token.clone();
-            match token.kind {
-                TokenKind::Identifier(value) => Some(value),
-                _ => unreachable!(),
-            }
-        } else {
-            None
-        };
-
-        let mut about_target = None;
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "about") {
-            end = self
-                .expect_identifier_named("about", "expected `about` after comment name")?
-                .clone();
-            if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
-                let target = self.parse_qualified_name()?;
-                end = Token {
-                    kind: TokenKind::Identifier(
-                        target.segments.last().cloned().unwrap_or_default(),
-                    ),
-                    span: target.span.clone(),
-                    leading_trivia: Vec::new(),
-                };
-                about_target = Some(target);
-            }
-        }
-
-        let mut locale = None;
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "locale") {
-            end = self
-                .expect_identifier_named("locale", "expected `locale` after comment target")?
-                .clone();
-            if matches!(self.peek_kind(), TokenKind::String(_)) {
-                end = self.expect_string_literal("expected locale string after `locale`")?;
-                if let TokenKind::String(value) = &end.kind {
-                    locale = Some(value.clone());
-                }
-            }
-        }
-
-        let mut comment_body = Vec::new();
-        while let TokenKind::BlockDoc(text) = self.peek_kind().clone() {
-            comment_body.push(text);
-            end = self.current().clone();
-            self.advance();
-        }
-
-        let mut body_members = Vec::new();
-        if matches!(self.peek_kind(), TokenKind::LBrace) {
-            self.advance();
-            let block = self.parse_declaration_block_contents_after_open()?;
-            docs.extend(block.owner_docs);
-            body_members = block.members;
-            end = block.end;
-        } else if matches!(self.peek_kind(), TokenKind::Semicolon) {
-            end = self.expect(TokenKind::Semicolon, "expected `;`")?;
-        } else if !self.comment_usage_can_end_here() {
-            return Err(self.error_here("expected `;`, body, or documentation after comment"));
-        }
-
-        let is_implicit_name = explicit_name.is_none();
-
-        let mut metadata_properties = BTreeMap::new();
-        if !comment_body.is_empty() {
-            metadata_properties.insert("body".to_string(), comment_body.join("\n\n"));
-        }
-        if let Some(locale) = locale {
-            metadata_properties.insert("locale".to_string(), locale);
-        }
-
-        Ok(Declaration::GenericUsage(GenericUsageDecl {
-            keyword: "comment".to_string(),
-            name: explicit_name.unwrap_or_else(|| "comment".to_string()),
-            is_implicit_name,
-            ty: None,
-            reference_target: about_target,
-            allocation_source: None,
-            allocation_target: None,
-            metadata_properties,
-            multiplicity: None,
-            expression: None,
-            additional_types: Vec::new(),
-            specializes: Vec::new(),
-            subsets: Vec::new(),
-            redefines: Vec::new(),
-            body_members,
-            comments: Vec::new(),
-            docs,
-            modifiers,
-            span: merge_span(&start.span, &end.span),
-        }))
+        let begin = self.index.checked_sub(1)
+            .ok_or_else(|| self.error_here("missing documentation keyword"))?;
+        let (consumed, declaration) = documentation::parse(
+            &self.tokens[begin..], self.kerml_relationship_bodies, docs, modifiers)?;
+        self.index = begin + consumed;
+        Ok(Declaration::GenericUsage(declaration))
     }
 
-    fn comment_usage_can_end_here(&self) -> bool {
-        matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof)
-            || self.block_starts_with_declaration()
+    fn parse_comment_usage_after_keyword(
+        &mut self, _start: Token, docs: Vec<String>, modifiers: Vec<String>,
+    ) -> Result<Declaration, Diagnostic> {
+        let begin = self.index.checked_sub(1)
+            .ok_or_else(|| self.error_here("missing comment keyword"))?;
+        let (consumed, declaration) = documentation::parse_comment(
+            &self.tokens[begin..], self.kerml_relationship_bodies, docs, modifiers)?;
+        self.index = begin + consumed;
+        Ok(Declaration::GenericUsage(declaration))
     }
 
     fn parse_textual_representation_after_keyword(
-        &mut self,
-        start: Token,
-        mut docs: Vec<String>,
-        modifiers: Vec<String>,
+        &mut self, start: Token, docs: Vec<String>, modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
-        let explicit_name = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value != "language")
-        {
-            Some(self.expect_identifier("expected textual representation name")?)
-        } else {
-            None
-        };
-        let mut end = self.tokens[self.index.saturating_sub(1)].clone();
-
-        if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "language") {
-            end = self.expect_identifier_named(
-                "language",
-                "expected `language` in textual representation",
-            )?;
-            if matches!(self.peek_kind(), TokenKind::String(_)) {
-                end = self.expect_string_literal("expected language string")?;
-            }
-        }
-
-        while let TokenKind::Doc(text) = self.peek_kind().clone() {
-            docs.push(text);
-            end = self.current().clone();
-            self.advance();
-        }
-
-        if matches!(self.peek_kind(), TokenKind::Semicolon) {
-            end = self.expect(TokenKind::Semicolon, "expected `;`")?;
-        } else if !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof)
-            && !self.block_starts_with_declaration()
-        {
-            return Err(self.error_here("expected textual representation body"));
-        }
-
-        let is_implicit_name = explicit_name.is_none();
-
-        Ok(Declaration::GenericUsage(GenericUsageDecl {
-            keyword: "rep".to_string(),
-            name: explicit_name.unwrap_or_else(|| "rep".to_string()),
-            is_implicit_name,
-            ty: None,
-            reference_target: None,
-            allocation_source: None,
-            allocation_target: None,
-            metadata_properties: Default::default(),
-            multiplicity: None,
-            expression: None,
-            additional_types: Vec::new(),
-            specializes: Vec::new(),
-            subsets: Vec::new(),
-            redefines: Vec::new(),
-            body_members: Vec::new(),
-            comments: Vec::new(),
-            docs,
-            modifiers,
-            span: merge_span(&start.span, &end.span),
-        }))
+        textual_representation::parse(&mut self.tokens, &mut self.index, start, docs, modifiers, self.kerml_relationship_bodies)
+            .map(Declaration::GenericUsage)
     }
 
     fn parse_implicit_usage(
         &mut self,
         mut docs: Vec<String>,
-        modifiers: Vec<String>,
+        mut modifiers: Vec<String>,
     ) -> Result<Declaration, Diagnostic> {
         let start = self.current().clone();
         let name = self.expect_identifier("expected declaration name")?;
         let tail = self.parse_usage_tail(&[])?;
         let end = self.finish_usage("declaration", tail.had_body)?;
-        let keyword = implicit_usage_keyword(&modifiers);
+        let variant_reference = modifiers.iter().any(|m| m == "variant");
+        let keyword = if variant_reference {
+            "reference"
+        } else {
+            implicit_usage_keyword(&modifiers)
+        };
+        let reference_target = variant_reference.then(|| QualifiedName {
+            segments: vec![name.clone()],
+            span: start.span.clone(),
+        });
+        tail.append_value_modifiers(&mut modifiers);
         docs.extend(tail.owner_docs);
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: keyword.to_string(),
             name,
-            is_implicit_name: false,
+            is_implicit_name: variant_reference,
             ty: tail.ty,
-            reference_target: None,
+            reference_target,
             allocation_source: None,
             allocation_target: None,
             metadata_properties: Default::default(),
@@ -2819,38 +3399,62 @@ impl Parser {
     }
 
     fn parse_alias(
-        &mut self,
-        docs: Vec<String>,
-        modifiers: Vec<String>,
+        &mut self, docs: Vec<String>, mut modifiers: Vec<String>,
     ) -> Result<AliasDecl, Diagnostic> {
         let start = self.expect_identifier_named("alias", "expected `alias`")?;
-        let name = self.expect_identifier("expected alias name")?;
+        if matches!(self.peek_kind(), TokenKind::LAngle) {
+            self.advance();
+            let short = self.expect_identifier("expected alias short name")?;
+            self.expect(TokenKind::RAngle, "expected `>` after alias short name")?;
+            modifiers.push(format!("short_name={short}"));
+        }
+        let name = if matches!(self.peek_kind(), TokenKind::Identifier(value) if value != "for") {
+            self.expect_identifier("expected alias name")?
+        } else { String::new() };
         self.expect_identifier_named("for", "expected `for` after alias name")?;
-        let target = self.parse_qualified_name()?;
-        let end = match self.peek_kind() {
-            TokenKind::Semicolon => {
-                self.expect(TokenKind::Semicolon, "expected `;` after alias")?
-            }
-            TokenKind::LBrace => self.consume_opaque_block_with_open()?,
-            _ => return Err(self.error_here("expected `;` or body after alias")),
-        };
+        let target = self.parse_grammar_qualified_name()?;
+        let (body_members, end) = self.parse_relationship_body("alias")?;
+        Ok(AliasDecl { name, target, body_members, comments: Vec::new(), docs, modifiers,
+            span: merge_span(&start.span, &end.span) })
+    }
 
-        Ok(AliasDecl {
-            name,
-            target,
-            comments: Vec::new(),
-            docs,
-            modifiers,
-            span: merge_span(&start.span, &end.span),
-        })
+    fn parse_relationship_body(&mut self, keyword: &str) -> Result<(Vec<Declaration>, Token), Diagnostic> {
+        if matches!(self.peek_kind(), TokenKind::LBrace) {
+            if self.kerml_relationship_bodies {
+                return crate::kerml::parser::parse_relationship_body_declarations(&mut self.tokens, &mut self.index);
+            }
+            self.advance();
+            let mut members = Vec::new();
+            while !matches!(self.peek_kind(), TokenKind::RBrace | TokenKind::Eof) {
+                let Some(member) = self.parse_declaration()? else { break; };
+                if !crate::namespace_grammar::permits_relationship_member(false, &member) {
+                    return Err(Diagnostic::new("SysML relationship bodies permit only annotating elements", Some(declaration_span(&member).clone())));
+                }
+                members.push(member);
+            }
+            let end = self.expect(TokenKind::RBrace, "expected `}` to close relationship body")?;
+            Ok((members, end))
+        } else {
+            let end = self.expect(TokenKind::Semicolon, &format!("expected `;` or body after {keyword}"))?;
+            Ok((Vec::new(), end))
+        }
     }
 
     fn parse_import_path(&mut self) -> Result<QualifiedName, Diagnostic> {
         self.parse_name_path(true)
     }
 
+    // Legacy callers also use this for FeatureChain/expression paths. Migrate
+    // those by their actual grammar rule, not by substituting QualifiedName.
     fn parse_qualified_name(&mut self) -> Result<QualifiedName, Diagnostic> {
         self.parse_name_path(false)
+    }
+
+    fn parse_grammar_qualified_name(&mut self) -> Result<QualifiedName, Diagnostic> {
+        let (consumed, name) = crate::xtext_fragment::qualified_name(
+            &self.tokens[self.index..], self.kerml_relationship_bodies)?;
+        self.index += consumed;
+        Ok(name)
     }
 
     fn parse_name_path(&mut self, allow_wildcards: bool) -> Result<QualifiedName, Diagnostic> {
@@ -2876,8 +3480,12 @@ impl Parser {
         Ok(QualifiedName { segments, span })
     }
 
-    fn parse_usage_tail(&mut self, stop_keywords: &[&str]) -> Result<UsageTail, Diagnostic> {
+    fn parse_usage_tail(&mut self, stop_keywords: &[&str]) -> Result<Box<UsageTail>, Diagnostic> {
         let mut ty = None;
+        let mut is_ordered = false;
+        let mut is_nonunique = false;
+        let mut value_is_initial = false;
+        let mut value_is_default = false;
         let mut multiplicity = None;
         let mut expression = None;
         let mut additional_types = Vec::new();
@@ -2894,6 +3502,29 @@ impl Parser {
 
         loop {
             match self.peek_kind() {
+                TokenKind::Colon if matches!(self.next_kind(), Some(TokenKind::Equals)) => {
+                    self.advance();
+                    self.advance();
+                    value_is_initial = true;
+                    expression = Some(self.parse_expression()?);
+                }
+                TokenKind::Identifier(value) if value == "ordered" || value == "nonunique" => {
+                    is_ordered |= value == "ordered";
+                    is_nonunique |= value == "nonunique";
+                    self.advance();
+                }
+                TokenKind::Identifier(value) if value == "default" => {
+                    self.advance();
+                    value_is_default = true;
+                    if matches!(self.peek_kind(), TokenKind::Colon) {
+                        self.advance();
+                        self.expect(TokenKind::Equals, "expected `:=` after default")?;
+                        value_is_initial = true;
+                    } else if matches!(self.peek_kind(), TokenKind::Equals) {
+                        self.advance();
+                    }
+                    expression = Some(self.parse_expression()?);
+                }
                 TokenKind::Colon => {
                     self.advance();
                     let mut conjugated = self.consume_optional_type_prefix();
@@ -2946,6 +3577,10 @@ impl Parser {
                         self.consume_suffix_adornments()?;
                     }
                 }
+                TokenKind::Identifier(value) if value == "references" => {
+                    self.advance();
+                    specializes.extend(self.parse_reference_list()?);
+                }
                 TokenKind::Identifier(value) if value == "subsets" || value == "redefines" => {
                     let keyword = self.expect_identifier("expected relation keyword")?;
                     let refs = self.parse_reference_list()?;
@@ -2974,7 +3609,11 @@ impl Parser {
             }
         }
 
-        Ok(UsageTail {
+        Ok(Box::new(UsageTail {
+            is_ordered,
+            is_nonunique,
+            value_is_initial,
+            value_is_default,
             ty,
             multiplicity,
             expression,
@@ -2985,45 +3624,82 @@ impl Parser {
             body_members,
             owner_docs,
             had_body,
-        })
+        }))
+    }
+
+    fn collect_transition_effect(
+        &mut self,
+        members: &mut Vec<Declaration>,
+    ) -> Result<String, Diagnostic> {
+        let begin = self.index;
+        let text = self.collect_behavior_text_until_then_or_end();
+        if matches!(self.tokens.get(begin).map(|t| &t.kind), Some(TokenKind::Identifier(value)) if value == "send")
+        {
+            let mut tokens = self.tokens[begin..self.index].to_vec();
+            let mut terminator = self.tokens[self.index].clone();
+            terminator.kind = TokenKind::Semicolon;
+            tokens.push(terminator.clone());
+            terminator.kind = TokenKind::Eof;
+            tokens.push(terminator);
+            if let Some(Declaration::GenericUsage(mut effect)) =
+                Parser::new(tokens, false).parse_declaration()?
+            {
+                effect.name = "effect".to_string();
+                effect.is_implicit_name = false;
+                members.push(Declaration::GenericUsage(effect));
+            }
+        }
+        Ok(text)
     }
 
     fn collect_behavior_text_until_then_or_end(&mut self) -> String {
-        let mut parts = Vec::new();
-        while !matches!(
-            self.peek_kind(),
-            TokenKind::Semicolon | TokenKind::RBrace | TokenKind::Eof
-        ) {
-            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "then") {
-                break;
-            }
-            parts.push(token_text(self.peek_kind()));
-            self.advance();
-        }
-        parts.join(" ").trim().to_string()
+        self.collect_behavior_text(&["then"])
     }
 
     fn collect_behavior_text_until_do_then_or_end(&mut self) -> String {
+        self.collect_behavior_text(&["do", "then"])
+    }
+
+    fn collect_behavior_text(&mut self, stops: &[&str]) -> String {
         let mut parts = Vec::new();
-        while !matches!(
-            self.peek_kind(),
-            TokenKind::Semicolon | TokenKind::RBrace | TokenKind::Eof
-        ) {
-            if matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "do" || value == "then")
+        let mut depth = 0usize;
+        while !matches!(self.peek_kind(), TokenKind::Eof) {
+            if depth == 0
+                && (matches!(self.peek_kind(), TokenKind::Semicolon | TokenKind::RBrace)
+                    || matches!(self.peek_kind(), TokenKind::Identifier(value) if stops.contains(&value.as_str())))
             {
                 break;
             }
-            parts.push(token_text(self.peek_kind()));
+            match self.peek_kind() {
+                TokenKind::LBrace | TokenKind::LParen | TokenKind::LBracket => depth += 1,
+                TokenKind::RBrace | TokenKind::RParen | TokenKind::RBracket => {
+                    depth = depth.saturating_sub(1)
+                }
+                _ => {}
+            }
+            parts.push(match self.peek_kind() {
+                TokenKind::Identifier(value)
+                    if !value.chars().all(|c| c.is_alphanumeric() || c == '_') =>
+                {
+                    format!("'{}'", value.replace('\\', "\\\\").replace('\'', "\\'"))
+                }
+                TokenKind::LBrace => "{".to_string(),
+                TokenKind::RBrace => "}".to_string(),
+                TokenKind::Semicolon => ";".to_string(),
+                other => token_text(other),
+            });
             self.advance();
         }
         parts.join(" ").trim().to_string()
     }
 
     fn parse_expression(&mut self) -> Result<Expr, Diagnostic> {
-        self.parse_or_expression()
+        self.parse_conditional_expression()
     }
 
-    fn try_parse_constraint_expression_tail(&mut self) -> Result<Option<UsageTail>, Diagnostic> {
+    fn try_parse_constraint_expression_tail(
+        &mut self,
+    ) -> Result<Option<Box<UsageTail>>, Diagnostic> {
         if !matches!(self.peek_kind(), TokenKind::LBrace) {
             return Ok(None);
         }
@@ -3033,6 +3709,14 @@ impl Parser {
             TokenKind::LBrace,
             "expected `{` before constraint expression",
         )?;
+        let mut documentation = Vec::new();
+        while matches!(self.peek_kind(), TokenKind::BlockDoc(_))
+            || matches!(self.peek_kind(), TokenKind::Identifier(value) if matches!(value.as_str(), "doc" | "comment" | "locale" | "rep" | "language")) {
+            match self.parse_declaration() {
+                Ok(Some(declaration)) => documentation.push(declaration),
+                _ => { self.index = checkpoint; return Ok(None); }
+            }
+        }
         let expression = match self.parse_expression() {
             Ok(expression) => expression,
             Err(_) => {
@@ -3052,7 +3736,11 @@ impl Parser {
             "expected `}` after constraint expression",
         )?;
 
-        Ok(Some(UsageTail {
+        Ok(Some(Box::new(UsageTail {
+            is_ordered: false,
+            is_nonunique: false,
+            value_is_initial: false,
+            value_is_default: false,
             ty: None,
             multiplicity: None,
             expression: Some(expression),
@@ -3060,67 +3748,47 @@ impl Parser {
             specializes: Vec::new(),
             subsets: Vec::new(),
             redefines: Vec::new(),
-            body_members: Vec::new(),
+            body_members: documentation,
             owner_docs: Vec::new(),
             had_body: true,
-        }))
+        })))
     }
 
     fn parse_or_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_and_expression()?;
-        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "or") {
-            self.expect_identifier_token("expected `or`")?;
-            let right = self.parse_and_expression()?;
-            let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op: BinaryOp::Or,
-                span,
-                right: Box::new(right),
-            };
-        }
-        Ok(expr)
+        self.parse_expression_chain(Self::parse_xor_expression, &["or", "|"])
     }
 
     fn parse_and_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_equality_expression()?;
-        while matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "and") {
-            self.expect_identifier_token("expected `and`")?;
-            let right = self.parse_equality_expression()?;
-            let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op: BinaryOp::And,
-                span,
-                right: Box::new(right),
-            };
-        }
-        Ok(expr)
+        self.parse_expression_chain(Self::parse_equality_expression, &["and", "&"])
     }
 
     fn parse_equality_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_comparison_expression()?;
-        loop {
-            let op = match self.peek_kind() {
-                TokenKind::DoubleEquals => BinaryOp::Equal,
-                TokenKind::BangEquals => BinaryOp::NotEqual,
-                _ => break,
-            };
+        self.parse_expression_chain(
+            Self::parse_classification_expression,
+            &["==", "!=", "===", "!=="],
+        )
+    }
+
+    fn parse_range_expression(&mut self) -> Result<Expr, Diagnostic> {
+        let left = self.parse_additive_expression()?;
+        if matches!(self.peek_kind(), TokenKind::Dot)
+            && matches!(self.next_kind(), Some(TokenKind::Dot))
+        {
             self.advance();
-            let right = self.parse_comparison_expression()?;
-            let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op,
-                right: Box::new(right),
+            self.advance();
+            let right = self.parse_additive_expression()?;
+            let span = merge_span(&expr_span(&left), &expr_span(&right));
+            return Ok(Expr::Call {
+                function: "..".to_string(),
+                args: vec![left, right],
                 span,
-            };
+            });
         }
-        Ok(expr)
+        Ok(left)
     }
 
     fn parse_comparison_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_additive_expression()?;
+        let mut expr = self.parse_range_expression()?;
         loop {
             let op = match self.peek_kind() {
                 TokenKind::LAngle => BinaryOp::Less,
@@ -3130,7 +3798,7 @@ impl Parser {
                 _ => break,
             };
             self.advance();
-            let right = self.parse_additive_expression()?;
+            let right = self.parse_range_expression()?;
             let span = merge_span(&expr_span(&expr), &expr_span(&right));
             expr = Expr::Binary {
                 left: Box::new(expr),
@@ -3164,24 +3832,7 @@ impl Parser {
     }
 
     fn parse_multiplicative_expression(&mut self) -> Result<Expr, Diagnostic> {
-        let mut expr = self.parse_power_expression()?;
-        loop {
-            let op = match self.peek_kind() {
-                TokenKind::Star => BinaryOp::Multiply,
-                TokenKind::Slash => BinaryOp::Divide,
-                _ => break,
-            };
-            self.advance();
-            let right = self.parse_power_expression()?;
-            let span = merge_span(&expr_span(&expr), &expr_span(&right));
-            expr = Expr::Binary {
-                left: Box::new(expr),
-                op,
-                right: Box::new(right),
-                span,
-            };
-        }
-        Ok(expr)
+        self.parse_expression_chain(Self::parse_power_expression, &["*", "/", "%"])
     }
 
     fn parse_power_expression(&mut self) -> Result<Expr, Diagnostic> {
@@ -3204,6 +3855,17 @@ impl Parser {
 
     fn parse_unary_expression(&mut self) -> Result<Expr, Diagnostic> {
         match self.peek_kind().clone() {
+            TokenKind::Plus | TokenKind::Tilde => {
+                let start = self.current().clone();
+                self.advance();
+                let operand = self.parse_unary_expression()?;
+                let span = merge_span(&start.span, &expr_span(&operand));
+                Ok(Expr::Operation {
+                    operator: token_text(&start.kind),
+                    operands: vec![operand],
+                    span,
+                })
+            }
             TokenKind::Minus => {
                 let token = self.current().clone();
                 self.advance();
@@ -3246,15 +3908,54 @@ impl Parser {
 
         loop {
             match self.peek_kind() {
+                // KerMLExpressions::PrimaryExpression: the receiver is operand 0.
+                TokenKind::Minus if matches!(self.next_kind(), Some(TokenKind::RAngle)) => {
+                    self.advance();
+                    self.advance();
+                    let function = self.parse_qualified_name()?.as_dot_string();
+                    let start_span = expr_span(&expr);
+                    let mut args = vec![expr];
+                    let end = if matches!(self.peek_kind(), TokenKind::LBrace) {
+                        args.push(self.parse_lambda_expression()?);
+                        self.tokens[self.index - 1].clone()
+                    } else if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+                        args.push(Expr::TypeReference(self.parse_qualified_name()?));
+                        self.tokens[self.index - 1].clone()
+                    } else {
+                        self.expect(
+                            TokenKind::LParen,
+                            "expected arrow arguments or function body",
+                        )?;
+                        if !matches!(self.peek_kind(), TokenKind::RParen) {
+                            loop {
+                                args.push(self.parse_call_argument_expression()?);
+                                if !matches!(self.peek_kind(), TokenKind::Comma) {
+                                    break;
+                                }
+                                self.advance();
+                            }
+                        }
+                        self.expect(TokenKind::RParen, "expected `)` after arrow arguments")?
+                    };
+                    expr = Expr::Call {
+                        function,
+                        args,
+                        span: merge_span(&start_span, &end.span),
+                    };
+                }
+                TokenKind::Dot if matches!(self.next_kind(), Some(TokenKind::Dot)) => break,
                 TokenKind::Dot => {
                     self.advance();
-                    if matches!(self.peek_kind(), TokenKind::Question) {
-                        self.advance();
-                        if matches!(self.peek_kind(), TokenKind::LBrace) {
-                            self.consume_opaque_block_with_open()?;
-                            continue;
-                        }
-                        return Err(self.error_here("expected `{` after filter operator"));
+                    if matches!(self.peek_kind(), TokenKind::Question | TokenKind::LBrace) {
+                        let operator = if matches!(self.peek_kind(), TokenKind::Question) {
+                            self.advance();
+                            ".?"
+                        } else {
+                            "."
+                        };
+                        let body = self.parse_lambda_expression()?;
+                        expr = expression_operation(operator, vec![expr, body]);
+                        continue;
                     }
                     let segment = self.expect_identifier("expected identifier after `.`")?;
                     let segment_span = self.tokens[self.index - 1].span.clone();
@@ -3288,22 +3989,45 @@ impl Parser {
                         span: merge_span(&start_span, &end.span),
                     };
                 }
-                TokenKind::LBracket => {
-                    self.consume_balanced(TokenKind::LBracket, TokenKind::RBracket)?;
-                }
-                TokenKind::Identifier(value) if value == "as" => {
-                    self.expect_identifier_named("as", "expected `as` in cast expression")?;
-                    if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
-                        let ty = self.parse_qualified_name()?;
-                        let span = merge_span(&expr_span(&expr), &ty.span);
-                        expr = Expr::Call {
-                            function: format!("as {}", ty.as_dot_string()),
-                            args: vec![expr],
-                            span,
-                        };
-                    } else {
-                        return Err(self.error_here("expected type name after `as`"));
+                TokenKind::LBracket | TokenKind::Hash => {
+                    let indexed = matches!(self.peek_kind(), TokenKind::Hash);
+                    self.advance();
+                    if indexed {
+                        self.expect(TokenKind::LParen, "expected `(` after `#`")?;
                     }
+                    let closing = if indexed {
+                        TokenKind::RParen
+                    } else {
+                        TokenKind::RBracket
+                    };
+                    let mut items = Vec::new();
+                    if self.peek_kind() != &closing {
+                        loop {
+                            items.push(self.parse_expression()?);
+                            if !matches!(self.peek_kind(), TokenKind::Comma) {
+                                break;
+                            }
+                            self.advance();
+                            if self.peek_kind() == &closing {
+                                break;
+                            }
+                        }
+                    }
+                    let end = self.expect(closing, "expected end of sequence expression")?;
+                    let span = merge_span(&expr_span(&expr), &end.span);
+                    let argument = if items.len() == 1 {
+                        items.remove(0)
+                    } else {
+                        Expr::Tuple {
+                            items,
+                            span: span.clone(),
+                        }
+                    };
+                    expr = Expr::Operation {
+                        operator: if indexed { "#" } else { "[" }.to_string(),
+                        operands: vec![expr, argument],
+                        span,
+                    };
                 }
                 _ => break,
             }
@@ -3313,7 +4037,47 @@ impl Parser {
     }
 
     fn parse_expression_primary(&mut self) -> Result<Expr, Diagnostic> {
+        if let Some((consumed, expression)) = crate::xtext_fragment::literal_expression(&self.tokens[self.index..])? {
+            self.index += consumed;
+            return Ok(expression);
+        }
         match self.peek_kind().clone() {
+            TokenKind::LBrace => self.parse_lambda_expression(),
+            TokenKind::At => {
+                let start = self.current().span.clone();
+                self.advance();
+                let operator = if matches!(self.peek_kind(), TokenKind::At) {
+                    self.advance();
+                    "@@"
+                } else {
+                    "@"
+                };
+                let reference = Expr::TypeReference(self.parse_qualified_name()?);
+                let span = merge_span(&start, &expr_span(&reference));
+                Ok(Expr::Operation {
+                    operator: operator.to_string(),
+                    operands: vec![reference],
+                    span,
+                })
+            }
+            TokenKind::Identifier(value)
+                if matches!(value.as_str(), "all" | "meta" | "hastype" | "istype" | "as") =>
+            {
+                let start = self.current().span.clone();
+                self.advance();
+                let reference = Expr::TypeReference(self.parse_qualified_name()?);
+                let span = merge_span(&start, &expr_span(&reference));
+                let operands = if matches!(value.as_str(), "hastype" | "istype" | "as") {
+                    vec![Expr::SelfRef(start), reference]
+                } else {
+                    vec![reference]
+                };
+                Ok(Expr::Operation {
+                    operator: value,
+                    operands,
+                    span,
+                })
+            }
             TokenKind::Identifier(value) if value == "new" => {
                 let start = self.expect_identifier_named("new", "expected `new`")?;
                 let constructor = self.parse_qualified_name()?;
@@ -3345,41 +4109,17 @@ impl Parser {
                 let token = self.expect_identifier_token("expected `self`")?;
                 Ok(Expr::SelfRef(token.span))
             }
-            TokenKind::Identifier(value) if value == "true" || value == "false" => {
-                self.advance();
-                Ok(Expr::Literal(LiteralExpr::Boolean(value == "true")))
-            }
             TokenKind::Identifier(_) => {
                 let name = self.parse_qualified_name()?;
                 Ok(Expr::Name(name))
             }
-            TokenKind::Number(value) => {
-                let token = self.current().clone();
-                self.advance();
-                if value.contains('.') {
-                    Ok(Expr::Literal(LiteralExpr::Real(value)))
-                } else {
-                    let value = value.parse::<i64>().map_err(|_| {
-                        Diagnostic::new("invalid integer literal", Some(token.span.clone()))
-                    })?;
-                    Ok(Expr::Literal(LiteralExpr::Integer(value)))
-                }
-            }
-            TokenKind::String(value) => {
-                self.advance();
-                Ok(Expr::Literal(LiteralExpr::String(value)))
-            }
+            TokenKind::Number(_) | TokenKind::String(_) => Err(Diagnostic::new(
+                "literal rejected by pinned Xtext rules",
+                Some(self.current().span.clone()),
+            )),
             TokenKind::LParen => {
                 let start = self.current().clone();
                 self.advance();
-                if matches!(self.peek_kind(), TokenKind::RParen) {
-                    let end = self.expect(TokenKind::RParen, "expected `)` after expression")?;
-                    return Ok(Expr::Tuple {
-                        items: Vec::new(),
-                        span: merge_span(&start.span, &end.span),
-                    });
-                }
-
                 let first = self.parse_expression()?;
                 if matches!(self.peek_kind(), TokenKind::Comma) {
                     let mut items = vec![first];
@@ -3405,13 +4145,56 @@ impl Parser {
     }
 
     fn parse_call_argument_expression(&mut self) -> Result<Expr, Diagnostic> {
-        if matches!(self.peek_kind(), TokenKind::Identifier(_))
-            && matches!(self.next_kind(), Some(TokenKind::Equals))
-        {
-            self.expect_identifier_token("expected argument name")?;
-            self.expect(TokenKind::Equals, "expected `=` after argument name")?;
+        let checkpoint = self.index;
+        if matches!(self.peek_kind(), TokenKind::Identifier(_)) {
+            let parameter = self.parse_qualified_name()?;
+            if matches!(self.peek_kind(), TokenKind::Equals) {
+                self.advance();
+                let value = self.parse_expression()?;
+                let span = merge_span(&parameter.span, &expr_span(&value));
+                return Ok(Expr::NamedArgument {
+                    parameter: Box::new(parameter),
+                    value: Box::new(value),
+                    span,
+                });
+            }
+            self.index = checkpoint;
         }
         self.parse_expression()
+    }
+
+    // Keep endpoint/body parsing off the recursive usage parser's stack frame.
+    fn parse_named_binary_connector(
+        &mut self,
+        keyword: &str,
+        effective_keyword: &str,
+        guarded_succession: bool,
+        tail: &mut UsageTail,
+    ) -> Result<Option<&'static str>, Diagnostic> {
+        if (keyword == "binding" && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "bind"))
+            || (keyword == "succession" && !guarded_succession && effective_keyword != "succession-flow"
+                && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "first"))
+        {
+            self.advance();
+            let named = self.starts_named_connection_end_member();
+            tail.body_members.push(self.parse_connection_end_member("source", named)?);
+            if keyword == "binding" {
+                self.expect(TokenKind::Equals, "expected `=` between binding ends")?;
+            } else {
+                self.expect_identifier_named("then", "expected `then` between succession ends")?;
+            }
+            let named = self.starts_named_connection_end_member();
+            tail.body_members.push(self.parse_connection_end_member("target", named)?);
+            if matches!(self.peek_kind(), TokenKind::LBrace) {
+                tail.had_body = true;
+                let block = self.parse_declaration_block()?;
+                tail.body_members.extend(block.members);
+                tail.owner_docs.extend(block.owner_docs);
+            }
+        } else {
+            return Ok(None);
+        }
+        Ok(Some(if keyword == "binding" { "bind" } else { "succession-as" }))
     }
 
     fn parse_connection_end_members(
@@ -3423,18 +4206,17 @@ impl Parser {
             && matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "connect");
         if starts_named_connect {
             self.expect_identifier_named("connect", "expected `connect`")?;
-            if matches!(self.peek_kind(), TokenKind::LParen) {
-                self.consume_balanced(TokenKind::LParen, TokenKind::RParen)?;
-                if matches!(self.peek_kind(), TokenKind::LBrace) {
-                    tail.had_body = true;
-                    let block = self.parse_declaration_block()?;
-                    tail.body_members.extend(block.members);
-                    tail.owner_docs.extend(block.owner_docs);
+            let mut ends = self.parse_connector_part()?;
+            if keyword == "interface" {
+                // Pilot InterfaceEnd returns PortUsage in both BinaryInterfacePart
+                // and NaryInterfacePart; ConnectionEnd remains ReferenceUsage.
+                for end in &mut ends {
+                    if let Declaration::GenericUsage(usage) = end {
+                        usage.keyword = "port".to_string();
+                    }
                 }
-                return Ok(());
             }
-            let has_named_ends = self.starts_named_connection_end_member();
-            tail.body_members = self.parse_connection_end_member_pair(has_named_ends)?;
+            tail.body_members.extend(ends);
             if matches!(self.peek_kind(), TokenKind::LBrace) {
                 tail.had_body = true;
                 let block = self.parse_declaration_block()?;
@@ -3450,7 +4232,7 @@ impl Parser {
             );
         if starts_anonymous_connect {
             if matches!(self.peek_kind(), TokenKind::LParen) {
-                self.consume_balanced(TokenKind::LParen, TokenKind::RParen)?;
+                tail.body_members.extend(self.parse_connector_part()?);
                 if matches!(self.peek_kind(), TokenKind::LBrace) {
                     tail.had_body = true;
                     let block = self.parse_declaration_block()?;
@@ -3459,7 +4241,7 @@ impl Parser {
                 }
                 return Ok(());
             }
-            tail.body_members = self.parse_connection_end_member_pair(false)?;
+            tail.body_members = self.parse_connection_end_member_pair()?;
             if matches!(self.peek_kind(), TokenKind::LBrace) {
                 tail.had_body = true;
                 let block = self.parse_declaration_block()?;
@@ -3471,13 +4253,44 @@ impl Parser {
         Ok(())
     }
 
-    fn parse_connection_end_member_pair(
-        &mut self,
-        named_ends: bool,
-    ) -> Result<Vec<Declaration>, Diagnostic> {
-        let source = self.parse_connection_end_member("source", named_ends)?;
+    fn parse_connector_part(&mut self) -> Result<Vec<Declaration>, Diagnostic> {
+        if !matches!(self.peek_kind(), TokenKind::LParen) {
+            return self.parse_connection_end_member_pair();
+        }
+        self.advance();
+        let mut ends = Vec::new();
+        loop {
+            let name = match ends.len() {
+                0 => "source".to_string(),
+                1 => "target".to_string(),
+                n => format!("end{}", n + 1),
+            };
+            let named = self.starts_named_connection_end_member();
+            ends.push(self.parse_connection_end_member(&name, named)?);
+            if !matches!(self.peek_kind(), TokenKind::Comma) {
+                break;
+            }
+            self.advance();
+        }
+        self.expect(TokenKind::RParen, "expected `)` after connector ends")?;
+        if ends.len() != 2 {
+            for end in &mut ends {
+                if let Declaration::GenericUsage(usage) = end {
+                    // An n-ary end has no binary source/target role.
+                    usage.modifiers.retain(|modifier| !modifier.starts_with("end-"));
+                }
+            }
+        }
+        Ok(ends)
+    }
+
+    fn parse_connection_end_member_pair(&mut self) -> Result<Vec<Declaration>, Diagnostic> {
+        // Each ConnectorEnd/InterfaceEnd has its own optional identification.
+        let source_named = self.starts_named_connection_end_member();
+        let source = self.parse_connection_end_member("source", source_named)?;
         self.expect_identifier_named("to", "expected `to` between connection ends")?;
-        let target = self.parse_connection_end_member("target", named_ends)?;
+        let target_named = self.starts_named_connection_end_member();
+        let target = self.parse_connection_end_member("target", target_named)?;
         Ok(vec![source, target])
     }
 
@@ -3509,9 +4322,10 @@ impl Parser {
         let span = merge_span(&start.span, &reference_target.span);
 
         Ok(Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
             keyword: "reference".to_string(),
             name,
-            is_implicit_name: false,
+            is_implicit_name: !named_end,
             ty: None,
             reference_target: Some(reference_target),
             allocation_source: None,
@@ -3590,7 +4404,7 @@ impl Parser {
             if usage.keyword == "state" {
                 // Anchor link features at the source state's declaration line.
                 // Only single-line `state x;` has an unambiguous anchor; the
-                // pilot's rule for a bodied `state x { … }` differs and is
+                // pilot's rule for a bodied `state x { â€¦ }` differs and is
                 // deferred, so skip those (leave their link refs pilot-only).
                 previous_state_span =
                     (usage.span.start_line == usage.span.end_line).then(|| usage.span.clone());
@@ -3625,6 +4439,7 @@ impl Parser {
     }
 
     fn block_starts_with_declaration(&self) -> bool {
+        if matches!(self.peek_kind(), TokenKind::BlockDoc(_)) { return true; }
         let mut index = self.index;
 
         while matches!(
@@ -3641,6 +4456,16 @@ impl Parser {
             index += 1;
         }
 
+        if index > self.index
+            && matches!(
+                self.tokens.get(index).map(|t| &t.kind),
+                Some(
+                    TokenKind::Colon | TokenKind::Equals | TokenKind::LBrace | TokenKind::Semicolon
+                )
+            )
+        {
+            return true;
+        }
         match self.tokens.get(index).map(|token| &token.kind) {
             Some(
                 TokenKind::Package
@@ -3655,8 +4480,24 @@ impl Parser {
                 Some(TokenKind::Identifier(_))
             ),
             Some(TokenKind::Identifier(value)) => {
-                if matches!(value.as_str(), "if" | "else" | "new") {
+                if matches!(value.as_str(), "language" | "rep" | "alias") { return true; }
+                if matches!(value.as_str(), "else" | "new") {
                     return false;
+                }
+                if value == "if" {
+                    // A guarded succession (`if ... then`) or conditional
+                    // expression (`if ... ? ... else`) is not an IfNode.
+                    // Preserve the existing expression/succession path here.
+                    for token in &self.tokens[index + 1..] {
+                        match &token.kind {
+                            TokenKind::LBrace => break,
+                            TokenKind::Question | TokenKind::Semicolon | TokenKind::RBrace => {
+                                return false;
+                            }
+                            TokenKind::Identifier(word) if word == "then" => return false,
+                            _ => {}
+                        }
+                    }
                 }
                 let next_kind = self.tokens.get(index + 1).map(|token| &token.kind);
                 matches!(
@@ -3672,10 +4513,11 @@ impl Parser {
                             | TokenKind::Semicolon
                     )
                 ) || matches!(next_kind, Some(TokenKind::LAngle) if is_feature_keyword(value))
-                    || matches!(next_kind, Some(TokenKind::LBracket) if value == "connect" || value == "end")
-                    || matches!(next_kind, Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) if value == "comment")
+                    || matches!(next_kind, Some(TokenKind::LBracket) if value == "connect" || value == "end" || index > self.index)
+                    || matches!(next_kind, Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) if matches!(value.as_str(), "comment" | "doc"))
+                    || matches!(next_kind, Some(TokenKind::String(_)) if value == "locale")
                     // `filter @X;` and `expose @X;` lead with `@`, which is not
-                    // a usage-declaration shape — without this they are consumed
+                    // a usage-declaration shape â€” without this they are consumed
                     // as opaque statements and silently vanish from the body
                     // (save-as-view SV-1).
                     || matches!(next_kind, Some(TokenKind::At) if value == "filter" || value == "expose")
@@ -3685,7 +4527,7 @@ impl Parser {
     }
 
     fn next_declaration_is_comment_usage(&self) -> bool {
-        matches!(self.peek_kind(), TokenKind::Identifier(value) if value == "comment")
+        matches!(self.peek_kind(), TokenKind::Identifier(value) if matches!(value.as_str(), "comment" | "doc"))
     }
 
     fn consume_opaque_block_contents(&mut self) -> Result<Token, Diagnostic> {
@@ -3808,6 +4650,7 @@ impl Parser {
             }
             self.expect(TokenKind::RAngle, "expected `>` after adornment")?;
             if !parts.is_empty() {
+                adornments.push(format!("short_name={}", parts.join("")));
                 adornments.push(parts.join(""));
             }
         }
@@ -3985,11 +4828,22 @@ impl Parser {
 
     fn should_parse_as_feature_keyword(&self, keyword: &str) -> bool {
         match self.next_kind() {
+            Some(TokenKind::Semicolon | TokenKind::LBrace) => {
+                // Reserved usage keywords also introduce unnamed declarations.
+                // Quoted identifiers include their quotes in the inclusive token
+                // span and remain default reference usages (e.g. `'action';`).
+                let span = &self.current().span;
+                is_feature_keyword(keyword)
+                    && span.start_line == span.end_line
+                    && span.end_col.saturating_sub(span.start_col) + 1 == keyword.chars().count()
+            },
             Some(TokenKind::Def | TokenKind::Identifier(_) | TokenKind::LAngle) => true,
-            Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) => keyword == "comment",
+            Some(TokenKind::Doc(_) | TokenKind::BlockDoc(_)) => matches!(keyword, "comment" | "doc"),
+            Some(TokenKind::String(_)) => keyword == "locale",
             Some(TokenKind::Colon) => {
                 matches!(keyword, "connection") || is_feature_keyword(keyword)
             }
+            Some(TokenKind::Equals) => keyword == "enum",
             Some(TokenKind::Specializes | TokenKind::Redefines) => is_feature_keyword(keyword),
             Some(TokenKind::LBracket) => matches!(keyword, "connect" | "end"),
             Some(TokenKind::Part) => matches!(keyword, "end"),
@@ -4068,17 +4922,6 @@ impl Parser {
         }
     }
 
-    fn expect_string_literal(&mut self, message: &str) -> Result<Token, Diagnostic> {
-        let token = self.current().clone();
-        match &token.kind {
-            TokenKind::String(_) => {
-                self.advance();
-                Ok(token)
-            }
-            _ => Err(Diagnostic::new(message, Some(token.span))),
-        }
-    }
-
     fn expect(&mut self, expected: TokenKind, message: &str) -> Result<Token, Diagnostic> {
         let token = self.current().clone();
         if std::mem::discriminant(&token.kind) == std::mem::discriminant(&expected) {
@@ -4146,6 +4989,56 @@ fn attach_leading_comments(declaration: Declaration, comments: Vec<CommentNote>)
     declaration
 }
 
+fn expression_operation(operator: &str, operands: Vec<Expr>) -> Expr {
+    let span = operands
+        .first()
+        .map(expr_span)
+        .zip(operands.last().map(expr_span))
+        .map(|(first, last)| merge_span(&first, &last))
+        .unwrap_or(SourceSpan {
+            start_line: 0,
+            start_col: 0,
+            end_line: 0,
+            end_col: 0,
+        });
+    let binary = match operator {
+        "and" => Some(BinaryOp::And),
+        "or" => Some(BinaryOp::Or),
+        "==" => Some(BinaryOp::Equal),
+        "!=" => Some(BinaryOp::NotEqual),
+        "*" => Some(BinaryOp::Multiply),
+        "/" => Some(BinaryOp::Divide),
+        _ => None,
+    };
+    if let (Some(op), [left, right]) = (binary, operands.as_slice()) {
+        return Expr::Binary {
+            op,
+            left: Box::new(left.clone()),
+            right: Box::new(right.clone()),
+            span,
+        };
+    }
+    Expr::Operation {
+        operator: operator.to_string(),
+        operands,
+        span,
+    }
+}
+
+pub(crate) fn parse_multiplicity_prefix(
+    tokens: &[Token],
+) -> Result<(MultiplicityRange, usize), Diagnostic> {
+    let mut parser = Parser::new(tokens.to_vec(), false);
+    let range = parser.parse_multiplicity_range()?;
+    Ok((range, parser.index))
+}
+
+pub(crate) fn parse_expression_prefix(tokens: &[Token]) -> Result<(Expr, usize), Diagnostic> {
+    let mut parser = Parser::new(tokens.to_vec(), false);
+    let expression = parser.parse_expression()?;
+    Ok((expression, parser.index))
+}
+
 fn expr_span(expr: &Expr) -> SourceSpan {
     match expr {
         Expr::Literal(_) => SourceSpan {
@@ -4154,9 +5047,12 @@ fn expr_span(expr: &Expr) -> SourceSpan {
             end_line: 0,
             end_col: 0,
         },
-        Expr::Name(name) => name.span.clone(),
+        Expr::Name(name) | Expr::TypeReference(name) => name.span.clone(),
         Expr::SelfRef(span) => span.clone(),
-        Expr::Tuple { span, .. }
+        Expr::Operation { span, .. }
+        | Expr::NamedArgument { span, .. }
+        | Expr::Lambda { span, .. }
+        | Expr::Tuple { span, .. }
         | Expr::Unary { span, .. }
         | Expr::Binary { span, .. }
         | Expr::Path { span, .. }
@@ -4173,7 +5069,7 @@ fn segment_text(kind: &TokenKind) -> String {
     }
 }
 
-fn token_text(kind: &TokenKind) -> String {
+pub(crate) fn token_text(kind: &TokenKind) -> String {
     match kind {
         TokenKind::Identifier(value) => value.clone(),
         TokenKind::String(value) => format!("\"{value}\""),
@@ -4198,6 +5094,7 @@ fn token_text(kind: &TokenKind) -> String {
         TokenKind::Plus => "+".to_string(),
         TokenKind::Minus => "-".to_string(),
         TokenKind::Slash => "/".to_string(),
+        TokenKind::Percent => "%".to_string(),
         TokenKind::Bang => "!".to_string(),
         TokenKind::Ampersand => "&".to_string(),
         TokenKind::Pipe => "|".to_string(),
@@ -4210,22 +5107,20 @@ fn token_text(kind: &TokenKind) -> String {
 }
 
 fn is_declaration_modifier(value: &str) -> bool {
+    if crate::enum_grammar::declaration_modifier(false, value) { return true; }
     matches!(
         value,
-        "public"
-            | "private"
-            | "protected"
-            | "library"
+        "library"
+            | "standard"
             | "entry"
             | "exit"
             | "abstract"
             | "do"
             | "ref"
-            | "in"
-            | "out"
             | "first"
             | "derived"
             | "readonly"
+            | "return"
             | "then"
             | "individual"
             | "variation"
@@ -4244,6 +5139,7 @@ fn is_feature_keyword(value: &str) -> bool {
         value,
         "accept"
             | "action"
+            | "actor"
             | "allocation"
             | "analysis"
             | "assert"
@@ -4251,19 +5147,32 @@ fn is_feature_keyword(value: &str) -> bool {
             | "attribute"
             | "calc"
             | "comment"
+            | "doc"
+            | "locale"
             | "concern"
             | "connect"
             | "connection"
             | "constraint"
             | "dependency"
             | "effect"
+            | "enum"
+            | "assign"
+            | "event"
             | "exhibit"
             | "flow"
+            | "fork"
+            | "join"
+            | "merge"
+            | "decide"
+            | "terminate"
             | "include"
             | "individual"
             | "interface"
             | "item"
             | "metadata"
+            | "message"
+            | "snapshot"
+            | "timeslice"
             | "occurrence"
             | "objective"
             | "perform"
@@ -4294,6 +5203,10 @@ fn append_module_member(module: &mut SysmlModule, declaration: Declaration) {
 }
 
 struct UsageTail {
+    is_ordered: bool,
+    is_nonunique: bool,
+    value_is_initial: bool,
+    value_is_default: bool,
     ty: Option<QualifiedName>,
     multiplicity: Option<MultiplicityRange>,
     expression: Option<Expr>,
@@ -4313,10 +5226,21 @@ struct DeclarationBlock {
 }
 
 impl UsageTail {
+    fn append_value_modifiers(&self, modifiers: &mut Vec<String>) {
+        if self.is_ordered { modifiers.push("ordered".to_string()); }
+        if self.is_nonunique { modifiers.push("nonunique".to_string()); }
+        if self.value_is_initial {
+            modifiers.push("feature_value_is_initial".to_string());
+        }
+        if self.value_is_default {
+            modifiers.push("feature_value_is_default".to_string());
+        }
+    }
+
     fn derived_name(&self, keyword: &str) -> String {
-        self.specializes
+        self.redefines
             .first()
-            .or(self.redefines.first())
+            .or(self.specializes.first())
             .or(self.subsets.first())
             .or(self.ty.as_ref())
             .and_then(|name| name.segments.last())
@@ -4329,7 +5253,7 @@ impl UsageTail {
 ///
 /// Deliberately total over the operators a filter can contain (`@`, boolean
 /// operators, comparisons, parentheses, scope separators) rather than falling
-/// back to the empty string the way `multiplicity_token_text` does — silently
+/// back to the empty string the way `multiplicity_token_text` does â€” silently
 /// dropping an operator would change the condition's meaning.
 fn filter_token_text(kind: TokenKind) -> String {
     match kind {
@@ -4361,6 +5285,7 @@ fn filter_token_text(kind: TokenKind) -> String {
         TokenKind::Plus => "+".to_string(),
         TokenKind::Minus => "-".to_string(),
         TokenKind::Slash => "/".to_string(),
+        TokenKind::Percent => "%".to_string(),
         TokenKind::Bang => "!".to_string(),
         TokenKind::Ampersand => "&".to_string(),
         TokenKind::Pipe => "|".to_string(),
@@ -4398,13 +5323,15 @@ fn normalize_filter_condition(raw: &str) -> String {
 
 fn multiplicity_token_text(kind: &TokenKind) -> String {
     match kind {
-        TokenKind::Number(value) | TokenKind::Identifier(value) | TokenKind::String(value) => {
+        TokenKind::Number(value) | TokenKind::Identifier(value) => {
             value.clone()
         }
+        TokenKind::String(value) => serde_json::to_string(value).unwrap_or_default(),
         TokenKind::Star => "*".to_string(),
         TokenKind::Dot => ".".to_string(),
         TokenKind::Comma => ",".to_string(),
         TokenKind::Colon => ":".to_string(),
+        TokenKind::ScopeSep => "::".to_string(),
         TokenKind::Minus => "-".to_string(),
         TokenKind::Plus => "+".to_string(),
         _ => String::new(),
@@ -4412,16 +5339,57 @@ fn multiplicity_token_text(kind: &TokenKind) -> String {
 }
 
 fn normalize_multiplicity_raw(raw: &str) -> String {
+    if raw.contains('"') { return raw.to_owned(); }
     raw.replace(". .", "..")
         .replace(" ", "")
         .replace("...", "..")
 }
 
 fn multiplicity_bounds(raw: &str) -> (String, String) {
-    if let Some((lower, upper)) = raw.split_once("..") {
-        return (lower.to_string(), upper.to_string());
+    let parts = split_multiplicity_bound_text(raw);
+    if parts.len() == 2 {
+        return (parts[0].to_string(), parts[1].to_string());
     }
     (raw.to_string(), raw.to_string())
+}
+
+pub(crate) fn split_multiplicity_bound_text(raw: &str) -> Vec<&str> {
+    let bytes = raw.as_bytes();
+    let mut parts = Vec::new();
+    let mut quoted = false;
+    let mut escaped = false;
+    let mut start = 0;
+    let mut index = 0;
+    while index < bytes.len() {
+        match bytes[index] {
+            b'\\' if quoted => escaped = !escaped,
+            b'"' if !escaped => quoted = !quoted,
+            _ => escaped = false,
+        }
+        if !quoted && bytes[index..].starts_with(b"..") {
+            parts.push(&raw[start..index]);
+            index += 2;
+            start = index;
+            continue;
+        }
+        index += 1;
+    }
+    parts.push(&raw[start..]);
+    parts
+}
+
+fn explicit_payload_reference(
+    name: &str,
+    ty: Option<QualifiedName>,
+    reference_target: Option<QualifiedName>,
+    modifiers: &[&str],
+    span: &SourceSpan,
+) -> Declaration {
+    let mut declaration = synthetic_reference_usage(name, ty, reference_target, modifiers, span);
+    if let Declaration::GenericUsage(usage) = &mut declaration {
+        usage.is_implicit_name = false;
+    }
+    declaration
 }
 
 fn synthetic_reference_usage(
@@ -4432,9 +5400,10 @@ fn synthetic_reference_usage(
     span: &SourceSpan,
 ) -> Declaration {
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "reference".to_string(),
         name: name.to_string(),
-        is_implicit_name: false,
+        is_implicit_name: name == "payload" && modifiers.contains(&"payload"),
         ty,
         reference_target,
         allocation_source: None,
@@ -4464,6 +5433,7 @@ fn synthetic_reference_usage(
 // referenced state.
 fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSpan) -> Declaration {
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "reference".to_string(),
         name: feature.to_string(),
         is_implicit_name: false,
@@ -4503,6 +5473,7 @@ fn succession_end_reference(feature: &str, state: QualifiedName, span: &SourceSp
 // so they stay inert to the state-machine projection.
 fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration {
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "reference".to_string(),
         name: feature.to_string(),
         is_implicit_name: false,
@@ -4531,9 +5502,9 @@ fn transition_member_reference(feature: &str, span: &SourceSpan) -> Declaration 
 // The pilot materializes a transition's `accept` trigger as an `accepter`
 // AcceptActionUsage owning a `payload` ReferenceUsage. The accepter carries no
 // source/target property, so it stays inert to `is_transition_element` (which
-// requires a `target`), and its keyword-prefixed element id ("accept.…") avoids
+// requires a `target`), and its keyword-prefixed element id ("accept.â€¦") avoids
 // the "transition." prefix branch of the state-machine projection.
-// The standalone `accept … then` shorthand materializes the same happensBefore
+// The standalone `accept â€¦ then` shorthand materializes the same happensBefore
 // succession as the `transition` keyword form, but the source state is implicit
 // (resolved during lowering), so the end references specialize only the
 // Succession source/target features. Anchored at the `then` clause.
@@ -4543,6 +5514,7 @@ fn standalone_happens_before_succession(span: &SourceSpan) -> Declaration {
         standalone_succession_end("laterOccurrence", span),
     ];
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "succession-as".to_string(),
         name: String::new(),
         is_implicit_name: true,
@@ -4567,6 +5539,7 @@ fn standalone_happens_before_succession(span: &SourceSpan) -> Declaration {
 
 fn standalone_succession_end(feature: &str, span: &SourceSpan) -> Declaration {
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "reference".to_string(),
         name: feature.to_string(),
         is_implicit_name: false,
@@ -4593,10 +5566,11 @@ fn standalone_succession_end(feature: &str, span: &SourceSpan) -> Declaration {
 }
 
 // Wrap the parsed accept members (payload/receiver references) in an `accepter`
-// AcceptActionUsage, used when rerouting a standalone `accept … then` shorthand
+// AcceptActionUsage, used when rerouting a standalone `accept â€¦ then` shorthand
 // into a TransitionUsage.
 fn accepter_action_with_members(members: Vec<Declaration>, span: &SourceSpan) -> Declaration {
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "accept".to_string(),
         name: "accepter".to_string(),
         is_implicit_name: false,
@@ -4625,6 +5599,7 @@ fn accepter_action_with_members(members: Vec<Declaration>, span: &SourceSpan) ->
 fn transition_accepter_action(span: &SourceSpan) -> Declaration {
     let payload = transition_member_reference("payload", span);
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "accept".to_string(),
         name: "accepter".to_string(),
         is_implicit_name: false,
@@ -4660,6 +5635,7 @@ fn transition_happens_before_succession(
         succession_end_reference("laterOccurrence", target, span),
     ];
     Declaration::GenericUsage(GenericUsageDecl {
+        annotation_targets: Vec::new(),
         keyword: "succession-as".to_string(),
         name: String::new(),
         is_implicit_name: true,
@@ -4695,6 +5671,12 @@ fn append_package_member(
 }
 
 fn implicit_usage_keyword(modifiers: &[String]) -> &'static str {
+    if modifiers.iter().any(|modifier| modifier == "individual") {
+        return "individual";
+    }
+    if modifiers.iter().any(|modifier| matches!(modifier.as_str(), "snapshot" | "timeslice")) {
+        return "occurrence";
+    }
     if modifiers
         .iter()
         .any(|modifier| matches!(modifier.as_str(), "entry" | "exit"))
@@ -4708,11 +5690,13 @@ fn implicit_usage_keyword(modifiers: &[String]) -> &'static str {
         "action"
     } else if modifiers
         .iter()
-        .any(|modifier| matches!(modifier.as_str(), "ref" | "in" | "out" | "inout"))
+        .any(|modifier| matches!(modifier.as_str(), "ref" | "in" | "out" | "inout" | "return"))
     {
         "reference"
     } else {
-        "feature"
+        // SysML DefaultReferenceUsage has no required usage keyword.
+        // KerML's separate parser continues to produce Feature declarations.
+        "reference"
     }
 }
 
@@ -4916,16 +5900,19 @@ mod tests {
     }
 
     #[test]
-    fn colliding_import_aliases_are_ambiguous_not_fatal() {
+    fn colliding_import_aliases_follow_pilot_first_visible_membership() {
         let module = parse_sysml(
             "package Demo { import First::Thing; import Second::Thing; part thing : Thing; }",
         )
         .unwrap();
-        let stdlib = fake_stdlib(["First::Thing", "Second::Thing"]);
+        let mut stdlib = fake_stdlib(["First::Thing", "Second::Thing"]);
+        for element in &mut stdlib.elements {
+            element.kind = "SysML::PartDefinition".to_string();
+        }
         let mappings = MappingBundle::load().unwrap();
-        let error = resolve_module(&module, &stdlib, &mappings).unwrap_err();
+        let resolved = resolve_module(&module, &stdlib, &mappings).unwrap();
 
-        assert!(error.message.contains("unresolved type `Thing`"));
+        assert_eq!(resolved.usages[0].type_ref.as_deref(), Some("First::Thing"));
     }
 
     #[test]
@@ -5074,7 +6061,7 @@ mod tests {
         let kir = transpile_module(&resolved, "inline.sysml", &mappings).unwrap();
 
         assert!(kir.elements.iter().any(|element| {
-            element.id == "type.Demo.APISService" && element.kind == "KerML::Core::Type"
+            element.id == "type.Demo.APISService" && element.kind == "KerML::Classifier"
         }));
     }
 
@@ -5099,8 +6086,13 @@ mod tests {
 
     #[test]
     fn resolver_allows_import_fallback_without_relaxing_general_type_lookup() {
-        let module = parse_sysml("package Demo { import ISQ::TorqueValue; part def Vehicle { part torque: TorqueValue; } }").unwrap();
-        let stdlib = fake_stdlib(["ISQ", "ISQMechanics::TorqueValue"]);
+        let module = parse_sysml("package Demo { import ISQ::TorqueValue; part def Vehicle { attribute torque: TorqueValue; } }").unwrap();
+        let mut stdlib = fake_stdlib(["ISQ", "ISQMechanics::TorqueValue"]);
+        for element in &mut stdlib.elements {
+            if element.id == "ISQMechanics::TorqueValue" {
+                element.kind = "SysML::AttributeDefinition".to_string();
+            }
+        }
         let mappings = MappingBundle::load().unwrap();
         let resolved = resolve_module(&module, &stdlib, &mappings).unwrap();
 
@@ -5150,7 +6142,8 @@ mod tests {
             element.id == "feature.Demo.Vehicle.conn" && element.kind == "SysML::PortUsage"
         }));
         assert!(kir.elements.iter().any(|element| {
-            element.id == "feature.Demo.Vehicle.sample" && element.kind == "KerML::Core::Feature"
+            element.properties.get("declared_name").is_some_and(|name| name == "sample")
+                && element.kind == "SysML::ReferenceUsage"
         }));
     }
 
@@ -5268,7 +6261,7 @@ mod tests {
             element
                 .id
                 .starts_with("feature.Demo.FuelInterface.consumerPort")
-                && element.kind == "KerML::Core::Feature"
+                && element.kind.ends_with("PortUsage")
                 && element.properties.get("type")
                     == Some(&serde_json::Value::String(
                         "type.Demo.FuelInPort".to_string(),
@@ -5385,7 +6378,12 @@ mod tests {
             "package Demo { import SysML::*; item def Payload; part def Vehicle { part engine: Engine; attribute status: Integer; item cargo: Payload; } part def Engine; }",
         )
         .unwrap();
-        let stdlib = fake_stdlib(["Integer", "SysML::Systems::PartDefinition"]);
+        let mut stdlib = fake_stdlib(["Integer", "SysML::Systems::PartDefinition"]);
+        // Imported namespaces need real elements, not only matching ID prefixes.
+        stdlib.elements.push(KirElement {
+            id: "SysML".into(), kind: "SysML::Namespace".into(), layer: 1,
+            properties: BTreeMap::new(),
+        });
         let mappings = MappingBundle::load().unwrap();
         let resolved = resolve_module(&module, &stdlib, &mappings).unwrap();
         let kir = transpile_module(&resolved, "inline.sysml", &mappings).unwrap();
@@ -5540,7 +6538,7 @@ mod tests {
     }
 
     #[test]
-    fn parses_modifier_only_ref_redefinition_as_reference_target() {
+    fn parses_modifier_only_ref_redefinition_with_inherited_name() {
         let module = parse_sysml(
             "package Demo { part system; part satisfactionContext { ref :>> system; } }",
         )
@@ -5558,10 +6556,9 @@ mod tests {
             &context.body_members[0],
             Declaration::GenericUsage(usage)
                 if usage.keyword == "reference"
-                    && usage.name == "ref"
-                    && usage.reference_target.as_ref().map(|target| target.as_dot_string())
-                        == Some("system".to_string())
-                    && usage.redefines.is_empty()
+                    && usage.name == "system"
+                    && usage.reference_target.is_none()
+                    && usage.redefines.iter().map(|target| target.as_dot_string()).collect::<Vec<_>>() == vec!["system"]
         ));
     }
 
@@ -5732,7 +6729,12 @@ mod tests {
         let succession_source = kir
             .elements
             .iter()
-            .find(|element| element.id == "reference.Demo.B.SuccessionFlowUsage.x.1")
+            .find(|element| {
+                element
+                    .id
+                    .starts_with("reference.Demo.B.SuccessionFlowUsage.")
+                    && element.id.ends_with(".x.1")
+            })
             .unwrap();
         assert_eq!(
             succession_source.properties.get("type"),
@@ -5755,7 +6757,12 @@ mod tests {
         let succession_target = kir
             .elements
             .iter()
-            .find(|element| element.id == "reference.Demo.B.SuccessionFlowUsage.receiver.1")
+            .find(|element| {
+                element
+                    .id
+                    .starts_with("reference.Demo.B.SuccessionFlowUsage.")
+                    && element.id.ends_with(".receiver.1")
+            })
             .unwrap();
         assert_eq!(
             succession_target.properties.get("type"),
@@ -5773,7 +6780,12 @@ mod tests {
         let payload = kir
             .elements
             .iter()
-            .find(|element| element.id == "reference.Demo.B.a1.AcceptActionUsage.payload.1")
+            .find(|element| {
+                element
+                    .id
+                    .starts_with("reference.Demo.B.a1.AcceptActionUsage.")
+                    && element.id.ends_with(".payload.1")
+            })
             .unwrap();
         assert_eq!(
             payload.properties.get("type"),
@@ -5795,11 +6807,16 @@ mod tests {
         let receiver = kir
             .elements
             .iter()
-            .find(|element| element.id == "reference.Demo.B.a1.AcceptActionUsage.receiver.1")
+            .find(|element| {
+                element
+                    .id
+                    .starts_with("reference.Demo.B.a1.AcceptActionUsage.")
+                    && element.id.ends_with(".receiver.1")
+            })
             .unwrap();
         assert_eq!(
             receiver.properties.get("type"),
-            Some(&serde_json::json!("Occurrences::Occurrence"))
+            Some(&serde_json::json!("type.Demo.P"))
         );
         assert_eq!(
             receiver.properties.get("redefined_features"),
@@ -5843,20 +6860,20 @@ mod tests {
         assert!(
             kir.elements
                 .iter()
-                .any(|element| element.id == "loop.Demo.action"
-                    && element.kind == "KerML::Core::Feature")
+                .any(|element| element.kind == "WhileLoopActionUsage")
         );
         assert!(
             kir.elements
                 .iter()
-                .any(|element| element.id == "until.Demo.charging"
-                    && element.kind == "KerML::Core::Feature")
+                .any(|element| element.properties.get("declared_name")
+                    == Some(&serde_json::json!("until"))
+                    && element.properties.contains_key("expression_ir"))
         );
         assert!(
             kir.elements
                 .iter()
-                .any(|element| element.id == "send.Demo.new"
-                    && element.kind == "KerML::Core::Feature")
+                .any(|element| element.kind == "SendActionUsage"
+                    && element.id.starts_with("feature.Demo."))
         );
     }
 
@@ -6006,7 +7023,7 @@ mod tests {
         assert!(matches!(
             &package.members[0],
             Declaration::GenericUsage(usage)
-                if usage.keyword == "interface" && usage.body_members.len() == 1
+                if usage.keyword == "interface" && usage.body_members.len() == 3
         ));
     }
 
@@ -6024,7 +7041,7 @@ mod tests {
         assert!(matches!(
             &action.body_members[2],
             Declaration::GenericUsage(usage)
-                if usage.keyword == "succession" && usage.name == "xFlow"
+                if usage.keyword == "succession-flow" && usage.name == "xFlow" && !usage.is_implicit_name
         ));
     }
 
@@ -6049,7 +7066,7 @@ mod tests {
 
     #[test]
     fn parses_accept_payload_name_and_type() {
-        // A standalone `accept … then` shorthand is rerouted to an anonymous
+        // A standalone `accept â€¦ then` shorthand is rerouted to an anonymous
         // TransitionUsage (implicit source = preceding sibling state) owning an
         // `accepter` AcceptActionUsage, which in turn owns the payload.
         let module =
@@ -6322,11 +7339,11 @@ mod tests {
         let payload = snd
             .members
             .iter()
-            .find(|member| member.declared_name == "in")
+            .find(|member| member.declared_name == "payload")
             .unwrap();
         assert_eq!(
             payload.redefined_features,
-            vec!["feature.Actions::SendAction::payload".to_string()]
+            vec!["Actions::SendAction::payload".to_string()]
         );
     }
 
@@ -6367,7 +7384,7 @@ mod tests {
             Some(ResolvedExpr::FeaturePath {
                 segments: vec![ResolvedPathSegment {
                     name: "result".to_string(),
-                    feature_id: "feature.AnalysisCases::AnalysisCase::result".to_string(),
+                    feature_id: "AnalysisCases::AnalysisCase::result".to_string(),
                 }]
             })
         );
@@ -6422,13 +7439,15 @@ mod tests {
             other => panic!("expected profiled usage, got {other:?}"),
         };
 
-        assert_eq!(usage.keyword, "profiled");
+        assert_eq!(usage.keyword, "extended");
+        assert!(usage.modifiers.contains(&"language_extension=profiled".to_string()));
         assert_eq!(usage.name, "concreteThing");
         assert_eq!(usage.specializes[0].as_dot_string(), "Base");
         assert!(matches!(
             &usage.body_members[0],
             Declaration::GenericUsage(child)
-                if child.keyword == "nested" && child.name == "child"
+                if child.keyword == "extended" && child.name == "child"
+                    && child.modifiers.contains(&"language_extension=nested".to_string())
         ));
     }
 
@@ -6691,7 +7710,11 @@ mod tests {
         let resolved = resolve_module(&module, &stdlib, &mappings).unwrap();
 
         let b = find_resolved_usage(&resolved.usages, "AliasTest.b").unwrap();
-        assert_eq!(b.specializes, vec!["ISQSpaceTime::width".to_string()]);
+        // `width` is a feature: retain a feature specialization, not a type.
+        assert_eq!(
+            b.specialized_features,
+            vec!["ISQSpaceTime::width".to_string()]
+        );
     }
 
     #[test]
@@ -7194,9 +8217,10 @@ mod tests {
             .iter()
             .find(|element| element.id == "allocation.Demo.a1_to_pcu")
             .unwrap();
+        assert!(document.elements.iter().any(|element| element.id == "action.Demo.ProvidePower.a1"));
         assert_eq!(
             allocation.properties.get("allocated"),
-            Some(&serde_json::json!("feature.Demo.ProvidePower.a1"))
+            Some(&serde_json::json!("action.Demo.ProvidePower.a1"))
         );
         assert_eq!(
             allocation.properties.get("allocated_to"),
@@ -7204,7 +8228,7 @@ mod tests {
         );
         assert_eq!(
             allocation.properties.get("source"),
-            Some(&serde_json::json!("feature.Demo.ProvidePower.a1"))
+            Some(&serde_json::json!("action.Demo.ProvidePower.a1"))
         );
         assert_eq!(
             allocation.properties.get("target"),
@@ -7365,7 +8389,7 @@ mod tests {
     }
 
     #[test]
-    fn parses_include_use_case_as_use_case_usage() {
+    fn parses_include_use_case_as_include_usage() {
         let module = parse_sysml(
             "package Demo { use case def UC1; use case def Main { include use case uc1 : UC1; } }",
         )
@@ -7380,7 +8404,7 @@ mod tests {
             other => panic!("expected use case usage, got {other:?}"),
         };
 
-        assert_eq!(usage.keyword, "use-case");
+        assert_eq!(usage.keyword, "include");
         assert_eq!(usage.name, "uc1");
         assert!(!usage.is_implicit_name);
     }
@@ -7462,7 +8486,21 @@ mod tests {
                 .into_iter()
                 .map(|id| KirElement {
                     id: id.to_string(),
-                    kind: id.to_string(),
+                    kind: if matches!(
+                        id,
+                        "Integer" | "Real" | "Boolean" | "String" | "Base::DataValue"
+                    ) {
+                        "DataType".to_string()
+                    } else {
+                        match id {
+                            "Parts::Part" => "PartDefinition",
+                            "Items::Item" => "ItemDefinition",
+                            "Ports::Port" => "PortDefinition",
+                            "Actions::Action" | "Actions::SendAction" => "ActionDefinition",
+                            "BinaryConnection" | "Connections::BinaryConnection" => "ConnectionDefinition",
+                            other => other,
+                        }.to_string()
+                    },
                     layer: 1,
                     properties: BTreeMap::new(),
                 })
@@ -7482,4 +8520,19 @@ mod tests {
             }
         })
     }
+}
+
+#[cfg(test)]
+mod release_2026_08_tests;
+
+struct UsageHead {
+    effective_keyword: String,
+    synthetic_body_members: Vec<Declaration>,
+    force_implicit_name: bool,
+    accept_target_span: Option<SourceSpan>,
+    leading_specialization: Option<QualifiedName>,
+    allocation_source: Option<QualifiedName>,
+    allocation_target: Option<QualifiedName>,
+    explicit_reference_target: Option<QualifiedName>,
+    explicit_name: Option<String>,
 }

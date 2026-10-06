@@ -1,0 +1,133 @@
+{
+  "backend": "rust-source",
+  "generator_sha256": "16a60e9a691a92cc79efd7aa2ae909c03fc3d6b1546753a9c162b4dfc69c97dd",
+  "inlined_helpers": [
+    {
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkOneType",
+      "source": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/validation/SysMLValidator.xtend",
+      "span": {
+        "end_line": 1422,
+        "length": 294,
+        "offset": 75230,
+        "start_line": 1416
+      },
+      "symbol": "org.omg.sysml.xtext.validation.SysMLValidator.checkOneType(org.omg.sysml.lang.sysml.Feature,java.lang.Class,java.lang.String,org.eclipse.emf.ecore.EReference,java.lang.String)"
+    }
+  ],
+  "input_sha256": "b70a4972a20174c99fc541c003f04f0ac4abe6acf987318921842baa541bd559",
+  "output_path": "crates/mercurio-sysml/src/validation_rules_generated.rs",
+  "output_sha256": "c082055268b3af8ff16ee8ff102d27cf742287c32da28327ab338ad37af9e0aa",
+  "rules": [
+    {
+      "dependencies": [
+        "org.omg.sysml.lang.sysml.Annotation.getOwnedAnnotatingElement()",
+        "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatedElement()",
+        "org.omg.sysml.lang.sysml.Annotation.getOwningAnnotatingElement()"
+      ],
+      "entrypoint": "fn rule_0000(",
+      "function_name": "rule_0000",
+      "id": "org.omg.kerml.xtext.validation.KerMLValidator#checkAnnotation",
+      "name": "checkAnnotation"
+    },
+    {
+      "dependencies": [
+        "org.omg.sysml.lang.sysml.Element.getOwner()",
+        "org.omg.sysml.lang.sysml.Import.getImportOwningNamespace()",
+        "org.omg.sysml.lang.sysml.Import.getVisibility()"
+      ],
+      "entrypoint": "fn rule_0001(",
+      "function_name": "rule_0001",
+      "id": "org.omg.kerml.xtext.validation.KerMLValidator#checkImport",
+      "name": "checkImport"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0002(",
+      "function_name": "rule_0002",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkAnalysisCaseUsage",
+      "name": "checkAnalysisCaseUsage"
+    },
+    {
+      "dependencies": [
+        "org.omg.sysml.lang.sysml.Definition.isVariation()"
+      ],
+      "entrypoint": "fn rule_0003(",
+      "function_name": "rule_0003",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationDefinition",
+      "name": "checkEnumerationDefinition"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0004(",
+      "function_name": "rule_0004",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkEnumerationUsage",
+      "name": "checkEnumerationUsage"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0005(",
+      "function_name": "rule_0005",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkMetadataUsage",
+      "name": "checkMetadataUsage"
+    },
+    {
+      "dependencies": [
+        "org.omg.sysml.lang.sysml.Usage.isReference()"
+      ],
+      "entrypoint": "fn rule_0006(",
+      "function_name": "rule_0006",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkReferenceUsage",
+      "name": "checkReferenceUsage"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0007(",
+      "function_name": "rule_0007",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkRenderingUsage",
+      "name": "checkRenderingUsage"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0008(",
+      "function_name": "rule_0008",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkUseCaseUsage",
+      "name": "checkUseCaseUsage"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0009(",
+      "function_name": "rule_0009",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkVerificationCaseUsage",
+      "name": "checkVerificationCaseUsage"
+    },
+    {
+      "dependencies": [
+        "java.lang.Class.isInstance(java.lang.Object)",
+        "org.omg.sysml.util.FeatureUtil.getAllTypesOf(org.omg.sysml.lang.sysml.Feature)"
+      ],
+      "entrypoint": "fn rule_0010(",
+      "function_name": "rule_0010",
+      "id": "org.omg.sysml.xtext.validation.SysMLValidator#checkViewpointUsage",
+      "name": "checkViewpointUsage"
+    }
+  ],
+  "schema_version": 1
+}

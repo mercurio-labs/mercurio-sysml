@@ -1,0 +1,3041 @@
+{
+  "cases": [
+    {
+      "after_closed": [],
+      "edges": [],
+      "pending": [],
+      "remaining": [],
+      "shape": "empty"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Subsetting",
+          "owner",
+          "a"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Subsetting",
+          "owner",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "shape": "implicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "Subsetting",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "pending": [
+        [
+          "Subsetting",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subsetting",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "shape": "unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Redefinition",
+          "owner",
+          "a"
+        ]
+      ],
+      "pending": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "explicit_redefinition"
+    },
+    {
+      "after_closed": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "owner",
+          "a"
+        ]
+      ],
+      "pending": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "remaining": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "shape": "explicit_subsetting"
+    },
+    {
+      "after_closed": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Redefinition",
+          "b"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "pending": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Redefinition",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Redefinition",
+          "b"
+        ]
+      ],
+      "shape": "implicit_redefinition"
+    },
+    {
+      "after_closed": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "pending": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Redefinition",
+          "a"
+        ]
+      ],
+      "shape": "cross_category"
+    },
+    {
+      "after_closed": [
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "owner",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "a",
+          "owner"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "shape": "owner_cycle"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ],
+        [
+          "Subsetting",
+          "b",
+          "a"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "general_cycle"
+    },
+    {
+      "after_closed": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "owner",
+          "owner"
+        ]
+      ],
+      "pending": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "shape": "explicit_self"
+    },
+    {
+      "after_closed": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Specialization",
+          "b"
+        ],
+        [
+          "Subsetting",
+          "c"
+        ],
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "edges": [],
+      "pending": [
+        [
+          "Subsetting",
+          "c"
+        ],
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Specialization",
+          "b"
+        ],
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "remaining": [
+        [
+          "Redefinition",
+          "a"
+        ],
+        [
+          "Specialization",
+          "b"
+        ],
+        [
+          "Subsetting",
+          "c"
+        ],
+        [
+          "Subsetting",
+          "a"
+        ]
+      ],
+      "shape": "ordered"
+    },
+    {
+      "after_closed": [
+        [
+          "FeatureTyping",
+          "a"
+        ],
+        [
+          "FeatureTyping",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "FeatureTyping",
+          "a"
+        ],
+        [
+          "FeatureTyping",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "FeatureTyping",
+          "a"
+        ],
+        [
+          "FeatureTyping",
+          "b"
+        ]
+      ],
+      "shape": "FeatureTyping_unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "FeatureTyping",
+          "owner",
+          "a"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "FeatureTyping",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "FeatureTyping_explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "FeatureTyping",
+          "owner",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "FeatureTyping",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "FeatureTyping_explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "FeatureTyping",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "FeatureTyping",
+          "a"
+        ],
+        [
+          "FeatureTyping",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "FeatureTyping",
+          "a"
+        ]
+      ],
+      "shape": "FeatureTyping_implicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "Subclassification",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Class"
+      },
+      "pending": [
+        [
+          "Subclassification",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subclassification",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "b"
+        ]
+      ],
+      "shape": "Subclassification_unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Subclassification",
+          "owner",
+          "a"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Class"
+      },
+      "pending": [
+        [
+          "Subclassification",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "Subclassification_explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "Subclassification",
+          "owner",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Class"
+      },
+      "pending": [
+        [
+          "Subclassification",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "Subclassification_explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "Subclassification",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Class",
+        "b": "Class",
+        "c": "Class",
+        "owner": "Class"
+      },
+      "pending": [
+        [
+          "Subclassification",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "Subclassification",
+          "a"
+        ]
+      ],
+      "shape": "Subclassification_implicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ],
+        [
+          "ReferenceSubsetting",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ],
+        [
+          "ReferenceSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ],
+        [
+          "ReferenceSubsetting",
+          "b"
+        ]
+      ],
+      "shape": "ReferenceSubsetting_unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "ReferenceSubsetting",
+          "owner",
+          "a"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "ReferenceSubsetting_explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "ReferenceSubsetting",
+          "owner",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ReferenceSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "ReferenceSubsetting_explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ],
+        [
+          "ReferenceSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "ReferenceSubsetting",
+          "a"
+        ]
+      ],
+      "shape": "ReferenceSubsetting_implicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "CrossSubsetting",
+          "a"
+        ],
+        [
+          "CrossSubsetting",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "CrossSubsetting",
+          "a"
+        ],
+        [
+          "CrossSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "CrossSubsetting",
+          "a"
+        ],
+        [
+          "CrossSubsetting",
+          "b"
+        ]
+      ],
+      "shape": "CrossSubsetting_unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "CrossSubsetting",
+          "owner",
+          "a"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "CrossSubsetting",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "CrossSubsetting_explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "CrossSubsetting",
+          "owner",
+          "a"
+        ],
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "CrossSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "CrossSubsetting_explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "CrossSubsetting",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subsetting",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "Feature",
+        "b": "Feature",
+        "c": "Feature",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "CrossSubsetting",
+          "a"
+        ],
+        [
+          "CrossSubsetting",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "CrossSubsetting",
+          "a"
+        ]
+      ],
+      "shape": "CrossSubsetting_implicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ],
+        [
+          "ConjugatedPortTyping",
+          "b"
+        ]
+      ],
+      "edges": [],
+      "nodes": {
+        "a": "ConjugatedPortDefinition",
+        "b": "ConjugatedPortDefinition",
+        "c": "ConjugatedPortDefinition",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ],
+        [
+          "ConjugatedPortTyping",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ],
+        [
+          "ConjugatedPortTyping",
+          "b"
+        ]
+      ],
+      "shape": "ConjugatedPortTyping_unrelated"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "ConjugatedPortTyping",
+          "owner",
+          "a"
+        ]
+      ],
+      "nodes": {
+        "a": "ConjugatedPortDefinition",
+        "b": "ConjugatedPortDefinition",
+        "c": "ConjugatedPortDefinition",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ]
+      ],
+      "remaining": [],
+      "shape": "ConjugatedPortTyping_explicit_same"
+    },
+    {
+      "after_closed": [],
+      "edges": [
+        [
+          "ConjugatedPortTyping",
+          "owner",
+          "a"
+        ],
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "ConjugatedPortDefinition",
+        "b": "ConjugatedPortDefinition",
+        "c": "ConjugatedPortDefinition",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ConjugatedPortTyping",
+          "b"
+        ]
+      ],
+      "remaining": [],
+      "shape": "ConjugatedPortTyping_explicit_narrower"
+    },
+    {
+      "after_closed": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ]
+      ],
+      "edges": [
+        [
+          "Subclassification",
+          "a",
+          "b"
+        ]
+      ],
+      "nodes": {
+        "a": "ConjugatedPortDefinition",
+        "b": "ConjugatedPortDefinition",
+        "c": "ConjugatedPortDefinition",
+        "owner": "Feature"
+      },
+      "pending": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ],
+        [
+          "ConjugatedPortTyping",
+          "b"
+        ]
+      ],
+      "remaining": [
+        [
+          "ConjugatedPortTyping",
+          "a"
+        ]
+      ],
+      "shape": "ConjugatedPortTyping_implicit_narrower"
+    }
+  ],
+  "definitions": {
+    "TypeAdapter#removeUnnecessaryImplicitGeneralTypes/0": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [],
+              "kind": "IDENTIFIER",
+              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getTarget()",
+                  "type": "()org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#getTarget()",
+              "type": "org.omg.sysml.lang.sysml.Type"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "removeUnnecessaryImplicitGeneralTypes()#target",
+          "type": "org.omg.sysml.lang.sysml.Type"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.List",
+                  "type": "java.util.List"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Specialization",
+                  "type": "org.omg.sysml.lang.sysml.Specialization"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.List",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#target",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedSpecialization()",
+                                          "type": "()org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Specialization>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedSpecialization()",
+                                      "type": "org.eclipse.emf.common.util.EList<org.omg.sysml.lang.sysml.Specialization>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.Collection#stream()",
+                                  "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.Collection#stream()",
+                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                          "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Specialization>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "unnamed module#org",
+                                                      "type": "org"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "unnamed module#org.omg",
+                                                  "type": "org.omg"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "unnamed module#org.omg.sysml",
+                                              "type": "org.omg.sysml"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "unnamed module#org.omg.sysml.lang",
+                                          "type": "org.omg.sysml.lang"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                      "type": "org.omg.sysml.lang.sysml"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Specialization",
+                                  "type": "org.omg.sysml.lang.sysml.Specialization"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#spec",
+                              "type": "org.omg.sysml.lang.sysml.Specialization"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#spec",
+                                              "type": "org.omg.sysml.lang.sysml.Specialization"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.Specialization#getSpecific()",
+                                          "type": "()org.omg.sysml.lang.sysml.Type"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.Specialization#getSpecific()",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "removeUnnecessaryImplicitGeneralTypes()#target",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    }
+                                  ],
+                                  "kind": "EQUAL_TO",
+                                  "type": "boolean"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#spec",
+                                              "type": "org.omg.sysml.lang.sysml.Specialization"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.Specialization#getGeneral()",
+                                          "type": "()org.omg.sysml.lang.sysml.Type"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.Specialization#getGeneral()",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    },
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "removeUnnecessaryImplicitGeneralTypes()#target",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    }
+                                  ],
+                                  "kind": "NOT_EQUAL_TO",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "CONDITIONAL_AND",
+                              "type": "boolean"
+                            }
+                          ],
+                          "kind": "LAMBDA_EXPRESSION",
+                          "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Specialization>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+                  "type": "(java.util.stream.Collector<? super org.omg.sysml.lang.sysml.Specialization,capture#308 of ?,java.util.List<org.omg.sysml.lang.sysml.Specialization>>)java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util.stream#java.util.stream.Collectors",
+                          "type": "java.util.stream.Collectors"
+                        }
+                      ],
+                      "kind": "MEMBER_SELECT",
+                      "symbol": "java.util.stream.Collectors#<T>toList()",
+                      "type": "()java.util.stream.Collector<org.omg.sysml.lang.sysml.Specialization,capture#308 of ?,java.util.List<org.omg.sysml.lang.sysml.Specialization>>"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "java.util.stream.Collectors#<T>toList()",
+                  "type": "java.util.stream.Collector<org.omg.sysml.lang.sysml.Specialization,capture#308 of ?,java.util.List<org.omg.sysml.lang.sysml.Specialization>>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "removeUnnecessaryImplicitGeneralTypes()#specializations",
+          "type": "java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.List",
+                  "type": "java.util.List"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.List",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "removeUnnecessaryImplicitGeneralTypes()#specializations",
+                                      "type": "java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.Collection#stream()",
+                                  "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.Collection#stream()",
+                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                          "type": "(java.util.function.Function<? super org.omg.sysml.lang.sysml.Specialization,? extends org.omg.sysml.lang.sysml.Type>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Specialization",
+                              "type": "org.omg.sysml.lang.sysml.Specialization"
+                            }
+                          ],
+                          "kind": "MEMBER_REFERENCE",
+                          "symbol": "org.omg.sysml.lang.sysml.Specialization#getGeneral()",
+                          "type": "java.util.function.Function<org.omg.sysml.lang.sysml.Specialization,org.omg.sysml.lang.sysml.Type>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+                  "type": "(java.util.stream.Collector<? super org.omg.sysml.lang.sysml.Type,capture#838 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util.stream#java.util.stream.Collectors",
+                          "type": "java.util.stream.Collectors"
+                        }
+                      ],
+                      "kind": "MEMBER_SELECT",
+                      "symbol": "java.util.stream.Collectors#<T>toList()",
+                      "type": "()java.util.stream.Collector<org.omg.sysml.lang.sysml.Type,capture#838 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "java.util.stream.Collectors#<T>toList()",
+                  "type": "java.util.stream.Collector<org.omg.sysml.lang.sysml.Type,capture#838 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "removeUnnecessaryImplicitGeneralTypes()#generals",
+          "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.List",
+                  "type": "java.util.List"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.List",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#specializations",
+                                              "type": "java.util.List<org.omg.sysml.lang.sysml.Specialization>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.Collection#stream()",
+                                          "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.Collection#stream()",
+                                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                                  "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Specialization>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Redefinition",
+                                          "type": "org.omg.sysml.lang.sysml.Redefinition"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Redefinition#class",
+                                      "type": "java.lang.Class<org.omg.sysml.lang.sysml.Redefinition>"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_REFERENCE",
+                                  "symbol": "java.lang.Class#isInstance(java.lang.Object)",
+                                  "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Specialization>"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "java.util.stream.Stream#filter(java.util.function.Predicate<? super T>)",
+                              "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Specialization>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                          "type": "(java.util.function.Function<? super org.omg.sysml.lang.sysml.Specialization,? extends org.omg.sysml.lang.sysml.Type>)java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Specialization",
+                              "type": "org.omg.sysml.lang.sysml.Specialization"
+                            }
+                          ],
+                          "kind": "MEMBER_REFERENCE",
+                          "symbol": "org.omg.sysml.lang.sysml.Specialization#getGeneral()",
+                          "type": "java.util.function.Function<org.omg.sysml.lang.sysml.Specialization,org.omg.sysml.lang.sysml.Type>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.stream.Stream#<R>map(java.util.function.Function<? super T,? extends R>)",
+                      "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+                  "type": "(java.util.stream.Collector<? super org.omg.sysml.lang.sysml.Type,capture#314 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util.stream#java.util.stream.Collectors",
+                          "type": "java.util.stream.Collectors"
+                        }
+                      ],
+                      "kind": "MEMBER_SELECT",
+                      "symbol": "java.util.stream.Collectors#<T>toList()",
+                      "type": "()java.util.stream.Collector<org.omg.sysml.lang.sysml.Type,capture#314 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "java.util.stream.Collectors#<T>toList()",
+                  "type": "java.util.stream.Collector<org.omg.sysml.lang.sysml.Type,capture#314 of ?,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.stream.Stream#<R,A>collect(java.util.stream.Collector<? super T,A,R>)",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "removeUnnecessaryImplicitGeneralTypes()#redefinedFeatures",
+          "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.List",
+                  "type": "java.util.List"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.List",
+              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "java.util#java.util.ArrayList",
+                      "type": "java.util.ArrayList"
+                    }
+                  ],
+                  "kind": "PARAMETERIZED_TYPE",
+                  "symbol": "java.util#java.util.ArrayList",
+                  "type": "java.util.ArrayList<org.omg.sysml.lang.sysml.Type>"
+                }
+              ],
+              "kind": "NEW_CLASS",
+              "symbol": "java.util.ArrayList#ArrayList()",
+              "type": "java.util.ArrayList<org.omg.sysml.lang.sysml.Type>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitGenerals",
+          "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                              "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.Map#values()",
+                          "type": "()java.util.Collection<java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.Map#values()",
+                      "type": "java.util.Collection<java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.lang.Iterable#forEach(java.util.function.Consumer<? super T>)",
+                  "type": "(java.util.function.Consumer<? super java.util.List<org.omg.sysml.lang.sysml.Type>>)void"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitGenerals",
+                      "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "MEMBER_REFERENCE",
+                  "symbol": "java.util.List#addAll(java.util.Collection<? extends E>)",
+                  "type": "java.util.function.Consumer<java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.lang.Iterable#forEach(java.util.function.Consumer<? super T>)",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "MODIFIERS"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.lang#java.lang.Object",
+                  "type": "java.lang.Object"
+                }
+              ],
+              "kind": "VARIABLE",
+              "symbol": "removeUnnecessaryImplicitGeneralTypes()#eClass",
+              "type": "java.lang.Object"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                              "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.Map#keySet()",
+                          "type": "()java.util.Set<org.eclipse.emf.ecore.EClass>"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.Map#keySet()",
+                      "type": "java.util.Set<org.eclipse.emf.ecore.EClass>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.Set#toArray()",
+                  "type": "()java.lang.Object[]"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.Set#toArray()",
+              "type": "java.lang.Object[]"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "MODIFIERS"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util#java.util.List",
+                          "type": "java.util.List"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        }
+                      ],
+                      "kind": "PARAMETERIZED_TYPE",
+                      "symbol": "java.util#java.util.List",
+                      "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                              "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                            }
+                          ],
+                          "kind": "MEMBER_SELECT",
+                          "symbol": "java.util.Map#get(java.lang.Object)",
+                          "type": "(java.lang.Object)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                        },
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#eClass",
+                          "type": "java.lang.Object"
+                        }
+                      ],
+                      "kind": "METHOD_INVOCATION",
+                      "symbol": "java.util.Map#get(java.lang.Object)",
+                      "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "VARIABLE",
+                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitEClassGenerals",
+                  "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitEClassGenerals",
+                              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                            },
+                            {
+                              "children": [],
+                              "kind": "NULL_LITERAL",
+                              "type": "<nulltype>"
+                            }
+                          ],
+                          "kind": "NOT_EQUAL_TO",
+                          "type": "boolean"
+                        }
+                      ],
+                      "kind": "PARENTHESIZED",
+                      "type": "boolean"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "removeUnnecessaryImplicitGeneralTypes()#eClass",
+                                      "type": "java.lang.Object"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.SysMLPackage",
+                                                  "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#eINSTANCE",
+                                              "type": "org.omg.sysml.lang.sysml.SysMLPackage"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getRedefinition()",
+                                          "type": "()org.eclipse.emf.ecore.EClass"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.lang.sysml.SysMLPackage#getRedefinition()",
+                                      "type": "org.eclipse.emf.ecore.EClass"
+                                    }
+                                  ],
+                                  "kind": "EQUAL_TO",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "PARENTHESIZED",
+                              "type": "boolean"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitEClassGenerals",
+                                              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.List#removeAll(java.util.Collection<?>)",
+                                          "type": "(java.util.Collection<?>)boolean"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#redefinedFeatures",
+                                          "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.List#removeAll(java.util.Collection<?>)",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitEClassGenerals",
+                                              "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.Collection#removeIf(java.util.function.Predicate<? super E>)",
+                                          "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Type>)boolean"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "MODIFIERS"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [],
+                                                                      "kind": "IDENTIFIER",
+                                                                      "symbol": "unnamed module#org",
+                                                                      "type": "org"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "unnamed module#org.omg",
+                                                                  "type": "org.omg"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "unnamed module#org.omg.sysml",
+                                                              "type": "org.omg.sysml"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "unnamed module#org.omg.sysml.lang",
+                                                          "type": "org.omg.sysml.lang"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                                      "type": "org.omg.sysml.lang.sysml"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                }
+                                              ],
+                                              "kind": "VARIABLE",
+                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#gen",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#generals",
+                                                                  "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "java.util.Collection#stream()",
+                                                              "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                                            }
+                                                          ],
+                                                          "kind": "METHOD_INVOCATION",
+                                                          "symbol": "java.util.Collection#stream()",
+                                                          "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                                      "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Type>)boolean"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "MODIFIERS"
+                                                            },
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [
+                                                                        {
+                                                                          "children": [
+                                                                            {
+                                                                              "children": [
+                                                                                {
+                                                                                  "children": [],
+                                                                                  "kind": "IDENTIFIER",
+                                                                                  "symbol": "unnamed module#org",
+                                                                                  "type": "org"
+                                                                                }
+                                                                              ],
+                                                                              "kind": "MEMBER_SELECT",
+                                                                              "symbol": "unnamed module#org.omg",
+                                                                              "type": "org.omg"
+                                                                            }
+                                                                          ],
+                                                                          "kind": "MEMBER_SELECT",
+                                                                          "symbol": "unnamed module#org.omg.sysml",
+                                                                          "type": "org.omg.sysml"
+                                                                        }
+                                                                      ],
+                                                                      "kind": "MEMBER_SELECT",
+                                                                      "symbol": "unnamed module#org.omg.sysml.lang",
+                                                                      "type": "org.omg.sysml.lang"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                                                  "type": "org.omg.sysml.lang.sysml"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                                            }
+                                                          ],
+                                                          "kind": "VARIABLE",
+                                                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#type",
+                                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                                        },
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "org.omg.sysml.adapter.TypeAdapter#specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                                              "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)boolean"
+                                                            },
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#type",
+                                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                                            },
+                                                            {
+                                                              "children": [],
+                                                              "kind": "IDENTIFIER",
+                                                              "symbol": "removeUnnecessaryImplicitGeneralTypes()#gen",
+                                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                                            }
+                                                          ],
+                                                          "kind": "METHOD_INVOCATION",
+                                                          "symbol": "org.omg.sysml.adapter.TypeAdapter#specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                                          "type": "boolean"
+                                                        }
+                                                      ],
+                                                      "kind": "LAMBDA_EXPRESSION",
+                                                      "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Type>"
+                                                    }
+                                                  ],
+                                                  "kind": "METHOD_INVOCATION",
+                                                  "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                                  "type": "boolean"
+                                                },
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitGenerals",
+                                                                  "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "java.util.Collection#stream()",
+                                                              "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                                            }
+                                                          ],
+                                                          "kind": "METHOD_INVOCATION",
+                                                          "symbol": "java.util.Collection#stream()",
+                                                          "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                                      "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Type>)boolean"
+                                                    },
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [],
+                                                              "kind": "MODIFIERS"
+                                                            },
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [
+                                                                    {
+                                                                      "children": [
+                                                                        {
+                                                                          "children": [
+                                                                            {
+                                                                              "children": [
+                                                                                {
+                                                                                  "children": [],
+                                                                                  "kind": "IDENTIFIER",
+                                                                                  "symbol": "unnamed module#org",
+                                                                                  "type": "org"
+                                                                                }
+                                                                              ],
+                                                                              "kind": "MEMBER_SELECT",
+                                                                              "symbol": "unnamed module#org.omg",
+                                                                              "type": "org.omg"
+                                                                            }
+                                                                          ],
+                                                                          "kind": "MEMBER_SELECT",
+                                                                          "symbol": "unnamed module#org.omg.sysml",
+                                                                          "type": "org.omg.sysml"
+                                                                        }
+                                                                      ],
+                                                                      "kind": "MEMBER_SELECT",
+                                                                      "symbol": "unnamed module#org.omg.sysml.lang",
+                                                                      "type": "org.omg.sysml.lang"
+                                                                    }
+                                                                  ],
+                                                                  "kind": "MEMBER_SELECT",
+                                                                  "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                                                  "type": "org.omg.sysml.lang.sysml"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                                            }
+                                                          ],
+                                                          "kind": "VARIABLE",
+                                                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#type",
+                                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                                        },
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#type",
+                                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                                },
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#gen",
+                                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                                }
+                                                              ],
+                                                              "kind": "NOT_EQUAL_TO",
+                                                              "type": "boolean"
+                                                            },
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "org.omg.sysml.adapter.TypeAdapter#specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                                                  "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)boolean"
+                                                                },
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#type",
+                                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                                },
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "removeUnnecessaryImplicitGeneralTypes()#gen",
+                                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                                }
+                                                              ],
+                                                              "kind": "METHOD_INVOCATION",
+                                                              "symbol": "org.omg.sysml.adapter.TypeAdapter#specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                                              "type": "boolean"
+                                                            }
+                                                          ],
+                                                          "kind": "CONDITIONAL_AND",
+                                                          "type": "boolean"
+                                                        }
+                                                      ],
+                                                      "kind": "LAMBDA_EXPRESSION",
+                                                      "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Type>"
+                                                    }
+                                                  ],
+                                                  "kind": "METHOD_INVOCATION",
+                                                  "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                                  "type": "boolean"
+                                                }
+                                              ],
+                                              "kind": "CONDITIONAL_OR",
+                                              "type": "boolean"
+                                            }
+                                          ],
+                                          "kind": "LAMBDA_EXPRESSION",
+                                          "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Type>"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.Collection#removeIf(java.util.function.Predicate<? super E>)",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            }
+                          ],
+                          "kind": "IF"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#implicitEClassGenerals",
+                                          "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "java.util.List#isEmpty()",
+                                      "type": "()boolean"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "java.util.List#isEmpty()",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "PARENTHESIZED",
+                              "symbol": "java.util.List#isEmpty()",
+                              "type": "boolean"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "org.omg.sysml.adapter.TypeAdapter#implicitGeneralTypes",
+                                              "type": "java.util.Map<org.eclipse.emf.ecore.EClass,java.util.List<org.omg.sysml.lang.sysml.Type>>"
+                                            }
+                                          ],
+                                          "kind": "MEMBER_SELECT",
+                                          "symbol": "java.util.Map#remove(java.lang.Object)",
+                                          "type": "(java.lang.Object)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "removeUnnecessaryImplicitGeneralTypes()#eClass",
+                                          "type": "java.lang.Object"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "java.util.Map#remove(java.lang.Object)",
+                                      "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                    }
+                                  ],
+                                  "kind": "EXPRESSION_STATEMENT"
+                                }
+                              ],
+                              "kind": "BLOCK"
+                            }
+                          ],
+                          "kind": "IF"
+                        }
+                      ],
+                      "kind": "BLOCK"
+                    }
+                  ],
+                  "kind": "IF"
+                }
+              ],
+              "kind": "BLOCK"
+            }
+          ],
+          "kind": "ENHANCED_FOR_LOOP"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#setIsAddImplicitGeneralTypes(boolean)",
+                  "type": "(boolean)void"
+                },
+                {
+                  "children": [],
+                  "kind": "BOOLEAN_LITERAL",
+                  "type": "boolean",
+                  "value": false
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.adapter.TypeAdapter#setIsAddImplicitGeneralTypes(boolean)",
+              "type": "void"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "TypeAdapter#specializesExcludingTarget/2": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [],
+              "kind": "MODIFIERS"
+            },
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "java.util#java.util.Set",
+                  "type": "java.util.Set"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "PARAMETERIZED_TYPE",
+              "symbol": "java.util#java.util.Set",
+              "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "java.util#java.util.HashSet",
+                      "type": "java.util.HashSet"
+                    }
+                  ],
+                  "kind": "PARAMETERIZED_TYPE",
+                  "symbol": "java.util#java.util.HashSet",
+                  "type": "java.util.HashSet<org.omg.sysml.lang.sysml.Type>"
+                }
+              ],
+              "kind": "NEW_CLASS",
+              "symbol": "java.util.HashSet#HashSet()",
+              "type": "java.util.HashSet<org.omg.sysml.lang.sysml.Type>"
+            }
+          ],
+          "kind": "VARIABLE",
+          "symbol": "specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#visited",
+          "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#visited",
+                      "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "java.util.Set#add(E)",
+                  "type": "(org.omg.sysml.lang.sysml.Type)boolean"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.adapter.TypeAdapter#getTarget()",
+                      "type": "()org.omg.sysml.lang.sysml.Type"
+                    }
+                  ],
+                  "kind": "METHOD_INVOCATION",
+                  "symbol": "org.omg.sysml.adapter.TypeAdapter#getTarget()",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "java.util.Set#add(E)",
+              "type": "boolean"
+            }
+          ],
+          "kind": "EXPRESSION_STATEMENT"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "org.omg.sysml.util#org.omg.sysml.util.TypeUtil",
+                      "type": "org.omg.sysml.util.TypeUtil"
+                    }
+                  ],
+                  "kind": "MEMBER_SELECT",
+                  "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+                  "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)boolean"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#subtype",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#supertype",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "specializesExcludingTarget(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#visited",
+                  "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+              "type": "boolean"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "TypeUtil#specializes/2": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+                  "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)boolean"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#subtype",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                {
+                  "children": [],
+                  "kind": "IDENTIFIER",
+                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)#supertype",
+                  "type": "org.omg.sysml.lang.sysml.Type"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "java.util#java.util.HashSet",
+                          "type": "java.util.HashSet"
+                        }
+                      ],
+                      "kind": "PARAMETERIZED_TYPE",
+                      "symbol": "java.util#java.util.HashSet",
+                      "type": "java.util.HashSet<org.omg.sysml.lang.sysml.Type>"
+                    }
+                  ],
+                  "kind": "NEW_CLASS",
+                  "symbol": "java.util.HashSet#HashSet()",
+                  "type": "java.util.HashSet<org.omg.sysml.lang.sysml.Type>"
+                }
+              ],
+              "kind": "METHOD_INVOCATION",
+              "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+              "type": "boolean"
+            }
+          ],
+          "kind": "RETURN"
+        }
+      ],
+      "kind": "BLOCK"
+    },
+    "TypeUtil#specializes/3": {
+      "children": [
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    },
+                    {
+                      "children": [],
+                      "kind": "IDENTIFIER",
+                      "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#supertype",
+                      "type": "org.omg.sysml.lang.sysml.Type"
+                    }
+                  ],
+                  "kind": "EQUAL_TO",
+                  "type": "boolean"
+                }
+              ],
+              "kind": "PARENTHESIZED",
+              "type": "boolean"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [],
+                      "kind": "BOOLEAN_LITERAL",
+                      "type": "boolean",
+                      "value": true
+                    }
+                  ],
+                  "kind": "RETURN"
+                }
+              ],
+              "kind": "BLOCK"
+            },
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "IDENTIFIER",
+                          "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                          "type": "org.omg.sysml.lang.sysml.Type"
+                        },
+                        {
+                          "children": [],
+                          "kind": "NULL_LITERAL",
+                          "type": "<nulltype>"
+                        }
+                      ],
+                      "kind": "NOT_EQUAL_TO",
+                      "type": "boolean"
+                    }
+                  ],
+                  "kind": "PARENTHESIZED",
+                  "type": "boolean"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#visited",
+                                  "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                                }
+                              ],
+                              "kind": "MEMBER_SELECT",
+                              "symbol": "java.util.Set#add(E)",
+                              "type": "(org.omg.sysml.lang.sysml.Type)boolean"
+                            },
+                            {
+                              "children": [],
+                              "kind": "IDENTIFIER",
+                              "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                              "type": "org.omg.sysml.lang.sysml.Type"
+                            }
+                          ],
+                          "kind": "METHOD_INVOCATION",
+                          "symbol": "java.util.Set#add(E)",
+                          "type": "boolean"
+                        }
+                      ],
+                      "kind": "EXPRESSION_STATEMENT"
+                    },
+                    {
+                      "children": [
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [],
+                                      "kind": "IDENTIFIER",
+                                      "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                    }
+                                  ],
+                                  "kind": "MEMBER_SELECT",
+                                  "symbol": "org.omg.sysml.lang.sysml.Type#isConjugated()",
+                                  "type": "()boolean"
+                                }
+                              ],
+                              "kind": "METHOD_INVOCATION",
+                              "symbol": "org.omg.sysml.lang.sysml.Type#isConjugated()",
+                              "type": "boolean"
+                            }
+                          ],
+                          "kind": "PARENTHESIZED",
+                          "symbol": "org.omg.sysml.lang.sysml.Type#isConjugated()",
+                          "type": "boolean"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [],
+                                  "kind": "MODIFIERS"
+                                },
+                                {
+                                  "children": [],
+                                  "kind": "IDENTIFIER",
+                                  "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                },
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedConjugator()",
+                                              "type": "()org.omg.sysml.lang.sysml.Conjugation"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "org.omg.sysml.lang.sysml.Type#getOwnedConjugator()",
+                                          "type": "org.omg.sysml.lang.sysml.Conjugation"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "org.omg.sysml.lang.sysml.Conjugation#getOriginalType()",
+                                      "type": "()org.omg.sysml.lang.sysml.Type"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "org.omg.sysml.lang.sysml.Conjugation#getOriginalType()",
+                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                }
+                              ],
+                              "kind": "VARIABLE",
+                              "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#originalType",
+                              "type": "org.omg.sysml.lang.sysml.Type"
+                            },
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#visited",
+                                                  "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "java.util.Set#contains(java.lang.Object)",
+                                              "type": "(java.lang.Object)boolean"
+                                            },
+                                            {
+                                              "children": [],
+                                              "kind": "IDENTIFIER",
+                                              "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#originalType",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "java.util.Set#contains(java.lang.Object)",
+                                          "type": "boolean"
+                                        }
+                                      ],
+                                      "kind": "LOGICAL_COMPLEMENT",
+                                      "type": "boolean"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                          "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)boolean"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#originalType",
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        },
+                                        {
+                                          "children": [],
+                                          "kind": "IDENTIFIER",
+                                          "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#supertype",
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        }
+                                      ],
+                                      "kind": "METHOD_INVOCATION",
+                                      "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type)",
+                                      "type": "boolean"
+                                    }
+                                  ],
+                                  "kind": "CONDITIONAL_AND",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "RETURN"
+                            }
+                          ],
+                          "kind": "BLOCK"
+                        },
+                        {
+                          "children": [
+                            {
+                              "children": [
+                                {
+                                  "children": [
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf(org.omg.sysml.lang.sysml.Type)",
+                                                      "type": "(org.omg.sysml.lang.sysml.Type)java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                                    },
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#subtype",
+                                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                                    }
+                                                  ],
+                                                  "kind": "METHOD_INVOCATION",
+                                                  "symbol": "org.omg.sysml.util.TypeUtil#getGeneralTypesOf(org.omg.sysml.lang.sysml.Type)",
+                                                  "type": "java.util.List<org.omg.sysml.lang.sysml.Type>"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "java.util.Collection#stream()",
+                                              "type": "()java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                            }
+                                          ],
+                                          "kind": "METHOD_INVOCATION",
+                                          "symbol": "java.util.Collection#stream()",
+                                          "type": "java.util.stream.Stream<org.omg.sysml.lang.sysml.Type>"
+                                        }
+                                      ],
+                                      "kind": "MEMBER_SELECT",
+                                      "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                      "type": "(java.util.function.Predicate<? super org.omg.sysml.lang.sysml.Type>)boolean"
+                                    },
+                                    {
+                                      "children": [
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [],
+                                              "kind": "MODIFIERS"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [
+                                                            {
+                                                              "children": [
+                                                                {
+                                                                  "children": [],
+                                                                  "kind": "IDENTIFIER",
+                                                                  "symbol": "unnamed module#org",
+                                                                  "type": "org"
+                                                                }
+                                                              ],
+                                                              "kind": "MEMBER_SELECT",
+                                                              "symbol": "unnamed module#org.omg",
+                                                              "type": "org.omg"
+                                                            }
+                                                          ],
+                                                          "kind": "MEMBER_SELECT",
+                                                          "symbol": "unnamed module#org.omg.sysml",
+                                                          "type": "org.omg.sysml"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "unnamed module#org.omg.sysml.lang",
+                                                      "type": "org.omg.sysml.lang"
+                                                    }
+                                                  ],
+                                                  "kind": "MEMBER_SELECT",
+                                                  "symbol": "unnamed module#org.omg.sysml.lang.sysml",
+                                                  "type": "org.omg.sysml.lang.sysml"
+                                                }
+                                              ],
+                                              "kind": "MEMBER_SELECT",
+                                              "symbol": "org.omg.sysml.lang.sysml#org.omg.sysml.lang.sysml.Type",
+                                              "type": "org.omg.sysml.lang.sysml.Type"
+                                            }
+                                          ],
+                                          "kind": "VARIABLE",
+                                          "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#type",
+                                          "type": "org.omg.sysml.lang.sysml.Type"
+                                        },
+                                        {
+                                          "children": [
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [
+                                                    {
+                                                      "children": [
+                                                        {
+                                                          "children": [],
+                                                          "kind": "IDENTIFIER",
+                                                          "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#visited",
+                                                          "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                                                        }
+                                                      ],
+                                                      "kind": "MEMBER_SELECT",
+                                                      "symbol": "java.util.Set#contains(java.lang.Object)",
+                                                      "type": "(java.lang.Object)boolean"
+                                                    },
+                                                    {
+                                                      "children": [],
+                                                      "kind": "IDENTIFIER",
+                                                      "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#type",
+                                                      "type": "org.omg.sysml.lang.sysml.Type"
+                                                    }
+                                                  ],
+                                                  "kind": "METHOD_INVOCATION",
+                                                  "symbol": "java.util.Set#contains(java.lang.Object)",
+                                                  "type": "boolean"
+                                                }
+                                              ],
+                                              "kind": "LOGICAL_COMPLEMENT",
+                                              "type": "boolean"
+                                            },
+                                            {
+                                              "children": [
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+                                                  "type": "(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)boolean"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#type",
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#supertype",
+                                                  "type": "org.omg.sysml.lang.sysml.Type"
+                                                },
+                                                {
+                                                  "children": [],
+                                                  "kind": "IDENTIFIER",
+                                                  "symbol": "specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)#visited",
+                                                  "type": "java.util.Set<org.omg.sysml.lang.sysml.Type>"
+                                                }
+                                              ],
+                                              "kind": "METHOD_INVOCATION",
+                                              "symbol": "org.omg.sysml.util.TypeUtil#specializes(org.omg.sysml.lang.sysml.Type,org.omg.sysml.lang.sysml.Type,java.util.Set<org.omg.sysml.lang.sysml.Type>)",
+                                              "type": "boolean"
+                                            }
+                                          ],
+                                          "kind": "CONDITIONAL_AND",
+                                          "type": "boolean"
+                                        }
+                                      ],
+                                      "kind": "LAMBDA_EXPRESSION",
+                                      "type": "java.util.function.Predicate<org.omg.sysml.lang.sysml.Type>"
+                                    }
+                                  ],
+                                  "kind": "METHOD_INVOCATION",
+                                  "symbol": "java.util.stream.Stream#anyMatch(java.util.function.Predicate<? super T>)",
+                                  "type": "boolean"
+                                }
+                              ],
+                              "kind": "RETURN"
+                            }
+                          ],
+                          "kind": "BLOCK"
+                        }
+                      ],
+                      "kind": "IF"
+                    }
+                  ],
+                  "kind": "BLOCK"
+                },
+                {
+                  "children": [
+                    {
+                      "children": [
+                        {
+                          "children": [],
+                          "kind": "BOOLEAN_LITERAL",
+                          "type": "boolean",
+                          "value": false
+                        }
+                      ],
+                      "kind": "RETURN"
+                    }
+                  ],
+                  "kind": "BLOCK"
+                }
+              ],
+              "kind": "IF"
+            }
+          ],
+          "kind": "IF"
+        }
+      ],
+      "kind": "BLOCK"
+    }
+  },
+  "kinds": {
+    "ConjugatedPortTyping": 31,
+    "CrossSubsetting": 41,
+    "FeatureTyping": 64,
+    "Redefinition": 126,
+    "ReferenceSubsetting": 127,
+    "Specialization": 141,
+    "Subclassification": 148,
+    "Subsetting": 150
+  },
+  "provenance": {
+    "construction_sha256": "aa88e6990edef7e59364981d7d18b6a9c47da553888517cbbe78842a6c46fc2f",
+    "driver_sha256": "d89f0cecca01cad36c4431c230bef8b046b5f8596e55c08eaf1929204bcace78",
+    "helper_sha256": "6588c8daf13c3a22e2a06e81011dfd29d299f016bb7d1a69adcc06f1cab60a36",
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/TypeAdapter.java": "bbf1fb1376477df59297dfc1a3696362bd468229e6ec0c5fe9bac76a6817b500",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/TypeUtil.java": "993ec81d1eb43e95582f3cee65708a9aee76e704a121192bee567d9ffe486d5c"
+    },
+    "tree_helper_sha256": "3a3adb2b371a1859a84f7768deb956afb5babe17af999a59264b0328a138d567"
+  },
+  "schema": "dev.mercurio.implicit-reduction.v1",
+  "scope": "Redundancy reduction over a precomputed pending snapshot; controlled complete ancestry, not complete transformation.",
+  "toolchain": {
+    "java": "openjdk version \"21.0.6\" 2025-01-21 LTS\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac": "javac 21.0.6"
+  }
+}

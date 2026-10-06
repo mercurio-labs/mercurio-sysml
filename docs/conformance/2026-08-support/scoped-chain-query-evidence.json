@@ -1,0 +1,66 @@
+{
+  "schema": "dev.mercurio.scoped-chain-query-evidence.v1",
+  "scope": "Scoped navigation prerequisites for exact Feature chains, not whole-model semantic validation or release qualification.",
+  "imported": "Pinned Xtext constructs source chains; Ecore ancestry, ownership, reference endpoint and ordered FeatureChaining contracts select the native query path.",
+  "handwritten_dependency": "Resolved Pilot TypeUtil.getGeneralTypesOf(type, excludeImplied, skip) supplies the scoped navigation exclusion algorithm; KerMLScopeProvider supplies query context. These dependencies are implemented explicitly in Rust, not inferred from model names.",
+  "native_consumers": [
+    "stored_feature_chain_target_for_scope_query",
+    "generated_general_types_for_scope",
+    "definition_general_type_inputs_for_scope_query",
+    "definition_inherited_memberships"
+  ],
+  "behavior": [
+    "Only a context reference contained in the current ordered chain suppresses its unresolved navigation contribution. Unrelated chains still defer.",
+    "Canonical ownership and present endpoint shape/identity are validated even when navigation is excluded.",
+    "Computed inheritance consumes the scoped general map without independently rereading excluded chain navigation.",
+    "Immutable full queries still require all endpoints. No persistent completeness flags or runtime Java."
+  ],
+  "verified_controls": {
+    "pilot_reciprocal_source_controls": 8,
+    "positive": 4,
+    "negative": 4,
+    "contexts": [
+      "both member orders",
+      "both library/context declaration orders",
+      "source-owned chained targets before and after persistence",
+      "missing inherited terminal rejects",
+      "unrelated pending chain still requires a field",
+      "malformed present endpoint rejects even in the excluded chain"
+    ]
+  },
+  "remaining": [
+    "Complete scoped visited-set propagation for specialization, implicit contribution and other query families.",
+    "Resource-aware separate-source loading, full validation and complete Feature contribution lifecycle.",
+    "Whole-model semantic verification of the actual library closure, all samples and timing qualification."
+  ],
+  "metrics": {
+    "matching_pilot_documents": 155,
+    "matching_pilot_documents_delta": 0,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "reciprocal_chain_controls_matching": "8/8",
+    "library_constructed_unqualified_elements": 269
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "f78c1f482bcfeb71ca0d30965425f7722309a6590f33e0edbc96f7bbacb0ca28",
+    "tools/run_chain_link_probe.py": "d2cb9c298ee51260d92b7511ddbe52a68ef5ade9783b271e7e8115dac105c14f",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotChainLinkProbe.java": "067b3d8c22113f548cf1c8e5198909b53fe8cc708405786e74d057e86fce9f61",
+    "docs/conformance/2026-08-support/chain-link-pilot-controls.json": "2ef7ee97466876fbdeb7b0936a726e5a901030dd23045ee1814ed97c13cffbe8"
+  },
+  "native_log": {
+    "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-reciprocal-scope-qualified.log",
+    "sha256": "b8ea96b682bee7ba8eaab8e816fe90a30eeea423e7819e8b3133ae27beb73665",
+    "passed": 167
+  },
+  "library_audit": {
+    "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-scoped-query-final-results.jsonl",
+    "sha256": "579a241d0220d4f93595c9c8b0969dbb663c70ae9817524c8370043477976bec",
+    "status": "constructed_unqualified",
+    "element_counts": [
+      144,
+      269
+    ],
+    "semantic_qualification": "not_assessed"
+  },
+  "oracle_reproduction": "Fresh pinned JVM export and independent --check reproduce all 58 controls; TypeUtil, scope, grammar, runtime jar, helper and driver inputs are fingerprinted."
+}

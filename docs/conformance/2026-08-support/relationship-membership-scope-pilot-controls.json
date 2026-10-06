@@ -1,0 +1,258 @@
+{
+  "cases": [
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored standalone relationship endpoints; local Redefinition target excluded. No validation.",
+        "specific_path": [
+          "P",
+          "host",
+          "a"
+        ],
+        "target_path": [
+          "P",
+          "host",
+          "b"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Feature",
+          "name": "Base.things",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.a",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.b",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "disjoiningType",
+          "kind": "Disjoining",
+          "owner_path": [
+            "P",
+            "host"
+          ],
+          "resolved": true,
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "host",
+            "b"
+          ],
+          "type_disjoined_path": [
+            "P",
+            "host",
+            "a"
+          ]
+        }
+      ],
+      "name": "Disjoining_standalone",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { feature things; } package P { feature host { feature a; feature b; disjoint a from b; } }",
+          "uri": "memory:/membership.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": true,
+        "scope": "Stored standalone relationship endpoints; local Redefinition target excluded. No validation.",
+        "specific_path": [
+          "P",
+          "host",
+          "a"
+        ],
+        "target_path": [
+          "P",
+          "host",
+          "b"
+        ]
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [],
+      "exports": [
+        {
+          "kind": "Feature",
+          "name": "Base.things",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.a",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.b",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "subsettedFeature",
+          "kind": "Subsetting",
+          "owner_path": [
+            "P",
+            "host"
+          ],
+          "resolved": true,
+          "specific_path": [
+            "P",
+            "host",
+            "a"
+          ],
+          "target_kind": "Feature",
+          "target_path": [
+            "P",
+            "host",
+            "b"
+          ]
+        }
+      ],
+      "name": "Subsetting_standalone",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { feature things; } package P { feature host { feature a; feature b; subset a subsets b; } }",
+          "uri": "memory:/membership.kerml"
+        }
+      ]
+    },
+    {
+      "assertion": {
+        "resolved": false,
+        "scope": "Stored standalone relationship endpoints; local Redefinition target excluded. No validation.",
+        "specific_path": [
+          "P",
+          "host",
+          "a"
+        ],
+        "target_path": null
+      },
+      "description_service": "org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions",
+      "diagnostics": [
+        {
+          "column": 125,
+          "line": 1,
+          "message": "Couldn't resolve reference to Feature 'b'.",
+          "source_uri": "memory:/membership.kerml"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "Feature",
+          "name": "Base.things",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.a",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Feature",
+          "name": "P.host.b",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0/@ownedRelationship.0/@ownedRelatedElement.0/@ownedRelationship.1/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "LibraryPackage",
+          "name": "Base",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.0/@ownedRelatedElement.0"
+        },
+        {
+          "kind": "Package",
+          "name": "P",
+          "uri": "memory:/membership.kerml#//@ownedRelationship.1/@ownedRelatedElement.0"
+        }
+      ],
+      "links": [
+        {
+          "field": "redefinedFeature",
+          "kind": "Redefinition",
+          "owner_path": [
+            "P",
+            "host"
+          ],
+          "resolved": false,
+          "specific_path": [
+            "P",
+            "host",
+            "a"
+          ]
+        }
+      ],
+      "name": "Redefinition_standalone",
+      "units": [
+        {
+          "language": "kerml",
+          "source": "standard library package Base { feature things; } package P { feature host { feature a; feature b; redefinition a redefines b; } }",
+          "uri": "memory:/membership.kerml"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "f478c863be46e215743996dc735fb8c8b85fbe86b27a1a6fbcadc466e6d2b048",
+    "helper_sha256": "b0a39ec4bdaffb195ae66a95bad4bd347b2ac519e126edffc1e16d86e8ff8158",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerMLRuntimeModule.xtend": "6af5a7dad3636f094210ce44146ae62e0bb81e60f478cd4d09660a4b310c7b58",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/naming/KerMLQualifiedNameProvider.java": "4f37219aaa8b63ac01525bc3e0fd2c8981bdd44006748e0ad5317ef5858472cf",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScope.xtend": "0bac05fcd4e104d21e9fee857ae069d7637c9bbebf7a926268c1b12b5b6989c6",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScopeProvider.xtend": "1de40e4a52087c70f0a514aa3aa111a05f741f135bb39bdfd8b25745e25fb6cb",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend": "42b8eda7fec0ff3031e025654f9341a9f45db0822e6f0ad3185f0f1981c501d9",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    }
+  },
+  "scope": "Three pinned Xtext controls for standalone declarations inside a Feature. Two local endpoint positives and a local Redefinition exclusion; no validation or complete scope qualification."
+}

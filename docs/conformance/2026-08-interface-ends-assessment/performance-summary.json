@@ -1,0 +1,417 @@
+{
+  "method": "fresh process, OS filesystem cache uncontrolled/warm, optimized native/prebuilt stdlib, Pilot CheckMode.ALL with published .index.json enabled, graph export excluded",
+  "successful_measurements": 48,
+  "total_measurements": 48,
+  "failures": [],
+  "groups": [
+    {
+      "group": "8b548aad4810",
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 829.7778000123799,
+          "min": 740.7758999906946,
+          "max": 845.7050999859348
+        },
+        "engine_ms": {
+          "median": 738.9027,
+          "min": 655.9903,
+          "max": 757.5299
+        },
+        "library_ms": {
+          "median": 312.75370000000004,
+          "min": 275.8295,
+          "max": 355.8362
+        },
+        "model_work_ms": {
+          "median": 401.4689,
+          "min": 380.0272,
+          "max": 425.94720000000007
+        }
+      },
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 8942.201899975771,
+          "min": 8881.033799989382,
+          "max": 8960.731500003021
+        },
+        "engine_ms": {
+          "median": 8715.2363,
+          "min": 8659.2194,
+          "max": 8756.2366
+        },
+        "library_ms": {
+          "median": 3855.4719,
+          "min": 3701.9676,
+          "max": 4206.5058
+        },
+        "model_work_ms": {
+          "median": 470.0296,
+          "min": 424.1193,
+          "max": 514.7605
+        }
+      },
+      "pilot_over_native_wall": 10.77662224735629,
+      "pilot_over_native_model_work": 1.1707746228910882
+    },
+    {
+      "group": "87b28b080d1d",
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 12460.843599983491,
+          "min": 10538.012700009858,
+          "max": 14754.060900013428
+        },
+        "engine_ms": {
+          "median": 12182.9815,
+          "min": 10296.1708,
+          "max": 14402.7288
+        },
+        "library_ms": {
+          "median": 3965.77,
+          "min": 3781.088,
+          "max": 4974.1761
+        },
+        "model_work_ms": {
+          "median": 3075.6204,
+          "min": 2496.1958,
+          "max": 5316.0283
+        }
+      },
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 1703.7227999826428,
+          "min": 1657.0992000051774,
+          "max": 2244.203499983996
+        },
+        "engine_ms": {
+          "median": 1624.1683999999998,
+          "min": 1572.6184,
+          "max": 2143.2924
+        },
+        "library_ms": {
+          "median": 362.9249,
+          "min": 298.0774,
+          "max": 531.0859999999999
+        },
+        "model_work_ms": {
+          "median": 1274.1633,
+          "min": 1260.7797,
+          "max": 1611.3971
+        }
+      },
+      "pilot_over_native_wall": 7.313891438272964,
+      "pilot_over_native_model_work": 2.4138353380606707
+    },
+    {
+      "group": "a01633e4052a",
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 4752.103000006173,
+          "min": 4468.713600013871,
+          "max": 5017.992200009758
+        },
+        "engine_ms": {
+          "median": 4652.7788,
+          "min": 4389.4992,
+          "max": 4915.395799999999
+        },
+        "library_ms": {
+          "median": 312.67479999999995,
+          "min": 307.21999999999997,
+          "max": 342.185
+        },
+        "model_work_ms": {
+          "median": 4309.9677,
+          "min": 4076.139,
+          "max": 4607.5960000000005
+        }
+      },
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 17077.76849999209,
+          "min": 16749.300499999663,
+          "max": 17191.524299996672
+        },
+        "engine_ms": {
+          "median": 16838.0881,
+          "min": 16461.2969,
+          "max": 17023.3835
+        },
+        "library_ms": {
+          "median": 4645.363,
+          "min": 4447.3306,
+          "max": 6299.644
+        },
+        "model_work_ms": {
+          "median": 6537.717799999999,
+          "min": 6126.808099999999,
+          "max": 7802.7805
+        }
+      },
+      "pilot_over_native_wall": 3.5937286081488358,
+      "pilot_over_native_model_work": 1.516883247176075
+    },
+    {
+      "group": "dca25ec10fb9",
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 21288.592199998675,
+          "min": 18433.76129999524,
+          "max": 21917.070800001966
+        },
+        "engine_ms": {
+          "median": 21063.3053,
+          "min": 18157.0099,
+          "max": 21644.4206
+        },
+        "library_ms": {
+          "median": 4225.4227,
+          "min": 3533.7045,
+          "max": 4293.7753
+        },
+        "model_work_ms": {
+          "median": 13039.5594,
+          "min": 9820.063,
+          "max": 13578.054999999998
+        }
+      },
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 7218.446700018831,
+          "min": 5848.72519999044,
+          "max": 7828.993300005095
+        },
+        "engine_ms": {
+          "median": 7114.6983,
+          "min": 5768.237,
+          "max": 7716.5857
+        },
+        "library_ms": {
+          "median": 345.23789999999997,
+          "min": 326.5107,
+          "max": 514.4876
+        },
+        "model_work_ms": {
+          "median": 6599.9154,
+          "min": 5422.8381,
+          "max": 7389.907
+        }
+      },
+      "pilot_over_native_wall": 2.9491929614086003,
+      "pilot_over_native_model_work": 1.9757161432705639
+    },
+    {
+      "group": "87c575b90bce",
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 816.3732000102755,
+          "min": 810.593100002734,
+          "max": 1041.543700004695
+        },
+        "engine_ms": {
+          "median": 727.1517,
+          "min": 707.9931,
+          "max": 929.4242
+        },
+        "library_ms": {
+          "median": 339.3923,
+          "min": 322.5329,
+          "max": 420.45500000000004
+        },
+        "model_work_ms": {
+          "median": 387.5422,
+          "min": 385.30530000000005,
+          "max": 508.76660000000004
+        }
+      },
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 10673.28460002318,
+          "min": 9087.63490000274,
+          "max": 12158.32140002749
+        },
+        "engine_ms": {
+          "median": 10401.1024,
+          "min": 8869.0431,
+          "max": 11917.814
+        },
+        "library_ms": {
+          "median": 4168.511,
+          "min": 4168.2762,
+          "max": 6363.6997
+        },
+        "model_work_ms": {
+          "median": 812.7923000000001,
+          "min": 648.8681,
+          "max": 1001.3838
+        }
+      },
+      "pilot_over_native_wall": 13.074026192786386,
+      "pilot_over_native_model_work": 2.097300113381201
+    },
+    {
+      "group": "8b2a5d1a6608",
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 10960.42459999444,
+          "min": 10475.214600010077,
+          "max": 15921.887800010154
+        },
+        "engine_ms": {
+          "median": 10707.658,
+          "min": 10157.6424,
+          "max": 15604.1072
+        },
+        "library_ms": {
+          "median": 4361.5114,
+          "min": 4259.9734,
+          "max": 7890.6382
+        },
+        "model_work_ms": {
+          "median": 1653.377,
+          "min": 1500.8365000000001,
+          "max": 2155.5116
+        }
+      },
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 904.009899997618,
+          "min": 869.907799991779,
+          "max": 910.2802000124939
+        },
+        "engine_ms": {
+          "median": 805.6868000000001,
+          "min": 781.7091,
+          "max": 822.1634
+        },
+        "library_ms": {
+          "median": 326.9959,
+          "min": 303.7466,
+          "max": 332.62760000000003
+        },
+        "model_work_ms": {
+          "median": 477.8165,
+          "min": 472.87120000000004,
+          "max": 495.0141
+        }
+      },
+      "pilot_over_native_wall": 12.12423071918053,
+      "pilot_over_native_model_work": 3.4602760683233
+    },
+    {
+      "group": "e250900ba1e2",
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 1260.7414000085555,
+          "min": 1143.4301999979652,
+          "max": 1400.4343000124209
+        },
+        "engine_ms": {
+          "median": 1175.9323,
+          "min": 1013.3559000000001,
+          "max": 1282.1576000000002
+        },
+        "library_ms": {
+          "median": 439.03180000000003,
+          "min": 353.5317,
+          "max": 448.57399999999996
+        },
+        "model_work_ms": {
+          "median": 727.1017,
+          "min": 659.6427,
+          "max": 842.8642
+        }
+      },
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 11136.658400006127,
+          "min": 10112.134499999229,
+          "max": 11243.229800020345
+        },
+        "engine_ms": {
+          "median": 10854.541,
+          "min": 9896.6536,
+          "max": 10976.2237
+        },
+        "library_ms": {
+          "median": 4691.4353,
+          "min": 4295.5139,
+          "max": 4957.8682
+        },
+        "model_work_ms": {
+          "median": 1526.0371,
+          "min": 1472.4232,
+          "max": 2070.7463000000002
+        }
+      },
+      "pilot_over_native_wall": 8.833420081176483,
+      "pilot_over_native_model_work": 2.098794570278133
+    },
+    {
+      "group": "020f131610d2",
+      "pilot": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 9763.729500002228,
+          "min": 9687.058000010438,
+          "max": 14369.248699978925
+        },
+        "engine_ms": {
+          "median": 9521.9637,
+          "min": 9452.9141,
+          "max": 14053.88
+        },
+        "library_ms": {
+          "median": 3903.4691,
+          "min": 3800.416,
+          "max": 5895.3639
+        },
+        "model_work_ms": {
+          "median": 1639.446,
+          "min": 1579.1071000000002,
+          "max": 2033.6053000000002
+        }
+      },
+      "native": {
+        "repetitions": 3,
+        "wall_ms": {
+          "median": 979.4709000270814,
+          "min": 937.7901999978349,
+          "max": 1381.0320000047795
+        },
+        "engine_ms": {
+          "median": 901.1206000000001,
+          "min": 852.4726999999999,
+          "max": 1268.7189999999998
+        },
+        "library_ms": {
+          "median": 325.2535,
+          "min": 284.6087,
+          "max": 414.4799
+        },
+        "model_work_ms": {
+          "median": 575.6863999999999,
+          "min": 567.6767,
+          "max": 854.0091
+        }
+      },
+      "pilot_over_native_wall": 9.968371188702259,
+      "pilot_over_native_model_work": 2.8478108914853646
+    }
+  ],
+  "caveat": "Native validation and semantic preservation are incomplete. These workflow timings do not establish equivalent work or a conformance-adjusted speedup."
+}

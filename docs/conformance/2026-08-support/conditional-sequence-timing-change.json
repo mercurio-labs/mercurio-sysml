@@ -1,0 +1,331 @@
+{
+  "status": "descriptive_comparison_not_regression_proof",
+  "source_fingerprints": {
+    "previous": "0ccc9fda3f0699237c2fc29a3095b0a4e9cd8c990f1ca3fdbd24480170bcecbb",
+    "current": "268ec00a1db1d2ab4b3f3b6d79534a38cb568e6527fd30cd1a9d7dfc273137dc"
+  },
+  "method": "Same source groups, 3 fresh-process trials per engine per group. OS cache and unrelated host activity uncontrolled. Native now preserves additional semantics. No claim of equivalent semantic work or statistical confidence.",
+  "groups": [
+    {
+      "group": "8b548aad4810",
+      "targets": [
+        "kerml/src/examples/Address Book Example/AddressBookModel.kerml"
+      ],
+      "native": {
+        "previous_median_ms": 708.5745000222232,
+        "current_median_ms": 700.1504999934696,
+        "change_percent": -1.1888658184128098,
+        "previous_range_ms": [
+          702.137300017057,
+          807.7725999755785
+        ],
+        "current_range_ms": [
+          666.5159999975003,
+          715.220899990527
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 8083.207399991807,
+        "current_median_ms": 7686.449900007574,
+        "change_percent": -4.908416676091165,
+        "previous_range_ms": [
+          8068.461599992588,
+          9556.37070001103
+        ],
+        "current_range_ms": [
+          7492.229099996621,
+          7838.9876000001095
+        ]
+      }
+    },
+    {
+      "group": "87b28b080d1d",
+      "targets": [
+        "kerml/src/examples/Simple Tests/ArgumentResolution.kerml",
+        "kerml/src/examples/Simple Tests/Associations.kerml",
+        "kerml/src/examples/Simple Tests/Behaviors.kerml",
+        "kerml/src/examples/Simple Tests/Circular.kerml",
+        "kerml/src/examples/Simple Tests/Classes.kerml",
+        "kerml/src/examples/Simple Tests/Classifications.kerml",
+        "kerml/src/examples/Simple Tests/Classifiers.kerml",
+        "kerml/src/examples/Simple Tests/Comments.kerml",
+        "kerml/src/examples/Simple Tests/Conjugation.kerml",
+        "kerml/src/examples/Simple Tests/Connectors.kerml",
+        "kerml/src/examples/Simple Tests/Dependencies.kerml",
+        "kerml/src/examples/Simple Tests/Expansion.kerml",
+        "kerml/src/examples/Simple Tests/Expressions.kerml",
+        "kerml/src/examples/Simple Tests/FeatureChains.kerml",
+        "kerml/src/examples/Simple Tests/FeatureInheritance.kerml",
+        "kerml/src/examples/Simple Tests/Features.kerml",
+        "kerml/src/examples/Simple Tests/Filtering.kerml",
+        "kerml/src/examples/Simple Tests/Imports.kerml",
+        "kerml/src/examples/Simple Tests/Inheritance.kerml",
+        "kerml/src/examples/Simple Tests/Inverses.kerml",
+        "kerml/src/examples/Simple Tests/MetadataTest.kerml",
+        "kerml/src/examples/Simple Tests/Redefinition.kerml",
+        "kerml/src/examples/Simple Tests/Scoping.kerml",
+        "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+        "kerml/src/examples/Simple Tests/Types.kerml"
+      ],
+      "native": {
+        "previous_median_ms": 1576.9812000216916,
+        "current_median_ms": 1502.992900001118,
+        "change_percent": -4.69176804514575,
+        "previous_range_ms": [
+          1522.369800019078,
+          1733.345599990571
+        ],
+        "current_range_ms": [
+          1488.9787999854889,
+          1594.8815000010654
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 10638.581899984274,
+        "current_median_ms": 9657.913799979724,
+        "change_percent": -9.218034031453005,
+        "previous_range_ms": [
+          10345.552899991162,
+          10854.599700018298
+        ],
+        "current_range_ms": [
+          9555.796800006647,
+          9867.65820000437
+        ]
+      }
+    },
+    {
+      "group": "a01633e4052a",
+      "targets": [
+        "sysml/src/examples/Simple Tests/ActionTest.sysml",
+        "sysml/src/examples/Simple Tests/AliasTest.sysml",
+        "sysml/src/examples/Simple Tests/AllocationTest.sysml",
+        "sysml/src/examples/Simple Tests/AnalysisTest.sysml",
+        "sysml/src/examples/Simple Tests/AssignmentTest.sysml",
+        "sysml/src/examples/Simple Tests/CalculationTest.sysml",
+        "sysml/src/examples/Simple Tests/CommentTest.sysml",
+        "sysml/src/examples/Simple Tests/ConjugationTest.sysml",
+        "sysml/src/examples/Simple Tests/ConnectionTest.sysml",
+        "sysml/src/examples/Simple Tests/ConstraintTest.sysml",
+        "sysml/src/examples/Simple Tests/ControlNodeTest.sysml",
+        "sysml/src/examples/Simple Tests/DecisionTest.sysml",
+        "sysml/src/examples/Simple Tests/DefaultValueTest.sysml",
+        "sysml/src/examples/Simple Tests/DependencyTest.sysml",
+        "sysml/src/examples/Simple Tests/EnumerationTest.sysml",
+        "sysml/src/examples/Simple Tests/FeaturePathTest.sysml",
+        "sysml/src/examples/Simple Tests/ImportTest.sysml",
+        "sysml/src/examples/Simple Tests/IndividualTest.sysml",
+        "sysml/src/examples/Simple Tests/InterfaceTest.sysml",
+        "sysml/src/examples/Simple Tests/ItemTest.sysml",
+        "sysml/src/examples/Simple Tests/MetadataTest.sysml",
+        "sysml/src/examples/Simple Tests/MultiplicityTest.sysml",
+        "sysml/src/examples/Simple Tests/OccurrenceTest.sysml",
+        "sysml/src/examples/Simple Tests/ParameterTest.sysml",
+        "sysml/src/examples/Simple Tests/PartTest.sysml",
+        "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+        "sysml/src/examples/Simple Tests/RootPackageTest.sysml",
+        "sysml/src/examples/Simple Tests/StateTest.sysml",
+        "sysml/src/examples/Simple Tests/StructuredControlTest.sysml",
+        "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+        "sysml/src/examples/Simple Tests/TradeStudyTest.sysml",
+        "sysml/src/examples/Simple Tests/UseCaseTest.sysml",
+        "sysml/src/examples/Simple Tests/VariabilityTest.sysml",
+        "sysml/src/examples/Simple Tests/VerificationTest.sysml",
+        "sysml/src/examples/Simple Tests/ViewTest.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 4271.548200020334,
+        "current_median_ms": 4861.022199998843,
+        "change_percent": 13.800008155724486,
+        "previous_range_ms": [
+          4230.350800004089,
+          4283.893899992108
+        ],
+        "current_range_ms": [
+          4115.369300008751,
+          4990.111999999499
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 14740.267899993341,
+        "current_median_ms": 15381.032200006302,
+        "change_percent": 4.347032932917383,
+        "previous_range_ms": [
+          14383.771499997238,
+          15538.582700013649
+        ],
+        "current_range_ms": [
+          13445.171400002437,
+          19945.441099989694
+        ]
+      }
+    },
+    {
+      "group": "dca25ec10fb9",
+      "targets": [
+        "sysml/src/examples/Vehicle Example/SysML v2 Spec Annex A SimpleVehicleModel.sysml",
+        "sysml/src/examples/Vehicle Example/VehicleDefinitions.sysml",
+        "sysml/src/examples/Vehicle Example/VehicleIndividuals.sysml",
+        "sysml/src/examples/Vehicle Example/VehicleUsages.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 4549.998300004518,
+        "current_median_ms": 6491.811699990649,
+        "change_percent": 42.677233527410394,
+        "previous_range_ms": [
+          4531.960299995262,
+          5638.722000003327
+        ],
+        "current_range_ms": [
+          5235.971999994945,
+          8473.965799988946
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 19266.15640000091,
+        "current_median_ms": 17774.63210001588,
+        "change_percent": -7.7416806394500215,
+        "previous_range_ms": [
+          16840.55829999852,
+          20268.05109999259
+        ],
+        "current_range_ms": [
+          17530.27440002188,
+          21607.423000008566
+        ]
+      }
+    },
+    {
+      "group": "87c575b90bce",
+      "targets": [
+        "sysml/src/training/02. Part Definitions/Part Definition Example.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 909.5157999836374,
+        "current_median_ms": 823.0878000031225,
+        "change_percent": -9.502638654773198,
+        "previous_range_ms": [
+          868.6269000172615,
+          925.8596999861766
+        ],
+        "current_range_ms": [
+          759.9445999949239,
+          879.8035000218078
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 9735.564900009194,
+        "current_median_ms": 9700.065899989568,
+        "change_percent": -0.36463215421216333,
+        "previous_range_ms": [
+          9724.97020001174,
+          11796.43550000037
+        ],
+        "current_range_ms": [
+          8582.801000011386,
+          10200.091500009876
+        ]
+      }
+    },
+    {
+      "group": "8b2a5d1a6608",
+      "targets": [
+        "sysml/src/training/20. Assignment Actions/Assignment Example.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 782.336900010705,
+        "current_median_ms": 896.5584000106901,
+        "change_percent": 14.600039957008558,
+        "previous_range_ms": [
+          769.1967000137083,
+          792.8918999969028
+        ],
+        "current_range_ms": [
+          842.1479999960866,
+          909.8548000038136
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 8904.045399976894,
+        "current_median_ms": 10281.903299997794,
+        "change_percent": 15.47451566256024,
+        "previous_range_ms": [
+          8868.985699984478,
+          9561.193300003652
+        ],
+        "current_range_ms": [
+          10244.830700015882,
+          10771.93369998713
+        ]
+      }
+    },
+    {
+      "group": "e250900ba1e2",
+      "targets": [
+        "sysml/src/training/23. State Definitions/State Definition Example-1.sysml",
+        "sysml/src/training/23. State Definitions/State Definition Example-2.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 934.621899999911,
+        "current_median_ms": 1101.3749999983702,
+        "change_percent": 17.84177109465068,
+        "previous_range_ms": [
+          904.7510999953374,
+          983.3406000107061
+        ],
+        "current_range_ms": [
+          967.979099979857,
+          1215.242300007958
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 8922.660100011854,
+        "current_median_ms": 9903.198400017573,
+        "change_percent": 10.989304635782515,
+        "previous_range_ms": [
+          8884.427800017875,
+          9706.178299995372
+        ],
+        "current_range_ms": [
+          9088.259400014067,
+          10423.998399986885
+        ]
+      }
+    },
+    {
+      "group": "020f131610d2",
+      "targets": [
+        "sysml/src/training/32. Requirements/Requirement Definitions.sysml",
+        "sysml/src/training/32. Requirements/Requirement Groups.sysml",
+        "sysml/src/training/32. Requirements/Requirement Satisfaction.sysml",
+        "sysml/src/training/32. Requirements/Requirement Usages.sysml"
+      ],
+      "native": {
+        "previous_median_ms": 1324.0646999911405,
+        "current_median_ms": 1058.449500007555,
+        "change_percent": -20.060590693593973,
+        "previous_range_ms": [
+          930.1103999896441,
+          1473.0926000047475
+        ],
+        "current_range_ms": [
+          991.4640999922995,
+          1068.6049000069033
+        ]
+      },
+      "pilot": {
+        "previous_median_ms": 10360.042699991027,
+        "current_median_ms": 9341.313999990234,
+        "change_percent": -9.833248081126877,
+        "previous_range_ms": [
+          9680.993699992541,
+          14773.71919999132
+        ],
+        "current_range_ms": [
+          9217.10940002231,
+          10240.978799993172
+        ]
+      }
+    }
+  ]
+}

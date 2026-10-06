@@ -1,0 +1,1233 @@
+{
+  "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+  "helper_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00",
+  "fixture_sha256": {
+    "connections.sysml": "ae6571752920aea91577cbcb5ddf2cb68c77dd44393fefb50b7848d1732c2506",
+    "definitions.sysml": "7bbe5f1a209268247e48f7eb1624abf8cadb95b6ecb188ad3078caf784462fb1",
+    "sources.sysml": "c070533fc5b97dc8a5f028188792c6fbf6741e95ad177f5b5a2b254dd4cbf414"
+  },
+  "source_set_spec_sha256": "99377cf648a6efdc0e60639cba03dbc7126e7c49cdc3d27c96b96a2576e5b166",
+  "timings_sha256": "0d33226f137ec18ce79c7c5d262daa8013dd450ea38bbcc1bc35f6aa302d03f1",
+  "validation": [
+    {
+      "relative_path": "definitions.sysml",
+      "status": "ok",
+      "validation_ms": 422.6835,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "sources.sysml",
+      "status": "ok",
+      "validation_ms": 23.5506,
+      "diagnostics": []
+    },
+    {
+      "relative_path": "connections.sysml",
+      "status": "ok",
+      "validation_ms": 357.6943,
+      "diagnostics": []
+    }
+  ],
+  "export_sha256": "c4cb652bb314a165ac860fff426b7bf66850ab0abcc1f8c5c6b388eb21a708db",
+  "observations": [
+    {
+      "qualified_name": "PortTypeConnections::genericAnonymous::right",
+      "kind": "ReferenceUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 10,
+        "end_line": 10
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "right",
+        "name": "right",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::10::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#14",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#28",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#42"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#14"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "402468d5-2f79-4126-b7c7-e6246605a054",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::genericAnonymous::right",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::genericAnonymous::source",
+      "kind": "ReferenceUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 10,
+        "end_line": 10
+      },
+      "documentation": [],
+      "properties": {
+        "name": "source",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::10::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#13",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#26",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#39"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#13"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "4d33852a-eea7-4381-9db2-bbef64fc94a7",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::genericAnonymous::source",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::genericNamed::left",
+      "kind": "ReferenceUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 9,
+        "end_line": 9
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "left",
+        "name": "left",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::9::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#11",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#22",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#33"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#11"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "7baea447-bb3f-4610-b498-1d3aef38e61e",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::genericNamed::left",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::genericNamed::target",
+      "kind": "ReferenceUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 9,
+        "end_line": 9
+      },
+      "documentation": [],
+      "properties": {
+        "name": "target",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::9::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#12",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#24",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#36"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#12"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "d7968566-76bf-41c1-b294-6e840f6f6885",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::genericNamed::target",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::minimal::source",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 8,
+        "end_line": 8
+      },
+      "documentation": [],
+      "properties": {
+        "name": "source",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::8::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#9",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#18",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#27"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#9"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "81d12016-b8d6-4b9e-8c1d-d3e20577182c",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::minimal::source",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::minimal::target",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 8,
+        "end_line": 8
+      },
+      "documentation": [],
+      "properties": {
+        "name": "target",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::8::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#10",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#20",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#30"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#10"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "447ac8c1-504a-4be2-85fa-265e8ae8df1d",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::minimal::target",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::mixedAnonymous::right",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "right",
+        "name": "right",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::7::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#8",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#16",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#24"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#8"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "1d5e2010-f9fa-4990-a13e-47dadc213aac",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::mixedAnonymous::right",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::mixedAnonymous::source",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 7,
+        "end_line": 7
+      },
+      "documentation": [],
+      "properties": {
+        "name": "source",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::7::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#7",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#14",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#21"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#7"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "3125337e-28bd-4306-ac5f-70f373f8c697",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::mixedAnonymous::source",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::mixedNamed::left",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 6,
+        "end_line": 6
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "left",
+        "name": "left",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::6::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#5",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#10",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#15"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#5"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "b09db563-7aed-4979-8d9b-bcf613ae3156",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::mixedNamed::left",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::mixedNamed::target",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 6,
+        "end_line": 6
+      },
+      "documentation": [],
+      "properties": {
+        "name": "target",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::6::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#6",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#12",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#18"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#6"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "6454acbc-c6ab-4381-b823-c7c3d518346e",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::mixedNamed::target",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::path::source",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 5,
+        "end_line": 5
+      },
+      "documentation": [],
+      "properties": {
+        "name": "source",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::5::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#3",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#6",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#9"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#3"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "083753ce-2a37-4ed6-b4f9-aaf698a593de",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::path::source",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::path::target",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 5,
+        "end_line": 5
+      },
+      "documentation": [],
+      "properties": {
+        "name": "target",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::5::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#4",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#8",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#12"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#4"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "8840dc2f-6531-43e2-a04a-1c9c1314a46a",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::path::target",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::typed::left",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 4,
+        "end_line": 4
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "left",
+        "name": "left",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::4::ReferenceSubsetting",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#3"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "a87faeea-6378-47c3-bc79-5e04ed8ed081",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::typed::left",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    },
+    {
+      "qualified_name": "PortTypeConnections::typed::right",
+      "kind": "PortUsage",
+      "library_group": "Input Model",
+      "source": {
+        "file": "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml",
+        "start_line": 4,
+        "end_line": 4
+      },
+      "documentation": [],
+      "properties": {
+        "declared_name": "right",
+        "name": "right",
+        "is_library_element": false,
+        "metatype_specialization_chain": [
+          "Element",
+          "Namespace",
+          "Type",
+          "Feature",
+          "Usage",
+          "OccurrenceUsage"
+        ],
+        "is_abstract": false,
+        "is_derived": false,
+        "is_end": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "reference_sequences": {
+          "owned_relationship": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::4::ReferenceSubsetting#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::OwningMembership#2",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Redefinition#4",
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::TypeFeaturing#6"
+            ],
+            "ordered": true,
+            "unique": true,
+            "many": true,
+            "derived": false
+          },
+          "multiplicity": {
+            "targets": [
+              "InputModel::../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/referenced-port-types/connections.sysml::?::Multiplicity#2"
+            ],
+            "ordered": false,
+            "unique": true,
+            "many": false,
+            "derived": true
+          },
+          "chaining_feature": {
+            "targets": [],
+            "ordered": true,
+            "unique": false,
+            "many": true,
+            "derived": true
+          }
+        },
+        "alias_ids": [],
+        "element_id": "6d943c4a-2250-4099-985a-545070ecaf64",
+        "is_implied_included": true,
+        "qualified_name": "PortTypeConnections::typed::right",
+        "is_conjugated": false,
+        "is_sufficient": false,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true,
+        "is_individual": false
+      }
+    }
+  ],
+  "type_and_reference_observations": [
+    {
+      "source": "PortTypeConnections::genericAnonymous::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericAnonymous::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::genericAnonymous::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericAnonymous::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::genericAnonymous::source",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericAnonymous::source",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::left",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::left",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::genericNamed::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::minimal::source",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::minimal::source",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::minimal::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::minimal::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::source",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedAnonymous::source",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::left",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::left",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::mixedNamed::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::path::source",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::path::source",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::path::target",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::path::target",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::typed::left",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::typed::left",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::typed::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::typed::right",
+      "relation": "definition",
+      "target": "PortTypeDefinitions::Other"
+    },
+    {
+      "source": "PortTypeConnections::typed::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Derived"
+    },
+    {
+      "source": "PortTypeConnections::typed::right",
+      "relation": "type",
+      "target": "PortTypeDefinitions::Other"
+    }
+  ]
+}

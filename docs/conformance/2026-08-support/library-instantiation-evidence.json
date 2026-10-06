@@ -1,0 +1,95 @@
+{
+  "schema": "dev.mercurio.library-instantiation-evidence.v1",
+  "scope": "Six operator/trigger instantiatedType getters under canonical supplied library providers. Resolved pinned programs/defaults drive generated selectors; ordered navigation, typing and prerequisite propagation are explicit handwritten Rust. Default adapter contribution programs, cold resources, invocation/trigger validity and complete transformation are separate unsupported requirements.",
+  "pipeline": {
+    "pinned_reference": "docs/conformance/2026-08-support/library-instantiation-pilot-controls.json",
+    "resolved_import": "25 typed method/constructor/initializer trees, six constructor defaults, ordered package inventory and three TriggerKind role mappings",
+    "native_generator": "tools/generate_library_instantiation.py",
+    "native_consumers": [
+      "definition_instantiated_type_query -> definition_reference_targets_query",
+      "definition_library_type_query -> standard_library_lookup_evaluate -> imported Name/QualifiedName converter"
+    ],
+    "handwritten_dependencies": [
+      "Canonical ownership/member navigation and lexical/inherited library scope",
+      "Known-absence versus pending/rejected outcome classification",
+      "First Type selection and narrower Function endpoint guard"
+    ],
+    "normative": "docs/conformance/2026-08-support/library-instantiation-normative-review.json"
+  },
+  "verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "native_definition_tests_passed": 379,
+    "focused_native_tests_passed": 7,
+    "generator_controls_passed": 6,
+    "candidate_pipeline_tests_passed": 8,
+    "tool_binary_tests_passed": 11,
+    "independent_cached_controls": 1236,
+    "operator_trigger_bindings_consumed": 6,
+    "all_instantiation_getter_bindings_consumed": 8,
+    "persisted_and_reordered_reference_context_comparisons": 4944,
+    "derived_reference_reader_compared_in_every_context": true,
+    "typed_boundary_modes": 8,
+    "typed_boundary_repeat_and_reload_checks": 32,
+    "null_and_constructor_defaults_verified": true,
+    "quoted_operator_segments_verified": [
+      "+",
+      "a::b",
+      "a b",
+      ".",
+      "#"
+    ],
+    "failed_lookups_not_negative_cached": true,
+    "completion_flags_written": false,
+    "full_transformation_proven": false,
+    "full_normative_qualification": false,
+    "resource_assessment_current_code": false,
+    "optimized_build": "passes",
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "latest_full_native_regression_passed": 379
+  },
+  "unsupported": [
+    "OperatorExpressionAdapter and TriggerInvocationExpressionAdapter contribution programs; native default/generalization consumer explicitly rejects these six classes until separately implemented",
+    "Full Invocation/Constructor/Operator/Trigger owning/value/multiplicity/result/parameter/receiver contexts and invocation/trigger validation",
+    "Known normative inconsistencies and invalid-domain controls remain explicitly reviewed rather than qualified",
+    "Actual library resource closure, global parser/model contracts and final sample/comparison/timing gates"
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/library_instantiation_generated.rs": "979de07e8c5a878107a948aac2c755cf5bb805352e5f0082b80110ca1d21ea7e",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/instantiation_strategy_generated.rs": "bfc4fd2edbbbe59bc47abf058503a3bb84b47a912822f4ff3a0025c1b8768f28",
+    "tools/generate_library_instantiation.py": "417634154e18bff3c125b373b41af6ff0aed5e801ca38ae0ef6a894e0420cb94",
+    "tools/test_library_instantiation.py": "65265d4c4fbc5c15f19b7c3c77a47b7821e8fe768dbc7468682c85de213f7e06",
+    "tools/run_library_instantiation_probe.py": "d69a917f72a0f7808f8b46542493a5c65a95c1f19e92f178b7ac0327d02475b5",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotLibraryInstantiationProbe.java": "abf7cd72b79a99736b155b0cefe6da125c86b0a91f242fb64e69b116a7b37a4b",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/library-instantiation-pilot-controls.json": "3588e12e30b1f750488a6293a737e5567c8b373a57ff7cf62947f2ff9fdb9f94",
+    "docs/conformance/2026-08-support/library-instantiation-normative-review.json": "94bde912007ce333bc37a39e90f98b44808f490f78d92209a8955aad0ab24f3a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-focused.log": "9344373d91cc9269fccfbf8fb5ff3cb6780cb41051ca2348c6c976dc86342344",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-tool-tests.log": "0576c690d1c878d58c5b3f0ef9ca9de3c3e3c0e52a556bf079111a0d8ac88d02",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-generator-tests.log": "223d3ee053e4f29028f4bb3b431054ec0cb9d31ad3c7d7bc459d708ffe871e75",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-release-build.log": "61ed7d237f7a8d32a36e3df2831ef14d672a3d55afe395efea70a0b6122cc014",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-cache-check.log": "ea9af478379dffe25beb42d253c520fed944da5e70d212a5d9ad9a2535b435a1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-export.log": "ea9af478379dffe25beb42d253c520fed944da5e70d212a5d9ad9a2535b435a1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  }
+}

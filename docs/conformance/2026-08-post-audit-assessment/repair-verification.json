@@ -1,0 +1,105 @@
+{
+  "scope": "Three concrete defects found by the preceding complete audit; this targeted evidence is not a general semantic-parity waiver.",
+  "repairs": [
+    {
+      "source": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+      "name": "fine structure constant",
+      "before_native_ir": {
+        "kind": "literal",
+        "value": 7.2973525693
+      },
+      "after_native_ir": {
+        "kind": "operation",
+        "operands": [
+          {
+            "kind": "literal",
+            "value": 0.0072973525693
+          },
+          {
+            "kind": "path",
+            "root": "self",
+            "segments": [
+              {
+                "feature": "MeasurementReferences::one",
+                "name": "one"
+              }
+            ]
+          }
+        ],
+        "operator": "["
+      },
+      "pilot_value_tree": [
+        "operator",
+        "[",
+        [
+          [
+            "literal",
+            "number",
+            0.0072973525693
+          ],
+          [
+            "reference",
+            "MeasurementReferences::one"
+          ]
+        ]
+      ],
+      "verification": "Numeric value and retained unit identifier match the Pilot observations. Full tree projection remains unassessed because its strict reference pairing does not pair external library objects.",
+      "post_fix_artifact_sha256": "6af3d25ce23edaad69b5412a0330814fdf9f91828671e37ba3cbea07a36a1d30"
+    },
+    {
+      "source": "sysml/src/validation/15-Properties-Values-Expressions/15_01-Constants.sysml",
+      "name": "electron to proton mass ratio",
+      "before_native_ir": {
+        "kind": "literal",
+        "value": 5.44617021487
+      },
+      "after_native_ir": {
+        "kind": "operation",
+        "operands": [
+          {
+            "kind": "literal",
+            "value": 0.000544617021487
+          },
+          {
+            "kind": "path",
+            "root": "self",
+            "segments": [
+              {
+                "feature": "MeasurementReferences::one",
+                "name": "one"
+              }
+            ]
+          }
+        ],
+        "operator": "["
+      },
+      "pilot_value_tree": [
+        "operator",
+        "[",
+        [
+          [
+            "literal",
+            "number",
+            0.000544617021487
+          ],
+          [
+            "reference",
+            "MeasurementReferences::one"
+          ]
+        ]
+      ],
+      "verification": "Numeric value and retained unit identifier match the Pilot observations. Full tree projection remains unassessed because its strict reference pairing does not pair external library objects.",
+      "post_fix_artifact_sha256": "6af3d25ce23edaad69b5412a0330814fdf9f91828671e37ba3cbea07a36a1d30"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Expressions.kerml",
+      "name": "z",
+      "before_native_target": "feature.Circular.z",
+      "after_native_target": "feature.Expressions.z",
+      "pilot_wrapper": "InputModel::kerml/src/examples/Simple Tests/Expressions.kerml::10::FeatureReferenceExpression#4",
+      "pilot_referent": "Expressions::z",
+      "verification": "Both references now point to their own uniquely paired declaration. Raw initializer trees still differ because the projection retains Pilot's lazy wrapper.",
+      "post_fix_artifact_sha256": "d8746505cd90ac1ec5cfc4fb4aa30eabc933148033847c7ba90a690b7d503f71"
+    }
+  ]
+}

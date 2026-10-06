@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralInteger",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = 2; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralRational",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = 2.5; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralBoolean",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = true; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralString",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = \"text\"; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralInfinity",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = *; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "NullExpression",
+          "operation": true
+        }
+      ],
+      "source": "package P { feature f = null; }"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralInteger",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralRational",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralBoolean",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralString",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "LiteralInfinity",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "NullExpression",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    },
+    {
+      "observations": [
+        {
+          "attribute": true,
+          "kind": "MetadataAccessExpression",
+          "operation": true
+        }
+      ],
+      "shape": "detached"
+    }
+  ],
+  "provenance": {
+    "driver_sha256": "4e9806a90ee90800664f14fe6a3395da6193689a0895e33cb25c4fc2775ddebd",
+    "helper_sha256": "c03fa6877754f5b68e570e8a8944947432e368e9956d8698e93a4d3f3dfc8e3a",
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+    "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+    "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/LiteralExpression_modelLevelEvaluable_InvocationDelegate.java": "ed6bf2f51232ab11f576c4eb786ec3c882ce3df7725e461ad912ce33508db6dd",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/MetadataAccessExpression_modelLevelEvaluable_InvocationDelegate.java": "9fb6e726e4f5770e5ba0bc5a580e0189568dfb6c134add2fd43ecc5722815ec9",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/NullExpression_modelLevelEvaluable_InvocationDelegate.java": "15e1bc469b72f1595477d9c305c853f0cf93e5b46178a09a1129cf0d3c1f6a90",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/invocation/OperationInvocationDelegateSelector.java": "29fae4b689573e1893e94e053df12935a64813205dc79ba41f75547f26e785b8",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/delegate/setting/Expression_isModelLevelEvaluable_SettingDelegate.java": "e20fbac418a5b916603b430e8269f2feca6f232e15880b4aa9e10a64f2397b38",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    }
+  },
+  "schema": "dev.mercurio.evaluability-controls.v1",
+  "scope": "Six source expressions and seven detached expression factories verify constant evaluability branches, attribute and operation. No numeric evaluation, result construction or semantic-validation qualification."
+}

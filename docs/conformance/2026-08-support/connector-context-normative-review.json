@@ -1,0 +1,45 @@
+{
+  "schema": "dev.mercurio.connector-context-normative-review.v1",
+  "normative_pdf": {
+    "path": "../target/upstream/SysML-v2-Release/doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      214,
+      215,
+      281
+    ],
+    "constraints": [
+      "deriveConnectorDefaultFeaturingType",
+      "checkConnectorTypeFeaturing"
+    ]
+  },
+  "reference": {
+    "path": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-contexts.extract.json",
+    "sha256": "752abfcc87a77231ddfe2cd4ebb79e9fda28aa84b92dd440569fcca63cfb1626",
+    "program": "org.omg.sysml.util.ConnectorUtil#getContextTypeFor",
+    "resolved_concrete_bindings": 12,
+    "independent_controls": 132
+  },
+  "disagreement": {
+    "case": "direct_partial_three",
+    "count": 12,
+    "model": "f0 featured by a; f1 featured by f0; f2 featured by unrelated b; three related features f0/f1/f2",
+    "pilot_utility_result": "f0",
+    "required_native_checked_result": null,
+    "reason": "The written connector constraint requires a common context for every related feature. The third feature has no direct or indirect featuring relationship or compatible context at f0. Pilot returns its first any-pair match before inspecting that third feature.",
+    "native_policy": "Retain the pinned utility as separately identified reference behavior. Native checked selection validates the shortcut against every remaining related feature, then computes shared contexts. The binding consumer uses checked selection; its binary behavior is unchanged."
+  },
+  "verification_scope": "Focused checked-candidate policy over supplied complete factory inputs, alongside unchanged independent utility observations. This is not full Connector defaultFeaturingType validation, global Anything qualification, end transformation, or transition-parent production.",
+  "remaining": [
+    "Global Base::Anything semantics for missing featuring contexts",
+    "Complete native parent transformation before SuccessionAsUsage context production",
+    "Complete end construction/transformation and subclass producer lifecycles",
+    "Full normative validation and actual resource qualification"
+  ],
+  "family_certificate_issued": false,
+  "native_consumers": [
+    "Shared checked binding context",
+    "Imported Connector.defaultFeaturingType projection over relatedFeature delegate"
+  ],
+  "native_delegate_projection_comparisons": 528
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "dev.mercurio.normative-inheritance-evidence.v1",
+  "specification": {
+    "release": "2026-08",
+    "release_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "section": "8.3.3.1.10 Type",
+    "pdf_pages": [
+      172,
+      173,
+      174,
+      175
+    ],
+    "printed_pages": [
+      146,
+      147,
+      148,
+      149
+    ]
+  },
+  "native_algorithm": "explicit_recursive_inherited_memberships",
+  "verified_scope": "Type inheritance uses imported Ecore subsets, ancestry, endpoint dispatch and defaults. Recursive scope excludes implied specializations. Full traversal requires complete materialized implied relationships at every visited Type. Public/protected memberships precede inherited contributions, conjugation selects originalType, and active-path exclusions terminate cycles. Materialized Feature filtering evaluates both normative predicates; iterative redefinition closure handles cycles. Namespace recursive ownership precedes inherited results. Feature.supertypes additionally appends the final canonical chaining target after the Type contribution, including conjugation. Imported Feature ancestry, ownedFeatureChaining subsets, endpoint types and reciprocal ownership drive the shared native target service.",
+  "remaining_dependencies": [
+    "Computing and materializing missing implicit generalizations and computed redefinitions; false/missing completeness flags preserve explicit dependency errors or existing resolved-snapshot inputs.",
+    "Filtered imports and external/global graphs.",
+    "Graphs deeper than the explicit 128-type inheritance recursion limit.",
+    "Whole-language/sample qualification remains open.",
+    "Feature chaining legality (nonself, not-one, adjacent conformance) and value/navigation semantics remain separate unqualified obligations; the bounded inheritance evaluator is not a whole-model validator."
+  ],
+  "pilot_controls": {
+    "artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/union-pilot-controls.json",
+    "matching_canonical_cases": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18
+    ],
+    "supplied_inherited_snapshots": false,
+    "scope": "Actual factory-created graphs cover visibility, import-all, diamonds, cycles, conjugation, protected re-export and recursive ownership."
+  },
+  "disagreement": {
+    "case": 17,
+    "operation": "Type.supertypes(true)",
+    "normative": "Reject owned Specializations with isImplied=true.",
+    "pilot": "TypeUtil.getSupertypesOf skips computed implicit generals but traverses stored Specializations flagged implied.",
+    "observed_pilot_union": [
+      "z",
+      "a",
+      "local"
+    ],
+    "expected_native_union": [
+      "local"
+    ],
+    "policy": "Follow the written specification; retain the Pilot observation separately."
+  },
+  "materialized_completeness": {
+    "normative_pdf_page": 137,
+    "printed_page": 111,
+    "feature": "Element.isImpliedIncluded",
+    "meaning": "True asserts all necessary implied relationships are present in ownedRelationship, including the case where none are required. Native derivation additionally requires an explicit complete canonical ownership collection. This consumes an input completeness assertion; it does not compute or prove missing implied relationships.",
+    "consumer": "stored_type_inherited_memberships",
+    "scope": "Full inheritance includes stored implied specializations. Materialized Feature redefinitions feed an iterative transitive closure and both Type.removeRedefinedFeatures predicates. Fully unnamed Features with no redefinition produce no effective names. Snapshot disagreement rejects."
+  },
+  "materialized_pilot_controls": {
+    "matching_canonical_cases": [
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      27,
+      28
+    ],
+    "supplied_inherited_snapshots": false,
+    "upstream_services_replaced": false,
+    "completeness_check": "The exporter compares stored redefinition endpoints against actual computed Pilot redefinitions and checks no unmaterialized implicit generals remain. It does not disable upstream semantic computation.",
+    "scope": "Nonrecursive inheritance; Feature filtering by another inherited Feature and by an owned Feature; transitive and cyclic redefinition; implied stored generalizations; anonymous and redefinition-derived names."
+  },
+  "alias_disagreement": {
+    "case": 26,
+    "operation": "Type.removeRedefinedFeatures",
+    "normative": "Compare another Membership; allRedefinedFeaturesOf includes its Feature itself, so distinct inherited memberships of the same Feature remove one another.",
+    "pilot": "The implementation excludes the member Feature itself from its redefined-target set and keeps both memberships.",
+    "observed_pilot_union": [
+      "z",
+      "a",
+      "local"
+    ],
+    "expected_native_union": [
+      "local"
+    ],
+    "policy": "Execute the written membership-based predicate and record the independent implementation disagreement."
+  },
+  "feature_chaining": {
+    "normative_pdf_pages": [
+      186,
+      187,
+      191,
+      192,
+      196,
+      197,
+      198
+    ],
+    "operations": [
+      "Feature.supertypes",
+      "deriveFeatureFeatureTarget",
+      "deriveFeatureOwnedFeatureChaining"
+    ],
+    "algorithm": "stored_feature_chain_target",
+    "scope": "Ordered canonical owned FeatureChainings produce the final target; absence or self target contributes nothing. This named handwritten operation consumes imported subset, target-type and ownership contracts and reconciles any supplied featureChained snapshot. Inherited scope reuses it for full and exclude-implied traversal; Type contributions precede final-target inheritance. Cycles use existing active-path exclusions.",
+    "pilot_artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/union-pilot-controls.json",
+    "matching_cases": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "supplied_inherited_snapshots": false,
+    "upstream_services_replaced": false,
+    "completeness_check": "Actual upstream implicit-general and computed-redefinition services confirm no missing relationships in the controls.",
+    "verification": "Nine actual upstream graphs cover final-only inheritance, explicit-before-chain order, recursive imports, a chain cycle, duplicate parent, protected/private visibility, PartUsage dispatch and conjugation. Public native compilation resolves visible members and rejects preceding-chain-only, hidden and missing names; record order does not change results. Native negative controls reject missing/wrong targets, malformed endpoints, contradictory owners/snapshots and incomplete full-inheritance dependencies.",
+    "limitation": "Factory-built graphs qualify operation behavior, not source parsing of chain declarations or full chain legality. No additional normative disagreement observed in these nine cases."
+  },
+  "computed_plain_general_inputs": {
+    "consumer": "definition_inherited_memberships",
+    "default_policy_evidence": "normative-plain-defaults.json",
+    "scope": "The shared inheritance walker also accepts a privately computed general-type map for plain KerML types. Imported default dispatch replaces the need for a materialized-isImpliedIncluded assertion for those general-type inputs only. Feature redefinition filtering retains its independent completeness checks.",
+    "verification": "Ten matching whole-document Pilot controls and focused dependency/visibility failures; two independent library-provider disagreements recorded separately."
+  }
+}

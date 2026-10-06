@@ -1,0 +1,48 @@
+{
+  "schema": "dev.mercurio.membership-name-pilot-controls.v1",
+  "scope": "Stored non-owning Membership attributes only. Owning membership derivation, endpoint resolution, publication and family qualification are separate.",
+  "cases": [
+    {
+      "member_name": null,
+      "member_short_name": null,
+      "mode": 0
+    },
+    {
+      "member_name": "Long",
+      "member_short_name": null,
+      "mode": 1
+    },
+    {
+      "member_name": null,
+      "member_short_name": "Short",
+      "mode": 2
+    },
+    {
+      "member_name": "Long",
+      "member_short_name": "Short",
+      "mode": 3
+    },
+    {
+      "member_name": "",
+      "member_short_name": null,
+      "mode": 4
+    },
+    {
+      "member_name": null,
+      "member_short_name": null,
+      "mode": 5
+    }
+  ],
+  "provenance": {
+    "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "runtime_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "source_sha256": {
+      "org.omg.sysml.model/src/main/java/org/omg/sysml/lang/sysml/impl/MembershipImpl.java": "ee31fbe40a60f8152ac6f05073455198e3614a8c159dc20ba341a8f552e06e5d",
+      "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+    },
+    "helper_sha256": "b332139fcee9899d69b2ec7a18ba2dd64efa1cb6a3b791a2de69ea56cbe21c73",
+    "driver_sha256": "f012031589057d72e6021dd585dadbf45497a7520c8c42c7341e527a6e7d7fed",
+    "ecore_effective_sha256": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "toolchain": "openjdk version \"21.0.6\" 2025-01-21 LTS\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)"
+  }
+}

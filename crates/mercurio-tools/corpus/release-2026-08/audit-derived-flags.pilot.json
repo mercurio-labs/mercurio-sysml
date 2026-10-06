@@ -1,0 +1,259 @@
+{
+  "source": {
+    "export_sha256": "a557611646b44fcc10496ee16de1db7831952137b06291017fe3ecd8be9e9fac",
+    "fixture_sha256": "a26a5315b7b0a60bcb2a5b4e3d9cd4d628c7f73349ea5f62faa51575889a9c9d",
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "helper_java_sha256": "ac800ee98fa496db194c1c90970ce762c4cd8903b97186099914d31be54f4f00"
+  },
+  "observations": [
+    {
+      "qualified_name": "AuditFlags::B::leftSide",
+      "kind": "ReferenceUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::B::rightSide",
+      "kind": "ReferenceUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Behavior::decided",
+      "kind": "DecisionNode",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": false,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Behavior::forked",
+      "kind": "ForkNode",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": false,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Behavior::joined",
+      "kind": "JoinNode",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": false,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Behavior::merged",
+      "kind": "MergeNode",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": true,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": false,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Bus::left",
+      "kind": "PortUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Bus::right",
+      "kind": "PortUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": true,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Choice",
+      "kind": "ActionDefinition",
+      "properties": {
+        "is_abstract": true,
+        "is_variation": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Choice::one",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Choice::two",
+      "kind": "ActionUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Holder::socket",
+      "kind": "PortUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Holder::socket::sample",
+      "kind": "AttributeUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": true,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": true
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Paths",
+      "kind": "UseCaseUsage",
+      "properties": {
+        "is_abstract": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": true,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::Paths::path",
+      "kind": "UseCaseUsage",
+      "properties": {
+        "is_abstract": false,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    },
+    {
+      "qualified_name": "AuditFlags::envelope",
+      "kind": "FlowUsage",
+      "properties": {
+        "is_abstract": true,
+        "is_ordered": false,
+        "is_unique": true,
+        "is_variable": false,
+        "is_composite": false,
+        "is_constant": false,
+        "is_portion": false,
+        "is_reference": true,
+        "is_variation": false,
+        "may_time_vary": false
+      }
+    }
+  ]
+}

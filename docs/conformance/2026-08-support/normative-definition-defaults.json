@@ -1,0 +1,105 @@
+{
+  "schema": "dev.mercurio.normative-definition-defaults.v1",
+  "release_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "pilot_revision": "692170b71867353b8f90341e61556f49a5beb0e5",
+  "normative_clauses": [
+    {
+      "document": "2a-OMG_Systems_Modeling_Language.pdf",
+      "sha256": "d73a916885f564300bd1bd0cc7b7d6ca37c32e1553909399d7b1445153a210d5",
+      "clauses": [
+        {
+          "name": "checkOccurrenceDefinitionIndividualSpecialization",
+          "pdf_pages": [
+            316,
+            317
+          ],
+          "rule": "Individual occurrences specialize Occurrences::Life."
+        },
+        {
+          "name": "checkOccurrenceDefinitionMultiplicitySpecialization",
+          "pdf_pages": [
+            317
+          ],
+          "rule": "Individual occurrences require a multiplicity specializing Base::zeroOrOne; this remains a separate dependency."
+        },
+        {
+          "name": "checkPartDefinitionSpecialization",
+          "pdf_pages": [
+            322
+          ],
+          "rule": "Part definitions specialize Parts::Part."
+        },
+        {
+          "name": "checkConnectionDefinitionSpecializations/checkConnectionDefinitionBinarySpecialization",
+          "pdf_pages": [
+            331
+          ],
+          "rule": "Connection defaults require Connections::Connection and binary definitions specialize Connections::BinaryConnection."
+        },
+        {
+          "name": "checkInterfaceDefinitionSpecialization/checkInterfaceDefinitionBinarySpecialization",
+          "pdf_pages": [
+            335
+          ],
+          "rule": "Interface defaults require Interfaces::Interface and binary definitions specialize Interfaces::BinaryInterface."
+        },
+        {
+          "name": "checkFlowDefinitionSpecialization/checkFlowDefinitionBinarySpecialization",
+          "pdf_pages": [
+            338,
+            339
+          ],
+          "rule": "Flows specialize Flows::MessageAction; a flowEnd count of two requires Flows::Message. Full flowEnd derivation and complete legality remain unqualified."
+        }
+      ]
+    },
+    {
+      "document": "1-Kernel_Modeling_Language.pdf",
+      "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+      "pdf_pages": [
+        176
+      ],
+      "clauses": [
+        "deriveTypeOwnedFeatureMembership",
+        "deriveTypeOwnedFeature",
+        "deriveTypeOwnedEndFeature"
+      ],
+      "rule": "Select owned FeatureMemberships, project their ownedMemberFeatures in order, then filter isEnd for ownedEndFeature."
+    }
+  ],
+  "imported": {
+    "artifact": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/definition-defaults.extract.json",
+    "frontend": "JDK javac parse/analyze with resolved symbols, parameter/result types, receivers and expression/statement trees. Five method bodies include the proven empty additional-member hook.",
+    "dispatch_rows": 26,
+    "generation": "Bounded source translation for blocks, return, if, ternary, integer inequality, literal default keys and selected resolved calls. Runtime-selected implicit-general names bind each metaclass. Unsupported calls, types or member algorithms fail closed."
+  },
+  "native_consumers": {
+    "generated": "definition_defaults_generated.rs",
+    "dependencies": [
+      "definition_owned_features: handwritten Ecore-driven ordered canonical ownership/end derivation with imported delegate/target/subset checks",
+      "stored_definition_generalizations: handwritten explicit-plus-default combination, self exclusion, endpoint validation and conservative metadata guard",
+      "definition_inherited_memberships: shared inherited lookup and concrete pending-field scheduling",
+      "standard_default_binding: canonical standard-library membership lookup; prior provider disagreements remain explicit"
+    ]
+  },
+  "verification": {
+    "runtime_controls": 196,
+    "scope": "Actual Pilot selector/general-type observations across 26 concrete Definition metaclasses, individual false/true where available and zero through three owned ends. Library bindings are supplied only for these factory controls. Contexts exercise selector behavior, including shapes that may violate later language constraints; these controls do not qualify full models or validation.",
+    "native_checks": "All controls execute the generated policy, owned-end computation and typed generalization consumer; reversed record order, missing libraries, wrong target kinds and incomplete canonical inputs are checked.",
+    "whole_document_matching_additions": 11,
+    "whole_document_total": 49,
+    "matched_nodes": 711,
+    "matched_reference_slots": 1348,
+    "syntax_negatives": 8,
+    "persistence": "Every matched document is compared after JSON persistence/reload."
+  },
+  "unsupported_required_behavior": [
+    "Individual source adds an unnamed Multiplicity via the pinned grammar. Shared Feature naming now handles it; a retained Pilot model still differs at Usage.isVariable because Usage.mayTimeVary remains unimplemented. This model is not counted as matching; full individual-definition support remains open.",
+    "Feature inheritance/redefinition, Usage defaults, semantic metadata, full standard-library/global-resource loading and language validation remain required.",
+    "All 26 selector programs have bounded runtime evidence; this does not qualify every textual declaration family or each default target library implementation.",
+    "The written Flow rule tests flowEnd whereas the pinned Java selector reads ownedEndFeature. The matching source context has owned ends only. Inherited Feature/end traversal still rejects pending redefinition filtering; equivalence outside this scope is unqualified and must be resolved normatively.",
+    "No full sample, release-wide semantic or timing gate is closed."
+  ],
+  "no_promotion": true,
+  "positional_end_integration_boundary": "Generic positional end naming is now implemented separately. FlowDefinition with explicit generals is rejected directly by definition_default_names until the written flowEnd-count constraint and the Pilot ownedEndFeature-count selector are reconciled. The existing independent source regression checks this named dependency, rather than relying on missing generic end semantics."
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "fixture_sha256": "4f7fa8e4a2c4e805e8f3f3bf946be4809e8e241f260ed0426bcb40f12090e66c",
+    "export_sha256": "ff4f3037bf5e43f0c82f719ab6a65654d16ae2e45b712417b641d8ca6e67a75e",
+    "jar_sha256": "b1ad9d64b1f0c75730facf25a5e2856bc9df2bb4bd39476df2fdf5ae68cd9350",
+    "extractor": "generate_release_usage_defaults.py",
+    "extractor_version": 1,
+    "export_metadata": {
+      "element_count": 1742,
+      "relationship_count": 12337,
+      "library_root": "C:\\dev\\git\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\target\\upstream\\SysML-v2-Pilot-Implementation\\sysml.library",
+      "input_files": [
+        "../../../mercurio-sysml/crates/mercurio-tools/corpus/release-2026-08/reference-kind-controls/prefixes-and-flow.sysml"
+      ],
+      "exported_at_utc": "2026-09-18T17:14:26.485751700Z"
+    },
+    "selected_elements": {
+      "ReferencePrefixes::Targets::work::handoff": "SuccessionFlowUsage"
+    }
+  },
+  "usage_type_defaults": {
+    "SuccessionFlowUsage": {
+      "type_ref": "Flows::SuccessionFlow"
+    }
+  }
+}

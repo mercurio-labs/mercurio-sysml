@@ -1,0 +1,131 @@
+{
+  "schema": "dev.mercurio.implicit-reduction-evidence.v1",
+  "imported_representation": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/implicit-reduction.extract.json",
+  "imported_sha256": "c4877df21d282ceb2410dc09db08c775a2290f8bb7e72763ac647331587da813",
+  "pilot_contexts": 33,
+  "matching_reduction_contexts": 32,
+  "conservative_rejection_contexts": 1,
+  "admitted_categories": [
+    "ConjugatedPortTyping",
+    "CrossSubsetting",
+    "FeatureTyping",
+    "Redefinition",
+    "ReferenceSubsetting",
+    "Specialization",
+    "Subclassification",
+    "Subsetting"
+  ],
+  "source_pipeline_contexts": 1,
+  "native_consumers": [
+    "definition_reduce_implicit_generals",
+    "definition_materialize_selected_generals",
+    "definition_document::materialize_selected_generalizations"
+  ],
+  "implementation_boundary": "Resolved TypeAdapter/TypeUtil trees guard upstream drift. Imported classifier IDs generate stable category order. Handwritten native reduction consumes shared general-type, ownership, endpoint and chain services. A fixed normalized pending snapshot is reduced before any mutation; surviving relationships use the existing Ecore insertion service in a transaction. The public source/persistence path and replay of surviving contributions are verified. Selection of contributions and complete transformation are separate dependencies.",
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      172,
+      173,
+      174
+    ],
+    "scope": "Type specialization semantics constrain any implementation optimization; the specific pending-queue reduction algorithm is Pilot implementation machinery, not a normative language operation."
+  },
+  "pilot_difference": {
+    "context": "general_cycle",
+    "pilot_result": "Both pending Subsetting contributions removed when their general Features mutually specialize each other.",
+    "native_result": "Explicit error and no mutation.",
+    "assessment": "Conservative boundary: no explicit or surviving contribution entails the removed constraints after reduction. A semantics-preserving cyclic reduction policy needs separate qualification; this is not counted as matching or full cycle support."
+  },
+  "remaining": [
+    "Semantics-preserving treatment of mutually specializing pending cycles",
+    "Complete contribution producers and chain deduplication before reduction",
+    "End transformation, binding membership choice and pending/post-insertion transformation",
+    "Complete release validation, sample comparison and timing"
+  ],
+  "qualification": {
+    "status": "focused_verified_release_open",
+    "native_tests_passed": 125,
+    "tooling_tests_passed": 71,
+    "native_test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-binding-stage-comparison-focused.log",
+    "native_test_log_sha256": "44f962a12c487a49b89379d0169e4eace053f9a5cb37b9027472a5283e4737a6",
+    "native_tests": 132,
+    "tooling_tests": 81,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-bound-value-focused.log",
+    "test_log_sha256": "4345a7d560c1ff865c93ef38e09e4ffbc20650171f4b695b3244cdd497935aaf"
+  },
+  "multi_owner_transaction": {
+    "native_consumer": "definition_document::materialize_generalization_batch",
+    "semantics": "All owner reductions read one immutable graph; all selected insertions commit atomically. This does not compute contribution producers or full transformation.",
+    "verification": "definition_generalization_batch_uses_snapshot_and_rolls_back",
+    "controls": [
+      "cross-owner snapshot isolation",
+      "canonical persistence",
+      "late identity collision rollback",
+      "duplicate owner rejection",
+      "missing owner rollback",
+      "no synthetic completeness flag"
+    ]
+  },
+  "default_producer_integration": {
+    "consumer": "definition_document::materialize_feature_defaults",
+    "implementation": "Handwritten orchestration consumes imported Feature/Connector/Usage selectors and shared library, positional and participant providers; deduplicates identical contributions and commits the complete selected batch transactionally.",
+    "verification": "definition_default_producers_reach_atomic_source_insertion",
+    "scope": "Source-level ordinary Feature default insertion, canonical persistence, collision/missing-owner/missing-library rollback and replay rejection. Existing provider controls remain separate from integration coverage.",
+    "remaining": "Full transformation including valuation, featuring, all computed redefinitions, post-insertion lifecycle and all concrete producer contexts remains unqualified."
+  },
+  "typed_category_integration": {
+    "verification": "definition_typed_generalizations_reach_source_and_persistence",
+    "pilot_controls_added": 8,
+    "scope": "FeatureTyping with Class targets and Subclassification with Class endpoints: unrelated, explicit same, explicit narrower, and implicit narrower controls. Public source insertion/persistence and narrowed endpoint rejection verified separately.",
+    "boundary": "Complete typing/classification producers and all endpoint subclasses remain unqualified."
+  },
+  "concrete_category_coverage": {
+    "imported": 8,
+    "consumed": 8,
+    "focused_verified": 8,
+    "matching_contexts": 32,
+    "conservative_rejections": 1,
+    "verification": "definition_implicit_reduction_matches_pilot_and_inserts_atomically",
+    "scope": "All concrete specialization categories appear in pending snapshots with independent Pilot observations, native reduction and physical insertion. ReferenceSubsetting, CrossSubsetting and ConjugatedPortTyping add 12 positive/boundary controls. Category equality is checked against the separate imported construction inventory.",
+    "exclusions": "No full transformation claim, no complete producer/context coverage, no new whole-document Pilot match. Cyclic removal remains unqualified."
+  },
+  "featuring_composition": {
+    "consumer": "definition_unassessed_implied_feature_relation",
+    "verification": "definition_featuring_composes_with_default_producers",
+    "scope": "The ordinary Feature default and redefinition providers admit implied TypeFeaturing only through the imported ownedTypeFeaturing delegate/subset/ownership checks. It is not a typing/generalization contribution. Other implied relationships retain the unqualified-lifecycle rejection.",
+    "evidence": [
+      "specialization query before and after owning featuring",
+      "canonical persistence preserves query behavior",
+      "default contribution insertion after featuring",
+      "mismatched featuring owner rejects",
+      "implied specialization still rejects incomplete lifecycle",
+      "no fabricated completeness flags"
+    ],
+    "new_whole_document_pilot_matches": 0,
+    "boundary": "Composition of previously verified providers, not independent whole-transformation qualification."
+  },
+  "binding_default_composition": {
+    "consumer": "definition_document::materialize_binding_defaults",
+    "verification": "definition_binary_binding_defaults_compose_and_roll_back",
+    "scope": "Fresh binary binding under a Class with ordinary endpoints and explicit Base/Links library inputs; atomic placement, owning featuring for connector and both ends, then one fixed-snapshot default batch.",
+    "verified": [
+      "selfLinks selected for connector",
+      "participant selected for each end after reduction",
+      "canonical persistence",
+      "missing library rolls back complete operation",
+      "no synthetic completeness flags"
+    ],
+    "implementation": "Named handwritten composition of existing imported-definition consumers and shared native services.",
+    "new_independent_pilot_models": 0,
+    "remaining": [
+      "complete transformed-model/lifecycle qualification",
+      "other library/end contexts",
+      "complete connector/end transformation",
+      "pending/post-insertion lifecycle"
+    ],
+    "independent_stage_comparison": "compatibility-evidence.json: four connector/end projections agree except 12 explicitly asserted completion flags; zero fully matching transformed models.",
+    "completed_alternative": "compatibility-evidence.json bounded_completion qualifies four full source documents via separate ordinary Feature and fresh-binding transactions. The original contribution-only stage remains partial."
+  }
+}

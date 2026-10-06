@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "files": {
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/util/ImplicitGeneralizationMap.java": "c6a8b87a69b6eccb4432e60bb73ef87f01c29dd6ed90dc44b7edf91e03748507",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/ConnectionDefinitionAdapter.java": "abbd12f7e12674aac869d8aeac1bdd4722de1dd66851101fe6523817344ac446",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FlowDefinitionAdapter.java": "c8f5019d1503c759dc38e14f91e737cba6236a4b8a8d21dde239ef537ad06db2",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/AssociationAdapter.java": "e552dd8ebadffce4e41899b00a6c76455184606150f2ec9bbdf9924c2e185e4d",
+      "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/AssociationStructureAdapter.java": "b2f562217bebcefcc3bf93a05e2cf301f9248f9c00700942664f03ef465c97d5"
+    },
+    "extractor": "generate_release_connection_defaults.py"
+  },
+  "definitions": {
+    "ConnectionDefinition": {
+      "base": "Connections::Connection",
+      "binary": "Connections::BinaryConnection"
+    },
+    "InterfaceDefinition": {
+      "base": "Interfaces::Interface",
+      "binary": "Interfaces::BinaryInterface"
+    },
+    "AllocationDefinition": {
+      "base": "Allocations::Allocation",
+      "binary": "Allocations::Allocation"
+    },
+    "FlowDefinition": {
+      "base": "Flows::MessageAction",
+      "binary": "Flows::Message"
+    },
+    "Association": {
+      "base": "Links::Link",
+      "binary": "Links::BinaryLink"
+    },
+    "AssociationStructure": {
+      "base": "Objects::LinkObject",
+      "binary": "Objects::BinaryLinkObject"
+    }
+  }
+}

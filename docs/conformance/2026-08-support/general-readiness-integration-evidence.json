@@ -1,0 +1,436 @@
+{
+  "schema": "dev.mercurio.general-readiness-integration-evidence.v1",
+  "qualification_certificate": false,
+  "status": "shared_crossing_readiness_component_verified_complete_genuine_service_unqualified",
+  "scope": {
+    "execution_revision": 13,
+    "frozen_reference_contexts": 26,
+    "complete_genuine_contexts_verified": 0,
+    "complete_b1_obligations_closed": 0,
+    "complete_b1_obligations_required": 10,
+    "strict_families_qualified": 0,
+    "strict_families_required": 34,
+    "release_gates_qualified": 0,
+    "release_gates_required": 5
+  },
+  "implementation": {
+    "imported": "Unchanged pinned Ecore inheritance, canonical ordered containment/opposites, endpoint types, delegate contracts and imported adapter/default programs; Xtext-driven source construction remains unchanged.",
+    "native_entrypoints": [
+      "generated_parent_namespace_query",
+      "definition_owned_cross_feature_in_view",
+      "definition_pending_cross_specializations_in_view",
+      "definition_required_cross_specializations_in_view",
+      "definition_assessed_binary_crossing_in_view",
+      "definition_assessed_cross_chain_parts_in_view",
+      "definition_assessed_explicit_crossing_in_view",
+      "definition_is_assessed_cross_chain_in_view",
+      "definition_cross_feature_in_view",
+      "definition_value_expression_owner_in_view",
+      "adopted_chain_in_view",
+      "definition_general_type_inputs_evaluate",
+      "definition_general_type_inputs_ready"
+    ],
+    "handwritten": "Shared immutable query view through bounded crossing selection, required/pending specialization, structural binary/explicit crossing proofs, general-type/default readiness, result membership and adopted literal value-chain reads. Algorithms remain explicitly handwritten dependencies of imported contracts; extraction alone is not qualified.",
+    "typed_dependencies": "Required/pending cross-specialization and readiness keep QueryFailure::Required(ReadField) until external Diagnostic boundaries. Missing type/redefined-feature endpoints remain exact scheduler dependencies rather than empty contributions or lossy rejected messages.",
+    "invalidations": "No cross-write cache: each graph edit, scheduler retry, reordered model and persisted model uses a fresh view. Existing canonical/foreign-owner structural checks are retained.",
+    "preserved": "Imported endpoint, reciprocal ownership, cardinality, stored ordering; bounded adapter admission; source scheduler registration and cycle guards; atomic construction, late rejection and rollback.",
+    "runtime": "Native production; no Java, clocks, threads, OS I/O or Cargo changes in kernel code.",
+    "remaining": "This integration does not complete every query reader, missing semantic algorithm, library lifecycle, all-source validation, publication, persistence or release comparison."
+  },
+  "focused_controls": {
+    "new_native_tests": 2,
+    "independent_selection_cases": 75,
+    "graph_views": [
+      "original",
+      "reversed",
+      "canonical_kir_json_persisted"
+    ],
+    "selection_contexts": 225,
+    "repeated_selection_reads": 450,
+    "missing_endpoint_cases": 2,
+    "repeated_exact_missing_reads": 8,
+    "malformed_endpoint_cases": 8,
+    "malformed_ownership_cases": 3,
+    "fresh_endpoint_repairs": 2,
+    "tests": [
+      "definition_shared_cross_readiness_matches_cached_pilot_order_and_persistence",
+      "definition_shared_cross_readiness_preserves_typed_dependencies_and_repairs"
+    ],
+    "repair_logs": "The first focused run passed all cached selection controls but its repair fixture used an unsupported Classifier-owned end. The fixture now uses the already supported Class and Base environment; no production admission was relaxed. Original failure log preserved."
+  },
+  "verification": {
+    "native_definition_tests_passed": 419,
+    "native_definition_tests_failed": 0,
+    "other_tests_filtered": 665,
+    "total_tests_registered": 1084,
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-native-regression.log",
+      "sha256": "6c885aeb8dc6c06f6d0193373ae55f0d240b9e2aa3aaeabd5f9fd4c689ce76d5"
+    },
+    "native_test_seconds": 41.32,
+    "native_process_seconds": 184.813,
+    "audit_tool_tests_passed": 17,
+    "tool_cache_certificate_checks_passed": 107,
+    "coverage_regenerated": true,
+    "historical_bounded_obligations": "11/14 unchanged; current source inputs and test evidence revalidated. No complete release service/family closure.",
+    "tool_checks_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-tool-checks.log",
+      "sha256": "b692971fb3f4e810fed23ccdadbe0ccf13b17ce4832ca3fd1ed8958b5e1ea7d7"
+    }
+  },
+  "genuine_diagnostic": {
+    "command": [
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "--definition-literal-value-bindings",
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\genuine-literal-producer-reference-inputs.json",
+      "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\docs\\conformance\\2026-08-support\\definition-pipeline-evidence\\general-readiness-genuine-assessment.jsonl"
+    ],
+    "exit_code": 1,
+    "status": "incomplete_budget",
+    "purpose": "One isolated genuine assessment after shared crossing/readiness consumers and exact typed prerequisites; unchanged 24-input set and 300-second diagnostic budget. No concurrent native regression.",
+    "soft_budget_seconds": 300,
+    "process_seconds": 300.313,
+    "compile_provenance": "Fresh current source general-readiness-tools-run.json release build; final production and test source unchanged during build and assessment.",
+    "binary_sha256": "8aaa07787ec5188c97e1ddaa095e54eadd774a064f4611b1a9ac1a3604ad2006",
+    "native_consumer_sha256": {
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "01dcdd498a84261dfad270059d2ec618b1206dd41eea2231127439b68de6d7e6",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/cold_literal_values.rs": "758e06e4ca36ca419aa85a8c7375e165e365d7fd30c7f3c652d3735d63daff65",
+      "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "9f66dad82e99d90998c24504c039f1b260a50f7c986538718033b979afc24cd9"
+    },
+    "spec_sha256": "66d2df50759e8036900224d8a895c98c042df0eab234a63d98341dbc6a22f028",
+    "input_sha256": {
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/Collections.kerml": "eac3be1f2bb63bf7e21bea1972a3c05f2d2a017a5de397836438ee55ace9394e",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Data Type Library/ScalarValues.kerml": "399ab6eea810f3cd9ea7b6f03b7b45cccebe9000069e6f8ac12c76e922157398",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/CollectionFunctions.kerml": "ab415b60625a953bd078eb0621fc421f85b46c00f859707289604bda34731126",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ControlFunctions.kerml": "dd66d4577d44750707b4017d789345295fce6c2d1d03fc10e0c47459ddd18d6a",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/IntegerFunctions.kerml": "a5ba453320ab2bfc780073125461080500a3de6c79eae077e8cd41b78eeec7d6",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ScalarFunctions.kerml": "4432f9d2eb9d871934e467d89b9a657ab9139897c85baf6ae60e971341e1de98",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/SequenceFunctions.kerml": "0d87d2d9569d0009453b09e297dd62e4b3c3655d3223eaad9e261e7373ef7869",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Base.kerml": "0a684334290742602432b9e8cf44203fa9b3fd61d04888863923b80223fcfd2e",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Clocks.kerml": "60ed3ef6b165b903d21e871b3671fc7faf0c8437bc54e4322559b4d724c1bf65",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/KerML.kerml": "d01c8994aabaa7f03e0f0968de55c6ea7e836ad41a747b992736e38b7032b216",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Links.kerml": "db4b619742a9cc11640a66f92c13a02f11ab97a0c233af6db57d915cc65da189",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Metaobjects.kerml": "734180605aabb540ceccce28fc157827eb7100c831790aa3635240a6955ac613",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Objects.kerml": "dd36c193411b21960ce8249694b7156bb27bc9d26270e2f3076f7c1c64c0ff03",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Occurrences.kerml": "b3a62ce0bc3a4f7e667102b4c2f68a4928ca8efeda425c6a4c8bdeadfbc9bbc1",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Performances.kerml": "52d100591c7bdf455c95b145d54bbc6ea8a68c6f9a0b583a07af337d5f17a1ae",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Semantic Library/Transfers.kerml": "48c54efa5055ad69edf8657d1f6d69d076f7aac31eb2c291380350303370b9a0",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/docs/conformance/2026-08-support/definition-pipeline-evidence/genuine-literal-producer-valuation-source-00.kerml": "237b80fa52a43fac1582cbadd1faf155b5a787d59b8c116158ffbfdc2f769a50",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/mercurio-sysml/docs/conformance/2026-08-support/definition-pipeline-evidence/genuine-literal-producer-valuation-source-01.kerml": "5a7e89a10392841d747f280a6751480badcf234368a120c93c6f1b114a19f9ab",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/BaseFunctions.kerml": "728420cf580a119310f319b142e7d38932e556745a2508e6ce9453d243bc6a54",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/ComplexFunctions.kerml": "df0347537e6f711f3d60c1798335ef354afc420726bdc5919a80fafa348cc97a",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/DataFunctions.kerml": "8c219a2becac038dcbf101ddf64eee57b568dcd95b204be26c2ed3a83ec510af",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/NumericalFunctions.kerml": "702ab0f027b46621c31e316de0d0108538da4b87e959a41fad464ada153acf58",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/RationalFunctions.kerml": "e3ab60e171c271566878a27984391f57db1b9557cdf0dc9f0ec28d2ac4c0b3a4",
+      "D:/dev/repos/mercurio-labs/mercurio/worktrees/sysml-v2-compliance-2026-08/target/upstream/SysML-v2-Release/sysml.library/Kernel Libraries/Kernel Function Library/RealFunctions.kerml": "ef861eb293190368dd4cae24f190e8803a3bb2ac01a31c6d95eda1b71ac0e2ec"
+    },
+    "inputs_unchanged_during_run": true,
+    "log": "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-genuine-assessment.log",
+    "log_sha256": "7a1f7648d6a1f37ddb2588f622f8fd5a98f4ef78abbea2a4a0118abfb608f895",
+    "output": "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-genuine-assessment.jsonl",
+    "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "latest_profile": {
+      "active_field": {
+        "attempt_elapsed_ms": 661.1727,
+        "field": "member_element",
+        "kind": "Membership",
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.21.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.expression.1.owned_relationship.0.owned_related_element.0.owned_relationship.1.owned_related_element.0.owned_relationship.0"
+      },
+      "elapsed_ms": 293487.0045,
+      "event_counts": {
+        "ContainerCacheHit": 8393,
+        "ContainerReadFinished": 229609,
+        "ContainerReadStarted": 229609,
+        "ContainmentCacheHit": 396958,
+        "ContainmentReadFinished": 101204,
+        "ContainmentReadStarted": 101204,
+        "ExplicitRedefinitionReadinessFinished": 20968,
+        "ExplicitRedefinitionReadinessStarted": 20968,
+        "GeneralTypesCacheHit": 15688,
+        "GeneralTypesFinished": 20421,
+        "GeneralTypesStarted": 20421,
+        "GeneralizationPrerequisite": 49,
+        "InheritedMembershipsFinished": 403,
+        "InheritedMembershipsStarted": 404,
+        "InheritedTraversalCacheHit": 3890,
+        "LibraryPathFinished": 5920,
+        "LibraryPathStarted": 5920,
+        "LinkFieldCommitted": 366,
+        "LinkFieldStarted": 528,
+        "LinkingStarted": 1,
+        "LiteralPrerequisite": 58,
+        "LiteralProducerFinished": 48,
+        "LiteralProducerStarted": 48,
+        "LiteralStageFinished": 244,
+        "LiteralStageStarted": 244,
+        "MembershipNamesFinished": 42697,
+        "MembershipNamesStarted": 42697,
+        "MetadataSelectionFinished": 4423,
+        "MetadataSelectionStarted": 4423,
+        "RedefinitionClosureEvaluationFinished": 19760,
+        "RedefinitionClosureEvaluationStarted": 19761,
+        "RedefinitionClosureFinished": 110491,
+        "RedefinitionClosureStarted": 110492,
+        "RedefinitionFilterCacheHit": 9788,
+        "RedefinitionFilterFinished": 12301,
+        "RedefinitionFilterStarted": 12302,
+        "ReferenceFinished": 527,
+        "ReferenceStarted": 528,
+        "ResourceFinished": 24,
+        "ResourceStarted": 24,
+        "ScopeMembershipsCacheHit": 18523,
+        "ScopeMembershipsFinished": 32464,
+        "ScopeMembershipsStarted": 32465
+      },
+      "measurement": "instrumented_native_diagnostic; not a Pilot timing comparison",
+      "publication_or_semantic_qualification": "not inferred",
+      "readers": [
+        {
+          "completed_calls": 0,
+          "exclusive_ms": 72695.5357,
+          "inclusive_ms": 231254.0355,
+          "open_calls": 1,
+          "phase": "LinkingStarted"
+        },
+        {
+          "completed_calls": 244,
+          "exclusive_ms": 47705.3477,
+          "inclusive_ms": 92881.4131,
+          "open_calls": 0,
+          "phase": "LiteralStageStarted"
+        },
+        {
+          "completed_calls": 20421,
+          "exclusive_ms": 47077.8149,
+          "inclusive_ms": 52264.2962,
+          "open_calls": 0,
+          "phase": "GeneralTypesStarted"
+        },
+        {
+          "completed_calls": 48,
+          "exclusive_ms": 31343.1781,
+          "inclusive_ms": 91105.9245,
+          "open_calls": 0,
+          "phase": "LiteralProducerStarted"
+        },
+        {
+          "completed_calls": 527,
+          "exclusive_ms": 17054.322,
+          "inclusive_ms": 67452.5753,
+          "open_calls": 1,
+          "phase": "ReferenceStarted"
+        },
+        {
+          "completed_calls": 12301,
+          "exclusive_ms": 5588.514,
+          "inclusive_ms": 14580.6074,
+          "open_calls": 1,
+          "phase": "RedefinitionFilterStarted"
+        },
+        {
+          "completed_calls": 5920,
+          "exclusive_ms": 2699.6512,
+          "inclusive_ms": 2885.312,
+          "open_calls": 0,
+          "phase": "LibraryPathStarted"
+        },
+        {
+          "completed_calls": 42697,
+          "exclusive_ms": 2534.1379,
+          "inclusive_ms": 7739.5777,
+          "open_calls": 0,
+          "phase": "MembershipNamesStarted"
+        },
+        {
+          "completed_calls": 32464,
+          "exclusive_ms": 1031.7262,
+          "inclusive_ms": 2290.2309,
+          "open_calls": 1,
+          "phase": "ScopeMembershipsStarted"
+        },
+        {
+          "completed_calls": 19760,
+          "exclusive_ms": 941.4657,
+          "inclusive_ms": 1017.7379,
+          "open_calls": 1,
+          "phase": "RedefinitionClosureEvaluationStarted"
+        },
+        {
+          "completed_calls": 101204,
+          "exclusive_ms": 758.3097,
+          "inclusive_ms": 1341.8618,
+          "open_calls": 0,
+          "phase": "ContainmentReadStarted"
+        },
+        {
+          "completed_calls": 229609,
+          "exclusive_ms": 587.1212,
+          "inclusive_ms": 587.1212,
+          "open_calls": 0,
+          "phase": "ContainerReadStarted"
+        },
+        {
+          "completed_calls": 4423,
+          "exclusive_ms": 459.4635,
+          "inclusive_ms": 459.5516,
+          "open_calls": 0,
+          "phase": "MetadataSelectionStarted"
+        },
+        {
+          "completed_calls": 20968,
+          "exclusive_ms": 425.039,
+          "inclusive_ms": 425.039,
+          "open_calls": 0,
+          "phase": "ExplicitRedefinitionReadinessStarted"
+        },
+        {
+          "completed_calls": 403,
+          "exclusive_ms": 223.9142,
+          "inclusive_ms": 35555.0605,
+          "open_calls": 1,
+          "phase": "InheritedMembershipsStarted"
+        },
+        {
+          "completed_calls": 24,
+          "exclusive_ms": 142.7979,
+          "inclusive_ms": 142.7979,
+          "open_calls": 0,
+          "phase": "ResourceStarted"
+        },
+        {
+          "completed_calls": 110491,
+          "exclusive_ms": 128.4945,
+          "inclusive_ms": 1146.2324,
+          "open_calls": 1,
+          "phase": "RedefinitionClosureStarted"
+        }
+      ],
+      "staged_reference_fields_committed": 366,
+      "unbalanced_pairs": 0,
+      "unfinished_calls": [
+        {
+          "elapsed_ms": 231254.0355,
+          "exclusive_ms": 72695.5357,
+          "field": null,
+          "owner_id": "",
+          "phase": "LinkingStarted"
+        },
+        {
+          "elapsed_ms": 632.9685,
+          "exclusive_ms": 41.0394,
+          "field": "member_element",
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.21.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.expression.1.owned_relationship.0.owned_related_element.0.owned_relationship.1.owned_related_element.0.owned_relationship.0",
+          "phase": "ReferenceStarted"
+        },
+        {
+          "elapsed_ms": 147.5102,
+          "exclusive_ms": 1.244,
+          "field": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.21.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.expression.1.owned_relationship.0.owned_related_element.0.owned_relationship.1.owned_related_element.0.owned_relationship.0",
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.21.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.operand.2.parameter",
+          "phase": "InheritedMembershipsStarted"
+        },
+        {
+          "elapsed_ms": 4.2474,
+          "exclusive_ms": 0.0754,
+          "field": null,
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.21.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.2.owned_related_element.0.expression.0.operand.2.parameter",
+          "phase": "RedefinitionFilterStarted"
+        },
+        {
+          "elapsed_ms": 4.1213,
+          "exclusive_ms": 0.0005,
+          "field": null,
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12.owned_related_element.0.owned_relationship.1.owned_related_element.0.owned_relationship.1.owned_related_element.0",
+          "phase": "RedefinitionClosureStarted"
+        },
+        {
+          "elapsed_ms": 4.1208,
+          "exclusive_ms": 2.9851,
+          "field": null,
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2046756e6374696f6e204c6962726172792f436f6e74726f6c46756e6374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.12.owned_related_element.0.owned_relationship.1.owned_related_element.0.owned_relationship.1.owned_related_element.0",
+          "phase": "RedefinitionClosureEvaluationStarted"
+        },
+        {
+          "elapsed_ms": 0.0,
+          "exclusive_ms": 0.0,
+          "field": "",
+          "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c2053656d616e746963204c6962726172792f4f6363757272656e6365732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.17.owned_related_element.0",
+          "phase": "ScopeMembershipsStarted"
+        }
+      ]
+    },
+    "unique_requested_fields": 58,
+    "candidate_rows": 0,
+    "assessment_rows": 0,
+    "row_statuses": [],
+    "successful_producer_attempts": 2,
+    "row_summaries": [],
+    "qualification": "not_assessed; producer/candidate success cannot alone qualify the whole frozen service"
+  },
+  "baseline_diagnostic": {
+    "artifact": "docs/conformance/2026-08-support/canonical-read-integration-evidence.json",
+    "status": "incomplete_budget",
+    "last_snapshot_ms": 291059.1533,
+    "checked_staged_field_writes": 284,
+    "producer_completions": 2,
+    "candidate_rows": 0,
+    "general_type_exclusive_ms": 53103.8027
+  },
+  "next_dependency": "Complete the remaining shared immutable chain-target and general-type/readiness readers, then audit redundant transaction planning/staging while preserving all guards and typed prerequisites. Current remaining costs include general-type evaluation 47.078s, literal stages 47.705s and producer overhead 31.343s exclusive at the final diagnostic snapshot; uninstrumented linker work is 72.696s. Actual whole-model linking and canonical publication must precede validation, persistence and comparison across all 26 frozen contexts. No budget increase or unchanged reassessment. Historical 31-input reference 774 is not cleared.",
+  "timing": "Current native diagnostic costs are workload observations, not semantic evidence or a comparable Pilot benchmark. Different partial progress snapshots cannot establish a completed-workload speedup.",
+  "preserved_inputs": {
+    "docs\\conformance\\2026-08-support\\definition-pipeline-qualification.json": "721377e3f725ce8cacef288b569f8ad7cceb89c8d6fb98e849738de49e5451da",
+    "docs\\conformance\\2026-08-support\\value-service-reference-controls.json.gz": "ab8542d44e03a1d4010e7e87a395742fd0e0d1c84fd86de0813626d8bc0b27b8",
+    "docs\\conformance\\2026-08-support\\value-service-reference-manifest.json": "99e18d8d57786c559e73783502d46879a42fb56186ec8f4a54f9addefbf00839"
+  },
+  "current_consumer_sha256": {
+    "crates/mercurio-sysml/src/definition_document.rs": "e58bd287519b59e5fce9d068a7f3838a602a7b6098f040602f967d1195af19bb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "33c99dc189a7832ef3dbae0bbe0dc3c98cd8dde5e8a845de9388a76a5b340406",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "01dcdd498a84261dfad270059d2ec618b1206dd41eea2231127439b68de6d7e6",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_value_validation.rs": "1cd2c4c3b3b20c4bcd8f816c8b0a8a5d5354c8d5b1d43deea276ccc0aeaafb57",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "b8da372a3ad56baab9b4905f483977822e0b08ec603c01f76cc3b789e16565eb",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/cold_literal_values.rs": "758e06e4ca36ca419aa85a8c7375e165e365d7fd30c7f3c652d3735d63daff65",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/literal_value_binding.rs": "9f66dad82e99d90998c24504c039f1b260a50f7c986538718033b979afc24cd9",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/connector_defaults_generated.rs": "c531af268c2efecbfebeaa70bad37b14eaa0498b146d6ef4f8d42073fb449bac",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "b5c063cf07b2dd554fd1a27afadf8bc12fade61aa669ada945b790ee839cdfe9",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "878bf82af90b0d22a03704bab62f48a18616ec4b8ad477f322e9c508484ba771",
+    "tools/export_pilot_connector_defaults.py": "97dbd7e5320927fcd07679adbb569df7a485810a4283a492a86bec40ab741052",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotConnectorDefaultExporter.java": "6bca6016147da5fc7a10541b4d9f9f331698fb2b5009ace9f7c7442acd5550ef",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_dependencies.rs": "5c629b7193c1d966d45456566da0d19ecda851b24ac915f4af6408f62f2e4e24",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/relative_namespace.rs": "c98baac06d89b6e582ef6137b63f511afd94c1a9817f01e9a922c5e79843bb28",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/reference_result_scope.rs": "cd0ce01f251241e26c4edb0677429d781e80fdeff17ab6fd79e25ea0be87337e",
+    "tools/prepare_native_reference_inputs.py": "b412fb9fe8c3f0849a554f89b0b0dfc093c258a0d7bb1b07c59394dcc20275d0",
+    "tools/prepare_library_reference_closure.py": "d50c8f2c206f864436fa9c370fd81c0d392d8028079001bad53d0dc53aec2b4a",
+    "crates/mercurio-tools/src/bin/audit_release_compile/profile.rs": "2f052a7184d7c24d9ac94c550384f1ac4a5bd8658d89b36f38ddc9d20e13fdcc",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "a8b90a22d7ab19644f6b980d99117e62056591b36d8bd86737d6a6c7c7549fa1"
+  },
+  "evidence_sha256": {
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-batch-scope.json": "c8c5ede65941be8a6d2dc90df104c5c54b260a9294eec890f72f3bdeea2ab2c8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-focused.log": "1a981ff334c22e7fde67c61e71093a11b11e6225bdc8270397adeec323846e14",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-focused-run.json": "25bbedf3928745ecc830f962cbd3289d149020d7f7f773dd05de6f106f6eaf79",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-focused-attempt-2.log": "5c23e8921fc164c01a7b5c043d73da49244e538985b80f979094a0aa4799a778",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-focused-attempt-2-run.json": "5c5263d0412ec0a44a084fd5074a414057050e6c4c8fd01a19a45650661ebd9b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-native-regression.log": "6c885aeb8dc6c06f6d0193373ae55f0d240b9e2aa3aaeabd5f9fd4c689ce76d5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-native-regression-run.json": "79244ff1cfda0938b65418af2bf2e14bb43429376e9ec449cf2424f730db3309",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-audit-tests.log": "69391d402f7ebd0b67ce5f5dea3602a2dbad838af7791ad81f9d7196df17967f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-release-build.log": "4240853077ced86259d4a6888f8939072accdf9136e4c25657285ff26597048d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-tools-run.json": "f3cb1c2ff1cf257dbce598bf2119954ec171cb0926f7637218bf54ca67279ea3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-genuine-assessment.log": "7a1f7648d6a1f37ddb2588f622f8fd5a98f4ef78abbea2a4a0118abfb608f895",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-genuine-assessment.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-genuine-assessment-run.json": "f5113fc6b437112d0b9acfed36dc51e09506f8bae92e6d83edc97a182212daae",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-tool-checks.log": "b692971fb3f4e810fed23ccdadbe0ccf13b17ce4832ca3fd1ed8958b5e1ea7d7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-readiness-tool-checks-run.json": "b2f20349add0e41afa69fb79470b6efeb697bb70b80dd404a5603d4d18e88e25"
+  },
+  "diagnostic_comparison": {
+    "meaning": "Fixed unchanged 24-input workload and equal 300-second limits. Snapshot elapsed times differ; successful staged writes are partial progress, not full support or a completed-workload speedup.",
+    "previous_snapshot_ms": 291059.1533,
+    "current_snapshot_ms": 293487.0045,
+    "previous_staged_fields": 284,
+    "current_staged_fields": 366,
+    "additional_staged_fields": 82,
+    "producer_completions": 2,
+    "candidate_rows": 0,
+    "service_obligations_closed": 0
+  }
+}

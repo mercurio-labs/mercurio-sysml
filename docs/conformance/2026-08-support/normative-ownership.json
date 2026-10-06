@@ -1,0 +1,28 @@
+{
+  "document": "Kernel Modeling Language v1.1, Beta 2",
+  "source_repository": "SysML-v2-Release",
+  "source_revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+  "source_path": "doc/1-Kernel_Modeling_Language.pdf",
+  "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+  "clauses": [
+    {
+      "section": "8.3.2.1.2 Element",
+      "pdf_pages": [
+        137,
+        138
+      ],
+      "printed_pages": [
+        111,
+        112
+      ],
+      "requirements": [
+        "ownedRelationship and owningRelatedElement are reciprocal; ownedRelationship preserves order.",
+        "owningRelationship identifies the relationship containing an element in ownedRelatedElement.",
+        "Element.owner derives through owningRelationship.owningRelatedElement, rather than identifying the containing relationship itself.",
+        "owningNamespace derives through owningMembership. A direct child of a non-owning membership or import does not acquire namespace membership by containment alone.",
+        "qualifiedName requires an unbroken chain of named owning namespaces. Internal resolver keys do not establish that chain."
+      ]
+    }
+  ],
+  "verification_scope": "Initial construction of two Ecore containment pairs and direct KerML alias/import children; does not qualify all Element operations, mutation or cycle handling."
+}

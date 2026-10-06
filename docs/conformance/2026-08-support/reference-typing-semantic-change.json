@@ -1,0 +1,81 @@
+{
+  "preceding_assessment": "../2026-08-interface-ends-assessment/README.md",
+  "current_assessment": "../2026-08-reference-typing-assessment/README.md",
+  "scope": "Aggregate triage comparison. Correctly anonymous reference usages can leave the named-declaration projection; a disappearing projected difference is not by itself proof of semantic equivalence. Full raw graphs remain retained.",
+  "before": {
+    "raw_aggregate": {
+      "compared": 310,
+      "native_elements": 11578,
+      "pilot_elements": 247516,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8597,
+      "native_only": 2981,
+      "pilot_only": 238919
+    },
+    "named_declaration_projection": {
+      "native_named_anchors_without_pilot_pair": 1953,
+      "unique_named_pairs": 6616,
+      "relation_fields_checked": 22246,
+      "relation_fields_equal_after_explicit_projection": 18448,
+      "extended_boolean_fields_missing_counterpart": 7407,
+      "relation_fields_missing_direct_counterpart": 4222,
+      "extended_boolean_fields_checked": 22697,
+      "relation_field_differences": 3798,
+      "named_declarations_with_pilot_initializer": 503,
+      "pilot_initializer_without_native_expression_ir": 17,
+      "name_or_direction_differences": 187,
+      "literal_initializers_checked": 49,
+      "pilot_named_anchors_without_native_pair": 183,
+      "metaclass_mismatches": 102,
+      "ambiguous_named_anchors": 1,
+      "boolean_differences": 32,
+      "extended_boolean_differences": 34
+    },
+    "ordered_expression_projection": {
+      "counts": {
+        "unassessed": 310,
+        "equal": 186,
+        "different": 7
+      },
+      "scope": "Named initializer value trees only; equality does not establish typing, implicit relationships, multiplicities or evaluation parity. Unsupported forms remain unassessed."
+    }
+  },
+  "after": {
+    "raw_aggregate": {
+      "compared": 310,
+      "native_elements": 11684,
+      "pilot_elements": 247516,
+      "exact_pairs": 0,
+      "mismatched_pairs": 8797,
+      "native_only": 2887,
+      "pilot_only": 238719
+    },
+    "named_declaration_projection": {
+      "native_named_anchors_without_pilot_pair": 1862,
+      "unique_named_pairs": 6618,
+      "relation_fields_checked": 22252,
+      "relation_fields_equal_after_explicit_projection": 18482,
+      "extended_boolean_fields_missing_counterpart": 7409,
+      "relation_fields_missing_direct_counterpart": 4226,
+      "extended_boolean_fields_checked": 22709,
+      "relation_field_differences": 3770,
+      "named_declarations_with_pilot_initializer": 503,
+      "pilot_initializer_without_native_expression_ir": 17,
+      "name_or_direction_differences": 187,
+      "literal_initializers_checked": 49,
+      "pilot_named_anchors_without_native_pair": 181,
+      "metaclass_mismatches": 102,
+      "ambiguous_named_anchors": 1,
+      "boolean_differences": 32,
+      "extended_boolean_differences": 34
+    },
+    "ordered_expression_projection": {
+      "counts": {
+        "unassessed": 310,
+        "equal": 186,
+        "different": 7
+      },
+      "scope": "Named initializer value trees only; equality does not establish typing, implicit relationships, multiplicities or evaluation parity. Unsupported forms remain unassessed."
+    }
+  }
+}

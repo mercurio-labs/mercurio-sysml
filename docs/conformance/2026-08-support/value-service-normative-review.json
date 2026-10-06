@@ -1,0 +1,111 @@
+{
+  "schema": "dev.mercurio.value-service-normative-review.v1",
+  "normative_reference": "Pinned release written KerML, v1.1 Beta 2; Pilot is independent implementation evidence.",
+  "input_sha256": {
+    "written_kerml_pdf": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pilot_validator_xtend": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+    "pilot_feature_adapter_java": "954158176be18227bb85986fefc18479673065522b57a113e8610a029fe3fde8",
+    "pilot_feature_util_java": "47f9aff7295fd0eed4fcd32e5784deb5f64b13015c6b3c282f17468cebc77178"
+  },
+  "rules": [
+    {
+      "id": "directed-valuation-selector-boundary",
+      "pdf_page": 196,
+      "printed_page": 170,
+      "constraint": "checkFeatureValuationSpecialization",
+      "normative": "Valuation specialization applies only when direction is null and every owned specialization is implied; it checks all owned valuations.",
+      "native_consumer": "definition_directed_valuation_input / definition_validate_result_feature_inputs",
+      "implementation": "handwritten_rust canonical admission, imported Feature selector, shared positional/default/reduction queries",
+      "scope": "One explicit canonical FeatureValue under a fixed directed Feature. Its body cannot affect the selector. This does not prove value transformation, binding, validation or completion.",
+      "excluded": "Multiple/missing/malformed valuations, unknown result/lifecycle/typing/crossing contexts remain explicit errors."
+    },
+    {
+      "id": "initial-values",
+      "pdf_page": 254,
+      "printed_page": 228,
+      "constraint": "validateFeatureValueIsInitial",
+      "normative": "An initial FeatureValue requires its featureWithValue to be variable. Default status does not remove that requirement.",
+      "native_consumer": "feature_value_validation::assess",
+      "implementation": "handwritten_rust predicate; imported Ecore ownership/flags; Usage getter uses shared mayTimeVary consumer",
+      "verification_scope": "Exact Feature source controls, default and non-default, variable and fixed; same result after persistence. Unsupported computed variability remains unverified."
+    },
+    {
+      "id": "overriding",
+      "pdf_page": 254,
+      "printed_page": 228,
+      "constraint": "validateFeatureValueOverriding",
+      "normative": "Every directly or indirectly redefined Feature must have only default FeatureValues.",
+      "native_consumer": "feature_value_validation::assess / materialized_redefinition_closure_query",
+      "implementation": "handwritten_rust normative predicate over existing shared native computed redefinition closure, excludes the receiver itself",
+      "verification_scope": "Parsed direct/transitive package-owned Feature chains, binding/default controls and persistence. Unsupported redefinition strategies remain unverified."
+    },
+    {
+      "id": "single-valuation",
+      "pdf_page": 253,
+      "printed_page": 227,
+      "constraint": "FeatureValue description: at most one FeatureValue on a Feature",
+      "normative": "Multiple valuations violate this separate structural obligation.",
+      "native_consumer": "feature_value_validation::assess / definition_directed_valuation_input",
+      "implementation": "handwritten_rust counting over imported ordered containment",
+      "verification_scope": "Multiple canonical valuations rejected by the selector and separately reported by the partial assessor; malformed ownership errors remain errors."
+    },
+    {
+      "id": "result-selection",
+      "pdf_pages": [
+        225,
+        227
+      ],
+      "printed_pages": [
+        199,
+        201
+      ],
+      "constraints": [
+        "deriveExpressionResult",
+        "deriveFunctionResult"
+      ],
+      "normative": "Select the owned or inherited return parameter; do not fabricate an owned return for a shorthand callable.",
+      "native_status": "Complete B1 source/prototype lifecycle remains open."
+    },
+    {
+      "id": "value-binding",
+      "pdf_pages": [
+        253,
+        254
+      ],
+      "printed_pages": [
+        227,
+        228
+      ],
+      "constraint": "checkFeatureValueBindingConnector",
+      "normative": "Non-default values require binding and chain construction; initial values also require the startShot semantic dependency.",
+      "native_status": "Complete ordered cold transformation and initial binding remain unsupported; selector preservation is not this behavior."
+    }
+  ],
+  "disagreements": [
+    {
+      "id": "all-valuations-versus-pilot-bound-producer",
+      "status": "documented_unimplemented_branches",
+      "detail": "Written checkFeatureValuationSpecialization checks all valuations, including default values, and permits existing implied specialization. Pinned Pilot producer selects the first non-default value and suppresses on any owned specialization. The existing bound-value producer still rejects disputed branches; no new closure is claimed."
+    },
+    {
+      "id": "multiple-valuations-diagnostics",
+      "status": "explicit_diagnostic_difference",
+      "detail": "Pilot rejects both appended valuation mutation controls through validateFeatureValueOverriding. Native uses the separate written single-valuation obligation rather than treating a receiver as one of its own redefined Features. Both reject; diagnostic categories differ."
+    }
+  ],
+  "unresolved_boundaries": [
+    {
+      "id": "valuation-wrong-type",
+      "pilot_outcome": "accepted",
+      "status": "not_classified_as_disagreement",
+      "detail": "Boolean return bound to integer literal is accepted by Pilot. Static validity versus satisfiability requires normative review; no type-check fix or Pilot error is inferred."
+    }
+  ],
+  "xtend_evaluation": {
+    "scope": "Two high-value predicates: initial variability and overriding. No general compiler expansion.",
+    "decision": "Explicit handwritten normative Rust, with pinned Xtend retained as reference evidence.",
+    "reason": "Initial predicate is a Boolean rule. Overriding depends on FeatureUtil computed redefinition closure and valuation selection, which require the existing native graph algorithm. Translating the method body alone would not implement that dependency. The two rules fit one shared assessor and focused source controls.",
+    "future": "Reevaluate translation only for repeated rules with resolved, supported dependency interfaces."
+  },
+  "qualification": "This review does not qualify B1, any family, all samples or the release."
+}

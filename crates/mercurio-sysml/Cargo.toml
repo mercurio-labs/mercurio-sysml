@@ -17,7 +17,7 @@ embed-stdlib = []
 [dependencies]
 mercurio-foundation = { path = "../../../mercurio-foundation/crates/mercurio-foundation", version = "0.86.0" }
 serde = { workspace = true, features = ["derive"] }
-serde_json.workspace = true
+serde_json = { workspace = true, features = ["float_roundtrip"] }
 
 [build-dependencies]
 mercurio-foundation = { path = "../../../mercurio-foundation/crates/mercurio-foundation", version = "0.86.0" }

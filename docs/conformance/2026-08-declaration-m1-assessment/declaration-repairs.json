@@ -1,0 +1,175 @@
+{
+  "original_metaclass_repairs": [
+    {
+      "source": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+      "line": 6,
+      "name": "c1",
+      "before": "AssumeUsage",
+      "native": "ConstraintUsage",
+      "pilot": "ConstraintUsage",
+      "native_id": "assume.RequirementTest.R.c1",
+      "pilot_id": "RequirementTest::R::c1"
+    },
+    {
+      "source": "sysml/src/examples/Simple Tests/RequirementTest.sysml",
+      "line": 16,
+      "name": "c1",
+      "before": "RequireUsage",
+      "native": "ConstraintUsage",
+      "pilot": "ConstraintUsage",
+      "native_id": "require.RequirementTest.R1.c1",
+      "pilot_id": "RequirementTest::R1::c1"
+    },
+    {
+      "source": "sysml/src/examples/Simple Tests/TextualRepresentationTest.sysml",
+      "line": 7,
+      "name": "inOCL",
+      "before": "Feature",
+      "native": "TextualRepresentation",
+      "pilot": "TextualRepresentation",
+      "native_id": "representation.TextualRepresentationTest.C.x_constraint.inOCL",
+      "pilot_id": "TextualRepresentationTest::C::x_constraint::inOCL"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Classifiers.kerml",
+      "line": 5,
+      "name": "Super",
+      "before": "Feature",
+      "native": "Subclassification",
+      "pilot": "Subclassification",
+      "native_id": "relationship.Classifiers.Super",
+      "pilot_id": "Classifiers::Super"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Dependencies.kerml",
+      "line": 11,
+      "name": "Use",
+      "before": "Feature",
+      "native": "Dependency",
+      "pilot": "Dependency",
+      "native_id": "relationship.Dependencies.Use",
+      "pilot_id": "Dependencies::Use"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 16,
+      "name": "F",
+      "before": "Feature",
+      "native": "TypeFeaturing",
+      "pilot": "TypeFeaturing",
+      "native_id": "relationship.Features.F",
+      "pilot_id": "Features::F"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 68,
+      "name": "Redef",
+      "before": "Feature",
+      "native": "Redefinition",
+      "pilot": "Redefinition",
+      "native_id": "relationship.Features.Redef",
+      "pilot_id": "Features::Redef"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 45,
+      "name": "Sub",
+      "before": "Feature",
+      "native": "Subsetting",
+      "pilot": "Subsetting",
+      "native_id": "relationship.Features.Sub",
+      "pilot_id": "Features::Sub"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 42,
+      "name": "t1",
+      "before": "Feature",
+      "native": "FeatureTyping",
+      "pilot": "FeatureTyping",
+      "native_id": "relationship.Features.t1",
+      "pilot_id": "Features::t1"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Features.kerml",
+      "line": 43,
+      "name": "t2",
+      "before": "Feature",
+      "native": "FeatureTyping",
+      "pilot": "FeatureTyping",
+      "native_id": "relationship.Features.t2",
+      "pilot_id": "Features::t2"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Inverses.kerml",
+      "line": 12,
+      "name": "Invert",
+      "before": "Feature",
+      "native": "FeatureInverting",
+      "pilot": "FeatureInverting",
+      "native_id": "relationship.Inverses.Invert",
+      "pilot_id": "Inverses::Invert"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/TextualRepresentation.kerml",
+      "line": 6,
+      "name": "x_constraint",
+      "before": "Feature",
+      "native": "Invariant",
+      "pilot": "Invariant",
+      "native_id": "feature.TextualRepresentation.C.x_constraint",
+      "pilot_id": "TextualRepresentation::C::x_constraint"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 17,
+      "name": "Gen",
+      "before": "Feature",
+      "native": "Specialization",
+      "pilot": "Specialization",
+      "native_id": "relationship.Types.Gen",
+      "pilot_id": "Types::Gen"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 25,
+      "name": "c1",
+      "before": "Feature",
+      "native": "Conjugation",
+      "pilot": "Conjugation",
+      "native_id": "relationship.Types.c1",
+      "pilot_id": "Types::c1"
+    },
+    {
+      "source": "kerml/src/examples/Simple Tests/Types.kerml",
+      "line": 26,
+      "name": "c2",
+      "before": "Feature",
+      "native": "Conjugation",
+      "pilot": "Conjugation",
+      "native_id": "relationship.Types.c2",
+      "pilot_id": "Types::c2"
+    },
+    {
+      "source": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+      "line": 111,
+      "name": "fuelConstraint",
+      "before": "AssumeUsage",
+      "native": "ConstraintUsage",
+      "pilot": "ConstraintUsage",
+      "native_id": "assume.8-Requirements.Vehicle Requirements.vehicleMass1.fuelConstraint",
+      "pilot_id": "'8-Requirements'::'Vehicle Requirements'::vehicleMass1::fuelConstraint"
+    },
+    {
+      "source": "sysml/src/validation/08-Requirements/8-Requirements.sysml",
+      "line": 129,
+      "name": "fuelConstraint",
+      "before": "AssumeUsage",
+      "native": "ConstraintUsage",
+      "pilot": "ConstraintUsage",
+      "native_id": "assume.8-Requirements.Vehicle Requirements.vehicleMass2.fuelConstraint",
+      "pilot_id": "'8-Requirements'::'Vehicle Requirements'::vehicleMass2::fuelConstraint"
+    }
+  ],
+  "scope": "All 17 original declaration pairs retained uniquely and verified against fresh Pilot graphs."
+}

@@ -1,14 +1,17 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 use std::env;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
 use mercurio_core::{
-    Graph, PilotExportDocument, RulePack, default_stdlib_path, load_pilot_export,
-    normalize_pilot_export, repo_path, repo_root,
+    Graph, KirDocument, PilotExportDocument, RulePack, default_stdlib_path, load_pilot_export,
+    normalize_pilot_export, repo_root,
 };
-use mercurio_sysml::sysml_metamodel_adapter_from_graph;
-use mercurio_tools::{load_pilot_lock, sha256_file};
+use mercurio_sysml::{
+    promote_observed_library_defaults, reconcile_library_metafeatures_with_ecore,
+    sysml_metamodel_adapter_from_graph,
+};
+use mercurio_tools::{load_pilot_lock, sha256_file, sysml_workspace_root};
 use serde_json::{Value, json};
 use time::OffsetDateTime;
 use time::format_description::well_known::Rfc3339;
@@ -17,13 +20,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = parse_args()?;
     let input_path = if let Some(pilot_root) = args.pilot_root.as_deref() {
         validate_pilot_checkout(pilot_root, args.allow_dirty)?;
-        export_from_pilot(pilot_root, &args.input_path)?
+        if args.from_export {
+            args.input_path.clone()
+        } else {
+            export_from_pilot(pilot_root, &args.input_path, args.pilot_jar.as_deref())?
+        }
     } else {
         args.input_path.clone()
     };
 
     let export = load_pilot_export(&input_path)?;
-    let mut kir = normalize_pilot_export(export.clone())?;
+    let enriched_export = with_ecore_derived_opposites(&export)?;
+    validate_ecore_export_relationships(&enriched_export)?;
+    let mut kir = normalize_pilot_export(enriched_export)?;
+    if export.metadata.as_ref().and_then(|metadata| metadata.get("observed_ecore_defaults_v1"))
+        == Some(&Value::Bool(true)) {
+        let promoted = promote_observed_library_defaults(&mut kir.elements)?;
+        println!("  observed Ecore attributes: {promoted}");
+    }
+    let reconciled = reconcile_library_metafeatures_with_ecore(&mut kir.elements)?;
+    println!("  Ecore attribute feature descriptors reconciled: {reconciled}");
+    apply_ecore_membership_cardinality(&mut kir)?;
     kir.metadata = build_kir_metadata(&args, &input_path, &export)?;
     let rulepack = sysml_metamodel_adapter_from_graph(&Graph::from_document(kir.clone())?);
     kir.write_pretty_to_path(&args.output_path)?;
@@ -38,8 +55,320 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+fn membership_ecore_path() -> PathBuf {
+    sysml_workspace_root().join(
+        "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json",
+    )
+}
+
+fn with_ecore_derived_opposites(export: &PilotExportDocument) -> Result<PilotExportDocument, Box<dyn std::error::Error>> {
+    let extracted: Value = serde_json::from_str(&std::fs::read_to_string(membership_ecore_path())?)?;
+    let features = extracted.get("features").and_then(Value::as_array)
+        .ok_or("effective Ecore extract has no features")?;
+    let mappings = [
+        ("Element", "owner", "owner", "Element", "ownedElement", "owned_element"),
+        ("Element", "owningMembership", "owning_membership", "OwningMembership", "ownedMemberElement", "owned_member_element"),
+    ];
+    let mut enriched = export.clone();
+    let mut seen = export.relationships.iter().map(|edge|
+        (edge.source.clone(), edge.relation.clone(), edge.target.clone())).collect::<BTreeSet<_>>();
+    for (forward_owner, forward_name, forward_relation, reverse_owner, reverse_name, reverse_relation) in mappings {
+        let find = |owner: &str, name: &str| features.iter().filter(|feature| {
+            feature["owner"].as_str().is_some_and(|id| id.rsplit("//").next() == Some(owner))
+                && feature["name"].as_str() == Some(name)
+                && feature["kind"].as_str() == Some("reference")
+        }).collect::<Vec<_>>();
+        let forward = find(forward_owner, forward_name);
+        let reverse = find(reverse_owner, reverse_name);
+        if forward.len() != 1 || reverse.len() != 1
+            || forward[0]["opposite"] != reverse[0]["id"]
+            || reverse[0]["opposite"] != forward[0]["id"]
+            || reverse[0]["derived"].as_bool() != Some(true) {
+            return Err(format!("missing derived Ecore opposite: {forward_owner}.{forward_name} / {reverse_owner}.{reverse_name}").into());
+        }
+        for edge in export.relationships.iter().filter(|edge| edge.relation == forward_relation) {
+            let key = (edge.target.clone(), reverse_relation.to_string(), edge.source.clone());
+            if seen.insert(key) {
+                let mut opposite = edge.clone();
+                opposite.source = edge.target.clone();
+                opposite.relation = reverse_relation.to_string();
+                opposite.target = edge.source.clone();
+                enriched.relationships.push(opposite);
+            }
+        }
+    }
+    Ok(enriched)
+}
+
+fn validate_ecore_export_relationships(export: &PilotExportDocument) -> Result<(), Box<dyn std::error::Error>> {
+    let extracted: Value = serde_json::from_str(&std::fs::read_to_string(membership_ecore_path())?)?;
+    let features = extracted.get("features").and_then(Value::as_array)
+        .ok_or("effective Ecore extract has no features")?;
+    let classes = extracted.get("classes").and_then(Value::as_array)
+        .ok_or("effective Ecore extract has no classes")?;
+    let class_parents = classes.iter().map(|class| {
+        let name = class["name"].as_str().ok_or("Ecore class without name")?;
+        let parents = class["super_types"].as_array().ok_or("Ecore class without super types")?
+            .iter().map(|parent| parent.as_str()
+                .and_then(|id| id.rsplit("//").next()).ok_or("invalid Ecore super type")
+                .map(str::to_string)).collect::<Result<Vec<_>, _>>()?;
+        Ok((name.to_string(), parents))
+    }).collect::<Result<BTreeMap<String, Vec<String>>, Box<dyn std::error::Error>>>()?;
+    fn ancestors(kind: &str, parents: &BTreeMap<String, Vec<String>>,
+        cache: &mut BTreeMap<String, BTreeSet<String>>) -> Result<BTreeSet<String>, String> {
+        if let Some(found) = cache.get(kind) { return Ok(found.clone()); }
+        let direct = parents.get(kind).ok_or_else(|| format!("unknown Ecore class: {kind}"))?;
+        let mut result = BTreeSet::from([kind.to_string()]);
+        for parent in direct { result.extend(ancestors(parent, parents, cache)?); }
+        cache.insert(kind.to_string(), result.clone());
+        Ok(result)
+    }
+    let mut cache = BTreeMap::new();
+    for kind in class_parents.keys() { ancestors(kind, &class_parents, &mut cache)?; }
+    let contracts = [
+        ("Element", "owner", "owner", 1, false, true),
+        ("Element", "ownedElement", "owned_element", -1, true, true),
+        ("Element", "owningMembership", "owning_membership", 1, false, true),
+        ("OwningMembership", "ownedMemberElement", "owned_member_element", 1, false, true),
+        ("Membership", "memberElement", "member_element", 1, false, true),
+        ("Membership", "membershipOwningNamespace", "membership_owning_namespace", 1, false, true),
+        ("Namespace", "ownedMember", "members", -1, true, true),
+        ("Namespace", "ownedMembership", "owned_membership", -1, true, true),
+        ("Type", "ownedFeature", "features", -1, true, true),
+        ("Feature", "type", "type", -1, true, true),
+        ("Feature", "featuringType", "featuring_type", -1, true, true),
+        ("Feature", "chainingFeature", "chaining_feature", -1, true, false),
+    ];
+    let mut rules = BTreeMap::new();
+    let mut relations_by_ecore_id = BTreeMap::new();
+    let mut opposite_ids = Vec::new();
+    for (owner, source_name, relation, upper, ordered, unique) in contracts {
+        let matching = features.iter().filter(|feature| {
+            feature.get("name").and_then(Value::as_str) == Some(source_name)
+                && feature.get("owner").and_then(Value::as_str)
+                    .is_some_and(|id| id.rsplit("//").next() == Some(owner))
+                && feature.get("kind").and_then(Value::as_str) == Some("reference")
+                && feature.get("upper_bound").and_then(Value::as_i64) == Some(upper)
+                && feature.get("ordered").and_then(Value::as_bool) == Some(ordered)
+                && feature.get("unique").and_then(Value::as_bool) == Some(unique)
+        }).collect::<Vec<_>>();
+        if matching.len() != 1 {
+            return Err(format!("missing Ecore reference contract: {owner}.{source_name}").into());
+        }
+        let lower = matching[0]["lower_bound"].as_i64().ok_or("Ecore reference without lower bound")?;
+        let target_kind = matching[0]["type"].as_str().and_then(|id| id.rsplit("//").next())
+            .ok_or("Ecore reference without target class")?;
+        let ecore_id = matching[0]["id"].as_str().ok_or("Ecore reference without ID")?;
+        relations_by_ecore_id.insert(ecore_id, relation);
+        if let Some(opposite) = matching[0]["opposite"].as_str() {
+            opposite_ids.push((relation, opposite));
+        }
+        rules.insert(relation, (owner, target_kind, lower, upper, unique));
+    }
+    let source_kinds = export.elements.iter().map(|element|
+        (element.qualified_name.as_str(), element.kind.as_str())).collect::<BTreeMap<_, _>>();
+    if source_kinds.len() != export.elements.len() { return Err("duplicate Pilot export element".into()); }
+    let mut seen = BTreeSet::new();
+    let mut edges = BTreeSet::new();
+    let mut counts = BTreeMap::<(&str, &str), i64>::new();
+    for relationship in &export.relationships {
+        if relationship.relation == "specializes" { continue; } // TypeUtil derivation, not one Ecore reference.
+        let (owner, target_class, _, upper, unique) = rules.get(relationship.relation.as_str())
+            .ok_or_else(|| format!("unmapped Pilot export relation: {}", relationship.relation))?;
+        let kind = source_kinds.get(relationship.source.as_str())
+            .ok_or_else(|| format!("missing Pilot export source: {}", relationship.source))?;
+        if !cache.get(*kind).is_some_and(|ancestors| ancestors.contains(*owner)) {
+            return Err(format!("{} cannot own Ecore reference {}", kind, relationship.relation).into());
+        }
+        let target_kind = source_kinds.get(relationship.target.as_str())
+            .ok_or_else(|| format!("missing Pilot export target: {}", relationship.target))?;
+        if !cache.get(*target_kind).is_some_and(|ancestors| ancestors.contains(*target_class)) {
+            return Err(format!("{} cannot target Ecore reference {}", target_kind, relationship.relation).into());
+        }
+        let count = counts.entry((&relationship.source, &relationship.relation)).or_default();
+        *count += 1;
+        if *upper >= 0 && *count > *upper {
+            return Err(format!("Ecore upper bound exceeded: {}.{}", relationship.source, relationship.relation).into());
+        }
+        if *unique && !seen.insert((&relationship.source, &relationship.relation, &relationship.target)) {
+            return Err(format!("duplicate target in unique Ecore collection: {}.{} -> {}",
+                relationship.source, relationship.relation, relationship.target).into());
+        }
+        edges.insert((relationship.source.as_str(), relationship.relation.as_str(), relationship.target.as_str()));
+    }
+    for (relation, opposite_id) in opposite_ids {
+        let Some(opposite_relation) = relations_by_ecore_id.get(opposite_id) else { continue; };
+        for &(source, observed_relation, target) in &edges {
+            if observed_relation == relation && !edges.contains(&(target, *opposite_relation, source)) {
+                return Err(format!("missing Ecore opposite: {source}.{relation} -> {target}.{opposite_relation}").into());
+            }
+        }
+    }
+    for (source, kind) in source_kinds {
+        let ancestry = cache.get(kind).ok_or_else(|| format!("unknown Pilot export kind: {kind}"))?;
+        for (relation, (owner, _, lower, _, _)) in &rules {
+            if *lower > 0 && ancestry.contains(*owner)
+                && counts.get(&(source, relation)).copied().unwrap_or_default() < *lower {
+                return Err(format!("required Ecore reference missing: {source}.{relation}").into());
+            }
+        }
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+mod collection_contract_tests {
+    use super::*;
+
+    #[test]
+    fn pinned_ecore_distinguishes_unique_and_nonunique_collections() {
+        let mut export: PilotExportDocument = serde_json::from_value(json!({
+            "elements": [
+                {"qualified_name":"Kernel::owner", "kind":"Feature", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::member", "kind":"Type", "library_group":"Kernel"}
+            ],
+            "relationships": [
+                {"source": "Kernel::owner", "relation": "type", "target": "Kernel::member"},
+                {"source": "Kernel::owner", "relation": "type", "target": "Kernel::member"}
+            ]
+        })).unwrap();
+        assert!(validate_ecore_export_relationships(&export).is_err());
+        for relationship in &mut export.relationships {
+            relationship.relation = "chaining_feature".to_string();
+        }
+        export.elements[1].kind = "Feature".to_string();
+        validate_ecore_export_relationships(&export).unwrap();
+    }
+
+    #[test]
+    fn pinned_ecore_rejects_multiple_singular_and_missing_required_references() {
+        let mut export: PilotExportDocument = serde_json::from_value(json!({
+            "elements": [
+                {"qualified_name":"Kernel::member", "kind":"Membership", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::a", "kind":"Element", "library_group":"Kernel"},
+                {"qualified_name":"Kernel", "kind":"Namespace", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::other", "kind":"Element", "library_group":"Kernel"}
+            ],
+            "relationships": []
+        })).unwrap();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("required Ecore reference missing"), "{error}");
+        export.relationships = serde_json::from_value(json!([
+            {"source":"Kernel::member", "relation":"member_element", "target":"Kernel::a"},
+            {"source":"Kernel::member", "relation":"membership_owning_namespace", "target":"Kernel"},
+            {"source":"Kernel", "relation":"owned_membership", "target":"Kernel::member"},
+            {"source":"Kernel::member", "relation":"owner", "target":"Kernel"},
+            {"source":"Kernel", "relation":"owned_element", "target":"Kernel::member"},
+            {"source":"Kernel::member", "relation":"owner", "target":"Kernel::other"}
+        ])).unwrap();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("Ecore upper bound exceeded"), "{error}");
+        export.relationships.pop();
+        validate_ecore_export_relationships(&export).unwrap();
+    }
+
+    #[test]
+    fn pinned_ecore_checks_reference_source_and_target_classes() {
+        let mut export: PilotExportDocument = serde_json::from_value(json!({
+            "elements": [
+                {"qualified_name":"Kernel::feature", "kind":"Feature", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::other", "kind":"Namespace", "library_group":"Kernel"}
+            ],
+            "relationships": [
+                {"source":"Kernel::feature", "relation":"type", "target":"Kernel::other"}
+            ]
+        })).unwrap();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("cannot target Ecore reference"), "{error}");
+        export.elements[1].kind = "Type".to_string();
+        validate_ecore_export_relationships(&export).unwrap();
+        export.relationships[0].relation = "member_element".to_string();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("cannot own Ecore reference"), "{error}");
+    }
+
+    #[test]
+    fn pinned_ecore_requires_both_membership_opposites() {
+        let mut export: PilotExportDocument = serde_json::from_value(json!({
+            "elements": [
+                {"qualified_name":"Kernel::member", "kind":"Membership", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::target", "kind":"Element", "library_group":"Kernel"},
+                {"qualified_name":"Kernel", "kind":"Namespace", "library_group":"Kernel"},
+                {"qualified_name":"Kernel::other", "kind":"Namespace", "library_group":"Kernel"}
+            ],
+            "relationships": [
+                {"source":"Kernel::member", "relation":"member_element", "target":"Kernel::target"},
+                {"source":"Kernel::member", "relation":"membership_owning_namespace", "target":"Kernel"}
+            ]
+        })).unwrap();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("missing Ecore opposite"), "{error}");
+        export.relationships.push(serde_json::from_value(json!({
+            "source":"Kernel", "relation":"owned_membership", "target":"Kernel::member"
+        })).unwrap());
+        validate_ecore_export_relationships(&export).unwrap();
+        export.relationships[1].target = "Kernel::other".to_string();
+        let error = validate_ecore_export_relationships(&export).unwrap_err().to_string();
+        assert!(error.contains("missing Ecore opposite"), "{error}");
+    }
+
+    #[test]
+    fn pinned_ecore_derives_missing_opposites_in_encounter_order_once() {
+        let export: PilotExportDocument = serde_json::from_value(json!({
+            "elements": [],
+            "relationships": [
+                {"source":"Kernel::second", "relation":"owner", "target":"Kernel"},
+                {"source":"Kernel::first", "relation":"owner", "target":"Kernel"},
+                {"source":"Kernel::first", "relation":"owning_membership", "target":"Kernel::membership"}
+            ]
+        })).unwrap();
+        let enriched = with_ecore_derived_opposites(&export).unwrap();
+        let derived = enriched.relationships.iter().filter(|edge| edge.relation == "owned_element")
+            .map(|edge| edge.target.as_str()).collect::<Vec<_>>();
+        assert_eq!(derived, ["Kernel::second", "Kernel::first"]);
+        assert!(enriched.relationships.iter().any(|edge|
+            edge.source == "Kernel::membership" && edge.relation == "owned_member_element"
+                && edge.target == "Kernel::first"));
+        assert_eq!(with_ecore_derived_opposites(&enriched).unwrap().relationships.len(),
+            enriched.relationships.len());
+    }
+}
+
+fn apply_ecore_membership_cardinality(kir: &mut KirDocument) -> Result<(), Box<dyn std::error::Error>> {
+    let extracted: Value = serde_json::from_str(&std::fs::read_to_string(membership_ecore_path())?)?;
+    let features = extracted.get("features").and_then(Value::as_array)
+        .ok_or("effective Ecore extract has no features")?;
+    for (owner, source_name, property) in [
+        ("Element", "owningMembership", "owning_membership"),
+        ("Membership", "memberElement", "member_element"),
+        ("Membership", "membershipOwningNamespace", "membership_owning_namespace"),
+        ("OwningMembership", "ownedMemberElement", "owned_member_element"),
+    ] {
+        let matches = features.iter().filter(|feature| {
+            feature.get("name").and_then(Value::as_str) == Some(source_name)
+                && feature.get("owner").and_then(Value::as_str)
+                    .is_some_and(|id| id.rsplit("//").next() == Some(owner))
+                && feature.get("kind").and_then(Value::as_str) == Some("reference")
+                && feature.get("upper_bound").and_then(Value::as_i64) == Some(1)
+        }).count();
+        if matches != 1 { return Err(format!("missing unique singular Ecore reference: {owner}.{source_name}").into()); }
+        let suffix = format!("::{owner}.{property}");
+        let mut found = 0;
+        for element in &mut kir.elements {
+            if element.kind == "MetamodelFeature" && element.id.ends_with(&suffix) {
+                element.properties.insert("upper".into(), json!(1));
+                found += 1;
+            }
+        }
+        if found != 1 { return Err(format!("missing unique KIR metafeature: {owner}.{property}").into()); }
+    }
+    Ok(())
+}
+
 struct Args {
     input_path: PathBuf,
+    from_export: bool,
+    pilot_jar: Option<PathBuf>,
     output_path: PathBuf,
     rulepack_output_path: PathBuf,
     pilot_root: Option<PathBuf>,
@@ -48,6 +377,7 @@ struct Args {
 
 fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
     let mut input_path = None;
+    let mut pilot_jar = None;
     let mut output_path = default_stdlib_path();
     let mut rulepack_output_path = default_rulepack_path(&output_path);
     let mut pilot_root = None;
@@ -78,6 +408,12 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
                 let value = args.get(index).ok_or("missing value for --pilot-root")?;
                 pilot_root = Some(PathBuf::from(value));
             }
+            "--pilot-jar" => {
+                index += 1;
+                pilot_jar = Some(PathBuf::from(
+                    args.get(index).ok_or("missing value for --pilot-jar")?,
+                ));
+            }
             "--allow-dirty" => {
                 allow_dirty = true;
             }
@@ -92,9 +428,10 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
         index += 1;
     }
 
+    let from_export = input_path.is_some();
     let input_path = match (input_path, pilot_root.as_ref()) {
         (Some(input_path), _) => input_path,
-        (None, Some(_)) => repo_path("target/stdlib-release/pilot-stdlib-export.json"),
+        (None, Some(_)) => sysml_workspace_root().join("target/stdlib-release/pilot-stdlib-export.json"),
         (None, None) => {
             return Err("expected --from-export PATH or --pilot-root PATH".into());
         }
@@ -102,6 +439,8 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
 
     Ok(Args {
         input_path,
+        from_export,
+        pilot_jar,
         output_path,
         rulepack_output_path,
         pilot_root,
@@ -111,7 +450,7 @@ fn parse_args() -> Result<Args, Box<dyn std::error::Error>> {
 
 fn print_usage() {
     println!(
-        "Usage: cargo run -p mercurio-tools --bin import_pilot_stdlib -- [--pilot-root PATH] [--from-export PATH] [--out PATH] [--rulepack-out PATH] [--allow-dirty]"
+        "Usage: cargo run -p mercurio-tools --bin import_pilot_stdlib -- [--pilot-root PATH] [--from-export PATH] [--pilot-jar PATH] [--out PATH] [--rulepack-out PATH] [--allow-dirty]"
     );
 }
 
@@ -165,6 +504,7 @@ fn build_kir_metadata(
         "input_export_sha256".to_string(),
         Value::String(sha256_file(input_path)?),
     );
+    metadata.insert("ecore_effective_sha256".to_string(), json!(sha256_file(&membership_ecore_path())?));
 
     if let Some(pilot_root) = &args.pilot_root {
         metadata.insert(
@@ -188,6 +528,13 @@ fn build_kir_metadata(
         }
     }
 
+    if let Some(jar) = &args.pilot_jar {
+        metadata.insert(
+            "pilot_jar_path".to_string(),
+            json!(metadata_path_string(jar)),
+        );
+        metadata.insert("pilot_jar_sha256".to_string(), json!(sha256_file(jar)?));
+    }
     if let Some(stdlib_version) = infer_stdlib_version(args, export) {
         metadata.insert("stdlib_version".to_string(), Value::String(stdlib_version));
     }
@@ -345,13 +692,17 @@ fn path_to_slash_string(path: &Path) -> String {
 fn export_from_pilot(
     pilot_root: &Path,
     export_path: &Path,
+    pilot_jar: Option<&Path>,
 ) -> Result<PathBuf, Box<dyn std::error::Error>> {
     let pilot_root = pilot_root.canonicalize()?;
     let library_root = pilot_root.join("sysml.library");
-    let interactive_jar = find_interactive_jar(&pilot_root)?;
-    let classes_dir = repo_path("target/pilot-exporter-classes");
-    let java_source = repo_path(
-        "../mercurio-sysml/tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStdlibExporter.java",
+    let interactive_jar = match pilot_jar {
+        Some(path) => path.canonicalize()?,
+        None => find_interactive_jar(&pilot_root)?,
+    };
+    let classes_dir = sysml_workspace_root().join("../target/pilot-exporter-classes");
+    let java_source = sysml_workspace_root().join(
+        "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotStdlibExporter.java",
     );
 
     compile_java_exporter(&interactive_jar, &java_source, &classes_dir)?;
@@ -446,7 +797,7 @@ fn run_java_exporter(
     );
 
     let status = if cfg!(windows) {
-        let script_path = repo_path("target/run_pilot_exporter.ps1");
+        let script_path = sysml_workspace_root().join("target/run_pilot_exporter.ps1");
         let script = format!(
             "$cp = '{}'\njava -cp $cp dev.mercurio.pilot.PilotStdlibExporter '{}' '{}'\n",
             classpath.replace('\'', "''"),

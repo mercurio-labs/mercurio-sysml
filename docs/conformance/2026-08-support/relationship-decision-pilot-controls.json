@@ -1,0 +1,448 @@
+{
+  "scope": "Two repeated endpoint decisions in each of six actual KerML relationship rules: independent parser branch evidence, including qualified names, chains and quoted names. Native checks cover decision execution only, not complete relationship construction. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "85aa05a517705053e9ad303a5af63f7dd5fdd0afe3a0d5494fe2cf1205026b1b"
+  },
+  "cases": [
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/2",
+      "input": "a :> b;",
+      "source": "subtype a :> b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/4",
+      "input": "b;",
+      "source": "subtype a :> b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Specialization#/elements/2",
+      "input": "a.b :> c;",
+      "source": "subtype a.b :> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/4",
+      "input": "c;",
+      "source": "subtype a.b :> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/2",
+      "input": "a :> b.c;",
+      "source": "subtype a :> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Specialization#/elements/4",
+      "input": "b.c;",
+      "source": "subtype a :> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Specialization#/elements/2",
+      "input": "a.b :> c.d;",
+      "source": "subtype a.b :> c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Specialization#/elements/4",
+      "input": "c.d;",
+      "source": "subtype a.b :> c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/2",
+      "input": "q::a :> r::b.c;",
+      "source": "subtype q::a :> r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Specialization#/elements/4",
+      "input": "r::b.c;",
+      "source": "subtype q::a :> r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/2",
+      "input": "'a.b' :> 'c.d';",
+      "source": "subtype 'a.b' :> 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Specialization#/elements/4",
+      "input": "'c.d';",
+      "source": "subtype 'a.b' :> 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/2",
+      "input": "a ~ b;",
+      "source": "conjugate a ~ b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/4",
+      "input": "b;",
+      "source": "conjugate a ~ b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Conjugation#/elements/2",
+      "input": "a.b ~ c;",
+      "source": "conjugate a.b ~ c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/4",
+      "input": "c;",
+      "source": "conjugate a.b ~ c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/2",
+      "input": "a ~ b.c;",
+      "source": "conjugate a ~ b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Conjugation#/elements/4",
+      "input": "b.c;",
+      "source": "conjugate a ~ b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Conjugation#/elements/2",
+      "input": "a.b ~ c.d;",
+      "source": "conjugate a.b ~ c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Conjugation#/elements/4",
+      "input": "c.d;",
+      "source": "conjugate a.b ~ c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/2",
+      "input": "q::a ~ r::b.c;",
+      "source": "conjugate q::a ~ r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Conjugation#/elements/4",
+      "input": "r::b.c;",
+      "source": "conjugate q::a ~ r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/2",
+      "input": "'a.b' ~ 'c.d';",
+      "source": "conjugate 'a.b' ~ 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Conjugation#/elements/4",
+      "input": "'c.d';",
+      "source": "conjugate 'a.b' ~ 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/2",
+      "input": "a from b;",
+      "source": "disjoint a from b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/4",
+      "input": "b;",
+      "source": "disjoint a from b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Disjoining#/elements/2",
+      "input": "a.b from c;",
+      "source": "disjoint a.b from c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/4",
+      "input": "c;",
+      "source": "disjoint a.b from c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/2",
+      "input": "a from b.c;",
+      "source": "disjoint a from b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Disjoining#/elements/4",
+      "input": "b.c;",
+      "source": "disjoint a from b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Disjoining#/elements/2",
+      "input": "a.b from c.d;",
+      "source": "disjoint a.b from c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Disjoining#/elements/4",
+      "input": "c.d;",
+      "source": "disjoint a.b from c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/2",
+      "input": "q::a from r::b.c;",
+      "source": "disjoint q::a from r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Disjoining#/elements/4",
+      "input": "r::b.c;",
+      "source": "disjoint q::a from r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/2",
+      "input": "'a.b' from 'c.d';",
+      "source": "disjoint 'a.b' from 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Disjoining#/elements/4",
+      "input": "'c.d';",
+      "source": "disjoint 'a.b' from 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "a of b;",
+      "source": "inverse a of b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "b;",
+      "source": "inverse a of b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "a.b of c;",
+      "source": "inverse a.b of c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "c;",
+      "source": "inverse a.b of c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "a of b.c;",
+      "source": "inverse a of b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "b.c;",
+      "source": "inverse a of b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "a.b of c.d;",
+      "source": "inverse a.b of c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "c.d;",
+      "source": "inverse a.b of c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "q::a of r::b.c;",
+      "source": "inverse q::a of r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "r::b.c;",
+      "source": "inverse q::a of r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/2",
+      "input": "'a.b' of 'c.d';",
+      "source": "inverse 'a.b' of 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "FeatureInverting#/elements/4",
+      "input": "'c.d';",
+      "source": "inverse 'a.b' of 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/2",
+      "input": "a :> b;",
+      "source": "subset a :> b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/4",
+      "input": "b;",
+      "source": "subset a :> b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Subsetting#/elements/2",
+      "input": "a.b :> c;",
+      "source": "subset a.b :> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/4",
+      "input": "c;",
+      "source": "subset a.b :> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/2",
+      "input": "a :> b.c;",
+      "source": "subset a :> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Subsetting#/elements/4",
+      "input": "b.c;",
+      "source": "subset a :> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Subsetting#/elements/2",
+      "input": "a.b :> c.d;",
+      "source": "subset a.b :> c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Subsetting#/elements/4",
+      "input": "c.d;",
+      "source": "subset a.b :> c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/2",
+      "input": "q::a :> r::b.c;",
+      "source": "subset q::a :> r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Subsetting#/elements/4",
+      "input": "r::b.c;",
+      "source": "subset q::a :> r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/2",
+      "input": "'a.b' :> 'c.d';",
+      "source": "subset 'a.b' :> 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Subsetting#/elements/4",
+      "input": "'c.d';",
+      "source": "subset 'a.b' :> 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/2",
+      "input": "a :>> b;",
+      "source": "redefinition a :>> b;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/4",
+      "input": "b;",
+      "source": "redefinition a :>> b;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Redefinition#/elements/2",
+      "input": "a.b :>> c;",
+      "source": "redefinition a.b :>> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/4",
+      "input": "c;",
+      "source": "redefinition a.b :>> c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/2",
+      "input": "a :>> b.c;",
+      "source": "redefinition a :>> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Redefinition#/elements/4",
+      "input": "b.c;",
+      "source": "redefinition a :>> b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Redefinition#/elements/2",
+      "input": "a.b :>> c.d;",
+      "source": "redefinition a.b :>> c.d;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Redefinition#/elements/4",
+      "input": "c.d;",
+      "source": "redefinition a.b :>> c.d;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/2",
+      "input": "q::a :>> r::b.c;",
+      "source": "redefinition q::a :>> r::b.c;"
+    },
+    {
+      "alternative": 1,
+      "decision": "Redefinition#/elements/4",
+      "input": "r::b.c;",
+      "source": "redefinition q::a :>> r::b.c;"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/2",
+      "input": "'a.b' :>> 'c.d';",
+      "source": "redefinition 'a.b' :>> 'c.d';"
+    },
+    {
+      "alternative": 0,
+      "decision": "Redefinition#/elements/4",
+      "input": "'c.d';",
+      "source": "redefinition 'a.b' :>> 'c.d';"
+    }
+  ]
+}

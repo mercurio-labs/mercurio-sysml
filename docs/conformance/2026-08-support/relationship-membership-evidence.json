@@ -1,0 +1,128 @@
+{
+  "schema": "dev.mercurio.relationship-membership-evidence.v1",
+  "scope": "Enclosing ordinary Feature default/direct-owned projections and bounded standalone source scope. Does not qualify ten relationship algorithms.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "69639895b7ade8a16dda87b2c1d73bcd846f6713db227bc0c4f04c0883f49ba6",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/grammar.structure.extract.json": "3d4796dfd30ae84bd4ebdd56f46163fa5e9d9c741b0530ebb1a9d08f9d1e0db1",
+    "tools/run_relationship_membership_probe.py": "99b491335e060f5ec85ee0393ddb94d7bfb3c77f03286176a8c9fd53b6c470ce",
+    "tools/run_relationship_membership_scope_probe.py": "f478c863be46e215743996dc735fb8c8b85fbe86b27a1a6fbcadc466e6d2b048",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotRelationshipMembershipProbe.java": "498254dfd5a176cafe4f4e199babe3f1f05c232643e4c85bf4285f4addcc9508",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotRelationshipMembershipScopeProbe.java": "b0a39ec4bdaffb195ae66a95bad4bd347b2ac519e126edffc1e16d86e8ff8158",
+    "docs/conformance/2026-08-support/relationship-membership-pilot-controls.json": "7f9f62e75a50a3efe714c060f21b59f3c6579e3de22dbc53c76f46dce8d9c1c0",
+    "docs/conformance/2026-08-support/relationship-membership-scope-pilot-controls.json": "5cade14347ca25c030d116e49d093729cdb26314716eb74d09f3e6335c70293d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-native-tests.log": "1a2512570335f991b56f3a8838a677f872768c3490ea987620e0949bcb8d9c6c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-focused-tests.log": "84cb1f177e4df5df96537f4ec98e25e63d0c1907bcef39058b1bae0d5a2ddb9e",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-pilot-check.log": "ca2b60a5a20f0b5606d77b4cbedbe166dad27e76f501a98297d58740bb5d7968",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-scope-pilot-check.log": "c6e5a100c3f1f1bbd28032b916304bf91867d7dc80f9f647212070e8cac573fc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-audit-tests.log": "c33002cb94102432edabacb0b4f32b0e7247f0c8dab9fe929a24c754b5e77383",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-certificate-tests.log": "2dfab5b651603f84f6408ad1f8b9ae295b14efcdcdff279caa2f3ae99ec776b1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relationship-membership-plan-tests.log": "bf67bc2c466e881548c3cca8678e2f637ae6b3d412484ca0347bf341bdec3051"
+  },
+  "imported": {
+    "ancestry": "Pinned effective Ecore Specialization, Disjoining and FeatureInverting ancestry selects the ten observed concrete classes. Canonical OwningMembership/ownedRelatedElement containment remains distinct from direct ownedRelationship.",
+    "grammar": "Pinned source grammars construct standalone declarations through OwningMembership; existing interpreter/model construction unchanged.",
+    "derived_views": [
+      "Feature::ownedTyping",
+      "Type::ownedSpecialization",
+      "Type::ownedFeature"
+    ],
+    "bindings": [
+      "ConjugatedPortTyping",
+      "CrossSubsetting",
+      "Disjoining",
+      "FeatureInverting",
+      "FeatureTyping",
+      "Redefinition",
+      "ReferenceSubsetting",
+      "Specialization",
+      "Subclassification",
+      "Subsetting"
+    ]
+  },
+  "native_consumption": {
+    "handwritten_dependencies": [
+      "definition_owned_relationship_declaration: imported ancestry and explicit non-implied lifecycle boundary",
+      "definition_owned_non_typing_membership: canonical stored child projection",
+      "generated_resource_reference_traced: Pilot immediate-container scope dependency; FeatureTyping retains non-expression origin; local Redefinition exclusion remains in shared inherited lookup"
+    ],
+    "implementation": "Shared Feature input provider admits the three relationship categories only as wrapped declarations, not enclosing Feature generalization/typing inputs. Canonical immediate-container scope handles membership-owned declarations as well as direct Type-owned relationships.",
+    "runtime_java": false,
+    "guards_retained": [
+      "implied partial declaration lifecycle",
+      "missing/malformed membership member",
+      "unassessed relationship categories and endpoint algorithms",
+      "separate missing-library, inherited-result, featuring and validation obligations"
+    ]
+  },
+  "verification": {
+    "pilot_factory_controls": 50,
+    "concrete_classes": 10,
+    "factory_boundaries": "Five explicit typing contexts, direct default and owned specialization/typing/feature projections. Factory-only endpoint/relationship algorithms are not executed. No synthetic library provider.",
+    "pilot_source_controls": 3,
+    "source_positives": 2,
+    "source_negative": "Local standalone Redefinition target excluded by upstream scope; native rejects this source too. Diagnostic-message equivalence is not assessed.",
+    "native_tests": 235,
+    "new_native_tests": 3,
+    "native_persistence": "Factory graphs persist and reverse storage; source positives parse/construct/link, preserve canonical membership containment and both endpoint identities before/after KIR persistence.",
+    "cached_pilot_reproduces": true,
+    "scope_provenance": {
+      "driver_sha256": "f478c863be46e215743996dc735fb8c8b85fbe86b27a1a6fbcadc466e6d2b048",
+      "helper_sha256": "b0a39ec4bdaffb195ae66a95bad4bd347b2ac519e126edffc1e16d86e8ff8158",
+      "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "source_sha256": {
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerMLRuntimeModule.xtend": "6af5a7dad3636f094210ce44146ae62e0bb81e60f478cd4d09660a4b310c7b58",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/naming/KerMLQualifiedNameProvider.java": "4f37219aaa8b63ac01525bc3e0fd2c8981bdd44006748e0ad5317ef5858472cf",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScope.xtend": "0bac05fcd4e104d21e9fee857ae069d7637c9bbebf7a926268c1b12b5b6989c6",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLGlobalScopeProvider.xtend": "1de40e4a52087c70f0a514aa3aa111a05f741f135bb39bdfd8b25745e25fb6cb",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScope.xtend": "42b8eda7fec0ff3031e025654f9341a9f45db0822e6f0ad3185f0f1981c501d9",
+        "org.omg.kerml.xtext/src/org/omg/kerml/xtext/scoping/KerMLScopeProvider.xtend": "fd47d979daf4dd3d04b31024b24d2febda79eebef7c95bde5683bcc96b7f3a13",
+        "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+      }
+    },
+    "factory_provenance": {
+      "driver_sha256": "99b491335e060f5ec85ee0393ddb94d7bfb3c77f03286176a8c9fd53b6c470ce",
+      "helper_sha256": "498254dfd5a176cafe4f4e199babe3f1f05c232643e4c85bf4285f4addcc9508",
+      "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+      "java_sha256": "abd12f952caba9b7404f15ca3939100f5ad5db5553187a3449814c57c2bf4b82",
+      "java_version": "openjdk version \"21.0.6\" 2025-01-21 LTS\r\nOpenJDK Runtime Environment Temurin-21.0.6+7 (build 21.0.6+7-LTS)\r\nOpenJDK 64-Bit Server VM Temurin-21.0.6+7 (build 21.0.6+7-LTS, mixed mode, sharing)",
+      "javac_sha256": "c81b3bece8daf28136b387841f924c66a9da88746246211cf769bfa6ac3a6f25",
+      "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+      "source_sha256": {
+        "org.omg.sysml.logic/src/main/java/org/omg/sysml/adapter/FeatureAdapter.java": "131c2452554814e0a8bf96abc788f4388c894eadcea9acc55dc32f1f9abe1455",
+        "org.omg.sysml/model/SysML.ecore": "dd3960e0a0031d074adb01162d9b7ec6551b2e7aa1d92b26b6f7a0ea45b464d6"
+      }
+    },
+    "audit_tests": 11,
+    "certificate_tests": 33,
+    "plan_tests": 14
+  },
+  "remaining_required": [
+    "Real sixteen-resource closure after this bounded fix; no reassessment claim",
+    "Inherited literal result typing/default composition against actual Performances",
+    "Relationship algorithms and full semantic validation across required contexts",
+    "Full pinned sample semantic qualification and comparable timing assessment"
+  ],
+  "qualification": {
+    "matching_whole_models": 155,
+    "ordinary_feature_bindings": [
+      50,
+      79
+    ],
+    "bounded_obligations": [
+      7,
+      9
+    ],
+    "families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "candidate": "unpromoted"
+  }
+}

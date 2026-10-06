@@ -1,0 +1,146 @@
+{
+  "schema": "dev.mercurio.construction-cost-evidence.v1",
+  "scope": "Native construction/linking observability and immutable containment/membership indexes; no new language feature or whole-resource qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "14642953bdbd81d275290db82c5841c5564fd220f8136852311bf26c3b1d06d1",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "95e8cc220a174d39acd721410abc6943494a4fa620c1be420c26b223b5d8517f",
+    "crates/mercurio-sysml/src/definition_document.rs": "946c9e2264c3e7c23446879a4dd2bd123a5cb3295c2b71ffb30a9fdc204e0d8b",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "4e7a550b558a2f63f26706a2ae997f31f5fd7caffc43c1b0df9e5da962783476",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-construction-trace.log": "c7abcd68bd6bded12ccae814d8ea54182b1d45b3b913c231205fc7082d173a9b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-trace.log": "994e5eeaf2eb2552af27154c00da5f5dea18d235de43820b7945840c540a32c1",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-trace-supervision.json": "9c3e8b1a08a28fcd4aceae7997822a3561f0ff0c47b78fc7509ac67e87636a3b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-link-budget.log": "140c5f7633238dd1f3888ce8e6dbe0207ce1750d926018834fd6ef1e6060ae58",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-link-budget-supervision.json": "3fecc109d34010b86cae1e3aa9760f059e2ca74a12adcd8ae2009a2c50fa6ad7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9"
+  },
+  "imported_representation": "Existing pinned Ecore ownership, opposite, type and membership definitions remain authoritative. This batch adds no extracted semantics.",
+  "native_consumers": [
+    "materialize_definition_resources_traced",
+    "generated_resource_reference",
+    "postprocess_relationship_endpoints",
+    "stored_children_indexed",
+    "membership_element_indexed",
+    "membership_names_indexed"
+  ],
+  "handwritten_dependencies": [
+    "Native immutable identity index: created per reference query or endpoint read pass, discarded before graph edits, retries or deferred resolution.",
+    "Ordered containment, canonical Ecore subtype/opposite checks, membership projection and name dispatch retain existing algorithms and guards.",
+    "Pure observer callbacks in language crate; clocks, environment flags and stderr only in maintainer audit tool."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/construction-cost-native-tests.log",
+      "sha256": "679cdf61f5d8e850a24d3cec2246dfbb7468623dd9f2f21d20a37113f90be391",
+      "passed": 211
+    },
+    "focused_controls": [
+      "definition_construction_trace_preserves_models_and_errors",
+      "definition_indexed_containment_preserves_order_and_failures"
+    ],
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/construction-cost-tool-tests.log",
+      "sha256": "b9ee7f34bb954ec505ec14cb6d47c283965b1243f11ebfa1ce040689fbfec57a",
+      "passed": 7
+    },
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/construction-cost-certificate-tests.log",
+      "sha256": "4fddf04b9f72fa307cc21939e88d8630137462593e794f22d5724345c22f6c5b",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/construction-cost-plan-tests.log",
+      "sha256": "0e88a8477cc135469ff27c90f2fc0c76f20372288d238aad6439c68ae9f1066f",
+      "passed": 14
+    }
+  },
+  "cost_diagnostics": {
+    "status": "timed_out",
+    "semantic_qualification": "not_assessed",
+    "resources_parsed": 16,
+    "elements_constructed_unpublished": 12288,
+    "linking_started_elapsed_ms": 57135,
+    "linking_budget_seconds": 90,
+    "wall_budget_seconds": 300,
+    "completed_reference_attempts": 34,
+    "slowest_completed_attempts": [
+      {
+        "elapsed_ms": 20467,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.1",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 20378,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.2",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 20139,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.3",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 19339,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.4",
+        "kind": "MembershipImport",
+        "field": "imported_membership",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 3297,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.5",
+        "kind": "NamespaceImport",
+        "field": "imported_namespace",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1291,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.9.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.1",
+        "kind": "Redefinition",
+        "field": "redefined_feature",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 1288,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.1",
+        "kind": "Redefinition",
+        "field": "redefined_feature",
+        "succeeded": "Some(true)"
+      },
+      {
+        "elapsed_ms": 913,
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.8.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.1",
+        "kind": "Redefinition",
+        "field": "redefined_feature",
+        "succeeded": "Some(true)"
+      }
+    ],
+    "in_flight": [
+      {
+        "owner_id": "definition.resource.443a2f6465762f7265706f732f6d6572637572696f2d6c6162732f6d6572637572696f2f776f726b74726565732f7379736d6c2d76322d636f6d706c69616e63652d323032362d30382f7461726765742f757073747265616d2f5379734d4c2d76322d52656c656173652f7379736d6c2e6c6962726172792f4b65726e656c204c69627261726965732f4b65726e656c20446174612054797065204c6962726172792f436f6c6c656374696f6e732e6b65726d6c.owned_relationship.0.owned_related_element.0.owned_relationship.10.owned_related_element.0.owned_relationship.2.owned_related_element.0.owned_relationship.0",
+        "field": "type",
+        "started_elapsed_ms": 147878,
+        "kind": "FeatureTyping"
+      }
+    ],
+    "comparison_limit": "Pre-index binary was not retained with a fingerprint; initial indexed probe competed with regression tests. These are bounded cost diagnostics, not comparable qualification benchmarks or evidence of a speedup.",
+    "remaining_dependency": "Four Collections import selections consume approximately 80 seconds. Repeated membership-name/derived-name evaluation during selection needs profiling and a shared immutable evaluation context with explicit dependency invalidation; this index change alone did not resolve that cost."
+  },
+  "metrics": {
+    "matching_pilot_models": 155,
+    "ordinary_feature_bindings_verified": 50,
+    "ordinary_feature_bindings_total": 79,
+    "bounded_obligations_closed": 7,
+    "bounded_obligations_total": 9,
+    "whole_families_closed": 0,
+    "whole_families_total": 34,
+    "release_gates_closed": 0,
+    "release_gates_total": 5
+  },
+  "qualification_boundary": "No full resource was linked, validated, published or persisted by these timed-out probes. Candidate remains unpromoted; all required behaviors and qualification gates remain open."
+}

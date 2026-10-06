@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "pilot_dirty": false,
+    "files": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend": "c4ecd82b5e426c9e49073b1f20c245e6c8be8d8feba74fe778126cf688aaf688",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/postprocessing/FeatureParserPostProcessor.java": "3e75730faea8897d73902dde975dc6ef469b7aed040b9da083f8c55ef563abaf"
+    },
+    "extractor": "generate_release_feature_checks.py"
+  },
+  "constant_implies_variable": true,
+  "checks": [
+    {
+      "operation": "variable_occurrence_owner",
+      "context": "Feature",
+      "method": "checkFeature",
+      "issue": "validateFeatureIsVariable",
+      "message": "Must be owned by an occurrence type",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 679,
+      "owner_type": "Occurrences::Occurrence"
+    },
+    {
+      "operation": "portion_not_variable",
+      "context": "Feature",
+      "method": "checkFeature",
+      "issue": "validateFeaturePortionNotVariable",
+      "message": "A portion cannot be variable",
+      "source_file": "org.omg.kerml.xtext/src/org/omg/kerml/xtext/validation/KerMLValidator.xtend",
+      "line": 685
+    }
+  ]
+}

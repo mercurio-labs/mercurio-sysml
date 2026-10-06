@@ -1,0 +1,920 @@
+{
+  "scope": "Raw BaseExpression/ClassificationExpression parser branch, root class and logical lexer tokens in both pinned languages. No linking, normalization, specification conformance or full sample qualification.",
+  "provenance": {
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "source_sha256": {
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/conversion/KerMLValueConverterService.xtend": "86c72e36de0efb3b1b7678f83a767963a430655ddf29a6dc846e8199e59be301",
+      "org.omg.kerml.expressions.xtext/src/org/omg/kerml/expressions/xtext/KerMLExpressions.xtext": "506ee54d356cc2e1194d69bc2669665e952fc841cb28a119ff6758da225b8c62",
+      "org.omg.kerml.xtext/src/org/omg/kerml/xtext/KerML.xtext": "455561523b47fb34ff6c24e570e6ef752adf200ea05beb4d848773eb1a109d46",
+      "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext": "f3521574570cfe2762c27e1374f20bb3075090eabad84562b77aed5278ab48ac"
+    },
+    "jar_sha256": "4512852638fc799505fe676955e8c78fedef1f3ce44ec90b57b34c05c31e6945",
+    "helper_sha256": "4df8318ba278361b1db7a3400a0f623ecba5d0585aec637ae7c498caaf92ecdf"
+  },
+  "cases": [
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "a",
+      "tokens": [
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": false,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "a.b",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "a::b",
+      "tokens": [
+        "terminal:ID",
+        "keyword:::",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "'a.b'",
+      "tokens": [
+        "terminal:UNRESTRICTED_NAME",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "f()",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "f(1)",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "f(x=1)",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "terminal:ID",
+        "keyword:=",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "a.b()",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 3,
+      "kind": "MetadataAccessExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "a.metadata",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "keyword:metadata",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 5,
+      "kind": "ConstructorExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "new T()",
+      "tokens": [
+        "keyword:new",
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 6,
+      "kind": "FeatureReferenceExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "{}",
+      "tokens": [
+        "keyword:{",
+        "keyword:}",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 7,
+      "kind": "LiteralInteger",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "(1)",
+      "tokens": [
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "NullExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "()",
+      "tokens": [
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "NullExpression",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "null",
+      "tokens": [
+        "keyword:null",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralInteger",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "12",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralRational",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "1e3",
+      "tokens": [
+        "terminal:EXP_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralRational",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "1.25e-2",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "keyword:.",
+        "terminal:EXP_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralString",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "\"text\"",
+      "tokens": [
+        "terminal:STRING_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralBoolean",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "true",
+      "tokens": [
+        "keyword:true",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralInfinity",
+      "language": "kerml",
+      "rule": "BaseExpression",
+      "source": "*",
+      "tokens": [
+        "keyword:*",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "LiteralInteger",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "1",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a hastype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a istype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:istype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a @ T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "hastype T",
+      "tokens": [
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "istype T",
+      "tokens": [
+        "keyword:istype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "@ T",
+      "tokens": [
+        "keyword:@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a as T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 3,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "as T",
+      "tokens": [
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "T @@ U",
+      "tokens": [
+        "terminal:ID",
+        "keyword:@@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "T meta U",
+      "tokens": [
+        "terminal:ID",
+        "keyword:meta",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a + b hastype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:+",
+        "terminal:ID",
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "kerml",
+      "rule": "ClassificationExpression",
+      "source": "a.b(1) as T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "a",
+      "tokens": [
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": false,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "a.b",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "a::b",
+      "tokens": [
+        "terminal:ID",
+        "keyword:::",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "FeatureReferenceExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "'a.b'",
+      "tokens": [
+        "terminal:UNRESTRICTED_NAME",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "f()",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "f(1)",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "f(x=1)",
+      "tokens": [
+        "terminal:ID",
+        "keyword:(",
+        "terminal:ID",
+        "keyword:=",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "InvocationExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "a.b()",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 3,
+      "kind": "MetadataAccessExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "a.metadata",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "keyword:metadata",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 5,
+      "kind": "ConstructorExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "new T()",
+      "tokens": [
+        "keyword:new",
+        "terminal:ID",
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 6,
+      "kind": "FeatureReferenceExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "{}",
+      "tokens": [
+        "keyword:{",
+        "keyword:}",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 7,
+      "kind": "LiteralInteger",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "(1)",
+      "tokens": [
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "NullExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "()",
+      "tokens": [
+        "keyword:(",
+        "keyword:)",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "NullExpression",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "null",
+      "tokens": [
+        "keyword:null",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralInteger",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "12",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralRational",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "1e3",
+      "tokens": [
+        "terminal:EXP_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralRational",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "1.25e-2",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "keyword:.",
+        "terminal:EXP_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralString",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "\"text\"",
+      "tokens": [
+        "terminal:STRING_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralBoolean",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "true",
+      "tokens": [
+        "keyword:true",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "LiteralInfinity",
+      "language": "sysml",
+      "rule": "BaseExpression",
+      "source": "*",
+      "tokens": [
+        "keyword:*",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "LiteralInteger",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "1",
+      "tokens": [
+        "terminal:DECIMAL_VALUE",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a hastype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a istype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:istype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a @ T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "hastype T",
+      "tokens": [
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "istype T",
+      "tokens": [
+        "keyword:istype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 1,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "@ T",
+      "tokens": [
+        "keyword:@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a as T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 3,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "as T",
+      "tokens": [
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 2,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "T @@ U",
+      "tokens": [
+        "terminal:ID",
+        "keyword:@@",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 4,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "T meta U",
+      "tokens": [
+        "terminal:ID",
+        "keyword:meta",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a + b hastype T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:+",
+        "terminal:ID",
+        "keyword:hastype",
+        "terminal:ID",
+        "eof"
+      ]
+    },
+    {
+      "accepted": true,
+      "alternative": 0,
+      "kind": "OperatorExpression",
+      "language": "sysml",
+      "rule": "ClassificationExpression",
+      "source": "a.b(1) as T",
+      "tokens": [
+        "terminal:ID",
+        "keyword:.",
+        "terminal:ID",
+        "keyword:(",
+        "terminal:DECIMAL_VALUE",
+        "keyword:)",
+        "keyword:as",
+        "terminal:ID",
+        "eof"
+      ]
+    }
+  ]
+}

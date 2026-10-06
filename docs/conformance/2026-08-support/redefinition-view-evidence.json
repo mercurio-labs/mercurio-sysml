@@ -1,0 +1,187 @@
+{
+  "schema": "dev.mercurio.redefinition-view-evidence.v1",
+  "scope": "Shared structural ownership and redefinition consumers reuse the existing immutable model index. This is cost and behavior-preservation evidence, not new language-family qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "1a9d5c2ee77d103a0202b8d51e12cdeae68acc306658c050ecfed43f57e160de",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "b9dab0054019bb4615846e9ebe7ec47fa0362ab129076dc3eff3d37adb6edfa5",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/feature_redefinitions_generated.rs": "71dbfee234b30e418d693f8985ab15543d4eb08b5ca7320e118555eae93c7a6a",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-semantics.extract.json": "d8bd7ad800b49ce0e48cf1a278af8735500bcd2dfe4bf9ef679c7a10087f7527",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-import-source-inputs.json": "ef27d914ed3c925004f80fae00665cb1c85407ebcacbd9d14f316b230dd465f9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-redefinition-analysis.json": "5036be67108bc8256c322e7a263de0d9da366b050246f706418027077a41b475",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-indexed-redefinition-supervision.json": "d3fbd26606776095e6de7a1d539610109b95df796157e1d65c80791def145599",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-view-trace.log": "75b4b92c1dbd0494410e055e9c315c56ccd922f0fb74e4806a50f3f94f450c39",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-view-analysis.json": "e2e7a05f34e608b2ee63dc850ef8f69e7d1608c9549cc865b66aa079466a1ea5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/performances-redefinition-view-supervision.json": "51e2cfa79bcfd00fc603a90f485de8db37e67de35e6766462abc92b71a998656"
+  },
+  "imported_representation": [
+    "Pinned effective Ecore ancestry, reciprocal ownership, endpoint types and owned-redefinition subset contracts",
+    "Resolved bounded redefinition and expression strategy dispatch retained"
+  ],
+  "native_consumers": [
+    "stored_membership_endpoint_indexed",
+    "definition_feature_owner_indexed",
+    "definition_redefined_features_query",
+    "materialized_redefinition_closure_query",
+    "remove_redefined_memberships_evaluate",
+    "definition_general_type_inputs_ready"
+  ],
+  "handwritten_boundary": "Ownership, scope, closure traversal and positional algorithms remain explicit handwritten Rust; imported definitions supply structural legality and generated bounded strategy selection. Positional dependencies are unchanged. No runtime Java, production clock or I/O.",
+  "implementation": [
+    "Reuse the same index across recursive closure queries, owned-feature suppression, canonical Feature ownership and result-parameter membership classification.",
+    "Preserve first-only early returns, explicit/computed duplicate order, reciprocal/type/subset guards and unsupported strategy errors.",
+    "No result caches, graph mutations, completeness assertions or synthetic implementation flags."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-view-native-tests.log",
+      "sha256": "a59429369fe73a5bfafdb5744f5c9acacd6794aad102827d49d6644f94af112e",
+      "passed": 223
+    },
+    "focused_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-view-focused-tests.log",
+      "sha256": "c1b3d515b58cb5f5a1eea58c9b79427beb462150102913cd6766426cde9caaae",
+      "passed": 2
+    },
+    "tool_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-view-tool-tests.log",
+      "sha256": "324a6bcbecace0470ef0191dbce5aebc39a5671ec639f7d83972fc4e79bfdb81",
+      "passed": 10
+    },
+    "certificate_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-view-certificate-tests.log",
+      "sha256": "fab4f6758b2c1d6f4cd8946ee838bc3e74d9dca5dc6a2035c87b184a25a82277",
+      "passed": 15
+    },
+    "plan_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-view-plan-tests.log",
+      "sha256": "f1fc7d6162be5d722980a8ff0fa72648b0144c83e382db699d782d26d5e4060c",
+      "passed": 14
+    }
+  },
+  "focused_contexts": [
+    "Prior native algorithm oracle and fixed expected results",
+    "First-only and full reads preserve explicit duplicate redefinitions",
+    "Missing relationship field, invalid kind, broken ownership, Package versus Type owner and assignment-write guard",
+    "Duplicate graph identity, true stored completeness flag and reversed storage",
+    "Existing filter controls and cached independent Pilot strategy/source controls remain passing"
+  ],
+  "matched_query_cost_control": {
+    "graph_elements": 12017,
+    "queries": 32,
+    "prior_native_microseconds": 291701,
+    "shared_view_microseconds": 1493,
+    "profile": "debug",
+    "index": "preexisting caller view; setup excluded",
+    "reference": "preserved prior native read path, not Pilot",
+    "acceptance": "matching results only; no machine-dependent timing threshold",
+    "semantic_qualification": "not_assessed"
+  },
+  "cost_diagnostic": {
+    "supervision": {
+      "schema": "dev.mercurio.native-assessment-supervision.v1",
+      "status": "timed_out",
+      "elapsed_seconds": 112.40600000001723,
+      "exit_code": 1,
+      "binary": "D:\\dev\\repos\\mercurio-labs\\mercurio\\worktrees\\sysml-v2-compliance-2026-08\\mercurio-sysml\\target\\release\\audit_release_compile.exe",
+      "binary_sha256": "ce12aedc9a80c47ced6fd234e9f85bdf295a7c4bd82ab092d2ae6fffc306483a",
+      "source_sha256": "1a9d5c2ee77d103a0202b8d51e12cdeae68acc306658c050ecfed43f57e160de",
+      "wall_budget_seconds": 240,
+      "linking_budget_seconds": 55,
+      "semantic_qualification": "not_assessed"
+    },
+    "completed_reference_attempts": 160,
+    "prior_attempts": 158,
+    "attempt_delta": 2,
+    "stage_summary": {
+      "Resource": {
+        "completed": 16,
+        "inclusive_ms": 124,
+        "exclusive_ms": 124,
+        "max_ms": 33
+      },
+      "MembershipNames": {
+        "completed": 7085,
+        "inclusive_ms": 1771,
+        "exclusive_ms": 1771,
+        "max_ms": 117
+      },
+      "ScopeMemberships": {
+        "completed": 776,
+        "inclusive_ms": 1357,
+        "exclusive_ms": 230,
+        "max_ms": 119
+      },
+      "Reference": {
+        "completed": 160,
+        "inclusive_ms": 49215,
+        "exclusive_ms": 2926,
+        "max_ms": 14241
+      },
+      "LibraryPath": {
+        "completed": 240,
+        "inclusive_ms": 181,
+        "exclusive_ms": 181,
+        "max_ms": 2
+      },
+      "GeneralTypes": {
+        "completed": 255,
+        "inclusive_ms": 19993,
+        "exclusive_ms": 19812,
+        "max_ms": 479
+      },
+      "InheritedMemberships": {
+        "completed": 39,
+        "inclusive_ms": 45295,
+        "exclusive_ms": 53,
+        "max_ms": 14035
+      },
+      "RedefinitionFilter": {
+        "completed": 179,
+        "inclusive_ms": 26689,
+        "exclusive_ms": 8335,
+        "max_ms": 2291
+      },
+      "RedefinitionClosure": {
+        "completed": 3550,
+        "inclusive_ms": 18354,
+        "exclusive_ms": 18354,
+        "max_ms": 1210
+      }
+    },
+    "semantic_qualification": "not_assessed"
+  },
+  "limits": [
+    "Synthetic matched-query timing does not predict release or Pilot performance.",
+    "Timed-out construction does not qualify publication or validation.",
+    "Reference attempts include retries and prerequisites, not distinct linked fields.",
+    "Inclusive stage times overlap; exclusive times include uninstrumented calls.",
+    "The prior assessment retains its original source fingerprint."
+  ],
+  "feature_status": {
+    "imported": "Existing pinned Ecore and bounded strategy definitions retained",
+    "consumed": "Canonical ownership/endpoint reads now use the caller view through closure, filtering and result classification",
+    "semantically_verified": "Focused behavior preservation and 223-test bounded regression; no new complete family",
+    "unsupported": "Existing specialized strategy, delegate, metadata, validation and full-resource lifecycle obligations remain open"
+  },
+  "metrics": {
+    "verified_whole_models": 155,
+    "ordinary_bindings": {
+      "verified": 50,
+      "total": 79
+    },
+    "bounded_obligations": {
+      "closed": 7,
+      "total": 9
+    },
+    "families": {
+      "qualified": 0,
+      "total": 34
+    },
+    "release_gates": {
+      "qualified": 0,
+      "total": 5
+    },
+    "candidate_promoted": false
+  }
+}

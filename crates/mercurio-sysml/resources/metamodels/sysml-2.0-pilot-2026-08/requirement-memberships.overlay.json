@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "source": {
+    "authorship": {
+      "mode": "hand-curated-overlay",
+      "reason": "Map compatibility construct aliases to pinned RequirementConstraintKind grammar tokens; the native enum consumer resolves their Ecore literals. Metaclasses come from the grammar/metamodel extracts. Preserve the existing role-prefixed source IDs for current analysis/simulation consumers; the canonical metaclass emission template remains validated."
+    },
+    "pilot_commit": "692170b71867353b8f90341e61556f49a5beb0e5",
+    "grammar": "org.omg.sysml.xtext/src/org/omg/sysml/xtext/SysML.xtext",
+    "rules": [
+      "RequirementConstraintMember",
+      "RequirementConstraintKind",
+      "RequirementConstraintUsage"
+    ]
+  },
+  "metaclass": "SysML::RequirementConstraintMembership",
+  "construct_tokens": {
+    "AssumeUsage": "assume",
+    "RequireUsage": "require"
+  },
+  "compatibility_id_prefixes": {
+    "AssumeUsage": "assume",
+    "RequireUsage": "require"
+  }
+}

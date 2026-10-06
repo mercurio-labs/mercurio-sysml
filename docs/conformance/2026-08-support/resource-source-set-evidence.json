@@ -1,0 +1,98 @@
+{
+  "schema": "dev.mercurio.resource-source-set-evidence.v1",
+  "batch_contract": "Separate pinned per-resource parsing, injective source-root identities, construct all roots before shared transactional linking, bounded public exports and persistence; semantic completion remains a separate accomplishment.",
+  "imported": "Pinned contextual Xtext RootNamespace programs selected per source language; Ecore containment/default/endpoint/visibility contracts consumed by canonical construction and publication.",
+  "handwritten_dependencies": [
+    "DefinitionSource URI-to-root identity encoding",
+    "resource global export lookup after lexical lookup",
+    "per-reference source language dispatch",
+    "existing shared deferred linker and parser postprocessing"
+  ],
+  "native_consumers": [
+    "parse_and_link_sources",
+    "materialize_definition_resources",
+    "generated_resource_reference",
+    "link_generated_graph"
+  ],
+  "verified": {
+    "cached_pilot_controls": 12,
+    "matching_link_controls": 10,
+    "matching_positive": 8,
+    "matching_negative": 2,
+    "disagreements": 2,
+    "contexts": [
+      "forward KerML and SysML qualified references",
+      "provider/consumer resource-order permutations",
+      "imports",
+      "forward alias",
+      "mixed-language provider",
+      "private and missing endpoints",
+      "exact target kind, declared path and resource URI before/after native persistence",
+      "duplicate/empty resource identity and independent grammar rejection",
+      "atomic failure and resource-root identity stability under ordering"
+    ],
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-resource-source-set.log",
+      "sha256": "ccfb290f14016b74293c8c4ae539d614bd32b53003c10f7de0038feb8b37f8b5",
+      "passed": 171
+    },
+    "audit_tool_tests": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/resource-source-set-tool-tests.log",
+      "sha256": "be06c0cdf3d8f733507d9d3fe9eb5c99baaef240138721e3a9b62c612a119641",
+      "passed": 4
+    },
+    "library_audit": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-source-set-results.jsonl",
+      "sha256": "73576f59bc68bbef55aae4fca4b38460dd36948f093deb0ccf73e7ece2ac2497",
+      "resource_mode": "separate",
+      "element_counts": [
+        145,
+        271
+      ],
+      "semantic_qualification": "not_assessed"
+    }
+  },
+  "pilot_disagreement": {
+    "controls": [
+      "duplicate_export_first",
+      "duplicate_export_reverse"
+    ],
+    "pilot": "Upstream global scope chooses the first loaded provider, changing target URI when the resource order is reversed.",
+    "native": "Rejects ambiguous public root exports instead of choosing a provider by input order.",
+    "qualification": "Open normative assessment; a recorded disagreement does not qualify full global scoping."
+  },
+  "acceleration": {
+    "editing": "Four source-set tests during edits; one broad 171-test regression at this batch boundary.",
+    "reference": "New multi-resource observations exported once and checked independently, then consumed from the fingerprinted cache by native tests. No existing Pilot suite re-export.",
+    "audit": "Within-process reuse of exact ordered resource paths and text. Cache control observes false/true/false for repeated identity and a distinct URI with equal text; changed content forms a new key.",
+    "cache_controls": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/source-set-cache-controls/results.jsonl",
+      "sha256": "6d94bf4be463642b1318fbf94542f5eedd41ab7152c26773b4cb767fc723d5c7"
+    }
+  },
+  "remaining": [
+    "Full semantic validation and complete Feature contribution lifecycle remain unassessed.",
+    "Resources must be supplied by the caller; no runtime filesystem/network or Java loading.",
+    "Global ambiguity normative assessment, complete global export policies, recursive resource closure and all specialized scopes remain required.",
+    "URI identities are stable under unit ordering; edits within a unit can change positional child IDs.",
+    "Whole-model equivalence, all pinned samples and comparable timing remain unqualified."
+  ],
+  "metrics": {
+    "matching_whole_pilot_documents": 155,
+    "delta": 0,
+    "resource_link_controls_matching": "10/12",
+    "resource_link_controls_disagreements": 2,
+    "whole_families": "0/34",
+    "release_gates": "0/5"
+  },
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "c0e17df9c658435281f237103c82cd28951998bcc1dfd9a36b3d79f2db41fcfc",
+    "crates/mercurio-sysml/src/definition_document.rs": "246a4a5ef754911169a3e0d641bbafd70ea9879687841ade77ad58008ede8f38",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit.rs": "bd37bb699bc3f636aa43c596495d01ced5aa0275a8aa593419b559c7e22537c6",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "e3fa2634d7fb54fb6a917d19c99c55f126c32bac177e8474d0db461f5de43a24",
+    "tools/prepare_definition_census.py": "1668d973c403ba3af5acbda0bf2fd08318832f528c9680685065e97bbd84da13",
+    "tools/run_resource_link_probe.py": "b6b94e4fbd80daaca9b998716b6574dcdf43f7cd81697747d4e90b27cabbeba4",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotResourceLinkProbe.java": "2852ed9f20e3aa3f800375d8cc2bf80f2f0aac1209ca179b6a44909f44ce75cf",
+    "docs/conformance/2026-08-support/resource-link-pilot-controls.json": "0e1a9077f5ffd4e4707b3ce0a8dc5e21fee8c2710130b91f1eaaead6d63ec9f2"
+  }
+}

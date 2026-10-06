@@ -1,0 +1,152 @@
+{
+  "schema": "dev.mercurio.inheritance-dag-query-evidence.v1",
+  "scope": "Reuse completed inherited-membership results for a proven bounded acyclic computed-general graph. Same semantic algorithm/order and fixed query context; not new semantics or a full family certificate.",
+  "inputs": {
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "0480b00b416bd9138a897bcaafe18c78a30945c2274650e3c180b736c63ef8fe",
+    "crates/mercurio-tools/src/bin/audit_release_compile.rs": "e7f912bf6cc4704aaa1d913fe9f88ed5cae4feaf2f34a00c74488a9574ca9351",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json": "7c4290959d5687e5245ee7d4c6b018ab337d950d3552402e18977252541fb8dd",
+    "docs/conformance/2026-08-support/normative-inheritance.json": "f534b050264b9e23ec522b2d712a77199da7e044dab0490a95315a5738d32ee1",
+    "docs/conformance/2026-08-support/scope-context-query-evidence.json": "1d62f0675ee3a176ac5955ff0e0225e99d41b13ba84cdb94e30dbde3a05cd9d7",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-native.log": "3d2da380a648e5ce84bbc1f7bd80bcc13c2d2a83f0aad181778a561b1b95134a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-focused.log": "ecf1368fad378238c7afc86ab0367ff37f9baf531a0dcfcfd67b735ef92542b0",
+    "docs/conformance/2026-08-support/enum-trigger-states-inheritance-dag-assessment.json": "d3b9c697b48a0da2a8a6cb65081595a0c09a124bb5ef53c76880794f8a085cd8",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-release-build.log": "9fe7d1f635b7655834d7a77523f8cec9da6eddeb08d4b2ab02e3c72ace2ee5d9",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/enum-trigger-states-inheritance-dag-progress.log": "8aa7f4c2d7ddb2a10226e1c76287eb6cb385c89e9744445b965a478183e3607b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-tool-tests.log": "217f402ace99b4c81d5ece4180807d524f03e69d34180a1862a5fef44b1cef1c",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-plan-tests.log": "040bba3dc489c1adbefc6661af17163c55766e9a47fb5cd2db1e7337eb7c7124",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-certificate-tests.log": "9bf361940116da40aecd89509f766d83e68f2d0e408341c9402a98cbefa79732",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/inheritance-dag-trace-tests.log": "46a59d823d772c3809446eba836399e2612ba33924b6c71abe8e15b736b8f4b7",
+    "docs/conformance/2026-08-support/projection-query-batch-contract.md": "03ccad408890cef99f73eb648815fdcdab1fd7b7718b5446ab6f8df04e1a704a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/projection-query-native.log": "0fff8ba7a57e491d68c505ec24d713ca6503e31d751fe5515a39e010b033e72f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/metadata-query-native.log": "20ecc607e51058144e772c6d08d7f5e8b0519ce0edd6969676bc56af505a97b5",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/membership-name-native.log": "62439a0978ef4092bfae6a72df84ae785f66e4f6bb518c5583aa259a90c6a866",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-linker-native.log": "e4a902df795a9bad50865d2f3a916bb844cd175674b7671f0b9c733faaf0047a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-ancestry-native.log": "57d44ea6e4fca5b2d0dfae6b9e017bec71dd3b946aac66e3b3b3df5fbddcbdf4",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-explicit-ancestry-native.log": "1d9cc916586e43f9f754b73b1031e4d2b583f3257c3d735c13432dfd3964ce84",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/typed-default-native.log": "c0151559f7625377a114773bb2f9456b991469a7c8b8a164e41c4d82e79e7be3",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/specialization-consumers-native.log": "1ea6af0170fd6e9da1c4d1be7dddb95343db71141dec70b831a9c9226ae1974d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/classifier-owner-native.log": "b3c25af246ebb4d7035d5ed7d32d8295b0dc0072bb253bbc4ea30274f3e9f27b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/no-owning-type-featuring-native.log": "b7953cf2cbf4c42392de8c3e42c0c3e34a6186326afb1d50b144779d3d43a82a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/general-type-view-native.log": "649a5206c5fe7fcb351627c2134b27a3fba84ab11ed763abc2bfddde1eb46f03",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/connector-context-qualified-native.log": "0d0e3e265c411403e22821e583ca83bd04cacbf73fd223293c6a1e90a7ed32dc",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/cold-transition-native.log": "e7be8bbbc04c0d364ca80f9b76c801200fd813eb380661312919410d45349d40",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/transition-context-stage-native.log": "2907cf2ed1ee09b4ba90e58ed9ce19908c1ef0479f2f6e60702a8963f8423349",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/state-contribution-native.log": "645479f73a324b759830794d402c60385f9c3e29fd7f39022ec03546655a7f16",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/redefinition-readiness-native.log": "7647fbe1859553194e17eaf559b4254c5af930390f35936c2a35ec1c80df286a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/compatibility-owned-features-native.log": "1eb4fd6e95b834af423382507ca356a00c92109aeaafbfe934ef384d9ac3f961",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-strategy-native.log": "b11e07ee7bc2d45daf61d9143e7989da294e44a5951ce409e7a6200d47e95f5a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/library-instantiation-native.log": "a1cc82f8df3b02dc70b8115a7671ff6fec4fd9512c76333b49ac1f917c644307",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/instantiation-contribution-native.log": "25889596e73f404c62e443e819964f86635e7c192fdaf75b711ca503a6d5b828",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-parameter-native.log": "c6a75f1fb9fc9238c7bf6bdc335480ffba466ebb79bba22ebb6ef3d1aac9694b",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/expression-context-contribution-native.log": "5f04590fdb087bdec9564c799ed4514891e4751fcf079c427cd659775cbdf86a",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/relative-namespace-native.log": "0f8c9b9ac452a4e6e74b6c7d4ca307eb8a6be794d6da12dc1a8ecee9bb0de85f",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/feature-chain-members-native.log": "d9b83bad0c6afb57cddc1f64b39de4d84d3be5879a08f26f86b614dfdd0f8b22",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/result-multiplicity-native.log": "73e62bdf9891ff416ec85afc4ef5fc2f36760c9f63ca9481cc5bca8aca4b0e81",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/usage-variability-native.log": "851f039671634ae480500ba02c997bbe5818604a60542ef095034e9ae5b7592d",
+    "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log": "18320cd8a6102adcca4bb329f635c4d466fb9fbdeaec8d1a5adda33a5cd42bd1"
+  },
+  "imported": {
+    "definitions": "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/ecore-effective.extract.json",
+    "representation": "Existing resolved general-type inputs, namespace membership, ownership and visibility contracts."
+  },
+  "native_consumption": {
+    "consumers": [
+      "definition_inherited_memberships_evaluate",
+      "definition_inherited_memberships_from_generals",
+      "inheritance_dag_height",
+      "explicit_recursive_inherited_memberships_evaluate"
+    ],
+    "handwritten_rust": "Computing supertypes, namespace/inheritance/import scope and Feature redefinition filtering remain explicit Rust algorithms consuming imported contracts.",
+    "admission": "The complete computed-general map is immutable for one traversal. Bottom-up graph proof rejects unknown edges/cycles and declines reuse above the existing 128-node bound. Canonical namespace and unique index guards remain.",
+    "fixed_context": [
+      "excluded relationship",
+      "import exclusion set",
+      "visited namespace set",
+      "exclude-implied mode",
+      "computed general-type map"
+    ],
+    "path_independence": "In a proven DAG no active ancestor is reachable below the current node. Fixed traversal context and depth proof permit caching by namespace ID inside this one invocation.",
+    "cache": "Only completed Ready results, in original membership order. Errors/deferred results are not cached. Edits, persistence and retries create new invocations. Cycles/deep graphs use the original active-path traversal."
+  },
+  "verification": {
+    "native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "native_definition_tests_passed": 379,
+    "focused_tests_passed": 2,
+    "diamond_levels": 7,
+    "ordered_differential_contexts": 8,
+    "diamond_reuse_hits_verified": 80,
+    "edited_visibility_views": 2,
+    "cycle_fallback_control": true,
+    "executed_depth_boundary_node_counts": [
+      128,
+      129
+    ],
+    "unknown_edge_declines_reuse": true,
+    "repeated_canonical_failure_controls": 2,
+    "fresh_full_pilot_comparison": false,
+    "comparable_pilot_timing": false,
+    "resource_assessment": {
+      "path": "docs/conformance/2026-08-support/enum-trigger-states-inheritance-dag-assessment.json",
+      "status": "time_box_expired",
+      "time_box_seconds": 300,
+      "parsed_input_files": 25,
+      "sampled_counts_lower_bounds": {
+        "ResourceStarted": 3,
+        "ResourceFinished": 3,
+        "LinkingStarted": 1,
+        "ReferenceStarted": 8,
+        "MembershipNamesStarted": 16500,
+        "MembershipNamesFinished": 16500,
+        "ReferenceFinished": 8,
+        "InheritedMembershipsStarted": 3,
+        "GeneralTypesStarted": 3,
+        "LibraryPathStarted": 3,
+        "LibraryPathFinished": 3,
+        "GeneralTypesFinished": 3,
+        "InheritedMembershipsFinished": 3,
+        "ScopeMembershipsStarted": 500,
+        "ScopeMembershipsFinished": 500,
+        "RedefinitionFilterStarted": 3,
+        "RedefinitionFilterFinished": 3,
+        "RedefinitionClosureStarted": 8000,
+        "RedefinitionClosureEvaluationStarted": 3500,
+        "RedefinitionClosureEvaluationFinished": 3500,
+        "RedefinitionClosureFinished": 8000,
+        "ScopeMembershipsCacheHit": 3,
+        "InheritedTraversalCacheHit": 3
+      },
+      "outcome": null,
+      "qualification": "not_assessed"
+    },
+    "latest_native_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/reference-result-scope-native.log",
+    "plan_tests_passed": 15,
+    "certificate_tests_passed": 33,
+    "release_build_passed": true,
+    "candidate_pipeline_tests_passed": 8,
+    "latest_full_native_regression_passed": 379
+  },
+  "remaining": [
+    "Actual library/caller lifecycle, integrated enum constraints/persistence and global parser/model-construction contracts remain unqualified. Use the fresh bounded assessment to isolate the next concrete linking dependency."
+  ],
+  "qualification": {
+    "whole_families": [
+      0,
+      34
+    ],
+    "release_gates": [
+      0,
+      5
+    ],
+    "bounded_obligations": [
+      11,
+      14
+    ],
+    "matched_whole_pilot_models": 155,
+    "family_certificate_issued": false,
+    "candidate_promoted": false
+  },
+  "next_batch_contract": {
+    "path": "docs/conformance/2026-08-support/projection-query-batch-contract.md",
+    "status": "source_audit_and_planned_work_not_implementation_or_qualification"
+  }
+}

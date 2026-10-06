@@ -1,0 +1,141 @@
+{
+  "schema": "dev.mercurio.import-multiplicity-projection-evidence.v1",
+  "scope": "Shared native importedElement and MultiplicityRange bound/lowerBound/upperBound identity projections over canonical linked ownership. No expression evaluation, full validation or transformation qualification.",
+  "inputs": {
+    "crates/mercurio-sysml/src/definition_document.rs": "8f154d538608c8bef10ebe1363d1462fbcd147d881e8d50f3d0b3e45144f46b6",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/definition_projection.rs": "dfcd38b0d98fd2297ce2eb1179cea5aafa6be6ba1d26eb348add2f5fff298373",
+    "crates/mercurio-sysml/src/language_frontend/lowering/emit/operand_construction.rs": "f85f1fdd5bdfd65e97767138d9e414de4f807b2f3f1886401e4bd9f4ac0583af",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model.rs": "91afc58904fd390646edada37844037ac1b23b7ed39eff947550f6a65b967a1c",
+    "crates/mercurio-sysml/src/language_frontend/lowering/ecore_model_generated.rs": "9691dedd807a585f0ae179d02e67a478da1f91b03e32a7f43002dda9c287ae23",
+    "tools/run_import_projection_probe.py": "0fa732984611b2f4ef412156196029579cb77df20b33af3aca6752434d2477f9",
+    "docs/conformance/2026-08-support/import-projection-pilot-controls.json": "f949094f653a091a6cdbadc0f83ff96811a05ad8d9c51eacb84386df4ba18d83",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotImportProjectionProbe.java": "5dce754f8ff4e16b674b7ed0654753b41200c702bbb1e9fbbec9d4e277d6bdea",
+    "tools/run_multiplicity_projection_probe.py": "efa650f5167eba599f5808386a390aef01a50ddc4a27aa70694e4e001f72fb57",
+    "docs/conformance/2026-08-support/multiplicity-projection-pilot-controls.json": "50672c14d7303d260964c4f85c10c73c0026eee520136a85de9a899e7745e444",
+    "tools/pilot-exporter/src/main/java/dev/mercurio/pilot/PilotMultiplicityProjectionProbe.java": "97a1e168afabe02a8a8554e6ed97675ea8107f5daa4f1b821beece7f98898b6a"
+  },
+  "imported_representation": "Resolved Ecore feature and delegate contracts select two concrete import kinds and MultiplicityRange fields. Stored reference readers validate endpoint types; imported hierarchy/subset/containment/opposites select owned memberships. Canonical source models come from the pinned Xtext consumer.",
+  "native_consumers": [
+    "definition_projection::reference_targets",
+    "definition_document::reference_targets",
+    "definition_document::assess_required_features"
+  ],
+  "handwritten_dependencies": [
+    "Import composition: NamespaceImport.importedNamespace or MembershipImport.importedMembership.memberElement",
+    "Multiplicity projection: ordered owned OwningMembership members filtered by Expression ancestry, aliases/imports/nonexpressions excluded",
+    "Zero expressions: empty bounds; one expression: upper only; two or more: first lower, second upper",
+    "Existing shared scoped resource linker and reciprocal membership/reference readers; no new name heuristics or runtime Java"
+  ],
+  "normative_reference": {
+    "release": "2026-08",
+    "revision": "fb97b754f29588b8e9c7a35f370880cd15eb29e7",
+    "document": "doc/1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "clauses": [
+      {
+        "pdf_page": 151,
+        "section": "8.3.2.4.2",
+        "requirement": "The imported element is the imported Namespace or the member element of the imported Membership."
+      },
+      {
+        "pdf_page": 257,
+        "rules": [
+          "deriveMultiplicityRangeBound",
+          "deriveMultiplicityRangeLowerBound",
+          "deriveMultiplicityRangeUpperBound"
+        ],
+        "requirement": "Select expressions in owned-member order; lower exists if at least two, upper is first if one or second otherwise; bounds are lower then upper."
+      }
+    ]
+  },
+  "reference_controls": [
+    {
+      "path": "docs/conformance/2026-08-support/import-projection-pilot-controls.json",
+      "sha256": "f949094f653a091a6cdbadc0f83ff96811a05ad8d9c51eacb84386df4ba18d83"
+    },
+    {
+      "path": "docs/conformance/2026-08-support/multiplicity-projection-pilot-controls.json",
+      "sha256": "50672c14d7303d260964c4f85c10c73c0026eee520136a85de9a899e7745e444"
+    }
+  ],
+  "verified_contexts": [
+    "Eight positive import observations across four independent source controls: both concrete kinds, forward declarations, nested namespaces and alias chains",
+    "Separate-resource linking in both resource orders; KIR persistence and reversed storage",
+    "Missing import/member endpoint, wrong target type, unresolved resource, private target and alias cycle reject; derived cached fields cannot provide missing dependencies",
+    "Four independent multiplicity source controls: unlimited, single integer, finite interval and unlimited upper",
+    "Four independent factory bound observations: zero through three owned expressions with unrelated owned members and aliases excluded",
+    "Missing ownership, absent member endpoints and broken reciprocal containment reject; derived snapshots ignored"
+  ],
+  "explicit_boundaries": [
+    "Pilot null-import factory observations are retained as reference for incomplete EMF objects; native required stored-target readers explicitly reject missing dependencies. These factory graphs are not complete source models.",
+    "Import visibility/recursion semantics outside existing shared linker controls remain unqualified.",
+    "Multiplicity expression identity is implemented; numeric value evaluation, nonnegative bound checks, result typing and all multiplicity invariants remain separate obligations.",
+    "Required-value assessment is not a full semantic validator."
+  ],
+  "verification": {
+    "native_log": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-import-multiplicity-projection.log",
+      "sha256": "32bb30de842bae752dfcea4035d7be7ce025c8ace3ce996d5d77c39a610b55e1",
+      "passed": 193
+    },
+    "focused_test_names": [
+      "definition_document::tests::definition_import_projection_matches_pilot_sources_and_resource_order",
+      "definition_document::tests::definition_import_projection_rejects_missing_wrong_and_cached_dependencies",
+      "definition_document::tests::definition_multiplicity_projection_checks_owned_members_and_boundary_inputs",
+      "definition_document::tests::definition_multiplicity_projection_matches_pilot_sources_and_persistence"
+    ],
+    "cohort": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/real-library-import-multiplicity-projection-results.jsonl",
+      "sha256": "c8b904ce4d19b530746841efacdcb4c34427619a3db4af38a5d2511df3666a57",
+      "source_sets": [
+        {
+          "name": "Base-and-ScalarValues.kerml",
+          "elements": 147,
+          "required_unverified": 32,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "name": "Base-ScalarValues-and-Links.kerml",
+          "elements": 277,
+          "required_unverified": 56,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        },
+        {
+          "name": "feature-default-source-control.kerml",
+          "elements": 157,
+          "required_unverified": 32,
+          "required_invalid": 0,
+          "replay": "idempotent_after_kir_persistence"
+        }
+      ]
+    },
+    "tooling": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/import-multiplicity-projection-tooling-tests.log",
+      "sha256": "2f1b261f7b7a4dcdeef62ab85b1fe9706f5a511e5a5d2e833bfda04c617a7bee",
+      "passed": 72
+    },
+    "audit_tools": {
+      "path": "docs/conformance/2026-08-support/definition-pipeline-evidence/import-multiplicity-projection-audit-tool-tests.log",
+      "sha256": "3cd60c2ac7ef83e007dcfc288312ca7e6de49d0c49318e92c9227b793cfc0a9e",
+      "passed": 10
+    }
+  },
+  "remaining": [
+    "Base + ScalarValues + Links: 28 Expression.result and 28 Expression.isModelLevelEvaluable required instances",
+    "Model-level evaluability requires its operation algorithm and executable dependencies, not an attribute flag",
+    "Expression result construction/generalization needs actual library and lexical contexts; unsupported contexts remain explicit",
+    "Full contribution and semantic-validation lifecycle; reviewed release inventory; complete sample comparison and timing"
+  ],
+  "metrics": {
+    "matching_pilot_document_models": 155,
+    "matching_models_delta": 0,
+    "required_unverified_before": 93,
+    "required_unverified_after": 56,
+    "required_invalid": 0,
+    "whole_families": "0/34",
+    "release_gates": "0/5",
+    "overall_percent": null
+  }
+}

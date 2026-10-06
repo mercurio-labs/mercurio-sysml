@@ -1,0 +1,106 @@
+[
+  {
+    "id": "sequence_00",
+    "expression": "1..3"
+  },
+  {
+    "id": "sequence_01",
+    "expression": "3..1"
+  },
+  {
+    "id": "sequence_02",
+    "expression": "(1, (2, 3), null, 4)"
+  },
+  {
+    "id": "sequence_03",
+    "expression": "(null, 7)#(1)"
+  },
+  {
+    "id": "sequence_04",
+    "expression": "((1, 2), (3, 4))#(3)"
+  },
+  {
+    "id": "sequence_05",
+    "expression": "(1..3)#(2)"
+  },
+  {
+    "id": "sequence_06",
+    "expression": "7 % 3"
+  },
+  {
+    "id": "sequence_07",
+    "expression": "-7 % 3"
+  },
+  {
+    "id": "sequence_08",
+    "expression": "7 % -3"
+  },
+  {
+    "id": "sequence_09",
+    "expression": "9007199254740993 + 1"
+  },
+  {
+    "id": "sequence_10",
+    "expression": "9007199254740993 > 9007199254740992"
+  },
+  {
+    "id": "sequence_11",
+    "expression": "1 == 1.0"
+  },
+  {
+    "id": "sequence_12",
+    "expression": "1 != 1.0"
+  },
+  {
+    "id": "sequence_13",
+    "expression": "null == null"
+  },
+  {
+    "id": "sequence_14",
+    "expression": "null != 1"
+  },
+  {
+    "id": "sequence_15",
+    "expression": "\"a\" + \"b\""
+  },
+  {
+    "id": "sequence_16",
+    "expression": "SequenceFunctions::size((1, (2, 3), null))"
+  },
+  {
+    "id": "sequence_17",
+    "expression": "IntegerFunctions::sum((1, 2, 3))"
+  },
+  {
+    "id": "sequence_18",
+    "expression": "IntegerFunctions::min(4, 2)"
+  },
+  {
+    "id": "sequence_19",
+    "expression": "IntegerFunctions::max(4, 2)"
+  },
+  {
+    "id": "sequence_20",
+    "expression": "if true ? (1, 2) else (3, 4)"
+  },
+  {
+    "id": "sequence_21",
+    "expression": "null ?? (1, 2)"
+  },
+  {
+    "id": "sequence_22",
+    "expression": "(1, 2)#(0)"
+  },
+  {
+    "id": "sequence_23",
+    "expression": "(1, 2)#(-1)"
+  },
+  {
+    "id": "sequence_24",
+    "expression": "false and (1 / 0 > 0)"
+  },
+  {
+    "id": "sequence_25",
+    "expression": "true or (1 / 0 > 0)"
+  }
+]

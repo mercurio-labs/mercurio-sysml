@@ -1,0 +1,54 @@
+{
+  "schema": "dev.mercurio.binding-provider-evidence.v1",
+  "imported_artifacts": {
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/connector-defaults.extract.json": "c6298a1cf367578beb9aa5d54efac7935b0c4978bf7dda0726aa76985456ed0c",
+    "crates/mercurio-sysml/resources/metamodels/sysml-2.0-pilot-2026-08/feature-defaults.extract.json": "357c7fcf8f486d982583923d8df4f8538a0b8b9e3f8bdd3e2b53cdfec6386b08"
+  },
+  "imported_binding_selector_contexts": 36,
+  "native_explicit_binary_generalization_contexts": 9,
+  "native_unassessed_arity_rejections": 27,
+  "matching_source_models": 3,
+  "negative_structural_source_controls": 1,
+  "source_end_generalization_queries": 8,
+  "matching_source_models_total": 151,
+  "implementation_boundary": "Resolved ConnectorAdapter selector, exact inherited dispatch and separately resolved BindingConnector default map generate native policy. Imported Ecore ownership and shared Feature generalization/redefinition/participant services supply lazy end queries. Source models use no fabricated completeness flags. This verifies lazy model queries, not physical implicit-relationship insertion or complete transformation.",
+  "native_consumers": [
+    "connector_defaults_generated::default_for",
+    "definition_connector_default_name",
+    "definition_ordinary_feature_inputs",
+    "definition_implicit_feature_generals",
+    "definition_general_type_inputs"
+  ],
+  "normative_reference": {
+    "document": "1-Kernel_Modeling_Language.pdf",
+    "sha256": "e8b7f33d9dac1a3fdd4eaa64b052608a989b92c580de91fdadb7038d33df99af",
+    "pdf_pages": [
+      214,
+      290
+    ],
+    "constraints": [
+      "checkBindingConnectorSpecialization",
+      "validateBindingConnectorIsBinary"
+    ],
+    "assessment": "The explicit-two-owned-end provider selects Links::selfLinks for every admitted typing/ownership context. Other owned-end counts are rejected as outside this provider; inherited-end binary cases remain unqualified. Binary validity is defined by two related Features, not by owned-end count."
+  },
+  "negative_control": {
+    "source_sha256": "5089596a4091a59eb1143dba594da369817053add2dc6c841069d858fa435167",
+    "artifact_key": "binding_connector_controls[2]",
+    "reason": "One end lacks a referenced Feature, so relatedFeature has size one and violates validateBindingConnectorIsBinary. Parsed structure, projections and end queries match Pilot; native semantic rejection is not qualified. This control is excluded from matching_source_models_total."
+  },
+  "remaining": [
+    "Binary validity and remaining binding/connector constraints",
+    "Inherited-end and other unassessed connector contexts",
+    "Physical implicit generalization/featuring insertion and complete end transformation",
+    "Membership selection, pending connector insertion, and post-insertion transformation",
+    "Complete sample, independent semantic, and timing qualification"
+  ],
+  "qualification": {
+    "native_tests": 112,
+    "test_log": "docs/conformance/2026-08-support/definition-pipeline-evidence/native-tests-binding-provider-verified.log",
+    "test_log_sha256": "7f15d246f8ce89746d407bb642b4486b432060960400906b4ef05ff759f0f9a6",
+    "tooling_tests": 117,
+    "complete_samples_and_timing_qualified": false
+  }
+}
